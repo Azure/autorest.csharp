@@ -21,13 +21,13 @@ namespace Models.Property.Optional.Models
         }
 
         /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
-        /// <param name="property"></param>
+        /// <param name="property"> Property. </param>
         internal CollectionsModelProperty(IList<StringProperty> property)
         {
             Property = property.ToList();
         }
 
-        /// <summary> Gets the property. </summary>
+        /// <summary> Property. </summary>
         public IList<StringProperty> Property { get; }
     }
 }

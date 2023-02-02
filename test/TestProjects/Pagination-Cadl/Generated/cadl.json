@@ -18,7 +18,7 @@
      "$id": "3",
      "Name": "requiredString",
      "SerializedName": "requiredString",
-     "Description": "",
+     "Description": "Required string",
      "Type": {
       "$id": "4",
       "Name": "string",
@@ -33,7 +33,7 @@
      "$id": "5",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
-     "Description": "",
+     "Description": "Required int",
      "Type": {
       "$id": "6",
       "Name": "int32",
@@ -58,7 +58,7 @@
      "$id": "8",
      "Name": "entries",
      "SerializedName": "entries",
-     "Description": "",
+     "Description": "Array of ledger entries",
      "Type": {
       "$id": "9",
       "Name": "Array",
@@ -73,7 +73,7 @@
          "$id": "11",
          "Name": "contents",
          "SerializedName": "contents",
-         "Description": "",
+         "Description": "Contents of the ledger entry.",
          "Type": {
           "$id": "12",
           "Name": "string",
@@ -126,7 +126,7 @@
      "$id": "17",
      "Name": "customNextLink",
      "SerializedName": "customNextLink",
-     "Description": "",
+     "Description": "Path to retrieve next page of ledger entries",
      "Type": {
       "$id": "18",
       "Name": "ResourceLocation",
@@ -154,7 +154,7 @@
      "$id": "20",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "",
+     "Description": "The LedgerEntry items on this page",
      "Type": {
       "$id": "21",
       "Name": "Array",
@@ -171,7 +171,7 @@
      "$id": "22",
      "Name": "nextLink",
      "SerializedName": "nextLink",
-     "Description": "",
+     "Description": "The link to the next page of items",
      "Type": {
       "$id": "23",
       "Name": "ResourceLocation",

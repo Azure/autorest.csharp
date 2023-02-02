@@ -14,26 +14,31 @@ namespace CadlFirstTest.Models
     public partial class Thing
     {
         /// <summary> Initializes a new instance of Thing. </summary>
-        /// <param name="name"></param>
-        /// <param name="requiredUnion"></param>
-        /// <param name="requiredLiteral"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredLiteral"/> is null. </exception>
-        public Thing(string name, string requiredUnion, string requiredLiteral)
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredLiteral"> required literal type. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/>, <paramref name="requiredLiteral"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        public Thing(string name, string requiredUnion, string requiredLiteral, string requiredBadDescription)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
             Argument.AssertNotNull(requiredLiteral, nameof(requiredLiteral));
+            Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
             Name = name;
             RequiredUnion = requiredUnion;
             RequiredLiteral = requiredLiteral;
+            RequiredBadDescription = requiredBadDescription;
         }
 
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> name of the Thing. </summary>
         public string Name { get; set; }
-        /// <summary> Gets or sets the required union. </summary>
+        /// <summary> required Union. </summary>
         public string RequiredUnion { get; set; }
-        /// <summary> Gets or sets the required literal. </summary>
+        /// <summary> required literal type. </summary>
         public string RequiredLiteral { get; set; }
+        /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
+        public string RequiredBadDescription { get; set; }
     }
 }

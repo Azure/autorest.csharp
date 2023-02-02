@@ -9,50 +9,42 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Models.Inheritance.Models
+namespace LroBasicCadl.Models
 {
-    public partial class Cat : IUtf8JsonSerializable
+    public partial class Thing : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("age");
-            writer.WriteNumberValue(Age);
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
 
-        internal static Cat DeserializeCat(JsonElement element)
+        internal static Thing DeserializeThing(JsonElement element)
         {
-            int age = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("age"))
-                {
-                    age = property.Value.GetInt32();
-                    continue;
-                }
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
             }
-            return new Cat(name, age);
+            return new Thing(name);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static Cat FromResponse(Response response)
+        internal static Thing FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeCat(document.RootElement);
+            return DeserializeThing(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

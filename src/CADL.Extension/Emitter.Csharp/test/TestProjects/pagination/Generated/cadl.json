@@ -18,7 +18,7 @@
      "$id": "3",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "",
+     "Description": "The LedgerEntry items on this page",
      "Type": {
       "$id": "4",
       "Name": "Array",
@@ -33,7 +33,7 @@
          "$id": "6",
          "Name": "contents",
          "SerializedName": "contents",
-         "Description": "",
+         "Description": "Contents of the ledger entry.",
          "Type": {
           "$id": "7",
           "Name": "string",
@@ -86,7 +86,7 @@
      "$id": "12",
      "Name": "nextLink",
      "SerializedName": "nextLink",
-     "Description": "",
+     "Description": "The link to the next page of items",
      "Type": {
       "$id": "13",
       "Name": "ResourceLocation",

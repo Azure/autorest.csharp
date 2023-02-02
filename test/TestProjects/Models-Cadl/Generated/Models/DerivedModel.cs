@@ -16,7 +16,7 @@ namespace ModelsInCadl.Models
     public partial class DerivedModel : BaseModel
     {
         /// <summary> Initializes a new instance of DerivedModel. </summary>
-        /// <param name="requiredCollection"></param>
+        /// <param name="requiredCollection"> Required collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredCollection"/> is null. </exception>
         public DerivedModel(IEnumerable<CollectionItem> requiredCollection)
         {
@@ -26,13 +26,13 @@ namespace ModelsInCadl.Models
         }
 
         /// <summary> Initializes a new instance of DerivedModel. </summary>
-        /// <param name="requiredCollection"></param>
+        /// <param name="requiredCollection"> Required collection. </param>
         internal DerivedModel(IList<CollectionItem> requiredCollection)
         {
             RequiredCollection = requiredCollection.ToList();
         }
 
-        /// <summary> Gets the required collection. </summary>
+        /// <summary> Required collection. </summary>
         public IList<CollectionItem> RequiredCollection { get; }
     }
 }

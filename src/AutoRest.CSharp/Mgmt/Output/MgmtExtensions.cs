@@ -86,12 +86,15 @@ namespace AutoRest.CSharp.Mgmt.Output
                 // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together
                 // some of the values are calculated multiple times (here and in writers).
                 // we just leave this implementation here since it could work for now
+                int resourceIndex = ResourceName.IndexOf("Resource");
+                var entityName = resourceIndex > 0 ? ResourceName.Substring(0, resourceIndex) : ResourceName;
                 return MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
                         operation,
                         operation.GetRequestPath(),
                         ContextualPath,
-                        operationName),
+                        operationName,
+                        propertyBagName: entityName),
                     extensionParamToUse);
             });
         }

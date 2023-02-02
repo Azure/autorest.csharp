@@ -72,7 +72,7 @@
      "$id": "11",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "12",
       "Name": "string",
@@ -96,7 +96,7 @@
      "$id": "14",
      "Name": "requiredString",
      "SerializedName": "requiredString",
-     "Description": "",
+     "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "15",
       "Name": "string",
@@ -111,7 +111,7 @@
      "$id": "16",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
-     "Description": "",
+     "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "17",
       "Name": "int32",
@@ -126,7 +126,7 @@
      "$id": "18",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
-     "Description": "",
+     "Description": "Required collection of enums",
      "Type": {
       "$id": "19",
       "Name": "Array",
@@ -143,7 +143,7 @@
      "$id": "20",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
-     "Description": "",
+     "Description": "Required dictionary of enums",
      "Type": {
       "$id": "21",
       "Name": "Dictionary",

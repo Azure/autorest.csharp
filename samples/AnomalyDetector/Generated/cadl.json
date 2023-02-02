@@ -282,7 +282,7 @@
      "$id": "44",
      "Name": "series",
      "SerializedName": "series",
-     "Description": "",
+     "Description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there is duplicated timestamp, the API will not work. In such\ncase, an error message will be returned.",
      "Type": {
       "$id": "45",
       "Name": "Array",
@@ -298,7 +298,7 @@
          "$id": "47",
          "Name": "timestamp",
          "SerializedName": "timestamp",
-         "Description": "",
+         "Description": "Optional argument, timestamp of a data point (ISO8601 format).",
          "Type": {
           "$id": "48",
           "Name": "zonedDateTime",
@@ -313,7 +313,7 @@
          "$id": "49",
          "Name": "value",
          "SerializedName": "value",
-         "Description": "",
+         "Description": "The measurement of that point, should be float.",
          "Type": {
           "$id": "50",
           "Name": "float32",
@@ -336,7 +336,7 @@
      "$id": "51",
      "Name": "granularity",
      "SerializedName": "granularity",
-     "Description": "",
+     "Description": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly,\nminutely, secondly, microsecond or none. If granularity is not present, it will\nbe none by default. If granularity is none, the timestamp property in time\nseries point can be absent.",
      "Type": {
       "$ref": "4"
      },
@@ -348,7 +348,7 @@
      "$id": "52",
      "Name": "customInterval",
      "SerializedName": "customInterval",
-     "Description": "",
+     "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
       "$id": "53",
       "Name": "int32",
@@ -363,7 +363,7 @@
      "$id": "54",
      "Name": "period",
      "SerializedName": "period",
-     "Description": "",
+     "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
       "$id": "55",
       "Name": "int32",
@@ -378,7 +378,7 @@
      "$id": "56",
      "Name": "maxAnomalyRatio",
      "SerializedName": "maxAnomalyRatio",
-     "Description": "",
+     "Description": "Optional argument, advanced model parameter, max anomaly ratio in a time series.",
      "Type": {
       "$id": "57",
       "Name": "float32",
@@ -393,7 +393,7 @@
      "$id": "58",
      "Name": "sensitivity",
      "SerializedName": "sensitivity",
-     "Description": "",
+     "Description": "Optional argument, advanced model parameter, between 0-99, the lower the value\nis, the larger the margin value will be which means less anomalies will be\naccepted.",
      "Type": {
       "$id": "59",
       "Name": "int32",
@@ -408,7 +408,7 @@
      "$id": "60",
      "Name": "imputeMode",
      "SerializedName": "imputeMode",
-     "Description": "",
+     "Description": "Used to specify how to deal with missing values in the input series, it's used\nwhen granularity is not \"none\".",
      "Type": {
       "$ref": "14"
      },
@@ -420,7 +420,7 @@
      "$id": "61",
      "Name": "imputeFixedValue",
      "SerializedName": "imputeFixedValue",
-     "Description": "",
+     "Description": "Used to specify the value to fill, it's used when granularity is not \"none\"\nand imputeMode is \"fixed\".",
      "Type": {
       "$id": "62",
       "Name": "float32",
@@ -448,7 +448,7 @@
      "$id": "64",
      "Name": "period",
      "SerializedName": "period",
-     "Description": "",
+     "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "65",
       "Name": "int32",
@@ -463,7 +463,7 @@
      "$id": "66",
      "Name": "expectedValues",
      "SerializedName": "expectedValues",
-     "Description": "",
+     "Description": "ExpectedValues contain expected value for each input point. The index of the\narray is consistent with the input series.",
      "Type": {
       "$id": "67",
       "Name": "Array",
@@ -483,7 +483,7 @@
      "$id": "69",
      "Name": "upperMargins",
      "SerializedName": "upperMargins",
-     "Description": "",
+     "Description": "UpperMargins contain upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which equals to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in response can be filtered by\nupperBoundary and lowerBoundary. By adjusting marginScale value, less\nsignificant anomalies can be filtered in client side. The index of the array is\nconsistent with the input series.",
      "Type": {
       "$id": "70",
       "Name": "Array",
@@ -503,7 +503,7 @@
      "$id": "72",
      "Name": "lowerMargins",
      "SerializedName": "lowerMargins",
-     "Description": "",
+     "Description": "LowerMargins contain lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which equals to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones in client side. The index of the array is consistent with the input\nseries.",
      "Type": {
       "$id": "73",
       "Name": "Array",
@@ -523,7 +523,7 @@
      "$id": "75",
      "Name": "isAnomaly",
      "SerializedName": "isAnomaly",
-     "Description": "",
+     "Description": "IsAnomaly contains anomaly properties for each input point. True means an\nanomaly either negative or positive has been detected. The index of the array\nis consistent with the input series.",
      "Type": {
       "$id": "76",
       "Name": "Array",
@@ -543,7 +543,7 @@
      "$id": "78",
      "Name": "isNegativeAnomaly",
      "SerializedName": "isNegativeAnomaly",
-     "Description": "",
+     "Description": "IsNegativeAnomaly contains anomaly status in negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series.",
      "Type": {
       "$id": "79",
       "Name": "Array",
@@ -563,7 +563,7 @@
      "$id": "81",
      "Name": "isPositiveAnomaly",
      "SerializedName": "isPositiveAnomaly",
-     "Description": "",
+     "Description": "IsPositiveAnomaly contain anomaly status in positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series.",
      "Type": {
       "$id": "82",
       "Name": "Array",
@@ -583,7 +583,7 @@
      "$id": "84",
      "Name": "severity",
      "SerializedName": "severity",
-     "Description": "",
+     "Description": "The severity score for each input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "Type": {
       "$id": "85",
       "Name": "Array",
@@ -613,7 +613,7 @@
      "$id": "88",
      "Name": "period",
      "SerializedName": "period",
-     "Description": "",
+     "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "89",
       "Name": "int32",
@@ -628,7 +628,7 @@
      "$id": "90",
      "Name": "suggestedWindow",
      "SerializedName": "suggestedWindow",
-     "Description": "",
+     "Description": "Suggested input series points needed for detecting the latest point.",
      "Type": {
       "$id": "91",
       "Name": "int32",
@@ -643,7 +643,7 @@
      "$id": "92",
      "Name": "expectedValue",
      "SerializedName": "expectedValue",
-     "Description": "",
+     "Description": "Expected value of the latest point.",
      "Type": {
       "$id": "93",
       "Name": "float32",
@@ -658,7 +658,7 @@
      "$id": "94",
      "Name": "upperMargin",
      "SerializedName": "upperMargin",
-     "Description": "",
+     "Description": "Upper margin of the latest point. UpperMargin is used to calculate\nupperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin.\nIf the value of latest point is between upperBoundary and lowerBoundary, it\nshould be treated as normal value. By adjusting marginScale value, anomaly\nstatus of latest point can be changed.",
      "Type": {
       "$id": "95",
       "Name": "float32",
@@ -673,7 +673,7 @@
      "$id": "96",
      "Name": "lowerMargin",
      "SerializedName": "lowerMargin",
-     "Description": "",
+     "Description": "Lower margin of the latest point. LowerMargin is used to calculate\nlowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.\n",
      "Type": {
       "$id": "97",
       "Name": "float32",
@@ -688,7 +688,7 @@
      "$id": "98",
      "Name": "isAnomaly",
      "SerializedName": "isAnomaly",
-     "Description": "",
+     "Description": "Anomaly status of the latest point, true means the latest point is an anomaly\neither in negative direction or positive direction.",
      "Type": {
       "$id": "99",
       "Name": "boolean",
@@ -703,7 +703,7 @@
      "$id": "100",
      "Name": "isNegativeAnomaly",
      "SerializedName": "isNegativeAnomaly",
-     "Description": "",
+     "Description": "Anomaly status in negative direction of the latest point. True means the latest\npoint is an anomaly and its real value is smaller than the expected one.",
      "Type": {
       "$id": "101",
       "Name": "boolean",
@@ -718,7 +718,7 @@
      "$id": "102",
      "Name": "isPositiveAnomaly",
      "SerializedName": "isPositiveAnomaly",
-     "Description": "",
+     "Description": "Anomaly status in positive direction of the latest point. True means the latest\npoint is an anomaly and its real value is larger than the expected one.",
      "Type": {
       "$id": "103",
       "Name": "boolean",
@@ -733,7 +733,7 @@
      "$id": "104",
      "Name": "severity",
      "SerializedName": "severity",
-     "Description": "",
+     "Description": "The severity score for the last input point. The larger the value is, the more\nsever the anomaly is. For normal points, the \"severity\" is always 0.",
      "Type": {
       "$id": "105",
       "Name": "float32",
@@ -758,7 +758,7 @@
      "$id": "107",
      "Name": "series",
      "SerializedName": "series",
-     "Description": "",
+     "Description": "Time series data points. Points should be sorted by timestamp in ascending\norder to match the change point detection result.",
      "Type": {
       "$id": "108",
       "Name": "Array",
@@ -775,7 +775,7 @@
      "$id": "109",
      "Name": "granularity",
      "SerializedName": "granularity",
-     "Description": "",
+     "Description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or\nsecondly. Granularity is used for verify whether input series is valid.",
      "Type": {
       "$ref": "4"
      },
@@ -787,7 +787,7 @@
      "$id": "110",
      "Name": "customInterval",
      "SerializedName": "customInterval",
-     "Description": "",
+     "Description": "Custom Interval is used to set non-standard time interval, for example, if the\nseries is 5 minutes, request can be set as {\"granularity\":\"minutely\",\n\"customInterval\":5}.",
      "Type": {
       "$id": "111",
       "Name": "int32",
@@ -802,7 +802,7 @@
      "$id": "112",
      "Name": "period",
      "SerializedName": "period",
-     "Description": "",
+     "Description": "Optional argument, periodic value of a time series. If the value is null or\ndoes not present, the API will determine the period automatically.",
      "Type": {
       "$id": "113",
       "Name": "int32",
@@ -817,7 +817,7 @@
      "$id": "114",
      "Name": "stableTrendWindow",
      "SerializedName": "stableTrendWindow",
-     "Description": "",
+     "Description": "Optional argument, advanced model parameter, a default stableTrendWindow will\nbe used in detection.",
      "Type": {
       "$id": "115",
       "Name": "int32",
@@ -832,7 +832,7 @@
      "$id": "116",
      "Name": "threshold",
      "SerializedName": "threshold",
-     "Description": "",
+     "Description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the\nvalue is, the larger the trend error will be which means less change point will\nbe accepted.",
      "Type": {
       "$id": "117",
       "Name": "float32",
@@ -857,7 +857,7 @@
      "$id": "119",
      "Name": "period",
      "SerializedName": "period",
-     "Description": "",
+     "Description": "Frequency extracted from the series, zero means no recurrent pattern has been\nfound.",
      "Type": {
       "$id": "120",
       "Name": "int32",
@@ -872,7 +872,7 @@
      "$id": "121",
      "Name": "isChangePoint",
      "SerializedName": "isChangePoint",
-     "Description": "",
+     "Description": "isChangePoint contains change point properties for each input point. True means\nan anomaly either negative or positive has been detected. The index of the\narray is consistent with the input series.",
      "Type": {
       "$id": "122",
       "Name": "Array",
@@ -892,7 +892,7 @@
      "$id": "124",
      "Name": "confidenceScores",
      "SerializedName": "confidenceScores",
-     "Description": "",
+     "Description": "the change point confidence of each point",
      "Type": {
       "$id": "125",
       "Name": "Array",
@@ -922,7 +922,7 @@
      "$id": "128",
      "Name": "resultId",
      "SerializedName": "resultId",
-     "Description": "",
+     "Description": "Result identifier, which is used to fetch the results of an inference call.",
      "Type": {
       "$id": "129",
       "Name": "string",
@@ -930,14 +930,14 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
+     "IsReadOnly": true,
      "IsDiscriminator": false
     },
     {
      "$id": "130",
      "Name": "summary",
      "SerializedName": "summary",
-     "Description": "",
+     "Description": "Multivariate anomaly detection status.",
      "Type": {
       "$id": "131",
       "Name": "MultivariateBatchDetectionResultSummary",
@@ -950,7 +950,7 @@
         "$id": "132",
         "Name": "status",
         "SerializedName": "status",
-        "Description": "",
+        "Description": "Status of detection results. One of CREATED, RUNNING, READY, and FAILED.",
         "Type": {
          "$ref": "21"
         },
@@ -962,7 +962,7 @@
         "$id": "133",
         "Name": "errors",
         "SerializedName": "errors",
-        "Description": "",
+        "Description": "Error message when detection is failed.",
         "Type": {
          "$id": "134",
          "Name": "Array",
@@ -978,7 +978,7 @@
             "$id": "136",
             "Name": "code",
             "SerializedName": "code",
-            "Description": "",
+            "Description": "The error code.",
             "Type": {
              "$id": "137",
              "Name": "string",
@@ -993,7 +993,7 @@
             "$id": "138",
             "Name": "message",
             "SerializedName": "message",
-            "Description": "",
+            "Description": "The message explaining the error reported by the service.",
             "Type": {
              "$id": "139",
              "Name": "string",
@@ -1016,7 +1016,7 @@
         "$id": "140",
         "Name": "variableStates",
         "SerializedName": "variableStates",
-        "Description": "",
+        "Description": "Variable Status.",
         "Type": {
          "$id": "141",
          "Name": "Array",
@@ -1032,7 +1032,7 @@
             "$id": "143",
             "Name": "variable",
             "SerializedName": "variable",
-            "Description": "",
+            "Description": "Variable name in variable states.",
             "Type": {
              "$id": "144",
              "Name": "string",
@@ -1047,7 +1047,7 @@
             "$id": "145",
             "Name": "filledNARatio",
             "SerializedName": "filledNARatio",
-            "Description": "",
+            "Description": "Proportion of missing values that need to be filled by fillNAMethod.",
             "Type": {
              "$id": "146",
              "Name": "float32",
@@ -1062,7 +1062,7 @@
             "$id": "147",
             "Name": "effectiveCount",
             "SerializedName": "effectiveCount",
-            "Description": "",
+            "Description": "Number of effective data points before applying fillNAMethod.",
             "Type": {
              "$id": "148",
              "Name": "int32",
@@ -1077,7 +1077,7 @@
             "$id": "149",
             "Name": "firstTimestamp",
             "SerializedName": "firstTimestamp",
-            "Description": "",
+            "Description": "First valid timestamp with value of input data.",
             "Type": {
              "$id": "150",
              "Name": "zonedDateTime",
@@ -1092,7 +1092,7 @@
             "$id": "151",
             "Name": "lastTimestamp",
             "SerializedName": "lastTimestamp",
-            "Description": "",
+            "Description": "Last valid timestamp with value of input data.",
             "Type": {
              "$id": "152",
              "Name": "zonedDateTime",
@@ -1115,7 +1115,7 @@
         "$id": "153",
         "Name": "setupInfo",
         "SerializedName": "setupInfo",
-        "Description": "",
+        "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
         "Type": {
          "$id": "154",
          "Name": "MultivariateBatchDetectionOptions",
@@ -1128,7 +1128,7 @@
            "$id": "155",
            "Name": "dataSource",
            "SerializedName": "dataSource",
-           "Description": "",
+           "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. The data schema should\nbe exactly the same with those used in the training phase.",
            "Type": {
             "$id": "156",
             "Name": "string",
@@ -1143,7 +1143,7 @@
            "$id": "157",
            "Name": "topContributorCount",
            "SerializedName": "topContributorCount",
-           "Description": "",
+           "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
            "Type": {
             "$id": "158",
             "Name": "int32",
@@ -1158,7 +1158,7 @@
            "$id": "159",
            "Name": "startTime",
            "SerializedName": "startTime",
-           "Description": "",
+           "Description": "A required field, indicating the start time of data for detection, which should\nbe date-time of ISO 8601 format.",
            "Type": {
             "$id": "160",
             "Name": "zonedDateTime",
@@ -1173,7 +1173,7 @@
            "$id": "161",
            "Name": "endTime",
            "SerializedName": "endTime",
-           "Description": "",
+           "Description": "A required field, indicating the end time of data for detection, which should\nbe date-time of ISO 8601 format.",
            "Type": {
             "$id": "162",
             "Name": "zonedDateTime",
@@ -1200,7 +1200,7 @@
      "$id": "163",
      "Name": "results",
      "SerializedName": "results",
-     "Description": "",
+     "Description": "Detection result for each timestamp.",
      "Type": {
       "$id": "164",
       "Name": "Array",
@@ -1216,7 +1216,7 @@
          "$id": "166",
          "Name": "timestamp",
          "SerializedName": "timestamp",
-         "Description": "",
+         "Description": "The timestamp for this anomaly.",
          "Type": {
           "$id": "167",
           "Name": "zonedDateTime",
@@ -1231,7 +1231,7 @@
          "$id": "168",
          "Name": "value",
          "SerializedName": "value",
-         "Description": "",
+         "Description": "The detailed value of this anomalous timestamp.",
          "Type": {
           "$id": "169",
           "Name": "AnomalyValue",
@@ -1244,7 +1244,7 @@
             "$id": "170",
             "Name": "isAnomaly",
             "SerializedName": "isAnomaly",
-            "Description": "",
+            "Description": "True if an anomaly is detected at the current timestamp.",
             "Type": {
              "$id": "171",
              "Name": "boolean",
@@ -1259,7 +1259,7 @@
             "$id": "172",
             "Name": "severity",
             "SerializedName": "severity",
-            "Description": "",
+            "Description": "Indicates the significance of the anomaly. The higher the severity, the more\nsignificant the anomaly is.",
             "Type": {
              "$id": "173",
              "Name": "float32",
@@ -1274,7 +1274,7 @@
             "$id": "174",
             "Name": "score",
             "SerializedName": "score",
-            "Description": "",
+            "Description": "Raw anomaly score of severity, will help indicate the degree of abnormality as\nwell.",
             "Type": {
              "$id": "175",
              "Name": "float32",
@@ -1289,7 +1289,7 @@
             "$id": "176",
             "Name": "interpretation",
             "SerializedName": "interpretation",
-            "Description": "",
+            "Description": "Interpretation of this anomalous timestamp.",
             "Type": {
              "$id": "177",
              "Name": "Array",
@@ -1305,7 +1305,7 @@
                 "$id": "179",
                 "Name": "variable",
                 "SerializedName": "variable",
-                "Description": "",
+                "Description": "Variable.",
                 "Type": {
                  "$id": "180",
                  "Name": "string",
@@ -1320,7 +1320,7 @@
                 "$id": "181",
                 "Name": "contributionScore",
                 "SerializedName": "contributionScore",
-                "Description": "",
+                "Description": "This score shows the percentage contributing to the anomalous timestamp. A\nnumber between 0 and 1.",
                 "Type": {
                  "$id": "182",
                  "Name": "float32",
@@ -1335,7 +1335,7 @@
                 "$id": "183",
                 "Name": "correlationChanges",
                 "SerializedName": "correlationChanges",
-                "Description": "",
+                "Description": "Correlation changes among the anomalous variables",
                 "Type": {
                  "$id": "184",
                  "Name": "CorrelationChanges",
@@ -1348,7 +1348,7 @@
                    "$id": "185",
                    "Name": "changedVariables",
                    "SerializedName": "changedVariables",
-                   "Description": "",
+                   "Description": "The correlated variables that have correlation changes under an anomaly.",
                    "Type": {
                     "$id": "186",
                     "Name": "Array",
@@ -1388,7 +1388,7 @@
          "$id": "188",
          "Name": "errors",
          "SerializedName": "errors",
-         "Description": "",
+         "Description": "Error message for the current timestamp.",
          "Type": {
           "$id": "189",
           "Name": "Array",
@@ -1447,7 +1447,7 @@
      "$id": "191",
      "Name": "dataSource",
      "SerializedName": "dataSource",
-     "Description": "",
+     "Description": "Source link to the input data to indicate an accessible Azure storage Uri,\neither pointed to an Azure blob storage folder, or pointed to a CSV file in\nAzure blob storage based on you data schema selection. ",
      "Type": {
       "$id": "192",
       "Name": "string",
@@ -1462,7 +1462,7 @@
      "$id": "193",
      "Name": "dataSchema",
      "SerializedName": "dataSchema",
-     "Description": "",
+     "Description": "Data schema of input data source: OneTable or MultiTable. The default\nDataSchema is OneTable.",
      "Type": {
       "$ref": "26"
      },
@@ -1474,7 +1474,7 @@
      "$id": "194",
      "Name": "startTime",
      "SerializedName": "startTime",
-     "Description": "",
+     "Description": "A required field, indicating the start time of training data, which should be\ndate-time of ISO 8601 format.",
      "Type": {
       "$id": "195",
       "Name": "zonedDateTime",
@@ -1489,7 +1489,7 @@
      "$id": "196",
      "Name": "endTime",
      "SerializedName": "endTime",
-     "Description": "",
+     "Description": "A required field, indicating the end time of training data, which should be\ndate-time of ISO 8601 format.",
      "Type": {
       "$id": "197",
       "Name": "zonedDateTime",
@@ -1504,7 +1504,7 @@
      "$id": "198",
      "Name": "displayName",
      "SerializedName": "displayName",
-     "Description": "",
+     "Description": "An optional field. The display name of the model whose maximum length is 24\ncharacters.",
      "Type": {
       "$id": "199",
       "Name": "string",
@@ -1519,7 +1519,7 @@
      "$id": "200",
      "Name": "slidingWindow",
      "SerializedName": "slidingWindow",
-     "Description": "",
+     "Description": "An optional field, indicating how many previous timestamps will be used to\ndetect whether the timestamp is anomaly or not. ",
      "Type": {
       "$id": "201",
       "Name": "int32",
@@ -1534,7 +1534,7 @@
      "$id": "202",
      "Name": "alignPolicy",
      "SerializedName": "alignPolicy",
-     "Description": "",
+     "Description": "An optional field, indicating the manner to align multiple variables.",
      "Type": {
       "$id": "203",
       "Name": "AlignPolicy",
@@ -1547,7 +1547,7 @@
         "$id": "204",
         "Name": "alignMode",
         "SerializedName": "alignMode",
-        "Description": "",
+        "Description": "An optional field, indicating how to align different variables to the same\ntime-range. Either Inner or Outer. ",
         "Type": {
          "$ref": "29"
         },
@@ -1559,7 +1559,7 @@
         "$id": "205",
         "Name": "fillNAMethod",
         "SerializedName": "fillNAMethod",
-        "Description": "",
+        "Description": "An optional field, indicating how missing values will be filled. One of\nPrevious, Subsequent, Linear, Zero, Fixed.",
         "Type": {
          "$ref": "32"
         },
@@ -1571,7 +1571,7 @@
         "$id": "206",
         "Name": "paddingValue",
         "SerializedName": "paddingValue",
-        "Description": "",
+        "Description": "An optional field. Required when fillNAMethod is Fixed.",
         "Type": {
          "$id": "207",
          "Name": "float32",
@@ -1592,7 +1592,7 @@
      "$id": "208",
      "Name": "status",
      "SerializedName": "status",
-     "Description": "",
+     "Description": "Model status. One of CREATED, RUNNING, READY, and FAILED.",
      "Type": {
       "$ref": "38"
      },
@@ -1604,7 +1604,7 @@
      "$id": "209",
      "Name": "errors",
      "SerializedName": "errors",
-     "Description": "",
+     "Description": "Error messages when failed to create a model.",
      "Type": {
       "$id": "210",
       "Name": "Array",
@@ -1621,7 +1621,7 @@
      "$id": "211",
      "Name": "diagnosticsInfo",
      "SerializedName": "diagnosticsInfo",
-     "Description": "",
+     "Description": "Diagnostics information to help inspect the states of model or variable.",
      "Type": {
       "$id": "212",
       "Name": "DiagnosticsInfo",
@@ -1634,7 +1634,7 @@
         "$id": "213",
         "Name": "modelState",
         "SerializedName": "modelState",
-        "Description": "",
+        "Description": "Model status.",
         "Type": {
          "$id": "214",
          "Name": "ModelState",
@@ -1647,7 +1647,7 @@
            "$id": "215",
            "Name": "epochIds",
            "SerializedName": "epochIds",
-           "Description": "",
+           "Description": "This indicates the number of passes of the entire training dataset the\nalgorithm has completed.",
            "Type": {
             "$id": "216",
             "Name": "Array",
@@ -1667,7 +1667,7 @@
            "$id": "218",
            "Name": "trainLosses",
            "SerializedName": "trainLosses",
-           "Description": "",
+           "Description": "List of metrics used to assess how the model fits the training data for each\nepoch.",
            "Type": {
             "$id": "219",
             "Name": "Array",
@@ -1687,7 +1687,7 @@
            "$id": "221",
            "Name": "validationLosses",
            "SerializedName": "validationLosses",
-           "Description": "",
+           "Description": "List of metrics used to assess how the model fits the validation set for each\nepoch.",
            "Type": {
             "$id": "222",
             "Name": "Array",
@@ -1707,7 +1707,7 @@
            "$id": "224",
            "Name": "latenciesInSeconds",
            "SerializedName": "latenciesInSeconds",
-           "Description": "",
+           "Description": "Latency for each epoch. ",
            "Type": {
             "$id": "225",
             "Name": "Array",
@@ -1733,7 +1733,7 @@
         "$id": "227",
         "Name": "variableStates",
         "SerializedName": "variableStates",
-        "Description": "",
+        "Description": "Variable Status.",
         "Type": {
          "$id": "228",
          "Name": "Array",
@@ -1775,7 +1775,7 @@
      "$id": "230",
      "Name": "modelId",
      "SerializedName": "modelId",
-     "Description": "",
+     "Description": "Model identifier.",
      "Type": {
       "$id": "231",
       "Name": "string",
@@ -1783,14 +1783,14 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
+     "IsReadOnly": true,
      "IsDiscriminator": false
     },
     {
      "$id": "232",
      "Name": "createdTime",
      "SerializedName": "createdTime",
-     "Description": "",
+     "Description": "Date and time (UTC) when the model was created.",
      "Type": {
       "$id": "233",
       "Name": "zonedDateTime",
@@ -1805,7 +1805,7 @@
      "$id": "234",
      "Name": "lastUpdatedTime",
      "SerializedName": "lastUpdatedTime",
-     "Description": "",
+     "Description": "Date and time (UTC) when the model was last updated.",
      "Type": {
       "$id": "235",
       "Name": "zonedDateTime",
@@ -1820,7 +1820,7 @@
      "$id": "236",
      "Name": "modelInfo",
      "SerializedName": "modelInfo",
-     "Description": "",
+     "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
      "Type": {
       "$ref": "190"
      },
@@ -1842,7 +1842,7 @@
      "$id": "238",
      "Name": "models",
      "SerializedName": "models",
-     "Description": "",
+     "Description": "List of models.",
      "Type": {
       "$id": "239",
       "Name": "Array",
@@ -1859,7 +1859,7 @@
      "$id": "240",
      "Name": "currentCount",
      "SerializedName": "currentCount",
-     "Description": "",
+     "Description": "Number of trained multivariate models.",
      "Type": {
       "$id": "241",
       "Name": "int32",
@@ -1874,7 +1874,7 @@
      "$id": "242",
      "Name": "maxCount",
      "SerializedName": "maxCount",
-     "Description": "",
+     "Description": "Maximum number of models that can be trained for this Anomaly Detector resource.",
      "Type": {
       "$id": "243",
       "Name": "int32",
@@ -1889,7 +1889,7 @@
      "$id": "244",
      "Name": "nextLink",
      "SerializedName": "nextLink",
-     "Description": "",
+     "Description": "The link to fetch more models.",
      "Type": {
       "$id": "245",
       "Name": "string",
@@ -1914,7 +1914,7 @@
      "$id": "247",
      "Name": "variables",
      "SerializedName": "variables",
-     "Description": "",
+     "Description": "This contains the inference data, including the name, timestamps(ISO 8601) and\nvalues of variables.",
      "Type": {
       "$id": "248",
       "Name": "Array",
@@ -1930,7 +1930,7 @@
          "$id": "250",
          "Name": "variable",
          "SerializedName": "variable",
-         "Description": "",
+         "Description": "Variable name of last detection request.",
          "Type": {
           "$id": "251",
           "Name": "string",
@@ -1945,7 +1945,7 @@
          "$id": "252",
          "Name": "timestamps",
          "SerializedName": "timestamps",
-         "Description": "",
+         "Description": "Timestamps of last detection request",
          "Type": {
           "$id": "253",
           "Name": "Array",
@@ -1965,7 +1965,7 @@
          "$id": "255",
          "Name": "values",
          "SerializedName": "values",
-         "Description": "",
+         "Description": "Values of variables.",
          "Type": {
           "$id": "256",
           "Name": "Array",
@@ -1993,7 +1993,7 @@
      "$id": "258",
      "Name": "topContributorCount",
      "SerializedName": "topContributorCount",
-     "Description": "",
+     "Description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
      "Type": {
       "$id": "259",
       "Name": "int32",
@@ -2021,7 +2021,7 @@
      "$id": "261",
      "Name": "variableStates",
      "SerializedName": "variableStates",
-     "Description": "",
+     "Description": "Variable Status.",
      "Type": {
       "$id": "262",
       "Name": "Array",
@@ -2038,7 +2038,7 @@
      "$id": "263",
      "Name": "results",
      "SerializedName": "results",
-     "Description": "",
+     "Description": "Anomaly status and information.",
      "Type": {
       "$id": "264",
       "Name": "Array",

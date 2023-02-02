@@ -360,6 +360,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (resourceScope.IsParameterizedScope() && !operationScope.IsParameterizedScope())
             {
                 var resourceScopeTypes = resourceScope.GetParameterizedScopeResourceTypes();
+                if (resourceScopeTypes is null)
+                    return false;
                 var operationScopeType = operationScope.GetResourceType();
                 if (resourceScopeTypes.Contains(ResourceTypeSegment.Any) || resourceScopeTypes.Contains(operationScopeType))
                     return true;
