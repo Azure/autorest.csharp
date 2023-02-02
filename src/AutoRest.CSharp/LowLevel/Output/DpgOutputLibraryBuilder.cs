@@ -69,10 +69,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var inputEnum in _rootNamespace.Enums)
             {
-                if (inputEnum.Usage != InputModelTypeUsage.None)
-                {
-                    dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null,_defaultNamespace), "public", typeFactory, _sourceInputModel));
-                }
+                dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
             }
         }
 
@@ -96,13 +93,10 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var model in _rootNamespace.Models)
             {
-                if (model.Usage != InputModelTypeUsage.None)
-                {
-                    derivedTypesLookup.TryGetValue(model, out var children);
-                    InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
-                    ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
-                    models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
-                }
+                derivedTypesLookup.TryGetValue(model, out var children);
+                InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
+                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
+                models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
             }
         }
 

@@ -22,6 +22,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -41,6 +42,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -67,6 +69,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -86,6 +89,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -112,6 +116,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -131,6 +136,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -157,6 +163,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -176,6 +183,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -200,6 +208,7 @@ var data = new {
     optionalLiteralInt = new {},
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
 };
 
 Response response = await client.PatchActionAsync(RequestContent.Create(data));
@@ -215,6 +224,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -234,6 +244,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -251,6 +262,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -275,6 +287,7 @@ var data = new {
     optionalLiteralInt = new {},
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
 };
 
 Response response = client.PatchAction(RequestContent.Create(data));
@@ -290,6 +303,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -309,6 +323,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -326,6 +341,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -350,6 +366,7 @@ var data = new {
     optionalLiteralInt = new {},
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
 };
 
 Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
@@ -365,6 +382,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -384,6 +402,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -401,6 +420,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -425,6 +445,7 @@ var data = new {
     optionalLiteralInt = new {},
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
 };
 
 Response response = client.AnonymousBody(RequestContent.Create(data));
@@ -440,6 +461,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -459,6 +481,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -476,6 +499,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -624,6 +648,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
 <code><![CDATA[
@@ -644,6 +669,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -663,6 +689,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -689,6 +716,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call SayHi with all parameters, and how to parse the result.
 <code><![CDATA[
@@ -709,6 +737,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -728,6 +757,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -761,6 +791,7 @@ var data = new {
         optionalLiteralInt = new {},
         optionalLiteralDouble = new {},
         optionalLiteralBool = new {},
+        requiredBadDescription = "<requiredBadDescription>",
     },
 };
 
@@ -777,6 +808,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -801,6 +833,7 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralInt: Literal, # Required. optional literal int
     optionalLiteralDouble: Literal, # Required. optional literal double
     optionalLiteralBool: Literal, # Required. optional literal bool
+    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
 }
 </code>
@@ -819,6 +852,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -852,6 +886,7 @@ var data = new {
         optionalLiteralInt = new {},
         optionalLiteralDouble = new {},
         optionalLiteralBool = new {},
+        requiredBadDescription = "<requiredBadDescription>",
     },
 };
 
@@ -868,6 +903,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -892,6 +928,7 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralInt: Literal, # Required. optional literal int
     optionalLiteralDouble: Literal, # Required. optional literal double
     optionalLiteralBool: Literal, # Required. optional literal bool
+    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
 }
 </code>
@@ -910,6 +947,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -943,6 +981,7 @@ var data = new {
         optionalLiteralInt = new {},
         optionalLiteralDouble = new {},
         optionalLiteralBool = new {},
+        requiredBadDescription = "<requiredBadDescription>",
     },
 };
 
@@ -959,6 +998,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -983,6 +1023,7 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralInt: Literal, # Required. optional literal int
     optionalLiteralDouble: Literal, # Required. optional literal double
     optionalLiteralBool: Literal, # Required. optional literal bool
+    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
 }
 </code>
@@ -1001,6 +1042,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -1034,6 +1076,7 @@ var data = new {
         optionalLiteralInt = new {},
         optionalLiteralDouble = new {},
         optionalLiteralBool = new {},
+        requiredBadDescription = "<requiredBadDescription>",
     },
 };
 
@@ -1050,6 +1093,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1074,6 +1118,7 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralInt: Literal, # Required. optional literal int
     optionalLiteralDouble: Literal, # Required. optional literal double
     optionalLiteralBool: Literal, # Required. optional literal bool
+    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
 }
 </code>
@@ -1092,6 +1137,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -1118,6 +1164,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1137,6 +1184,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -1163,6 +1211,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1182,6 +1231,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -1206,6 +1256,7 @@ var data = new {
     optionalLiteralInt = new {},
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
 };
 
 Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
@@ -1221,6 +1272,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1240,6 +1292,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -1257,6 +1310,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -1281,6 +1335,7 @@ var data = new {
     optionalLiteralInt = new {},
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
 };
 
 Response response = client.CreateLiteral(RequestContent.Create(data));
@@ -1296,6 +1351,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1315,6 +1371,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -1332,6 +1389,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -1358,6 +1416,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1377,6 +1436,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 
@@ -1403,6 +1463,7 @@ Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1422,6 +1483,7 @@ Schema for <c>Thing</c>:
   optionalLiteralInt: Literal, # Required. optional literal int
   optionalLiteralDouble: Literal, # Required. optional literal double
   optionalLiteralBool: Literal, # Required. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
 

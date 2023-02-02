@@ -10,6 +10,7 @@ Scenarios.FirstTestCadl_CreateLiteral = passOnSuccess([
     req.expect.bodyEquals({
         name: "test",
         requiredUnion: "test",
+        requiredBadDescription: "abc",
         requiredLiteralString: "accept",
         requiredLiteralInt: 123,
         requiredLiteralDouble: 1.23,
@@ -24,6 +25,7 @@ Scenarios.FirstTestCadl_CreateLiteral = passOnSuccess([
       body: json({
         name: "literal",
         requiredUnion: "union",
+        requiredBadDescription: "def",
         // below are useless
         requiredLiteralString: "reject",
         requiredLiteralInt: 12345,

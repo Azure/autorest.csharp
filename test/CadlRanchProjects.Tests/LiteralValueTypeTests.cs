@@ -24,9 +24,10 @@ namespace CadlRanchProjects.Tests
         [Test]
         public async Task LiteralModelProperties() => await Test(async (host) =>
         {
-            Thing result = await new CadlFirstTestClient(host).CreateLiteralAsync(new Thing("test", "test"));
+            Thing result = await new CadlFirstTestClient(host).CreateLiteralAsync(new Thing("test", "test", "abc"));
             Assert.AreEqual(result.Name, "literal");
             Assert.AreEqual(result.RequiredUnion, "union");
+            Assert.AreEqual(result.RequiredBadDescription, "def");
             // the following are stick to literal value, despite the mock server returns different value
             Assert.AreEqual(result.RequiredLiteralString, "accept");
             Assert.AreEqual(result.RequiredLiteralInt, 123);

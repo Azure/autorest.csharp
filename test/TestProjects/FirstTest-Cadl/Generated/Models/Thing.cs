@@ -16,14 +16,17 @@ namespace CadlFirstTest.Models
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="requiredUnion"/> is null. </exception>
-        public Thing(string name, string requiredUnion)
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        public Thing(string name, string requiredUnion, string requiredBadDescription)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+            Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
             Name = name;
             RequiredUnion = requiredUnion;
+            RequiredBadDescription = requiredBadDescription;
         }
 
         /// <summary> name of the Thing. </summary>
@@ -53,5 +56,8 @@ namespace CadlFirstTest.Models
 
         /// <summary> optional literal bool. </summary>
         internal bool OptionalLiteralBool { get; } = true;
+
+        /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
+        public string RequiredBadDescription { get; set; }
     }
 }

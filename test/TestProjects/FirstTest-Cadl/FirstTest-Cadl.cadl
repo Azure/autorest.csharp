@@ -80,6 +80,9 @@ model Thing {
 
   @doc("optional literal bool")
   optionalLiteralBool: true;
+
+  @doc("description with xml <|endoftext|>")
+  requiredBadDescription: string
 }
 
 @friendlyName("Friend")

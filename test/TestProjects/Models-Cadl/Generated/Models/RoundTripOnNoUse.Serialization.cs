@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace ModelsInCadl.Models
 {
-    public partial class DerivedModel : IUtf8JsonSerializable
+    public partial class RoundTripOnNoUse : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -24,12 +24,15 @@ namespace ModelsInCadl.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
+            writer.WritePropertyName("baseModelProp");
+            writer.WriteStringValue(BaseModelProp);
             writer.WriteEndObject();
         }
 
-        internal static DerivedModel DeserializeDerivedModel(JsonElement element)
+        internal static RoundTripOnNoUse DeserializeRoundTripOnNoUse(JsonElement element)
         {
             IList<CollectionItem> requiredCollection = default;
+            string baseModelProp = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredCollection"))
@@ -42,20 +45,25 @@ namespace ModelsInCadl.Models
                     requiredCollection = array;
                     continue;
                 }
+                if (property.NameEquals("baseModelProp"))
+                {
+                    baseModelProp = property.Value.GetString();
+                    continue;
+                }
             }
-            return new DerivedModel(requiredCollection);
+            return new RoundTripOnNoUse(baseModelProp, requiredCollection);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static DerivedModel FromResponse(Response response)
+        internal static RoundTripOnNoUse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModel(document.RootElement);
+            return DeserializeRoundTripOnNoUse(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
