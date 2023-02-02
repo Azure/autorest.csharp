@@ -148,6 +148,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
             _writer.Line($"var {resourceVar:D} = {client}.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;");
+            // since right after we get the resource above, we would immeditately call an extension method on the resource
+            // here we just add the namespace of the extension class into the writer so that the following invocation would not have compilation errors
+            _writer.UseNamespace(parentExtension.Namespace);
             return resourceVar;
         }
 
@@ -158,6 +161,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             WriteCreateResourceIdentifier(example, idVar, parentExtension.ContextualPath, parentExtension.ArmCoreType);
 
             _writer.Line($"{parentExtension.ArmCoreType} {resourceVar:D} = {client}.Get{parentExtension.ArmCoreType.Name}({idVar});");
+            // since right after we get the resource above, we would immeditately call an extension method on the resource
+            // here we just add the namespace of the extension class into the writer so that the following invocation would not have compilation errors
+            _writer.UseNamespace(parentExtension.Namespace);
             return resourceVar;
         }
 
