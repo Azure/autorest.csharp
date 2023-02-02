@@ -599,7 +599,7 @@ export function getUsages(
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
         if (type.kind === "Model") {
-            const effectiveType = getEffectiveModelType(program, type);
+            const effectiveType = getEffectiveSchemaType(program, type) as Model;
             typeName =
                 getFriendlyName(program, effectiveType) ?? effectiveType.name;
         }
