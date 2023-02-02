@@ -46,8 +46,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var pagingMethod in client.PagingMethods)
                     {
-                        WritePagingOperation(writer, client, pagingMethod, true);
-                        WritePagingOperation(writer, client, pagingMethod, false);
+                        WritePagingOperation(writer, pagingMethod);
                     }
 
                     foreach (var longRunningOperation in client.LongRunningOperationMethods)
@@ -266,37 +265,22 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private void WritePagingOperation(CodeWriter writer, DataPlaneClient client, PagingMethod pagingMethod, bool async)
+        private void WritePagingOperation(CodeWriter writer, Method method)
         {
-            var pageType = pagingMethod.PagingResponse.ItemType;
-            var parameters = pagingMethod.Method.Parameters
-                .Where(p => p.Name != KnownParameters.RequestContext.Name)
-                .Append(KnownParameters.CancellationTokenParameter)
-                .ToList();
+            writer.WriteXmlDocumentationSummary($"{method.Signature.SummaryText}");
 
-            var pipelineReference = new Reference(PipelineField, typeof(HttpPipeline));
-            var scopeName = pagingMethod.Diagnostics.ScopeName;
-            var nextLinkName = pagingMethod.PagingResponse.NextLinkPropertyName;
-            var itemName = pagingMethod.PagingResponse.ItemPropertyName;
-            var signature = new MethodSignature(
-                pagingMethod.Name,
-                pagingMethod.Method.SummaryText,
-                pagingMethod.Method.DescriptionText,
-                MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual,
-                new CSharpType(typeof(Pageable<>), pageType),
-                null,
-                parameters);
-
-            writer.WriteXmlDocumentationSummary($"{pagingMethod.Method.SummaryText}");
-
-            foreach (Parameter parameter in parameters)
+            foreach (Parameter parameter in method.Signature.Parameters)
             {
                 writer.WriteXmlDocumentationParameter(parameter.Name, $"{parameter.Description}");
             }
 
-            writer.WriteXmlDocumentationRequiredParametersException(parameters);
-            writer.WriteXmlDocumentation("remarks", $"{pagingMethod.Method.DescriptionText}");
-            writer.WritePageable(signature.WithAsync(async), pageType, new Reference(RestClientField, client.RestClient.Type), pagingMethod.Method, pagingMethod.NextPageMethod, ClientDiagnosticsField, pipelineReference, scopeName, itemName, nextLinkName, async);
+            writer.WriteXmlDocumentationRequiredParametersException(method.Signature.Parameters);
+            writer.WriteXmlDocumentation("remarks", $"{method.Signature.DescriptionText}");
+            using (writer.WriteMethodDeclaration(method.Signature))
+            {
+                writer.WriteBody(method.Body);
+            }
+            writer.Line();
         }
 
         private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperationMethod lroMethod, bool async)

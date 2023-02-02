@@ -85,8 +85,8 @@ namespace AutoRest.CSharp.Output.Models
             var operationParameters = new Dictionary<InputOperation, MethodParametersBuilder>();
             foreach (var inputOperation in operations)
             {
-                var builder = new MethodParametersBuilder(typeFactory, inputOperation, fields);
-                builder.BuildParameters();
+                var builder = new MethodParametersBuilder(typeFactory, inputOperation);
+                builder.BuildDpg();
                 operationParameters[inputOperation] = builder;
             }
 
@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Output.Models
                         ? parametersBuilder.CreateMessageParameters.Prepend(KnownParameters.NextLink).ToArray()
                         : Array.Empty<Parameter>();
 
-                var methodBuilder = new OperationMethodsBuilder(operation, fields, clientName, typeFactory, parametersBuilder.RequestParts, parametersBuilder.CreateMessageParameters, createNextPageMessageMethodParameters, parametersBuilder.ParameterLinks);
+                var methodBuilder = new OperationMethodsBuilder(operation, null, fields, clientName, typeFactory, parametersBuilder.RequestParts, parametersBuilder.CreateMessageParameters, createNextPageMessageMethodParameters, parametersBuilder.ParameterLinks);
                 methods.Add(methodBuilder.BuildDpg());
             }
 

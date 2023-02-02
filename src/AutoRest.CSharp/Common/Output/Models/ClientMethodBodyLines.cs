@@ -30,7 +30,11 @@ namespace AutoRest.CSharp.Output.Models
             {
                 switch (parameterLink)
                 {
-                    case { ProtocolParameters.Count: 0 }:
+                    case { ProtocolParameters.Count: 0, ConvenienceParameters: var convenienceParameters }:
+                        if (convenienceParameters.Count == 1 && convenienceParameters[0] == KnownParameters.CancellationTokenParameter)
+                        {
+                            requestContextVariable = KnownParameters.CancellationTokenParameter;
+                        }
                         // Skip the convenience-only parameters
                         break;
                     case { ProtocolParameters: [var protocolParameter], ConvenienceParameters: [var convenienceParameter], IntermediateModel: null }:
@@ -135,7 +139,7 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        public static class Set
+        public static class Assign
         {
             public static MethodBodyLine ResponseValueId(CodeWriterDeclaration response, ValueExpression from)
             {

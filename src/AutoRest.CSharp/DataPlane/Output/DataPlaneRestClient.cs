@@ -20,13 +20,12 @@ namespace AutoRest.CSharp.Output.Models
     {
         private readonly string _clientName;
         private readonly IReadOnlyDictionary<InputOperation, RestClientMethod> _requestMethods;
-        private readonly IReadOnlyDictionary<InputOperation, RestClientMethod> _nextPageRequestMethods;
 
         public IReadOnlyList<LowLevelClientMethod> ProtocolMethods { get; }
         public RestClientBuilder ClientBuilder { get; }
         public ClientFields Fields { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
-        public IReadOnlyList<RestClientMethod> Methods { get; }
+        public IReadOnlyList<HlcMethods> Methods { get; }
         public ConstructorSignature Constructor { get; }
 
         public string ClientPrefix { get; }
@@ -44,92 +43,40 @@ namespace AutoRest.CSharp.Output.Models
             Parameters = GetOrderedParameters(clientBuilder);
             ClientBuilder = clientBuilder;
             Fields = ClientFields.CreateForRestClient(Parameters);
-
-            _requestMethods = EnsureNormalMethods(inputClient, Fields, typeFactory, library);
-            _nextPageRequestMethods = EnsureGetNextPageMethods(inputClient, _requestMethods);
-
             Constructor = new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
-            Methods = BuildAllMethods(inputClient, _requestMethods, _nextPageRequestMethods).ToArray();
-            ProtocolMethods = GetProtocolMethods(Methods, Fields, inputClient, typeFactory, library).ToList();
+
+            var methods = CreateMethods(inputClient, Fields, clientPrefix + GetClientSuffix(), typeFactory, library);
+            Methods = methods;
+            _requestMethods = methods.ToDictionary(m => m.Operation, m => m.CreateMessageMethods[0]);
+            ProtocolMethods = GetProtocolMethods(_requestMethods.Values, Fields, inputClient, typeFactory, library).ToList();
         }
 
-        private static Dictionary<InputOperation, RestClientMethod> EnsureNormalMethods(InputClient inputClient, ClientFields fields, TypeFactory typeFactory, DataPlaneOutputLibrary library)
+        private static IReadOnlyList<HlcMethods> CreateMethods(InputClient inputClient, ClientFields fields, string clientName, TypeFactory typeFactory, DataPlaneOutputLibrary library)
         {
-            var requestMethods = new Dictionary<InputOperation, RestClientMethod>();
+            var operationParameters = new Dictionary<InputOperation, MethodParametersBuilder>();
 
-            foreach (var operation in inputClient.Operations)
+            foreach (var inputOperation in inputClient.Operations)
             {
-                var headerModel = library.FindHeaderModel(operation);
-                var parameters = new List<Parameter>();
-                var requestParts = new List<RequestPartSource>();
-
-                foreach (var inputParameter in operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp)))
-                {
-                    var parameter = Parameter.FromInputParameter(inputParameter, typeFactory.CreateType(inputParameter.Type), typeFactory);
-                    // Grouped and flattened parameters shouldn't be added to methods
-                    if (inputParameter.Kind == InputOperationParameterKind.Method)
-                    {
-                        parameters.Add(parameter);
-                    }
-
-                    var reference = MethodParametersBuilder.CreateReference(inputParameter, parameter, fields, typeFactory);
-                    var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
-                    requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, reference, serializationFormat));
-                }
-
-                var method = RestClientBuilder.BuildRequestMethod(operation, RestClientBuilder.OrderParametersByRequired(parameters), requestParts, headerModel, typeFactory);
-                requestMethods.Add(operation, method);
+                var builder = new MethodParametersBuilder(typeFactory, inputOperation);
+                builder.BuildHlc();
+                operationParameters[inputOperation] = builder;
             }
 
-            return requestMethods;
-        }
-
-        private static Dictionary<InputOperation, RestClientMethod> EnsureGetNextPageMethods(InputClient inputClient, IReadOnlyDictionary<InputOperation, RestClientMethod> normalMethods)
-        {
-            var nextPageMethods = new Dictionary<InputOperation, RestClientMethod>();
-            foreach (var operation in inputClient.Operations)
+            var restClient = new FormattableStringToExpression($"RestClient");
+            var methods = new List<HlcMethods>();
+            foreach (var (operation, builder) in operationParameters)
             {
-                var paging = operation.Paging;
-                if (paging == null)
-                {
-                    continue;
-                }
+                var createNextPageMessageMethodParameters = operation.Paging is { NextLinkOperation: { } nextLinkOperation }
+                    ? operationParameters[nextLinkOperation].CreateMessageParameters
+                    : operation.Paging is { NextLinkName: {} }
+                        ? builder.CreateMessageParameters.Prepend(KnownParameters.NextLink).ToArray()
+                        : Array.Empty<Parameter>();
 
-                RestClientMethod? nextMethod = null;
-                if (paging.NextLinkOperation != null)
-                {
-                    nextMethod = normalMethods[paging.NextLinkOperation];
-                }
-                else if (paging.NextLinkName != null)
-                {
-                    var method = normalMethods[operation];
-                    nextMethod = RestClientBuilder.BuildNextPageMethod(method);
-                }
-
-                if (nextMethod != null)
-                {
-                    nextPageMethods.Add(operation, nextMethod);
-                }
+                var methodBuilder = new OperationMethodsBuilder(operation, restClient, fields, clientName, typeFactory, builder.RequestParts, builder.CreateMessageParameters, createNextPageMessageMethodParameters, builder.ParameterLinks);
+                methods.Add(methodBuilder.BuildHlc(library.FindHeaderModel(operation)));
             }
 
-            return nextPageMethods;
-        }
-
-        private static IEnumerable<RestClientMethod> BuildAllMethods(InputClient inputClient, IReadOnlyDictionary<InputOperation, RestClientMethod> requestMethods, IReadOnlyDictionary<InputOperation, RestClientMethod> nextPageRequestMethods)
-        {
-            foreach (var operation in inputClient.Operations)
-            {
-                yield return requestMethods[operation];
-            }
-
-            foreach (var operation in inputClient.Operations)
-            {
-                // remove duplicates when GetNextPage method is not autogenerated
-                if (nextPageRequestMethods.TryGetValue(operation, out RestClientMethod? nextOperationMethod) && operation.Paging?.NextLinkOperation == null)
-                {
-                    yield return nextOperationMethod;
-                }
-            }
+            return methods;
         }
 
         private static IReadOnlyList<Parameter> GetOrderedParameters(RestClientBuilder clientBuilder)
@@ -150,12 +97,6 @@ namespace AutoRest.CSharp.Output.Models
             // Filter protocol method requests for this operationGroup based on the config
             var operations = methods.Select(m => m.Operation).Where(operation => IsProtocolMethodExists(operation, inputClient, library));
             return LowLevelClient.BuildMethods(typeFactory, operations, fields, _clientName);
-        }
-
-        public RestClientMethod? GetNextOperationMethod(InputOperation request)
-        {
-            _nextPageRequestMethods.TryGetValue(request, out RestClientMethod? value);
-            return value;
         }
 
         public RestClientMethod GetOperationMethod(InputOperation request)

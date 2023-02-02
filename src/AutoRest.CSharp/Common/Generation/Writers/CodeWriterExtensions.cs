@@ -618,6 +618,38 @@ namespace AutoRest.CSharp.Generation.Writers
             return scope;
         }
 
+        public static CodeWriter WriteBody(this CodeWriter writer, MethodBody methodBody)
+        {
+            foreach (var block in methodBody.Blocks)
+            {
+                WriteBodyBlock(writer, block);
+            }
+
+            return writer;
+        }
+
+        private static void WriteBodyBlock(CodeWriter writer, MethodBodyBlock bodyBlock)
+        {
+            switch (bodyBlock)
+            {
+                case ParameterValidationBlock parameterValidation:
+                    writer.WriteParametersValidation(parameterValidation.Parameters);
+                    break;
+                case DiagnosticScopeMethodBodyBlock diagnosticScope:
+                    using (writer.WriteDiagnosticScope(diagnosticScope.Diagnostic, diagnosticScope.ClientDiagnosticsReference))
+                    {
+                        WriteBodyBlock(writer, diagnosticScope.InnerBlock);
+                    }
+                    break;
+                case MethodBodyLines lines:
+                    foreach (var line in lines.MethodBodySingleLine)
+                    {
+                        writer.Line(line);
+                    }
+                    break;
+            }
+        }
+
         public static CodeWriter Line(this CodeWriter writer, MethodBodyLine line)
         {
             switch (line)
@@ -694,6 +726,29 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(methodCall.MethodName);
                     WriteArguments(writer, methodCall.Arguments);
                     writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync);
+                    break;
+                case FuncExpression {Parameters: var parameters, Inner: var inner}:
+                    using (writer.AmbientScope())
+                    {
+                        if (parameters.Count == 1)
+                        {
+                            writer.Declaration(parameters[0]);
+                        }
+                        else
+                        {
+                            writer.AppendRaw("(");
+                            foreach (var parameter in parameters)
+                            {
+                                writer.Declaration(parameter);
+                                writer.AppendRaw(", ");
+                            }
+                            writer.RemoveTrailingComma();
+                            writer.AppendRaw(")");
+                        }
+
+                        writer.AppendRaw(" => ");
+                        writer.WriteValueExpression(inner);
+                    }
                     break;
                 case NewInstanceExpression newInstance:
                     WriteNewInstance(writer, newInstance);

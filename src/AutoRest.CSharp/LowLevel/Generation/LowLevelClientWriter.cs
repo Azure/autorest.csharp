@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.WriteMethodDeclaration(method.Signature))
             {
-                WriteBody(writer, method.Body);
+                writer.WriteBody(method.Body);
             }
             writer.Line();
         }
@@ -225,36 +225,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
             _writer.Line();
-        }
-
-        private static void WriteBody(CodeWriter writer, MethodBody methodBody)
-        {
-            foreach (var block in methodBody.Blocks)
-            {
-                WriteBodyBlock(writer, block);
-            }
-        }
-
-        private static void WriteBodyBlock(CodeWriter writer, MethodBodyBlock bodyBlock)
-        {
-            switch (bodyBlock)
-            {
-                case ParameterValidationBlock parameterValidation:
-                    writer.WriteParametersValidation(parameterValidation.Parameters);
-                    break;
-                case DiagnosticScopeMethodBodyBlock diagnosticScope:
-                    using (writer.WriteDiagnosticScope(diagnosticScope.Diagnostic, diagnosticScope.ClientDiagnosticsReference))
-                    {
-                        WriteBodyBlock(writer, diagnosticScope.InnerBlock);
-                    }
-                    break;
-                case MethodBodyLines lines:
-                    foreach (var line in lines.MethodBodySingleLine)
-                    {
-                        writer.Line(line);
-                    }
-                    break;
-            }
         }
 
         private void WriteSubClientFactoryMethod()

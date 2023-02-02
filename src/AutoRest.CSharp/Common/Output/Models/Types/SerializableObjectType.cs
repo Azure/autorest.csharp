@@ -40,6 +40,8 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private bool? _hasXmlSerialization;
         private bool HasXmlSerialization => _hasXmlSerialization ??= EnsureHasXmlSerialization();
 
+        public abstract ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false);
+
         protected abstract bool EnsureHasJsonSerialization();
         protected abstract bool EnsureHasXmlSerialization();
         protected abstract bool EnsureIncludeSerializer();

@@ -675,7 +675,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
-                    _writer.Line(Set.ResponseValueId(response, CallCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, response)));
+                    _writer.Line(Assign.ResponseValueId(response, CallCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, response)));
                 }
 
                 // the case that we did not need to wrap the result

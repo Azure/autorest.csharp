@@ -81,45 +81,6 @@ namespace AutoRest.CSharp.Common.Output.Builders
         /// <summary>
         /// This function builds an enumerable of <see cref="PagingMethod"/> from an <see cref="OperationGroup"/> and a <see cref="RestClient"/>
         /// </summary>
-        /// <param name="inputClient">The InputClient to build methods from</param>
-        /// <param name="restClient">The corresponding RestClient to the operation group</param>
-        /// <param name="declaration">The type declaration options</param>
-        /// <returns>An enumerable of <see cref="PagingMethod"/></returns>
-        public static IEnumerable<PagingMethod> BuildPagingMethods(InputClient inputClient, DataPlaneRestClient restClient, TypeDeclarationOptions declaration)
-        {
-            foreach (var operation in inputClient.Operations)
-            {
-                var paging = operation.Paging;
-                if (paging == null || operation.LongRunning != null)
-                {
-                    continue;
-                }
-
-                RestClientMethod method = restClient.GetOperationMethod(operation);
-                RestClientMethod? nextPageMethod = restClient.GetNextOperationMethod(operation);
-
-                yield return BuildPagingMethod(method.Name, paging.NextLinkName, paging.ItemName, method, nextPageMethod, declaration);
-            }
-        }
-
-        public static PagingMethod BuildPagingMethod(string methodName, string? nextLinkName, string? itemName, RestClientMethod method, RestClientMethod? nextPageMethod, TypeDeclarationOptions declaration)
-        {
-            if (!(method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is ObjectResponseBody objectResponseBody))
-            {
-                throw new InvalidOperationException($"Method {method.Name} has to have a return value");
-            }
-
-            return new PagingMethod(
-                method,
-                nextPageMethod,
-                methodName,
-                new Diagnostic($"{declaration.Name}.{methodName}"),
-                new PagingResponseInfo(nextLinkName, itemName, objectResponseBody.Type));
-        }
-
-        /// <summary>
-        /// This function builds an enumerable of <see cref="PagingMethod"/> from an <see cref="OperationGroup"/> and a <see cref="RestClient"/>
-        /// </summary>
         /// <param name="operationGroup">The OperationGroup to build methods from</param>
         /// <param name="restClient">The corresponding RestClient to the operation group</param>
         /// <param name="declaration">The type declaration options</param>

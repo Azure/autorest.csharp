@@ -155,22 +155,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             return model;
         }
 
-        public LongRunningOperationInfo FindLongRunningOperationInfo(InputClient inputClient, InputOperation operation)
-        {
-            var client = FindClient(inputClient);
-
-            Debug.Assert(client != null, "client != null, LROs should be disabled when public clients are disabled.");
-
-            var nextOperationMethod = operation.Paging != null
-                ? client.RestClient.GetNextOperationMethod(operation)
-                : null;
-
-            return new LongRunningOperationInfo(
-                client.Declaration.Accessibility,
-                client.RestClient.ClientPrefix,
-                nextOperationMethod);
-        }
-
         public IEnumerable<DataPlaneRestClient> RestClients => _restClients.Values;
 
         public DataPlaneRestClient FindRestClient(InputClient client)
@@ -204,14 +188,21 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (Configuration.PublicClients)
             {
-                foreach (var client in _input.Clients)
+                foreach (var inputClient in _input.Clients)
                 {
-                    foreach (var operation in client.Operations)
+                    var client = FindClient(inputClient);
+                    Debug.Assert(client != null, "client != null, LROs should be disabled when public clients are disabled.");
+
+                    foreach (var methods in client.RestClient.Methods)
                     {
-                        if (operation.LongRunning != null)
+                        if (methods is not { Operation: { LongRunning: {}} operation })
                         {
-                            operations.Add(operation, new LongRunningOperation(operation, _typeFactory, FindLongRunningOperationInfo(client, operation), _defaultNamespace, _sourceInputModel));
+                            continue;
                         }
+
+                        var createNextPageMessage = methods.CreateMessageMethods.Count == 2 ? methods.CreateMessageMethods[1] : null;
+                        var info = new LongRunningOperationInfo(client.Declaration.Accessibility, client.RestClient.ClientPrefix, createNextPageMessage);
+                        operations.Add(operation, new LongRunningOperation(operation, _typeFactory, info, _defaultNamespace, _sourceInputModel));
                     }
                 }
             }

@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -18,7 +17,6 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 using Request = AutoRest.CSharp.Output.Models.Requests.Request;
 using Response = AutoRest.CSharp.Output.Models.Responses.Response;
@@ -67,9 +65,9 @@ namespace AutoRest.CSharp.Output.Models
             return language.SerializedName ?? language.Name;
         }
 
-        public static RestClientMethod BuildRequestMethod(InputOperation operation, IReadOnlyList<Parameter> parameters, IReadOnlyCollection<RequestPartSource> requestParts, DataPlaneResponseHeaderGroupType? responseHeaderModel, TypeFactory typeFactory)
+        public static RestClientMethod BuildRequestMethod(InputOperation operation, IReadOnlyList<Parameter> parameters, IReadOnlyCollection<RequestPartSource> requestParts, DataPlaneResponseHeaderGroupType? responseHeaderModel, ClientFields fields, TypeFactory typeFactory)
         {
-            Request request = BuildRequest(operation, requestParts, typeFactory);
+            Request request = BuildRequest(operation, requestParts, fields, typeFactory);
             Response[] responses = BuildResponses(operation, typeFactory, out var responseType);
 
             return new RestClientMethod(
@@ -120,26 +118,64 @@ namespace AutoRest.CSharp.Output.Models
             return clientResponse.ToArray();
         }
 
-        private static Request BuildRequest(InputOperation operation, IReadOnlyCollection<RequestPartSource> requestParts, TypeFactory factory)
+        private static ReferenceOrConstant CreateReference(InputParameter? operationParameter, Parameter parameter, ClientFields fields, TypeFactory typeFactory)
+        {
+            if (operationParameter is null)
+            {
+                return parameter;
+            }
+
+            if (operationParameter.Kind == InputOperationParameterKind.Client)
+            {
+                var field = operationParameter.IsEndpoint ? fields.EndpointField : fields.GetFieldByParameter(parameter);
+                if (field == null)
+                {
+                    throw new InvalidOperationException($"Parameter {parameter.Name} should have matching field");
+                }
+
+                return new Reference(field.Name, field.Type);
+            }
+
+            if (operationParameter.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
+            {
+                return (ReferenceOrConstant)parameter.DefaultValue;
+            }
+
+            var groupedByParameter = operationParameter.GroupedBy;
+            if (groupedByParameter == null)
+            {
+                return parameter;
+            }
+
+            var groupModel = (SchemaObjectType)typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
+            var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
+
+            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
+        }
+
+        private static Request BuildRequest(InputOperation operation, IReadOnlyCollection<RequestPartSource> requestParts, ClientFields fields, TypeFactory typeFactory)
         {
             var uriParametersMap = new Dictionary<string, PathSegment>();
             var pathParametersMap = new Dictionary<string, PathSegment>();
             var queryParameters = new List<QueryParameter>();
             var headerParameters = new List<RequestHeader>();
+            var bodyParameters = new Dictionary<InputParameter, ReferenceOrConstant>();
             RequestBody? body = null;
 
-            foreach (var (nameInRequest, operationParameter, reference, serializationFormat) in requestParts)
+            foreach (var (nameInRequest, inputParameter, outputParameter, serializationFormat) in requestParts)
             {
-                if (operationParameter == null)
+                var reference = CreateReference(inputParameter, outputParameter, fields, typeFactory);
+
+                if (inputParameter == null)
                 {
                     Debug.Assert(nameInRequest == KnownParameters.MatchConditionsParameter.Name || nameInRequest == KnownParameters.RequestConditionsParameter.Name);
                     headerParameters.Add(new RequestHeader(nameInRequest, reference, null, serializationFormat));
                     continue;
                 }
 
-                var escape = !operationParameter.SkipUrlEncoding;
+                var escape = !inputParameter.SkipUrlEncoding;
 
-                switch (operationParameter.Location)
+                switch (inputParameter.Location)
                 {
                     case RequestLocation.Uri:
                         uriParametersMap.Add(nameInRequest, new PathSegment(reference, escape, serializationFormat, isRaw: true));
@@ -148,23 +184,27 @@ namespace AutoRest.CSharp.Output.Models
                         pathParametersMap.Add(nameInRequest, new PathSegment(reference, escape, serializationFormat, isRaw: false));
                         break;
                     case RequestLocation.Query:
-                        queryParameters.Add(new QueryParameter(nameInRequest, reference, operationParameter.ArraySerializationDelimiter, escape, serializationFormat, operationParameter.Explode));
+                        queryParameters.Add(new QueryParameter(nameInRequest, reference, inputParameter.ArraySerializationDelimiter, escape, serializationFormat, inputParameter.Explode));
                         break;
                     case RequestLocation.Header:
-                        var headerName = operationParameter.HeaderCollectionPrefix ?? nameInRequest;
-                        headerParameters.Add(new RequestHeader(headerName, reference, operationParameter.ArraySerializationDelimiter, serializationFormat));
+                        var headerName = inputParameter.HeaderCollectionPrefix ?? nameInRequest;
+                        headerParameters.Add(new RequestHeader(headerName, reference, inputParameter.ArraySerializationDelimiter, serializationFormat));
                         break;
                     case RequestLocation.Body when reference.Type.EqualsIgnoreNullable(KnownParameters.RequestContent.Type):
                         body = new RequestContentRequestBody(reference.Reference.Name);
                         break;
                     case RequestLocation.Body when operation.RequestBodyMediaType != BodyMediaType.None:
-                        body = BuildRequestBody(requestParts, operation.RequestBodyMediaType, factory);
+                        bodyParameters.Add(inputParameter, reference);
                         break;
                 }
             }
 
             var uriParameters = GetPathSegments(operation.Uri, uriParametersMap, isRaw: true);
             var pathParameters = GetPathSegments(operation.Path, pathParametersMap, isRaw: false);
+            if (body == null && bodyParameters.Any())
+            {
+                body = BuildRequestBody(bodyParameters, requestParts, operation.RequestBodyMediaType, fields, typeFactory);
+            }
 
             return new Request(
                 operation.HttpMethod,
@@ -175,25 +215,9 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        private static RequestBody? BuildRequestBody(IReadOnlyCollection<RequestPartSource> allParameters, BodyMediaType bodyMediaType, TypeFactory factory)
+        private static RequestBody? BuildRequestBody(IReadOnlyDictionary<InputParameter, ReferenceOrConstant> bodyParameters, IReadOnlyCollection<RequestPartSource> allParameters, BodyMediaType bodyMediaType, ClientFields fields, TypeFactory typeFactory)
         {
             RequestBody? body = null;
-
-            var references = new Dictionary<string, ReferenceOrConstant>();
-            var bodyParameters = new List<(InputParameter, ReferenceOrConstant)>();
-            foreach (var (_, inputParameter, value, _) in allParameters)
-            {
-                if (inputParameter is not null)
-                {
-                    references[inputParameter.NameInRequest] = value;
-                }
-
-                if (inputParameter is { Location: RequestLocation.Body })
-                {
-                    bodyParameters.Add((inputParameter, value));
-                }
-            }
-
             if (bodyParameters.Count > 0)
             {
                 if (bodyMediaType == BodyMediaType.Multipart)
@@ -239,7 +263,7 @@ namespace AutoRest.CSharp.Output.Models
                 else
                 {
                     Debug.Assert(bodyParameters.Count == 1);
-                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters[0];
+                    var (bodyRequestParameter, bodyParameterValue) = bodyParameters.First();
                     if (bodyMediaType == BodyMediaType.Binary ||
                         // WORKAROUND: https://github.com/Azure/autorest.modelerfour/issues/360
                         bodyRequestParameter.Type is InputPrimitiveType { Kind: InputTypeKind.Stream })
@@ -260,14 +284,18 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened)
                         {
-                            var objectType = (SchemaObjectType)factory.CreateType(bodyRequestParameter.Type).Implementation;
+                            var objectType = (SchemaObjectType)typeFactory.CreateType(bodyRequestParameter.Type).Implementation;
 
                             var initializationMap = new List<ObjectPropertyInitializer>();
+                            var references = allParameters
+                                .Where(rp => rp.InputParameter is not null)
+                                .ToDictionary(rp => rp.InputParameter!.NameInRequest, rp => CreateReference(rp.InputParameter, rp.OutputParameter, fields, typeFactory));
+
                             foreach ((_, InputParameter? inputParameter, _, _) in allParameters)
                             {
                                 if (inputParameter is { VirtualParameter: { } virtualParameter })
                                 {
-                                    initializationMap.Add(new ObjectPropertyInitializer(objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true), references[GetRequestParameterName(virtualParameter)].Reference));
+                                    initializationMap.Add(new ObjectPropertyInitializer(objectType.GetPropertyForSchemaProperty(virtualParameter.TargetProperty, true), references[GetRequestParameterName(virtualParameter)]));
                                 }
                             }
 
@@ -340,7 +368,7 @@ namespace AutoRest.CSharp.Output.Models
         /// </summary>
         /// <param name="parameters">Parameters to sort</param>
         /// <returns></returns>
-        public static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.IsOptionalInSignature).ToArray();
+        private static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.IsOptionalInSignature).ToArray();
 
         // Merges operations without response types types together
         private static CSharpType? ReduceResponses(List<Response> responses)
@@ -471,5 +499,5 @@ namespace AutoRest.CSharp.Output.Models
         }
     }
 
-    internal record RequestPartSource(string NameInRequest, InputParameter? InputParameter, ReferenceOrConstant Reference, SerializationFormat SerializationFormat);
+    internal record RequestPartSource(string NameInRequest, InputParameter? InputParameter, Parameter OutputParameter, SerializationFormat SerializationFormat);
 }

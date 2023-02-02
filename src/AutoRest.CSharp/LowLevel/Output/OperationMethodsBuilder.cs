@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -18,11 +19,13 @@ using static AutoRest.CSharp.Output.Models.ClientMethodBodyLines;
 using static AutoRest.CSharp.Output.Models.ValueExpressions;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Configuration = AutoRest.CSharp.Input.Configuration;
+using Response = Azure.Response;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal class OperationMethodsBuilder
     {
+        private readonly ValueExpression? _restClient;
         private readonly ClientFields _fields;
         private readonly string _clientName;
         private readonly TypeFactory _typeFactory;
@@ -47,6 +50,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public OperationMethodsBuilder(
             InputOperation operation,
+            ValueExpression? restClient,
             ClientFields fields,
             string clientName,
             TypeFactory typeFactory,
@@ -57,6 +61,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             Operation = operation;
 
+            _restClient = restClient;
             _fields = fields;
             _clientName = clientName;
             _typeFactory = typeFactory;
@@ -84,14 +89,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public LowLevelClientMethod BuildDpg()
         {
-            var createMessageMethod = RestClientBuilder.BuildRequestMethod(Operation, _createMessageMethodParameters, _requestParts, null, _typeFactory);
-            var createRequestMethods = _createNextPageMessageMethodName is not null && Operation.Paging is { NextLinkOperation: null }
-                ? new[]{ createMessageMethod, RestClientBuilder.BuildNextPageMethod(createMessageMethod) }
-                : new[]{ createMessageMethod };
+            var createRequestMethods = CreateRequestMethods(null).ToArray();
             var protocolMethods = new[]{ BuildProtocolMethod(true), BuildProtocolMethod(false) };
 
-            var convenienceMethods = ShouldConvenienceMethodGenerated()
-                ? new[]{ BuildConvenienceMethod(true), BuildConvenienceMethod(false) }
+            var convenienceMethods = ShouldConvenienceMethodGenerated(out var needNameChange)
+                ? new[]{ BuildConvenienceMethod(needNameChange, true), BuildConvenienceMethod(needNameChange, false) }
                 : Array.Empty<Method>();
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
@@ -103,8 +105,30 @@ namespace AutoRest.CSharp.Output.Models
             return new LowLevelClientMethod(convenienceMethods, protocolMethods, createRequestMethods, requestBodyType, responseBodyType, protocolMethodPaging, Operation.LongRunning);
         }
 
-        private bool ShouldConvenienceMethodGenerated()
+        public HlcMethods BuildHlc(DataPlaneResponseHeaderGroupType? headerModel)
         {
+            var createRequestMethods = CreateRequestMethods(headerModel).ToArray();
+            var convenienceMethods = Operation.Paging is not null && Operation.LongRunning is null
+                ? new[]{ BuildConvenienceMethod(false, true), BuildConvenienceMethod(false, false) }
+                : Array.Empty<Method>();
+
+            return new HlcMethods(Operation, createRequestMethods, convenienceMethods);
+        }
+
+        private IEnumerable<RestClientMethod> CreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel)
+        {
+            var createMessageMethod = RestClientBuilder.BuildRequestMethod(Operation, _createMessageMethodParameters, _requestParts, headerModel, _fields, _typeFactory);
+            yield return createMessageMethod;
+            if (_createNextPageMessageMethodName is not null && Operation.Paging is { NextLinkOperation: null })
+            {
+                yield return RestClientBuilder.BuildNextPageMethod(createMessageMethod);
+            }
+        }
+
+        private bool ShouldConvenienceMethodGenerated(out bool needNameChange)
+        {
+            needNameChange = false;
+
             if (!Operation.GenerateConvenienceMethod)
             {
                 return false;
@@ -116,13 +140,15 @@ namespace AutoRest.CSharp.Output.Models
                 return false;
             }
 
-            if (_responseType is not null)
+            if (_responseType is null && _convenienceMethodParameters.Where(p => p != KnownParameters.CancellationTokenParameter)
+                    .SequenceEqual(_protocolMethodParameters.Where(p => p != KnownParameters.RequestContext)))
             {
-                return true;
+                return false;
             }
 
-            return !_convenienceMethodParameters.Where(p => p != KnownParameters.CancellationTokenParameter)
-                .SequenceEqual(_protocolMethodParameters.Where(p => p != KnownParameters.RequestContext));
+            needNameChange = _protocolMethodParameters.Where(p => !p.IsOptionalInSignature)
+                .SequenceEqual(_convenienceMethodParameters.Where(p => !p.IsOptionalInSignature));
+            return true;
         }
 
         private static CSharpType? GetResponseType(InputOperation operation, TypeFactory typeFactory)
@@ -139,7 +165,7 @@ namespace AutoRest.CSharp.Output.Models
                 throw new InvalidOperationException($"Method {operation.Name} is pageable and has to have a return value");
             }
 
-            if (responseType.IsFrameworkType || responseType.Implementation is not ModelTypeProvider modelType)
+            if (responseType.IsFrameworkType || responseType.Implementation is not SerializableObjectType modelType)
             {
                 return TypeFactory.IsList(responseType) ? TypeFactory.GetElementType(responseType) : responseType;
             }
@@ -181,11 +207,8 @@ namespace AutoRest.CSharp.Output.Models
             return new Method(signature.WithAsync(async), body);
         }
 
-        private Method BuildConvenienceMethod(bool async)
+        private Method BuildConvenienceMethod(bool needNameChange, bool async)
         {
-            var needNameChange = _protocolMethodParameters.Where(p => !p.IsOptionalInSignature)
-                .SequenceEqual(_convenienceMethodParameters.Where(p => !p.IsOptionalInSignature));
-
             var methodName = _protocolMethodName;
             if (needNameChange)
             {
@@ -341,7 +364,10 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<MethodBodyLine> CreatePagingConvenienceMethodLines(string methodName, OperationPaging paging, bool async)
         {
-            var clientDiagnostics = _fields.ClientDiagnosticsProperty.Declaration;
+            ValueExpression clientDiagnostics = _restClient != null
+                ? new FormattableStringToExpression($"_{KnownParameters.ClientDiagnostics.Name}")
+                : new VariableReference(_fields.ClientDiagnosticsProperty.Declaration);
+
             var pipeline = _fields.PipelineField.Declaration;
             var scopeName = $"{_clientName}.{methodName}";
             var itemPropertyName = paging.ItemName ?? "value";
@@ -352,10 +378,11 @@ namespace AutoRest.CSharp.Output.Models
 
             lines.CreatePageableMethodArguments(_parameterLinks, out var createRequestArguments, out var requestContextVariable);
 
-            lines.Add(Declare.FirstPageRequest(null, _createMessageMethodName, createRequestArguments, out var createFirstPageRequest));
+            lines.Add(Declare.FirstPageRequest(_restClient, _createMessageMethodName, createRequestArguments, out var createFirstPageRequest));
             if (_createNextPageMessageMethodName is not null)
             {
-                lines.Add(Declare.NextPageRequest(null, _createNextPageMessageMethodName, createRequestArguments.Prepend(KnownParameters.NextLink), out createNextPageRequest));
+                var arguments = _restClient != null ? _createNextPageMessageMethodParameters.Select(p => new ParameterReference(p)) : createRequestArguments.Prepend(KnownParameters.NextLink);
+                lines.Add(Declare.NextPageRequest(_restClient, _createNextPageMessageMethodName, arguments, out createNextPageRequest));
             }
 
             lines.Add(Return(Call.PageableHelpers.CreatePageable(createFirstPageRequest, createNextPageRequest, clientDiagnostics, pipeline, _responseType, scopeName, itemPropertyName, nextLinkName, requestContextVariable, async)));

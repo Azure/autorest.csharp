@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
@@ -25,12 +26,18 @@ namespace AutoRest.CSharp.Generation.Writers
                     var responseClassifierTypes = new List<ResponseClassifierType>();
                     writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
-                    foreach (var method in restClient.Methods)
+
+                    var methods = restClient.Methods
+                        .SelectMany(m => m.CreateMessageMethods.Select((cm, i) => (cm, i, m.Operation)))
+                        .OrderBy(arg => arg.i);
+
+                    foreach (var (createMessageMethod, _, operation) in methods)
                     {
-                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", restClient.Fields, null, false, restClient.Parameters);
-                        WriteOperation(writer, method, restClient.Fields, true);
-                        WriteOperation(writer, method, restClient.Fields, false);
-                        var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethods[0].Operation.Equals(method.Operation));
+                        RequestWriterHelpers.WriteRequestCreation(writer, createMessageMethod, "internal", restClient.Fields, null, false, restClient.Parameters);
+
+                        WriteOperation(writer, createMessageMethod, restClient.Fields, true);
+                        WriteOperation(writer, createMessageMethod, restClient.Fields, false);
+                        var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethods[0].Operation.Equals(operation));
                         if (protocolMethod != null)
                         {
                             LowLevelClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);

@@ -4,7 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -15,6 +17,7 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal static class ValueExpressions
     {
+        public static ValueExpression Func(CodeWriterDeclaration arg, ValueExpression expression) => new FuncExpression(new[]{ arg }, expression);
         public static ValueExpression New(CSharpType type, params ValueExpression[] arguments) => new NewInstanceExpression(type, arguments);
         public static ValueExpression New(CSharpType type, IReadOnlyDictionary<string, ValueExpression> properties) => new NewInstanceExpression(type, Array.Empty<ValueExpression>()) { Properties = properties };
 
@@ -50,6 +53,11 @@ namespace AutoRest.CSharp.Output.Models
 
         public static class Call
         {
+            public static ValueExpression Instance(ValueExpression? instanceReference, string methodName) => new InstanceMethodCallExpression(instanceReference, methodName, Array.Empty<ValueExpression>(), false);
+            public static ValueExpression Instance(ValueExpression? instanceReference, string methodName, ValueExpression arg) => new InstanceMethodCallExpression(instanceReference, methodName, new[]{ arg }, false);
+            public static ValueExpression Static(CSharpType? methodType, string methodName) => new StaticMethodCallExpression(methodType, methodName, Array.Empty<ValueExpression>());
+            public static ValueExpression Static(CSharpType? methodType, string methodName, ValueExpression arg) => new StaticMethodCallExpression(methodType, methodName, new[]{ arg });
+
             public static ValueExpression FromCancellationToken() => new StaticMethodCallExpression(null, "FromCancellationToken", new[]{ new ParameterReference(KnownParameters.CancellationTokenParameter) });
 
             public static ValueExpression ToString(Parameter parameter) => ToString(parameter.CheckNull());
@@ -110,6 +118,7 @@ namespace AutoRest.CSharp.Output.Models
 
             public static class PageableHelpers
             {
+                private static readonly CSharpType BinaryDataType = typeof(BinaryData);
                 private static readonly CSharpType PageableHelpersType = typeof(Azure.Core.PageableHelpers);
 
                 public static ValueExpression CreatePageable(
@@ -128,7 +137,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         new VariableReference(createFirstPageRequest),
                         createNextPageRequest != null ? new VariableReference(createNextPageRequest) : Null,
-                        new FormattableStringToExpression(PageableMethodsWriterExtensions.GetValueFactory(pageItemType)),
+                        GetValueFactory(pageItemType),
                         clientDiagnostics,
                         pipeline,
                         Literal(scopeName),
@@ -163,7 +172,7 @@ namespace AutoRest.CSharp.Output.Models
                         new ParameterReference(KnownParameters.WaitForCompletion),
                         new VariableReference(message),
                         createNextPageRequest is not null ? new VariableReference(createNextPageRequest) : Null,
-                        new FormattableStringToExpression(PageableMethodsWriterExtensions.GetValueFactory(pageItemType)),
+                        GetValueFactory(pageItemType),
                         new VariableReference(clientDiagnostics),
                         new VariableReference(pipeline),
                         new FormattableStringToExpression($"{typeof(OperationFinalStateVia)}.{finalStateVia}"),
@@ -179,6 +188,30 @@ namespace AutoRest.CSharp.Output.Models
 
                     var methodName = async ? nameof(Azure.Core.PageableHelpers.CreateAsyncPageable) : nameof(Azure.Core.PageableHelpers.CreatePageable);
                     return new StaticMethodCallExpression(PageableHelpersType, methodName, arguments, false, async);
+                }
+
+                public static ValueExpression GetValueFactory(CSharpType? pageItemType)
+                {
+                    if (pageItemType is null)
+                    {
+                        throw new NotSupportedException("Type of the element of the page must be specified");
+                    }
+
+                    if (pageItemType.Equals(BinaryDataType))
+                    {
+                        // When `JsonElement` provides access to its UTF8 buffer, change this code to create `BinaryData` from it.
+                        // See also PageableHelpers.ParseResponseForBinaryData
+                        var e = new CodeWriterDeclaration("e");
+                        return Func(e, Call.Static(BinaryDataType, nameof(BinaryData.FromString), Call.Instance(e, nameof(JsonElement.GetRawText))));
+                    }
+
+                    if (!pageItemType.IsFrameworkType && pageItemType.Implementation is SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type)
+                    {
+                        return new MemberReference(new TypeReference(type.Type), $"Deserialize{type.Declaration.Name}");
+                    }
+
+                    var deserializeImplementation = new FormattableStringToExpression(JsonCodeWriterExtensions.GetDeserializeValueFormattable($"e", pageItemType));
+                    return Func(new CodeWriterDeclaration("e"), deserializeImplementation);
                 }
             }
 
@@ -254,4 +287,5 @@ namespace AutoRest.CSharp.Output.Models
     internal record NullConditionalExpression(ValueExpression Inner) : ValueExpression;
     internal record StaticMethodCallExpression(CSharpType? MethodType, string MethodName, IReadOnlyList<ValueExpression> Arguments, bool CallAsExtension = false, bool CallAsAsync = false) : ValueExpression;
     internal record InstanceMethodCallExpression(ValueExpression? InstanceReference, string MethodName, IReadOnlyList<ValueExpression> Arguments, bool CallAsAsync) : ValueExpression;
+    internal record FuncExpression(IReadOnlyList<CodeWriterDeclaration> Parameters, ValueExpression Inner) : ValueExpression;
 }

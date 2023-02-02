@@ -15,4 +15,6 @@ namespace AutoRest.CSharp.Output.Models
         InputType? ResponseBodyType,
         ProtocolMethodPaging? PagingInfo,
         OperationLongRunning? LongRunning);
+
+    internal record HlcMethods(InputOperation Operation, IReadOnlyList<RestClientMethod> CreateMessageMethods, IReadOnlyList<Method> ConvenienceMethods);
 }

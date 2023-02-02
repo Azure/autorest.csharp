@@ -580,7 +580,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return objectProperty;
         }
 
-        public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
+        public override ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
         {
             if (!TryGetPropertyForSchemaProperty(p => p.SchemaProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
             {

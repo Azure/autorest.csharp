@@ -36,16 +36,14 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly TypeFactory _typeFactory;
         private readonly InputOperation _operation;
-        private readonly ClientFields _fields;
         private readonly List<RequestPartSource> _requestParts;
         private readonly List<Parameter> _createMessageParameters;
         private readonly List<ParameterLink> _parameterLinks;
 
-        public MethodParametersBuilder(TypeFactory typeFactory, InputOperation operation, ClientFields fields)
+        public MethodParametersBuilder(TypeFactory typeFactory, InputOperation operation)
         {
             _typeFactory = typeFactory;
             _operation = operation;
-            _fields = fields;
 
             _requestParts = new List<RequestPartSource>();
             _createMessageParameters = new List<Parameter>();
@@ -56,7 +54,28 @@ namespace AutoRest.CSharp.Output.Models
         public IReadOnlyList<Parameter> CreateMessageParameters => _createMessageParameters;
         public IReadOnlyList<ParameterLink> ParameterLinks => _parameterLinks;
 
-        public void BuildParameters()
+        public void BuildHlc()
+        {
+            var parameters = new List<Parameter>();
+            foreach (var inputParameter in _operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp)))
+            {
+                var parameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _typeFactory);
+                // Grouped and flattened parameters shouldn't be added to methods
+                if (inputParameter.Kind == InputOperationParameterKind.Method)
+                {
+                    parameters.Add(parameter);
+                }
+
+                var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
+                _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameter, serializationFormat));
+            }
+
+            _createMessageParameters.AddRange(parameters.OrderBy(p => p.IsOptionalInSignature));
+            _parameterLinks.AddRange(_createMessageParameters.Select(p => new ParameterLink(p)));
+            _parameterLinks.Add(new ParameterLink(new[]{KnownParameters.CancellationTokenParameter}, Array.Empty<Parameter>(), null));
+        }
+
+        public void BuildDpg()
         {
             var operationParameters = _operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
 
@@ -281,38 +300,8 @@ namespace AutoRest.CSharp.Output.Models
 
         private void AddReference(string nameInRequest, InputParameter? inputParameter, Parameter parameter, SerializationFormat serializationFormat)
         {
-            var reference = inputParameter != null ? CreateReference(inputParameter with { GroupedBy = null }, parameter, _fields, _typeFactory) : parameter;
-            _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter, reference, serializationFormat));
-        }
-
-        public static ReferenceOrConstant CreateReference(InputParameter operationParameter, Parameter parameter, ClientFields fields, TypeFactory typeFactory)
-        {
-            if (operationParameter.Kind == InputOperationParameterKind.Client)
-            {
-                var field = operationParameter.IsEndpoint ? fields.EndpointField : fields.GetFieldByParameter(parameter);
-                if (field == null)
-                {
-                    throw new InvalidOperationException($"Parameter {parameter.Name} should have matching field");
-                }
-
-                return new Reference(field.Name, field.Type);
-            }
-
-            if (operationParameter.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
-            {
-                return (ReferenceOrConstant)parameter.DefaultValue;
-            }
-
-            var groupedByParameter = operationParameter.GroupedBy;
-            if (groupedByParameter == null)
-            {
-                return parameter;
-            }
-
-            var groupModel = (SchemaObjectType)typeFactory.CreateType(groupedByParameter.Type with {IsNullable = false}).Implementation;
-            var property = groupModel.GetPropertyForGroupedParameter(operationParameter.Name);
-
-            return new Reference($"{groupedByParameter.Name.ToVariableName()}.{property.Declaration.Name}", property.Declaration.Type);
+            // DPG would do ungrouping in protocol method rather than in create request methods
+            _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter != null ? inputParameter with { GroupedBy = null } : null, parameter, serializationFormat));
         }
 
         private CSharpType ChangeTypeForProtocolMethod(InputType type) => type switch

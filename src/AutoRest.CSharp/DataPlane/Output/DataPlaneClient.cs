@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models
     {
         private readonly InputClient _inputClient;
         private readonly DataPlaneOutputLibrary _library;
-        private PagingMethod[]? _pagingMethods;
+        private Method[]? _pagingMethods;
         private ClientMethod[]? _methods;
         private LongRunningOperationMethod[]? _longRunningOperationMethods;
 
@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public ClientMethod[] Methods => _methods ??= ClientBuilder.BuildMethods(_inputClient, RestClient, Declaration).ToArray();
 
-        public PagingMethod[] PagingMethods => _pagingMethods ??= ClientBuilder.BuildPagingMethods(_inputClient, RestClient, Declaration).ToArray();
+        public Method[] PagingMethods => _pagingMethods ??= RestClient.Methods.SelectMany(m => m.ConvenienceMethods).ToArray();
 
         public LongRunningOperationMethod[] LongRunningOperationMethods => _longRunningOperationMethods ??= BuildLongRunningOperationMethods().ToArray();
 

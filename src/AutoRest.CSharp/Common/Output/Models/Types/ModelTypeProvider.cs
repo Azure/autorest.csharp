@@ -395,7 +395,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return new ModelMethodDefinition(ToRequestContentSignature, SerializationWriter.JsonToRequestContentMethod);
         }
 
-        public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
+        public override ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)
         {
             if (!TryGetPropertyForInputModelProperty(p => p.InputModelProperty?.SerializedName == serializedName, out ObjectTypeProperty? objectProperty, includeParents))
             {
