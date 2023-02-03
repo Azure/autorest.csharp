@@ -3,9 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
+using AutoRest.CSharp.Mgmt.Models;
 
 namespace AutoRest.CSharp.Input
 {
@@ -95,7 +97,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> noResourceSuffix,
             IReadOnlyList<string> schemasToPrependRPPrefix,
             IReadOnlyList<string> generateArmResourceExtensions,
-            IReadOnlyList<string> preventWrappingReturnType,
+            IReadOnlyList<string> parameterizedScopes,
             MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
@@ -164,11 +166,7 @@ namespace AutoRest.CSharp.Input
             NoResourceSuffix = noResourceSuffix;
             PrependRPPrefix = schemasToPrependRPPrefix;
             GenerateArmResourceExtensions = generateArmResourceExtensions;
-            if (preventWrappingReturnType.Any())
-            {
-                Console.Error.WriteLine($"WARNING: The configuration 'prevent-wrapping-return-type' is a workaround and will be removed in the future.");
-            }
-            PreventWrappingReturnType = preventWrappingReturnType;
+            RawParameterizedScopes = parameterizedScopes;
             IsArmCore = Configuration.DeserializeBoolean(armCore, false);
             DoesResourceModelRequireType = Configuration.DeserializeBoolean(resourceModelRequiresType, true);
             DoesResourceModelRequireName = Configuration.DeserializeBoolean(resourceModelRequiresName, true);
@@ -211,6 +209,10 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
         public IReadOnlyDictionary<string, string[]> OperationPositions { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
+        public IReadOnlyList<string> RawParameterizedScopes { get; }
+        private ImmutableHashSet<RequestPath>? _parameterizedScopes;
+        internal ImmutableHashSet<RequestPath> ParameterizedScopes
+            => _parameterizedScopes ??= RawParameterizedScopes.Select(scope => RequestPath.FromString(scope)).ToImmutableHashSet();
         public IReadOnlyList<string> OperationGroupsToOmit { get; }
         public IReadOnlyList<string> RequestPathIsNonResource { get; }
         public IReadOnlyList<string> NoPropertyTypeReplacement { get; }
@@ -221,12 +223,11 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepPluralResourceData { get; }
         public IReadOnlyList<string> PrependRPPrefix { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
-        public IReadOnlyDictionary<string, string> UpdateRequiredCopy {get;}
+        public IReadOnlyDictionary<string, string> UpdateRequiredCopy { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> PatchInitializerCustomization { get; }
 
         public IReadOnlyList<string> NoResourceSuffix { get; }
         public IReadOnlyList<string> GenerateArmResourceExtensions { get; }
-        public IReadOnlyList<string> PreventWrappingReturnType { get; }
 
         public bool IsArmCore { get; }
 
@@ -244,7 +245,7 @@ namespace AutoRest.CSharp.Input
                 noResourceSuffix: autoRest.GetValue<string[]?>("no-resource-suffix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 schemasToPrependRPPrefix: autoRest.GetValue<string[]?>("prepend-rp-prefix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 generateArmResourceExtensions: autoRest.GetValue<string[]?>("generate-arm-resource-extensions").GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                preventWrappingReturnType: autoRest.GetValue<string[]?>("prevent-wrapping-return-type").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                parameterizedScopes: autoRest.GetValue<string[]?>("parameterized-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
@@ -281,7 +282,6 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(NoResourceSuffix), NoResourceSuffix);
             WriteNonEmptySettings(writer, nameof(PrependRPPrefix), PrependRPPrefix);
             WriteNonEmptySettings(writer, nameof(GenerateArmResourceExtensions), GenerateArmResourceExtensions);
-            WriteNonEmptySettings(writer, nameof(PreventWrappingReturnType), PreventWrappingReturnType);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
             WriteNonEmptySettings(writer, nameof(OperationPositions), OperationPositions);
@@ -324,7 +324,6 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(NoResourceSuffix), out var noResourceSuffixElement);
             root.TryGetProperty(nameof(PrependRPPrefix), out var prependRPPrefixElement);
             root.TryGetProperty(nameof(GenerateArmResourceExtensions), out var generateArmResourceExtensionsElement);
-            root.TryGetProperty(nameof(PreventWrappingReturnType), out var preventWrappingReturnTypeElement);
             root.TryGetProperty(nameof(RequestPathToParent), out var requestPathToParent);
             root.TryGetProperty(nameof(RequestPathToResourceName), out var requestPathToResourceName);
             root.TryGetProperty(nameof(RequestPathToResourceData), out var requestPathToResourceData);
@@ -341,6 +340,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
             root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValuesElement);
+            root.TryGetProperty(nameof(RawParameterizedScopes), out var parameterizedScopesElement);
 
             var operationGroupToOmit = Configuration.DeserializeArray(operationGroupsToOmitElement);
             var requestPathIsNonResource = Configuration.DeserializeArray(requestPathIsNonResourceElement);
@@ -353,7 +353,7 @@ namespace AutoRest.CSharp.Input
             var noResourceSuffix = Configuration.DeserializeArray(noResourceSuffixElement);
             var prependRPPrefix = Configuration.DeserializeArray(prependRPPrefixElement);
             var generateArmResourceExtensions = Configuration.DeserializeArray(generateArmResourceExtensionsElement);
-            var preventWrappingReturnType = Configuration.DeserializeArray(preventWrappingReturnTypeElement);
+            var parameterizedScopes = Configuration.DeserializeArray(parameterizedScopesElement);
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
@@ -376,7 +376,7 @@ namespace AutoRest.CSharp.Input
                 noResourceSuffix: noResourceSuffix,
                 schemasToPrependRPPrefix: prependRPPrefix,
                 generateArmResourceExtensions: generateArmResourceExtensions,
-                preventWrappingReturnType: preventWrappingReturnType,
+                parameterizedScopes: parameterizedScopes,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,
