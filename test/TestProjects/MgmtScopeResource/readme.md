@@ -13,7 +13,11 @@ input-file:
   - $(this-folder)/Deployments.json
   - $(this-folder)/Links.json
   - $(this-folder)/vmInsightsOnboarding_API.json
+  - $(this-folder)/guestconfiguration.json
 namespace: MgmtScopeResource
+
+parameterized-scopes:
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
 
 list-exception:
   - /{linkId}
@@ -47,6 +51,7 @@ operation-positions:
 generate-arm-resource-extensions:
 - /{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}
 - /{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName} # only for test
 
 patch-initializer-customization:
   Deployment:
