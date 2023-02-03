@@ -205,5 +205,83 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
+    <member name="CreateThingAsync(WaitUntil,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateThingAsync with required parameters and request content and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new LroBasicCadlClient(endpoint);
+
+var data = new {
+    name = "<name>",
+};
+
+var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
+
+BinaryData data = operation.Value;
+JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="CreateThing(WaitUntil,RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateThing with required parameters and request content and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new LroBasicCadlClient(endpoint);
+
+var data = new {
+    name = "<name>",
+};
+
+var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data));
+
+BinaryData data = operation.Value;
+JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
   </members>
 </doc>
