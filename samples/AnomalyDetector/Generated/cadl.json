@@ -2211,6 +2211,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -2321,6 +2322,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -2431,6 +2433,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -2514,6 +2517,7 @@
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/detect-batch/{resultId}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -2637,6 +2641,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -2746,6 +2751,7 @@
       "NextLinkName": "nextLink",
       "ItemName": "models"
      },
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -2826,6 +2832,7 @@
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/models/{modelId}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -2909,6 +2916,7 @@
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/models/{modelId}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -3065,6 +3073,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -3196,6 +3205,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],

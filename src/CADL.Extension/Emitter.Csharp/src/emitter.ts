@@ -77,13 +77,16 @@ import { dllFilePath } from "@autorest/csharp";
 import { execSync } from "child_process";
 import {
     Client,
+    createDpgContext,
     getConvenienceAPIName,
     isApiVersion,
     isOperationGroup,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
-    OperationGroup
+    OperationGroup,
+    shouldGenerateConvenient,
+    shouldGenerateProtocol
 } from "@azure-tools/cadl-dpg";
 import { ClientKind } from "./type/ClientKind.js";
 import { getVersions } from "@cadl-lang/versioning";
@@ -107,6 +110,9 @@ export interface NetEmitterOptions {
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
+    "generate-protocol-methods"?: boolean;
+    "generate-convenience-methods"?: boolean;
+    "package-name"?: string;
 }
 
 const defaultOptions = {
@@ -143,7 +149,10 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         },
         "clear-output-folder": { type: "boolean", nullable: true },
         "save-inputs": { type: "boolean", nullable: true },
-        "model-namespace": { type: "boolean", nullable: true }
+        "model-namespace": { type: "boolean", nullable: true },
+        "generate-protocol-methods": { type: "boolean", nullable: true },
+        "generate-convenience-methods": { type: "boolean", nullable: true },
+        "package-name": { type: "string", nullable: true }
     },
     required: []
 };
@@ -161,7 +170,6 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const emitterOptions = context.options;
     const emitterOutputDir = context.emitterOutputDir;
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
-    const resolvedSharedFolders: string[] = [];
     const outputFolder = resolvePath(emitterOutputDir ?? "./cadl-output");
     const options: NetEmitterOptions = {
         outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
@@ -179,12 +187,12 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         "save-inputs": resolvedOptions["save-inputs"],
         "model-namespace": resolvedOptions["model-namespace"]
     };
-    const version: string = "";
+
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
         const namespace = getServiceNamespaceString(program) || "";
 
-        const root = createModel(program, options.generateConvenienceAPI);
+        const root = createModel(context, options.generateConvenienceAPI);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const generatedFolder = resolvePath(outputFolder, "Generated");
@@ -296,9 +304,10 @@ function getClient(
 }
 
 function createModel(
-    program: Program,
+    context: EmitContext<NetEmitterOptions>,
     generateConvenienceAPI: boolean = false
 ): any {
+    const program = context.program;
     const serviceNamespaceType = getServiceNamespace(program);
     if (!serviceNamespaceType) {
         return;
@@ -489,7 +498,7 @@ function createModel(
                 getHttpOperation(program, op)
             );
             const inputOperation: InputOperation = loadOperation(
-                program,
+                context,
                 httpOperation,
                 url,
                 urlParameters,
@@ -677,13 +686,14 @@ function getOperationGroupName(program: Program, operation: Operation): string {
 }
 
 function loadOperation(
-    program: Program,
+    context: EmitContext<NetEmitterOptions>,
     operation: HttpOperation,
     uri: string,
     urlParameters: InputParameter[] | undefined = undefined,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
+    const program = context.program;
     const {
         path: fullPath,
         operation: op,
@@ -758,10 +768,8 @@ function loadOperation(
         mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const convenienceApiDecorator: boolean =
-        getConvenienceAPIName(program, op) !== undefined;
-    const generateConvenienceMethod: boolean =
-        requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
+    const generateProtocol: boolean = shouldGenerateProtocol(createDpgContext(context), op);
+    const generateConvenience: boolean = requestMethod !== RequestMethod.PATCH && (shouldGenerateConvenient(createDpgContext(context), op) || getConvenienceAPIName(program, op) !== undefined);
 
     /* handle lro */
     /* handle paging. */
@@ -811,7 +819,8 @@ function loadOperation(
             resourceOperation
         ),
         Paging: paging,
-        GenerateConvenienceMethod: generateConvenienceMethod
+        GenerateProtocolMethod: generateProtocol,
+        GenerateConvenienceMethod: generateConvenience
     } as InputOperation;
 
     function loadOperationParameter(

@@ -349,6 +349,7 @@
       "NextLinkName": "customNextLink",
       "ItemName": "entries"
      },
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -415,6 +416,7 @@
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],

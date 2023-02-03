@@ -108,5 +108,5 @@ model RootModel {
 @route("/inputToRoundTrip")
 @doc("RoundTrip operation to make RootModel round-trip")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op roundTrip(@body input: RootModel): RootModel;
