@@ -19,7 +19,7 @@ $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http'
-$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true --option @azure-tools/cadl-csharp.clear-output-folder=true'
+$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true --option @azure-tools/cadl-csharp.clear-output-folder=true --option @azure-tools/cadl-csharp.generate-convenience-methods=false'
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -55,12 +55,8 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
 
 function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
-    $cadlFolders = Get-ChildItem -Path $cadlRanchFilePath -Depth 2 -Directory $testName
-    if ($cadlFolders) {
-        $cadlFolder = $cadlFolders[0]
-        $cadlMain = Join-Path $cadlFolder "main.cadl"
-        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true --option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
-    }
+    $cadlMain = Join-Path $cadlRanchFilePath $testName "main.cadl"
+    Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true --option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
 }
 
 $testNames =
@@ -256,17 +252,17 @@ if (!($Exclude -contains "Samples"))
 
 # Cadl projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
-$cadlRanchProjectNames =
-    'api-key',
-    'oauth2',
-    'property-optional',
-    'property-types'
+$cadlRanchProjectPaths =
+    'authentication/api-key',
+    'authentication/oauth2',
+    'models/property-optional',
+    'models/property-types'
 
 if (!($Exclude -contains "CadlRanchProjects"))
 {
-    foreach ($testName in $cadlRanchProjectNames)
+    foreach ($testPath in $cadlRanchProjectPaths)
     {
-        Add-CadlRanch-Cadl $testName "cadl-" $cadlRanchProjectDirectory
+        Add-CadlRanch-Cadl $testPath "cadl-" $cadlRanchProjectDirectory
     }
 }
 

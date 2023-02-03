@@ -336,6 +336,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/string/all",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -397,6 +398,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/string/default",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -502,6 +504,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -607,6 +610,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
@@ -680,6 +684,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/bytes/all",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -741,6 +746,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/bytes/default",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -846,6 +852,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -951,6 +958,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
@@ -1024,6 +1032,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/datetime/all",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1085,6 +1094,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/datetime/default",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1190,6 +1200,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1295,6 +1306,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
@@ -1368,6 +1380,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/duration/all",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1429,6 +1442,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/duration/default",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1534,6 +1548,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1639,6 +1654,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
@@ -1712,6 +1728,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/collections/bytes/all",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1773,6 +1790,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/collections/bytes/default",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1878,6 +1896,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1983,6 +2002,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
@@ -2056,6 +2076,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/collections/model/all",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -2117,6 +2138,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/collections/model/default",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -2222,6 +2244,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -2327,6 +2350,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
@@ -2400,6 +2424,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/requiredAndOptional/all",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -2461,6 +2486,7 @@
      "Uri": "{host}",
      "Path": "/models/properties/optional/requiredAndOptional/requiredOnly",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -2566,6 +2592,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -2671,6 +2698,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],

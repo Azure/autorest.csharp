@@ -1,7 +1,7 @@
 {
  "$id": "1",
- "Name": "Authentication.OAuth2",
- "Description": "Illustrates clients generated with OAuth2 authentication.",
+ "Name": "Authentication.ApiKey",
+ "Description": "Illustrates clients generated with ApiKey authentication.",
  "ApiVersions": [
   "1.0.0"
  ],
@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "InvalidAuth",
-   "Namespace": "Authentication.OAuth2",
+   "Namespace": "Authentication.ApiKey",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -35,13 +35,13 @@
  "Clients": [
   {
    "$id": "5",
-   "Name": "OAuth2Client",
-   "Description": "Illustrates clients generated with OAuth2 authentication.",
+   "Name": "ApiKeyClient",
+   "Description": "Illustrates clients generated with ApiKey authentication.",
    "Operations": [
     {
      "$id": "6",
      "Name": "valid",
-     "ResourceName": "OAuth2",
+     "ResourceName": "ApiKey",
      "Description": "Check whether client is authenticated",
      "Parameters": [
       {
@@ -148,15 +148,16 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/authentication/oauth2/valid",
+     "Path": "/authentication/api-key/valid",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
      "$id": "19",
      "Name": "invalid",
-     "ResourceName": "OAuth2",
-     "Description": "Check whether client is authenticated. Will return an invalid bearer error.",
+     "ResourceName": "ApiKey",
+     "Description": "Check whether client is authenticated.",
      "Parameters": [
       {
        "$ref": "7"
@@ -218,8 +219,9 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/authentication/oauth2/invalid",
+     "Path": "/authentication/api-key/invalid",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
@@ -231,11 +233,9 @@
  ],
  "Auth": {
   "$id": "26",
-  "OAuth2": {
+  "ApiKey": {
    "$id": "27",
-   "Scopes": [
-    "https://security.microsoft.com/.default"
-   ]
+   "Name": "x-ms-api-key"
   }
  }
 }

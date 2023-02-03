@@ -96,7 +96,7 @@ namespace Hello.Demo2 {
     @route("/againHi")
     @doc("Return hi again")
     @get
-    @convenienceAPI
+    @convenientAPI(true)
     op helloAgain(@header p1: string, @body action: RoundTripModel, @Cadl.Http.header contentType: "text/plain", @path p2: string): Thing;
 
     @route("/noContentType")
@@ -105,7 +105,7 @@ namespace Hello.Demo2 {
     op noContentType(@header p1: string, @body action: RoundTripModel, @path p2: string): Thing;
 
     @route("/demoHi")
-    @convenienceAPI
+    @convenientAPI(true)
     @doc("Return hi in demo2")
     @get
     op helloDemo2(): Thing;
@@ -114,7 +114,7 @@ namespace Hello.Demo2 {
 @route("/top")
 @doc("top level method")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op topAction(@path @format("date") action: string): Thing;
 
 @route("/top2")
@@ -126,19 +126,19 @@ op topAction2(): Thing;
 @route("/patch")
 @doc("top level patch")
 @patch
-@convenienceAPI
+@convenientAPI(true)
 op patchAction(@body body: Thing): Thing;
 
 @route("/anonymousBody")
 @doc("body parameter without body decorator")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op anonymousBody( ...Thing ): Thing;
 
 @route("/friendlyName")
 @doc("Model can have its friendly name")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op friendlyModel(...NotFriend): NotFriend;
 
 op addTimeHeader(@header("Repeatability-First-Sent") repeatabilityFirstSent?: zonedDateTime): void;
@@ -148,4 +148,20 @@ namespace EnumTest {
     @route("/unknown-value")
     @doc("get extensible enum")
     op getUnknownValue(): DaysOfWeekExtensibleEnum;
+}
+
+namespace ProtocolAndConvenient {
+  @doc("When set protocol false and convenient true, then the protocol method should be internal")
+  @route("internalProtocol")
+  @post
+  @convenientAPI(true)
+  @protocolAPI(false)
+  op internalProtocol(@body body: Thing): Thing;  
+
+  @doc("When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one")
+  @route("stillConvenient")
+  @get
+  @convenientAPI(true)
+  @protocolAPI(false)
+  op stillConvenient(): void;
 }
