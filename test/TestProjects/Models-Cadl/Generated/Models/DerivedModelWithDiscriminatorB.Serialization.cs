@@ -16,9 +16,9 @@ namespace ModelsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredInt");
+            writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
-            writer.WritePropertyName("discriminatorProperty");
+            writer.WritePropertyName("discriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty);
             writer.WriteEndObject();
         }
@@ -29,12 +29,12 @@ namespace ModelsInCadl.Models
             string discriminatorProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredInt"))
+                if (property.NameEquals("requiredInt"u8))
                 {
                     requiredInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("discriminatorProperty"))
+                if (property.NameEquals("discriminatorProperty"u8))
                 {
                     discriminatorProperty = property.Value.GetString();
                     continue;

@@ -17,7 +17,7 @@ namespace Models.Property.Types.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("property");
+            writer.WritePropertyName("property"u8);
             writer.WriteStartObject();
             foreach (var item in Property)
             {
@@ -33,7 +33,7 @@ namespace Models.Property.Types.Models
             IDictionary<string, string> property = default;
             foreach (var property0 in element.EnumerateObject())
             {
-                if (property0.NameEquals("property"))
+                if (property0.NameEquals("property"u8))
                 {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property1 in property0.Value.EnumerateObject())

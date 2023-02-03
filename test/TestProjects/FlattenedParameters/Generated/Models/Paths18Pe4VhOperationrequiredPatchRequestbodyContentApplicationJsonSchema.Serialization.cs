@@ -15,13 +15,13 @@ namespace FlattenedParameters.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("flattened");
+            writer.WritePropertyName("flattened"u8);
             writer.WriteStartObject();
-            writer.WritePropertyName("required");
+            writer.WritePropertyName("required"u8);
             writer.WriteStringValue(Required);
             if (Optional.IsDefined(NonRequired))
             {
-                writer.WritePropertyName("non_required");
+                writer.WritePropertyName("non_required"u8);
                 writer.WriteStringValue(NonRequired);
             }
             writer.WriteEndObject();

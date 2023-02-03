@@ -17,7 +17,7 @@ namespace MgmtScopeResource.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Template))
             {
-                writer.WritePropertyName("template");
+                writer.WritePropertyName("template"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Template);
 #else
@@ -26,14 +26,14 @@ namespace MgmtScopeResource.Models
             }
             if (Optional.IsDefined(Parameters))
             {
-                writer.WritePropertyName("parameters");
+                writer.WritePropertyName("parameters"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Parameters);
 #else
                 JsonSerializer.Serialize(writer, JsonDocument.Parse(Parameters.ToString()).RootElement);
 #endif
             }
-            writer.WritePropertyName("mode");
+            writer.WritePropertyName("mode"u8);
             writer.WriteStringValue(Mode.ToSerialString());
             writer.WriteEndObject();
         }

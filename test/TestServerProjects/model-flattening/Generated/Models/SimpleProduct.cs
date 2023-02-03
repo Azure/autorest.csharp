@@ -19,6 +19,8 @@ namespace model_flattening.Models
         public SimpleProduct(string productId) : base(productId)
         {
             Argument.AssertNotNull(productId, nameof(productId));
+
+            Capacity = "Large";
         }
 
         /// <summary> Initializes a new instance of SimpleProduct. </summary>
@@ -28,7 +30,7 @@ namespace model_flattening.Models
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        internal SimpleProduct(string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue) : base(productId, description)
+        internal SimpleProduct(string productId, string description, string maxProductDisplayName, string capacity, string genericValue, string odataValue) : base(productId, description)
         {
             MaxProductDisplayName = maxProductDisplayName;
             Capacity = capacity;
@@ -39,7 +41,7 @@ namespace model_flattening.Models
         /// <summary> Display name of product. </summary>
         public string MaxProductDisplayName { get; set; }
         /// <summary> Capacity of product. For example, 4 people. </summary>
-        public SimpleProductPropertiesMaxProductCapacity? Capacity { get; set; }
+        public string Capacity { get; set; }
         /// <summary> Generic URL value. </summary>
         public string GenericValue { get; set; }
         /// <summary> URL value. </summary>

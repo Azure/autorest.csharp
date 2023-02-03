@@ -359,17 +359,16 @@ namespace model_flattening
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description = null, string maxProductDisplayName = null, SimpleProductPropertiesMaxProductCapacity? capacity = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<SimpleProduct>> PostFlattenedSimpleProductAsync(string productId, string description = null, string maxProductDisplayName = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestResourceFlatteningTestServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
             try
             {
-                return await RestClient.PostFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, capacity, genericValue, odataValue, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PostFlattenedSimpleProductAsync(productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -382,17 +381,16 @@ namespace model_flattening
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description = null, string maxProductDisplayName = null, SimpleProductPropertiesMaxProductCapacity? capacity = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
+        public virtual Response<SimpleProduct> PostFlattenedSimpleProduct(string productId, string description = null, string maxProductDisplayName = null, string genericValue = null, string odataValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("AutoRestResourceFlatteningTestServiceClient.PostFlattenedSimpleProduct");
             scope.Start();
             try
             {
-                return RestClient.PostFlattenedSimpleProduct(productId, description, maxProductDisplayName, capacity, genericValue, odataValue, cancellationToken);
+                return RestClient.PostFlattenedSimpleProduct(productId, description, maxProductDisplayName, genericValue, odataValue, cancellationToken);
             }
             catch (Exception e)
             {

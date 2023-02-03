@@ -17,7 +17,7 @@ namespace TypeSchemaMapping.Models
             string discriminatorProperty = "Unknown";
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("DiscriminatorProperty"))
+                if (property.NameEquals("DiscriminatorProperty"u8))
                 {
                     discriminatorProperty = property.Value.GetString();
                     continue;

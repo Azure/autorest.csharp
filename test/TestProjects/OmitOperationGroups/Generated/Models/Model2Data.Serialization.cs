@@ -19,12 +19,12 @@ namespace OmitOperationGroups
             writer.WriteStartObject();
             if (Optional.IsDefined(B))
             {
-                writer.WritePropertyName("b");
+                writer.WritePropertyName("b"u8);
                 writer.WriteStringValue(B);
             }
             if (Optional.IsDefined(Modelx))
             {
-                writer.WritePropertyName("modelx");
+                writer.WritePropertyName("modelx"u8);
                 writer.WriteObjectValue(Modelx);
             }
             writer.WriteEndObject();
@@ -42,12 +42,12 @@ namespace OmitOperationGroups
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("b"))
+                if (property.NameEquals("b"u8))
                 {
                     b = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("modelx"))
+                if (property.NameEquals("modelx"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -57,32 +57,32 @@ namespace OmitOperationGroups
                     modelx = ModelX.DeserializeModelX(property.Value);
                     continue;
                 }
-                if (property.NameEquals("f"))
+                if (property.NameEquals("f"u8))
                 {
                     f = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("g"))
+                if (property.NameEquals("g"u8))
                 {
                     g = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("systemData"))
+                if (property.NameEquals("systemData"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

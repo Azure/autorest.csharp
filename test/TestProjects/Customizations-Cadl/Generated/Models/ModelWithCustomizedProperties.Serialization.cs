@@ -17,21 +17,21 @@ namespace CustomizationsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("propertyToMakeInternal");
+            writer.WritePropertyName("propertyToMakeInternal"u8);
             writer.WriteNumberValue(PropertyToMakeInternal);
-            writer.WritePropertyName("propertyToRename");
+            writer.WritePropertyName("propertyToRename"u8);
             writer.WriteNumberValue(RenamedProperty);
-            writer.WritePropertyName("propertyToMakeFloat");
+            writer.WritePropertyName("propertyToMakeFloat"u8);
             writer.WriteNumberValue(PropertyToMakeFloat);
-            writer.WritePropertyName("propertyToMakeInt");
+            writer.WritePropertyName("propertyToMakeInt"u8);
             writer.WriteNumberValue(PropertyToMakeInt);
-            writer.WritePropertyName("propertyToMakeDuration");
+            writer.WritePropertyName("propertyToMakeDuration"u8);
             writer.WriteStringValue(PropertyToMakeDuration, "P");
-            writer.WritePropertyName("propertyToMakeString");
+            writer.WritePropertyName("propertyToMakeString"u8);
             writer.WriteStringValue(PropertyToMakeString);
-            writer.WritePropertyName("propertyToMakeJsonElement");
+            writer.WritePropertyName("propertyToMakeJsonElement"u8);
             PropertyToMakeJsonElement.WriteTo(writer);
-            writer.WritePropertyName("propertyToField");
+            writer.WritePropertyName("propertyToField"u8);
             writer.WriteStringValue(_propertyToField);
             writer.WriteEndObject();
         }
@@ -48,42 +48,42 @@ namespace CustomizationsInCadl.Models
             string propertyToField = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("propertyToMakeInternal"))
+                if (property.NameEquals("propertyToMakeInternal"u8))
                 {
                     propertyToMakeInternal = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("propertyToRename"))
+                if (property.NameEquals("propertyToRename"u8))
                 {
                     propertyToRename = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("propertyToMakeFloat"))
+                if (property.NameEquals("propertyToMakeFloat"u8))
                 {
                     propertyToMakeFloat = property.Value.GetSingle();
                     continue;
                 }
-                if (property.NameEquals("propertyToMakeInt"))
+                if (property.NameEquals("propertyToMakeInt"u8))
                 {
                     propertyToMakeInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("propertyToMakeDuration"))
+                if (property.NameEquals("propertyToMakeDuration"u8))
                 {
                     propertyToMakeDuration = property.Value.GetTimeSpan("P");
                     continue;
                 }
-                if (property.NameEquals("propertyToMakeString"))
+                if (property.NameEquals("propertyToMakeString"u8))
                 {
                     propertyToMakeString = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("propertyToMakeJsonElement"))
+                if (property.NameEquals("propertyToMakeJsonElement"u8))
                 {
                     propertyToMakeJsonElement = property.Value.Clone();
                     continue;
                 }
-                if (property.NameEquals("propertyToField"))
+                if (property.NameEquals("propertyToField"u8))
                 {
                     propertyToField = property.Value.GetString();
                     continue;

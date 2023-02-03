@@ -17,7 +17,7 @@ namespace model_flattening.Models
             Optional<string> value = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("property"))
+                if (property.NameEquals("property"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -26,7 +26,7 @@ namespace model_flattening.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("value"))
+                        if (property0.NameEquals("value"u8))
                         {
                             value = property0.Value.GetString();
                             continue;

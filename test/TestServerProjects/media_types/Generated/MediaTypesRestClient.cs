@@ -461,6 +461,209 @@ namespace media_types
             }
         }
 
+        internal HttpMessage CreateBodyThreeTypesRequest(Stream message)
+        {
+            var message0 = _pipeline.CreateMessage();
+            var request = message0.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/bodyThreeTypes", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
+            request.Headers.Add("Content-Type", "application/octet-stream");
+            request.Content = RequestContent.Create(message);
+            return message0;
+        }
+
+        /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response<string>> BodyThreeTypesAsync(Stream message, CancellationToken cancellationToken = default)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            using var message0 = CreateBodyThreeTypesRequest(message);
+            await _pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
+            switch (message0.Response.Status)
+            {
+                case 200:
+                    {
+                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message0.Response);
+                    }
+                default:
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response<string> BodyThreeTypes(Stream message, CancellationToken cancellationToken = default)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            using var message0 = CreateBodyThreeTypesRequest(message);
+            _pipeline.Send(message0, cancellationToken);
+            switch (message0.Response.Status)
+            {
+                case 200:
+                    {
+                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message0.Response);
+                    }
+                default:
+                    throw ClientDiagnostics.CreateRequestFailedException(message0.Response);
+            }
+        }
+
+        internal HttpMessage CreateBodyThreeTypesRequest(string message)
+        {
+            var message0 = _pipeline.CreateMessage();
+            var request = message0.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/bodyThreeTypes", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
+            request.Headers.Add("Content-Type", "text/plain");
+            request.Content = new StringRequestContent(message);
+            return message0;
+        }
+
+        /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response<string>> BodyThreeTypesAsync(string message, CancellationToken cancellationToken = default)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            using var message0 = CreateBodyThreeTypesRequest(message);
+            await _pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
+            switch (message0.Response.Status)
+            {
+                case 200:
+                    {
+                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message0.Response);
+                    }
+                default:
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response<string> BodyThreeTypes(string message, CancellationToken cancellationToken = default)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            using var message0 = CreateBodyThreeTypesRequest(message);
+            _pipeline.Send(message0, cancellationToken);
+            switch (message0.Response.Status)
+            {
+                case 200:
+                    {
+                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message0.Response);
+                    }
+                default:
+                    throw ClientDiagnostics.CreateRequestFailedException(message0.Response);
+            }
+        }
+
+        internal HttpMessage CreateBodyThreeTypesRequest(object message)
+        {
+            var message0 = _pipeline.CreateMessage();
+            var request = message0.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/mediatypes/bodyThreeTypes", false);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "text/plain");
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(message);
+            request.Content = content;
+            return message0;
+        }
+
+        /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response<string>> BodyThreeTypesAsync(object message, CancellationToken cancellationToken = default)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            using var message0 = CreateBodyThreeTypesRequest(message);
+            await _pipeline.SendAsync(message0, cancellationToken).ConfigureAwait(false);
+            switch (message0.Response.Status)
+            {
+                case 200:
+                    {
+                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
+                        string value = await streamReader.ReadToEndAsync().ConfigureAwait(false);
+                        return Response.FromValue(value, message0.Response);
+                    }
+                default:
+                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message0.Response).ConfigureAwait(false);
+            }
+        }
+
+        /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;. </summary>
+        /// <param name="message"> The payload body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response<string> BodyThreeTypes(object message, CancellationToken cancellationToken = default)
+        {
+            if (message == null)
+            {
+                throw new ArgumentNullException(nameof(message));
+            }
+
+            using var message0 = CreateBodyThreeTypesRequest(message);
+            _pipeline.Send(message0, cancellationToken);
+            switch (message0.Response.Status)
+            {
+                case 200:
+                    {
+                        StreamReader streamReader = new StreamReader(message0.Response.ContentStream);
+                        string value = streamReader.ReadToEnd();
+                        return Response.FromValue(value, message0.Response);
+                    }
+                default:
+                    throw ClientDiagnostics.CreateRequestFailedException(message0.Response);
+            }
+        }
+
         internal HttpMessage CreatePutTextAndJsonBodyRequest(ContentType3 contentType, string message)
         {
             var message0 = _pipeline.CreateMessage();

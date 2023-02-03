@@ -16,9 +16,9 @@ namespace AnomalyDetector.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("code");
+            writer.WritePropertyName("code"u8);
             writer.WriteStringValue(Code);
-            writer.WritePropertyName("message");
+            writer.WritePropertyName("message"u8);
             writer.WriteStringValue(Message);
             writer.WriteEndObject();
         }
@@ -29,12 +29,12 @@ namespace AnomalyDetector.Models
             string message = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("code"))
+                if (property.NameEquals("code"u8))
                 {
                     code = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("message"))
+                if (property.NameEquals("message"u8))
                 {
                     message = property.Value.GetString();
                     continue;

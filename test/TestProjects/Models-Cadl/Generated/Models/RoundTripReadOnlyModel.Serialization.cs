@@ -40,22 +40,22 @@ namespace ModelsInCadl.Models
             Optional<IReadOnlyDictionary<string, RecordItem>> optionalModelRecord = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredReadonlyString"))
+                if (property.NameEquals("requiredReadonlyString"u8))
                 {
                     requiredReadonlyString = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredReadonlyInt"))
+                if (property.NameEquals("requiredReadonlyInt"u8))
                 {
                     requiredReadonlyInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("optionalReadonlyString"))
+                if (property.NameEquals("optionalReadonlyString"u8))
                 {
                     optionalReadonlyString = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("optionalReadonlyInt"))
+                if (property.NameEquals("optionalReadonlyInt"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -65,12 +65,12 @@ namespace ModelsInCadl.Models
                     optionalReadonlyInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("requiredReadonlyModel"))
+                if (property.NameEquals("requiredReadonlyModel"u8))
                 {
                     requiredReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
                     continue;
                 }
-                if (property.NameEquals("optionalReadonlyModel"))
+                if (property.NameEquals("optionalReadonlyModel"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -80,27 +80,27 @@ namespace ModelsInCadl.Models
                     optionalReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);
                     continue;
                 }
-                if (property.NameEquals("requiredReadonlyFixedStringEnum"))
+                if (property.NameEquals("requiredReadonlyFixedStringEnum"u8))
                 {
                     requiredReadonlyFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
                     continue;
                 }
-                if (property.NameEquals("requiredReadonlyExtensibleEnum"))
+                if (property.NameEquals("requiredReadonlyExtensibleEnum"u8))
                 {
                     requiredReadonlyExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("optionalReadonlyFixedStringEnum"))
+                if (property.NameEquals("optionalReadonlyFixedStringEnum"u8))
                 {
                     optionalReadonlyFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
                     continue;
                 }
-                if (property.NameEquals("optionalReadonlyExtensibleEnum"))
+                if (property.NameEquals("optionalReadonlyExtensibleEnum"u8))
                 {
                     optionalReadonlyExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("requiredReadonlyStringList"))
+                if (property.NameEquals("requiredReadonlyStringList"u8))
                 {
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -110,7 +110,7 @@ namespace ModelsInCadl.Models
                     requiredReadonlyStringList = array;
                     continue;
                 }
-                if (property.NameEquals("requiredReadonlyIntList"))
+                if (property.NameEquals("requiredReadonlyIntList"u8))
                 {
                     List<int> array = new List<int>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -120,7 +120,7 @@ namespace ModelsInCadl.Models
                     requiredReadonlyIntList = array;
                     continue;
                 }
-                if (property.NameEquals("requiredReadOnlyModelCollection"))
+                if (property.NameEquals("requiredReadOnlyModelCollection"u8))
                 {
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -130,7 +130,7 @@ namespace ModelsInCadl.Models
                     requiredReadOnlyModelCollection = array;
                     continue;
                 }
-                if (property.NameEquals("requiredReadOnlyIntRecord"))
+                if (property.NameEquals("requiredReadOnlyIntRecord"u8))
                 {
                     Dictionary<string, int> dictionary = new Dictionary<string, int>();
                     foreach (var property0 in property.Value.EnumerateObject())
@@ -140,7 +140,7 @@ namespace ModelsInCadl.Models
                     requiredReadOnlyIntRecord = dictionary;
                     continue;
                 }
-                if (property.NameEquals("requiredStringRecord"))
+                if (property.NameEquals("requiredStringRecord"u8))
                 {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
@@ -150,7 +150,7 @@ namespace ModelsInCadl.Models
                     requiredStringRecord = dictionary;
                     continue;
                 }
-                if (property.NameEquals("requiredReadOnlyModelRecord"))
+                if (property.NameEquals("requiredReadOnlyModelRecord"u8))
                 {
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
@@ -160,7 +160,7 @@ namespace ModelsInCadl.Models
                     requiredReadOnlyModelRecord = dictionary;
                     continue;
                 }
-                if (property.NameEquals("optionalReadonlyStringList"))
+                if (property.NameEquals("optionalReadonlyStringList"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -175,7 +175,7 @@ namespace ModelsInCadl.Models
                     optionalReadonlyStringList = array;
                     continue;
                 }
-                if (property.NameEquals("optionalReadonlyIntList"))
+                if (property.NameEquals("optionalReadonlyIntList"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -190,7 +190,7 @@ namespace ModelsInCadl.Models
                     optionalReadonlyIntList = array;
                     continue;
                 }
-                if (property.NameEquals("optionalReadOnlyModelCollection"))
+                if (property.NameEquals("optionalReadOnlyModelCollection"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -205,7 +205,7 @@ namespace ModelsInCadl.Models
                     optionalReadOnlyModelCollection = array;
                     continue;
                 }
-                if (property.NameEquals("optionalReadOnlyIntRecord"))
+                if (property.NameEquals("optionalReadOnlyIntRecord"u8))
                 {
                     Dictionary<string, int> dictionary = new Dictionary<string, int>();
                     foreach (var property0 in property.Value.EnumerateObject())
@@ -215,7 +215,7 @@ namespace ModelsInCadl.Models
                     optionalReadOnlyIntRecord = dictionary;
                     continue;
                 }
-                if (property.NameEquals("optionalReadOnlyStringRecord"))
+                if (property.NameEquals("optionalReadOnlyStringRecord"u8))
                 {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
@@ -225,7 +225,7 @@ namespace ModelsInCadl.Models
                     optionalReadOnlyStringRecord = dictionary;
                     continue;
                 }
-                if (property.NameEquals("optionalModelRecord"))
+                if (property.NameEquals("optionalModelRecord"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

@@ -18,12 +18,12 @@ namespace OmitOperationGroups.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("id");
+                writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             if (Optional.IsCollectionDefined(Modelqs))
             {
-                writer.WritePropertyName("modelqs");
+                writer.WritePropertyName("modelqs"u8);
                 writer.WriteStartArray();
                 foreach (var item in Modelqs)
                 {
@@ -41,17 +41,17 @@ namespace OmitOperationGroups.Models
             Optional<IList<ModelQ>> modelqs = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("k"))
+                if (property.NameEquals("k"u8))
                 {
                     k = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("modelqs"))
+                if (property.NameEquals("modelqs"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

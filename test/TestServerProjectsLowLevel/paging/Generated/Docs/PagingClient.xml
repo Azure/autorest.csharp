@@ -63,6 +63,68 @@ Schema for <c>ProductResultValue</c>:
 
 </remarks>
     </member>
+    <member name="GetEmptyNextLinkNamePagesAsync(RequestContext)">
+<example>
+This sample shows how to call GetEmptyNextLinkNamePagesAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+await foreach (var data in client.GetEmptyNextLinkNamePagesAsync())
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>ProductResultValue</c>:
+<code>{
+  properties: {
+    id: number, # Optional.
+    name: string, # Optional.
+  }, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetEmptyNextLinkNamePages(RequestContext)">
+<example>
+This sample shows how to call GetEmptyNextLinkNamePages and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+foreach (var data in client.GetEmptyNextLinkNamePages())
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>ProductResultValue</c>:
+<code>{
+  properties: {
+    id: number, # Optional.
+    name: string, # Optional.
+  }, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
     <member name="GetNullNextLinkNamePagesAsync(RequestContext)">
 <example>
 This sample shows how to call GetNullNextLinkNamePagesAsync and parse the result.
@@ -173,6 +235,118 @@ foreach (var data in client.GetSinglePages())
 </example>
 <remarks>
 Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>ProductResultValues</c>:
+<code>{
+  properties: {
+    id: number, # Optional.
+    name: string, # Optional.
+  }, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetSinglePagesWithBodyParamsAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call GetSinglePagesWithBodyParamsAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+var data = new {};
+
+await foreach (var data in client.GetSinglePagesWithBodyParamsAsync(RequestContent.Create(data)))
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+This sample shows how to call GetSinglePagesWithBodyParamsAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+var data = new {
+    name = "<name>",
+};
+
+await foreach (var data in client.GetSinglePagesWithBodyParamsAsync(RequestContent.Create(data)))
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload and one item in the pageable response.
+
+Request Body:
+
+Schema for <c>BodyParam</c>:
+<code>{
+  name: string, # Optional.
+}
+</code>
+
+Response Body:
+
+Schema for <c>ProductResultValues</c>:
+<code>{
+  properties: {
+    id: number, # Optional.
+    name: string, # Optional.
+  }, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetSinglePagesWithBodyParams(RequestContent,RequestContext)">
+<example>
+This sample shows how to call GetSinglePagesWithBodyParams and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+var data = new {};
+
+foreach (var data in client.GetSinglePagesWithBodyParams(RequestContent.Create(data)))
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.ToString());
+}
+]]></code>
+This sample shows how to call GetSinglePagesWithBodyParams with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+var data = new {
+    name = "<name>",
+};
+
+foreach (var data in client.GetSinglePagesWithBodyParams(RequestContent.Create(data)))
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload and one item in the pageable response.
+
+Request Body:
+
+Schema for <c>BodyParam</c>:
+<code>{
+  name: string, # Optional.
+}
+</code>
 
 Response Body:
 
@@ -456,6 +630,68 @@ var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
 foreach (var data in client.DuplicateParams("<filter>"))
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>ProductResultValues</c>:
+<code>{
+  properties: {
+    id: number, # Optional.
+    name: string, # Optional.
+  }, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PageWithMaxPageSizeAsync(RequestContext)">
+<example>
+This sample shows how to call PageWithMaxPageSizeAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+await foreach (var data in client.PageWithMaxPageSizeAsync())
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>ProductResultValues</c>:
+<code>{
+  properties: {
+    id: number, # Optional.
+    name: string, # Optional.
+  }, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PageWithMaxPageSize(RequestContext)">
+<example>
+This sample shows how to call PageWithMaxPageSize and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+foreach (var data in client.PageWithMaxPageSize())
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -1133,6 +1369,130 @@ Below is the JSON schema for one item in the pageable response.
 Response Body:
 
 Schema for <c>OdataProductResultValues</c>:
+<code>{
+  properties: {
+    id: number, # Optional.
+    name: string, # Optional.
+  }, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="AppendApiVersionAsync(RequestContext)">
+<example>
+This sample shows how to call AppendApiVersionAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+await foreach (var data in client.AppendApiVersionAsync())
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>ProductResultValues</c>:
+<code>{
+  properties: {
+    id: number, # Optional.
+    name: string, # Optional.
+  }, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="AppendApiVersion(RequestContext)">
+<example>
+This sample shows how to call AppendApiVersion and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+foreach (var data in client.AppendApiVersion())
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>ProductResultValues</c>:
+<code>{
+  properties: {
+    id: number, # Optional.
+    name: string, # Optional.
+  }, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ReplaceApiVersionAsync(RequestContext)">
+<example>
+This sample shows how to call ReplaceApiVersionAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+await foreach (var data in client.ReplaceApiVersionAsync())
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>ProductResultValues</c>:
+<code>{
+  properties: {
+    id: number, # Optional.
+    name: string, # Optional.
+  }, # Optional.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ReplaceApiVersion(RequestContext)">
+<example>
+This sample shows how to call ReplaceApiVersion and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new PagingClient(credential);
+
+foreach (var data in client.ReplaceApiVersion())
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("properties").GetProperty("name").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>ProductResultValues</c>:
 <code>{
   properties: {
     id: number, # Optional.

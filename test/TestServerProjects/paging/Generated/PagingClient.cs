@@ -31,10 +31,11 @@ namespace paging
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> server parameter. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/> or <paramref name="pipeline"/> is null. </exception>
-        internal PagingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null)
+        /// <param name="apiVersion"> Api Version. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="apiVersion"/> is null. </exception>
+        internal PagingClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint = null, string apiVersion = "1.0.0")
         {
-            RestClient = new PagingRestClient(clientDiagnostics, pipeline, endpoint);
+            RestClient = new PagingRestClient(clientDiagnostics, pipeline, endpoint, apiVersion);
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
         }
@@ -55,6 +56,24 @@ namespace paging
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetNoItemNamePagesRequest();
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetNoItemNamePagesNextPageRequest(nextLink);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetNoItemNamePages", "value", "nextLink", cancellationToken);
+        }
+
+        /// <summary> A paging operation that gets an empty next link and should stop after page 1. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> GetEmptyNextLinkNamePagesAsync(CancellationToken cancellationToken = default)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetEmptyNextLinkNamePagesRequest();
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetEmptyNextLinkNamePagesNextPageRequest(nextLink);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetEmptyNextLinkNamePages", "value", "nextLink", cancellationToken);
+        }
+
+        /// <summary> A paging operation that gets an empty next link and should stop after page 1. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> GetEmptyNextLinkNamePages(CancellationToken cancellationToken = default)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetEmptyNextLinkNamePagesRequest();
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetEmptyNextLinkNamePagesNextPageRequest(nextLink);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetEmptyNextLinkNamePages", "value", "nextLink", cancellationToken);
         }
 
         /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
@@ -89,6 +108,32 @@ namespace paging
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetSinglePagesRequest();
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetSinglePagesNextPageRequest(nextLink);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetSinglePages", "values", "nextLink", cancellationToken);
+        }
+
+        /// <summary> A paging operation that finishes on the first call with body params without a nextlink. </summary>
+        /// <param name="parameters"> put {&apos;name&apos;: &apos;body&apos;} to pass the test. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual AsyncPageable<Product> GetSinglePagesWithBodyParamsAsync(BodyParam parameters, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(parameters, nameof(parameters));
+
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetSinglePagesWithBodyParamsRequest(parameters);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, parameters);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetSinglePagesWithBodyParams", "values", "nextLink", cancellationToken);
+        }
+
+        /// <summary> A paging operation that finishes on the first call with body params without a nextlink. </summary>
+        /// <param name="parameters"> put {&apos;name&apos;: &apos;body&apos;} to pass the test. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
+        public virtual Pageable<Product> GetSinglePagesWithBodyParams(BodyParam parameters, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(parameters, nameof(parameters));
+
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetSinglePagesWithBodyParamsRequest(parameters);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, parameters);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetSinglePagesWithBodyParams", "values", "nextLink", cancellationToken);
         }
 
         /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
@@ -169,6 +214,24 @@ namespace paging
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateDuplicateParamsRequest(filter);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateDuplicateParamsNextPageRequest(nextLink, filter);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.DuplicateParams", "values", "nextLink", cancellationToken);
+        }
+
+        /// <summary> Paging with max page size. We don&apos;t want to. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> PageWithMaxPageSizeAsync(CancellationToken cancellationToken = default)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreatePageWithMaxPageSizeRequest();
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreatePageWithMaxPageSizeNextPageRequest(nextLink);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.PageWithMaxPageSize", "values", "nextLink", cancellationToken);
+        }
+
+        /// <summary> Paging with max page size. We don&apos;t want to. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> PageWithMaxPageSize(CancellationToken cancellationToken = default)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreatePageWithMaxPageSizeRequest();
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreatePageWithMaxPageSizeNextPageRequest(nextLink);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.PageWithMaxPageSize", "values", "nextLink", cancellationToken);
         }
 
         /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
@@ -381,6 +444,42 @@ namespace paging
             HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateGetMultiplePagesFragmentWithGroupingNextLinkRequest(customParameterGroup);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateNextFragmentWithGroupingRequest(nextLink, customParameterGroup);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", "values", "odata.nextLink", cancellationToken);
+        }
+
+        /// <summary> A paging operation with api version. When calling the next link, you want to append your client&apos;s api version to the next link. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> AppendApiVersionAsync(CancellationToken cancellationToken = default)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateAppendApiVersionRequest();
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateAppendApiVersionNextPageRequest(nextLink);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.AppendApiVersion", "values", "nextLink", cancellationToken);
+        }
+
+        /// <summary> A paging operation with api version. When calling the next link, you want to append your client&apos;s api version to the next link. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> AppendApiVersion(CancellationToken cancellationToken = default)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateAppendApiVersionRequest();
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateAppendApiVersionNextPageRequest(nextLink);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.AppendApiVersion", "values", "nextLink", cancellationToken);
+        }
+
+        /// <summary> A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client&apos;s api version. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual AsyncPageable<Product> ReplaceApiVersionAsync(CancellationToken cancellationToken = default)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateReplaceApiVersionRequest();
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateReplaceApiVersionNextPageRequest(nextLink);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.ReplaceApiVersion", "values", "nextLink", cancellationToken);
+        }
+
+        /// <summary> A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client&apos;s api version. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Pageable<Product> ReplaceApiVersion(CancellationToken cancellationToken = default)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => RestClient.CreateReplaceApiVersionRequest();
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => RestClient.CreateReplaceApiVersionNextPageRequest(nextLink);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, Product.DeserializeProduct, _clientDiagnostics, _pipeline, "PagingClient.ReplaceApiVersion", "values", "nextLink", cancellationToken);
         }
 
         /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>

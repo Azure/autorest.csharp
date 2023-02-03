@@ -18,12 +18,12 @@ namespace xms_error_responses.Models
             Optional<string> aniType = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("aniType"))
+                if (property.NameEquals("aniType"u8))
                 {
                     aniType = property.Value.GetString();
                     continue;

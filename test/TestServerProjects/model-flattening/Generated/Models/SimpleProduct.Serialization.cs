@@ -15,35 +15,35 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("base_product_id");
+            writer.WritePropertyName("base_product_id"u8);
             writer.WriteStringValue(ProductId);
             if (Optional.IsDefined(Description))
             {
-                writer.WritePropertyName("base_product_description");
+                writer.WritePropertyName("base_product_description"u8);
                 writer.WriteStringValue(Description);
             }
-            writer.WritePropertyName("details");
+            writer.WritePropertyName("details"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(MaxProductDisplayName))
             {
-                writer.WritePropertyName("max_product_display_name");
+                writer.WritePropertyName("max_product_display_name"u8);
                 writer.WriteStringValue(MaxProductDisplayName);
             }
             if (Optional.IsDefined(Capacity))
             {
-                writer.WritePropertyName("max_product_capacity");
-                writer.WriteStringValue(Capacity.Value.ToString());
+                writer.WritePropertyName("max_product_capacity"u8);
+                writer.WriteStringValue(Capacity);
             }
-            writer.WritePropertyName("max_product_image");
+            writer.WritePropertyName("max_product_image"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(GenericValue))
             {
-                writer.WritePropertyName("generic_value");
+                writer.WritePropertyName("generic_value"u8);
                 writer.WriteStringValue(GenericValue);
             }
             if (Optional.IsDefined(OdataValue))
             {
-                writer.WritePropertyName("@odata.value");
+                writer.WritePropertyName("@odata.value"u8);
                 writer.WriteStringValue(OdataValue);
             }
             writer.WriteEndObject();
@@ -56,22 +56,22 @@ namespace model_flattening.Models
             string baseProductId = default;
             Optional<string> baseProductDescription = default;
             Optional<string> maxProductDisplayName = default;
-            Optional<SimpleProductPropertiesMaxProductCapacity> maxProductCapacity = default;
+            Optional<string> maxProductCapacity = default;
             Optional<string> genericValue = default;
             Optional<string> odataValue = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("base_product_id"))
+                if (property.NameEquals("base_product_id"u8))
                 {
                     baseProductId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("base_product_description"))
+                if (property.NameEquals("base_product_description"u8))
                 {
                     baseProductDescription = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("details"))
+                if (property.NameEquals("details"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -80,22 +80,17 @@ namespace model_flattening.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("max_product_display_name"))
+                        if (property0.NameEquals("max_product_display_name"u8))
                         {
                             maxProductDisplayName = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("max_product_capacity"))
+                        if (property0.NameEquals("max_product_capacity"u8))
                         {
-                            if (property0.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                property0.ThrowNonNullablePropertyIsNull();
-                                continue;
-                            }
-                            maxProductCapacity = new SimpleProductPropertiesMaxProductCapacity(property0.Value.GetString());
+                            maxProductCapacity = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("max_product_image"))
+                        if (property0.NameEquals("max_product_image"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -104,12 +99,12 @@ namespace model_flattening.Models
                             }
                             foreach (var property1 in property0.Value.EnumerateObject())
                             {
-                                if (property1.NameEquals("generic_value"))
+                                if (property1.NameEquals("generic_value"u8))
                                 {
                                     genericValue = property1.Value.GetString();
                                     continue;
                                 }
-                                if (property1.NameEquals("@odata.value"))
+                                if (property1.NameEquals("@odata.value"u8))
                                 {
                                     odataValue = property1.Value.GetString();
                                     continue;
@@ -121,7 +116,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new SimpleProduct(baseProductId, baseProductDescription.Value, maxProductDisplayName.Value, Optional.ToNullable(maxProductCapacity), genericValue.Value, odataValue.Value);
+            return new SimpleProduct(baseProductId, baseProductDescription.Value, maxProductDisplayName.Value, maxProductCapacity.Value, genericValue.Value, odataValue.Value);
         }
     }
 }

@@ -20,17 +20,17 @@ namespace Pagination.Models
             string transactionId = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("contents"))
+                if (property.NameEquals("contents"u8))
                 {
                     contents = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("collectionId"))
+                if (property.NameEquals("collectionId"u8))
                 {
                     collectionId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("transactionId"))
+                if (property.NameEquals("transactionId"u8))
                 {
                     transactionId = property.Value.GetString();
                     continue;

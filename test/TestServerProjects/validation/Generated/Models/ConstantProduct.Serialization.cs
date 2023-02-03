@@ -15,9 +15,9 @@ namespace validation.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("constProperty");
+            writer.WritePropertyName("constProperty"u8);
             writer.WriteStringValue(ConstProperty);
-            writer.WritePropertyName("constProperty2");
+            writer.WritePropertyName("constProperty2"u8);
             writer.WriteStringValue(ConstProperty2);
             writer.WriteEndObject();
         }
@@ -28,12 +28,12 @@ namespace validation.Models
             string constProperty2 = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("constProperty"))
+                if (property.NameEquals("constProperty"u8))
                 {
                     constProperty = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("constProperty2"))
+                if (property.NameEquals("constProperty2"u8))
                 {
                     constProperty2 = property.Value.GetString();
                     continue;
