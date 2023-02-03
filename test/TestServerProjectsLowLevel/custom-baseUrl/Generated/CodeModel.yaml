@@ -195,7 +195,6 @@ operationGroups:
             paths_getEmpty:
               parameters:
                 accountName: testaccount
-                host: host:3000
               responses:
                 '200':
                   body: ''

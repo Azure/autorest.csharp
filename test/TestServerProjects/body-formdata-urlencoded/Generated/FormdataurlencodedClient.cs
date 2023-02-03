@@ -85,16 +85,17 @@ namespace body_formdata_urlencoded
         }
 
         /// <summary> Test a partially constant formdata body. Pass in { grant_type: &apos;access_token&apos;, access_token: &apos;foo&apos;, service: &apos;bar&apos; } to pass the test. </summary>
+        /// <param name="grantType"> Constant part of a formdata body. </param>
         /// <param name="service"> Indicates the name of your Azure container registry. </param>
         /// <param name="accessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PartialConstantBodyAsync(string service, string accessToken, CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PartialConstantBodyAsync(PostContentSchemaGrantType grantType, string service, string accessToken, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataurlencodedClient.PartialConstantBody");
             scope.Start();
             try
             {
-                return await RestClient.PartialConstantBodyAsync(service, accessToken, cancellationToken).ConfigureAwait(false);
+                return await RestClient.PartialConstantBodyAsync(grantType, service, accessToken, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -104,16 +105,17 @@ namespace body_formdata_urlencoded
         }
 
         /// <summary> Test a partially constant formdata body. Pass in { grant_type: &apos;access_token&apos;, access_token: &apos;foo&apos;, service: &apos;bar&apos; } to pass the test. </summary>
+        /// <param name="grantType"> Constant part of a formdata body. </param>
         /// <param name="service"> Indicates the name of your Azure container registry. </param>
         /// <param name="accessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PartialConstantBody(string service, string accessToken, CancellationToken cancellationToken = default)
+        public virtual Response PartialConstantBody(PostContentSchemaGrantType grantType, string service, string accessToken, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FormdataurlencodedClient.PartialConstantBody");
             scope.Start();
             try
             {
-                return RestClient.PartialConstantBody(service, accessToken, cancellationToken);
+                return RestClient.PartialConstantBody(grantType, service, accessToken, cancellationToken);
             }
             catch (Exception e)
             {

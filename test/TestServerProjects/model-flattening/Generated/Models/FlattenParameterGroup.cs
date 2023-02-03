@@ -24,7 +24,6 @@ namespace model_flattening.Models
 
             Name = name;
             ProductId = productId;
-            Capacity = "Large";
         }
 
         /// <summary> Product name with value &apos;groupproduct&apos;. </summary>
@@ -38,7 +37,7 @@ namespace model_flattening.Models
         /// <summary> Display name of product. </summary>
         public string MaxProductDisplayName { get; set; }
         /// <summary> Capacity of product. For example, 4 people. </summary>
-        public string Capacity { get; set; }
+        public SimpleProductPropertiesMaxProductCapacity? Capacity { get; set; }
         /// <summary> Generic URL value. </summary>
         public string GenericValue { get; set; }
         /// <summary> URL value. </summary>

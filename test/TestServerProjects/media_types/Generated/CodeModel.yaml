@@ -114,7 +114,7 @@ schemas: !Schemas
           name: ContentType2
           description: Content type for upload
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_46
+    - !SealedChoiceSchema &ref_35
       choices:
         - !ChoiceValue 
           value: application/json
@@ -186,26 +186,6 @@ schemas: !Schemas
           name: Accept2
           description: 'Accept: text/plain'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_38
-      type: constant
-      value: !ConstantValue 
-        value: application/octet-stream
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: ApplicationOctetStream
-          description: Content Type 'application/octet-stream'
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_41
-      type: constant
-      value: !ConstantValue 
-        value: text/plain
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: TextPlain
-          description: Content Type 'text/plain'
-      protocol: !Protocols {}
     - !ConstantSchema &ref_36
       type: constant
       value: !ConstantValue 
@@ -215,24 +195,6 @@ schemas: !Schemas
         default:
           name: Accept3
           description: 'Accept: text/plain'
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_47
-      type: constant
-      value: !ConstantValue 
-        value: text/plain
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: Accept4
-          description: 'Accept: text/plain'
-      protocol: !Protocols {}
-  any:
-    - !AnySchema &ref_35
-      type: any
-      language: !Languages 
-        default:
-          name: any
-          description: Anything
       protocol: !Protocols {}
   binaries:
     - !BinarySchema &ref_8
@@ -264,13 +226,6 @@ schemas: !Schemas
       apiVersions:
         - !ApiVersion 
           version: 2.0-preview
-      language: !Languages 
-        default:
-          name: binary
-          description: ''
-      protocol: !Protocols {}
-    - !BinarySchema &ref_39
-      type: binary
       language: !Languages 
         default:
           name: binary
@@ -857,30 +812,30 @@ operationGroups:
             description: 'Binary body with three content types. Pass in string ''hello, world'' with content type ''text/plain'', {''hello'': world''} with content type ''application/json'' and a byte string for ''application/octet-stream''.'
         protocol: !Protocols {}
       - !Operation 
-        operationId: bodyThreeTypes
+        operationId: putTextAndJsonBody
         apiVersions:
           - !ApiVersion 
             version: 2.0-preview
         parameters:
           - *ref_2
         requestMediaTypes:
-          application/json: !Request &ref_45
+          application/json: !Request &ref_39
             parameters:
-              - !Parameter 
-                schema: *ref_3
+              - !Parameter &ref_37
+                schema: *ref_35
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
                 language: !Languages 
                   default:
                     name: contentType
-                    description: Body Parameter content-type
+                    description: Upload file type
                     serializedName: Content-Type
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_37
-                schema: *ref_35
+              - !Parameter &ref_38
+                schema: *ref_0
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -890,7 +845,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-                    style: json
+                    style: binary
               - !Parameter 
                 schema: *ref_36
                 implementation: Method
@@ -906,203 +861,7 @@ operationGroups:
                     in: header
             signatureParameters:
               - *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /mediatypes/bodyThreeTypes
-                method: post
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-          application/octet-stream: !Request &ref_43
-            parameters:
-              - !Parameter 
-                schema: *ref_38
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Upload file type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_40
-                schema: *ref_39
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: message
-                    description: The payload body.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: binary
-              - !Parameter 
-                schema: *ref_36
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_40
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpBinaryRequest 
-                path: /mediatypes/bodyThreeTypes
-                method: post
-                binary: true
-                knownMediaType: binary
-                mediaTypes:
-                  - application/octet-stream
-                uri: '{$host}'
-          text/plain: !Request &ref_44
-            parameters:
-              - !Parameter 
-                schema: *ref_41
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Upload file type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_42
-                schema: *ref_0
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: message
-                    description: The payload body.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: binary
-              - !Parameter 
-                schema: *ref_36
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_42
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpBinaryRequest 
-                path: /mediatypes/bodyThreeTypes
-                method: post
-                binary: true
-                knownMediaType: text
-                mediaTypes:
-                  - text/plain
-                uri: '{$host}'
-        requests:
-          - *ref_43
-          - *ref_44
-          - *ref_45
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_13
-            language: !Languages 
-              default:
-                name: ''
-                description: Received correct content type and body.
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: text
-                mediaTypes:
-                  - text/plain
-                statusCodes:
-                  - '200'
-        language: !Languages 
-          default:
-            name: BodyThreeTypes
-            description: 'Body with three types. Can be stream, string, or JSON. Pass in string ''hello, world'' with content type ''text/plain'', {''hello'': world''} with content type ''application/json'' and a byte string for ''application/octet-stream''.'
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: putTextAndJsonBody
-        apiVersions:
-          - !ApiVersion 
-            version: 2.0-preview
-        parameters:
-          - *ref_2
-        requestMediaTypes:
-          application/json: !Request &ref_50
-            parameters:
-              - !Parameter &ref_48
-                schema: *ref_46
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Upload file type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_49
-                schema: *ref_0
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: message
-                    description: The payload body.
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: binary
-              - !Parameter 
-                schema: *ref_47
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_48
-              - *ref_49
+              - *ref_38
             language: !Languages 
               default:
                 name: ''
@@ -1117,9 +876,9 @@ operationGroups:
                   - application/json
                   - text/plain
                 uri: '{$host}'
-          text/plain: *ref_50
+          text/plain: *ref_39
         requests:
-          - *ref_50
+          - *ref_39
         signatureParameters: []
         responses:
           - !SchemaResponse 

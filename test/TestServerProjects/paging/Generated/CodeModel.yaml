@@ -84,16 +84,6 @@ schemas: !Schemas
           name: ProductResultNextLink
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_22
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      language: !Languages 
-        default:
-          name: BodyParamName
-          description: ''
-      protocol: !Protocols {}
     - !StringSchema &ref_10
       type: string
       apiVersions:
@@ -104,7 +94,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_23
+    - !StringSchema &ref_22
       type: string
       apiVersions:
         - !ApiVersion 
@@ -114,7 +104,7 @@ schemas: !Schemas
           name: OdataProductResultOdataNextLink
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_24
+    - !StringSchema &ref_23
       type: string
       apiVersions:
         - !ApiVersion 
@@ -125,7 +115,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   choices:
-    - !ChoiceSchema &ref_25
+    - !ChoiceSchema &ref_24
       choices:
         - !ChoiceValue 
           value: Succeeded
@@ -204,7 +194,7 @@ schemas: !Schemas
           description: The status of the request
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_32
+    - !ConstantSchema &ref_30
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -214,48 +204,15 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_35
-      type: constant
-      value: !ConstantValue 
-        value: application/json
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: ApplicationJson
-          description: Content Type 'application/json'
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_42
+    - !ConstantSchema &ref_36
       type: constant
       value: !ConstantValue 
         value: true
       valueType: *ref_1
       language: !Languages 
         default:
-          name: Constant3
+          name: Constant2
           description: ''
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_45
-      type: constant
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      value: !ConstantValue 
-        value: '5'
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: MaxPageSizeType
-          description: ''
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_30
-      type: constant
-      value: !ConstantValue 
-        value: 1.0.0
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: ApiVersion10
-          description: Api Version (1.0.0)
       protocol: !Protocols {}
   groups:
     - !GroupSchema &ref_3
@@ -264,7 +221,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_2
           originalParameter:
-            - !Parameter &ref_39
+            - !Parameter &ref_33
               schema: *ref_2
               groupedBy: !Parameter &ref_5
                 schema: *ref_3
@@ -293,7 +250,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_4
           originalParameter:
-            - !Parameter &ref_40
+            - !Parameter &ref_34
               schema: *ref_4
               groupedBy: *ref_5
               implementation: Method
@@ -325,7 +282,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_2
           originalParameter:
-            - !Parameter &ref_47
+            - !Parameter &ref_40
               schema: *ref_2
               groupedBy: !Parameter &ref_7
                 schema: *ref_6
@@ -354,7 +311,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_4
           originalParameter:
-            - !Parameter &ref_48
+            - !Parameter &ref_41
               schema: *ref_4
               groupedBy: *ref_7
               implementation: Method
@@ -386,7 +343,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_2
           originalParameter:
-            - !Parameter &ref_51
+            - !Parameter &ref_44
               schema: *ref_2
               groupedBy: !Parameter &ref_9
                 schema: *ref_8
@@ -416,7 +373,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_2
           originalParameter:
-            - !Parameter &ref_52
+            - !Parameter &ref_45
               schema: *ref_2
               groupedBy: *ref_9
               implementation: Method
@@ -440,7 +397,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_4
           originalParameter:
-            - !Parameter &ref_53
+            - !Parameter &ref_46
               schema: *ref_4
               groupedBy: *ref_9
               implementation: Method
@@ -472,7 +429,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_10
           originalParameter:
-            - !Parameter &ref_61
+            - !Parameter &ref_54
               schema: *ref_10
               groupedBy: !Parameter &ref_12
                 schema: *ref_11
@@ -494,7 +451,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: query
-            - !Parameter &ref_63
+            - !Parameter &ref_56
               schema: *ref_10
               groupedBy: !Parameter &ref_13
                 schema: *ref_11
@@ -526,7 +483,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_10
           originalParameter:
-            - !Parameter &ref_62
+            - !Parameter &ref_55
               schema: *ref_10
               groupedBy: *ref_12
               implementation: Method
@@ -540,7 +497,7 @@ schemas: !Schemas
               protocol: !Protocols 
                 http: !HttpParameter 
                   in: path
-            - !Parameter &ref_64
+            - !Parameter &ref_57
               schema: *ref_10
               groupedBy: *ref_13
               implementation: Method
@@ -574,7 +531,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_2
           originalParameter:
-            - !Parameter &ref_67
+            - !Parameter &ref_60
               schema: *ref_2
               groupedBy: !Parameter &ref_15
                 schema: *ref_14
@@ -603,7 +560,7 @@ schemas: !Schemas
         - !GroupProperty 
           schema: *ref_4
           originalParameter:
-            - !Parameter &ref_68
+            - !Parameter &ref_61
               schema: *ref_4
               groupedBy: *ref_15
               implementation: Method
@@ -630,14 +587,14 @@ schemas: !Schemas
           description: Parameter group
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_33
+    - !ObjectSchema &ref_31
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: !ArraySchema &ref_26
+          schema: !ArraySchema &ref_25
             type: array
             apiVersions:
               - !ApiVersion 
@@ -728,14 +685,14 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_19
     - *ref_20
-    - !ObjectSchema &ref_34
+    - !ObjectSchema &ref_32
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: !ArraySchema &ref_27
+          schema: !ArraySchema &ref_26
             type: array
             apiVersions:
               - !ApiVersion 
@@ -770,38 +727,14 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_36
+    - !ObjectSchema &ref_43
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_22
-          serializedName: name
-          language: !Languages 
-            default:
-              name: name
-              description: ''
-          protocol: !Protocols {}
-      serializationFormats:
-        - json
-      usage:
-        - input
-      language: !Languages 
-        default:
-          name: BodyParam
-          description: ''
-          namespace: ''
-      protocol: !Protocols {}
-    - !ObjectSchema &ref_50
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      properties:
-        - !Property 
-          schema: !ArraySchema &ref_28
+          schema: !ArraySchema &ref_27
             type: array
             apiVersions:
               - !ApiVersion 
@@ -819,7 +752,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_23
+          schema: *ref_22
           serializedName: odata.nextLink
           language: !Languages 
             default:
@@ -836,14 +769,14 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - !ObjectSchema &ref_71
+    - !ObjectSchema &ref_63
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       properties:
         - !Property 
-          schema: !ArraySchema &ref_29
+          schema: !ArraySchema &ref_28
             type: array
             apiVersions:
               - !ApiVersion 
@@ -861,7 +794,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_24
+          schema: *ref_23
           serializedName: nextLink
           language: !Languages 
             default:
@@ -885,7 +818,7 @@ schemas: !Schemas
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_25
+          schema: *ref_24
           serializedName: status
           language: !Languages 
             default:
@@ -899,12 +832,12 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
   arrays:
+    - *ref_25
     - *ref_26
     - *ref_27
     - *ref_28
-    - *ref_29
 globalParameters:
-  - !Parameter &ref_31
+  - !Parameter &ref_29
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -920,19 +853,6 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_70
-    schema: *ref_30
-    implementation: Client
-    origin: modelerfour:synthesized/api-version
-    required: true
-    language: !Languages 
-      default:
-        name: apiVersion
-        description: Api Version
-        serializedName: api-version
-    protocol: !Protocols 
-      http: !HttpParameter 
-        in: query
 operationGroups:
   - !OperationGroup 
     $key: Paging
@@ -943,12 +863,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -973,7 +893,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_33
+            schema: *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -1006,85 +926,17 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
-        operationId: Paging_getEmptyNextLinkNamePages
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_31
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_32
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /paging/emptynextlink
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_33
-            language: !Languages 
-              default:
-                name: ''
-                description: A list of products
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-pageable:
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: GetEmptyNextLinkNamePages
-            description: A paging operation that gets an empty next link and should stop after page 1.
-            paging:
-              nextLinkName: nextLink
-        protocol: !Protocols {}
-      - !Operation 
         operationId: Paging_getNullNextLinkNamePages
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1109,7 +961,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1149,12 +1001,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1179,7 +1031,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1214,118 +1066,17 @@ operationGroups:
               nextLinkName: nextLink
         protocol: !Protocols {}
       - !Operation 
-        operationId: Paging_getSinglePagesWithBodyParams
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_31
-        requestMediaTypes:
-          application/json: !Request &ref_38
-            parameters:
-              - !Parameter 
-                schema: *ref_35
-                implementation: Method
-                origin: modelerfour:synthesized/content-type
-                required: true
-                language: !Languages 
-                  default:
-                    name: contentType
-                    description: Body Parameter content-type
-                    serializedName: Content-Type
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-              - !Parameter &ref_37
-                schema: *ref_36
-                implementation: Method
-                required: true
-                language: !Languages 
-                  default:
-                    name: parameters
-                    description: 'put {''name'': ''body''} to pass the test'
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: body
-                    style: json
-              - !Parameter 
-                schema: *ref_32
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters:
-              - *ref_37
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpWithBodyRequest 
-                path: /paging/single/getWithBodyParams
-                method: get
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                uri: '{$host}'
-        requests:
-          - *ref_38
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_34
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response with ProvisioningState='Canceled'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-pageable:
-            itemName: values
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: GetSinglePagesWithBodyParams
-            description: A paging operation that finishes on the first call with body params without a nextlink
-            paging:
-              itemName: values
-              nextLinkName: nextLink
-        protocol: !Protocols {}
-      - !Operation 
         operationId: Paging_firstResponseEmpty
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1350,7 +1101,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_33
+            schema: *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -1388,8 +1139,8 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
-          - !Parameter &ref_41
+          - *ref_29
+          - !Parameter &ref_35
             schema: *ref_10
             implementation: Method
             language: !Languages 
@@ -1400,13 +1151,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - *ref_39
-          - *ref_40
+          - *ref_33
+          - *ref_34
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1431,10 +1182,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_41
+          - *ref_35
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1474,8 +1225,8 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
-          - !Parameter &ref_43
+          - *ref_29
+          - !Parameter &ref_37
             schema: *ref_2
             implementation: Method
             required: true
@@ -1488,7 +1239,7 @@ operationGroups:
               http: !HttpParameter 
                 in: query
           - !Parameter 
-            schema: *ref_42
+            schema: *ref_36
             implementation: Method
             required: true
             language: !Languages 
@@ -1503,7 +1254,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1526,10 +1277,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_43
+          - *ref_37
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1565,15 +1316,15 @@ operationGroups:
               itemName: values
               member: NextOperationWithQueryParams
               nextLinkName: nextLink
-              nextLinkOperation: !Operation &ref_46
+              nextLinkOperation: !Operation &ref_39
                 operationId: Paging_nextOperationWithQueryParams
                 apiVersions:
                   - !ApiVersion 
                     version: 1.0.0
                 parameters:
-                  - *ref_31
+                  - *ref_29
                   - !Parameter 
-                    schema: *ref_42
+                    schema: *ref_36
                     implementation: Method
                     required: true
                     language: !Languages 
@@ -1588,7 +1339,7 @@ operationGroups:
                   - !Request 
                     parameters:
                       - !Parameter 
-                        schema: *ref_32
+                        schema: *ref_30
                         implementation: Method
                         origin: modelerfour:synthesized/accept
                         required: true
@@ -1613,7 +1364,7 @@ operationGroups:
                 signatureParameters: []
                 responses:
                   - !SchemaResponse 
-                    schema: *ref_34
+                    schema: *ref_32
                     language: !Languages 
                       default:
                         name: ''
@@ -1654,8 +1405,8 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
-          - !Parameter &ref_44
+          - *ref_29
+          - !Parameter &ref_38
             schema: *ref_10
             implementation: Method
             language: !Languages 
@@ -1670,7 +1421,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1693,10 +1444,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_44
+          - *ref_38
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1730,96 +1481,15 @@ operationGroups:
               itemName: values
               nextLinkName: nextLink
         protocol: !Protocols {}
-      - !Operation 
-        operationId: Paging_pageWithMaxPageSize
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_31
-          - !Parameter 
-            schema: *ref_45
-            implementation: Method
-            language: !Languages 
-              default:
-                name: maxpagesize
-                description: Max page size query param. Don't send
-                serializedName: $maxpagesize
-            protocol: !Protocols 
-              http: !HttpParameter 
-                in: query
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_32
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /paging/maxPageSize
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_34
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response with ProvisioningState='Canceled'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-pageable:
-            itemName: values
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: PageWithMaxPageSize
-            description: 'Paging with max page size. We don''t want to '
-            paging:
-              itemName: values
-              nextLinkName: nextLink
-        protocol: !Protocols {}
-      - *ref_46
+      - *ref_39
       - !Operation 
         operationId: Paging_getOdataMultiplePages
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
-          - !Parameter &ref_49
+          - *ref_29
+          - !Parameter &ref_42
             schema: *ref_10
             implementation: Method
             language: !Languages 
@@ -1830,13 +1500,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - *ref_47
-          - *ref_48
+          - *ref_40
+          - *ref_41
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1861,10 +1531,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_49
+          - *ref_42
         responses:
           - !SchemaResponse 
-            schema: *ref_50
+            schema: *ref_43
             language: !Languages 
               default:
                 name: ''
@@ -1904,8 +1574,8 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
-          - !Parameter &ref_54
+          - *ref_29
+          - !Parameter &ref_47
             schema: *ref_10
             implementation: Method
             language: !Languages 
@@ -1916,14 +1586,14 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - *ref_51
-          - *ref_52
-          - *ref_53
+          - *ref_44
+          - *ref_45
+          - *ref_46
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1948,10 +1618,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_54
+          - *ref_47
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -1991,12 +1661,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2021,7 +1691,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -2061,12 +1731,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2091,7 +1761,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -2131,12 +1801,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2161,7 +1831,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -2201,12 +1871,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2231,7 +1901,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -2271,12 +1941,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2301,7 +1971,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -2341,8 +2011,8 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
-          - !Parameter &ref_55
+          - *ref_29
+          - !Parameter &ref_48
             schema: *ref_10
             implementation: Method
             required: true
@@ -2354,7 +2024,7 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - !Parameter &ref_56
+          - !Parameter &ref_49
             schema: *ref_10
             implementation: Method
             required: true
@@ -2370,7 +2040,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2393,11 +2063,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_55
-          - *ref_56
+          - *ref_48
+          - *ref_49
         responses:
           - !SchemaResponse 
-            schema: *ref_50
+            schema: *ref_43
             language: !Languages 
               default:
                 name: ''
@@ -2433,14 +2103,14 @@ operationGroups:
               itemName: values
               member: NextFragment
               nextLinkName: odata.nextLink
-              nextLinkOperation: !Operation &ref_60
+              nextLinkOperation: !Operation &ref_53
                 operationId: Paging_nextFragment
                 apiVersions:
                   - !ApiVersion 
                     version: 1.0.0
                 parameters:
-                  - *ref_31
-                  - !Parameter &ref_57
+                  - *ref_29
+                  - !Parameter &ref_50
                     schema: *ref_10
                     implementation: Method
                     required: true
@@ -2452,7 +2122,7 @@ operationGroups:
                     protocol: !Protocols 
                       http: !HttpParameter 
                         in: query
-                  - !Parameter &ref_58
+                  - !Parameter &ref_51
                     schema: *ref_10
                     implementation: Method
                     required: true
@@ -2464,7 +2134,7 @@ operationGroups:
                     protocol: !Protocols 
                       http: !HttpParameter 
                         in: path
-                  - !Parameter &ref_59
+                  - !Parameter &ref_52
                     schema: *ref_10
                     implementation: Method
                     required: true
@@ -2482,7 +2152,7 @@ operationGroups:
                   - !Request 
                     parameters:
                       - !Parameter 
-                        schema: *ref_32
+                        schema: *ref_30
                         implementation: Method
                         origin: modelerfour:synthesized/accept
                         required: true
@@ -2505,12 +2175,12 @@ operationGroups:
                         method: get
                         uri: '{$host}'
                 signatureParameters:
-                  - *ref_57
-                  - *ref_58
-                  - *ref_59
+                  - *ref_50
+                  - *ref_51
+                  - *ref_52
                 responses:
                   - !SchemaResponse 
-                    schema: *ref_50
+                    schema: *ref_43
                     language: !Languages 
                       default:
                         name: ''
@@ -2546,7 +2216,7 @@ operationGroups:
                       itemName: values
                       member: NextFragment
                       nextLinkName: odata.nextLink
-                      nextLinkOperation: *ref_60
+                      nextLinkOperation: *ref_53
                 protocol: !Protocols {}
         protocol: !Protocols {}
       - !Operation 
@@ -2555,14 +2225,14 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
-          - *ref_61
-          - *ref_62
+          - *ref_29
+          - *ref_54
+          - *ref_55
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2589,7 +2259,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_50
+            schema: *ref_43
             language: !Languages 
               default:
                 name: ''
@@ -2625,16 +2295,16 @@ operationGroups:
               itemName: values
               member: NextFragmentWithGrouping
               nextLinkName: odata.nextLink
-              nextLinkOperation: !Operation &ref_66
+              nextLinkOperation: !Operation &ref_59
                 operationId: Paging_nextFragmentWithGrouping
                 apiVersions:
                   - !ApiVersion 
                     version: 1.0.0
                 parameters:
-                  - *ref_31
-                  - *ref_63
-                  - *ref_64
-                  - !Parameter &ref_65
+                  - *ref_29
+                  - *ref_56
+                  - *ref_57
+                  - !Parameter &ref_58
                     schema: *ref_10
                     implementation: Method
                     required: true
@@ -2652,7 +2322,7 @@ operationGroups:
                   - !Request 
                     parameters:
                       - !Parameter 
-                        schema: *ref_32
+                        schema: *ref_30
                         implementation: Method
                         origin: modelerfour:synthesized/accept
                         required: true
@@ -2677,10 +2347,10 @@ operationGroups:
                         method: get
                         uri: '{$host}'
                 signatureParameters:
-                  - *ref_65
+                  - *ref_58
                 responses:
                   - !SchemaResponse 
-                    schema: *ref_50
+                    schema: *ref_43
                     language: !Languages 
                       default:
                         name: ''
@@ -2716,7 +2386,7 @@ operationGroups:
                       itemName: values
                       member: NextFragmentWithGrouping
                       nextLinkName: odata.nextLink
-                      nextLinkOperation: *ref_66
+                      nextLinkOperation: *ref_59
                 protocol: !Protocols {}
         protocol: !Protocols {}
       - !Operation 
@@ -2725,8 +2395,8 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
-          - !Parameter &ref_69
+          - *ref_29
+          - !Parameter &ref_62
             schema: *ref_10
             implementation: Method
             language: !Languages 
@@ -2737,13 +2407,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: header
-          - *ref_67
-          - *ref_68
+          - *ref_60
+          - *ref_61
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2768,10 +2438,10 @@ operationGroups:
                 method: post
                 uri: '{$host}'
         signatureParameters:
-          - *ref_69
+          - *ref_62
         responses:
           - !SchemaResponse 
-            schema: *ref_34
+            schema: *ref_32
             language: !Languages 
               default:
                 name: ''
@@ -2806,162 +2476,20 @@ operationGroups:
               itemName: values
               nextLinkName: nextLink
         protocol: !Protocols {}
-      - !Operation 
-        operationId: Paging_appendApiVersion
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_31
-          - *ref_70
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_32
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /paging/apiVersion/append/1
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_34
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response with ProvisioningState='Canceled'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-pageable:
-            itemName: values
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: AppendApiVersion
-            description: A paging operation with api version. When calling the next link, you want to append your client's api version to the next link
-            paging:
-              itemName: values
-              nextLinkName: nextLink
-        protocol: !Protocols {}
-      - !Operation 
-        operationId: Paging_replaceApiVersion
-        apiVersions:
-          - !ApiVersion 
-            version: 1.0.0
-        parameters:
-          - *ref_31
-          - *ref_70
-        requests:
-          - !Request 
-            parameters:
-              - !Parameter 
-                schema: *ref_32
-                implementation: Method
-                origin: modelerfour:synthesized/accept
-                required: true
-                language: !Languages 
-                  default:
-                    name: accept
-                    description: Accept header
-                    serializedName: Accept
-                protocol: !Protocols 
-                  http: !HttpParameter 
-                    in: header
-            signatureParameters: []
-            language: !Languages 
-              default:
-                name: ''
-                description: ''
-            protocol: !Protocols 
-              http: !HttpRequest 
-                path: /paging/apiVersion/replace/1
-                method: get
-                uri: '{$host}'
-        signatureParameters: []
-        responses:
-          - !SchemaResponse 
-            schema: *ref_34
-            language: !Languages 
-              default:
-                name: ''
-                description: Initial response with ProvisioningState='Canceled'
-            protocol: !Protocols 
-              http: !HttpResponse 
-                knownMediaType: json
-                mediaTypes:
-                  - application/json
-                statusCodes:
-                  - '200'
-        exceptions:
-          - !Response 
-            language: !Languages 
-              default:
-                name: ''
-                description: Unexpected error
-            protocol: !Protocols 
-              http: !HttpResponse 
-                statusCodes:
-                  - default
-        extensions:
-          x-ms-pageable:
-            itemName: values
-            nextLinkName: nextLink
-        language: !Languages 
-          default:
-            name: ReplaceApiVersion
-            description: A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client's api version
-            paging:
-              itemName: values
-              nextLinkName: nextLink
-        protocol: !Protocols {}
-      - *ref_60
-      - *ref_66
+      - *ref_53
+      - *ref_59
       - !Operation 
         operationId: Paging_getPagingModelWithItemNameWithXMSClientName
         apiVersions:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_31
+          - *ref_29
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_32
+                schema: *ref_30
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -2986,7 +2514,7 @@ operationGroups:
         signatureParameters: []
         responses:
           - !SchemaResponse 
-            schema: *ref_71
+            schema: *ref_63
             language: !Languages 
               default:
                 name: ''

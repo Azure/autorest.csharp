@@ -105,6 +105,24 @@ schemas: !Schemas
           name: PetFood
           description: Can take a value of meat, or fish, or plant
       protocol: !Protocols {}
+    - !ChoiceSchema &ref_6
+      choices:
+        - !ChoiceValue 
+          value: access_token
+          language:
+            default:
+              name: AccessToken
+              description: ''
+      type: choice
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      choiceType: *ref_0
+      language: !Languages 
+        default:
+          name: PostContentSchemaGrantType
+          description: Constant part of a formdata body.
+      protocol: !Protocols {}
   sealedChoices:
     - !SealedChoiceSchema &ref_1
       choices:
@@ -146,19 +164,6 @@ schemas: !Schemas
         default:
           name: ApplicationXWwwFormUrlencoded
           description: Content Type 'application/x-www-form-urlencoded'
-      protocol: !Protocols {}
-    - !ConstantSchema &ref_6
-      type: constant
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      value: !ConstantValue 
-        value: access_token
-      valueType: *ref_0
-      language: !Languages 
-        default:
-          name: PostContentSchemaGrantType
-          description: Constant part of a formdata body.
       protocol: !Protocols {}
   objects:
     - !ObjectSchema 
@@ -431,7 +436,7 @@ operationGroups:
         parameters:
           - *ref_9
         requestMediaTypes:
-          application/x-www-form-urlencoded: !Request &ref_21
+          application/x-www-form-urlencoded: !Request &ref_22
             parameters:
               - !Parameter 
                 schema: *ref_11
@@ -446,7 +451,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter 
+              - !Parameter &ref_19
                 schema: *ref_6
                 implementation: Method
                 isPartialBody: true
@@ -459,7 +464,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-              - !Parameter &ref_19
+              - !Parameter &ref_20
                 schema: *ref_7
                 implementation: Method
                 isPartialBody: true
@@ -472,7 +477,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: body
-              - !Parameter &ref_20
+              - !Parameter &ref_21
                 schema: *ref_8
                 implementation: Method
                 isPartialBody: true
@@ -488,6 +493,7 @@ operationGroups:
             signatureParameters:
               - *ref_19
               - *ref_20
+              - *ref_21
             language: !Languages 
               default:
                 name: ''
@@ -501,7 +507,7 @@ operationGroups:
                   - application/x-www-form-urlencoded
                 uri: '{$host}'
         requests:
-          - *ref_21
+          - *ref_22
         signatureParameters: []
         responses:
           - !Response 

@@ -32,7 +32,7 @@ namespace model_flattening.Models
             if (Optional.IsDefined(Capacity))
             {
                 writer.WritePropertyName("max_product_capacity"u8);
-                writer.WriteStringValue(Capacity);
+                writer.WriteStringValue(Capacity.Value.ToString());
             }
             writer.WritePropertyName("max_product_image"u8);
             writer.WriteStartObject();
@@ -56,7 +56,7 @@ namespace model_flattening.Models
             string baseProductId = default;
             Optional<string> baseProductDescription = default;
             Optional<string> maxProductDisplayName = default;
-            Optional<string> maxProductCapacity = default;
+            Optional<SimpleProductPropertiesMaxProductCapacity> maxProductCapacity = default;
             Optional<string> genericValue = default;
             Optional<string> odataValue = default;
             foreach (var property in element.EnumerateObject())
@@ -87,7 +87,12 @@ namespace model_flattening.Models
                         }
                         if (property0.NameEquals("max_product_capacity"u8))
                         {
-                            maxProductCapacity = property0.Value.GetString();
+                            if (property0.Value.ValueKind == JsonValueKind.Null)
+                            {
+                                property0.ThrowNonNullablePropertyIsNull();
+                                continue;
+                            }
+                            maxProductCapacity = new SimpleProductPropertiesMaxProductCapacity(property0.Value.GetString());
                             continue;
                         }
                         if (property0.NameEquals("max_product_image"u8))
@@ -116,7 +121,7 @@ namespace model_flattening.Models
                     continue;
                 }
             }
-            return new SimpleProduct(baseProductId, baseProductDescription.Value, maxProductDisplayName.Value, maxProductCapacity.Value, genericValue.Value, odataValue.Value);
+            return new SimpleProduct(baseProductId, baseProductDescription.Value, maxProductDisplayName.Value, Optional.ToNullable(maxProductCapacity), genericValue.Value, odataValue.Value);
         }
     }
 }

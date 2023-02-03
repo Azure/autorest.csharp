@@ -326,55 +326,5 @@ namespace azure_parameter_grouping
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }
         }
-
-        internal HttpMessage CreateGroupWithConstantRequest(Grouper grouper)
-        {
-            var message = _pipeline.CreateMessage();
-            var request = message.Request;
-            request.Method = RequestMethod.Put;
-            var uri = new RawRequestUriBuilder();
-            uri.Reset(_endpoint);
-            uri.AppendPath("/parameterGrouping/groupWithConstant", false);
-            request.Uri = uri;
-            request.Headers.Add("groupedConstant", "foo");
-            if (grouper?.GroupedParameter != null)
-            {
-                request.Headers.Add("groupedParameter", grouper.GroupedParameter);
-            }
-            request.Headers.Add("Accept", "application/json");
-            return message;
-        }
-
-        /// <summary> Parameter group with a constant. Pass in &apos;foo&apos; for groupedConstant and &apos;bar&apos; for groupedParameter. </summary>
-        /// <param name="grouper"> Parameter group. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> GroupWithConstantAsync(Grouper grouper = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateGroupWithConstantRequest(grouper);
-            await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return message.Response;
-                default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary> Parameter group with a constant. Pass in &apos;foo&apos; for groupedConstant and &apos;bar&apos; for groupedParameter. </summary>
-        /// <param name="grouper"> Parameter group. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response GroupWithConstant(Grouper grouper = null, CancellationToken cancellationToken = default)
-        {
-            using var message = CreateGroupWithConstantRequest(grouper);
-            _pipeline.Send(message, cancellationToken);
-            switch (message.Response.Status)
-            {
-                case 200:
-                    return message.Response;
-                default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
-            }
-        }
     }
 }

@@ -377,13 +377,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            header_paramExistingKey:
-              parameters:
-                User-Agent: overwrite
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: ParamExistingKey
@@ -531,13 +524,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            header_paramProtectedKey:
-              parameters:
-                Content-Type: text/html
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: ParamProtectedKey
@@ -698,14 +684,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            header_paramInteger:
-              parameters:
-                scenario: positive
-                value: 1
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: ParamInteger

@@ -921,7 +921,7 @@ operationGroups:
               parameters: {}
               responses:
                 '200':
-                  body: '    Now is the time for all good men to come to the aid of their country    '
+                  body: <tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>
         language: !Languages 
           default:
             name: GetWhitespace
@@ -1019,7 +1019,7 @@ operationGroups:
           x-ms-examples:
             string_putWhitespace:
               parameters:
-                stringBody: '    Now is the time for all good men to come to the aid of their country    '
+                stringBody: <tab><space><space>Now is the time for all good men to come to the aid of their country<tab><space><space>
               responses:
                 '200': {}
         language: !Languages 
@@ -1162,13 +1162,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_putNull:
-              parameters: {}
-              responses:
-                '200':
-                  body: YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjQ=
         language: !Languages 
           default:
             name: GetBase64Encoded
@@ -1236,13 +1229,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_putNull:
-              parameters: {}
-              responses:
-                '200':
-                  body: YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw
         language: !Languages 
           default:
             name: GetBase64UrlEncoded
@@ -1337,13 +1323,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_putNull:
-              parameters:
-                stringBody: YSBzdHJpbmcgdGhhdCBnZXRzIGVuY29kZWQgd2l0aCBiYXNlNjR1cmw
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: PutBase64UrlEncoded
@@ -1412,12 +1391,6 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
-        extensions:
-          x-ms-examples:
-            string_putNull:
-              parameters: {}
-              responses:
-                '200': {}
         language: !Languages 
           default:
             name: GetNullBase64UrlEncoded
@@ -1948,8 +1921,7 @@ operationGroups:
           x-ms-examples:
             enum_putReferencedConstant:
               parameters:
-                enumStringBody:
-                  ColorConstant: green-color
+                enumStringBody: green-color
               responses:
                 '200': {}
         language: !Languages 
