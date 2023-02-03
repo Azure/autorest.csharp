@@ -12,7 +12,7 @@
    "Name": "Pet",
    "Namespace": "PetStore",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "3",
@@ -66,7 +66,7 @@
    "Name": "ToyListResults",
    "Namespace": "PetStore",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "10",
@@ -81,7 +81,7 @@
        "Name": "Toy",
        "Namespace": "PetStore",
        "IsNullable": false,
-       "Usage": "None",
+       "Usage": "Output",
        "Properties": [
         {
          "$id": "13",
@@ -286,7 +286,8 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "35",
@@ -380,7 +381,8 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "43",
@@ -487,7 +489,8 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "52",
@@ -587,7 +590,8 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}/toys",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

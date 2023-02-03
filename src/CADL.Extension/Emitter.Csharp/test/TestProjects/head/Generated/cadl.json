@@ -12,7 +12,7 @@
    "Name": "Thing",
    "Namespace": "Cadl.HeadClient",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "3",
@@ -216,7 +216,8 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "25",
@@ -326,7 +327,8 @@
       "text/plain"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
