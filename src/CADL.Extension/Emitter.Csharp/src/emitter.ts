@@ -78,6 +78,7 @@ import { execSync } from "child_process";
 import {
     Client,
     createDpgContext,
+    DpgEmitterOptions,
     getConvenienceAPIName,
     isApiVersion,
     isOperationGroup,
@@ -93,7 +94,7 @@ import { getVersions } from "@cadl-lang/versioning";
 import { EmitContext } from "@cadl-lang/compiler/*";
 import { capitalize } from "./lib/utils.js";
 
-export interface NetEmitterOptions {
+export type NetEmitterOptions = {
     outputFile?: string;
     logFile?: string;
     namespace?: string;
@@ -110,10 +111,7 @@ export interface NetEmitterOptions {
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
-    "generate-protocol-methods"?: boolean;
-    "generate-convenience-methods"?: boolean;
-    "package-name"?: string;
-}
+} & DpgEmitterOptions;
 
 const defaultOptions = {
     outputFile: "cadl.json",
@@ -122,7 +120,10 @@ const defaultOptions = {
     "new-project": false,
     csharpGeneratorPath: dllFilePath,
     "clear-output-folder": false,
-    "save-inputs": false
+    "save-inputs": false,
+    "generate-protocol-methods": true,
+    "generate-convenience-methods": true,
+    "package-name": undefined
 };
 
 const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
