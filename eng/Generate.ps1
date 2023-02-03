@@ -194,7 +194,7 @@ if (!($Exclude -contains "TestProjects"))
             continue
         }
         if ($testName.EndsWith("Cadl")) {
-            Add-Cadl $testName $directory "--option @azure-tools/cadl-csharp.generate-convenience-methods=false"
+            Add-Cadl $testName $directory "" "--option @azure-tools/cadl-csharp.generate-convenience-methods=false"
         } else {
             if (Test-Path $readmeConfigurationPath)
             {
