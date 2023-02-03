@@ -284,6 +284,7 @@
       "application/merge-patch+json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],

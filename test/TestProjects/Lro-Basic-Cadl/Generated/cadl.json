@@ -278,6 +278,7 @@
        "IsErrorResponse": false
       }
      },
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -473,6 +474,7 @@
        "IsErrorResponse": false
       }
      },
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -623,6 +625,7 @@
        "IsErrorResponse": false
       }
      },
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],

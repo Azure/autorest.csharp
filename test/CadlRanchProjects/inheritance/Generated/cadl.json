@@ -345,6 +345,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -405,6 +406,7 @@
      "Uri": "{host}",
      "Path": "/models/inheritance/valid",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -512,6 +514,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -572,6 +575,7 @@
      "Uri": "{host}",
      "Path": "/models/inheritance/discriminated/model",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -676,6 +680,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -736,6 +741,7 @@
      "Uri": "{host}",
      "Path": "/models/inheritance/discriminated/recursivemodel",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -840,6 +846,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -900,6 +907,7 @@
      "Uri": "{host}",
      "Path": "/models/inheritance/discriminated/missingdiscriminator",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -960,6 +968,7 @@
      "Uri": "{host}",
      "Path": "/models/inheritance/discriminated/wrongdiscriminator",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],
