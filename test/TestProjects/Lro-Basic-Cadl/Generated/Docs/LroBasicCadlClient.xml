@@ -236,7 +236,7 @@ Schema for <c>Thing</c>:
 
 Response Body:
 
-Schema for <c>Thing</c>:
+Schema for <c>AcceptedResponse</c>:
 <code>{
   name: string, # Required.
 }
@@ -275,7 +275,7 @@ Schema for <c>Thing</c>:
 
 Response Body:
 
-Schema for <c>Thing</c>:
+Schema for <c>AcceptedResponse</c>:
 <code>{
   name: string, # Required.
 }

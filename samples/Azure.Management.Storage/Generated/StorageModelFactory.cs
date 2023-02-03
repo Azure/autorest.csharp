@@ -42,24 +42,6 @@ namespace Azure.Management.Storage.Models
             return new BlobServiceData(id, name, resourceType, systemData, sku, corsRulesValue != null ? new CorsRules(corsRulesValue?.ToList()) : null, defaultServiceVersion, deleteRetentionPolicy, isVersioningEnabled, automaticSnapshotPolicyEnabled, changeFeed, restorePolicy, containerDeleteRetentionPolicy, lastAccessTimeTrackingPolicy);
         }
 
-        /// <summary> Initializes a new instance of DeleteRetentionPolicy. </summary>
-        /// <param name="enabled"> Indicates whether DeleteRetentionPolicy is enabled. </param>
-        /// <param name="days"> Indicates the number of days that the deleted item should be retained. The minimum specified value can be 1 and the maximum value can be 365. </param>
-        /// <returns> A new <see cref="Models.DeleteRetentionPolicy"/> instance for mocking. </returns>
-        public static DeleteRetentionPolicy DeleteRetentionPolicy(bool? enabled = null, int? days = null)
-        {
-            return new DeleteRetentionPolicy(enabled, days);
-        }
-
-        /// <summary> Initializes a new instance of ChangeFeed. </summary>
-        /// <param name="enabled"> Indicates whether change feed event logging is enabled for the Blob service. </param>
-        /// <param name="retentionInDays"> Indicates the duration of changeFeed retention in days. Minimum value is 1 day and maximum value is 146000 days (400 years). A null value indicates an infinite retention of the change feed. </param>
-        /// <returns> A new <see cref="Models.ChangeFeed"/> instance for mocking. </returns>
-        public static ChangeFeed ChangeFeed(bool? enabled = null, int? retentionInDays = null)
-        {
-            return new ChangeFeed(enabled, retentionInDays);
-        }
-
         /// <summary> Initializes a new instance of RestorePolicyProperties. </summary>
         /// <param name="enabled"> Blob restore is enabled if set to true. </param>
         /// <param name="days"> how long this blob can be restored. It should be great than zero and less than DeleteRetentionPolicy.days. </param>
@@ -69,19 +51,6 @@ namespace Azure.Management.Storage.Models
         public static RestorePolicyProperties RestorePolicyProperties(bool enabled = default, int? days = null, DateTimeOffset? lastEnabledOn = null, DateTimeOffset? minRestoreOn = null)
         {
             return new RestorePolicyProperties(enabled, days, lastEnabledOn, minRestoreOn);
-        }
-
-        /// <summary> Initializes a new instance of LastAccessTimeTrackingPolicy. </summary>
-        /// <param name="enable"> When set to true last access time based tracking is enabled. </param>
-        /// <param name="name"> Name of the policy. The valid value is AccessTimeTracking. This field is currently read only. </param>
-        /// <param name="trackingGranularityInDays"> The field specifies blob object tracking granularity in days, typically how often the blob object should be tracked.This field is currently read only with value as 1. </param>
-        /// <param name="blobType"> An array of predefined supported blob types. Only blockBlob is the supported value. This field is currently read only. </param>
-        /// <returns> A new <see cref="Models.LastAccessTimeTrackingPolicy"/> instance for mocking. </returns>
-        public static LastAccessTimeTrackingPolicy LastAccessTimeTrackingPolicy(bool enable = default, Name? name = null, int? trackingGranularityInDays = null, IEnumerable<string> blobType = null)
-        {
-            blobType ??= new List<string>();
-
-            return new LastAccessTimeTrackingPolicy(enable, name, trackingGranularityInDays, blobType?.ToList());
         }
 
         /// <summary> Initializes a new instance of StorageSku. </summary>
@@ -253,18 +222,6 @@ namespace Azure.Management.Storage.Models
             return new FileServiceData(id, name, resourceType, systemData, sku, corsRulesValue != null ? new CorsRules(corsRulesValue?.ToList()) : null, shareDeleteRetentionPolicy, protocolSmb != null ? new ProtocolSettings(protocolSmb) : null);
         }
 
-        /// <summary> Initializes a new instance of SmbSetting. </summary>
-        /// <param name="multichannelEnabled"> Multichannel setting. Applies to Premium FileStorage only. </param>
-        /// <param name="versions"> SMB protocol versions supported by server. Valid values are SMB2.1, SMB3.0, SMB3.1.1. Should be passed as a string with delimiter &apos;;&apos;. </param>
-        /// <param name="authenticationMethods"> SMB authentication methods supported by server. Valid values are NTLMv2, Kerberos. Should be passed as a string with delimiter &apos;;&apos;. </param>
-        /// <param name="kerberosTicketEncryption"> Kerberos ticket encryption supported by server. Valid values are RC4-HMAC, AES-256. Should be passed as a string with delimiter &apos;;&apos;. </param>
-        /// <param name="channelEncryption"> SMB channel encryption supported by server. Valid values are AES-128-CCM, AES-128-GCM, AES-256-GCM. Should be passed as a string with delimiter &apos;;&apos;. </param>
-        /// <returns> A new <see cref="Models.SmbSetting"/> instance for mocking. </returns>
-        public static SmbSetting SmbSetting(bool? multichannelEnabled = null, string versions = null, string authenticationMethods = null, string kerberosTicketEncryption = null, string channelEncryption = null)
-        {
-            return new SmbSetting(multichannelEnabled != null ? new Multichannel(multichannelEnabled) : null, versions, authenticationMethods, kerberosTicketEncryption, channelEncryption);
-        }
-
         /// <summary> Initializes a new instance of FileShareData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
@@ -296,25 +253,6 @@ namespace Azure.Management.Storage.Models
             signedIdentifiers ??= new List<SignedIdentifier>();
 
             return new FileShareData(id, name, resourceType, systemData, lastModifiedOn, metadata, shareQuota, enabledProtocols, rootSquash, version, deleted, deletedOn, remainingRetentionDays, accessTier, accessTierChangeOn, accessTierStatus, shareUsageBytes, leaseStatus, leaseState, leaseDuration, signedIdentifiers?.ToList(), snapshotOn, etag);
-        }
-
-        /// <summary> Initializes a new instance of SignedIdentifier. </summary>
-        /// <param name="id"> An unique identifier of the stored access policy. </param>
-        /// <param name="accessPolicy"> Access policy. </param>
-        /// <returns> A new <see cref="Models.SignedIdentifier"/> instance for mocking. </returns>
-        public static SignedIdentifier SignedIdentifier(string id = null, AccessPolicy accessPolicy = null)
-        {
-            return new SignedIdentifier(id, accessPolicy);
-        }
-
-        /// <summary> Initializes a new instance of AccessPolicy. </summary>
-        /// <param name="startOn"> Start time of the access policy. </param>
-        /// <param name="expiryOn"> Expiry time of the access policy. </param>
-        /// <param name="permission"> List of abbreviated permissions. </param>
-        /// <returns> A new <see cref="Models.AccessPolicy"/> instance for mocking. </returns>
-        public static AccessPolicy AccessPolicy(DateTimeOffset? startOn = null, DateTimeOffset? expiryOn = null, string permission = null)
-        {
-            return new AccessPolicy(startOn, expiryOn, permission);
         }
 
         /// <summary> Initializes a new instance of LeaseShareResponse. </summary>
@@ -375,38 +313,6 @@ namespace Azure.Management.Storage.Models
             return new CheckNameAvailabilityResult(nameAvailable, reason, message);
         }
 
-        /// <summary> Initializes a new instance of CustomDomain. </summary>
-        /// <param name="name"> Gets or sets the custom domain name assigned to the storage account. Name is the CNAME source. </param>
-        /// <param name="useSubDomainName"> Indicates whether indirect CName validation is enabled. Default value is false. This should only be set on updates. </param>
-        /// <returns> A new <see cref="Models.CustomDomain"/> instance for mocking. </returns>
-        public static CustomDomain CustomDomain(string name = null, bool? useSubDomainName = null)
-        {
-            return new CustomDomain(name, useSubDomainName);
-        }
-
-        /// <summary> Initializes a new instance of Encryption. </summary>
-        /// <param name="services"> List of services which support encryption. </param>
-        /// <param name="keySource"> The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault. </param>
-        /// <param name="requireInfrastructureEncryption"> A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest. </param>
-        /// <param name="keyVaultProperties"> Properties provided by key vault. </param>
-        /// <param name="encryptionUserAssignedIdentity"> The identity to be used with service-side encryption at rest. </param>
-        /// <returns> A new <see cref="Models.Encryption"/> instance for mocking. </returns>
-        public static Encryption Encryption(EncryptionServices services = null, KeySource keySource = default, bool? requireInfrastructureEncryption = null, KeyVaultProperties keyVaultProperties = null, string encryptionUserAssignedIdentity = null)
-        {
-            return new Encryption(services, keySource, requireInfrastructureEncryption, keyVaultProperties, encryptionUserAssignedIdentity != null ? new EncryptionIdentity(encryptionUserAssignedIdentity) : null);
-        }
-
-        /// <summary> Initializes a new instance of EncryptionServices. </summary>
-        /// <param name="blob"> The encryption function of the blob storage service. </param>
-        /// <param name="file"> The encryption function of the file storage service. </param>
-        /// <param name="table"> The encryption function of the table storage service. </param>
-        /// <param name="queue"> The encryption function of the queue storage service. </param>
-        /// <returns> A new <see cref="Models.EncryptionServices"/> instance for mocking. </returns>
-        public static EncryptionServices EncryptionServices(EncryptionService blob = null, EncryptionService file = null, EncryptionService table = null, EncryptionService queue = null)
-        {
-            return new EncryptionServices(blob, file, table, queue);
-        }
-
         /// <summary> Initializes a new instance of EncryptionService. </summary>
         /// <param name="enabled"> A boolean indicating whether or not the service encrypts the data as it is stored. </param>
         /// <param name="lastEnabledOn"> Gets a rough estimate of the date/time when the encryption was last enabled by the user. Only returned when encryption is enabled. There might be some unencrypted blobs which were written after this time, as it is just a rough estimate. </param>
@@ -427,89 +333,6 @@ namespace Azure.Management.Storage.Models
         public static KeyVaultProperties KeyVaultProperties(string keyName = null, string keyVersion = null, Uri keyVaultUri = null, string currentVersionedKeyIdentifier = null, DateTimeOffset? lastKeyRotationTimestamp = null)
         {
             return new KeyVaultProperties(keyName, keyVersion, keyVaultUri, currentVersionedKeyIdentifier, lastKeyRotationTimestamp);
-        }
-
-        /// <summary> Initializes a new instance of NetworkRuleSet. </summary>
-        /// <param name="bypass"> Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Possible values are any combination of Logging|Metrics|AzureServices (For example, &quot;Logging, Metrics&quot;), or None to bypass none of those traffics. </param>
-        /// <param name="resourceAccessRules"> Sets the resource access rules. </param>
-        /// <param name="virtualNetworkRules"> Sets the virtual network rules. </param>
-        /// <param name="ipRules"> Sets the IP ACL rules. </param>
-        /// <param name="defaultAction"> Specifies the default action of allow or deny when no other rules match. </param>
-        /// <returns> A new <see cref="Models.NetworkRuleSet"/> instance for mocking. </returns>
-        public static NetworkRuleSet NetworkRuleSet(Bypass? bypass = null, IEnumerable<ResourceAccessRule> resourceAccessRules = null, IEnumerable<VirtualNetworkRule> virtualNetworkRules = null, IEnumerable<IPRule> ipRules = null, DefaultAction defaultAction = default)
-        {
-            resourceAccessRules ??= new List<ResourceAccessRule>();
-            virtualNetworkRules ??= new List<VirtualNetworkRule>();
-            ipRules ??= new List<IPRule>();
-
-            return new NetworkRuleSet(bypass, resourceAccessRules?.ToList(), virtualNetworkRules?.ToList(), ipRules?.ToList(), defaultAction);
-        }
-
-        /// <summary> Initializes a new instance of ResourceAccessRule. </summary>
-        /// <param name="tenantId"> Tenant Id. </param>
-        /// <param name="resourceId"> Resource Id. </param>
-        /// <returns> A new <see cref="Models.ResourceAccessRule"/> instance for mocking. </returns>
-        public static ResourceAccessRule ResourceAccessRule(Guid? tenantId = null, string resourceId = null)
-        {
-            return new ResourceAccessRule(tenantId, resourceId);
-        }
-
-        /// <summary> Initializes a new instance of VirtualNetworkRule. </summary>
-        /// <param name="virtualNetworkResourceId"> Resource ID of a subnet, for example: /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}. </param>
-        /// <param name="action"> The action of virtual network rule. </param>
-        /// <param name="state"> Gets the state of virtual network rule. </param>
-        /// <returns> A new <see cref="Models.VirtualNetworkRule"/> instance for mocking. </returns>
-        public static VirtualNetworkRule VirtualNetworkRule(string virtualNetworkResourceId = null, Action? action = null, State? state = null)
-        {
-            return new VirtualNetworkRule(virtualNetworkResourceId, action, state);
-        }
-
-        /// <summary> Initializes a new instance of IPRule. </summary>
-        /// <param name="ipAddressOrRange"> Specifies the IP or IP range in CIDR format. Only IPV4 address is allowed. </param>
-        /// <param name="action"> The action of IP ACL rule. </param>
-        /// <returns> A new <see cref="Models.IPRule"/> instance for mocking. </returns>
-        public static IPRule IPRule(string ipAddressOrRange = null, Action? action = null)
-        {
-            return new IPRule(ipAddressOrRange, action);
-        }
-
-        /// <summary> Initializes a new instance of AzureFilesIdentityBasedAuthentication. </summary>
-        /// <param name="directoryServiceOptions"> Indicates the directory service used. </param>
-        /// <param name="activeDirectoryProperties"> Required if choose AD. </param>
-        /// <param name="defaultSharePermission"> Default share permission for users using Kerberos authentication if RBAC role is not assigned. </param>
-        /// <returns> A new <see cref="Models.AzureFilesIdentityBasedAuthentication"/> instance for mocking. </returns>
-        public static AzureFilesIdentityBasedAuthentication AzureFilesIdentityBasedAuthentication(DirectoryServiceOption directoryServiceOptions = default, ActiveDirectoryProperties activeDirectoryProperties = null, DefaultSharePermission? defaultSharePermission = null)
-        {
-            return new AzureFilesIdentityBasedAuthentication(directoryServiceOptions, activeDirectoryProperties, defaultSharePermission);
-        }
-
-        /// <summary> Initializes a new instance of RoutingPreference. </summary>
-        /// <param name="routingChoice"> Routing Choice defines the kind of network routing opted by the user. </param>
-        /// <param name="publishMicrosoftEndpoints"> A boolean flag which indicates whether microsoft routing storage endpoints are to be published. </param>
-        /// <param name="publishInternetEndpoints"> A boolean flag which indicates whether internet routing storage endpoints are to be published. </param>
-        /// <returns> A new <see cref="Models.RoutingPreference"/> instance for mocking. </returns>
-        public static RoutingPreference RoutingPreference(RoutingChoice? routingChoice = null, bool? publishMicrosoftEndpoints = null, bool? publishInternetEndpoints = null)
-        {
-            return new RoutingPreference(routingChoice, publishMicrosoftEndpoints, publishInternetEndpoints);
-        }
-
-        /// <summary> Initializes a new instance of ImmutableStorageAccount. </summary>
-        /// <param name="enabled"> A boolean flag which enables account-level immutability. All the containers under such an account have object-level immutability enabled by default. </param>
-        /// <param name="immutabilityPolicy"> Specifies the default account-level immutability policy which is inherited and applied to objects that do not possess an explicit immutability policy at the object level. The object-level immutability policy has higher precedence than the container-level immutability policy, which has a higher precedence than the account-level immutability policy. </param>
-        /// <returns> A new <see cref="Models.ImmutableStorageAccount"/> instance for mocking. </returns>
-        public static ImmutableStorageAccount ImmutableStorageAccount(bool? enabled = null, AccountImmutabilityPolicyProperties immutabilityPolicy = null)
-        {
-            return new ImmutableStorageAccount(enabled, immutabilityPolicy);
-        }
-
-        /// <summary> Initializes a new instance of AccountImmutabilityPolicyProperties. </summary>
-        /// <param name="immutabilityPeriodSinceCreationInDays"> The immutability period for the blobs in the container since the policy creation, in days. </param>
-        /// <param name="state"> The ImmutabilityPolicy state defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted. </param>
-        /// <param name="allowProtectedAppendWrites"> This property can only be changed for disabled and unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. </param>
-        /// <returns> A new <see cref="Models.AccountImmutabilityPolicyProperties"/> instance for mocking. </returns>
-        public static AccountImmutabilityPolicyProperties AccountImmutabilityPolicyProperties(int? immutabilityPeriodSinceCreationInDays = null, AccountImmutabilityPolicyState? state = null, bool? allowProtectedAppendWrites = null)
-        {
-            return new AccountImmutabilityPolicyProperties(immutabilityPeriodSinceCreationInDays, state, allowProtectedAppendWrites);
         }
 
         /// <summary> Initializes a new instance of StorageAccountData. </summary>
@@ -637,16 +460,6 @@ namespace Azure.Management.Storage.Models
             return new StoragePrivateEndpointConnectionData(id, name, resourceType, systemData, privateEndpointId != null ? ResourceManagerModelFactory.SubResource(privateEndpointId) : null, connectionState, provisioningState);
         }
 
-        /// <summary> Initializes a new instance of StoragePrivateLinkServiceConnectionState. </summary>
-        /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
-        /// <param name="description"> The reason for approval/rejection of the connection. </param>
-        /// <param name="actionRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
-        /// <returns> A new <see cref="Models.StoragePrivateLinkServiceConnectionState"/> instance for mocking. </returns>
-        public static StoragePrivateLinkServiceConnectionState StoragePrivateLinkServiceConnectionState(StoragePrivateEndpointServiceConnectionStatus? status = null, string description = null, string actionRequired = null)
-        {
-            return new StoragePrivateLinkServiceConnectionState(status, description, actionRequired);
-        }
-
         /// <summary> Initializes a new instance of BlobRestoreStatus. </summary>
         /// <param name="status"> The status of blob restore progress. Possible values are: - InProgress: Indicates that blob restore is ongoing. - Complete: Indicates that blob restore has been completed successfully. - Failed: Indicates that blob restore is failed. </param>
         /// <param name="failureReason"> Failure reason when blob restore is failed. </param>
@@ -746,90 +559,6 @@ namespace Azure.Management.Storage.Models
             return new ManagementPolicyData(id, name, resourceType, systemData, lastModifiedOn, rules != null ? new ManagementPolicySchema(rules?.ToList()) : null);
         }
 
-        /// <summary> Initializes a new instance of ManagementPolicyRule. </summary>
-        /// <param name="enabled"> Rule is enabled if set to true. </param>
-        /// <param name="name"> A rule name can contain any combination of alpha numeric characters. Rule name is case-sensitive. It must be unique within a policy. </param>
-        /// <param name="ruleType"> The valid value is Lifecycle. </param>
-        /// <param name="definition"> An object that defines the Lifecycle rule. </param>
-        /// <returns> A new <see cref="Models.ManagementPolicyRule"/> instance for mocking. </returns>
-        public static ManagementPolicyRule ManagementPolicyRule(bool? enabled = null, string name = null, RuleType ruleType = default, ManagementPolicyDefinition definition = null)
-        {
-            return new ManagementPolicyRule(enabled, name, ruleType, definition);
-        }
-
-        /// <summary> Initializes a new instance of ManagementPolicyDefinition. </summary>
-        /// <param name="actions"> An object that defines the action set. </param>
-        /// <param name="filters"> An object that defines the filter set. </param>
-        /// <returns> A new <see cref="Models.ManagementPolicyDefinition"/> instance for mocking. </returns>
-        public static ManagementPolicyDefinition ManagementPolicyDefinition(ManagementPolicyAction actions = null, ManagementPolicyFilter filters = null)
-        {
-            return new ManagementPolicyDefinition(actions, filters);
-        }
-
-        /// <summary> Initializes a new instance of ManagementPolicyAction. </summary>
-        /// <param name="baseBlob"> The management policy action for base blob. </param>
-        /// <param name="snapshot"> The management policy action for snapshot. </param>
-        /// <param name="version"> The management policy action for version. </param>
-        /// <returns> A new <see cref="Models.ManagementPolicyAction"/> instance for mocking. </returns>
-        public static ManagementPolicyAction ManagementPolicyAction(ManagementPolicyBaseBlob baseBlob = null, ManagementPolicySnapShot snapshot = null, ManagementPolicyVersion version = null)
-        {
-            return new ManagementPolicyAction(baseBlob, snapshot, version);
-        }
-
-        /// <summary> Initializes a new instance of ManagementPolicyBaseBlob. </summary>
-        /// <param name="tierToCool"> The function to tier blobs to cool storage. Support blobs currently at Hot tier. </param>
-        /// <param name="tierToArchive"> The function to tier blobs to archive storage. Support blobs currently at Hot or Cool tier. </param>
-        /// <param name="delete"> The function to delete the blob. </param>
-        /// <param name="enableAutoTierToHotFromCool"> This property enables auto tiering of a blob from cool to hot on a blob access. This property requires tierToCool.daysAfterLastAccessTimeGreaterThan. </param>
-        /// <returns> A new <see cref="Models.ManagementPolicyBaseBlob"/> instance for mocking. </returns>
-        public static ManagementPolicyBaseBlob ManagementPolicyBaseBlob(DateAfterModification tierToCool = null, DateAfterModification tierToArchive = null, DateAfterModification delete = null, bool? enableAutoTierToHotFromCool = null)
-        {
-            return new ManagementPolicyBaseBlob(tierToCool, tierToArchive, delete, enableAutoTierToHotFromCool);
-        }
-
-        /// <summary> Initializes a new instance of DateAfterModification. </summary>
-        /// <param name="daysAfterModificationGreaterThan"> Value indicating the age in days after last modification. </param>
-        /// <param name="daysAfterLastAccessTimeGreaterThan"> Value indicating the age in days after last blob access. This property can only be used in conjunction with last access time tracking policy. </param>
-        /// <returns> A new <see cref="Models.DateAfterModification"/> instance for mocking. </returns>
-        public static DateAfterModification DateAfterModification(float? daysAfterModificationGreaterThan = null, float? daysAfterLastAccessTimeGreaterThan = null)
-        {
-            return new DateAfterModification(daysAfterModificationGreaterThan, daysAfterLastAccessTimeGreaterThan);
-        }
-
-        /// <summary> Initializes a new instance of ManagementPolicySnapShot. </summary>
-        /// <param name="tierToCoolDaysAfterCreationGreaterThan"> The function to tier blob snapshot to cool storage. Support blob snapshot currently at Hot tier. </param>
-        /// <param name="tierToArchiveDaysAfterCreationGreaterThan"> The function to tier blob snapshot to archive storage. Support blob snapshot currently at Hot or Cool tier. </param>
-        /// <param name="deleteDaysAfterCreationGreaterThan"> The function to delete the blob snapshot. </param>
-        /// <returns> A new <see cref="Models.ManagementPolicySnapShot"/> instance for mocking. </returns>
-        public static ManagementPolicySnapShot ManagementPolicySnapShot(float? tierToCoolDaysAfterCreationGreaterThan = null, float? tierToArchiveDaysAfterCreationGreaterThan = null, float? deleteDaysAfterCreationGreaterThan = null)
-        {
-            return new ManagementPolicySnapShot(tierToCoolDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(tierToCoolDaysAfterCreationGreaterThan.Value) : null, tierToArchiveDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(tierToArchiveDaysAfterCreationGreaterThan.Value) : null, deleteDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(deleteDaysAfterCreationGreaterThan.Value) : null);
-        }
-
-        /// <summary> Initializes a new instance of ManagementPolicyVersion. </summary>
-        /// <param name="tierToCoolDaysAfterCreationGreaterThan"> The function to tier blob version to cool storage. Support blob version currently at Hot tier. </param>
-        /// <param name="tierToArchiveDaysAfterCreationGreaterThan"> The function to tier blob version to archive storage. Support blob version currently at Hot or Cool tier. </param>
-        /// <param name="deleteDaysAfterCreationGreaterThan"> The function to delete the blob version. </param>
-        /// <returns> A new <see cref="Models.ManagementPolicyVersion"/> instance for mocking. </returns>
-        public static ManagementPolicyVersion ManagementPolicyVersion(float? tierToCoolDaysAfterCreationGreaterThan = null, float? tierToArchiveDaysAfterCreationGreaterThan = null, float? deleteDaysAfterCreationGreaterThan = null)
-        {
-            return new ManagementPolicyVersion(tierToCoolDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(tierToCoolDaysAfterCreationGreaterThan.Value) : null, tierToArchiveDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(tierToArchiveDaysAfterCreationGreaterThan.Value) : null, deleteDaysAfterCreationGreaterThan.HasValue ? new DateAfterCreation(deleteDaysAfterCreationGreaterThan.Value) : null);
-        }
-
-        /// <summary> Initializes a new instance of ManagementPolicyFilter. </summary>
-        /// <param name="prefixMatch"> An array of strings for prefixes to be match. </param>
-        /// <param name="blobTypes"> An array of predefined enum values. Currently blockBlob supports all tiering and delete actions. Only delete actions are supported for appendBlob. </param>
-        /// <param name="blobIndexMatch"> An array of blob index tag based filters, there can be at most 10 tag filters. </param>
-        /// <returns> A new <see cref="Models.ManagementPolicyFilter"/> instance for mocking. </returns>
-        public static ManagementPolicyFilter ManagementPolicyFilter(IEnumerable<string> prefixMatch = null, IEnumerable<string> blobTypes = null, IEnumerable<TagFilter> blobIndexMatch = null)
-        {
-            prefixMatch ??= new List<string>();
-            blobTypes ??= new List<string>();
-            blobIndexMatch ??= new List<TagFilter>();
-
-            return new ManagementPolicyFilter(prefixMatch?.ToList(), blobTypes?.ToList(), blobIndexMatch?.ToList());
-        }
-
         /// <summary> Initializes a new instance of BlobInventoryPolicyData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
@@ -841,34 +570,6 @@ namespace Azure.Management.Storage.Models
         public static BlobInventoryPolicyData BlobInventoryPolicyData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, DateTimeOffset? lastModifiedOn = null, BlobInventoryPolicySchema policy = null)
         {
             return new BlobInventoryPolicyData(id, name, resourceType, systemData, lastModifiedOn, policy);
-        }
-
-        /// <summary> Initializes a new instance of BlobInventoryPolicyDefinition. </summary>
-        /// <param name="filters"> An object that defines the filter set. </param>
-        /// <param name="format"> This is a required field, it specifies the format for the inventory files. </param>
-        /// <param name="schedule"> This is a required field. This field is used to schedule an inventory formation. </param>
-        /// <param name="objectType"> This is a required field. This field specifies the scope of the inventory created either at the blob or container level. </param>
-        /// <param name="schemaFields"> This is a required field. This field specifies the fields and properties of the object to be included in the inventory. The Schema field value &apos;Name&apos; is always required. The valid values for this field for the &apos;Blob&apos; definition.objectType include &apos;Name, Creation-Time, Last-Modified, Content-Length, Content-MD5, BlobType, AccessTier, AccessTierChangeTime, AccessTierInferred, Tags, Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl, Snapshot, VersionId, IsCurrentVersion, Metadata, LastAccessTime&apos;. The valid values for &apos;Container&apos; definition.objectType include &apos;Name, Last-Modified, Metadata, LeaseStatus, LeaseState, LeaseDuration, PublicAccess, HasImmutabilityPolicy, HasLegalHold&apos;. Schema field values &apos;Expiry-Time, hdi_isfolder, Owner, Group, Permissions, Acl&apos; are valid only for Hns enabled accounts.&apos;Tags&apos; field is only valid for non Hns accounts. </param>
-        /// <returns> A new <see cref="Models.BlobInventoryPolicyDefinition"/> instance for mocking. </returns>
-        public static BlobInventoryPolicyDefinition BlobInventoryPolicyDefinition(BlobInventoryPolicyFilter filters = null, Format format = default, Schedule schedule = default, ObjectType objectType = default, IEnumerable<string> schemaFields = null)
-        {
-            schemaFields ??= new List<string>();
-
-            return new BlobInventoryPolicyDefinition(filters, format, schedule, objectType, schemaFields?.ToList());
-        }
-
-        /// <summary> Initializes a new instance of BlobInventoryPolicyFilter. </summary>
-        /// <param name="prefixMatch"> An array of strings for blob prefixes to be matched. </param>
-        /// <param name="blobTypes"> An array of predefined enum values. Valid values include blockBlob, appendBlob, pageBlob. Hns accounts does not support pageBlobs. This field is required when definition.objectType property is set to &apos;Blob&apos;. </param>
-        /// <param name="includeBlobVersions"> Includes blob versions in blob inventory when value is set to true. The definition.schemaFields values &apos;VersionId and IsCurrentVersion&apos; are required if this property is set to true, else they must be excluded. </param>
-        /// <param name="includeSnapshots"> Includes blob snapshots in blob inventory when value is set to true. The definition.schemaFields value &apos;Snapshot&apos; is required if this property is set to true, else it must be excluded. </param>
-        /// <returns> A new <see cref="Models.BlobInventoryPolicyFilter"/> instance for mocking. </returns>
-        public static BlobInventoryPolicyFilter BlobInventoryPolicyFilter(IEnumerable<string> prefixMatch = null, IEnumerable<string> blobTypes = null, bool? includeBlobVersions = null, bool? includeSnapshots = null)
-        {
-            prefixMatch ??= new List<string>();
-            blobTypes ??= new List<string>();
-
-            return new BlobInventoryPolicyFilter(prefixMatch?.ToList(), blobTypes?.ToList(), includeBlobVersions, includeSnapshots);
         }
 
         /// <summary> Initializes a new instance of StoragePrivateLinkResource. </summary>
@@ -904,28 +605,6 @@ namespace Azure.Management.Storage.Models
             rules ??= new List<ObjectReplicationPolicyRule>();
 
             return new ObjectReplicationPolicyData(id, name, resourceType, systemData, policyId, enabledOn, sourceAccount, destinationAccount, rules?.ToList());
-        }
-
-        /// <summary> Initializes a new instance of ObjectReplicationPolicyRule. </summary>
-        /// <param name="ruleId"> Rule Id is auto-generated for each new rule on destination account. It is required for put policy on source account. </param>
-        /// <param name="sourceContainer"> Required. Source container name. </param>
-        /// <param name="destinationContainer"> Required. Destination container name. </param>
-        /// <param name="filters"> Optional. An object that defines the filter set. </param>
-        /// <returns> A new <see cref="Models.ObjectReplicationPolicyRule"/> instance for mocking. </returns>
-        public static ObjectReplicationPolicyRule ObjectReplicationPolicyRule(string ruleId = null, string sourceContainer = null, string destinationContainer = null, ObjectReplicationPolicyFilter filters = null)
-        {
-            return new ObjectReplicationPolicyRule(ruleId, sourceContainer, destinationContainer, filters);
-        }
-
-        /// <summary> Initializes a new instance of ObjectReplicationPolicyFilter. </summary>
-        /// <param name="prefixMatch"> Optional. Filters the results to replicate only blobs whose names begin with the specified prefix. </param>
-        /// <param name="minCreationTime"> Blobs created after the time will be replicated to the destination. It must be in datetime format &apos;yyyy-MM-ddTHH:mm:ssZ&apos;. Example: 2020-02-19T16:05:00Z. </param>
-        /// <returns> A new <see cref="Models.ObjectReplicationPolicyFilter"/> instance for mocking. </returns>
-        public static ObjectReplicationPolicyFilter ObjectReplicationPolicyFilter(IEnumerable<string> prefixMatch = null, string minCreationTime = null)
-        {
-            prefixMatch ??= new List<string>();
-
-            return new ObjectReplicationPolicyFilter(prefixMatch?.ToList(), minCreationTime);
         }
 
         /// <summary> Initializes a new instance of EncryptionScopeData. </summary>

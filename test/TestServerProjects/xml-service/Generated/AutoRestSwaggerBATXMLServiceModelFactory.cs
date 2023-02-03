@@ -14,87 +14,6 @@ namespace xml_service.Models
     /// <summary> Model factory for generated models. </summary>
     public static partial class AutoRestSwaggerBATXMLServiceModelFactory
     {
-        /// <summary> Initializes a new instance of RootWithRefAndNoMeta. </summary>
-        /// <param name="refToModel"> XML will use RefToModel. </param>
-        /// <param name="something"> Something else (just to avoid flattening). </param>
-        /// <returns> A new <see cref="Models.RootWithRefAndNoMeta"/> instance for mocking. </returns>
-        public static RootWithRefAndNoMeta RootWithRefAndNoMeta(ComplexTypeNoMeta refToModel = null, string something = null)
-        {
-            return new RootWithRefAndNoMeta(refToModel, something);
-        }
-
-        /// <summary> Initializes a new instance of ComplexTypeNoMeta. </summary>
-        /// <param name="id"> The id of the res. </param>
-        /// <returns> A new <see cref="Models.ComplexTypeNoMeta"/> instance for mocking. </returns>
-        public static ComplexTypeNoMeta ComplexTypeNoMeta(string id = null)
-        {
-            return new ComplexTypeNoMeta(id);
-        }
-
-        /// <summary> Initializes a new instance of RootWithRefAndMeta. </summary>
-        /// <param name="refToModel"> XML will use XMLComplexTypeWithMeta. </param>
-        /// <param name="something"> Something else (just to avoid flattening). </param>
-        /// <returns> A new <see cref="Models.RootWithRefAndMeta"/> instance for mocking. </returns>
-        public static RootWithRefAndMeta RootWithRefAndMeta(ComplexTypeWithMeta refToModel = null, string something = null)
-        {
-            return new RootWithRefAndMeta(refToModel, something);
-        }
-
-        /// <summary> Initializes a new instance of ComplexTypeWithMeta. </summary>
-        /// <param name="id"> The id of the res. </param>
-        /// <returns> A new <see cref="Models.ComplexTypeWithMeta"/> instance for mocking. </returns>
-        public static ComplexTypeWithMeta ComplexTypeWithMeta(string id = null)
-        {
-            return new ComplexTypeWithMeta(id);
-        }
-
-        /// <summary> Initializes a new instance of Slideshow. </summary>
-        /// <param name="title"></param>
-        /// <param name="date"></param>
-        /// <param name="author"></param>
-        /// <param name="slides"></param>
-        /// <returns> A new <see cref="Models.Slideshow"/> instance for mocking. </returns>
-        public static Slideshow Slideshow(string title = null, string date = null, string author = null, IEnumerable<Slide> slides = null)
-        {
-            slides ??= new List<Slide>();
-
-            return new Slideshow(title, date, author, slides?.ToList());
-        }
-
-        /// <summary> Initializes a new instance of Slide. </summary>
-        /// <param name="type"></param>
-        /// <param name="title"></param>
-        /// <param name="items"></param>
-        /// <returns> A new <see cref="Models.Slide"/> instance for mocking. </returns>
-        public static Slide Slide(string type = null, string title = null, IEnumerable<string> items = null)
-        {
-            items ??= new List<string>();
-
-            return new Slide(type, title, items?.ToList());
-        }
-
-        /// <summary> Initializes a new instance of AppleBarrel. </summary>
-        /// <param name="goodApples"></param>
-        /// <param name="badApples"></param>
-        /// <returns> A new <see cref="Models.AppleBarrel"/> instance for mocking. </returns>
-        public static AppleBarrel AppleBarrel(IEnumerable<string> goodApples = null, IEnumerable<string> badApples = null)
-        {
-            goodApples ??= new List<string>();
-            badApples ??= new List<string>();
-
-            return new AppleBarrel(goodApples?.ToList(), badApples?.ToList());
-        }
-
-        /// <summary> Initializes a new instance of Banana. </summary>
-        /// <param name="name"></param>
-        /// <param name="flavor"></param>
-        /// <param name="expiration"> The time at which you should reconsider eating this banana. </param>
-        /// <returns> A new <see cref="Models.Banana"/> instance for mocking. </returns>
-        public static Banana Banana(string name = null, string flavor = null, DateTimeOffset? expiration = null)
-        {
-            return new Banana(name, flavor, expiration);
-        }
-
         /// <summary> Initializes a new instance of ListContainersResponse. </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="prefix"></param>
@@ -133,41 +52,6 @@ namespace xml_service.Models
         public static ContainerProperties ContainerProperties(DateTimeOffset lastModified = default, string etag = null, LeaseStatusType? leaseStatus = null, LeaseStateType? leaseState = null, LeaseDurationType? leaseDuration = null, PublicAccessType? publicAccess = null)
         {
             return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess);
-        }
-
-        /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
-        /// <param name="logging"> Azure Analytics Logging settings. </param>
-        /// <param name="hourMetrics"> A summary of request statistics grouped by API in hourly aggregates for blobs. </param>
-        /// <param name="minuteMetrics"> a summary of request statistics grouped by API in minute aggregates for blobs. </param>
-        /// <param name="cors"> The set of CORS rules. </param>
-        /// <param name="defaultServiceVersion"> The default version to use for requests to the Blob service if an incoming request&apos;s version is not specified. Possible values include version 2008-10-27 and all more recent versions. </param>
-        /// <param name="deleteRetentionPolicy"> The Delete Retention Policy for the service. </param>
-        /// <returns> A new <see cref="Models.StorageServiceProperties"/> instance for mocking. </returns>
-        public static StorageServiceProperties StorageServiceProperties(Logging logging = null, Metrics hourMetrics = null, Metrics minuteMetrics = null, IEnumerable<CorsRule> cors = null, string defaultServiceVersion = null, RetentionPolicy deleteRetentionPolicy = null)
-        {
-            cors ??= new List<CorsRule>();
-
-            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors?.ToList(), defaultServiceVersion, deleteRetentionPolicy);
-        }
-
-        /// <summary> Initializes a new instance of RetentionPolicy. </summary>
-        /// <param name="enabled"> Indicates whether a retention policy is enabled for the storage service. </param>
-        /// <param name="days"> Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted. </param>
-        /// <returns> A new <see cref="Models.RetentionPolicy"/> instance for mocking. </returns>
-        public static RetentionPolicy RetentionPolicy(bool enabled = default, int? days = null)
-        {
-            return new RetentionPolicy(enabled, days);
-        }
-
-        /// <summary> Initializes a new instance of Metrics. </summary>
-        /// <param name="version"> The version of Storage Analytics to configure. </param>
-        /// <param name="enabled"> Indicates whether metrics are enabled for the Blob service. </param>
-        /// <param name="includeAPIs"> Indicates whether metrics should generate summary statistics for called API operations. </param>
-        /// <param name="retentionPolicy"> the retention policy. </param>
-        /// <returns> A new <see cref="Models.Metrics"/> instance for mocking. </returns>
-        public static Metrics Metrics(string version = null, bool enabled = default, bool? includeAPIs = null, RetentionPolicy retentionPolicy = null)
-        {
-            return new Metrics(version, enabled, includeAPIs, retentionPolicy);
         }
 
         /// <summary> Initializes a new instance of ListBlobsResponse. </summary>
@@ -275,22 +159,6 @@ namespace xml_service.Models
         public static ObjectWithXMsTextProperty ObjectWithXMsTextProperty(string language = null, string content = null)
         {
             return new ObjectWithXMsTextProperty(language, content);
-        }
-
-        /// <summary> Initializes a new instance of ModelWithByteProperty. </summary>
-        /// <param name="bytes"></param>
-        /// <returns> A new <see cref="Models.ModelWithByteProperty"/> instance for mocking. </returns>
-        public static ModelWithByteProperty ModelWithByteProperty(byte[] bytes = null)
-        {
-            return new ModelWithByteProperty(bytes);
-        }
-
-        /// <summary> Initializes a new instance of ModelWithUrlProperty. </summary>
-        /// <param name="url"></param>
-        /// <returns> A new <see cref="Models.ModelWithUrlProperty"/> instance for mocking. </returns>
-        public static ModelWithUrlProperty ModelWithUrlProperty(Uri url = null)
-        {
-            return new ModelWithUrlProperty(url);
         }
     }
 }

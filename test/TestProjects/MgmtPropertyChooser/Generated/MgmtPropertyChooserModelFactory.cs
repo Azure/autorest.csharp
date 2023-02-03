@@ -116,16 +116,5 @@ namespace MgmtPropertyChooser.Models
 
             return new IdentityWithDifferentPropertyType(principalId, tenantId, resourceIdentityType, userAssignedIdentities);
         }
-
-        /// <summary> Initializes a new instance of IdentityWithNoSystemIdentity. </summary>
-        /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type &apos;SystemAssigned, UserAssigned&apos; includes both an implicitly created identity and a set of user assigned identities. The type &apos;None&apos; will remove any identities from the virtual machine. </param>
-        /// <param name="userAssignedIdentities"> The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: &apos;/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}&apos;. </param>
-        /// <returns> A new <see cref="Models.IdentityWithNoSystemIdentity"/> instance for mocking. </returns>
-        public static IdentityWithNoSystemIdentity IdentityWithNoSystemIdentity(ResourceIdentityType? resourceIdentityType = null, IDictionary<string, UserAssignedIdentity> userAssignedIdentities = null)
-        {
-            userAssignedIdentities ??= new Dictionary<string, UserAssignedIdentity>();
-
-            return new IdentityWithNoSystemIdentity(resourceIdentityType, userAssignedIdentities);
-        }
     }
 }

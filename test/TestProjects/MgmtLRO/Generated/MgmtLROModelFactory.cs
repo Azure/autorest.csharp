@@ -33,15 +33,6 @@ namespace MgmtLRO.Models
             return new FakeData(id, name, resourceType, systemData, tags, location, properties);
         }
 
-        /// <summary> Initializes a new instance of FakeProperties. </summary>
-        /// <param name="platformUpdateDomainCount"> Update Domain count. </param>
-        /// <param name="platformFaultDomainCount"> Fault Domain count. </param>
-        /// <returns> A new <see cref="Models.FakeProperties"/> instance for mocking. </returns>
-        public static FakeProperties FakeProperties(int? platformUpdateDomainCount = null, int? platformFaultDomainCount = null)
-        {
-            return new FakeProperties(platformUpdateDomainCount, platformFaultDomainCount);
-        }
-
         /// <summary> Initializes a new instance of FakePostResult. </summary>
         /// <param name="fakePostResultBar"></param>
         /// <returns> A new <see cref="Models.FakePostResult"/> instance for mocking. </returns>

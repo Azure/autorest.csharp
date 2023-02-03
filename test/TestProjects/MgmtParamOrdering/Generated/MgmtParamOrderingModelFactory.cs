@@ -97,19 +97,6 @@ namespace MgmtParamOrdering.Models
             return new EnvironmentContainerResourceData(id, name, resourceType, systemData, tags, location, properties);
         }
 
-        /// <summary> Initializes a new instance of EnvironmentContainer. </summary>
-        /// <param name="description"> The asset description text. </param>
-        /// <param name="properties"> The asset property dictionary. </param>
-        /// <param name="tags"> Tag dictionary. Tags can be added, removed, and updated. </param>
-        /// <returns> A new <see cref="Models.EnvironmentContainer"/> instance for mocking. </returns>
-        public static EnvironmentContainer EnvironmentContainer(string description = null, IDictionary<string, string> properties = null, IDictionary<string, string> tags = null)
-        {
-            properties ??= new Dictionary<string, string>();
-            tags ??= new Dictionary<string, string>();
-
-            return new EnvironmentContainer(description, properties, tags);
-        }
-
         /// <summary> Initializes a new instance of WorkspaceData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

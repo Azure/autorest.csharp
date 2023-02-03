@@ -10,13 +10,13 @@ using Azure.Core;
 
 namespace LroBasicCadl.Models
 {
-    /// <summary> The Thing. </summary>
-    public partial class Thing
+    /// <summary> The AcceptedResponse. </summary>
+    public partial class AcceptedResponse
     {
-        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <summary> Initializes a new instance of AcceptedResponse. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Thing(string name)
+        internal AcceptedResponse(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 

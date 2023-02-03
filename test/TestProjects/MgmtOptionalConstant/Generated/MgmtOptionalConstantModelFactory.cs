@@ -31,23 +31,5 @@ namespace MgmtOptionalConstant.Models
 
             return new OptionalMachineData(id, name, resourceType, systemData, tags, location, listener, content);
         }
-
-        /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
-        /// <param name="passName"> The pass name. Currently, the only allowable value is OobeSystem. </param>
-        /// <param name="protocol"> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </param>
-        /// <returns> A new <see cref="Models.ModelWithRequiredConstant"/> instance for mocking. </returns>
-        public static ModelWithRequiredConstant ModelWithRequiredConstant(PassName passName = default, ProtocolType? protocol = null)
-        {
-            return new ModelWithRequiredConstant(passName, protocol);
-        }
-
-        /// <summary> Initializes a new instance of ModelWithOptionalConstant. </summary>
-        /// <param name="passName"> The pass name. Currently, the only allowable value is OobeSystem. </param>
-        /// <param name="settingName"> Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon. </param>
-        /// <returns> A new <see cref="Models.ModelWithOptionalConstant"/> instance for mocking. </returns>
-        public static ModelWithOptionalConstant ModelWithOptionalConstant(PassName? passName = null, SettingName? settingName = null)
-        {
-            return new ModelWithOptionalConstant(passName, settingName);
-        }
     }
 }

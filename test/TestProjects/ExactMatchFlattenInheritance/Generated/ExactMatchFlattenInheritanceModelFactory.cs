@@ -67,17 +67,6 @@ namespace ExactMatchFlattenInheritance.Models
             return new AzureResourceFlattenModel3(id, name, resourceType, systemData, tags, location, foo);
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel4. </summary>
-        /// <param name="foo"> New property. </param>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="resourceType"></param>
-        /// <returns> A new <see cref="Models.AzureResourceFlattenModel4"/> instance for mocking. </returns>
-        public static AzureResourceFlattenModel4 AzureResourceFlattenModel4(int? foo = null, string id = null, string name = null, string resourceType = null)
-        {
-            return new AzureResourceFlattenModel4(foo, id, name, resourceType);
-        }
-
         /// <summary> Initializes a new instance of AzureResourceFlattenModel5. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
@@ -100,27 +89,6 @@ namespace ExactMatchFlattenInheritance.Models
         public static CustomModel2Data CustomModel2Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string foo = null)
         {
             return new CustomModel2Data(id, name, resourceType, systemData, foo);
-        }
-
-        /// <summary> Initializes a new instance of CustomModel3Data. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="resourceType"></param>
-        /// <param name="foo"></param>
-        /// <returns> A new <see cref="ExactMatchFlattenInheritance.CustomModel3Data"/> instance for mocking. </returns>
-        public static CustomModel3Data CustomModel3Data(string id = null, string name = null, string resourceType = null, string foo = null)
-        {
-            return new CustomModel3Data(id, name, resourceType, foo);
-        }
-
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel7. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="resourceType"></param>
-        /// <returns> A new <see cref="Models.AzureResourceFlattenModel7"/> instance for mocking. </returns>
-        public static AzureResourceFlattenModel7 AzureResourceFlattenModel7(string id = null, string name = null, string resourceType = null)
-        {
-            return new AzureResourceFlattenModel7(id, name, resourceType);
         }
     }
 }

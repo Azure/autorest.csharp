@@ -44,14 +44,6 @@ namespace Azure.Network.Management.Interface.Models
             return new NetworkInterface(id, name, type, location, tags, etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations?.ToList(), tapConfigurations?.ToList(), dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads?.ToList(), resourceGuid, provisioningState);
         }
 
-        /// <summary> Initializes a new instance of SubResource. </summary>
-        /// <param name="id"> Resource ID. </param>
-        /// <returns> A new <see cref="Models.SubResource"/> instance for mocking. </returns>
-        public static SubResource SubResource(string id = null)
-        {
-            return new SubResource(id);
-        }
-
         /// <summary> Initializes a new instance of NetworkSecurityGroup. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
@@ -303,16 +295,6 @@ namespace Azure.Network.Management.Interface.Models
             return new PrivateLinkServiceConnection(id, name, type, etag, provisioningState, privateLinkServiceId, groupIds?.ToList(), requestMessage, privateLinkServiceConnectionState);
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnectionState. </summary>
-        /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
-        /// <param name="description"> The reason for approval/rejection of the connection. </param>
-        /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
-        /// <returns> A new <see cref="Models.PrivateLinkServiceConnectionState"/> instance for mocking. </returns>
-        public static PrivateLinkServiceConnectionState PrivateLinkServiceConnectionState(string status = null, string description = null, string actionsRequired = null)
-        {
-            return new PrivateLinkServiceConnectionState(status, description, actionsRequired);
-        }
-
         /// <summary> Initializes a new instance of IPConfiguration. </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
@@ -356,43 +338,6 @@ namespace Azure.Network.Management.Interface.Models
             ipTags ??= new List<IpTag>();
 
             return new PublicIPAddress(id, name, type, location, tags, sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTags?.ToList(), ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState);
-        }
-
-        /// <summary> Initializes a new instance of PublicIPAddressSku. </summary>
-        /// <param name="name"> Name of a public IP address SKU. </param>
-        /// <returns> A new <see cref="Models.PublicIPAddressSku"/> instance for mocking. </returns>
-        public static PublicIPAddressSku PublicIPAddressSku(PublicIPAddressSkuName? name = null)
-        {
-            return new PublicIPAddressSku(name);
-        }
-
-        /// <summary> Initializes a new instance of PublicIPAddressDnsSettings. </summary>
-        /// <param name="domainNameLabel"> The domain name label. The concatenation of the domain name label and the regionalized DNS zone make up the fully qualified domain name associated with the public IP address. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system. </param>
-        /// <param name="fqdn"> The Fully Qualified Domain Name of the A DNS record associated with the public IP. This is the concatenation of the domainNameLabel and the regionalized DNS zone. </param>
-        /// <param name="reverseFqdn"> The reverse FQDN. A user-visible, fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN. </param>
-        /// <returns> A new <see cref="Models.PublicIPAddressDnsSettings"/> instance for mocking. </returns>
-        public static PublicIPAddressDnsSettings PublicIPAddressDnsSettings(string domainNameLabel = null, string fqdn = null, string reverseFqdn = null)
-        {
-            return new PublicIPAddressDnsSettings(domainNameLabel, fqdn, reverseFqdn);
-        }
-
-        /// <summary> Initializes a new instance of DdosSettings. </summary>
-        /// <param name="ddosCustomPolicy"> The DDoS custom policy associated with the public IP. </param>
-        /// <param name="protectionCoverage"> The DDoS protection policy customizability of the public IP. Only standard coverage will have the ability to be customized. </param>
-        /// <param name="protectedIP"> Enables DDoS protection on the public IP. </param>
-        /// <returns> A new <see cref="Models.DdosSettings"/> instance for mocking. </returns>
-        public static DdosSettings DdosSettings(SubResource ddosCustomPolicy = null, DdosSettingsProtectionCoverage? protectionCoverage = null, bool? protectedIP = null)
-        {
-            return new DdosSettings(ddosCustomPolicy, protectionCoverage, protectedIP);
-        }
-
-        /// <summary> Initializes a new instance of IpTag. </summary>
-        /// <param name="ipTagType"> The IP tag type. Example: FirstPartyUsage. </param>
-        /// <param name="tag"> The value of the IP tag associated with the public IP. Example: SQL. </param>
-        /// <returns> A new <see cref="Models.IpTag"/> instance for mocking. </returns>
-        public static IpTag IpTag(string ipTagType = null, string tag = null)
-        {
-            return new IpTag(ipTagType, tag);
         }
 
         /// <summary> Initializes a new instance of IPConfigurationProfile. </summary>
@@ -563,15 +508,6 @@ namespace Azure.Network.Management.Interface.Models
             backendAddresses ??= new List<ApplicationGatewayBackendAddress>();
 
             return new ApplicationGatewayBackendAddressPool(id, name, etag, type, backendIPConfigurations?.ToList(), backendAddresses?.ToList(), provisioningState);
-        }
-
-        /// <summary> Initializes a new instance of ApplicationGatewayBackendAddress. </summary>
-        /// <param name="fqdn"> Fully qualified domain name (FQDN). </param>
-        /// <param name="ipAddress"> IP address. </param>
-        /// <returns> A new <see cref="Models.ApplicationGatewayBackendAddress"/> instance for mocking. </returns>
-        public static ApplicationGatewayBackendAddress ApplicationGatewayBackendAddress(string fqdn = null, string ipAddress = null)
-        {
-            return new ApplicationGatewayBackendAddress(fqdn, ipAddress);
         }
 
         /// <summary> Initializes a new instance of BackendAddressPool. </summary>
@@ -761,14 +697,6 @@ namespace Azure.Network.Management.Interface.Models
             outboundRules ??= new List<OutboundRule>();
 
             return new LoadBalancer(id, name, type, location, tags, sku, etag, frontendIPConfigurations?.ToList(), backendAddressPools?.ToList(), loadBalancingRules?.ToList(), probes?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), resourceGuid, provisioningState);
-        }
-
-        /// <summary> Initializes a new instance of LoadBalancerSku. </summary>
-        /// <param name="name"> Name of a load balancer SKU. </param>
-        /// <returns> A new <see cref="Models.LoadBalancerSku"/> instance for mocking. </returns>
-        public static LoadBalancerSku LoadBalancerSku(LoadBalancerSkuName? name = null)
-        {
-            return new LoadBalancerSku(name);
         }
 
         /// <summary> Initializes a new instance of LoadBalancingRule. </summary>

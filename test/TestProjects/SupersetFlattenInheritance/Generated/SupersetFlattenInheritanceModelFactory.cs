@@ -17,26 +17,6 @@ namespace SupersetFlattenInheritance.Models
     public static partial class SupersetFlattenInheritanceModelFactory
     {
 
-        /// <summary> Initializes a new instance of CustomModel1. </summary>
-        /// <param name="id"></param>
-        /// <param name="foo"></param>
-        /// <returns> A new <see cref="Models.CustomModel1"/> instance for mocking. </returns>
-        public static CustomModel1 CustomModel1(string id = null, string foo = null)
-        {
-            return new CustomModel1(id, foo);
-        }
-
-        /// <summary> Initializes a new instance of CustomModel2. </summary>
-        /// <param name="id"></param>
-        /// <param name="bar"></param>
-        /// <param name="idPropertiesId"></param>
-        /// <param name="foo"></param>
-        /// <returns> A new <see cref="Models.CustomModel2"/> instance for mocking. </returns>
-        public static CustomModel2 CustomModel2(string id = null, string bar = null, string idPropertiesId = null, string foo = null)
-        {
-            return new CustomModel2(id, bar, idPropertiesId, foo);
-        }
-
         /// <summary> Initializes a new instance of SubResourceModel1. </summary>
         /// <param name="id"></param>
         /// <param name="foo"></param>
@@ -54,25 +34,6 @@ namespace SupersetFlattenInheritance.Models
         public static SubResourceModel2 SubResourceModel2(string id = null, string idPropertiesId = null, string foo = null)
         {
             return new SubResourceModel2(id, idPropertiesId, foo);
-        }
-
-        /// <summary> Initializes a new instance of WritableSubResourceModel1. </summary>
-        /// <param name="id"></param>
-        /// <param name="foo"></param>
-        /// <returns> A new <see cref="Models.WritableSubResourceModel1"/> instance for mocking. </returns>
-        public static WritableSubResourceModel1 WritableSubResourceModel1(string id = null, string foo = null)
-        {
-            return new WritableSubResourceModel1(id, foo);
-        }
-
-        /// <summary> Initializes a new instance of WritableSubResourceModel2. </summary>
-        /// <param name="id"></param>
-        /// <param name="idPropertiesId"></param>
-        /// <param name="foo"></param>
-        /// <returns> A new <see cref="Models.WritableSubResourceModel2"/> instance for mocking. </returns>
-        public static WritableSubResourceModel2 WritableSubResourceModel2(string id = null, string idPropertiesId = null, string foo = null)
-        {
-            return new WritableSubResourceModel2(id, idPropertiesId, foo);
         }
 
         /// <summary> Initializes a new instance of ResourceModel1Data. </summary>
@@ -131,16 +92,6 @@ namespace SupersetFlattenInheritance.Models
             tags ??= new Dictionary<string, string>();
 
             return new TrackedResourceModel2(id, name, resourceType, systemData, tags, location, foo, bar, fooPropertiesFoo);
-        }
-
-        /// <summary> Initializes a new instance of NonResourceModel1. </summary>
-        /// <param name="bar"></param>
-        /// <param name="id"></param>
-        /// <param name="foo"></param>
-        /// <returns> A new <see cref="Models.NonResourceModel1"/> instance for mocking. </returns>
-        public static NonResourceModel1 NonResourceModel1(string bar = null, string id = null, string foo = null)
-        {
-            return new NonResourceModel1(bar, id, foo);
         }
     }
 }

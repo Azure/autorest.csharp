@@ -42,15 +42,6 @@ namespace lro.Models
             return new Resource(id, type, tags, location, name);
         }
 
-        /// <summary> Initializes a new instance of Sku. </summary>
-        /// <param name="name"></param>
-        /// <param name="id"></param>
-        /// <returns> A new <see cref="Models.Sku"/> instance for mocking. </returns>
-        public static Sku Sku(string name = null, string id = null)
-        {
-            return new Sku(name, id);
-        }
-
         /// <summary> Initializes a new instance of SubProduct. </summary>
         /// <param name="id"> Sub Resource Id. </param>
         /// <param name="provisioningState"></param>

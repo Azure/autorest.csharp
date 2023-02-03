@@ -40,14 +40,6 @@ namespace MgmtSafeFlatten.Models
             return new TypeOneData(id, name, resourceType, systemData, tags, location, myType, layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)) : null, layerOneType, layerOneConflictId != null ? ResourceManagerModelFactory.WritableSubResource(layerOneConflictId) : null);
         }
 
-        /// <summary> Initializes a new instance of LayerOneBaseType. </summary>
-        /// <param name="name"></param>
-        /// <returns> A new <see cref="Models.LayerOneBaseType"/> instance for mocking. </returns>
-        public static LayerOneBaseType LayerOneBaseType(string name = "Unknown")
-        {
-            return new UnknownLayerOneBaseType(name);
-        }
-
         /// <summary> Initializes a new instance of TypeTwoData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
@@ -63,22 +55,6 @@ namespace MgmtSafeFlatten.Models
             tags ??= new Dictionary<string, string>();
 
             return new TypeTwoData(id, name, resourceType, systemData, tags, location, myType, layerTwoMyProp != null ? new LayerOneSingle(new LayerTwoSingle(layerTwoMyProp)) : null);
-        }
-
-        /// <summary> Initializes a new instance of LayerOneFooType. </summary>
-        /// <param name="parameters"> Defines the parameters for the type. </param>
-        /// <returns> A new <see cref="Models.LayerOneFooType"/> instance for mocking. </returns>
-        public static LayerOneFooType LayerOneFooType(string parameters = null)
-        {
-            return new LayerOneFooType(LayerOneTypeName.LayerOneFoo, parameters);
-        }
-
-        /// <summary> Initializes a new instance of LayerOneBarType. </summary>
-        /// <param name="parameters"> Defines the parameters for the type. </param>
-        /// <returns> A new <see cref="Models.LayerOneBarType"/> instance for mocking. </returns>
-        public static LayerOneBarType LayerOneBarType(string parameters = null)
-        {
-            return new LayerOneBarType(LayerOneTypeName.LayerOneBar, parameters);
         }
     }
 }

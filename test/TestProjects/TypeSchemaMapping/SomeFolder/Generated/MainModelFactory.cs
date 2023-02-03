@@ -14,14 +14,6 @@ namespace TypeSchemaMapping.Models
     internal static partial class MainModelFactory
     {
 
-        /// <summary> Initializes a new instance of AbstractModel. </summary>
-        /// <param name="discriminatorProperty"></param>
-        /// <returns> A new <see cref="Models.AbstractModel"/> instance for mocking. </returns>
-        public static AbstractModel AbstractModel(string discriminatorProperty = null)
-        {
-            return new UnknownAbstractModel(discriminatorProperty);
-        }
-
         /// <summary> Initializes a new instance of PublicModelWithInternalProperty. </summary>
         /// <param name="stringPropertyJson"></param>
         /// <param name="publicProperty"></param>
@@ -31,43 +23,12 @@ namespace TypeSchemaMapping.Models
             return new PublicModelWithInternalProperty(stringPropertyJson, publicProperty);
         }
 
-        /// <summary> Initializes a new instance of DerivedFromAbstractModel. </summary>
-        /// <returns> A new <see cref="Models.DerivedFromAbstractModel"/> instance for mocking. </returns>
-        public static DerivedFromAbstractModel DerivedFromAbstractModel()
-        {
-            return new DerivedFromAbstractModel("DerivedFromAbstractModel");
-        }
-
         /// <summary> Initializes a new instance of ModelWithGuidProperty. </summary>
         /// <param name="modelProperty"> . </param>
         /// <returns> A new <see cref="Models.ModelWithGuidProperty"/> instance for mocking. </returns>
         public static ModelWithGuidProperty ModelWithGuidProperty(Guid? modelProperty = null)
         {
             return new ModelWithGuidProperty(modelProperty);
-        }
-
-        /// <summary> Initializes a new instance of ModelWithCustomUsage. </summary>
-        /// <param name="modelProperty"> . </param>
-        /// <returns> A new <see cref="Models.ModelWithCustomUsage"/> instance for mocking. </returns>
-        public static ModelWithCustomUsage ModelWithCustomUsage(string modelProperty = null)
-        {
-            return new ModelWithCustomUsage(modelProperty);
-        }
-
-        /// <summary> Initializes a new instance of ModelWithCustomUsageViaAttribute. </summary>
-        /// <param name="modelProperty"> . </param>
-        /// <returns> A new <see cref="Models.ModelWithCustomUsageViaAttribute"/> instance for mocking. </returns>
-        public static ModelWithCustomUsageViaAttribute ModelWithCustomUsageViaAttribute(string modelProperty = null)
-        {
-            return new ModelWithCustomUsageViaAttribute(modelProperty);
-        }
-
-        /// <summary> Initializes a new instance of ModelWithUriProperty. </summary>
-        /// <param name="uri"> . </param>
-        /// <returns> A new <see cref="Models.ModelWithUriProperty"/> instance for mocking. </returns>
-        public static ModelWithUriProperty ModelWithUriProperty(Uri uri = null)
-        {
-            return new ModelWithUriProperty(uri);
         }
     }
 }

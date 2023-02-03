@@ -5,9 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-
 namespace AppConfiguration.Models
 {
     /// <summary> Model factory for generated models. </summary>
@@ -19,23 +16,6 @@ namespace AppConfiguration.Models
         public static Key Key(string name = null)
         {
             return new Key(name);
-        }
-
-        /// <summary> Initializes a new instance of KeyValue. </summary>
-        /// <param name="key"></param>
-        /// <param name="label"></param>
-        /// <param name="contentType"></param>
-        /// <param name="value"></param>
-        /// <param name="lastModified"></param>
-        /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
-        /// <param name="locked"></param>
-        /// <param name="etag"></param>
-        /// <returns> A new <see cref="Models.KeyValue"/> instance for mocking. </returns>
-        public static KeyValue KeyValue(string key = null, string label = null, string contentType = null, string value = null, DateTimeOffset? lastModified = null, IDictionary<string, string> tags = null, bool? locked = null, string etag = null)
-        {
-            tags ??= new Dictionary<string, string>();
-
-            return new KeyValue(key, label, contentType, value, lastModified, tags, locked, etag);
         }
 
         /// <summary> Initializes a new instance of Label. </summary>

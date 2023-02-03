@@ -439,24 +439,22 @@ namespace Azure.Language.Authoring
         /// <summary> Creates a new deployment or replaces an existing one. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeployProjectAsync(String,String,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> DeployProjectAsync(string projectName, string deploymentName, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeployProjectAsync(String,String,RequestContext)']/*" />
+        public virtual async Task<Response> DeployProjectAsync(string projectName, string deploymentName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("AuthoringClient.DeployProject");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeployProjectRequest(projectName, deploymentName, content, context);
+                using HttpMessage message = CreateDeployProjectRequest(projectName, deploymentName, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -469,24 +467,22 @@ namespace Azure.Language.Authoring
         /// <summary> Creates a new deployment or replaces an existing one. </summary>
         /// <param name="projectName"> The String to use. </param>
         /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeployProject(String,String,RequestContent,RequestContext)']/*" />
-        public virtual Response DeployProject(string projectName, string deploymentName, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeployProject(String,String,RequestContext)']/*" />
+        public virtual Response DeployProject(string projectName, string deploymentName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(content, nameof(content));
 
             using var scope = ClientDiagnostics.CreateScope("AuthoringClient.DeployProject");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateDeployProjectRequest(projectName, deploymentName, content, context);
+                using HttpMessage message = CreateDeployProjectRequest(projectName, deploymentName, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -841,26 +837,32 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary> Lists the existing projects. </summary>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjectsAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetProjectsAsync(RequestContext context = null)
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjectsAsync(Int32,Int32,Int32,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetProjectsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetProjectsRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetProjectsNextPageRequest(nextLink, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetProjectsRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetProjectsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetProjects", "value", "nextLink", context);
         }
 
         /// <summary> Lists the existing projects. </summary>
+        /// <param name="maxCount"> The Int32 to use. </param>
+        /// <param name="skip"> The Int32 to use. </param>
+        /// <param name="maxpagesize"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjects(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetProjects(RequestContext context = null)
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjects(Int32,Int32,Int32,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetProjects(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetProjectsRequest(context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetProjectsNextPageRequest(nextLink, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetProjectsRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetProjectsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringClient.GetProjects", "value", "nextLink", context);
         }
 
@@ -1004,7 +1006,7 @@ namespace Azure.Language.Authoring
             return message;
         }
 
-        internal HttpMessage CreateGetProjectsRequest(RequestContext context)
+        internal HttpMessage CreateGetProjectsRequest(int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1013,6 +1015,18 @@ namespace Azure.Language.Authoring
             uri.Reset(_endpoint);
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects", false);
+            if (maxCount != null)
+            {
+                uri.AppendQuery("top", maxCount.Value, true);
+            }
+            if (skip != null)
+            {
+                uri.AppendQuery("skip", skip.Value, true);
+            }
+            if (maxpagesize != null)
+            {
+                uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -1091,7 +1105,7 @@ namespace Azure.Language.Authoring
             return message;
         }
 
-        internal HttpMessage CreateDeployProjectRequest(string projectName, string deploymentName, RequestContent content, RequestContext context)
+        internal HttpMessage CreateDeployProjectRequest(string projectName, string deploymentName, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200201);
             var request = message.Request;
@@ -1106,8 +1120,6 @@ namespace Azure.Language.Authoring
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            request.Content = content;
             return message;
         }
 
@@ -1259,7 +1271,7 @@ namespace Azure.Language.Authoring
             return message;
         }
 
-        internal HttpMessage CreateGetProjectsNextPageRequest(string nextLink, RequestContext context)
+        internal HttpMessage CreateGetProjectsNextPageRequest(string nextLink, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;

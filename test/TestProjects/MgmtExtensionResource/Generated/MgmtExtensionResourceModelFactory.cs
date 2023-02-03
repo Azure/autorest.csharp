@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtExtensionResource;
@@ -55,33 +54,6 @@ namespace MgmtExtensionResource.Models
             parameters ??= new Dictionary<string, ParameterDefinitionsValue>();
 
             return new PolicyDefinitionData(id, name, resourceType, systemData, policyType, mode, displayName, description, policyRule, metadata, parameters);
-        }
-
-        /// <summary> Initializes a new instance of ParameterDefinitionsValue. </summary>
-        /// <param name="parameterType"> The data type of the parameter. </param>
-        /// <param name="allowedValues"> The allowed values for the parameter. </param>
-        /// <param name="defaultValue"> The default value for the parameter if no value is provided. </param>
-        /// <param name="metadata"> General metadata for the parameter. </param>
-        /// <returns> A new <see cref="Models.ParameterDefinitionsValue"/> instance for mocking. </returns>
-        public static ParameterDefinitionsValue ParameterDefinitionsValue(ParameterType? parameterType = null, IEnumerable<BinaryData> allowedValues = null, BinaryData defaultValue = null, ParameterDefinitionsValueMetadata metadata = null)
-        {
-            allowedValues ??= new List<BinaryData>();
-
-            return new ParameterDefinitionsValue(parameterType, allowedValues?.ToList(), defaultValue, metadata);
-        }
-
-        /// <summary> Initializes a new instance of ParameterDefinitionsValueMetadata. </summary>
-        /// <param name="displayName"> The display name for the parameter. </param>
-        /// <param name="description"> The description of the parameter. </param>
-        /// <param name="strongType"> Used when assigning the policy definition through the portal. Provides a context aware list of values for the user to choose from. </param>
-        /// <param name="assignPermissions"> Set to true to have Azure portal create role assignments on the resource ID or resource scope value of this parameter during policy assignment. This property is useful in case you wish to assign permissions outside the assignment scope. </param>
-        /// <param name="additionalProperties"> Additional Properties. </param>
-        /// <returns> A new <see cref="Models.ParameterDefinitionsValueMetadata"/> instance for mocking. </returns>
-        public static ParameterDefinitionsValueMetadata ParameterDefinitionsValueMetadata(string displayName = null, string description = null, string strongType = null, bool? assignPermissions = null, IDictionary<string, BinaryData> additionalProperties = null)
-        {
-            additionalProperties ??= new Dictionary<string, BinaryData>();
-
-            return new ParameterDefinitionsValueMetadata(displayName, description, strongType, assignPermissions, additionalProperties);
         }
     }
 }

@@ -43,15 +43,5 @@ namespace MgmtSubscriptionNameParameter.Models
         {
             return new SBSubscriptionData(id, name, resourceType, systemData, messageCount, createdOn, accessedOn, updatedOn, lockDuration, requiresSession, defaultMessageTimeToLive, deadLetteringOnFilterEvaluationExceptions, deadLetteringOnMessageExpiration, duplicateDetectionHistoryTimeWindow, maxDeliveryCount, enableBatchedOperations, autoDeleteOnIdle, forwardTo, forwardDeadLetteredMessagesTo, isClientAffine, clientAffineProperties);
         }
-
-        /// <summary> Initializes a new instance of SBClientAffineProperties. </summary>
-        /// <param name="clientId"> Indicates the Client ID of the application that created the client-affine subscription. </param>
-        /// <param name="isDurable"> For client-affine subscriptions, this value indicates whether the subscription is durable or not. </param>
-        /// <param name="isShared"> For client-affine subscriptions, this value indicates whether the subscription is shared or not. </param>
-        /// <returns> A new <see cref="Models.SBClientAffineProperties"/> instance for mocking. </returns>
-        public static SBClientAffineProperties SBClientAffineProperties(string clientId = null, bool? isDurable = null, bool? isShared = null)
-        {
-            return new SBClientAffineProperties(clientId, isDurable, isShared);
-        }
     }
 }

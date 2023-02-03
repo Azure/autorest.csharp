@@ -42,9 +42,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public static ModelFactoryTypeProvider? TryCreate(string defaultLibraryName, string rootNamespaceName, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel, bool onlyIncludesReadOnlyModels = false)
         {
-            Func<SerializableObjectType, bool> predicate = onlyIncludesReadOnlyModels ? RequiresModelFactoryForReadOnly : RequiresModelFactory;
             var objectTypes = models.OfType<SerializableObjectType>()
-                .Where(predicate)
+                .Where(RequiresModelFactory)
                 .ToArray();
 
             if (!objectTypes.Any())
@@ -183,41 +182,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new MethodSignature(ctorSignature.Name, ctorSignature.Summary, ctorSignature.Description, Public | Static, modelType.Type, returnDescription, methodParameters);
         }
 
-        /// <summary>
-        /// This is the old logic of determining whether a model needs a corresponding model factory entry.
-        /// </summary>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        private static bool RequiresModelFactoryForReadOnly(SerializableObjectType model)
-        {
-            if (model.Declaration.Accessibility != "public" || !model.IncludeDeserializer || model.Declaration.IsAbstract)
-            {
-                return false;
-            }
-
-            if (model.Properties.Any(p => p.Declaration.Accessibility != "public" && p.SchemaProperty?.IsDiscriminator != true))
-            {
-                return false;
-            }
-
-            var readOnlyProperties = model.Properties
-                .Where(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType))
-                .ToList();
-
-            if (!readOnlyProperties.Any())
-            {
-                return false;
-            }
-            if (model.SerializationConstructor.Signature.Parameters.Any(p => !p.Type.IsPublic))
-            {
-                return false;
-            }
-
-            return model.Constructors
-                .Where(c => c.Signature.Modifiers.HasFlag(Public))
-                .All(c => readOnlyProperties.Any(property => c.FindParameterByInitializedProperty(property) == default));
-        }
-
         private static bool RequiresModelFactory(SerializableObjectType model)
         {
             if (model.Declaration.Accessibility != "public" || !model.IncludeDeserializer)
@@ -232,7 +196,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties);
 
-            if (!properties.Any())
+            if (!properties.Any(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
             {
                 return false;
             }

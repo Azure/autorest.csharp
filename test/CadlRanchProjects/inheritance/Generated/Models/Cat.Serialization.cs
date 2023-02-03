@@ -11,13 +11,11 @@ using Azure.Core;
 
 namespace Models.Inheritance.Models
 {
-    public partial class Siamese : IUtf8JsonSerializable
+    public partial class Cat : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("smart");
-            writer.WriteBooleanValue(Smart);
             writer.WritePropertyName("age");
             writer.WriteNumberValue(Age);
             writer.WritePropertyName("name");
@@ -25,18 +23,12 @@ namespace Models.Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static Siamese DeserializeSiamese(JsonElement element)
+        internal static Cat DeserializeCat(JsonElement element)
         {
-            bool smart = default;
             int age = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("smart"))
-                {
-                    smart = property.Value.GetBoolean();
-                    continue;
-                }
                 if (property.NameEquals("age"))
                 {
                     age = property.Value.GetInt32();
@@ -48,15 +40,15 @@ namespace Models.Inheritance.Models
                     continue;
                 }
             }
-            return new Siamese(name, age, smart);
+            return new Cat(name, age);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static Siamese FromResponse(Response response)
+        internal new static Cat FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSiamese(document.RootElement);
+            return DeserializeCat(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

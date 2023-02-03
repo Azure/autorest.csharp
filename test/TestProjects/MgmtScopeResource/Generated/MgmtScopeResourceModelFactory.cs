@@ -43,23 +43,6 @@ namespace MgmtScopeResource.Models
             return new FakePolicyAssignmentData(id, name, resourceType, systemData, location, identity, displayName, policyDefinitionId, scope, notScopes?.ToList(), parameters, description, metadata, enforcementMode, nonComplianceMessages?.ToList());
         }
 
-        /// <summary> Initializes a new instance of ParameterValuesValue. </summary>
-        /// <param name="value"> The value of the parameter. </param>
-        /// <returns> A new <see cref="Models.ParameterValuesValue"/> instance for mocking. </returns>
-        public static ParameterValuesValue ParameterValuesValue(BinaryData value = null)
-        {
-            return new ParameterValuesValue(value);
-        }
-
-        /// <summary> Initializes a new instance of NonComplianceMessage. </summary>
-        /// <param name="message"> A message that describes why a resource is non-compliant with the policy. This is shown in &apos;deny&apos; error messages and on resource&apos;s non-compliant compliance results. </param>
-        /// <param name="policyDefinitionReferenceId"> The policy definition reference ID within a policy set definition the message is intended for. This is only applicable if the policy assignment assigns a policy set definition. If this is not provided the message applies to all policies assigned by this policy assignment. </param>
-        /// <returns> A new <see cref="Models.NonComplianceMessage"/> instance for mocking. </returns>
-        public static NonComplianceMessage NonComplianceMessage(string message = null, string policyDefinitionReferenceId = null)
-        {
-            return new NonComplianceMessage(message, policyDefinitionReferenceId);
-        }
-
         /// <summary> Initializes a new instance of DeploymentExtendedData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
@@ -28,32 +27,6 @@ namespace MgmtDiscriminator.Models
         public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, DeliveryRuleProperties properties = null)
         {
             return new DeliveryRuleData(id, name, resourceType, systemData, properties);
-        }
-
-        /// <summary> Initializes a new instance of DeliveryRuleProperties. </summary>
-        /// <param name="order"> The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied. </param>
-        /// <param name="conditions">
-        /// The condition that must be matched for the actions to be executed
-        /// Please note <see cref="DeliveryRuleCondition"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="DeliveryRuleQueryStringCondition"/>, <see cref="DeliveryRuleRemoteAddressCondition"/> and <see cref="DeliveryRuleRequestMethodCondition"/>.
-        /// </param>
-        /// <param name="actions">
-        /// A list of actions that are executed when all the conditions of a rule are satisfied.
-        /// Please note <see cref="DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="UrlRedirectAction"/>, <see cref="UrlRewriteAction"/> and <see cref="UrlSigningAction"/>.
-        /// </param>
-        /// <param name="extraMappingInfo">
-        /// A dictionary of mapping details about the actions that are executed when all the conditions of a rule are satisfied.
-        /// Please note <see cref="DeliveryRuleAction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="DeliveryRuleCacheExpirationAction"/>, <see cref="DeliveryRuleCacheKeyQueryStringAction"/>, <see cref="DeliveryRuleRequestHeaderAction"/>, <see cref="DeliveryRuleResponseHeaderAction"/>, <see cref="OriginGroupOverrideAction"/>, <see cref="DeliveryRuleRouteConfigurationOverrideAction"/>, <see cref="UrlRedirectAction"/>, <see cref="UrlRewriteAction"/> and <see cref="UrlSigningAction"/>.
-        /// </param>
-        /// <returns> A new <see cref="Models.DeliveryRuleProperties"/> instance for mocking. </returns>
-        public static DeliveryRuleProperties DeliveryRuleProperties(int? order = null, DeliveryRuleCondition conditions = null, IEnumerable<DeliveryRuleAction> actions = null, IDictionary<string, DeliveryRuleAction> extraMappingInfo = null)
-        {
-            actions ??= new List<DeliveryRuleAction>();
-            extraMappingInfo ??= new Dictionary<string, DeliveryRuleAction>();
-
-            return new DeliveryRuleProperties(order, conditions, actions?.ToList(), extraMappingInfo);
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleCondition. </summary>
@@ -83,21 +56,6 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleRemoteAddressCondition(MatchVariable.RemoteAddress, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of RemoteAddressMatchConditionParameters. </summary>
-        /// <param name="typeName"></param>
-        /// <param name="operator"> Describes operator to be matched. </param>
-        /// <param name="negateCondition"> Describes if this is negate condition or not. </param>
-        /// <param name="matchValues"> Match values to match against. The operator will apply to each value in here with OR semantics. If any of them match the variable with the given operator this match condition is considered a match. </param>
-        /// <param name="transforms"> List of transforms. </param>
-        /// <returns> A new <see cref="Models.RemoteAddressMatchConditionParameters"/> instance for mocking. </returns>
-        public static RemoteAddressMatchConditionParameters RemoteAddressMatchConditionParameters(RemoteAddressMatchConditionParametersTypeName typeName = default, RemoteAddressOperator @operator = default, bool? negateCondition = null, IEnumerable<string> matchValues = null, IEnumerable<Transform> transforms = null)
-        {
-            matchValues ??= new List<string>();
-            transforms ??= new List<Transform>();
-
-            return new RemoteAddressMatchConditionParameters(typeName, @operator, negateCondition, matchValues?.ToList(), transforms?.ToList());
-        }
-
         /// <summary> Initializes a new instance of DeliveryRuleRequestMethodCondition. </summary>
         /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
@@ -105,21 +63,6 @@ namespace MgmtDiscriminator.Models
         public static DeliveryRuleRequestMethodCondition DeliveryRuleRequestMethodCondition(string foo = null, RequestMethodMatchConditionParameters parameters = null)
         {
             return new DeliveryRuleRequestMethodCondition(MatchVariable.RequestMethod, foo, parameters);
-        }
-
-        /// <summary> Initializes a new instance of RequestMethodMatchConditionParameters. </summary>
-        /// <param name="typeName"></param>
-        /// <param name="operator"> Describes operator to be matched. </param>
-        /// <param name="negateCondition"> Describes if this is negate condition or not. </param>
-        /// <param name="transforms"> List of transforms. </param>
-        /// <param name="matchValues"> The match value for the condition of the delivery rule. </param>
-        /// <returns> A new <see cref="Models.RequestMethodMatchConditionParameters"/> instance for mocking. </returns>
-        public static RequestMethodMatchConditionParameters RequestMethodMatchConditionParameters(RequestMethodMatchConditionParametersTypeName typeName = default, RequestMethodOperator @operator = default, bool? negateCondition = null, IEnumerable<Transform> transforms = null, IEnumerable<RequestMethodMatchConditionParametersMatchValuesItem> matchValues = null)
-        {
-            transforms ??= new List<Transform>();
-            matchValues ??= new List<RequestMethodMatchConditionParametersMatchValuesItem>();
-
-            return new RequestMethodMatchConditionParameters(typeName, @operator, negateCondition, transforms?.ToList(), matchValues?.ToList());
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleQueryStringCondition. </summary>
@@ -131,21 +74,6 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of QueryStringMatchConditionParameters. </summary>
-        /// <param name="typeName"></param>
-        /// <param name="operator"> Describes operator to be matched. </param>
-        /// <param name="negateCondition"> Describes if this is negate condition or not. </param>
-        /// <param name="matchValues"> The match value for the condition of the delivery rule. </param>
-        /// <param name="transforms"> List of transforms. </param>
-        /// <returns> A new <see cref="Models.QueryStringMatchConditionParameters"/> instance for mocking. </returns>
-        public static QueryStringMatchConditionParameters QueryStringMatchConditionParameters(QueryStringMatchConditionParametersTypeName typeName = default, QueryStringOperator @operator = default, bool? negateCondition = null, IEnumerable<string> matchValues = null, IEnumerable<Transform> transforms = null)
-        {
-            matchValues ??= new List<string>();
-            transforms ??= new List<Transform>();
-
-            return new QueryStringMatchConditionParameters(typeName, @operator, negateCondition, matchValues?.ToList(), transforms?.ToList());
-        }
-
         /// <summary> Initializes a new instance of UrlRedirectAction. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
@@ -155,20 +83,6 @@ namespace MgmtDiscriminator.Models
             return new UrlRedirectAction(DeliveryRuleActionType.UrlRedirect, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of UrlRedirectActionParameters. </summary>
-        /// <param name="typeName"></param>
-        /// <param name="redirectType"> The redirect type the rule will use when redirecting traffic. </param>
-        /// <param name="destinationProtocol"> Protocol to use for the redirect. The default value is MatchRequest. </param>
-        /// <param name="customPath"> The full path to redirect. Path cannot be empty and must start with /. Leave empty to use the incoming path as destination path. </param>
-        /// <param name="customHostname"> Host to redirect. Leave empty to use the incoming host as the destination host. </param>
-        /// <param name="customQueryString"> The set of query strings to be placed in the redirect URL. Setting this value would replace any existing query string; leave empty to preserve the incoming query string. Query string must be in &lt;key&gt;=&lt;value&gt; format. ? and &amp; will be added automatically so do not include them. </param>
-        /// <param name="customFragment"> Fragment to add to the redirect URL. Fragment is the part of the URL that comes after #. Do not include the #. </param>
-        /// <returns> A new <see cref="Models.UrlRedirectActionParameters"/> instance for mocking. </returns>
-        public static UrlRedirectActionParameters UrlRedirectActionParameters(UrlRedirectActionParametersTypeName typeName = default, RedirectType redirectType = default, DestinationProtocol? destinationProtocol = null, string customPath = null, string customHostname = null, string customQueryString = null, string customFragment = null)
-        {
-            return new UrlRedirectActionParameters(typeName, redirectType, destinationProtocol, customPath, customHostname, customQueryString, customFragment);
-        }
-
         /// <summary> Initializes a new instance of UrlSigningAction. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
@@ -176,18 +90,6 @@ namespace MgmtDiscriminator.Models
         public static UrlSigningAction UrlSigningAction(string foo = null, UrlSigningActionParameters parameters = null)
         {
             return new UrlSigningAction(DeliveryRuleActionType.UrlSigning, foo, parameters);
-        }
-
-        /// <summary> Initializes a new instance of UrlSigningActionParameters. </summary>
-        /// <param name="typeName"></param>
-        /// <param name="algorithm"> Algorithm to use for URL signing. </param>
-        /// <param name="parameterNameOverride"> Defines which query string parameters in the url to be considered for expires, key id etc. </param>
-        /// <returns> A new <see cref="Models.UrlSigningActionParameters"/> instance for mocking. </returns>
-        public static UrlSigningActionParameters UrlSigningActionParameters(UrlSigningActionParametersTypeName typeName = default, Algorithm? algorithm = null, IEnumerable<UrlSigningParamIdentifier> parameterNameOverride = null)
-        {
-            parameterNameOverride ??= new List<UrlSigningParamIdentifier>();
-
-            return new UrlSigningActionParameters(typeName, algorithm, parameterNameOverride?.ToList());
         }
 
         /// <summary> Initializes a new instance of OriginGroupOverrideAction. </summary>
@@ -208,17 +110,6 @@ namespace MgmtDiscriminator.Models
             return new UrlRewriteAction(DeliveryRuleActionType.UrlRewrite, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of UrlRewriteActionParameters. </summary>
-        /// <param name="typeName"></param>
-        /// <param name="sourcePattern"> define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched. </param>
-        /// <param name="destination"> Define the relative URL to which the above requests will be rewritten by. </param>
-        /// <param name="preserveUnmatchedPath"> Whether to preserve unmatched path. Default value is true. </param>
-        /// <returns> A new <see cref="Models.UrlRewriteActionParameters"/> instance for mocking. </returns>
-        public static UrlRewriteActionParameters UrlRewriteActionParameters(UrlRewriteActionParametersTypeName typeName = default, string sourcePattern = null, string destination = null, bool? preserveUnmatchedPath = null)
-        {
-            return new UrlRewriteActionParameters(typeName, sourcePattern, destination, preserveUnmatchedPath);
-        }
-
         /// <summary> Initializes a new instance of DeliveryRuleRequestHeaderAction. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
@@ -226,17 +117,6 @@ namespace MgmtDiscriminator.Models
         public static DeliveryRuleRequestHeaderAction DeliveryRuleRequestHeaderAction(string foo = null, HeaderActionParameters parameters = null)
         {
             return new DeliveryRuleRequestHeaderAction(DeliveryRuleActionType.ModifyRequestHeader, foo, parameters);
-        }
-
-        /// <summary> Initializes a new instance of HeaderActionParameters. </summary>
-        /// <param name="typeName"></param>
-        /// <param name="headerAction"> Action to perform. </param>
-        /// <param name="headerName"> Name of the header to modify. </param>
-        /// <param name="value"> Value for the specified action. </param>
-        /// <returns> A new <see cref="Models.HeaderActionParameters"/> instance for mocking. </returns>
-        public static HeaderActionParameters HeaderActionParameters(HeaderActionParametersTypeName typeName = default, HeaderAction headerAction = default, string headerName = null, string value = null)
-        {
-            return new HeaderActionParameters(typeName, headerAction, headerName, value);
         }
 
         /// <summary> Initializes a new instance of DeliveryRuleResponseHeaderAction. </summary>
@@ -257,17 +137,6 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleCacheExpirationAction(DeliveryRuleActionType.CacheExpiration, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of CacheExpirationActionParameters. </summary>
-        /// <param name="typeName"></param>
-        /// <param name="cacheBehavior"> Caching behavior for the requests. </param>
-        /// <param name="cacheType"> The level at which the content needs to be cached. </param>
-        /// <param name="cacheDuration"> The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss. </param>
-        /// <returns> A new <see cref="Models.CacheExpirationActionParameters"/> instance for mocking. </returns>
-        public static CacheExpirationActionParameters CacheExpirationActionParameters(CacheExpirationActionParametersTypeName typeName = default, CacheBehavior cacheBehavior = default, CacheType cacheType = default, TimeSpan? cacheDuration = null)
-        {
-            return new CacheExpirationActionParameters(typeName, cacheBehavior, cacheType, cacheDuration);
-        }
-
         /// <summary> Initializes a new instance of DeliveryRuleCacheKeyQueryStringAction. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
@@ -277,16 +146,6 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleCacheKeyQueryStringAction(DeliveryRuleActionType.CacheKeyQueryString, foo, parameters);
         }
 
-        /// <summary> Initializes a new instance of CacheKeyQueryStringActionParameters. </summary>
-        /// <param name="typeName"></param>
-        /// <param name="queryStringBehavior"> Caching behavior for the requests. </param>
-        /// <param name="queryParameters"> query parameters to include or exclude (comma separated). </param>
-        /// <returns> A new <see cref="Models.CacheKeyQueryStringActionParameters"/> instance for mocking. </returns>
-        public static CacheKeyQueryStringActionParameters CacheKeyQueryStringActionParameters(CacheKeyQueryStringActionParametersTypeName typeName = default, QueryStringBehavior queryStringBehavior = default, string queryParameters = null)
-        {
-            return new CacheKeyQueryStringActionParameters(typeName, queryStringBehavior, queryParameters);
-        }
-
         /// <summary> Initializes a new instance of DeliveryRuleRouteConfigurationOverrideAction. </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
@@ -294,24 +153,6 @@ namespace MgmtDiscriminator.Models
         public static DeliveryRuleRouteConfigurationOverrideAction DeliveryRuleRouteConfigurationOverrideAction(string foo = null, RouteConfigurationOverrideActionParameters parameters = null)
         {
             return new DeliveryRuleRouteConfigurationOverrideAction(DeliveryRuleActionType.RouteConfigurationOverride, foo, parameters);
-        }
-
-        /// <summary> Initializes a new instance of RouteConfigurationOverrideActionParameters. </summary>
-        /// <param name="typeName"></param>
-        /// <param name="originGroupOverride"> A reference to the origin group override configuration. Leave empty to use the default origin group on route. </param>
-        /// <returns> A new <see cref="Models.RouteConfigurationOverrideActionParameters"/> instance for mocking. </returns>
-        public static RouteConfigurationOverrideActionParameters RouteConfigurationOverrideActionParameters(RouteConfigurationOverrideActionParametersTypeName typeName = default, OriginGroupOverride originGroupOverride = null)
-        {
-            return new RouteConfigurationOverrideActionParameters(typeName, originGroupOverride);
-        }
-
-        /// <summary> Initializes a new instance of OriginGroupOverride. </summary>
-        /// <param name="originGroupId"> defines the OriginGroup that would override the DefaultOriginGroup on route. </param>
-        /// <param name="forwardingProtocol"> Protocol this rule will use when forwarding traffic to backends. </param>
-        /// <returns> A new <see cref="Models.OriginGroupOverride"/> instance for mocking. </returns>
-        public static OriginGroupOverride OriginGroupOverride(ResourceIdentifier originGroupId = null, ForwardingProtocol? forwardingProtocol = null)
-        {
-            return new OriginGroupOverride(originGroupId != null ? ResourceManagerModelFactory.WritableSubResource(originGroupId) : null, forwardingProtocol);
         }
     }
 }

@@ -11,56 +11,40 @@ using Azure.Core;
 
 namespace Models.Inheritance.Models
 {
-    public partial class Siamese : IUtf8JsonSerializable
+    public partial class Pet : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("smart");
-            writer.WriteBooleanValue(Smart);
-            writer.WritePropertyName("age");
-            writer.WriteNumberValue(Age);
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
 
-        internal static Siamese DeserializeSiamese(JsonElement element)
+        internal static Pet DeserializePet(JsonElement element)
         {
-            bool smart = default;
-            int age = default;
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("smart"))
-                {
-                    smart = property.Value.GetBoolean();
-                    continue;
-                }
-                if (property.NameEquals("age"))
-                {
-                    age = property.Value.GetInt32();
-                    continue;
-                }
                 if (property.NameEquals("name"))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
             }
-            return new Siamese(name, age, smart);
+            return new Pet(name);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static Siamese FromResponse(Response response)
+        internal static Pet FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSiamese(document.RootElement);
+            return DeserializePet(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

@@ -10,24 +10,6 @@ namespace ModelWithConverterUsage.Models
     /// <summary> Model factory for generated models. </summary>
     public static partial class ModelWithConverterUsageModelFactory
     {
-        /// <summary> Initializes a new instance of ModelClass. </summary>
-        /// <param name="stringProperty"></param>
-        /// <param name="enumProperty"> More Letters. </param>
-        /// <param name="objProperty"> The product documentation. </param>
-        /// <returns> A new <see cref="Models.ModelClass"/> instance for mocking. </returns>
-        public static ModelClass ModelClass(string stringProperty = null, EnumProperty enumProperty = default, Product objProperty = null)
-        {
-            return new ModelClass(stringProperty, enumProperty, objProperty);
-        }
-
-        /// <summary> Initializes a new instance of Product. </summary>
-        /// <param name="constProperty"> Constant string. </param>
-        /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
-        public static Product Product(string constProperty = null)
-        {
-            return new Product(constProperty);
-        }
-
         /// <summary> Initializes a new instance of OutputModel. </summary>
         /// <param name="outputModelProperty"> Constant string. </param>
         /// <returns> A new <see cref="Models.OutputModel"/> instance for mocking. </returns>

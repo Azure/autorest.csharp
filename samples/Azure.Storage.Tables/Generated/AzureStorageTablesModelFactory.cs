@@ -59,39 +59,6 @@ namespace Azure.Storage.Tables.Models
             return new TableEntityQueryResponse(odataMetadata, value?.ToList());
         }
 
-        /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
-        /// <param name="logging"> Azure Analytics Logging settings. </param>
-        /// <param name="hourMetrics"> A summary of request statistics grouped by API in hourly aggregates for queues. </param>
-        /// <param name="minuteMetrics"> a summary of request statistics grouped by API in minute aggregates for queues. </param>
-        /// <param name="cors"> The set of CORS rules. </param>
-        /// <returns> A new <see cref="Models.StorageServiceProperties"/> instance for mocking. </returns>
-        public static StorageServiceProperties StorageServiceProperties(Logging logging = null, Metrics hourMetrics = null, Metrics minuteMetrics = null, IEnumerable<CorsRule> cors = null)
-        {
-            cors ??= new List<CorsRule>();
-
-            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors?.ToList());
-        }
-
-        /// <summary> Initializes a new instance of RetentionPolicy. </summary>
-        /// <param name="enabled"> Indicates whether a retention policy is enabled for the storage service. </param>
-        /// <param name="days"> Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted. </param>
-        /// <returns> A new <see cref="Models.RetentionPolicy"/> instance for mocking. </returns>
-        public static RetentionPolicy RetentionPolicy(bool enabled = default, int? days = null)
-        {
-            return new RetentionPolicy(enabled, days);
-        }
-
-        /// <summary> Initializes a new instance of Metrics. </summary>
-        /// <param name="version"> The version of Storage Analytics to configure. </param>
-        /// <param name="enabled"> Indicates whether metrics are enabled for the Queue service. </param>
-        /// <param name="includeAPIs"> Indicates whether metrics should generate summary statistics for called API operations. </param>
-        /// <param name="retentionPolicy"> the retention policy. </param>
-        /// <returns> A new <see cref="Models.Metrics"/> instance for mocking. </returns>
-        public static Metrics Metrics(string version = null, bool enabled = default, bool? includeAPIs = null, RetentionPolicy retentionPolicy = null)
-        {
-            return new Metrics(version, enabled, includeAPIs, retentionPolicy);
-        }
-
         /// <summary> Initializes a new instance of StorageServiceStats. </summary>
         /// <param name="geoReplication"> Geo-Replication information for the Secondary Storage Service. </param>
         /// <returns> A new <see cref="Models.StorageServiceStats"/> instance for mocking. </returns>

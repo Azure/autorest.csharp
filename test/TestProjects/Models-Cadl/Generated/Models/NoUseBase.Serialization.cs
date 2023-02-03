@@ -5,65 +5,46 @@
 
 #nullable disable
 
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace ModelsInCadl.Models
 {
-    public partial class RoundTripOnNoUse : IUtf8JsonSerializable
+    public partial class NoUseBase : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredCollection");
-            writer.WriteStartArray();
-            foreach (var item in RequiredCollection)
-            {
-                writer.WriteObjectValue(item);
-            }
-            writer.WriteEndArray();
             writer.WritePropertyName("baseModelProp");
             writer.WriteStringValue(BaseModelProp);
             writer.WriteEndObject();
         }
 
-        internal static RoundTripOnNoUse DeserializeRoundTripOnNoUse(JsonElement element)
+        internal static NoUseBase DeserializeNoUseBase(JsonElement element)
         {
-            IList<CollectionItem> requiredCollection = default;
             string baseModelProp = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredCollection"))
-                {
-                    List<CollectionItem> array = new List<CollectionItem>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(CollectionItem.DeserializeCollectionItem(item));
-                    }
-                    requiredCollection = array;
-                    continue;
-                }
                 if (property.NameEquals("baseModelProp"))
                 {
                     baseModelProp = property.Value.GetString();
                     continue;
                 }
             }
-            return new RoundTripOnNoUse(baseModelProp, requiredCollection);
+            return new NoUseBase(baseModelProp);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static RoundTripOnNoUse FromResponse(Response response)
+        internal static NoUseBase FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripOnNoUse(document.RootElement);
+            return DeserializeNoUseBase(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

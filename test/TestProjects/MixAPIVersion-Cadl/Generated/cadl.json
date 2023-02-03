@@ -194,11 +194,32 @@
       },
       {
        "$id": "25",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Description": "pet name",
+       "Type": {
+        "$id": "26",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "27",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "26",
+        "$id": "28",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -213,36 +234,15 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "27",
+        "$id": "29",
         "Type": {
-         "$id": "28",
+         "$id": "30",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
         },
         "Value": "2022-11-30-preview"
        }
-      },
-      {
-       "$id": "29",
-       "Name": "name",
-       "NameInRequest": "name",
-       "Description": "pet name",
-       "Type": {
-        "$id": "30",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
       },
       {
        "$id": "31",
@@ -348,7 +348,7 @@
        }
       },
       {
-       "$ref": "25"
+       "$ref": "27"
       }
      ],
      "Responses": [
@@ -532,7 +532,7 @@
        "$ref": "23"
       },
       {
-       "$ref": "25"
+       "$ref": "27"
       },
       {
        "$id": "57",

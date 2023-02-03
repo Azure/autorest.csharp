@@ -30,28 +30,6 @@ namespace SupersetInheritance.Models
             return new SupersetModel1Data(id, name, resourceType, systemData, @new);
         }
 
-        /// <summary> Initializes a new instance of SupersetModel2. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="supersetModel2Type"></param>
-        /// <param name="new"></param>
-        /// <returns> A new <see cref="Models.SupersetModel2"/> instance for mocking. </returns>
-        public static SupersetModel2 SupersetModel2(string id = null, string name = null, string supersetModel2Type = null, string @new = null)
-        {
-            return new SupersetModel2(id, name, supersetModel2Type, @new);
-        }
-
-        /// <summary> Initializes a new instance of SupersetModel3. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="supersetModel3Type"></param>
-        /// <param name="new"></param>
-        /// <returns> A new <see cref="Models.SupersetModel3"/> instance for mocking. </returns>
-        public static SupersetModel3 SupersetModel3(int? id = null, string name = null, string supersetModel3Type = null, string @new = null)
-        {
-            return new SupersetModel3(id, name, supersetModel3Type, @new);
-        }
-
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

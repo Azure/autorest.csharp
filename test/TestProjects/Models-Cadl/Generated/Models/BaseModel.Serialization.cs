@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 
 namespace ModelsInCadl.Models
@@ -16,6 +17,22 @@ namespace ModelsInCadl.Models
         {
             writer.WriteStartObject();
             writer.WriteEndObject();
+        }
+
+        internal static BaseModel DeserializeBaseModel(JsonElement element)
+        {
+            foreach (var property in element.EnumerateObject())
+            {
+            }
+            return new BaseModel();
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static BaseModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeBaseModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

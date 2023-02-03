@@ -453,16 +453,6 @@ namespace MgmtListMethods.Models
             return new UpdateWorkspaceQuotas(id, updateWorkspaceQuotasType, limit, unit, status);
         }
 
-        /// <summary> Initializes a new instance of FakeConfigurationListResult. </summary>
-        /// <param name="value"> The list of Fake Configuration. </param>
-        /// <returns> A new <see cref="Models.FakeConfigurationListResult"/> instance for mocking. </returns>
-        public static FakeConfigurationListResult FakeConfigurationListResult(IEnumerable<FakeConfigurationData> value = null)
-        {
-            value ??= new List<FakeConfigurationData>();
-
-            return new FakeConfigurationListResult(value?.ToList());
-        }
-
         /// <summary> Initializes a new instance of FakeConfigurationData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>

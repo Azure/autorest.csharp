@@ -140,7 +140,7 @@
       "Namespace": "ModelsInCadl",
       "Description": "Base model",
       "IsNullable": false,
-      "Usage": "Input",
+      "Usage": "RoundTrip",
       "Properties": []
      },
      "IsRequired": true,
@@ -1560,7 +1560,7 @@
    "Namespace": "ModelsInCadl",
    "Description": "Base model",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "196",

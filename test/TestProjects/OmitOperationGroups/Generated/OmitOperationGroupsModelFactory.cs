@@ -16,24 +16,6 @@ namespace OmitOperationGroups.Models
     /// <summary> Model factory for generated models. </summary>
     public static partial class OmitOperationGroupsModelFactory
     {
-        /// <summary> Initializes a new instance of ModelX. </summary>
-        /// <param name="e"></param>
-        /// <param name="c"></param>
-        /// <param name="d"></param>
-        /// <returns> A new <see cref="Models.ModelX"/> instance for mocking. </returns>
-        public static ModelX ModelX(string e = null, string c = null, string d = null)
-        {
-            return new ModelX(e, c, d);
-        }
-
-        /// <summary> Initializes a new instance of ModelY. </summary>
-        /// <param name="e"></param>
-        /// <returns> A new <see cref="Models.ModelY"/> instance for mocking. </returns>
-        public static ModelY ModelY(string e = null)
-        {
-            return new ModelY(e);
-        }
-
         /// <summary> Initializes a new instance of ModelZ. </summary>
         /// <param name="h"></param>
         /// <param name="i"></param>

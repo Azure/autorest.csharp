@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Linq;
 
 namespace model_flattening.Models
 {
@@ -51,41 +50,6 @@ namespace model_flattening.Models
         public static ProductWrapper ProductWrapper(string value = null)
         {
             return new ProductWrapper(value);
-        }
-
-        /// <summary> Initializes a new instance of ResourceCollection. </summary>
-        /// <param name="productresource"> Flattened product. </param>
-        /// <param name="arrayofresources"></param>
-        /// <param name="dictionaryofresources"> Dictionary of &lt;FlattenedProduct&gt;. </param>
-        /// <returns> A new <see cref="Models.ResourceCollection"/> instance for mocking. </returns>
-        public static ResourceCollection ResourceCollection(FlattenedProduct productresource = null, IEnumerable<FlattenedProduct> arrayofresources = null, IDictionary<string, FlattenedProduct> dictionaryofresources = null)
-        {
-            arrayofresources ??= new List<FlattenedProduct>();
-            dictionaryofresources ??= new Dictionary<string, FlattenedProduct>();
-
-            return new ResourceCollection(productresource, arrayofresources?.ToList(), dictionaryofresources);
-        }
-
-        /// <summary> Initializes a new instance of SimpleProduct. </summary>
-        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
-        /// <param name="description"> Description of product. </param>
-        /// <param name="maxProductDisplayName"> Display name of product. </param>
-        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
-        /// <param name="genericValue"> Generic URL value. </param>
-        /// <param name="odataValue"> URL value. </param>
-        /// <returns> A new <see cref="Models.SimpleProduct"/> instance for mocking. </returns>
-        public static SimpleProduct SimpleProduct(string productId = null, string description = null, string maxProductDisplayName = null, SimpleProductPropertiesMaxProductCapacity? capacity = null, string genericValue = null, string odataValue = null)
-        {
-            return new SimpleProduct(productId, description, maxProductDisplayName, capacity, genericValue, odataValue);
-        }
-
-        /// <summary> Initializes a new instance of BaseProduct. </summary>
-        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
-        /// <param name="description"> Description of product. </param>
-        /// <returns> A new <see cref="Models.BaseProduct"/> instance for mocking. </returns>
-        public static BaseProduct BaseProduct(string productId = null, string description = null)
-        {
-            return new BaseProduct(productId, description);
         }
     }
 }
