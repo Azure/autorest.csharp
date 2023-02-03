@@ -98,8 +98,12 @@ stages:
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
           - pwsh: ./eng/ExecuteCadlEmitterUnitTests.ps1
-            displayName: 'Unit Test for CADL emitter'
+            displayName: 'E2E Test for CADL emitter'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              npm run test --prefix src/CADL.Extension/Emitter.Csharp
+            displayName: 'Unit Test'
+            workingDirectory: $(Build.SourcesDirectory)
           - task: PublishBuildArtifacts@1
             condition: succeededOrFailed()
             displayName: 'Publish Artifacts'

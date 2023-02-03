@@ -295,7 +295,7 @@ function getClient(
     return undefined;
 }
 
-function createModel(
+export function createModel(
     program: Program,
     generateConvenienceAPI: boolean = false
 ): any {
