@@ -56,23 +56,42 @@ describe("compiler: enum", () => {
         runner = await createEmitterTestHost();
     });
 
-    // it("Fixed enum", async () => {
-    //     const program = await cadlCompile(`
-    //     @doc("Simple enum")
-    //     @fixed
-    //     enum SimpleEnum {
-    //         One: "1",
-    //         Two: "2",
-    //         Four: "4"
-    //     }
-    //     op test(@body input: SimpleEnum): string[];
-    //   `, runner, true, true)
-    //     const root: CodeModel = createModel(program, false);
-    //     const type = root.Clients[0].Operations[0].Parameters[0].Type as InputEnumType;
-    //     assert(type.EnumValueType !== undefined);
-    //     deepStrictEqual(type.Name, "SimpleEnum");
-    //     deepStrictEqual(type.IsExtensible, false);
-    //   });
+    it("Fixed enum", async () => {
+        const program = await cadlCompile(`
+        #suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "Enums should be defined without the @fixed decorator."
+        @doc("Simple enum")
+        @fixed
+        enum SimpleEnum {
+            One: "1",
+            Two: "2",
+            Four: "4"
+        }
+        #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Operation 'test' should be defined using a signature from the Azure.Core namespace."
+        @doc("test fixed enum.")
+        op test(@doc("fixed enum as input.")@body input: SimpleEnum): string[];
+      `, runner, true, true)
+        const root: CodeModel = createModel(program, false);
+        assert(isEqual({
+          Name: 'SimpleEnum',
+          Namespace: 'Azure.Csharp.Testing',
+          Accessibility: undefined,
+          Deprecated: undefined,
+          Description: 'Simple enum',
+          EnumValueType: 'String',
+          AllowedValues: [
+            { Name: 'One', Value: '1', Description: undefined },
+            { Name: 'Two', Value: '2', Description: undefined },
+            { Name: 'Four', Value: '4', Description: undefined }
+          ],
+          IsExtensible: false,
+          IsNullable: false,
+          Usage: 'None'
+        }, root.Clients[0].Operations[0].Parameters[0].Type))
+        const type = root.Clients[0].Operations[0].Parameters[0].Type as InputEnumType;
+        assert(type.EnumValueType !== undefined);
+        deepStrictEqual(type.Name, "SimpleEnum");
+        deepStrictEqual(type.IsExtensible, false);
+      });
 
     it("extensible enum", async () => {
         const program = await cadlCompile(`
