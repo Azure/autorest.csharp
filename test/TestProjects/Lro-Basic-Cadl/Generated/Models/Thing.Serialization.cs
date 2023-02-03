@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace CadlFirstTest.Models
+namespace LroBasicCadl.Models
 {
     public partial class Thing : IUtf8JsonSerializable
     {
@@ -18,21 +18,12 @@ namespace CadlFirstTest.Models
             writer.WriteStartObject();
             writer.WritePropertyName("name");
             writer.WriteStringValue(Name);
-            writer.WritePropertyName("requiredUnion");
-            writer.WriteStringValue(RequiredUnion);
-            writer.WritePropertyName("requiredLiteral");
-            writer.WriteStringValue(RequiredLiteral);
-            writer.WritePropertyName("requiredBadDescription");
-            writer.WriteStringValue(RequiredBadDescription);
             writer.WriteEndObject();
         }
 
         internal static Thing DeserializeThing(JsonElement element)
         {
             string name = default;
-            string requiredUnion = default;
-            string requiredLiteral = default;
-            string requiredBadDescription = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"))
@@ -40,23 +31,8 @@ namespace CadlFirstTest.Models
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredUnion"))
-                {
-                    requiredUnion = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("requiredLiteral"))
-                {
-                    requiredLiteral = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("requiredBadDescription"))
-                {
-                    requiredBadDescription = property.Value.GetString();
-                    continue;
-                }
             }
-            return new Thing(name, requiredUnion, requiredLiteral, requiredBadDescription);
+            return new Thing(name);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
