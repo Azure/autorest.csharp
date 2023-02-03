@@ -47,6 +47,8 @@ model Thing {
   requiredUnion: string | string[]|int32;
   @doc("required literal type")
   requiredLiteral: "accept";
+  @doc("description with xml <|endoftext|>")
+  requiredBadDescription: string
 }
 
 @friendlyName("Friend")
