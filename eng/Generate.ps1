@@ -256,8 +256,7 @@ $cadlRanchProjectPaths =
     'authentication/api-key',
     'authentication/oauth2',
     'models/property-optional',
-    'models/property-types',
-    'models/usage'
+    'models/property-types'
 
 if (!($Exclude -contains "CadlRanchProjects"))
 {
