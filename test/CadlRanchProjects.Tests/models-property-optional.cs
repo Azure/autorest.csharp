@@ -12,7 +12,7 @@ using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
 {
-    public class PropertyOptionalTests : CadlRanchTestBase
+    public class ModelsPropertyOptionalTests : CadlRanchTestBase
     {
         [Test]
         public Task Models_Property_Optional_String_getAll() => Test(async (host) =>
