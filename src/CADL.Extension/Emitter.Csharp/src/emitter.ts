@@ -768,8 +768,14 @@ function loadOperation(
         mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const generateProtocol: boolean = shouldGenerateProtocol(createDpgContext(context), op);
-    const generateConvenience: boolean = requestMethod !== RequestMethod.PATCH && (shouldGenerateConvenient(createDpgContext(context), op) || getConvenienceAPIName(program, op) !== undefined);
+    const generateProtocol: boolean = shouldGenerateProtocol(
+        createDpgContext(context),
+        op
+    );
+    const generateConvenience: boolean =
+        requestMethod !== RequestMethod.PATCH &&
+        (shouldGenerateConvenient(createDpgContext(context), op) ||
+            getConvenienceAPIName(program, op) !== undefined);
 
     /* handle lro */
     /* handle paging. */
