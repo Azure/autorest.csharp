@@ -38,7 +38,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static void BuildContextualParameterMappingHierarchy(RequestPath current, Stack<ContextualParameterMapping> parameterMappingStack, ValueExpression idVariable, ValueExpression invocation)
         {
             // Check if the current path is a scope parameter
-            if (current.IsParameterizedScope())
+            if (current.IsRawParameterizedScope())
             {
                 // in this case, we should only have one segment in this current path
                 parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, current.Last(), invocation));
