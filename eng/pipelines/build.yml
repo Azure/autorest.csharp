@@ -159,7 +159,7 @@ stages:
         - Build_and_Test
         - Release
       jobs:
-        - job: Update
+        - job: Update_Codes
           timeoutInMinutes: 180
           pool:
             vmImage: ubuntu-20.04
@@ -178,7 +178,38 @@ stages:
             - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -AutorestCSharpVersion $(AutorestCSharpVersion) -CadlEmitterVersion $(CadlEmitterVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
               failOnStderr: false
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-              displayName: 'Update generator version in Azure SDK repo'
+              displayName: 'Update SDK codes and generator version in Azure SDK repo'
+            - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
+              parameters:
+                BaseBranchName: main
+                RepoName: azure-sdk-for-net
+                PRBranchName: auto-update-autorest
+                CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
+                PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
+                PRTitle:  Update AutoRest C# version
+                PushArgs: -f
+                WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+                ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+        - job: Update_Samples
+          timeoutInMinutes: 180
+          pool:
+            vmImage: ubuntu-20.04
+          variables:
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
+          steps:
+            - checkout: self
+            - checkout: azure-sdk-for-net
+            - checkout: azure-sdk-tools
+            - task: UseDotNet@2
+              displayName: 'Use .NET Core SDK'
+              inputs:
+                useGlobalJson: true
+                performMultiLevelLookup: true
+            - pwsh: ./eng/UpdateAzureSdkSampleForNet.ps1 -AutorestCSharpVersion $(AutorestCSharpVersion) -CadlEmitterVersion $(CadlEmitterVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+              failOnStderr: false
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              displayName: 'Update sample codes and generator version in Azure SDK repo'
             - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
               parameters:
                 BaseBranchName: main
