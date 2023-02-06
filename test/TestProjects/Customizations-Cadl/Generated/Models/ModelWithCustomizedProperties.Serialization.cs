@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -33,6 +34,46 @@ namespace CustomizationsInCadl.Models
             PropertyToMakeJsonElement.WriteTo(writer);
             writer.WritePropertyName("propertyToField"u8);
             writer.WriteStringValue(_propertyToField);
+            writer.WritePropertyName("badListName");
+            writer.WriteStartArray();
+            foreach (var item in GoodListName)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("badDictionaryName");
+            writer.WriteStartObject();
+            foreach (var item in GoodDictionaryName)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("badListOfListName");
+            writer.WriteStartArray();
+            foreach (var item in GoodListOfListName)
+            {
+                writer.WriteStartArray();
+                foreach (var item0 in item)
+                {
+                    writer.WriteStringValue(item0);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("badListOfDictionaryName");
+            writer.WriteStartArray();
+            foreach (var item in GoodListOfDictionaryName)
+            {
+                writer.WriteStartObject();
+                foreach (var item0 in item)
+                {
+                    writer.WritePropertyName(item0.Key);
+                    writer.WriteStringValue(item0.Value);
+                }
+                writer.WriteEndObject();
+            }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
 
@@ -46,6 +87,10 @@ namespace CustomizationsInCadl.Models
             string propertyToMakeString = default;
             JsonElement propertyToMakeJsonElement = default;
             string propertyToField = default;
+            IList<string> badListName = default;
+            IDictionary<string, string> badDictionaryName = default;
+            IList<IList<string>> badListOfListName = default;
+            IList<IDictionary<string, string>> badListOfDictionaryName = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propertyToMakeInternal"u8))
@@ -88,8 +133,58 @@ namespace CustomizationsInCadl.Models
                     propertyToField = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("badListName"))
+                {
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    badListName = array;
+                    continue;
+                }
+                if (property.NameEquals("badDictionaryName"))
+                {
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    badDictionaryName = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("badListOfListName"))
+                {
+                    List<IList<string>> array = new List<IList<string>>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        List<string> array0 = new List<string>();
+                        foreach (var item0 in item.EnumerateArray())
+                        {
+                            array0.Add(item0.GetString());
+                        }
+                        array.Add(array0);
+                    }
+                    badListOfListName = array;
+                    continue;
+                }
+                if (property.NameEquals("badListOfDictionaryName"))
+                {
+                    List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                        foreach (var property0 in item.EnumerateObject())
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetString());
+                        }
+                        array.Add(dictionary);
+                    }
+                    badListOfDictionaryName = array;
+                    continue;
+                }
             }
-            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField);
+            return new ModelWithCustomizedProperties(propertyToMakeInternal, propertyToRename, propertyToMakeFloat, propertyToMakeInt, propertyToMakeDuration, propertyToMakeString, propertyToMakeJsonElement, propertyToField, badListName, badDictionaryName, badListOfListName, badListOfDictionaryName);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
