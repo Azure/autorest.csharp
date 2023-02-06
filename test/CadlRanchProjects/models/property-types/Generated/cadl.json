@@ -587,7 +587,7 @@
      "Path": "/models/properties/types/boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "71",
@@ -694,7 +694,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -768,7 +768,7 @@
      "Path": "/models/properties/types/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "87",
@@ -875,7 +875,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -949,7 +949,7 @@
      "Path": "/models/properties/types/bytes",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "103",
@@ -1056,7 +1056,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -1130,7 +1130,7 @@
      "Path": "/models/properties/types/int",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "119",
@@ -1237,7 +1237,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -1311,7 +1311,7 @@
      "Path": "/models/properties/types/float",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "135",
@@ -1418,7 +1418,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -1492,7 +1492,7 @@
      "Path": "/models/properties/types/datetime",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "151",
@@ -1599,7 +1599,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -1673,7 +1673,7 @@
      "Path": "/models/properties/types/duration",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "167",
@@ -1780,7 +1780,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -1854,7 +1854,7 @@
      "Path": "/models/properties/types/enum",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "183",
@@ -1961,7 +1961,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -2035,7 +2035,7 @@
      "Path": "/models/properties/types/extensible-enum",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "199",
@@ -2142,7 +2142,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -2216,7 +2216,7 @@
      "Path": "/models/properties/types/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "215",
@@ -2323,7 +2323,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -2397,7 +2397,7 @@
      "Path": "/models/properties/types/collections/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "231",
@@ -2504,7 +2504,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -2578,7 +2578,7 @@
      "Path": "/models/properties/types/collections/int",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "247",
@@ -2685,7 +2685,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -2759,7 +2759,7 @@
      "Path": "/models/properties/types/collections/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "263",
@@ -2866,7 +2866,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -2940,7 +2940,7 @@
      "Path": "/models/properties/types/dictionary/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "279",
@@ -3047,7 +3047,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -3121,7 +3121,7 @@
      "Path": "/models/properties/types/never",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "295",
@@ -3228,7 +3228,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

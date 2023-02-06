@@ -13,7 +13,7 @@ using Models.Property.Types.Models;
 
 namespace CadlRanchProjects.Tests
 {
-    public class property_types : CadlRanchTestBase
+    public class ModelsPropertyTypesTests : CadlRanchTestBase
     {
         [Test]
         public Task Models_Property_Types_Boolean_get() => Test(async (host) =>

@@ -17,7 +17,7 @@ using NUnit.Framework.Internal;
 
 namespace CadlRanchProjects.Tests
 {
-    public class OAuth2Tests: CadlRanchTestBase
+    public class AuthenticationOAuth2Tests: CadlRanchTestBase
     {
         [Test]
         public Task Authentication_OAuth2_valid() => Test(async (host) =>

@@ -55,7 +55,19 @@ model ModelWithCustomizedProperties {
   propertyToMakeJsonElement: string;  
  
   @doc("Field that replaces property (original name: PropertyToField)")
-  propertyToField: string; 
+  propertyToField: string;
+
+  @doc("Property renamed that is list")
+  badListName: string[];
+
+  @doc("Property renamed that is dictionary")
+  badDictionaryName: Record<string>;
+
+  @doc("Property renamed that is listoflist")
+  badListOfListName: string[][];
+
+  @doc("Property renamed that is listofdictionary")
+  badListOfDictionaryName: Record<string>[];
 }
 
 @doc("Renamed enum (original name: EnumToRename)")
