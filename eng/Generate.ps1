@@ -19,7 +19,7 @@ $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http'
-$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true --option @azure-tools/cadl-csharp.clear-output-folder=true --option @azure-tools/cadl-csharp.generate-convenience-methods=false'
+$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true --option @azure-tools/cadl-csharp.clear-output-folder=true'
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -56,7 +56,7 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
 function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
     $cadlMain = Join-Path $cadlRanchFilePath $testName "main.cadl"
-    Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true --option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
+    Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
 }
 
 $testNames =
@@ -194,7 +194,7 @@ if (!($Exclude -contains "TestProjects"))
             continue
         }
         if ($testName.EndsWith("Cadl")) {
-            Add-Cadl $testName $directory
+            Add-Cadl $testName $directory "" "--option @azure-tools/cadl-csharp.generate-convenience-methods=false"
         } else {
             if (Test-Path $readmeConfigurationPath)
             {
@@ -246,7 +246,7 @@ if (!($Exclude -contains "Samples"))
         $cadlMain = Join-Path $projectDirectory "main.cadl"
         $cadlClient = Join-Path $projectDirectory "client.cadl"
         $mainCadlFile = If (Test-Path "$cadlClient") { Resolve-Path "$cadlClient" } Else { Resolve-Path "$cadlMain"}
-        Add-Cadl $projectName $projectDirectory $mainCadlFile "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true"
+        Add-Cadl $projectName $projectDirectory $mainCadlFile
     }
 }
 
@@ -256,7 +256,8 @@ $cadlRanchProjectPaths =
     'authentication/api-key',
     'authentication/oauth2',
     'models/property-optional',
-    'models/property-types'
+    'models/property-types',
+    'models/usage'
 
 if (!($Exclude -contains "CadlRanchProjects"))
 {

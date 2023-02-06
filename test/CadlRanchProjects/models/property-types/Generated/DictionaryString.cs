@@ -6,10 +6,12 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Models.Property.Types.Models;
 
 namespace Models.Property.Types
 {
@@ -43,6 +45,44 @@ namespace Models.Property.Types
             _pipeline = pipeline;
             _endpoint = endpoint;
             _apiVersion = apiVersion;
+        }
+
+        /// <summary> Get call. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<DictionaryStringProperty>> GetDictionaryStringValueAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("DictionaryString.GetDictionaryStringValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await GetDictionaryStringAsync(context).ConfigureAwait(false);
+                return Response.FromValue(DictionaryStringProperty.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get call. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<DictionaryStringProperty> GetDictionaryStringValue(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("DictionaryString.GetDictionaryStringValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = GetDictionaryString(context);
+                return Response.FromValue(DictionaryStringProperty.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Get call. </summary>
@@ -85,6 +125,32 @@ namespace Models.Property.Types
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<Response> PutAsync(DictionaryStringProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await PutAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Put operation. </summary>
+        /// <param name="body"> body. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual Response Put(DictionaryStringProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Put(body.ToRequestContent(), context);
+            return response;
         }
 
         /// <summary> Put operation. </summary>
@@ -165,6 +231,17 @@ namespace Models.Property.Types
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (!cancellationToken.CanBeCanceled)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

@@ -6,10 +6,12 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Models.Property.Optional.Models;
 
 namespace Models.Property.Optional
 {
@@ -46,6 +48,44 @@ namespace Models.Property.Optional
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<CollectionsModelProperty>> GetAllValueAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CollectionsModel.GetAllValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await GetAllAsync(context).ConfigureAwait(false);
+                return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get models that will return all properties in the model. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<CollectionsModelProperty> GetAllValue(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CollectionsModel.GetAllValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = GetAll(context);
+                return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -79,6 +119,44 @@ namespace Models.Property.Optional
             {
                 using HttpMessage message = CreateGetAllRequest(context);
                 return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get models that will return the default object. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<CollectionsModelProperty>> GetDefaultValueAsync(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CollectionsModel.GetDefaultValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await GetDefaultAsync(context).ConfigureAwait(false);
+                return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get models that will return the default object. </summary>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<CollectionsModelProperty> GetDefaultValue(CancellationToken cancellationToken = default)
+        {
+            using var scope = ClientDiagnostics.CreateScope("CollectionsModel.GetDefaultValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = GetDefault(context);
+                return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
             }
             catch (Exception e)
             {
@@ -130,6 +208,32 @@ namespace Models.Property.Optional
         }
 
         /// <summary> Put a body with all properties present. </summary>
+        /// <param name="body"> The CollectionsModelProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<Response> PutAllAsync(CollectionsModelProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await PutAllAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Put a body with all properties present. </summary>
+        /// <param name="body"> The CollectionsModelProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual Response PutAll(CollectionsModelProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = PutAll(body.ToRequestContent(), context);
+            return response;
+        }
+
+        /// <summary> Put a body with all properties present. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
@@ -177,6 +281,32 @@ namespace Models.Property.Optional
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary> Put a body with default properties. </summary>
+        /// <param name="body"> The CollectionsModelProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual async Task<Response> PutDefaultAsync(CollectionsModelProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await PutDefaultAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> Put a body with default properties. </summary>
+        /// <param name="body"> The CollectionsModelProperty to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        public virtual Response PutDefault(CollectionsModelProperty body, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(body, nameof(body));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = PutDefault(body.ToRequestContent(), context);
+            return response;
         }
 
         /// <summary> Put a body with default properties. </summary>
@@ -287,6 +417,17 @@ namespace Models.Property.Optional
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (!cancellationToken.CanBeCanceled)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

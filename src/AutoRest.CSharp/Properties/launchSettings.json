@@ -180,6 +180,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\property-types\\Generated"
     },
+    "cadl-models/usage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\usage\\Generated"
+    },
     "ClientAndOperationGroup-Cadl": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ClientAndOperationGroup-Cadl\\Generated"
