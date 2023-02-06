@@ -175,19 +175,13 @@ stages:
               inputs:
                 useGlobalJson: true
                 performMultiLevelLookup: true
-            - pwsh: ./eng/UpdateAzureSdkForNet.ps1 -AutorestCSharpVersion $(AutorestCSharpVersion) -CadlEmitterVersion $(CadlEmitterVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-              failOnStderr: false
-              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-              displayName: 'Update SDK codes and generator version in Azure SDK repo'
-            - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
+            - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
               parameters:
-                BaseBranchName: main
-                RepoName: azure-sdk-for-net
-                PRBranchName: auto-update-autorest
+                BaseRepoBranch: auto-update-autorest
+                BaseRepoOwner: azure-sdk
                 CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
-                PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
-                PRTitle:  Update AutoRest C# version
-                PushArgs: -f
+                TargetRepoOwner: Azure
+                TargetRepoName: $(Build.Repository.Name)
                 WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
                 ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
         - job: Update_Samples
@@ -206,18 +200,34 @@ stages:
               inputs:
                 useGlobalJson: true
                 performMultiLevelLookup: true
-            - pwsh: ./eng/UpdateAzureSdkSampleForNet.ps1 -AutorestCSharpVersion $(AutorestCSharpVersion) -CadlEmitterVersion $(CadlEmitterVersion) -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-              failOnStderr: false
-              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-              displayName: 'Update sample codes and generator version in Azure SDK repo'
-            - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
+            - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
               parameters:
-                BaseBranchName: main
-                RepoName: azure-sdk-for-net
-                PRBranchName: auto-update-autorest
+                BaseRepoBranch: auto-update-autorest
+                BaseRepoOwner: azure-sdk
                 CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
-                PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
-                PRTitle:  Update AutoRest C# version
-                PushArgs: -f
+                TargetRepoOwner: Azure
+                TargetRepoName: $(Build.Repository.Name)
                 WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
                 ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+        - job: Create_PR
+          variables:
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
+          steps:
+            - checkout: self
+            - checkout: azure-sdk-tools
+            - task: PowerShell@2
+              displayName: Create pull request
+              condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
+              inputs:
+                pwsh: true
+                filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
+                arguments: >
+                  -RepoOwner "Azure"
+                  -RepoName "$(RepoNameWithoutOwner)"
+                  -BaseBranch "main"
+                  -PROwner "azure-sdk"
+                  -PRBranch "auto-update-autorest"
+                  -AuthToken "$(azuresdk-github-pat)"
+                  -PRTitle "Update AutoRest C# version"
+                  -PRBody "$Update AutoRest C# version to $(AutorestCSharpVersion)"
