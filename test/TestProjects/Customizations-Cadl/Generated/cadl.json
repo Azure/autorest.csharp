@@ -331,6 +331,108 @@
         "IsRequired": true,
         "IsReadOnly": false,
         "IsDiscriminator": false
+       },
+       {
+        "$id": "45",
+        "Name": "badListName",
+        "SerializedName": "badListName",
+        "Description": "Property renamed that is list",
+        "Type": {
+         "$id": "46",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "47",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       },
+       {
+        "$id": "48",
+        "Name": "badDictionaryName",
+        "SerializedName": "badDictionaryName",
+        "Description": "Property renamed that is dictionary",
+        "Type": {
+         "$id": "49",
+         "Name": "Dictionary",
+         "KeyType": {
+          "$id": "50",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "ValueType": {
+          "$id": "51",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       },
+       {
+        "$id": "52",
+        "Name": "badListOfListName",
+        "SerializedName": "badListOfListName",
+        "Description": "Property renamed that is listoflist",
+        "Type": {
+         "$id": "53",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "54",
+          "Name": "Array",
+          "ElementType": {
+           "$id": "55",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsNullable": false
+         },
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       },
+       {
+        "$id": "56",
+        "Name": "badListOfDictionaryName",
+        "SerializedName": "badListOfDictionaryName",
+        "Description": "Property renamed that is listofdictionary",
+        "Type": {
+         "$id": "57",
+         "Name": "Array",
+         "ElementType": {
+          "$id": "58",
+          "Name": "Dictionary",
+          "KeyType": {
+           "$id": "59",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "ValueType": {
+           "$id": "60",
+           "Name": "string",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "IsNullable": false
+         },
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
        }
       ]
      },
@@ -339,7 +441,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "45",
+     "$id": "61",
      "Name": "propertyEnumToRename",
      "SerializedName": "propertyEnumToRename",
      "Description": "EnumToRename",
@@ -351,7 +453,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "46",
+     "$id": "62",
      "Name": "propertyEnumWithValueToRename",
      "SerializedName": "propertyEnumWithValueToRename",
      "Description": "EnumWithValueToRename",
@@ -363,7 +465,7 @@
      "IsDiscriminator": false
     },
     {
-     "$id": "47",
+     "$id": "63",
      "Name": "propertyEnumToBeMadeExtensible",
      "SerializedName": "propertyEnumToBeMadeExtensible",
      "Description": "EnumToBeMadeExtensible",
@@ -391,18 +493,18 @@
  ],
  "Clients": [
   {
-   "$id": "48",
+   "$id": "64",
    "Name": "CustomizationsInCadlClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "49",
+     "$id": "65",
      "Name": "roundTrip",
      "ResourceName": "CustomizationsInCadl",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Parameters": [
       {
-       "$id": "50",
+       "$id": "66",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -419,11 +521,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "51",
+       "$id": "67",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "52",
+        "$id": "68",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -438,19 +540,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "53",
+        "$id": "69",
         "Type": {
-         "$ref": "52"
+         "$ref": "68"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "54",
+       "$id": "70",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "55",
+        "$id": "71",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -465,20 +567,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "56",
+        "$id": "72",
         "Type": {
-         "$ref": "55"
+         "$ref": "71"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "57",
+       "$id": "73",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "58",
+        "$id": "74",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -493,9 +595,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "75",
         "Type": {
-         "$id": "60",
+         "$id": "76",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -506,7 +608,7 @@
      ],
      "Responses": [
       {
-       "$id": "61",
+       "$id": "77",
        "StatusCodes": [
         200
        ],
@@ -531,7 +633,7 @@
     }
    ],
    "Protocol": {
-    "$id": "62"
+    "$id": "78"
    },
    "Creatable": true
   }
