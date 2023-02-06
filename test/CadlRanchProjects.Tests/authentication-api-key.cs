@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CadlRanchProjects.Tests
 {
-    public class ApiKeyTests : CadlRanchTestBase
+    public class AuthenticationApiKeyTests : CadlRanchTestBase
     {
         [Test]
         public Task Authentication_ApiKey_valid() => Test(async (host) =>

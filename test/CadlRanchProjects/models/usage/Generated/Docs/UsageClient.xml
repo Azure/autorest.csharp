@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="InputAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call InputAsync with required request content.
+<code><![CDATA[
+var client = new UsageClient();
+
+var data = new {
+    requiredProp = "<requiredProp>",
+};
+
+Response response = await client.InputAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>InputRecord</c>:
+<code>{
+  requiredProp: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Input(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Input with required request content.
+<code><![CDATA[
+var client = new UsageClient();
+
+var data = new {
+    requiredProp = "<requiredProp>",
+};
+
+Response response = client.Input(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>InputRecord</c>:
+<code>{
+  requiredProp: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="OutputAsync(RequestContext)">
+<example>
+This sample shows how to call OutputAsync and parse the result.
+<code><![CDATA[
+var client = new UsageClient();
+
+Response response = await client.OutputAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>OutputRecord</c>:
+<code>{
+  requiredProp: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Output(RequestContext)">
+<example>
+This sample shows how to call Output and parse the result.
+<code><![CDATA[
+var client = new UsageClient();
+
+Response response = client.Output();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>OutputRecord</c>:
+<code>{
+  requiredProp: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="InputAndOutputAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call InputAndOutputAsync with required request content and parse the result.
+<code><![CDATA[
+var client = new UsageClient();
+
+var data = new {
+    requiredProp = "<requiredProp>",
+};
+
+Response response = await client.InputAndOutputAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>InputOutputRecord</c>:
+<code>{
+  requiredProp: string, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>InputOutputRecord</c>:
+<code>{
+  requiredProp: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="InputAndOutput(RequestContent,RequestContext)">
+<example>
+This sample shows how to call InputAndOutput with required request content and parse the result.
+<code><![CDATA[
+var client = new UsageClient();
+
+var data = new {
+    requiredProp = "<requiredProp>",
+};
+
+Response response = client.InputAndOutput(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredProp").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>InputOutputRecord</c>:
+<code>{
+  requiredProp: string, # Required.
+}
+</code>
+
+Response Body:
+
+Schema for <c>InputOutputRecord</c>:
+<code>{
+  requiredProp: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

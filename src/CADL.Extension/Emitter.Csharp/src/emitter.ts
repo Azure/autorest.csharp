@@ -101,7 +101,6 @@ export type NetEmitterOptions = {
     "library-name"?: string;
     "single-top-level-client"?: boolean;
     skipSDKGeneration?: boolean;
-    generateConvenienceAPI?: boolean; //workaround for cadl-ranch project
     "unreferenced-types-handling"?:
         | "removeOrInternalize"
         | "internalize"
@@ -136,7 +135,6 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "library-name": { type: "string", nullable: true },
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", default: false, nullable: true },
-        generateConvenienceAPI: { type: "boolean", nullable: true },
         "unreferenced-types-handling": {
             type: "string",
             enum: ["removeOrInternalize", "internalize", "keepAll"],
@@ -179,7 +177,6 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             resolvedOptions.logFile
         ),
         skipSDKGeneration: resolvedOptions.skipSDKGeneration,
-        generateConvenienceAPI: resolvedOptions.generateConvenienceAPI ?? false,
         "unreferenced-types-handling":
             resolvedOptions["unreferenced-types-handling"],
         "new-project": resolvedOptions["new-project"],
@@ -193,7 +190,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         // Write out the dotnet model to the output path
         const namespace = getServiceNamespaceString(program) || "";
 
-        const root = createModel(context, options.generateConvenienceAPI);
+        const root = createModel(context);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const generatedFolder = resolvePath(outputFolder, "Generated");
@@ -304,10 +301,7 @@ function getClient(
     return undefined;
 }
 
-function createModel(
-    context: EmitContext<NetEmitterOptions>,
-    generateConvenienceAPI: boolean = false
-): any {
+function createModel(context: EmitContext<NetEmitterOptions>): any {
     const program = context.program;
     const serviceNamespaceType = getServiceNamespace(program);
     if (!serviceNamespaceType) {
@@ -509,10 +503,7 @@ function createModel(
 
             applyDefaultContentTypeAndAcceptParameter(inputOperation);
             inputClient.Operations.push(inputOperation);
-            if (
-                inputOperation.GenerateConvenienceMethod ||
-                generateConvenienceAPI
-            )
+            if (inputOperation.GenerateConvenienceMethod)
                 convenienceOperations.push(httpOperation);
         }
         return inputClient;
