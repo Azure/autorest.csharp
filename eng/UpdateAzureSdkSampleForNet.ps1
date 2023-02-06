@@ -6,5 +6,5 @@ $SdkRepoRoot = Resolve-Path $SdkRepoRoot
 
 UpdateGeneratorMetaData($AutorestCSharpVersion, $CadlEmitterVersion, $SdkRepoRoot)
 
-Write-Host "Generating Azure SDK Codes..."
-dotnet msbuild /restore /t:GenerateCode "$SdkRepoRoot\eng\service.proj"
+Write-Host "Generating Azure SDK Samples..."
+dotnet msbuild /restore /t:GenerateTests "$SdkRepoRoot\eng\service.proj"
