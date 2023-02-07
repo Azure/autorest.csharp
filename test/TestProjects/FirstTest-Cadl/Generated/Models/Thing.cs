@@ -49,13 +49,13 @@ namespace CadlFirstTest.Models
         internal string OptionalLiteralString { get; } = "reject";
 
         /// <summary> optional literal int. </summary>
-        internal int OptionalLiteralInt { get; } = 456;
+        internal int? OptionalLiteralInt { get; } = 456;
 
         /// <summary> optional literal double. </summary>
-        internal double OptionalLiteralDouble { get; } = 4.56;
+        internal double? OptionalLiteralDouble { get; } = 4.56;
 
         /// <summary> optional literal bool. </summary>
-        internal bool OptionalLiteralBool { get; } = true;
+        internal bool? OptionalLiteralBool { get; } = true;
 
         /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
         public string RequiredBadDescription { get; set; }

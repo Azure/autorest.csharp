@@ -28,14 +28,47 @@ namespace CadlFirstTest.Models
             writer.WriteNumberValue(RequiredLiteralDouble);
             writer.WritePropertyName("requiredLiteralBool");
             writer.WriteBooleanValue(RequiredLiteralBool);
-            writer.WritePropertyName("optionalLiteralString");
-            writer.WriteStringValue(OptionalLiteralString);
-            writer.WritePropertyName("optionalLiteralInt");
-            writer.WriteNumberValue(OptionalLiteralInt);
-            writer.WritePropertyName("optionalLiteralDouble");
-            writer.WriteNumberValue(OptionalLiteralDouble);
-            writer.WritePropertyName("optionalLiteralBool");
-            writer.WriteBooleanValue(OptionalLiteralBool);
+            if (Optional.IsDefined(OptionalLiteralString))
+            {
+                writer.WritePropertyName("optionalLiteralString");
+                writer.WriteStringValue(OptionalLiteralString);
+            }
+            if (Optional.IsDefined(OptionalLiteralInt))
+            {
+                if (OptionalLiteralInt != null)
+                {
+                    writer.WritePropertyName("optionalLiteralInt");
+                    writer.WriteNumberValue(OptionalLiteralInt.Value);
+                }
+                else
+                {
+                    writer.WriteNull("optionalLiteralInt");
+                }
+            }
+            if (Optional.IsDefined(OptionalLiteralDouble))
+            {
+                if (OptionalLiteralDouble != null)
+                {
+                    writer.WritePropertyName("optionalLiteralDouble");
+                    writer.WriteNumberValue(OptionalLiteralDouble.Value);
+                }
+                else
+                {
+                    writer.WriteNull("optionalLiteralDouble");
+                }
+            }
+            if (Optional.IsDefined(OptionalLiteralBool))
+            {
+                if (OptionalLiteralBool != null)
+                {
+                    writer.WritePropertyName("optionalLiteralBool");
+                    writer.WriteBooleanValue(OptionalLiteralBool.Value);
+                }
+                else
+                {
+                    writer.WriteNull("optionalLiteralBool");
+                }
+            }
             writer.WritePropertyName("requiredBadDescription");
             writer.WriteStringValue(RequiredBadDescription);
             writer.WriteEndObject();

@@ -70,16 +70,16 @@ model Thing {
   requiredLiteralBool: false;
 
   @doc("optional literal string")
-  optionalLiteralString: "reject";
+  optionalLiteralString?: "reject";
 
   @doc("optional literal int")
-  optionalLiteralInt: 456;
+  optionalLiteralInt?: 456;
 
   @doc("optional literal double")
-  optionalLiteralDouble: 4.56;
+  optionalLiteralDouble?: 4.56;
 
   @doc("optional literal bool")
-  optionalLiteralBool: true;
+  optionalLiteralBool?: true;
 
   @doc("description with xml <|endoftext|>")
   requiredBadDescription: string
