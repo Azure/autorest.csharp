@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace MgmtRenameRules.Models
 {
@@ -23,10 +24,7 @@ namespace MgmtRenameRules.Models
         /// <exception cref="ArgumentNullException"> <paramref name="domainNameLabel"/> is null. </exception>
         public VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(string domainNameLabel)
         {
-            if (domainNameLabel == null)
-            {
-                throw new ArgumentNullException(nameof(domainNameLabel));
-            }
+            Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
 
             DomainNameLabel = domainNameLabel;
         }

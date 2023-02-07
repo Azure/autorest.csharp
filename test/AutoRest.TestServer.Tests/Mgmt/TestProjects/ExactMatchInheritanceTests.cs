@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
 using ExactMatchInheritance;
 using ExactMatchInheritance.Models;
@@ -89,6 +91,23 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             Assert.NotNull(type, $"Type {className} should exist");
             var property = type.GetProperty(propertyName);
             Assert.AreEqual(exist, property != null, $"Property {propertyName} should {(exist ? string.Empty : "not")} exist");
+        }
+
+        [Test]
+        public void DataFactoryExpressionProperties()
+        {
+            Assert.AreEqual(typeof(DataFactoryExpression<string>), typeof(ExactMatchModel1Data).GetProperty("Type5").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<double>), typeof(ExactMatchModel1Data).GetProperty("Type6").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<bool>), typeof(ExactMatchModel1Data).GetProperty("Type7").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<int>), typeof(ExactMatchModel1Data).GetProperty("Type8").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<BinaryData>), typeof(ExactMatchModel1Data).GetProperty("Type9").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<IList<string>>), typeof(ExactMatchModel1Data).GetProperty("Type11").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<IDictionary<string, string>>), typeof(ExactMatchModel1Data).GetProperty("Type12").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<IList<SeparateClass>>), typeof(ExactMatchModel1Data).GetProperty("Type13").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<DateTimeOffset>), typeof(ExactMatchModel1Data).GetProperty("Type14").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<TimeSpan>), typeof(ExactMatchModel1Data).GetProperty("Type15").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryExpression<Uri>), typeof(ExactMatchModel1Data).GetProperty("Type16").PropertyType);
+            Assert.IsTrue(typeof(SeparateClass).GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute)));
         }
 
         private Type? FindTypeByName(string name)

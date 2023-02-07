@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "cadl.visibility",
+ "Name": "Cadl.visibility",
  "Description": "Illustrates read, write and read/write properties.",
  "ApiVersions": [
   "1.0.0"
@@ -12,6 +12,7 @@
    "Name": "Dog",
    "Namespace": "Cadl.visibility",
    "IsNullable": false,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "3",
@@ -20,7 +21,7 @@
      "Description": "",
      "Type": {
       "$id": "4",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -64,12 +65,13 @@
  "Clients": [
   {
    "$id": "9",
-   "Name": "visibility",
+   "Name": "visibilityClient",
    "Description": "Illustrates read, write and read/write properties.",
    "Operations": [
     {
      "$id": "10",
      "Name": "sendVisibilityPropertyModel",
+     "ResourceName": "visibility",
      "Parameters": [
       {
        "$id": "11",
@@ -211,7 +213,9 @@
        "StatusCodes": [
         200
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -221,13 +225,15 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
     "$id": "27"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

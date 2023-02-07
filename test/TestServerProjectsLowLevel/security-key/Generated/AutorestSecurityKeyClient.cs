@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace security_key_LowLevel
 {
-    // Data plane generated client. The AutorestSecurityKey service client.
+    // Data plane generated client.
     /// <summary> The AutorestSecurityKey service client. </summary>
     public partial class AutorestSecurityKeyClient
     {
@@ -61,16 +61,7 @@ namespace security_key_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call HeadAsync.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new AutorestSecurityKeyClient(credential);
-        /// 
-        /// Response response = await client.HeadAsync();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/AutorestSecurityKeyClient.xml" path="doc/members/member[@name='HeadAsync(RequestContext)']/*" />
         public virtual async Task<Response> HeadAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AutorestSecurityKeyClient.Head");
@@ -91,16 +82,7 @@ namespace security_key_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Head.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new AutorestSecurityKeyClient(credential);
-        /// 
-        /// Response response = client.Head();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/AutorestSecurityKeyClient.xml" path="doc/members/member[@name='Head(RequestContext)']/*" />
         public virtual Response Head(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AutorestSecurityKeyClient.Head");

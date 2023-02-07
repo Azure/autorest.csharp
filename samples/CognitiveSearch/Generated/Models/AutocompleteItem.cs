@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -18,14 +19,8 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> or <paramref name="queryPlusText"/> is null. </exception>
         internal AutocompleteItem(string text, string queryPlusText)
         {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
-            if (queryPlusText == null)
-            {
-                throw new ArgumentNullException(nameof(queryPlusText));
-            }
+            Argument.AssertNotNull(text, nameof(text));
+            Argument.AssertNotNull(queryPlusText, nameof(queryPlusText));
 
             Text = text;
             QueryPlusText = queryPlusText;

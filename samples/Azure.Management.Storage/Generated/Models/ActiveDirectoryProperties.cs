@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -22,30 +23,12 @@ namespace Azure.Management.Storage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="domainName"/>, <paramref name="netBiosDomainName"/>, <paramref name="forestName"/>, <paramref name="domainGuid"/>, <paramref name="domainSid"/> or <paramref name="azureStorageSid"/> is null. </exception>
         public ActiveDirectoryProperties(string domainName, string netBiosDomainName, string forestName, string domainGuid, string domainSid, string azureStorageSid)
         {
-            if (domainName == null)
-            {
-                throw new ArgumentNullException(nameof(domainName));
-            }
-            if (netBiosDomainName == null)
-            {
-                throw new ArgumentNullException(nameof(netBiosDomainName));
-            }
-            if (forestName == null)
-            {
-                throw new ArgumentNullException(nameof(forestName));
-            }
-            if (domainGuid == null)
-            {
-                throw new ArgumentNullException(nameof(domainGuid));
-            }
-            if (domainSid == null)
-            {
-                throw new ArgumentNullException(nameof(domainSid));
-            }
-            if (azureStorageSid == null)
-            {
-                throw new ArgumentNullException(nameof(azureStorageSid));
-            }
+            Argument.AssertNotNull(domainName, nameof(domainName));
+            Argument.AssertNotNull(netBiosDomainName, nameof(netBiosDomainName));
+            Argument.AssertNotNull(forestName, nameof(forestName));
+            Argument.AssertNotNull(domainGuid, nameof(domainGuid));
+            Argument.AssertNotNull(domainSid, nameof(domainSid));
+            Argument.AssertNotNull(azureStorageSid, nameof(azureStorageSid));
 
             DomainName = domainName;
             NetBiosDomainName = netBiosDomainName;

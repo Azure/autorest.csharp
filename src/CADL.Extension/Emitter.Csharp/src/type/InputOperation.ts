@@ -16,7 +16,9 @@ export interface Paging {
 
 export interface InputOperation {
     Name: string;
+    ResourceName?: string;
     Summary?: string;
+    Deprecated?: string;
     Description?: string;
     Accessibility?: string;
     Parameters: InputParameter[];
@@ -30,5 +32,6 @@ export interface InputOperation {
     BufferResponse: boolean;
     LongRunning?: OperationLongRunning;
     Paging?: OperationPaging;
+    GenerateProtocolMethod: boolean;
     GenerateConvenienceMethod: boolean;
 }

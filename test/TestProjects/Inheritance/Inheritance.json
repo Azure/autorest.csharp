@@ -45,7 +45,52 @@
     "BaseClass": {
       "type": "object",
       "properties": {
-        "BaseClassProperty": { "type": "string" }
+        "BaseClassProperty": { "type": "string" },
+        "DfeString": {
+          "type": "object",
+          "x-ms-format": "dfe-string"
+        },
+        "DfeDouble": {
+          "type": "object",
+          "x-ms-format": "dfe-float"
+        },
+        "DfeBool": {
+          "type": "object",
+          "x-ms-format": "dfe-bool"
+        },
+        "DfeInt": {
+          "type": "object",
+          "x-ms-format": "dfe-int"
+        },
+        "DfeObject": {
+          "type": "object",
+          "x-ms-format": "dfe-object"
+        },
+        "DfeListOfT": {
+          "type": "object",
+          "x-ms-format": "dfe-list-generic",
+          "x-ms-format-element-definition": "SeparateClass"
+        },
+        "DfeListOfString": {
+          "type": "object",
+          "x-ms-format": "dfe-list-string"
+        },
+        "DfeKeyValuePairs": {
+          "type": "object",
+          "x-ms-format": "dfe-key-value-pairs"
+        },
+        "DfeDateTime": {
+          "type": "object",
+          "x-ms-format": "dfe-date-time"
+        },
+        "DfeDuration": {
+            "type": "object",
+            "x-ms-format": "dfe-duration"
+        },
+        "DfeUri": {
+            "type": "object",
+            "x-ms-format": "dfe-uri"
+        }
       }
     },
     "BaseClassWithDiscriminator": {
@@ -213,6 +258,19 @@
         }
       ],
       "x-ms-discriminator-value": "random value"
+    },
+    "SeparateClass": {
+      "type": "object",
+      "properties": {
+        "StringProperty":
+        {
+          "type": "string"
+        },
+        "ModelProperty":
+        {
+          "$ref": "#/definitions/BaseClassWithExtensibleEnumDiscriminator"
+        }
+      }
     }
   }
 }

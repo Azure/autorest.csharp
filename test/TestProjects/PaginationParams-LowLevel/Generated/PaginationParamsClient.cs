@@ -6,16 +6,13 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
 namespace PaginationParams_LowLevel
 {
-    // Data plane generated client. The PaginationParams service client.
+    // Data plane generated client.
     /// <summary> The PaginationParams service client. </summary>
     public partial class PaginationParamsClient
     {
@@ -67,66 +64,12 @@ namespace PaginationParams_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetPaginationParamsAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// await foreach (var data in client.GetPaginationParamsAsync())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.ToString());
-        /// }
-        /// ]]></code>
-        /// This sample shows how to call GetPaginationParamsAsync with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// await foreach (var data in client.GetPaginationParamsAsync(1234, 1234, 1234))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("type").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>PageSizeIntegerModelListResultValue</c>:
-        /// <code>{
-        ///   id: string, # Optional. Resource ID.
-        ///   name: string, # Optional. Resource name.
-        ///   type: string, # Optional. Resource type.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='GetPaginationParamsAsync(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPaginationParamsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return GetPaginationParamsImplementationAsync("PaginationParamsClient.GetPaginationParams", maxCount, skip, maxpagesize, context);
-        }
-
-        private AsyncPageable<BinaryData> GetPaginationParamsImplementationAsync(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPaginationParamsRequest(maxCount, skip, maxpagesize, context)
-                        : CreateGetPaginationParamsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationParamsRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationParamsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.GetPaginationParams", "value", "nextLink", context);
         }
 
         /// <param name="maxCount"> Optional. Specified maximum number of total containers. </param>
@@ -135,66 +78,12 @@ namespace PaginationParams_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetPaginationParams and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// foreach (var data in client.GetPaginationParams())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.ToString());
-        /// }
-        /// ]]></code>
-        /// This sample shows how to call GetPaginationParams with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// foreach (var data in client.GetPaginationParams(1234, 1234, 1234))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("type").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>PageSizeIntegerModelListResultValue</c>:
-        /// <code>{
-        ///   id: string, # Optional. Resource ID.
-        ///   name: string, # Optional. Resource name.
-        ///   type: string, # Optional. Resource type.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='GetPaginationParams(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPaginationParams(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return GetPaginationParamsImplementation("PaginationParamsClient.GetPaginationParams", maxCount, skip, maxpagesize, context);
-        }
-
-        private Pageable<BinaryData> GetPaginationParamsImplementation(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGetPaginationParamsRequest(maxCount, skip, maxpagesize, context)
-                        : CreateGetPaginationParamsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationParamsRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationParamsNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.GetPaginationParams", "value", "nextLink", context);
         }
 
         /// <param name="limit"> Optional. Specified maximum number of total containers. </param>
@@ -203,66 +92,12 @@ namespace PaginationParams_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call Get2sAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// await foreach (var data in client.Get2sAsync())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.ToString());
-        /// }
-        /// ]]></code>
-        /// This sample shows how to call Get2sAsync with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// await foreach (var data in client.Get2sAsync(1234, 1234, 1234))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("type").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>PageSizeIntegerModelListResultValue</c>:
-        /// <code>{
-        ///   id: string, # Optional. Resource ID.
-        ///   name: string, # Optional. Resource name.
-        ///   type: string, # Optional. Resource type.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2sAsync(Int32,Int32,Int64,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> Get2sAsync(int? limit = null, int? offset = null, long? maxpagesize = null, RequestContext context = null)
         {
-            return Get2sImplementationAsync("PaginationParamsClient.Get2s", limit, offset, maxpagesize, context);
-        }
-
-        private AsyncPageable<BinaryData> Get2sImplementationAsync(string diagnosticsScopeName, int? limit, int? offset, long? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGet2sRequest(limit, offset, maxpagesize, context)
-                        : CreateGet2sNextPageRequest(nextLink, limit, offset, maxpagesize, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet2sNextPageRequest(nextLink, limit, offset, maxpagesize, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", context);
         }
 
         /// <param name="limit"> Optional. Specified maximum number of total containers. </param>
@@ -271,66 +106,12 @@ namespace PaginationParams_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call Get2s and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// foreach (var data in client.Get2s())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.ToString());
-        /// }
-        /// ]]></code>
-        /// This sample shows how to call Get2s with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// foreach (var data in client.Get2s(1234, 1234, 1234))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("type").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>PageSizeIntegerModelListResultValue</c>:
-        /// <code>{
-        ///   id: string, # Optional. Resource ID.
-        ///   name: string, # Optional. Resource name.
-        ///   type: string, # Optional. Resource type.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get2s(Int32,Int32,Int64,RequestContext)']/*" />
         public virtual Pageable<BinaryData> Get2s(int? limit = null, int? offset = null, long? maxpagesize = null, RequestContext context = null)
         {
-            return Get2sImplementation("PaginationParamsClient.Get2s", limit, offset, maxpagesize, context);
-        }
-
-        private Pageable<BinaryData> Get2sImplementation(string diagnosticsScopeName, int? limit, int? offset, long? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGet2sRequest(limit, offset, maxpagesize, context)
-                        : CreateGet2sNextPageRequest(nextLink, limit, offset, maxpagesize, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet2sRequest(limit, offset, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet2sNextPageRequest(nextLink, limit, offset, maxpagesize, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get2s", "value", "nextLink", context);
         }
 
         /// <param name="maxCount"> Optional. Specified maximum number of total containers. </param>
@@ -339,66 +120,12 @@ namespace PaginationParams_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call Get3sAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// await foreach (var data in client.Get3sAsync())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.ToString());
-        /// }
-        /// ]]></code>
-        /// This sample shows how to call Get3sAsync with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// await foreach (var data in client.Get3sAsync(1234, 1234, 1234))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("type").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>PageSizeIntegerModelListResultValue</c>:
-        /// <code>{
-        ///   id: string, # Optional. Resource ID.
-        ///   name: string, # Optional. Resource name.
-        ///   type: string, # Optional. Resource type.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get3sAsync(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> Get3sAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return Get3sImplementationAsync("PaginationParamsClient.Get3s", maxCount, skip, maxpagesize, context);
-        }
-
-        private AsyncPageable<BinaryData> Get3sImplementationAsync(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGet3sRequest(maxCount, skip, maxpagesize, context)
-                        : CreateGet3sNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet3sRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet3sNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get3s", "value", "nextLink", context);
         }
 
         /// <param name="maxCount"> Optional. Specified maximum number of total containers. </param>
@@ -407,66 +134,12 @@ namespace PaginationParams_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call Get3s and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// foreach (var data in client.Get3s())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.ToString());
-        /// }
-        /// ]]></code>
-        /// This sample shows how to call Get3s with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// foreach (var data in client.Get3s(1234, 1234, 1234))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("type").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>PageSizeIntegerModelListResultValue</c>:
-        /// <code>{
-        ///   id: string, # Optional. Resource ID.
-        ///   name: string, # Optional. Resource name.
-        ///   type: string, # Optional. Resource type.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get3s(Int32,Int32,Int32,RequestContext)']/*" />
         public virtual Pageable<BinaryData> Get3s(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
-            return Get3sImplementation("PaginationParamsClient.Get3s", maxCount, skip, maxpagesize, context);
-        }
-
-        private Pageable<BinaryData> Get3sImplementation(string diagnosticsScopeName, int? maxCount, int? skip, int? maxpagesize, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGet3sRequest(maxCount, skip, maxpagesize, context)
-                        : CreateGet3sNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet3sRequest(maxCount, skip, maxpagesize, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet3sNextPageRequest(nextLink, maxCount, skip, maxpagesize, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get3s", "value", "nextLink", context);
         }
 
         /// <param name="top"> Optional. Specified maximum number of total containers. </param>
@@ -475,66 +148,12 @@ namespace PaginationParams_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call Get4sAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// await foreach (var data in client.Get4sAsync())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.ToString());
-        /// }
-        /// ]]></code>
-        /// This sample shows how to call Get4sAsync with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// await foreach (var data in client.Get4sAsync(1234, 1234, 1234))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("type").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>PageSizeIntegerModelListResultValue</c>:
-        /// <code>{
-        ///   id: string, # Optional. Resource ID.
-        ///   name: string, # Optional. Resource name.
-        ///   type: string, # Optional. Resource type.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get4sAsync(Int32,Int32,Single,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> Get4sAsync(int? top = null, int? skip = null, float? maxcount = null, RequestContext context = null)
         {
-            return Get4sImplementationAsync("PaginationParamsClient.Get4s", top, skip, maxcount, context);
-        }
-
-        private AsyncPageable<BinaryData> Get4sImplementationAsync(string diagnosticsScopeName, int? top, int? skip, float? maxcount, RequestContext context)
-        {
-            return PageableHelpers.CreateAsyncPageable(CreateEnumerableAsync, ClientDiagnostics, diagnosticsScopeName);
-            async IAsyncEnumerable<Page<BinaryData>> CreateEnumerableAsync(string nextLink, int? pageSizeHint, [EnumeratorCancellation] CancellationToken cancellationToken = default)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGet4sRequest(top, skip, maxcount, context)
-                        : CreateGet4sNextPageRequest(nextLink, top, skip, maxcount, context);
-                    var page = await LowLevelPageableHelpers.ProcessMessageAsync(_pipeline, message, context, "value", "nextLink", cancellationToken).ConfigureAwait(false);
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet4sRequest(top, skip, maxcount, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet4sNextPageRequest(nextLink, top, skip, maxcount, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get4s", "value", "nextLink", context);
         }
 
         /// <param name="top"> Optional. Specified maximum number of total containers. </param>
@@ -543,66 +162,12 @@ namespace PaginationParams_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call Get4s and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// foreach (var data in client.Get4s())
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.ToString());
-        /// }
-        /// ]]></code>
-        /// This sample shows how to call Get4s with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new PaginationParamsClient(credential);
-        /// 
-        /// foreach (var data in client.Get4s(1234, 1234, 1234))
-        /// {
-        ///     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-        ///     Console.WriteLine(result.GetProperty("id").ToString());
-        ///     Console.WriteLine(result.GetProperty("name").ToString());
-        ///     Console.WriteLine(result.GetProperty("type").ToString());
-        /// }
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for one item in the pageable response.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>PageSizeIntegerModelListResultValue</c>:
-        /// <code>{
-        ///   id: string, # Optional. Resource ID.
-        ///   name: string, # Optional. Resource name.
-        ///   type: string, # Optional. Resource type.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/PaginationParamsClient.xml" path="doc/members/member[@name='Get4s(Int32,Int32,Single,RequestContext)']/*" />
         public virtual Pageable<BinaryData> Get4s(int? top = null, int? skip = null, float? maxcount = null, RequestContext context = null)
         {
-            return Get4sImplementation("PaginationParamsClient.Get4s", top, skip, maxcount, context);
-        }
-
-        private Pageable<BinaryData> Get4sImplementation(string diagnosticsScopeName, int? top, int? skip, float? maxcount, RequestContext context)
-        {
-            return PageableHelpers.CreatePageable(CreateEnumerable, ClientDiagnostics, diagnosticsScopeName);
-            IEnumerable<Page<BinaryData>> CreateEnumerable(string nextLink, int? pageSizeHint)
-            {
-                do
-                {
-                    var message = string.IsNullOrEmpty(nextLink)
-                        ? CreateGet4sRequest(top, skip, maxcount, context)
-                        : CreateGet4sNextPageRequest(nextLink, top, skip, maxcount, context);
-                    var page = LowLevelPageableHelpers.ProcessMessage(_pipeline, message, context, "value", "nextLink");
-                    nextLink = page.ContinuationToken;
-                    yield return page;
-                } while (!string.IsNullOrEmpty(nextLink));
-            }
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGet4sRequest(top, skip, maxcount, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGet4sNextPageRequest(nextLink, top, skip, maxcount, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PaginationParamsClient.Get4s", "value", "nextLink", context);
         }
 
         internal HttpMessage CreateGetPaginationParamsRequest(int? maxCount, int? skip, int? maxpagesize, RequestContext context)

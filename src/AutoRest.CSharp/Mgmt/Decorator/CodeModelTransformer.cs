@@ -1,12 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Collections.Generic;
+using AutoRest.CSharp.Common.Decorator;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator.Transformer;
-using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -14,6 +12,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
     {
         public static void Transform()
         {
+            // schema usage transformer must run first
+            SchemaUsageTransformer.Transform(MgmtContext.CodeModel);
+            DefaultDerivedSchema.AddDefaultDerivedSchemas(MgmtContext.CodeModel);
             OmitOperationGroups.RemoveOperationGroups();
             PartialResourceResolver.Update();
             SubscriptionIdUpdater.Update();

@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace Inheritance.Models
 {
     /// <summary> The BaseClassWithEntensibleEnumDiscriminatorEnum. </summary>
-    internal readonly partial struct BaseClassWithEntensibleEnumDiscriminatorEnum : IEquatable<BaseClassWithEntensibleEnumDiscriminatorEnum>
+    public readonly partial struct BaseClassWithEntensibleEnumDiscriminatorEnum : IEquatable<BaseClassWithEntensibleEnumDiscriminatorEnum>
     {
         private readonly string _value;
 

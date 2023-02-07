@@ -1,0 +1,316 @@
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
+using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoRest.CSharp.AutoRest.Plugins;
+using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Simplification;
+
+namespace AutoRest.CSharp.Common.Output.PostProcessing;
+
+internal class PostProcessor
+{
+    public PostProcessor()
+    {
+    }
+
+    protected record TypeSymbols(ImmutableHashSet<INamedTypeSymbol> DeclaredSymbols, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> DocumentsCache);
+
+    /// <summary>
+    /// This method reads the project, returns the types defined in it and build symbol caches to acceralate the calculation
+    /// By default, the types defined in shared documents are not included. Please override <see cref="ShouldIncludeDocument(Document)"/> to tweak this behaviour
+    /// </summary>
+    /// <param name="compilation">The <see cref="Compilation"/> of the <paramref name="project"/> </param>
+    /// <param name="project">The project to extract type symbols from</param>
+    /// <param name="publicOnly">If <paramref name="publicOnly"/> is true, only public types will be included. If <paramref name="publicOnly"/> is false, all types will be included </param>
+    /// <returns>A instance of <see cref="TypeSymbols"/> which includes the information of the declared symbols of the given accessibility, along with some useful cache that is useful in this class. </returns>
+    protected async Task<TypeSymbols> GetTypeSymbolsAsync(Compilation compilation, Project project, bool publicOnly = true)
+    {
+        var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+        var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
+        var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
+        foreach (var document in project.Documents)
+        {
+            if (ShouldIncludeDocument(document))
+            {
+                var root = await document.GetSyntaxRootAsync();
+                if (root == null)
+                    continue;
+
+                var semanticModel = compilation.GetSemanticModel(root.SyntaxTree);
+
+                foreach (var typeDeclaration in root.DescendantNodes().OfType<BaseTypeDeclarationSyntax>())
+                {
+                    var symbol = semanticModel.GetDeclaredSymbol(typeDeclaration);
+                    if (symbol == null)
+                        continue;
+                    if (publicOnly && symbol.DeclaredAccessibility != Accessibility.Public)
+                        continue;
+                    result.Add(symbol);
+                    declarationCache.AddInList(symbol, typeDeclaration);
+                    documentCache.AddInList(document, symbol, () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default));
+                }
+            }
+        }
+
+        return new TypeSymbols(result.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default),
+            declarationCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet(), (IEqualityComparer<INamedTypeSymbol>)SymbolEqualityComparer.Default),
+            documentCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default)));
+    }
+
+    protected virtual bool ShouldIncludeDocument(Document document) => !GeneratedCodeWorkspace.IsSharedDocument(document);
+
+    /// <summary>
+    /// This method marks the "not publicly" referenced types as internal if they are previously defined as public. It will do this job in the following steps:
+    /// 1. This method will read all the public types defined in the given <paramref name="project"/>, and build a cache for those symbols
+    /// 2. Build a public reference map for those symbols
+    /// 3. Finds all the root symbols, please override the <see cref="IsRootDocument(Document)"/> to control which document you would like to include
+    /// 4. Visit all the symbols starting from the root symbols following the reference map to get all unvisited symbols
+    /// 5. Change the accessibility of the unvisited symbols in step 4 to internal
+    /// </summary>
+    /// <param name="project">The project to process</param>
+    /// <returns>The processed <see cref="Project"/>. <see cref="Project"/> is immutable, therefore this should usually be a new instance </returns>
+    public async Task<Project> InternalizeAsync(Project project)
+    {
+        var compilation = await project.GetCompilationAsync();
+        if (compilation == null)
+            return project;
+
+        // first get all the declared symbols
+        var definitions = await GetTypeSymbolsAsync(compilation, project, true);
+        // build the reference map
+        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildPublicReferenceMapAsync(definitions.DeclaredSymbols, definitions.DeclaredNodesCache);
+        // get the root symbols
+        var rootSymbols = GetRootSymbols(project, definitions);
+        // traverse all the root and recursively add all the things we met
+        var publicSymbols = VisitSymbolsFromRootAsync(rootSymbols, referenceMap);
+
+        var symbolsToInternalize = definitions.DeclaredSymbols.Except(publicSymbols);
+
+        var nodesToInternalize = new List<BaseTypeDeclarationSyntax>();
+        foreach (var symbol in symbolsToInternalize)
+        {
+            nodesToInternalize.AddRange(definitions.DeclaredNodesCache[symbol]);
+        }
+
+        foreach (var model in nodesToInternalize)
+        {
+            project = MarkInternal(project, model);
+        }
+
+        return project;
+    }
+
+    /// <summary>
+    /// This method removes the no-referenced types from the <paramref name="project"/>. It will do this job in the following steps:
+    /// 1. This method will read all the defined types in the given <paramref name="project"/>, and build a cache for those symbols
+    /// 2. Build a reference map for those symbols (including non-public usage)
+    /// 3. Finds all the root symbols, please override the <see cref="IsRootDocument(Document)"/> to control which document you would like to include
+    /// 4. Visit all the symbols starting from the root symbols following the reference map to get all unvisited symbols
+    /// 5. Remove the definition of the unvisited symbols in step 4
+    /// </summary>
+    /// <param name="project">The project to process</param>
+    /// <returns>The processed <see cref="Project"/>. <see cref="Project"/> is immutable, therefore this should usually be a new instance </returns>
+    public async Task<Project> RemoveAsync(Project project)
+    {
+        var compilation = await project.GetCompilationAsync();
+        if (compilation == null)
+            return project;
+
+        // find all the declarations, including non-public declared
+        var definitions = await GetTypeSymbolsAsync(compilation, project, false);
+        // build reference map
+        var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildAllReferenceMapAsync(definitions.DeclaredSymbols, definitions.DocumentsCache);
+        // get root symbols
+        var rootSymbols = GetRootSymbols(project, definitions);
+        // traverse the map to determine the declarations that we are about to remove, starting from root nodes
+        var referencedSymbols = VisitSymbolsFromRootAsync(rootSymbols, referenceMap);
+
+        var symbolsToRemove = definitions.DeclaredSymbols.Except(referencedSymbols);
+
+        var nodesToRemove = new List<BaseTypeDeclarationSyntax>();
+        foreach (var symbol in symbolsToRemove)
+        {
+            nodesToRemove.AddRange(definitions.DeclaredNodesCache[symbol]);
+        }
+
+        // remove them one by one
+        return await RemoveModelsAsync(project, nodesToRemove);
+    }
+
+    /// <summary>
+    /// Do a BFS starting from the <paramref name="rootSymbols"/> by following the <paramref name="referenceMap"/>
+    /// </summary>
+    /// <param name="rootSymbols"></param>
+    /// <param name="referenceMap"></param>
+    /// <returns></returns>
+    private static IEnumerable<INamedTypeSymbol> VisitSymbolsFromRootAsync(IEnumerable<INamedTypeSymbol> rootSymbols, ReferenceMap referenceMap)
+    {
+        var queue = new Queue<INamedTypeSymbol>(rootSymbols.Concat(referenceMap.GlobalReferencedSymbols));
+        var visited = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+        while (queue.Count > 0)
+        {
+            var definition = queue.Dequeue();
+            if (visited.Contains(definition))
+                continue;
+            visited.Add(definition);
+            // add this definition to the result
+            yield return definition;
+            // add every type referenced by this node to the queue
+            foreach (var child in GetReferencedTypes(definition, referenceMap))
+            {
+                queue.Enqueue(child);
+            }
+        }
+    }
+
+    private static IEnumerable<T> GetReferencedTypes<T>(T definition, IReadOnlyDictionary<T, IEnumerable<T>> referenceMap) where T : notnull
+    {
+        if (referenceMap.TryGetValue(definition, out var references))
+            return references;
+
+        return Enumerable.Empty<T>();
+    }
+
+    private Project MarkInternal(Project project, BaseTypeDeclarationSyntax declarationNode)
+    {
+        var newNode = ChangeModifier(declarationNode, SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword);
+        var tree = declarationNode.SyntaxTree;
+        var document = project.GetDocument(tree)!;
+        var newRoot = tree.GetRoot().ReplaceNode(declarationNode, newNode).WithAdditionalAnnotations(Simplifier.Annotation);
+        document = document.WithSyntaxRoot(newRoot);
+        return document.Project;
+    }
+
+    private async Task<Project> RemoveModelsAsync(Project project, IEnumerable<BaseTypeDeclarationSyntax> unusedModels)
+    {
+        // accumulate the definitions from the same document together
+        var documents = new Dictionary<Document, HashSet<BaseTypeDeclarationSyntax>>();
+        foreach (var model in unusedModels)
+        {
+            var document = project.GetDocument(model.SyntaxTree);
+            Debug.Assert(document != null);
+            if (!documents.ContainsKey(document))
+                documents.Add(document, new HashSet<BaseTypeDeclarationSyntax>());
+
+            documents[document].Add(model);
+        }
+
+        foreach (var models in documents.Values)
+        {
+            project = await RemoveModelsFromDocumentAsync(project, models);
+        }
+
+        return project;
+    }
+
+    private static BaseTypeDeclarationSyntax ChangeModifier(BaseTypeDeclarationSyntax memberDeclaration, SyntaxKind from, SyntaxKind to)
+    {
+        var originalTokenInList = memberDeclaration.Modifiers.FirstOrDefault(token => token.IsKind(from));
+
+        // skip this if there is nothing to replace
+        if (originalTokenInList == default)
+            return memberDeclaration;
+
+        var newToken = SyntaxFactory.Token(originalTokenInList.LeadingTrivia, to, originalTokenInList.TrailingTrivia);
+        var newModifiers = memberDeclaration.Modifiers.Replace(originalTokenInList, newToken);
+        return memberDeclaration.WithModifiers(newModifiers);
+    }
+
+    private async Task<Project> RemoveModelsFromDocumentAsync(Project project, IEnumerable<BaseTypeDeclarationSyntax> models)
+    {
+        var tree = models.First().SyntaxTree;
+        var document = project.GetDocument(tree);
+        if (document == null)
+            return project;
+        var root = await tree.GetRootAsync();
+        root = root.RemoveNodes(models, SyntaxRemoveOptions.KeepNoTrivia);
+        document = document.WithSyntaxRoot(root!);
+        return document.Project;
+    }
+
+    protected HashSet<INamedTypeSymbol> GetRootSymbols(Project project, TypeSymbols modelSymbols)
+    {
+        var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+        foreach (var symbol in modelSymbols.DeclaredSymbols)
+        {
+            foreach (var declarationNode in modelSymbols.DeclaredNodesCache[symbol])
+            {
+                var document = project.GetDocument(declarationNode.SyntaxTree);
+                if (document == null)
+                    continue;
+                if (IsRootDocument(document))
+                {
+                    result.Add(symbol);
+                    break;
+                    // if any of the declaring document of this symbol is considered as a root document, we add the symbol to the root list, skipping the processing of any other documents of this symbol
+                }
+            }
+        }
+
+        return result;
+    }
+
+    protected virtual bool IsRootDocument(Document document)
+    {
+        // a document is a root document, when
+        // 1. it is a custom document (not generated or shared)
+        // 2. it is a client
+        return GeneratedCodeWorkspace.IsCustomDocument(document) || IsClientDocument(document);
+    }
+
+    private static bool IsClientDocument(Document document)
+    {
+        return document.Name.EndsWith("Client.cs", StringComparison.Ordinal);
+    }
+
+    protected virtual bool HasDiscriminator(BaseTypeDeclarationSyntax node, [MaybeNullWhen(false)] out HashSet<string> identifiers)
+    {
+        identifiers = null;
+        // only class models will have discriminators
+        if (node is ClassDeclarationSyntax classDeclaration)
+        {
+            if (classDeclaration.HasLeadingTrivia)
+            {
+                var syntaxTriviaList = classDeclaration.GetLeadingTrivia();
+                var filteredTriviaList = syntaxTriviaList.Where(syntaxTrivia => DiscriminatorDescFixedPart.All(syntaxTrivia.ToFullString().Contains));
+                if (filteredTriviaList.Count() == 1)
+                {
+                    var descendantNodes = filteredTriviaList.First().GetStructure()?.DescendantNodes().ToList();
+                    var filteredDescendantNodes = FilterTriviaWithDiscriminator(descendantNodes);
+                    var identifierNodes = filteredDescendantNodes.SelectMany(node => node.DescendantNodes().OfType<XmlCrefAttributeSyntax>());
+                    identifiers = identifierNodes.Select(identifier => identifier.Cref.ToFullString()).ToHashSet();
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        return false;
+    }
+
+    private static IEnumerable<SyntaxNode> FilterTriviaWithDiscriminator(List<SyntaxNode>? nodes)
+    {
+        if (nodes is null)
+        {
+            return Enumerable.Empty<SyntaxNode>();
+        }
+
+        // If the base class has discriminator, we will add a description at the end of the original description to add the known derived types
+        // Here we use the added description to filter the syntax nodes coming from xml comment to get all the derived types exactly
+        var targetIndex = nodes.FindLastIndex(node => node.ToFullString().Contains(DiscriminatorDescFixedPart.Last()));
+        return nodes.Where((val, index) => index >= targetIndex);
+    }
+
+    private static readonly List<string> DiscriminatorDescFixedPart = ObjectType.DiscriminatorDescFixedPart;
+}

@@ -45,19 +45,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return isAsync ? new CSharpType(typeof(AsyncPageable<>), type) : new CSharpType(typeof(Pageable<>), type);
         }
 
-        public static CSharpType WrapPageable(this Type type, bool isAsync)
-        {
-            return isAsync ? new CSharpType(typeof(AsyncPageable<>), new CSharpType(type)) : new CSharpType(typeof(Pageable<>), new CSharpType(type));
-        }
-
         public static CSharpType WrapAsync(this CSharpType type, bool isAsync)
         {
             return isAsync ? new CSharpType(typeof(Task<>), type) : type;
-        }
-
-        public static CSharpType WrapAsync(this Type type, bool isAsync)
-        {
-            return new CSharpType(type).WrapAsync(isAsync);
         }
 
         public static CSharpType WrapResponse(this CSharpType type, bool isAsync)
@@ -72,29 +62,20 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return isAsync ? new CSharpType(typeof(Task<>), response) : response;
         }
 
-        public static CSharpType WrapResponse(this Type type, bool isAsync)
+        public static bool TryCast<T>(this CSharpType type, [MaybeNullWhen(false)] out T provider) where T : TypeProvider
         {
-            var response = new CSharpType(typeof(Response<>), new CSharpType(type));
-            return isAsync ? new CSharpType(typeof(Task<>), response) : response;
-        }
-
-        public static CSharpType UnWrapResponse(this CSharpType type)
-        {
-            return type.Name == "Response" && type.Arguments.Length == 1 ? type.Arguments[0] : type;
-        }
-
-        public static bool IsResourceDataType(this CSharpType type, [MaybeNullWhen(false)] out ResourceData data)
-        {
-            data = null;
+            provider = null;
             if (type.IsFrameworkType)
                 return false;
 
-            if (MgmtContext.Library.TryGetTypeProvider(type.Name, out var provider))
-            {
-                data = provider as ResourceData;
-                return data != null;
-            }
-            return false;
+            provider = type.Implementation as T;
+            return provider != null;
         }
+
+        public static bool TryCastResource(this CSharpType type, [MaybeNullWhen(false)] out Resource resource)
+            => type.TryCast<Resource>(out resource);
+
+        public static bool TryCastResourceData(this CSharpType type, [MaybeNullWhen(false)] out ResourceData data)
+            => type.TryCast<ResourceData>(out data);
     }
 }

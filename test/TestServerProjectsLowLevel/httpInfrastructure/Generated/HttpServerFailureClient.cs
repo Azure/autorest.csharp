@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace httpInfrastructure_LowLevel
 {
-    // Data plane generated client. The HttpServerFailure service client.
+    // Data plane generated client.
     /// <summary> The HttpServerFailure service client. </summary>
     public partial class HttpServerFailureClient
     {
@@ -61,16 +61,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Head501Async.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
-        /// 
-        /// Response response = await client.Head501Async();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Head501Async(RequestContext)']/*" />
         public virtual async Task<Response> Head501Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
@@ -91,16 +82,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Head501.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
-        /// 
-        /// Response response = client.Head501();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Head501(RequestContext)']/*" />
         public virtual Response Head501(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
@@ -121,16 +103,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Get501Async.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
-        /// 
-        /// Response response = await client.Get501Async();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Get501Async(RequestContext)']/*" />
         public virtual async Task<Response> Get501Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
@@ -151,16 +124,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Get501.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
-        /// 
-        /// Response response = client.Get501();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Get501(RequestContext)']/*" />
         public virtual Response Get501(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
@@ -182,18 +146,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Post505Async with required request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
-        /// 
-        /// var data = true;
-        /// 
-        /// Response response = await client.Post505Async(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Post505Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Post505Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
@@ -215,18 +168,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Post505 with required request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
-        /// 
-        /// var data = true;
-        /// 
-        /// Response response = client.Post505(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Post505(RequestContent,RequestContext)']/*" />
         public virtual Response Post505(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
@@ -248,18 +190,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Delete505Async with required request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
-        /// 
-        /// var data = true;
-        /// 
-        /// Response response = await client.Delete505Async(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Delete505Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> Delete505Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
@@ -281,18 +212,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Delete505 with required request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HttpServerFailureClient(credential);
-        /// 
-        /// var data = true;
-        /// 
-        /// Response response = client.Delete505(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Delete505(RequestContent,RequestContext)']/*" />
         public virtual Response Delete505(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");

@@ -8,6 +8,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
@@ -79,6 +80,54 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                     }
                 }
             }
+
+            // we also have to iterate all operations
+            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+            {
+                foreach (var operation in operationGroup.Operations)
+                {
+                    foreach (var operationResponse in operation.Responses)
+                    {
+                        ReplaceResponseSchema(schemas, operationResponse as SchemaResponse, replaceSchema);
+                    }
+
+                    foreach (var operationResponse in operation.Exceptions)
+                    {
+                        ReplaceResponseSchema(schemas, operationResponse as SchemaResponse, replaceSchema);
+                    }
+
+                    foreach (var parameter in operation.Parameters)
+                    {
+                        ReplaceRequestParamSchema(schemas, parameter, replaceSchema);
+                    }
+
+                    foreach (var request in operation.Requests)
+                    {
+                        foreach (var parameter in request.Parameters)
+                        {
+                            ReplaceRequestParamSchema(schemas, parameter, replaceSchema);
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void ReplaceResponseSchema(HashSet<Schema> schemas, SchemaResponse? response, Schema replaceSchema)
+        {
+            if (response == null || response.Schema == null)
+                return;
+            if (response.Schema is ChoiceSchema || response.Schema is SealedChoiceSchema)
+            {
+                if (schemas.Contains(response.Schema))
+                    response.Schema = replaceSchema;
+            }
+        }
+
+        private static void ReplaceRequestParamSchema(HashSet<Schema> schemas, RequestParameter parameter, Schema replaceSchema)
+        {
+            if (parameter.Schema is ChoiceSchema || parameter.Schema is SealedChoiceSchema)
+                if (schemas.Contains(parameter.Schema))
+                    parameter.Schema = replaceSchema;
         }
 
         private static Schema CollapseChoices(IEnumerable<Schema> schemas)

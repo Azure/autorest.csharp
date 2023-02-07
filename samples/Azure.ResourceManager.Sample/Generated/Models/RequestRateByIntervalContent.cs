@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -35,10 +36,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="blobContainerSasUri"/> is null. </exception>
         public RequestRateByIntervalContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, IntervalInMin intervalLength) : base(blobContainerSasUri, fromTime, toTime)
         {
-            if (blobContainerSasUri == null)
-            {
-                throw new ArgumentNullException(nameof(blobContainerSasUri));
-            }
+            Argument.AssertNotNull(blobContainerSasUri, nameof(blobContainerSasUri));
 
             IntervalLength = intervalLength;
         }

@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace Accessibility_LowLevel_TokenAuth
 {
-    // Data plane generated client. The Accessibility service client.
+    // Data plane generated client.
     /// <summary> The Accessibility service client. </summary>
     public partial class AccessibilityClient
     {
@@ -61,18 +61,7 @@ namespace Accessibility_LowLevel_TokenAuth
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call OperationAsync with required request content.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new AccessibilityClient(credential);
-        /// 
-        /// var data = "<String>";
-        /// 
-        /// Response response = await client.OperationAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
@@ -93,18 +82,7 @@ namespace Accessibility_LowLevel_TokenAuth
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Operation with required request content.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new AccessibilityClient(credential);
-        /// 
-        /// var data = "<String>";
-        /// 
-        /// Response response = client.Operation(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='Operation(RequestContent,RequestContext)']/*" />
         public virtual Response Operation(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
@@ -125,18 +103,7 @@ namespace Accessibility_LowLevel_TokenAuth
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call OperationInternalAsync with required request content.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new AccessibilityClient(credential);
-        /// 
-        /// var data = "<String>";
-        /// 
-        /// Response response = await client.OperationInternalAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationInternalAsync(RequestContent,RequestContext)']/*" />
         internal virtual async Task<Response> OperationInternalAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
@@ -157,18 +124,7 @@ namespace Accessibility_LowLevel_TokenAuth
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call OperationInternal with required request content.
-        /// <code><![CDATA[
-        /// var credential = new DefaultAzureCredential();
-        /// var client = new AccessibilityClient(credential);
-        /// 
-        /// var data = "<String>";
-        /// 
-        /// Response response = client.OperationInternal(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationInternal(RequestContent,RequestContext)']/*" />
         internal virtual Response OperationInternal(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");

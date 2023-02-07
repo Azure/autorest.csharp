@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace model_flattening.Models
 {
@@ -17,10 +18,7 @@ namespace model_flattening.Models
         /// <exception cref="ArgumentNullException"> <paramref name="productId"/> is null. </exception>
         public SimpleProduct(string productId) : base(productId)
         {
-            if (productId == null)
-            {
-                throw new ArgumentNullException(nameof(productId));
-            }
+            Argument.AssertNotNull(productId, nameof(productId));
         }
 
         /// <summary> Initializes a new instance of SimpleProduct. </summary>

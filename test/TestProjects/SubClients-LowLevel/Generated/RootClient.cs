@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace SubClients_LowLevel
 {
-    // Data plane generated client. The Root service client.
+    // Data plane generated client.
     /// <summary> The Root service client. </summary>
     public partial class RootClient
     {
@@ -68,18 +68,7 @@ namespace SubClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetCachedParameterAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RootClient("<cachedParameter>", credential);
-        /// 
-        /// Response response = await client.GetCachedParameterAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/RootClient.xml" path="doc/members/member[@name='GetCachedParameterAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetCachedParameterAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RootClient.GetCachedParameter");
@@ -99,18 +88,7 @@ namespace SubClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetCachedParameter and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RootClient("<cachedParameter>", credential);
-        /// 
-        /// Response response = client.GetCachedParameter();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/RootClient.xml" path="doc/members/member[@name='GetCachedParameter(RequestContext)']/*" />
         public virtual Response GetCachedParameter(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RootClient.GetCachedParameter");

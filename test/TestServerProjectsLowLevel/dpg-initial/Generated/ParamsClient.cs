@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace dpg_initial_LowLevel
 {
-    // Data plane generated client. The Params service client.
+    // Data plane generated client.
     /// <summary> The Params service client. </summary>
     public partial class ParamsClient
     {
@@ -64,18 +64,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call HeadNoParamsAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = await client.HeadNoParamsAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParamsAsync(RequestContext)']/*" />
         public virtual async Task<Response> HeadNoParamsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
@@ -99,18 +88,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call HeadNoParams and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = client.HeadNoParams();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParams(RequestContext)']/*" />
         public virtual Response HeadNoParams(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
@@ -136,18 +114,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetRequiredAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = await client.GetRequiredAsync("<parameter>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequiredAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> GetRequiredAsync(string parameter, RequestContext context = null)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
@@ -175,18 +142,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetRequired with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = client.GetRequired("<parameter>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequired(String,RequestContext)']/*" />
         public virtual Response GetRequired(string parameter, RequestContext context = null)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
@@ -212,28 +168,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutRequiredOptionalAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = await client.PutRequiredOptionalAsync("<requiredParam>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call PutRequiredOptionalAsync with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptionalAsync(String,String,RequestContext)']/*" />
         public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam = null, RequestContext context = null)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
@@ -259,28 +194,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutRequiredOptional with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = client.PutRequiredOptional("<requiredParam>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call PutRequiredOptional with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = client.PutRequiredOptional("<requiredParam>", "<optionalParam>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptional(String,String,RequestContext)']/*" />
         public virtual Response PutRequiredOptional(string requiredParam, string optionalParam = null, RequestContext context = null)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
@@ -305,34 +219,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PostParametersAsync with required request content and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// var data = new {
-        ///     url = "<url>",
-        /// };
-        /// 
-        /// Response response = await client.PostParametersAsync(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>PostInput</c>:
-        /// <code>{
-        ///   url: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParametersAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PostParametersAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -357,34 +244,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PostParameters with required request content and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// var data = new {
-        ///     url = "<url>",
-        /// };
-        /// 
-        /// Response response = client.PostParameters(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>PostInput</c>:
-        /// <code>{
-        ///   url: string, # Required.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParameters(RequestContent,RequestContext)']/*" />
         public virtual Response PostParameters(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -411,28 +271,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetOptionalAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = await client.GetOptionalAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call GetOptionalAsync with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = await client.GetOptionalAsync("<optionalParam>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptionalAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> GetOptionalAsync(string optionalParam = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
@@ -457,28 +296,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetOptional and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = client.GetOptional();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call GetOptional with all parameters, and how to parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new ParamsClient(credential);
-        /// 
-        /// Response response = client.GetOptional("<optionalParam>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptional(String,RequestContext)']/*" />
         public virtual Response GetOptional(string optionalParam = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");

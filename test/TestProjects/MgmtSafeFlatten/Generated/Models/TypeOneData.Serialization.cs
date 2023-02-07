@@ -101,7 +101,7 @@ namespace MgmtSafeFlatten
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    layerOneConflict = JsonSerializer.Deserialize<WritableSubResource>(property.Value.ToString());
+                    layerOneConflict = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("tags"))
@@ -146,7 +146,7 @@ namespace MgmtSafeFlatten
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
             }

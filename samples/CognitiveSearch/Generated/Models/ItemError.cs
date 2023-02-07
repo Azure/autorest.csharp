@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -18,10 +19,7 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="errorMessage"/> is null. </exception>
         internal ItemError(string errorMessage, int statusCode)
         {
-            if (errorMessage == null)
-            {
-                throw new ArgumentNullException(nameof(errorMessage));
-            }
+            Argument.AssertNotNull(errorMessage, nameof(errorMessage));
 
             ErrorMessage = errorMessage;
             StatusCode = statusCode;

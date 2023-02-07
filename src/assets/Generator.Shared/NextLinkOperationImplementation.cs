@@ -5,6 +5,7 @@
 
 using System;
 using System.Linq;
+using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -39,17 +40,12 @@ namespace Azure.Core
         {
             string? apiVersionStr = apiVersionOverride ?? (TryGetApiVersion(startRequestUri, out ReadOnlySpan<char> apiVersion) ? apiVersion.ToString() : null);
             var headerSource = GetHeaderSource(requestMethod, startRequestUri, response, apiVersionStr, out var nextRequestUri);
-            if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState))
+            if (headerSource == HeaderSource.None && IsFinalState(response, headerSource, out var failureState, out _))
             {
                 return new CompletedOperation(failureState ?? GetOperationStateFromFinalResponse(requestMethod, response));
             }
 
-            var (originalResponseHasLocation, lastKnownLocation) = headerSource == HeaderSource.Location
-                ? (true, nextRequestUri)
-                : response.Headers.TryGetValue("Location", out var locationUri)
-                    ? (true, locationUri)
-                    : (false, null);
-
+            var originalResponseHasLocation = response.Headers.TryGetValue("Location", out var lastKnownLocation);
             return new NextLinkOperationImplementation(pipeline, requestMethod, startRequestUri, nextRequestUri, headerSource, originalResponseHasLocation, lastKnownLocation, finalStateVia, apiVersionStr);
         }
 
@@ -92,7 +88,7 @@ namespace Azure.Core
         {
             Response response = await GetResponseAsync(async, _nextRequestUri, cancellationToken).ConfigureAwait(false);
 
-            var hasCompleted = IsFinalState(response, _headerSource, out var failureState);
+            var hasCompleted = IsFinalState(response, _headerSource, out var failureState, out var resourceLocation);
             if (failureState != null)
             {
                 return failureState.Value;
@@ -100,7 +96,7 @@ namespace Azure.Core
 
             if (hasCompleted)
             {
-                string? finalUri = GetFinalUri();
+                string? finalUri = GetFinalUri(resourceLocation);
                 var finalResponse = finalUri != null
                     ? await GetResponseAsync(async, finalUri, cancellationToken).ConfigureAwait(false)
                     : response;
@@ -215,34 +211,49 @@ namespace Azure.Core
         /// <summary>
         /// This function is used to get the final request uri after the lro has completed.
         /// </summary>
-        private string? GetFinalUri()
+        private string? GetFinalUri(string? resourceLocation)
         {
-            // Set final uri as null if the response header doesn't contain "Operation-Location" or "Azure-AsyncOperation".
+            // Set final uri as null if the response for initial request doesn't contain header "Operation-Location" or "Azure-AsyncOperation".
             if (_headerSource is not (HeaderSource.OperationLocation or HeaderSource.AzureAsyncOperation))
             {
                 return null;
             }
 
-            // Set final uri as null if original request is a delete method.
+            // Set final uri as null if initial request is a delete method.
             if (_requestMethod == RequestMethod.Delete)
             {
                 return null;
             }
 
-            // Set final uri as original request's uri if one of these requirements are met:
-            // 1.Original request is a put method;
-            // 2.Original request is a management plane patch method. For data plane patch method, the final uri will be determinned by the original response header and "_finalStateVia";
-            // 3.Original response header contains "Location" and FinalStateVia is configured to OriginalUri.
-            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch && _startRequestUri.Scheme == "https" && _startRequestUri.Host == "management.azure.com" || _originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.OriginalUri)
+            // Handle final-state-via options: https://github.com/Azure/autorest/blob/main/docs/extensions/readme.md#x-ms-long-running-operation-options
+            switch (_finalStateVia)
+            {
+                case OperationFinalStateVia.LocationOverride when _originalResponseHasLocation:
+                    return _lastKnownLocation;
+                case OperationFinalStateVia.OperationLocation or OperationFinalStateVia.AzureAsyncOperation when _requestMethod == RequestMethod.Post:
+                    return null;
+                case OperationFinalStateVia.OriginalUri:
+                    return _startRequestUri.AbsoluteUri;
+            }
+
+            // If response body contains resourceLocation, use it: https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#target-resource-location
+            if (resourceLocation != null)
+            {
+                return resourceLocation;
+            }
+
+            // If initial request is PUT or PATCH, return initial request Uri
+            if (_requestMethod == RequestMethod.Put || _requestMethod == RequestMethod.Patch)
             {
                 return _startRequestUri.AbsoluteUri;
             }
 
-            // Set final uri as last known location header if original response header contains "Location" and FinalStateVia is configured to Location.
-            if (_originalResponseHasLocation && _finalStateVia == OperationFinalStateVia.Location)
+            // If response for initial request contains header "Location", return last known location
+            if (_originalResponseHasLocation)
             {
                 return _lastKnownLocation;
             }
+
             return null;
         }
 
@@ -278,9 +289,11 @@ namespace Azure.Core
             return message;
         }
 
-        private static bool IsFinalState(Response response, HeaderSource headerSource, out OperationState? failureState)
+        private static bool IsFinalState(Response response, HeaderSource headerSource, out OperationState? failureState, out string? resourceLocation)
         {
             failureState = null;
+            resourceLocation = null;
+
             if (headerSource == HeaderSource.Location)
             {
                 return response.Status != 202;
@@ -288,7 +301,7 @@ namespace Azure.Core
 
             if (response.Status is >= 200 and <= 204)
             {
-                if (response.ContentStream?.Length > 0)
+                if (response.ContentStream is {Length: > 0})
                 {
                     try
                     {
@@ -305,9 +318,17 @@ namespace Azure.Core
                                     failureState = OperationState.Failure(response);
                                     return true;
                                 }
+                                else if (!SuccessStates.Contains(state))
+                                {
+                                    return false;
+                                }
                                 else
                                 {
-                                    return SuccessStates.Contains(state);
+                                    if (headerSource is HeaderSource.OperationLocation or HeaderSource.AzureAsyncOperation && root.TryGetProperty("resourceLocation", out var resourceLocationProperty))
+                                    {
+                                        resourceLocation = resourceLocationProperty.GetString();
+                                    }
+                                    return true;
                                 }
                         }
                     }
@@ -318,7 +339,7 @@ namespace Azure.Core
                     }
                 }
 
-                // If provisioningState was not found, it defaults to Succeeded.
+                // If headerSource is None and provisioningState was not found, it defaults to Succeeded.
                 if (headerSource == HeaderSource.None)
                 {
                     return true;

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetPaginationLedgerEntriesAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call GetPaginationLedgerEntriesAsync with required request content and parse the result.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+};
+
+await foreach (var data in client.GetPaginationLedgerEntriesAsync(RequestContent.Create(data)))
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
+}
+]]></code>
+</example>
+<remarks>
+A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
+
+Below is the JSON schema for the request payload and one item in the pageable response.
+
+Request Body:
+
+Schema for <c>ListLedgerEntryInputBody</c>:
+<code>{
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
+}
+</code>
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  contents: string, # Required. Contents of the ledger entry.
+  collectionId: string, # Required.
+  transactionId: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetPaginationLedgerEntries(RequestContent,RequestContext)">
+<example>
+This sample shows how to call GetPaginationLedgerEntries with required request content and parse the result.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+};
+
+foreach (var data in client.GetPaginationLedgerEntries(RequestContent.Create(data)))
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
+}
+]]></code>
+</example>
+<remarks>
+A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
+
+Below is the JSON schema for the request payload and one item in the pageable response.
+
+Request Body:
+
+Schema for <c>ListLedgerEntryInputBody</c>:
+<code>{
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
+}
+</code>
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  contents: string, # Required. Contents of the ledger entry.
+  collectionId: string, # Required.
+  transactionId: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetLedgerEntriesAsync(RequestContext)">
+<example>
+This sample shows how to call GetLedgerEntriesAsync and parse the result.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+await foreach (var data in client.GetLedgerEntriesAsync())
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  contents: string, # Required. Contents of the ledger entry.
+  collectionId: string, # Required.
+  transactionId: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetLedgerEntries(RequestContext)">
+<example>
+This sample shows how to call GetLedgerEntries and parse the result.
+<code><![CDATA[
+var credential = new DefaultAzureCredential();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new PaginationClient(endpoint, credential);
+
+foreach (var data in client.GetLedgerEntries())
+{
+    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("contents").ToString());
+    Console.WriteLine(result.GetProperty("collectionId").ToString());
+    Console.WriteLine(result.GetProperty("transactionId").ToString());
+}
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for one item in the pageable response.
+
+Response Body:
+
+Schema for <c>Array</c>:
+<code>{
+  contents: string, # Required. Contents of the ledger entry.
+  collectionId: string, # Required.
+  transactionId: string, # Required.
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

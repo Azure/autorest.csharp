@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "stringformat",
+ "Name": "stringFormat",
  "ApiVersions": [
   "2015-06-18"
  ],
@@ -9,11 +9,13 @@
  "Clients": [
   {
    "$id": "2",
-   "Name": "stringFormat",
+   "Name": "stringFormatClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "3",
      "Name": "getZonedDateTime",
+     "ResourceName": "stringFormat",
      "Description": "Path parameter is string with zonedDateTime format",
      "Parameters": [
       {
@@ -22,7 +24,7 @@
        "NameInRequest": "time",
        "Type": {
         "$id": "5",
-        "Name": "DateTime",
+        "Name": "zonedDateTime",
         "Kind": "DateTime",
         "IsNullable": false
        },
@@ -101,19 +103,23 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/zonedDateTime/{time}",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "14",
      "Name": "getUri",
+     "ResourceName": "stringFormat",
      "Description": "path paramter is string with uri format",
      "Parameters": [
       {
@@ -173,20 +179,24 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/uri/{uri}",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
     "$id": "21"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

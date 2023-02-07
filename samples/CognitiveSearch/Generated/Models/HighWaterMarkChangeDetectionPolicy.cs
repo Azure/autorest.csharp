@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -17,10 +18,7 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="highWaterMarkColumnName"/> is null. </exception>
         public HighWaterMarkChangeDetectionPolicy(string highWaterMarkColumnName)
         {
-            if (highWaterMarkColumnName == null)
-            {
-                throw new ArgumentNullException(nameof(highWaterMarkColumnName));
-            }
+            Argument.AssertNotNull(highWaterMarkColumnName, nameof(highWaterMarkColumnName));
 
             HighWaterMarkColumnName = highWaterMarkColumnName;
             OdataType = "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";

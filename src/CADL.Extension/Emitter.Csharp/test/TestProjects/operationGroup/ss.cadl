@@ -1,0 +1,15 @@
+@client({
+  name: "NewOperationGroupService",
+  service: Azure.OperationGroupService
+})
+interface NewOperationGroupService{
+    one is Azure.OperationGroupService.Alpha.one;
+    two is Azure.OperationGroupService.Beta.two;
+    three is Azure.OperationGroupService.Beta.SubBeta.three;
+}
+
+@operationGroup
+interface GammaGroup{
+    four is Azure.OperationGroupService.Gamma.four;
+    five is Azure.OperationGroupService.Gamma.five;
+}

@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "petstore",
+ "Name": "PetStore",
  "Description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
  "ApiVersions": [
   "2021-03-25"
@@ -10,7 +10,7 @@
    "$id": "2",
    "Name": "PetKind",
    "Namespace": "PetStore",
-   "Description": "Extensible enum for pet kind",
+   "Description": "Extensible enum Values for pet kind",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -25,7 +25,8 @@
     }
    ],
    "IsExtensible": true,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "Input"
   }
  ],
  "Models": [
@@ -34,6 +35,7 @@
    "Name": "Pet",
    "Namespace": "PetStore",
    "IsNullable": false,
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "6",
@@ -72,7 +74,7 @@
      "Description": "",
      "Type": {
       "$id": "11",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -86,12 +88,13 @@
  "Clients": [
   {
    "$id": "12",
-   "Name": "Pets",
+   "Name": "PetStoreClient",
    "Description": "Manage your pets. You can delete or get the Pet from pet store.",
    "Operations": [
     {
      "$id": "13",
      "Name": "delete",
+     "ResourceName": "Pets",
      "Summary": "delete.",
      "Description": "Delete a pet.",
      "Parameters": [
@@ -122,7 +125,7 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "17",
-        "Name": "Int32",
+        "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        },
@@ -201,7 +204,9 @@
        "StatusCodes": [
         200
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "DELETE",
@@ -209,11 +214,13 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "26",
      "Name": "read",
+     "ResourceName": "Pets",
      "Description": "Returns a pet. Supports eTags.",
      "Parameters": [
       {
@@ -226,7 +233,7 @@
        "Description": "The id of pet.",
        "Type": {
         "$id": "28",
-        "Name": "Int32",
+        "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        },
@@ -280,7 +287,9 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       },
       {
        "$id": "33",
@@ -290,7 +299,9 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -298,11 +309,13 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "34",
      "Name": "create",
+     "ResourceName": "Pets",
      "Parameters": [
       {
        "$ref": "14"
@@ -391,7 +404,9 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -402,11 +417,13 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "43",
      "Name": "getPetByKind",
+     "ResourceName": "Pets",
      "Parameters": [
       {
        "$ref": "14"
@@ -468,7 +485,9 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -476,11 +495,13 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{kind}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "49",
      "Name": "GetFirstPet",
+     "ResourceName": "Pets",
      "Parameters": [
       {
        "$ref": "14"
@@ -491,7 +512,7 @@
        "NameInRequest": "start",
        "Type": {
         "$id": "51",
-        "Name": "Int32",
+        "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
        },
@@ -545,7 +566,9 @@
        "BodyType": {
         "$ref": "5"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -553,12 +576,14 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
     "$id": "56"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

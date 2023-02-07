@@ -17471,6 +17471,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Create an availability set.:
+              $ref: ./examples/CreateAnAvailabilitySet.json
         language: !Languages 
           default:
             name: CreateOrUpdate
@@ -17803,6 +17807,9 @@ operationGroups:
                 statusCodes:
                   - '200'
         extensions:
+          x-ms-examples:
+            List availability sets in a subscription.:
+              $ref: ./examples/ListAvailabilitySetsInASubscription.json
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -18099,6 +18106,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '201'
+        extensions:
+          x-ms-examples:
+            Create or Update a proximity placement group.:
+              $ref: ./examples/CreateOrUpdateAProximityPlacementGroup.json
         language: !Languages 
           default:
             name: CreateOrUpdate
@@ -18211,6 +18222,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Create a proximity placement group.:
+              $ref: ./examples/PatchAProximityPlacementGroup.json
         language: !Languages 
           default:
             name: Update
@@ -18273,6 +18288,10 @@ operationGroups:
               http: !HttpResponse 
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Create a proximity placement group.:
+              $ref: ./examples/DeleteAProximityPlacementGroup.json
         language: !Languages 
           default:
             name: Delete
@@ -18366,6 +18385,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Create a proximity placement group.:
+              $ref: ./examples/GetAProximityPlacementGroup.json
         language: !Languages 
           default:
             name: Get
@@ -18422,6 +18445,9 @@ operationGroups:
                 statusCodes:
                   - '200'
         extensions:
+          x-ms-examples:
+            Create a proximity placement group.:
+              $ref: ./examples/ListProximityPlacementGroupsInASubscription.json
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -18495,6 +18521,9 @@ operationGroups:
                 statusCodes:
                   - '200'
         extensions:
+          x-ms-examples:
+            Create a proximity placement group.:
+              $ref: ./examples/ListProximityPlacementGroupsInAResourceGroup.json
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -18632,6 +18661,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '201'
+        extensions:
+          x-ms-examples:
+            Create or update a dedicated host group.:
+              $ref: ./examples/CreateOrUpdateADedicatedHostGroup.json
         language: !Languages 
           default:
             name: CreateOrUpdate
@@ -18907,6 +18940,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Create a dedicated host group.:
+              $ref: ./examples/GetADedicatedHostGroup.json
         language: !Languages 
           default:
             name: Get
@@ -19187,6 +19224,9 @@ operationGroups:
                 statusCodes:
                   - '201'
         extensions:
+          x-ms-examples:
+            Create or update a dedicated host .:
+              $ref: ./examples/CreateOrUpdateADedicatedHost.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -19515,6 +19555,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Get a dedicated host.:
+              $ref: ./examples/GetADedicatedHost.json
         language: !Languages 
           default:
             name: Get
@@ -19867,6 +19911,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '201'
+        extensions:
+          x-ms-examples:
+            Create a new SSH public key resource.:
+              $ref: ./examples/CreateAnSshPublicKey.json
         language: !Languages 
           default:
             name: Create
@@ -20131,6 +20179,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Get an ssh public key.:
+              $ref: ./examples/GetAnSshPublicKey.json
         language: !Languages 
           default:
             name: Get
@@ -20212,6 +20264,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Generate an SSH key pair.:
+              $ref: ./examples/GenerateSshKeyPair.json
         language: !Languages 
           default:
             name: GenerateKeyPair
@@ -21781,6 +21837,9 @@ operationGroups:
                 statusCodes:
                   - '200'
         extensions:
+          x-ms-examples:
+            Lists all the virtual machines under the specified subscription for the specified location.:
+              $ref: ./examples/ListVirtualMachinesInASubscriptionByLocation.json
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -22036,6 +22095,47 @@ operationGroups:
                 statusCodes:
                   - '201'
         extensions:
+          x-ms-examples:
+            Create a custom-image vm from an unmanaged generalized os image.:
+              $ref: ./examples/CreateACustomImageVmFromAnUnmanagedGeneralizedOsImage.json
+            Create a platform-image vm with unmanaged os and data disks.:
+              $ref: ./examples/CreateAPlatformImageVmWithUnmanagedOsAndDataDisks.json
+            Create a vm from a custom image.:
+              $ref: ./examples/CreateAVmFromACustomImage.json
+            Create a vm in an availability set.:
+              $ref: ./examples/CreateAVmInAnAvailabilitySet.json
+            Create a vm with DiskEncryptionSet resource id in the os disk and data disk.:
+              $ref: ./examples/CreateAVmWithDiskEncryptionSetResource.json
+            Create a vm with Host Encryption using encryptionAtHost property.:
+              $ref: ./examples/CreateAVmWithEncryptionAtHost.json
+            Create a vm with a marketplace image plan.:
+              $ref: ./examples/CreateAVmWithAMarketplaceImagePlan.json
+            Create a vm with a patch setting patchMode of AutomaticByOS.:
+              $ref: ./examples/CreateAVmWithPatchSettingModeOfAutomaticByOS.json
+            Create a vm with a patch setting patchMode of AutomaticByPlatform.:
+              $ref: ./examples/CreateAVmWithPatchSettingModeOfAutomaticByPlatform.json
+            Create a vm with a patch setting patchMode of Manual.:
+              $ref: ./examples/CreateAVmWithPatchSettingModeOfManual.json
+            Create a vm with an extensions time budget.:
+              $ref: ./examples/CreateAVmWithExtensionsTimeBudget.json
+            Create a vm with boot diagnostics.:
+              $ref: ./examples/CreateAVmWithBootDiagnostics.json
+            Create a vm with empty data disks.:
+              $ref: ./examples/CreateAVmWithEmptyDataDisks.json
+            Create a vm with ephemeral os disk provisioning in Cache disk using placement property.:
+              $ref: ./examples/CreateAVmWithADiffOsDiskUsingDiffDiskPlacementAsCacheDisk.json
+            Create a vm with ephemeral os disk provisioning in Resource disk using placement property.:
+              $ref: ./examples/CreateAVmWithADiffOsDiskUsingDiffDiskPlacementAsResourceDisk.json
+            Create a vm with ephemeral os disk.:
+              $ref: ./examples/CreateAVmWithADiffOsDisk.json
+            Create a vm with managed boot diagnostics.:
+              $ref: ./examples/CreateAVmWithManagedBootDiagnostics.json
+            Create a vm with password authentication.:
+              $ref: ./examples/CreateAVmWithPasswordAuthentication.json
+            Create a vm with premium storage.:
+              $ref: ./examples/CreateAVmWithPremiumStorage.json
+            Create a vm with ssh authentication.:
+              $ref: ./examples/CreateAVmWithSshAuthentication.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -22163,6 +22263,9 @@ operationGroups:
                 statusCodes:
                   - '201'
         extensions:
+          x-ms-examples:
+            Update a VM by detaching data disk:
+              $ref: ./examples/UpdateVMDetachDataDiskUsingToBeDetachedProperty.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -22350,6 +22453,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Get a Virtual Machine.:
+              $ref: ./examples/GetVirtualMachine.json
+            Get a virtual machine placed on a dedicated host group through automatic placement:
+              $ref: ./examples/GetVirtualMachineAutoPlacedOnDedicatedHostGroup.json
         language: !Languages 
           default:
             name: Get
@@ -22431,6 +22540,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Get Virtual Machine Instance View.:
+              $ref: ./examples/GetVirtualMachineInstanceView.json
+            Get instance view of a virtual machine placed on a dedicated host group through automatic placement.:
+              $ref: ./examples/GetVirtualMachineInstanceViewAutoPlacedOnDedicatedHostGroup.json
         language: !Languages 
           default:
             name: InstanceView
@@ -22639,6 +22754,10 @@ operationGroups:
               http: !HttpResponse 
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Generalize a Virtual Machine.:
+              $ref: ./examples/GeneralizeVirtualMachine.json
         language: !Languages 
           default:
             name: Generalize
@@ -22869,6 +22988,9 @@ operationGroups:
                 statusCodes:
                   - '200'
         extensions:
+          x-ms-examples:
+            Lists all available virtual machine sizes to which the specified virtual machine can be resized:
+              $ref: ./examples/ListAvailableVmSizes_VirtualMachines.json
           x-ms-pageable:
             nextLinkName: null
         language: !Languages 
@@ -23059,6 +23181,9 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Reapply the state of a virtual machine.:
+              $ref: ./examples/ReapplyVirtualMachine.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -23384,6 +23509,9 @@ operationGroups:
                 statusCodes:
                   - '202'
         extensions:
+          x-ms-examples:
+            Reimage a Virtual Machine.:
+              $ref: ./examples/ReimageVirtualMachine.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -23493,6 +23621,9 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            RetrieveBootDiagnosticsData of a virtual machine.:
+              $ref: ./examples/RetrieveBootDiagnosticsDataVirtualMachine.json
           x-ms-long-running-operation: false
         language: !Languages 
           default:
@@ -23630,6 +23761,9 @@ operationGroups:
                 statusCodes:
                   - '204'
         extensions:
+          x-ms-examples:
+            Simulate Eviction a virtual machine.:
+              $ref: ./examples/SimulateEvictionOfVM.json
           x-ms-long-running-operation: false
         language: !Languages 
           default:
@@ -23736,6 +23870,9 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Assess patch state of a virtual machine.:
+              $ref: ./examples/VirtualMachineAssessPatches.json
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: location
@@ -23954,6 +24091,27 @@ operationGroups:
                 statusCodes:
                   - '201'
         extensions:
+          x-ms-examples:
+            Create a virtual machine image from a blob with DiskEncryptionSet resource.:
+              $ref: ./examples/CreateAnImageFromABlobWithDiskEncryptionSet.json
+            Create a virtual machine image from a blob.:
+              $ref: ./examples/CreateAnImageFromABlob.json
+            Create a virtual machine image from a managed disk with DiskEncryptionSet resource.:
+              $ref: ./examples/CreateAnImageFromAManagedDiskWithDiskEncryptionSet.json
+            Create a virtual machine image from a managed disk.:
+              $ref: ./examples/CreateAnImageFromAManagedDisk.json
+            Create a virtual machine image from a snapshot with DiskEncryptionSet resource.:
+              $ref: ./examples/CreateAnImageFromASnapshotWithDiskEncryptionSet.json
+            Create a virtual machine image from a snapshot.:
+              $ref: ./examples/CreateAnImageFromASnapshot.json
+            Create a virtual machine image from an existing virtual machine.:
+              $ref: ./examples/CreateAnImageFromAVM.json
+            Create a virtual machine image that includes a data disk from a blob.:
+              $ref: ./examples/CreateAnImageThatIncludesADataDiskFromABlob.json
+            Create a virtual machine image that includes a data disk from a managed disk.:
+              $ref: ./examples/CreateAnImageThatIncludesADataDiskFromAManagedDisk.json
+            Create a virtual machine image that includes a data disk from a snapshot.:
+              $ref: ./examples/CreateAnImageThatIncludesADataDiskFromASnapshot.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -24081,6 +24239,9 @@ operationGroups:
                 statusCodes:
                   - '201'
         extensions:
+          x-ms-examples:
+            Updates tags of an Image.:
+              $ref: ./examples/UpdateImage.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -24257,6 +24418,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Get information about a virtual machine image.:
+              $ref: ./examples/GetInformationAboutAnImage.json
         language: !Languages 
           default:
             name: Get
@@ -24326,6 +24491,9 @@ operationGroups:
                 statusCodes:
                   - '200'
         extensions:
+          x-ms-examples:
+            List all virtual machine images in a resource group.:
+              $ref: ./examples/ListImagesInAResourceGroup.json
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -24386,6 +24554,9 @@ operationGroups:
                 statusCodes:
                   - '200'
         extensions:
+          x-ms-examples:
+            List all virtual machine images in a subscription.:
+              $ref: ./examples/ListImagesInASubscription.json
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -24524,6 +24695,47 @@ operationGroups:
                 statusCodes:
                   - '201'
         extensions:
+          x-ms-examples:
+            Create a custom-image scale set from an unmanaged generalized os image.:
+              $ref: ./examples/CreateACustomImageScaleSetFromAnUnmanagedGeneralizedOsImage.json
+            Create a platform-image scale set with unmanaged os disks.:
+              $ref: ./examples/CreateAPlatformImageScaleSetWithUnmanagedOsDisks.json
+            Create a scale set from a custom image.:
+              $ref: ./examples/CreateAScaleSetFromACustomImage.json
+            Create a scale set with DiskEncryptionSet resource in os disk and data disk.:
+              $ref: ./examples/CreateAScalesetWithDiskEncryptionSetResource.json
+            Create a scale set with Host Encryption using encryptionAtHost property.:
+              $ref: ./examples/CreateAScaleSetWithEncryptionAtHost.json
+            Create a scale set with a marketplace image plan.:
+              $ref: ./examples/CreateAScaleSetWithAMarketplaceImagePlan.json
+            Create a scale set with an azure application gateway.:
+              $ref: ./examples/CreateAScaleSetWithAnAzureApplicationGateway.json
+            Create a scale set with an azure load balancer.:
+              $ref: ./examples/CreateAScaleSetWithAnAzureLoadBalancer.json
+            Create a scale set with automatic repairs enabled:
+              $ref: ./examples/CreateAScaleSetWithAutomaticRepairs.json
+            Create a scale set with boot diagnostics.:
+              $ref: ./examples/CreateAScaleSetWithBootDiagnostics.json
+            Create a scale set with empty data disks on each vm.:
+              $ref: ./examples/CreateAScaleSetWithEmptyDataDisksOnEachVm.json
+            Create a scale set with ephemeral os disks using placement property.:
+              $ref: ./examples/CreateAScaleSetWithDiffOsDiskUsingDiffDiskPlacement.json
+            Create a scale set with ephemeral os disks.:
+              $ref: ./examples/CreateAScaleSetWithDiffOsDisk.json
+            Create a scale set with extension time budget.:
+              $ref: ./examples/CreateAScaleSetWithExtensionsTimeBudget.json
+            Create a scale set with managed boot diagnostics.:
+              $ref: ./examples/CreateAScaleSetWithManagedBootDiagnostics.json
+            Create a scale set with password authentication.:
+              $ref: ./examples/CreateAScaleSetWithPasswordAuthentication.json
+            Create a scale set with premium storage.:
+              $ref: ./examples/CreateAScaleSetWithPremiumStorage.json
+            Create a scale set with ssh authentication.:
+              $ref: ./examples/CreateAScaleSetWithSshAuthentication.json
+            Create a scale set with terminate scheduled events enabled.:
+              $ref: ./examples/CreateAScaleSetWithTerminateScheduledEventEnabled.json
+            Create a scale set with virtual machines in different zones.:
+              $ref: ./examples/CreateAScaleSetWithVMsInDifferentZones.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -24802,6 +25014,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Get a virtual machine scale set placed on a dedicated host group through automatic placement.:
+              $ref: ./examples/GetVirtualMachineScaleSetAutoPlacedOnDedicatedHostGroup.json
         language: !Languages 
           default:
             name: Get
@@ -27362,6 +27578,9 @@ operationGroups:
                 statusCodes:
                   - '202'
         extensions:
+          x-ms-examples:
+            Start an extension rolling upgrade.:
+              $ref: ./examples/VMScaleSetExtensionRollingUpgrade.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -27618,6 +27837,9 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Create VirtualMachineScaleSet VM extension.:
+              $ref: ./examples/CreateOrUpdateVirtualMachineScaleSetVMExtensions.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -27772,6 +27994,9 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Update VirtualMachineScaleSet VM extension.:
+              $ref: ./examples/UpdateVirtualMachineScaleSetVMExtensions.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -27909,6 +28134,9 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            Delete VirtualMachineScaleSet VM extension.:
+              $ref: ./examples/DeleteVirtualMachineScaleSetVMExtensions.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -28043,6 +28271,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Get VirtualMachineScaleSet VM extension.:
+              $ref: ./examples/GetVirtualMachineScaleSetVMExtensions.json
         language: !Languages 
           default:
             name: Get
@@ -28163,6 +28395,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            List extensions in Vmss instance.:
+              $ref: ./examples/ListVirtualMachineScaleSetVMExtensions.json
         language: !Languages 
           default:
             name: List
@@ -28896,6 +29132,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Get instance view of a virtual machine from a VM scale set placed on a dedicated host group through automatic placement.:
+              $ref: ./examples/GetVirtualMachineScaleSetVMInstanceViewAutoPlacedOnDedicatedHostGroup.json
         language: !Languages 
           default:
             name: GetInstanceView
@@ -29496,6 +29736,9 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            RetrieveBootDiagnosticsData of a virtual machine.:
+              $ref: ./examples/RetrieveBootDiagnosticsDataVMScaleSetVM.json
           x-ms-long-running-operation: false
         language: !Languages 
           default:
@@ -29659,6 +29902,9 @@ operationGroups:
                 statusCodes:
                   - '204'
         extensions:
+          x-ms-examples:
+            Simulate Eviction a virtual machine.:
+              $ref: ./examples/SimulateEvictionOfVmssVM.json
           x-ms-long-running-operation: false
         language: !Languages 
           default:
@@ -29777,6 +30023,9 @@ operationGroups:
                 statusCodes:
                   - '202'
         extensions:
+          x-ms-examples:
+            Export logs which contain all Api requests made to Compute Resource Provider within the given time period broken down by intervals.:
+              $ref: ./examples/LogAnalyticsRequestRateByInterval.json
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: azure-async-operation
@@ -29889,6 +30138,9 @@ operationGroups:
                 statusCodes:
                   - '202'
         extensions:
+          x-ms-examples:
+            Export logs which contain all throttled Api requests made to Compute Resource Provider within the given time period.:
+              $ref: ./examples/LogAnalyticsThrottledRequests.json
           x-ms-long-running-operation: true
           x-ms-long-running-operation-options:
             final-state-via: azure-async-operation

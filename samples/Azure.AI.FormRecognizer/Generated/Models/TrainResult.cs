@@ -20,10 +20,7 @@ namespace Azure.AI.FormRecognizer.Models
         /// <exception cref="ArgumentNullException"> <paramref name="trainingDocuments"/> is null. </exception>
         internal TrainResult(IEnumerable<TrainingDocumentInfo> trainingDocuments)
         {
-            if (trainingDocuments == null)
-            {
-                throw new ArgumentNullException(nameof(trainingDocuments));
-            }
+            Argument.AssertNotNull(trainingDocuments, nameof(trainingDocuments));
 
             TrainingDocuments = trainingDocuments.ToList();
             Fields = new ChangeTrackingList<FormFieldsReport>();

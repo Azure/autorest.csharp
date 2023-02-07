@@ -6,15 +6,5 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class ObjectTypeDiscriminatorImplementation
-    {
-        public ObjectTypeDiscriminatorImplementation(string key, CSharpType type)
-        {
-            Key = key;
-            Type = type;
-        }
-
-        public string Key { get; }
-        public CSharpType Type { get; }
-    }
+    internal record ObjectTypeDiscriminatorImplementation(string Key, CSharpType Type);
 }

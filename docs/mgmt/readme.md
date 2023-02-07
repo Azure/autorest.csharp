@@ -687,12 +687,34 @@ and since it is a scope resource without any configuration, its parent is anythi
 ```csharp
 public static partial class ResourcesExtension
 {
-    public static DeploymentCollection GetDeployments(this ArmResource armResource)
+    public static DeploymentCollection GetDeployments(this ArmClient client, ResourceIdentifier scope)
     {
         /* ... */
     }
 }
 ```
+If you would like to generate an extension method of the `ArmResource` class for this scope resource, you need to add this configuration `generate-arm-resource-extensions` by adding the request path of this scope resource:
+```yaml
+generate-arm-resource-extensions:
+- /{scope}/providers/Microsoft.Resources/deployments/{deploymentName}
+```
+And you will see this change in the generated code:
+```diff
+public static partial class ResourcesExtension
+{
+    public static DeploymentCollection GetDeployments(this ArmClient client, ResourceIdentifier scope)
+    {
+        /* ... */
+    }
++
++   public static DeploymentCollection GetDeployments(this ArmResource armResource)
++   {
++       /* ... */
++   }
+}
+```
+Please note this extension methods have a huge side effect: because all `Resource` class would inherit from `ArmResource`, once the user import the namespace of this SDK, they would see this `GetDeployments` method on any `Resource` instance, while in the real life, this scope resource might not be that general to be applied onto any resource coming from any RP. Please only use this configuration when it could be confirmed to support plenty of resources and has the plan to support more.
+
 To assign specific resource types to this scope, you can use the following configuration:
 
 ```yaml
@@ -725,6 +747,65 @@ public static partial class ResourcesExtension
 +   }
 }
 ```
+
+In some cases, we might have a resource that extends another resource from another RP. For instance this resource in `guestconfiguration` RP: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}` extends another resource virtual machine in the `compute` RP.
+
+By default, because the generator will never find the `VirtualMachineResource` when generating this SDK, the parent resource of this `VmGuestConfigurationResource` will be `ResourceGroupResource`.
+```csharp
+public static partial class GuestConfigurationExtensions
+{
+    public static VmGuestConfigurationCollection GetVmGuestConfigurations(this ResourceGroupResource resourceGroup, string vmName)
+    {
+        /* ... */
+    }
+}
+```
+
+To show the relationship between resources across different RPs, we could convert it into a scope resource by using the following configuration:
+```yaml
+parameterized-scopes:
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}
+```
+This configuration registers the listed request paths as resources the generator could recognize even if they might not exist in the current context. After applying this configuration, the generated code will have the following changes:
+```diff
+public static partial class GuestConfigurationExtensions
+{
+-   public static VmGuestConfigurationCollection GetVmGuestConfigurations(this ResourceGroupResource resourceGroup, string vmName)
+-   {
+-       /* ... */
+-   }
++   public static VmGuestConfigurationCollection GetVmGuestConfigurations(this ArmClient client, ResourceIdentifier scope)
++   {
++       if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
++           throw new InvalidOperationException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
++       /* ... */
++   }
+}
+```
+
+This configuration works fine with the configuration introduced above:
+```yaml
+generate-arm-resource-extensions:
+- /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}
+```
+and this is how the generated code would change:
+```diff
+public static partial class GuestConfigurationExtensions
+{
+    public static VmGuestConfigurationCollection GetVmGuestConfigurations(this ArmClient client, ResourceIdentifier scope)
+    {
+        if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
+            throw new InvalidOperationException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
+        /* ... */
+    }
++
++   public static VmGuestConfigurationCollection GetVmGuestConfigurations(this ArmResource armResource)
++   {
++       /* ... */
++   }
+}
+```
+Please note this `ArmResource` extension method has the same side effect as explained above: this extension is only meant to be got or created under the virtual machine resource, but the extension method will let you see this method on any resource instance because they all inherit from `ArmResource`.
 
 ### SDK polishing configurations
 

@@ -26,13 +26,13 @@ namespace AutoRest.CSharp.Common.Input
         public static InputEnumTypeValue CreateEnumTypeValue(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
-            string? value = null;
+            object? value = null;
             string? description = null;
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputEnumTypeValue.Name), ref name)
-                    || reader.TryReadString(nameof(InputEnumTypeValue.Value), ref value)
+                    || reader.TryReadEnumValue(nameof(InputEnumTypeValue.Value), ref value)
                     || reader.TryReadString(nameof(InputEnumTypeValue.Description), ref description);
 
                 if (!isKnownProperty)

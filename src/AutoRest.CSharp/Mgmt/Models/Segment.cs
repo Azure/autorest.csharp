@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public override int GetHashCode() => _stringValue.GetHashCode();
 
-        public override string? ToString() => _stringValue;
+        public override string ToString() => _stringValue;
 
         internal static string BuildSerializedSegments(IEnumerable<Segment> segments, bool slashPrefix = true)
         {

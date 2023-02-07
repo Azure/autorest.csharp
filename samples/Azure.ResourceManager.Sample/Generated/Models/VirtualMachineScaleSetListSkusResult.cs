@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -25,10 +26,7 @@ namespace Azure.ResourceManager.Sample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="vmssSkus"/> is null. </exception>
         internal VirtualMachineScaleSetListSkusResult(IEnumerable<VirtualMachineScaleSetSku> vmssSkus)
         {
-            if (vmssSkus == null)
-            {
-                throw new ArgumentNullException(nameof(vmssSkus));
-            }
+            Argument.AssertNotNull(vmssSkus, nameof(vmssSkus));
 
             VmssSkus = vmssSkus.ToList();
         }

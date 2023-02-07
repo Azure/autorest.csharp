@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -23,34 +24,13 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="documentCounter"/>, <paramref name="indexCounter"/>, <paramref name="indexerCounter"/>, <paramref name="dataSourceCounter"/>, <paramref name="storageSizeCounter"/>, <paramref name="synonymMapCounter"/> or <paramref name="skillsetCounter"/> is null. </exception>
         internal ServiceCounters(ResourceCounter documentCounter, ResourceCounter indexCounter, ResourceCounter indexerCounter, ResourceCounter dataSourceCounter, ResourceCounter storageSizeCounter, ResourceCounter synonymMapCounter, ResourceCounter skillsetCounter)
         {
-            if (documentCounter == null)
-            {
-                throw new ArgumentNullException(nameof(documentCounter));
-            }
-            if (indexCounter == null)
-            {
-                throw new ArgumentNullException(nameof(indexCounter));
-            }
-            if (indexerCounter == null)
-            {
-                throw new ArgumentNullException(nameof(indexerCounter));
-            }
-            if (dataSourceCounter == null)
-            {
-                throw new ArgumentNullException(nameof(dataSourceCounter));
-            }
-            if (storageSizeCounter == null)
-            {
-                throw new ArgumentNullException(nameof(storageSizeCounter));
-            }
-            if (synonymMapCounter == null)
-            {
-                throw new ArgumentNullException(nameof(synonymMapCounter));
-            }
-            if (skillsetCounter == null)
-            {
-                throw new ArgumentNullException(nameof(skillsetCounter));
-            }
+            Argument.AssertNotNull(documentCounter, nameof(documentCounter));
+            Argument.AssertNotNull(indexCounter, nameof(indexCounter));
+            Argument.AssertNotNull(indexerCounter, nameof(indexerCounter));
+            Argument.AssertNotNull(dataSourceCounter, nameof(dataSourceCounter));
+            Argument.AssertNotNull(storageSizeCounter, nameof(storageSizeCounter));
+            Argument.AssertNotNull(synonymMapCounter, nameof(synonymMapCounter));
+            Argument.AssertNotNull(skillsetCounter, nameof(skillsetCounter));
 
             DocumentCounter = documentCounter;
             IndexCounter = indexCounter;

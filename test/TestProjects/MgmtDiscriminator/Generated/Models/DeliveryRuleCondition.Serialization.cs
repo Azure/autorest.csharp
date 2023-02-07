@@ -31,16 +31,7 @@ namespace MgmtDiscriminator.Models
                     case "RequestMethod": return DeliveryRuleRequestMethodCondition.DeserializeDeliveryRuleRequestMethodCondition(element);
                 }
             }
-            MatchVariable name = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("name"))
-                {
-                    name = new MatchVariable(property.Value.GetString());
-                    continue;
-                }
-            }
-            return new UnknownDeliveryRuleCondition(name);
+            return UnknownDeliveryRuleCondition.DeserializeUnknownDeliveryRuleCondition(element);
         }
     }
 }

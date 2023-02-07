@@ -2,9 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Security;
+using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -85,12 +87,87 @@ namespace AutoRest.CSharp.Output.Builders
 
             _ => schema.Extensions?.Format switch
                 {
+                    XMsFormat.DateTime => SerializationFormat.DateTime_ISO8601,
+                    XMsFormat.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
+                    XMsFormat.DateTimeUnix => SerializationFormat.DateTime_Unix,
                     XMsFormat.DurationConstant => SerializationFormat.Duration_Constant,
                     _ => SerializationFormat.Default
                 }
         };
 
         public static string EscapeXmlDescription(string s) => SecurityElement.Escape(s) ?? s;
+
+        private const string EscapedAmpersand = "&amp;";
+        private const string EscapedLessThan = "&lt;";
+        private const string EscapedGreaterThan = "&gt;";
+        private const string EscapedAppostrophe = "&apos;";
+        private const string EscapedQuote = "&quot;";
+        public static string EscapeXmlDocDescription(string s)
+        {
+            if (String.IsNullOrEmpty(s))
+                return s;
+
+            var span = s.AsSpan();
+            Dictionary<int, string> replacements = new Dictionary<int, string>();
+            for (int i = 0; i < span.Length; i++)
+            {
+                switch (span[i])
+                {
+                    case '&':
+                        if (IsAlreadyEscaped(ref span, i, out int escapeLength))
+                        {
+                            i += escapeLength;
+                        }
+                        else
+                        {
+                            replacements.Add(i, EscapedAmpersand);
+                        }
+                        break;
+                    case '<':
+                        replacements.Add(i, EscapedLessThan);
+                        break;
+                    case '>':
+                        replacements.Add(i, EscapedGreaterThan);
+                        break;
+                }
+            }
+            if (replacements.Count > 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                int lastStart = 0;
+                foreach (var kv in replacements)
+                {
+                    sb.Append(span.Slice(lastStart, kv.Key - lastStart));
+                    sb.Append(kv.Value);
+                    lastStart = kv.Key + 1;
+                }
+                sb.Append(span.Slice(lastStart));
+                return sb.ToString();
+            }
+            return s;
+        }
+
+        private static bool IsAlreadyEscaped(ref ReadOnlySpan<char> span, int i, out int escapeLength)
+        {
+            return IsEscapedMatch(ref span, i, EscapedAmpersand, out escapeLength) ||
+                IsEscapedMatch(ref span, i, EscapedLessThan, out escapeLength) ||
+                IsEscapedMatch(ref span, i, EscapedGreaterThan, out escapeLength) ||
+                IsEscapedMatch(ref span, i, EscapedAppostrophe, out escapeLength) ||
+                IsEscapedMatch(ref span, i, EscapedQuote, out escapeLength);
+        }
+
+        private static bool IsEscapedMatch(ref ReadOnlySpan<char> span, int i, string escapedChar, out int escapeLength)
+        {
+            escapeLength = 0;
+            if (span.Length < i + escapedChar.Length)
+                return false;
+
+            var slice = span.Slice(i, escapedChar.Length);
+            var isMatch = slice.Equals(escapedChar.AsSpan(), StringComparison.Ordinal);
+            if (isMatch)
+                escapeLength = slice.Length;
+            return isMatch;
+        }
 
         public static string CSharpName(this RequestParameter parameter) => parameter.Language.Default.Name.ToVariableName();
 
@@ -196,20 +273,6 @@ namespace AutoRest.CSharp.Output.Builders
             }
 
             return name;
-        }
-
-        public static FormattableString CreateDefaultPropertyDescription(this ObjectTypeProperty property, string? overrideName = null)
-        {
-            var nameToUse = overrideName ?? property.Declaration.Name;
-            String splitDeclarationName = string.Join(" ", Utilities.StringExtensions.SplitByCamelCase(nameToUse)).ToLower();
-            if (property.IsReadOnly)
-            {
-                return $"Gets the {splitDeclarationName}";
-            }
-            else
-            {
-                return $"Gets or sets the {splitDeclarationName}";
-            }
         }
     }
 }

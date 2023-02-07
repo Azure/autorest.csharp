@@ -1,0 +1,241 @@
+{
+ "$id": "1",
+ "Name": "Pagination",
+ "ApiVersions": [
+  "2022-05-13"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "CustomPage",
+   "Namespace": "Azure.Core.Foundations",
+   "Description": "Paged collection of LedgerEntry items",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "value",
+     "SerializedName": "value",
+     "Description": "The LedgerEntry items on this page",
+     "Type": {
+      "$id": "4",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "5",
+       "Name": "LedgerEntry",
+       "Namespace": "Pagination",
+       "IsNullable": false,
+       "Usage": "Output",
+       "Properties": [
+        {
+         "$id": "6",
+         "Name": "contents",
+         "SerializedName": "contents",
+         "Description": "Contents of the ledger entry.",
+         "Type": {
+          "$id": "7",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        },
+        {
+         "$id": "8",
+         "Name": "collectionId",
+         "SerializedName": "collectionId",
+         "Description": "",
+         "Type": {
+          "$id": "9",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": true,
+         "IsDiscriminator": false
+        },
+        {
+         "$id": "10",
+         "Name": "transactionId",
+         "SerializedName": "transactionId",
+         "Description": "",
+         "Type": {
+          "$id": "11",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": true,
+         "IsDiscriminator": false
+        }
+       ]
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "12",
+     "Name": "nextLink",
+     "SerializedName": "nextLink",
+     "Description": "The link to the next page of items",
+     "Type": {
+      "$id": "13",
+      "Name": "ResourceLocation",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$ref": "5"
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "14",
+   "Name": "PaginationClient",
+   "Description": "",
+   "Operations": [
+    {
+     "$id": "15",
+     "Name": "ListLedgerEntries",
+     "ResourceName": "LedgerEntry",
+     "Summary": "Gets ledger entries from a collection corresponding to a range.",
+     "Description": "A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.",
+     "Parameters": [
+      {
+       "$id": "16",
+       "Name": "pagnationUri",
+       "NameInRequest": "pagnationUri",
+       "Type": {
+        "$id": "17",
+        "Name": "Uri",
+        "Kind": "Uri",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "18",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "19",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "20",
+        "Type": {
+         "$id": "21",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2022-05-13"
+       }
+      },
+      {
+       "$id": "22",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "23",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "24",
+        "Type": {
+         "$ref": "23"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "25",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "2"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{pagnationUri}",
+     "Path": "/app/transactions",
+     "BufferResponse": true,
+     "Paging": {
+      "$id": "26",
+      "NextLinkName": "nextLink",
+      "ItemName": "value"
+     },
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "27"
+   },
+   "Creatable": true
+  }
+ ],
+ "Auth": {
+  "$id": "28",
+  "OAuth2": {
+   "$id": "29",
+   "Scopes": [
+    "https://pagination.azure.com/.default"
+   ]
+  }
+ }
+}

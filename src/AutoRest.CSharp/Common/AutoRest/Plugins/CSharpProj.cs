@@ -2,12 +2,16 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Communication;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -29,7 +33,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.25.0"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.26.0"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -83,10 +87,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             return version;
         }
-
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
-            string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
+            string? codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
             if (string.IsNullOrEmpty(codeModelFileName))
                 throw new Exception("Generator did not receive the code model file.");
 
@@ -96,8 +99,37 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             Configuration.Initialize(autoRest);
 
             var context = new BuildContext(codeModel, null);
+            Execute(context.DefaultNamespace, async (filename, text) =>
+            {
+                await autoRest.WriteFile(Path.Combine(Configuration.RelativeProjectFolder, filename), text, "source-file-csharp");
+            },
+                codeModelYaml.Contains("x-ms-format: dfe-"));
+            return true;
+        }
 
-            var isTestProject = Configuration.MgmtConfiguration.TestGen is not null;
+        public void Execute(string defaultNamespace, string generatedDir, bool includeDfe)
+        {
+            Execute(defaultNamespace, async (filename, text) =>
+            {
+                //TODO adding to workspace makes the formatting messed up since its a raw xml document
+                //somewhere it tries to parse it as a syntax tree and when it converts back to text
+                //its no longer valid xml.  We should consider a "raw files" concept in the work space
+                //so the file writing can still remain in one place
+                await File.WriteAllTextAsync(Path.Combine(Configuration.AbsoluteProjectFolder, filename), text);
+            },
+                includeDfe);
+        }
+
+        private void Execute(string defaultNamespace, Action<string, string> writeFile, bool includeDfe)
+        {
+            if (includeDfe)
+            {
+                _coreCsProjContent += @"
+  <ItemGroup>
+    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" Version=""1.0.0-alpha.20221121.1"" />
+  </ItemGroup>";
+            }
+            var isTestProject = Configuration.MgmtTestConfiguration is not null;
             if (isTestProject)
             {
                 _coreCsProjContent += string.Format(@"
@@ -113,7 +145,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
   <ItemGroup>
     <Compile Include = ""..\..\..\..\src\assets\TestFramework\*.cs"" />
-  </ItemGroup>", context.DefaultNamespace);
+  </ItemGroup>", defaultNamespace);
             }
 
             string csProjContent;
@@ -138,14 +170,12 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 csProjContent = string.Format(_csProjContent, csProjPackageReference, _coreCsProjContent);
             }
 
-            var projectFile = $"{Configuration.ProjectFolder}{context.DefaultNamespace}";
+            var projectFile = defaultNamespace;
             if (isTestProject)
             {
                 projectFile += ".Tests";
             }
-            await autoRest.WriteFile($"{projectFile}.csproj", csProjContent, "source-file-csharp");
-
-            return true;
+            writeFile($"{projectFile}.csproj", csProjContent);
         }
     }
 }

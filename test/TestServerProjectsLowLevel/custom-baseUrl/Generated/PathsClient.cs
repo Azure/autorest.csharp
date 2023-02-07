@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace custom_baseUrl_LowLevel
 {
-    // Data plane generated client. The Paths service client.
+    // Data plane generated client.
     /// <summary> The Paths service client. </summary>
     public partial class PathsClient
     {
@@ -63,16 +63,7 @@ namespace custom_baseUrl_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetEmptyAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
-        /// 
-        /// Response response = await client.GetEmptyAsync("<accountName>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmptyAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyAsync(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
@@ -97,16 +88,7 @@ namespace custom_baseUrl_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetEmpty with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new PathsClient(credential);
-        /// 
-        /// Response response = client.GetEmpty("<accountName>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetEmpty(String,RequestContext)']/*" />
         public virtual Response GetEmpty(string accountName, RequestContext context = null)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));

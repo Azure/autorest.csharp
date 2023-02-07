@@ -26,10 +26,7 @@ namespace MgmtRenameRules.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public VirtualMachineScaleSetNetworkConfiguration(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
             IPConfigurations = new ChangeTrackingList<VirtualMachineScaleSetIPConfiguration>();

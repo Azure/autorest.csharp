@@ -14,7 +14,7 @@ using Azure.Core.Pipeline;
 
 namespace BodyAndPath_LowLevel
 {
-    // Data plane generated client. The BodyAndPath service client.
+    // Data plane generated client.
     /// <summary> The BodyAndPath service client. </summary>
     public partial class BodyAndPathClient
     {
@@ -66,19 +66,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call CreateAsync with required parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = await client.CreateAsync("<itemName>", RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks> Resets products. </remarks>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateAsync(String,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -106,19 +94,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Create with required parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = client.Create("<itemName>", RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks> Resets products. </remarks>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Create(String,RequestContent,RequestContext)']/*" />
         public virtual Response Create(string itemName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -148,29 +124,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call CreateStreamAsync with required parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = File.OpenRead("<filePath>");
-        /// 
-        /// Response response = await client.CreateStreamAsync("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call CreateStreamAsync with all parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = File.OpenRead("<filePath>");
-        /// 
-        /// Response response = await client.CreateStreamAsync("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new String[]{"<excluded>"});
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks> Resets products. </remarks>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStreamAsync(String,RequestContent,ContentType,IEnumerable,RequestContext)']/*" />
         public virtual async Task<Response> CreateStreamAsync(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
@@ -200,29 +154,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call CreateStream with required parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = File.OpenRead("<filePath>");
-        /// 
-        /// Response response = client.CreateStream("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call CreateStream with all parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = File.OpenRead("<filePath>");
-        /// 
-        /// Response response = client.CreateStream("<itemNameStream>", RequestContent.Create(data), ContentType.ApplicationOctetStream, new String[]{"<excluded>"});
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks> Resets products. </remarks>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStream(String,RequestContent,ContentType,IEnumerable,RequestContext)']/*" />
         public virtual Response CreateStream(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
@@ -251,19 +183,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call CreateEnumAsync with required parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = await client.CreateEnumAsync("<enumName1>", "<enumName2>", RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks> Resets products. </remarks>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnumAsync(String,String,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
@@ -293,19 +213,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call CreateEnum with required parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = client.CreateEnum("<enumName1>", "<enumName2>", RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks> Resets products. </remarks>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnum(String,String,RequestContent,RequestContext)']/*" />
         public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
@@ -330,19 +238,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetBodyAndPathsAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// Response response = await client.GetBodyAndPathsAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result[0].ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks> List all. </remarks>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPathsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBodyAndPathsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
@@ -363,19 +259,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetBodyAndPaths and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// Response response = client.GetBodyAndPaths();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result[0].ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks> List all. </remarks>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPaths(RequestContext)']/*" />
         public virtual Response GetBodyAndPaths(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
@@ -396,19 +280,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetItemsAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// Response response = await client.GetItemsAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result[0].ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks> List all products. </remarks>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItemsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetItemsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
@@ -429,19 +301,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetItems and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// Response response = client.GetItems();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result[0].ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks> List all products. </remarks>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItems(RequestContext)']/*" />
         public virtual Response GetItems(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
@@ -469,28 +329,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call UpdateAsync with required parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call UpdateAsync with all parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = await client.UpdateAsync("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", <value>);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='UpdateAsync(String,String,String,RequestContent,String,String,RequestContext)']/*" />
         public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
@@ -523,28 +362,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Update with required parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call Update with all parameters and request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new BodyAndPathClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = client.Update("<item3>", "<item2>", "<item4>", RequestContent.Create(data), "<item5>", <value>);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Update(String,String,String,RequestContent,String,String,RequestContext)']/*" />
         public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));

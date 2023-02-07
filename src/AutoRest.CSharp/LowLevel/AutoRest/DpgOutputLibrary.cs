@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -20,6 +21,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<ModelTypeProvider> Models => _models.Values;
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
+        public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
 
         public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
         {
@@ -33,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
-            if (!_isCadlInput)
+            if (!_isCadlInput || enumType.Usage == InputModelTypeUsage.None)
             {
                 return TypeFactory.CreateType(enumType.EnumValueType);
             }
@@ -47,9 +49,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public override CSharpType ResolveModel(InputModelType model)
-            => _models.TryGetValue(model, out var modelFactory) ? modelFactory.Type : new CSharpType(typeof(object), model.IsNullable);
+            => _models.TryGetValue(model, out var modelTypeProvider) ? modelTypeProvider.Type : new CSharpType(typeof(object), model.IsNullable);
 
         public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
+
+        public override TypeProvider FindTypeProviderForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
 
         public override CSharpType? FindTypeByName(string originalName) => null;
     }

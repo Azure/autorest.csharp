@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace multiple_inheritance.Models
 {
@@ -17,10 +18,7 @@ namespace multiple_inheritance.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Horse(string name) : base(name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
         }
 
         /// <summary> Initializes a new instance of Horse. </summary>
@@ -29,10 +27,7 @@ namespace multiple_inheritance.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal Horse(string name, bool? isAShowHorse) : base(name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             IsAShowHorse = isAShowHorse;
         }

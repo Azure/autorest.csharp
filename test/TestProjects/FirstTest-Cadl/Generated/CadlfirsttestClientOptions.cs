@@ -10,8 +10,8 @@ using Azure.Core;
 
 namespace CadlFirstTest
 {
-    /// <summary> Client options for cadlfirsttest library clients. </summary>
-    public partial class CadlfirsttestClientOptions : ClientOptions
+    /// <summary> Client options for CadlFirstTestClient. </summary>
+    public partial class CadlFirstTestClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V0_1_0;
 
@@ -24,8 +24,8 @@ namespace CadlFirstTest
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of CadlfirsttestClientOptions. </summary>
-        public CadlfirsttestClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of CadlFirstTestClientOptions. </summary>
+        public CadlFirstTestClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

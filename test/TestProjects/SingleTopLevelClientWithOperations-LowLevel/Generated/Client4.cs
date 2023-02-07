@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace SingleTopLevelClientWithOperations_LowLevel
 {
-    // Data plane generated sub-client. The Client4 sub-client.
+    // Data plane generated sub-client.
     /// <summary> The Client4 sub-client. </summary>
     public partial class Client4
     {
@@ -57,18 +57,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PatchAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new TopLevelClientWithOperationClient(credential).GetClient4("<clientParameter>");
-        /// 
-        /// Response response = await client.PatchAsync("<filter>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/Client4.xml" path="doc/members/member[@name='PatchAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> PatchAsync(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));
@@ -93,18 +82,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Patch with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new TopLevelClientWithOperationClient(credential).GetClient4("<clientParameter>");
-        /// 
-        /// Response response = client.Patch("<filter>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/Client4.xml" path="doc/members/member[@name='Patch(String,RequestContext)']/*" />
         public virtual Response Patch(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));

@@ -86,7 +86,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static ObjectTypeProperty GetObjectTypeProperty(ObjectTypeProperty originalType, CSharpType replacementCSharpType)
         {
             var extraDescription = IsReplacementTypeManagedServiceIdentity(replacementCSharpType) ? originalType.CreateExtraDescriptionWithManagedServiceIdentity() : string.Empty;
-            var originalDescription = string.IsNullOrWhiteSpace(originalType.Description) ? originalType.CreateDefaultPropertyDescription().ToString() : originalType.Description;
+            var originalDescription = originalType.Description;
             var periodAndSpace = originalDescription.ToString().EndsWith(".") ? " " : ". ";
             var description = string.IsNullOrEmpty(extraDescription) ? originalDescription : $"{originalDescription}{periodAndSpace}{extraDescription}";
             return new ObjectTypeProperty(

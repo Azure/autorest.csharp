@@ -5,8 +5,11 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 
 namespace Inheritance.Models
 {
@@ -20,12 +23,78 @@ namespace Inheritance.Models
                 writer.WritePropertyName("BaseClassProperty");
                 writer.WriteStringValue(BaseClassProperty);
             }
+            if (Optional.IsDefined(DfeString))
+            {
+                writer.WritePropertyName("DfeString");
+                JsonSerializer.Serialize(writer, DfeString);
+            }
+            if (Optional.IsDefined(DfeDouble))
+            {
+                writer.WritePropertyName("DfeDouble");
+                JsonSerializer.Serialize(writer, DfeDouble);
+            }
+            if (Optional.IsDefined(DfeBool))
+            {
+                writer.WritePropertyName("DfeBool");
+                JsonSerializer.Serialize(writer, DfeBool);
+            }
+            if (Optional.IsDefined(DfeInt))
+            {
+                writer.WritePropertyName("DfeInt");
+                JsonSerializer.Serialize(writer, DfeInt);
+            }
+            if (Optional.IsDefined(DfeObject))
+            {
+                writer.WritePropertyName("DfeObject");
+                JsonSerializer.Serialize(writer, DfeObject);
+            }
+            if (Optional.IsDefined(DfeListOfT))
+            {
+                writer.WritePropertyName("DfeListOfT");
+                JsonSerializer.Serialize(writer, DfeListOfT);
+            }
+            if (Optional.IsDefined(DfeListOfString))
+            {
+                writer.WritePropertyName("DfeListOfString");
+                JsonSerializer.Serialize(writer, DfeListOfString);
+            }
+            if (Optional.IsDefined(DfeKeyValuePairs))
+            {
+                writer.WritePropertyName("DfeKeyValuePairs");
+                JsonSerializer.Serialize(writer, DfeKeyValuePairs);
+            }
+            if (Optional.IsDefined(DfeDateTime))
+            {
+                writer.WritePropertyName("DfeDateTime");
+                JsonSerializer.Serialize(writer, DfeDateTime);
+            }
+            if (Optional.IsDefined(DfeDuration))
+            {
+                writer.WritePropertyName("DfeDuration");
+                JsonSerializer.Serialize(writer, DfeDuration);
+            }
+            if (Optional.IsDefined(DfeUri))
+            {
+                writer.WritePropertyName("DfeUri");
+                JsonSerializer.Serialize(writer, DfeUri);
+            }
             writer.WriteEndObject();
         }
 
         internal static ClassThatInheritsFromBaseClass DeserializeClassThatInheritsFromBaseClass(JsonElement element)
         {
             Optional<string> baseClassProperty = default;
+            Optional<DataFactoryExpression<string>> dfeString = default;
+            Optional<DataFactoryExpression<double>> dfeDouble = default;
+            Optional<DataFactoryExpression<bool>> dfeBool = default;
+            Optional<DataFactoryExpression<int>> dfeInt = default;
+            Optional<DataFactoryExpression<BinaryData>> dfeObject = default;
+            Optional<DataFactoryExpression<IList<SeparateClass>>> dfeListOfT = default;
+            Optional<DataFactoryExpression<IList<string>>> dfeListOfString = default;
+            Optional<DataFactoryExpression<IDictionary<string, string>>> dfeKeyValuePairs = default;
+            Optional<DataFactoryExpression<DateTimeOffset>> dfeDateTime = default;
+            Optional<DataFactoryExpression<TimeSpan>> dfeDuration = default;
+            Optional<DataFactoryExpression<Uri>> dfeUri = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("BaseClassProperty"))
@@ -33,8 +102,118 @@ namespace Inheritance.Models
                     baseClassProperty = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("DfeString"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeString = JsonSerializer.Deserialize<DataFactoryExpression<string>>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("DfeDouble"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeDouble = JsonSerializer.Deserialize<DataFactoryExpression<double>>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("DfeBool"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeBool = JsonSerializer.Deserialize<DataFactoryExpression<bool>>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("DfeInt"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeInt = JsonSerializer.Deserialize<DataFactoryExpression<int>>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("DfeObject"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeObject = JsonSerializer.Deserialize<DataFactoryExpression<BinaryData>>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("DfeListOfT"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeListOfT = JsonSerializer.Deserialize<DataFactoryExpression<IList<SeparateClass>>>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("DfeListOfString"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeListOfString = JsonSerializer.Deserialize<DataFactoryExpression<IList<string>>>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("DfeKeyValuePairs"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeKeyValuePairs = JsonSerializer.Deserialize<DataFactoryExpression<IDictionary<string, string>>>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("DfeDateTime"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeDateTime = JsonSerializer.Deserialize<DataFactoryExpression<DateTimeOffset>>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("DfeDuration"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeDuration = JsonSerializer.Deserialize<DataFactoryExpression<TimeSpan>>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("DfeUri"))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    dfeUri = JsonSerializer.Deserialize<DataFactoryExpression<Uri>>(property.Value.GetRawText());
+                    continue;
+                }
             }
-            return new ClassThatInheritsFromBaseClass(baseClassProperty.Value);
+            return new ClassThatInheritsFromBaseClass(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value);
         }
     }
 }

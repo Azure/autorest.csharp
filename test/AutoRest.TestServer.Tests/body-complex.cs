@@ -825,17 +825,17 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual("king", dotSalmon.Species);
 
             var dotFish = result.Value.SampleFish;
-            Assert.AreEqual(null, dotFish.FishType);
+            Assert.AreEqual("Unknown", dotFish.FishType);
             Assert.AreEqual("king", dotFish.Species);
 
             var fishes = result.Value.Fishes.ToArray();
 
             dotFish = fishes[0];
-            Assert.AreEqual(null, dotFish.FishType);
+            Assert.AreEqual("Unknown", dotFish.FishType);
             Assert.AreEqual("king", dotFish.Species);
 
             dotFish = fishes[1];
-            Assert.AreEqual(null, dotFish.FishType);
+            Assert.AreEqual("Unknown", dotFish.FishType);
             Assert.AreEqual("king", dotFish.Species);
         });
 

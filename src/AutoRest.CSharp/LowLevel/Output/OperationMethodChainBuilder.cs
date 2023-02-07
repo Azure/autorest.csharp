@@ -13,6 +13,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -42,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models
         private ProtocolMethodPaging? _protocolMethodPaging;
         private RequestConditionHeaders _conditionHeaderFlag = RequestConditionHeaders.None;
 
-        public InputOperation Operation { get; }
+        private InputOperation Operation { get; }
 
         public OperationMethodChainBuilder(InputOperation operation, string clientName, ClientFields fields, TypeFactory typeFactory)
         {
@@ -80,8 +81,12 @@ namespace AutoRest.CSharp.Output.Models
         public LowLevelClientMethod BuildOperationMethodChain()
         {
             var returnTypeChain = BuildReturnTypes();
+            var protocolMethodAttributes = Operation.Deprecated is { } deprecated
+                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
+                : Array.Empty<CSharpAttribute>();
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
-            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Protocol, null, protocolMethodParameters);
+            var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : MethodSignatureModifiers.Internal) | Virtual;
+            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, protocolMethodModifiers, returnTypeChain.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
             var convenienceMethod = ShouldConvenienceMethodGenerated(returnTypeChain) ? BuildConvenienceMethod(returnTypeChain) : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
@@ -94,7 +99,8 @@ namespace AutoRest.CSharp.Output.Models
         private bool ShouldConvenienceMethodGenerated(ReturnTypeChain returnTypeChain)
         {
             return Operation.GenerateConvenienceMethod
-                && (_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
+                && (!Operation.GenerateProtocolMethod
+                || _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
                 || !returnTypeChain.Convenience.Equals(returnTypeChain.Protocol));
         }
 
@@ -116,12 +122,15 @@ namespace AutoRest.CSharp.Output.Models
 
         private ReturnTypeChain BuildReturnTypes()
         {
-            var operationBodyTypes = Operation.Responses.Select(r => r.BodyType).WhereNotNull().Distinct().ToArray();
-            CSharpType? responseType = operationBodyTypes.Length switch
+            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
+            CSharpType? responseType = null;
+            if (operationBodyTypes.Length != 0)
             {
-                0 => null,
-                1 => _typeFactory.CreateType(operationBodyTypes[0]),
-                _ => new CSharpType(typeof(object))
+                var firstBodyType = operationBodyTypes[0];
+                if (firstBodyType != null)
+                {
+                    responseType = _typeFactory.CreateType(firstBodyType);
+                }
             };
 
             if (Operation.Paging != null)
@@ -129,6 +138,22 @@ namespace AutoRest.CSharp.Output.Models
                 if (responseType == null)
                 {
                     throw new InvalidOperationException($"Method {Operation.Name} has to have a return value");
+                }
+
+                if (!responseType.IsFrameworkType && responseType.Implementation is ModelTypeProvider modelType)
+                {
+                    var property = modelType.GetPropertyBySerializedName(Operation.Paging.ItemName ?? "value");
+                    var propertyType = property.ValueType.WithNullable(false);
+                    if (!TypeFactory.IsList(propertyType))
+                    {
+                        throw new InvalidOperationException($"'{modelType.Declaration.Name}.{property.Declaration.Name}' property must be a collection of items");
+                    }
+
+                    responseType = TypeFactory.GetElementType(property.ValueType);
+                }
+                else if (TypeFactory.IsList(responseType))
+                {
+                    responseType = TypeFactory.GetElementType(responseType);
                 }
 
                 if (Operation.LongRunning != null)
@@ -173,22 +198,44 @@ namespace AutoRest.CSharp.Output.Models
                 name = _restClientMethod.Name.IsLastWordSingular() ? $"{_restClientMethod.Name}Value" : $"{_restClientMethod.Name.LastWordToSingular()}Values";
             }
 
-            var parameters = _orderedParameters.Select(p => p.Convenience).WhereNotNull().ToArray();
+            var parameterList = new List<Parameter>();
+            foreach (var parameterChain in _orderedParameters)
+            {
+                if (parameterChain.Input?.Kind == InputOperationParameterKind.Spread)
+                {
+                    InputType type = parameterChain.Input.Type;
+                    if (type is InputModelType modelType)
+                    {
+                        foreach (var prop in modelType.Properties)
+                        {
+                            var parameter = Parameter.FromModelProperty(prop, prop.Name.ToVariableName(), _typeFactory.CreateType(prop.Type));
+                            parameterList.Add(parameter);
+                        }
+                    }
+
+                } else if (parameterChain.Convenience != null)
+                {
+                    parameterList.Add(parameterChain.Convenience);
+                }
+            }
+            var attributes = Operation.Deprecated is { } deprecated
+                ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
+                : null;
             var protocolToConvenience = _orderedParameters
                 .Where(p => p.Protocol != null)
-                .Select(p => (p.Protocol!, p.Convenience))
+                .Select(p => (p.Protocol!, p.Convenience, p.Input))
                 .ToArray();
-
-            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameters);
+            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
         }
 
-        public void BuildParameters()
+        private void BuildParameters()
         {
             var operationParameters = Operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
 
-            var pathParameters = new Dictionary<string, InputParameter>();
+            var requiredPathParameters = new Dictionary<string, InputParameter>();
+            var optionalPathParameters = new Dictionary<string, InputParameter>();
             var requiredRequestParameters = new List<InputParameter>();
             var optionalRequestParameters = new List<InputParameter>();
 
@@ -221,8 +268,11 @@ namespace AutoRest.CSharp.Output.Models
                             : requestConditionSerializationFormat;
 
                         break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path }:
-                        pathParameters.Add(operationParameter.NameInRequest, operationParameter);
+                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: null }:
+                        requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
+                        break;
+                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: not null }:
+                        optionalPathParameters.Add(operationParameter.NameInRequest, operationParameter);
                         break;
                     case { IsRequired: true, DefaultValue: null }:
                         requiredRequestParameters.Add(operationParameter);
@@ -234,10 +284,12 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             AddWaitForCompletion();
-            AddUriOrPathParameters(Operation.Uri, pathParameters);
-            AddUriOrPathParameters(Operation.Path, pathParameters);
+            AddUriOrPathParameters(Operation.Uri, requiredPathParameters);
+            AddUriOrPathParameters(Operation.Path, requiredPathParameters);
             AddQueryOrHeaderParameters(requiredRequestParameters);
             AddBody(bodyParameter, contentTypeRequestParameter);
+            AddUriOrPathParameters(Operation.Uri, optionalPathParameters);
+            AddUriOrPathParameters(Operation.Path, optionalPathParameters);
             AddQueryOrHeaderParameters(optionalRequestParameters);
             AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
             AddRequestContext();
@@ -247,7 +299,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (Operation.LongRunning != null)
             {
-                _orderedParameters.Add(new ParameterChain(KnownParameters.WaitForCompletion, KnownParameters.WaitForCompletion, null));
+                _orderedParameters.Add(new ParameterChain(null, KnownParameters.WaitForCompletion, KnownParameters.WaitForCompletion, null));
             }
         }
 
@@ -264,10 +316,6 @@ namespace AutoRest.CSharp.Output.Models
                 if (requestParameters.TryGetValue(text, out var requestParameter))
                 {
                     AddParameter(text, requestParameter);
-                }
-                else
-                {
-                    ErrorHelpers.ThrowError($"\n\nError while processing request '{uriPart}'\n\n  '{text}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
                 }
             }
         }
@@ -290,7 +338,7 @@ namespace AutoRest.CSharp.Output.Models
             _protocolBodyParameter = bodyParameter.IsRequired
                 ? KnownParameters.RequestContent
                 : KnownParameters.RequestContentNullable;
-            _orderedParameters.Add(new ParameterChain(BuildParameter(bodyParameter), _protocolBodyParameter, _protocolBodyParameter));
+            _orderedParameters.Add(new ParameterChain(bodyParameter, BuildParameter(bodyParameter), _protocolBodyParameter, _protocolBodyParameter));
 
             if (contentTypeRequestParameter != null)
             {
@@ -317,7 +365,7 @@ namespace AutoRest.CSharp.Output.Models
             switch (conditionHeaderFlag)
             {
                 case RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch:
-                    _orderedParameters.Add(new ParameterChain(KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter));
+                    _orderedParameters.Add(new ParameterChain(null, KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter));
                     AddReference(KnownParameters.MatchConditionsParameter.Name, null, KnownParameters.MatchConditionsParameter, serializationFormat);
                     break;
                 case RequestConditionHeaders.IfMatch:
@@ -325,7 +373,7 @@ namespace AutoRest.CSharp.Output.Models
                     AddParameter(requestConditionRequestParameter, typeof(ETag));
                     break;
                 default:
-                    _orderedParameters.Add(new ParameterChain(KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter));
+                    _orderedParameters.Add(new ParameterChain(null, KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter));
                     AddReference(KnownParameters.RequestConditionsParameter.Name, null, KnownParameters.RequestConditionsParameter, serializationFormat);
                     break;
             }
@@ -333,7 +381,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public void AddRequestContext()
         {
-            _orderedParameters.Add(new ParameterChain(KnownParameters.CancellationTokenParameter, KnownParameters.RequestContext, KnownParameters.RequestContext));
+            _orderedParameters.Add(new ParameterChain(null, KnownParameters.CancellationTokenParameter, KnownParameters.RequestContext, KnownParameters.RequestContext));
         }
 
         private void AddContentTypeRequestParameter(InputParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
@@ -341,7 +389,7 @@ namespace AutoRest.CSharp.Output.Models
             var name = operationParameter.Name.ToVariableName();
             var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
             var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
-            _orderedParameters.Add(new ParameterChain(null, parameter, parameter));
+            _orderedParameters.Add(new ParameterChain(null, null, parameter, parameter));
 
             AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
         }
@@ -361,14 +409,14 @@ namespace AutoRest.CSharp.Output.Models
 
             if (inputParameter.Kind == InputOperationParameterKind.Grouped)
             {
-                _orderedParameters.Add(new ParameterChain(null, protocolMethodParameter, protocolMethodParameter));
+                _orderedParameters.Add(new ParameterChain(inputParameter, null, protocolMethodParameter, protocolMethodParameter));
                 return;
             }
 
             var convenienceMethodParameter = BuildParameter(inputParameter);
             var parameterChain = inputParameter.Location == RequestLocation.None
-                ? new ParameterChain(convenienceMethodParameter, null, null)
-                : new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
+                ? new ParameterChain(inputParameter, convenienceMethodParameter, null, null)
+                : new ParameterChain(inputParameter, convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
 
             _orderedParameters.Add(parameterChain);
         }
@@ -418,6 +466,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private record ReturnTypeChain(CSharpType Convenience, CSharpType Protocol, CSharpType? ConvenienceResponseType);
 
-        private record ParameterChain(Parameter? Convenience, Parameter? Protocol, Parameter? CreateMessage);
+        private record ParameterChain(InputParameter? Input, Parameter? Convenience, Parameter? Protocol, Parameter? CreateMessage);
     }
 }

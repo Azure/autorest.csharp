@@ -3,8 +3,10 @@
 
 using System;
 using System.Collections.Generic;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using Azure.Core;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 #pragma warning disable SA1649
 namespace AutoRest.CSharp.Common.Input
@@ -29,7 +31,7 @@ namespace AutoRest.CSharp.Common.Input
         public InputOAuth2Auth() : this(Array.Empty<string>()) {}
     }
 
-    internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations)
+    internal record InputClient(string Name, string Description, IReadOnlyList<InputOperation> Operations, bool Creatable, IReadOnlyList<InputParameter> Parameters, string? Parent)
     {
         private readonly string? _key;
 
@@ -39,12 +41,14 @@ namespace AutoRest.CSharp.Common.Input
             init => _key = value;
         }
 
-        public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>()) { }
+        public InputClient() : this(string.Empty, string.Empty, Array.Empty<InputOperation>(), true, Array.Empty<InputParameter>(), null) { }
     }
 
     internal record InputOperation(
         string Name,
+        string? ResourceName,
         string? Summary,
+        string? Deprecated,
         string Description,
         string? Accessibility,
         IReadOnlyList<InputParameter> Parameters,
@@ -58,11 +62,14 @@ namespace AutoRest.CSharp.Common.Input
         bool BufferResponse,
         OperationLongRunning? LongRunning,
         OperationPaging? Paging,
+        bool GenerateProtocolMethod,
         bool GenerateConvenienceMethod)
     {
         public InputOperation() : this(
             Name: string.Empty,
+            ResourceName: null,
             Summary: null,
+            Deprecated: null,
             Description: string.Empty,
             Accessibility: null,
             Parameters: Array.Empty<InputParameter>(),
@@ -76,6 +83,7 @@ namespace AutoRest.CSharp.Common.Input
             BufferResponse: false,
             LongRunning: null,
             Paging: null,
+            GenerateProtocolMethod: true,
             GenerateConvenienceMethod: false)
         { }
     }
@@ -122,17 +130,26 @@ namespace AutoRest.CSharp.Common.Input
         { }
     }
 
-    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<HttpResponseHeader> Headers)
+    internal record OperationResponseHeader(string Name, string NameInResponse, string Description, InputType Type)
     {
-        public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<HttpResponseHeader>()) { }
+        public OperationResponseHeader() : this("", "", "", InputPrimitiveType.String) { }
     }
 
-    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse);
+    internal record OperationResponse(IReadOnlyList<int> StatusCodes, InputType? BodyType, BodyMediaType BodyMediaType, IReadOnlyList<OperationResponseHeader> Headers, bool IsErrorResponse)
+    {
+        public OperationResponse() : this(StatusCodes: Array.Empty<int>(), BodyType: null, BodyMediaType: BodyMediaType.None, Headers: Array.Empty<OperationResponseHeader>(), IsErrorResponse: false) { }
+    }
+
+    internal record OperationLongRunning(OperationFinalStateVia FinalStateVia, OperationResponse FinalResponse)
+    {
+        public OperationLongRunning() : this(FinalStateVia: OperationFinalStateVia.Location, FinalResponse: new OperationResponse()) { }
+    }
 
     internal record OperationPaging(string? NextLinkName, string? ItemName)
     {
         public InputOperation? NextLinkOperation => NextLinkOperationRef?.Invoke() ?? null;
         public Func<InputOperation>? NextLinkOperationRef { get; init; }
+        public OperationPaging():this(null, null) { }
     }
 
     internal abstract record InputType(string Name, bool IsNullable = false) { }
@@ -159,6 +176,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType Guid { get; }               = new(InputTypeKind.Guid);
         public static InputPrimitiveType Int32 { get; }              = new(InputTypeKind.Int32);
         public static InputPrimitiveType Int64 { get; }              = new(InputTypeKind.Int64);
+        public static InputPrimitiveType IPAddress { get; }          = new(InputTypeKind.IPAddress);
         public static InputPrimitiveType Object { get; }             = new(InputTypeKind.Object);
         public static InputPrimitiveType RequestMethod { get; }      = new(InputTypeKind.RequestMethod);
         public static InputPrimitiveType ResourceIdentifier { get; } = new(InputTypeKind.ResourceIdentifier);
@@ -171,15 +189,29 @@ namespace AutoRest.CSharp.Common.Input
         public bool IsNumber => Kind is InputTypeKind.Int32 or InputTypeKind.Int64 or InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128;
     }
 
+    internal record InputLiteralType(string Name, InputType LiteralValueType, object Value, bool IsNullable = false) : InputType(Name, IsNullable);
+
     internal record InputListType(string Name, InputType ElementType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
-    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator) { }
+    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, FormattableString? DefaultValue = null)
+    {
+    }
 
-    internal record InputConstant(object Value, InputType Type);
+    internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTypes, bool IsNullable = false) : InputType(Name, IsNullable);
 
-    internal record InputEnumTypeValue(string Name, string Value, string? Description);
+    internal record InputConstant(object? Value, InputType Type);
+
+    internal record InputEnumTypeValue(string Name, object Value, string? Description)
+    {
+        public virtual string GetJsonValueString() => GetValueString();
+        public string GetValueString() => (Value.ToString() ?? string.Empty);
+    }
+
+    internal record InputEnumTypeStringValue(string Name, string StringValue, string? Description) : InputEnumTypeValue(Name, StringValue, Description);
+    internal record InputEnumTypeIntegerValue(string Name, Int32 IntegerValue, string? Description) : InputEnumTypeValue(Name, IntegerValue, Description);
+    internal record InputEnumTypeFloatValue(string Name, float FloatValue, string? Description) : InputEnumTypeValue(Name, FloatValue, Description);
 
     internal enum InputOperationParameterKind
     {
@@ -187,7 +219,8 @@ namespace AutoRest.CSharp.Common.Input
         Client = 1,
         Constant = 2,
         Flattened = 3,
-        Grouped = 4,
+        Spread = 4,
+        Grouped = 5,
     }
 
     internal enum BodyMediaType
@@ -223,6 +256,7 @@ namespace AutoRest.CSharp.Common.Input
         Guid,
         Int32,
         Int64,
+        IPAddress,
         Object,
         RequestMethod,
         ResourceIdentifier,
@@ -231,5 +265,13 @@ namespace AutoRest.CSharp.Common.Input
         String,
         Time,
         Uri,
+    }
+
+    internal enum InputModelTypeUsage
+    {
+        None = 0,
+        Input = 1,
+        Output = 2,
+        RoundTrip = Input | Output
     }
 }

@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
@@ -19,10 +20,7 @@ namespace MgmtMockAndSample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="accessPolicies"/> is null. </exception>
         public VaultAccessPolicyProperties(IEnumerable<AccessPolicyEntry> accessPolicies)
         {
-            if (accessPolicies == null)
-            {
-                throw new ArgumentNullException(nameof(accessPolicies));
-            }
+            Argument.AssertNotNull(accessPolicies, nameof(accessPolicies));
 
             AccessPolicies = accessPolicies.ToList();
         }

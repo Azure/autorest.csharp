@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using AutoRest.CSharp.Common.Decorator;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -17,29 +20,29 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal class SchemaObjectType : ObjectType
+    internal class SchemaObjectType : SerializableObjectType
     {
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly SchemaTypeUsage _usage;
 
         private readonly ModelTypeMapping? _sourceTypeMapping;
-        private readonly bool _hasJsonSerialization;
-        private readonly bool _hasXmlSerialization;
+        private readonly IReadOnlyList<KnownMediaType> _supportedSerializationFormats;
 
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
-        private ObjectTypeDiscriminator? _discriminator;
-        private JsonObjectSerialization? _jsonSerialization;
-        private XmlObjectSerialization? _xmlSerialization;
+
+        private BuildContext _context;
 
         public SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
             : base(context)
         {
+            _context = context;
             DefaultName = objectSchema.CSharpName();
             DefaultNamespace = GetDefaultNamespace(objectSchema.Extensions?.Namespace, context);
             ObjectSchema = objectSchema;
@@ -68,9 +71,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _usage |= Enum.Parse<SchemaTypeUsage>(objectSchema.Extensions?.Usage!, true);
             }
 
-            var supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
-            _hasJsonSerialization = supportedSerializationFormats.Contains(KnownMediaType.Json);
-            _hasXmlSerialization = supportedSerializationFormats.Contains(KnownMediaType.Xml);
+            _supportedSerializationFormats = GetSupportedSerializationFormats(objectSchema, _sourceTypeMapping);
         }
 
         internal ObjectSchema ObjectSchema { get; }
@@ -79,15 +80,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility { get; } = "public";
         protected override TypeKind TypeKind => IsStruct ? TypeKind.Struct : TypeKind.Class;
-        public bool IsStruct => ExistingType?.IsValueType == true;
 
-        public JsonObjectSerialization? JsonSerialization => _hasJsonSerialization ? _jsonSerialization ??= _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this) : null;
-        public XmlObjectSerialization? XmlSerialization => _hasXmlSerialization ? _xmlSerialization ??= _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this) : null;
-        public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
+        private ObjectType? _defaultDerivedType;
+        private bool _hasCalculatedDefaultDerivedType;
+        public ObjectType? DefaultDerivedType => _defaultDerivedType ??= BuildDefaultDerviedType();
 
-        protected override bool IsAbstract => ObjectSchema != null &&
-            ObjectSchema.Extensions != null &&
-            ObjectSchema.Extensions.MgmtReferenceType;
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
 
         public bool IsInheritableCommonType => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
@@ -126,7 +124,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             List<ObjectPropertyInitializer> serializationInitializers = new List<ObjectPropertyInitializer>();
             ObjectTypeConstructor? baseSerializationCtor = null;
 
-            if (Inherits is {IsFrameworkType: false, Implementation: ObjectType objectType})
+            if (Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType })
             {
                 baseSerializationCtor = objectType.SerializationConstructor;
                 serializationConstructorParameters.AddRange(baseSerializationCtor.Signature.Parameters);
@@ -134,11 +132,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in Properties)
             {
+                // skip the flattened properties, we should never include them in serialization
+                if (property is FlattenedObjectTypeProperty)
+                    continue;
+
                 var type = property.Declaration.Type;
 
                 var deserializationParameter = new Parameter(
                     property.Declaration.Name.ToVariableName(),
-                    property.Description,
+                    property.ParameterDescription,
                     type,
                     null,
                     ValidationType.None,
@@ -208,7 +210,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var property in Properties)
             {
                 // Only required properties that are not discriminators go into default ctor
-                if (property == Discriminator?.Property)
+                // skip the flattened properties, we should never include them in the constructors
+                if (property == Discriminator?.Property || property is FlattenedObjectTypeProperty)
                 {
                     continue;
                 }
@@ -244,7 +247,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var validate = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? ValidationType.AssertNotNull : ValidationType.None;
                     var defaultCtorParameter = new Parameter(
                         property.Declaration.Name.ToVariableName(),
-                        property.Description,
+                        property.ParameterDescription,
                         inputType,
                         defaultParameterValue,
                         validate,
@@ -289,9 +292,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 baseCtor);
         }
 
-        public bool IncludeSerializer => _usage.HasFlag(SchemaTypeUsage.Input);
-        public bool IncludeDeserializer => _usage.HasFlag(SchemaTypeUsage.Output);
-        public virtual bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+        public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
+
         protected bool SkipInitializerConstructor => ObjectSchema != null &&
             ObjectSchema.Extensions != null &&
             ObjectSchema.Extensions.SkipInitCtor;
@@ -312,7 +314,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
         }
 
-        private ObjectTypeDiscriminator? BuildDiscriminator()
+        protected override ObjectTypeDiscriminator? BuildDiscriminator()
         {
             Discriminator? schemaDiscriminator = ObjectSchema.Discriminator;
             ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
@@ -332,18 +334,21 @@ namespace AutoRest.CSharp.Output.Models.Types
                 implementations = CreateDiscriminatorImplementations(schemaDiscriminator);
             }
 
+            ObjectType defaultDerivedType = DefaultDerivedType!;
+
             var property = GetPropertyForSchemaProperty(schemaDiscriminator.Property, includeParents: true);
 
             if (ObjectSchema.DiscriminatorValue != null)
             {
-                value = BuilderHelpers.ParseConstant(ObjectSchema.DiscriminatorValue, property.Declaration.Type);
+                value = BuilderHelpers.ParseConstant(ObjectSchema.DiscriminatorValue, property.Declaration.Type.GetNonNullable());
             }
 
             return new ObjectTypeDiscriminator(
                 property,
                 schemaDiscriminator.Property.SerializedName,
                 implementations,
-                value
+                value,
+                defaultDerivedType
             );
         }
 
@@ -484,7 +489,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private CSharpType GetDefaultPropertyType(Property property)
         {
-            var valueType = _typeFactory.CreateType(property.Schema, property.IsNullable);
+            var valueType = _typeFactory.CreateType(property.Schema, property.IsNullable, property.Schema is AnyObjectSchema ? property.Extensions?.Format : property.Schema.Extensions?.Format, property: property);
 
             if (!_usage.HasFlag(SchemaTypeUsage.Input) ||
                 property.IsReadOnly)
@@ -496,7 +501,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         // Enumerates all schemas that were merged into this one, excludes the inherited schema
-        protected IEnumerable<ObjectSchema> GetCombinedSchemas()
+        protected internal IEnumerable<ObjectSchema> GetCombinedSchemas()
         {
             yield return ObjectSchema;
 
@@ -612,6 +617,52 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string CreateDescription()
         {
             return ObjectSchema.CreateDescription();
+        }
+
+        protected override bool EnsureHasJsonSerialization()
+        {
+            return _supportedSerializationFormats.Contains(KnownMediaType.Json);
+        }
+
+        protected override bool EnsureHasXmlSerialization()
+        {
+            return _supportedSerializationFormats.Contains(KnownMediaType.Xml);
+        }
+
+        protected override bool EnsureIncludeSerializer()
+        {
+            return _usage.HasFlag(SchemaTypeUsage.Input);
+        }
+
+        protected override bool EnsureIncludeDeserializer()
+        {
+            return _usage.HasFlag(SchemaTypeUsage.Output);
+        }
+
+        protected override JsonObjectSerialization EnsureJsonSerialization()
+        {
+            return _serializationBuilder.BuildJsonObjectSerialization(ObjectSchema, this);
+        }
+
+        protected override XmlObjectSerialization EnsureXmlSerialization()
+        {
+            return _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this);
+        }
+
+        private ObjectType? BuildDefaultDerviedType()
+        {
+            if (_hasCalculatedDefaultDerivedType)
+                return _defaultDerivedType;
+
+            _hasCalculatedDefaultDerivedType = true;
+            if (_context.BaseLibrary is null)
+                return null;
+
+            var defaultDerivedSchema = ObjectSchema.GetDefaultDerivedSchema();
+            if (defaultDerivedSchema is null)
+                return null;
+
+            return _context.BaseLibrary.FindTypeProviderForSchema(defaultDerivedSchema) as ObjectType;
         }
     }
 }

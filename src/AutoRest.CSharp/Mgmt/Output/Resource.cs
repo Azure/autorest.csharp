@@ -4,20 +4,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -154,7 +152,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     contextualPath,
                     operationName,
                     isLongRunning,
-                    throwIfNull);
+                    throwIfNull,
+                    Type.Name);
                 result.Add(restOperation);
             }
 
@@ -166,7 +165,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         // name after `{ResourceName}Resource`, unless the `ResourceName` already ends with `Resource`
         protected override string DefaultName => Configuration.MgmtConfiguration.NoResourceSuffix.Contains(ResourceName) ? ResourceName : ResourceName.AddResourceSuffixToResourceName();
 
-        public override FormattableString Description => CreateDescription(ResourceName);
+        public override FormattableString Description => CreateDescription();
 
         public bool IsSingleton => SingletonResourceIdSuffix != null;
 
@@ -227,11 +226,36 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// Finds the corresponding <see cref="ResourceData"/> of this <see cref="Resource"/>
         /// </summary>
         public ResourceData ResourceData { get; }
+        private MgmtClientOperation? _createOperation;
+        private MgmtClientOperation? _getOperation;
+        private MgmtClientOperation? _deleteOperation;
+        private MgmtClientOperation? _updateOperation;
+        public virtual MgmtClientOperation? CreateOperation => _createOperation ??= GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate", true);
+        public virtual MgmtClientOperation GetOperation => _getOperation ??= GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
+        public virtual MgmtClientOperation? DeleteOperation => _deleteOperation ??= GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
+        public virtual MgmtClientOperation? UpdateOperation => _updateOperation ??= EnsureUpdateOperation();
 
-        public MgmtClientOperation? CreateOperation => GetOperationWithVerb(HttpMethod.Put, "CreateOrUpdate", true);
-        public MgmtClientOperation GetOperation => GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
-        public MgmtClientOperation? DeleteOperation => GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
-        public MgmtClientOperation? UpdateOperation => GetOperationWithVerb(HttpMethod.Patch, "Update");
+        private MgmtClientOperation? EnsureUpdateOperation()
+        {
+            var updateOperation = GetOperationWithVerb(HttpMethod.Patch, "Update");
+
+            if (updateOperation != null)
+                return updateOperation;
+
+            if (ResourceCollection?.CreateOperation is not null)
+            {
+                var createOrUpdateOperation = ResourceCollection.CreateOperation.OperationMappings.Values.First();
+                return MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        createOrUpdateOperation,
+                        "Update",
+                        createOrUpdateOperation.MgmtReturnType,
+                        createOrUpdateOperation.Description ?? $"Update this {ResourceName}.",
+                        createOrUpdateOperation.RequestPath));
+            }
+
+            return null;
+        }
 
         protected virtual bool ShouldIncludeOperation(Operation operation)
         {
@@ -253,24 +277,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                 result.Add(GetOperation);
             if (DeleteOperation != null)
                 result.Add(DeleteOperation);
-            if (UpdateOperation is null)
-            {
-                if (ResourceCollection?.CreateOperation is not null)
-                {
-                    var createOrUpdateOperation = ResourceCollection.CreateOperation.OperationMappings.Values.First();
-                    result.Add(MgmtClientOperation.FromOperation(
-                        new MgmtRestOperation(
-                            createOrUpdateOperation,
-                            "Update",
-                            createOrUpdateOperation.MgmtReturnType,
-                            createOrUpdateOperation.Description ?? $"Update this {ResourceName}.",
-                            createOrUpdateOperation.RequestPath)));
-                }
-            }
-            else
-            {
+            if (UpdateOperation != null)
                 result.Add(UpdateOperation);
-            }
             if (IsSingleton && CreateOperation != null)
                 result.Add(CreateOperation);
             result.AddRange(ClientOperations);
@@ -356,7 +364,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                     operation,
                     requestPath,
                     contextualPath,
-                    methodName);
+                    methodName,
+                    propertyBagName: Type.Name);
 
                 if (result.TryGetValue(key, out var list))
                 {
@@ -386,7 +395,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <returns></returns>
         protected virtual RequestPath GetContextualPath(OperationSet operationSet, RequestPath operationRequestPath)
         {
-            var contextualPath = operationSet.GetRequestPath();
+            var contextualPath = RequestPath;
             // we need to replace the scope in this contextual path with the actual scope in the operation
             var scope = contextualPath.GetScopePath();
             if (!scope.IsParameterizedScope())
@@ -400,22 +409,11 @@ namespace AutoRest.CSharp.Mgmt.Output
             return operation.IsResourceCollectionOperation(out var resourceOperationSet) && resourceOperationSet == operationSet;
         }
 
-        protected override IEnumerable<MgmtRestClient> EnsureRestClients()
-        {
-            var childRestClients = ClientOperations.SelectMany(clientOperation => clientOperation.Select(restOperation => restOperation.RestClient)).Distinct();
-            var resourceRestClients = OperationSet.Select(operation => MgmtContext.Library.GetRestClient(operation)).Distinct();
-
-            return resourceRestClients.Concat(childRestClients).Distinct();
-        }
-
-        private MgmtRestClient? _myRestClient;
-        public MgmtRestClient MyRestClient => _myRestClient ??= RestClients.FirstOrDefault(client => client.Resources.Any(resource => resource.ResourceName == ResourceName)) ?? RestClients.First();
-
         public ResourceTypeSegment ResourceType { get; }
 
-        protected virtual FormattableString CreateDescription(string clientPrefix)
+        protected virtual FormattableString CreateDescription()
         {
-            var an = clientPrefix.StartsWithVowel() ? "an" : "a";
+            var an = ResourceName.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
             var parents = this.Parent();
             var parentTypes = parents.Select(parent => parent is MgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();
@@ -451,20 +449,19 @@ namespace AutoRest.CSharp.Mgmt.Output
             return new Parameter(segment.Reference.Name, null, ctype, null, ValidationType.AssertNotNull, null);
         }
 
+        private MethodSignature? _createResourceIdentifierMethodSignature;
         /// <summary>
         /// Returns the different method signature for different base path of this resource
         /// </summary>
         /// <returns></returns>
-        public virtual MethodSignature CreateResourceIdentifierMethodSignature
-            => createResourceIdentifierMethodSignature ??= new MethodSignature(
-                Name: "CreateResourceIdentifier",
-                null,
-                Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
-                Modifiers: Public | Static,
-                ReturnType: typeof(ResourceIdentifier),
-                ReturnDescription: null,
-                Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
-        private MethodSignature? createResourceIdentifierMethodSignature;
+        public virtual MethodSignature CreateResourceIdentifierMethodSignature => _createResourceIdentifierMethodSignature ??= new MethodSignature(
+            Name: "CreateResourceIdentifier",
+            null,
+            Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
+            Modifiers: Public | Static,
+            ReturnType: typeof(ResourceIdentifier),
+            ReturnDescription: null,
+            Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
 
         public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
         {

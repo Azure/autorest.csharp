@@ -99,10 +99,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
-                var codeWriter = new CodeWriter();
-                new ResourceWriter(codeWriter, resource).Write();
+                var writer = new ResourceWriter(resource);
+                writer.Write();
 
-                AddGeneratedFile(project, $"{resource.Type.Name}.cs", codeWriter.ToString());
+                AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }
 
             // write extension class
@@ -141,21 +141,17 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
             }
 
+            foreach (var model in MgmtContext.Library.PropertyBagModels)
+            {
+                var name = model.Type.Name;
+                WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
+            }
+
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
-            await project.PostProcess(PostProcess);
-
-        }
-
-        private static async Task<Project> PostProcess(Project project)
-        {
             var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-            project = await Internalizer.InternalizeAsync(project, modelsToKeep);
-
-            project = await Remover.RemoveUnusedAsync(project, modelsToKeep);
-
-            return project;
+            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep));
         }
 
         private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
@@ -188,17 +184,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         {
             var codeWriter = new CodeWriter();
 
-            if (model is MgmtObjectType objectType && objectType.BackingSchema != null)
-            {
-                var backingModel = new MgmtObjectType(objectType.BackingSchema);
-                var name = backingModel.Type.Name;
-                WriteArmModel(project, backingModel, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
-                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
-            }
-            else
-            {
-                ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
-            }
+            ReferenceTypeWriter.GetWriter(model).WriteModel(codeWriter, model);
 
             AddGeneratedFile(project, modelFileName, codeWriter.ToString());
 

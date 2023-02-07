@@ -1,0 +1,287 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-dpg";
+import "@azure-tools/cadl-ranch-expect";
+
+using Cadl.Rest;
+using Cadl.Http;
+using Azure.DPG;
+
+@doc("Illustrates inheritance and polymorphic model.")
+@service({
+    title: "Cadl ranch inheritance",
+    version: "2021-03-25"
+})
+@server("http://localhost:3000", "TestServer endpoint")
+@route("/models/inheritance")
+namespace Models.Inheritance;
+
+@doc("This is base model for non-discriminator normal multiple levels inheritance.")
+model Pet {
+  name: string;
+}
+
+@doc("The second level model in the normal multiple levels inheritance.")
+model Cat extends Pet {
+  age: int32;
+}
+
+@doc("The third level model in the normal multiple levels inheritance.")
+model Siamese extends Cat {
+  smart: boolean;
+}
+
+@doc("This is base model for polymorphic multiple levels inheritance with a discriminator.")
+@discriminator("kind")
+model Fish {
+  age: int32;
+}
+
+/*@doc("The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.")
+@discriminator("sharktype")
+model Shark extends Fish {
+  kind: "shark";
+}*/
+
+@doc("The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic instances.")
+model Salmon extends Fish {
+  kind: "salmon";
+  friends?: Fish[];
+  hate?: Record<Fish>;
+  partner?: Fish;
+}
+
+/*@doc("The third level model SawShark in polymorphic multiple levels inheritance.")
+model SawShark extends Shark {
+  sharktype: "saw";
+}
+
+@doc("The third level model GoblinShark in polymorphic multiple levels inheritance.")
+model GoblinShark extends Shark {
+  sharktype: "goblin";
+}*/
+
+@scenario
+@scenarioDoc("""
+Generate and send model.
+Expected input body:
+```json
+{"name": "abc", "age": 32, "smart": true}
+```
+""")
+@route("/valid")
+@post
+@convenientAPI(true)
+op postValid(@body input: Siamese): OkResponse;
+
+@scenario
+@scenarioDoc("""
+Generate and receive model.
+Expected response body:
+```json
+{"name": "abc", "age": 32, "smart": true}
+```
+""")
+@route("/valid")
+@get
+@convenientAPI(true)
+op getValid(): Siamese;
+
+@scenario
+@scenarioDoc("Generate, send, and receive round-trip bottom model.")
+@route("/valid")
+@put
+@convenientAPI(true)
+op putValid(@body input: Siamese): Siamese;
+
+@route("/discriminated")
+interface Discriminated {
+  @scenario
+  @route("/model")
+  @scenarioDoc("""
+  Generate and receive polymorphic model in multiple levels inheritance with 2 discriminators.
+  Expected response body:
+  ```json
+  {"age": 1, "kind": "shark",  "sharktype": "goblin"}
+  ```
+  """)
+  @get
+  @convenientAPI(true)
+  getModel(): Fish;
+
+  @scenario
+  @route("/model")
+  @scenarioDoc("""
+  Generate and send polymorphic model in multiple levels inheritance with 2 discriminators.
+  Expected input body:
+  ```json
+  {"age": 1, "kind": "shark",  "sharktype": "goblin"}
+  ```
+  """)
+  @put
+  @convenientAPI(true)
+  putModel(@body input: Fish): OkResponse;
+
+  @scenario
+  @route("/recursivemodel")
+  @scenarioDoc("""
+  Generate and receive polymorphic models has collection and dictionary properties referring to other polymorphic models.
+  Expected response body:
+  ```json
+  {
+    "age": 1,
+    "kind": "salmon",
+    "partner": {
+      "age": 2,
+      "kind": "shark",
+      "sharktype": "saw"
+    },
+    "friends": [
+      {
+        "age": 2,
+        "kind": "salmon",
+        "partner": {
+          "age": 3,
+          "kind": "salmon"
+        },
+        "hate": {
+          "key1": {
+            "age": 4,
+            "kind": "salmon"
+          },
+          "key2": {
+            "age": 2,
+            "kind": "shark",
+            "sharktype": "goblin"
+          }
+        }
+      },
+      {
+        "age": 3,
+        "kind": "shark",
+        "sharktype": "goblin"
+      }
+    ],
+    "hate": {
+      "key3": {
+        "age": 3,
+        "kind": "shark",
+        "sharktype": "saw"
+      },
+      "key4": {
+        "age": 2,
+        "kind": "salmon",
+        "friends": [
+          {
+            "age": 1,
+            "kind": "salmon"
+          },
+          {
+            "age": 4,
+            "kind": "shark",
+            "sharktype": "goblin"
+          }
+        ]
+      }
+    }
+  }
+  ```
+  """)
+  @get
+  @convenientAPI(true)
+  getRecursiveModel(): Fish;
+
+  @scenario
+  @route("/recursivemodel")
+  @scenarioDoc("""
+  Generate and send polymorphic models has collection and dictionary properties referring to other polymorphic models.
+  Expected input body:
+  ```json
+  {
+    "age": 1,
+    "kind": "salmon",
+    "partner": {
+      "age": 2,
+      "kind": "shark",
+      "sharktype": "saw"
+    },
+    "friends": [
+      {
+        "age": 2,
+        "kind": "salmon",
+        "partner": {
+          "age": 3,
+          "kind": "salmon"
+        },
+        "hate": {
+          "key1": {
+            "age": 4,
+            "kind": "salmon"
+          },
+          "key2": {
+            "age": 2,
+            "kind": "shark",
+            "sharktype": "goblin"
+          }
+        }
+      },
+      {
+        "age": 3,
+        "kind": "shark",
+        "sharktype": "goblin"
+      }
+    ],
+    "hate": {
+      "key3": {
+        "age": 3,
+        "kind": "shark",
+        "sharktype": "saw"
+      },
+      "key4": {
+        "age": 2,
+        "kind": "salmon",
+        "friends": [
+          {
+            "age": 1,
+            "kind": "salmon"
+          },
+          {
+            "age": 4,
+            "kind": "shark",
+            "sharktype": "goblin"
+          }
+        ]
+      }
+    }
+  }
+  ```
+  """)
+  @put
+  @convenientAPI(true)
+  putRecursiveModel(@body input: Fish): OkResponse;
+
+  @scenario
+  @route("/missingdiscriminator")
+  @scenarioDoc("""
+  Get a model omitting the discriminator.
+  Expected response body:
+  ```json
+  {"age": 1}
+  ```
+  """)
+  @get
+  @convenientAPI(true)
+  getMissingDiscriminator(): Fish;
+
+  @scenario
+  @route("/wrongdiscriminator")
+  @scenarioDoc("""
+  Get a model containing discriminator value never defined.
+  Expected response body:
+  ```json
+  {"age": 1, "kind": "wrongKind" }
+  ```
+  """)
+  @get
+  @convenientAPI(true)
+  getWrongDiscriminator(): Fish;
+}

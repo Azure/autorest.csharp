@@ -80,7 +80,7 @@ namespace AutoRest.TestServer.Tests
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
-            AsyncPageable<Product> allPages = new DPGClient(Key, host, null).GetPagesValuesAsync("model");
+            AsyncPageable<Product> allPages = new DPGClient(Key, host, null).GetPageValuesAsync("model");
             var pagesCount = 0;
             await foreach (Page<Product> page in allPages.AsPages())
             {
@@ -88,8 +88,7 @@ namespace AutoRest.TestServer.Tests
                 Assert.AreEqual("model", $"{page.Values.First().Received}");
             }
 
-            // +1 due to the last iteration of enumeration that doesn't make a call
-            Assert.AreEqual(pagesCount + 1, diagnosticListener.Scopes.Count);
+            Assert.AreEqual(pagesCount, diagnosticListener.Scopes.Count);
         });
 
         [Test]

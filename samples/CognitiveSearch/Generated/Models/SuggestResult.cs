@@ -19,10 +19,7 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         internal SuggestResult(string text)
         {
-            if (text == null)
-            {
-                throw new ArgumentNullException(nameof(text));
-            }
+            Argument.AssertNotNull(text, nameof(text));
 
             Text = text;
             AdditionalProperties = new ChangeTrackingDictionary<string, object>();

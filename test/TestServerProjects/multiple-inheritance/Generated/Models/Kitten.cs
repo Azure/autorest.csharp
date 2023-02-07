@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace multiple_inheritance.Models
 {
@@ -17,10 +18,7 @@ namespace multiple_inheritance.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Kitten(string name) : base(name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
         }
 
         /// <summary> Initializes a new instance of Kitten. </summary>
@@ -32,10 +30,7 @@ namespace multiple_inheritance.Models
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal Kitten(string name, bool? likesMilk, bool? meows, bool? hisses, bool? eatsMiceYet) : base(name, likesMilk, meows, hisses)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
+            Argument.AssertNotNull(name, nameof(name));
 
             EatsMiceYet = eatsMiceYet;
         }

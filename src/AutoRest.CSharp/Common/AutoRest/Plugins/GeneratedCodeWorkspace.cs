@@ -9,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.PostProcessing;
+using AutoRest.CSharp.Input;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -19,18 +21,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class GeneratedCodeWorkspace
     {
-        public static string SharedFolder = "shared";
-        public static string GeneratedFolder = "Generated";
+        public static readonly string SharedFolder = "shared";
+        public static readonly string GeneratedFolder = "Generated";
 
         private static readonly string[] SharedFolders = { SharedFolder };
         private static readonly string[] GeneratedFolders = { GeneratedFolder };
         private static Task<Project>? _cachedProject;
 
         private Project _project;
+        private Dictionary<string, string> _docFiles { get; init; }
 
         private GeneratedCodeWorkspace(Project generatedCodeProject)
         {
             _project = generatedCodeProject;
+            _docFiles = new Dictionary<string, string>();
         }
 
         /// <summary>
@@ -51,6 +55,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             root = root.WithAdditionalAnnotations(Simplifier.Annotation);
             document = document.WithSyntaxRoot(root);
             _project = document.Project;
+        }
+
+        /// <summary>
+        /// Add generated doc file.
+        /// </summary>
+        /// <param name="name">Name of the doc file, including the relative path to the "Generated" folder.</param>
+        /// <param name="text">Content of the doc file.</param>
+        public void AddGeneratedDocFile(string name, string text)
+        {
+            _docFiles.Add(name, text);
         }
 
         public async IAsyncEnumerable<(string Name, string Text)> GetGeneratedFilesAsync()
@@ -74,8 +88,16 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             foreach (var task in documents)
             {
                 var processed = await task;
+
+                processed = await Simplifier.ReduceAsync(processed);
+                processed = await Formatter.FormatAsync(processed);
                 var text = await processed.GetSyntaxTreeAsync();
                 yield return (processed.Name, text!.ToString());
+            }
+
+            foreach (var doc in _docFiles)
+            {
+                yield return (doc.Key, doc.Value);
             }
         }
 
@@ -89,8 +111,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 document = document.WithSyntaxRoot(rewriter.Visit(await syntaxTree.GetRootAsync()));
             }
 
-            document = await Simplifier.ReduceAsync(document);
-            document = await Formatter.FormatAsync(document);
             return document;
         }
 
@@ -201,6 +221,29 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task PostProcess(Func<Project, Task<Project>> processor)
         {
             _project = await processor(_project);
+        }
+
+        /// <summary>
+        /// This method invokes the postProcessor to do some post processing work
+        /// Depending on the configuration, it will either remove + internalize, just internalize or do nothing
+        /// </summary>
+        /// <param name="postProcessor"></param>
+        /// <returns></returns>
+        public async Task PostProcessAsync(PostProcessor? postProcessor = null)
+        {
+            postProcessor ??= new PostProcessor();
+            switch (Configuration.UnreferencedTypesHandling)
+            {
+                case Configuration.UnreferencedTypesHandlingOption.KeepAll:
+                    break;
+                case Configuration.UnreferencedTypesHandlingOption.Internalize:
+                    _project = await postProcessor.InternalizeAsync(_project);
+                    break;
+                case Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize:
+                    _project = await postProcessor.InternalizeAsync(_project);
+                    _project = await postProcessor.RemoveAsync(_project);
+                    break;
+            }
         }
     }
 }

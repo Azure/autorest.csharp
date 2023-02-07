@@ -3,10 +3,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -45,6 +47,7 @@ namespace AutoRest.CSharp.Output.Builders
                 InputTypeKind.BytesBase64Url => SerializationFormat.Bytes_Base64Url,
                 InputTypeKind.Bytes => SerializationFormat.Bytes_Base64,
                 InputTypeKind.Date => SerializationFormat.Date_ISO8601,
+                InputTypeKind.DateTime => SerializationFormat.DateTime_ISO8601,
                 InputTypeKind.DateTimeISO8601 => SerializationFormat.DateTime_ISO8601,
                 InputTypeKind.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
                 InputTypeKind.DateTimeUnix => SerializationFormat.DateTime_Unix,
@@ -175,11 +178,7 @@ namespace AutoRest.CSharp.Output.Builders
                         type.IsNullable);
                 default:
                     JsonSerializationOptions options = IsManagedServiceIdentityV3(schema, type) ? JsonSerializationOptions.UseManagedServiceIdentityV3 : JsonSerializationOptions.None;
-                    return new JsonValueSerialization(
-                        type,
-                        BuilderHelpers.GetSerializationFormat(schema),
-                        type.IsNullable,
-                        options);
+                    return new JsonValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema), type.IsNullable, options);
             }
         }
 
@@ -314,7 +313,7 @@ namespace AutoRest.CSharp.Output.Builders
                     continue;
                 }
 
-                string name = property!.FlattenedNames.ElementAt(depthIndex);
+                string name = property!.FlattenedNames!.ElementAt(depthIndex);
                 if (!propertyBag.Bag.TryGetValue(name, out PropertyBag? namedBag))
                 {
                     namedBag = new PropertyBag();
@@ -350,9 +349,9 @@ namespace AutoRest.CSharp.Output.Builders
                 return null;
             }
 
-            var valueSerialization = BuildSerialization(
-                inheritedDictionarySchema.ElementType,
-                TypeFactory.GetElementType(additionalPropertiesProperty.Declaration.Type));
+            var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
+            Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
+            var valueSerialization = BuildSerialization(inheritedDictionarySchema.ElementType, dictionaryValueType);
 
             return new JsonAdditionalPropertiesSerialization(
                     additionalPropertiesProperty,

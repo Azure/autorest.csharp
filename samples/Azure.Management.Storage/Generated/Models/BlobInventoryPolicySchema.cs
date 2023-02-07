@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Azure.Core;
 
 namespace Azure.Management.Storage.Models
 {
@@ -21,10 +22,7 @@ namespace Azure.Management.Storage.Models
         /// <exception cref="ArgumentNullException"> <paramref name="rules"/> is null. </exception>
         public BlobInventoryPolicySchema(bool enabled, InventoryRuleType inventoryRuleType, IEnumerable<BlobInventoryPolicyRule> rules)
         {
-            if (rules == null)
-            {
-                throw new ArgumentNullException(nameof(rules));
-            }
+            Argument.AssertNotNull(rules, nameof(rules));
 
             Enabled = enabled;
             InventoryRuleType = inventoryRuleType;

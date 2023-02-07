@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { Operation, Program, Type } from "@cadl-lang/compiler";
+import { DecoratedType, Operation, Program, Type } from "@cadl-lang/compiler";
 import { ExternalDocs } from "../type/ExternalDocs.js";
 
 const externalDocsKey = Symbol("externalDocs");
@@ -23,4 +23,8 @@ export function getOperationId(
     return program.stateMap(operationIdsKey).get(entity);
 }
 
-export const convenienceApiKey = "x-ms-convenient-api";
+export function hasDecorator(type: DecoratedType, name: string): boolean {
+    return (
+        type.decorators.find((it) => it.decorator.name === name) !== undefined
+    );
+}

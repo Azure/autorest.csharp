@@ -11,6 +11,7 @@ using System.Reflection;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -24,24 +25,23 @@ namespace AutoRest.CSharp.Output.Models.Types
     {
         private static ConcurrentDictionary<Type, SystemObjectType> _typeCache = new ConcurrentDictionary<Type, SystemObjectType>();
 
-        public static SystemObjectType Create(Type type, BuildContext context)
+        public static SystemObjectType Create(Type type, string defaultNamespace, SourceInputModel? sourceInputModel)
         {
             if (_typeCache.TryGetValue(type, out var result))
                 return result;
 
-            result = new SystemObjectType(type, context);
+            result = new SystemObjectType(type, defaultNamespace, sourceInputModel);
             _typeCache.TryAdd(type, result);
             return result;
         }
 
         private readonly Type _type;
-        private readonly BuildContext _context;
+        private readonly SourceInputModel? _sourceInputModel;
 
-        public SystemObjectType(Type type, BuildContext context)
-            : base(context)
+        private SystemObjectType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             _type = type;
-            _context = context;
+            _sourceInputModel = sourceInputModel;
             DefaultName = GetNameWithoutGeneric(type);
         }
 
@@ -60,6 +60,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         internal Type SystemType => _type;
+
+        public override bool IncludeConverter => false;
 
         internal static bool TryGetCtor(Type type, string attributeType, [MaybeNullWhen(false)] out ConstructorInfo result)
         {
@@ -90,25 +92,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ when type == typeof(SystemData) => type,
             _ => null,
         };
-
-        internal IEnumerable<Attribute> GetCustomAttributes()
-        {
-            var type = _type;
-            return type.GetCustomAttributes();
-        }
-
-        internal IEnumerable<PropertyInfo> GetAllProperties()
-        {
-            var type = _type;
-            while (type != null)
-            {
-                foreach (var property in type.GetProperties())
-                {
-                    yield return property;
-                }
-                type = type.BaseType;
-            }
-        }
 
         private static string GetNameWithoutGeneric(Type t)
         {
@@ -221,7 +204,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override CSharpType? CreateInheritedType()
         {
-            return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(_context, _type.BaseType);
+            return _type.BaseType == null || _type.BaseType == typeof(object) ? null : CSharpType.FromSystemType(_type.BaseType, base.DefaultNamespace, _sourceInputModel);
         }
 
         protected override string CreateDescription()

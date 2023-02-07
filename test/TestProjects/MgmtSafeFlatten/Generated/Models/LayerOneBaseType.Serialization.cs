@@ -30,16 +30,7 @@ namespace MgmtSafeFlatten.Models
                     case "LayerOneFoo": return LayerOneFooType.DeserializeLayerOneFooType(element);
                 }
             }
-            LayerOneTypeName name = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("name"))
-                {
-                    name = new LayerOneTypeName(property.Value.GetString());
-                    continue;
-                }
-            }
-            return new UnknownLayerOneBaseType(name);
+            return UnknownLayerOneBaseType.DeserializeUnknownLayerOneBaseType(element);
         }
     }
 }

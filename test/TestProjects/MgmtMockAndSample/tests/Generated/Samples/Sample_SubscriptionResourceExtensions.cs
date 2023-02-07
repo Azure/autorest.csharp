@@ -11,9 +11,9 @@ using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
-using MgmtMockAndSample.Models;
+using MgmtMockAndSample;
 
-namespace MgmtMockAndSample
+namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_SubscriptionResourceExtensions
     {
@@ -25,8 +25,10 @@ namespace MgmtMockAndSample
             // Generated from example definition: 
             // this example is just showing the usage of "Vaults_ListDeleted" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
@@ -47,30 +49,6 @@ namespace MgmtMockAndSample
             Console.WriteLine($"Succeeded");
         }
 
-        // Validate a vault name
-        [NUnit.Framework.Test]
-        [NUnit.Framework.Ignore("Only verifying that the sample builds")]
-        public async Task CheckNameAvailabilityVault_ValidateAVaultName()
-        {
-            // Generated from example definition: 
-            // this example is just showing the usage of "Vaults_CheckNameAvailability" operation, for the dependent resources, they will have to be created separately.
-
-            // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
-
-            // this example assumes you already have this SubscriptionResource created on azure
-            // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
-            string subscriptionId = "00000000-0000-0000-0000-000000000000";
-            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier(subscriptionId);
-            SubscriptionResource subscriptionResource = client.GetSubscriptionResource(subscriptionResourceId);
-
-            // invoke the operation
-            VaultCheckNameAvailabilityContent content = new VaultCheckNameAvailabilityContent("sample-vault");
-            CheckNameAvailabilityResult result = await subscriptionResource.CheckNameAvailabilityVaultAsync(content);
-
-            Console.WriteLine($"Succeeded: {result}");
-        }
-
         // List deleted managed HSMs in the specified subscription
         [NUnit.Framework.Test]
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
@@ -79,8 +57,10 @@ namespace MgmtMockAndSample
             // Generated from example definition: 
             // this example is just showing the usage of "ManagedHsms_ListDeleted" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource

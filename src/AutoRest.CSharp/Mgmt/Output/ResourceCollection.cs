@@ -33,7 +33,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         public override CSharpType? BaseType => typeof(ArmCollection);
         protected override IReadOnlyList<CSharpType> EnsureGetInterfaces()
         {
-            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature))
+            if (GetAllOperation is null || GetAllOperation.MethodParameters.Any(p => !p.IsOptionalInSignature &&
+            (!p.IsPropertyBag || p.Validation != ValidationType.None)))
                 return base.EnsureGetInterfaces();
 
             var getRestOperation = GetAllOperation.OperationMappings.Values.First();
@@ -197,7 +198,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <returns></returns>
         protected override RequestPath GetContextualPath(OperationSet operationSet, RequestPath operationRequestPath)
         {
-            var contextualPath = operationSet.ParentRequestPath();
+            var contextualPath = operationSet.ParentRequestPath(ResourceType);
             // we need to replace the scope in this contextual path with the actual scope in the operation
             var scope = contextualPath.GetScopePath();
             if (!scope.IsParameterizedScope())
@@ -209,9 +210,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         // name after `{ResourceName}Collection`
         protected override string DefaultName => ResourceName + _suffixValue;
 
-        protected override FormattableString CreateDescription(string clientPrefix)
+        protected override FormattableString CreateDescription()
         {
-            var an = clientPrefix.StartsWithVowel() ? "an" : "a";
+            var an = ResourceName.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
             var parents = Resource.Parent();
             var parentTypes = parents.Select(parent => parent is MgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();

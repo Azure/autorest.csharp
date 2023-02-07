@@ -6,10 +6,15 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> Base type for functions that can modify document scores during ranking. </summary>
+    /// <summary>
+    /// Base type for functions that can modify document scores during ranking.
+    /// Please note <see cref="ScoringFunction"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
+    /// The available derived classes include <see cref="DistanceScoringFunction"/>, <see cref="FreshnessScoringFunction"/>, <see cref="MagnitudeScoringFunction"/> and <see cref="TagScoringFunction"/>.
+    /// </summary>
     public partial class ScoringFunction
     {
         /// <summary> Initializes a new instance of ScoringFunction. </summary>
@@ -18,10 +23,7 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
         public ScoringFunction(string fieldName, double boost)
         {
-            if (fieldName == null)
-            {
-                throw new ArgumentNullException(nameof(fieldName));
-            }
+            Argument.AssertNotNull(fieldName, nameof(fieldName));
 
             FieldName = fieldName;
             Boost = boost;

@@ -53,7 +53,7 @@ https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b27
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cognitiveservices/data-plane/FormRecognizer/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cognitiveservices/data-plane/ImageSearch/readme.md - https://github.com/Azure/autorest/issues/3498
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cognitiveservices/data-plane/InkRecognizer/readme.md
-https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cognitiveservices/data-plane/LocalSearch/readme.md
+#https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cognitiveservices/data-plane/LocalSearch/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cognitiveservices/data-plane/LUIS/Authoring/readme.md - https://github.com/Azure/autorest.modelerfour/issues/283
 https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cognitiveservices/data-plane/LUIS/Runtime/readme.md
 #https://github.com/Azure/azure-rest-api-specs/blob/d9cf7c7ed3d674ebd482836e82b274014245ae67/specification/cognitiveservices/data-plane/NewsSearch/readme.md - https://github.com/Azure/autorest/issues/3498

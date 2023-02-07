@@ -14,10 +14,23 @@ export interface InputPrimitiveType extends InputType {
     Kind: InputTypeKind;
 }
 
+export interface InputLiteralType extends InputType {
+    Name: "Literal";
+    LiteralValueType: InputType;
+    Value: any;
+}
+
+export interface InputUnionType extends InputType {
+    Name: "Union";
+    UnionItemTypes: InputType[];
+}
+
 export interface InputModelType extends InputType {
     Namespace?: string;
     Accessibility?: string;
+    Deprecated?: string;
     Description: string;
+    Usage: string;
     Properties: InputModelProperty[];
     BaseModel?: InputModelType;
     DiscriminatorPropertyName?: string;
@@ -27,10 +40,12 @@ export interface InputModelType extends InputType {
 export interface InputEnumType extends InputType {
     Namespace?: string;
     Accessibility?: string;
+    Deprecated?: string;
     Description: string;
     EnumValueType: string;
     AllowedValues: InputEnumTypeValue[];
     IsExtensible: boolean;
+    Usage: string;
 }
 
 export interface InputListType extends InputType {

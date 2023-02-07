@@ -9,11 +9,13 @@
  "Clients": [
   {
    "$id": "2",
-   "Name": "endpoint",
+   "Name": "endpointClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "3",
      "Name": "genEndPoint",
+     "ResourceName": "endpoint",
      "Description": "Path parameter is string with format",
      "Parameters": [
       {
@@ -121,20 +123,24 @@
        "StatusCodes": [
         204
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "{endpointServiceUrl}",
      "Path": "/endpoint/{action}",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
     "$id": "16"
-   }
+   },
+   "Creatable": true
   }
  ]
 }

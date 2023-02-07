@@ -60,28 +60,68 @@ namespace AutoRest.CSharp.MgmtTest.Models
         }
 
         /// <summary>
-        /// Returns the values to construct a resource identifier for the input request path
+        /// Returns the values to construct a resource identifier for the input request path of the resource
         /// This method does not validate the parenting relationship between the request path passing in and the request path inside this test case
         /// The passing in request path should always be a parent of the request path in this test case
         /// </summary>
-        /// <param name="requestPath"></param>
+        /// <param name="resourcePath"></param>
         /// <returns></returns>
-        /// <exception cref="InvalidOperationException"></exception>
-        public IEnumerable<ExampleParameterValue> ComposeResourceIdentifierParameterValues(RequestPath requestPath)
+        public IEnumerable<ResourceIdentifierInitializer> ComposeResourceIdentifierExpressionValues(RequestPath resourcePath)
         {
-            // we first take the same amount of segments from my own request path, in case there is a case that the parameter names between different paths are different
-            var piecesFromMyOwn = RequestPath.Take(requestPath.Count);
+            var scopePath = resourcePath.GetScopePath();
+            if (scopePath.IsRawParameterizedScope())
+            {
+                var trimmedPath = resourcePath.TrimScope();
+                return ComposeResourceIdentifierForScopePath(scopePath, trimmedPath);
+            }
+            else
+            {
+                return ComposeResourceIdentifierForUsualPath(RequestPath, resourcePath);
+            }
+        }
+
+        private IEnumerable<ResourceIdentifierInitializer> ComposeResourceIdentifierForScopePath(RequestPath scopePath, RequestPath trimmedPath)
+        {
+            // we need to find the scope, and put everything in the scope into the scope parameter
+            var operationScopePath = RequestPath.GetScopePath();
+            var operationTrimmedPath = RequestPath.TrimScope();
+
+            var scopeValues = new List<ExampleParameterValue>();
+            foreach (var referenceSegment in operationScopePath.Where(segment => segment.IsReference))
+            {
+                scopeValues.Add(FindExampleParameterValueFromReference(referenceSegment.Reference));
+            }
+
+            if (operationScopePath.Count == 1)
+                yield return new ResourceIdentifierInitializer(scopeValues.Single());
+            else
+                yield return new ResourceIdentifierInitializer(operationScopePath, scopeValues);
+
+            foreach (var referenceSegment in operationTrimmedPath.Take(trimmedPath.Count).Where(segment => segment.IsReference))
+            {
+                yield return new ResourceIdentifierInitializer(FindExampleParameterValueFromReference(referenceSegment.Reference));
+            }
+        }
+
+        private IEnumerable<ResourceIdentifierInitializer> ComposeResourceIdentifierForUsualPath(RequestPath requestPath, RequestPath resourcePath)
+        {
+            // we first take the same amount of segments from my own request path, in case there is a case that the parameter names from these two paths are different
+            var piecesFromMyOwn = requestPath.Take(resourcePath.Count);
             // there should be a contract that we will never have two parameters with the same name in one path
             foreach (var referenceSegment in piecesFromMyOwn.Where(segment => segment.IsReference))
             {
-                // find a path parameter in our path parameters for one with same name
-                var serializedName = GetParameterSerializedName(referenceSegment.ReferenceName);
-                var parameter = FindPathExampleParameterBySerializedName(serializedName);
-                var exampleValue = parameter.ExampleValue;
-                exampleValue = ReplacePathParameterValue(serializedName, referenceSegment.Reference.Type, exampleValue);
-
-                yield return new ExampleParameterValue(referenceSegment.Reference, exampleValue);
+                yield return new ResourceIdentifierInitializer(FindExampleParameterValueFromReference(referenceSegment.Reference));
             }
+        }
+
+        private ExampleParameterValue FindExampleParameterValueFromReference(Reference reference)
+        {
+            // find a path parameter in our path parameters for one with same name
+            var serializedName = GetParameterSerializedName(reference.Name);
+            var parameter = FindPathExampleParameterBySerializedName(serializedName);
+            var exampleValue = ReplacePathParameterValue(serializedName, reference.Type, parameter.ExampleValue);
+
+            return new ExampleParameterValue(reference, exampleValue);
         }
 
         protected virtual ExampleValue ReplacePathParameterValue(string serializedName, CSharpType type, ExampleValue value)

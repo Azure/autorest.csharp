@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace header_LowLevel
 {
-    // Data plane generated client. The Header service client.
+    // Data plane generated client.
     /// <summary> The Header service client. </summary>
     public partial class HeaderClient
     {
@@ -63,16 +63,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamExistingKeyAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamExistingKeyAsync("<userAgent>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamExistingKeyAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ParamExistingKeyAsync(string userAgent, RequestContext context = null)
         {
             Argument.AssertNotNull(userAgent, nameof(userAgent));
@@ -97,16 +88,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="userAgent"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamExistingKey with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamExistingKey("<userAgent>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamExistingKey(String,RequestContext)']/*" />
         public virtual Response ParamExistingKey(string userAgent, RequestContext context = null)
         {
             Argument.AssertNotNull(userAgent, nameof(userAgent));
@@ -129,16 +111,7 @@ namespace header_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseExistingKeyAsync.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseExistingKeyAsync();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseExistingKeyAsync(RequestContext)']/*" />
         public virtual async Task<Response> ResponseExistingKeyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
@@ -159,16 +132,7 @@ namespace header_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseExistingKey.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseExistingKey();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseExistingKey(RequestContext)']/*" />
         public virtual Response ResponseExistingKey(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseExistingKey");
@@ -191,16 +155,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamProtectedKeyAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamProtectedKeyAsync("<contentType>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamProtectedKeyAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ParamProtectedKeyAsync(string contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(contentType, nameof(contentType));
@@ -225,16 +180,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="contentType"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamProtectedKey with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamProtectedKey("<contentType>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamProtectedKey(String,RequestContext)']/*" />
         public virtual Response ParamProtectedKey(string contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(contentType, nameof(contentType));
@@ -257,16 +203,7 @@ namespace header_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseProtectedKeyAsync.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseProtectedKeyAsync();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseProtectedKeyAsync(RequestContext)']/*" />
         public virtual async Task<Response> ResponseProtectedKeyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
@@ -287,16 +224,7 @@ namespace header_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseProtectedKey.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseProtectedKey();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseProtectedKey(RequestContext)']/*" />
         public virtual Response ResponseProtectedKey(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.ResponseProtectedKey");
@@ -320,16 +248,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamIntegerAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamIntegerAsync("<scenario>", 1234);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamIntegerAsync(String,Int32,RequestContext)']/*" />
         public virtual async Task<Response> ParamIntegerAsync(string scenario, int value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -355,16 +274,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamInteger with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamInteger("<scenario>", 1234);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamInteger(String,Int32,RequestContext)']/*" />
         public virtual Response ParamInteger(string scenario, int value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -389,16 +299,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseIntegerAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseIntegerAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseIntegerAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseIntegerAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -423,16 +324,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseInteger with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseInteger("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseInteger(String,RequestContext)']/*" />
         public virtual Response ResponseInteger(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -458,16 +350,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamLongAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamLongAsync("<scenario>", 1234);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamLongAsync(String,Int64,RequestContext)']/*" />
         public virtual async Task<Response> ParamLongAsync(string scenario, long value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -493,16 +376,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamLong with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamLong("<scenario>", 1234);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamLong(String,Int64,RequestContext)']/*" />
         public virtual Response ParamLong(string scenario, long value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -527,16 +401,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseLongAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseLongAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseLongAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseLongAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -561,16 +426,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseLong with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseLong("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseLong(String,RequestContext)']/*" />
         public virtual Response ResponseLong(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -596,16 +452,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamFloatAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamFloatAsync("<scenario>", 1234);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamFloatAsync(String,Single,RequestContext)']/*" />
         public virtual async Task<Response> ParamFloatAsync(string scenario, float value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -631,16 +478,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamFloat with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamFloat("<scenario>", 1234);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamFloat(String,Single,RequestContext)']/*" />
         public virtual Response ParamFloat(string scenario, float value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -665,16 +503,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseFloatAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseFloatAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseFloatAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseFloatAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -699,16 +528,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseFloat with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseFloat("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseFloat(String,RequestContext)']/*" />
         public virtual Response ResponseFloat(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -734,16 +554,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamDoubleAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamDoubleAsync("<scenario>", 1234);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDoubleAsync(String,Double,RequestContext)']/*" />
         public virtual async Task<Response> ParamDoubleAsync(string scenario, double value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -769,16 +580,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamDouble with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamDouble("<scenario>", 1234);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDouble(String,Double,RequestContext)']/*" />
         public virtual Response ParamDouble(string scenario, double value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -803,16 +605,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseDoubleAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseDoubleAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDoubleAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDoubleAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -837,16 +630,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseDouble with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseDouble("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDouble(String,RequestContext)']/*" />
         public virtual Response ResponseDouble(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -872,16 +656,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamBoolAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamBoolAsync("<scenario>", true);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamBoolAsync(String,Boolean,RequestContext)']/*" />
         public virtual async Task<Response> ParamBoolAsync(string scenario, bool value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -907,16 +682,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamBool with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamBool("<scenario>", true);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamBool(String,Boolean,RequestContext)']/*" />
         public virtual Response ParamBool(string scenario, bool value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -941,16 +707,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseBoolAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseBoolAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseBoolAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseBoolAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -975,16 +732,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseBool with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseBool("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseBool(String,RequestContext)']/*" />
         public virtual Response ResponseBool(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1010,24 +758,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamStringAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamStringAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call ParamStringAsync with all parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamStringAsync("<scenario>", "<value>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamStringAsync(String,String,RequestContext)']/*" />
         public virtual async Task<Response> ParamStringAsync(string scenario, string value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1053,24 +784,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamString with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamString("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call ParamString with all parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamString("<scenario>", "<value>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamString(String,String,RequestContext)']/*" />
         public virtual Response ParamString(string scenario, string value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1095,16 +809,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseStringAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseStringAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseStringAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseStringAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1129,16 +834,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseString with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseString("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseString(String,RequestContext)']/*" />
         public virtual Response ResponseString(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1164,16 +860,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamDateAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.UtcNow);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDateAsync(String,DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> ParamDateAsync(string scenario, DateTimeOffset value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1199,16 +886,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamDate with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamDate("<scenario>", DateTimeOffset.UtcNow);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDate(String,DateTimeOffset,RequestContext)']/*" />
         public virtual Response ParamDate(string scenario, DateTimeOffset value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1233,16 +911,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseDateAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseDateAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDateAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDateAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1267,16 +936,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseDate with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseDate("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDate(String,RequestContext)']/*" />
         public virtual Response ResponseDate(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1302,16 +962,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamDatetimeAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.UtcNow);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeAsync(String,DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> ParamDatetimeAsync(string scenario, DateTimeOffset value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1337,16 +988,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamDatetime with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamDatetime("<scenario>", DateTimeOffset.UtcNow);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetime(String,DateTimeOffset,RequestContext)']/*" />
         public virtual Response ParamDatetime(string scenario, DateTimeOffset value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1371,16 +1013,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseDatetimeAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseDatetimeAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDatetimeAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1405,16 +1038,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseDatetime with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseDatetime("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetime(String,RequestContext)']/*" />
         public virtual Response ResponseDatetime(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1440,24 +1064,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamDatetimeRfc1123Async with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamDatetimeRfc1123Async("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call ParamDatetimeRfc1123Async with all parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamDatetimeRfc1123Async("<scenario>", DateTimeOffset.UtcNow);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeRfc1123Async(String,DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> ParamDatetimeRfc1123Async(string scenario, DateTimeOffset? value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1483,24 +1090,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamDatetimeRfc1123 with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamDatetimeRfc1123("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call ParamDatetimeRfc1123 with all parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamDatetimeRfc1123("<scenario>", DateTimeOffset.UtcNow);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDatetimeRfc1123(String,DateTimeOffset,RequestContext)']/*" />
         public virtual Response ParamDatetimeRfc1123(string scenario, DateTimeOffset? value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1525,16 +1115,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseDatetimeRfc1123Async with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseDatetimeRfc1123Async("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeRfc1123Async(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDatetimeRfc1123Async(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1559,16 +1140,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseDatetimeRfc1123 with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseDatetimeRfc1123("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDatetimeRfc1123(String,RequestContext)']/*" />
         public virtual Response ResponseDatetimeRfc1123(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1594,16 +1166,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamDurationAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamDurationAsync("<scenario>", new TimeSpan(1, 2, 3));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDurationAsync(String,TimeSpan,RequestContext)']/*" />
         public virtual async Task<Response> ParamDurationAsync(string scenario, TimeSpan value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1629,16 +1192,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamDuration with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamDuration("<scenario>", new TimeSpan(1, 2, 3));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamDuration(String,TimeSpan,RequestContext)']/*" />
         public virtual Response ParamDuration(string scenario, TimeSpan value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1663,16 +1217,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseDurationAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseDurationAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDurationAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseDurationAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1697,16 +1242,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseDuration with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseDuration("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseDuration(String,RequestContext)']/*" />
         public virtual Response ResponseDuration(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1732,16 +1268,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamByteAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamByteAsync("<scenario>", null);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByteAsync(String,Byte[],RequestContext)']/*" />
         public virtual async Task<Response> ParamByteAsync(string scenario, byte[] value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1768,16 +1295,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> or <paramref name="value"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamByte with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamByte("<scenario>", null);
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamByte(String,Byte[],RequestContext)']/*" />
         public virtual Response ParamByte(string scenario, byte[] value, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1803,16 +1321,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseByteAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseByteAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseByteAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseByteAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1837,16 +1346,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseByte with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseByte("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseByte(String,RequestContext)']/*" />
         public virtual Response ResponseByte(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1872,24 +1372,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamEnumAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamEnumAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call ParamEnumAsync with all parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ParamEnumAsync("<scenario>", "<value>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamEnumAsync(String,String,RequestContext)']/*" />
         public virtual async Task<Response> ParamEnumAsync(string scenario, string value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1915,24 +1398,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ParamEnum with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamEnum("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call ParamEnum with all parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ParamEnum("<scenario>", "<value>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ParamEnum(String,String,RequestContext)']/*" />
         public virtual Response ParamEnum(string scenario, string value = null, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1957,16 +1423,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseEnumAsync with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.ResponseEnumAsync("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseEnumAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> ResponseEnumAsync(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -1991,16 +1448,7 @@ namespace header_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="scenario"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call ResponseEnum with required parameters.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.ResponseEnum("<scenario>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='ResponseEnum(String,RequestContext)']/*" />
         public virtual Response ResponseEnum(string scenario, RequestContext context = null)
         {
             Argument.AssertNotNull(scenario, nameof(scenario));
@@ -2023,16 +1471,7 @@ namespace header_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call CustomRequestIdAsync.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = await client.CustomRequestIdAsync();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='CustomRequestIdAsync(RequestContext)']/*" />
         public virtual async Task<Response> CustomRequestIdAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.CustomRequestId");
@@ -2053,16 +1492,7 @@ namespace header_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call CustomRequestId.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new HeaderClient(credential);
-        /// 
-        /// Response response = client.CustomRequestId();
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/HeaderClient.xml" path="doc/members/member[@name='CustomRequestId(RequestContext)']/*" />
         public virtual Response CustomRequestId(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HeaderClient.CustomRequestId");

@@ -5,13 +5,16 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
 namespace ExactMatchInheritance
 {
+    [JsonConverter(typeof(ExactMatchModel5DataConverter))]
     public partial class ExactMatchModel5Data : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
@@ -96,11 +99,24 @@ namespace ExactMatchInheritance
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.ToString());
+                    systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
             }
             return new ExactMatchModel5Data(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, @new.Value);
+        }
+
+        internal partial class ExactMatchModel5DataConverter : JsonConverter<ExactMatchModel5Data>
+        {
+            public override void Write(Utf8JsonWriter writer, ExactMatchModel5Data model, JsonSerializerOptions options)
+            {
+                writer.WriteObjectValue(model);
+            }
+            public override ExactMatchModel5Data Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            {
+                using var document = JsonDocument.ParseValue(ref reader);
+                return DeserializeExactMatchModel5Data(document.RootElement);
+            }
         }
     }
 }

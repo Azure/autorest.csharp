@@ -50,7 +50,7 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
-function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fast="", $debug="")
+function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
 {
     if (!(Test-Path $baseOutput)) {
         New-Item $baseOutput -ItemType Directory
@@ -58,25 +58,31 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fa
 
     $baseOutput = Resolve-Path -Path $baseOutput
     $baseOutput = $baseOutput -replace "\\", "/"
-    $outputPath = Join-Path $baseOutput "Generated"
-    $outputPath = $outputPath -replace "\\", "/"
+    $outputPath = $baseOutput
 
-    if (!$fast) 
+    if ($fast)
+    {
+        $outputPath = Join-Path $baseOutput "Generated"
+        $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
+        Invoke "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
+    }
+    else
     {
         #clean up
-        if (Test-Path $outputPath) 
+        if (Test-Path $outputPath/Generated/*) 
         {
-            Remove-Item $outputPath/* -Include *.* -Exclude *Configuration.json*
+            Remove-Item $outputPath/Generated/* -Recurse
         }
         
         # emit cadl json
         $repoRootPath = Join-Path $PSScriptRoot ".."
         $repoRootPath = Resolve-Path -Path $repoRootPath
         Push-Location $repoRootPath
+        $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
         Try
         {
             $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
-            $emitCommand = "node node_modules/@cadl-lang/compiler/dist/core/cli.js compile --output-path $outputPath $cadlFileName --emit @azure-tools/cadl-csharp"
+            $emitCommand = "npx cadl compile $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.emitter-output-dir=$outputPath --option @azure-tools/cadl-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
             Invoke $emitCommand    
         }
         Finally 
@@ -85,9 +91,6 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $sharedSource="", $fa
         }        
     }
 
-    $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
-    $command = "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
-    Invoke $command
     Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
 }
 
@@ -103,6 +106,19 @@ function Invoke-CadlSetup()
         npm run build
     }
     Finally 
+    {
+        Pop-Location
+    }
+
+    # build cadl ranch mock api
+    $cadlRanchMockApiPath = Join-Path $PSScriptRoot ".." "test" "CadlRanchMockApis"
+    $cadlRanchMockApiPath = Resolve-Path -Path $cadlRanchMockApiPath
+    Push-Location $cadlRanchMockApiPath
+    Try
+    {
+        npm run build
+    }
+    Finally
     {
         Pop-Location
     }

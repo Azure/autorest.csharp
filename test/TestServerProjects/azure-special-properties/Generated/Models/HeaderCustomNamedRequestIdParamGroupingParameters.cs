@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace azure_special_properties.Models
 {
@@ -17,10 +18,7 @@ namespace azure_special_properties.Models
         /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> is null. </exception>
         public HeaderCustomNamedRequestIdParamGroupingParameters(string fooClientRequestId)
         {
-            if (fooClientRequestId == null)
-            {
-                throw new ArgumentNullException(nameof(fooClientRequestId));
-            }
+            Argument.AssertNotNull(fooClientRequestId, nameof(fooClientRequestId));
 
             FooClientRequestId = fooClientRequestId;
         }

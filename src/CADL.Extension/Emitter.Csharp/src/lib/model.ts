@@ -1,29 +1,42 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+import { isFixed } from "@azure-tools/cadl-azure-core";
 import {
     Enum,
     EnumMember,
     getDoc,
+    getDeprecated,
     getEffectiveModelType,
     getFormat,
     getFriendlyName,
-    getIntrinsicModelName,
     getKnownValues,
     getVisibility,
-    isIntrinsic,
     Model,
     ModelProperty,
     Namespace,
     NeverType,
+    Operation,
     Program,
-    Type
+    resolveUsages,
+    Type,
+    UsageFlags,
+    UsageTracker,
+    TrackableType,
+    getDiscriminator,
+    IntrinsicType,
+    isVoidType,
+    isArrayModelType,
+    isRecordModelType,
+    Scalar,
+    Union
 } from "@cadl-lang/compiler";
-import { getDiscriminator } from "@cadl-lang/rest";
+import { getResourceOperation } from "@cadl-lang/rest";
 import {
     getHeaderFieldName,
     getPathParamName,
     getQueryParamName,
+    HttpOperation,
     isStatusCode
 } from "@cadl-lang/rest/http";
 import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
@@ -32,11 +45,14 @@ import {
     InputDictionaryType,
     InputEnumType,
     InputListType,
+    InputLiteralType,
     InputModelType,
     InputPrimitiveType,
-    InputType
+    InputType,
+    InputUnionType
 } from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
+import { Usage } from "../type/Usage.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -48,49 +64,7 @@ export function mapCadlTypeToCSharpInputTypeKind(
     const kind = cadlType.kind;
     switch (kind) {
         case "Model":
-            const name = cadlType.name;
-            switch (name) {
-                case "bytes":
-                    return InputTypeKind.BinaryData;
-                case "int8":
-                    return InputTypeKind.Int32;
-                case "int16":
-                    return InputTypeKind.Int32;
-                case "int32":
-                    return InputTypeKind.Int32;
-                case "int64":
-                    return InputTypeKind.Int64;
-                case "safeint":
-                    return InputTypeKind.Int64;
-                case "uint8":
-                    return InputTypeKind.Int32;
-                case "uint16":
-                    return InputTypeKind.Int32;
-                case "uint32":
-                    return InputTypeKind.Int32;
-                case "uint64":
-                    return InputTypeKind.Int64;
-                case "float32":
-                    return InputTypeKind.Float32;
-                case "float64":
-                    return InputTypeKind.Float64;
-                case "string":
-                    return InputTypeKind.String;
-                case "boolean":
-                    return InputTypeKind.Boolean;
-                case "plainDate":
-                    return InputTypeKind.DateTime;
-                case "zonedDateTime":
-                    return InputTypeKind.DateTime;
-                case "plainTime":
-                    return InputTypeKind.Time;
-                case "duration":
-                    return InputTypeKind.Duration;
-                case "Map":
-                    return InputTypeKind.Dictionary;
-                default:
-                    return InputTypeKind.Model;
-            }
+            return getCSharpInputTypeKindByIntrinsicModelName(cadlType.name);
         case "ModelProperty":
             return InputTypeKind.Object;
         case "Enum":
@@ -106,6 +80,55 @@ export function mapCadlTypeToCSharpInputTypeKind(
     }
 }
 
+function getCSharpInputTypeKindByIntrinsicModelName(
+    name: string
+): InputTypeKind {
+    switch (name) {
+        case "bytes":
+            return InputTypeKind.BinaryData;
+        case "int8":
+            return InputTypeKind.Int32;
+        case "int16":
+            return InputTypeKind.Int32;
+        case "int32":
+            return InputTypeKind.Int32;
+        case "int64":
+            return InputTypeKind.Int64;
+        case "safeint":
+            return InputTypeKind.Int64;
+        case "uint8":
+            return InputTypeKind.Int32;
+        case "uint16":
+            return InputTypeKind.Int32;
+        case "uint32":
+            return InputTypeKind.Int32;
+        case "uint64":
+            return InputTypeKind.Int64;
+        case "float32":
+            return InputTypeKind.Float32;
+        case "float64":
+            return InputTypeKind.Float64;
+        case "string":
+            return InputTypeKind.String;
+        case "uri":
+            return InputTypeKind.String;
+        case "url":
+            return InputTypeKind.String;
+        case "boolean":
+            return InputTypeKind.Boolean;
+        case "plainDate":
+            return InputTypeKind.Date;
+        case "zonedDateTime":
+            return InputTypeKind.DateTime;
+        case "plainTime":
+            return InputTypeKind.Time;
+        case "duration":
+            return InputTypeKind.Duration;
+        default:
+            return InputTypeKind.Model;
+    }
+}
+
 /**
  * Map cadl intrinsic model to c# model name
  * @param cadlType
@@ -114,7 +137,7 @@ export function mapCadlIntrinsicModelToCsharpModel(
     program: Program,
     cadlType: Model
 ): string | undefined {
-    if (!isIntrinsic(program, cadlType)) {
+    if (!program.checker.isStdType(cadlType)) {
         return undefined;
     }
     //const name = getIntrinsicModelName(program, cadlType);
@@ -156,14 +179,13 @@ export function mapCadlIntrinsicModelToCsharpModel(
             return "TimeSpan";
         case "duration":
             return "TimeSpan";
-        case "Map":
+        case "Record":
             // We assert on valType because Map types always have a type
             return "Dictionary";
         default:
             return "UnKnownType";
     }
 }
-
 /**
  * If type is an anonymous model, tries to find a named model that has the same
  * set of properties when non-schema properties are excluded.
@@ -171,9 +193,10 @@ export function mapCadlIntrinsicModelToCsharpModel(
 export function getEffectiveSchemaType(program: Program, type: Type): Type {
     let target = type;
     if (type.kind === "Model" && !type.name) {
-        const effective = getEffectiveModelType(program,
+        const effective = getEffectiveModelType(
+            program,
             type,
-            isSchemaProperty
+            isSchemaPropertyInternal
         );
         if (effective.name) {
             target = effective;
@@ -182,19 +205,23 @@ export function getEffectiveSchemaType(program: Program, type: Type): Type {
 
     return target;
 
-    /**
-     * A "schema property" here is a property that is emitted to OpenAPI schema.
-     *
-     * Headers, parameters, status codes are not schema properties even they are
-     * represented as properties in Cadl.
-     */
-    function isSchemaProperty(property: ModelProperty) {
-        const headerInfo = getHeaderFieldName(program, property);
-        const queryInfo = getQueryParamName(program, property);
-        const pathInfo = getPathParamName(program, property);
-        const statusCodeinfo = isStatusCode(program, property);
-        return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
+    function isSchemaPropertyInternal(property: ModelProperty) {
+        return isSchemaProperty(program, property);
     }
+}
+
+/**
+ * A "schema property" here is a property that is emitted to OpenAPI schema.
+ *
+ * Headers, parameters, status codes are not schema properties even they are
+ * represented as properties in Cadl.
+ */
+function isSchemaProperty(program: Program, property: ModelProperty) {
+    const headerInfo = getHeaderFieldName(program, property);
+    const queryInfo = getQueryParamName(program, property);
+    const pathInfo = getPathParamName(program, property);
+    const statusCodeinfo = isStatusCode(program, property);
+    return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
 }
 
 export function getDefaultValue(type: Type): any {
@@ -233,63 +260,73 @@ export function getInputType(
             program,
             type
         );
-        return {
+        const valueType = {
             Name: type.kind,
             Kind: builtInKind,
             IsNullable: false
         } as InputPrimitiveType;
+
+        return {
+            Name: "Literal",
+            LiteralValueType: valueType,
+            Value: getDefaultValue(type),
+            IsNullable: false
+        } as InputLiteralType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
-    } else {
-        return {
-            Name: InputTypeKind.UnKnownKind,
-            IsNullable: false
-        } as InputType;
-    }
-
-    function getInputModelType(m: Model): InputType {
-        const intrinsicName = getIntrinsicModelName(program, m);
-        if (intrinsicName && intrinsicName === "string") {
-            const values = getKnownValues(program, m);
-            if (values) {
-                return getInputModelForExtensibleEnum(m, values);
+    } else if (type.kind === "EnumMember") {
+        return getInputTypeForEnum(type.enum);
+    } else if (type.kind === "Intrinsic") {
+        return getInputModelForIntrinsicType(type);
+    } else if (type.kind === "Scalar" /*&& program.checker.isStdType(type)*/) {
+        let effectiveType = type;
+        while (!program.checker.isStdType(effectiveType)) {
+            if (type.baseScalar) {
+                effectiveType = type.baseScalar;
+            } else {
+                break;
             }
         }
-
-        /* Array and Map Type. */
-        if (m.indexer) {
-            if (!isNeverType(m.indexer.key)) {
-                const name = getIntrinsicModelName(program, m.indexer.key);
-                if (m.indexer.value) {
-                    if (name === "integer") {
-                        return getInputTypeForArray(m.indexer.value);
-                    } else {
-                        return getInputTypeForMap(
-                            m.indexer.key,
-                            m.indexer.value
-                        );
-                    }
+        const intrinsicName = effectiveType.name;
+        switch (intrinsicName) {
+            case "string":
+                const values = getKnownValues(program, type);
+                if (values) {
+                    return getInputModelForEnumByKnowValues(type, values);
                 }
-            }
-        }
-
-        if (m.name === intrinsicName) {
             // if the model is one of the Cadl Intrinsic type.
             // it's a base Cadl "primitive" that corresponds directly to an c# data type.
             // In such cases, we don't want to emit a ref and instead just
             // emit the base type directly.
-            return {
-                Name: mapCadlIntrinsicModelToCsharpModel(program, m) ?? m.name,
-                Kind: mapCadlTypeToCSharpInputTypeKind(program, m),
-                IsNullable: false
-            } as InputPrimitiveType;
-        } else {
-            return getInputModelForModel(m);
+            default:
+                return {
+                    Name: type.name,
+                    Kind: getCSharpInputTypeKindByIntrinsicModelName(
+                        intrinsicName
+                    ),
+                    IsNullable: false
+                } as InputPrimitiveType;
         }
+    } else if (type.kind === "Union") {
+        return getInputTypeForUnion(type);
+    } else {
+        throw new Error(`Unsupported type ${type.kind}`);
     }
 
-    function getInputModelForExtensibleEnum(
-        m: Model,
+    function getInputModelType(m: Model): InputType {
+        /* Array and Map Type. */
+        if (!isNeverType(m)) {
+            if (isArrayModelType(program, m)) {
+                return getInputTypeForArray(m.indexer.value);
+            } else if (isRecordModelType(program, m)) {
+                return getInputTypeForMap(m.indexer.key, m.indexer.value);
+            }
+        }
+        return getInputModelForModel(m);
+    }
+
+    function getInputModelForEnumByKnowValues(
+        m: Model | Scalar,
         e: Enum
     ): InputEnumType {
         let extensibleEnum = enums.get(m.name);
@@ -304,10 +341,11 @@ export function getInputType(
                 Name: m.name,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
+                Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 EnumValueType: innerEnum.EnumValueType,
                 AllowedValues: innerEnum.AllowedValues,
-                IsExtensible: true,
+                IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
             enums.set(m.name, extensibleEnum);
@@ -327,7 +365,9 @@ export function getInputType(
                 );
             }
             const allowValues: InputEnumTypeValue[] = [];
-            const enumValueType = enumMemberType(e.members.entries().next().value);
+            const enumValueType = enumMemberType(
+                e.members.entries().next().value[1]
+            );
 
             for (const key of e.members.keys()) {
                 const option = e.members.get(key);
@@ -335,12 +375,14 @@ export function getInputType(
                     throw Error(`No member value for $key`);
                 }
                 if (enumValueType !== enumMemberType(option)) {
-                    throw new Error("The enum member value type is not consistent.");
+                    throw new Error(
+                        "The enum member value type is not consistent."
+                    );
                 }
                 const member = {
                     Name: key,
                     Value: option.value ?? option?.name,
-                    Description: getDoc(program, option),
+                    Description: getDoc(program, option)
                 } as InputEnumTypeValue;
                 allowValues.push(member);
             }
@@ -349,10 +391,11 @@ export function getInputType(
                 Name: e.name,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
+                Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
                 AllowedValues: allowValues,
-                IsExtensible: false,
+                IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
             if (addToCollection) enums.set(e.name, enumType);
@@ -395,12 +438,14 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
+                Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
                 DiscriminatorPropertyName: getDiscriminator(program, m)
                     ?.propertyName,
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
+                Usage: Usage.None,
                 Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
 
@@ -449,16 +494,20 @@ export function getInputType(
         discriminatorPropertyName?: string
     ): void {
         inputProperties.forEach((value: ModelProperty, key: string) => {
-            if (value.name !== discriminatorPropertyName) {
+            if (
+                value.name !== discriminatorPropertyName &&
+                isSchemaProperty(program, value)
+            ) {
                 const vis = getVisibility(program, value);
                 let isReadOnly: boolean = false;
                 if (vis && vis.includes("read") && vis.length === 1) {
                     isReadOnly = true;
                 }
+                if (isNeverType(value.type) || isVoidType(value.type)) return;
                 const inputProp = {
                     Name: value.name,
                     SerializedName: value.name,
-                    Description: "",
+                    Description: getDoc(program, value) ?? "",
                     Type: getInputType(program, value.type, models, enums),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
@@ -480,8 +529,7 @@ export function getInputType(
         }
 
         // Cadl "primitive" types can't be base types for models
-        const intrinsicName = getIntrinsicModelName(program, m);
-        if (intrinsicName) {
+        if (program.checker.isStdType(m)) {
             return undefined;
         }
 
@@ -501,4 +549,124 @@ export function getInputType(
         }
         return namespaceString;
     }
+
+    function getInputModelForIntrinsicType(type: IntrinsicType): InputType {
+        switch (type.name) {
+            case "unknown":
+                return {
+                    Name: "unknown",
+                    Description: getDoc(program, type),
+                    IsNullable: false,
+                    Usage: Usage.None,
+                    Properties: []
+                } as InputModelType;
+            default:
+                throw new Error(`Unsupported type ${type.name}`);
+        }
+    }
+
+    function getInputTypeForUnion(union: Union): InputUnionType {
+        const ItemTypes: InputType[] = [];
+        const variants = Array.from(union.variants.values());
+        for (const variant of variants) {
+            ItemTypes.push(getInputType(program, variant.type, models, enums));
+        }
+        return {
+            Name: "Union",
+            UnionItemTypes: ItemTypes,
+            IsNullable: false
+        } as InputUnionType;
+    }
+}
+
+export function getUsages(
+    program: Program,
+    ops?: HttpOperation[]
+): { inputs: string[]; outputs: string[]; roundTrips: string[] } {
+    const result: {
+        inputs: string[];
+        outputs: string[];
+        roundTrips: string[];
+    } = { inputs: [], outputs: [], roundTrips: [] };
+    if (!ops) {
+        return result;
+    }
+
+    const operations: Operation[] = ops.map((op) => op.operation);
+    const usages = resolveUsages(operations);
+    const usagesMap: Map<string, UsageFlags> = new Map<string, UsageFlags>();
+    for (const type of usages.types) {
+        let typeName = "";
+        if ("name" in type) typeName = type.name ?? "";
+        if (type.kind === "Model") {
+            const effectiveType = getEffectiveSchemaType(
+                program,
+                type
+            ) as Model;
+            typeName =
+                getFriendlyName(program, effectiveType) ?? effectiveType.name;
+        }
+        const affectTypes: string[] = [];
+        if (typeName !== "") affectTypes.push(typeName);
+        if (type.kind === "Model" && type.templateArguments) {
+            for (const arg of type.templateArguments) {
+                if (arg.kind === "Model" && "name" in arg && arg.name !== "") {
+                    affectTypes.push(getFriendlyName(program, arg) ?? arg.name);
+                }
+            }
+        }
+
+        for (const name of affectTypes) {
+            let value = usagesMap.get(name);
+            if (!value) value = UsageFlags.None;
+            if (usages.isUsedAs(type, UsageFlags.Input))
+                value = value | UsageFlags.Input;
+            if (usages.isUsedAs(type, UsageFlags.Output))
+                value = value | UsageFlags.Output;
+            usagesMap.set(name, value);
+        }
+    }
+    /* handle resource operation. */
+    for (const op of ops) {
+        const resourceOperation = getResourceOperation(program, op.operation);
+        if (resourceOperation) {
+            if (!op.parameters.bodyParameter && op.parameters.bodyType) {
+                const resourceName = resourceOperation.resourceType.name;
+                let value = usagesMap.get(resourceName);
+                if (!value) value = UsageFlags.Input;
+                else value = value | UsageFlags.Input;
+                usagesMap.set(resourceName, value);
+            }
+        }
+
+        /* handle spread. */
+        if (!op.parameters.bodyParameter && op.parameters.bodyType) {
+            const effectiveBodyType = getEffectiveSchemaType(
+                program,
+                op.parameters.bodyType
+            );
+            if (
+                effectiveBodyType.kind === "Model" &&
+                effectiveBodyType.name !== ""
+            ) {
+                const modelName =
+                    getFriendlyName(program, effectiveBodyType) ??
+                    effectiveBodyType.name;
+                let value = usagesMap.get(modelName);
+                if (!value) value = UsageFlags.Input;
+                else value = value | UsageFlags.Input;
+                usagesMap.set(modelName, value);
+            }
+        }
+    }
+    for (const [key, value] of usagesMap) {
+        if (value === (UsageFlags.Input | UsageFlags.Output)) {
+            result.roundTrips.push(key);
+        } else if (value === UsageFlags.Input) {
+            result.inputs.push(key);
+        } else if (value === UsageFlags.Output) {
+            result.outputs.push(key);
+        }
+    }
+    return result;
 }

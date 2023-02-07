@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Utilities
         {
             internal string ErrorText;
 
-            internal ErrorException (string errorText)
+            internal ErrorException(string errorText) : base(errorText)
             {
                 ErrorText = errorText;
             }

@@ -11,7 +11,7 @@ using Azure.Core;
 namespace MgmtMockAndSample.Models
 {
     // customize the enum entries to keep the underscore
-    public readonly partial struct MinimumTlsVersion : IEquatable<MinimumTlsVersion>
+    public readonly partial struct MinimumTlsVersion
     {
         /// <summary> TLS1_0. </summary>
         [CodeGenMember("TLS10")]

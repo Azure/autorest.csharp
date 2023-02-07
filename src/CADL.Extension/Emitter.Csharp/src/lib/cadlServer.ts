@@ -6,9 +6,16 @@ import { http } from "@cadl-lang/rest/*";
 import { InputConstant } from "../type/InputConstant";
 import { InputOperationParameterKind } from "../type/InputOperationParameterKind.js";
 import { InputParameter } from "../type/InputParameter.js";
-import { InputPrimitiveType, InputType } from "../type/InputType.js";
+import {
+    InputEnumType,
+    InputModelType,
+    InputPrimitiveType,
+    InputType
+} from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 import { RequestLocation } from "../type/RequestLocation.js";
+import { Usage } from "../type/Usage.js";
+import { getInputType } from "./model.js";
 
 export interface CadlServer {
     url: string;
@@ -33,25 +40,35 @@ function getDefaultValue(type: Type): any {
 
 export function resolveServers(
     program: Program,
-    servers: http.HttpServer[]
+    servers: http.HttpServer[],
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
 ): CadlServer[] {
     return servers.map((server) => {
         const parameters: InputParameter[] = [];
         let url: string = server.url;
+        const endpoint: string = url
+            .replace("http://", "")
+            .replace("https://", "")
+            .split("/")[0];
         for (const [name, prop] of server.parameters) {
             // if (!validateValidServerVariable(program, prop)) {
             //   continue;
             // }
-
+            const isEndpoint: boolean = endpoint === `{${name}}`;
             let defaultValue = undefined;
             const value = prop.default ? getDefaultValue(prop.default) : "";
+            const inputType: InputType = isEndpoint
+                ? ({
+                      Name: "Uri",
+                      Kind: InputTypeKind.Uri,
+                      IsNullable: false
+                  } as InputPrimitiveType)
+                : getInputType(program, prop.type, models, enums);
+
             if (value) {
                 defaultValue = {
-                    Type: {
-                        Name: "Uri",
-                        Kind: InputTypeKind.Uri,
-                        IsNullable: false
-                    } as InputPrimitiveType,
+                    Type: inputType,
                     Value: value
                 } as InputConstant;
             }
@@ -59,17 +76,15 @@ export function resolveServers(
                 Name: name,
                 NameInRequest: name,
                 Description: getDoc(program, prop),
-                Type: {
-                    Name: "Uri",
-                    Kind: InputTypeKind.Uri,
-                    IsNullable: false
-                } as InputPrimitiveType,
+                Type: inputType,
                 Location: RequestLocation.Uri,
-                IsApiVersion: false,
+                IsApiVersion:
+                    name.toLowerCase() === "apiversion" ||
+                    name.toLowerCase() === "api-version",
                 IsResourceParameter: false,
                 IsContentType: false,
                 IsRequired: true,
-                IsEndpoint: true,
+                IsEndpoint: isEndpoint,
                 SkipUrlEncoding: false,
                 Explode: false,
                 Kind: InputOperationParameterKind.Client,

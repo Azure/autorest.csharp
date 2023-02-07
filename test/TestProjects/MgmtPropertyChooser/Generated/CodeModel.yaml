@@ -2272,6 +2272,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Get a Virtual Machine.:
+              $ref: ./examples/GetVirtualMachine.json
+            Get a virtual machine placed on a dedicated host group through automatic placement:
+              $ref: ./examples/GetVirtualMachineAutoPlacedOnDedicatedHostGroup.json
         language: !Languages 
           default:
             name: List
@@ -2539,6 +2545,9 @@ operationGroups:
                 statusCodes:
                   - '201'
         extensions:
+          x-ms-examples:
+            Update a VM by detaching data disk:
+              $ref: ./examples/UpdateVMDetachDataDiskUsingToBeDetachedProperty.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -2726,6 +2735,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Get a Virtual Machine.:
+              $ref: ./examples/GetVirtualMachine.json
+            Get a virtual machine placed on a dedicated host group through automatic placement:
+              $ref: ./examples/GetVirtualMachineAutoPlacedOnDedicatedHostGroup.json
         language: !Languages 
           default:
             name: Get

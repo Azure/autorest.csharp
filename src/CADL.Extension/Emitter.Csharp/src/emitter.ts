@@ -2,12 +2,17 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
+    createCadlLibrary,
+    getDeprecated,
     getDoc,
     getServiceNamespace,
     getServiceNamespaceString,
     getServiceTitle,
     getServiceVersion,
     getSummary,
+    ignoreDiagnostics,
+    isErrorModel,
+    JSONSchemaType,
     Model,
     ModelProperty,
     Operation,
@@ -15,20 +20,20 @@ import {
     resolvePath
 } from "@cadl-lang/compiler";
 import {
-    getAllRoutes,
+    getAllHttpServices,
     getAuthentication,
+    getHttpOperation,
     getServers,
+    HttpOperation,
     HttpOperationParameter,
     HttpOperationResponse,
-    OperationDetails,
     ServiceAuthentication
 } from "@cadl-lang/rest/http";
-import { getExtensions } from "@cadl-lang/openapi";
 import { CodeModel } from "./type/CodeModel.js";
 import { InputClient } from "./type/InputClient.js";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
-import { InputOperation } from "./type/InputOperation.js";
+import { InputOperation, Paging } from "./type/InputOperation.js";
 import { RequestMethod, parseHttpRequestMethod } from "./type/RequestMethod.js";
 import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
@@ -43,70 +48,243 @@ import { OperationResponse } from "./type/OperationResponse.js";
 import {
     getDefaultValue,
     getEffectiveSchemaType,
-    getInputType
+    getInputType,
+    getUsages
 } from "./lib/model.js";
 import { InputOperationParameterKind } from "./type/InputOperationParameterKind.js";
 import { resolveServers } from "./lib/cadlServer.js";
 import {
-    convenienceApiKey,
     getExternalDocs,
-    getOperationId
+    getOperationId,
+    hasDecorator
 } from "./lib/decorators.js";
 import { InputAuth } from "./type/InputAuth.js";
 import { InputApiKeyAuth } from "./type/InputApiKeyAuth.js";
 import { InputOAuth2Auth } from "./type/InputOAuth2Auth.js";
-import { getConsumes, getProduces, getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
+import { getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
 import { InputTypeKind } from "./type/InputTypeKind.js";
 import { InputConstant } from "./type/InputConstant.js";
+import { Usage } from "./type/Usage.js";
+import { HttpResponseHeader } from "./type/HttpResponseHeader.js";
+import { OperationPaging } from "./type/OperationPaging.js";
+import { OperationLongRunning } from "./type/OperationLongRunning.js";
+import { OperationFinalStateVia } from "./type/OperationFinalStateVia.js";
+import { getOperationLink } from "@azure-tools/cadl-azure-core";
+import fs from "fs";
+import path from "node:path";
+import { Configuration } from "./type/Configuration.js";
+import { dllFilePath } from "@autorest/csharp";
+import { execSync } from "child_process";
+import {
+    Client,
+    createDpgContext,
+    DpgEmitterOptions,
+    getConvenienceAPIName,
+    isApiVersion,
+    isOperationGroup,
+    listClients,
+    listOperationGroups,
+    listOperationsInOperationGroup,
+    OperationGroup,
+    shouldGenerateConvenient,
+    shouldGenerateProtocol
+} from "@azure-tools/cadl-dpg";
+import { ClientKind } from "./type/ClientKind.js";
+import { getVersions } from "@cadl-lang/versioning";
+import { EmitContext } from "@cadl-lang/compiler/*";
+import { capitalize } from "./lib/utils.js";
 
-export interface NetEmitterOptions {
-    outputFile: string;
-    logFile: string;
-}
+export type NetEmitterOptions = {
+    outputFile?: string;
+    logFile?: string;
+    namespace?: string;
+    "library-name"?: string;
+    "single-top-level-client"?: boolean;
+    skipSDKGeneration?: boolean;
+    "unreferenced-types-handling"?:
+        | "removeOrInternalize"
+        | "internalize"
+        | "keepAll";
+    "new-project"?: boolean;
+    csharpGeneratorPath?: string;
+    "clear-output-folder"?: boolean;
+    "save-inputs"?: boolean;
+    "model-namespace"?: boolean;
+} & DpgEmitterOptions;
 
 const defaultOptions = {
     outputFile: "cadl.json",
-    logFile: "log.json"
+    logFile: "log.json",
+    skipSDKGeneration: false,
+    "new-project": false,
+    csharpGeneratorPath: dllFilePath,
+    "clear-output-folder": false,
+    "save-inputs": false,
+    "generate-protocol-methods": true,
+    "generate-convenience-methods": true,
+    "package-name": undefined
 };
 
-export async function $onEmit(
-    program: Program,
-    emitterOptions: NetEmitterOptions
-) {
+const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
+    type: "object",
+    additionalProperties: false,
+    properties: {
+        outputFile: { type: "string", nullable: true },
+        logFile: { type: "string", nullable: true },
+        namespace: { type: "string", nullable: true },
+        "library-name": { type: "string", nullable: true },
+        "single-top-level-client": { type: "boolean", nullable: true },
+        skipSDKGeneration: { type: "boolean", default: false, nullable: true },
+        "unreferenced-types-handling": {
+            type: "string",
+            enum: ["removeOrInternalize", "internalize", "keepAll"],
+            nullable: true
+        },
+        "new-project": { type: "boolean", nullable: true },
+        csharpGeneratorPath: {
+            type: "string",
+            default: dllFilePath,
+            nullable: true
+        },
+        "clear-output-folder": { type: "boolean", nullable: true },
+        "save-inputs": { type: "boolean", nullable: true },
+        "model-namespace": { type: "boolean", nullable: true },
+        "generate-protocol-methods": { type: "boolean", nullable: true },
+        "generate-convenience-methods": { type: "boolean", nullable: true },
+        "package-name": { type: "string", nullable: true }
+    },
+    required: []
+};
+
+export const $lib = createCadlLibrary({
+    name: "cadl-csharp",
+    diagnostics: {},
+    emitter: {
+        options: NetEmitterOptionsSchema
+    }
+});
+
+export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
+    const program: Program = context.program;
+    const emitterOptions = context.options;
+    const emitterOutputDir = context.emitterOutputDir;
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
+    const outputFolder = resolvePath(emitterOutputDir ?? "./cadl-output");
     const options: NetEmitterOptions = {
-        outputFile: resolvePath(
-            program.compilerOptions.outputPath ?? "./cadl-output",
-            resolvedOptions.outputFile
-        ),
+        outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
         logFile: resolvePath(
-            program.compilerOptions.outputPath ?? "./cadl-output",
+            emitterOutputDir ?? "./cadl-output",
             resolvedOptions.logFile
-        )
+        ),
+        skipSDKGeneration: resolvedOptions.skipSDKGeneration,
+        "unreferenced-types-handling":
+            resolvedOptions["unreferenced-types-handling"],
+        "new-project": resolvedOptions["new-project"],
+        csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
+        "clear-output-folder": resolvedOptions["clear-output-folder"],
+        "save-inputs": resolvedOptions["save-inputs"],
+        "model-namespace": resolvedOptions["model-namespace"]
     };
-    const version: string = "";
+
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const namespace =
-            getServiceNamespaceString(program)?.toLowerCase() || "";
-        const outPath =
-            version.trim().length > 0
-                ? resolvePath(
-                    options.outputFile?.replace(".json", `.${version}.json`)
-                )
-                : resolvePath(options.outputFile);
+        const namespace = getServiceNamespaceString(program) || "";
 
-        const root = createModel(program);
+        const root = createModel(context);
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
+            const generatedFolder = resolvePath(outputFolder, "Generated");
+
+            //resolve shared folders based on generator path override
+            const resolvedSharedFolders: string[] = [];
+            const sharedFolders = [
+                resolvePath(
+                    options.csharpGeneratorPath ?? dllFilePath,
+                    "..",
+                    "Generator.Shared"
+                ),
+                resolvePath(
+                    options.csharpGeneratorPath ?? dllFilePath,
+                    "..",
+                    "Azure.Core.Shared"
+                )
+            ];
+            for (const sharedFolder of sharedFolders) {
+                resolvedSharedFolders.push(
+                    path
+                        .relative(generatedFolder, sharedFolder)
+                        .replaceAll("\\", "/")
+                );
+            }
+
+            if (!fs.existsSync(generatedFolder)) {
+                fs.mkdirSync(generatedFolder, { recursive: true });
+            }
+
             await program.host.writeFile(
-                outPath,
+                resolvePath(generatedFolder, "cadl.json"),
                 prettierOutput(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
                 )
             );
+
+            //emit configuration.json
+            const configurations = {
+                OutputFolder: ".",
+                Namespace: resolvedOptions.namespace ?? namespace,
+                LibraryName: resolvedOptions["library-name"] ?? null,
+                SharedSourceFolders: resolvedSharedFolders ?? [],
+                SingleTopLevelClient:
+                    resolvedOptions["single-top-level-client"],
+                "unreferenced-types-handling":
+                    options["unreferenced-types-handling"],
+                "model-namespace": resolvedOptions["model-namespace"]
+            } as Configuration;
+
+            await program.host.writeFile(
+                resolvePath(generatedFolder, "Configuration.json"),
+                prettierOutput(JSON.stringify(configurations, null, 2))
+            );
+
+            if (options.skipSDKGeneration !== true) {
+                const newProjectOption = options["new-project"]
+                    ? "--new-project"
+                    : "";
+                const command = `dotnet --roll-forward Major ${resolvePath(
+                    options.csharpGeneratorPath ?? dllFilePath
+                )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
+                    options["clear-output-folder"]
+                }`;
+                console.info(command);
+
+                try {
+                    execSync(command, { stdio: "inherit" });
+                } catch (error: any) {
+                    if (error.message) console.log(error.message);
+                    if (error.stderr) console.error(error.stderr);
+                    if (error.stdout) console.log(error.stdout);
+
+                    throw error;
+                }
+            }
+
+            if (!options["save-inputs"]) {
+                // delete
+                deleteFile(resolvePath(generatedFolder, "cadl.json"));
+                deleteFile(resolvePath(generatedFolder, "Configuration.json"));
+            }
         }
     }
+}
+
+function deleteFile(filePath: string) {
+    fs.unlink(filePath, (err) => {
+        if (err) {
+            console.log(`stderr: ${err}`);
+        }
+
+        console.log(`File ${filePath} is deleted.`);
+    });
 }
 
 function prettierOutput(output: string) {
@@ -123,25 +301,37 @@ function getClient(
     return undefined;
 }
 
-function createModel(program: Program): any {
+function createModel(context: EmitContext<NetEmitterOptions>): any {
+    const program = context.program;
     const serviceNamespaceType = getServiceNamespace(program);
     if (!serviceNamespaceType) {
         return;
     }
     const title = getServiceTitle(program);
-    const version = getServiceVersion(program);
-    if (version === "0000-00-00") {
-        console.error("No API-Version provided.");
-        return;
+    const apiVersions: Set<string> = new Set<string>();
+    let version = getServiceVersion(program);
+    if (version !== "0000-00-00") {
+        apiVersions.add(version);
     }
 
+    const versions = getVersions(
+        program,
+        serviceNamespaceType
+    )[1]?.getVersions();
+    if (versions) {
+        for (const ver of versions) {
+            apiVersions.add(ver.value);
+        }
+        version = versions[versions.length - 1].value; //default version
+    }
+
+    if (apiVersions.size === 0) {
+        throw "No Api-Version Provided";
+    }
     const description = getDoc(program, serviceNamespaceType);
     const externalDocs = getExternalDocs(program, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
-
-    const apiVersions: Set<string> = new Set<string>();
-    apiVersions.add(version);
     const apiVersionParam: InputParameter = {
         Name: "apiVersion",
         NameInRequest: "api-version",
@@ -169,8 +359,7 @@ function createModel(program: Program): any {
             Value: version
         } as InputConstant
     };
-    const namespace =
-        getServiceNamespaceString(program)?.toLowerCase() || "client";
+    const namespace = getServiceNamespaceString(program) || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
     let auth = undefined;
     if (authentication) {
@@ -179,85 +368,82 @@ function createModel(program: Program): any {
 
     const modelMap = new Map<string, InputModelType>();
     const enumMap = new Map<string, InputEnumType>();
+    let urlParameters: InputParameter[] | undefined = undefined;
+    let url: string = "";
+    const convenienceOperations: HttpOperation[] = [];
+    let lroMonitorOperations: Set<Operation>;
     try {
-        const [routes] = getAllRoutes(program);
-        console.log("routes:" + routes.length);
-        const clients: InputClient[] = [];
         //create endpoint parameter from servers
-        let endPointParam = undefined;
-        let url: string = "";
         if (servers !== undefined) {
-            const cadlServers = resolveServers(program, servers);
-            if (cadlServers.length > 0) {
-                /* choose the first server as endpoint. */
-                url = cadlServers[0].url;
-                endPointParam = cadlServers[0].parameters[0];
-            }
-        }
-
-        for (const operation of routes) {
-            console.log(JSON.stringify(operation.path));
-            if (!isSupportedOperation(operation)) continue;
-            const groupName: string = getOperationGroupName(
+            const cadlServers = resolveServers(
                 program,
-                operation.operation
-            );
-            let client = getClient(clients, groupName);
-            if (!client) {
-                const container = operation.container;
-                const clientDesc = getDoc(program, container);
-                const clientSummary = getSummary(program, container);
-                client = {
-                    Name: groupName,
-                    Description: clientDesc,
-                    Operations: [],
-                    Protocol: {}
-                } as InputClient;
-                clients.push(client);
-            }
-            const op: InputOperation = loadOperation(
-                program,
-                operation,
-                url,
-                endPointParam,
+                servers,
                 modelMap,
                 enumMap
             );
-
-            applyDefaultContentTypeAndAcceptParameter(op);
-
-            const apiVersionInOperation = op.Parameters.find(
-                (value) => value.IsApiVersion
-            );
-            if (apiVersionInOperation) {
-                if (apiVersionInOperation.DefaultValue?.Value) {
-                    apiVersions.add(apiVersionInOperation.DefaultValue.Value);
-                }
+            if (cadlServers.length > 0) {
+                /* choose the first server as endpoint. */
+                url = cadlServers[0].url;
+                urlParameters = cadlServers[0].parameters;
             }
-            client.Operations.push(op);
         }
-        if (apiVersions.size > 1) {
-            apiVersionParam.Kind = InputOperationParameterKind.Constant;
+        const [services] = getAllHttpServices(program);
+        const routes = services[0].operations;
+        if (routes.length === 0) {
+            throw `No Route for service ${services[0].namespace.name}`;
         }
+        console.log("routes:" + routes.length);
+
+        lroMonitorOperations = getAllLroMonitorOperations(routes, program);
+        const clients: InputClient[] = [];
+        const dpgClients = listClients(program);
+        for (const client of dpgClients) {
+            clients.push(emitClient(client));
+            const dpgOperationGroups = listOperationGroups(program, client);
+            for (const dpgGroup of dpgOperationGroups) {
+                clients.push(emitClient(dpgGroup, client));
+            }
+        }
+
         for (const client of clients) {
             for (const op of client.Operations) {
-                const apiVersionInOperation = op.Parameters.find(
+                const apiVersionIndex = op.Parameters.findIndex(
                     (value) => value.IsApiVersion
                 );
-                if (apiVersionInOperation) {
-                    if (apiVersions.size > 1) {
-                        apiVersionInOperation.Kind =
-                            InputOperationParameterKind.Constant;
-                    }
-                    if (!apiVersionInOperation.DefaultValue) {
+                if (apiVersionIndex !== -1) {
+                    const apiVersionInOperation =
+                        op.Parameters[apiVersionIndex];
+                    if (!apiVersionInOperation.DefaultValue?.Value) {
                         apiVersionInOperation.DefaultValue =
                             apiVersionParam.DefaultValue;
+                    }
+                    /**
+                     * replace to the global apiVerison parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
+                     * Three checkpoints:
+                     * the parameter is query parameter,
+                     * it is client parameter
+                     * it does not has default value, or the default value is included in the global service apiVersion.
+                     */
+                    if (
+                        apiVersions.has(
+                            apiVersionInOperation.DefaultValue?.Value
+                        ) &&
+                        apiVersionInOperation.Kind ===
+                            InputOperationParameterKind.Client &&
+                        apiVersionInOperation.Location ===
+                            apiVersionParam.Location
+                    ) {
+                        op.Parameters[apiVersionIndex] = apiVersionParam;
                     }
                 } else {
                     op.Parameters.push(apiVersionParam);
                 }
             }
         }
+
+        const usages = getUsages(program, convenienceOperations);
+        setUsage(usages, modelMap);
+        setUsage(usages, enumMap);
 
         const clientModel = {
             Name: namespace,
@@ -276,21 +462,123 @@ function createModel(program: Program): any {
             throw err;
         }
     }
+
+    function emitClient(
+        client: Client | OperationGroup,
+        parent?: Client
+    ): InputClient {
+        const operations = listOperationsInOperationGroup(program, client);
+        let clientDesc = "";
+        if (operations.length > 0) {
+            const container = ignoreDiagnostics(
+                getHttpOperation(program, operations[0])
+            ).container;
+            clientDesc = getDoc(program, container) ?? "";
+        }
+
+        const inputClient = {
+            Name:
+                client.kind === ClientKind.DpgClient
+                    ? client.name
+                    : client.type.name,
+            Description: clientDesc,
+            Operations: [],
+            Protocol: {},
+            Creatable: client.kind === ClientKind.DpgClient,
+            Parent: parent?.name
+        } as InputClient;
+        for (const op of operations) {
+            if (lroMonitorOperations.has(op)) continue;
+            const httpOperation = ignoreDiagnostics(
+                getHttpOperation(program, op)
+            );
+            const inputOperation: InputOperation = loadOperation(
+                context,
+                httpOperation,
+                url,
+                urlParameters,
+                modelMap,
+                enumMap
+            );
+
+            applyDefaultContentTypeAndAcceptParameter(inputOperation);
+            inputClient.Operations.push(inputOperation);
+            if (inputOperation.GenerateConvenienceMethod)
+                convenienceOperations.push(httpOperation);
+        }
+        return inputClient;
+    }
+
+    function getAllLroMonitorOperations(
+        routes: HttpOperation[],
+        program: Program
+    ): Set<Operation> {
+        const lroMonitorOperations = new Set<Operation>();
+        for (const operation of routes) {
+            const operationLink = getOperationLink(
+                program,
+                operation.operation,
+                "polling"
+            );
+            if (operationLink !== undefined) {
+                lroMonitorOperations.add(operationLink.linkedOperation);
+            }
+        }
+        return lroMonitorOperations;
+    }
 }
 
-function applyDefaultContentTypeAndAcceptParameter(operation: InputOperation): void {
+function setUsage(
+    usages: { inputs: string[]; outputs: string[]; roundTrips: string[] },
+    models: Map<string, InputModelType | InputEnumType>
+) {
+    for (const [name, m] of models) {
+        if (usages.inputs.includes(name)) {
+            m.Usage = Usage.Input;
+        } else if (usages.outputs.includes(name)) {
+            m.Usage = Usage.Output;
+        } else if (usages.roundTrips.includes(name)) {
+            m.Usage = Usage.RoundTrip;
+        } else {
+            m.Usage = Usage.None;
+        }
+    }
+}
+
+function applyDefaultContentTypeAndAcceptParameter(
+    operation: InputOperation
+): void {
     const defaultValue: string = "application/json";
-    if (operation.Parameters.some(value => value.Location === RequestLocation.Body)
-        && !operation.Parameters.some(value => value.IsContentType === true)) {
-        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "contentType", "Content-Type"));
+    if (
+        operation.Parameters.some(
+            (value) => value.Location === RequestLocation.Body
+        ) &&
+        !operation.Parameters.some((value) => value.IsContentType === true)
+    ) {
+        operation.Parameters.push(
+            createContentTypeOrAcceptParameter(
+                [defaultValue],
+                "contentType",
+                "Content-Type"
+            )
+        );
         operation.RequestMediaTypes = [defaultValue];
     }
 
-    if (!operation.Parameters.some(
-        value =>
-            value.Location === RequestLocation.Header &&
-            value.NameInRequest.toLowerCase() === "accept")) {
-        operation.Parameters.push(createContentTypeOrAcceptParameter([defaultValue], "accept", "Accept"))
+    if (
+        !operation.Parameters.some(
+            (value) =>
+                value.Location === RequestLocation.Header &&
+                value.NameInRequest.toLowerCase() === "accept"
+        )
+    ) {
+        operation.Parameters.push(
+            createContentTypeOrAcceptParameter(
+                [defaultValue],
+                "accept",
+                "Accept"
+            )
+        );
     }
 }
 
@@ -322,9 +610,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                    Type: inputType,
-                    Value: mediaTypes[0]
-                } as InputConstant)
+                      Type: inputType,
+                      Value: mediaTypes[0]
+                  } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -353,7 +641,7 @@ function processServiceAuthentication(
                     break;
                 default:
                     throw new Error("Not supported authentication.");
-    }
+            }
         }
     }
 
@@ -366,10 +654,7 @@ function processServiceAuthentication(
     return auth;
 }
 
-function getOperationGroupName(
-    program: Program,
-    operation: Operation
-): string {
+function getOperationGroupName(program: Program, operation: Operation): string {
     const explicitOperationId = getOperationId(program, operation);
     if (explicitOperationId) {
         const ids: string[] = explicitOperationId.split("_");
@@ -393,13 +678,14 @@ function getOperationGroupName(
 }
 
 function loadOperation(
-    program: Program,
-    operation: OperationDetails,
+    context: EmitContext<NetEmitterOptions>,
+    operation: HttpOperation,
     uri: string,
-    endpoint: InputParameter | undefined = undefined,
+    urlParameters: InputParameter[] | undefined = undefined,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
+    const program = context.program;
     const {
         path: fullPath,
         operation: op,
@@ -413,7 +699,11 @@ function loadOperation(
     const externalDocs = getExternalDocs(program, op);
 
     const parameters: InputParameter[] = [];
-    if (endpoint) parameters.push(endpoint);
+    if (urlParameters) {
+        for (const param of urlParameters) {
+            parameters.push(param);
+        }
+    }
     for (const p of cadlParameters.parameters) {
         parameters.push(loadOperationParameter(program, p));
     }
@@ -424,21 +714,39 @@ function loadOperation(
         );
     } else if (cadlParameters.bodyType) {
         if (resourceOperation) {
-            parameters.push(loadBodyParameter(program, resourceOperation.resourceType));
+            parameters.push(
+                loadBodyParameter(program, resourceOperation.resourceType)
+            );
         } else {
             const effectiveBodyType = getEffectiveSchemaType(
                 program,
                 cadlParameters.bodyType
             );
             if (effectiveBodyType.kind === "Model") {
-                parameters.push(loadBodyParameter(program, effectiveBodyType));
+                if (effectiveBodyType.name !== "") {
+                    parameters.push(
+                        loadBodyParameter(program, effectiveBodyType)
+                    );
+                } else {
+                    effectiveBodyType.name = `${capitalize(op.name)}Request`;
+                    let bodyParameter = loadBodyParameter(
+                        program,
+                        effectiveBodyType
+                    );
+                    bodyParameter.Kind = InputOperationParameterKind.Spread;
+                    parameters.push(bodyParameter);
+                }
             }
         }
     }
 
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
-        const operationResponse = loadOperationResponse(program, res, resourceOperation);
+        const operationResponse = loadOperationResponse(
+            program,
+            res,
+            resourceOperation
+        );
         if (operationResponse) {
             responses.push(operationResponse);
         }
@@ -452,14 +760,47 @@ function loadOperation(
         mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const convenienceApiDecorator: boolean =
-        getExtensions(program, op).get(convenienceApiKey) ?? false;
-    const generateConvenienceMethod: boolean =
-        requestMethod !== RequestMethod.PATCH && convenienceApiDecorator;
+    const generateProtocol: boolean = shouldGenerateProtocol(
+        createDpgContext(context),
+        op
+    );
+    const generateConvenience: boolean =
+        requestMethod !== RequestMethod.PATCH &&
+        (shouldGenerateConvenient(createDpgContext(context), op) ||
+            getConvenienceAPIName(program, op) !== undefined);
+
+    /* handle lro */
+    /* handle paging. */
+    let paging: OperationPaging | undefined = undefined;
+    for (const res of operation.responses) {
+        const body = res.responses[0]?.body;
+        if (body?.type) {
+            if (
+                body.type.kind === "Model" &&
+                hasDecorator(body?.type, "$pagedResult")
+            ) {
+                const itemsProperty = Array.from(
+                    body.type.properties.values()
+                ).find((it) => hasDecorator(it, "$items"));
+                const nextLinkProperty = Array.from(
+                    body.type.properties.values()
+                ).find((it) => hasDecorator(it, "$nextLink"));
+                paging = {
+                    NextLinkName: nextLinkProperty?.name,
+                    ItemName: itemsProperty?.name
+                } as OperationPaging;
+            }
+        }
+    }
+    /* TODO: handle lro */
 
     return {
         Name: op.name,
+        ResourceName:
+            resourceOperation?.resourceType.name ??
+            getOperationGroupName(program, op),
         Summary: summary,
+        Deprecated: getDeprecated(program, op),
         Description: desc,
         Parameters: parameters,
         Responses: responses,
@@ -470,7 +811,14 @@ function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
-        GenerateConvenienceMethod: generateConvenienceMethod
+        LongRunning: loadOperationLongRunning(
+            program,
+            operation,
+            resourceOperation
+        ),
+        Paging: paging,
+        GenerateProtocolMethod: generateProtocol,
+        GenerateConvenienceMethod: generateConvenience
     } as InputOperation;
 
     function loadOperationParameter(
@@ -494,17 +842,17 @@ function loadOperation(
             } as InputConstant;
         }
         const requestLocation = requestLocationMap[location];
-        const isApiVersion: boolean =
-            requestLocation === RequestLocation.Query &&
-            name.toLocaleLowerCase() === "api-version";
+        const isApiVer: boolean = isApiVersion(program, parameter);
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
         const kind: InputOperationParameterKind = isContentType
             ? InputOperationParameterKind.Constant
-            : isApiVersion
-                ? InputOperationParameterKind.Client
-                : InputOperationParameterKind.Method;
+            : isApiVer
+            ? defaultValue
+                ? InputOperationParameterKind.Constant
+                : InputOperationParameterKind.Client
+            : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
@@ -513,7 +861,7 @@ function loadOperation(
             Location: requestLocation,
             DefaultValue: defaultValue,
             IsRequired: !param.optional,
-            IsApiVersion: isApiVersion,
+            IsApiVersion: isApiVer,
             IsResourceParameter: false,
             IsContentType: isContentType,
             IsEndpoint: false,
@@ -561,10 +909,16 @@ function loadOperation(
         status.push(Number(response.statusCode));
         //TODO: what to do if more than 1 response?
         const body = response.responses[0]?.body;
+
         let type: InputType | undefined = undefined;
         if (body?.type) {
             if (resourceOperation && resourceOperation.operation !== "list") {
-                type = getInputType(program, resourceOperation.resourceType, models, enums);
+                type = getInputType(
+                    program,
+                    resourceOperation.resourceType,
+                    models,
+                    enums
+                );
             } else {
                 const cadlType = getEffectiveSchemaType(program, body.type);
                 const inputType: InputType = getInputType(
@@ -577,24 +931,89 @@ function loadOperation(
             }
         }
 
+        const headers = response.responses[0]?.headers;
+        const responseHeaders: HttpResponseHeader[] = [];
+        if (headers) {
+            for (const key of Object.keys(headers)) {
+                responseHeaders.push({
+                    Name: key,
+                    NameInResponse: headers[key].name,
+                    Description: getDoc(program, headers[key]) ?? "",
+                    Type: getInputType(
+                        program,
+                        headers[key].type,
+                        models,
+                        enums
+                    )
+                } as HttpResponseHeader);
+            }
+        }
+
         return {
             StatusCodes: status,
             BodyType: type,
-            BodyMediaType: BodyMediaType.Json
+            BodyMediaType: BodyMediaType.Json,
+            Headers: responseHeaders,
+            IsErrorResponse: isErrorModel(program, response.type)
         } as OperationResponse;
+    }
+
+    function loadOperationLongRunning(
+        program: Program,
+        op: HttpOperation,
+        resourceOperation?: ResourceOperation
+    ): OperationLongRunning | undefined {
+        if (!isLroOperation(program, op.operation)) return undefined;
+
+        const finalResponse = loadLongRunningFinalResponse(
+            program,
+            op,
+            resourceOperation
+        );
+        if (finalResponse === undefined) return undefined;
+
+        return {
+            FinalStateVia: OperationFinalStateVia.Location, // data plane only supports `location`
+            FinalResponse: finalResponse
+        } as OperationLongRunning;
+    }
+
+    function loadLongRunningFinalResponse(
+        program: Program,
+        op: HttpOperation,
+        resourceOperation?: ResourceOperation
+    ): OperationResponse | undefined {
+        let finalResponse: any | undefined;
+        for (const response of op.responses) {
+            if (response.statusCode === "200") {
+                finalResponse = response;
+                break;
+            }
+            if (response.statusCode === "204") {
+                finalResponse = response;
+            }
+        }
+
+        if (finalResponse !== undefined) {
+            return loadOperationResponse(
+                program,
+                finalResponse,
+                resourceOperation
+            );
+        }
+
+        return loadOperationResponse(
+            program,
+            op.responses[0],
+            resourceOperation
+        );
+    }
+
+    function isLroOperation(program: Program, op: Operation) {
+        return getOperationLink(program, op, "polling") !== undefined;
     }
 }
 
-function isLroOperation(op: OperationDetails) {
-    return false;
-}
-function isPagingOperation(op: OperationDetails) {
-    return false;
-}
-function isSupportedOperation(op: OperationDetails) {
-    if (isLroOperation(op) || isPagingOperation(op)) return false;
-    return true;
-}
 class ErrorTypeFoundError extends Error {
     constructor() {
         super("Error type found in evaluated Cadl output");

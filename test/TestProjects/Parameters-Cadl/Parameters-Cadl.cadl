@@ -1,0 +1,27 @@
+import "@azure-tools/cadl-azure-core";
+import "@cadl-lang/openapi";
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-dpg";
+
+using Cadl.Http;
+using Azure.DPG;
+
+@serviceTitle("Text authoring")
+@serviceVersion("2022-05-15-preview")
+namespace ParametersCadl;
+
+
+@route("/parameterOrders")
+namespace ParameterOrders {
+    model Result {
+        id: string
+    }
+
+    @convenientAPI(true)
+    op Operation(@query start: int32, @query end?: int32): Result;
+
+    @convenientAPI(true)
+    @head
+    op Operation2(@query start?: int32, @query end: int32): Result;
+}

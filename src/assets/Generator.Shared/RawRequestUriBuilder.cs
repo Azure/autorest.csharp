@@ -5,6 +5,7 @@
 
 using System;
 using System.Globalization;
+using System.IO;
 
 namespace Azure.Core
 {
@@ -20,25 +21,35 @@ namespace Azure.Core
 
         private RawWritingPosition? _position;
 
-        private static (string Name, string Value) GetQueryParts(string queryUnparsed)
+        private static void GetQueryParts(ReadOnlySpan<char> queryUnparsed, out ReadOnlySpan<char> name, out ReadOnlySpan<char> value)
         {
             int separatorIndex = queryUnparsed.IndexOf(QueryValueSeparator);
             if (separatorIndex == -1)
             {
-                return (queryUnparsed, string.Empty);
+                name = queryUnparsed;
+                value = ReadOnlySpan<char>.Empty;
             }
-            return (queryUnparsed.Substring(0, separatorIndex), queryUnparsed.Substring(separatorIndex + 1));
+            else
+            {
+                name = queryUnparsed.Slice(0, separatorIndex);
+                value = queryUnparsed.Slice(separatorIndex + 1);
+            }
         }
 
         public void AppendRaw(string value, bool escape)
         {
+            AppendRaw(value.AsSpan(), escape);
+        }
+
+        private void AppendRaw(ReadOnlySpan<char> value, bool escape)
+        {
             if (_position == null)
             {
-                if (!string.IsNullOrEmpty(Query))
+                if (HasQuery)
                 {
                     _position = RawWritingPosition.Query;
                 }
-                else if (!string.IsNullOrEmpty(Path))
+                else if (HasPath)
                 {
                     _position = RawWritingPosition.Path;
                 }
@@ -51,22 +62,23 @@ namespace Azure.Core
                     _position = RawWritingPosition.Scheme;
                 }
             }
-            while (!string.IsNullOrWhiteSpace(value))
+
+            while (!value.IsEmpty)
             {
                 if (_position == RawWritingPosition.Scheme)
                 {
-                    int separator = value.IndexOf(SchemeSeparator, StringComparison.InvariantCultureIgnoreCase);
+                    int separator = value.IndexOf(SchemeSeparator.AsSpan(), StringComparison.InvariantCultureIgnoreCase);
                     if (separator == -1)
                     {
-                        Scheme += value;
-                        value = string.Empty;
+                        Scheme += value.ToString();
+                        value = ReadOnlySpan<char>.Empty;
                     }
                     else
                     {
-                        Scheme += value.Substring(0, separator);
+                        Scheme += value.Slice(0, separator).ToString();
                         // TODO: Find a better way to map schemes to default ports
                         Port = string.Equals(Scheme, "https", StringComparison.OrdinalIgnoreCase) ? 443 : 80;
-                        value = value.Substring(separator + SchemeSeparator.Length);
+                        value = value.Slice(separator + SchemeSeparator.Length);
                         _position = RawWritingPosition.Host;
                     }
                 }
@@ -75,10 +87,10 @@ namespace Azure.Core
                     int separator = value.IndexOfAny(HostOrPort);
                     if (separator == -1)
                     {
-                        if (string.IsNullOrEmpty(Path))
+                        if (!HasPath)
                         {
-                            Host += value;
-                            value = string.Empty;
+                            Host += value.ToString();
+                            value = ReadOnlySpan<char>.Empty;
                         }
                         else
                         {
@@ -89,9 +101,9 @@ namespace Azure.Core
                     }
                     else
                     {
-                        Host += value.Substring(0, separator);
+                        Host += value.Slice(0, separator).ToString();
                         _position = value[separator] == HostSeparator ? RawWritingPosition.Path : RawWritingPosition.Port;
-                        value = value.Substring(separator + 1);
+                        value = value.Slice(separator + 1);
                     }
                 }
                 else if (_position == RawWritingPosition.Port)
@@ -99,13 +111,21 @@ namespace Azure.Core
                     int separator = value.IndexOf(HostSeparator);
                     if (separator == -1)
                     {
-                        Port = int.Parse(value, CultureInfo.InvariantCulture);
-                        value = string.Empty;
+#if NETCOREAPP2_1_OR_GREATER
+                        Port = int.Parse(value, NumberStyles.Integer, CultureInfo.InvariantCulture);
+#else
+                        Port = int.Parse(value.ToString(), CultureInfo.InvariantCulture);
+#endif
+                        value = ReadOnlySpan<char>.Empty;
                     }
                     else
                     {
-                        Port = int.Parse(value.Substring(0, separator), CultureInfo.InvariantCulture);
-                        value = value.Substring(separator + 1);
+#if NETCOREAPP2_1_OR_GREATER
+                        Port = int.Parse(value.Slice(0, separator), NumberStyles.Integer, CultureInfo.InvariantCulture);
+#else
+                        Port = int.Parse(value.Slice(0, separator).ToString(), CultureInfo.InvariantCulture);
+#endif
+                        value = value.Slice(separator + 1);
                     }
                     // Port cannot be split (like Host), so always transition to Path when Port is parsed
                     _position = RawWritingPosition.Path;
@@ -116,12 +136,12 @@ namespace Azure.Core
                     if (separator == -1)
                     {
                         AppendPath(value, escape);
-                        value = string.Empty;
+                        value = ReadOnlySpan<char>.Empty;
                     }
                     else
                     {
-                        AppendPath(value.Substring(0, separator), escape);
-                        value = value.Substring(separator + 1);
+                        AppendPath(value.Slice(0, separator), escape);
+                        value = value.Slice(separator + 1);
                         _position = RawWritingPosition.Query;
                     }
                 }
@@ -130,19 +150,19 @@ namespace Azure.Core
                     int separator = value.IndexOf(QueryContinueSeparator);
                     if (separator == 0)
                     {
-                        value = value.Substring(1);
+                        value = value.Slice(1);
                     }
                     else if (separator == -1)
                     {
-                        (string queryName, string queryValue) = GetQueryParts(value);
+                        GetQueryParts(value, out var queryName, out var queryValue);
                         AppendQuery(queryName, queryValue, escape);
-                        value = string.Empty;
+                        value = ReadOnlySpan<char>.Empty;
                     }
                     else
                     {
-                        (string queryName, string queryValue) = GetQueryParts(value.Substring(0, separator));
+                        GetQueryParts(value.Slice(0, separator), out var queryName, out var queryValue);
                         AppendQuery(queryName, queryValue, escape);
-                        value = value.Substring(separator + 1);
+                        value = value.Slice(separator + 1);
                     }
                 }
             }

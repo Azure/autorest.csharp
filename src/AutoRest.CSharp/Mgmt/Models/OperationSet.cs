@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             var hintPath = hint.GetRequestPath();
             var segmentsCount = RequestPath.Split('/', StringSplitOptions.RemoveEmptyEntries).Length;
             var segments = hintPath.Take(segmentsCount);
-            return new RequestPath(segments);
+            return Models.RequestPath.FromSegments(segments);
         }
 
         private Operation? FindBestOperation()

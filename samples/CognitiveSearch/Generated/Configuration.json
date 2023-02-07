@@ -3,10 +3,22 @@
   "Namespace": "CognitiveSearch",
   "LibraryName": null,
   "SharedSourceFolders": [
-    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "generation1-convenience-client": true
+  "generation1-convenience-client": true,
+  "SuppressAbstractBaseClasses": [
+    "Analyzer",
+    "CharFilter",
+    "CognitiveServicesAccount",
+    "DataChangeDetectionPolicy",
+    "DataDeletionDetectionPolicy",
+    "ScoringFunction",
+    "Similarity",
+    "Skill",
+    "TokenFilter",
+    "Tokenizer"
+  ]
 }

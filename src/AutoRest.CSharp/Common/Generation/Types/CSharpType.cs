@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Generation.Types
@@ -88,6 +89,8 @@ namespace AutoRest.CSharp.Generation.Types
 
         public Type? SerializeAs { get; }
 
+        public bool HasParent => IsFrameworkType ? false : Implementation is ObjectType objectType ? objectType.Inherits is not null : false;
+
         protected bool Equals(CSharpType other, bool ignoreNullable)
             => Equals(_implementation, other._implementation) &&
                _type == other._type &&
@@ -140,19 +143,42 @@ namespace AutoRest.CSharp.Generation.Types
             return new CodeWriter().Append($"{this}").ToString(false);
         }
 
-        internal static CSharpType FromSystemType(BuildContext context, Type type)
+        internal static CSharpType FromSystemType(Type type, string defaultNamespace, SourceInputModel? sourceInputModel)
         {
             var genericTypes = type.GetGenericArguments().Select(t => new CSharpType(t));
-            var systemObjectType = SystemObjectType.Create(type, context);
+            var systemObjectType = SystemObjectType.Create(type, defaultNamespace, sourceInputModel);
             // TODO -- why we do not just return systemObjectType.Type here? because of the generic types?
             return new CSharpType(
                 systemObjectType,
-                type.Namespace ?? context.DefaultNamespace,
+                type.Namespace ?? defaultNamespace,
                 systemObjectType.Declaration.Name,
                 type.IsValueType,
                 type.IsEnum,
                 false,
                 genericTypes.ToArray());
+        }
+
+        internal static CSharpType FromSystemType(BuildContext context, Type type)
+            => FromSystemType(type, context.DefaultNamespace, context.SourceInputModel);
+
+        public bool IsCollectionType()
+        {
+            if (!IsFrameworkType)
+                return false;
+
+            return FrameworkType.Equals(typeof(IList<>)) ||
+                FrameworkType.Equals(typeof(IEnumerable<>)) ||
+                FrameworkType == typeof(IReadOnlyList<>) ||
+                FrameworkType.Equals(typeof(IDictionary<,>)) ||
+                FrameworkType == typeof(IReadOnlyDictionary<,>);
+        }
+
+        public CSharpType GetNonNullable()
+        {
+            if (!IsNullable)
+                return this;
+
+            return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
         }
     }
 }

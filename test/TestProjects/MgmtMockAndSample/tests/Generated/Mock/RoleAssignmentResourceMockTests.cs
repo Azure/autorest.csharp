@@ -60,5 +60,16 @@ namespace MgmtMockAndSample.Tests.Mock
                 CanDelegate = false,
             });
         }
+
+        [RecordedTest]
+        public async Task Validate()
+        {
+            // Example: Validate role assignments for subscription
+
+            string subscriptionId = "00000000-0000-0000-0000-000000000000";
+            ResourceIdentifier roleAssignmentResourceId = RoleAssignmentResource.CreateResourceIdentifier($"/subscriptions/{subscriptionId}", "roleAssignmentId");
+            RoleAssignmentResource roleAssignment = GetArmClient().GetRoleAssignmentResource(roleAssignmentResourceId);
+            await roleAssignment.ValidateAsync();
+        }
     }
 }

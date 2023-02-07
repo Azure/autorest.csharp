@@ -2,10 +2,11 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace CustomizationsInCadl
+namespace CustomizationsInCadl.Models
 {
     public partial class ModelWithCustomizedProperties
     {
@@ -50,5 +51,29 @@ namespace CustomizationsInCadl
         /// </summary>
         [CodeGenMember("PropertyToField")]
         private readonly string _propertyToField;
+
+        /// <summary>
+        /// Property renamed that is list
+        /// </summary>
+        [CodeGenMember("BadListName")]
+        public IList<string> GoodListName { get; }
+
+        /// <summary>
+        /// Property renamed that is dictionary
+        /// </summary>
+        [CodeGenMember("BadDictionaryName")]
+        public IDictionary<string, string> GoodDictionaryName { get; }
+
+        /// <summary>
+        /// Property renamed that is listoflist
+        /// </summary>
+        [CodeGenMember("BadListOfListName")]
+        public IList<IList<string>> GoodListOfListName { get; }
+
+        /// <summary>
+        /// Property renamed that is listofdictionary
+        /// </summary>
+        [CodeGenMember("BadListOfDictionaryName")]
+        public IList<IDictionary<string, string>> GoodListOfDictionaryName { get; }
     }
 }

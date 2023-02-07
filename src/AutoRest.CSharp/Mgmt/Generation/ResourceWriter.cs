@@ -24,6 +24,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private Resource This { get; }
 
+        public ResourceWriter(Resource resource) : this(new CodeWriter(), resource)
+        { }
+
         public ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
         {
             This = resource;
@@ -104,7 +107,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteAddTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
@@ -121,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteSetTagsBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
@@ -143,7 +146,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteRemoveTagBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
         {
-            using (WriteDiagnosticScope(_writer, diagnostic, GetDiagnosticName(This.GetOperation.OperationMappings.Values.First())))
+            using (_writer.WriteDiagnosticScope(diagnostic, GetDiagnosticReference(This.GetOperation.OperationMappings.Values.First())))
             {
                 using (_writer.Scope(GetTagResourceCheckString(isAsync)))
                 {
@@ -180,20 +183,21 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             if (This.UpdateOperation is null && This.CreateOperation is null)
                 throw new InvalidOperationException($"Unexpected null update method for resource {This.ResourceName} while its marked as taggable");
-            MgmtClientOperation operation = (This.UpdateOperation ?? This.CreateOperation)!;
-            var updateMethodName = This.UpdateOperation is null ? This.IsSingleton ? "CreateOrUpdate" : "Update" : This.UpdateOperation.Name;
+            var updateOperation = (This.UpdateOperation ?? This.CreateOperation)!;
+            var getOperation = This.GetOperation;
+            var updateMethodName = updateOperation.Name;
 
             var configureStr = isAsync ? ".ConfigureAwait(false)" : String.Empty;
             var awaitStr = isAsync ? "await " : String.Empty;
-            _writer.Line($"var current = ({awaitStr}{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr}).Value.Data;");
+            _writer.Line($"var current = ({awaitStr}{CreateMethodName(getOperation.Name, isAsync)}(cancellationToken: cancellationToken){configureStr}).Value.Data;");
 
-            var lroParamStr = operation.IsLongRunningOperation ? "WaitUntil.Completed, " : String.Empty;
+            var lroParamStr = updateOperation.IsLongRunningOperation ? "WaitUntil.Completed, " : String.Empty;
 
-            var parameters = operation.IsLongRunningOperation ? operation.MethodSignature.Parameters.Skip(1) : operation.MethodSignature.Parameters;
+            var parameters = updateOperation.IsLongRunningOperation ? updateOperation.MethodSignature.Parameters.Skip(1) : updateOperation.MethodSignature.Parameters;
             var bodyParamType = parameters.First().Type;
             string bodyParamName = "current";
             //if we are using PATCH always minimize what we pass in the body to what we actually want to change
-            if (!bodyParamType.Equals(This.ResourceData.Type) || operation.OperationMappings.Values.First().Operation.GetHttpMethod() == HttpMethod.Patch)
+            if (!bodyParamType.Equals(This.ResourceData.Type) || updateOperation.OperationMappings.Values.First().Operation.GetHttpMethod() == HttpMethod.Patch)
             {
                 bodyParamName = "patch";
                 if (bodyParamType.Implementation is ObjectType objectType)
@@ -239,15 +243,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line($"{bodyParamName}.Tags{setCode};");
             _writer.Line($"var result = {awaitStr}{CreateMethodName(updateMethodName, isAsync)}({lroParamStr}{bodyParamName}, cancellationToken: cancellationToken){configureStr};");
-            if (operation.IsLongRunningOperation)
+            if (updateOperation.IsLongRunningOperation)
             {
-                if (operation.ReturnType.Arguments.Length == 0)
+                if (updateOperation.MgmtReturnType == null)
                 {
-                    _writer.Line($"return {awaitStr}{CreateMethodName("Get", isAsync)}(cancellationToken: cancellationToken){configureStr};");
+                    _writer.Line($"return {awaitStr}{CreateMethodName(getOperation.Name, isAsync)}(cancellationToken: cancellationToken){configureStr};");
                 }
                 else
                 {
-                    _writer.Line($"return Response.FromValue(result.Value, result.GetRawResponse());");
+                    _writer.Line($"return {typeof(Response)}.FromValue(result.Value, result.GetRawResponse());");
                 }
             }
             else
@@ -260,13 +264,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             _writer.Line($"{GetAwait(isAsync)} GetTagResource().{CreateMethodName("CreateOrUpdate", isAsync)}({typeof(WaitUntil)}.Completed, originalTags.Value.Data, cancellationToken: cancellationToken){GetConfigureAwait(isAsync)};");
 
-            MgmtClientOperation clientOperation = This.GetOperation!;
+            var getOperation = This.GetOperation;
             // we need to write multiple branches for a normal method
-            if (clientOperation.OperationMappings.Count == 1)
+            if (getOperation.OperationMappings.Count == 1)
             {
                 // if we only have one branch, we would not need those if-else statements
-                var branch = clientOperation.OperationMappings.Keys.First();
-                WriteTaggableCommonMethodBranch(clientOperation.OperationMappings[branch], clientOperation.ParameterMappings[branch], isAsync);
+                var branch = getOperation.OperationMappings.Keys.First();
+                WriteTaggableCommonMethodBranch(getOperation.OperationMappings[branch], getOperation.ParameterMappings[branch], isAsync);
             }
             else
             {
@@ -275,22 +279,30 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private void WriteTaggableCommonMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync)
+        private void WriteTaggableCommonMethodBranch(MgmtRestOperation getOperation, IEnumerable<ParameterMapping> parameterMappings, bool isAsync)
         {
             var originalResponse = new CodeWriterDeclaration("originalResponse");
             _writer
                 .Append($"var {originalResponse:D} = {GetAwait(isAsync)} ")
-                .Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, isAsync)}(");
+                .Append($"{GetRestClientName(getOperation)}.{CreateMethodName(getOperation.Method.Name, isAsync)}(");
 
             WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {
-                _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, operation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
+                _writer.Line($"{originalResponse}.Value.Id = {CreateResourceIdentifierExpression(This, getOperation.RequestPath, parameterMappings, $"{originalResponse}.Value")};");
             }
 
-            _writer.Line($"return {typeof(Response)}.FromValue(new {operation.ReturnType.UnWrapResponse()}({ArmClientReference}, {originalResponse}.Value), {originalResponse}.GetRawResponse());");
+            var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);
+            if (valueConverter != null)
+            {
+                _writer.Line($"return {typeof(Response)}.FromValue({valueConverter}, {originalResponse}.GetRawResponse());");
+            }
+            else
+            {
+                _writer.Line($"return {originalResponse}");
+            }
         }
     }
 }

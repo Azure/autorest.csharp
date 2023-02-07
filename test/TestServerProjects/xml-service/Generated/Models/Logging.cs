@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -21,14 +22,8 @@ namespace xml_service.Models
         /// <exception cref="ArgumentNullException"> <paramref name="version"/> or <paramref name="retentionPolicy"/> is null. </exception>
         public Logging(string version, bool delete, bool read, bool write, RetentionPolicy retentionPolicy)
         {
-            if (version == null)
-            {
-                throw new ArgumentNullException(nameof(version));
-            }
-            if (retentionPolicy == null)
-            {
-                throw new ArgumentNullException(nameof(retentionPolicy));
-            }
+            Argument.AssertNotNull(version, nameof(version));
+            Argument.AssertNotNull(retentionPolicy, nameof(retentionPolicy));
 
             Version = version;
             Delete = delete;

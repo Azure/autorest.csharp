@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -39,11 +40,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         internal ObjectTypeProperty[] MyProperties => _myProperties ??= BuildMyProperties().ToArray();
 
-        protected override bool IsAbstract => base.IsAbstract || BackingSchema != null;
-
-        private ObjectSchema? _backingSchema;
-        public ObjectSchema? BackingSchema => _backingSchema ??= BuildBackingSchema();
-
         private static string GetDefaultName(ObjectSchema objectSchema, bool isResourceType)
         {
             var name = objectSchema.CSharpName();
@@ -66,16 +62,52 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            List<ObjectTypeProperty> objTypeProperties = new List<ObjectTypeProperty>();
             var parentProperties = GetParentPropertyNames();
             foreach (var property in base.BuildProperties())
             {
                 if (!parentProperties.Contains(property.Declaration.Name))
                 {
-                    var propertyType = UpdatePropertyDescription(CreatePropertyType(property));
+                    var propertyType = CreatePropertyType(property);
+                    // check if the type of this property is "single property type"
+                    if (IsSinglePropertyObject(propertyType))
+                    {
+                        propertyType = propertyType.MarkFlatten();
+                    }
                     yield return propertyType;
                 }
             }
+        }
+
+        private static bool IsSinglePropertyObject(ObjectTypeProperty property)
+        {
+            if (!property.Declaration.Type.TryCast<ObjectType>(out var objType))
+                return false;
+
+            return objType switch
+            {
+                SystemObjectType systemObjectType => HandleSystemObjectType(systemObjectType),
+                SchemaObjectType schemaObjectType => HandleMgmtObjectType(schemaObjectType),
+                _ => throw new InvalidOperationException($"Unhandled case {objType.GetType()} for property {property.Declaration.Type} {property.Declaration.Name}")
+            };
+        }
+
+        private static bool HandleMgmtObjectType(SchemaObjectType objType)
+        {
+            if (objType.Discriminator != null)
+                return false;
+
+            if (objType.AdditionalPropertiesProperty != null)
+                return false;
+
+            // we cannot use the EnumerateHierarchy method because we are calling this when we are building that
+            var properties = objType.GetCombinedSchemas().SelectMany(obj => obj.Properties);
+            return properties.Count() == 1;
+        }
+
+        private static bool HandleSystemObjectType(SystemObjectType objType)
+        {
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            return properties.Count() == 1;
         }
 
         private IEnumerable<ObjectTypeProperty> BuildMyProperties()
@@ -96,8 +128,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 for (int i = 0; i < objectTypeProperty.ValueType.Arguments.Length; i++)
                 {
                     var argType = objectTypeProperty.ValueType.Arguments[i];
-                    var typeToReplace = argType.IsFrameworkType ? null : argType.Implementation as MgmtObjectType;
-                    if (typeToReplace != null)
+                    if (argType.TryCast<MgmtObjectType>(out var typeToReplace))
                     {
                         var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                         objectTypeProperty.ValueType.Arguments[i] = match ?? argType;
@@ -108,8 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             else
             {
                 ObjectTypeProperty propertyType = objectTypeProperty;
-                var typeToReplace = objectTypeProperty.ValueType?.IsFrameworkType == false ? objectTypeProperty.ValueType.Implementation as MgmtObjectType : null;
-                if (typeToReplace != null)
+                if (objectTypeProperty.ValueType.TryCast<MgmtObjectType>(out var typeToReplace))
                 {
                     var match = ReferenceTypePropertyChooser.GetExactMatch(typeToReplace);
                     if (match != null)
@@ -234,104 +264,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CreateDescription()
         {
-            return ObjectSchema.CreateDescription() + CreateExtraDescriptionWithDiscriminator();
-        }
-
-        public static readonly List<string> DiscriminatorDescFixedPart = new List<string> { "Please note ",
-            " is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.",
-            "The available derived classes include " };
-
-        protected virtual string CreateExtraDescriptionWithDiscriminator()
-        {
-            if (Discriminator?.HasDescendants == true)
-            {
-                List<FormattableString> childrenList = new List<FormattableString>();
-                foreach (var implementation in Discriminator.Implementations)
-                {
-                    childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
-                }
-                return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type.Name}\"/>{DiscriminatorDescFixedPart[1]}" +
-                    $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
-            }
-            return string.Empty;
-        }
-
-        private ObjectTypeProperty UpdatePropertyDescription(ObjectTypeProperty property)
-        {
-            CSharpType type = property.ValueType;
-            string updatedDescription = string.Empty;
-            if (type.IsFrameworkType)
-            {
-                if (TypeFactory.IsList(type))
-                {
-                    if (!type.Arguments.First().IsFrameworkType && type.Arguments.First().Implementation is MgmtObjectType objectType)
-                    {
-                        updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
-                    }
-                }
-                else if (TypeFactory.IsDictionary(type))
-                {
-                    var objectTypes = type.Arguments.Where(arg => !arg.IsFrameworkType && arg.Implementation is MgmtObjectType);
-                    if (objectTypes.Count() > 0)
-                    {
-                        var subDescription = objectTypes.Select(o => ((MgmtObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator());
-                        updatedDescription = string.Join("", subDescription);
-                    }
-                }
-            }
-            else if (type.Implementation is MgmtObjectType objectType)
-            {
-                updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
-            }
-            return updatedDescription.IsNullOrEmpty() ? property :
-                new ObjectTypeProperty(property.Declaration,
-                property.Description + updatedDescription,
-                property.IsReadOnly,
-                property.SchemaProperty,
-                property.ValueType,
-                property.OptionalViaNullability);
-        }
-
-        private ObjectSchema? BuildBackingSchema()
-        {
-            if (ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0 && !Configuration.MgmtConfiguration.SuppressAbstractBaseClass.Contains(DefaultName))
-            {
-                return BuildInternalBackingSchema();
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private ObjectSchema BuildInternalBackingSchema()
-        {
-            // TODO: Avoid potential duplicated schema name and discriminator value.
-            // Note: When this Todo is done, the method IsDescendantOf also needs to be updated.
-            // Reason:
-            // Here we just hard coded the name and discriminator value for the internal backing schema.
-            // This could work now, but there are also potential duplicate conflict issue.
-            var schema = new ObjectSchema
-            {
-                Language = new Languages
-                {
-                    Default = new Language
-                    {
-                        Name = "Unknown" + ObjectSchema.Language.Default.Name
-                    }
-                },
-                Parents = new Relations
-                {
-                    All = { ObjectSchema },
-                    Immediate = { ObjectSchema }
-                },
-                DiscriminatorValue = "Unknown",
-                SerializationFormats = { KnownMediaType.Json }
-            };
-            ICollection<string> usages = ObjectSchema.Usage.Select(u => u.ToString()).ToList();
-            usages.Add("Model");
-            schema.Extensions = new RecordOfStringAndAny { { "x-csharp-usage", string.Join(',', usages) }, { "x-ms-skip-init-ctor", true } };
-            return schema;
+            return ObjectSchema.CreateDescription();
         }
     }
 }

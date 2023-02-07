@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "securityclient",
+ "Name": "SecurityClient",
  "Description": "Illustrates clients generated from a Cadl with security.",
  "ApiVersions": [
   "1.0.0"
@@ -10,12 +10,13 @@
  "Clients": [
   {
    "$id": "2",
-   "Name": "SecurityClient",
+   "Name": "SecurityClientClient",
    "Description": "Illustrates clients generated from a Cadl with security.",
    "Operations": [
     {
      "$id": "3",
      "Name": "genSecurity",
+     "ResourceName": "SecurityClient",
      "Description": "Get security info",
      "Parameters": [
       {
@@ -114,20 +115,24 @@
        "StatusCodes": [
         200
        ],
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/security",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
     "$id": "16"
-   }
+   },
+   "Creatable": true
   }
  ],
  "Auth": {

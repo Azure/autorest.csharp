@@ -327,6 +327,40 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}/validate": {
+      "post": {
+        "tags": [
+          "RoleAssignments"
+        ],
+        "operationId": "RoleAssignments_Validate",
+        "description": "Gets all role assignments for the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "roleAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the role assignment to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of role assignments."
+          }
+        },
+        "x-ms-examples": {
+          "Validate role assignments for subscription": {
+            "$ref": "./examples/ValidateRoleAssignment.json"
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.Authorization/roleAssignments": {
       "get": {
         "tags": [

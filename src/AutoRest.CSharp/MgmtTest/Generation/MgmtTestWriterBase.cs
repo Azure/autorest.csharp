@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Decorator;
@@ -13,6 +14,7 @@ using AutoRest.CSharp.MgmtTest.Output;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Models;
 using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.MgmtTest.Generation
@@ -46,12 +48,30 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _writer.Line();
         }
 
-        protected virtual void WriteCreateResourceIdentifier(OperationExample example, CodeWriterDeclaration declaration, RequestPath requestPath, CSharpType resourceType)
+        protected virtual void WriteCreateResourceIdentifier(OperationExample example, CodeWriterDeclaration idDeclaration, RequestPath resourcePath, CSharpType resourceType)
         {
-            _writer.Append($"{typeof(ResourceIdentifier)} {declaration:D} = {resourceType}.CreateResourceIdentifier(");
-            foreach (var value in example.ComposeResourceIdentifierParameterValues(requestPath))
+            var resourceIdExpressionValues = example.ComposeResourceIdentifierExpressionValues(resourcePath).ToList();
+            foreach (var initializer in resourceIdExpressionValues)
             {
-                _writer.AppendExampleParameterValue(value).AppendRaw(",");
+                if (initializer.ScopeValues is not null)
+                {
+                    foreach (var value in initializer.ScopeValues)
+                    {
+                        var parameterDeclaration = new CodeWriterVariableDeclaration(value.Name, value.Type);
+                        _writer.AppendDeclaration(parameterDeclaration).AppendRaw(" = ")
+                            .AppendExampleParameterValue(value).LineRaw(";");
+                    }
+                }
+            }
+            _writer.Append($"{typeof(ResourceIdentifier)} {idDeclaration:D} = {resourceType}.CreateResourceIdentifier(");
+            foreach (var initializer in resourceIdExpressionValues)
+            {
+                if (initializer.Value is not null)
+                    _writer.AppendExampleParameterValue(initializer.Value).AppendRaw(",");
+                else
+                {
+                    _writer.AppendRaw("$\"").AppendRaw(initializer.Scope!.ToString()!).AppendRaw("\"").AppendRaw(",");
+                }
             }
             _writer.RemoveTrailingComma();
             _writer.Line($");");
@@ -59,6 +79,19 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected virtual void WriteCreateScopeResourceIdentifier(OperationExample example, CodeWriterDeclaration declaration, RequestPath requestPath)
         {
+            var resourceIdExpressionValues = example.ComposeResourceIdentifierExpressionValues(requestPath).ToList();
+            foreach (var initializer in resourceIdExpressionValues)
+            {
+                if (initializer.ScopeValues is not null)
+                {
+                    foreach (var value in initializer.ScopeValues)
+                    {
+                        var parameterDeclaration = new CodeWriterVariableDeclaration(value.Name, value.Type);
+                        _writer.AppendDeclaration(parameterDeclaration).AppendRaw(" = ")
+                            .AppendExampleParameterValue(value).LineRaw(";");
+                    }
+                }
+            }
             _writer.Append($"{typeof(ResourceIdentifier)} {declaration:D} = new {typeof(ResourceIdentifier)}(");
             // we do not know exactly which resource the scope is, therefore we need to use the string.Format method to include those parameter values and construct a valid resource id of the scope
             _writer.Append($"{typeof(string)}.Format(\"");
@@ -72,9 +105,14 @@ namespace AutoRest.CSharp.MgmtTest.Generation
                     _writer.Append($"{{{refIndex++}}}");
             }
             _writer.AppendRaw("\", ");
-            foreach (var value in example.ComposeResourceIdentifierParameterValues(requestPath))
+            foreach (var initializer in resourceIdExpressionValues)
             {
-                _writer.AppendExampleParameterValue(value).AppendRaw(",");
+                if (initializer.Value is not null)
+                    _writer.AppendExampleParameterValue(initializer.Value).AppendRaw(",");
+                else
+                {
+                    _writer.AppendRaw("$\"").AppendRaw(initializer.Scope!.ToString()!).AppendRaw("\"").AppendRaw(",");
+                }
             }
             _writer.RemoveTrailingComma();
             _writer.LineRaw("));");
@@ -110,6 +148,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         {
             var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
             _writer.Line($"var {resourceVar:D} = {client}.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;");
+            // since right after we get the resource above, we would immeditately call an extension method on the resource
+            // here we just add the namespace of the extension class into the writer so that the following invocation would not have compilation errors
+            _writer.UseNamespace(parentExtension.Namespace);
             return resourceVar;
         }
 
@@ -120,6 +161,9 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             WriteCreateResourceIdentifier(example, idVar, parentExtension.ContextualPath, parentExtension.ArmCoreType);
 
             _writer.Line($"{parentExtension.ArmCoreType} {resourceVar:D} = {client}.Get{parentExtension.ArmCoreType.Name}({idVar});");
+            // since right after we get the resource above, we would immeditately call an extension method on the resource
+            // here we just add the namespace of the extension class into the writer so that the following invocation would not have compilation errors
+            _writer.UseNamespace(parentExtension.Namespace);
             return resourceVar;
         }
 

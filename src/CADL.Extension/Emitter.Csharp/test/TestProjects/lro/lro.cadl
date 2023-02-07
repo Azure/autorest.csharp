@@ -25,12 +25,13 @@ using Azure.Core;
 namespace LroOperation;
 
 @doc("The endpoint to use.")
-model Endpoint is string;
+scalar Endpoint extends string;
 
 // Model types
 @resource("Pet")
 model Pet {
   @key
+  @visibility("read")
   name: string;
   tag?: string;
 

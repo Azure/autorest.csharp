@@ -9,6 +9,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -22,8 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     /// <summary>
     /// MgmtTypeProvider represents the information that corresponds to the generated class in the SDK that contains operations in it.
-    /// This includes <see cref="Resource"/>, <see cref="ResourceCollection"/>, <see cref="ArmClientExtensions"/>, <see cref="TenantExtensions"/>,
-    /// <see cref="SubscriptionExtensions"/>, <see cref="ResourceGroupExtensions"/> and <see cref="ManagementGroupExtensions"/>
+    /// This includes <see cref="Resource"/>, <see cref="ResourceCollection"/>, <see cref="ArmClientExtensions"/>, <see cref="MgmtExtensions"/> and <see cref="MgmtExtensionsWrapper"/>
     /// </summary>
     internal abstract class MgmtTypeProvider : TypeProvider
     {
@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return Array.Empty<CSharpType>();
         }
 
-        public IEnumerable<CSharpType> GetImplementsList()
+        public IEnumerable<CSharpType> GetImplements()
         {
             if (BaseType is not null)
                 yield return BaseType;
@@ -267,14 +267,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 uniqueSets.Add(key);
             }
             return uniqueSets;
-        }
-
-        private IEnumerable<MgmtRestClient>? _restClients;
-        public IEnumerable<MgmtRestClient> RestClients => _restClients ??= EnsureRestClients();
-
-        protected virtual IEnumerable<MgmtRestClient> EnsureRestClients()
-        {
-            return ClientOperations.SelectMany(operation => operation.Select(restOperation => restOperation.RestClient)).Distinct();
         }
     }
 }

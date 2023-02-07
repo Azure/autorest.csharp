@@ -3,8 +3,8 @@
   "Namespace": "MgmtMockAndSample",
   "LibraryName": "MgmtMockAndSample",
   "SharedSourceFolders": [
-    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
   "azure-arm": true,
   "public-clients": true,
@@ -17,6 +17,9 @@
   "GenerateArmResourceExtensions": [
     "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}"
   ],
+  "RequestPathToParent": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}/validate": "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}"
+  },
   "FormatByNameRules": {
     "tenantId": "uuid",
     "resourceType": "resource-type",
@@ -26,6 +29,7 @@
     "*Uris": "Uri"
   },
   "RenameMapping": {
-    "Type": "EncryptionType"
+    "Type": "EncryptionType",
+    "FirewallPolicyThreatIntelWhitelist.ipAddresses": "-|ip-address"
   }
 }

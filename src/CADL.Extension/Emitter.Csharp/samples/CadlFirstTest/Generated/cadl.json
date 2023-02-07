@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "demo.helloworld",
+ "Name": "Demo.HelloWorld",
  "ApiVersions": [
   "0.1.0"
  ],
@@ -29,13 +29,14 @@
     }
    ],
    "IsExtensible": false,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "Input"
   },
   {
    "$id": "6",
    "Name": "ExtensibleEnum",
    "Namespace": "Demo.HelloWorld",
-   "Description": "Extensible enum",
+   "Description": "Extensible enum Values",
    "EnumValueType": "String",
    "AllowedValues": [
     {
@@ -55,7 +56,8 @@
     }
    ],
    "IsExtensible": true,
-   "IsNullable": false
+   "IsNullable": false,
+   "Usage": "Input"
   }
  ],
  "Models": [
@@ -64,12 +66,13 @@
    "Name": "Thing",
    "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "11",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "12",
       "Name": "string",
@@ -87,12 +90,13 @@
    "Name": "RoundTripModel",
    "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "14",
      "Name": "requiredString",
      "SerializedName": "requiredString",
-     "Description": "",
+     "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "15",
       "Name": "string",
@@ -107,10 +111,10 @@
      "$id": "16",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
-     "Description": "",
+     "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "17",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -122,7 +126,7 @@
      "$id": "18",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
-     "Description": "",
+     "Description": "Required collection of enums",
      "Type": {
       "$id": "19",
       "Name": "Array",
@@ -139,7 +143,7 @@
      "$id": "20",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
-     "Description": "",
+     "Description": "Required dictionary of enums",
      "Type": {
       "$id": "21",
       "Name": "Dictionary",
@@ -164,11 +168,13 @@
  "Clients": [
   {
    "$id": "23",
-   "Name": "HelloWorld",
+   "Name": "HelloWorldClient",
+   "Description": "",
    "Operations": [
     {
      "$id": "24",
      "Name": "topAction",
+     "ResourceName": "HelloWorld",
      "Description": "top level method",
      "Parameters": [
       {
@@ -259,19 +265,23 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/top/{action}",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "35",
      "Name": "topAction2",
+     "ResourceName": "HelloWorld",
      "Description": "top level method2",
      "Parameters": [
       {
@@ -314,19 +324,23 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/top2",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "40",
      "Name": "anonymousBody",
+     "ResourceName": "HelloWorld",
      "Description": "body parameter without body decorator",
      "Parameters": [
       {
@@ -413,7 +427,9 @@
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "POST",
@@ -423,30 +439,22 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
-    }
-   ],
-   "Protocol": {
-    "$id": "49"
-   }
-  },
-  {
-   "$id": "50",
-   "Name": "Demo",
-   "Description": "Hello world service",
-   "Operations": [
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
     {
-     "$id": "51",
+     "$id": "49",
      "Name": "sayHi",
+     "ResourceName": "Demo",
      "Description": "Return hi",
      "Parameters": [
       {
-       "$id": "52",
+       "$id": "50",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "53",
+        "$id": "51",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -461,9 +469,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "54",
+        "$id": "52",
         "Type": {
-         "$ref": "53"
+         "$ref": "51"
         },
         "Value": "application/json"
        }
@@ -474,39 +482,34 @@
      ],
      "Responses": [
       {
-       "$id": "55",
+       "$id": "53",
        "StatusCodes": [
         200
        ],
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/hello",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
-    }
-   ],
-   "Protocol": {
-    "$id": "56"
-   }
-  },
-  {
-   "$id": "57",
-   "Name": "Demo2",
-   "Operations": [
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
     {
-     "$id": "58",
+     "$id": "54",
      "Name": "helloAgain",
+     "ResourceName": "Demo2",
      "Description": "Return hi again",
      "Parameters": [
       {
-       "$id": "59",
+       "$id": "55",
        "Name": "action",
        "NameInRequest": "action",
        "Type": {
@@ -523,11 +526,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "60",
+       "$id": "56",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "61",
+        "$id": "57",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -542,19 +545,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "62",
+        "$id": "58",
         "Type": {
-         "$ref": "61"
+         "$ref": "57"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "63",
+       "$id": "59",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "64",
+        "$id": "60",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -569,9 +572,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "65",
+        "$id": "61",
         "Type": {
-         "$ref": "64"
+         "$ref": "60"
         },
         "Value": "application/json"
        }
@@ -582,14 +585,16 @@
      ],
      "Responses": [
       {
-       "$id": "66",
+       "$id": "62",
        "StatusCodes": [
         200
        ],
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
@@ -599,20 +604,22 @@
      "RequestMediaTypes": [
       "application/json"
      ],
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
-     "$id": "67",
+     "$id": "63",
      "Name": "helloDemo2",
+     "ResourceName": "Demo2",
      "Description": "Return hi in demo2",
      "Parameters": [
       {
-       "$id": "68",
+       "$id": "64",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "69",
+        "$id": "65",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -627,9 +634,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "70",
+        "$id": "66",
         "Type": {
-         "$ref": "69"
+         "$ref": "65"
         },
         "Value": "application/json"
        }
@@ -640,27 +647,31 @@
      ],
      "Responses": [
       {
-       "$id": "71",
+       "$id": "67",
        "StatusCodes": [
         200
        ],
        "BodyType": {
         "$ref": "10"
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "",
      "Path": "/demoHi",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "72"
-   }
+    "$id": "68"
+   },
+   "Creatable": true
   }
  ]
 }

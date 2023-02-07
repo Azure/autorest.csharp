@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -20,22 +19,22 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
-
         public EnumType(ChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, true), context.DefaultNamespace, GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
+            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, true), GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
         {
         }
 
         public EnumType(SealedChoiceSchema schema, BuildContext context)
-            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, false), context.DefaultNamespace, GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
+            : this(CodeModelConverter.CreateEnumType(schema, schema.ChoiceType, schema.Choices, false), GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context), context.TypeFactory, context.SourceInputModel)
         {
         }
 
         public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-            : base(GetDefaultNamespace(input.Namespace, defaultNamespace), sourceInputModel)
+            : base(defaultNamespace, sourceInputModel)
         {
             _allowedValues = input.AllowedValues;
             _typeFactory = typeFactory;
+            _deprecated = input.Deprecated;
 
             DefaultName = input.Name.ToCleanName();
             DefaultAccessibility = input.Accessibility ?? defaultAccessibility;
@@ -60,11 +59,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsExtensible = isExtensible;
         }
 
-        private static string GetDefaultNamespace(string? ns, string defaultNamespace)
-            => ns ?? (Configuration.ModelNamespace ? $"{defaultNamespace}.Models" : defaultNamespace);
-
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }
+        public bool IsStringValueType => ValueType.Equals(typeof(string));
+        public bool IsIntValueType => ValueType.Equals(typeof(Int32)) || IsLongValueType;
+        public bool IsLongValueType => ValueType.Equals(typeof(Int64));
         public string? Description { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -91,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static string CreateDescription(InputEnumTypeValue value)
         {
             var description = string.IsNullOrWhiteSpace(value.Description)
-                ? value.Value
+                ? value.GetValueString()
                 : value.Description;
             return BuilderHelpers.EscapeXmlDescription(description);
         }

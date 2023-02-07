@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace SubClients_LowLevel
 {
-    // Data plane generated sub-client. The Parameter sub-client.
+    // Data plane generated sub-client.
     /// <summary> The Parameter sub-client. </summary>
     public partial class Parameter
     {
@@ -52,18 +52,7 @@ namespace SubClients_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="subParameter"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetSubParameterAsync with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
-        /// 
-        /// Response response = await client.GetSubParameterAsync("<subParameter>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetSubParameterAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));
@@ -88,18 +77,7 @@ namespace SubClients_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="subParameter"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call GetSubParameter with required parameters and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
-        /// 
-        /// Response response = client.GetSubParameter("<subParameter>");
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetSubParameter(String,RequestContext)']/*" />
         public virtual Response GetSubParameter(string subParameter, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));

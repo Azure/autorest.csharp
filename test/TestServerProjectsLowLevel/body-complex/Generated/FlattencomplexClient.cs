@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
-    // Data plane generated client. The Flattencomplex service client.
+    // Data plane generated client.
     /// <summary> The Flattencomplex service client. </summary>
     public partial class FlattencomplexClient
     {
@@ -60,38 +60,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetValidAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new FlattencomplexClient(credential);
-        /// 
-        /// Response response = await client.GetValidAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("kind").ToString());
-        /// Console.WriteLine(result.GetProperty("propB1").ToString());
-        /// Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
-        /// <code>{
-        ///   propD1: string, # Optional.
-        ///   kind: Kind1, # Required.
-        ///   propB1: string, # Optional.
-        ///   helper: {
-        ///     propBH1: string, # Optional.
-        ///   }, # Optional.
-        /// }
-        /// </code>
-        /// </details>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/FlattencomplexClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
@@ -111,38 +80,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetValid and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new FlattencomplexClient(credential);
-        /// 
-        /// Response response = client.GetValid();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("kind").ToString());
-        /// Console.WriteLine(result.GetProperty("propB1").ToString());
-        /// Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// <details><summary>MyDerivedType</summary>Schema for <c>MyDerivedType</c>:
-        /// <code>{
-        ///   propD1: string, # Optional.
-        ///   kind: Kind1, # Required.
-        ///   propB1: string, # Optional.
-        ///   helper: {
-        ///     propBH1: string, # Optional.
-        ///   }, # Optional.
-        /// }
-        /// </code>
-        /// </details>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/FlattencomplexClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
         public virtual Response GetValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FlattencomplexClient.GetValid");

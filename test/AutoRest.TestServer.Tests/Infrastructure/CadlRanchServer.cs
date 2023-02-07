@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System.Diagnostics;
 using System.IO;
 
 namespace AutoRest.TestServer.Tests.Infrastructure
@@ -25,6 +26,12 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         internal static string GetCoverageFilePath()
         {
             return Path.Combine(GetCoverageDirectory(), "cadl-ranch-coverage-csharp.json");
+        }
+
+        protected override void Stop(Process process)
+        {
+            Process.Start(new ProcessStartInfo("node", $"{Path.Combine(GetNodeModulesDirectory(), "@azure-tools", "cadl-ranch", "dist", "cli", "cli.js")} server stop --port {Port}"));
+            process.WaitForExit();
         }
     }
 }

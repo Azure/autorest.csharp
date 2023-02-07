@@ -1,8 +1,10 @@
 import "@cadl-lang/rest";
 import "./decorators.mjs";
 import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
+using Azure.DPG;
 
 @serviceTitle("Pet Store Service")
 @serviceVersion("2021-03-25")
@@ -58,15 +60,10 @@ model PetId {
 }
 
 @doc("Extensible enum Values for pet kind")
-enum PetKindValues {
+enum PetKind {
     Dog: "dog",
     Cat: "cat"
 }
-
-@doc("Extensible enum for pet kind")
-@knownValues(PetKindValues)
-model PetKind is string {}
-
 
 @doc("Manage your pets. You can delete or get the Pet from pet store.")
 @summary("Manage your pets.")
@@ -75,22 +72,22 @@ namespace Pets {
   @doc("Delete a pet.")
   @summary("delete.")
   @delete
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenientAPI(true)
   op delete(...PetId): Response<200> | Error;
 
   // @fancyDoc("List pets.")
   // op list(@query nextLink?: string): OkResponse<ResponsePage<Pet>> | Error;
 
   @doc("Returns a pet. Supports eTags.")
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenientAPI(true)
   op read(...PetId): Pet | (NotModifiedResponse & Pet) | Error;
 
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenientAPI(true)
   @post op create(@body pet: Pet): Pet | Error;
 
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenientAPI(true)
   @get op getPetByKind(@path kind: PetKind): Pet | Error;
 
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenientAPI(true)
   @get op GetFirstPet(@query start?: int32): Pet | Error;
 }

@@ -16,6 +16,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         private readonly Process _process;
         public HttpClient Client { get; }
         public Uri Host { get; }
+        public string Port { get; }
 
         public TestServerBase(string baseDirectory, string processArguments)
         {
@@ -37,7 +38,8 @@ namespace AutoRest.TestServer.Tests.Infrastructure
                 var indexOfPort = s?.IndexOf(portPhrase);
                 if (indexOfPort > 0)
                 {
-                    Host = new Uri($"http://localhost:{s.Substring(indexOfPort.Value + portPhrase.Length).Trim()}");
+                    Port = s.Substring(indexOfPort.Value + portPhrase.Length).Trim();
+                    Host = new Uri($"http://localhost:{Port}");
                     Client = new HttpClient
                     {
                         BaseAddress = Host
@@ -56,6 +58,11 @@ namespace AutoRest.TestServer.Tests.Infrastructure
         protected static string GetCoverageDirectory()
         {
             return Path.Combine(_buildProperties.Value.ArtifactsDirectory, "coverage");
+        }
+
+        protected static string GetRepoRootDirectory()
+        {
+            return _buildProperties.Value.RepoRoot;
         }
 
         protected static string GetNodeModulesDirectory()
@@ -79,14 +86,14 @@ namespace AutoRest.TestServer.Tests.Infrastructure
             }
         }
 
-        public void Stop()
+        protected virtual void Stop(Process process)
         {
-            _process.Kill(true);
+            process.Kill(true);
         }
 
         public void Dispose()
         {
-            Stop();
+            Stop(_process);
 
             _process?.Dispose();
             Client?.Dispose();

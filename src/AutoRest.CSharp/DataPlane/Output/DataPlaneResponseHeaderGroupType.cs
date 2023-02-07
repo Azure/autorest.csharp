@@ -22,23 +22,23 @@ namespace AutoRest.CSharp.Output.Models.Responses
             "x-ms-request-id"
         };
 
-        public DataPlaneResponseHeaderGroupType(InputClient inputClient, InputOperation operation, HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context)
+        public DataPlaneResponseHeaderGroupType(InputClient inputClient, InputOperation operation, OperationResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context)
             :this(httpResponseHeaders, context, operation.Name.ToCleanName(), context.Library.FindRestClient(inputClient).ClientPrefix)
         {
         }
 
-        private DataPlaneResponseHeaderGroupType(HttpResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context, string operationName, string clientName)
+        private DataPlaneResponseHeaderGroupType(OperationResponseHeader[] httpResponseHeaders, BuildContext<DataPlaneOutputLibrary> context, string operationName, string clientName)
             : base(context)
         {
-            ResponseHeader CreateResponseHeader(HttpResponseHeader header)
+            ResponseHeader CreateResponseHeader(OperationResponseHeader header)
             {
-                CSharpType type = context.TypeFactory.CreateType(header.Schema, true);
+                CSharpType type = context.TypeFactory.CreateType(header.Type);
 
                 return new ResponseHeader(
-                    header.CSharpName(),
-                    header.Extensions?.HeaderCollectionPrefix ?? header.Header,
+                    header.Name.ToCleanName(),
+                    header.NameInResponse,
                     type,
-                    BuilderHelpers.EscapeXmlDescription(header.Language!.Default.Description));
+                    BuilderHelpers.EscapeXmlDescription(header.Description));
             }
 
             DefaultName = clientName + operationName + "Headers";
@@ -53,19 +53,19 @@ namespace AutoRest.CSharp.Output.Models.Responses
 
         public static DataPlaneResponseHeaderGroupType? TryCreate(InputClient inputClient, InputOperation operation, BuildContext<DataPlaneOutputLibrary> context)
         {
-            var httpResponseHeaders = operation.Responses.SelectMany(r => r.Headers)
-                .Where(h => !_knownResponseHeaders.Contains(h.Header, StringComparer.InvariantCultureIgnoreCase))
-                .GroupBy(h => h.Header)
+            var OperationResponseHeaders = operation.Responses.SelectMany(r => r.Headers)
+                .Where(h => !_knownResponseHeaders.Contains(h.NameInResponse, StringComparer.InvariantCultureIgnoreCase))
+                .GroupBy(h => h.NameInResponse)
                 // Take first header definition with any particular name
                 .Select(h => h.First())
                 .ToArray();
 
-            if (!httpResponseHeaders.Any())
+            if (!OperationResponseHeaders.Any())
             {
                 return null;
             }
 
-            return new DataPlaneResponseHeaderGroupType(inputClient, operation, httpResponseHeaders, context);
+            return new DataPlaneResponseHeaderGroupType(inputClient, operation, OperationResponseHeaders, context);
         }
     }
 }

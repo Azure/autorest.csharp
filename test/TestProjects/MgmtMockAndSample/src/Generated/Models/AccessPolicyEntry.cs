@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace MgmtMockAndSample.Models
 {
@@ -19,14 +20,8 @@ namespace MgmtMockAndSample.Models
         /// <exception cref="ArgumentNullException"> <paramref name="objectId"/> or <paramref name="permissions"/> is null. </exception>
         public AccessPolicyEntry(Guid tenantId, string objectId, Permissions permissions)
         {
-            if (objectId == null)
-            {
-                throw new ArgumentNullException(nameof(objectId));
-            }
-            if (permissions == null)
-            {
-                throw new ArgumentNullException(nameof(permissions));
-            }
+            Argument.AssertNotNull(objectId, nameof(objectId));
+            Argument.AssertNotNull(permissions, nameof(permissions));
 
             TenantId = tenantId;
             ObjectId = objectId;

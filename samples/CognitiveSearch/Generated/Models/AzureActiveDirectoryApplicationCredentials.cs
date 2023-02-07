@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace CognitiveSearch.Models
 {
@@ -17,10 +18,7 @@ namespace CognitiveSearch.Models
         /// <exception cref="ArgumentNullException"> <paramref name="applicationId"/> is null. </exception>
         public AzureActiveDirectoryApplicationCredentials(string applicationId)
         {
-            if (applicationId == null)
-            {
-                throw new ArgumentNullException(nameof(applicationId));
-            }
+            Argument.AssertNotNull(applicationId, nameof(applicationId));
 
             ApplicationId = applicationId;
         }

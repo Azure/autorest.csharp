@@ -4,8 +4,6 @@
 // </auto-generated>
 //----------------------
 
-using System;
-
 namespace AutoRest.CSharp.Input
 {
     #pragma warning disable // Disable all warnings
@@ -360,95 +358,98 @@ namespace AutoRest.CSharp.Input
         [System.Runtime.Serialization.EnumMember(Value = @"any-object")]
         AnyObject = 1,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"arm-id")]
+        ArmId = 2,
+
         [System.Runtime.Serialization.EnumMember(Value = @"array")]
-        Array = 2,
+        Array = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"binary")]
-        Binary = 3,
+        Binary = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"boolean")]
-        Boolean = 4,
+        Boolean = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"byte-array")]
-        ByteArray = 5,
+        ByteArray = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"char")]
-        Char = 6,
+        Char = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"choice")]
-        Choice = 7,
+        Choice = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"conditional")]
-        Conditional = 8,
+        Conditional = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"constant")]
-        Constant = 9,
+        Constant = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"credential")]
-        Credential = 10,
+        Credential = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date")]
-        Date = 11,
+        Date = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date-time")]
-        DateTime = 12,
+        DateTime = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dictionary")]
-        Dictionary = 13,
+        Dictionary = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"duration")]
-        Duration = 14,
+        Duration = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
-        Flag = 15,
+        Flag = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"group")]
-        Group = 16,
+        Group = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"integer")]
-        Integer = 17,
+        Integer = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"not")]
-        Not = 18,
+        Not = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"number")]
-        Number = 19,
+        Number = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"object")]
-        Object = 20,
+        Object = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"odata-query")]
-        OdataQuery = 21,
+        OdataQuery = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"or")]
-        Or = 22,
+        Or = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-choice")]
-        SealedChoice = 23,
+        SealedChoice = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-conditional")]
-        SealedConditional = 24,
+        SealedConditional = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
-        String = 25,
+        String = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"time")]
-        Time = 26,
+        Time = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unixtime")]
-        Unixtime = 27,
+        Unixtime = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unknown")]
-        Unknown = 28,
+        Unknown = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uri")]
-        Uri = 29,
+        Uri = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uuid")]
-        Uuid = 30,
+        Uuid = 31,
 
         [System.Runtime.Serialization.EnumMember(Value = @"xor")]
-        Xor = 31,
+        Xor = 32,
     }
 
     /// <summary>Compound schemas are used to construct complex objects or offer choices of a set of schemas.
@@ -468,109 +469,115 @@ namespace AutoRest.CSharp.Input
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal enum PrimitiveSchemaTypes
     {
+        [System.Runtime.Serialization.EnumMember(Value = @"arm-id")]
+        ArmId = 0,
+
         [System.Runtime.Serialization.EnumMember(Value = @"boolean")]
-        Boolean = 0,
+        Boolean = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"char")]
-        Char = 1,
+        Char = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"credential")]
-        Credential = 2,
+        Credential = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date")]
-        Date = 3,
+        Date = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date-time")]
-        DateTime = 4,
+        DateTime = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"duration")]
-        Duration = 5,
+        Duration = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"integer")]
-        Integer = 6,
+        Integer = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"number")]
-        Number = 7,
+        Number = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
-        String = 8,
+        String = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"time")]
-        Time = 9,
+        Time = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unixtime")]
-        Unixtime = 10,
+        Unixtime = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uri")]
-        Uri = 11,
+        Uri = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uuid")]
-        Uuid = 12,
+        Uuid = 13,
     }
 
     /// <summary>schema types that are non-object or complex types</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal enum ValueSchemaTypes
     {
+        [System.Runtime.Serialization.EnumMember(Value = @"arm-id")]
+        ArmId = 0,
+
         [System.Runtime.Serialization.EnumMember(Value = @"array")]
-        Array = 0,
+        Array = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"boolean")]
-        Boolean = 1,
+        Boolean = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"byte-array")]
-        ByteArray = 2,
+        ByteArray = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"char")]
-        Char = 3,
+        Char = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"choice")]
-        Choice = 4,
+        Choice = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"conditional")]
-        Conditional = 5,
+        Conditional = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"credential")]
-        Credential = 6,
+        Credential = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date")]
-        Date = 7,
+        Date = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date-time")]
-        DateTime = 8,
+        DateTime = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"duration")]
-        Duration = 9,
+        Duration = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
-        Flag = 10,
+        Flag = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"integer")]
-        Integer = 11,
+        Integer = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"number")]
-        Number = 12,
+        Number = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-choice")]
-        SealedChoice = 13,
+        SealedChoice = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-conditional")]
-        SealedConditional = 14,
+        SealedConditional = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
-        String = 15,
+        String = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"time")]
-        Time = 16,
+        Time = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unixtime")]
-        Unixtime = 17,
+        Unixtime = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uri")]
-        Uri = 18,
+        Uri = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uuid")]
-        Uuid = 19,
+        Uuid = 20,
     }
 
     /// <summary>schema types that can be objects</summary>
@@ -597,92 +604,95 @@ namespace AutoRest.CSharp.Input
         [System.Runtime.Serialization.EnumMember(Value = @"any-object")]
         AnyObject = 1,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"arm-id")]
+        ArmId = 2,
+
         [System.Runtime.Serialization.EnumMember(Value = @"array")]
-        Array = 2,
+        Array = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"binary")]
-        Binary = 3,
+        Binary = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"boolean")]
-        Boolean = 4,
+        Boolean = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = @"byte-array")]
-        ByteArray = 5,
+        ByteArray = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = @"char")]
-        Char = 6,
+        Char = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = @"choice")]
-        Choice = 7,
+        Choice = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = @"conditional")]
-        Conditional = 8,
+        Conditional = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = @"constant")]
-        Constant = 9,
+        Constant = 10,
 
         [System.Runtime.Serialization.EnumMember(Value = @"credential")]
-        Credential = 10,
+        Credential = 11,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date")]
-        Date = 11,
+        Date = 12,
 
         [System.Runtime.Serialization.EnumMember(Value = @"date-time")]
-        DateTime = 12,
+        DateTime = 13,
 
         [System.Runtime.Serialization.EnumMember(Value = @"dictionary")]
-        Dictionary = 13,
+        Dictionary = 14,
 
         [System.Runtime.Serialization.EnumMember(Value = @"duration")]
-        Duration = 14,
+        Duration = 15,
 
         [System.Runtime.Serialization.EnumMember(Value = @"flag")]
-        Flag = 15,
+        Flag = 16,
 
         [System.Runtime.Serialization.EnumMember(Value = @"group")]
-        Group = 16,
+        Group = 17,
 
         [System.Runtime.Serialization.EnumMember(Value = @"integer")]
-        Integer = 17,
+        Integer = 18,
 
         [System.Runtime.Serialization.EnumMember(Value = @"not")]
-        Not = 18,
+        Not = 19,
 
         [System.Runtime.Serialization.EnumMember(Value = @"number")]
-        Number = 19,
+        Number = 20,
 
         [System.Runtime.Serialization.EnumMember(Value = @"object")]
-        Object = 20,
+        Object = 21,
 
         [System.Runtime.Serialization.EnumMember(Value = @"odata-query")]
-        OdataQuery = 21,
+        OdataQuery = 22,
 
         [System.Runtime.Serialization.EnumMember(Value = @"or")]
-        Or = 22,
+        Or = 23,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-choice")]
-        SealedChoice = 23,
+        SealedChoice = 24,
 
         [System.Runtime.Serialization.EnumMember(Value = @"sealed-conditional")]
-        SealedConditional = 24,
+        SealedConditional = 25,
 
         [System.Runtime.Serialization.EnumMember(Value = @"string")]
-        String = 25,
+        String = 26,
 
         [System.Runtime.Serialization.EnumMember(Value = @"time")]
-        Time = 26,
+        Time = 27,
 
         [System.Runtime.Serialization.EnumMember(Value = @"unixtime")]
-        Unixtime = 27,
+        Unixtime = 28,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uri")]
-        Uri = 28,
+        Uri = 29,
 
         [System.Runtime.Serialization.EnumMember(Value = @"uuid")]
-        Uuid = 29,
+        Uuid = 30,
 
         [System.Runtime.Serialization.EnumMember(Value = @"xor")]
-        Xor = 30,
+        Xor = 31,
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
@@ -1104,6 +1114,12 @@ namespace AutoRest.CSharp.Input
     /// <summary>a schema that represents a Uuid value</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
     internal partial class UuidSchema : PrimitiveSchema
+    {
+    }
+
+    /// <summary>a schema that represents a Uuid value</summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v9.0.0.0)")]
+    internal partial class ArmIdSchema : PrimitiveSchema
     {
     }
 
@@ -1583,6 +1599,11 @@ namespace AutoRest.CSharp.Input
         [YamlDotNet.Serialization.YamlMember(Alias = "uris")]
         [System.ComponentModel.DataAnnotations.Required]
         public System.Collections.Generic.ICollection<UriSchema> Uris { get; set; } = new System.Collections.ObjectModel.Collection<UriSchema>();
+
+        /// <summary>an URI of some kind</summary>
+        [YamlDotNet.Serialization.YamlMember(Alias = "armIds")]
+        [System.ComponentModel.DataAnnotations.Required]
+        public System.Collections.Generic.ICollection<ArmIdSchema> ArmIds { get; set; } = new System.Collections.ObjectModel.Collection<ArmIdSchema>();
 
         /// <summary>a password or credential</summary>
         [YamlDotNet.Serialization.YamlMember(Alias = "credentials")]

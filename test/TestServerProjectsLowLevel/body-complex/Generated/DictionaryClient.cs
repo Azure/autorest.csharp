@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace body_complex_LowLevel
 {
-    // Data plane generated client. The Dictionary service client.
+    // Data plane generated client.
     /// <summary> The Dictionary service client. </summary>
     public partial class DictionaryClient
     {
@@ -61,30 +61,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetValidAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// Response response = await client.GetValidAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DictionaryClient.GetValid");
@@ -105,30 +82,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetValid and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// Response response = client.GetValid();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
         public virtual Response GetValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DictionaryClient.GetValid");
@@ -151,44 +105,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutValidAsync.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutValidAsync with all request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// var data = new {
-        ///     defaultProgram = new {
-        ///         key = "<String>",
-        ///     },
-        /// };
-        /// 
-        /// Response response = await client.PutValidAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='PutValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -213,44 +130,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutValid.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = client.PutValid(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutValid with all request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// var data = new {
-        ///     defaultProgram = new {
-        ///         key = "<String>",
-        ///     },
-        /// };
-        /// 
-        /// Response response = client.PutValid(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='PutValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -273,30 +153,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetEmptyAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// Response response = await client.GetEmptyAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
@@ -317,30 +174,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetEmpty and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// Response response = client.GetEmpty();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
         public virtual Response GetEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DictionaryClient.GetEmpty");
@@ -363,44 +197,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutEmptyAsync.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = await client.PutEmptyAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutEmptyAsync with all request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// var data = new {
-        ///     defaultProgram = new {
-        ///         key = "<String>",
-        ///     },
-        /// };
-        /// 
-        /// Response response = await client.PutEmptyAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='PutEmptyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -425,44 +222,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call PutEmpty.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = client.PutEmpty(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call PutEmpty with all request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// var data = new {
-        ///     defaultProgram = new {
-        ///         key = "<String>",
-        ///     },
-        /// };
-        /// 
-        /// Response response = client.PutEmpty(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='PutEmpty(RequestContent,RequestContext)']/*" />
         public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -485,30 +245,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetNullAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// Response response = await client.GetNullAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='GetNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DictionaryClient.GetNull");
@@ -529,30 +266,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetNull and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// Response response = client.GetNull();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='GetNull(RequestContext)']/*" />
         public virtual Response GetNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DictionaryClient.GetNull");
@@ -573,30 +287,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetNotProvidedAsync and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// Response response = await client.GetNotProvidedAsync();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='GetNotProvidedAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DictionaryClient.GetNotProvided");
@@ -617,30 +308,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call GetNotProvided and parse the result.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var client = new DictionaryClient(credential);
-        /// 
-        /// Response response = client.GetNotProvided();
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the response payload.
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>DictionaryWrapper</c>:
-        /// <code>{
-        ///   defaultProgram: Dictionary&lt;string, string&gt;, # Optional. Dictionary of &lt;string&gt;
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/DictionaryClient.xml" path="doc/members/member[@name='GetNotProvided(RequestContext)']/*" />
         public virtual Response GetNotProvided(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DictionaryClient.GetNotProvided");

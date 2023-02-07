@@ -1281,6 +1281,43 @@
                     "default": "Public",
                     "description": "The type of this DNS zone (Public or Private)."
                 },
+                "machineType": {
+                    "type": "integer",
+                    "enum": [1, 2, 4],
+                    "x-ms-enum": {
+                        "name": "MachineType",
+                        "modelAsString": false
+                    }
+                },
+                "storageType": {
+                    "type": "integer",
+                    "enum": [1, 2, 3],
+                    "x-ms-enum": {
+                        "name": "StorageType",
+                        "modelAsString": false,
+                        "values": [{
+                            "name": "Standard_LRS",
+                            "value": 1,
+                            "description": "Locally redundant storage"
+                        }, {
+                            "name": "Standard_ZRS",
+                            "value": 2,
+                            "description": "Zone-redundant storage"
+                        }, {
+                            "name": "Standard_GRS",
+                            "value": 3,
+                            "description": "Geo-redundant storage"
+                        }]
+                    }
+                },
+                "memoryType": {
+                    "type": "integer",
+                    "format": "int64",
+                    "enum": [-1, 2, 4],
+                    "x-ms-enum": {
+                        "name": "MemoryType"
+                    }
+                },
                 "registrationVirtualNetworks": {
                     "type": "array",
                     "items": {

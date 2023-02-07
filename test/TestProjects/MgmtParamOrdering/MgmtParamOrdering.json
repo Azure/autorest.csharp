@@ -100,7 +100,8 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "description": "The name of the availability set."
+                        "description": "The name of the availability set.",
+                        "x-ms-client-default": "test"
                     },
                     {
                         "name": "parameters",

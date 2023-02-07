@@ -11,19 +11,7 @@
 #####################
 
 # Catch all
-*                                              @AlexanderSher @lirenhe @chunyu3 
-
-# Data Plane Reviewers
-/samples/AppConfiguration/                     @annelo-msft
-/samples/Azure.AI.*/                           @annelo-msft
-/samples/Azure.Analytics.*/                    @annelo-msft
-/samples/Azure.Storage.*/                      @annelo-msft
-/samples/Cognitive*/                           @annelo-msft
-/src/assets/Generator.Shared/                  @annelo-msft
-/src/AutoRest.CSharp/DataPlane/                @annelo-msft
-/src/AutoRest.CSharp/LowLevel/                 @annelo-msft
-/test/AutoRest.TestServer.Tests/               @annelo-msft
-/test/AutoRest.TestServerLowLevel.Tests/       @annelo-msft
+*                                              @AlexanderSher @lirenhe @chunyu3 @m-nash
 
 # Management CSharp CodeReviewers
 /samples/Azure.Management.Storage/             @allenjzhang @m-nash

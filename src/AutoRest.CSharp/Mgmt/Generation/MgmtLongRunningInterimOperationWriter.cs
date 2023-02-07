@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -67,6 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     _writer.WriteXmlDocumentationInheritDoc();
                     _writer
                         .LineRaw("#pragma warning disable CA1822")
+                        .LineRaw($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]")
                         .LineRaw("public override string Id => throw new NotImplementedException();")
                         .LineRaw("#pragma warning restore CA1822")
                         .Line();

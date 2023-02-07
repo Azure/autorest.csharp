@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace ServiceVersionOverride
 {
-    // Data plane generated client. The ServiceVersionOverride service client.
+    // Data plane generated client.
     /// <summary> The ServiceVersionOverride service client. </summary>
     public partial class ServiceVersionOverrideClient
     {
@@ -52,15 +52,7 @@ namespace ServiceVersionOverride
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call OperationAsync with required parameters.
-        /// <code><![CDATA[
-        /// var client = new ServiceVersionOverrideClient();
-        /// 
-        /// Response response = await client.OperationAsync("<notApiVersionEnum>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='OperationAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(string notApiVersionEnum, RequestContext context = null)
         {
             Argument.AssertNotNull(notApiVersionEnum, nameof(notApiVersionEnum));
@@ -84,15 +76,7 @@ namespace ServiceVersionOverride
         /// <exception cref="ArgumentNullException"> <paramref name="notApiVersionEnum"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Operation with required parameters.
-        /// <code><![CDATA[
-        /// var client = new ServiceVersionOverrideClient();
-        /// 
-        /// Response response = client.Operation("<notApiVersionEnum>");
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
+        /// <include file="Docs/ServiceVersionOverrideClient.xml" path="doc/members/member[@name='Operation(String,RequestContext)']/*" />
         public virtual Response Operation(string notApiVersionEnum, RequestContext context = null)
         {
             Argument.AssertNotNull(notApiVersionEnum, nameof(notApiVersionEnum));

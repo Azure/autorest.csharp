@@ -28,6 +28,16 @@ namespace MgmtMockAndSample.Tests.Mock
         }
 
         [RecordedTest]
+        public async Task CheckNameAvailabilityVault()
+        {
+            // Example: Validate a vault name
+
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            await subscriptionResource.CheckNameAvailabilityVaultAsync(new VaultCheckNameAvailabilityContent("sample-vault"));
+        }
+
+        [RecordedTest]
         public async Task Delete()
         {
             // Example: Delete a vault
@@ -91,45 +101,6 @@ namespace MgmtMockAndSample.Tests.Mock
             await foreach (var _ in subscriptionResource.GetVaultsAsync(top: 1))
             {
             }
-        }
-
-        [RecordedTest]
-        public async Task Update()
-        {
-            // Example: Update an existing vault
-
-            ResourceIdentifier vaultResourceId = VaultResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group", "sample-vault");
-            VaultResource vault = GetArmClient().GetVaultResource(vaultResourceId);
-            await vault.UpdateAsync(new VaultPatch()
-            {
-                Properties = new VaultPatchProperties()
-                {
-                    TenantId = Guid.Parse("00000000-0000-0000-0000-000000000000"),
-                    Sku = new MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily.A, MgmtMockAndSampleSkuName.Standard),
-                    AccessPolicies =
-{
-new AccessPolicyEntry(Guid.Parse("00000000-0000-0000-0000-000000000000"),"00000000-0000-0000-0000-000000000000",new Permissions()
-{
-Keys =
-{
-KeyPermission.Encrypt,KeyPermission.Decrypt,KeyPermission.WrapKey,KeyPermission.UnwrapKey,KeyPermission.Sign,KeyPermission.Verify,KeyPermission.Get,KeyPermission.List,KeyPermission.Create,KeyPermission.Update,KeyPermission.Import,KeyPermission.Delete,KeyPermission.Backup,KeyPermission.Restore,KeyPermission.Recover,KeyPermission.Purge
-},
-Secrets =
-{
-SecretPermission.Get,SecretPermission.List,SecretPermission.Set,SecretPermission.Delete,SecretPermission.Backup,SecretPermission.Restore,SecretPermission.Recover,SecretPermission.Purge
-},
-Certificates =
-{
-CertificatePermission.Get,CertificatePermission.List,CertificatePermission.Delete,CertificatePermission.Create,CertificatePermission.Import,CertificatePermission.Update,CertificatePermission.Managecontacts,CertificatePermission.Getissuers,CertificatePermission.Listissuers,CertificatePermission.Setissuers,CertificatePermission.Deleteissuers,CertificatePermission.Manageissuers,CertificatePermission.Recover,CertificatePermission.Purge
-},
-})
-},
-                    EnabledForDeployment = true,
-                    EnabledForDiskEncryption = true,
-                    EnabledForTemplateDeployment = true,
-                    PublicNetworkAccess = "Enabled",
-                },
-            });
         }
 
         [RecordedTest]

@@ -28,7 +28,10 @@ namespace AutoRest.CSharp.Common.Input
             var isFirstProperty = id == null && name == null;
             string? ns = null;
             string? accessibility = null;
+            string? deprecated = null;
             string? description = null;
+            InputModelTypeUsage usage = InputModelTypeUsage.None;
+            string? usageString = null;
             bool isExtendable = false;
             InputPrimitiveType? valueType = null;
             IReadOnlyList<InputEnumTypeValue>? allowedValues = null;
@@ -38,7 +41,9 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputEnumType.Name), ref name)
                     || reader.TryReadString(nameof(InputEnumType.Namespace), ref ns)
                     || reader.TryReadString(nameof(InputEnumType.Accessibility), ref accessibility)
+                    || reader.TryReadString(nameof(InputEnumType.Deprecated), ref deprecated)
                     || reader.TryReadString(nameof(InputEnumType.Description), ref description)
+                    || reader.TryReadString(nameof(InputEnumType.Usage), ref usageString)
                     || reader.TryReadBoolean(nameof(InputEnumType.IsExtensible), ref isExtendable)
                     || reader.TryReadPrimitiveType(nameof(InputEnumType.EnumValueType), ref valueType)
                     || reader.TryReadWithConverter(nameof(InputEnumType.AllowedValues), options, ref allowedValues);
@@ -50,19 +55,74 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             name = name ?? throw new JsonException("Enum must have name");
-            description = description ?? throw new JsonException("Enum must have a description");
+            // TODO: roll back to throw JSON error when there is linter on the upstream to check enum without @doc
+            //description = description ?? throw new JsonException("Enum must have a description");
+            if (description == null)
+            {
+                description = "";
+                System.Console.Error.WriteLine($"[Warn]: Enum '{name}' must have a description");
+            }
+
+            if (usageString != null)
+            {
+                Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
+            }
 
             if (allowedValues == null || allowedValues.Count == 0)
             {
                 throw new JsonException("Enum must have at least one value");
             }
 
-            var enumType = new InputEnumType(name, ns, accessibility, description, valueType ?? InputPrimitiveType.Int32, allowedValues, isExtendable);
+            valueType ??= InputPrimitiveType.Int32;
+            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, normalizeValues(allowedValues, valueType), isExtendable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);
             }
             return enumType;
         }
+
+        private static IReadOnlyList<InputEnumTypeValue> normalizeValues(IReadOnlyList<InputEnumTypeValue> allowedValues, InputPrimitiveType valueType)
+        {
+            var concreteValues = new List<InputEnumTypeValue>(allowedValues.Count);
+
+            switch (valueType.Kind)
+            {
+                case InputTypeKind.String:
+                    foreach (var value in allowedValues)
+                    {
+                        concreteValues.Add(new InputEnumTypeStringValue(value.Name, (string)value.Value, value.Description));
+                    }
+                    break;
+                case InputTypeKind.Int32:
+                    foreach (var value in allowedValues)
+                    {
+                        concreteValues.Add(new InputEnumTypeIntegerValue(value.Name, (Int32)value.Value, value.Description));
+                    }
+                    break;
+                case InputTypeKind.Float32:
+                    foreach (var value in allowedValues)
+                    {
+                        concreteValues.Add(new InputEnumTypeFloatValue(value.Name, (float)value.Value, value.Description));
+                    }
+                    break;
+                default:
+                    throw new JsonException($"Unsupported enum value type: {valueType.Kind}");
+            }
+
+            return concreteValues;
+        }
+
+        //private static IReadOnlyList<InputEnumTypeValue> convertToConcreteValues<EnumType, ValueType>(IReadOnlyList<InputEnumTypeValue> allowedValues) where EnumType : InputEnumTypeValue
+        //{
+        //    var concreteValues = new List<InputEnumTypeValue>(allowedValues.Count);
+
+        //    foreach (var value in allowedValues)
+        //    {
+        //        concreteValues.Add(new EnumType(value.Name, (ValueType)value.Value, value.Description));
+        //    }
+
+        //    return concreteValues;
+        //}
     }
 }

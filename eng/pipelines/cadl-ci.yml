@@ -22,7 +22,7 @@ variables:
   - name: skipComponentGovernanceDetection
     value: true
   - name: NodeVersion
-    value: '16.x'
+    value: '18.x'
   - name: VAR_ARTIFACT_NAME
     value: 'CadlCsharpEmitter'
   - name: VAR_BUILD_ARTIFACT_STAGING_DIRECTORY
@@ -48,7 +48,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20220920.1
+      ref: refs/tags/azure-sdk-build-tools_20230119.1
 stages:
   - stage: 'Build_and_Test'
     jobs:
@@ -63,7 +63,7 @@ stages:
           displayName: 'Install Dependencies for CADL csharp'
           inputs:
             command: install
-            workingDir: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
+            workingDir: $(Build.SourcesDirectory)
         - task: Npm@1
           displayName: 'Build CADL csharp emitter'
           inputs:

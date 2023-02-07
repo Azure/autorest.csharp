@@ -2670,8 +2670,11 @@ operationGroups:
                 in: path
           - !Parameter &ref_117
             schema: *ref_1
+            clientDefaultValue: test
             implementation: Method
             required: true
+            extensions:
+              x-ms-client-default: test
             language: !Languages 
               default:
                 name: availabilitySetName
@@ -5836,6 +5839,9 @@ operationGroups:
                 statusCodes:
                   - '204'
         extensions:
+          x-ms-examples:
+            Force Delete a VM scale set.:
+              $ref: ./examples/compute/ForceDeleteVirtualMachineScaleSets.json
           x-ms-long-running-operation: true
         language: !Languages 
           default:
@@ -5930,6 +5936,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - '200'
+        extensions:
+          x-ms-examples:
+            Get a virtual machine scale set placed on a dedicated host group through automatic placement.:
+              $ref: ./examples/compute/GetVirtualMachineScaleSetAutoPlacedOnDedicatedHostGroup.json
+            Get a virtual machine scale set with UserData:
+              $ref: ./examples/compute/GetVirtualMachineScaleSetWithUserData.json
         language: !Languages 
           default:
             name: Get

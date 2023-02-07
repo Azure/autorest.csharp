@@ -1,6 +1,6 @@
 {
     "name": "@azure-tools/cadl-csharp",
-    "version": "0.1.5",
+    "version": "0.1.11",
     "author": "Microsoft Corporation",
     "description": "Cadl library for emitting csharp model from the Cadl REST protocol binding",
     "homepage": "https://github.com/Microsoft/cadl",
@@ -28,35 +28,38 @@
         "test-official": "c8 mocha --forbid-only",
         "lint": "eslint . --ext .ts --max-warnings=0",
         "lint:fix": "eslint . --fix --ext .ts",
-        "prettier:fix": "prettier --write ./src/**/*.ts",
-        "prettier": "prettier --check ./src/**/*.ts"
-
+        "prettier:fix": "prettier --write --config .prettierrc.json ./src/**/*.ts",
+        "prettier": "prettier --check --config .prettierrc.json ./src/**/*.ts"
     },
     "files": [
         "dist/**"
     ],
     "devDependencies": {
-        "@azure-tools/cadl-azure-core": "0.7.0",
-        "@azure-tools/cadl-autorest": "0.20.0",
-        "@cadl-lang/compiler": "0.35.0",
-        "@cadl-lang/eslint-config-cadl": "0.4.0",
-        "@cadl-lang/eslint-plugin": "0.1.1",
-        "@cadl-lang/library-linter": "0.2.0",
-        "@cadl-lang/openapi": "0.12.0",
-        "@cadl-lang/rest": "0.17.0",
-        "@cadl-lang/versioning": "0.8.0",
+        "@types/fs-extra": "^9.0.13",
         "@types/js-yaml": "^4.0.5",
         "@types/mocha": "~9.1.0",
-        "@types/node": "~16.0.3",
+        "@types/node": "~18.11.14",
         "@types/prettier": "^2.6.3",
         "c8": "~7.11.0",
         "eslint": "^8.12.0",
         "mocha": "~9.2.0",
         "rimraf": "~3.0.2",
-        "typescript": "~4.7.2"
+        "typescript": "~4.9.4"
     },
     "dependencies": {
+        "@autorest/csharp": "3.0.0-beta.20221201.1",
+        "@azure-tools/cadl-autorest": "0.25.0",
+        "@azure-tools/cadl-azure-core": "0.25.0",
+        "@azure-tools/cadl-dpg": "0.25.0",
+        "@cadl-lang/compiler": "0.39.0",
+        "@cadl-lang/eslint-config-cadl": "0.5.0",
+        "@cadl-lang/eslint-plugin": "0.39.0",
+        "@cadl-lang/library-linter": "0.39.0",
+        "@cadl-lang/openapi": "0.39.0",
+        "@cadl-lang/rest": "0.39.0",
+        "@cadl-lang/versioning": "0.39.0",
+        "fs-extra": "^10.1.0",
         "js-yaml": "^4.1.0",
-        "json-serialize-refs": "^0.0.6-0"
+        "json-serialize-refs": "^0.1.0-0"
     }
 }

@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "cadl.testserver.arraybasic",
+ "Name": "Cadl.TestServer.ArrayBasic",
  "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
  "ApiVersions": [
   "1.0.0"
@@ -12,6 +12,7 @@
    "Name": "Pet",
    "Namespace": "Cadl.TestServer.ArrayBasic",
    "IsNullable": false,
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "3",
@@ -50,7 +51,7 @@
      "Description": "",
      "Type": {
       "$id": "8",
-      "Name": "Int32",
+      "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
@@ -64,12 +65,13 @@
  "Clients": [
   {
    "$id": "9",
-   "Name": "ArrayBasic",
+   "Name": "ArrayBasicClient",
    "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
    "Operations": [
     {
      "$id": "10",
      "Name": "list",
+     "ResourceName": "ArrayBasic",
      "Summary": "Manage your pets.",
      "Description": "Manage your pets. You can delete or get the Pet from pet store.",
      "Parameters": [
@@ -190,22 +192,31 @@
         200
        ],
        "BodyType": {
-        "$ref": "2"
+        "$id": "25",
+        "Name": "Array",
+        "ElementType": {
+         "$ref": "2"
+        },
+        "IsNullable": false
        },
-       "BodyMediaType": "Json"
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
       }
      ],
      "HttpMethod": "GET",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
      "Path": "/pets",
-     "BufferResponse": false,
-     "GenerateConvenienceMethod": false
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "25"
-   }
+    "$id": "26"
+   },
+   "Creatable": true
   }
  ]
 }

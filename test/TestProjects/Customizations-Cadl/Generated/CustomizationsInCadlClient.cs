@@ -6,14 +6,16 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using CustomizationsInCadl.Models;
 
-namespace GeneratedModels
+namespace CustomizationsInCadl
 {
-    // Data plane generated client. CADL project to test various types of models.
+    // Data plane generated client.
     /// <summary> CADL project to test various types of models. </summary>
     public partial class CustomizationsInCadlClient
     {
@@ -43,133 +45,38 @@ namespace GeneratedModels
         }
 
         /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
+        /// <param name="input"> The RootModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual async Task<Response<RootModel>> RoundTripAsync(RootModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await RoundTripAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(RootModel.FromResponse(response), response);
+        }
+
+        /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
+        /// <param name="input"> The RootModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        public virtual Response<RootModel> RoundTrip(RootModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = RoundTrip(input.ToRequestContent(), context);
+            return Response.FromValue(RootModel.FromResponse(response), response);
+        }
+
+        /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call RoundTripAsync and parse the result.
-        /// <code><![CDATA[
-        /// var client = new CustomizationsInCadlClient();
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = await client.RoundTripAsync(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call RoundTripAsync with all request content, and how to parse the result.
-        /// <code><![CDATA[
-        /// var client = new CustomizationsInCadlClient();
-        /// 
-        /// var data = new {
-        ///     propertyModelToMakeInternal = new {
-        ///         requiredInt = 1234,
-        ///     },
-        ///     propertyModelToRename = new {
-        ///         requiredInt = 1234,
-        ///     },
-        ///     propertyModelToChangeNamespace = new {
-        ///         requiredInt = 1234,
-        ///     },
-        ///     propertyModelWithCustomizedProperties = new {
-        ///         propertyToMakeInternal = 1234,
-        ///         propertyToRename = 1234,
-        ///         propertyToMakeFloat = 1234,
-        ///         propertyToMakeInt = 123.45f,
-        ///         propertyToMakeDuration = "<propertyToMakeDuration>",
-        ///         propertyToMakeString = PT1H23M45S,
-        ///         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
-        ///         propertyToField = "<propertyToField>",
-        ///     },
-        ///     propertyEnumToRename = "1",
-        ///     propertyEnumWithValueToRename = "1",
-        ///     propertyEnumToBeMadeExtensible = "1",
-        /// };
-        /// 
-        /// Response response = await client.RoundTripAsync(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeFloat").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInt").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeDuration").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeString").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>RootModel</c>:
-        /// <code>{
-        ///   propertyModelToMakeInternal: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelToRename: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelToChangeNamespace: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelWithCustomizedProperties: {
-        ///     propertyToMakeInternal: number, # Required.
-        ///     propertyToRename: number, # Required.
-        ///     propertyToMakeFloat: number, # Required.
-        ///     propertyToMakeInt: number, # Required.
-        ///     propertyToMakeDuration: string, # Required.
-        ///     propertyToMakeString: string (duration ISO 8601 Format), # Required.
-        ///     propertyToMakeJsonElement: string, # Required.
-        ///     propertyToField: string, # Required.
-        ///   }, # Optional.
-        ///   propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        ///   propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        ///   propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>RootModel</c>:
-        /// <code>{
-        ///   propertyModelToMakeInternal: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelToRename: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelToChangeNamespace: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelWithCustomizedProperties: {
-        ///     propertyToMakeInternal: number, # Required.
-        ///     propertyToRename: number, # Required.
-        ///     propertyToMakeFloat: number, # Required.
-        ///     propertyToMakeInt: number, # Required.
-        ///     propertyToMakeDuration: string, # Required.
-        ///     propertyToMakeString: string (duration ISO 8601 Format), # Required.
-        ///     propertyToMakeJsonElement: string, # Required.
-        ///     propertyToField: string, # Required.
-        ///   }, # Optional.
-        ///   propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        ///   propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        ///   propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/CustomizationsInCadlClient.xml" path="doc/members/member[@name='RoundTripAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RoundTripAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -194,128 +101,7 @@ namespace GeneratedModels
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <example>
-        /// This sample shows how to call RoundTrip and parse the result.
-        /// <code><![CDATA[
-        /// var client = new CustomizationsInCadlClient();
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = client.RoundTrip(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.ToString());
-        /// ]]></code>
-        /// This sample shows how to call RoundTrip with all request content, and how to parse the result.
-        /// <code><![CDATA[
-        /// var client = new CustomizationsInCadlClient();
-        /// 
-        /// var data = new {
-        ///     propertyModelToMakeInternal = new {
-        ///         requiredInt = 1234,
-        ///     },
-        ///     propertyModelToRename = new {
-        ///         requiredInt = 1234,
-        ///     },
-        ///     propertyModelToChangeNamespace = new {
-        ///         requiredInt = 1234,
-        ///     },
-        ///     propertyModelWithCustomizedProperties = new {
-        ///         propertyToMakeInternal = 1234,
-        ///         propertyToRename = 1234,
-        ///         propertyToMakeFloat = 1234,
-        ///         propertyToMakeInt = 123.45f,
-        ///         propertyToMakeDuration = "<propertyToMakeDuration>",
-        ///         propertyToMakeString = PT1H23M45S,
-        ///         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
-        ///         propertyToField = "<propertyToField>",
-        ///     },
-        ///     propertyEnumToRename = "1",
-        ///     propertyEnumWithValueToRename = "1",
-        ///     propertyEnumToBeMadeExtensible = "1",
-        /// };
-        /// 
-        /// Response response = client.RoundTrip(RequestContent.Create(data));
-        /// 
-        /// JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-        /// Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelToRename").GetProperty("requiredInt").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelToChangeNamespace").GetProperty("requiredInt").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInternal").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToRename").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeFloat").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeInt").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeDuration").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeString").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
-        /// Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request and response payloads.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>RootModel</c>:
-        /// <code>{
-        ///   propertyModelToMakeInternal: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelToRename: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelToChangeNamespace: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelWithCustomizedProperties: {
-        ///     propertyToMakeInternal: number, # Required.
-        ///     propertyToRename: number, # Required.
-        ///     propertyToMakeFloat: number, # Required.
-        ///     propertyToMakeInt: number, # Required.
-        ///     propertyToMakeDuration: string, # Required.
-        ///     propertyToMakeString: string (duration ISO 8601 Format), # Required.
-        ///     propertyToMakeJsonElement: string, # Required.
-        ///     propertyToField: string, # Required.
-        ///   }, # Optional.
-        ///   propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        ///   propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        ///   propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// Response Body:
-        /// 
-        /// Schema for <c>RootModel</c>:
-        /// <code>{
-        ///   propertyModelToMakeInternal: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelToRename: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelToChangeNamespace: {
-        ///     requiredInt: number, # Required.
-        ///   }, # Optional.
-        ///   propertyModelWithCustomizedProperties: {
-        ///     propertyToMakeInternal: number, # Required.
-        ///     propertyToRename: number, # Required.
-        ///     propertyToMakeFloat: number, # Required.
-        ///     propertyToMakeInt: number, # Required.
-        ///     propertyToMakeDuration: string, # Required.
-        ///     propertyToMakeString: string (duration ISO 8601 Format), # Required.
-        ///     propertyToMakeJsonElement: string, # Required.
-        ///     propertyToField: string, # Required.
-        ///   }, # Optional.
-        ///   propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        ///   propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        ///   propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/CustomizationsInCadlClient.xml" path="doc/members/member[@name='RoundTrip(RequestContent,RequestContext)']/*" />
         public virtual Response RoundTrip(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -347,6 +133,17 @@ namespace GeneratedModels
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (!cancellationToken.CanBeCanceled)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

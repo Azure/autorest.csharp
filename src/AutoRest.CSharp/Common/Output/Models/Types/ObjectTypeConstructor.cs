@@ -11,18 +11,25 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectTypeConstructor
     {
-        public ObjectTypeConstructor(string name, MethodSignatureModifiers modifiers, Parameter[] parameters, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
+        public ObjectTypeConstructor(ConstructorSignature signature, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
         {
-            Signature = new ConstructorSignature(
-                name,
-                $"Initializes a new instance of {name}",
-                null,
-                modifiers,
-                parameters,
-                new(isBase: true, baseConstructor?.Signature.Parameters ?? Array.Empty<Parameter>()));
-
+            Signature = signature;
             Initializers = initializers;
             BaseConstructor = baseConstructor;
+        }
+
+        public ObjectTypeConstructor(string name, MethodSignatureModifiers modifiers, Parameter[] parameters, ObjectPropertyInitializer[] initializers, ObjectTypeConstructor? baseConstructor = null)
+            : this(
+                 new ConstructorSignature(
+                     name,
+                     $"Initializes a new instance of {name}",
+                     null,
+                     modifiers,
+                     parameters,
+                     Initializer: new(isBase: true, baseConstructor?.Signature.Parameters ?? Array.Empty<Parameter>())),
+                 initializers,
+                 baseConstructor)
+        {
         }
 
         public ConstructorSignature Signature { get; }
@@ -34,7 +41,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var propertyInitializer in Initializers)
             {
                 var value = propertyInitializer.Value;
-                if (value.IsConstant) continue;
+                if (value.IsConstant)
+                    continue;
 
                 if (value.Reference.Name == constructorParameter.Name)
                 {

@@ -1301,6 +1301,12 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Create or update a policy definition:
+              $ref: ./examples/createOrUpdatePolicyDefinition.json
+            Create or update a policy definition with advanced parameters:
+              $ref: ./examples/createOrUpdatePolicyDefinitionAdvancedParams.json
         language: !Languages 
           default:
             name: CreateOrUpdate
@@ -1389,6 +1395,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Delete a policy definition:
+              $ref: ./examples/deletePolicyDefinition.json
         language: !Languages 
           default:
             name: Delete
@@ -1472,6 +1482,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Retrieve a policy definition:
+              $ref: ./examples/getPolicyDefinition.json
         language: !Languages 
           default:
             name: Get
@@ -1554,6 +1568,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Retrieve a built-in policy definition:
+              $ref: ./examples/getBuiltinPolicyDefinition.json
         language: !Languages 
           default:
             name: GetBuiltIn
@@ -1680,6 +1698,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Create or update a policy definition at management group level:
+              $ref: ./examples/createOrUpdatePolicyDefinitionAtManagementGroup.json
         language: !Languages 
           default:
             name: CreateOrUpdateAtManagementGroup
@@ -1780,6 +1802,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Delete a policy definition at management group level:
+              $ref: ./examples/deletePolicyDefinitionAtManagementGroup.json
         language: !Languages 
           default:
             name: DeleteAtManagementGroup
@@ -1875,6 +1901,10 @@ operationGroups:
                   - application/json
                 statusCodes:
                   - default
+        extensions:
+          x-ms-examples:
+            Retrieve a policy definition at management group level:
+              $ref: ./examples/getPolicyDefinitionAtManagementGroup.json
         language: !Languages 
           default:
             name: GetAtManagementGroup
@@ -1975,6 +2005,9 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            List policy definitions by subscription:
+              $ref: ./examples/listPolicyDefinitions.json
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -2083,6 +2116,9 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            List built-in policy definitions:
+              $ref: ./examples/listBuiltInPolicyDefinitions.json
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 
@@ -2202,6 +2238,9 @@ operationGroups:
                 statusCodes:
                   - default
         extensions:
+          x-ms-examples:
+            List policy definitions by management group:
+              $ref: ./examples/listPolicyDefinitionsByManagementGroup.json
           x-ms-pageable:
             nextLinkName: nextLink
         language: !Languages 

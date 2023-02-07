@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetItemAsync(String,String,String,RequestContext)">
+<example>
+This sample shows how to call GetItemAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParameterSequenceClient(credential);
+
+Response response = await client.GetItemAsync("<itemName>", "<origin>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetItemAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParameterSequenceClient(credential);
+
+Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+<remarks>
+Get item.
+</remarks>
+    </member>
+    <member name="GetItem(String,String,String,RequestContext)">
+<example>
+This sample shows how to call GetItem with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParameterSequenceClient(credential);
+
+Response response = client.GetItem("<itemName>", "<origin>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call GetItem with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParameterSequenceClient(credential);
+
+Response response = client.GetItem("<itemName>", "<origin>", "<version>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+<remarks>
+Get item.
+</remarks>
+    </member>
+    <member name="SelectItemAsync(String,String,String,RequestContext)">
+<example>
+This sample shows how to call SelectItemAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParameterSequenceClient(credential);
+
+Response response = await client.SelectItemAsync("<itemName>", "<origin>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call SelectItemAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParameterSequenceClient(credential);
+
+Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+<remarks>
+Select item.
+</remarks>
+    </member>
+    <member name="SelectItem(String,String,String,RequestContext)">
+<example>
+This sample shows how to call SelectItem with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParameterSequenceClient(credential);
+
+Response response = client.SelectItem("<itemName>", "<origin>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call SelectItem with all parameters, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParameterSequenceClient(credential);
+
+Response response = client.SelectItem("<itemName>", "<origin>", "<version>");
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+<remarks>
+Select item.
+</remarks>
+    </member>
+  </members>
+</doc>

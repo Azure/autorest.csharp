@@ -4,12 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Xml;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -51,6 +53,38 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return writer.AppendExampleParameterValue(exampleParameterValue);
         }
 
+        public static CodeWriter AppendExamplePropertyBagParamValue(this CodeWriter writer, Parameter parameter, Dictionary<string, ExampleParameterValue> exampleParameterValue)
+        {
+            writer.Append($"new {parameter.Type}(");
+            var mgmtObject = parameter.Type.Implementation as ModelTypeProvider;
+            var requiredProperties = mgmtObject!.Properties.Where(p => p.IsRequired);
+            var nonRequiredProperties = mgmtObject!.Properties.Where(p => !p.IsRequired);
+            foreach (var property in requiredProperties)
+            {
+                var parameterName = property.Declaration.Name.ToVariableName();
+                if (exampleParameterValue.TryGetValue(parameterName, out ExampleParameterValue? value))
+                {
+                    writer.Append($"{parameterName}: ");
+                    writer.AppendExampleParameterValue(value);
+                    writer.Append($", ");
+                }
+            }
+            writer.RemoveTrailingComma();
+            writer.Append($"){{ ");
+            foreach (var property in nonRequiredProperties)
+            {
+                var parameterName = property.Declaration.Name.ToVariableName();
+                if (exampleParameterValue.TryGetValue(parameterName, out ExampleParameterValue? value))
+                {
+                    writer.Append($"{property.Declaration.Name} = ");
+                    writer.AppendExampleParameterValue(value);
+                    writer.Append($", ");
+                }
+            }
+            writer.RemoveTrailingComma();
+            return writer.Append($"}}");
+        }
+
         public static CodeWriter AppendExampleParameterValue(this CodeWriter writer, ExampleParameterValue exampleParameterValue)
         {
             if (exampleParameterValue.Value != null)
@@ -78,12 +112,14 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
         {
+            // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
+            var elements = exampleValue.Elements ?? Enumerable.Empty<ExampleValue>();
             // since this is a list, we take the first generic argument (and it should always has this first argument)
             var elementType = type.Arguments.First();
             var initialization = includeInitialization ? (FormattableString)$"new {elementType}[]" : (FormattableString)$"";
             using (writer.Scope(initialization, newLine: false))
             {
-                foreach (var itemValue in exampleValue.Elements)
+                foreach (var itemValue in elements)
                 {
                     // TODO -- bad formatting will happen in collection initializer because roslyn formatter ignores things in these places: https://github.com/dotnet/roslyn/issues/8269
                     writer.AppendExampleValue(itemValue, elementType);
@@ -100,15 +136,19 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendDictionaryValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
         {
+            // the collections in our generated SDK could never be assigned to, therefore if we have null value here, we can only assign an empty collection
+            var keyValues = exampleValue.Properties ?? new Dictionary<string, ExampleValue>();
             // since this is a dictionary, we take the first generic argument as the key type
             // this is important because in our SDK, the key of a dictionary is not always a string. It could be a string-like type, for instance, a ResourceIdentifier
             var keyType = type.Arguments[0];
             // the second as the value type
             var valueType = type.Arguments[1];
-            var initialization = includeInitialization ? (FormattableString)$"new {type}()" : (FormattableString)$"";
+            // the type of dictionary in our generated SDK is usually an interface `IDictionary<>` or `IReadOnlyDictionary<>`, here we just use `Dictionary` as its proper initialization
+            var concreteDictType = new CSharpType(typeof(Dictionary<,>), type.Arguments);
+            var initialization = includeInitialization ? (FormattableString)$"new {concreteDictType}()" : (FormattableString)$"";
             using (writer.Scope(initialization, newLine: false))
             {
-                foreach ((var key, var value) in exampleValue.Properties)
+                foreach ((var key, var value) in keyValues)
                 {
                     // write key
                     writer.AppendRaw("[");
@@ -132,6 +172,11 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendComplexFrameworkTypeValue(this CodeWriter writer, ObjectSchema objectSchema, Type type, ExampleValue exampleValue)
         {
+            if (exampleValue.Properties == null)
+            {
+                writer.AppendRaw(type.IsValueType ? "default" : "null");
+                return writer;
+            }
             var propertyMetadataDict = ReferenceClassFinder.GetPropertyMetadata(type);
             // get the first constructor
             var publicCtor = type.GetConstructors().Where(c => c.IsPublic).OrderBy(c => c.GetParameters().Count()).First();
@@ -183,17 +228,24 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 return writer.AppendRawValue(exampleValue.RawValue, exampleValue.RawValue.GetType());
             }
             // check if this is an array
-            if (exampleValue.Elements.Any())
+            if (exampleValue.Elements != null && exampleValue.Elements.Any())
             {
                 return writer.AppendListValue(typeof(object), exampleValue);
             }
             // fallback to complex object
-            using (writer.Scope($"new "))
+            if (exampleValue.Properties == null)
             {
-                foreach ((var key, var value) in exampleValue.Properties)
+                writer.LineRaw("null");
+            }
+            else
+            {
+                using (writer.Scope($"new {typeof(Dictionary<string, object>)}()"))
                 {
-                    writer.Append($"{key} = ");
-                    writer.AppendAnonymousObject(value);
+                    foreach ((var key, var value) in exampleValue.Properties)
+                    {
+                        writer.Append($"[{key:L}] = ");
+                        writer.AppendAnonymousObject(value);
+                    }
                 }
             }
 
@@ -202,7 +254,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendRawList(this CodeWriter writer, List<object?> list)
         {
-            writer.AppendRaw("new[] { ");
+            writer.Append($"new {typeof(object)}[] {{ ");
             foreach (var item in list)
             {
                 writer.AppendRawValue(item, item?.GetType() ?? typeof(object));
@@ -215,11 +267,11 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendRawDictionary(this CodeWriter writer, Dictionary<object, object?> dict)
         {
-            using (writer.Scope($"new ", newLine: false))
+            using (writer.Scope($"new {typeof(Dictionary<string, object>)}()", newLine: false))
             {
                 foreach ((var key, var value) in dict)
                 {
-                    writer.Append($"{key.ToString()} = ");
+                    writer.Append($"[{key.ToString():L}] = ");
                     writer.AppendRawValue(value, value?.GetType() ?? typeof(object));
                     writer.LineRaw(",");
                 }
@@ -242,29 +294,45 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
 
         private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, AllSchemaTypes? schemaType) => type switch
         {
-            _ when schemaType == AllSchemaTypes.Duration => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
-            _ when IsPrimitiveType(type) => writer.AppendRaw(value),
-            _ when IsNewInstanceInitializedStringLikeType(type) => writer.Append($"new {type}({value:L})"),
-            _ when IsParsableInitializedStringLikeType(type) => writer.Append($"{type}.Parse({value:L})"),
+            _ when schemaType is AllSchemaTypes.Number or AllSchemaTypes.Integer => writer.AppendRaw(value),
+            _ when schemaType is AllSchemaTypes.Duration => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
+            _ when _primitiveTypes.Contains(type) => writer.AppendRaw(value),
+            _ when _newInstanceInitializedTypes.Contains(type) => writer.Append($"new {type}({value:L})"),
+            _ when _parsableInitializedTypes.Contains(type) => writer.Append($"{type}.Parse({value:L})"),
             _ when type == typeof(byte[]) => writer.Append($"{typeof(Convert)}.FromBase64String({value:L})"),
             _ => writer.Append($"{value:L}"),
         };
 
-        private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && IsStringLikeType(type.FrameworkType);
+        private static bool IsStringLikeType(CSharpType type) => type.IsFrameworkType && (_newInstanceInitializedTypes.Contains(type.FrameworkType) || _parsableInitializedTypes.Contains(type.FrameworkType));
 
-        private static bool IsStringLikeType(Type type)
-            => IsNewInstanceInitializedStringLikeType(type) || IsParsableInitializedStringLikeType(type);
+        private static readonly HashSet<Type> _primitiveTypes = new()
+        {
+            typeof(bool), typeof(bool?),
+            typeof(int), typeof(int?),
+            typeof(long), typeof(long?),
+            typeof(float), typeof(float?),
+            typeof(double), typeof(double?),
+            typeof(decimal), typeof(decimal?)
+        };
 
-        private static bool IsPrimitiveType(Type type)
-            => IsType<bool>(type) || IsType<int>(type) || IsType<long>(type) || IsType<double>(type) || IsType<decimal>(type);
+        private static readonly HashSet<Type> _newInstanceInitializedTypes = new()
+        {
+            typeof(ResourceIdentifier),
+            typeof(ResourceType),
+            typeof(Uri),
+            typeof(AzureLocation), typeof(AzureLocation?),
+            typeof(RequestMethod), typeof(RequestMethod?),
+            typeof(ContentType), typeof(ContentType?),
+            typeof(ETag), typeof(ETag?)
+        };
 
-        private static bool IsNewInstanceInitializedStringLikeType(Type type)
-            => IsType<ResourceIdentifier>(type) || IsType<ResourceType>(type) || IsType<Uri>(type) || IsType<AzureLocation>(type) || IsType<RequestMethod>(type) || IsType<ContentType>(type) || IsType<ETag>(type);
-
-        private static bool IsParsableInitializedStringLikeType(Type type)
-            => IsType<DateTimeOffset>(type) || IsType<Guid>(type) || IsType<TimeSpan>(type);
-
-        private static bool IsType<T>(Type type) => type == typeof(T) || (typeof(T).IsValueType && type == typeof(T?));
+        private static readonly HashSet<Type> _parsableInitializedTypes = new()
+        {
+            typeof(DateTimeOffset),
+            typeof(Guid), typeof(Guid?),
+            typeof(TimeSpan), typeof(TimeSpan?),
+            typeof(IPAddress)
+        };
 
         private static CodeWriter AppendTypeProviderValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
         {
@@ -273,18 +341,45 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
                 case ObjectType objectType:
                     return writer.AppendObjectTypeValue(objectType, exampleValue.Properties);
                 case EnumType enumType:
-                    return writer.AppendEnumTypeValue(enumType, (string)exampleValue.RawValue!);
+                    return writer.AppendEnumTypeValue(enumType, exampleValue.RawValue!);
             }
             return writer.AppendRaw("default");
         }
 
-        private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
+        private static ObjectType GetActualImplementation(ObjectType objectType, Dictionary<string, ExampleValue> valueDict)
         {
+            var discriminator = objectType.Discriminator;
+            // check if this has a discriminator
+            if (discriminator == null || !discriminator.HasDescendants)
+                return objectType;
+            var discriminatorPropertyName = discriminator.SerializedName;
+            // get value of this in the valueDict and we should always has a discriminator value in the example
+            if (!valueDict.TryGetValue(discriminatorPropertyName, out var exampleValue) || exampleValue.RawValue == null)
+            {
+                throw new InvalidOperationException($"Attempting to get the discriminator value for property `{discriminatorPropertyName}` on object type {objectType.Type.Name} but got none or non-primitive type");
+            }
+            // the discriminator should always be a primitive type
+            var actualDiscriminatorValue = exampleValue.RawValue;
+            var implementation = discriminator.Implementations.FirstOrDefault(info => info.Key.Equals(actualDiscriminatorValue));
+            if (implementation == null)
+                throw new InvalidOperationException($"Cannot find an implementation corresponding to the discriminator value {actualDiscriminatorValue} for object model type {objectType.Type.Name}");
+
+            return (ObjectType)implementation.Type.Implementation;
+        }
+
+        private static CodeWriter AppendObjectTypeValue(this CodeWriter writer, ObjectType objectType, Dictionary<string, ExampleValue>? valueDict)
+        {
+            if (valueDict == null)
+            {
+                writer.AppendRaw("null");
+                return writer;
+            }
+            // need to get the actual ObjectType if this type has a discrinimator
+            objectType = GetActualImplementation(objectType, valueDict);
             // get all the properties on this type, including the properties from its base type
             var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
             var constructor = objectType.InitializationConstructor;
-            writer.UseNamespace(objectType.Type.Namespace);
-            writer.Append($"new {objectType.Type.Name}(");
+            writer.Append($"new {objectType.Type}(");
             // build a map from parameter name to property
             var propertyDict = properties.ToDictionary(
                 property => property.Declaration.Name.ToVariableName(), property => property);
@@ -346,60 +441,43 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             var propertiesToWrite = new Dictionary<string, (CSharpType PropertyType, ExampleValue ExampleValue)>();
             foreach (var property in properties)
             {
-                var schemaProperty = property.SchemaProperty;
-                if (!IsPropertyAssignable(property) || schemaProperty == null)
+                var propertyToDeal = property;
+                var schemaProperty = propertyToDeal.SchemaProperty;
+                if (schemaProperty == null)
                     continue; // now we explicitly ignore all the AdditionalProperties
 
                 if (!valueDict.TryGetValue(schemaProperty.SerializedName, out var exampleValue))
                     continue; // skip the property that does not have a value
 
-                var hierarchyStack = new Stack<ObjectTypeProperty>();
-                hierarchyStack.Push(property);
-                BuildHeirarchy(property, hierarchyStack);
                 // check if this property is safe-flattened
-                if (hierarchyStack.Count > 1)
+                var flattenedProperty = propertyToDeal.FlattenedProperty;
+                if (flattenedProperty != null)
                 {
-                    // get example value out of the dict
-                    exampleValue = UnwrapExampleValueFromSinglePropertySchema(exampleValue, hierarchyStack);
+                    // unwrap the single property object
+                    exampleValue = UnwrapExampleValueFromSinglePropertySchema(exampleValue, flattenedProperty);
                     if (exampleValue == null)
                         continue;
-                    // We could build a stack hierarchy here as well, and when we pop that, we only take the last result
-                    // in the meantime we pop the example value once at a time, so that in this way we could just assign the innerest property with the innerest example values of the objects
-                    var innerProperty = hierarchyStack.Pop();
-                    var immediateParentProperty = hierarchyStack.Pop();
-                    var myPropertyName = innerProperty.GetCombinedPropertyName(immediateParentProperty);
-                    // we need to know if this property has a setter, code copied from ModelWriter.WriteProperties
-                    if (!property.IsReadOnly && innerProperty.IsReadOnly)
-                    {
-                        if (ModelWriter.HasCtorWithSingleParam(property, innerProperty))
-                        {
-                            // this branch has a setter
-                            propertiesToWrite.Add(myPropertyName, (innerProperty.Declaration.Type, exampleValue));
-                        }
-                    }
-                    else if (!property.IsReadOnly && !innerProperty.IsReadOnly)
-                    {
-                        // this branch always has a setter
-                        propertiesToWrite.Add(myPropertyName, (innerProperty.Declaration.Type, exampleValue));
-                    }
+                    propertyToDeal = flattenedProperty;
                 }
-                else
-                {
-                    propertiesToWrite.Add(property.Declaration.Name, (property.Declaration.Type, exampleValue));
-                }
+
+                if (!IsPropertyAssignable(propertyToDeal))
+                    continue; // now we explicitly ignore all the AdditionalProperties
+
+                propertiesToWrite.Add(propertyToDeal.Declaration.Name, (propertyToDeal.Declaration.Type, exampleValue));
             }
 
             return propertiesToWrite;
         }
 
-        private static ExampleValue? UnwrapExampleValueFromSinglePropertySchema(ExampleValue exampleValue, Stack<ObjectTypeProperty> hierarchyStack)
+        private static ExampleValue? UnwrapExampleValueFromSinglePropertySchema(ExampleValue exampleValue, FlattenedObjectTypeProperty flattenedProperty)
         {
+            var hierarchyStack = flattenedProperty.BuildHierarchyStack();
             // reverse the stack because it is a stack, iterating it will start from the innerest property
             // skip the first because this stack include the property we are handling here right now
             foreach (var property in hierarchyStack.Reverse().Skip(1))
             {
                 var schemaProperty = property.SchemaProperty;
-                if (schemaProperty == null || !exampleValue.Properties.TryGetValue(schemaProperty.SerializedName, out var inner))
+                if (schemaProperty == null || exampleValue.Properties == null || !exampleValue.Properties.TryGetValue(schemaProperty.SerializedName, out var inner))
                     return null;
                 // get the value of this layer
                 exampleValue = inner;
@@ -407,29 +485,24 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             return exampleValue;
         }
 
-        private static void BuildHeirarchy(ObjectTypeProperty property, Stack<ObjectTypeProperty> heirarchyStack)
-        {
-            if (property.IsSinglePropertyObject(out var childProp))
-            {
-                heirarchyStack.Push(childProp);
-                BuildHeirarchy(childProp, heirarchyStack);
-            }
-        }
-
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
-            => TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly;
+            => property.Declaration.Accessibility == "public" && (TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly);
 
-        private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, string value)
+        private static CodeWriter AppendEnumTypeValue(this CodeWriter writer, EnumType enumType, object value)
         {
-            // find value in one of the choices
-            var choice = enumType.Values.FirstOrDefault(c => value.Equals(c.Value.Value));
+            // find value in one of the choices.
+            // Here we convert the values to string then compare, because the raw value has the "primitive types are deserialized into strings" issue
+            var choice = enumType.Values.FirstOrDefault(c => StringComparer.Ordinal.Equals(value.ToString(), c.Value.Value?.ToString()));
             writer.UseNamespace(enumType.Type.Namespace);
             if (choice != null)
                 return writer.Append($"{enumType.Type.Name}.{choice.Declaration.Name}");
             // if we did not find a match, check if this is a SealedChoice, if so, we throw exceptions
             if (!enumType.IsExtensible)
                 throw new InvalidOperationException($"Enum value `{value}` in example does not find in type {enumType.Type.Name}");
-            return writer.Append($"new {enumType.Type.Name}({value:L})");
+            var underlyingType = enumType.ValueType.FrameworkType; // the underlying type of an extensible enum should always be a primitive type which is a framework type
+            return writer.Append($"new {enumType.Type}(")
+                .AppendRawValue(value, underlyingType)
+                .AppendRaw(")");
         }
 
         public static CodeWriter AppendDeclaration(this CodeWriter writer, CodeWriterVariableDeclaration declaration)

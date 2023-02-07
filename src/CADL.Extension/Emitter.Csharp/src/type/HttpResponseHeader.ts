@@ -5,5 +5,7 @@ import { InputType } from "./InputType.js";
 
 export interface HttpResponseHeader {
     Name: string;
-    type: InputType;
+    NameInResponse: string;
+    Description: string;
+    Type: InputType;
 }

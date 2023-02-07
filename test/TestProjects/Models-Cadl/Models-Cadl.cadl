@@ -1,4 +1,7 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
+import "@azure-tools/cadl-azure-core";
 
 @serviceTitle("Models in CADL")
 @serviceVersion("0.1.0")
@@ -7,6 +10,8 @@ namespace ModelsInCadl;
 
 using Cadl.Http;
 using Cadl.Rest;
+using Azure.DPG;
+using Azure.Core;
 
 @doc("Base model")
 model BaseModel {
@@ -21,7 +26,7 @@ model DerivedModel extends BaseModel {
 
 @discriminator("discriminatorProperty")
 @doc("Base model with discriminator property.")
-model BaseModelWithDiscriminator extends BaseModel {}
+model BaseModelWithDiscriminator {}
 
 @doc("Deriver model with discriminator property.")
 model DerivedModelWithDiscriminatorA extends BaseModelWithDiscriminator {
@@ -52,22 +57,36 @@ model RecordItem extends DerivedModel {
 }
 
 @doc("Fixed string enum")
+@fixed
 enum FixedStringEnum {
     One: "1",
     Two: "2",
     Four: "4"
 }
 
-@doc("Extensible enum Values")
-enum ExtensibleEnumValues {
+@doc("Fixed int enum")
+@fixed
+@deprecated("deprecated for test")
+enum FixedIntEnum {
+    One: 1,
+    Two: 2,
+    Four: 4
+}
+
+// @doc("Fixed float enum")
+// enum FixedFloatEnum {
+//     One: 1.1,
+//     Two: 2.1,
+//     Four: 4.0
+// }
+
+@doc("Extensible enum")
+@deprecated("deprecated for test")
+enum ExtensibleEnum {
     One: "1",
     Two: "2",
     Four: "4"
 }
-
-@doc("Extensible enum")
-@knownValues(ExtensibleEnumValues)
-model ExtensibleEnum is string {}
 
 @doc("Model used both as input and output")
 model RoundTripModel extends BaseModel {
@@ -82,6 +101,12 @@ model RoundTripModel extends BaseModel {
 
   @doc("Required fixed string enum")
   requiredFixedStringEnum: FixedStringEnum;
+
+  @doc("Required fixed int enum")
+  requiredFixedIntEnum: FixedIntEnum;
+
+//   @doc("Required fixed float enum")
+//   requiredFixedFloatEnum: FixedFloatEnum;
 
   @doc("Required extensible enum")
   requiredExtensibleEnum: ExtensibleEnum;
@@ -117,7 +142,7 @@ model RoundTripPrimitiveModel extends BaseModel {
   requiredFloat: float32;
 
   @doc("Required double, illustrating a value type property.")
-  requiredDouble: float64;
+  required_Double: float64;
 
   @doc("Required bolean, illustrating a value type property.")
   requiredBoolean: boolean;
@@ -130,7 +155,7 @@ model RoundTripPrimitiveModel extends BaseModel {
 }
 
 @doc("Model used only as input")
-model InputModel extends BaseModel {
+model InputModel {
   @doc("Required string")
   requiredString: string;
 
@@ -154,7 +179,7 @@ model InputModel extends BaseModel {
 }
 
 @doc("Model used only as output")
-model OutputModel extends BaseModel {
+model OutputModel {
   @doc("Required string")
   requiredString: string;
 
@@ -172,6 +197,7 @@ model OutputModel extends BaseModel {
 }
 
 @doc("RoundTrip model with optional properties.")
+@deprecated("deprecated for test")
 model RoundTripOptionalModel {
   @doc("Optional string, illustrating an optional reference type property.")
   optionalString?: string;
@@ -186,16 +212,16 @@ model RoundTripOptionalModel {
   optionalIntList?: int32[];
 
   @doc("Optional model collection")
-  optionalModelCollection: CollectionItem[];
+  optionalModelCollection?: CollectionItem[];
 
   @doc("Optional model.")
   optionalModel?: DerivedModel;
 
   @doc("Optional fixed string enum")
-  optionalFixedStringEnum: FixedStringEnum;
+  optionalFixedStringEnum?: FixedStringEnum;
 
   @doc("Optional extensible enum")
-  optionalExtensibleEnum: ExtensibleEnum;
+  optionalExtensibleEnum?: ExtensibleEnum;
 
   @doc("Optional int record")
   optionalIntRecord?: Record<int32>;
@@ -205,6 +231,12 @@ model RoundTripOptionalModel {
 
   @doc("Optional model record")
   optionalModelRecord?: Record<RecordItem>;
+
+  @doc("Optional plainDate")
+  optionalPlainDate?: plainDate;
+
+  @doc("Optional plainTime")
+  optionalPlainTime?: plainTime;
 }
 
 @doc("Output model with readonly properties.")
@@ -296,38 +328,98 @@ model RoundTripReadOnlyModel {
   optionalModelRecord?: Record<RecordItem>;
 }
 
-@doc("Model that has property of its own type")
+@doc("Output model that has property of its own type")
 model ErrorModel {
+  @doc("Error message")
+  @visibility("read")
+  message: string;
+
   @doc("Required Record")
+  @visibility("read")
   innerError?: ErrorModel;
 }
 
+@doc("Input model that has property of its own type")
+model InputRecursiveModel {
+  @doc("Message")
+  message: string;
+
+  @doc("Required Record")
+  inner?: InputRecursiveModel;
+}
+
+@doc("Roundtrip model that has property of its own type")
+model RoundTripRecursiveModel {
+  @doc("Message")
+  message: string;
+
+  @doc("Required Record")
+  inner?: RoundTripRecursiveModel;
+}
+
+@doc("Input model that has property of its own type")
 @route("/inputToRoundTrip")
 @doc("Input to RoundTrip")
 @get
+@convenientAPI(true)
 op inputToRoundTrip(@body input: InputModel): RoundTripModel;
 
 @route("/inputToRoundTripPrimitive")
 @doc("Input to RoundTripPrimitive")
 @get
+@convenientAPI(true)
 op inputToRoundTripPrimitive(@body input: InputModel): RoundTripPrimitiveModel;
 
 @route("/inputToRoundTripOptional")
 @doc("Input to RoundTripOptional")
 @get
-op inputToRoundTripOptional(@body input: InputModel): RoundTripOptionalModel;
+@convenientAPI(true)
+op inputToRoundTripOptional(@body input: RoundTripOptionalModel): RoundTripOptionalModel;
 
 @route("/inputToRoundTripReadOnly")
 @doc("Input to RoundTripReadOnly")
 @get
+@convenientAPI(true)
+@deprecated("deprecated for test")
 op inputToRoundTripReadOnly(@body input: InputModel): RoundTripReadOnlyModel;
 
 @route("/roundTripToOutput")
 @doc("RoundTrip to Output")
 @get
+@convenientAPI(true)
 op roundTripToOutput(@body input: RoundTripModel): OutputModel;
+
+@route("/inputRecursive")
+@doc("Input recursive model")
+@post
+@convenientAPI(true)
+op InputRecursive(@body input: InputRecursiveModel): Response<200>|ErrorModel;
+
+@route("/roundTripRecursive")
+@doc("RoundTrip recursive model")
+@put
+@convenientAPI(true)
+op roundTripRecursive(@body input: RoundTripRecursiveModel): RoundTripRecursiveModel;
 
 @route("/selfReference")
 @doc("Returns model that has property of its own type")
 @get
+@convenientAPI(true)
 op selfReference(): ErrorModel;
+
+@doc("Base model")
+model NoUseBase {
+  @doc("base model property")
+  baseModelProp: string;
+}
+
+@doc("Derived model")
+model RoundTripOnNoUse extends NoUseBase {
+  @doc("Required collection")
+  requiredCollection: CollectionItem[];
+}
+
+@doc("Returns RoundTripOnNoUse")
+@get
+@convenientAPI(true)
+op roundTripToOutputWithNoUseBase(@body input: RoundTripOnNoUse): RoundTripOnNoUse;

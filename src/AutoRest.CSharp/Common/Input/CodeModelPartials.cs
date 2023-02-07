@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using YamlDotNet.Serialization;
@@ -179,6 +180,9 @@ namespace AutoRest.CSharp.Input
     {
         public const string ArmId = "arm-id";
         public const string AzureLocation = "azure-location";
+        public const string DateTime = "date-time";
+        public const string DateTimeRFC1123 = "date-time-rfc1123";
+        public const string DateTimeUnix = "date-time-unix";
         public const string DurationConstant = "duration-constant";
         public const string ETag = "etag";
         public const string ResourceType = "resource-type";
@@ -186,6 +190,17 @@ namespace AutoRest.CSharp.Input
         public const string IPAddress = "ip-address";
         public const string ContentType = "content-type";
         public const string RequestMethod = "request-method";
+        public const string DataFactoryExpressionOfObject = "dfe-object";
+        public const string DataFactoryExpressionOfString = "dfe-string";
+        public const string DataFactoryExpressionOfInt = "dfe-int";
+        public const string DataFactoryExpressionOfDouble = "dfe-float";
+        public const string DataFactoryExpressionOfBool = "dfe-bool";
+        public const string DataFactoryExpressionOfListOfT = "dfe-list-generic";
+        public const string DataFactoryExpressionOfListOfString = "dfe-list-string";
+        public const string DataFactoryExpressionOfKeyValuePairs = "dfe-key-value-pairs";
+        public const string DataFactoryExpressionOfDateTime = "dfe-date-time";
+        public const string DataFactoryExpressionOfDuration = "dfe-duration";
+        public const string DataFactoryExpressionOfUri = "dfe-uri";
     }
 
     internal partial class ServiceResponse
@@ -742,15 +757,18 @@ namespace AutoRest.CSharp.Input
         [YamlMember(Alias = "flattenedNames")]
         public ICollection<string>? FlattenedNames { get; set; }
 
-        /**Use elements if schema.type==Array, use properties if schema.type==Object/Dictionary, otherwise use rawValue */
+        /// <summary>
+        /// Use elements if schema.type==Array, use properties if schema.type==Object/Dictionary, otherwise use rawValue
+        /// We have to make Elements and Properties nullable because we need the ability to distinguish null value and an empty array/dictionary/object
+        /// </summary>
         [YamlMember(Alias = "rawValue")]
         public object? RawValue { get; set; }
 
         [YamlMember(Alias = "elements")]
-        public System.Collections.Generic.ICollection<ExampleValue> Elements { get; set; } = Array.Empty<ExampleValue>();
+        public System.Collections.Generic.ICollection<ExampleValue>? Elements { get; set; }
 
         [YamlMember(Alias = "properties")]
-        public Dictionary<string, ExampleValue> Properties { get; set; } = new();
+        public Dictionary<string, ExampleValue>? Properties { get; set; }
 
         // parent class Name--> value
         [YamlMember(Alias = "parentsValue")]

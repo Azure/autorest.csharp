@@ -1,0 +1,74 @@
+import "@azure-tools/cadl-azure-core";
+import "@cadl-lang/openapi";
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-dpg";
+
+using Cadl.Http;
+using Azure.DPG;
+using Cadl.Versioning;
+
+@serviceTitle("Text authoring")
+@serviceVersion("2022-05-15-preview")
+@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+@server(
+    "{lroBasicUrl}",
+    "Endpoint Service",
+    {
+        lroBasicUrl: string,
+    }
+)
+namespace LroBasicCadl;
+
+
+@Cadl.Rest.resource("projects")
+model Project {
+  @key
+  @visibility("read")
+  id: string;
+  description?: string;
+
+  name?: string;
+}
+
+model Thing {
+  name: string;
+}
+
+interface Authoring {
+  createProjectStatusMonitor is CustomCore.PollingOperation<Project>;
+
+  @convenientAPI(true)
+  @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
+  createProject is Azure.Core.LongRunningResourceCreateWithServiceProvidedName<Project>;
+  
+  @convenientAPI(true)
+  @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
+  op updateProject is Azure.Core.LongRunningResourceCreateOrReplace<Project, Project>;
+
+  @convenientAPI(true)
+  @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
+  op createThing is CustomCore.LongRunningRpcOperation<Thing, Thing>;
+}
+
+namespace CustomCore {
+  @Cadl.Rest.parentResource(T)
+  @Cadl.Rest.resource("operations")
+  model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
+    operationId: string;
+  }
+
+  @Cadl.Http.route("operations")
+  @convenientAPI(true)
+  op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
+
+  @doc("Long running RPC operation template")
+  op LongRunningRpcOperation<
+    TParams extends object,
+    TResponse extends object
+  > is Azure.Core.RpcOperation<
+    TParams,
+    Azure.Core.Foundations.AcceptedResponse<TResponse &
+      Azure.Core.Foundations.LongRunningStatusLocation>
+  >;
+}

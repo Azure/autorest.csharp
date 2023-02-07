@@ -5,8 +5,6 @@ using System;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Utilities;
-using Azure.Core;
 using NUnit.Framework;
 using static AutoRest.CSharp.Mgmt.Models.MgmtRestOperation;
 
@@ -14,14 +12,84 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
 {
     internal class MgmtRestOperationTests
     {
-        private RequestPath GetFromString(string path) => new RequestPath(path.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(segment => new Segment(segment, isConstant: !segment.Contains('{'))).ToList());
+        [OneTimeSetUp]
+        public void Setup()
+        {
+            var mgmtConfiguration = new MgmtConfiguration(
+                operationGroupsToOmit: Array.Empty<string>(),
+                requestPathIsNonResource: Array.Empty<string>(),
+                noPropertyTypeReplacement: Array.Empty<string>(),
+                listException: Array.Empty<string>(),
+                promptedEnumValues: Array.Empty<string>(),
+                keepOrphanedModels: Array.Empty<string>(),
+                keepPluralEnums: Array.Empty<string>(),
+                keepPluralResourceData: Array.Empty<string>(),
+                noResourceSuffix: Array.Empty<string>(),
+                schemasToPrependRPPrefix: Array.Empty<string>(),
+                generateArmResourceExtensions: Array.Empty<string>(),
+                parameterizedScopes: Array.Empty<string>(),
+                mgmtDebug: new MgmtConfiguration.MgmtDebugConfiguration(),
+                requestPathToParent: default,
+                requestPathToResourceName: default,
+                requestPathToResourceData: default,
+                requestPathToResourceType: default,
+                requestPathToScopeResourceTypes: default,
+                operationPositions: default,
+                requestPathToSingletonResource: default,
+                overrideOperationName: default,
+                renameRules: default,
+                formatByNameRules: default,
+                renameMapping: default,
+                parameterRenameMapping: default,
+                irregularPluralWords: default,
+                mergeOperations: default,
+                armCore: default,
+                resourceModelRequiresType: default,
+                resourceModelRequiresName: default,
+                singletonRequiresKeyword: default,
+                operationIdMappings: default,
+                updateRequiredCopy: default,
+                patchInitializerCustomization: default);
+            Configuration.Initialize(outputFolder: ".",
+                ns: null,
+                name: null,
+                sharedSourceFolders: Array.Empty<string>(),
+                saveInputs: true,
+                azureArm: true,
+                publicClients: true,
+                modelNamespace: true,
+                headAsBoolean: true,
+                skipCSProjPackageReference: true,
+                generation1ConvenienceClient: false,
+                singleTopLevelClient: false,
+                skipSerializationFormatXml: false,
+                disablePaginationTopRenaming: false,
+                unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
+                projectFolder: "/..",
+                protocolMethodList: Array.Empty<string>(),
+                suppressAbstractBaseClasses: Array.Empty<string>(),
+                mgmtConfiguration: mgmtConfiguration,
+                mgmtTestConfiguration: null);
+        }
 
         private void TestPair(ResourceMatchType expected, HttpMethod httpMethod, string resourcePathStr, string requestPathStr, bool isList)
         {
-            RequestPath resourcePath = GetFromString(resourcePathStr);
-            RequestPath requestPath = GetFromString(requestPathStr);
+            RequestPath resourcePath = RequestPath.FromString(resourcePathStr);
+            RequestPath requestPath = RequestPath.FromString(requestPathStr);
             Assert.AreEqual(expected, MgmtRestOperation.GetMatchType(httpMethod, resourcePath, requestPath, isList));
         }
+
+        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+            "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}",
+            "/subscriptions/{subscriptionId}/providers/Microsoft.EventGrid/eventSubscriptions")]
+        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+            "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}",
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/providers/Microsoft.EventGrid/eventSubscriptions")]
+        [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
+            "/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}",
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/Microsoft.EventGrid/eventSubscriptions")]
+        public void ValidateScopeListMatching(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
+            => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
         [TestCase(ResourceMatchType.ChildList, HttpMethod.Get, true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}",
@@ -77,6 +145,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
             "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}",
             "/subscriptions/{subscriptionId}/resourceGroups")]
+        [TestCase(ResourceMatchType.AncestorList, HttpMethod.Get, true,
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}",
+            "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments")]
         public void ValidateListMatchingSegments(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)
             => TestPair(expected, httpMethod, resourcePathStr, requestPathStr, isList);
 
@@ -146,7 +217,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase(ResourceMatchType.ParentList, HttpMethod.Get, true,
             "/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
             "/providers/Microsoft.Authorization/policyDefinitions")]
-        [TestCase(ResourceMatchType.None, HttpMethod.Get, true,
+        [TestCase(ResourceMatchType.AncestorList, HttpMethod.Get, true,
             "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}",
             "/providers/Microsoft.Authorization/policyDefinitions")]
         public void PolicyDefinitionMultiParent(ResourceMatchType expected, HttpMethod httpMethod, bool isList, string resourcePathStr, string requestPathStr)

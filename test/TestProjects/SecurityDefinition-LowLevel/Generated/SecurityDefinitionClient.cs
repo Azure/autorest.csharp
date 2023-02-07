@@ -13,7 +13,7 @@ using Azure.Core.Pipeline;
 
 namespace SecurityDefinition_LowLevel
 {
-    // Data plane generated client. The SecurityDefinition service client.
+    // Data plane generated client.
     /// <summary> The SecurityDefinition service client. </summary>
     public partial class SecurityDefinitionClient
     {
@@ -93,46 +93,7 @@ namespace SecurityDefinition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call OperationAsync.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new SecurityDefinitionClient(endpoint, credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = await client.OperationAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call OperationAsync with all request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new SecurityDefinitionClient(endpoint, credential);
-        /// 
-        /// var data = new {
-        ///     Code = "<Code>",
-        ///     Status = "<Status>",
-        /// };
-        /// 
-        /// Response response = await client.OperationAsync(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>TestModel</c>:
-        /// <code>{
-        ///   Code: string, # Optional.
-        ///   Status: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='OperationAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -156,46 +117,7 @@ namespace SecurityDefinition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <example>
-        /// This sample shows how to call Operation.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new SecurityDefinitionClient(endpoint, credential);
-        /// 
-        /// var data = new {};
-        /// 
-        /// Response response = client.Operation(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// This sample shows how to call Operation with all request content.
-        /// <code><![CDATA[
-        /// var credential = new AzureKeyCredential("<key>");
-        /// var endpoint = new Uri("<https://my-service.azure.com>");
-        /// var client = new SecurityDefinitionClient(endpoint, credential);
-        /// 
-        /// var data = new {
-        ///     Code = "<Code>",
-        ///     Status = "<Status>",
-        /// };
-        /// 
-        /// Response response = client.Operation(RequestContent.Create(data));
-        /// Console.WriteLine(response.Status);
-        /// ]]></code>
-        /// </example>
-        /// <remarks>
-        /// Below is the JSON schema for the request payload.
-        /// 
-        /// Request Body:
-        /// 
-        /// Schema for <c>TestModel</c>:
-        /// <code>{
-        ///   Code: string, # Optional.
-        ///   Status: string, # Optional.
-        /// }
-        /// </code>
-        /// 
-        /// </remarks>
+        /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='Operation(RequestContent,RequestContext)']/*" />
         public virtual Response Operation(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

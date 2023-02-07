@@ -2,14 +2,18 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
 
 namespace AutoRest.CSharp.Input
 {
     internal static class Configuration
     {
+        internal static readonly string ProjectFolderDefault = "../";
+
         public static class Options
         {
             public const string OutputFolder = "output-folder";
@@ -29,11 +33,38 @@ namespace AutoRest.CSharp.Input
             public const string ProtocolMethodList = "protocol-method-list";
             public const string SkipSerializationFormatXml = "skip-serialization-format-xml";
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
+            public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
+            public const string UnreferencedTypesHandling = "unreferenced-types-handling";
         }
 
-        public static void Initialize(string outputFolder, string? ns, string? name, string[] sharedSourceFolders,
-            bool saveInputs, bool azureArm, bool publicClients, bool modelNamespace, bool headAsBoolean, bool skipCSProjPackageReference,
-            bool generation1ConvenienceClient, bool singleTopLevelClient, bool skipSerializationFormatXml, bool disablePaginationTopRenaming, string projectFolder, string[] protocolMethodList, MgmtConfiguration mgmtConfiguration)
+        public enum UnreferencedTypesHandlingOption
+        {
+            RemoveOrInternalize = 0,
+            Internalize = 1,
+            KeepAll = 2
+        }
+
+        public static void Initialize(
+            string outputFolder,
+            string? ns,
+            string? name,
+            string[] sharedSourceFolders,
+            bool saveInputs,
+            bool azureArm,
+            bool publicClients,
+            bool modelNamespace,
+            bool headAsBoolean,
+            bool skipCSProjPackageReference,
+            bool generation1ConvenienceClient,
+            bool singleTopLevelClient,
+            bool skipSerializationFormatXml,
+            bool disablePaginationTopRenaming,
+            UnreferencedTypesHandlingOption unreferencedTypesHandling,
+            string? projectFolder,
+            string[] protocolMethodList,
+            IReadOnlyList<string> suppressAbstractBaseClasses,
+            MgmtConfiguration mgmtConfiguration,
+            MgmtTestConfiguration? mgmtTestConfiguration)
         {
             _outputFolder = outputFolder;
             Namespace = ns;
@@ -47,11 +78,24 @@ namespace AutoRest.CSharp.Input
             SkipCSProjPackageReference = skipCSProjPackageReference;
             Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
-            _projectFolder = Path.IsPathRooted(projectFolder) ? Path.GetRelativePath(outputFolder, projectFolder) : projectFolder;
+            UnreferencedTypesHandling = unreferencedTypesHandling;
+            projectFolder ??= ProjectFolderDefault;
+            if (Path.IsPathRooted(projectFolder))
+            {
+                _absoluteProjectFolder = projectFolder;
+                projectFolder = Path.GetRelativePath(outputFolder, projectFolder);
+            }
+            else
+            {
+                _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
+            }
+            _relativeProjectFolder = projectFolder;
             _protocolMethodList = protocolMethodList;
             SkipSerializationFormatXml = skipSerializationFormatXml;
             DisablePaginationTopRenaming = disablePaginationTopRenaming;
             _mgmtConfiguration = mgmtConfiguration;
+            MgmtTestConfiguration = mgmtTestConfiguration;
+            _suppressAbstractBaseClasses = suppressAbstractBaseClasses;
         }
 
         private static string? _outputFolder;
@@ -71,6 +115,9 @@ namespace AutoRest.CSharp.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
+        public static UnreferencedTypesHandlingOption UnreferencedTypesHandling { get; private set; }
+        private static IReadOnlyList<string>? _suppressAbstractBaseClasses;
+        public static IReadOnlyList<string> SuppressAbstractBaseClasses => _suppressAbstractBaseClasses ?? throw new InvalidOperationException("Configuration has not been initialized");
 
         private static string[]? _protocolMethodList;
         public static string[] ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -78,8 +125,12 @@ namespace AutoRest.CSharp.Input
         private static MgmtConfiguration? _mgmtConfiguration;
         public static MgmtConfiguration MgmtConfiguration => _mgmtConfiguration ?? throw new InvalidOperationException("Configuration has not been initialized");
 
-        private static string? _projectFolder;
-        public static string ProjectFolder => _projectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
+        public static MgmtTestConfiguration? MgmtTestConfiguration { get; private set; }
+
+        private static string? _relativeProjectFolder;
+        public static string RelativeProjectFolder => _relativeProjectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
+        private static string? _absoluteProjectFolder;
+        public static string AbsoluteProjectFolder => _absoluteProjectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
 
         public static void Initialize(IPluginCommunication autoRest)
         {
@@ -88,28 +139,53 @@ namespace AutoRest.CSharp.Input
                 ns: autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult(),
                 name: autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult(),
                 sharedSourceFolders: GetRequiredOption<string[]>(autoRest, Options.SharedSourceFolders).Select(TrimFileSuffix).ToArray(),
-                saveInputs: GetOptionValue(autoRest, Options.SaveInputs),
-                azureArm: GetOptionValue(autoRest, Options.AzureArm),
-                publicClients: GetOptionValue(autoRest, Options.PublicClients),
-                modelNamespace: GetOptionValue(autoRest, Options.ModelNamespace),
-                headAsBoolean: GetOptionValue(autoRest, Options.HeadAsBoolean),
-                skipCSProjPackageReference: GetOptionValue(autoRest, Options.SkipCSProjPackageReference),
-                generation1ConvenienceClient: GetOptionValue(autoRest, Options.Generation1ConvenienceClient),
-                singleTopLevelClient: GetOptionValue(autoRest, Options.SingleTopLevelClient),
-                skipSerializationFormatXml: GetOptionValue(autoRest, Options.SkipSerializationFormatXml),
-                disablePaginationTopRenaming: GetOptionValue(autoRest, Options.DisablePaginationTopRenaming),
-                projectFolder: GetOptionStringValue(autoRest, Options.ProjectFolder, TrimFileSuffix),
+                saveInputs: GetOptionBoolValue(autoRest, Options.SaveInputs),
+                azureArm: GetOptionBoolValue(autoRest, Options.AzureArm),
+                publicClients: GetOptionBoolValue(autoRest, Options.PublicClients),
+                modelNamespace: GetOptionBoolValue(autoRest, Options.ModelNamespace),
+                headAsBoolean: GetOptionBoolValue(autoRest, Options.HeadAsBoolean),
+                skipCSProjPackageReference: GetOptionBoolValue(autoRest, Options.SkipCSProjPackageReference),
+                generation1ConvenienceClient: GetOptionBoolValue(autoRest, Options.Generation1ConvenienceClient),
+                singleTopLevelClient: GetOptionBoolValue(autoRest, Options.SingleTopLevelClient),
+                skipSerializationFormatXml: GetOptionBoolValue(autoRest, Options.SkipSerializationFormatXml),
+                disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
+                unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
+                projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest)
+                suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
+                mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest)
             );
         }
 
-        private static bool GetOptionValue(IPluginCommunication autoRest, string option)
+        private static T GetOptionEnumValue<T>(IPluginCommunication autoRest, string option) where T : struct, Enum
         {
-            return autoRest.GetValue<bool?>(option).GetAwaiter().GetResult() ?? GetDefaultOptionValue(option)!.Value;
+            var enumStr = autoRest.GetValue<string?>(option).GetAwaiter().GetResult();
+            return GetOptionEnumValueFromString<T>(option, enumStr);
         }
 
-        public static bool? GetDefaultOptionValue(string option)
+        internal static T GetOptionEnumValueFromString<T>(string option, string? enumStrValue) where T : struct, Enum
+        {
+            if (Enum.TryParse<T>(enumStrValue, true, out var enumValue))
+            {
+                return enumValue;
+            }
+
+            return (T)GetDefaultEnumOptionValue(option)!;
+        }
+
+        public static Enum? GetDefaultEnumOptionValue(string option) => option switch
+        {
+            Options.UnreferencedTypesHandling => UnreferencedTypesHandlingOption.RemoveOrInternalize,
+            _ => null
+        };
+
+        private static bool GetOptionBoolValue(IPluginCommunication autoRest, string option)
+        {
+            return autoRest.GetValue<bool?>(option).GetAwaiter().GetResult() ?? GetDefaultBoolOptionValue(option)!.Value;
+        }
+
+        public static bool? GetDefaultBoolOptionValue(string option)
         {
             switch (option)
             {
@@ -138,23 +214,6 @@ namespace AutoRest.CSharp.Input
             }
         }
 
-        private static string GetOptionStringValue(IPluginCommunication autoRest, string option, Func<string, string>? func)
-        {
-            var projectFolder = autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult();
-            return projectFolder == null ? GetDefaultOptionStringValue(option)! : (func == null ? projectFolder : func(projectFolder));
-        }
-
-        public static string? GetDefaultOptionStringValue(string option)
-        {
-            switch (option)
-            {
-                case Options.ProjectFolder:
-                    return "../";
-                default:
-                    return null;
-            }
-        }
-
         private static T GetRequiredOption<T>(IPluginCommunication autoRest, string name)
         {
             return autoRest.GetValue<T>(name).GetAwaiter().GetResult() ?? throw new InvalidOperationException($"{name} configuration parameter is required");
@@ -169,5 +228,16 @@ namespace AutoRest.CSharp.Input
 
             return path;
         }
+
+        internal static bool IsValidJsonElement(JsonElement? element)
+        {
+            return element != null && element?.ValueKind != JsonValueKind.Null && element?.ValueKind != JsonValueKind.Undefined;
+        }
+
+        public static bool DeserializeBoolean(JsonElement? jsonElement, bool defaultValue = false)
+            => jsonElement == null || !Configuration.IsValidJsonElement(jsonElement) ? defaultValue : Convert.ToBoolean(jsonElement.ToString());
+
+        public static IReadOnlyList<string> DeserializeArray(JsonElement jsonElement)
+            => jsonElement.ValueKind != JsonValueKind.Array ? Array.Empty<string>() : jsonElement.EnumerateArray().Select(t => t.ToString()).ToArray();
     }
 }

@@ -1,7 +1,9 @@
 import "@cadl-lang/rest";
 import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
 
 using Cadl.Http;
+using Azure.DPG;
 
 @serviceTitle("MultiInterfaceClient")
 @serviceVersion("1.0.0")
@@ -25,7 +27,7 @@ model Cat {
 interface dogs {
   @doc("Illustrate grouping operations on subclient.")
   @get
-  @OpenAPI.extension("x-ms-convenient-api", true)
+  @convenientAPI(true)
   getDogsConvenient(): Dog;
 
   @doc("Illustrate grouping operations on subclient.")

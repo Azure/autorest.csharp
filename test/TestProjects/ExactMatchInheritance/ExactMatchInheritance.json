@@ -518,6 +518,56 @@
                 },
                 "type4": {
                     "type": "string"
+                },
+                "type5": {
+                    "type": "object",
+                    "x-ms-format": "dfe-string"
+                },
+                "type6": {
+                    "type": "object",
+                    "x-ms-format": "dfe-float"
+                },
+                "type7": {
+                    "type": "object",
+                    "x-ms-format": "dfe-bool"
+                },
+                "type8": {
+                    "type": "object",
+                    "x-ms-format": "dfe-int"
+                },
+                "type9": {
+                  "type": "object",
+                  "x-ms-format": "dfe-object"
+                },
+                "type10": {
+                  "type": "object",
+                  "x-ms-format": "dfe-list-generic",
+                  "x-ms-format-element-definition": "SeparateClass"
+                },
+                "type11": {
+                  "type": "object",
+                  "x-ms-format": "dfe-list-string"
+                },
+                "type12": {
+                  "type": "object",
+                  "x-ms-format": "dfe-key-value-pairs"
+                },
+                "type13": {
+                    "type": "object",
+                    "x-ms-format": "dfe-list-generic",
+                    "x-ms-format-element-definition": "#/definitions/SeparateClass"
+                },
+                "type14": {
+                    "type": "object",
+                    "x-ms-format": "dfe-date-time"
+                },
+                "type15": {
+                    "type": "object",
+                    "x-ms-format": "dfe-duration"
+                },
+                "type16": {
+                    "type": "object",
+                    "x-ms-format": "dfe-uri"
                 }
             },
             "allOf": [
@@ -709,6 +759,19 @@
                     "type": "string"
                 }
             }
+        },
+        "SeparateClass": {
+          "type": "object",
+          "properties": {
+            "StringProperty":
+            {
+              "type": "string"
+            },
+            "ModelProperty":
+            {
+              "$ref": "#/definitions/ExactMatchModel10"
+            }
+          }
         }
     },
     "parameters": {

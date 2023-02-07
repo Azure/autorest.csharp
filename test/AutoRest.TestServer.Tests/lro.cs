@@ -120,7 +120,7 @@ namespace AutoRest.TestServer.Tests
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch201RetryWithAsyncHeaderAsync();
             var resp = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("/lro/patch/201/retry/onlyAsyncHeader/operationStatuses/201", resp.Value.Id);
+            Assert.AreEqual("/lro/patch/201/retry/onlyAsyncHeader", resp.Value.Id);
         });
 
         [Test]
@@ -128,7 +128,7 @@ namespace AutoRest.TestServer.Tests
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch201RetryWithAsyncHeader();
             var resp = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("/lro/patch/201/retry/onlyAsyncHeader/operationStatuses/201", resp.Value.Id);
+            Assert.AreEqual("/lro/patch/201/retry/onlyAsyncHeader", resp.Value.Id);
         });
 
         [Test]
@@ -136,7 +136,7 @@ namespace AutoRest.TestServer.Tests
         {
             var operation = await new LROsClient(ClientDiagnostics, pipeline, host).StartPatch202RetryWithAsyncAndLocationHeaderAsync();
             var resp = await operation.WaitForCompletionAsync().ConfigureAwait(false);
-            Assert.AreEqual("/lro/patch/202/retry/asyncAndLocationHeader/operationResults/202/finalResults/202", resp.Value.Id);
+            Assert.AreEqual("/lro/patch/202/retry/asyncAndLocationHeader", resp.Value.Id);
         });
 
         [Test]
@@ -144,7 +144,7 @@ namespace AutoRest.TestServer.Tests
         {
             var operation = new LROsClient(ClientDiagnostics, pipeline, host).StartPatch202RetryWithAsyncAndLocationHeader();
             var resp = WaitForCompletionWithValue(operation);
-            Assert.AreEqual("/lro/patch/202/retry/asyncAndLocationHeader/operationResults/202/finalResults/202", resp.Value.Id);
+            Assert.AreEqual("/lro/patch/202/retry/asyncAndLocationHeader", resp.Value.Id);
         });
 
         [Test]

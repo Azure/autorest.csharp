@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using Azure.Core;
 
 namespace xml_service.Models
 {
@@ -21,22 +22,10 @@ namespace xml_service.Models
         /// <exception cref="ArgumentNullException"> <paramref name="allowedOrigins"/>, <paramref name="allowedMethods"/>, <paramref name="allowedHeaders"/> or <paramref name="exposedHeaders"/> is null. </exception>
         public CorsRule(string allowedOrigins, string allowedMethods, string allowedHeaders, string exposedHeaders, int maxAgeInSeconds)
         {
-            if (allowedOrigins == null)
-            {
-                throw new ArgumentNullException(nameof(allowedOrigins));
-            }
-            if (allowedMethods == null)
-            {
-                throw new ArgumentNullException(nameof(allowedMethods));
-            }
-            if (allowedHeaders == null)
-            {
-                throw new ArgumentNullException(nameof(allowedHeaders));
-            }
-            if (exposedHeaders == null)
-            {
-                throw new ArgumentNullException(nameof(exposedHeaders));
-            }
+            Argument.AssertNotNull(allowedOrigins, nameof(allowedOrigins));
+            Argument.AssertNotNull(allowedMethods, nameof(allowedMethods));
+            Argument.AssertNotNull(allowedHeaders, nameof(allowedHeaders));
+            Argument.AssertNotNull(exposedHeaders, nameof(exposedHeaders));
 
             AllowedOrigins = allowedOrigins;
             AllowedMethods = allowedMethods;

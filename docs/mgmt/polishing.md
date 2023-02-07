@@ -8,6 +8,7 @@
     - [Rename a property in a class](#rename-a-property-in-a-class)
     - [Change the format of a property](#change-the-format-of-a-property)
     - [Rename an enumeration value in an enumeration type](#rename-an-enumeration-value-in-an-enumeration-type)
+  - [Rename a parameter in an operation](#rename-a-parameter-in-an-operation)
   - [Irregular Plural Words](#irregular-plural-words)
   - [Keep Plural Enums](#keep-plural-enums)
   - [Suppress Abstract Base Class](#suppress-abstract-base-class)
@@ -225,6 +226,20 @@ rename-mapping:
 ```
 where the `EnumType` is the original name of the enumeration type in the **swagger**, and `enum_value` is the original name of the enumeration value in the **swagger**. In case we have spaces or other special character, you might need to use quotes to enclosing the key in this mapping to ensure everything is good without compile errors.
 
+## Rename a parameter in an operation
+
+There is a configuration that allows you to change the parameter names in an operation. For instance,
+```yaml
+parameter-rename-mapping:
+  VirtualMachines_CreateOrUpdate:
+    name: vmName
+```
+This configuration is a two-level dictionary. The key of the first level dictionary is the operation id you would like to change. In the above sample, the generator will change the parameter names that match in the operation with operation id `VirtualMachines_CreateOrUpdate`.
+
+The value of the first level dictionary of this configuration is another dictionary, the original parameter name as its keys, and the desired parameter name as its value. In the above sample, the generator will rename the parameter `name` to `vmName` in the operation `VirtualMachines_CreateOrUpdate`.
+
+If the parameter name specified does not exist in the specified operation, nothing will happen.
+
 ## Irregular Plural Words
 
 The generator needs to convert word into its plural form or convert it back to its singular form in some circumstances. Our generator uses the [Humanizer](https://humanizr.net/) to do that. It has a dictionary of irregular words and if a word is not in the dictionary, it will use some built-in rules to convert the word.
@@ -249,6 +264,8 @@ keep-plural-enums:
 ## Suppress Abstract Base Class
 
 The generator will add an `abstract` modifier to the base class when its has a discriminator. This could help the user understand that it is the derived classes that really work as the base class isn't allowed to be instantiated. However, we also provide the configuration to suppress this feature, you can use `suppress-abstract-base-class` with the corresponding class name to remove the `abstract` modifier. In particular, it should be noted that there is difference between the original model name in swagger and the name in the final generated SDK and this configuration requires the finalized model name in SDK.
+
+**[Note]:** The class names specified under `suppress-abstract-base-class` are **original names**, not the names changed after applying renaming directives.
 
 ```yaml
 suppress-abstract-base-class:
