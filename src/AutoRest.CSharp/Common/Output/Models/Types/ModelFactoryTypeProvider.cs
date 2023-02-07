@@ -196,7 +196,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties);
             // we skip the models with internal properties when the internal property is neither a discriminator or safe flattened
-            if (properties.Any(p => p.Declaration.Accessibility != "public" && (p.SchemaProperty?.IsDiscriminator is not true && p.FlattenedProperty == null)))
+            if (properties.Any(p => p.Declaration.Accessibility != "public" && (model.Discriminator?.Property != p && p.FlattenedProperty == null)))
             {
                 return false;
             }
