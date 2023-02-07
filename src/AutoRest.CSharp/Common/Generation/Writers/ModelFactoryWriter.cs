@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, assignment, parameter.Type));
             }
 
-            if (!Configuration.ModelFactoryForHlc && model.Discriminator is ObjectTypeDiscriminator discriminator)
+            if (model.Discriminator is ObjectTypeDiscriminator discriminator && !Configuration.ModelFactoryForHlc.Contains(model.Declaration.Name))
             {
                 if (discriminator.Value is Constant discriminatorValue)
                 {

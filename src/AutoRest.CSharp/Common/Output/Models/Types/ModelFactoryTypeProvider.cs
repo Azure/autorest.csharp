@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = "public";
         }
 
-        public static ModelFactoryTypeProvider? TryCreate(string defaultLibraryName, string rootNamespaceName, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel, bool onlyIncludesReadOnlyModels = false)
+        public static ModelFactoryTypeProvider? TryCreate(string defaultLibraryName, string rootNamespaceName, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
         {
             var objectTypes = models.OfType<SerializableObjectType>()
                 .Where(RequiresModelFactory)
@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var inputType = property.Declaration.Type;
                 Constant? overriddenDefaultValue = null;
                 // check if the property is the discriminator, but skip the check if the configuration is on for HLC only
-                if (!Configuration.ModelFactoryForHlc && discriminator != null && discriminator.Property == property)
+                if (discriminator != null && discriminator.Property == property && !Configuration.ModelFactoryForHlc.Contains(modelType.Declaration.Name))
                 {
                     var value = discriminator.Value;
                     if (value != null)
@@ -195,6 +195,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            // we skip the models with internal properties when the internal property is neither a discriminator or safe flattened
+            if (properties.Any(p => p.Declaration.Accessibility != "public" && (p.SchemaProperty?.IsDiscriminator is not true && p.FlattenedProperty == null)))
+            {
+                return false;
+            }
 
             if (!properties.Any(p => p.IsReadOnly && !TypeFactory.IsReadWriteDictionary(p.ValueType) && !TypeFactory.IsReadWriteList(p.ValueType)))
             {
