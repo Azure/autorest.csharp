@@ -27,7 +27,7 @@ model Cat {
 interface dogs {
   @doc("Illustrate grouping operations on subclient.")
   @get
-  @convenienceAPI
+  @convenientAPI(true)
   getDogsConvenient(): Dog;
 
   @doc("Illustrate grouping operations on subclient.")

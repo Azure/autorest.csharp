@@ -51,7 +51,7 @@ model DetectionResult {
 For asynchronous inference, get multivariate anomaly detection result based on
 resultId returned by the BatchDetectAnomaly api.
 """)
-@convenienceAPI("ConvenienceGet")
+@convenientAPI(true)
 op GetBatchDetectionResult(
   @format("uuid")
   @path resultId: string,

@@ -160,7 +160,7 @@ stages:
         - Release
       jobs:
         - job: Update
-          timeoutInMinutes: 120
+          timeoutInMinutes: 180
           pool:
             vmImage: ubuntu-20.04
           variables:

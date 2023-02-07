@@ -70,7 +70,7 @@ Expected input body:
 """)
 @route("/valid")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op postValid(@body input: Siamese): OkResponse;
 
 @scenario
@@ -83,14 +83,14 @@ Expected response body:
 """)
 @route("/valid")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op getValid(): Siamese;
 
 @scenario
 @scenarioDoc("Generate, send, and receive round-trip bottom model.")
 @route("/valid")
 @put
-@convenienceAPI
+@convenientAPI(true)
 op putValid(@body input: Siamese): Siamese;
 
 @route("/discriminated")
@@ -105,7 +105,7 @@ interface Discriminated {
   ```
   """)
   @get
-  @convenienceAPI
+  @convenientAPI(true)
   getModel(): Fish;
 
   @scenario
@@ -118,7 +118,7 @@ interface Discriminated {
   ```
   """)
   @put
-  @convenienceAPI
+  @convenientAPI(true)
   putModel(@body input: Fish): OkResponse;
 
   @scenario
@@ -187,7 +187,7 @@ interface Discriminated {
   ```
   """)
   @get
-  @convenienceAPI
+  @convenientAPI(true)
   getRecursiveModel(): Fish;
 
   @scenario
@@ -256,7 +256,7 @@ interface Discriminated {
   ```
   """)
   @put
-  @convenienceAPI
+  @convenientAPI(true)
   putRecursiveModel(@body input: Fish): OkResponse;
 
   @scenario
@@ -269,7 +269,7 @@ interface Discriminated {
   ```
   """)
   @get
-  @convenienceAPI
+  @convenientAPI(true)
   getMissingDiscriminator(): Fish;
 
   @scenario
@@ -282,6 +282,6 @@ interface Discriminated {
   ```
   """)
   @get
-  @convenienceAPI
+  @convenientAPI(true)
   getWrongDiscriminator(): Fish;
 }

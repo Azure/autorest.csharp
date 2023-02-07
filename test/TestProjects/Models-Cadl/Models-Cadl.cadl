@@ -361,50 +361,50 @@ model RoundTripRecursiveModel {
 @route("/inputToRoundTrip")
 @doc("Input to RoundTrip")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op inputToRoundTrip(@body input: InputModel): RoundTripModel;
 
 @route("/inputToRoundTripPrimitive")
 @doc("Input to RoundTripPrimitive")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op inputToRoundTripPrimitive(@body input: InputModel): RoundTripPrimitiveModel;
 
 @route("/inputToRoundTripOptional")
 @doc("Input to RoundTripOptional")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op inputToRoundTripOptional(@body input: RoundTripOptionalModel): RoundTripOptionalModel;
 
 @route("/inputToRoundTripReadOnly")
 @doc("Input to RoundTripReadOnly")
 @get
-@convenienceAPI
+@convenientAPI(true)
 @deprecated("deprecated for test")
 op inputToRoundTripReadOnly(@body input: InputModel): RoundTripReadOnlyModel;
 
 @route("/roundTripToOutput")
 @doc("RoundTrip to Output")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op roundTripToOutput(@body input: RoundTripModel): OutputModel;
 
 @route("/inputRecursive")
 @doc("Input recursive model")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op InputRecursive(@body input: InputRecursiveModel): Response<200>|ErrorModel;
 
 @route("/roundTripRecursive")
 @doc("RoundTrip recursive model")
 @put
-@convenienceAPI
+@convenientAPI(true)
 op roundTripRecursive(@body input: RoundTripRecursiveModel): RoundTripRecursiveModel;
 
 @route("/selfReference")
 @doc("Returns model that has property of its own type")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op selfReference(): ErrorModel;
 
 @doc("Base model")
@@ -421,5 +421,5 @@ model RoundTripOnNoUse extends NoUseBase {
 
 @doc("Returns RoundTripOnNoUse")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op roundTripToOutputWithNoUseBase(@body input: RoundTripOnNoUse): RoundTripOnNoUse;

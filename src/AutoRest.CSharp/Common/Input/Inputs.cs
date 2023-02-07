@@ -62,6 +62,7 @@ namespace AutoRest.CSharp.Common.Input
         bool BufferResponse,
         OperationLongRunning? LongRunning,
         OperationPaging? Paging,
+        bool GenerateProtocolMethod,
         bool GenerateConvenienceMethod)
     {
         public InputOperation() : this(
@@ -82,6 +83,7 @@ namespace AutoRest.CSharp.Common.Input
             BufferResponse: false,
             LongRunning: null,
             Paging: null,
+            GenerateProtocolMethod: true,
             GenerateConvenienceMethod: false)
         { }
     }
