@@ -16,7 +16,7 @@ namespace ModelsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("discriminatorProperty");
+            writer.WritePropertyName("discriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty);
             writer.WriteEndObject();
         }

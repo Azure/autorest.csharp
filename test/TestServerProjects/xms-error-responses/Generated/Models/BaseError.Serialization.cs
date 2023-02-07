@@ -17,7 +17,7 @@ namespace xms_error_responses.Models
             Optional<string> someBaseProp = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("someBaseProp"))
+                if (property.NameEquals("someBaseProp"u8))
                 {
                     someBaseProp = property.Value.GetString();
                     continue;

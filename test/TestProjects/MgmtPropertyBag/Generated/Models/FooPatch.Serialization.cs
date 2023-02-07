@@ -17,7 +17,7 @@ namespace MgmtPropertyBag.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Details))
             {
-                writer.WritePropertyName("details");
+                writer.WritePropertyName("details"u8);
                 writer.WriteStringValue(Details);
             }
             writer.WriteEndObject();

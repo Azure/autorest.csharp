@@ -16,18 +16,18 @@ namespace additionalProperties.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("id");
+            writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
             if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("name");
+                writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            writer.WritePropertyName("@odata.location");
+            writer.WritePropertyName("@odata.location"u8);
             writer.WriteStringValue(OdataLocation);
             if (Optional.IsCollectionDefined(AdditionalProperties))
             {
-                writer.WritePropertyName("additionalProperties");
+                writer.WritePropertyName("additionalProperties"u8);
                 writer.WriteStartObject();
                 foreach (var item in AdditionalProperties)
                 {
@@ -55,17 +55,17 @@ namespace additionalProperties.Models
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("status"))
+                if (property.NameEquals("status"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -75,12 +75,12 @@ namespace additionalProperties.Models
                     status = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("@odata.location"))
+                if (property.NameEquals("@odata.location"u8))
                 {
                     odataLocation = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("additionalProperties"))
+                if (property.NameEquals("additionalProperties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

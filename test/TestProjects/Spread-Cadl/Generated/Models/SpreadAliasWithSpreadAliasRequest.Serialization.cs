@@ -15,9 +15,9 @@ namespace Spread.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            writer.WritePropertyName("age");
+            writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }

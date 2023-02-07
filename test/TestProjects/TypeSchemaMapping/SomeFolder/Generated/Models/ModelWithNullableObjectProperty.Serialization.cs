@@ -17,7 +17,7 @@ namespace TypeSchemaMapping.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
             {
-                writer.WritePropertyName("ModelProperty");
+                writer.WritePropertyName("ModelProperty"u8);
                 ModelProperty.WriteTo(writer);
             }
             writer.WriteEndObject();
@@ -28,7 +28,7 @@ namespace TypeSchemaMapping.Models
             Optional<JsonElement> modelProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ModelProperty"))
+                if (property.NameEquals("ModelProperty"u8))
                 {
                     modelProperty = property.Value.Clone();
                     continue;

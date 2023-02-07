@@ -20,7 +20,7 @@ namespace CognitiveSearch.Models
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("@search.text"))
+                if (property.NameEquals("@search.text"u8))
                 {
                     searchText = property.Value.GetString();
                     continue;

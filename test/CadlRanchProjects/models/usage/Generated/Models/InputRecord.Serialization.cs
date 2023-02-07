@@ -15,7 +15,7 @@ namespace Models.Usage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredProp");
+            writer.WritePropertyName("requiredProp"u8);
             writer.WriteStringValue(RequiredProp);
             writer.WriteEndObject();
         }

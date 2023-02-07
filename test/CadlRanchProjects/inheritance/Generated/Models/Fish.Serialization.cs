@@ -16,9 +16,9 @@ namespace Models.Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("kind");
+            writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            writer.WritePropertyName("age");
+            writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }

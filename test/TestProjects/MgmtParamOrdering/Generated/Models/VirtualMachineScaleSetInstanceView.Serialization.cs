@@ -17,7 +17,7 @@ namespace MgmtParamOrdering.Models
             Optional<string> virtualMachine = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("virtualMachine"))
+                if (property.NameEquals("virtualMachine"u8))
                 {
                     virtualMachine = property.Value.GetString();
                     continue;

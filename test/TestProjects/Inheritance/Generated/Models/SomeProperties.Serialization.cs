@@ -17,12 +17,12 @@ namespace Inheritance.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(SomeProperty))
             {
-                writer.WritePropertyName("SomeProperty");
+                writer.WritePropertyName("SomeProperty"u8);
                 writer.WriteStringValue(SomeProperty);
             }
             if (Optional.IsDefined(SomeOtherProperty))
             {
-                writer.WritePropertyName("SomeOtherProperty");
+                writer.WritePropertyName("SomeOtherProperty"u8);
                 writer.WriteStringValue(SomeOtherProperty);
             }
             writer.WriteEndObject();
@@ -34,12 +34,12 @@ namespace Inheritance.Models
             Optional<string> someOtherProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("SomeProperty"))
+                if (property.NameEquals("SomeProperty"u8))
                 {
                     someProperty = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("SomeOtherProperty"))
+                if (property.NameEquals("SomeOtherProperty"u8))
                 {
                     someOtherProperty = property.Value.GetString();
                     continue;

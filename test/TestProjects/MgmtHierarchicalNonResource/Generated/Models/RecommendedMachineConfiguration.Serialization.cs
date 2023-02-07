@@ -18,7 +18,7 @@ namespace MgmtHierarchicalNonResource.Models
             Optional<ResourceRange> memory = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("vCPUs"))
+                if (property.NameEquals("vCPUs"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -28,7 +28,7 @@ namespace MgmtHierarchicalNonResource.Models
                     vCpus = ResourceRange.DeserializeResourceRange(property.Value);
                     continue;
                 }
-                if (property.NameEquals("memory"))
+                if (property.NameEquals("memory"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

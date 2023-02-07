@@ -30,17 +30,17 @@ namespace MgmtHierarchicalNonResource.Models
             Optional<string> uniqueId = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("location"))
+                if (property.NameEquals("location"u8))
                 {
                     location = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -49,7 +49,7 @@ namespace MgmtHierarchicalNonResource.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("osType"))
+                        if (property0.NameEquals("osType"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -59,7 +59,7 @@ namespace MgmtHierarchicalNonResource.Models
                             osType = property0.Value.GetString().ToOperatingSystemType();
                             continue;
                         }
-                        if (property0.NameEquals("osState"))
+                        if (property0.NameEquals("osState"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -69,7 +69,7 @@ namespace MgmtHierarchicalNonResource.Models
                             osState = property0.Value.GetString().ToOperatingSystemStateType();
                             continue;
                         }
-                        if (property0.NameEquals("endOfLifeDate"))
+                        if (property0.NameEquals("endOfLifeDate"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -79,7 +79,7 @@ namespace MgmtHierarchicalNonResource.Models
                             endOfLifeDate = property0.Value.GetDateTimeOffset("O");
                             continue;
                         }
-                        if (property0.NameEquals("identifier"))
+                        if (property0.NameEquals("identifier"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -89,7 +89,7 @@ namespace MgmtHierarchicalNonResource.Models
                             identifier = GalleryImageIdentifier.DeserializeGalleryImageIdentifier(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("recommended"))
+                        if (property0.NameEquals("recommended"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -99,7 +99,7 @@ namespace MgmtHierarchicalNonResource.Models
                             recommended = RecommendedMachineConfiguration.DeserializeRecommendedMachineConfiguration(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("disallowed"))
+                        if (property0.NameEquals("disallowed"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -109,7 +109,7 @@ namespace MgmtHierarchicalNonResource.Models
                             disallowed = Disallowed.DeserializeDisallowed(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("hyperVGeneration"))
+                        if (property0.NameEquals("hyperVGeneration"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -119,7 +119,7 @@ namespace MgmtHierarchicalNonResource.Models
                             hyperVGeneration = new HyperVGeneration(property0.Value.GetString());
                             continue;
                         }
-                        if (property0.NameEquals("features"))
+                        if (property0.NameEquals("features"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -134,7 +134,7 @@ namespace MgmtHierarchicalNonResource.Models
                             features = array;
                             continue;
                         }
-                        if (property0.NameEquals("purchasePlan"))
+                        if (property0.NameEquals("purchasePlan"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -147,7 +147,7 @@ namespace MgmtHierarchicalNonResource.Models
                     }
                     continue;
                 }
-                if (property.NameEquals("identifier"))
+                if (property.NameEquals("identifier"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -156,7 +156,7 @@ namespace MgmtHierarchicalNonResource.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("uniqueId"))
+                        if (property0.NameEquals("uniqueId"u8))
                         {
                             uniqueId = property0.Value.GetString();
                             continue;

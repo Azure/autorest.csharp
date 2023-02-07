@@ -16,11 +16,11 @@ namespace ModelsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("message");
+            writer.WritePropertyName("message"u8);
             writer.WriteStringValue(Message);
             if (Optional.IsDefined(Inner))
             {
-                writer.WritePropertyName("inner");
+                writer.WritePropertyName("inner"u8);
                 writer.WriteObjectValue(Inner);
             }
             writer.WriteEndObject();
@@ -32,12 +32,12 @@ namespace ModelsInCadl.Models
             Optional<RoundTripRecursiveModel> inner = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("message"))
+                if (property.NameEquals("message"u8))
                 {
                     message = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("inner"))
+                if (property.NameEquals("inner"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
