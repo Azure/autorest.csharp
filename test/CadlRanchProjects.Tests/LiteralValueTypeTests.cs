@@ -5,14 +5,7 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 using CadlFirstTest.Models;
 using CadlFirstTest;
-using Azure.Identity;
 using System.Threading.Tasks;
-using static CadlRanchProjects.Tests.OAuth2Tests;
-using Azure.Core;
-using Authentication.OAuth2;
-using Azure.Core.Pipeline;
-using System;
-using System.Collections.Generic;
 
 namespace CadlRanchProjects.Tests
 {

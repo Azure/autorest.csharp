@@ -601,6 +601,7 @@
      "Uri": "{firstTestCadlUrl}",
      "Path": "/top/{action}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -662,6 +663,7 @@
      "Uri": "{firstTestCadlUrl}",
      "Path": "/top2",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -770,6 +772,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -878,6 +881,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -986,6 +990,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -1063,6 +1068,7 @@
      "Uri": "{firstTestCadlUrl}",
      "Path": "/",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1184,6 +1190,7 @@
      "Uri": "{firstTestCadlUrl}",
      "Path": "/hello",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1338,6 +1345,7 @@
       "text/plain"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -1486,6 +1494,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -1547,6 +1556,7 @@
      "Uri": "{firstTestCadlUrl}",
      "Path": "/demoHi",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -1655,6 +1665,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -1815,6 +1826,7 @@
      "Uri": "{firstTestCadlUrl}",
      "Path": "/helloLiteral/{p2}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -1876,23 +1888,192 @@
      "Uri": "{firstTestCadlUrl}",
      "Path": "/unknown-value",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "194",
+     "Name": "internalProtocol",
+     "ResourceName": "ProtocolAndConvenient",
+     "Description": "When set protocol false and convenient true, then the protocol method should be internal",
+     "Parameters": [
+      {
+       "$ref": "69"
+      },
+      {
+       "$id": "195",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "18"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "196",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "197",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "198",
+        "Type": {
+         "$ref": "197"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "199",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "200",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "201",
+        "Type": {
+         "$ref": "200"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "76"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "202",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "18"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{firstTestCadlUrl}",
+     "Path": "/internalProtocol",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": false,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "203",
+     "Name": "stillConvenient",
+     "ResourceName": "ProtocolAndConvenient",
+     "Description": "When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one",
+     "Parameters": [
+      {
+       "$ref": "69"
+      },
+      {
+       "$id": "204",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "205",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "206",
+        "Type": {
+         "$ref": "205"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "76"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "207",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{firstTestCadlUrl}",
+     "Path": "/stillConvenient",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": false,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "194"
+    "$id": "208"
    },
    "Creatable": true
   }
  ],
  "Auth": {
-  "$id": "195",
+  "$id": "209",
   "ApiKey": {
-   "$id": "196",
+   "$id": "210",
    "Name": "x-ms-api-key"
   },
   "OAuth2": {
-   "$id": "197",
+   "$id": "211",
    "Scopes": [
     "https://api.example.com/.default"
    ]

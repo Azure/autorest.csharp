@@ -77,6 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // get the segment in pairs
                 var segmentPairs = SplitDiffIntoPairs(diffPath).ToList();
                 var indexOfProvidersPair = segmentPairs.FindIndex(pair => pair[0] == Segment.Providers);
+                var resourceTypeIdVariableName = idVariableName;
                 // from the tail, check these segments in pairs
                 for (int i = 0; i < segmentPairs.Count; i++)
                 {
@@ -99,7 +100,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                                 }
                                 else
                                 {
-                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.ResourceType.Namespace"));
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{resourceTypeIdVariableName}.ResourceType.Namespace"));
                                 }
                                 // do not append a new .Parent to the id
                             }
@@ -120,6 +121,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         if (keySegment.IsReference)
                         {
                             parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.GetLastType()", new[] { "System.Linq" }));
+                            resourceTypeIdVariableName = $"{idVariableName}{invocationSuffix}";
                             appendParent = true;
                         }
                         else if (keySegment.IsExpandable)

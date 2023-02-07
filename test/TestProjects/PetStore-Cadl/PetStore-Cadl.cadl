@@ -72,22 +72,22 @@ namespace Pets {
   @doc("Delete a pet.")
   @summary("delete.")
   @delete
-  @convenienceAPI
+  @convenientAPI(true)
   op delete(...PetId): Response<200> | Error;
 
   // @fancyDoc("List pets.")
   // op list(@query nextLink?: string): OkResponse<ResponsePage<Pet>> | Error;
 
   @doc("Returns a pet. Supports eTags.")
-  @convenienceAPI
+  @convenientAPI(true)
   op read(...PetId): Pet | (NotModifiedResponse & Pet) | Error;
 
-  @convenienceAPI
+  @convenientAPI(true)
   @post op create(@body pet: Pet): Pet | Error;
 
-  @convenienceAPI
+  @convenientAPI(true)
   @get op getPetByKind(@path kind: PetKind): Pet | Error;
 
-  @convenienceAPI
+  @convenientAPI(true)
   @get op GetFirstPet(@query start?: int32): Pet | Error;
 }

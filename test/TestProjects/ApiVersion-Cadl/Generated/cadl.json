@@ -185,6 +185,7 @@
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/detect-batch/{resultId}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],
