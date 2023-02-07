@@ -21,22 +21,22 @@ namespace MgmtRenameRules
             writer.WriteStartObject();
             if (Optional.IsDefined(Sku))
             {
-                writer.WritePropertyName("sku");
+                writer.WritePropertyName("sku"u8);
                 writer.WriteObjectValue(Sku);
             }
             if (Optional.IsDefined(Plan))
             {
-                writer.WritePropertyName("plan");
+                writer.WritePropertyName("plan"u8);
                 writer.WriteObjectValue(Plan);
             }
             if (Optional.IsDefined(Identity))
             {
-                writer.WritePropertyName("identity");
+                writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
             if (Optional.IsCollectionDefined(Zones))
             {
-                writer.WritePropertyName("zones");
+                writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
                 foreach (var item in Zones)
                 {
@@ -46,7 +46,7 @@ namespace MgmtRenameRules
             }
             if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName("tags");
+                writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
                 foreach (var item in Tags)
                 {
@@ -55,83 +55,83 @@ namespace MgmtRenameRules
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("location");
+            writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(IPsecSomething))
             {
-                writer.WritePropertyName("ipsecSomething");
+                writer.WritePropertyName("ipsecSomething"u8);
                 writer.WriteStringValue(IPsecSomething);
             }
             if (Optional.IsDefined(TestIPsec))
             {
-                writer.WritePropertyName("testIPSec");
+                writer.WritePropertyName("testIPSec"u8);
                 writer.WriteStringValue(TestIPsec);
             }
             if (Optional.IsDefined(P2SServer))
             {
-                writer.WritePropertyName("p2sServer");
+                writer.WritePropertyName("p2sServer"u8);
                 writer.WriteStringValue(P2SServer);
             }
             if (Optional.IsDefined(UpgradePolicy))
             {
-                writer.WritePropertyName("upgradePolicy");
+                writer.WritePropertyName("upgradePolicy"u8);
                 writer.WriteObjectValue(UpgradePolicy);
             }
             if (Optional.IsDefined(AutomaticRepairsPolicy))
             {
-                writer.WritePropertyName("automaticRepairsPolicy");
+                writer.WritePropertyName("automaticRepairsPolicy"u8);
                 writer.WriteObjectValue(AutomaticRepairsPolicy);
             }
             if (Optional.IsDefined(VirtualMachineProfile))
             {
-                writer.WritePropertyName("virtualMachineProfile");
+                writer.WritePropertyName("virtualMachineProfile"u8);
                 writer.WriteObjectValue(VirtualMachineProfile);
             }
             if (Optional.IsDefined(Overprovision))
             {
-                writer.WritePropertyName("overprovision");
+                writer.WritePropertyName("overprovision"u8);
                 writer.WriteBooleanValue(Overprovision.Value);
             }
             if (Optional.IsDefined(DoNotRunExtensionsOnOverprovisionedVms))
             {
-                writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs");
+                writer.WritePropertyName("doNotRunExtensionsOnOverprovisionedVMs"u8);
                 writer.WriteBooleanValue(DoNotRunExtensionsOnOverprovisionedVms.Value);
             }
             if (Optional.IsDefined(SinglePlacementGroup))
             {
-                writer.WritePropertyName("singlePlacementGroup");
+                writer.WritePropertyName("singlePlacementGroup"u8);
                 writer.WriteBooleanValue(SinglePlacementGroup.Value);
             }
             if (Optional.IsDefined(ZoneBalance))
             {
-                writer.WritePropertyName("zoneBalance");
+                writer.WritePropertyName("zoneBalance"u8);
                 writer.WriteBooleanValue(ZoneBalance.Value);
             }
             if (Optional.IsDefined(PlatformFaultDomainCount))
             {
-                writer.WritePropertyName("platformFaultDomainCount");
+                writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
             if (Optional.IsDefined(ProximityPlacementGroup))
             {
-                writer.WritePropertyName("proximityPlacementGroup");
+                writer.WritePropertyName("proximityPlacementGroup"u8);
                 JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
             if (Optional.IsDefined(HostGroup))
             {
-                writer.WritePropertyName("hostGroup");
+                writer.WritePropertyName("hostGroup"u8);
                 JsonSerializer.Serialize(writer, HostGroup);
             }
             if (Optional.IsDefined(AdditionalCapabilities))
             {
-                writer.WritePropertyName("additionalCapabilities");
+                writer.WritePropertyName("additionalCapabilities"u8);
                 writer.WriteObjectValue(AdditionalCapabilities);
             }
             if (Optional.IsDefined(ScaleInPolicy))
             {
-                writer.WritePropertyName("scaleInPolicy");
+                writer.WritePropertyName("scaleInPolicy"u8);
                 writer.WriteObjectValue(ScaleInPolicy);
             }
             writer.WriteEndObject();
@@ -169,7 +169,7 @@ namespace MgmtRenameRules
             Optional<ScaleInPolicy> scaleInPolicy = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("sku"))
+                if (property.NameEquals("sku"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -179,7 +179,7 @@ namespace MgmtRenameRules
                     sku = MgmtRenameRulesSku.DeserializeMgmtRenameRulesSku(property.Value);
                     continue;
                 }
-                if (property.NameEquals("plan"))
+                if (property.NameEquals("plan"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -189,7 +189,7 @@ namespace MgmtRenameRules
                     plan = MgmtRenameRulesPlan.DeserializeMgmtRenameRulesPlan(property.Value);
                     continue;
                 }
-                if (property.NameEquals("identity"))
+                if (property.NameEquals("identity"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -199,7 +199,7 @@ namespace MgmtRenameRules
                     identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("zones"))
+                if (property.NameEquals("zones"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -214,7 +214,7 @@ namespace MgmtRenameRules
                     zones = array;
                     continue;
                 }
-                if (property.NameEquals("tags"))
+                if (property.NameEquals("tags"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -229,27 +229,27 @@ namespace MgmtRenameRules
                     tags = dictionary;
                     continue;
                 }
-                if (property.NameEquals("location"))
+                if (property.NameEquals("location"u8))
                 {
                     location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("systemData"))
+                if (property.NameEquals("systemData"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -259,7 +259,7 @@ namespace MgmtRenameRules
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -268,22 +268,22 @@ namespace MgmtRenameRules
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("ipsecSomething"))
+                        if (property0.NameEquals("ipsecSomething"u8))
                         {
                             ipsecSomething = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("testIPSec"))
+                        if (property0.NameEquals("testIPSec"u8))
                         {
                             testIPsec = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("p2sServer"))
+                        if (property0.NameEquals("p2sServer"u8))
                         {
                             p2sServer = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("upgradePolicy"))
+                        if (property0.NameEquals("upgradePolicy"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -293,7 +293,7 @@ namespace MgmtRenameRules
                             upgradePolicy = UpgradePolicy.DeserializeUpgradePolicy(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("automaticRepairsPolicy"))
+                        if (property0.NameEquals("automaticRepairsPolicy"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -303,7 +303,7 @@ namespace MgmtRenameRules
                             automaticRepairsPolicy = AutomaticRepairsPolicy.DeserializeAutomaticRepairsPolicy(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("virtualMachineProfile"))
+                        if (property0.NameEquals("virtualMachineProfile"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -313,12 +313,12 @@ namespace MgmtRenameRules
                             virtualMachineProfile = VirtualMachineScaleSetVmProfile.DeserializeVirtualMachineScaleSetVmProfile(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("provisioningState"))
+                        if (property0.NameEquals("provisioningState"u8))
                         {
                             provisioningState = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("overprovision"))
+                        if (property0.NameEquals("overprovision"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -328,7 +328,7 @@ namespace MgmtRenameRules
                             overprovision = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("doNotRunExtensionsOnOverprovisionedVMs"))
+                        if (property0.NameEquals("doNotRunExtensionsOnOverprovisionedVMs"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -338,12 +338,12 @@ namespace MgmtRenameRules
                             doNotRunExtensionsOnOverprovisionedVms = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("uniqueId"))
+                        if (property0.NameEquals("uniqueId"u8))
                         {
                             uniqueId = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("singlePlacementGroup"))
+                        if (property0.NameEquals("singlePlacementGroup"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -353,7 +353,7 @@ namespace MgmtRenameRules
                             singlePlacementGroup = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("zoneBalance"))
+                        if (property0.NameEquals("zoneBalance"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -363,7 +363,7 @@ namespace MgmtRenameRules
                             zoneBalance = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("platformFaultDomainCount"))
+                        if (property0.NameEquals("platformFaultDomainCount"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -373,7 +373,7 @@ namespace MgmtRenameRules
                             platformFaultDomainCount = property0.Value.GetInt32();
                             continue;
                         }
-                        if (property0.NameEquals("proximityPlacementGroup"))
+                        if (property0.NameEquals("proximityPlacementGroup"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -383,7 +383,7 @@ namespace MgmtRenameRules
                             proximityPlacementGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
-                        if (property0.NameEquals("hostGroup"))
+                        if (property0.NameEquals("hostGroup"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -393,7 +393,7 @@ namespace MgmtRenameRules
                             hostGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
-                        if (property0.NameEquals("additionalCapabilities"))
+                        if (property0.NameEquals("additionalCapabilities"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -403,7 +403,7 @@ namespace MgmtRenameRules
                             additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("scaleInPolicy"))
+                        if (property0.NameEquals("scaleInPolicy"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {

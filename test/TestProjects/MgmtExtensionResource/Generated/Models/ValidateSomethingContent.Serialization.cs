@@ -17,7 +17,7 @@ namespace MgmtExtensionResource.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Something))
             {
-                writer.WritePropertyName("something");
+                writer.WritePropertyName("something"u8);
                 writer.WriteStringValue(Something);
             }
             writer.WriteEndObject();

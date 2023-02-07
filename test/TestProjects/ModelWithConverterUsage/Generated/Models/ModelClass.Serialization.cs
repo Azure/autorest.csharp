@@ -20,14 +20,14 @@ namespace ModelWithConverterUsage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(StringProperty))
             {
-                writer.WritePropertyName("String_Property");
+                writer.WritePropertyName("String_Property"u8);
                 writer.WriteStringValue(StringProperty);
             }
-            writer.WritePropertyName("Enum_Property");
+            writer.WritePropertyName("Enum_Property"u8);
             writer.WriteStringValue(EnumProperty.ToSerialString());
             if (Optional.IsDefined(ObjProperty))
             {
-                writer.WritePropertyName("Obj_Property");
+                writer.WritePropertyName("Obj_Property"u8);
                 writer.WriteObjectValue(ObjProperty);
             }
             writer.WriteEndObject();
@@ -40,17 +40,17 @@ namespace ModelWithConverterUsage.Models
             Optional<Product> objProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("String_Property"))
+                if (property.NameEquals("String_Property"u8))
                 {
                     stringProperty = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("Enum_Property"))
+                if (property.NameEquals("Enum_Property"u8))
                 {
                     enumProperty = property.Value.GetString().ToEnumProperty();
                     continue;
                 }
-                if (property.NameEquals("Obj_Property"))
+                if (property.NameEquals("Obj_Property"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

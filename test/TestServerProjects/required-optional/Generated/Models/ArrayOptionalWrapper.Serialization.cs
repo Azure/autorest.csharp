@@ -17,7 +17,7 @@ namespace required_optional.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Value))
             {
-                writer.WritePropertyName("value");
+                writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {

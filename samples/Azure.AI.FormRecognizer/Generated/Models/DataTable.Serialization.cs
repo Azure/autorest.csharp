@@ -20,17 +20,17 @@ namespace Azure.AI.FormRecognizer.Models
             IReadOnlyList<DataTableCell> cells = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("rows"))
+                if (property.NameEquals("rows"u8))
                 {
                     rows = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("columns"))
+                if (property.NameEquals("columns"u8))
                 {
                     columns = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("cells"))
+                if (property.NameEquals("cells"u8))
                 {
                     List<DataTableCell> array = new List<DataTableCell>();
                     foreach (var item in property.Value.EnumerateArray())

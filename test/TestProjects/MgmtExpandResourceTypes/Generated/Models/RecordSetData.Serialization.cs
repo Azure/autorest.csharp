@@ -21,14 +21,14 @@ namespace MgmtExpandResourceTypes
             writer.WriteStartObject();
             if (Optional.IsDefined(Etag))
             {
-                writer.WritePropertyName("etag");
+                writer.WritePropertyName("etag"u8);
                 writer.WriteStringValue(Etag);
             }
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Metadata))
             {
-                writer.WritePropertyName("metadata");
+                writer.WritePropertyName("metadata"u8);
                 writer.WriteStartObject();
                 foreach (var item in Metadata)
                 {
@@ -39,17 +39,17 @@ namespace MgmtExpandResourceTypes
             }
             if (Optional.IsDefined(TTL))
             {
-                writer.WritePropertyName("TTL");
+                writer.WritePropertyName("TTL"u8);
                 writer.WriteNumberValue(TTL.Value);
             }
             if (Optional.IsDefined(TargetResource))
             {
-                writer.WritePropertyName("targetResource");
+                writer.WritePropertyName("targetResource"u8);
                 JsonSerializer.Serialize(writer, TargetResource);
             }
             if (Optional.IsCollectionDefined(ARecords))
             {
-                writer.WritePropertyName("ARecords");
+                writer.WritePropertyName("ARecords"u8);
                 writer.WriteStartArray();
                 foreach (var item in ARecords)
                 {
@@ -59,7 +59,7 @@ namespace MgmtExpandResourceTypes
             }
             if (Optional.IsCollectionDefined(AaaaRecords))
             {
-                writer.WritePropertyName("AAAARecords");
+                writer.WritePropertyName("AAAARecords"u8);
                 writer.WriteStartArray();
                 foreach (var item in AaaaRecords)
                 {
@@ -69,7 +69,7 @@ namespace MgmtExpandResourceTypes
             }
             if (Optional.IsCollectionDefined(MxRecords))
             {
-                writer.WritePropertyName("MXRecords");
+                writer.WritePropertyName("MXRecords"u8);
                 writer.WriteStartArray();
                 foreach (var item in MxRecords)
                 {
@@ -79,7 +79,7 @@ namespace MgmtExpandResourceTypes
             }
             if (Optional.IsCollectionDefined(NsRecords))
             {
-                writer.WritePropertyName("NSRecords");
+                writer.WritePropertyName("NSRecords"u8);
                 writer.WriteStartArray();
                 foreach (var item in NsRecords)
                 {
@@ -89,7 +89,7 @@ namespace MgmtExpandResourceTypes
             }
             if (Optional.IsCollectionDefined(PtrRecords))
             {
-                writer.WritePropertyName("PTRRecords");
+                writer.WritePropertyName("PTRRecords"u8);
                 writer.WriteStartArray();
                 foreach (var item in PtrRecords)
                 {
@@ -99,7 +99,7 @@ namespace MgmtExpandResourceTypes
             }
             if (Optional.IsCollectionDefined(SrvRecords))
             {
-                writer.WritePropertyName("SRVRecords");
+                writer.WritePropertyName("SRVRecords"u8);
                 writer.WriteStartArray();
                 foreach (var item in SrvRecords)
                 {
@@ -109,7 +109,7 @@ namespace MgmtExpandResourceTypes
             }
             if (Optional.IsCollectionDefined(TxtRecords))
             {
-                writer.WritePropertyName("TXTRecords");
+                writer.WritePropertyName("TXTRecords"u8);
                 writer.WriteStartArray();
                 foreach (var item in TxtRecords)
                 {
@@ -119,17 +119,17 @@ namespace MgmtExpandResourceTypes
             }
             if (Optional.IsDefined(CnameRecord))
             {
-                writer.WritePropertyName("CNAMERecord");
+                writer.WritePropertyName("CNAMERecord"u8);
                 writer.WriteObjectValue(CnameRecord);
             }
             if (Optional.IsDefined(SoaRecord))
             {
-                writer.WritePropertyName("SOARecord");
+                writer.WritePropertyName("SOARecord"u8);
                 writer.WriteObjectValue(SoaRecord);
             }
             if (Optional.IsCollectionDefined(CaaRecords))
             {
-                writer.WritePropertyName("caaRecords");
+                writer.WritePropertyName("caaRecords"u8);
                 writer.WriteStartArray();
                 foreach (var item in CaaRecords)
                 {
@@ -165,27 +165,27 @@ namespace MgmtExpandResourceTypes
             Optional<IList<CaaRecord>> caaRecords = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("etag"))
+                if (property.NameEquals("etag"u8))
                 {
                     etag = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("systemData"))
+                if (property.NameEquals("systemData"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -195,7 +195,7 @@ namespace MgmtExpandResourceTypes
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -204,7 +204,7 @@ namespace MgmtExpandResourceTypes
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("metadata"))
+                        if (property0.NameEquals("metadata"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -219,7 +219,7 @@ namespace MgmtExpandResourceTypes
                             metadata = dictionary;
                             continue;
                         }
-                        if (property0.NameEquals("TTL"))
+                        if (property0.NameEquals("TTL"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -229,17 +229,17 @@ namespace MgmtExpandResourceTypes
                             ttl = property0.Value.GetInt64();
                             continue;
                         }
-                        if (property0.NameEquals("fqdn"))
+                        if (property0.NameEquals("fqdn"u8))
                         {
                             fqdn = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("provisioningState"))
+                        if (property0.NameEquals("provisioningState"u8))
                         {
                             provisioningState = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("targetResource"))
+                        if (property0.NameEquals("targetResource"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -249,7 +249,7 @@ namespace MgmtExpandResourceTypes
                             targetResource = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
-                        if (property0.NameEquals("ARecords"))
+                        if (property0.NameEquals("ARecords"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -264,7 +264,7 @@ namespace MgmtExpandResourceTypes
                             aRecords = array;
                             continue;
                         }
-                        if (property0.NameEquals("AAAARecords"))
+                        if (property0.NameEquals("AAAARecords"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -279,7 +279,7 @@ namespace MgmtExpandResourceTypes
                             aaaaRecords = array;
                             continue;
                         }
-                        if (property0.NameEquals("MXRecords"))
+                        if (property0.NameEquals("MXRecords"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -294,7 +294,7 @@ namespace MgmtExpandResourceTypes
                             mxRecords = array;
                             continue;
                         }
-                        if (property0.NameEquals("NSRecords"))
+                        if (property0.NameEquals("NSRecords"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -309,7 +309,7 @@ namespace MgmtExpandResourceTypes
                             nsRecords = array;
                             continue;
                         }
-                        if (property0.NameEquals("PTRRecords"))
+                        if (property0.NameEquals("PTRRecords"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -324,7 +324,7 @@ namespace MgmtExpandResourceTypes
                             ptrRecords = array;
                             continue;
                         }
-                        if (property0.NameEquals("SRVRecords"))
+                        if (property0.NameEquals("SRVRecords"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -339,7 +339,7 @@ namespace MgmtExpandResourceTypes
                             srvRecords = array;
                             continue;
                         }
-                        if (property0.NameEquals("TXTRecords"))
+                        if (property0.NameEquals("TXTRecords"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -354,7 +354,7 @@ namespace MgmtExpandResourceTypes
                             txtRecords = array;
                             continue;
                         }
-                        if (property0.NameEquals("CNAMERecord"))
+                        if (property0.NameEquals("CNAMERecord"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -364,7 +364,7 @@ namespace MgmtExpandResourceTypes
                             cnameRecord = CnameRecord.DeserializeCnameRecord(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("SOARecord"))
+                        if (property0.NameEquals("SOARecord"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -374,7 +374,7 @@ namespace MgmtExpandResourceTypes
                             soaRecord = SoaRecord.DeserializeSoaRecord(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("caaRecords"))
+                        if (property0.NameEquals("caaRecords"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {

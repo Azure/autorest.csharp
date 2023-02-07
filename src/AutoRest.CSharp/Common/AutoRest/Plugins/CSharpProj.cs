@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private string _csProjPackageReference = @"
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>11.0</LangVersion>
     <IncludeGeneratorSharedCode>true</IncludeGeneratorSharedCode>
     <RestoreAdditionalProjectSources>https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json</RestoreAdditionalProjectSources>
   </PropertyGroup>

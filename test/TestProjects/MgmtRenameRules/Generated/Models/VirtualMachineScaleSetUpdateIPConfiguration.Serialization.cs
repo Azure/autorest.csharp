@@ -19,39 +19,39 @@ namespace MgmtRenameRules.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("name");
+                writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
             if (Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("id");
+                writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Subnet))
             {
-                writer.WritePropertyName("subnet");
+                writer.WritePropertyName("subnet"u8);
                 JsonSerializer.Serialize(writer, Subnet);
             }
             if (Optional.IsDefined(Primary))
             {
-                writer.WritePropertyName("primary");
+                writer.WritePropertyName("primary"u8);
                 writer.WriteBooleanValue(Primary.Value);
             }
             if (Optional.IsDefined(PublicIPAddressConfiguration))
             {
-                writer.WritePropertyName("publicIPAddressConfiguration");
+                writer.WritePropertyName("publicIPAddressConfiguration"u8);
                 writer.WriteObjectValue(PublicIPAddressConfiguration);
             }
             if (Optional.IsDefined(PrivateIPAddressVersion))
             {
-                writer.WritePropertyName("privateIPAddressVersion");
+                writer.WritePropertyName("privateIPAddressVersion"u8);
                 writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
             }
             if (Optional.IsCollectionDefined(ApplicationGatewayBackendAddressPools))
             {
-                writer.WritePropertyName("applicationGatewayBackendAddressPools");
+                writer.WritePropertyName("applicationGatewayBackendAddressPools"u8);
                 writer.WriteStartArray();
                 foreach (var item in ApplicationGatewayBackendAddressPools)
                 {
@@ -61,7 +61,7 @@ namespace MgmtRenameRules.Models
             }
             if (Optional.IsCollectionDefined(ApplicationSecurityGroups))
             {
-                writer.WritePropertyName("applicationSecurityGroups");
+                writer.WritePropertyName("applicationSecurityGroups"u8);
                 writer.WriteStartArray();
                 foreach (var item in ApplicationSecurityGroups)
                 {
@@ -71,7 +71,7 @@ namespace MgmtRenameRules.Models
             }
             if (Optional.IsCollectionDefined(LoadBalancerBackendAddressPools))
             {
-                writer.WritePropertyName("loadBalancerBackendAddressPools");
+                writer.WritePropertyName("loadBalancerBackendAddressPools"u8);
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerBackendAddressPools)
                 {
@@ -81,7 +81,7 @@ namespace MgmtRenameRules.Models
             }
             if (Optional.IsCollectionDefined(LoadBalancerInboundNatPools))
             {
-                writer.WritePropertyName("loadBalancerInboundNatPools");
+                writer.WritePropertyName("loadBalancerInboundNatPools"u8);
                 writer.WriteStartArray();
                 foreach (var item in LoadBalancerInboundNatPools)
                 {
@@ -107,17 +107,17 @@ namespace MgmtRenameRules.Models
             Optional<IList<WritableSubResource>> loadBalancerInboundNatPools = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -126,7 +126,7 @@ namespace MgmtRenameRules.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("subnet"))
+                        if (property0.NameEquals("subnet"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -136,7 +136,7 @@ namespace MgmtRenameRules.Models
                             subnet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
                             continue;
                         }
-                        if (property0.NameEquals("primary"))
+                        if (property0.NameEquals("primary"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -146,7 +146,7 @@ namespace MgmtRenameRules.Models
                             primary = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("publicIPAddressConfiguration"))
+                        if (property0.NameEquals("publicIPAddressConfiguration"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -156,7 +156,7 @@ namespace MgmtRenameRules.Models
                             publicIPAddressConfiguration = VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.DeserializeVirtualMachineScaleSetUpdatePublicIPAddressConfiguration(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("privateIPAddressVersion"))
+                        if (property0.NameEquals("privateIPAddressVersion"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -166,7 +166,7 @@ namespace MgmtRenameRules.Models
                             privateIPAddressVersion = new IPVersion(property0.Value.GetString());
                             continue;
                         }
-                        if (property0.NameEquals("applicationGatewayBackendAddressPools"))
+                        if (property0.NameEquals("applicationGatewayBackendAddressPools"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -181,7 +181,7 @@ namespace MgmtRenameRules.Models
                             applicationGatewayBackendAddressPools = array;
                             continue;
                         }
-                        if (property0.NameEquals("applicationSecurityGroups"))
+                        if (property0.NameEquals("applicationSecurityGroups"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -196,7 +196,7 @@ namespace MgmtRenameRules.Models
                             applicationSecurityGroups = array;
                             continue;
                         }
-                        if (property0.NameEquals("loadBalancerBackendAddressPools"))
+                        if (property0.NameEquals("loadBalancerBackendAddressPools"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -211,7 +211,7 @@ namespace MgmtRenameRules.Models
                             loadBalancerBackendAddressPools = array;
                             continue;
                         }
-                        if (property0.NameEquals("loadBalancerInboundNatPools"))
+                        if (property0.NameEquals("loadBalancerInboundNatPools"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {

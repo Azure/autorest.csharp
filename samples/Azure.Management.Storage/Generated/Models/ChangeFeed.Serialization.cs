@@ -17,12 +17,12 @@ namespace Azure.Management.Storage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Enabled))
             {
-                writer.WritePropertyName("enabled");
+                writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
             }
             if (Optional.IsDefined(RetentionInDays))
             {
-                writer.WritePropertyName("retentionInDays");
+                writer.WritePropertyName("retentionInDays"u8);
                 writer.WriteNumberValue(RetentionInDays.Value);
             }
             writer.WriteEndObject();
@@ -34,7 +34,7 @@ namespace Azure.Management.Storage.Models
             Optional<int> retentionInDays = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("enabled"))
+                if (property.NameEquals("enabled"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -44,7 +44,7 @@ namespace Azure.Management.Storage.Models
                     enabled = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("retentionInDays"))
+                if (property.NameEquals("retentionInDays"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

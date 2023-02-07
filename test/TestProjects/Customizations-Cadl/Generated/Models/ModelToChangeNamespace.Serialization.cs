@@ -16,7 +16,7 @@ namespace CustomizationsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredInt");
+            writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
             writer.WriteEndObject();
         }
@@ -26,7 +26,7 @@ namespace CustomizationsInCadl.Models
             int requiredInt = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredInt"))
+                if (property.NameEquals("requiredInt"u8))
                 {
                     requiredInt = property.Value.GetInt32();
                     continue;

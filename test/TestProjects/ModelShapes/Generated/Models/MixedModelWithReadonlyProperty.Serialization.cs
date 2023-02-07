@@ -25,7 +25,7 @@ namespace ModelShapes.Models
             Optional<IReadOnlyList<ReadonlyModel>> readonlyListProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ReadonlyProperty"))
+                if (property.NameEquals("ReadonlyProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -35,7 +35,7 @@ namespace ModelShapes.Models
                     readonlyProperty = ReadonlyModel.DeserializeReadonlyModel(property.Value);
                     continue;
                 }
-                if (property.NameEquals("ReadonlyListProperty"))
+                if (property.NameEquals("ReadonlyListProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

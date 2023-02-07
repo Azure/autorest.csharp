@@ -15,7 +15,7 @@ namespace AdditionalPropertiesEx.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("id");
+            writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
             foreach (var item in AdditionalProperties)
             {

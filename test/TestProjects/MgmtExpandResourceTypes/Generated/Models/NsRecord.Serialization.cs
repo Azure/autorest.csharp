@@ -17,7 +17,7 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Nsdname))
             {
-                writer.WritePropertyName("nsdname");
+                writer.WritePropertyName("nsdname"u8);
                 writer.WriteStringValue(Nsdname);
             }
             writer.WriteEndObject();
@@ -28,7 +28,7 @@ namespace MgmtExpandResourceTypes.Models
             Optional<string> nsdname = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("nsdname"))
+                if (property.NameEquals("nsdname"u8))
                 {
                     nsdname = property.Value.GetString();
                     continue;
