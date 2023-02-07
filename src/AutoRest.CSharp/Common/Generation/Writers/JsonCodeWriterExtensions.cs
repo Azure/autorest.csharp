@@ -286,13 +286,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void DeserializeIntoObjectProperties(this CodeWriter writer, IEnumerable<JsonPropertySerialization> propertySerializations, FormattableString itemVariable, Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables)
         {
-            foreach (JsonPropertySerialization property in propertySerializations)
+            foreach (JsonPropertySerialization property in propertySerializations.Where(p => !p.ShouldSkipDeserialization))
             {
-                if (property.ShouldSkipDeserialization)
-                {
-                    continue;
-                }
-
                 writer.Append($"if({itemVariable}.NameEquals({property.SerializedName:L}))");
                 using (writer.Scope())
                 {

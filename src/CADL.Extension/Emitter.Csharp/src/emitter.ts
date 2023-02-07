@@ -846,7 +846,7 @@ function loadOperation(
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
-        const kind: InputOperationParameterKind = isContentType
+        const kind: InputOperationParameterKind = isContentType || inputType.Name === "Literal"
             ? InputOperationParameterKind.Constant
             : isApiVer
             ? defaultValue

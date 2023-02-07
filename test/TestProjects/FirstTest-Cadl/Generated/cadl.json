@@ -1708,7 +1708,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Constant"
       },
       {
        "$id": "177",
@@ -1741,7 +1741,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Constant"
       },
       {
        "$id": "181",
@@ -1774,7 +1774,7 @@
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
        "Explode": false,
-       "Kind": "Method"
+       "Kind": "Constant"
       },
       {
        "$id": "185",
