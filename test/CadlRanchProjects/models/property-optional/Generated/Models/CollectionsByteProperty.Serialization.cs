@@ -20,7 +20,7 @@ namespace Models.Property.Optional.Models
             writer.WriteStartObject();
             if (Azure.Core.Optional.IsCollectionDefined(Property))
             {
-                writer.WritePropertyName("property");
+                writer.WritePropertyName("property"u8);
                 writer.WriteStartArray();
                 foreach (var item in Property)
                 {
@@ -40,7 +40,7 @@ namespace Models.Property.Optional.Models
             Optional<IList<BinaryData>> property = default;
             foreach (var property0 in element.EnumerateObject())
             {
-                if (property0.NameEquals("property"))
+                if (property0.NameEquals("property"u8))
                 {
                     if (property0.Value.ValueKind == JsonValueKind.Null)
                     {

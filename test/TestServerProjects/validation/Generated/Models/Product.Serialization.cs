@@ -18,7 +18,7 @@ namespace validation.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(DisplayNames))
             {
-                writer.WritePropertyName("display_names");
+                writer.WritePropertyName("display_names"u8);
                 writer.WriteStartArray();
                 foreach (var item in DisplayNames)
                 {
@@ -28,25 +28,25 @@ namespace validation.Models
             }
             if (Optional.IsDefined(Capacity))
             {
-                writer.WritePropertyName("capacity");
+                writer.WritePropertyName("capacity"u8);
                 writer.WriteNumberValue(Capacity.Value);
             }
             if (Optional.IsDefined(Image))
             {
-                writer.WritePropertyName("image");
+                writer.WritePropertyName("image"u8);
                 writer.WriteStringValue(Image);
             }
-            writer.WritePropertyName("child");
+            writer.WritePropertyName("child"u8);
             writer.WriteObjectValue(Child);
-            writer.WritePropertyName("constChild");
+            writer.WritePropertyName("constChild"u8);
             writer.WriteObjectValue(ConstChild);
-            writer.WritePropertyName("constInt");
+            writer.WritePropertyName("constInt"u8);
             writer.WriteNumberValue(ConstInt);
-            writer.WritePropertyName("constString");
+            writer.WritePropertyName("constString"u8);
             writer.WriteStringValue(ConstString);
             if (Optional.IsDefined(ConstStringAsEnum))
             {
-                writer.WritePropertyName("constStringAsEnum");
+                writer.WritePropertyName("constStringAsEnum"u8);
                 writer.WriteStringValue(ConstStringAsEnum);
             }
             writer.WriteEndObject();
@@ -64,7 +64,7 @@ namespace validation.Models
             Optional<string> constStringAsEnum = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("display_names"))
+                if (property.NameEquals("display_names"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -79,7 +79,7 @@ namespace validation.Models
                     displayNames = array;
                     continue;
                 }
-                if (property.NameEquals("capacity"))
+                if (property.NameEquals("capacity"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -89,32 +89,32 @@ namespace validation.Models
                     capacity = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("image"))
+                if (property.NameEquals("image"u8))
                 {
                     image = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("child"))
+                if (property.NameEquals("child"u8))
                 {
                     child = ChildProduct.DeserializeChildProduct(property.Value);
                     continue;
                 }
-                if (property.NameEquals("constChild"))
+                if (property.NameEquals("constChild"u8))
                 {
                     constChild = ConstantProduct.DeserializeConstantProduct(property.Value);
                     continue;
                 }
-                if (property.NameEquals("constInt"))
+                if (property.NameEquals("constInt"u8))
                 {
                     constInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("constString"))
+                if (property.NameEquals("constString"u8))
                 {
                     constString = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("constStringAsEnum"))
+                if (property.NameEquals("constStringAsEnum"u8))
                 {
                     constStringAsEnum = property.Value.GetString();
                     continue;

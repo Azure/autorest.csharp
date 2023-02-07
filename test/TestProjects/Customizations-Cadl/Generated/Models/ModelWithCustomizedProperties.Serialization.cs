@@ -18,30 +18,30 @@ namespace CustomizationsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("propertyToMakeInternal");
+            writer.WritePropertyName("propertyToMakeInternal"u8);
             writer.WriteNumberValue(PropertyToMakeInternal);
-            writer.WritePropertyName("propertyToRename");
+            writer.WritePropertyName("propertyToRename"u8);
             writer.WriteNumberValue(RenamedProperty);
-            writer.WritePropertyName("propertyToMakeFloat");
+            writer.WritePropertyName("propertyToMakeFloat"u8);
             writer.WriteNumberValue(PropertyToMakeFloat);
-            writer.WritePropertyName("propertyToMakeInt");
+            writer.WritePropertyName("propertyToMakeInt"u8);
             writer.WriteNumberValue(PropertyToMakeInt);
-            writer.WritePropertyName("propertyToMakeDuration");
+            writer.WritePropertyName("propertyToMakeDuration"u8);
             writer.WriteStringValue(PropertyToMakeDuration, "P");
-            writer.WritePropertyName("propertyToMakeString");
+            writer.WritePropertyName("propertyToMakeString"u8);
             writer.WriteStringValue(PropertyToMakeString);
-            writer.WritePropertyName("propertyToMakeJsonElement");
+            writer.WritePropertyName("propertyToMakeJsonElement"u8);
             PropertyToMakeJsonElement.WriteTo(writer);
-            writer.WritePropertyName("propertyToField");
+            writer.WritePropertyName("propertyToField"u8);
             writer.WriteStringValue(_propertyToField);
-            writer.WritePropertyName("badListName");
+            writer.WritePropertyName("badListName"u8);
             writer.WriteStartArray();
             foreach (var item in GoodListName)
             {
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("badDictionaryName");
+            writer.WritePropertyName("badDictionaryName"u8);
             writer.WriteStartObject();
             foreach (var item in GoodDictionaryName)
             {
@@ -49,7 +49,7 @@ namespace CustomizationsInCadl.Models
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
-            writer.WritePropertyName("badListOfListName");
+            writer.WritePropertyName("badListOfListName"u8);
             writer.WriteStartArray();
             foreach (var item in GoodListOfListName)
             {
@@ -61,7 +61,7 @@ namespace CustomizationsInCadl.Models
                 writer.WriteEndArray();
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("badListOfDictionaryName");
+            writer.WritePropertyName("badListOfDictionaryName"u8);
             writer.WriteStartArray();
             foreach (var item in GoodListOfDictionaryName)
             {
@@ -93,47 +93,47 @@ namespace CustomizationsInCadl.Models
             IList<IDictionary<string, string>> badListOfDictionaryName = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("propertyToMakeInternal"))
+                if (property.NameEquals("propertyToMakeInternal"u8))
                 {
                     propertyToMakeInternal = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("propertyToRename"))
+                if (property.NameEquals("propertyToRename"u8))
                 {
                     propertyToRename = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("propertyToMakeFloat"))
+                if (property.NameEquals("propertyToMakeFloat"u8))
                 {
                     propertyToMakeFloat = property.Value.GetSingle();
                     continue;
                 }
-                if (property.NameEquals("propertyToMakeInt"))
+                if (property.NameEquals("propertyToMakeInt"u8))
                 {
                     propertyToMakeInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("propertyToMakeDuration"))
+                if (property.NameEquals("propertyToMakeDuration"u8))
                 {
                     propertyToMakeDuration = property.Value.GetTimeSpan("P");
                     continue;
                 }
-                if (property.NameEquals("propertyToMakeString"))
+                if (property.NameEquals("propertyToMakeString"u8))
                 {
                     propertyToMakeString = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("propertyToMakeJsonElement"))
+                if (property.NameEquals("propertyToMakeJsonElement"u8))
                 {
                     propertyToMakeJsonElement = property.Value.Clone();
                     continue;
                 }
-                if (property.NameEquals("propertyToField"))
+                if (property.NameEquals("propertyToField"u8))
                 {
                     propertyToField = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("badListName"))
+                if (property.NameEquals("badListName"u8))
                 {
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -143,7 +143,7 @@ namespace CustomizationsInCadl.Models
                     badListName = array;
                     continue;
                 }
-                if (property.NameEquals("badDictionaryName"))
+                if (property.NameEquals("badDictionaryName"u8))
                 {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
@@ -153,7 +153,7 @@ namespace CustomizationsInCadl.Models
                     badDictionaryName = dictionary;
                     continue;
                 }
-                if (property.NameEquals("badListOfListName"))
+                if (property.NameEquals("badListOfListName"u8))
                 {
                     List<IList<string>> array = new List<IList<string>>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -168,7 +168,7 @@ namespace CustomizationsInCadl.Models
                     badListOfListName = array;
                     continue;
                 }
-                if (property.NameEquals("badListOfDictionaryName"))
+                if (property.NameEquals("badListOfDictionaryName"u8))
                 {
                     List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                     foreach (var item in property.Value.EnumerateArray())

@@ -22,7 +22,7 @@ namespace MgmtRenameRules.Models
             Optional<Uri> basePath = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -32,7 +32,7 @@ namespace MgmtRenameRules.Models
                     properties = Models.LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);
                     continue;
                 }
-                if (property.NameEquals("contentType"))
+                if (property.NameEquals("contentType"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -42,7 +42,7 @@ namespace MgmtRenameRules.Models
                     contentType = new ContentType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("content"))
+                if (property.NameEquals("content"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -52,7 +52,7 @@ namespace MgmtRenameRules.Models
                     content = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("method"))
+                if (property.NameEquals("method"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -62,7 +62,7 @@ namespace MgmtRenameRules.Models
                     method = new RequestMethod(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("basePath"))
+                if (property.NameEquals("basePath"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

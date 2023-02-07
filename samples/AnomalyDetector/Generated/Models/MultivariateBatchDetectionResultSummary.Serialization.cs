@@ -22,12 +22,12 @@ namespace AnomalyDetector.Models
             MultivariateBatchDetectionOptions setupInfo = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("status"))
+                if (property.NameEquals("status"u8))
                 {
                     status = property.Value.GetString().ToMultivariateBatchDetectionStatus();
                     continue;
                 }
-                if (property.NameEquals("errors"))
+                if (property.NameEquals("errors"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -42,7 +42,7 @@ namespace AnomalyDetector.Models
                     errors = array;
                     continue;
                 }
-                if (property.NameEquals("variableStates"))
+                if (property.NameEquals("variableStates"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -57,7 +57,7 @@ namespace AnomalyDetector.Models
                     variableStates = array;
                     continue;
                 }
-                if (property.NameEquals("setupInfo"))
+                if (property.NameEquals("setupInfo"u8))
                 {
                     setupInfo = MultivariateBatchDetectionOptions.DeserializeMultivariateBatchDetectionOptions(property.Value);
                     continue;

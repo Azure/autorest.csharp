@@ -21,7 +21,7 @@ namespace Models.Property.Optional.Models
             {
                 if (Property != null)
                 {
-                    writer.WritePropertyName("property");
+                    writer.WritePropertyName("property"u8);
                     writer.WriteStringValue(Property.Value, "O");
                 }
                 else
@@ -37,7 +37,7 @@ namespace Models.Property.Optional.Models
             Optional<DateTimeOffset?> property = default;
             foreach (var property0 in element.EnumerateObject())
             {
-                if (property0.NameEquals("property"))
+                if (property0.NameEquals("property"u8))
                 {
                     if (property0.Value.ValueKind == JsonValueKind.Null)
                     {

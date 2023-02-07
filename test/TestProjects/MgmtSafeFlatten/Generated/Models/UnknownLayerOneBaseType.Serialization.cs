@@ -15,7 +15,7 @@ namespace MgmtSafeFlatten.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
             writer.WriteEndObject();
         }
@@ -25,7 +25,7 @@ namespace MgmtSafeFlatten.Models
             LayerOneTypeName name = "Unknown";
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = new LayerOneTypeName(property.Value.GetString());
                     continue;

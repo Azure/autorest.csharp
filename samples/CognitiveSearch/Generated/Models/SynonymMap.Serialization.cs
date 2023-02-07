@@ -15,20 +15,20 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            writer.WritePropertyName("format");
+            writer.WritePropertyName("format"u8);
             writer.WriteStringValue(Format);
-            writer.WritePropertyName("synonyms");
+            writer.WritePropertyName("synonyms"u8);
             writer.WriteStringValue(Synonyms);
             if (Optional.IsDefined(EncryptionKey))
             {
-                writer.WritePropertyName("encryptionKey");
+                writer.WritePropertyName("encryptionKey"u8);
                 writer.WriteObjectValue(EncryptionKey);
             }
             if (Optional.IsDefined(ETag))
             {
-                writer.WritePropertyName("@odata.etag");
+                writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
             }
             writer.WriteEndObject();
@@ -43,22 +43,22 @@ namespace CognitiveSearch.Models
             Optional<string> odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("format"))
+                if (property.NameEquals("format"u8))
                 {
                     format = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("synonyms"))
+                if (property.NameEquals("synonyms"u8))
                 {
                     synonyms = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("encryptionKey"))
+                if (property.NameEquals("encryptionKey"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -68,7 +68,7 @@ namespace CognitiveSearch.Models
                     encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
                     continue;
                 }
-                if (property.NameEquals("@odata.etag"))
+                if (property.NameEquals("@odata.etag"u8))
                 {
                     odataEtag = property.Value.GetString();
                     continue;

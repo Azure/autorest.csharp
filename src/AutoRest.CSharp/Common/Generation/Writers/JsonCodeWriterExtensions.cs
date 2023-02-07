@@ -246,7 +246,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (property.ValueSerialization == null)
                 {
                     // Flattened property
-                    writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L});");
+                    writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
                     writer.Line($"{writerName}.WriteStartObject();");
                     writer.ToSerializeCall(writerName, property.PropertySerializations!);
                     writer.Line($"{writerName}.WriteEndObject();");
@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var propertyType = property.PropertyType;
                         var declarationName = property.PropertyName;
 
-                        writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L});");
+                        writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
 
                         if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
                         {
@@ -288,7 +288,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (JsonPropertySerialization property in propertySerializations)
             {
-                writer.Append($"if({itemVariable}.NameEquals({property.SerializedName:L}))");
+                writer.Append($"if({itemVariable}.NameEquals({property.SerializedName:L}u8))");
                 using (writer.Scope())
                 {
                     if (property.ValueType?.IsNullable == true)

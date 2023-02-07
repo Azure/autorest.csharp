@@ -19,17 +19,17 @@ namespace MgmtMockAndSample.Models
             Optional<int> sev = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("description"))
+                if (property.NameEquals("description"u8))
                 {
                     description = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("sev"))
+                if (property.NameEquals("sev"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

@@ -20,12 +20,12 @@ namespace MgmtScopeResource.Models
             Optional<IReadOnlyList<WhatIfChange>> changes = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("status"))
+                if (property.NameEquals("status"u8))
                 {
                     status = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("errorResponse"))
+                if (property.NameEquals("errorResponse"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -35,7 +35,7 @@ namespace MgmtScopeResource.Models
                     errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -44,7 +44,7 @@ namespace MgmtScopeResource.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("changes"))
+                        if (property0.NameEquals("changes"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {

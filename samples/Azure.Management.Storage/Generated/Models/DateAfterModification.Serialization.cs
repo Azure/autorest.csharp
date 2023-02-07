@@ -17,12 +17,12 @@ namespace Azure.Management.Storage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(DaysAfterModificationGreaterThan))
             {
-                writer.WritePropertyName("daysAfterModificationGreaterThan");
+                writer.WritePropertyName("daysAfterModificationGreaterThan"u8);
                 writer.WriteNumberValue(DaysAfterModificationGreaterThan.Value);
             }
             if (Optional.IsDefined(DaysAfterLastAccessTimeGreaterThan))
             {
-                writer.WritePropertyName("daysAfterLastAccessTimeGreaterThan");
+                writer.WritePropertyName("daysAfterLastAccessTimeGreaterThan"u8);
                 writer.WriteNumberValue(DaysAfterLastAccessTimeGreaterThan.Value);
             }
             writer.WriteEndObject();
@@ -34,7 +34,7 @@ namespace Azure.Management.Storage.Models
             Optional<float> daysAfterLastAccessTimeGreaterThan = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("daysAfterModificationGreaterThan"))
+                if (property.NameEquals("daysAfterModificationGreaterThan"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -44,7 +44,7 @@ namespace Azure.Management.Storage.Models
                     daysAfterModificationGreaterThan = property.Value.GetSingle();
                     continue;
                 }
-                if (property.NameEquals("daysAfterLastAccessTimeGreaterThan"))
+                if (property.NameEquals("daysAfterLastAccessTimeGreaterThan"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

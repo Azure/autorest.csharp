@@ -17,12 +17,12 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Enabled))
             {
-                writer.WritePropertyName("enabled");
+                writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
             }
             if (Optional.IsDefined(GracePeriod))
             {
-                writer.WritePropertyName("gracePeriod");
+                writer.WritePropertyName("gracePeriod"u8);
                 writer.WriteStringValue(GracePeriod);
             }
             writer.WriteEndObject();
@@ -34,7 +34,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<string> gracePeriod = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("enabled"))
+                if (property.NameEquals("enabled"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -44,7 +44,7 @@ namespace Azure.ResourceManager.Sample.Models
                     enabled = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("gracePeriod"))
+                if (property.NameEquals("gracePeriod"u8))
                 {
                     gracePeriod = property.Value.GetString();
                     continue;

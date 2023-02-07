@@ -17,17 +17,17 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(ImageReference))
             {
-                writer.WritePropertyName("imageReference");
+                writer.WritePropertyName("imageReference"u8);
                 writer.WriteObjectValue(ImageReference);
             }
             if (Optional.IsDefined(OsDisk))
             {
-                writer.WritePropertyName("osDisk");
+                writer.WritePropertyName("osDisk"u8);
                 writer.WriteObjectValue(OsDisk);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
-                writer.WritePropertyName("dataDisks");
+                writer.WritePropertyName("dataDisks"u8);
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {

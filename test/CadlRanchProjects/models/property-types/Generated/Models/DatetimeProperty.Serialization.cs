@@ -17,7 +17,7 @@ namespace Models.Property.Types.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("property");
+            writer.WritePropertyName("property"u8);
             writer.WriteStringValue(Property, "O");
             writer.WriteEndObject();
         }
@@ -27,7 +27,7 @@ namespace Models.Property.Types.Models
             DateTimeOffset property = default;
             foreach (var property0 in element.EnumerateObject())
             {
-                if (property0.NameEquals("property"))
+                if (property0.NameEquals("property"u8))
                 {
                     property = property0.Value.GetDateTimeOffset("O");
                     continue;

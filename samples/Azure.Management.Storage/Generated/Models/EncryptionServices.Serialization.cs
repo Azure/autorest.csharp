@@ -17,22 +17,22 @@ namespace Azure.Management.Storage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Blob))
             {
-                writer.WritePropertyName("blob");
+                writer.WritePropertyName("blob"u8);
                 writer.WriteObjectValue(Blob);
             }
             if (Optional.IsDefined(File))
             {
-                writer.WritePropertyName("file");
+                writer.WritePropertyName("file"u8);
                 writer.WriteObjectValue(File);
             }
             if (Optional.IsDefined(Table))
             {
-                writer.WritePropertyName("table");
+                writer.WritePropertyName("table"u8);
                 writer.WriteObjectValue(Table);
             }
             if (Optional.IsDefined(Queue))
             {
-                writer.WritePropertyName("queue");
+                writer.WritePropertyName("queue"u8);
                 writer.WriteObjectValue(Queue);
             }
             writer.WriteEndObject();
@@ -46,7 +46,7 @@ namespace Azure.Management.Storage.Models
             Optional<EncryptionService> queue = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("blob"))
+                if (property.NameEquals("blob"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -56,7 +56,7 @@ namespace Azure.Management.Storage.Models
                     blob = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
-                if (property.NameEquals("file"))
+                if (property.NameEquals("file"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -66,7 +66,7 @@ namespace Azure.Management.Storage.Models
                     file = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
-                if (property.NameEquals("table"))
+                if (property.NameEquals("table"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -76,7 +76,7 @@ namespace Azure.Management.Storage.Models
                     table = EncryptionService.DeserializeEncryptionService(property.Value);
                     continue;
                 }
-                if (property.NameEquals("queue"))
+                if (property.NameEquals("queue"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

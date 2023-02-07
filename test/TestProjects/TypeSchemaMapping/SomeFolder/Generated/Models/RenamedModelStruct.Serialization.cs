@@ -16,26 +16,26 @@ namespace CustomNamespace
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("ModelProperty");
+            writer.WritePropertyName("ModelProperty"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(CustomizedFlattenedStringProperty))
             {
-                writer.WritePropertyName("ModelProperty");
+                writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteStringValue(CustomizedFlattenedStringProperty);
             }
             if (Optional.IsDefined(PropertyToField))
             {
-                writer.WritePropertyName("PropertyToField");
+                writer.WritePropertyName("PropertyToField"u8);
                 writer.WriteStringValue(PropertyToField);
             }
             if (Optional.IsDefined(Fruit))
             {
-                writer.WritePropertyName("Fruit");
+                writer.WritePropertyName("Fruit"u8);
                 writer.WriteStringValue(Fruit.Value.ToSerialString());
             }
             if (Optional.IsDefined(DaysOfWeek))
             {
-                writer.WritePropertyName("DaysOfWeek");
+                writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
             }
             writer.WriteEndObject();
@@ -50,7 +50,7 @@ namespace CustomNamespace
             Optional<CustomDaysOfWeek> daysOfWeek = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ModelProperty"))
+                if (property.NameEquals("ModelProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -59,17 +59,17 @@ namespace CustomNamespace
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("ModelProperty"))
+                        if (property0.NameEquals("ModelProperty"u8))
                         {
                             modelProperty = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("PropertyToField"))
+                        if (property0.NameEquals("PropertyToField"u8))
                         {
                             propertyToField = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("Fruit"))
+                        if (property0.NameEquals("Fruit"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -79,7 +79,7 @@ namespace CustomNamespace
                             fruit = property0.Value.GetString().ToCustomFruitEnum();
                             continue;
                         }
-                        if (property0.NameEquals("DaysOfWeek"))
+                        if (property0.NameEquals("DaysOfWeek"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
