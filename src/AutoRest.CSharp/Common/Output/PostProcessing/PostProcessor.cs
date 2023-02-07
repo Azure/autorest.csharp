@@ -99,6 +99,8 @@ internal class PostProcessor
         if (compilation == null)
             return project;
 
+        // get the type names suppressed by the attribute
+        var suppressedTypeNames = GeneratedCodeWorkspace.GetSuppressedTypeNames(compilation);
         // first get all the declared symbols
         var definitions = await GetTypeSymbolsAsync(compilation, project, true);
         // build the reference map
@@ -121,18 +123,18 @@ internal class PostProcessor
             project = MarkInternal(project, model);
         }
 
-        project = await RemoveMethodsFromModelFactoryAsync(project, definitions, nodesToInternalize);
+        var modelNamesToRemove = nodesToInternalize.Select(item => item.Identifier.Text).Concat(suppressedTypeNames);
+        project = await RemoveMethodsFromModelFactoryAsync(project, definitions, modelNamesToRemove.ToHashSet());
 
         return project;
     }
 
-    private async Task<Project> RemoveMethodsFromModelFactoryAsync(Project project, TypeSymbols definitions, IEnumerable<BaseTypeDeclarationSyntax> modelsToRemove)
+    private async Task<Project> RemoveMethodsFromModelFactoryAsync(Project project, TypeSymbols definitions, HashSet<string> namesToRemove)
     {
         var modelFactorySymbol = definitions.ModelFactorySymbol;
         if (modelFactorySymbol == null)
             return project;
 
-        var namesToRemove = new HashSet<string>(modelsToRemove.Select(item => item.Identifier.Text));
         var nodesToRemove = new List<SyntaxNode>();
 
         foreach (var method in modelFactorySymbol.GetMembers().OfType<IMethodSymbol>())
@@ -205,7 +207,9 @@ internal class PostProcessor
         }
 
         // remove them one by one
-        return await RemoveModelsAsync(project, nodesToRemove);
+        project = await RemoveModelsAsync(project, nodesToRemove);
+
+        return project;
     }
 
     /// <summary>
