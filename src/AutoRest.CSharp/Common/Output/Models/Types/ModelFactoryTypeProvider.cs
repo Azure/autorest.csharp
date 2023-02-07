@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -14,6 +15,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
+using Humanizer;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -60,13 +62,21 @@ namespace AutoRest.CSharp.Output.Models.Types
         private HashSet<MethodInfo>? _existingModelFactoryMethods;
         public HashSet<MethodInfo> ExistingModelFactoryMethods => _existingModelFactoryMethods ??= typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
 
-        public (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignment(CodeWriter writer, SerializableObjectType model, Parameter parameter)
+        private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForSimpleProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, ObjectTypeProperty property)
         {
-            var propertyStack = _parameterPropertyCache[model][parameter];
+            var from = parameter.Type;
+            var to = property.Declaration.Type;
+            FormattableString result = $"{parameter.Name:I}";
+            return (property, result);
+        }
+
+        private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForFlattenedProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, Stack<ObjectTypeProperty> propertyStack)
+        {
             var assignmentProperty = propertyStack.Last();
+            Debug.Assert(assignmentProperty.FlattenedProperty != null);
 
             // determine whether this is a value type that changed to nullable because of other enclosing properties are nullable
-            var isOverriddenValueType = assignmentProperty.FlattenedProperty != null && assignmentProperty.FlattenedProperty.IsOverriddenValueType;
+            var isOverriddenValueType = assignmentProperty.FlattenedProperty.IsOverriddenValueType;
 
             // iterate over the property stack to build a nested expression of variable assignment
             ObjectTypeProperty property, immediateParentProperty;
@@ -114,14 +124,41 @@ namespace AutoRest.CSharp.Output.Models.Types
             return (assignmentProperty, result);
         }
 
-        private readonly Dictionary<SerializableObjectType, Dictionary<Parameter, Stack<ObjectTypeProperty>>> _parameterPropertyCache = new();
+        public (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignment(CodeWriter writer, SerializableObjectType model, Parameter parameter)
+        {
+            var property = _parameterCache[model][parameter];
+            var propertyStack = property.BuildHierarchyStack();
+
+            if (propertyStack.Count == 1)
+                return GetPropertyAssignmentForSimpleProperty(writer, model, parameter, property);
+
+            return GetPropertyAssignmentForFlattenedProperty(writer, model, parameter, propertyStack);
+        }
+
+        private string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
+        {
+            if (TypeFactory.RequiresToList(from, to))
+            {
+                writer.UseNamespace(typeof(Enumerable).Namespace!);
+                return from.IsNullable ? "?.ToList()" : ".ToList()";
+            }
+
+            if (to is { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } })
+            {
+                return string.Empty;
+            }
+
+            return string.Empty;
+        }
+
+        private readonly Dictionary<SerializableObjectType, Dictionary<Parameter, ObjectTypeProperty>> _parameterCache = new();
 
         private MethodSignature CreateMethod(SerializableObjectType modelType)
         {
             var ctor = modelType.SerializationConstructor;
             var ctorSignature = ctor.Signature;
             var methodParameters = new List<Parameter>(ctorSignature.Parameters.Count);
-            var cache = new Dictionary<Parameter, Stack<ObjectTypeProperty>>();
+            var cache = new Dictionary<Parameter, ObjectTypeProperty>();
 
             var discriminator = modelType.Discriminator;
 
@@ -172,10 +209,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 };
 
                 methodParameters.Add(modelFactoryMethodParameter);
-                cache.Add(modelFactoryMethodParameter, property.BuildHierarchyStack());
+                cache.Add(modelFactoryMethodParameter, property);
             }
 
-            _parameterPropertyCache.Add(modelType, cache);
+            _parameterCache.Add(modelType, cache);
 
             FormattableString returnDescription = $"A new <see cref=\"{modelType.Declaration.Namespace}.{modelType.Declaration.Name}\"/> instance for mocking.";
 
@@ -195,6 +232,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var properties = model.EnumerateHierarchy().SelectMany(obj => obj.Properties);
+            var testProperties = properties.Where(p => p.Declaration.Accessibility != "public" && (model.Discriminator?.Property != p && p.FlattenedProperty == null));
             // we skip the models with internal properties when the internal property is neither a discriminator or safe flattened
             if (properties.Any(p => p.Declaration.Accessibility != "public" && (model.Discriminator?.Property != p && p.FlattenedProperty == null)))
             {

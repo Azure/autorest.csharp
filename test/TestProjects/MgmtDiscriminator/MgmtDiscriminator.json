@@ -268,6 +268,9 @@
                             "additionalProperties": {
                                 "$ref": "#/definitions/DeliveryRuleAction"
                             }
+                        },
+                        "pet": {
+                            "$ref": "#/definitions/Pet"
                         }
                     }
                 }
@@ -283,6 +286,60 @@
                     "items": {
                         "$ref": "#/definitions/DeliveryRule"
                     }
+                }
+            }
+        },
+        "Pet": {
+            "description": "A pet",
+            "discriminator": "kind",
+            "required": [ "kind" ],
+            "properties": {
+                "kind": {
+                    "description": "The kind of the pet",
+                    "type": "string",
+                    "enum": [
+                        "Cat",
+                        "Dog"
+                    ],
+                    "x-ms-enum":{
+                        "name": "PetKind",
+                        "modelAsString": false
+                    }
+                },
+                "id": {
+                    "description": "The Id of the pet",
+                    "type": "string",
+                    "readOnly": true
+                }
+            }
+        },
+        "Cat": {
+            "description": "A cat",
+            "x-ms-discriminator-value": "Cat",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Pet"
+                }
+            ],
+            "properties": {
+                "meow": {
+                    "description": "A cat can meow",
+                    "type": "string"
+                }
+            }
+        },
+        "Dog": {
+            "description": "A dog",
+            "x-ms-discriminator-value": "Dog",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Pet"
+                }
+            ],
+            "properties": {
+                "bark": {
+                    "description": "A dog can bark",
+                    "type": "string"
                 }
             }
         },

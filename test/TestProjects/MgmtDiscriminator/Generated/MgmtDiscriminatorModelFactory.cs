@@ -47,6 +47,33 @@ namespace MgmtDiscriminator.Models
             return new DeliveryRuleAction(name, foo);
         }
 
+        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <param name="kind"> The kind of the pet. </param>
+        /// <param name="id"> The Id of the pet. </param>
+        /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
+        public static Pet Pet(string kind = "Unknown", string id = null)
+        {
+            return new UnknownPet(kind, id);
+        }
+
+        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <param name="id"> The Id of the pet. </param>
+        /// <param name="meow"> A cat can meow. </param>
+        /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
+        public static Cat Cat(string id = null, string meow = null)
+        {
+            return new Cat(PetKind.Cat, id, meow);
+        }
+
+        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <param name="id"> The Id of the pet. </param>
+        /// <param name="bark"> A dog can bark. </param>
+        /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
+        public static Dog Dog(string id = null, string bark = null)
+        {
+            return new Dog(PetKind.Dog, id, bark);
+        }
+
         /// <summary> Initializes a new instance of DeliveryRuleRemoteAddressCondition. </summary>
         /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
