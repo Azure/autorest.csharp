@@ -17,4 +17,4 @@ $CadlEmitterProps = "$SdkRepoRoot\eng\emitter-package.json"
     Set-Content $CadlEmitterProps -NoNewline
 
 dotnet msbuild /restore /t:GenerateCode "$SdkRepoRoot\eng\service.proj"
-dotnet msbuild /restore /t:GenerateTests "$SdkRepoRoot\eng\service.proj"
+dotnet msbuild /restore /t:GenerateTest "$SdkRepoRoot\eng\service.proj"
