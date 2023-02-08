@@ -16,12 +16,14 @@ namespace CadlFirstTest.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            writer.WritePropertyName("requiredUnion");
+            writer.WritePropertyName("requiredUnion"u8);
             writer.WriteStringValue(RequiredUnion);
-            writer.WritePropertyName("requiredLiteral");
+            writer.WritePropertyName("requiredLiteral"u8);
             writer.WriteStringValue(RequiredLiteral);
+            writer.WritePropertyName("requiredBadDescription"u8);
+            writer.WriteStringValue(RequiredBadDescription);
             writer.WriteEndObject();
         }
 
@@ -30,25 +32,31 @@ namespace CadlFirstTest.Models
             string name = default;
             string requiredUnion = default;
             string requiredLiteral = default;
+            string requiredBadDescription = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredUnion"))
+                if (property.NameEquals("requiredUnion"u8))
                 {
                     requiredUnion = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredLiteral"))
+                if (property.NameEquals("requiredLiteral"u8))
                 {
                     requiredLiteral = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("requiredBadDescription"u8))
+                {
+                    requiredBadDescription = property.Value.GetString();
+                    continue;
+                }
             }
-            return new Thing(name, requiredUnion, requiredLiteral);
+            return new Thing(name, requiredUnion, requiredLiteral, requiredBadDescription);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

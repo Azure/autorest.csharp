@@ -27,32 +27,32 @@ namespace Azure.Language.Authoring.Models
             string id = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("jobId"))
+                if (property.NameEquals("jobId"u8))
                 {
                     jobId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("createdDateTime"))
+                if (property.NameEquals("createdDateTime"u8))
                 {
                     createdDateTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("lastUpdatedDateTime"))
+                if (property.NameEquals("lastUpdatedDateTime"u8))
                 {
                     lastUpdatedDateTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("expirationDateTime"))
+                if (property.NameEquals("expirationDateTime"u8))
                 {
                     expirationDateTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("status"))
+                if (property.NameEquals("status"u8))
                 {
                     status = new JobStatus(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("warnings"))
+                if (property.NameEquals("warnings"u8))
                 {
                     List<JobWarning> array = new List<JobWarning>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -62,12 +62,12 @@ namespace Azure.Language.Authoring.Models
                     warnings = array;
                     continue;
                 }
-                if (property.NameEquals("errors"))
+                if (property.NameEquals("errors"u8))
                 {
                     errors = JsonSerializer.Deserialize<ResponseError>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetString();
                     continue;

@@ -19,7 +19,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(IpAddresses))
             {
-                writer.WritePropertyName("ipAddresses");
+                writer.WritePropertyName("ipAddresses"u8);
                 writer.WriteStartArray();
                 foreach (var item in IpAddresses)
                 {
@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
             }
             if (Optional.IsCollectionDefined(Fqdns))
             {
-                writer.WritePropertyName("fqdns");
+                writer.WritePropertyName("fqdns"u8);
                 writer.WriteStartArray();
                 foreach (var item in Fqdns)
                 {
@@ -46,7 +46,7 @@ namespace MgmtMockAndSample.Models
             Optional<IList<string>> fqdns = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ipAddresses"))
+                if (property.NameEquals("ipAddresses"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -61,7 +61,7 @@ namespace MgmtMockAndSample.Models
                     ipAddresses = array;
                     continue;
                 }
-                if (property.NameEquals("fqdns"))
+                if (property.NameEquals("fqdns"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

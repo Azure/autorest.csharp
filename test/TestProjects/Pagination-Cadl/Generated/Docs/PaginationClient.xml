@@ -32,8 +32,8 @@ Request Body:
 
 Schema for <c>ListLedgerEntryInputBody</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
 }
 </code>
 
@@ -41,7 +41,7 @@ Response Body:
 
 Schema for <c>Array</c>:
 <code>{
-  contents: string, # Required.
+  contents: string, # Required. Contents of the ledger entry.
   collectionId: string, # Required.
   transactionId: string, # Required.
 }
@@ -80,8 +80,8 @@ Request Body:
 
 Schema for <c>ListLedgerEntryInputBody</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
 }
 </code>
 
@@ -89,7 +89,7 @@ Response Body:
 
 Schema for <c>Array</c>:
 <code>{
-  contents: string, # Required.
+  contents: string, # Required. Contents of the ledger entry.
   collectionId: string, # Required.
   transactionId: string, # Required.
 }
@@ -121,7 +121,7 @@ Response Body:
 
 Schema for <c>Array</c>:
 <code>{
-  contents: string, # Required.
+  contents: string, # Required. Contents of the ledger entry.
   collectionId: string, # Required.
   transactionId: string, # Required.
 }
@@ -153,7 +153,7 @@ Response Body:
 
 Schema for <c>Array</c>:
 <code>{
-  contents: string, # Required.
+  contents: string, # Required. Contents of the ledger entry.
   collectionId: string, # Required.
   transactionId: string, # Required.
 }

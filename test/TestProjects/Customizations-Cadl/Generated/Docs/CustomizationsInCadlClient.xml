@@ -37,6 +37,22 @@ var data = new {
         propertyToMakeString = PT1H23M45S,
         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
         propertyToField = "<propertyToField>",
+        badListName = new[] {
+            "<String>"
+        },
+        badDictionaryName = new {
+            key = "<String>",
+        },
+        badListOfListName = new[] {
+            new[] {
+                "<String>"
+            }
+        },
+        badListOfDictionaryName = new[] {
+            new {
+                key = "<String>",
+            }
+        },
     },
     propertyEnumToRename = "1",
     propertyEnumWithValueToRename = "1",
@@ -57,6 +73,10 @@ Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").Ge
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeString").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListName")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
@@ -70,27 +90,31 @@ Request Body:
 Schema for <c>RootModel</c>:
 <code>{
   propertyModelToMakeInternal: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToMakeInternal
   propertyModelToRename: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToRename
   propertyModelToChangeNamespace: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToChangeNamespace
   propertyModelWithCustomizedProperties: {
-    propertyToMakeInternal: number, # Required.
-    propertyToRename: number, # Required.
-    propertyToMakeFloat: number, # Required.
-    propertyToMakeInt: number, # Required.
-    propertyToMakeDuration: string, # Required.
-    propertyToMakeString: string (duration ISO 8601 Format), # Required.
-    propertyToMakeJsonElement: string, # Required.
-    propertyToField: string, # Required.
-  }, # Optional.
-  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
+    propertyToMakeInternal: number, # Required. Public property made internal
+    propertyToRename: number, # Required. Renamed property (original name: PropertyToRename)
+    propertyToMakeFloat: number, # Required. Property with type changed to float (original type: int)
+    propertyToMakeInt: number, # Required. Property with type changed to int (original type: float)
+    propertyToMakeDuration: string, # Required. Property with type changed to duration (original type: string)
+    propertyToMakeString: string (duration ISO 8601 Format), # Required. Property with type changed to string (original type: duration)
+    propertyToMakeJsonElement: string, # Required. Property with type changed to JsonElement (original type: string)
+    propertyToField: string, # Required. Field that replaces property (original name: PropertyToField)
+    badListName: [string], # Required. Property renamed that is list
+    badDictionaryName: Dictionary&lt;string, string&gt;, # Required. Property renamed that is dictionary
+    badListOfListName: [string[]], # Required. Property renamed that is listoflist
+    badListOfDictionaryName: [Dictionary&lt;string, string&gt;], # Required. Property renamed that is listofdictionary
+  }, # Optional. ModelWithCustomizedProperties
+  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToRename
+  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumWithValueToRename
+  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToBeMadeExtensible
 }
 </code>
 
@@ -99,27 +123,31 @@ Response Body:
 Schema for <c>RootModel</c>:
 <code>{
   propertyModelToMakeInternal: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToMakeInternal
   propertyModelToRename: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToRename
   propertyModelToChangeNamespace: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToChangeNamespace
   propertyModelWithCustomizedProperties: {
-    propertyToMakeInternal: number, # Required.
-    propertyToRename: number, # Required.
-    propertyToMakeFloat: number, # Required.
-    propertyToMakeInt: number, # Required.
-    propertyToMakeDuration: string, # Required.
-    propertyToMakeString: string (duration ISO 8601 Format), # Required.
-    propertyToMakeJsonElement: string, # Required.
-    propertyToField: string, # Required.
-  }, # Optional.
-  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
+    propertyToMakeInternal: number, # Required. Public property made internal
+    propertyToRename: number, # Required. Renamed property (original name: PropertyToRename)
+    propertyToMakeFloat: number, # Required. Property with type changed to float (original type: int)
+    propertyToMakeInt: number, # Required. Property with type changed to int (original type: float)
+    propertyToMakeDuration: string, # Required. Property with type changed to duration (original type: string)
+    propertyToMakeString: string (duration ISO 8601 Format), # Required. Property with type changed to string (original type: duration)
+    propertyToMakeJsonElement: string, # Required. Property with type changed to JsonElement (original type: string)
+    propertyToField: string, # Required. Field that replaces property (original name: PropertyToField)
+    badListName: [string], # Required. Property renamed that is list
+    badDictionaryName: Dictionary&lt;string, string&gt;, # Required. Property renamed that is dictionary
+    badListOfListName: [string[]], # Required. Property renamed that is listoflist
+    badListOfDictionaryName: [Dictionary&lt;string, string&gt;], # Required. Property renamed that is listofdictionary
+  }, # Optional. ModelWithCustomizedProperties
+  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToRename
+  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumWithValueToRename
+  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToBeMadeExtensible
 }
 </code>
 
@@ -161,6 +189,22 @@ var data = new {
         propertyToMakeString = PT1H23M45S,
         propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
         propertyToField = "<propertyToField>",
+        badListName = new[] {
+            "<String>"
+        },
+        badDictionaryName = new {
+            key = "<String>",
+        },
+        badListOfListName = new[] {
+            new[] {
+                "<String>"
+            }
+        },
+        badListOfDictionaryName = new[] {
+            new {
+                key = "<String>",
+            }
+        },
     },
     propertyEnumToRename = "1",
     propertyEnumWithValueToRename = "1",
@@ -181,6 +225,10 @@ Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").Ge
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeString").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
 Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListName")[0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
+Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
 Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
@@ -194,27 +242,31 @@ Request Body:
 Schema for <c>RootModel</c>:
 <code>{
   propertyModelToMakeInternal: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToMakeInternal
   propertyModelToRename: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToRename
   propertyModelToChangeNamespace: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToChangeNamespace
   propertyModelWithCustomizedProperties: {
-    propertyToMakeInternal: number, # Required.
-    propertyToRename: number, # Required.
-    propertyToMakeFloat: number, # Required.
-    propertyToMakeInt: number, # Required.
-    propertyToMakeDuration: string, # Required.
-    propertyToMakeString: string (duration ISO 8601 Format), # Required.
-    propertyToMakeJsonElement: string, # Required.
-    propertyToField: string, # Required.
-  }, # Optional.
-  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
+    propertyToMakeInternal: number, # Required. Public property made internal
+    propertyToRename: number, # Required. Renamed property (original name: PropertyToRename)
+    propertyToMakeFloat: number, # Required. Property with type changed to float (original type: int)
+    propertyToMakeInt: number, # Required. Property with type changed to int (original type: float)
+    propertyToMakeDuration: string, # Required. Property with type changed to duration (original type: string)
+    propertyToMakeString: string (duration ISO 8601 Format), # Required. Property with type changed to string (original type: duration)
+    propertyToMakeJsonElement: string, # Required. Property with type changed to JsonElement (original type: string)
+    propertyToField: string, # Required. Field that replaces property (original name: PropertyToField)
+    badListName: [string], # Required. Property renamed that is list
+    badDictionaryName: Dictionary&lt;string, string&gt;, # Required. Property renamed that is dictionary
+    badListOfListName: [string[]], # Required. Property renamed that is listoflist
+    badListOfDictionaryName: [Dictionary&lt;string, string&gt;], # Required. Property renamed that is listofdictionary
+  }, # Optional. ModelWithCustomizedProperties
+  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToRename
+  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumWithValueToRename
+  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToBeMadeExtensible
 }
 </code>
 
@@ -223,27 +275,31 @@ Response Body:
 Schema for <c>RootModel</c>:
 <code>{
   propertyModelToMakeInternal: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToMakeInternal
   propertyModelToRename: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToRename
   propertyModelToChangeNamespace: {
-    requiredInt: number, # Required.
-  }, # Optional.
+    requiredInt: number, # Required. Required int
+  }, # Optional. ModelToChangeNamespace
   propertyModelWithCustomizedProperties: {
-    propertyToMakeInternal: number, # Required.
-    propertyToRename: number, # Required.
-    propertyToMakeFloat: number, # Required.
-    propertyToMakeInt: number, # Required.
-    propertyToMakeDuration: string, # Required.
-    propertyToMakeString: string (duration ISO 8601 Format), # Required.
-    propertyToMakeJsonElement: string, # Required.
-    propertyToField: string, # Required.
-  }, # Optional.
-  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
-  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional.
+    propertyToMakeInternal: number, # Required. Public property made internal
+    propertyToRename: number, # Required. Renamed property (original name: PropertyToRename)
+    propertyToMakeFloat: number, # Required. Property with type changed to float (original type: int)
+    propertyToMakeInt: number, # Required. Property with type changed to int (original type: float)
+    propertyToMakeDuration: string, # Required. Property with type changed to duration (original type: string)
+    propertyToMakeString: string (duration ISO 8601 Format), # Required. Property with type changed to string (original type: duration)
+    propertyToMakeJsonElement: string, # Required. Property with type changed to JsonElement (original type: string)
+    propertyToField: string, # Required. Field that replaces property (original name: PropertyToField)
+    badListName: [string], # Required. Property renamed that is list
+    badDictionaryName: Dictionary&lt;string, string&gt;, # Required. Property renamed that is dictionary
+    badListOfListName: [string[]], # Required. Property renamed that is listoflist
+    badListOfDictionaryName: [Dictionary&lt;string, string&gt;], # Required. Property renamed that is listofdictionary
+  }, # Optional. ModelWithCustomizedProperties
+  propertyEnumToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToRename
+  propertyEnumWithValueToRename: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumWithValueToRename
+  propertyEnumToBeMadeExtensible: &quot;1&quot; | &quot;2&quot; | &quot;3&quot;, # Optional. EnumToBeMadeExtensible
 }
 </code>
 

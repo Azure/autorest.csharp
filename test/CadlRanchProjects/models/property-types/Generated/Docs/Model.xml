@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetModelAsync(RequestContext)">
+<example>
+This sample shows how to call GetModelAsync and parse the result.
+<code><![CDATA[
+var client = new TypesClient().GetModelClient(<1.0.0>);
+
+Response response = await client.GetModelAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>ModelProperty</c>:
+<code>{
+  property: {
+    property: string, # Required. Required string property
+  }, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetModel(RequestContext)">
+<example>
+This sample shows how to call GetModel and parse the result.
+<code><![CDATA[
+var client = new TypesClient().GetModelClient(<1.0.0>);
+
+Response response = client.GetModel();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>ModelProperty</c>:
+<code>{
+  property: {
+    property: string, # Required. Required string property
+  }, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new TypesClient().GetModelClient(<1.0.0>);
+
+var data = new {
+    property = new {
+        property = "<property>",
+    },
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>ModelProperty</c>:
+<code>{
+  property: {
+    property: string, # Required. Required string property
+  }, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new TypesClient().GetModelClient(<1.0.0>);
+
+var data = new {
+    property = new {
+        property = "<property>",
+    },
+};
+
+Response response = client.Put(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>ModelProperty</c>:
+<code>{
+  property: {
+    property: string, # Required. Required string property
+  }, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

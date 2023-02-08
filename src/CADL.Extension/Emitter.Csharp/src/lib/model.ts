@@ -507,7 +507,7 @@ export function getInputType(
                 const inputProp = {
                     Name: value.name,
                     SerializedName: value.name,
-                    Description: "",
+                    Description: getDoc(program, value) ?? "",
                     Type: getInputType(program, value.type, models, enums),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
@@ -599,7 +599,10 @@ export function getUsages(
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
         if (type.kind === "Model") {
-            const effectiveType = getEffectiveModelType(program, type);
+            const effectiveType = getEffectiveSchemaType(
+                program,
+                type
+            ) as Model;
             typeName =
                 getFriendlyName(program, effectiveType) ?? effectiveType.name;
         }

@@ -17,7 +17,7 @@ namespace TypeSchemaMapping.Models
             Optional<string> stringProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("StringProperty"))
+                if (property.NameEquals("StringProperty"u8))
                 {
                     stringProperty = property.Value.GetString();
                     continue;

@@ -20,7 +20,7 @@ namespace ModelWithConverterUsage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
             {
-                writer.WritePropertyName("Model_Property");
+                writer.WritePropertyName("Model_Property"u8);
                 writer.WriteStringValue(ModelProperty);
             }
             writer.WriteEndObject();
@@ -31,7 +31,7 @@ namespace ModelWithConverterUsage.Models
             Optional<string> modelProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("Model_Property"))
+                if (property.NameEquals("Model_Property"u8))
                 {
                     modelProperty = property.Value.GetString();
                     continue;

@@ -17,7 +17,7 @@ namespace Azure.AI.FormRecognizer.Models
             ErrorInformation error = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("error"))
+                if (property.NameEquals("error"u8))
                 {
                     error = ErrorInformation.DeserializeErrorInformation(property.Value);
                     continue;

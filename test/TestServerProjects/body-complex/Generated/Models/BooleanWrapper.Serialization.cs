@@ -17,12 +17,12 @@ namespace body_complex.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(FieldTrue))
             {
-                writer.WritePropertyName("field_true");
+                writer.WritePropertyName("field_true"u8);
                 writer.WriteBooleanValue(FieldTrue.Value);
             }
             if (Optional.IsDefined(FieldFalse))
             {
-                writer.WritePropertyName("field_false");
+                writer.WritePropertyName("field_false"u8);
                 writer.WriteBooleanValue(FieldFalse.Value);
             }
             writer.WriteEndObject();
@@ -34,7 +34,7 @@ namespace body_complex.Models
             Optional<bool> fieldFalse = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("field_true"))
+                if (property.NameEquals("field_true"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -44,7 +44,7 @@ namespace body_complex.Models
                     fieldTrue = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("field_false"))
+                if (property.NameEquals("field_false"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

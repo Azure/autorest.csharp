@@ -12,7 +12,7 @@
    "Name": "Dog",
    "Namespace": "Cadl.visibility",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "3",
@@ -226,7 +226,8 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
