@@ -93,7 +93,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("Need cadl ranch fix")]
         public Task Models_Property_Optional_Datetime_putAll() => Test(async (host) =>
         {
             DatetimeProperty data = new()
@@ -208,6 +207,43 @@ namespace CadlRanchProjects.Tests
         public Task Models_Property_Optional_CollectionsModel_putDefault() => Test(async (host) =>
         {
             Response response = await new OptionalClient(host, null).GetCollectionsModelClient().PutDefaultAsync(new CollectionsModelProperty().ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Models_Property_Optional_RequiredAndOptional_getAll() => Test(async (host) =>
+        {
+            Response response = await new OptionalClient(host, null).GetRequiredAndOptionalClient().GetAllAsync();
+            var result = RequiredAndOptionalProperty.FromResponse(response);
+            Assert.AreEqual("hello", result.OptionalProperty);
+            Assert.AreEqual(42, result.RequiredProperty);
+        });
+
+        [Test]
+        public Task Models_Property_Optional_RequiredAndOptional_getRequiredOnly() => Test(async (host) =>
+        {
+            Response response = await new OptionalClient(host, null).GetRequiredAndOptionalClient().GetRequiredOnlyAsync();
+            var result = RequiredAndOptionalProperty.FromResponse(response);
+            Assert.AreEqual(null, result.OptionalProperty);
+            Assert.AreEqual(42, result.RequiredProperty);
+        });
+
+        [Test]
+        public Task Models_Property_Optional_RequiredAndOptional_putAll() => Test(async (host) =>
+        {
+            var content = new RequiredAndOptionalProperty(42)
+            {
+                OptionalProperty = "hello"
+            };
+
+            Response response = await new OptionalClient(host, null).GetRequiredAndOptionalClient().PutAllAsync(content.ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Models_Property_Optional_RequiredAndOptional_putRequiredOnly() => Test(async (host) =>
+        {
+            Response response = await new OptionalClient(host, null).GetRequiredAndOptionalClient().PutRequiredOnlyAsync(new RequiredAndOptionalProperty(42));
             Assert.AreEqual(204, response.Status);
         });
     }

@@ -255,6 +255,7 @@ $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 $cadlRanchProjectPaths =
     'authentication/api-key',
     'authentication/oauth2',
+    'authentication/union',
     'models/property-optional',
     'models/property-types',
     'models/usage'

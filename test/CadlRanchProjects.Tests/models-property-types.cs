@@ -214,5 +214,20 @@ namespace CadlRanchProjects.Tests
             Response response = await new TypesClient(host, null).GetDictionaryStringClient().PutAsync(new DictionaryStringProperty(new Dictionary<string, string> { ["k1"] = "hello", ["k2"] = "world" }).ToRequestContent());
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public Task Models_Property_Types_Never_get() => Test(async (host) =>
+        {
+            Response response = await new TypesClient(host, null).GetNeverClient().GetNeverAsync();
+            var result = NeverProperty.FromResponse(response);
+            Assert.NotNull(result);
+        });
+
+        [Test]
+        public Task Models_Property_Types_Never_put() => Test(async (host) =>
+        {
+            Response response = await new TypesClient(host, null).GetNeverClient().PutAsync(new NeverProperty().ToRequestContent());
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }
