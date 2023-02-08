@@ -63,29 +63,29 @@ alias ThingAliasWithSpreadAlias = {
 @route("/spreadModel")
 @doc("spread a model as body.")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op spreadModel( ...Thing ): void;
 
 @route("/spreadAlias")
 @doc("spread an alias as body.")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op spreadAlias( ...ThingAlias ): void;
 
 @route("/spreadMultiTargetAlias")
 @doc("spread an alias which has multiple target property as body.")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op spreadMultiTargetAlias( ...ThingMultiTargetAlias ): void;
 
 @route("/spreadAliasWithModel")
 @doc("spread an alias which contains a complex model property as body.")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op spreadAliasWithModel( ...ThingAliasWithModel ): void;
 
 @route("/spreadAliasWithSpreadAlias")
 @doc("spread an alias with contains another alias property as body.")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op spreadAliasWithSpreadAlias( ...ThingAliasWithSpreadAlias ): void;

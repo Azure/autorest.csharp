@@ -891,5 +891,129 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
+    <member name="InternalProtocolAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call InternalProtocolAsync with required request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteral = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = await client.InternalProtocolAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="InternalProtocol(RequestContent,RequestContext)">
+<example>
+This sample shows how to call InternalProtocol with required request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteral = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = client.InternalProtocol(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteral: Literal, # Required. required literal type
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="StillConvenientAsync(RequestContext)">
+<example>
+This sample shows how to call StillConvenientAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+Response response = await client.StillConvenientAsync();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StillConvenient(RequestContext)">
+<example>
+This sample shows how to call StillConvenient.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new CadlFirstTestClient(credential);
+
+Response response = client.StillConvenient();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
   </members>
 </doc>

@@ -28,11 +28,11 @@
         "test-official": "c8 mocha --forbid-only",
         "lint": "eslint . --ext .ts --max-warnings=0",
         "lint:fix": "eslint . --fix --ext .ts",
-        "prettier:fix": "prettier --write --config .prettierrc.json ./src/**/*.ts",
+        "prettier:fix": "prettier --write --config .prettierrc.json ./src/**/*.ts ./test/**/*.ts",
         "prettier": "prettier --check --config .prettierrc.json ./src/**/*.ts"
     },
     "files": [
-        "dist/**"
+        "dist/src/**"
     ],
     "devDependencies": {
         "@types/fs-extra": "^9.0.13",

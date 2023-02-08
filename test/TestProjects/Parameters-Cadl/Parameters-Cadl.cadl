@@ -18,10 +18,10 @@ namespace ParameterOrders {
         id: string
     }
 
-    @convenienceAPI
+    @convenientAPI(true)
     op Operation(@query start: int32, @query end?: int32): Result;
 
-    @convenienceAPI
+    @convenientAPI(true)
     @head
     op Operation2(@query start?: int32, @query end: int32): Result;
 }

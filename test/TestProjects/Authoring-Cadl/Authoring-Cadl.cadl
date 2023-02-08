@@ -287,11 +287,11 @@ interface Deployments {
 
 interface Jobs {
   @doc("Gets the status of an existing deployment job.")
-  @convenienceAPI
+  @convenientAPI(true)
   getDeploymentStatus is ResourceRead<DeploymentJob>;
 
   @doc("Gets the status of an existing swap deployment job.")
-  @convenienceAPI
+  @convenientAPI(true)
   getSwapDeploymentsStatus is ResourceRead<SwapDeploymentsJob>;
 }
 
