@@ -19,12 +19,12 @@ namespace Models.Inheritance.Models
             int age = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("kind"))
+                if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("age"))
+                if (property.NameEquals("age"u8))
                 {
                     age = property.Value.GetInt32();
                     continue;

@@ -17,7 +17,7 @@ namespace Azure.Management.Storage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(EncryptionUserAssignedIdentity))
             {
-                writer.WritePropertyName("userAssignedIdentity");
+                writer.WritePropertyName("userAssignedIdentity"u8);
                 writer.WriteStringValue(EncryptionUserAssignedIdentity);
             }
             writer.WriteEndObject();
@@ -28,7 +28,7 @@ namespace Azure.Management.Storage.Models
             Optional<string> userAssignedIdentity = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("userAssignedIdentity"))
+                if (property.NameEquals("userAssignedIdentity"u8))
                 {
                     userAssignedIdentity = property.Value.GetString();
                     continue;

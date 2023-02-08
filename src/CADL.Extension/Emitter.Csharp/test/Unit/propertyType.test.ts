@@ -44,7 +44,7 @@ describe("compiler : array", () => {
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context, false);
+        const root: CodeModel = createModel(context);
         deepStrictEqual(
             root.Clients[0].Operations[0].Parameters[0].Type.Name,
             "Array"
@@ -73,7 +73,7 @@ describe("compiler : array", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context, false);
+        const root: CodeModel = createModel(context);
         deepStrictEqual(
             root.Clients[0].Operations[0].Responses[0].BodyType?.Name,
             "Array"
@@ -122,7 +122,7 @@ describe("compiler: enum", () => {
             true
         );
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context, false);
+        const root: CodeModel = createModel(context);
         assert(
             isEqual(
                 {
@@ -170,7 +170,7 @@ describe("compiler: enum", () => {
             true
         );
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context, false);
+        const root: CodeModel = createModel(context);
         assert(
             isEqual(
                 {
@@ -213,7 +213,7 @@ describe("compiler: enum", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const root: CodeModel = createModel(context, false);
+        const root: CodeModel = createModel(context);
         assert(
             isEqual(
                 {

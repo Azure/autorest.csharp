@@ -19,7 +19,7 @@ namespace paging.Models
             Optional<string> odataNextLink = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("values"))
+                if (property.NameEquals("values"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -34,7 +34,7 @@ namespace paging.Models
                     values = array;
                     continue;
                 }
-                if (property.NameEquals("odata.nextLink"))
+                if (property.NameEquals("odata.nextLink"u8))
                 {
                     odataNextLink = property.Value.GetString();
                     continue;

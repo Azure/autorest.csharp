@@ -20,7 +20,7 @@ namespace body_complex.Models
             {
                 if (DefaultProgram != null)
                 {
-                    writer.WritePropertyName("defaultProgram");
+                    writer.WritePropertyName("defaultProgram"u8);
                     writer.WriteStartObject();
                     foreach (var item in DefaultProgram)
                     {
@@ -42,7 +42,7 @@ namespace body_complex.Models
             Optional<IDictionary<string, string>> defaultProgram = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("defaultProgram"))
+                if (property.NameEquals("defaultProgram"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

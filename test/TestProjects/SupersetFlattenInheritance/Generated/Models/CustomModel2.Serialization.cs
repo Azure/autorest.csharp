@@ -17,24 +17,24 @@ namespace SupersetFlattenInheritance.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("id");
+                writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             if (Optional.IsDefined(Bar))
             {
-                writer.WritePropertyName("bar");
+                writer.WritePropertyName("bar"u8);
                 writer.WriteStringValue(Bar);
             }
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(IdPropertiesId))
             {
-                writer.WritePropertyName("id");
+                writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(IdPropertiesId);
             }
             if (Optional.IsDefined(Foo))
             {
-                writer.WritePropertyName("foo");
+                writer.WritePropertyName("foo"u8);
                 writer.WriteStringValue(Foo);
             }
             writer.WriteEndObject();
@@ -49,17 +49,17 @@ namespace SupersetFlattenInheritance.Models
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("bar"))
+                if (property.NameEquals("bar"u8))
                 {
                     bar = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -68,12 +68,12 @@ namespace SupersetFlattenInheritance.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("id"))
+                        if (property0.NameEquals("id"u8))
                         {
                             id0 = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("foo"))
+                        if (property0.NameEquals("foo"u8))
                         {
                             foo = property0.Value.GetString();
                             continue;

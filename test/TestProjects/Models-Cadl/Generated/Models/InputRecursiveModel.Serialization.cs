@@ -15,11 +15,11 @@ namespace ModelsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("message");
+            writer.WritePropertyName("message"u8);
             writer.WriteStringValue(Message);
             if (Optional.IsDefined(Inner))
             {
-                writer.WritePropertyName("inner");
+                writer.WritePropertyName("inner"u8);
                 writer.WriteObjectValue(Inner);
             }
             writer.WriteEndObject();

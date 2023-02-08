@@ -17,24 +17,24 @@ namespace ExactMatchFlattenInheritance.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
             {
-                writer.WritePropertyName("foo");
+                writer.WritePropertyName("foo"u8);
                 writer.WriteNumberValue(Foo.Value);
             }
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("id");
+                writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
             if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("name");
+                writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
             if (Optional.IsDefined(ResourceType))
             {
-                writer.WritePropertyName("type");
+                writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceType);
             }
             writer.WriteEndObject();
@@ -49,7 +49,7 @@ namespace ExactMatchFlattenInheritance.Models
             Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("foo"))
+                if (property.NameEquals("foo"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -59,7 +59,7 @@ namespace ExactMatchFlattenInheritance.Models
                     foo = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -68,17 +68,17 @@ namespace ExactMatchFlattenInheritance.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("id"))
+                        if (property0.NameEquals("id"u8))
                         {
                             id = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("name"))
+                        if (property0.NameEquals("name"u8))
                         {
                             name = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("type"))
+                        if (property0.NameEquals("type"u8))
                         {
                             type = property0.Value.GetString();
                             continue;

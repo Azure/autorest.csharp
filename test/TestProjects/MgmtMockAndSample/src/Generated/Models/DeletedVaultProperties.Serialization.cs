@@ -24,12 +24,12 @@ namespace MgmtMockAndSample.Models
             Optional<bool> purgeProtectionEnabled = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("vaultId"))
+                if (property.NameEquals("vaultId"u8))
                 {
                     vaultId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("location"))
+                if (property.NameEquals("location"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -39,7 +39,7 @@ namespace MgmtMockAndSample.Models
                     location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("deletionDate"))
+                if (property.NameEquals("deletionDate"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -49,7 +49,7 @@ namespace MgmtMockAndSample.Models
                     deletionDate = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("scheduledPurgeDate"))
+                if (property.NameEquals("scheduledPurgeDate"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -59,7 +59,7 @@ namespace MgmtMockAndSample.Models
                     scheduledPurgeDate = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("tags"))
+                if (property.NameEquals("tags"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -74,7 +74,7 @@ namespace MgmtMockAndSample.Models
                     tags = dictionary;
                     continue;
                 }
-                if (property.NameEquals("purgeProtectionEnabled"))
+                if (property.NameEquals("purgeProtectionEnabled"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
