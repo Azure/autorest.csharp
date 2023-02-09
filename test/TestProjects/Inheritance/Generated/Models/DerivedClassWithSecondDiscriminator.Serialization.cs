@@ -13,11 +13,13 @@ using Azure.Core.Expressions.DataFactory;
 
 namespace Inheritance.Models
 {
-    public partial class BaseClassWithDiscriminator : IUtf8JsonSerializable
+    public partial class DerivedClassWithSecondDiscriminator : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("SecondDiscriminatorProperty"u8);
+            writer.WriteStringValue(SecondDiscriminatorProperty);
             writer.WritePropertyName("DiscriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty);
             if (Optional.IsDefined(BaseClassProperty))
@@ -83,19 +85,17 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static BaseClassWithDiscriminator DeserializeBaseClassWithDiscriminator(JsonElement element)
+        internal static DerivedClassWithSecondDiscriminator DeserializeDerivedClassWithSecondDiscriminator(JsonElement element)
         {
-            if (element.TryGetProperty("DiscriminatorProperty", out JsonElement discriminator))
+            if (element.TryGetProperty("SecondDiscriminatorProperty", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "ClassThatInheritsFromBaseClassWithDiscriminator": return ClassThatInheritsFromBaseClassWithDiscriminator.DeserializeClassThatInheritsFromBaseClassWithDiscriminator(element);
-                    case "ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties": return ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties.DeserializeClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties(element);
-                    case "DerivedClassWithSecondDiscriminator": return DerivedClassWithSecondDiscriminator.DeserializeDerivedClassWithSecondDiscriminator(element);
                     case "DerivedClassWithSecondDiscriminatorChildOne": return DerivedClassWithSecondDiscriminatorChildOne.DeserializeDerivedClassWithSecondDiscriminatorChildOne(element);
                     case "DerivedClassWithSecondDiscriminatorChildTwo": return DerivedClassWithSecondDiscriminatorChildTwo.DeserializeDerivedClassWithSecondDiscriminatorChildTwo(element);
                 }
             }
+            string secondDiscriminatorProperty = "DerivedClassWithSecondDiscriminator";
             string discriminatorProperty = default;
             Optional<string> baseClassProperty = default;
             Optional<DataFactoryExpression<string>> dfeString = default;
@@ -111,6 +111,11 @@ namespace Inheritance.Models
             Optional<DataFactoryExpression<Uri>> dfeUri = default;
             foreach (var property in element.EnumerateObject())
             {
+                if (property.NameEquals("SecondDiscriminatorProperty"u8))
+                {
+                    secondDiscriminatorProperty = property.Value.GetString();
+                    continue;
+                }
                 if (property.NameEquals("DiscriminatorProperty"u8))
                 {
                     discriminatorProperty = property.Value.GetString();
@@ -232,7 +237,7 @@ namespace Inheritance.Models
                     continue;
                 }
             }
-            return new BaseClassWithDiscriminator(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, discriminatorProperty);
+            return new DerivedClassWithSecondDiscriminator(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, discriminatorProperty, secondDiscriminatorProperty);
         }
     }
 }

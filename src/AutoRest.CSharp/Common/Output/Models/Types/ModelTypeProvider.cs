@@ -181,9 +181,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             //get base public ctor params
             List<Parameter> fullParameterList;
             IEnumerable<Parameter> parametersToPassToBase;
-            GetConstructorParameters(serializationParameters, out fullParameterList, out parametersToPassToBase, false, CreateSerializationConstructorParameter);
+            var parent = GetBaseObjectType();
+            GetConstructorParameters(parent, serializationParameters, out fullParameterList, out parametersToPassToBase, false, CreateSerializationConstructorParameter);
 
-            FormattableString[] baseInitializers = GetInitializersFromParameters(parametersToPassToBase);
+            FormattableString[] baseInitializers = GetInitializersFromParameters(parent, parametersToPassToBase);
 
             return new ConstructorSignature(
                 name,
@@ -199,7 +200,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             //get base public ctor params
             List<Parameter> fullParameterList;
             IEnumerable<Parameter> parametersToPassToBase;
-            GetConstructorParameters(parameters, out fullParameterList, out parametersToPassToBase, true, CreatePublicConstructorParameter);
+            var parent = GetBaseObjectType();
+            GetConstructorParameters(parent, parameters, out fullParameterList, out parametersToPassToBase, true, CreatePublicConstructorParameter);
 
             var summary = $"Initializes a new instance of {name}";
             var accessibility = usage == InputModelTypeUsage.Output
@@ -209,7 +211,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (_inputModel.DiscriminatorPropertyName is not null)
                 accessibility = MethodSignatureModifiers.Protected;
 
-            FormattableString[] baseInitializers = GetInitializersFromParameters(parametersToPassToBase);
+            FormattableString[] baseInitializers = GetInitializersFromParameters(parent, parametersToPassToBase);
 
             return new ConstructorSignature(
                 name,
@@ -220,21 +222,21 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Initializer: new(true, baseInitializers));
         }
 
-        private void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator)
+        private void GetConstructorParameters(ObjectType? parent, IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer, Func<Parameter, Parameter> creator)
         {
             fullParameterList = new List<Parameter>();
-            var parent = GetBaseObjectType();
             parametersToPassToBase = Array.Empty<Parameter>();
             if (parent is not null)
             {
                 var ctor = isInitializer ? parent.InitializationConstructor : parent.SerializationConstructor;
                 parametersToPassToBase = ctor.Signature.Parameters;
-                fullParameterList.AddRange(_inputModel.IsDefaultDiscriminator ? parametersToPassToBase : parametersToPassToBase.Where(p => p.Name != Discriminator?.SerializedName));
+                fullParameterList.AddRange(_inputModel.IsDefaultDiscriminator ? parametersToPassToBase :
+                    parametersToPassToBase.Where(p => p.Name != parent.Discriminator?.SerializedName)); // discriminator of parent class should not be exposed in current constructor because it's initialized by discrimination value
             }
             fullParameterList.AddRange(parameters.Select(creator));
         }
 
-        private FormattableString[] GetInitializersFromParameters(IEnumerable<Parameter> parametersToPassToBase)
+        private FormattableString[] GetInitializersFromParameters(ObjectType? parent, IEnumerable<Parameter> parametersToPassToBase)
         {
             var baseInitializers = ConstructorInitializer.ParametersToFormattableString(parametersToPassToBase).ToArray();
             if (Discriminator?.Value is not null && !_inputModel.IsDefaultDiscriminator)
@@ -242,7 +244,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 FormattableString discriminatorInitializer = Discriminator.Value.Value.Type.Equals(typeof(string)) ? (FormattableString)$"\"{Discriminator.Value.Value.Value}\"" : (FormattableString)$"{Discriminator.Value.Value.Value}";
                 for (int i = 0; i < baseInitializers.Length; i++)
                 {
-                    if (baseInitializers[i].ToString() == Discriminator.SerializedName)
+                    if (baseInitializers[i].ToString() == parent!.Discriminator!.SerializedName) // discriminator value is for discriminator property of parent, not for current discriminator property because it could be different from the parent's
                         baseInitializers[i] = discriminatorInitializer;
                 }
             }
@@ -443,7 +445,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.Name, _typeFactory.CreateType(child))).ToArray();
+                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
                 property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
             }
 

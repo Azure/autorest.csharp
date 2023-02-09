@@ -271,6 +271,38 @@
           "$ref": "#/definitions/BaseClassWithExtensibleEnumDiscriminator"
         }
       }
+    },
+    "DerivedClassWithSecondDiscriminator": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseClassWithDiscriminator"
+        }
+      ],
+      "x-ms-discriminator-value": "DerivedClassWithSecondDiscriminator",
+      "properties": {
+        "SecondDiscriminatorProperty": { "type": "string" }
+      },
+      "discriminator": "SecondDiscriminatorProperty",
+      "required": ["SecondDiscriminatorProperty"]
+    },
+    "DerivedClassWithSecondDiscriminatorChildOne": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DerivedClassWithSecondDiscriminator"
+        }
+      ],
+      "x-ms-discriminator-value": "DerivedClassWithSecondDiscriminatorChildOne"
+    },
+    "DerivedClassWithSecondDiscriminatorChildTwo": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DerivedClassWithSecondDiscriminator"
+        }
+      ],
+      "x-ms-discriminator-value": "DerivedClassWithSecondDiscriminatorChildTwo"
     }
   }
 }

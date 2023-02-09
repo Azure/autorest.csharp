@@ -11,7 +11,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_16
+    - !StringSchema &ref_21
       type: string
       apiVersions:
         - !ApiVersion 
@@ -21,7 +21,7 @@ schemas: !Schemas
           name: BaseClassProperty
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_12
+    - !StringSchema &ref_17
       type: string
       apiVersions:
         - !ApiVersion 
@@ -61,7 +61,7 @@ schemas: !Schemas
           name: ClassThatInheritsFromBaseClassAndRedefinesAPropertyBaseClassProperty
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_18
+    - !StringSchema &ref_23
       type: string
       apiVersions:
         - !ApiVersion 
@@ -81,7 +81,7 @@ schemas: !Schemas
           name: ClassThatInheritsFromSomePropertiesAndBaseClassAndRedefinesAPropertyBaseClassProperty
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_28
+    - !StringSchema &ref_33
       type: string
       apiVersions:
         - !ApiVersion 
@@ -91,8 +91,18 @@ schemas: !Schemas
           name: SeparateClassStringProperty
           description: ''
       protocol: !Protocols {}
+    - !StringSchema &ref_14
+      type: string
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: DerivedClassWithSecondDiscriminatorProperty
+          description: ''
+      protocol: !Protocols {}
   choices:
-    - !ChoiceSchema &ref_26
+    - !ChoiceSchema &ref_31
       choices:
         - !ChoiceValue 
           value: derived
@@ -117,7 +127,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   sealedChoices:
-    - !SealedChoiceSchema &ref_21
+    - !SealedChoiceSchema &ref_26
       choices:
         - !ChoiceValue 
           value: derived
@@ -142,7 +152,7 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_30
+    - !ConstantSchema &ref_35
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -152,7 +162,7 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_31
+    - !ConstantSchema &ref_36
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -163,7 +173,7 @@ schemas: !Schemas
           description: 'Accept: application/json'
       protocol: !Protocols {}
   anyObjects:
-    - !AnyObjectSchema &ref_17
+    - !AnyObjectSchema &ref_22
       type: any-object
       language: !Languages 
         default:
@@ -185,7 +195,7 @@ schemas: !Schemas
                 version: 1.0.0
             children: !Relations 
               all:
-                - !ObjectSchema &ref_11
+                - !ObjectSchema &ref_16
                   type: object
                   apiVersions:
                     - !ApiVersion 
@@ -370,18 +380,126 @@ schemas: !Schemas
                       description: ''
                       namespace: ''
                   protocol: !Protocols {}
+                - !ObjectSchema &ref_11
+                  type: object
+                  apiVersions:
+                    - !ApiVersion 
+                      version: 1.0.0
+                  children: !Relations 
+                    all:
+                      - !ObjectSchema &ref_12
+                        type: object
+                        apiVersions:
+                          - !ApiVersion 
+                            version: 1.0.0
+                        discriminatorValue: DerivedClassWithSecondDiscriminatorChildOne
+                        parents: !Relations 
+                          all:
+                            - *ref_11
+                            - *ref_1
+                            - *ref_2
+                          immediate:
+                            - *ref_11
+                        serializationFormats:
+                          - json
+                        usage:
+                          - input
+                          - output
+                        extensions:
+                          x-ms-discriminator-value: DerivedClassWithSecondDiscriminatorChildOne
+                        language: !Languages 
+                          default:
+                            name: DerivedClassWithSecondDiscriminatorChildOne
+                            description: ''
+                            namespace: ''
+                        protocol: !Protocols {}
+                      - !ObjectSchema &ref_13
+                        type: object
+                        apiVersions:
+                          - !ApiVersion 
+                            version: 1.0.0
+                        discriminatorValue: DerivedClassWithSecondDiscriminatorChildTwo
+                        parents: !Relations 
+                          all:
+                            - *ref_11
+                            - *ref_1
+                            - *ref_2
+                          immediate:
+                            - *ref_11
+                        serializationFormats:
+                          - json
+                        usage:
+                          - input
+                          - output
+                        extensions:
+                          x-ms-discriminator-value: DerivedClassWithSecondDiscriminatorChildTwo
+                        language: !Languages 
+                          default:
+                            name: DerivedClassWithSecondDiscriminatorChildTwo
+                            description: ''
+                            namespace: ''
+                        protocol: !Protocols {}
+                    immediate:
+                      - *ref_12
+                      - *ref_13
+                  discriminator: !Discriminator 
+                    all:
+                      DerivedClassWithSecondDiscriminatorChildOne: *ref_12
+                      DerivedClassWithSecondDiscriminatorChildTwo: *ref_13
+                    immediate:
+                      DerivedClassWithSecondDiscriminatorChildOne: *ref_12
+                      DerivedClassWithSecondDiscriminatorChildTwo: *ref_13
+                    property: !Property &ref_15
+                      schema: *ref_14
+                      isDiscriminator: true
+                      required: true
+                      serializedName: SecondDiscriminatorProperty
+                      language: !Languages 
+                        default:
+                          name: secondDiscriminatorProperty
+                          description: ''
+                      protocol: !Protocols {}
+                  discriminatorValue: DerivedClassWithSecondDiscriminator
+                  parents: !Relations 
+                    all:
+                      - *ref_1
+                      - *ref_2
+                    immediate:
+                      - *ref_1
+                  properties:
+                    - *ref_15
+                  serializationFormats:
+                    - json
+                  usage:
+                    - input
+                    - output
+                  extensions:
+                    x-ms-discriminator-value: DerivedClassWithSecondDiscriminator
+                  language: !Languages 
+                    default:
+                      name: DerivedClassWithSecondDiscriminator
+                      description: ''
+                      namespace: ''
+                  protocol: !Protocols {}
+                - *ref_12
+                - *ref_13
               immediate:
-                - *ref_11
+                - *ref_16
                 - *ref_4
+                - *ref_11
             discriminator: !Discriminator 
               all:
-                ClassThatInheritsFromBaseClassWithDiscriminator: *ref_11
+                ClassThatInheritsFromBaseClassWithDiscriminator: *ref_16
                 ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_4
+                DerivedClassWithSecondDiscriminator: *ref_11
+                DerivedClassWithSecondDiscriminatorChildOne: *ref_12
+                DerivedClassWithSecondDiscriminatorChildTwo: *ref_13
               immediate:
-                ClassThatInheritsFromBaseClassWithDiscriminator: *ref_11
+                ClassThatInheritsFromBaseClassWithDiscriminator: *ref_16
                 ClassThatInheritsFromBaseClassWithDiscriminatorAndSomeProperties: *ref_4
-              property: !Property &ref_13
-                schema: *ref_12
+                DerivedClassWithSecondDiscriminator: *ref_11
+              property: !Property &ref_18
+                schema: *ref_17
                 isDiscriminator: true
                 required: true
                 serializedName: DiscriminatorProperty
@@ -396,7 +514,7 @@ schemas: !Schemas
               immediate:
                 - *ref_2
             properties:
-              - *ref_13
+              - *ref_18
             serializationFormats:
               - json
             usage:
@@ -410,7 +528,7 @@ schemas: !Schemas
             protocol: !Protocols {}
           - *ref_7
           - *ref_8
-          - !ObjectSchema &ref_14
+          - !ObjectSchema &ref_19
             type: object
             apiVersions:
               - !ApiVersion 
@@ -431,9 +549,9 @@ schemas: !Schemas
                 description: ''
                 namespace: ''
             protocol: !Protocols {}
-          - *ref_11
+          - *ref_16
           - *ref_4
-          - !ObjectSchema &ref_15
+          - !ObjectSchema &ref_20
             type: object
             apiVersions:
               - !ApiVersion 
@@ -456,16 +574,19 @@ schemas: !Schemas
             protocol: !Protocols {}
           - *ref_5
           - *ref_6
+          - *ref_11
+          - *ref_12
+          - *ref_13
         immediate:
           - *ref_1
           - *ref_7
           - *ref_8
-          - *ref_14
-          - *ref_15
+          - *ref_19
+          - *ref_20
           - *ref_5
       properties:
         - !Property 
-          schema: *ref_16
+          schema: *ref_21
           serializedName: BaseClassProperty
           language: !Languages 
             default:
@@ -473,7 +594,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_22
           serializedName: DfeString
           extensions:
             x-ms-format: dfe-string
@@ -483,7 +604,7 @@ schemas: !Schemas
               description: Any object
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_22
           serializedName: DfeDouble
           extensions:
             x-ms-format: dfe-float
@@ -493,7 +614,7 @@ schemas: !Schemas
               description: Any object
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_22
           serializedName: DfeBool
           extensions:
             x-ms-format: dfe-bool
@@ -503,7 +624,7 @@ schemas: !Schemas
               description: Any object
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_22
           serializedName: DfeInt
           extensions:
             x-ms-format: dfe-int
@@ -513,7 +634,7 @@ schemas: !Schemas
               description: Any object
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_22
           serializedName: DfeObject
           extensions:
             x-ms-format: dfe-object
@@ -523,7 +644,7 @@ schemas: !Schemas
               description: Any object
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_22
           serializedName: DfeListOfT
           extensions:
             x-ms-format: dfe-list-generic
@@ -534,7 +655,7 @@ schemas: !Schemas
               description: Any object
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_22
           serializedName: DfeListOfString
           extensions:
             x-ms-format: dfe-list-string
@@ -544,7 +665,7 @@ schemas: !Schemas
               description: Any object
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_22
           serializedName: DfeKeyValuePairs
           extensions:
             x-ms-format: dfe-key-value-pairs
@@ -554,7 +675,7 @@ schemas: !Schemas
               description: Any object
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_22
           serializedName: DfeDateTime
           extensions:
             x-ms-format: dfe-date-time
@@ -564,7 +685,7 @@ schemas: !Schemas
               description: Any object
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_22
           serializedName: DfeDuration
           extensions:
             x-ms-format: dfe-duration
@@ -574,7 +695,7 @@ schemas: !Schemas
               description: Any object
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_22
           serializedName: DfeUri
           extensions:
             x-ms-format: dfe-uri
@@ -598,10 +719,10 @@ schemas: !Schemas
     - *ref_3
     - *ref_7
     - *ref_8
-    - *ref_14
-    - *ref_11
+    - *ref_19
+    - *ref_16
     - *ref_4
-    - *ref_15
+    - *ref_20
     - !ObjectSchema 
       type: object
       apiVersions:
@@ -609,7 +730,7 @@ schemas: !Schemas
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_18
+          schema: *ref_23
           serializedName: BaseClassProperty
           language: !Languages 
             default:
@@ -624,14 +745,14 @@ schemas: !Schemas
       protocol: !Protocols {}
     - *ref_5
     - *ref_6
-    - !ObjectSchema &ref_19
+    - !ObjectSchema &ref_24
       type: object
       apiVersions:
         - !ApiVersion 
           version: 1.0.0
       children: !Relations 
         all:
-          - !ObjectSchema &ref_20
+          - !ObjectSchema &ref_25
             type: object
             apiVersions:
               - !ApiVersion 
@@ -639,9 +760,9 @@ schemas: !Schemas
             discriminatorValue: derived
             parents: !Relations 
               all:
-                - *ref_19
+                - *ref_24
               immediate:
-                - *ref_19
+                - *ref_24
             extensions:
               x-ms-discriminator-value: derived
             language: !Languages 
@@ -651,86 +772,12 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_20
-      discriminator: !Discriminator 
-        all:
-          derived: *ref_20
-        immediate:
-          derived: *ref_20
-        property: !Property &ref_22
-          schema: *ref_21
-          isDiscriminator: true
-          required: true
-          serializedName: DiscriminatorProperty
-          language: !Languages 
-            default:
-              name: discriminatorProperty
-              description: ''
-          protocol: !Protocols {}
-      properties:
-        - *ref_22
-      language: !Languages 
-        default:
-          name: BaseClassWithEnumDiscriminator
-          description: ''
-          namespace: ''
-      protocol: !Protocols {}
-    - *ref_20
-    - !ObjectSchema &ref_23
-      type: object
-      apiVersions:
-        - !ApiVersion 
-          version: 1.0.0
-      children: !Relations 
-        all:
-          - !ObjectSchema &ref_24
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: 1.0.0
-            discriminatorValue: derived
-            parents: !Relations 
-              all:
-                - *ref_23
-              immediate:
-                - *ref_23
-            extensions:
-              x-ms-discriminator-value: derived
-            language: !Languages 
-              default:
-                name: DerivedClassWithExtensibleEnumDiscriminator
-                description: ''
-                namespace: ''
-            protocol: !Protocols {}
-          - !ObjectSchema &ref_25
-            type: object
-            apiVersions:
-              - !ApiVersion 
-                version: 1.0.0
-            discriminatorValue: random value
-            parents: !Relations 
-              all:
-                - *ref_23
-              immediate:
-                - *ref_23
-            extensions:
-              x-ms-discriminator-value: random value
-            language: !Languages 
-              default:
-                name: AnotherDerivedClassWithExtensibleEnumDiscriminator
-                description: ''
-                namespace: ''
-            protocol: !Protocols {}
-        immediate:
-          - *ref_24
           - *ref_25
       discriminator: !Discriminator 
         all:
-          derived: *ref_24
-          random value: *ref_25
+          derived: *ref_25
         immediate:
-          derived: *ref_24
-          random value: *ref_25
+          derived: *ref_25
         property: !Property &ref_27
           schema: *ref_26
           isDiscriminator: true
@@ -745,12 +792,86 @@ schemas: !Schemas
         - *ref_27
       language: !Languages 
         default:
+          name: BaseClassWithEnumDiscriminator
+          description: ''
+          namespace: ''
+      protocol: !Protocols {}
+    - *ref_25
+    - !ObjectSchema &ref_28
+      type: object
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      children: !Relations 
+        all:
+          - !ObjectSchema &ref_29
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: 1.0.0
+            discriminatorValue: derived
+            parents: !Relations 
+              all:
+                - *ref_28
+              immediate:
+                - *ref_28
+            extensions:
+              x-ms-discriminator-value: derived
+            language: !Languages 
+              default:
+                name: DerivedClassWithExtensibleEnumDiscriminator
+                description: ''
+                namespace: ''
+            protocol: !Protocols {}
+          - !ObjectSchema &ref_30
+            type: object
+            apiVersions:
+              - !ApiVersion 
+                version: 1.0.0
+            discriminatorValue: random value
+            parents: !Relations 
+              all:
+                - *ref_28
+              immediate:
+                - *ref_28
+            extensions:
+              x-ms-discriminator-value: random value
+            language: !Languages 
+              default:
+                name: AnotherDerivedClassWithExtensibleEnumDiscriminator
+                description: ''
+                namespace: ''
+            protocol: !Protocols {}
+        immediate:
+          - *ref_29
+          - *ref_30
+      discriminator: !Discriminator 
+        all:
+          derived: *ref_29
+          random value: *ref_30
+        immediate:
+          derived: *ref_29
+          random value: *ref_30
+        property: !Property &ref_32
+          schema: *ref_31
+          isDiscriminator: true
+          required: true
+          serializedName: DiscriminatorProperty
+          language: !Languages 
+            default:
+              name: discriminatorProperty
+              description: ''
+          protocol: !Protocols {}
+      properties:
+        - *ref_32
+      language: !Languages 
+        default:
           name: BaseClassWithExtensibleEnumDiscriminator
           description: ''
           namespace: ''
       protocol: !Protocols {}
-    - *ref_24
-    - *ref_25
+    - *ref_29
+    - *ref_30
     - !ObjectSchema 
       type: object
       apiVersions:
@@ -758,7 +879,7 @@ schemas: !Schemas
           version: 1.0.0
       properties:
         - !Property 
-          schema: *ref_28
+          schema: *ref_33
           serializedName: StringProperty
           language: !Languages 
             default:
@@ -766,7 +887,7 @@ schemas: !Schemas
               description: ''
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_23
+          schema: *ref_28
           serializedName: ModelProperty
           language: !Languages 
             default:
@@ -779,8 +900,11 @@ schemas: !Schemas
           description: ''
           namespace: ''
       protocol: !Protocols {}
+    - *ref_11
+    - *ref_12
+    - *ref_13
 globalParameters:
-  - !Parameter &ref_29
+  - !Parameter &ref_34
     schema: *ref_0
     clientDefaultValue: http://localhost:3000
     implementation: Client
@@ -806,12 +930,12 @@ operationGroups:
           - !ApiVersion 
             version: 1.0.0
         parameters:
-          - *ref_29
+          - *ref_34
         requestMediaTypes:
-          application/json: !Request &ref_33
+          application/json: !Request &ref_38
             parameters:
               - !Parameter 
-                schema: *ref_30
+                schema: *ref_35
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -823,7 +947,7 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_32
+              - !Parameter &ref_37
                 schema: *ref_2
                 implementation: Method
                 required: true
@@ -836,7 +960,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_31
+                schema: *ref_36
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -849,7 +973,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_32
+              - *ref_37
             language: !Languages 
               default:
                 name: ''
@@ -863,7 +987,7 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_33
+          - *ref_38
         signatureParameters: []
         responses:
           - !SchemaResponse 

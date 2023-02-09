@@ -202,7 +202,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                if (discriminator is not null && !serialization.Type.HasParent && !serialization.Type.Equals(discriminator.DefaultObjectType.Type))
+                if (discriminator is not null && !serialization.Type.Equals(discriminator.DefaultObjectType.Type) &&
+                    (!serialization.Type.HasParent || // HLC & mgmt: base class is not abstract, check base class according to wether there is a parent
+                        declaration.IsAbstract) ) // CADL: each base class is abstract
                 {
                     writer.Line($"return {JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(discriminator.DefaultObjectType.Type.Implementation, $"element", JsonSerializationOptions.None)};");
                 }

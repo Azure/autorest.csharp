@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
 {
-    public class InheritanceTests : CadlRanchTestBase
+    public class ModelsInheritanceTests : CadlRanchTestBase
     {
         [Test]
         public Task PostValid() => Test(async (host) =>
@@ -38,27 +38,21 @@ namespace CadlRanchProjects.Tests
             Assert.IsFalse(response.Value.Smart);
         });
 
-// The following test cases need to be fixed when we fix the problem in CADL ranch inheritance which contain multiple discriminators
         [Test]
         public Task GetModel() => Test(async (host) =>
         {
             var response = await new InheritanceClient(host, null).GetModelValueAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(1, response.Value.Age);
-            /*Assert.IsInstanceOf<Shark>(response.Value);*/
+            Assert.IsInstanceOf<GoblinShark>(response.Value);
         });
 
-        /*[Test]
+        [Test]
         public Task PutModel() => Test(async (host) =>
         {
-            try
-            {
-                var response = await new InheritanceClient(host, null).PutModelAsync(new GoblinShark(1));
-            }
-            catch (Exception) { }
+            var response = await new InheritanceClient(host, null).PutModelAsync(new GoblinShark(1));
             Assert.AreEqual(200, response.Status);
-            Assert.IsInstanceOf<Shark>(response.Value);
-        });*/
+        });
 
         [Test]
         public Task GetRecursiveModel() => Test(async (host) =>
@@ -66,7 +60,7 @@ namespace CadlRanchProjects.Tests
             var response = await new InheritanceClient(host, null).GetRecursiveModelValueAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(1, response.Value.Age);
-            /*Assert.IsInstanceOf<Salmon>(response.Value);*/
+            Assert.IsInstanceOf<Salmon>(response.Value);
         });
 
         [Ignore("fix discriminator")]
@@ -83,7 +77,7 @@ namespace CadlRanchProjects.Tests
             var response = await new InheritanceClient(host, null).GetMissingDiscriminatorValueAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.IsNotInstanceOf<Salmon>(response.Value);
-            //Assert.IsNotInstanceOf<Shark>(response.Value);
+            Assert.IsNotInstanceOf<Shark>(response.Value);
             Assert.AreEqual(1, response.Value.Age);
         });
 
@@ -93,7 +87,7 @@ namespace CadlRanchProjects.Tests
             var response = await new InheritanceClient(host, null).GetWrongDiscriminatorValueAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.IsNotInstanceOf<Salmon>(response.Value);
-            //Assert.IsNotInstanceOf<Shark>(response.Value);
+            Assert.IsNotInstanceOf<Shark>(response.Value);
             Assert.AreEqual(1, response.Value.Age);
         });
     }

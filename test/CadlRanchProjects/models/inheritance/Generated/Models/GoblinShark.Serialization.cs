@@ -11,11 +11,13 @@ using Azure.Core;
 
 namespace Models.Inheritance.Models
 {
-    public partial class Fish : IUtf8JsonSerializable
+    public partial class GoblinShark : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
+            writer.WritePropertyName("sharktype"u8);
+            writer.WriteStringValue(Sharktype);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("age"u8);
@@ -23,28 +25,42 @@ namespace Models.Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static Fish DeserializeFish(JsonElement element)
+        internal static GoblinShark DeserializeGoblinShark(JsonElement element)
         {
-            if (element.TryGetProperty("kind", out JsonElement discriminator))
+            string sharktype = default;
+            string kind = default;
+            int age = default;
+            foreach (var property in element.EnumerateObject())
             {
-                switch (discriminator.GetString())
+                if (property.NameEquals("sharktype"u8))
                 {
-                    case "Salmon": return Salmon.DeserializeSalmon(element);
+                    sharktype = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("age"u8))
+                {
+                    age = property.Value.GetInt32();
+                    continue;
                 }
             }
-            return UnknownFish.DeserializeUnknownFish(element);
+            return new GoblinShark(age);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static Fish FromResponse(Response response)
+        internal new static GoblinShark FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFish(document.RootElement);
+            return DeserializeGoblinShark(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);
