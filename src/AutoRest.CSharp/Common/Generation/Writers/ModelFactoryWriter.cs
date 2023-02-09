@@ -76,24 +76,40 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var ctor = model.SerializationConstructor;
-            var initializes = new List<PropertyInitializer>();
+            var initializers = new Dictionary<ObjectTypeProperty, PropertyInitializer>();
             foreach (var parameter in method.Parameters)
             {
                 (var property, var assignment) = This.GetPropertyAssignment(_writer, model, parameter);
-                initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, assignment, parameter.Type));
+                initializers.Add(property, new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, assignment, parameter.Type));
             }
 
             if (model.Discriminator is ObjectTypeDiscriminator discriminator && !Configuration.ModelFactoryForHlc.Contains(model.Declaration.Name))
             {
+                var discriminatorProperty = discriminator.Property;
                 if (discriminator.Value is Constant discriminatorValue)
                 {
-                    var property = discriminator.Property;
-                    initializes.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, GetDiscriminatorValue(property.Declaration.Type, discriminatorValue)));
+                    initializers.Add(discriminatorProperty,
+                        new PropertyInitializer(
+                            discriminatorProperty.Declaration.Name,
+                            discriminatorProperty.Declaration.Type,
+                            discriminatorProperty.IsReadOnly,
+                            GetDiscriminatorValue(discriminatorProperty.Declaration.Type, discriminatorValue)));
                 }
                 else if (model.Declaration.IsAbstract)
                 {
                     model = (SerializableObjectType)discriminator.DefaultObjectType!;
                     ctor = model.SerializationConstructor;
+                }
+
+                // here we ensure the discriminator property will always have an initializer
+                if (!initializers.ContainsKey(discriminatorProperty))
+                {
+                    initializers.Add(discriminatorProperty,
+                        new PropertyInitializer(
+                            discriminatorProperty.Declaration.Name,
+                            discriminatorProperty.Declaration.Type,
+                            discriminatorProperty.IsReadOnly,
+                            $"default"));
                 }
             }
 
@@ -101,7 +117,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (_writer.WriteMethodDeclaration(method))
             {
                 _writer.WriteParameterNullChecks(method.Parameters);
-                _writer.WriteInitialization(v => _writer.Line($"return {v};"), model, ctor, initializes);
+                _writer.WriteInitialization(v => _writer.Line($"return {v};"), model, ctor, initializers.Values);
             }
         }
 

@@ -13,8 +13,8 @@ using MgmtDiscriminator;
 
 namespace MgmtDiscriminator.Models
 {
-    /// <summary> Model factory for generated models. </summary>
-    public static partial class MgmtDiscriminatorModelFactory
+    /// <summary> Model factory for models. </summary>
+    public static partial class ArmMgmtDiscriminatorModelFactory
     {
 
         /// <summary> Initializes a new instance of DeliveryRuleData. </summary>
@@ -48,12 +48,11 @@ namespace MgmtDiscriminator.Models
         }
 
         /// <summary> Initializes a new instance of Pet. </summary>
-        /// <param name="kind"> The kind of the pet. </param>
         /// <param name="id"> The Id of the pet. </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
-        public static Pet Pet(string kind = "Unknown", string id = null)
+        public static Pet Pet(string id = null)
         {
-            return new UnknownPet(kind, id);
+            return new UnknownPet(default, id);
         }
 
         /// <summary> Initializes a new instance of Cat. </summary>

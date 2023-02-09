@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public IEnumerable<SerializableObjectType> Models { get; }
 
-        public FormattableString Description => $"Model factory for generated models.";
+        public FormattableString Description => $"Model factory for models.";
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
@@ -186,10 +186,17 @@ namespace AutoRest.CSharp.Output.Models.Types
                     else
                     {
                         // this is the base
-                        if (inputType.TryCast<EnumType>(out var enumType))
+                        switch (inputType)
                         {
-                            inputType = enumType.ValueType;
-                            overriddenDefaultValue = new Constant("Unknown", inputType);
+                            case { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } extensibleEnumType }:
+                                inputType = extensibleEnumType.ValueType;
+                                overriddenDefaultValue = new Constant("Unknown", inputType);
+                                break;
+                            case { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } }:
+                                continue;
+                                // we skip the parameter if the discriminator is a sealed choice because we can never pass in a "Unknown" value.
+                            default:
+                                break;
                         }
                     }
                 }
