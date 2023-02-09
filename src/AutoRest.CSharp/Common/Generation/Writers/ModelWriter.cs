@@ -300,7 +300,7 @@ Examples:
         {
         }
 
-        public void WriteConstructor(CodeWriter writer, ObjectType schema)
+        private void WriteConstructor(CodeWriter writer, ObjectType schema)
         {
             foreach (var constructor in schema.Constructors)
             {

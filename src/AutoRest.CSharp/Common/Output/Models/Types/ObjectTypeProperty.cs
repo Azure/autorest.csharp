@@ -20,7 +20,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             : this(new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type), field.Description?.ToString() ?? String.Empty, field.Modifiers.HasFlag(FieldModifiers.ReadOnly), null, field.IsRequired, inputModelProperty: inputModelProperty)
         {
             // now the default value will be set only when the model is generated from property bag
-            if (enclosingType is ModelTypeProvider model && model.IsPropertyBag)
+            if ((enclosingType is ModelTypeProvider model && model.IsPropertyBag) ||
+                (inputModelProperty.Type is InputLiteralType)) // or the property is a literal type
             {
                 DefaultValue = field.DefaultValue;
             }
