@@ -39,6 +39,12 @@ namespace MgmtMultipleParentResource
 
         internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyData data)
         {
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            Argument.AssertNotNull(data, nameof(data));
+
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
@@ -64,23 +70,13 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> The operation to create or update the run command. </summary>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
-        /// <param name="childName"> The name of the virtual machine run command. </param>
-        /// <param name="data"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="data"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyData data, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response> CreateOrUpdateAsync(HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(data, nameof(data));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, anotherName, childName, data);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -93,23 +89,13 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> The operation to create or update the run command. </summary>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="anotherName"> The name of the virtual machine where the run command should be created or updated. </param>
-        /// <param name="childName"> The name of the virtual machine run command. </param>
-        /// <param name="data"> Parameters supplied to the Create Virtual Machine RunCommand operation. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="data"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyData data, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response CreateOrUpdate(HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(data, nameof(data));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, anotherName, childName, data);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -123,6 +109,12 @@ namespace MgmtMultipleParentResource
 
         internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyUpdate childBody)
         {
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            Argument.AssertNotNull(childBody, nameof(childBody));
+
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Patch;
@@ -148,23 +140,13 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> The operation to update the run command. </summary>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="anotherName"> The name of the virtual machine where the run command should be updated. </param>
-        /// <param name="childName"> The name of the virtual machine run command. </param>
-        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response> UpdateAsync(HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(childBody, nameof(childBody));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, anotherName, childName, childBody);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -176,23 +158,13 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> The operation to update the run command. </summary>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="anotherName"> The name of the virtual machine where the run command should be updated. </param>
-        /// <param name="childName"> The name of the virtual machine run command. </param>
-        /// <param name="childBody"> Parameters supplied to the Update Virtual Machine RunCommand operation. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/>, <paramref name="childName"/> or <paramref name="childBody"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string anotherName, string childName, ChildBodyUpdate childBody, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response Update(HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
-            Argument.AssertNotNull(childBody, nameof(childBody));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, anotherName, childName, childBody);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -205,6 +177,11 @@ namespace MgmtMultipleParentResource
 
         internal HttpMessage CreateDeleteRequest(string subscriptionId, string resourceGroupName, string anotherName, string childName)
         {
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
+            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
@@ -226,21 +203,13 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> The operation to delete the run command. </summary>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="anotherName"> The name of the virtual machine where the run command should be deleted. </param>
-        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> DeleteAsync(string subscriptionId, string resourceGroupName, string anotherName, string childName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response> DeleteAsync(HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, anotherName, childName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -254,21 +223,13 @@ namespace MgmtMultipleParentResource
         }
 
         /// <summary> The operation to delete the run command. </summary>
-        /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
-        /// <param name="resourceGroupName"> The name of the resource group. </param>
-        /// <param name="anotherName"> The name of the virtual machine where the run command should be deleted. </param>
-        /// <param name="childName"> The name of the virtual machine run command. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="anotherName"/> or <paramref name="childName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response Delete(string subscriptionId, string resourceGroupName, string anotherName, string childName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response Delete(HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(anotherName, nameof(anotherName));
-            Argument.AssertNotNullOrEmpty(childName, nameof(childName));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateDeleteRequest(subscriptionId, resourceGroupName, anotherName, childName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

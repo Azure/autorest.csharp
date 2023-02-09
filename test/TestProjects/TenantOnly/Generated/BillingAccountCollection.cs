@@ -81,8 +81,9 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = await _billingAccountRestClient.CreateAsync(billingAccountName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new TenantOnlyArmOperation<BillingAccountResource>(new BillingAccountOperationSource(Client), _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                using var message = _billingAccountRestClient.CreateCreateRequest(billingAccountName, data);
+                var response = await _billingAccountRestClient.CreateAsync(message, cancellationToken).ConfigureAwait(false);
+                var operation = new TenantOnlyArmOperation<BillingAccountResource>(new BillingAccountOperationSource(Client), _billingAccountClientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.AzureAsyncOperation);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -122,8 +123,9 @@ namespace TenantOnly
             scope.Start();
             try
             {
-                var response = _billingAccountRestClient.Create(billingAccountName, data, cancellationToken);
-                var operation = new TenantOnlyArmOperation<BillingAccountResource>(new BillingAccountOperationSource(Client), _billingAccountClientDiagnostics, Pipeline, _billingAccountRestClient.CreateCreateRequest(billingAccountName, data).Request, response, OperationFinalStateVia.AzureAsyncOperation);
+                using var message = _billingAccountRestClient.CreateCreateRequest(billingAccountName, data);
+                var response = _billingAccountRestClient.Create(message, cancellationToken);
+                var operation = new TenantOnlyArmOperation<BillingAccountResource>(new BillingAccountOperationSource(Client), _billingAccountClientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.AzureAsyncOperation);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

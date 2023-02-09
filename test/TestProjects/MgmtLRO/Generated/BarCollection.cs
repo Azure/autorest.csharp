@@ -81,8 +81,9 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtLROArmOperation<BarResource>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, data).Request, response, OperationFinalStateVia.Location);
+                using var message = _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, data);
+                var response = await _barRestClient.CreateAsync(message, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtLROArmOperation<BarResource>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -122,8 +123,9 @@ namespace MgmtLRO
             scope.Start();
             try
             {
-                var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, data, cancellationToken);
-                var operation = new MgmtLROArmOperation<BarResource>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, data).Request, response, OperationFinalStateVia.Location);
+                using var message = _barRestClient.CreateCreateRequest(Id.SubscriptionId, Id.ResourceGroupName, barName, data);
+                var response = _barRestClient.Create(message, cancellationToken);
+                var operation = new MgmtLROArmOperation<BarResource>(new BarOperationSource(Client), _barClientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

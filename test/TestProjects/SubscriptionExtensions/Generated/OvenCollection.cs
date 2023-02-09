@@ -81,8 +81,9 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var response = await _ovenRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, ovenName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, data).Request, response, OperationFinalStateVia.Location);
+                using var message = _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, data);
+                var response = await _ovenRestClient.CreateOrUpdateAsync(message, cancellationToken).ConfigureAwait(false);
+                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -122,8 +123,9 @@ namespace SubscriptionExtensions
             scope.Start();
             try
             {
-                var response = _ovenRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, ovenName, data, cancellationToken);
-                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, data).Request, response, OperationFinalStateVia.Location);
+                using var message = _ovenRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, ovenName, data);
+                var response = _ovenRestClient.CreateOrUpdate(message, cancellationToken);
+                var operation = new SubscriptionExtensionsArmOperation<OvenResource>(new OvenOperationSource(Client), _ovenClientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

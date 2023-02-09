@@ -11,6 +11,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Requests;
 using Azure;
 using Azure.Core;
+using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -28,11 +29,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteClientFields(writer, restClient);
                     WriteClientCtor(writer, restClient);
 
-                    foreach (var method in restClient.Methods.Select(m => m.Method))
+                    foreach (var (operation, method) in restClient.Methods)
                     {
-                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", restClient.Fields, null, true, restClient.Parameters);
-                        WriteOperation(writer, restClient, method, true);
-                        WriteOperation(writer, restClient, method, false);
+                        // we will change the lro implemetation according to https://github.com/Azure/autorest.csharp/issues/3076#issuecomment-1421882331
+                        bool isLongRunningOperation = operation.IsLongRunning;
+                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", restClient.Fields, null, true, restClient.Parameters, isLongRunningOperation ? true : false);
+                        WriteOperation(writer, restClient, method, true, isLongRunningOperation);
+                        WriteOperation(writer, restClient, method, false, isLongRunningOperation);
                     }
                 }
             }
@@ -65,13 +68,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             writer.Line();
         }
 
-        private static void WriteOperation(CodeWriter writer, MgmtRestClient restClient, RestClientMethod operation, bool async)
+        private static void WriteOperation(CodeWriter writer, MgmtRestClient restClient, RestClientMethod operation, bool async, bool isLongRunningOperation)
         {
             var returnType = operation.ReturnType != null
                 ? new CSharpType(typeof(Response<>), operation.ReturnType)
                 : new CSharpType(typeof(Response));
 
-            var parameters = operation.Parameters.Append(KnownParameters.CancellationTokenParameter).ToArray();
+            var parameters = isLongRunningOperation
+                ? new Parameter[] { KnownParameters.Message, KnownParameters.CancellationTokenParameter }
+                : operation.Parameters.Append(KnownParameters.CancellationTokenParameter).ToArray();
             var method = new MethodSignature(operation.Name, operation.Summary, operation.Description, MethodSignatureModifiers.Public, returnType, null, parameters).WithAsync(async);
 
             writer
@@ -81,14 +86,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             using (writer.WriteMethodDeclaration(method))
             {
                 writer.WriteParametersValidation(parameters);
-                var messageVariable = new CodeWriterDeclaration("message");
-                var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
+                if (!isLongRunningOperation)
+                {
+                    var requestMethodName = RequestWriterHelpers.CreateRequestMethodName(operation.Name);
+                    writer.Line($"using var message = {requestMethodName}({operation.Parameters.GetIdentifiersFormattable()});");
+                }
 
-                writer
-                    .Line($"using var {messageVariable:D} = {requestMethodName}({operation.Parameters.GetIdentifiersFormattable()});")
-                    .WriteMethodCall(async, $"{restClient.Fields.PipelineField.Name}.SendAsync", $"{restClient.Fields.PipelineField.Name}.Send", $"{messageVariable}, {KnownParameters.CancellationTokenParameter.Name}");
+                writer.WriteMethodCall(async, $"{restClient.Fields.PipelineField.Name}.SendAsync", $"{restClient.Fields.PipelineField.Name}.Send", $"{KnownParameters.Message.Name}, {KnownParameters.CancellationTokenParameter.Name}");
 
-                ResponseWriterHelpers.WriteStatusCodeSwitch(writer, messageVariable.ActualName, operation, async, null);
+                ResponseWriterHelpers.WriteStatusCodeSwitch(writer, KnownParameters.Message.Name, operation, async, null);
             }
             writer.Line();
         }

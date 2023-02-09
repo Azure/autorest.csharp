@@ -743,9 +743,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
+            var restClientName = GetRestClientName(operation);
+            if (!operation.IsFakeLongRunningOperation)
+            {
+                _writer.Append($"using var message = {restClientName}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
+                WriteArguments(_writer, parameterMapping);
+                _writer.RemoveTrailingComma();
+                _writer.Line($");");
+            }
             _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
-            WriteArguments(_writer, parameterMapping);
+            _writer.Append($"{restClientName}.{CreateMethodName(operation.Method.Name, async)}(");
+            if (operation.IsFakeLongRunningOperation)
+                WriteArguments(_writer, parameterMapping);
+            else
+                _writer.Append($"message, ");
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
             WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, async);
@@ -787,10 +798,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         .Append($"), ");
                 }
 
-                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
-                WriteArguments(_writer, parameterMapping);
-                _writer.RemoveTrailingComma();
-                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
+                _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, message.Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
             }
             _writer.Line($");");
             var waitForCompletionMethod = operation.MgmtReturnType is null ?

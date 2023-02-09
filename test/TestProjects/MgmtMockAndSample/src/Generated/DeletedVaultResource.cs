@@ -172,8 +172,9 @@ namespace MgmtMockAndSample
             scope.Start();
             try
             {
-                var response = await _deletedVaultVaultsRestClient.PurgeDeletedAsync(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMockAndSampleArmOperation(_deletedVaultVaultsClientDiagnostics, Pipeline, _deletedVaultVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name).Request, response, OperationFinalStateVia.Location);
+                using var message = _deletedVaultVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name);
+                var response = await _deletedVaultVaultsRestClient.PurgeDeletedAsync(message, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtMockAndSampleArmOperation(_deletedVaultVaultsClientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionResponseAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -206,8 +207,9 @@ namespace MgmtMockAndSample
             scope.Start();
             try
             {
-                var response = _deletedVaultVaultsRestClient.PurgeDeleted(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name, cancellationToken);
-                var operation = new MgmtMockAndSampleArmOperation(_deletedVaultVaultsClientDiagnostics, Pipeline, _deletedVaultVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name).Request, response, OperationFinalStateVia.Location);
+                using var message = _deletedVaultVaultsRestClient.CreatePurgeDeletedRequest(Id.SubscriptionId, new AzureLocation(Id.Parent.Name), Id.Name);
+                var response = _deletedVaultVaultsRestClient.PurgeDeleted(message, cancellationToken);
+                var operation = new MgmtMockAndSampleArmOperation(_deletedVaultVaultsClientDiagnostics, Pipeline, message.Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletionResponse(cancellationToken);
                 return operation;

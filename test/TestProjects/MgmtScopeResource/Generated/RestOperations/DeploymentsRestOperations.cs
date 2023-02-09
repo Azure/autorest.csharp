@@ -39,6 +39,9 @@ namespace MgmtScopeResource
 
         internal Azure.Core.HttpMessage CreateDeleteAtScopeRequest(string scope, string deploymentName)
         {
+            Argument.AssertNotNull(scope, nameof(scope));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Delete;
@@ -56,17 +59,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </summary>
-        /// <param name="scope"> The resource scope. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="deploymentName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> DeleteAtScopeAsync(string scope, string deploymentName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response> DeleteAtScopeAsync(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateDeleteAtScopeRequest(scope, deploymentName);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -79,17 +78,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code. </summary>
-        /// <param name="scope"> The resource scope. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> or <paramref name="deploymentName"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response DeleteAtScope(string scope, string deploymentName, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response DeleteAtScope(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateDeleteAtScopeRequest(scope, deploymentName);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -181,6 +176,10 @@ namespace MgmtScopeResource
 
         internal Azure.Core.HttpMessage CreateCreateOrUpdateAtScopeRequest(string scope, string deploymentName, Deployment deployment)
         {
+            Argument.AssertNotNull(scope, nameof(scope));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            Argument.AssertNotNull(deployment, nameof(deployment));
+
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Put;
@@ -202,19 +201,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
-        /// <param name="scope"> The resource scope. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deployment"> Additional parameters supplied to the operation. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="deployment"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateOrUpdateAtScopeAsync(string scope, string deploymentName, Deployment deployment, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response> CreateOrUpdateAtScopeAsync(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deployment, nameof(deployment));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateCreateOrUpdateAtScopeRequest(scope, deploymentName, deployment);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -227,19 +220,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> You can provide the template and parameters directly in the request or link to JSON files. </summary>
-        /// <param name="scope"> The resource scope. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deployment"> Additional parameters supplied to the operation. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="deployment"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response CreateOrUpdateAtScope(string scope, string deploymentName, Deployment deployment, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response CreateOrUpdateAtScope(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deployment, nameof(deployment));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateCreateOrUpdateAtScopeRequest(scope, deploymentName, deployment);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -392,6 +379,10 @@ namespace MgmtScopeResource
 
         internal Azure.Core.HttpMessage CreateValidateAtScopeRequest(string scope, string deploymentName, Deployment deployment)
         {
+            Argument.AssertNotNull(scope, nameof(scope));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            Argument.AssertNotNull(deployment, nameof(deployment));
+
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
@@ -414,19 +405,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager.. </summary>
-        /// <param name="scope"> The resource scope. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deployment"> Parameters to validate. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="deployment"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> ValidateAtScopeAsync(string scope, string deploymentName, Deployment deployment, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response> ValidateAtScopeAsync(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deployment, nameof(deployment));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateValidateAtScopeRequest(scope, deploymentName, deployment);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -440,19 +425,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager.. </summary>
-        /// <param name="scope"> The resource scope. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deployment"> Parameters to validate. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="scope"/>, <paramref name="deploymentName"/> or <paramref name="deployment"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response ValidateAtScope(string scope, string deploymentName, Deployment deployment, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response ValidateAtScope(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deployment, nameof(deployment));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateValidateAtScopeRequest(scope, deploymentName, deployment);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -617,6 +596,9 @@ namespace MgmtScopeResource
 
         internal Azure.Core.HttpMessage CreateWhatIfAtTenantScopeRequest(string deploymentName, DeploymentWhatIf deploymentWhatIf)
         {
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
@@ -637,17 +619,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the tenant group. </summary>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deploymentWhatIf"> Parameters to validate. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="deploymentWhatIf"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> WhatIfAtTenantScopeAsync(string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response> WhatIfAtTenantScopeAsync(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateWhatIfAtTenantScopeRequest(deploymentName, deploymentWhatIf);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -660,17 +638,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the tenant group. </summary>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deploymentWhatIf"> Parameters to validate. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> or <paramref name="deploymentWhatIf"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response WhatIfAtTenantScope(string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response WhatIfAtTenantScope(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateWhatIfAtTenantScopeRequest(deploymentName, deploymentWhatIf);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -684,6 +658,10 @@ namespace MgmtScopeResource
 
         internal Azure.Core.HttpMessage CreateWhatIfAtManagementGroupScopeRequest(string groupId, string deploymentName, DeploymentWhatIf deploymentWhatIf)
         {
+            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
@@ -706,19 +684,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the management group. </summary>
-        /// <param name="groupId"> The management group ID. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deploymentWhatIf"> Parameters to validate. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="deploymentName"/> or <paramref name="deploymentWhatIf"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> WhatIfAtManagementGroupScopeAsync(string groupId, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response> WhatIfAtManagementGroupScopeAsync(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateWhatIfAtManagementGroupScopeRequest(groupId, deploymentName, deploymentWhatIf);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -731,19 +703,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the management group. </summary>
-        /// <param name="groupId"> The management group ID. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deploymentWhatIf"> Parameters to validate. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="groupId"/>, <paramref name="deploymentName"/> or <paramref name="deploymentWhatIf"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="groupId"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response WhatIfAtManagementGroupScope(string groupId, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response WhatIfAtManagementGroupScope(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(groupId, nameof(groupId));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateWhatIfAtManagementGroupScopeRequest(groupId, deploymentName, deploymentWhatIf);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -757,6 +723,10 @@ namespace MgmtScopeResource
 
         internal Azure.Core.HttpMessage CreateWhatIfAtSubscriptionScopeRequest(string subscriptionId, string deploymentName, DeploymentWhatIf deploymentWhatIf)
         {
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
@@ -779,19 +749,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the subscription. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deploymentWhatIf"> Parameters to What If. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="deploymentName"/> or <paramref name="deploymentWhatIf"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> WhatIfAtSubscriptionScopeAsync(string subscriptionId, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response> WhatIfAtSubscriptionScopeAsync(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateWhatIfAtSubscriptionScopeRequest(subscriptionId, deploymentName, deploymentWhatIf);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -804,19 +768,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the subscription. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deploymentWhatIf"> Parameters to What If. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="deploymentName"/> or <paramref name="deploymentWhatIf"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response WhatIfAtSubscriptionScope(string subscriptionId, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response WhatIfAtSubscriptionScope(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateWhatIfAtSubscriptionScopeRequest(subscriptionId, deploymentName, deploymentWhatIf);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -830,6 +788,11 @@ namespace MgmtScopeResource
 
         internal Azure.Core.HttpMessage CreateWhatIfRequest(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf deploymentWhatIf)
         {
+            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
+            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
+            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
+            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+
             var message = _pipeline.CreateMessage();
             var request = message.Request;
             request.Method = RequestMethod.Post;
@@ -854,21 +817,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the resource group. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. </param>
-        /// <param name="resourceGroupName"> The name of the resource group the template will be deployed to. The name is case insensitive. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deploymentWhatIf"> Parameters to validate. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/> or <paramref name="deploymentWhatIf"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> WhatIfAsync(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public async Task<Response> WhatIfAsync(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateWhatIfRequest(subscriptionId, resourceGroupName, deploymentName, deploymentWhatIf);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -881,21 +836,13 @@ namespace MgmtScopeResource
         }
 
         /// <summary> Returns changes that will be made by the deployment if executed at the scope of the resource group. </summary>
-        /// <param name="subscriptionId"> The ID of the target subscription. </param>
-        /// <param name="resourceGroupName"> The name of the resource group the template will be deployed to. The name is case insensitive. </param>
-        /// <param name="deploymentName"> The name of the deployment. </param>
-        /// <param name="deploymentWhatIf"> Parameters to validate. </param>
+        /// <param name="message"> The HTTP context flowing through the pipeline. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="deploymentName"/> or <paramref name="deploymentWhatIf"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response WhatIf(string subscriptionId, string resourceGroupName, string deploymentName, DeploymentWhatIf deploymentWhatIf, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
+        public Response WhatIf(Azure.Core.HttpMessage message, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
-            Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
-            Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
-            Argument.AssertNotNull(deploymentWhatIf, nameof(deploymentWhatIf));
+            Argument.AssertNotNull(message, nameof(message));
 
-            using var message = CreateWhatIfRequest(subscriptionId, resourceGroupName, deploymentName, deploymentWhatIf);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
