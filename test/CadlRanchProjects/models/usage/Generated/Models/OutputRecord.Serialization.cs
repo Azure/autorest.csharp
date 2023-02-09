@@ -18,7 +18,7 @@ namespace Models.Usage.Models
             string requiredProp = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredProp"))
+                if (property.NameEquals("requiredProp"u8))
                 {
                     requiredProp = property.Value.GetString();
                     continue;

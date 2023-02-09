@@ -23,7 +23,7 @@ namespace CognitiveSearch.Models
             Optional<string> odataNextLink = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("@odata.count"))
+                if (property.NameEquals("@odata.count"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
                     odataCount = property.Value.GetInt64();
                     continue;
                 }
-                if (property.NameEquals("@search.coverage"))
+                if (property.NameEquals("@search.coverage"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -43,7 +43,7 @@ namespace CognitiveSearch.Models
                     searchCoverage = property.Value.GetDouble();
                     continue;
                 }
-                if (property.NameEquals("@search.facets"))
+                if (property.NameEquals("@search.facets"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -63,7 +63,7 @@ namespace CognitiveSearch.Models
                     searchFacets = dictionary;
                     continue;
                 }
-                if (property.NameEquals("@search.nextPageParameters"))
+                if (property.NameEquals("@search.nextPageParameters"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -73,7 +73,7 @@ namespace CognitiveSearch.Models
                     searchNextPageParameters = SearchRequest.DeserializeSearchRequest(property.Value);
                     continue;
                 }
-                if (property.NameEquals("value"))
+                if (property.NameEquals("value"u8))
                 {
                     List<SearchResult> array = new List<SearchResult>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -83,7 +83,7 @@ namespace CognitiveSearch.Models
                     value = array;
                     continue;
                 }
-                if (property.NameEquals("@odata.nextLink"))
+                if (property.NameEquals("@odata.nextLink"u8))
                 {
                     odataNextLink = property.Value.GetString();
                     continue;

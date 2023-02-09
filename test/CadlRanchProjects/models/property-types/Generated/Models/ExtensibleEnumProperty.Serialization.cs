@@ -16,7 +16,7 @@ namespace Models.Property.Types.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("property");
+            writer.WritePropertyName("property"u8);
             writer.WriteStringValue(Property.ToString());
             writer.WriteEndObject();
         }
@@ -26,7 +26,7 @@ namespace Models.Property.Types.Models
             InnerEnum property = default;
             foreach (var property0 in element.EnumerateObject())
             {
-                if (property0.NameEquals("property"))
+                if (property0.NameEquals("property"u8))
                 {
                     property = new InnerEnum(property0.Value.GetString());
                     continue;

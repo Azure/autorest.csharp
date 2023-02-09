@@ -19,7 +19,7 @@ namespace Models.Inheritance.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Friends))
             {
-                writer.WritePropertyName("friends");
+                writer.WritePropertyName("friends"u8);
                 writer.WriteStartArray();
                 foreach (var item in Friends)
                 {
@@ -29,7 +29,7 @@ namespace Models.Inheritance.Models
             }
             if (Optional.IsCollectionDefined(Hate))
             {
-                writer.WritePropertyName("hate");
+                writer.WritePropertyName("hate"u8);
                 writer.WriteStartObject();
                 foreach (var item in Hate)
                 {
@@ -40,12 +40,12 @@ namespace Models.Inheritance.Models
             }
             if (Optional.IsDefined(Partner))
             {
-                writer.WritePropertyName("partner");
+                writer.WritePropertyName("partner"u8);
                 writer.WriteObjectValue(Partner);
             }
-            writer.WritePropertyName("kind");
+            writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            writer.WritePropertyName("age");
+            writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }
@@ -59,7 +59,7 @@ namespace Models.Inheritance.Models
             int age = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("friends"))
+                if (property.NameEquals("friends"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -74,7 +74,7 @@ namespace Models.Inheritance.Models
                     friends = array;
                     continue;
                 }
-                if (property.NameEquals("hate"))
+                if (property.NameEquals("hate"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -89,7 +89,7 @@ namespace Models.Inheritance.Models
                     hate = dictionary;
                     continue;
                 }
-                if (property.NameEquals("partner"))
+                if (property.NameEquals("partner"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -99,12 +99,12 @@ namespace Models.Inheritance.Models
                     partner = DeserializeFish(property.Value);
                     continue;
                 }
-                if (property.NameEquals("kind"))
+                if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("age"))
+                if (property.NameEquals("age"u8))
                 {
                     age = property.Value.GetInt32();
                     continue;

@@ -21,7 +21,7 @@ namespace body_complex.Models
             Optional<IReadOnlyList<DotFish>> fishes = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("sampleSalmon"))
+                if (property.NameEquals("sampleSalmon"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -31,7 +31,7 @@ namespace body_complex.Models
                     sampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value);
                     continue;
                 }
-                if (property.NameEquals("salmons"))
+                if (property.NameEquals("salmons"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -46,7 +46,7 @@ namespace body_complex.Models
                     salmons = array;
                     continue;
                 }
-                if (property.NameEquals("sampleFish"))
+                if (property.NameEquals("sampleFish"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -56,7 +56,7 @@ namespace body_complex.Models
                     sampleFish = DotFish.DeserializeDotFish(property.Value);
                     continue;
                 }
-                if (property.NameEquals("fishes"))
+                if (property.NameEquals("fishes"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

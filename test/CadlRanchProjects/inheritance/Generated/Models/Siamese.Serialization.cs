@@ -16,11 +16,11 @@ namespace Models.Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("smart");
+            writer.WritePropertyName("smart"u8);
             writer.WriteBooleanValue(Smart);
-            writer.WritePropertyName("age");
+            writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(Age);
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
@@ -32,17 +32,17 @@ namespace Models.Inheritance.Models
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("smart"))
+                if (property.NameEquals("smart"u8))
                 {
                     smart = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("age"))
+                if (property.NameEquals("age"u8))
                 {
                     age = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;

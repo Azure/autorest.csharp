@@ -15,7 +15,7 @@ namespace Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("DiscriminatorProperty");
+            writer.WritePropertyName("DiscriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty.ToString());
             writer.WriteEndObject();
         }
@@ -25,7 +25,7 @@ namespace Inheritance.Models
             BaseClassWithEntensibleEnumDiscriminatorEnum discriminatorProperty = "Unknown";
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("DiscriminatorProperty"))
+                if (property.NameEquals("DiscriminatorProperty"u8))
                 {
                     discriminatorProperty = new BaseClassWithEntensibleEnumDiscriminatorEnum(property.Value.GetString());
                     continue;

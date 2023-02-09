@@ -18,7 +18,7 @@ namespace ApiVersionInCadl.Models
             string resultId = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("resultId"))
+                if (property.NameEquals("resultId"u8))
                 {
                     resultId = property.Value.GetString();
                     continue;

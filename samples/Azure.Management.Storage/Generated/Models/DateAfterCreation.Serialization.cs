@@ -15,7 +15,7 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("daysAfterCreationGreaterThan");
+            writer.WritePropertyName("daysAfterCreationGreaterThan"u8);
             writer.WriteNumberValue(DaysAfterCreationGreaterThan);
             writer.WriteEndObject();
         }
@@ -25,7 +25,7 @@ namespace Azure.Management.Storage.Models
             float daysAfterCreationGreaterThan = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("daysAfterCreationGreaterThan"))
+                if (property.NameEquals("daysAfterCreationGreaterThan"u8))
                 {
                     daysAfterCreationGreaterThan = property.Value.GetSingle();
                     continue;

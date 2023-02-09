@@ -20,7 +20,7 @@ namespace AnomalyDetector.Models
             {
                 if (AlignMode != null)
                 {
-                    writer.WritePropertyName("alignMode");
+                    writer.WritePropertyName("alignMode"u8);
                     writer.WriteStringValue(AlignMode.Value.ToSerialString());
                 }
                 else
@@ -32,7 +32,7 @@ namespace AnomalyDetector.Models
             {
                 if (FillNAMethod != null)
                 {
-                    writer.WritePropertyName("fillNAMethod");
+                    writer.WritePropertyName("fillNAMethod"u8);
                     writer.WriteStringValue(FillNAMethod.Value.ToString());
                 }
                 else
@@ -44,7 +44,7 @@ namespace AnomalyDetector.Models
             {
                 if (PaddingValue != null)
                 {
-                    writer.WritePropertyName("paddingValue");
+                    writer.WritePropertyName("paddingValue"u8);
                     writer.WriteNumberValue(PaddingValue.Value);
                 }
                 else
@@ -62,7 +62,7 @@ namespace AnomalyDetector.Models
             Optional<float?> paddingValue = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("alignMode"))
+                if (property.NameEquals("alignMode"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -72,7 +72,7 @@ namespace AnomalyDetector.Models
                     alignMode = property.Value.GetString().ToAlignMode();
                     continue;
                 }
-                if (property.NameEquals("fillNAMethod"))
+                if (property.NameEquals("fillNAMethod"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -82,7 +82,7 @@ namespace AnomalyDetector.Models
                     fillNAMethod = new FillNAMethod(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("paddingValue"))
+                if (property.NameEquals("paddingValue"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

@@ -17,57 +17,57 @@ namespace MgmtRenameRules.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(OSProfile))
             {
-                writer.WritePropertyName("osProfile");
+                writer.WritePropertyName("osProfile"u8);
                 writer.WriteObjectValue(OSProfile);
             }
             if (Optional.IsDefined(StorageProfile))
             {
-                writer.WritePropertyName("storageProfile");
+                writer.WritePropertyName("storageProfile"u8);
                 writer.WriteObjectValue(StorageProfile);
             }
             if (Optional.IsDefined(NetworkProfile))
             {
-                writer.WritePropertyName("networkProfile");
+                writer.WritePropertyName("networkProfile"u8);
                 writer.WriteObjectValue(NetworkProfile);
             }
             if (Optional.IsDefined(SecurityProfile))
             {
-                writer.WritePropertyName("securityProfile");
+                writer.WritePropertyName("securityProfile"u8);
                 writer.WriteObjectValue(SecurityProfile);
             }
             if (Optional.IsDefined(DiagnosticsProfile))
             {
-                writer.WritePropertyName("diagnosticsProfile");
+                writer.WritePropertyName("diagnosticsProfile"u8);
                 writer.WriteObjectValue(DiagnosticsProfile);
             }
             if (Optional.IsDefined(ExtensionProfile))
             {
-                writer.WritePropertyName("extensionProfile");
+                writer.WritePropertyName("extensionProfile"u8);
                 writer.WriteObjectValue(ExtensionProfile);
             }
             if (Optional.IsDefined(LicenseType))
             {
-                writer.WritePropertyName("licenseType");
+                writer.WritePropertyName("licenseType"u8);
                 writer.WriteStringValue(LicenseType);
             }
             if (Optional.IsDefined(Priority))
             {
-                writer.WritePropertyName("priority");
+                writer.WritePropertyName("priority"u8);
                 writer.WriteStringValue(Priority.Value.ToString());
             }
             if (Optional.IsDefined(EvictionPolicy))
             {
-                writer.WritePropertyName("evictionPolicy");
+                writer.WritePropertyName("evictionPolicy"u8);
                 writer.WriteStringValue(EvictionPolicy.Value.ToString());
             }
             if (Optional.IsDefined(BillingProfile))
             {
-                writer.WritePropertyName("billingProfile");
+                writer.WritePropertyName("billingProfile"u8);
                 writer.WriteObjectValue(BillingProfile);
             }
             if (Optional.IsDefined(ScheduledEventsProfile))
             {
-                writer.WritePropertyName("scheduledEventsProfile");
+                writer.WritePropertyName("scheduledEventsProfile"u8);
                 writer.WriteObjectValue(ScheduledEventsProfile);
             }
             writer.WriteEndObject();
@@ -88,7 +88,7 @@ namespace MgmtRenameRules.Models
             Optional<ScheduledEventsProfile> scheduledEventsProfile = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("osProfile"))
+                if (property.NameEquals("osProfile"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -98,7 +98,7 @@ namespace MgmtRenameRules.Models
                     osProfile = VirtualMachineScaleSetOSProfile.DeserializeVirtualMachineScaleSetOSProfile(property.Value);
                     continue;
                 }
-                if (property.NameEquals("storageProfile"))
+                if (property.NameEquals("storageProfile"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -108,7 +108,7 @@ namespace MgmtRenameRules.Models
                     storageProfile = VirtualMachineScaleSetStorageProfile.DeserializeVirtualMachineScaleSetStorageProfile(property.Value);
                     continue;
                 }
-                if (property.NameEquals("networkProfile"))
+                if (property.NameEquals("networkProfile"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -118,7 +118,7 @@ namespace MgmtRenameRules.Models
                     networkProfile = VirtualMachineScaleSetNetworkProfile.DeserializeVirtualMachineScaleSetNetworkProfile(property.Value);
                     continue;
                 }
-                if (property.NameEquals("securityProfile"))
+                if (property.NameEquals("securityProfile"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -128,7 +128,7 @@ namespace MgmtRenameRules.Models
                     securityProfile = SecurityProfile.DeserializeSecurityProfile(property.Value);
                     continue;
                 }
-                if (property.NameEquals("diagnosticsProfile"))
+                if (property.NameEquals("diagnosticsProfile"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -138,7 +138,7 @@ namespace MgmtRenameRules.Models
                     diagnosticsProfile = DiagnosticsProfile.DeserializeDiagnosticsProfile(property.Value);
                     continue;
                 }
-                if (property.NameEquals("extensionProfile"))
+                if (property.NameEquals("extensionProfile"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -148,12 +148,12 @@ namespace MgmtRenameRules.Models
                     extensionProfile = VirtualMachineScaleSetExtensionProfile.DeserializeVirtualMachineScaleSetExtensionProfile(property.Value);
                     continue;
                 }
-                if (property.NameEquals("licenseType"))
+                if (property.NameEquals("licenseType"u8))
                 {
                     licenseType = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("priority"))
+                if (property.NameEquals("priority"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -163,7 +163,7 @@ namespace MgmtRenameRules.Models
                     priority = new VirtualMachinePriorityType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("evictionPolicy"))
+                if (property.NameEquals("evictionPolicy"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -173,7 +173,7 @@ namespace MgmtRenameRules.Models
                     evictionPolicy = new VirtualMachineEvictionPolicyType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("billingProfile"))
+                if (property.NameEquals("billingProfile"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -183,7 +183,7 @@ namespace MgmtRenameRules.Models
                     billingProfile = BillingProfile.DeserializeBillingProfile(property.Value);
                     continue;
                 }
-                if (property.NameEquals("scheduledEventsProfile"))
+                if (property.NameEquals("scheduledEventsProfile"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

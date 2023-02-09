@@ -18,10 +18,10 @@ namespace Models.Property.Optional.Models
             writer.WriteStartObject();
             if (Azure.Core.Optional.IsDefined(OptionalProperty))
             {
-                writer.WritePropertyName("optionalProperty");
+                writer.WritePropertyName("optionalProperty"u8);
                 writer.WriteStringValue(OptionalProperty);
             }
-            writer.WritePropertyName("requiredProperty");
+            writer.WritePropertyName("requiredProperty"u8);
             writer.WriteNumberValue(RequiredProperty);
             writer.WriteEndObject();
         }
@@ -32,12 +32,12 @@ namespace Models.Property.Optional.Models
             int requiredProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("optionalProperty"))
+                if (property.NameEquals("optionalProperty"u8))
                 {
                     optionalProperty = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredProperty"))
+                if (property.NameEquals("requiredProperty"u8))
                 {
                     requiredProperty = property.Value.GetInt32();
                     continue;

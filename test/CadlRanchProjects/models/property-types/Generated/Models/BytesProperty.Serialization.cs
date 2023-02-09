@@ -17,7 +17,7 @@ namespace Models.Property.Types.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("property");
+            writer.WritePropertyName("property"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Property);
 #else
@@ -31,7 +31,7 @@ namespace Models.Property.Types.Models
             BinaryData property = default;
             foreach (var property0 in element.EnumerateObject())
             {
-                if (property0.NameEquals("property"))
+                if (property0.NameEquals("property"u8))
                 {
                     property = BinaryData.FromString(property0.Value.GetRawText());
                     continue;
