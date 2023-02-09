@@ -14,7 +14,7 @@ using MgmtOperations;
 namespace MgmtOperations.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class ArmMgmtModelFactory
+    public static partial class ArmMgmtOperationsModelFactory
     {
         /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
         /// <param name="id"> The id. </param>

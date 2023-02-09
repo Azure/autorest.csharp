@@ -16,7 +16,7 @@ using MgmtMockAndSample;
 namespace MgmtMockAndSample.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class MgmtMockAndSampleModelFactory
+    public static partial class ArmMgmtMockAndSampleModelFactory
     {
         /// <summary> Initializes a new instance of VaultProperties. </summary>
         /// <param name="duration"> Time elapsed for task. </param>
