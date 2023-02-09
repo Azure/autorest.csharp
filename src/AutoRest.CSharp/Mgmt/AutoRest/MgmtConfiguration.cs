@@ -98,6 +98,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> schemasToPrependRPPrefix,
             IReadOnlyList<string> generateArmResourceExtensions,
             IReadOnlyList<string> parameterizedScopes,
+            IReadOnlyList<string> checkEmptyStringForTypesInDeserialization,
             MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
@@ -167,6 +168,7 @@ namespace AutoRest.CSharp.Input
             PrependRPPrefix = schemasToPrependRPPrefix;
             GenerateArmResourceExtensions = generateArmResourceExtensions;
             RawParameterizedScopes = parameterizedScopes;
+            CheckEmptyStringForTypesInDeserialization = checkEmptyStringForTypesInDeserialization;
             IsArmCore = Configuration.DeserializeBoolean(armCore, false);
             DoesResourceModelRequireType = Configuration.DeserializeBoolean(resourceModelRequiresType, true);
             DoesResourceModelRequireName = Configuration.DeserializeBoolean(resourceModelRequiresName, true);
@@ -229,6 +231,8 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> NoResourceSuffix { get; }
         public IReadOnlyList<string> GenerateArmResourceExtensions { get; }
 
+        public IReadOnlyList<string> CheckEmptyStringForTypesInDeserialization { get; }
+
         public bool IsArmCore { get; }
 
         internal static MgmtConfiguration GetConfiguration(IPluginCommunication autoRest)
@@ -246,6 +250,7 @@ namespace AutoRest.CSharp.Input
                 schemasToPrependRPPrefix: autoRest.GetValue<string[]?>("prepend-rp-prefix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 generateArmResourceExtensions: autoRest.GetValue<string[]?>("generate-arm-resource-extensions").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 parameterizedScopes: autoRest.GetValue<string[]?>("parameterized-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                checkEmptyStringForTypesInDeserialization: autoRest.GetValue<string[]?>("check-empty-string-for-types-in-deserialization").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
@@ -282,6 +287,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(NoResourceSuffix), NoResourceSuffix);
             WriteNonEmptySettings(writer, nameof(PrependRPPrefix), PrependRPPrefix);
             WriteNonEmptySettings(writer, nameof(GenerateArmResourceExtensions), GenerateArmResourceExtensions);
+            WriteNonEmptySettings(writer, nameof(CheckEmptyStringForTypesInDeserialization), CheckEmptyStringForTypesInDeserialization);
             WriteNonEmptySettings(writer, nameof(OperationGroupsToOmit), OperationGroupsToOmit);
             WriteNonEmptySettings(writer, nameof(RequestPathToParent), RequestPathToParent);
             WriteNonEmptySettings(writer, nameof(OperationPositions), OperationPositions);
@@ -341,6 +347,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
             root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValuesElement);
             root.TryGetProperty(nameof(RawParameterizedScopes), out var parameterizedScopesElement);
+            root.TryGetProperty(nameof(CheckEmptyStringForTypesInDeserialization), out var checkEmptyStringForTypesInDeserializationElement);
 
             var operationGroupToOmit = Configuration.DeserializeArray(operationGroupsToOmitElement);
             var requestPathIsNonResource = Configuration.DeserializeArray(requestPathIsNonResourceElement);
@@ -354,6 +361,7 @@ namespace AutoRest.CSharp.Input
             var prependRPPrefix = Configuration.DeserializeArray(prependRPPrefixElement);
             var generateArmResourceExtensions = Configuration.DeserializeArray(generateArmResourceExtensionsElement);
             var parameterizedScopes = Configuration.DeserializeArray(parameterizedScopesElement);
+            var checkEmptyStringForTypesInDeserialization = Configuration.DeserializeArray(checkEmptyStringForTypesInDeserializationElement);
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
@@ -377,6 +385,7 @@ namespace AutoRest.CSharp.Input
                 schemasToPrependRPPrefix: prependRPPrefix,
                 generateArmResourceExtensions: generateArmResourceExtensions,
                 parameterizedScopes: parameterizedScopes,
+                checkEmptyStringForTypesInDeserialization: checkEmptyStringForTypesInDeserialization,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,
