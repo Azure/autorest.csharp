@@ -28,7 +28,7 @@ import {
 } from "@cadl-lang/compiler";
 import { getInputType } from "../../src/lib/model.js";
 
-describe("compiler : array", () => {
+describe("Test GetInputType for array", () => {
     let runner: TestHost;
 
     beforeEach(async () => {
@@ -95,7 +95,7 @@ describe("compiler : array", () => {
     });
 });
 
-describe("compiler: enum", () => {
+describe("Test GetInputType for enum", () => {
     let runner: TestHost;
 
     beforeEach(async () => {
