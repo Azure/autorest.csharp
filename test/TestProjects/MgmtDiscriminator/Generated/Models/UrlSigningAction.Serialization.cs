@@ -39,7 +39,7 @@ namespace MgmtDiscriminator.Models
                     name = new DeliveryRuleActionType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("foo"))
+                if (property.NameEquals("foo"u8))
                 {
                     foo = property.Value.GetString();
                     continue;

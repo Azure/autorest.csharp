@@ -17,10 +17,10 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Meow))
             {
-                writer.WritePropertyName("meow");
+                writer.WritePropertyName("meow"u8);
                 writer.WriteStringValue(Meow);
             }
-            writer.WritePropertyName("kind");
+            writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
             writer.WriteEndObject();
         }
@@ -32,17 +32,17 @@ namespace MgmtDiscriminator.Models
             Optional<string> id = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("meow"))
+                if (property.NameEquals("meow"u8))
                 {
                     meow = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("kind"))
+                if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString().ToPetKind();
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetString();
                     continue;

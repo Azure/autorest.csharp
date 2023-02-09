@@ -6,22 +6,12 @@
 #nullable disable
 
 using System;
-using System.Text.Json;
 
 namespace TypeSchemaMapping.Models
 {
-    /// <summary> Model factory for generated models. </summary>
+    /// <summary> Model factory for models. </summary>
     internal static partial class MainModelFactory
     {
-
-        /// <summary> Initializes a new instance of PublicModelWithInternalProperty. </summary>
-        /// <param name="stringPropertyJson"></param>
-        /// <param name="publicProperty"></param>
-        /// <returns> A new <see cref="Models.PublicModelWithInternalProperty"/> instance for mocking. </returns>
-        public static PublicModelWithInternalProperty PublicModelWithInternalProperty(JsonElement stringPropertyJson = default, string publicProperty = null)
-        {
-            return new PublicModelWithInternalProperty(stringPropertyJson, publicProperty);
-        }
 
         /// <summary> Initializes a new instance of ModelWithGuidProperty. </summary>
         /// <param name="modelProperty"> . </param>

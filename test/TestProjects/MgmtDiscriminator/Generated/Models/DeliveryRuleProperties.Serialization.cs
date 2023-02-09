@@ -49,7 +49,7 @@ namespace MgmtDiscriminator.Models
             }
             if (Optional.IsDefined(Pet))
             {
-                writer.WritePropertyName("pet");
+                writer.WritePropertyName("pet"u8);
                 writer.WriteObjectValue(Pet);
             }
             writer.WriteEndObject();
@@ -114,7 +114,7 @@ namespace MgmtDiscriminator.Models
                     extraMappingInfo = dictionary;
                     continue;
                 }
-                if (property.NameEquals("pet"))
+                if (property.NameEquals("pet"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

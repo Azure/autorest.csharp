@@ -23,7 +23,7 @@ namespace LroBasicCadl.Models
             Name = name;
         }
 
-        /// <summary> Gets the name. </summary>
-        public string Name { get; }
+        /// <summary> Gets or sets the name. </summary>
+        public string Name { get; set; }
     }
 }

@@ -56,14 +56,14 @@ namespace ModelsInCadl.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static RoundTripOnNoUse FromResponse(Response response)
+        internal static RoundTripOnNoUse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeRoundTripOnNoUse(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

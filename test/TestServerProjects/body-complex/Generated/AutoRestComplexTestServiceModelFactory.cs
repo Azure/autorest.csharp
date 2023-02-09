@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace body_complex.Models
 {
-    /// <summary> Model factory for generated models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class AutoRestComplexTestServiceModelFactory
     {
         /// <summary> Initializes a new instance of DotFish. </summary>

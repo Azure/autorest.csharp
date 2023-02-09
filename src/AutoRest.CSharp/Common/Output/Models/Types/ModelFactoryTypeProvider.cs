@@ -135,22 +135,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             return GetPropertyAssignmentForFlattenedProperty(writer, model, parameter, propertyStack);
         }
 
-        private string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
-        {
-            if (TypeFactory.RequiresToList(from, to))
-            {
-                writer.UseNamespace(typeof(Enumerable).Namespace!);
-                return from.IsNullable ? "?.ToList()" : ".ToList()";
-            }
-
-            if (to is { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } })
-            {
-                return string.Empty;
-            }
-
-            return string.Empty;
-        }
-
         private readonly Dictionary<SerializableObjectType, Dictionary<Parameter, ObjectTypeProperty>> _parameterCache = new();
 
         private MethodSignature CreateMethod(SerializableObjectType modelType)

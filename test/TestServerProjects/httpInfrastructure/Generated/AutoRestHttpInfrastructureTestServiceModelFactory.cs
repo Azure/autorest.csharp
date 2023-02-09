@@ -7,7 +7,7 @@
 
 namespace httpInfrastructure.Models
 {
-    /// <summary> Model factory for generated models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class AutoRestHttpInfrastructureTestServiceModelFactory
     {
         /// <summary> Initializes a new instance of MyException. </summary>

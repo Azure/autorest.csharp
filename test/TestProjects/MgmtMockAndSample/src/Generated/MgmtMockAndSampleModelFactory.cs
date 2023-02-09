@@ -15,7 +15,7 @@ using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Models
 {
-    /// <summary> Model factory for generated models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class MgmtMockAndSampleModelFactory
     {
         /// <summary> Initializes a new instance of VaultProperties. </summary>
@@ -464,6 +464,45 @@ namespace MgmtMockAndSample.Models
         public static TemplateHashResult TemplateHashResult(string minifiedTemplate = null, string templateHash = null)
         {
             return new TemplateHashResult(minifiedTemplate, templateHash);
+        }
+
+        /// <summary> Initializes a new instance of GuestConfigurationAssignmentData. </summary>
+        /// <param name="id"> ARM resource id of the guest configuration assignment. </param>
+        /// <param name="name"> Name of the guest configuration assignment. </param>
+        /// <param name="location"> Region where the VM is located. </param>
+        /// <param name="resourceType"> The type of the resource. </param>
+        /// <param name="properties"> Properties of the Guest configuration assignment. </param>
+        /// <returns> A new <see cref="MgmtMockAndSample.GuestConfigurationAssignmentData"/> instance for mocking. </returns>
+        public static GuestConfigurationAssignmentData GuestConfigurationAssignmentData(string id = null, string name = null, AzureLocation? location = null, ResourceType? resourceType = null, GuestConfigurationAssignmentProperties properties = null)
+        {
+            return new GuestConfigurationAssignmentData(id, name, location, resourceType, properties);
+        }
+
+        /// <summary> Initializes a new instance of GuestConfigurationAssignmentProperties. </summary>
+        /// <param name="targetResourceId"> VM resource Id. </param>
+        /// <param name="complianceStatus"> A value indicating compliance status of the machine for the assigned guest configuration. </param>
+        /// <param name="lastComplianceStatusChecked"> Date and time when last compliance status was checked. </param>
+        /// <param name="latestReportId"> Id of the latest report for the guest configuration assignment. </param>
+        /// <param name="parameterHash"> parameter hash for the guest configuration assignment. </param>
+        /// <param name="context"> The source which initiated the guest configuration assignment. Ex: Azure Policy. </param>
+        /// <param name="assignmentHash"> Combined hash of the configuration package and parameters. </param>
+        /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
+        /// <param name="resourceType"> Type of the resource - VMSS / VM. </param>
+        /// <returns> A new <see cref="Models.GuestConfigurationAssignmentProperties"/> instance for mocking. </returns>
+        public static GuestConfigurationAssignmentProperties GuestConfigurationAssignmentProperties(string targetResourceId = null, ComplianceStatus? complianceStatus = null, DateTimeOffset? lastComplianceStatusChecked = null, string latestReportId = null, string parameterHash = null, string context = null, string assignmentHash = null, ProvisioningState? provisioningState = null, ResourceType? resourceType = null)
+        {
+            return new GuestConfigurationAssignmentProperties(targetResourceId, complianceStatus, lastComplianceStatusChecked, latestReportId, parameterHash, context, assignmentHash, provisioningState, resourceType);
+        }
+
+        /// <summary> Initializes a new instance of GuestConfigurationBaseResource. </summary>
+        /// <param name="id"> ARM resource id of the guest configuration assignment. </param>
+        /// <param name="name"> Name of the guest configuration assignment. </param>
+        /// <param name="location"> Region where the VM is located. </param>
+        /// <param name="resourceType"> The type of the resource. </param>
+        /// <returns> A new <see cref="Models.GuestConfigurationBaseResource"/> instance for mocking. </returns>
+        public static GuestConfigurationBaseResource GuestConfigurationBaseResource(string id = null, string name = null, AzureLocation? location = null, ResourceType? resourceType = null)
+        {
+            return new GuestConfigurationBaseResource(id, name, location, resourceType);
         }
     }
 }

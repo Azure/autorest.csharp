@@ -7,7 +7,7 @@
 
 namespace xms_error_responses.Models
 {
-    /// <summary> Model factory for generated models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class XMSErrorResponseExtensionsModelFactory
     {
         /// <summary> Initializes a new instance of Pet. </summary>

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace additionalProperties.Models
 {
-    /// <summary> Model factory for generated models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class AdditionalPropertiesModelFactory
     {
         /// <summary> Initializes a new instance of PetAPTrue. </summary>
@@ -76,22 +76,6 @@ namespace additionalProperties.Models
             additionalProperties ??= new Dictionary<string, float>();
 
             return new PetAPInProperties(id, name, status, additionalProperties);
-        }
-
-        /// <summary> Initializes a new instance of PetAPInPropertiesWithAPString. </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="status"></param>
-        /// <param name="odataLocation"></param>
-        /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
-        /// <param name="moreAdditionalProperties"> Additional Properties. </param>
-        /// <returns> A new <see cref="Models.PetAPInPropertiesWithAPString"/> instance for mocking. </returns>
-        public static PetAPInPropertiesWithAPString PetAPInPropertiesWithAPString(int id = default, string name = null, bool? status = null, string odataLocation = null, IDictionary<string, float> additionalProperties = null, IDictionary<string, string> moreAdditionalProperties = null)
-        {
-            additionalProperties ??= new Dictionary<string, float>();
-            moreAdditionalProperties ??= new Dictionary<string, string>();
-
-            return new PetAPInPropertiesWithAPString(id, name, status, odataLocation, additionalProperties, moreAdditionalProperties);
         }
     }
 }

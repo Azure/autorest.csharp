@@ -537,21 +537,31 @@ Schema for <c>Deployment</c>:
 
 </remarks>
     </member>
-    <member name="DeployProjectAsync(String,String,RequestContext)">
+    <member name="DeployProjectAsync(String,String,RequestContent,RequestContext)">
 <example>
-This sample shows how to call DeployProjectAsync with required parameters and parse the result.
+This sample shows how to call DeployProjectAsync with required parameters and request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>");
+var data = new {};
+
+Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
 <remarks>
-Below is the JSON schema for the response payload.
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Deployment</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
 
 Response Body:
 
@@ -563,21 +573,31 @@ Schema for <c>Deployment</c>:
 
 </remarks>
     </member>
-    <member name="DeployProject(String,String,RequestContext)">
+    <member name="DeployProject(String,String,RequestContent,RequestContext)">
 <example>
-This sample shows how to call DeployProject with required parameters and parse the result.
+This sample shows how to call DeployProject with required parameters and request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
-Response response = client.DeployProject("<projectName>", "<deploymentName>");
+var data = new {};
+
+Response response = client.DeployProject("<projectName>", "<deploymentName>", RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
 <remarks>
-Below is the JSON schema for the response payload.
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Deployment</c>:
+<code>{
+  name: string, # Required.
+}
+</code>
 
 Response Body:
 
@@ -933,7 +953,7 @@ Schema for <c>SwapDeploymentsJob</c>:
 
 </remarks>
     </member>
-    <member name="GetProjectsAsync(Int32,Int32,Int32,RequestContext)">
+    <member name="GetProjectsAsync(RequestContext)">
 <example>
 This sample shows how to call GetProjectsAsync and parse the result.
 <code><![CDATA[
@@ -941,24 +961,6 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
 await foreach (var data in client.GetProjectsAsync())
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-}
-]]></code>
-This sample shows how to call GetProjectsAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringClient(endpoint);
-
-await foreach (var data in client.GetProjectsAsync(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -998,7 +1000,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetProjects(Int32,Int32,Int32,RequestContext)">
+    <member name="GetProjects(RequestContext)">
 <example>
 This sample shows how to call GetProjects and parse the result.
 <code><![CDATA[
@@ -1006,24 +1008,6 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringClient(endpoint);
 
 foreach (var data in client.GetProjects())
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-}
-]]></code>
-This sample shows how to call GetProjects with all parameters, and how to parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringClient(endpoint);
-
-foreach (var data in client.GetProjects(1234, 1234, 1234))
 {
     JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("projectName").ToString());

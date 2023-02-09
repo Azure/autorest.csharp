@@ -7,7 +7,7 @@
 
 namespace subscriptionId_apiVersion.Models
 {
-    /// <summary> Model factory for generated models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class MicrosoftAzureTestUrlModelFactory
     {
         /// <summary> Initializes a new instance of SampleResourceGroup. </summary>
