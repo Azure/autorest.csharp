@@ -44,6 +44,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public static ModelFactoryTypeProvider? TryCreate(string defaultLibraryName, string rootNamespaceName, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
         {
+            if (!Configuration.GenerateModelFactory)
+                return null;
+
             var objectTypes = models.OfType<SerializableObjectType>()
                 .Where(RequiresModelFactory)
                 .ToArray();
