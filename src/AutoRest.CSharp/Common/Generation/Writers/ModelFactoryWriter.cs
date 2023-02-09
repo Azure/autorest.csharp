@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (type.TryCast<EnumType>(out var enumType) && value.Value is EnumTypeValue enumValue)
             {
                 // in this case, the value must be a EnumTypeValue
-                return $"{type}.{enumValue.Declaration.Name}";
+                return $"{enumType.Type}.{enumValue.Declaration.Name}";
             }
 
             // otherwise if the discriminator is just a plain string
