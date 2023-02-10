@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Something))
             {
-                writer.WritePropertyName("something");
+                writer.WritePropertyName("something"u8);
                 writer.WriteStringValue(Something);
             }
             writer.WriteEndObject();
@@ -28,7 +28,7 @@ namespace MgmtMockAndSample.Models
             Optional<string> something = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("something"))
+                if (property.NameEquals("something"u8))
                 {
                     something = property.Value.GetString();
                     continue;

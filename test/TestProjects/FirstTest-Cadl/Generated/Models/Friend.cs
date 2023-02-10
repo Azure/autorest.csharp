@@ -14,7 +14,7 @@ namespace CadlFirstTest.Models
     public partial class Friend
     {
         /// <summary> Initializes a new instance of Friend. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> name of the NotFriend. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Friend(string name)
         {
@@ -23,7 +23,7 @@ namespace CadlFirstTest.Models
             Name = name;
         }
 
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> name of the NotFriend. </summary>
         public string Name { get; set; }
     }
 }

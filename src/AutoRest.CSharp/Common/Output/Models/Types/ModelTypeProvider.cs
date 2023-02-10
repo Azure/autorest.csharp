@@ -52,6 +52,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
 
+        public bool IsPropertyBag => _inputModel.IsPropertyBag;
+
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
@@ -145,6 +147,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         valueSerialization,
                         property.IsRequired,
                         shouldSkipSerialization,
+                        ShouldSkipDeserialization(property),
                         optionalViaNullability));
                 }
             }
@@ -154,6 +157,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private bool ShouldSkipSerialization(ObjectTypeProperty property)
         {
             if (property.InputModelProperty!.IsDiscriminator)
+            {
+                return false;
+            }
+
+            if (property.InputModelProperty.Type is InputLiteralType)
             {
                 return false;
             }
@@ -170,6 +178,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return property.IsReadOnly && _inputModel.Usage is not InputModelTypeUsage.Input;
         }
+
+        private bool ShouldSkipDeserialization(ObjectTypeProperty property) => property.InputModelProperty?.Type is InputLiteralType;
 
         private ConstructorSignature? CreateSerializationConstructorSignature(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {
@@ -353,6 +363,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool EnsureHasJsonSerialization()
         {
+            if (IsPropertyBag)
+                return false;
             return true;
         }
 
@@ -439,7 +451,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = _derivedTypes.Select(child => new ObjectTypeDiscriminatorImplementation(child.Name, _typeFactory.CreateType(child))).ToArray();
+                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.Name, _typeFactory.CreateType(child))).ToArray();
                 property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
             }
 

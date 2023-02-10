@@ -20,22 +20,22 @@ namespace xms_error_responses.Models
             Optional<string> someBaseProp = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("whatSubAddress"))
+                if (property.NameEquals("whatSubAddress"u8))
                 {
                     whatSubAddress = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("reason"))
+                if (property.NameEquals("reason"u8))
                 {
                     reason = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("whatNotFound"))
+                if (property.NameEquals("whatNotFound"u8))
                 {
                     whatNotFound = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("someBaseProp"))
+                if (property.NameEquals("someBaseProp"u8))
                 {
                     someBaseProp = property.Value.GetString();
                     continue;

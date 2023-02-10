@@ -212,6 +212,10 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
             writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
+            if (property.DefaultValue != null)
+            {
+                writer.AppendRaw(" = ").Append(property.DefaultValue).Line($";");
+            }
         }
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
@@ -305,7 +309,7 @@ Examples:
         {
         }
 
-        public void WriteConstructor(CodeWriter writer, ObjectType schema)
+        private void WriteConstructor(CodeWriter writer, ObjectType schema)
         {
             foreach (var constructor in schema.Constructors)
             {

@@ -70,7 +70,13 @@ export function mapCadlTypeToCSharpInputTypeKind(
         case "Enum":
             return InputTypeKind.Enum;
         case "Number":
-            return InputTypeKind.Int32;
+            let nubmerValue = cadlType.value;
+            if (nubmerValue % 1 === 0) {
+                return InputTypeKind.Int32;
+            }
+            return InputTypeKind.Float64;
+        case "Boolean":
+            return InputTypeKind.Boolean;
         case "String":
             if (format === "date") return InputTypeKind.DateTime;
             if (format === "uri") return InputTypeKind.Uri;
@@ -260,7 +266,7 @@ export function getInputType(
             program,
             type
         );
-        const valueType =  {
+        const valueType = {
             Name: type.kind,
             Kind: builtInKind,
             IsNullable: false
@@ -269,8 +275,8 @@ export function getInputType(
         return {
             Name: "Literal",
             LiteralValueType: valueType,
-            Value : getDefaultValue(type),
-            IsNullable: false,
+            Value: getDefaultValue(type),
+            IsNullable: false
         } as InputLiteralType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
@@ -319,16 +325,16 @@ export function getInputType(
             if (isArrayModelType(program, m)) {
                 return getInputTypeForArray(m.indexer.value);
             } else if (isRecordModelType(program, m)) {
-                return getInputTypeForMap(
-                            m.indexer.key,
-                            m.indexer.value
-                        );
+                return getInputTypeForMap(m.indexer.key, m.indexer.value);
             }
         }
         return getInputModelForModel(m);
     }
 
-    function getInputModelForEnumByKnowValues(m: Model | Scalar, e: Enum): InputEnumType {
+    function getInputModelForEnumByKnowValues(
+        m: Model | Scalar,
+        e: Enum
+    ): InputEnumType {
         let extensibleEnum = enums.get(m.name);
         if (!extensibleEnum) {
             const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
@@ -507,7 +513,7 @@ export function getInputType(
                 const inputProp = {
                     Name: value.name,
                     SerializedName: value.name,
-                    Description: "",
+                    Description: getDoc(program, value) ?? "",
                     Type: getInputType(program, value.type, models, enums),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
@@ -568,7 +574,7 @@ export function getInputType(
     function getInputTypeForUnion(union: Union): InputUnionType {
         const ItemTypes: InputType[] = [];
         const variants = Array.from(union.variants.values());
-        for( const variant of variants) {
+        for (const variant of variants) {
             ItemTypes.push(getInputType(program, variant.type, models, enums));
         }
         return {
@@ -599,8 +605,12 @@ export function getUsages(
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
         if (type.kind === "Model") {
-            const effectiveType = getEffectiveModelType(program, type);
-            typeName = getFriendlyName(program, effectiveType) ?? effectiveType.name;
+            const effectiveType = getEffectiveSchemaType(
+                program,
+                type
+            ) as Model;
+            typeName =
+                getFriendlyName(program, effectiveType) ?? effectiveType.name;
         }
         const affectTypes: string[] = [];
         if (typeName !== "") affectTypes.push(typeName);
@@ -632,6 +642,26 @@ export function getUsages(
                 if (!value) value = UsageFlags.Input;
                 else value = value | UsageFlags.Input;
                 usagesMap.set(resourceName, value);
+            }
+        }
+
+        /* handle spread. */
+        if (!op.parameters.bodyParameter && op.parameters.bodyType) {
+            const effectiveBodyType = getEffectiveSchemaType(
+                program,
+                op.parameters.bodyType
+            );
+            if (
+                effectiveBodyType.kind === "Model" &&
+                effectiveBodyType.name !== ""
+            ) {
+                const modelName =
+                    getFriendlyName(program, effectiveBodyType) ??
+                    effectiveBodyType.name;
+                let value = usagesMap.get(modelName);
+                if (!value) value = UsageFlags.Input;
+                else value = value | UsageFlags.Input;
+                usagesMap.set(modelName, value);
             }
         }
     }

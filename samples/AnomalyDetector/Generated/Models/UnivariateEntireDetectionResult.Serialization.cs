@@ -26,12 +26,12 @@ namespace AnomalyDetector.Models
             Optional<IReadOnlyList<float>> severity = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("period"))
+                if (property.NameEquals("period"u8))
                 {
                     period = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("expectedValues"))
+                if (property.NameEquals("expectedValues"u8))
                 {
                     List<float> array = new List<float>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -41,7 +41,7 @@ namespace AnomalyDetector.Models
                     expectedValues = array;
                     continue;
                 }
-                if (property.NameEquals("upperMargins"))
+                if (property.NameEquals("upperMargins"u8))
                 {
                     List<float> array = new List<float>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -51,7 +51,7 @@ namespace AnomalyDetector.Models
                     upperMargins = array;
                     continue;
                 }
-                if (property.NameEquals("lowerMargins"))
+                if (property.NameEquals("lowerMargins"u8))
                 {
                     List<float> array = new List<float>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -61,7 +61,7 @@ namespace AnomalyDetector.Models
                     lowerMargins = array;
                     continue;
                 }
-                if (property.NameEquals("isAnomaly"))
+                if (property.NameEquals("isAnomaly"u8))
                 {
                     List<bool> array = new List<bool>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -71,7 +71,7 @@ namespace AnomalyDetector.Models
                     isAnomaly = array;
                     continue;
                 }
-                if (property.NameEquals("isNegativeAnomaly"))
+                if (property.NameEquals("isNegativeAnomaly"u8))
                 {
                     List<bool> array = new List<bool>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -81,7 +81,7 @@ namespace AnomalyDetector.Models
                     isNegativeAnomaly = array;
                     continue;
                 }
-                if (property.NameEquals("isPositiveAnomaly"))
+                if (property.NameEquals("isPositiveAnomaly"u8))
                 {
                     List<bool> array = new List<bool>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -91,7 +91,7 @@ namespace AnomalyDetector.Models
                     isPositiveAnomaly = array;
                     continue;
                 }
-                if (property.NameEquals("severity"))
+                if (property.NameEquals("severity"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

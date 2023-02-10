@@ -55,8 +55,16 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Gets provider operations metadata for the specified resource provider.
-        /// Request Path: /providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}
-        /// Operation Id: ProviderOperations_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ProviderOperations_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceProviderNamespace"> The namespace of the resource provider. </param>
         /// <param name="expand"> Specifies whether to expand the values. </param>
@@ -85,8 +93,16 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Gets provider operations metadata for the specified resource provider.
-        /// Request Path: /providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}
-        /// Operation Id: ProviderOperations_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ProviderOperations_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceProviderNamespace"> The namespace of the resource provider. </param>
         /// <param name="expand"> Specifies whether to expand the values. </param>
@@ -115,8 +131,16 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Gets provider operations metadata for all resource providers.
-        /// Request Path: /providers/Microsoft.Authorization/providerOperations
-        /// Operation Id: ProviderOperations_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Authorization/providerOperations</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ProviderOperations_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="expand"> Specifies whether to expand the values. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -130,8 +154,16 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Gets provider operations metadata for all resource providers.
-        /// Request Path: /providers/Microsoft.Authorization/providerOperations
-        /// Operation Id: ProviderOperations_List
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Authorization/providerOperations</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ProviderOperations_List</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="expand"> Specifies whether to expand the values. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -145,8 +177,16 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}
-        /// Operation Id: ProviderOperations_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ProviderOperations_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceProviderNamespace"> The namespace of the resource provider. </param>
         /// <param name="expand"> Specifies whether to expand the values. </param>
@@ -173,8 +213,16 @@ namespace MgmtResourceName
 
         /// <summary>
         /// Checks to see if the resource exists in azure.
-        /// Request Path: /providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}
-        /// Operation Id: ProviderOperations_Get
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Authorization/providerOperations/{resourceProviderNamespace}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>ProviderOperations_Get</description>
+        /// </item>
+        /// </list>
         /// </summary>
         /// <param name="resourceProviderNamespace"> The namespace of the resource provider. </param>
         /// <param name="expand"> Specifies whether to expand the values. </param>

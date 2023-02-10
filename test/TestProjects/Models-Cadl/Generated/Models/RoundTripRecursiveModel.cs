@@ -14,7 +14,7 @@ namespace ModelsInCadl.Models
     public partial class RoundTripRecursiveModel
     {
         /// <summary> Initializes a new instance of RoundTripRecursiveModel. </summary>
-        /// <param name="message"></param>
+        /// <param name="message"> Message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public RoundTripRecursiveModel(string message)
         {
@@ -24,17 +24,17 @@ namespace ModelsInCadl.Models
         }
 
         /// <summary> Initializes a new instance of RoundTripRecursiveModel. </summary>
-        /// <param name="message"></param>
-        /// <param name="inner"></param>
+        /// <param name="message"> Message. </param>
+        /// <param name="inner"> Required Record. </param>
         internal RoundTripRecursiveModel(string message, RoundTripRecursiveModel inner)
         {
             Message = message;
             Inner = inner;
         }
 
-        /// <summary> Gets or sets the message. </summary>
+        /// <summary> Message. </summary>
         public string Message { get; set; }
-        /// <summary> Gets or sets the inner. </summary>
+        /// <summary> Required Record. </summary>
         public RoundTripRecursiveModel Inner { get; set; }
     }
 }

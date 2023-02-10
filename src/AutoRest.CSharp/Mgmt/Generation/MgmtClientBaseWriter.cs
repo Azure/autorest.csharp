@@ -169,20 +169,34 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
         }
 
+        private string GetEnumerableArgValue()
+        {
+            string value = string.Empty;
+            if (This is ResourceCollection collection)
+            {
+                if (collection.GetAllOperation?.IsPropertyBagOperation == true)
+                {
+                    value = "options: null";
+                }
+            }
+            return value;
+        }
+
         private void WriteIEnumerable(CSharpType type)
         {
             _writer.Line();
             var enumeratorType = new CSharpType(typeof(IEnumerator<>), type.Arguments);
             _writer.Line($"{enumeratorType:I} {type:I}.GetEnumerator()");
+            string argValue = GetEnumerableArgValue();
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAll().GetEnumerator();");
+                _writer.Line($"return GetAll({argValue}).GetEnumerator();");
             }
             _writer.Line();
             _writer.Line($"{typeof(IEnumerator)} {typeof(IEnumerable)}.GetEnumerator()");
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAll().GetEnumerator();");
+                _writer.Line($"return GetAll({argValue}).GetEnumerator();");
             }
         }
 
@@ -191,9 +205,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             var enumeratorType = new CSharpType(typeof(IAsyncEnumerator<>), type.Arguments);
             _writer.Line($"{enumeratorType:I} {type:I}.GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Type:I} {KnownParameters.CancellationTokenParameter.Name})");
+            string argValue = GetEnumerableArgValue();
             using (_writer.Scope())
             {
-                _writer.Line($"return GetAllAsync({KnownParameters.CancellationTokenParameter.Name}: {KnownParameters.CancellationTokenParameter.Name}).GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Name});");
+                _writer.Line($"return GetAllAsync({(argValue == string.Empty ? string.Empty : argValue + ", ")}{KnownParameters.CancellationTokenParameter.Name}: {KnownParameters.CancellationTokenParameter.Name}).GetAsyncEnumerator({KnownParameters.CancellationTokenParameter.Name});");
             }
         }
 
@@ -452,16 +467,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected internal static string GetNextLink(bool isNextPageFunc)
         {
             return isNextPageFunc ? "nextLink, " : string.Empty;
-        }
-
-        protected void WriteRequestPathAndOperationId(MgmtClientOperation clientOperation)
-        {
-            foreach (var operation in clientOperation)
-            {
-                _writer.Line($"/// RequestPath: {operation.RequestPath}");
-                _writer.Line($"/// ContextualPath: {operation.ContextualPath}");
-                _writer.Line($"/// OperationId: {operation.OperationId}");
-            }
         }
 
         protected FormattableString GetResourceTypeExpression(ResourceTypeSegment resourceType)
@@ -823,13 +828,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         else
                         {
                             Console.Error.WriteLine($"WARNING: Parameter '{parameter.Parameter.Name}' is like a page size parameter, but it's not a numeric type. Fix it or overwrite it if necessary.");
-                            args.Add($"{parameter.Parameter.Name}");
+                            if (parameter.Parameter.IsPropertyBag)
+                                args.Add($"{parameter.ValueExpression}");
+                            else
+                                args.Add($"{parameter.Parameter.Name}");
                         }
                     }
                     else
                     {
                         if (passNullForOptionalParameters && parameter.Parameter.Validation == ValidationType.None)
                             args.Add($"null");
+                        else if (parameter.Parameter.IsPropertyBag)
+                            args.Add($"{parameter.ValueExpression}");
                         else
                             args.Add($"{parameter.Parameter.Name}");
                     }

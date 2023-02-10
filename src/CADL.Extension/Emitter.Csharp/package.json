@@ -28,8 +28,8 @@
         "test-official": "c8 mocha --forbid-only",
         "lint": "eslint . --ext .ts --max-warnings=0",
         "lint:fix": "eslint . --fix --ext .ts",
-        "prettier:fix": "prettier --write ./src/**/*.ts",
-        "prettier": "prettier --check ./src/**/*.ts"
+        "prettier:fix": "prettier --write --config .prettierrc.json ./src/**/*.ts",
+        "prettier": "prettier --check --config .prettierrc.json ./src/**/*.ts"
     },
     "files": [
         "dist/**"
@@ -48,16 +48,16 @@
     },
     "dependencies": {
         "@autorest/csharp": "3.0.0-beta.20221201.1",
-        "@azure-tools/cadl-autorest": "0.24.0",
-        "@azure-tools/cadl-azure-core": "0.24.0",
-        "@azure-tools/cadl-dpg": "0.24.0",
-        "@cadl-lang/compiler": "0.38.5",
+        "@azure-tools/cadl-autorest": "0.25.0",
+        "@azure-tools/cadl-azure-core": "0.25.0",
+        "@azure-tools/cadl-dpg": "0.25.0",
+        "@cadl-lang/compiler": "0.39.0",
         "@cadl-lang/eslint-config-cadl": "0.5.0",
-        "@cadl-lang/eslint-plugin": "0.38.0",
-        "@cadl-lang/library-linter": "0.38.0",
-        "@cadl-lang/openapi": "0.38.0",
-        "@cadl-lang/rest": "0.38.0",
-        "@cadl-lang/versioning": "0.38.0",
+        "@cadl-lang/eslint-plugin": "0.39.0",
+        "@cadl-lang/library-linter": "0.39.0",
+        "@cadl-lang/openapi": "0.39.0",
+        "@cadl-lang/rest": "0.39.0",
+        "@cadl-lang/versioning": "0.39.0",
         "fs-extra": "^10.1.0",
         "js-yaml": "^4.1.0",
         "json-serialize-refs": "^0.1.0-0"

@@ -62,6 +62,7 @@ namespace AutoRest.CSharp.Common.Input
         bool BufferResponse,
         OperationLongRunning? LongRunning,
         OperationPaging? Paging,
+        bool GenerateProtocolMethod,
         bool GenerateConvenienceMethod)
     {
         public InputOperation() : this(
@@ -82,6 +83,7 @@ namespace AutoRest.CSharp.Common.Input
             BufferResponse: false,
             LongRunning: null,
             Paging: null,
+            GenerateProtocolMethod: true,
             GenerateConvenienceMethod: false)
         { }
     }
@@ -174,6 +176,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType Guid { get; }               = new(InputTypeKind.Guid);
         public static InputPrimitiveType Int32 { get; }              = new(InputTypeKind.Int32);
         public static InputPrimitiveType Int64 { get; }              = new(InputTypeKind.Int64);
+        public static InputPrimitiveType IPAddress { get; }          = new(InputTypeKind.IPAddress);
         public static InputPrimitiveType Object { get; }             = new(InputTypeKind.Object);
         public static InputPrimitiveType RequestMethod { get; }      = new(InputTypeKind.RequestMethod);
         public static InputPrimitiveType ResourceIdentifier { get; } = new(InputTypeKind.ResourceIdentifier);
@@ -192,13 +195,13 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
-    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator)
+    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, FormattableString? DefaultValue = null)
     {
     }
 
     internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTypes, bool IsNullable = false) : InputType(Name, IsNullable);
 
-    internal record InputConstant(object Value, InputType Type);
+    internal record InputConstant(object? Value, InputType Type);
 
     internal record InputEnumTypeValue(string Name, object Value, string? Description)
     {
@@ -216,7 +219,8 @@ namespace AutoRest.CSharp.Common.Input
         Client = 1,
         Constant = 2,
         Flattened = 3,
-        Grouped = 4,
+        Spread = 4,
+        Grouped = 5,
     }
 
     internal enum BodyMediaType
@@ -252,6 +256,7 @@ namespace AutoRest.CSharp.Common.Input
         Guid,
         Int32,
         Int64,
+        IPAddress,
         Object,
         RequestMethod,
         ResourceIdentifier,

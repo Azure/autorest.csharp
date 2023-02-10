@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
     internal class MgmtTestOutputLibrary
     {
         private readonly MockTestDefinitionModel _mockTestModel;
+        private readonly MgmtTestConfiguration _mgmtTestConfiguration;
         public MgmtTestOutputLibrary(CodeModel codeModel, SourceInputModel sourceInputModel)
         {
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
@@ -32,6 +33,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             }
 
             _mockTestModel = MgmtContext.CodeModel.TestModel!.MockTest;
+            _mgmtTestConfiguration = Configuration.MgmtTestConfiguration!;
         }
 
         private IEnumerable<MgmtSampleProvider>? _samples;
@@ -58,6 +60,11 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                 {
                     // we need to find which resource or resource collection this test case belongs
                     var operationId = exampleGroup.OperationId;
+
+                    // skip this operation if we find it in the `skipped-operations` configuration
+                    if (_mgmtTestConfiguration.SkippedOperations.Contains(operationId))
+                        continue;
+
                     var providerAndOperations = FindCarriersFromOperationId(operationId);
                     foreach (var providerForExample in providerAndOperations)
                     {

@@ -4,7 +4,7 @@
     <PackageId>Microsoft.Azure.AutoRest.CSharp</PackageId>
     <OutputType>Exe</OutputType>
     <Version>3.0.0</Version>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
@@ -27,6 +27,8 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.1.0" />
     <PackageReference Include="System.Text.Json" Version="6.0.5" />
     <PackageReference Include="YamlDotNet" Version="11.2.1" />
+    <!-- Any stable version of System.Memory should work here. -->
+    <PackageReference Include="System.Memory" Version="4.5.4" />
   </ItemGroup>
 
   <!-- Enable SourceLink  -->

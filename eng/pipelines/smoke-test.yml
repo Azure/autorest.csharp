@@ -8,9 +8,9 @@ jobs:
     vmImage: ubuntu-20.04
   steps:
     - task: NodeTool@0
-      displayName: "Install Node 1.x"
+      displayName: "Install Node 18.x"
       inputs:
-        versionSpec: '16.x'
+        versionSpec: '18.x'
     - task: UseDotNet@2
       displayName: 'Use .NET Core SDK'
       inputs:

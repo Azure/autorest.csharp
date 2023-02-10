@@ -14,8 +14,8 @@ namespace Azure.Language.Authoring.Models
     public partial class JobWarning
     {
         /// <summary> Initializes a new instance of JobWarning. </summary>
-        /// <param name="code"></param>
-        /// <param name="message"></param>
+        /// <param name="code"> The warning code. </param>
+        /// <param name="message"> The warning message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
         internal JobWarning(string code, string message)
         {
@@ -26,9 +26,9 @@ namespace Azure.Language.Authoring.Models
             Message = message;
         }
 
-        /// <summary> Gets the code. </summary>
+        /// <summary> The warning code. </summary>
         public string Code { get; }
-        /// <summary> Gets the message. </summary>
+        /// <summary> The warning message. </summary>
         public string Message { get; }
     }
 }

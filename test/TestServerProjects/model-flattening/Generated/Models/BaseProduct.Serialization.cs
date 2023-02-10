@@ -15,11 +15,11 @@ namespace model_flattening.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("base_product_id");
+            writer.WritePropertyName("base_product_id"u8);
             writer.WriteStringValue(ProductId);
             if (Optional.IsDefined(Description))
             {
-                writer.WritePropertyName("base_product_description");
+                writer.WritePropertyName("base_product_description"u8);
                 writer.WriteStringValue(Description);
             }
             writer.WriteEndObject();
@@ -31,12 +31,12 @@ namespace model_flattening.Models
             Optional<string> baseProductDescription = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("base_product_id"))
+                if (property.NameEquals("base_product_id"u8))
                 {
                     baseProductId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("base_product_description"))
+                if (property.NameEquals("base_product_description"u8))
                 {
                     baseProductDescription = property.Value.GetString();
                     continue;

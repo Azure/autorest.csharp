@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetStringAsync(RequestContext)">
+<example>
+This sample shows how to call GetStringAsync and parse the result.
+<code><![CDATA[
+var client = new TypesClient().GetStringClient(<1.0.0>);
+
+Response response = await client.GetStringAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetString(RequestContext)">
+<example>
+This sample shows how to call GetString and parse the result.
+<code><![CDATA[
+var client = new TypesClient().GetStringClient(<1.0.0>);
+
+Response response = client.GetString();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new TypesClient().GetStringClient(<1.0.0>);
+
+var data = new {
+    property = "<property>",
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new TypesClient().GetStringClient(<1.0.0>);
+
+var data = new {
+    property = "<property>",
+};
+
+Response response = client.Put(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

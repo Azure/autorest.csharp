@@ -19,17 +19,17 @@ namespace Azure.ResourceManager.Sample.Models
             string id = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("privateKey"))
+                if (property.NameEquals("privateKey"u8))
                 {
                     privateKey = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("publicKey"))
+                if (property.NameEquals("publicKey"u8))
                 {
                     publicKey = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetString();
                     continue;

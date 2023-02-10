@@ -18,17 +18,17 @@ namespace CustomNamespace
             writer.WriteStartObject();
             if (Optional.IsDefined(PropertyRenamedAndTypeChanged))
             {
-                writer.WritePropertyName("ModelProperty");
+                writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteNumberValue(PropertyRenamedAndTypeChanged.Value);
             }
             if (Optional.IsDefined(_field))
             {
-                writer.WritePropertyName("PropertyToField");
+                writer.WritePropertyName("PropertyToField"u8);
                 writer.WriteStringValue(_field);
             }
-            writer.WritePropertyName("Fruit");
+            writer.WritePropertyName("Fruit"u8);
             writer.WriteStringValue(CustomizedFancyField.ToSerialString());
-            writer.WritePropertyName("DaysOfWeek");
+            writer.WritePropertyName("DaysOfWeek"u8);
             writer.WriteStringValue(DaysOfWeek.ToString());
             writer.WriteEndObject();
         }

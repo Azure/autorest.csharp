@@ -15,7 +15,7 @@ namespace ModelsInCadl.Models
     public partial class CollectionItem
     {
         /// <summary> Initializes a new instance of CollectionItem. </summary>
-        /// <param name="requiredModelRecord"></param>
+        /// <param name="requiredModelRecord"> Required model record. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredModelRecord"/> is null. </exception>
         public CollectionItem(IDictionary<string, RecordItem> requiredModelRecord)
         {
@@ -24,7 +24,7 @@ namespace ModelsInCadl.Models
             RequiredModelRecord = requiredModelRecord;
         }
 
-        /// <summary> Gets the required model record. </summary>
+        /// <summary> Required model record. </summary>
         public IDictionary<string, RecordItem> RequiredModelRecord { get; }
     }
 }
