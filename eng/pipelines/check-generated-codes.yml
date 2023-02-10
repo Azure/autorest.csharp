@@ -19,8 +19,8 @@ jobs:
     - script: |
         npm ci
       displayName: "Install packages"
-    - pwsh: .\eng\Generate.ps1 -Filter "${{ parameters.filter }}" -Exclude TestServer,TestProjects,Samples,CadlRanchProjects -reset
-      displayName: "Check if code is up-to-date"
+    - pwsh: .\eng\GeneratedCodeCheck.ps1 -Filter "${{ parameters.filter }}"
+      displayName: "Check if generated codes are up-to-date"
       env:
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
         DOTNET_CLI_TELEMETRY_OPTOUT: 1
