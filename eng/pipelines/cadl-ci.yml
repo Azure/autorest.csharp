@@ -77,7 +77,11 @@ stages:
             customCommand: pack
             workingDir: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
         - pwsh: ./eng/ExecuteCadlEmitterUnitTests.ps1
-          displayName: 'Unit_Test for CADL emitter'
+          displayName: 'E2E_Test for CADL emitter'
+          workingDirectory: $(Build.SourcesDirectory)
+        - script: |
+            npm run test --prefix src/CADL.Extension/Emitter.Csharp
+          displayName: 'Unit Test'
           workingDirectory: $(Build.SourcesDirectory)
         - script: |
             mkdir -p $(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)/packages
