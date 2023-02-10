@@ -301,7 +301,7 @@ function getClient(
     return undefined;
 }
 
-function createModel(context: EmitContext<NetEmitterOptions>): any {
+export function createModel(context: EmitContext<NetEmitterOptions>): any {
     const program = context.program;
     const serviceNamespaceType = getServiceNamespace(program);
     if (!serviceNamespaceType) {

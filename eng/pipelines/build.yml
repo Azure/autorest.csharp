@@ -47,9 +47,9 @@ stages:
               useGlobalJson: true
               performMultiLevelLookup: true
           - task: NodeTool@0
-            displayName: "Install Node 18.x"
+            displayName: "Install Node 18.13.0"
             inputs:
-              versionSpec: '18.x'
+              versionSpec: '18.13.0'
           - script: |
               npm ci
             displayName: "Install packages"
@@ -98,7 +98,11 @@ stages:
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
           - pwsh: ./eng/ExecuteCadlEmitterUnitTests.ps1
-            displayName: 'Unit Test for CADL emitter'
+            displayName: 'E2E Test for CADL emitter'
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              npm run test --prefix src/CADL.Extension/Emitter.Csharp
+            displayName: 'Unit Test'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - task: PublishBuildArtifacts@1
             condition: succeededOrFailed()
