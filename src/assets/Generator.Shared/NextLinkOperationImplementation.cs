@@ -67,14 +67,9 @@ namespace Azure.Core
         public static IOperation? Create(
             HttpPipeline pipeline,
             string id,
-            out string? finalResponse,
             string? apiVersionOverride = null)
         {
             var lroDetails = BinaryData.FromBytes(Convert.FromBase64String(id)).ToObjectFromJson<Dictionary<string, string>>();
-            if (lroDetails.TryGetValue("FinalResponse", out finalResponse))
-            {
-                return null;
-            }
             if (!Uri.TryCreate(lroDetails["InitialUri"], UriKind.Absolute, out var startRequestUri))
                 throw new InvalidOperationException("Invalid initial URI");
             if (!lroDetails.TryGetValue("NextRequestUri", out var nextRequestUri))
@@ -95,14 +90,9 @@ namespace Azure.Core
             IOperationSource<T> operationSource,
             HttpPipeline pipeline,
             string id,
-            out string? finalResponse,
             string? apiVersionOverride = null)
         {
-            var operation = Create(pipeline, id, out finalResponse, apiVersionOverride);
-            if (finalResponse != null)
-            {
-                return null;
-            }
+            var operation = Create(pipeline, id, apiVersionOverride);
             return new OperationToOperationOfT<T>(operationSource, operation!);
         }
 
@@ -465,13 +455,7 @@ namespace Azure.Core
 
             public string GetOperationId()
             {
-                var serializeOptions = new JsonSerializerOptions { Converters = { new StreamConverter() } };
-                var lroDetails = new Dictionary<string, string>()
-                {
-                    ["FinalResponse"] = BinaryData.FromObjectAsJson<Response>(_operationState.RawResponse, serializeOptions).ToString()
-                };
-                var lroData = BinaryData.FromObjectAsJson(lroDetails);
-                return Convert.ToBase64String(lroData.ToArray());
+                return string.Empty;
             }
         }
 
