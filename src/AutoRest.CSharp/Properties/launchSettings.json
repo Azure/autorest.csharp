@@ -172,6 +172,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\oauth2\\Generated"
     },
+    "cadl-authentication/union": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\union\\Generated"
+    },
     "cadl-models/property-optional": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\property-optional\\Generated"

@@ -17,7 +17,7 @@ namespace MgmtSafeFlatten.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(MyProp))
             {
-                writer.WritePropertyName("myProp");
+                writer.WritePropertyName("myProp"u8);
                 writer.WriteStringValue(MyProp);
             }
             writer.WriteEndObject();
@@ -28,7 +28,7 @@ namespace MgmtSafeFlatten.Models
             Optional<string> myProp = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("myProp"))
+                if (property.NameEquals("myProp"u8))
                 {
                     myProp = property.Value.GetString();
                     continue;

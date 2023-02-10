@@ -18,17 +18,17 @@ namespace MgmtDiscriminator.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Order))
             {
-                writer.WritePropertyName("order");
+                writer.WritePropertyName("order"u8);
                 writer.WriteNumberValue(Order.Value);
             }
             if (Optional.IsDefined(Conditions))
             {
-                writer.WritePropertyName("conditions");
+                writer.WritePropertyName("conditions"u8);
                 writer.WriteObjectValue(Conditions);
             }
             if (Optional.IsCollectionDefined(Actions))
             {
-                writer.WritePropertyName("actions");
+                writer.WritePropertyName("actions"u8);
                 writer.WriteStartArray();
                 foreach (var item in Actions)
                 {
@@ -38,7 +38,7 @@ namespace MgmtDiscriminator.Models
             }
             if (Optional.IsCollectionDefined(ExtraMappingInfo))
             {
-                writer.WritePropertyName("extraMappingInfo");
+                writer.WritePropertyName("extraMappingInfo"u8);
                 writer.WriteStartObject();
                 foreach (var item in ExtraMappingInfo)
                 {
@@ -58,7 +58,7 @@ namespace MgmtDiscriminator.Models
             Optional<IDictionary<string, DeliveryRuleAction>> extraMappingInfo = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("order"))
+                if (property.NameEquals("order"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -68,7 +68,7 @@ namespace MgmtDiscriminator.Models
                     order = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("conditions"))
+                if (property.NameEquals("conditions"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -78,7 +78,7 @@ namespace MgmtDiscriminator.Models
                     conditions = DeliveryRuleCondition.DeserializeDeliveryRuleCondition(property.Value);
                     continue;
                 }
-                if (property.NameEquals("actions"))
+                if (property.NameEquals("actions"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -93,7 +93,7 @@ namespace MgmtDiscriminator.Models
                     actions = array;
                     continue;
                 }
-                if (property.NameEquals("extraMappingInfo"))
+                if (property.NameEquals("extraMappingInfo"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

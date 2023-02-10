@@ -18,12 +18,12 @@ namespace TypeSchemaMapping.Models
             Optional<string> publicProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("InternalProperty"))
+                if (property.NameEquals("InternalProperty"u8))
                 {
                     internalProperty = property.Value.Clone();
                     continue;
                 }
-                if (property.NameEquals("PublicProperty"))
+                if (property.NameEquals("PublicProperty"u8))
                 {
                     publicProperty = property.Value.GetString();
                     continue;

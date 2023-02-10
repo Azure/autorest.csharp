@@ -21,7 +21,7 @@ namespace MgmtParamOrdering
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName("tags");
+                writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
                 foreach (var item in Tags)
                 {
@@ -30,35 +30,35 @@ namespace MgmtParamOrdering
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("location");
+            writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Description))
             {
-                writer.WritePropertyName("description");
+                writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
             if (Optional.IsDefined(FriendlyName))
             {
-                writer.WritePropertyName("friendlyName");
+                writer.WritePropertyName("friendlyName"u8);
                 writer.WriteStringValue(FriendlyName);
             }
             if (Optional.IsDefined(KeyVault))
             {
-                writer.WritePropertyName("keyVault");
+                writer.WritePropertyName("keyVault"u8);
                 writer.WriteStringValue(KeyVault);
             }
             if (Optional.IsDefined(ApplicationInsights))
             {
-                writer.WritePropertyName("applicationInsights");
+                writer.WritePropertyName("applicationInsights"u8);
                 writer.WriteStringValue(ApplicationInsights);
             }
             if (Optional.IsDefined(ContainerRegistry))
             {
                 if (ContainerRegistry != null)
                 {
-                    writer.WritePropertyName("containerRegistry");
+                    writer.WritePropertyName("containerRegistry"u8);
                     writer.WriteStringValue(ContainerRegistry);
                 }
                 else
@@ -68,32 +68,32 @@ namespace MgmtParamOrdering
             }
             if (Optional.IsDefined(StorageAccount))
             {
-                writer.WritePropertyName("storageAccount");
+                writer.WritePropertyName("storageAccount"u8);
                 writer.WriteStringValue(StorageAccount);
             }
             if (Optional.IsDefined(DiscoveryUri))
             {
-                writer.WritePropertyName("discoveryUrl");
+                writer.WritePropertyName("discoveryUrl"u8);
                 writer.WriteStringValue(DiscoveryUri.AbsoluteUri);
             }
             if (Optional.IsDefined(HbiWorkspace))
             {
-                writer.WritePropertyName("hbiWorkspace");
+                writer.WritePropertyName("hbiWorkspace"u8);
                 writer.WriteBooleanValue(HbiWorkspace.Value);
             }
             if (Optional.IsDefined(ImageBuildCompute))
             {
-                writer.WritePropertyName("imageBuildCompute");
+                writer.WritePropertyName("imageBuildCompute"u8);
                 writer.WriteStringValue(ImageBuildCompute);
             }
             if (Optional.IsDefined(AllowPublicAccessWhenBehindVnet))
             {
-                writer.WritePropertyName("allowPublicAccessWhenBehindVnet");
+                writer.WritePropertyName("allowPublicAccessWhenBehindVnet"u8);
                 writer.WriteBooleanValue(AllowPublicAccessWhenBehindVnet.Value);
             }
             if (Optional.IsDefined(PrimaryUserAssignedIdentity))
             {
-                writer.WritePropertyName("primaryUserAssignedIdentity");
+                writer.WritePropertyName("primaryUserAssignedIdentity"u8);
                 writer.WriteStringValue(PrimaryUserAssignedIdentity);
             }
             writer.WriteEndObject();
@@ -126,7 +126,7 @@ namespace MgmtParamOrdering
             Optional<Guid> tenantId = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("tags"))
+                if (property.NameEquals("tags"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -141,27 +141,27 @@ namespace MgmtParamOrdering
                     tags = dictionary;
                     continue;
                 }
-                if (property.NameEquals("location"))
+                if (property.NameEquals("location"u8))
                 {
                     location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("systemData"))
+                if (property.NameEquals("systemData"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -171,7 +171,7 @@ namespace MgmtParamOrdering
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -180,32 +180,32 @@ namespace MgmtParamOrdering
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("workspaceId"))
+                        if (property0.NameEquals("workspaceId"u8))
                         {
                             workspaceId = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("description"))
+                        if (property0.NameEquals("description"u8))
                         {
                             description = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("friendlyName"))
+                        if (property0.NameEquals("friendlyName"u8))
                         {
                             friendlyName = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("keyVault"))
+                        if (property0.NameEquals("keyVault"u8))
                         {
                             keyVault = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("applicationInsights"))
+                        if (property0.NameEquals("applicationInsights"u8))
                         {
                             applicationInsights = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("containerRegistry"))
+                        if (property0.NameEquals("containerRegistry"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -215,12 +215,12 @@ namespace MgmtParamOrdering
                             containerRegistry = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("storageAccount"))
+                        if (property0.NameEquals("storageAccount"u8))
                         {
                             storageAccount = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("discoveryUrl"))
+                        if (property0.NameEquals("discoveryUrl"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -230,7 +230,7 @@ namespace MgmtParamOrdering
                             discoveryUrl = new Uri(property0.Value.GetString());
                             continue;
                         }
-                        if (property0.NameEquals("provisioningState"))
+                        if (property0.NameEquals("provisioningState"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -240,7 +240,7 @@ namespace MgmtParamOrdering
                             provisioningState = new ProvisioningState(property0.Value.GetString());
                             continue;
                         }
-                        if (property0.NameEquals("hbiWorkspace"))
+                        if (property0.NameEquals("hbiWorkspace"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -250,12 +250,12 @@ namespace MgmtParamOrdering
                             hbiWorkspace = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("serviceProvisionedResourceGroup"))
+                        if (property0.NameEquals("serviceProvisionedResourceGroup"u8))
                         {
                             serviceProvisionedResourceGroup = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("privateLinkCount"))
+                        if (property0.NameEquals("privateLinkCount"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -265,12 +265,12 @@ namespace MgmtParamOrdering
                             privateLinkCount = property0.Value.GetInt32();
                             continue;
                         }
-                        if (property0.NameEquals("imageBuildCompute"))
+                        if (property0.NameEquals("imageBuildCompute"u8))
                         {
                             imageBuildCompute = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("allowPublicAccessWhenBehindVnet"))
+                        if (property0.NameEquals("allowPublicAccessWhenBehindVnet"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -280,12 +280,12 @@ namespace MgmtParamOrdering
                             allowPublicAccessWhenBehindVnet = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("primaryUserAssignedIdentity"))
+                        if (property0.NameEquals("primaryUserAssignedIdentity"u8))
                         {
                             primaryUserAssignedIdentity = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("tenantId"))
+                        if (property0.NameEquals("tenantId"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {

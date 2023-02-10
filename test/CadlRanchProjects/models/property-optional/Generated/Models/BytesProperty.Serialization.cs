@@ -19,7 +19,7 @@ namespace Models.Property.Optional.Models
             writer.WriteStartObject();
             if (Azure.Core.Optional.IsDefined(Property))
             {
-                writer.WritePropertyName("property");
+                writer.WritePropertyName("property"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Property);
 #else
@@ -34,7 +34,7 @@ namespace Models.Property.Optional.Models
             Optional<BinaryData> property = default;
             foreach (var property0 in element.EnumerateObject())
             {
-                if (property0.NameEquals("property"))
+                if (property0.NameEquals("property"u8))
                 {
                     if (property0.Value.ValueKind == JsonValueKind.Null)
                     {

@@ -16,7 +16,7 @@ namespace Models.Usage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredProp");
+            writer.WritePropertyName("requiredProp"u8);
             writer.WriteStringValue(RequiredProp);
             writer.WriteEndObject();
         }
@@ -26,7 +26,7 @@ namespace Models.Usage.Models
             string requiredProp = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredProp"))
+                if (property.NameEquals("requiredProp"u8))
                 {
                     requiredProp = property.Value.GetString();
                     continue;

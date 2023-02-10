@@ -20,12 +20,12 @@ namespace ExactMatchInheritance.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(StringProperty))
             {
-                writer.WritePropertyName("StringProperty");
+                writer.WritePropertyName("StringProperty"u8);
                 writer.WriteStringValue(StringProperty);
             }
             if (Optional.IsDefined(ModelProperty))
             {
-                writer.WritePropertyName("ModelProperty");
+                writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteObjectValue(ModelProperty);
             }
             writer.WriteEndObject();
@@ -37,12 +37,12 @@ namespace ExactMatchInheritance.Models
             Optional<ExactMatchModel10> modelProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("StringProperty"))
+                if (property.NameEquals("StringProperty"u8))
                 {
                     stringProperty = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("ModelProperty"))
+                if (property.NameEquals("ModelProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

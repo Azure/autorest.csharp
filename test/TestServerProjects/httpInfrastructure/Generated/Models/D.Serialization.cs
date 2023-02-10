@@ -17,7 +17,7 @@ namespace httpInfrastructure.Models
             Optional<string> httpStatusCode = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("httpStatusCode"))
+                if (property.NameEquals("httpStatusCode"u8))
                 {
                     httpStatusCode = property.Value.GetString();
                     continue;

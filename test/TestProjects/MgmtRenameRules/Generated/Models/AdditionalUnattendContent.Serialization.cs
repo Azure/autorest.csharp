@@ -17,22 +17,22 @@ namespace MgmtRenameRules.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(PassName))
             {
-                writer.WritePropertyName("passName");
+                writer.WritePropertyName("passName"u8);
                 writer.WriteStringValue(PassName.Value.ToString());
             }
             if (Optional.IsDefined(ComponentName))
             {
-                writer.WritePropertyName("componentName");
+                writer.WritePropertyName("componentName"u8);
                 writer.WriteStringValue(ComponentName.Value.ToString());
             }
             if (Optional.IsDefined(SettingName))
             {
-                writer.WritePropertyName("settingName");
+                writer.WritePropertyName("settingName"u8);
                 writer.WriteStringValue(SettingName.Value.ToSerialString());
             }
             if (Optional.IsDefined(BackupFrequency))
             {
-                writer.WritePropertyName("backupFrequency");
+                writer.WritePropertyName("backupFrequency"u8);
                 writer.WriteNumberValue(BackupFrequency.Value);
             }
             writer.WriteEndObject();
@@ -46,7 +46,7 @@ namespace MgmtRenameRules.Models
             Optional<int> backupFrequency = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("passName"))
+                if (property.NameEquals("passName"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -56,7 +56,7 @@ namespace MgmtRenameRules.Models
                     passName = new PassName(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("componentName"))
+                if (property.NameEquals("componentName"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -66,7 +66,7 @@ namespace MgmtRenameRules.Models
                     componentName = new ComponentName(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("settingName"))
+                if (property.NameEquals("settingName"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -76,7 +76,7 @@ namespace MgmtRenameRules.Models
                     settingName = property.Value.GetString().ToSettingName();
                     continue;
                 }
-                if (property.NameEquals("backupFrequency"))
+                if (property.NameEquals("backupFrequency"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

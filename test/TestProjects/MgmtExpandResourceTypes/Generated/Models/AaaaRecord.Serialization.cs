@@ -17,7 +17,7 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Ipv6Address))
             {
-                writer.WritePropertyName("ipv6Address");
+                writer.WritePropertyName("ipv6Address"u8);
                 writer.WriteStringValue(Ipv6Address);
             }
             writer.WriteEndObject();
@@ -28,7 +28,7 @@ namespace MgmtExpandResourceTypes.Models
             Optional<string> ipv6Address = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ipv6Address"))
+                if (property.NameEquals("ipv6Address"u8))
                 {
                     ipv6Address = property.Value.GetString();
                     continue;

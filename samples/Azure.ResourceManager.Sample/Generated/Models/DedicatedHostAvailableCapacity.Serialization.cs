@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<IReadOnlyList<DedicatedHostAllocatableVM>> allocatableVMs = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("allocatableVMs"))
+                if (property.NameEquals("allocatableVMs"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

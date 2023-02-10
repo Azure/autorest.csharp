@@ -19,7 +19,7 @@ namespace MgmtMockAndSample.Models
             Optional<string> result = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("issues"))
+                if (property.NameEquals("issues"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -34,7 +34,7 @@ namespace MgmtMockAndSample.Models
                     issues = array;
                     continue;
                 }
-                if (property.NameEquals("result"))
+                if (property.NameEquals("result"u8))
                 {
                     result = property.Value.GetString();
                     continue;
