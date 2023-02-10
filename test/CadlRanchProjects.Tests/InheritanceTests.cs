@@ -26,6 +26,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("abc", response.Value.Name);
             Assert.AreEqual(32, response.Value.Age);
+            Assert.True(response.Value.Smart);
         });
 
         [Test]
@@ -45,7 +46,7 @@ namespace CadlRanchProjects.Tests
             var response = await new InheritanceClient(host, null).GetModelValueAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(1, response.Value.Age);
-            /*Assert.IsInstanceOf<Shark>(response.Value);*/
+            Assert.IsInstanceOf<Shark>(response.Value);
         });
 
         /*[Test]

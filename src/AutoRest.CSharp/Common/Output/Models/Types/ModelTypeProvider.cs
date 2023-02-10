@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (property.Declaration.Type.IsCollectionType())
             {
-                return  _inputModel.Usage is InputModelTypeUsage.Output;
+                return _inputModel.Usage is InputModelTypeUsage.Output;
             }
 
             return property.IsReadOnly && _inputModel.Usage is not InputModelTypeUsage.Input;
@@ -451,7 +451,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.Name, _typeFactory.CreateType(child))).ToArray();
+                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
                 property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
             }
 
