@@ -286,15 +286,16 @@ namespace AutoRest.CSharp.Generation.Writers
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-                var (parameters, spreadVariable) = PrepareConvenienceMethodParameters(convenienceMethod, contextVariable);
 
-                WriteSpreadBodyConverter(_writer, convenienceMethod, spreadVariable);
-                WriteCancellationTokenToRequestContext(_writer, contextVariable);
+                var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
+
+                // write whatever we need to convert the parameters
+                converter(_writer);
 
                 var responseVariable = new CodeWriterDeclaration("response");
                 _writer
                     .Append($"{typeof(Response)} {responseVariable:D} = ")
-                    .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameters, async)
+                    .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
                     .LineRaw(";");
 
                 var responseType = convenienceMethod.ResponseType;
@@ -316,10 +317,10 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
 
-                var (parameters, spreadVariable) = PrepareConvenienceMethodParameters(convenienceMethod, contextVariable);
+                var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
 
-                WriteSpreadBodyConverter(_writer, convenienceMethod, spreadVariable);
-                WriteCancellationTokenToRequestContext(_writer, contextVariable);
+                // write whatever we need to convert the parameters
+                converter(_writer);
 
                 var responseType = convenienceMethod.ResponseType;
                 if (responseType == null)
@@ -327,7 +328,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     // return [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
                     _writer
                         .Append($"return ")
-                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameters, async)
+                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
                         .LineRaw(";");
                 }
                 else
@@ -336,7 +337,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var responseVariable = new CodeWriterDeclaration("response");
                     _writer
                         .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
-                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameters, async)
+                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
                         .LineRaw(";");
                     // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
                     var diagnostic = convenienceMethod.Diagnostic ?? clientMethod.ProtocolMethodDiagnostic;
@@ -346,43 +347,37 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line();
         }
 
-        // RequestContext context = FromCancellationToken(cancellationToken);
-        private static void WriteCancellationTokenToRequestContext(CodeWriter writer, CodeWriterDeclaration contextVariable)
-        {
-            writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
-        }
+        //private static (IReadOnlyList<FormattableString> Parameters, FormattableString? SpreadBodyVariable) PrepareConvenienceMethodParameters(ConvenienceMethod convenienceMethod, CodeWriterDeclaration contextVariable)
+        //{
+        //    FormattableString? spreadBodyVariable = null;
+        //    var parameters = new List<FormattableString>();
+        //    foreach (var converter in convenienceMethod.ProtocolToConvenienceParameterConverters)
+        //    {
+        //        var protocolParameter = converter.Protocol;
+        //        var convenienceParameter = converter.Convenience;
+        //        if (convenienceParameter == KnownParameters.CancellationTokenParameter)
+        //        {
+        //            parameters.Add($"{contextVariable:I}");
+        //        }
+        //        else if (convenienceParameter != null)
+        //        {
+        //            parameters.Add(convenienceParameter.GetConversionFormattable(protocolParameter.Type));
+        //        }
+        //        else
+        //        {
+        //            throw new InvalidOperationException($"{protocolParameter.Name} protocol method parameter doesn't have matching field or parameter in convenience method {convenienceMethod.Signature.Name}");
+        //        }
 
-        private static (IReadOnlyList<FormattableString> Parameters, FormattableString? SpreadBodyVariable) PrepareConvenienceMethodParameters(ConvenienceMethod convenienceMethod, CodeWriterDeclaration contextVariable)
-        {
-            FormattableString? spreadBodyVariable = null;
-            var parameters = new List<FormattableString>();
-            foreach (var converter in convenienceMethod.ProtocolToConvenienceParameterConverters)
-            {
-                var protocolParameter = converter.Protocol;
-                var convenienceParameter = converter.Convenience;
-                if (convenienceParameter == KnownParameters.CancellationTokenParameter)
-                {
-                    parameters.Add($"{contextVariable:I}");
-                }
-                else if (convenienceParameter != null)
-                {
-                    parameters.Add(convenienceParameter.GetConversionFormattable(protocolParameter.Type));
-                }
-                else
-                {
-                    throw new InvalidOperationException($"{protocolParameter.Name} protocol method parameter doesn't have matching field or parameter in convenience method {convenienceMethod.Signature.Name}");
-                }
+        //        if (converter.ConvenienceSpread != null)
+        //        {
+        //            // we put a declaration here to avoid possible local variable naming collisions
+        //            var declaration = new CodeWriterDeclaration(convenienceParameter.Name);
+        //            spreadBodyVariable = $"{declaration:D}";
+        //        }
+        //    }
 
-                if (converter.ConvenienceSpread != null)
-                {
-                    // we put a declaration here to avoid possible local variable naming collisions
-                    var declaration = new CodeWriterDeclaration(convenienceParameter.Name);
-                    spreadBodyVariable = $"{declaration:D}";
-                }
-            }
-
-            return (parameters, spreadBodyVariable);
-        }
+        //    return (parameters, spreadBodyVariable);
+        //}
 
         private void WriteConveniencePageableMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ProtocolMethodPaging pagingInfo, ClientFields fields, bool async)
         {
