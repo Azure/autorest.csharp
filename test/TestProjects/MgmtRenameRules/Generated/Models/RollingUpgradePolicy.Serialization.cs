@@ -17,22 +17,22 @@ namespace MgmtRenameRules.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(MaxBatchInstancePercent))
             {
-                writer.WritePropertyName("maxBatchInstancePercent");
+                writer.WritePropertyName("maxBatchInstancePercent"u8);
                 writer.WriteNumberValue(MaxBatchInstancePercent.Value);
             }
             if (Optional.IsDefined(MaxUnhealthyInstancePercent))
             {
-                writer.WritePropertyName("maxUnhealthyInstancePercent");
+                writer.WritePropertyName("maxUnhealthyInstancePercent"u8);
                 writer.WriteNumberValue(MaxUnhealthyInstancePercent.Value);
             }
             if (Optional.IsDefined(MaxUnhealthyUpgradedInstancePercent))
             {
-                writer.WritePropertyName("maxUnhealthyUpgradedInstancePercent");
+                writer.WritePropertyName("maxUnhealthyUpgradedInstancePercent"u8);
                 writer.WriteNumberValue(MaxUnhealthyUpgradedInstancePercent.Value);
             }
             if (Optional.IsDefined(PauseTimeBetweenBatches))
             {
-                writer.WritePropertyName("pauseTimeBetweenBatches");
+                writer.WritePropertyName("pauseTimeBetweenBatches"u8);
                 writer.WriteStringValue(PauseTimeBetweenBatches);
             }
             writer.WriteEndObject();
@@ -46,7 +46,7 @@ namespace MgmtRenameRules.Models
             Optional<string> pauseTimeBetweenBatches = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("maxBatchInstancePercent"))
+                if (property.NameEquals("maxBatchInstancePercent"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -56,7 +56,7 @@ namespace MgmtRenameRules.Models
                     maxBatchInstancePercent = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("maxUnhealthyInstancePercent"))
+                if (property.NameEquals("maxUnhealthyInstancePercent"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -66,7 +66,7 @@ namespace MgmtRenameRules.Models
                     maxUnhealthyInstancePercent = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("maxUnhealthyUpgradedInstancePercent"))
+                if (property.NameEquals("maxUnhealthyUpgradedInstancePercent"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -76,7 +76,7 @@ namespace MgmtRenameRules.Models
                     maxUnhealthyUpgradedInstancePercent = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("pauseTimeBetweenBatches"))
+                if (property.NameEquals("pauseTimeBetweenBatches"u8))
                 {
                     pauseTimeBetweenBatches = property.Value.GetString();
                     continue;

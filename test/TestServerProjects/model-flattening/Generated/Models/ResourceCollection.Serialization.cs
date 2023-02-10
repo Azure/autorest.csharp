@@ -18,12 +18,12 @@ namespace model_flattening.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Productresource))
             {
-                writer.WritePropertyName("productresource");
+                writer.WritePropertyName("productresource"u8);
                 writer.WriteObjectValue(Productresource);
             }
             if (Optional.IsCollectionDefined(Arrayofresources))
             {
-                writer.WritePropertyName("arrayofresources");
+                writer.WritePropertyName("arrayofresources"u8);
                 writer.WriteStartArray();
                 foreach (var item in Arrayofresources)
                 {
@@ -33,7 +33,7 @@ namespace model_flattening.Models
             }
             if (Optional.IsCollectionDefined(Dictionaryofresources))
             {
-                writer.WritePropertyName("dictionaryofresources");
+                writer.WritePropertyName("dictionaryofresources"u8);
                 writer.WriteStartObject();
                 foreach (var item in Dictionaryofresources)
                 {
@@ -52,7 +52,7 @@ namespace model_flattening.Models
             Optional<IDictionary<string, FlattenedProduct>> dictionaryofresources = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("productresource"))
+                if (property.NameEquals("productresource"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -62,7 +62,7 @@ namespace model_flattening.Models
                     productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value);
                     continue;
                 }
-                if (property.NameEquals("arrayofresources"))
+                if (property.NameEquals("arrayofresources"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -77,7 +77,7 @@ namespace model_flattening.Models
                     arrayofresources = array;
                     continue;
                 }
-                if (property.NameEquals("dictionaryofresources"))
+                if (property.NameEquals("dictionaryofresources"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

@@ -17,7 +17,7 @@ namespace ModelsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredCollection");
+            writer.WritePropertyName("requiredCollection"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredCollection)
             {
@@ -32,7 +32,7 @@ namespace ModelsInCadl.Models
             IList<CollectionItem> requiredCollection = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredCollection"))
+                if (property.NameEquals("requiredCollection"u8))
                 {
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -48,7 +48,7 @@ namespace ModelsInCadl.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static DerivedModel FromResponse(Response response)
+        internal static DerivedModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDerivedModel(document.RootElement);

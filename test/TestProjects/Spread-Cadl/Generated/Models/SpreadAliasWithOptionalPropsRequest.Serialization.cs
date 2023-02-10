@@ -15,18 +15,18 @@ namespace Spread.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             if (Optional.IsDefined(Color))
             {
-                writer.WritePropertyName("color");
+                writer.WritePropertyName("color"u8);
                 writer.WriteStringValue(Color);
             }
             if (Optional.IsDefined(Age))
             {
                 if (Age != null)
                 {
-                    writer.WritePropertyName("age");
+                    writer.WritePropertyName("age"u8);
                     writer.WriteNumberValue(Age.Value);
                 }
                 else
@@ -34,7 +34,7 @@ namespace Spread.Models
                     writer.WriteNull("age");
                 }
             }
-            writer.WritePropertyName("items");
+            writer.WritePropertyName("items"u8);
             writer.WriteStartArray();
             foreach (var item in Items)
             {
@@ -43,7 +43,7 @@ namespace Spread.Models
             writer.WriteEndArray();
             if (Optional.IsCollectionDefined(Elements))
             {
-                writer.WritePropertyName("elements");
+                writer.WritePropertyName("elements"u8);
                 writer.WriteStartArray();
                 foreach (var item in Elements)
                 {

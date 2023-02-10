@@ -17,7 +17,7 @@ namespace ModelsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredModelRecord");
+            writer.WritePropertyName("requiredModelRecord"u8);
             writer.WriteStartObject();
             foreach (var item in RequiredModelRecord)
             {
@@ -33,7 +33,7 @@ namespace ModelsInCadl.Models
             IDictionary<string, RecordItem> requiredModelRecord = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredModelRecord"))
+                if (property.NameEquals("requiredModelRecord"u8))
                 {
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())

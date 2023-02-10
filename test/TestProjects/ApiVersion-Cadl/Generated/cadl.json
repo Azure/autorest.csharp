@@ -42,7 +42,7 @@
      "$id": "6",
      "Name": "resultId",
      "SerializedName": "resultId",
-     "Description": "",
+     "Description": "Result identifier, which is used to fetch the results of an inference call.",
      "Type": {
       "$id": "7",
       "Name": "string",
@@ -185,6 +185,7 @@
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/detect-batch/{resultId}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],

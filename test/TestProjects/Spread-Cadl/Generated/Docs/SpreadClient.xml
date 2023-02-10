@@ -24,8 +24,8 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -54,8 +54,8 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -84,8 +84,8 @@ Request Body:
 
 Schema for <c>SpreadAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -114,8 +114,8 @@ Request Body:
 
 Schema for <c>SpreadAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -144,8 +144,8 @@ Request Body:
 
 Schema for <c>SpreadMultiTargetAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -174,8 +174,8 @@ Request Body:
 
 Schema for <c>SpreadMultiTargetAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -204,8 +204,8 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -234,8 +234,8 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -264,8 +264,8 @@ Request Body:
 
 Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -294,8 +294,8 @@ Request Body:
 
 Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -346,11 +346,11 @@ Request Body:
 
 Schema for <c>SpreadAliasWithOptionalPropsRequest</c>:
 <code>{
-  name: string, # Required.
-  color: string, # Optional.
-  age: number, # Optional.
-  items: [number], # Required.
-  elements: [string], # Optional.
+  name: string, # Required. name of the Thing
+  color: string, # Optional. optional property of the Thing
+  age: number, # Optional. age of the Thing
+  items: [number], # Required. required array
+  elements: [string], # Optional. optional array
 }
 </code>
 
@@ -401,11 +401,11 @@ Request Body:
 
 Schema for <c>SpreadAliasWithOptionalPropsRequest</c>:
 <code>{
-  name: string, # Required.
-  color: string, # Optional.
-  age: number, # Optional.
-  items: [number], # Required.
-  elements: [string], # Optional.
+  name: string, # Required. name of the Thing
+  color: string, # Optional. optional property of the Thing
+  age: number, # Optional. age of the Thing
+  items: [number], # Required. required array
+  elements: [string], # Optional. optional array
 }
 </code>
 

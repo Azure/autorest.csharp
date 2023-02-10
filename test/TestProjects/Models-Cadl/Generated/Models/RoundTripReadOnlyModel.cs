@@ -16,8 +16,8 @@ namespace ModelsInCadl.Models
     public partial class RoundTripReadOnlyModel
     {
         /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
-        /// <param name="optionalReadOnlyIntRecord"></param>
-        /// <param name="optionalReadOnlyStringRecord"></param>
+        /// <param name="optionalReadOnlyIntRecord"> Optional int record. </param>
+        /// <param name="optionalReadOnlyStringRecord"> Optional string record. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="optionalReadOnlyIntRecord"/> or <paramref name="optionalReadOnlyStringRecord"/> is null. </exception>
         internal RoundTripReadOnlyModel(IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord, IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord)
         {
@@ -39,28 +39,28 @@ namespace ModelsInCadl.Models
         }
 
         /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
-        /// <param name="requiredReadonlyString"></param>
-        /// <param name="requiredReadonlyInt"></param>
-        /// <param name="optionalReadonlyString"></param>
-        /// <param name="optionalReadonlyInt"></param>
-        /// <param name="requiredReadonlyModel"></param>
-        /// <param name="optionalReadonlyModel"></param>
-        /// <param name="requiredReadonlyFixedStringEnum"></param>
-        /// <param name="requiredReadonlyExtensibleEnum"></param>
-        /// <param name="optionalReadonlyFixedStringEnum"></param>
-        /// <param name="optionalReadonlyExtensibleEnum"></param>
-        /// <param name="requiredReadonlyStringList"></param>
-        /// <param name="requiredReadonlyIntList"></param>
-        /// <param name="requiredReadOnlyModelCollection"></param>
-        /// <param name="requiredReadOnlyIntRecord"></param>
-        /// <param name="requiredStringRecord"></param>
-        /// <param name="requiredReadOnlyModelRecord"></param>
-        /// <param name="optionalReadonlyStringList"></param>
-        /// <param name="optionalReadonlyIntList"></param>
-        /// <param name="optionalReadOnlyModelCollection"></param>
-        /// <param name="optionalReadOnlyIntRecord"></param>
-        /// <param name="optionalReadOnlyStringRecord"></param>
-        /// <param name="optionalModelRecord"></param>
+        /// <param name="requiredReadonlyString"> Required string, illustrating a readonly reference type property. </param>
+        /// <param name="requiredReadonlyInt"> Required int, illustrating a readonly value type property. </param>
+        /// <param name="optionalReadonlyString"> Optional string, illustrating a readonly reference type property. </param>
+        /// <param name="optionalReadonlyInt"> Optional int, illustrating a readonly value type property. </param>
+        /// <param name="requiredReadonlyModel"> Required readonly model. </param>
+        /// <param name="optionalReadonlyModel"> Optional readonly model. </param>
+        /// <param name="requiredReadonlyFixedStringEnum"> Required readonly fixed string enum. </param>
+        /// <param name="requiredReadonlyExtensibleEnum"> Required readonly extensible enum. </param>
+        /// <param name="optionalReadonlyFixedStringEnum"> Optional readonly fixed string enum. </param>
+        /// <param name="optionalReadonlyExtensibleEnum"> Optional readonly extensible enum. </param>
+        /// <param name="requiredReadonlyStringList"> Required readonly string collection. </param>
+        /// <param name="requiredReadonlyIntList"> Required readonly int collection. </param>
+        /// <param name="requiredReadOnlyModelCollection"> Required model collection. </param>
+        /// <param name="requiredReadOnlyIntRecord"> Required int record. </param>
+        /// <param name="requiredStringRecord"> Required string record. </param>
+        /// <param name="requiredReadOnlyModelRecord"> Required model record. </param>
+        /// <param name="optionalReadonlyStringList"> Optional readonly string collection. </param>
+        /// <param name="optionalReadonlyIntList"> Optional readonly int collection. </param>
+        /// <param name="optionalReadOnlyModelCollection"> Optional model collection. </param>
+        /// <param name="optionalReadOnlyIntRecord"> Optional int record. </param>
+        /// <param name="optionalReadOnlyStringRecord"> Optional string record. </param>
+        /// <param name="optionalModelRecord"> Optional model record. </param>
         internal RoundTripReadOnlyModel(string requiredReadonlyString, int requiredReadonlyInt, string optionalReadonlyString, int? optionalReadonlyInt, DerivedModel requiredReadonlyModel, DerivedModel optionalReadonlyModel, FixedStringEnum requiredReadonlyFixedStringEnum, ExtensibleEnum requiredReadonlyExtensibleEnum, FixedStringEnum optionalReadonlyFixedStringEnum, ExtensibleEnum optionalReadonlyExtensibleEnum, IReadOnlyList<string> requiredReadonlyStringList, IReadOnlyList<int> requiredReadonlyIntList, IReadOnlyList<CollectionItem> requiredReadOnlyModelCollection, IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord, IReadOnlyDictionary<string, string> requiredStringRecord, IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord, IReadOnlyList<string> optionalReadonlyStringList, IReadOnlyList<int> optionalReadonlyIntList, IReadOnlyList<CollectionItem> optionalReadOnlyModelCollection, IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord, IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord, IReadOnlyDictionary<string, RecordItem> optionalModelRecord)
         {
             RequiredReadonlyString = requiredReadonlyString;
@@ -87,49 +87,49 @@ namespace ModelsInCadl.Models
             OptionalModelRecord = optionalModelRecord;
         }
 
-        /// <summary> Gets the required readonly string. </summary>
+        /// <summary> Required string, illustrating a readonly reference type property. </summary>
         public string RequiredReadonlyString { get; }
-        /// <summary> Gets the required readonly int. </summary>
+        /// <summary> Required int, illustrating a readonly value type property. </summary>
         public int RequiredReadonlyInt { get; }
-        /// <summary> Gets the optional readonly string. </summary>
+        /// <summary> Optional string, illustrating a readonly reference type property. </summary>
         public string OptionalReadonlyString { get; }
-        /// <summary> Gets the optional readonly int. </summary>
+        /// <summary> Optional int, illustrating a readonly value type property. </summary>
         public int? OptionalReadonlyInt { get; }
-        /// <summary> Gets the required readonly model. </summary>
+        /// <summary> Required readonly model. </summary>
         public DerivedModel RequiredReadonlyModel { get; }
-        /// <summary> Gets the optional readonly model. </summary>
+        /// <summary> Optional readonly model. </summary>
         public DerivedModel OptionalReadonlyModel { get; }
-        /// <summary> Gets the required readonly fixed string enum. </summary>
+        /// <summary> Required readonly fixed string enum. </summary>
         public FixedStringEnum RequiredReadonlyFixedStringEnum { get; }
-        /// <summary> Gets the required readonly extensible enum. </summary>
+        /// <summary> Required readonly extensible enum. </summary>
         public ExtensibleEnum RequiredReadonlyExtensibleEnum { get; }
-        /// <summary> Gets the optional readonly fixed string enum. </summary>
+        /// <summary> Optional readonly fixed string enum. </summary>
         public FixedStringEnum OptionalReadonlyFixedStringEnum { get; }
-        /// <summary> Gets the optional readonly extensible enum. </summary>
+        /// <summary> Optional readonly extensible enum. </summary>
         public ExtensibleEnum OptionalReadonlyExtensibleEnum { get; }
-        /// <summary> Gets the required readonly string list. </summary>
+        /// <summary> Required readonly string collection. </summary>
         public IReadOnlyList<string> RequiredReadonlyStringList { get; }
-        /// <summary> Gets the required readonly int list. </summary>
+        /// <summary> Required readonly int collection. </summary>
         public IReadOnlyList<int> RequiredReadonlyIntList { get; }
-        /// <summary> Gets the required read only model collection. </summary>
+        /// <summary> Required model collection. </summary>
         public IReadOnlyList<CollectionItem> RequiredReadOnlyModelCollection { get; }
-        /// <summary> Gets the required read only int record. </summary>
+        /// <summary> Required int record. </summary>
         public IReadOnlyDictionary<string, int> RequiredReadOnlyIntRecord { get; }
-        /// <summary> Gets the required string record. </summary>
+        /// <summary> Required string record. </summary>
         public IReadOnlyDictionary<string, string> RequiredStringRecord { get; }
-        /// <summary> Gets the required read only model record. </summary>
+        /// <summary> Required model record. </summary>
         public IReadOnlyDictionary<string, RecordItem> RequiredReadOnlyModelRecord { get; }
-        /// <summary> Gets the optional readonly string list. </summary>
+        /// <summary> Optional readonly string collection. </summary>
         public IReadOnlyList<string> OptionalReadonlyStringList { get; }
-        /// <summary> Gets the optional readonly int list. </summary>
+        /// <summary> Optional readonly int collection. </summary>
         public IReadOnlyList<int> OptionalReadonlyIntList { get; }
-        /// <summary> Gets the optional read only model collection. </summary>
+        /// <summary> Optional model collection. </summary>
         public IReadOnlyList<CollectionItem> OptionalReadOnlyModelCollection { get; }
-        /// <summary> Gets the optional read only int record. </summary>
+        /// <summary> Optional int record. </summary>
         public IReadOnlyDictionary<string, int> OptionalReadOnlyIntRecord { get; }
-        /// <summary> Gets the optional read only string record. </summary>
+        /// <summary> Optional string record. </summary>
         public IReadOnlyDictionary<string, string> OptionalReadOnlyStringRecord { get; }
-        /// <summary> Gets the optional model record. </summary>
+        /// <summary> Optional model record. </summary>
         public IReadOnlyDictionary<string, RecordItem> OptionalModelRecord { get; }
     }
 }

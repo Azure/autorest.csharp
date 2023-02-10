@@ -13,13 +13,13 @@
    "Namespace": "Cadl.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "3",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "Name",
      "Type": {
       "$id": "4",
       "Name": "string",
@@ -38,13 +38,13 @@
    "Namespace": "Cadl.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "6",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "Name",
      "Type": {
       "$id": "7",
       "Name": "string",
@@ -179,6 +179,7 @@
      "Uri": "{host}",
      "Path": "/dogs",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -287,7 +288,8 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "31",
@@ -348,7 +350,8 @@
      "Uri": "{host}",
      "Path": "/cats",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "36",
@@ -456,7 +459,8 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

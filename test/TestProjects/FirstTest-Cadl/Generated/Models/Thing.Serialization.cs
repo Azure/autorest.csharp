@@ -16,12 +16,61 @@ namespace CadlFirstTest.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            writer.WritePropertyName("requiredUnion");
+            writer.WritePropertyName("requiredUnion"u8);
             writer.WriteStringValue(RequiredUnion);
-            writer.WritePropertyName("requiredLiteral");
-            writer.WriteStringValue(RequiredLiteral);
+            writer.WritePropertyName("requiredLiteralString"u8);
+            writer.WriteStringValue(RequiredLiteralString);
+            writer.WritePropertyName("requiredLiteralInt"u8);
+            writer.WriteNumberValue(RequiredLiteralInt);
+            writer.WritePropertyName("requiredLiteralDouble"u8);
+            writer.WriteNumberValue(RequiredLiteralDouble);
+            writer.WritePropertyName("requiredLiteralBool"u8);
+            writer.WriteBooleanValue(RequiredLiteralBool);
+            if (Optional.IsDefined(OptionalLiteralString))
+            {
+                writer.WritePropertyName("optionalLiteralString"u8);
+                writer.WriteStringValue(OptionalLiteralString);
+            }
+            if (Optional.IsDefined(OptionalLiteralInt))
+            {
+                if (OptionalLiteralInt != null)
+                {
+                    writer.WritePropertyName("optionalLiteralInt"u8);
+                    writer.WriteNumberValue(OptionalLiteralInt.Value);
+                }
+                else
+                {
+                    writer.WriteNull("optionalLiteralInt");
+                }
+            }
+            if (Optional.IsDefined(OptionalLiteralDouble))
+            {
+                if (OptionalLiteralDouble != null)
+                {
+                    writer.WritePropertyName("optionalLiteralDouble"u8);
+                    writer.WriteNumberValue(OptionalLiteralDouble.Value);
+                }
+                else
+                {
+                    writer.WriteNull("optionalLiteralDouble");
+                }
+            }
+            if (Optional.IsDefined(OptionalLiteralBool))
+            {
+                if (OptionalLiteralBool != null)
+                {
+                    writer.WritePropertyName("optionalLiteralBool"u8);
+                    writer.WriteBooleanValue(OptionalLiteralBool.Value);
+                }
+                else
+                {
+                    writer.WriteNull("optionalLiteralBool");
+                }
+            }
+            writer.WritePropertyName("requiredBadDescription"u8);
+            writer.WriteStringValue(RequiredBadDescription);
             writer.WriteEndObject();
         }
 
@@ -29,26 +78,26 @@ namespace CadlFirstTest.Models
         {
             string name = default;
             string requiredUnion = default;
-            string requiredLiteral = default;
+            string requiredBadDescription = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredUnion"))
+                if (property.NameEquals("requiredUnion"u8))
                 {
                     requiredUnion = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredLiteral"))
+                if (property.NameEquals("requiredBadDescription"u8))
                 {
-                    requiredLiteral = property.Value.GetString();
+                    requiredBadDescription = property.Value.GetString();
                     continue;
                 }
             }
-            return new Thing(name, requiredUnion, requiredLiteral);
+            return new Thing(name, requiredUnion, requiredBadDescription);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

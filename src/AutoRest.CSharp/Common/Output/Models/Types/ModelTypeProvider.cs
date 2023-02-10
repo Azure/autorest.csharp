@@ -147,6 +147,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         valueSerialization,
                         property.IsRequired,
                         shouldSkipSerialization,
+                        ShouldSkipDeserialization(property),
                         optionalViaNullability));
                 }
             }
@@ -156,6 +157,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private bool ShouldSkipSerialization(ObjectTypeProperty property)
         {
             if (property.InputModelProperty!.IsDiscriminator)
+            {
+                return false;
+            }
+
+            if (property.InputModelProperty.Type is InputLiteralType)
             {
                 return false;
             }
@@ -172,6 +178,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return property.IsReadOnly && _inputModel.Usage is not InputModelTypeUsage.Input;
         }
+
+        private bool ShouldSkipDeserialization(ObjectTypeProperty property) => property.InputModelProperty?.Type is InputLiteralType;
 
         private ConstructorSignature? CreateSerializationConstructorSignature(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {

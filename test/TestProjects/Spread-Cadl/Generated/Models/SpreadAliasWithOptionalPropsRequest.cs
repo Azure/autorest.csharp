@@ -16,8 +16,8 @@ namespace Spread.Models
     internal partial class SpreadAliasWithOptionalPropsRequest
     {
         /// <summary> Initializes a new instance of SpreadAliasWithOptionalPropsRequest. </summary>
-        /// <param name="name"></param>
-        /// <param name="items"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="items"> required array. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         public SpreadAliasWithOptionalPropsRequest(string name, IEnumerable<int> items)
         {
@@ -29,15 +29,15 @@ namespace Spread.Models
             Elements = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Gets the name. </summary>
+        /// <summary> name of the Thing. </summary>
         public string Name { get; }
-        /// <summary> Gets or sets the color. </summary>
+        /// <summary> optional property of the Thing. </summary>
         public string Color { get; set; }
-        /// <summary> Gets or sets the age. </summary>
+        /// <summary> age of the Thing. </summary>
         public int? Age { get; set; }
-        /// <summary> Gets the items. </summary>
+        /// <summary> required array. </summary>
         public IList<int> Items { get; }
-        /// <summary> Gets the elements. </summary>
+        /// <summary> optional array. </summary>
         public IList<string> Elements { get; }
     }
 }

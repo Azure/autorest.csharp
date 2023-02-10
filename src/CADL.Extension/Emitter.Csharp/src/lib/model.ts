@@ -70,7 +70,13 @@ export function mapCadlTypeToCSharpInputTypeKind(
         case "Enum":
             return InputTypeKind.Enum;
         case "Number":
-            return InputTypeKind.Int32;
+            let nubmerValue = cadlType.value;
+            if (nubmerValue % 1 === 0) {
+                return InputTypeKind.Int32;
+            }
+            return InputTypeKind.Float64;
+        case "Boolean":
+            return InputTypeKind.Boolean;
         case "String":
             if (format === "date") return InputTypeKind.DateTime;
             if (format === "uri") return InputTypeKind.Uri;
@@ -507,7 +513,7 @@ export function getInputType(
                 const inputProp = {
                     Name: value.name,
                     SerializedName: value.name,
-                    Description: "",
+                    Description: getDoc(program, value) ?? "",
                     Type: getInputType(program, value.type, models, enums),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
@@ -599,7 +605,10 @@ export function getUsages(
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
         if (type.kind === "Model") {
-            const effectiveType = getEffectiveModelType(program, type);
+            const effectiveType = getEffectiveSchemaType(
+                program,
+                type
+            ) as Model;
             typeName =
                 getFriendlyName(program, effectiveType) ?? effectiveType.name;
         }

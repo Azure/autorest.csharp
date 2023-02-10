@@ -102,6 +102,7 @@ namespace AutoRest.CSharp.Common.Input
                 BufferResponse: operation.Extensions?.BufferResponse ?? true,
                 LongRunning: CreateLongRunning(operation),
                 Paging: CreateOperationPaging(operation),
+                GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false);
 
             _inputOperationToOperationMap[inputOperation] = operation;

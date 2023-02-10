@@ -17,7 +17,7 @@ namespace ModelShapes.Models
             Optional<string> name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("Name"))
+                if (property.NameEquals("Name"u8))
                 {
                     name = property.Value.GetString();
                     continue;

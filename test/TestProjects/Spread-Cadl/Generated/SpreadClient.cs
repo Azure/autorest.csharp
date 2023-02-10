@@ -135,8 +135,8 @@ namespace Spread
         }
 
         /// <summary> spread an alias as body. </summary>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response> SpreadAliasAsync(string name, int age, CancellationToken cancellationToken = default)
@@ -150,8 +150,8 @@ namespace Spread
         }
 
         /// <summary> spread an alias as body. </summary>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response SpreadAlias(string name, int age, CancellationToken cancellationToken = default)
@@ -217,8 +217,8 @@ namespace Spread
         /// <summary> spread an alias which has multiple target property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -236,8 +236,8 @@ namespace Spread
         /// <summary> spread an alias which has multiple target property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -405,8 +405,8 @@ namespace Spread
         /// <summary> spread an alias with contains another alias property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -424,8 +424,8 @@ namespace Spread
         /// <summary> spread an alias with contains another alias property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
-        /// <param name="name"></param>
-        /// <param name="age"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -501,11 +501,11 @@ namespace Spread
         /// <summary> spread an alias with contains optional properties as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
-        /// <param name="name"></param>
-        /// <param name="items"></param>
-        /// <param name="color"></param>
-        /// <param name="age"></param>
-        /// <param name="elements"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="items"> required array. </param>
+        /// <param name="color"> optional property of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
+        /// <param name="elements"> optional array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -536,11 +536,11 @@ namespace Spread
         /// <summary> spread an alias with contains optional properties as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
-        /// <param name="name"></param>
-        /// <param name="items"></param>
-        /// <param name="color"></param>
-        /// <param name="age"></param>
-        /// <param name="elements"></param>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="items"> required array. </param>
+        /// <param name="color"> optional property of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
+        /// <param name="elements"> optional array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>

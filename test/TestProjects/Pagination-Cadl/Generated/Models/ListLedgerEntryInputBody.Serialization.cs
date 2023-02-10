@@ -15,9 +15,9 @@ namespace Pagination.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredString");
+            writer.WritePropertyName("requiredString"u8);
             writer.WriteStringValue(RequiredString);
-            writer.WritePropertyName("requiredInt");
+            writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
             writer.WriteEndObject();
         }

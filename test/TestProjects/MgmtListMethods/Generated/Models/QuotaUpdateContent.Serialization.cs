@@ -17,7 +17,7 @@ namespace MgmtListMethods.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Value))
             {
-                writer.WritePropertyName("value");
+                writer.WritePropertyName("value"u8);
                 writer.WriteStartArray();
                 foreach (var item in Value)
                 {
@@ -27,7 +27,7 @@ namespace MgmtListMethods.Models
             }
             if (Optional.IsDefined(Location))
             {
-                writer.WritePropertyName("location");
+                writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
             writer.WriteEndObject();

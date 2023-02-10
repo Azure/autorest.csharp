@@ -18,7 +18,7 @@
      "$id": "3",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "4",
       "Name": "string",
@@ -33,7 +33,7 @@
      "$id": "5",
      "Name": "age",
      "SerializedName": "age",
-     "Description": "",
+     "Description": "age of the Thing",
      "Type": {
       "$id": "6",
       "Name": "int32",
@@ -57,7 +57,7 @@
      "$id": "8",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "9",
       "Name": "string",
@@ -72,7 +72,7 @@
      "$id": "10",
      "Name": "age",
      "SerializedName": "age",
-     "Description": "",
+     "Description": "age of the Thing",
      "Type": {
       "$id": "11",
       "Name": "int32",
@@ -96,7 +96,7 @@
      "$id": "13",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "14",
       "Name": "string",
@@ -111,7 +111,7 @@
      "$id": "15",
      "Name": "age",
      "SerializedName": "age",
-     "Description": "",
+     "Description": "age of the Thing",
      "Type": {
       "$id": "16",
       "Name": "int32",
@@ -135,7 +135,7 @@
      "$id": "18",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "19",
       "Name": "string",
@@ -150,7 +150,7 @@
      "$id": "20",
      "Name": "age",
      "SerializedName": "age",
-     "Description": "",
+     "Description": "age of the Thing",
      "Type": {
       "$id": "21",
       "Name": "int32",
@@ -174,7 +174,7 @@
      "$id": "23",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of the Thing",
      "Type": {
       "$id": "24",
       "Name": "string",
@@ -189,7 +189,7 @@
      "$id": "25",
      "Name": "color",
      "SerializedName": "color",
-     "Description": "",
+     "Description": "optional property of the Thing",
      "Type": {
       "$id": "26",
       "Name": "string",
@@ -204,7 +204,7 @@
      "$id": "27",
      "Name": "age",
      "SerializedName": "age",
-     "Description": "",
+     "Description": "age of the Thing",
      "Type": {
       "$id": "28",
       "Name": "int32",
@@ -219,7 +219,7 @@
      "$id": "29",
      "Name": "items",
      "SerializedName": "items",
-     "Description": "",
+     "Description": "required array",
      "Type": {
       "$id": "30",
       "Name": "Array",
@@ -239,7 +239,7 @@
      "$id": "32",
      "Name": "elements",
      "SerializedName": "elements",
-     "Description": "",
+     "Description": "optional array",
      "Type": {
       "$id": "33",
       "Name": "Array",
@@ -412,6 +412,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -517,6 +518,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -662,6 +664,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -807,6 +810,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -952,6 +956,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
@@ -1097,6 +1102,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],

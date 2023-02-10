@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetAllAsync(RequestContext)">
+<example>
+This sample shows how to call GetAllAsync and parse the result.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+Response response = await client.GetAllAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Optional. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetAll(RequestContext)">
+<example>
+This sample shows how to call GetAll and parse the result.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+Response response = client.GetAll();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Optional. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetDefaultAsync(RequestContext)">
+<example>
+This sample shows how to call GetDefaultAsync and parse the result.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+Response response = await client.GetDefaultAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Optional. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetDefault(RequestContext)">
+<example>
+This sample shows how to call GetDefault and parse the result.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+Response response = client.GetDefault();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Optional. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutAllAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAllAsync.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+var data = new {};
+
+Response response = await client.PutAllAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAllAsync with all request content.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+var data = new {
+    property = "<property>",
+};
+
+Response response = await client.PutAllAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Optional. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutAll(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAll.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+var data = new {};
+
+Response response = client.PutAll(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutAll with all request content.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+var data = new {
+    property = "<property>",
+};
+
+Response response = client.PutAll(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Optional. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutDefaultAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutDefaultAsync.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+var data = new {};
+
+Response response = await client.PutDefaultAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutDefaultAsync with all request content.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+var data = new {
+    property = "<property>",
+};
+
+Response response = await client.PutDefaultAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Optional. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutDefault(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutDefault.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+var data = new {};
+
+Response response = client.PutDefault(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutDefault with all request content.
+<code><![CDATA[
+var client = new OptionalClient().GetStringClient(<1.0.0>);
+
+var data = new {
+    property = "<property>",
+};
+
+Response response = client.PutDefault(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>StringProperty</c>:
+<code>{
+  property: string, # Optional. Property
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>
