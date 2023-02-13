@@ -27,6 +27,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"public static readonly {typeof(ResourceType)} ResourceType = \"{This.ResourceType}\";");
             _writer.Line();
 
+            // comparing with the `ResourceWriter`, `PartialResourceWriter` does not write the `public XXXData { get; }` property because partial resources do not have resource data.
+
             _writer.Line();
             WriteStaticValidate($"ResourceType");
         }
