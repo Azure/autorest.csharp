@@ -26,8 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of DeliveryRuleRequestHeaderAction. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
+        /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
-        internal DeliveryRuleRequestHeaderAction(DeliveryRuleActionType name, HeaderActionParameters parameters) : base(name)
+        internal DeliveryRuleRequestHeaderAction(DeliveryRuleActionType name, string foo, HeaderActionParameters parameters) : base(name, foo)
         {
             Parameters = parameters;
             Name = name;

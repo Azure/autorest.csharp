@@ -26,6 +26,7 @@ namespace MgmtDiscriminator.Models
         {
             HeaderActionParameters parameters = default;
             DeliveryRuleActionType name = default;
+            Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("parameters"u8))
@@ -38,8 +39,13 @@ namespace MgmtDiscriminator.Models
                     name = new DeliveryRuleActionType(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("foo"u8))
+                {
+                    foo = property.Value.GetString();
+                    continue;
+                }
             }
-            return new DeliveryRuleResponseHeaderAction(name, parameters);
+            return new DeliveryRuleResponseHeaderAction(name, foo.Value, parameters);
         }
     }
 }
