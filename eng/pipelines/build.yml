@@ -67,7 +67,7 @@ stages:
               DOTNET_CLI_TELEMETRY_OPTOUT: 1
               DOTNET_MULTILEVEL_LOOKUP: 0
           - pwsh: ./eng/SharedCodeCheck.ps1
-            displayName: "Check if shared source codes are up-to-date"
+            displayName: "Check if shared source code is up-to-date"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - task: Npm@1
             displayName: 'Build CADL Ranch Mock Api project'
