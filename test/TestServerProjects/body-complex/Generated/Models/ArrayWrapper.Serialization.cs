@@ -18,7 +18,7 @@ namespace body_complex.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Array))
             {
-                writer.WritePropertyName("array");
+                writer.WritePropertyName("array"u8);
                 writer.WriteStartArray();
                 foreach (var item in Array)
                 {
@@ -34,7 +34,7 @@ namespace body_complex.Models
             Optional<IList<string>> array = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("array"))
+                if (property.NameEquals("array"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

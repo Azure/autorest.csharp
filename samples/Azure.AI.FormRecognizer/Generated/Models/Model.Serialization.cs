@@ -19,12 +19,12 @@ namespace Azure.AI.FormRecognizer.Models
             Optional<TrainResult> trainResult = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("modelInfo"))
+                if (property.NameEquals("modelInfo"u8))
                 {
                     modelInfo = ModelInfo.DeserializeModelInfo(property.Value);
                     continue;
                 }
-                if (property.NameEquals("keys"))
+                if (property.NameEquals("keys"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -34,7 +34,7 @@ namespace Azure.AI.FormRecognizer.Models
                     keys = KeysResult.DeserializeKeysResult(property.Value);
                     continue;
                 }
-                if (property.NameEquals("trainResult"))
+                if (property.NameEquals("trainResult"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

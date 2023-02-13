@@ -12,7 +12,7 @@
    "Name": "Pet",
    "Namespace": "Cadl.TestServer.ArrayBasic",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "3",
@@ -209,7 +209,8 @@
      "Uri": "{host}",
      "Path": "/pets",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

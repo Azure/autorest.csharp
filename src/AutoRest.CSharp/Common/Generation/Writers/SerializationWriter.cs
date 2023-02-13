@@ -2,13 +2,13 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
@@ -29,7 +29,10 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (schema)
             {
                 case SerializableObjectType objectSchema:
-                    WriteObjectSerialization(writer, objectSchema);
+                    if (objectSchema.IncludeSerializer || objectSchema.IncludeDeserializer)
+                    {
+                        WriteObjectSerialization(writer, objectSchema);
+                    }
                     break;
                 case EnumType { IsExtensible: false } sealedChoiceSchema:
                     WriteEnumSerialization(writer, sealedChoiceSchema);
@@ -147,22 +150,32 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteXmlSerialize(CodeWriter writer, XmlElementSerialization serialization)
+        private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization)
         {
-            const string namehint = "nameHint";
-            writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} writer, {typeof(string)} {namehint})");
+            var nameHint = new CodeWriterDeclaration("nameHint");
+            writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} writer, {typeof(string)} {nameHint:D})");
             using (writer.Scope())
             {
-                writer.ToSerializeCall(serialization, $"this", null, namehint);
+                writer.ToSerializeCall(serialization, nameHint);
             }
             writer.Line();
         }
 
         private static void WriteXmlDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
         {
-            using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(XElement)} element)"))
+            var element = new CodeWriterDeclaration("element");
+            using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(XElement)} {element:D})"))
             {
-                writer.ToDeserializeCall(serialization, $"element", v => writer.Line($"return {v};"), true);
+                var propertyVariables = writer.ToDeserializeObjectCall(serialization, element);
+                var initializers = new List<PropertyInitializer>();
+                foreach (var propertyVariable in propertyVariables)
+                {
+                    var property = propertyVariable.Key;
+                    initializers.Add(new PropertyInitializer(property.PropertyName, property.PropertyType, property.ShouldSkipSerialization, $"{propertyVariable.Value.ActualName}"));
+                }
+
+                var objectType = (ObjectType) serialization.Type.Implementation;
+                writer.WriteInitialization(v => writer.Line($"return {v};"), objectType, objectType.SerializationConstructor, initializers);
             }
             writer.Line();
         }
@@ -171,16 +184,16 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(JsonElement)} element)"))
             {
-                bool hasDecendants = serialization.Discriminator is null ? false : serialization.Discriminator.HasDescendants;
-                bool isThisTheDefaultDerivedType = serialization.Type.Equals(serialization.Discriminator?.DefaultObjectType?.Type);
-                if (serialization.Discriminator is not null && hasDecendants)
+                var discriminator = serialization.Discriminator;
+
+                if (discriminator is not null && discriminator.HasDescendants)
                 {
-                    using (writer.Scope($"if (element.TryGetProperty({serialization.Discriminator.SerializedName:L}, out {typeof(JsonElement)} discriminator))"))
+                    using (writer.Scope($"if (element.TryGetProperty({discriminator.SerializedName:L}, out {typeof(JsonElement)} discriminator))"))
                     {
                         writer.Line($"switch (discriminator.GetString())");
                         using (writer.Scope())
                         {
-                            foreach (var implementation in serialization.Discriminator.Implementations)
+                            foreach (var implementation in discriminator.Implementations)
                             {
                                 var implementationFormattable = JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(implementation.Type.Implementation, $"element", JsonSerializationOptions.None);
                                 writer.Line($"case {implementation.Key:L}: return {implementationFormattable};");
@@ -189,9 +202,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 }
 
-                if (serialization.Discriminator is not null && !isThisTheDefaultDerivedType && !serialization.Type.HasParent)
+                if (discriminator is not null && !serialization.Type.HasParent && !serialization.Type.Equals(discriminator.DefaultObjectType.Type))
                 {
-                    writer.Line($"return {JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(serialization.Discriminator.DefaultObjectType.Type.Implementation, $"element", JsonSerializationOptions.None)};");
+                    writer.Line($"return {JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(discriminator.DefaultObjectType.Type.Implementation, $"element", JsonSerializationOptions.None)};");
                 }
                 else
                 {
@@ -203,7 +216,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization)
         {
-
             using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} writer)"))
             {
                 writer.ToSerializeCall(jsonSerialization);

@@ -118,6 +118,7 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/top",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -181,6 +182,7 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Alpha",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
@@ -255,6 +257,7 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Beta",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -318,6 +321,7 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/SubBeta",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
@@ -393,6 +397,7 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Gamma",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -456,6 +461,7 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Gamma",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],

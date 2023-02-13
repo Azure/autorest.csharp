@@ -60,7 +60,13 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
     $baseOutput = $baseOutput -replace "\\", "/"
     $outputPath = $baseOutput
 
-    if (!$fast) 
+    if ($fast)
+    {
+        $outputPath = Join-Path $baseOutput "Generated"
+        $dotnetArguments = $debug ? "--no-build --debug" : "--no-build" 
+        Invoke "dotnet run --project $script:AutoRestPluginProject $dotnetArguments --standalone $outputPath"
+    }
+    else
     {
         #clean up
         if (Test-Path $outputPath/Generated/*) 
@@ -72,7 +78,7 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
         $repoRootPath = Join-Path $PSScriptRoot ".."
         $repoRootPath = Resolve-Path -Path $repoRootPath
         Push-Location $repoRootPath
-        $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/AutoRest.CSharp.dll"
+        $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
         Try
         {
             $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"

@@ -22,7 +22,7 @@ namespace AutoRest.LowLevel.Tests
         [Test]
         public void OutputRecursive()
         {
-            var output = ErrorModel.DeserializeErrorModel(Parse("{\"message\":\"parent\",\"innerError\":{\"message\":\"child\"}}"));
+            var output = ErrorModel.DeserializeErrorModel(JsonAsserts.Parse("{\"message\":\"parent\",\"innerError\":{\"message\":\"child\"}}"));
 
             Assert.AreEqual("parent", output.Message);
             Assert.AreEqual("child", output.InnerError.Message);
@@ -42,11 +42,6 @@ namespace AutoRest.LowLevel.Tests
             Assert.AreEqual(input.Message, output.Message);
             Assert.AreEqual(input.Inner.Message, output.Inner.Message);
             Assert.AreEqual(input.Inner.Inner, output.Inner.Inner);
-        }
-
-        private static JsonElement Parse(string content)
-        {
-            return JsonDocument.Parse(content).RootElement;
         }
     }
 }

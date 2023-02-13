@@ -3,8 +3,8 @@
   "Namespace": "MgmtScopeResource",
   "LibraryName": null,
   "SharedSourceFolders": [
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
   "azure-arm": true,
   "public-clients": true,
@@ -15,7 +15,8 @@
   ],
   "GenerateArmResourceExtensions": [
     "/{scope}/providers/Microsoft.Authorization/policyAssignments/{policyAssignmentName}",
-    "/{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default"
+    "/{resourceUri}/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default",
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}"
   ],
   "RequestPathToParent": {
     "/{scope}/providers/Microsoft.Resources/links": "/{linkId}",

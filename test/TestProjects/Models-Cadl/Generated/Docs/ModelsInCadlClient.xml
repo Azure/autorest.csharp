@@ -56,14 +56,14 @@ Request Body:
 
 Schema for <c>InputModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
   requiredModel: {
-  }, # Required.
-  requiredIntCollection: [number], # Required.
-  requiredStringCollection: [string], # Required.
-  requiredModelCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  }, # Required. Required model
+  requiredIntCollection: [number], # Required. Required primitive value type collection
+  requiredStringCollection: [string], # Required. Required primitive reference type collection
+  requiredModelCollection: [CollectionItem], # Required. Required model collection
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
 }
 </code>
 
@@ -71,21 +71,21 @@ Response Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
-  }, # Required.
-  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+  }, # Required. Required model with discriminator
+  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
+  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
+  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required extensible enum
   requiredCollection: [
     {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
     }
-  ], # Required.
-  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required.
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  ], # Required. Required collection
+  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
+  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
 }
 </code>
 
@@ -146,14 +146,14 @@ Request Body:
 
 Schema for <c>InputModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
   requiredModel: {
-  }, # Required.
-  requiredIntCollection: [number], # Required.
-  requiredStringCollection: [string], # Required.
-  requiredModelCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  }, # Required. Required model
+  requiredIntCollection: [number], # Required. Required primitive value type collection
+  requiredStringCollection: [string], # Required. Required primitive reference type collection
+  requiredModelCollection: [CollectionItem], # Required. Required model collection
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
 }
 </code>
 
@@ -161,21 +161,21 @@ Response Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
-  }, # Required.
-  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+  }, # Required. Required model with discriminator
+  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
+  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
+  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required extensible enum
   requiredCollection: [
     {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
     }
-  ], # Required.
-  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required.
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  ], # Required. Required collection
+  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
+  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
 }
 </code>
 
@@ -225,7 +225,7 @@ Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredInt64").ToString());
 Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
 Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredDouble").ToString());
+Console.WriteLine(result.GetProperty("required_Double").ToString());
 Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
 Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
 Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
@@ -238,14 +238,14 @@ Request Body:
 
 Schema for <c>InputModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
   requiredModel: {
-  }, # Required.
-  requiredIntCollection: [number], # Required.
-  requiredStringCollection: [string], # Required.
-  requiredModelCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  }, # Required. Required model
+  requiredIntCollection: [number], # Required. Required primitive value type collection
+  requiredStringCollection: [string], # Required. Required primitive reference type collection
+  requiredModelCollection: [CollectionItem], # Required. Required model collection
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
 }
 </code>
 
@@ -253,15 +253,15 @@ Response Body:
 
 Schema for <c>RoundTripPrimitiveModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredInt64: number, # Required.
-  requiredSafeInt: number, # Required.
-  requiredFloat: number, # Required.
-  requiredDouble: number, # Required.
-  requiredBoolean: boolean, # Required.
-  requiredDateTimeOffset: string (date &amp; time), # Required.
-  requiredTimeSpan: string (duration ISO 8601 Format), # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredInt64: number, # Required. Required int64, illustrating a value type property.
+  requiredSafeInt: number, # Required. Required safeint, illustrating a value type property.
+  requiredFloat: number, # Required. Required float, illustrating a value type property.
+  required_Double: number, # Required. Required double, illustrating a value type property.
+  requiredBoolean: boolean, # Required. Required bolean, illustrating a value type property.
+  requiredDateTimeOffset: string (date &amp; time), # Required. Required date time offset, illustrating a reference type property.
+  requiredTimeSpan: string (duration ISO 8601 Format), # Required. Required time span, illustrating a value type property.
 }
 </code>
 
@@ -311,7 +311,7 @@ Console.WriteLine(result.GetProperty("requiredInt").ToString());
 Console.WriteLine(result.GetProperty("requiredInt64").ToString());
 Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
 Console.WriteLine(result.GetProperty("requiredFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredDouble").ToString());
+Console.WriteLine(result.GetProperty("required_Double").ToString());
 Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
 Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
 Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
@@ -324,14 +324,14 @@ Request Body:
 
 Schema for <c>InputModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
   requiredModel: {
-  }, # Required.
-  requiredIntCollection: [number], # Required.
-  requiredStringCollection: [string], # Required.
-  requiredModelCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  }, # Required. Required model
+  requiredIntCollection: [number], # Required. Required primitive value type collection
+  requiredStringCollection: [string], # Required. Required primitive reference type collection
+  requiredModelCollection: [CollectionItem], # Required. Required model collection
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
 }
 </code>
 
@@ -339,15 +339,15 @@ Response Body:
 
 Schema for <c>RoundTripPrimitiveModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredInt64: number, # Required.
-  requiredSafeInt: number, # Required.
-  requiredFloat: number, # Required.
-  requiredDouble: number, # Required.
-  requiredBoolean: boolean, # Required.
-  requiredDateTimeOffset: string (date &amp; time), # Required.
-  requiredTimeSpan: string (duration ISO 8601 Format), # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredInt64: number, # Required. Required int64, illustrating a value type property.
+  requiredSafeInt: number, # Required. Required safeint, illustrating a value type property.
+  requiredFloat: number, # Required. Required float, illustrating a value type property.
+  required_Double: number, # Required. Required double, illustrating a value type property.
+  requiredBoolean: boolean, # Required. Required bolean, illustrating a value type property.
+  requiredDateTimeOffset: string (date &amp; time), # Required. Required date time offset, illustrating a reference type property.
+  requiredTimeSpan: string (duration ISO 8601 Format), # Required. Required time span, illustrating a value type property.
 }
 </code>
 
@@ -355,21 +355,31 @@ Schema for <c>RoundTripPrimitiveModel</c>:
     </member>
     <member name="InputToRoundTripOptionalAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripOptionalAsync with required request content and parse the result.
+This sample shows how to call InputToRoundTripOptionalAsync and parse the result.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {};
+
+Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call InputToRoundTripOptionalAsync with all request content, and how to parse the result.
 <code><![CDATA[
 var client = new ModelsInCadlClient();
 
 var data = new {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new {},
-    requiredIntCollection = new[] {
-        1234
-    },
-    requiredStringCollection = new[] {
+    optionalString = "<optionalString>",
+    optionalInt = 1234,
+    optionalStringList = new[] {
         "<String>"
     },
-    requiredModelCollection = new[] {
+    optionalIntList = new[] {
+        1234
+    },
+    optionalModelCollection = new[] {
         new {
             requiredModelRecord = new {
                 key = new {
@@ -378,7 +388,26 @@ var data = new {
             },
         }
     },
-    requiredModelRecord = new {
+    optionalModel = new {
+        requiredCollection = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {
+                        requiredCollection = new[] {},
+                    },
+                },
+            }
+        },
+    },
+    optionalFixedStringEnum = "1",
+    optionalExtensibleEnum = "1",
+    optionalIntRecord = new {
+        key = 1234,
+    },
+    optionalStringRecord = new {
+        key = "<String>",
+    },
+    optionalModelRecord = new {
         key = new {
             requiredCollection = new[] {
                 new {
@@ -387,6 +416,8 @@ var data = new {
             },
         },
     },
+    optionalPlainDate = "2022-05-10",
+    optionalPlainTime = 01:23:45,
 };
 
 Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
@@ -400,6 +431,8 @@ Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
+Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -407,16 +440,23 @@ Below is the JSON schema for the request and response payloads.
 
 Request Body:
 
-Schema for <c>InputModel</c>:
+Schema for <c>RoundTripOptionalModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredModel: {
-  }, # Required.
-  requiredIntCollection: [number], # Required.
-  requiredStringCollection: [string], # Required.
-  requiredModelCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  optionalString: string, # Optional. Optional string, illustrating an optional reference type property.
+  optionalInt: number, # Optional. Optional int, illustrating an optional value type property.
+  optionalStringList: [string], # Optional. Optional string collection.
+  optionalIntList: [number], # Optional. Optional int collection.
+  optionalModelCollection: [CollectionItem], # Optional. Optional model collection
+  optionalModel: {
+    requiredCollection: [CollectionItem], # Required. Required collection
+  }, # Optional. Optional model.
+  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
+  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
+  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
+  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional. Optional string record
+  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
+  optionalPlainDate: string (date), # Optional. Optional plainDate
+  optionalPlainTime: string (time), # Optional. Optional plainTime
 }
 </code>
 
@@ -424,19 +464,21 @@ Response Body:
 
 Schema for <c>RoundTripOptionalModel</c>:
 <code>{
-  optionalString: string, # Optional.
-  optionalInt: number, # Optional.
-  optionalStringList: [string], # Optional.
-  optionalIntList: [number], # Optional.
-  optionalModelCollection: [CollectionItem], # Required.
+  optionalString: string, # Optional. Optional string, illustrating an optional reference type property.
+  optionalInt: number, # Optional. Optional int, illustrating an optional value type property.
+  optionalStringList: [string], # Optional. Optional string collection.
+  optionalIntList: [number], # Optional. Optional int collection.
+  optionalModelCollection: [CollectionItem], # Optional. Optional model collection
   optionalModel: {
-    requiredCollection: [CollectionItem], # Required.
-  }, # Optional.
-  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional.
-  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional.
-  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+    requiredCollection: [CollectionItem], # Required. Required collection
+  }, # Optional. Optional model.
+  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
+  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
+  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
+  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional. Optional string record
+  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
+  optionalPlainDate: string (date), # Optional. Optional plainDate
+  optionalPlainTime: string (time), # Optional. Optional plainTime
 }
 </code>
 
@@ -444,21 +486,31 @@ Schema for <c>RoundTripOptionalModel</c>:
     </member>
     <member name="InputToRoundTripOptional(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripOptional with required request content and parse the result.
+This sample shows how to call InputToRoundTripOptional and parse the result.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {};
+
+Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call InputToRoundTripOptional with all request content, and how to parse the result.
 <code><![CDATA[
 var client = new ModelsInCadlClient();
 
 var data = new {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new {},
-    requiredIntCollection = new[] {
-        1234
-    },
-    requiredStringCollection = new[] {
+    optionalString = "<optionalString>",
+    optionalInt = 1234,
+    optionalStringList = new[] {
         "<String>"
     },
-    requiredModelCollection = new[] {
+    optionalIntList = new[] {
+        1234
+    },
+    optionalModelCollection = new[] {
         new {
             requiredModelRecord = new {
                 key = new {
@@ -467,7 +519,26 @@ var data = new {
             },
         }
     },
-    requiredModelRecord = new {
+    optionalModel = new {
+        requiredCollection = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {
+                        requiredCollection = new[] {},
+                    },
+                },
+            }
+        },
+    },
+    optionalFixedStringEnum = "1",
+    optionalExtensibleEnum = "1",
+    optionalIntRecord = new {
+        key = 1234,
+    },
+    optionalStringRecord = new {
+        key = "<String>",
+    },
+    optionalModelRecord = new {
         key = new {
             requiredCollection = new[] {
                 new {
@@ -476,6 +547,8 @@ var data = new {
             },
         },
     },
+    optionalPlainDate = "2022-05-10",
+    optionalPlainTime = 01:23:45,
 };
 
 Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
@@ -489,6 +562,8 @@ Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
+Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -496,16 +571,23 @@ Below is the JSON schema for the request and response payloads.
 
 Request Body:
 
-Schema for <c>InputModel</c>:
+Schema for <c>RoundTripOptionalModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
-  requiredModel: {
-  }, # Required.
-  requiredIntCollection: [number], # Required.
-  requiredStringCollection: [string], # Required.
-  requiredModelCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  optionalString: string, # Optional. Optional string, illustrating an optional reference type property.
+  optionalInt: number, # Optional. Optional int, illustrating an optional value type property.
+  optionalStringList: [string], # Optional. Optional string collection.
+  optionalIntList: [number], # Optional. Optional int collection.
+  optionalModelCollection: [CollectionItem], # Optional. Optional model collection
+  optionalModel: {
+    requiredCollection: [CollectionItem], # Required. Required collection
+  }, # Optional. Optional model.
+  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
+  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
+  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
+  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional. Optional string record
+  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
+  optionalPlainDate: string (date), # Optional. Optional plainDate
+  optionalPlainTime: string (time), # Optional. Optional plainTime
 }
 </code>
 
@@ -513,19 +595,21 @@ Response Body:
 
 Schema for <c>RoundTripOptionalModel</c>:
 <code>{
-  optionalString: string, # Optional.
-  optionalInt: number, # Optional.
-  optionalStringList: [string], # Optional.
-  optionalIntList: [number], # Optional.
-  optionalModelCollection: [CollectionItem], # Required.
+  optionalString: string, # Optional. Optional string, illustrating an optional reference type property.
+  optionalInt: number, # Optional. Optional int, illustrating an optional value type property.
+  optionalStringList: [string], # Optional. Optional string collection.
+  optionalIntList: [number], # Optional. Optional int collection.
+  optionalModelCollection: [CollectionItem], # Optional. Optional model collection
   optionalModel: {
-    requiredCollection: [CollectionItem], # Required.
-  }, # Optional.
-  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional.
-  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional.
-  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+    requiredCollection: [CollectionItem], # Required. Required collection
+  }, # Optional. Optional model.
+  optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
+  optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
+  optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
+  optionalStringRecord: Dictionary&lt;string, string&gt;, # Optional. Optional string record
+  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
+  optionalPlainDate: string (date), # Optional. Optional plainDate
+  optionalPlainTime: string (time), # Optional. Optional plainTime
 }
 </code>
 
@@ -595,14 +679,14 @@ Request Body:
 
 Schema for <c>InputModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
   requiredModel: {
-  }, # Required.
-  requiredIntCollection: [number], # Required.
-  requiredStringCollection: [string], # Required.
-  requiredModelCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  }, # Required. Required model
+  requiredIntCollection: [number], # Required. Required primitive value type collection
+  requiredStringCollection: [string], # Required. Required primitive reference type collection
+  requiredModelCollection: [CollectionItem], # Required. Required model collection
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
 }
 </code>
 
@@ -610,30 +694,30 @@ Response Body:
 
 Schema for <c>RoundTripReadOnlyModel</c>:
 <code>{
-  requiredReadonlyString: string, # Required.
-  requiredReadonlyInt: number, # Required.
-  optionalReadonlyString: string, # Optional.
-  optionalReadonlyInt: number, # Optional.
+  requiredReadonlyString: string, # Required. Required string, illustrating a readonly reference type property.
+  requiredReadonlyInt: number, # Required. Required int, illustrating a readonly value type property.
+  optionalReadonlyString: string, # Optional. Optional string, illustrating a readonly reference type property.
+  optionalReadonlyInt: number, # Optional. Optional int, illustrating a readonly value type property.
   requiredReadonlyModel: {
-    requiredCollection: [CollectionItem], # Required.
-  }, # Required.
-  optionalReadonlyModel: DerivedModel, # Optional.
-  requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  optionalReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  optionalReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredReadonlyStringList: [string], # Required.
-  requiredReadonlyIntList: [number], # Required.
-  requiredReadOnlyModelCollection: [CollectionItem], # Required.
-  requiredReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required.
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
-  requiredReadOnlyModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
-  optionalReadonlyStringList: [string], # Optional.
-  optionalReadonlyIntList: [number], # Optional.
-  optionalReadOnlyModelCollection: [CollectionItem], # Optional.
-  optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required.
-  optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required.
-  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+    requiredCollection: [CollectionItem], # Required. Required collection
+  }, # Required. Required readonly model.
+  optionalReadonlyModel: DerivedModel, # Optional. Optional readonly model.
+  requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required readonly fixed string enum
+  requiredReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required readonly extensible enum
+  optionalReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Optional readonly fixed string enum
+  optionalReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Optional readonly extensible enum
+  requiredReadonlyStringList: [string], # Required. Required readonly string collection.
+  requiredReadonlyIntList: [number], # Required. Required readonly int collection.
+  requiredReadOnlyModelCollection: [CollectionItem], # Required. Required model collection
+  requiredReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
+  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
+  requiredReadOnlyModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+  optionalReadonlyStringList: [string], # Optional. Optional readonly string collection.
+  optionalReadonlyIntList: [number], # Optional. Optional readonly int collection.
+  optionalReadOnlyModelCollection: [CollectionItem], # Optional. Optional model collection
+  optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Optional int record
+  optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required. Optional string record
+  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
 }
 </code>
 
@@ -703,14 +787,14 @@ Request Body:
 
 Schema for <c>InputModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
   requiredModel: {
-  }, # Required.
-  requiredIntCollection: [number], # Required.
-  requiredStringCollection: [string], # Required.
-  requiredModelCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  }, # Required. Required model
+  requiredIntCollection: [number], # Required. Required primitive value type collection
+  requiredStringCollection: [string], # Required. Required primitive reference type collection
+  requiredModelCollection: [CollectionItem], # Required. Required model collection
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
 }
 </code>
 
@@ -718,30 +802,30 @@ Response Body:
 
 Schema for <c>RoundTripReadOnlyModel</c>:
 <code>{
-  requiredReadonlyString: string, # Required.
-  requiredReadonlyInt: number, # Required.
-  optionalReadonlyString: string, # Optional.
-  optionalReadonlyInt: number, # Optional.
+  requiredReadonlyString: string, # Required. Required string, illustrating a readonly reference type property.
+  requiredReadonlyInt: number, # Required. Required int, illustrating a readonly value type property.
+  optionalReadonlyString: string, # Optional. Optional string, illustrating a readonly reference type property.
+  optionalReadonlyInt: number, # Optional. Optional int, illustrating a readonly value type property.
   requiredReadonlyModel: {
-    requiredCollection: [CollectionItem], # Required.
-  }, # Required.
-  optionalReadonlyModel: DerivedModel, # Optional.
-  requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  optionalReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  optionalReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredReadonlyStringList: [string], # Required.
-  requiredReadonlyIntList: [number], # Required.
-  requiredReadOnlyModelCollection: [CollectionItem], # Required.
-  requiredReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required.
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
-  requiredReadOnlyModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
-  optionalReadonlyStringList: [string], # Optional.
-  optionalReadonlyIntList: [number], # Optional.
-  optionalReadOnlyModelCollection: [CollectionItem], # Optional.
-  optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required.
-  optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required.
-  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional.
+    requiredCollection: [CollectionItem], # Required. Required collection
+  }, # Required. Required readonly model.
+  optionalReadonlyModel: DerivedModel, # Optional. Optional readonly model.
+  requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required readonly fixed string enum
+  requiredReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required readonly extensible enum
+  optionalReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Optional readonly fixed string enum
+  optionalReadonlyExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Optional readonly extensible enum
+  requiredReadonlyStringList: [string], # Required. Required readonly string collection.
+  requiredReadonlyIntList: [number], # Required. Required readonly int collection.
+  requiredReadOnlyModelCollection: [CollectionItem], # Required. Required model collection
+  requiredReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
+  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
+  requiredReadOnlyModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+  optionalReadonlyStringList: [string], # Optional. Optional readonly string collection.
+  optionalReadonlyIntList: [number], # Optional. Optional readonly int collection.
+  optionalReadOnlyModelCollection: [CollectionItem], # Optional. Optional model collection
+  optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Optional int record
+  optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required. Optional string record
+  optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
 }
 </code>
 
@@ -800,21 +884,21 @@ Request Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
-  }, # Required.
-  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+  }, # Required. Required model with discriminator
+  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
+  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
+  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required extensible enum
   requiredCollection: [
     {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
     }
-  ], # Required.
-  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required.
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  ], # Required. Required collection
+  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
+  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
 }
 </code>
 
@@ -822,17 +906,17 @@ Response Body:
 
 Schema for <c>OutputModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
   requiredModel: {
     requiredCollection: [
       {
-        requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
       }
-    ], # Required.
-  }, # Required.
-  requiredCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+    ], # Required. Required collection
+  }, # Required. Required model
+  requiredCollection: [CollectionItem], # Required. Required collection
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
 }
 </code>
 
@@ -891,21 +975,21 @@ Request Body:
 
 Schema for <c>RoundTripModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
-  }, # Required.
-  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
-  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required.
+  }, # Required. Required model with discriminator
+  requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
+  requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
+  requiredExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required extensible enum
   requiredCollection: [
     {
-      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
     }
-  ], # Required.
-  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required.
-  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+  ], # Required. Required collection
+  requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
+  requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
 }
 </code>
 
@@ -913,17 +997,17 @@ Response Body:
 
 Schema for <c>OutputModel</c>:
 <code>{
-  requiredString: string, # Required.
-  requiredInt: number, # Required.
+  requiredString: string, # Required. Required string
+  requiredInt: number, # Required. Required int
   requiredModel: {
     requiredCollection: [
       {
-        requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+        requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
       }
-    ], # Required.
-  }, # Required.
-  requiredCollection: [CollectionItem], # Required.
-  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required.
+    ], # Required. Required collection
+  }, # Required. Required model
+  requiredCollection: [CollectionItem], # Required. Required collection
+  requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
 }
 </code>
 
@@ -961,8 +1045,8 @@ Request Body:
 
 Schema for <c>InputRecursiveModel</c>:
 <code>{
-  message: string, # Required.
-  inner: InputRecursiveModel, # Optional.
+  message: string, # Required. Message
+  inner: InputRecursiveModel, # Optional. Required Record
 }
 </code>
 
@@ -1000,8 +1084,8 @@ Request Body:
 
 Schema for <c>InputRecursiveModel</c>:
 <code>{
-  message: string, # Required.
-  inner: InputRecursiveModel, # Optional.
+  message: string, # Required. Message
+  inner: InputRecursiveModel, # Optional. Required Record
 }
 </code>
 
@@ -1044,8 +1128,8 @@ Request Body:
 
 Schema for <c>RoundTripRecursiveModel</c>:
 <code>{
-  message: string, # Required.
-  inner: RoundTripRecursiveModel, # Optional.
+  message: string, # Required. Message
+  inner: RoundTripRecursiveModel, # Optional. Required Record
 }
 </code>
 
@@ -1053,8 +1137,8 @@ Response Body:
 
 Schema for <c>RoundTripRecursiveModel</c>:
 <code>{
-  message: string, # Required.
-  inner: RoundTripRecursiveModel, # Optional.
+  message: string, # Required. Message
+  inner: RoundTripRecursiveModel, # Optional. Required Record
 }
 </code>
 
@@ -1097,8 +1181,8 @@ Request Body:
 
 Schema for <c>RoundTripRecursiveModel</c>:
 <code>{
-  message: string, # Required.
-  inner: RoundTripRecursiveModel, # Optional.
+  message: string, # Required. Message
+  inner: RoundTripRecursiveModel, # Optional. Required Record
 }
 </code>
 
@@ -1106,8 +1190,8 @@ Response Body:
 
 Schema for <c>RoundTripRecursiveModel</c>:
 <code>{
-  message: string, # Required.
-  inner: RoundTripRecursiveModel, # Optional.
+  message: string, # Required. Message
+  inner: RoundTripRecursiveModel, # Optional. Required Record
 }
 </code>
 
@@ -1133,8 +1217,8 @@ Response Body:
 
 Schema for <c>ErrorModel</c>:
 <code>{
-  message: string, # Required.
-  innerError: ErrorModel, # Optional.
+  message: string, # Required. Error message
+  innerError: ErrorModel, # Optional. Required Record
 }
 </code>
 
@@ -1160,8 +1244,120 @@ Response Body:
 
 Schema for <c>ErrorModel</c>:
 <code>{
-  message: string, # Required.
-  innerError: ErrorModel, # Optional.
+  message: string, # Required. Error message
+  innerError: ErrorModel, # Optional. Required Record
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="RoundTripToOutputWithNoUseBaseAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call RoundTripToOutputWithNoUseBaseAsync with required request content and parse the result.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {
+    requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                },
+            },
+        }
+    },
+    baseModelProp = "<baseModelProp>",
+};
+
+Response response = await client.RoundTripToOutputWithNoUseBaseAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("baseModelProp").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>RoundTripOnNoUse</c>:
+<code>{
+  requiredCollection: [
+    {
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+    }
+  ], # Required. Required collection
+  baseModelProp: string, # Required. base model property
+}
+</code>
+
+Response Body:
+
+Schema for <c>RoundTripOnNoUse</c>:
+<code>{
+  requiredCollection: [
+    {
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+    }
+  ], # Required. Required collection
+  baseModelProp: string, # Required. base model property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="RoundTripToOutputWithNoUseBase(RequestContent,RequestContext)">
+<example>
+This sample shows how to call RoundTripToOutputWithNoUseBase with required request content and parse the result.
+<code><![CDATA[
+var client = new ModelsInCadlClient();
+
+var data = new {
+    requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                },
+            },
+        }
+    },
+    baseModelProp = "<baseModelProp>",
+};
+
+Response response = client.RoundTripToOutputWithNoUseBase(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("baseModelProp").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>RoundTripOnNoUse</c>:
+<code>{
+  requiredCollection: [
+    {
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+    }
+  ], # Required. Required collection
+  baseModelProp: string, # Required. base model property
+}
+</code>
+
+Response Body:
+
+Schema for <c>RoundTripOnNoUse</c>:
+<code>{
+  requiredCollection: [
+    {
+      requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+    }
+  ], # Required. Required collection
+  baseModelProp: string, # Required. base model property
 }
 </code>
 

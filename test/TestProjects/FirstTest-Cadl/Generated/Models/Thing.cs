@@ -14,16 +14,50 @@ namespace CadlFirstTest.Models
     public partial class Thing
     {
         /// <summary> Initializes a new instance of Thing. </summary>
-        /// <param name="name"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Thing(string name)
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="requiredUnion"> required Union. </param>
+        /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
+        public Thing(string name, string requiredUnion, string requiredBadDescription)
         {
             Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
+            Argument.AssertNotNull(requiredBadDescription, nameof(requiredBadDescription));
 
             Name = name;
+            RequiredUnion = requiredUnion;
+            RequiredBadDescription = requiredBadDescription;
         }
 
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> name of the Thing. </summary>
         public string Name { get; set; }
+        /// <summary> required Union. </summary>
+        public string RequiredUnion { get; set; }
+        /// <summary> required literal string. </summary>
+        internal string RequiredLiteralString { get; } = "accept";
+
+        /// <summary> required literal int. </summary>
+        internal int RequiredLiteralInt { get; } = 123;
+
+        /// <summary> required literal double. </summary>
+        internal double RequiredLiteralDouble { get; } = 1.23;
+
+        /// <summary> required literal bool. </summary>
+        internal bool RequiredLiteralBool { get; } = false;
+
+        /// <summary> optional literal string. </summary>
+        internal string OptionalLiteralString { get; } = "reject";
+
+        /// <summary> optional literal int. </summary>
+        internal int? OptionalLiteralInt { get; } = 456;
+
+        /// <summary> optional literal double. </summary>
+        internal double? OptionalLiteralDouble { get; } = 4.56;
+
+        /// <summary> optional literal bool. </summary>
+        internal bool? OptionalLiteralBool { get; } = true;
+
+        /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
+        public string RequiredBadDescription { get; set; }
     }
 }

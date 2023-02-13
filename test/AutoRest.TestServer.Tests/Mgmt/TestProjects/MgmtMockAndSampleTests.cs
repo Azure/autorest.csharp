@@ -69,7 +69,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
         [TestCase("Get")]
         [TestCase("Delete")]
-        [TestCase("Update")]
+        //[TestCase("Update")] // comment this because this corresponding generated test case is removed in order to test a new configuration
         [TestCase("GetPrivateLinkResources")]
         public void ValidateVaultResourceMockTests(string methodName, params string[] argTypes)
         {

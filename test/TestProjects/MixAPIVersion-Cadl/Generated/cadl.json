@@ -19,7 +19,7 @@
      "$id": "3",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "pet name",
      "Type": {
       "$id": "4",
       "Name": "string",
@@ -27,7 +27,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
+     "IsReadOnly": true,
      "IsDiscriminator": false
     },
     {
@@ -74,7 +74,7 @@
      "$id": "10",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "",
+     "Description": "The Toy items on this page",
      "Type": {
       "$id": "11",
       "Name": "Array",
@@ -97,7 +97,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
+         "IsReadOnly": true,
          "IsDiscriminator": false
         },
         {
@@ -142,7 +142,7 @@
      "$id": "19",
      "Name": "nextLink",
      "SerializedName": "nextLink",
-     "Description": "",
+     "Description": "The link to the next page of items",
      "Type": {
       "$id": "20",
       "Name": "ResourceLocation",
@@ -194,32 +194,11 @@
       },
       {
        "$id": "25",
-       "Name": "name",
-       "NameInRequest": "name",
-       "Description": "pet name",
-       "Type": {
-        "$id": "26",
-        "Name": "string",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Path",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "27",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "28",
+        "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -234,15 +213,36 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "27",
         "Type": {
-         "$id": "30",
+         "$id": "28",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
         },
         "Value": "2022-11-30-preview"
        }
+      },
+      {
+       "$id": "29",
+       "Name": "name",
+       "NameInRequest": "name",
+       "Description": "pet name",
+       "Type": {
+        "$id": "30",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
       },
       {
        "$id": "31",
@@ -288,6 +288,7 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets/Pet/{name}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -348,7 +349,7 @@
        }
       },
       {
-       "$ref": "27"
+       "$ref": "25"
       }
      ],
      "Responses": [
@@ -382,6 +383,7 @@
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -398,13 +400,19 @@
        "NameInRequest": "apiVersion",
        "Type": {
         "$id": "45",
-        "Name": "String",
-        "Kind": "String",
+        "Name": "Literal",
+        "LiteralValueType": {
+         "$id": "46",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2022-07-09",
         "IsNullable": false
        },
        "Location": "Query",
        "DefaultValue": {
-        "$id": "46",
+        "$id": "47",
         "Type": {
          "$ref": "45"
         },
@@ -420,7 +428,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "47",
+       "$id": "48",
        "Name": "pet",
        "NameInRequest": "pet",
        "Type": {
@@ -437,11 +445,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "48",
+       "$id": "49",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "49",
+        "$id": "50",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -456,19 +464,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "50",
+        "$id": "51",
         "Type": {
-         "$ref": "49"
+         "$ref": "50"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "51",
+       "$id": "52",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "52",
+        "$id": "53",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -483,9 +491,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "53",
+        "$id": "54",
         "Type": {
-         "$ref": "52"
+         "$ref": "53"
         },
         "Value": "application/json"
        }
@@ -493,7 +501,7 @@
      ],
      "Responses": [
       {
-       "$id": "54",
+       "$id": "55",
        "StatusCodes": [
         200
        ],
@@ -513,10 +521,11 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "55",
+     "$id": "56",
      "Name": "listPet",
      "ResourceName": "Toy",
      "Summary": "Gets ledger entries from a collection corresponding to a range.",
@@ -526,14 +535,14 @@
        "$ref": "23"
       },
       {
-       "$ref": "27"
+       "$ref": "25"
       },
       {
-       "$id": "56",
+       "$id": "57",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "57",
+        "$id": "58",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -548,9 +557,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "58",
+        "$id": "59",
         "Type": {
-         "$ref": "57"
+         "$ref": "58"
         },
         "Value": "application/json"
        }
@@ -558,7 +567,7 @@
      ],
      "Responses": [
       {
-       "$id": "59",
+       "$id": "60",
        "StatusCodes": [
         200
        ],
@@ -576,15 +585,16 @@
      "Path": "/pets/toys/Toy",
      "BufferResponse": true,
      "Paging": {
-      "$id": "60",
+      "$id": "61",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "61"
+    "$id": "62"
    },
    "Creatable": true
   }

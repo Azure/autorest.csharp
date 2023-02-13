@@ -31,16 +31,24 @@ model Project {
   name?: string;
 }
 
+model Thing {
+  name: string;
+}
+
 interface Authoring {
   createProjectStatusMonitor is CustomCore.PollingOperation<Project>;
 
-  @convenienceAPI
+  @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
   createProject is Azure.Core.LongRunningResourceCreateWithServiceProvidedName<Project>;
   
-  @convenienceAPI
+  @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
   op updateProject is Azure.Core.LongRunningResourceCreateOrReplace<Project, Project>;
+
+  @convenientAPI(true)
+  @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
+  op createThing is CustomCore.LongRunningRpcOperation<Thing, Thing>;
 }
 
 namespace CustomCore {
@@ -51,6 +59,16 @@ namespace CustomCore {
   }
 
   @Cadl.Http.route("operations")
-  @convenienceAPI
+  @convenientAPI(true)
   op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
+
+  @doc("Long running RPC operation template")
+  op LongRunningRpcOperation<
+    TParams extends object,
+    TResponse extends object
+  > is Azure.Core.RpcOperation<
+    TParams,
+    Azure.Core.Foundations.AcceptedResponse<TResponse &
+      Azure.Core.Foundations.LongRunningStatusLocation>
+  >;
 }

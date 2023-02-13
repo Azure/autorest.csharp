@@ -128,9 +128,10 @@ namespace AutoRest.CSharp.Output.Models
                     Name: operation.Language.Default.Name,
                     ResourceName: null,
                     Summary: operation.Language.Default.Summary,
+                    Deprecated: operation.Deprecated?.Reason,
                     Description: operation.Language.Default.Description,
                     Accessibility: operation.Accessibility,
-                    Parameters: new List<InputParameter>(),
+                    Parameters: CreateInputParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),
                     Responses: new List<OperationResponse>(),
                     HttpMethod: httpRequest.Method.ToCoreRequestMethod(),
                     RequestBodyMediaType: BodyMediaType.None,
@@ -141,9 +142,63 @@ namespace AutoRest.CSharp.Output.Models
                     BufferResponse: operation.Extensions?.BufferResponse ?? true,
                     LongRunning: null,
                     Paging: CreateOperationPaging(operation),
+                    true,
                     false);
             }
             return new InputOperation();
+        }
+
+        private static IReadOnlyList<InputParameter> CreateInputParameters(IEnumerable<RequestParameter> requestParameters)
+        {
+            var parameters = new List<InputParameter>();
+            foreach (var requestParameter in requestParameters)
+            {
+                parameters.Add(CreateInputParameter(requestParameter));
+            }
+            return parameters;
+        }
+
+        private static InputParameter CreateInputParameter(RequestParameter requestParameter)
+        {
+            return new(
+                    Name: requestParameter.Language.Default.Name,
+                    NameInRequest: requestParameter.Language.Default.SerializedName ?? requestParameter.Language.Default.Name,
+                    Description: requestParameter.Language.Default.Description,
+                    Type: CodeModelConverter.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, null) with { IsNullable = requestParameter.IsNullable || !requestParameter.IsRequired },
+                    Location: CodeModelConverter.GetRequestLocation(requestParameter),
+                    DefaultValue: GetDefaultValue(requestParameter),
+                    IsRequired: requestParameter.IsRequired,
+                    GroupedBy: requestParameter.GroupedBy != null ? CreateInputParameter(requestParameter.GroupedBy) : null,
+                    Kind: CodeModelConverter.GetOperationParameterKind(requestParameter),
+                    IsApiVersion: requestParameter.Origin == "modelerfour:synthesized/api-version",
+                    IsResourceParameter: Convert.ToBoolean(requestParameter.Extensions.GetValue<string>("x-ms-resource-identifier")),
+                    IsContentType: requestParameter.Origin == "modelerfour:synthesized/content-type",
+                    IsEndpoint: requestParameter.Origin == "modelerfour:synthesized/host",
+                    ArraySerializationDelimiter: GetArraySerializationDelimiter(requestParameter),
+                    Explode: requestParameter.Protocol.Http is HttpParameter { Explode: true },
+                    SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
+                    HeaderCollectionPrefix: requestParameter.Extensions?.HeaderCollectionPrefix,
+                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null);
+        }
+
+        private static InputConstant? GetDefaultValue(RequestParameter parameter)
+        {
+            if (parameter.ClientDefaultValue != null)
+            {
+                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CodeModelConverter.CreateType(parameter.Schema, parameter.Extensions?.Format, null) with { IsNullable = parameter.IsNullable });
+            }
+
+            if (parameter.Schema is ConstantSchema constantSchema)
+            {
+                return new InputConstant(Value: constantSchema.Value.Value, Type: CodeModelConverter.CreateType(constantSchema.ValueType, constantSchema.Extensions?.Format, null) with { IsNullable = constantSchema.Value.Value == null});
+            }
+
+            if (!parameter.IsRequired)
+            {
+                return new InputConstant(Value: null, Type: CodeModelConverter.CreateType(parameter.Schema, parameter.Extensions?.Format, null) with { IsNullable = parameter.IsNullable });
+            }
+
+            return null;
         }
 
         private OperationPaging? CreateOperationPaging(Operation operation)

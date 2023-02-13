@@ -46,10 +46,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             else
             {
-                string pagingItemName = method.Operation.Paging?.ItemName ?? "value";
+                valuePropertyName = method.Operation.Paging?.ItemName ?? "value";
                 var schemaObject = (SchemaObjectType)returnType.Implementation;
-                itemType = GetValueProperty(schemaObject, pagingItemName)?.ValueType.Arguments.FirstOrDefault();
-                valuePropertyName = pagingItemName.ToCleanName();
+                itemType = GetValueProperty(schemaObject, valuePropertyName)?.ValueType.Arguments.FirstOrDefault();
             }
             return itemType != null;
         }

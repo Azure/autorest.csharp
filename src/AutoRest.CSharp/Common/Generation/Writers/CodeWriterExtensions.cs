@@ -18,6 +18,7 @@ using Azure;
 using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using System.Text.Json;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -71,6 +72,16 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return writer;
+        }
+
+
+        public static CodeWriter WriteParseJsonDocument(this CodeWriter writer, CodeWriterDeclaration responseVariable, bool async, out CodeWriterDeclaration documentVariable)
+        {
+            documentVariable = new CodeWriterDeclaration("document");
+
+            return async
+                ? writer.Line($"using var {documentVariable:D} = await {typeof(JsonDocument)}.{nameof(JsonDocument.ParseAsync)}({responseVariable}.{nameof(Response.ContentStream)}, default, cancellationToken).ConfigureAwait(false);")
+                : writer.Line($"using var {documentVariable:D} = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}({responseVariable}.{nameof(Response.ContentStream)});");
         }
 
         public static CodeWriter WriteField(this CodeWriter writer, FieldDeclaration field, bool declareInCurrentScope = true)
@@ -131,6 +142,27 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
+            if (methodBase.Attributes is {} attributes)
+            {
+                foreach (var attribute in attributes)
+                {
+                    if (attribute.Arguments.Any())
+                    {
+                        writer.Append($"[{attribute.Type}(");
+                        foreach (var argument in attribute.Arguments)
+                        {
+                            writer.Append($"{argument:L}, ");
+                        }
+                        writer.RemoveTrailingComma();
+                        writer.LineRaw(")]");
+                    }
+                    else
+                    {
+                        writer.Line($"[{attribute.Type}]");
+                    }
+                }
+            }
+
             foreach (var disabledWarning in disabledWarnings)
             {
                 writer.Line($"#pragma warning disable {disabledWarning}");
@@ -391,15 +423,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteConstant(this CodeWriter writer, Constant constant) => writer.Append(constant.GetConstantFormattable());
 
-        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, Action<FormattableString> valueCallback, string responseVariable, CSharpType? type)
+        public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, CodeWriterDeclaration? variable, FormattableString responseVariable, CSharpType? type)
         {
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteDeserializationForMethods(jsonSerialization, async, valueCallback, responseVariable, type is not null && type.Equals(typeof(BinaryData)));
+                    writer.WriteDeserializationForMethods(jsonSerialization, async, variable, responseVariable, type is not null && type.Equals(typeof(BinaryData)));
                     break;
                 case XmlElementSerialization xmlSerialization:
-                    writer.WriteDeserializationForMethods(xmlSerialization, valueCallback, responseVariable);
+                    writer.WriteDeserializationForMethods(xmlSerialization, variable, responseVariable);
                     break;
                 default:
                     throw new NotImplementedException(serialization.ToString());
@@ -563,7 +595,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Scope($"if ({propertyName} != null)");
         }
 
-        public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType, IEnumerable<Attribute>? attributes = default)
+        public static IDisposable WriteCommonMethodWithoutValidation(this CodeWriter writer, MethodSignature signature, FormattableString? returnDescription, bool isAsync, bool isPublicType)
         {
             writer.WriteXmlDocumentationSummary(signature.FormattableDescription);
             writer.WriteXmlDocumentationParameters(signature.Parameters);
@@ -577,13 +609,6 @@ namespace AutoRest.CSharp.Generation.Writers
             if (returnDesc is not null)
                 writer.WriteXmlDocumentationReturns(returnDesc);
 
-            if (attributes is not null)
-            {
-                foreach (var attribute in attributes)
-                {
-                    writer.Line($"[{attribute.GetType()}]");
-                }
-            }
             return writer.WriteMethodDeclaration(signature.WithAsync(isAsync));
         }
 

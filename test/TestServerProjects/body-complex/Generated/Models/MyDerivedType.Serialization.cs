@@ -20,22 +20,22 @@ namespace body_complex.Models
             Optional<string> propBH1 = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("propD1"))
+                if (property.NameEquals("propD1"u8))
                 {
                     propD1 = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("kind"))
+                if (property.NameEquals("kind"u8))
                 {
                     kind = new MyKind(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("propB1"))
+                if (property.NameEquals("propB1"u8))
                 {
                     propB1 = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("helper"))
+                if (property.NameEquals("helper"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -44,7 +44,7 @@ namespace body_complex.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("propBH1"))
+                        if (property0.NameEquals("propBH1"u8))
                         {
                             propBH1 = property0.Value.GetString();
                             continue;

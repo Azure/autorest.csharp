@@ -17,7 +17,7 @@ namespace TypeSchemaMapping.Models
             Optional<AbstractModel> abstractModelProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("AbstractModelProperty"))
+                if (property.NameEquals("AbstractModelProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

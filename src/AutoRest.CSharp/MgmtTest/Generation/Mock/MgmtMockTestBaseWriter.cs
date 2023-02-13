@@ -97,13 +97,6 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
         protected void WriteTestAttribute()
         {
             _writer.Line($"[RecordedTest]");
-
-            string? ignoreReason = Configuration.MgmtConfiguration.TestGen?.IgnoreReason;
-            if (ignoreReason is not null)
-            {
-                _writer.UseNamespace("NUnit.Framework");
-                _writer.Line($"[Ignore(\"{ignoreReason}\")]");
-            }
         }
 
         protected void WriteTestOperation(CodeWriterDeclaration declaration, MockTestCase testCase)
@@ -134,6 +127,11 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
                 if (testCase.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
                 {
                     _writer.AppendExampleParameterValue(parameter, parameterValue);
+                    _writer.AppendRaw(",");
+                }
+                else if (parameter.IsPropertyBag)
+                {
+                    _writer.AppendExamplePropertyBagParamValue(parameter, testCase.PropertyBagParamValueMapping);
                     _writer.AppendRaw(",");
                 }
             }

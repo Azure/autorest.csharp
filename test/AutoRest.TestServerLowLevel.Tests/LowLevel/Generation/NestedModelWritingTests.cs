@@ -14,7 +14,7 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
         public void RoundTripModel(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/7435655e82b732b3573379f76e0e613423d244e9/packages/cadl-ranch-specs/http/models/nested-models/main.cadl#L60-L67
-            var model = new InputModelType("RoundTripModel", "NestedModelsBasic.Models", "public", "Round-trip model with nested model properties", InputModelTypeUsage.RoundTrip,
+            var model = new InputModelType("RoundTripModel", "NestedModelsBasic.Models", "public", null, "Round-trip model with nested model properties", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty>
                 {
                     new InputModelProperty("NestedRoundTripModel", "NestedRoundTripModel", "Required nested round-trip model.", NestedRoundTripOnlyModelType, true, false, false),
@@ -32,7 +32,7 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
         public void InputModel(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/7435655e82b732b3573379f76e0e613423d244e9/packages/cadl-ranch-specs/http/models/nested-models/main.cadl#L42-L49
-            var model = new InputModelType("InputModel", "NestedModelsBasic.Models", "public", "Input model with nested model properties", InputModelTypeUsage.Input,
+            var model = new InputModelType("InputModel", "NestedModelsBasic.Models", "public", null, "Input model with nested model properties", InputModelTypeUsage.Input,
                 new List<InputModelProperty>
                 {
                     new InputModelProperty("NestedInputModel", "NestedInputModel", "Required nested input model.", NestedInputOnlyModelType, true, false, false),
@@ -50,7 +50,7 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
         public void OutpuModel(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/7435655e82b732b3573379f76e0e613423d244e9/packages/cadl-ranch-specs/http/models/nested-models/main.cadl#L51-L58
-            var model = new InputModelType("OutputModel", "NestedModelsBasic.Models", "public", "Output model with nested model properties", InputModelTypeUsage.Output,
+            var model = new InputModelType("OutputModel", "NestedModelsBasic.Models", "public", null, "Output model with nested model properties", InputModelTypeUsage.Output,
                 new List<InputModelProperty>
                 {
                     new InputModelProperty("NestedOutputModel", "NestedOutputModel", "Required nested output model.", NestedOutputOnlyModelType, true, false, false),
@@ -64,19 +64,19 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
             ValidateGeneratedCodes("OutputModel", expectedModelCodes, expectedSerializationCodes, library);
         }
 
-        private static readonly InputModelType NestedInputOnlyModelType = new InputModelType("NestedInputOnlyModel", "NestedInputOnlyModel", "public", "Model to illustrate a nested model that only appears on an input model.", InputModelTypeUsage.Input,
+        private static readonly InputModelType NestedInputOnlyModelType = new InputModelType("NestedInputOnlyModel", "NestedInputOnlyModel", "public", null, "Model to illustrate a nested model that only appears on an input model.", InputModelTypeUsage.Input,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty, RequiredStringListProperty, RequiredIntListProperty },
             null, new List<InputModelType>(), null, null);
 
-        private static readonly InputModelType NestedOutputOnlyModelType = new InputModelType("NestedOutputOnlyModel", "NestedOutputOnlyModel", "public", "Model to illustrate a nested model that only appears on an ouput model.", InputModelTypeUsage.Output,
+        private static readonly InputModelType NestedOutputOnlyModelType = new InputModelType("NestedOutputOnlyModel", "NestedOutputOnlyModel", "public", null, "Model to illustrate a nested model that only appears on an ouput model.", InputModelTypeUsage.Output,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty, RequiredStringListProperty, RequiredIntListProperty },
             null, new List<InputModelType>(), null, null);
 
-        private static readonly InputModelType NestedRoundTripOnlyModelType = new InputModelType("NestedRoundTripOnlyModel", "NestedRoundTripOnlyModel", "public", "Model to illustrate a nested model that only appears on a nested model.", InputModelTypeUsage.RoundTrip,
+        private static readonly InputModelType NestedRoundTripOnlyModelType = new InputModelType("NestedRoundTripOnlyModel", "NestedRoundTripOnlyModel", "public", null, "Model to illustrate a nested model that only appears on a nested model.", InputModelTypeUsage.RoundTrip,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty, RequiredStringListProperty, RequiredIntListProperty },
             null, new List<InputModelType>(), null, null);
 
-        private static readonly InputModelType NestedRoundTripSharedModelType = new InputModelType("NestedRoundTripSharedModel", "NestedRoundTripSharedModel", "public", "Model to illustrate a nested model that appears as a nested model on input, output, and round-trip models.", InputModelTypeUsage.RoundTrip,
+        private static readonly InputModelType NestedRoundTripSharedModelType = new InputModelType("NestedRoundTripSharedModel", "NestedRoundTripSharedModel", "public", null, "Model to illustrate a nested model that appears as a nested model on input, output, and round-trip models.", InputModelTypeUsage.RoundTrip,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty, RequiredStringListProperty, RequiredIntListProperty },
             null, new List<InputModelType>(), null, null);
 

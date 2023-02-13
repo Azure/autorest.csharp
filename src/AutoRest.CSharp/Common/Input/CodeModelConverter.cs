@@ -88,6 +88,7 @@ namespace AutoRest.CSharp.Common.Input
                 Name: operation.Language.Default.Name,
                 ResourceName: null,
                 Summary: operation.Language.Default.Summary,
+                Deprecated: operation.Deprecated?.Reason,
                 Description: operation.Language.Default.Description,
                 Accessibility: operation.Accessibility,
                 Parameters: CreateOperationParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),
@@ -101,6 +102,7 @@ namespace AutoRest.CSharp.Common.Input
                 BufferResponse: operation.Extensions?.BufferResponse ?? true,
                 LongRunning: CreateLongRunning(operation),
                 Paging: CreateOperationPaging(operation),
+                GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false);
 
             _inputOperationToOperationMap[inputOperation] = operation;
@@ -226,6 +228,7 @@ namespace AutoRest.CSharp.Common.Input
                 Name: schema.Language.Default.Name,
                 Namespace: schema.Extensions?.Namespace,
                 Accessibility: schema.Extensions?.Accessibility,
+                Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
                 Usage: (schemaUsages.GetUsage(schema) & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
                 {
@@ -259,7 +262,7 @@ namespace AutoRest.CSharp.Common.Input
             IsDiscriminator: property.IsDiscriminator ?? false
         );
 
-        private static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
+        public static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
         {
             { Implementation: ImplementationLocation.Client } => InputOperationParameterKind.Client,
             { Schema: ConstantSchema } => InputOperationParameterKind.Constant,
@@ -324,7 +327,7 @@ namespace AutoRest.CSharp.Common.Input
         private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
             => CreateType(schema, format, modelsCache) with { IsNullable = isNullable };
 
-        private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
+        public static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
         {
             BinarySchema => InputPrimitiveType.Stream,
 
@@ -360,6 +363,8 @@ namespace AutoRest.CSharp.Common.Input
             { Type: AllSchemaTypes.String } when format == XMsFormat.ETag => InputPrimitiveType.ETag,
             { Type: AllSchemaTypes.String } when format == XMsFormat.ResourceType => InputPrimitiveType.ResourceType,
             { Type: AllSchemaTypes.String } when format == XMsFormat.RequestMethod => InputPrimitiveType.RequestMethod,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.Object => InputPrimitiveType.Object,
+            { Type: AllSchemaTypes.String } when format == XMsFormat.IPAddress => InputPrimitiveType.IPAddress,
 
             ConstantSchema constantSchema => CreateType(constantSchema.ValueType, format, modelsCache),
 
@@ -383,6 +388,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: schema.Name,
             Namespace: schema.Extensions?.Namespace,
             Accessibility: schema.Extensions?.Accessibility,
+            Deprecated: schema.Deprecated?.Reason,
             Description: schema.CreateDescription(),
             Usage: InputModelTypeUsage.None,
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
@@ -396,7 +402,7 @@ namespace AutoRest.CSharp.Common.Input
             Value: choiceValue.Value
         );
 
-        private static RequestLocation GetRequestLocation(RequestParameter requestParameter) => requestParameter.In switch
+        public static RequestLocation GetRequestLocation(RequestParameter requestParameter) => requestParameter.In switch
         {
             HttpParameterIn.Uri => RequestLocation.Uri,
             HttpParameterIn.Path => RequestLocation.Path,

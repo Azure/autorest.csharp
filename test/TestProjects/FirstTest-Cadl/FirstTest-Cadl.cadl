@@ -3,11 +3,26 @@ import "@cadl-lang/openapi";
 import "@azure-tools/cadl-dpg";
 import "@azure-tools/cadl-azure-core";
 
-@serviceTitle("Hello world")
-@serviceVersion("0.1.0")
+@service(
+    {
+        title: "hello world",
+        version: "0.1.0"
+    }
+)
 @doc("This is a sample cadl project.")
-@server("http://localhost:300","Endpoint Service")
-@useAuth(OAuth2Auth<[{
+@server(
+    "{firstTestCadlUrl}",
+    "Endpoint Service",
+    {
+        firstTestCadlUrl: string,
+    }
+)
+@useAuth(OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">)
+@Cadl.Rest.produces("application/json")
+@Cadl.Rest.consumes("application/json")
+namespace CadlFirstTest;
+
+model AuthFlow {
     type: OAuth2FlowType.clientCredentials;
     tokenUrl: "https://api.example.com/oauth2/token";
     refreshUrl: "https://api.example.com/oauth2/refresh";
@@ -41,6 +56,36 @@ enum ExtensibleEnum {
 model Thing {
   @doc("name of the Thing")
   name: string;
+
+  @doc("required Union")
+  requiredUnion: string | string[]|int32;
+
+  @doc("required literal string")
+  requiredLiteralString: "accept";
+
+  @doc("required literal int")
+  requiredLiteralInt: 123;
+
+  @doc("required literal double")
+  requiredLiteralDouble: 1.23;
+
+  @doc("required literal bool")
+  requiredLiteralBool: false;
+
+  @doc("optional literal string")
+  optionalLiteralString?: "reject";
+
+  @doc("optional literal int")
+  optionalLiteralInt?: 456;
+
+  @doc("optional literal double")
+  optionalLiteralDouble?: 4.56;
+
+  @doc("optional literal bool")
+  optionalLiteralBool?: true;
+
+  @doc("description with xml <|endoftext|>")
+  requiredBadDescription: string
 }
 
 @friendlyName("Friend")
@@ -100,7 +145,7 @@ namespace Hello.Demo2 {
     @route("/againHi")
     @doc("Return hi again")
     @get
-    @convenienceAPI
+    @convenientAPI(true)
     op helloAgain(@header p1: string, @body action: RoundTripModel, @Cadl.Http.header contentType: "text/plain", @path p2: string): Thing;
 
     @route("/noContentType")
@@ -109,16 +154,28 @@ namespace Hello.Demo2 {
     op noContentType(@header p1: string, @body action: RoundTripModel, @path p2: string): Thing;
 
     @route("/demoHi")
-    @convenienceAPI
+    @convenientAPI(true)
     @doc("Return hi in demo2")
     @get
     op helloDemo2(): Thing;
+
+    @route("/literal")
+    @convenienceAPI
+    @doc("Create with literal value")
+    @post
+    op createLiteral(@body body: Thing): Thing;
+
+    @route("/helloLiteral")
+    @convenienceAPI
+    @doc("Send literal parameters")
+    @get
+    op helloLiteral(@header p1: "test", @path p2: 123, @query p3: true): Thing;
 }
 
 @route("/top")
 @doc("top level method")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op topAction(@path @format("date") action: string): Thing;
 
 @route("/top2")
@@ -130,19 +187,19 @@ op topAction2(): Thing;
 @route("/patch")
 @doc("top level patch")
 @patch
-@convenienceAPI
+@convenientAPI(true)
 op patchAction(@body body: Thing): Thing;
 
 @route("/anonymousBody")
 @doc("body parameter without body decorator")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op anonymousBody( ...Thing ): Thing;
 
 @route("/friendlyName")
 @doc("Model can have its friendly name")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op friendlyModel(...NotFriend): NotFriend;
 
 op addTimeHeader(@header("Repeatability-First-Sent") repeatabilityFirstSent?: zonedDateTime): void;
@@ -152,4 +209,20 @@ namespace EnumTest {
     @route("/unknown-value")
     @doc("get extensible enum")
     op getUnknownValue(): DaysOfWeekExtensibleEnum;
+}
+
+namespace ProtocolAndConvenient {
+  @doc("When set protocol false and convenient true, then the protocol method should be internal")
+  @route("internalProtocol")
+  @post
+  @convenientAPI(true)
+  @protocolAPI(false)
+  op internalProtocol(@body body: Thing): Thing;  
+
+  @doc("When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one")
+  @route("stillConvenient")
+  @get
+  @convenientAPI(true)
+  @protocolAPI(false)
+  op stillConvenient(): void;
 }

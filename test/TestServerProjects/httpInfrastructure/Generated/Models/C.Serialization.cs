@@ -17,7 +17,7 @@ namespace httpInfrastructure.Models
             Optional<string> httpCode = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("httpCode"))
+                if (property.NameEquals("httpCode"u8))
                 {
                     httpCode = property.Value.GetString();
                     continue;

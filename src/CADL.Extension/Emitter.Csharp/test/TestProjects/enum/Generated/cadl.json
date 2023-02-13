@@ -52,7 +52,7 @@
    ],
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   },
   {
    "$id": "10",
@@ -100,7 +100,7 @@
    ],
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   },
   {
    "$id": "18",
@@ -162,7 +162,7 @@
    ],
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   }
  ],
  "Models": [
@@ -172,13 +172,13 @@
    "Namespace": "Cadl.EnumPropertiesBasic",
    "Description": "Input model with enum properties.",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "28",
      "Name": "Day",
      "SerializedName": "Day",
-     "Description": "",
+     "Description": "Required standard enum value.",
      "Type": {
       "$ref": "2"
      },
@@ -190,7 +190,7 @@
      "$id": "29",
      "Name": "FixedDay",
      "SerializedName": "FixedDay",
-     "Description": "",
+     "Description": "Required fixed enum value.",
      "Type": {
       "$ref": "10"
      },
@@ -389,7 +389,8 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

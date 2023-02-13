@@ -6,6 +6,7 @@ import {
     Enum,
     EnumMember,
     getDoc,
+    getDeprecated,
     getEffectiveModelType,
     getFormat,
     getFriendlyName,
@@ -27,7 +28,8 @@ import {
     isVoidType,
     isArrayModelType,
     isRecordModelType,
-    Scalar
+    Scalar,
+    Union
 } from "@cadl-lang/compiler";
 import { getResourceOperation } from "@cadl-lang/rest";
 import {
@@ -44,9 +46,11 @@ import {
     InputDictionaryType,
     InputEnumType,
     InputListType,
+    InputLiteralType,
     InputModelType,
     InputPrimitiveType,
-    InputType
+    InputType,
+    InputUnionType
 } from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 import { Usage } from "../type/Usage.js";
@@ -67,7 +71,13 @@ export function mapCadlTypeToCSharpInputTypeKind(
         case "Enum":
             return InputTypeKind.Enum;
         case "Number":
-            return InputTypeKind.Int32;
+            let nubmerValue = cadlType.value;
+            if (nubmerValue % 1 === 0) {
+                return InputTypeKind.Int32;
+            }
+            return InputTypeKind.Float64;
+        case "Boolean":
+            return InputTypeKind.Boolean;
         case "String":
             if (format === "date") return InputTypeKind.DateTime;
             if (format === "uri") return InputTypeKind.Uri;
@@ -114,7 +124,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
         case "boolean":
             return InputTypeKind.Boolean;
         case "plainDate":
-            return InputTypeKind.DateTime;
+            return InputTypeKind.Date;
         case "zonedDateTime":
             return InputTypeKind.DateTime;
         case "plainTime":
@@ -261,11 +271,18 @@ export function getInputType(
             program,
             type
         );
-        return {
+        const valueType = {
             Name: type.kind,
             Kind: builtInKind,
             IsNullable: false
         } as InputPrimitiveType;
+
+        return {
+            Name: "Literal",
+            LiteralValueType: valueType,
+            Value: getDefaultValue(type),
+            IsNullable: false
+        } as InputLiteralType;
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
     } else if (type.kind === "EnumMember") {
@@ -303,7 +320,7 @@ export function getInputType(
                 } as InputPrimitiveType;
         }
     } else if (type.kind === "Union") {
-        throw new Error(`Union is not supported.`);
+        return getInputTypeForUnion(type);
     } else {
         throw new Error(`Unsupported type ${type.kind}`);
     }
@@ -314,16 +331,16 @@ export function getInputType(
             if (isArrayModelType(program, m)) {
                 return getInputTypeForArray(m.indexer.value);
             } else if (isRecordModelType(program, m)) {
-                return getInputTypeForMap(
-                            m.indexer.key,
-                            m.indexer.value
-                        );
+                return getInputTypeForMap(m.indexer.key, m.indexer.value);
             }
         }
         return getInputModelForModel(m);
     }
 
-    function getInputModelForEnumByKnowValues(m: Model | Scalar, e: Enum): InputEnumType {
+    function getInputModelForEnumByKnowValues(
+        m: Model | Scalar,
+        e: Enum
+    ): InputEnumType {
         let extensibleEnum = enums.get(m.name);
         if (!extensibleEnum) {
             const innerEnum: InputEnumType = getInputTypeForEnum(e, false);
@@ -336,6 +353,7 @@ export function getInputType(
                 Name: m.name,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
+                Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 EnumValueType: innerEnum.EnumValueType,
                 AllowedValues: innerEnum.AllowedValues,
@@ -385,6 +403,7 @@ export function getInputType(
                 Name: e.name,
                 Namespace: getFullNamespaceString(e.namespace),
                 Accessibility: undefined, //TODO: need to add accessibility
+                Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
                 AllowedValues: allowValues,
@@ -431,6 +450,7 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
+                Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
                 DiscriminatorPropertyName: getDiscriminator(program, m)
@@ -502,7 +522,7 @@ export function getInputType(
                 const inputProp = {
                     Name: value.name,
                     SerializedName: value.name,
-                    Description: "",
+                    Description: getDoc(program, value) ?? "",
                     Type: getInputType(program, value.type, models, enums),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
@@ -559,6 +579,19 @@ export function getInputType(
                 throw new Error(`Unsupported type ${type.name}`);
         }
     }
+
+    function getInputTypeForUnion(union: Union): InputUnionType {
+        const ItemTypes: InputType[] = [];
+        const variants = Array.from(union.variants.values());
+        for (const variant of variants) {
+            ItemTypes.push(getInputType(program, variant.type, models, enums));
+        }
+        return {
+            Name: "Union",
+            UnionItemTypes: ItemTypes,
+            IsNullable: false
+        } as InputUnionType;
+    }
 }
 
 export function getUsages(
@@ -581,8 +614,12 @@ export function getUsages(
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
         if (type.kind === "Model") {
-            const effectiveType = getEffectiveModelType(program, type);
-            typeName = getFriendlyName(program, effectiveType) ?? effectiveType.name;
+            const effectiveType = getEffectiveSchemaType(
+                program,
+                type
+            ) as Model;
+            typeName =
+                getFriendlyName(program, effectiveType) ?? effectiveType.name;
         }
         const affectTypes: string[] = [];
         if (typeName !== "") affectTypes.push(typeName);
@@ -614,6 +651,26 @@ export function getUsages(
                 if (!value) value = UsageFlags.Input;
                 else value = value | UsageFlags.Input;
                 usagesMap.set(resourceName, value);
+            }
+        }
+
+        /* handle spread. */
+        if (!op.parameters.bodyParameter && op.parameters.bodyType) {
+            const effectiveBodyType = getEffectiveSchemaType(
+                program,
+                op.parameters.bodyType
+            );
+            if (
+                effectiveBodyType.kind === "Model" &&
+                effectiveBodyType.name !== ""
+            ) {
+                const modelName =
+                    getFriendlyName(program, effectiveBodyType) ??
+                    effectiveBodyType.name;
+                let value = usagesMap.get(modelName);
+                if (!value) value = UsageFlags.Input;
+                else value = value | UsageFlags.Input;
+                usagesMap.set(modelName, value);
             }
         }
     }

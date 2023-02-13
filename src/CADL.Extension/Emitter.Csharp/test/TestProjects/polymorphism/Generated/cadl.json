@@ -13,7 +13,7 @@
    "Description": "This is base model for polymorphic multiple levels inheritance with a discriminator.",
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "3",
@@ -43,7 +43,7 @@
    "BaseModel": {
     "$ref": "2"
    },
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": []
   },
   {
@@ -56,7 +56,7 @@
    "BaseModel": {
     "$ref": "5"
    },
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": []
   },
   {
@@ -69,7 +69,7 @@
    "BaseModel": {
     "$ref": "5"
    },
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": []
   },
   {
@@ -82,7 +82,7 @@
    "BaseModel": {
     "$ref": "2"
    },
-   "Usage": "None",
+   "Usage": "RoundTrip",
    "Properties": [
     {
      "$id": "9",
@@ -293,7 +293,8 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "31",
@@ -354,7 +355,8 @@
      "Uri": "{Endpoint}",
      "Path": "/discriminated/recursivemodel",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "36",
@@ -459,7 +461,8 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "45",
@@ -520,7 +523,8 @@
      "Uri": "{Endpoint}",
      "Path": "/discriminated/missingdiscriminator",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "50",
@@ -581,7 +585,8 @@
      "Uri": "{Endpoint}",
      "Path": "/discriminated/wrongdiscriminator",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

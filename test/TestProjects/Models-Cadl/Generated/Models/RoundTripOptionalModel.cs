@@ -13,40 +13,35 @@ using Azure.Core;
 namespace ModelsInCadl.Models
 {
     /// <summary> RoundTrip model with optional properties. </summary>
+    [Obsolete("deprecated for test")]
     public partial class RoundTripOptionalModel
     {
         /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
-        /// <param name="optionalModelCollection"></param>
-        /// <param name="optionalFixedStringEnum"></param>
-        /// <param name="optionalExtensibleEnum"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="optionalModelCollection"/> is null. </exception>
-        internal RoundTripOptionalModel(IEnumerable<CollectionItem> optionalModelCollection, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum)
+        public RoundTripOptionalModel()
         {
-            Argument.AssertNotNull(optionalModelCollection, nameof(optionalModelCollection));
-
             OptionalStringList = new ChangeTrackingList<string>();
             OptionalIntList = new ChangeTrackingList<int>();
-            OptionalModelCollection = optionalModelCollection.ToList();
-            OptionalFixedStringEnum = optionalFixedStringEnum;
-            OptionalExtensibleEnum = optionalExtensibleEnum;
+            OptionalModelCollection = new ChangeTrackingList<CollectionItem>();
             OptionalIntRecord = new ChangeTrackingDictionary<string, int>();
             OptionalStringRecord = new ChangeTrackingDictionary<string, string>();
             OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
         }
 
         /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
-        /// <param name="optionalString"></param>
-        /// <param name="optionalInt"></param>
-        /// <param name="optionalStringList"></param>
-        /// <param name="optionalIntList"></param>
-        /// <param name="optionalModelCollection"></param>
-        /// <param name="optionalModel"></param>
-        /// <param name="optionalFixedStringEnum"></param>
-        /// <param name="optionalExtensibleEnum"></param>
-        /// <param name="optionalIntRecord"></param>
-        /// <param name="optionalStringRecord"></param>
-        /// <param name="optionalModelRecord"></param>
-        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IReadOnlyList<string> optionalStringList, IReadOnlyList<int> optionalIntList, IReadOnlyList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum optionalFixedStringEnum, ExtensibleEnum optionalExtensibleEnum, IReadOnlyDictionary<string, int> optionalIntRecord, IReadOnlyDictionary<string, string> optionalStringRecord, IReadOnlyDictionary<string, RecordItem> optionalModelRecord)
+        /// <param name="optionalString"> Optional string, illustrating an optional reference type property. </param>
+        /// <param name="optionalInt"> Optional int, illustrating an optional value type property. </param>
+        /// <param name="optionalStringList"> Optional string collection. </param>
+        /// <param name="optionalIntList"> Optional int collection. </param>
+        /// <param name="optionalModelCollection"> Optional model collection. </param>
+        /// <param name="optionalModel"> Optional model. </param>
+        /// <param name="optionalFixedStringEnum"> Optional fixed string enum. </param>
+        /// <param name="optionalExtensibleEnum"> Optional extensible enum. </param>
+        /// <param name="optionalIntRecord"> Optional int record. </param>
+        /// <param name="optionalStringRecord"> Optional string record. </param>
+        /// <param name="optionalModelRecord"> Optional model record. </param>
+        /// <param name="optionalPlainDate"> Optional plainDate. </param>
+        /// <param name="optionalPlainTime"> Optional plainTime. </param>
+        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime)
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
@@ -59,29 +54,35 @@ namespace ModelsInCadl.Models
             OptionalIntRecord = optionalIntRecord;
             OptionalStringRecord = optionalStringRecord;
             OptionalModelRecord = optionalModelRecord;
+            OptionalPlainDate = optionalPlainDate;
+            OptionalPlainTime = optionalPlainTime;
         }
 
-        /// <summary> Gets the optional string. </summary>
-        public string OptionalString { get; }
-        /// <summary> Gets the optional int. </summary>
-        public int? OptionalInt { get; }
-        /// <summary> Gets the optional string list. </summary>
-        public IReadOnlyList<string> OptionalStringList { get; }
-        /// <summary> Gets the optional int list. </summary>
-        public IReadOnlyList<int> OptionalIntList { get; }
-        /// <summary> Gets the optional model collection. </summary>
-        public IReadOnlyList<CollectionItem> OptionalModelCollection { get; }
-        /// <summary> Gets the optional model. </summary>
-        public DerivedModel OptionalModel { get; }
-        /// <summary> Gets the optional fixed string enum. </summary>
-        public FixedStringEnum OptionalFixedStringEnum { get; }
-        /// <summary> Gets the optional extensible enum. </summary>
-        public ExtensibleEnum OptionalExtensibleEnum { get; }
-        /// <summary> Gets the optional int record. </summary>
-        public IReadOnlyDictionary<string, int> OptionalIntRecord { get; }
-        /// <summary> Gets the optional string record. </summary>
-        public IReadOnlyDictionary<string, string> OptionalStringRecord { get; }
-        /// <summary> Gets the optional model record. </summary>
-        public IReadOnlyDictionary<string, RecordItem> OptionalModelRecord { get; }
+        /// <summary> Optional string, illustrating an optional reference type property. </summary>
+        public string OptionalString { get; set; }
+        /// <summary> Optional int, illustrating an optional value type property. </summary>
+        public int? OptionalInt { get; set; }
+        /// <summary> Optional string collection. </summary>
+        public IList<string> OptionalStringList { get; }
+        /// <summary> Optional int collection. </summary>
+        public IList<int> OptionalIntList { get; }
+        /// <summary> Optional model collection. </summary>
+        public IList<CollectionItem> OptionalModelCollection { get; }
+        /// <summary> Optional model. </summary>
+        public DerivedModel OptionalModel { get; set; }
+        /// <summary> Optional fixed string enum. </summary>
+        public FixedStringEnum? OptionalFixedStringEnum { get; set; }
+        /// <summary> Optional extensible enum. </summary>
+        public ExtensibleEnum? OptionalExtensibleEnum { get; set; }
+        /// <summary> Optional int record. </summary>
+        public IDictionary<string, int> OptionalIntRecord { get; }
+        /// <summary> Optional string record. </summary>
+        public IDictionary<string, string> OptionalStringRecord { get; }
+        /// <summary> Optional model record. </summary>
+        public IDictionary<string, RecordItem> OptionalModelRecord { get; }
+        /// <summary> Optional plainDate. </summary>
+        public DateTimeOffset? OptionalPlainDate { get; set; }
+        /// <summary> Optional plainTime. </summary>
+        public TimeSpan? OptionalPlainTime { get; set; }
     }
 }
