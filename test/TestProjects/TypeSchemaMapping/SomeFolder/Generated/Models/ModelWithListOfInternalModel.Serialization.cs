@@ -19,12 +19,12 @@ namespace TypeSchemaMapping.Models
             Optional<IReadOnlyList<InternalModel>> internalListProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("StringProperty"))
+                if (property.NameEquals("StringProperty"u8))
                 {
                     stringProperty = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("InternalListProperty"))
+                if (property.NameEquals("InternalListProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

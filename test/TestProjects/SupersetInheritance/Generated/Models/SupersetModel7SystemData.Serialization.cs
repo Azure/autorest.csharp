@@ -20,12 +20,12 @@ namespace SupersetInheritance.Models
             Optional<string> lastModifiedBy = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("createdBy"))
+                if (property.NameEquals("createdBy"u8))
                 {
                     createdBy = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("createdAt"))
+                if (property.NameEquals("createdAt"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -35,7 +35,7 @@ namespace SupersetInheritance.Models
                     createdAt = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("lastModifiedBy"))
+                if (property.NameEquals("lastModifiedBy"u8))
                 {
                     lastModifiedBy = property.Value.GetString();
                     continue;

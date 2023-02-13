@@ -21,20 +21,17 @@ namespace Azure.Language.Authoring.Models
         /// <param name="status"> The job status. </param>
         /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
         /// <param name="errors"> The errors encountered while executing the job. </param>
-        /// <param name="id"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="jobId"/>, <paramref name="warnings"/>, <paramref name="errors"/> or <paramref name="id"/> is null. </exception>
-        internal DeploymentJob(string jobId, JobStatus status, IEnumerable<JobWarning> warnings, ResponseError errors, string id)
+        /// <exception cref="ArgumentNullException"> <paramref name="jobId"/>, <paramref name="warnings"/> or <paramref name="errors"/> is null. </exception>
+        internal DeploymentJob(string jobId, JobStatus status, IEnumerable<JobWarning> warnings, ResponseError errors)
         {
             Argument.AssertNotNull(jobId, nameof(jobId));
             Argument.AssertNotNull(warnings, nameof(warnings));
             Argument.AssertNotNull(errors, nameof(errors));
-            Argument.AssertNotNull(id, nameof(id));
 
             JobId = jobId;
             Status = status;
             Warnings = warnings.ToList();
             Errors = errors;
-            Id = id;
         }
 
         /// <summary> Initializes a new instance of DeploymentJob. </summary>

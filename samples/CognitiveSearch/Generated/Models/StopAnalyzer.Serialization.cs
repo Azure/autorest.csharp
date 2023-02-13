@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Stopwords))
             {
-                writer.WritePropertyName("stopwords");
+                writer.WritePropertyName("stopwords"u8);
                 writer.WriteStartArray();
                 foreach (var item in Stopwords)
                 {
@@ -26,9 +26,9 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
-            writer.WritePropertyName("@odata.type");
+            writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
@@ -40,7 +40,7 @@ namespace CognitiveSearch.Models
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("stopwords"))
+                if (property.NameEquals("stopwords"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -55,12 +55,12 @@ namespace CognitiveSearch.Models
                     stopwords = array;
                     continue;
                 }
-                if (property.NameEquals("@odata.type"))
+                if (property.NameEquals("@odata.type"u8))
                 {
                     odataType = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;

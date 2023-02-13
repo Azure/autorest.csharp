@@ -20,22 +20,22 @@ namespace Azure.Management.Storage.Models
             Optional<string> dfs = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("blob"))
+                if (property.NameEquals("blob"u8))
                 {
                     blob = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("file"))
+                if (property.NameEquals("file"u8))
                 {
                     file = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("web"))
+                if (property.NameEquals("web"u8))
                 {
                     web = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("dfs"))
+                if (property.NameEquals("dfs"u8))
                 {
                     dfs = property.Value.GetString();
                     continue;

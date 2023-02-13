@@ -164,21 +164,29 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath-LowLevel\\Generated"
     },
-    "cadl-api-key": {
+    "cadl-authentication/api-key": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\api-key\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\api-key\\Generated"
     },
-    "cadl-oauth2": {
+    "cadl-authentication/oauth2": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\oauth2\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\oauth2\\Generated"
     },
-    "cadl-property-optional": {
+    "cadl-authentication/union": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\property-optional\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\union\\Generated"
     },
-    "cadl-property-types": {
+    "cadl-models/property-optional": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\property-types\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\property-optional\\Generated"
+    },
+    "cadl-models/property-types": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\property-types\\Generated"
+    },
+    "cadl-models/usage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\usage\\Generated"
     },
     "ClientAndOperationGroup-Cadl": {
       "commandName": "Project",

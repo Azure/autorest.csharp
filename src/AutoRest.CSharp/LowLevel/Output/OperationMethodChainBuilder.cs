@@ -85,7 +85,8 @@ namespace AutoRest.CSharp.Output.Models
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : Array.Empty<CSharpAttribute>();
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
-            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
+            var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : MethodSignatureModifiers.Internal) | Virtual;
+            var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, protocolMethodModifiers, returnTypeChain.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
             var convenienceMethod = ShouldConvenienceMethodGenerated(returnTypeChain) ? BuildConvenienceMethod(returnTypeChain) : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
@@ -98,7 +99,8 @@ namespace AutoRest.CSharp.Output.Models
         private bool ShouldConvenienceMethodGenerated(ReturnTypeChain returnTypeChain)
         {
             return Operation.GenerateConvenienceMethod
-                && (_orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
+                && (!Operation.GenerateProtocolMethod
+                || _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
                 || !returnTypeChain.Convenience.Equals(returnTypeChain.Protocol));
         }
 
@@ -434,9 +436,9 @@ namespace AutoRest.CSharp.Output.Models
             _requestParts.Add(new RequestPartSource(nameInRequest, operationParameter, reference, serializationFormat));
         }
 
-        private ReferenceOrConstant CreateReference(InputParameter? operationParameter, Parameter parameter)
+        private ReferenceOrConstant CreateReference(InputParameter operationParameter, Parameter parameter)
         {
-            if (operationParameter?.Kind == InputOperationParameterKind.Client)
+            if (operationParameter.Kind == InputOperationParameterKind.Client)
             {
                 var field = operationParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByParameter(parameter);
                 if (field == null)
@@ -447,7 +449,7 @@ namespace AutoRest.CSharp.Output.Models
                 return new Reference(field.Name, field.Type);
             }
 
-            if (operationParameter?.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
+            if (operationParameter.Kind is InputOperationParameterKind.Constant && parameter.DefaultValue is not null)
             {
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }

@@ -20,7 +20,7 @@ namespace ModelWithConverterUsage.Models
             Optional<string> outputModelProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("Output_Model_Property"))
+                if (property.NameEquals("Output_Model_Property"u8))
                 {
                     outputModelProperty = property.Value.GetString();
                     continue;

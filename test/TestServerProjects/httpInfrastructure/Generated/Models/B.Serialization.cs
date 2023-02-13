@@ -18,12 +18,12 @@ namespace httpInfrastructure.Models
             Optional<string> statusCode = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("textStatusCode"))
+                if (property.NameEquals("textStatusCode"u8))
                 {
                     textStatusCode = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("statusCode"))
+                if (property.NameEquals("statusCode"u8))
                 {
                     statusCode = property.Value.GetString();
                     continue;

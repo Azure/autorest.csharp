@@ -18,7 +18,7 @@ namespace Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("DiscriminatorProperty");
+            writer.WritePropertyName("DiscriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty.ToString());
             writer.WriteEndObject();
         }

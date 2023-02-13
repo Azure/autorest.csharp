@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Models
             Optional<string> readOnlySomething = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("readOnlySomething"))
+                if (property.NameEquals("readOnlySomething"u8))
                 {
                     readOnlySomething = property.Value.GetString();
                     continue;

@@ -21,7 +21,7 @@ namespace CognitiveServices.TextAnalytics.Models
             string modelVersion = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("documents"))
+                if (property.NameEquals("documents"u8))
                 {
                     List<DocumentSentiment> array = new List<DocumentSentiment>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -31,7 +31,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     documents = array;
                     continue;
                 }
-                if (property.NameEquals("errors"))
+                if (property.NameEquals("errors"u8))
                 {
                     List<DocumentError> array = new List<DocumentError>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -41,7 +41,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     errors = array;
                     continue;
                 }
-                if (property.NameEquals("statistics"))
+                if (property.NameEquals("statistics"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -51,7 +51,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     statistics = RequestStatistics.DeserializeRequestStatistics(property.Value);
                     continue;
                 }
-                if (property.NameEquals("modelVersion"))
+                if (property.NameEquals("modelVersion"u8))
                 {
                     modelVersion = property.Value.GetString();
                     continue;

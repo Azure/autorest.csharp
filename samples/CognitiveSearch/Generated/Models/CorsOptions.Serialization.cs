@@ -16,7 +16,7 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("allowedOrigins");
+            writer.WritePropertyName("allowedOrigins"u8);
             writer.WriteStartArray();
             foreach (var item in AllowedOrigins)
             {
@@ -25,7 +25,7 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             if (Optional.IsDefined(MaxAgeInSeconds))
             {
-                writer.WritePropertyName("maxAgeInSeconds");
+                writer.WritePropertyName("maxAgeInSeconds"u8);
                 writer.WriteNumberValue(MaxAgeInSeconds.Value);
             }
             writer.WriteEndObject();
@@ -37,7 +37,7 @@ namespace CognitiveSearch.Models
             Optional<long> maxAgeInSeconds = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("allowedOrigins"))
+                if (property.NameEquals("allowedOrigins"u8))
                 {
                     List<string> array = new List<string>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -47,7 +47,7 @@ namespace CognitiveSearch.Models
                     allowedOrigins = array;
                     continue;
                 }
-                if (property.NameEquals("maxAgeInSeconds"))
+                if (property.NameEquals("maxAgeInSeconds"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

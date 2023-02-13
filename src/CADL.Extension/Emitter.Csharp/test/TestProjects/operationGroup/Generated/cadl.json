@@ -118,7 +118,8 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/top",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "15",
@@ -181,7 +182,8 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Alpha",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -255,7 +257,8 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Beta",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "29",
@@ -318,7 +321,8 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/SubBeta",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -393,7 +397,8 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Gamma",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "43",
@@ -456,7 +461,8 @@
      "Uri": "{operationGroupServiceUrl}",
      "Path": "/Gamma",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

@@ -18,7 +18,7 @@ namespace CognitiveSearch.Models
             IReadOnlyList<TokenInfo> tokens = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("tokens"))
+                if (property.NameEquals("tokens"u8))
                 {
                     List<TokenInfo> array = new List<TokenInfo>();
                     foreach (var item in property.Value.EnumerateArray())

@@ -10,7 +10,7 @@ $PackagesProps = "$SdkRepoRoot\eng\Packages.Data.props"
     "<PackageReference Update=`"Microsoft.Azure.AutoRest.CSharp`" Version=`"$AutorestCSharpVersion`" PrivateAssets=`"All`" />" | `
     Set-Content $PackagesProps -NoNewline
 
-$CadlEmitterProps = "$SdkRepoRoot\eng\csharp-emitter-package.json"
+$CadlEmitterProps = "$SdkRepoRoot\eng\emitter-package.json"
 (Get-Content -Raw $CadlEmitterProps) -replace`
     '"@azure-tools/cadl-csharp": ".*?"',
     "`"@azure-tools/cadl-csharp`": `"$CadlEmitterVersion`"" | `

@@ -17,17 +17,17 @@ namespace OmitOperationGroups.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(C))
             {
-                writer.WritePropertyName("c");
+                writer.WritePropertyName("c"u8);
                 writer.WriteStringValue(C);
             }
             if (Optional.IsDefined(D))
             {
-                writer.WritePropertyName("d");
+                writer.WritePropertyName("d"u8);
                 writer.WriteStringValue(D);
             }
             if (Optional.IsDefined(E))
             {
-                writer.WritePropertyName("e");
+                writer.WritePropertyName("e"u8);
                 writer.WriteStringValue(E);
             }
             writer.WriteEndObject();
@@ -40,17 +40,17 @@ namespace OmitOperationGroups.Models
             Optional<string> e = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("c"))
+                if (property.NameEquals("c"u8))
                 {
                     c = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("d"))
+                if (property.NameEquals("d"u8))
                 {
                     d = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("e"))
+                if (property.NameEquals("e"u8))
                 {
                     e = property.Value.GetString();
                     continue;

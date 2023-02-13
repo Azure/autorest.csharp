@@ -17,7 +17,7 @@ namespace OmitOperationGroups.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(E))
             {
-                writer.WritePropertyName("e");
+                writer.WritePropertyName("e"u8);
                 writer.WriteStringValue(E);
             }
             writer.WriteEndObject();
@@ -28,7 +28,7 @@ namespace OmitOperationGroups.Models
             Optional<string> e = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("e"))
+                if (property.NameEquals("e"u8))
                 {
                     e = property.Value.GetString();
                     continue;
