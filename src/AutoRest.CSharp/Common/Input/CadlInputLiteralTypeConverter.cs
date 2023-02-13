@@ -85,8 +85,8 @@ namespace AutoRest.CSharp.Common.Input
             Object? value = null;
             switch (type)
             {
-                case InputPrimitiveType primitype:
-                    switch (primitype.Kind)
+                case InputPrimitiveType primitiveType:
+                    switch (primitiveType.Kind)
                     {
                         case InputTypeKind.String:
                             value = reader.GetString() ?? throw new JsonException();
@@ -94,19 +94,19 @@ namespace AutoRest.CSharp.Common.Input
                         case InputTypeKind.Int32:
                             value = reader.GetInt32();
                             break;
-                        case InputTypeKind.Int64:
-                            value = reader.GetInt64();
+                        case InputTypeKind.Float64:
+                            value = reader.GetDouble();
                             break;
                         case InputTypeKind.Boolean:
                             value = reader.GetBoolean();
                             break;
                         default:
-                            throw new JsonException($"Not supported litreal type {primitype.Kind}.");
+                            throw new JsonException($"Not supported literal type {primitiveType.Kind}.");
 
                     }
                     break;
                 default:
-                    throw new JsonException($"Not supported litreal type {type.Name}.");
+                    throw new JsonException($"Not supported literal type {type.Name}.");
             }
             reader.Read();
             return value;

@@ -351,7 +351,7 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)_parameters[operationParameter.Name];
             }
 
-            if (operationParameter.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
+            if (operationParameter is { Kind:InputOperationParameterKind.Constant } && parameter.DefaultValue is not null)
             {
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }
