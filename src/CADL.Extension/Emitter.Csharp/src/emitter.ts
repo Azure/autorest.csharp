@@ -89,7 +89,12 @@ import { ClientKind } from "./type/ClientKind.js";
 import { getVersions } from "@cadl-lang/versioning";
 import { EmitContext } from "@cadl-lang/compiler/*";
 import { capitalize } from "./lib/utils.js";
-import { NetEmitterOptions, NetEmitterOptionsSchema, resolveOptions, resolveOutputFolder } from "./options.js";
+import {
+    NetEmitterOptions,
+    NetEmitterOptionsSchema,
+    resolveOptions,
+    resolveOutputFolder
+} from "./options.js";
 
 export const $lib = createCadlLibrary({
     name: "cadl-csharp",
@@ -151,8 +156,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 Namespace: options.namespace ?? namespace,
                 LibraryName: options["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient:
-                    options["single-top-level-client"],
+                SingleTopLevelClient: options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
                 "model-namespace": options["model-namespace"],
@@ -168,7 +172,11 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 const newProjectOption = options["new-project"]
                     ? "--new-project"
                     : "";
-                const command = `dotnet --roll-forward Major ${resolvePath(options.csharpGeneratorPath)} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${options["clear-output-folder"]}`;
+                const command = `dotnet --roll-forward Major ${resolvePath(
+                    options.csharpGeneratorPath
+                )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
+                    options["clear-output-folder"]
+                }`;
                 console.info(command);
 
                 try {
@@ -343,9 +351,9 @@ export function createModel(context: EmitContext<NetEmitterOptions>): any {
                             apiVersionInOperation.DefaultValue?.Value
                         ) &&
                         apiVersionInOperation.Kind ===
-                        InputOperationParameterKind.Client &&
+                            InputOperationParameterKind.Client &&
                         apiVersionInOperation.Location ===
-                        apiVersionParam.Location
+                            apiVersionParam.Location
                     ) {
                         op.Parameters[apiVersionIndex] = apiVersionParam;
                     }
@@ -524,9 +532,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                    Type: inputType,
-                    Value: mediaTypes[0]
-                } as InputConstant)
+                      Type: inputType,
+                      Value: mediaTypes[0]
+                  } as InputConstant)
                 : undefined
     } as InputParameter;
 }

@@ -10,9 +10,9 @@ export type NetEmitterOptions = {
     "single-top-level-client"?: boolean;
     skipSDKGeneration?: boolean;
     "unreferenced-types-handling"?:
-    | "removeOrInternalize"
-    | "internalize"
-    | "keepAll";
+        | "removeOrInternalize"
+        | "internalize"
+        | "keepAll";
     "new-project"?: boolean;
     csharpGeneratorPath?: string;
     "clear-output-folder"?: boolean;
@@ -20,7 +20,6 @@ export type NetEmitterOptions = {
     "model-namespace"?: boolean;
     "array-to-page"?: boolean;
 } & DpgEmitterOptions;
-
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     type: "object",
@@ -49,7 +48,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "generate-protocol-methods": { type: "boolean", nullable: true },
         "generate-convenience-methods": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },
-        "array-to-page": {type: "boolean", nullable: true}
+        "array-to-page": { type: "boolean", nullable: true }
     },
     required: []
 };
@@ -83,6 +82,8 @@ export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
     };
 }
 
-export function resolveOutputFolder(context: EmitContext<NetEmitterOptions>): string {
+export function resolveOutputFolder(
+    context: EmitContext<NetEmitterOptions>
+): string {
     return resolvePath(context.emitterOutputDir ?? "./cadl-output");
 }
