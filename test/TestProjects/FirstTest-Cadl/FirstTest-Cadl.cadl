@@ -29,10 +29,7 @@ model AuthFlow {
     scopes: [
         "https://api.example.com/.default"
     ]
-}]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">)
-@Cadl.Rest.produces("application/json")
-@Cadl.Rest.consumes("application/json")
-namespace CadlFirstTest;
+}
 
 using Cadl.Http;
 using Azure.DPG;
@@ -92,18 +89,6 @@ model Thing {
 model NotFriend {
   @doc("name of the NotFriend")
   name: string;
-}
-
-model NotReferenceModel {
-  @doc("name of NotReference Model")
-  name: string
-}
-
-@doc("NotReference enum")
-enum NotReferenceEnum {
-  One: "1",
-  Two: "2",
-  Four: "4"
 }
 
 model RoundTripModel {
