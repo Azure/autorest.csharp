@@ -486,6 +486,7 @@
      "Uri": "{pagnationUri}",
      "Path": "/app/rawArray",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],

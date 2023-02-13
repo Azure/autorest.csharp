@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private InputOperation InitializeOperation(InputOperation operation)
         {
-            if (operation.Paging == null && GetFirstBodyType(operation) is InputListType)
+            if (Configuration.ArrayToPage && operation.Paging == null && GetFirstBodyType(operation) is InputListType)
             {
                 operation = operation with { Paging = new OperationPaging() };
             }
@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Output.Models
             var firstBodyType = GetFirstBodyType(Operation);
             if (firstBodyType != null)
             {
-                responseType = _typeFactory.CreateType(firstBodyType);
+                responseType = TypeFactory.GetOutputType(_typeFactory.CreateType(firstBodyType));
             }
 
             if (Operation.Paging != null)
@@ -224,9 +224,17 @@ namespace AutoRest.CSharp.Output.Models
                         }
                     }
 
-                } else if (parameterChain.Convenience != null)
+                }
+                else if (parameterChain.Convenience != null)
                 {
-                    parameterList.Add(parameterChain.Convenience);
+                    if (TypeFactory.IsList(parameterChain.Convenience.Type))
+                    {
+                        parameterList.Add(parameterChain.Convenience with { Type = new CSharpType(typeof(object)) });
+                    }
+                    else
+                    {
+                        parameterList.Add(parameterChain.Convenience);
+                    }
                 }
             }
             var attributes = Operation.Deprecated is { } deprecated
