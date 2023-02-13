@@ -172,6 +172,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
+                    WriteIfNotDefault(writer, Configuration.Options.GenerateModelFactory, Configuration.GenerateModelFactory);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ModelFactoryForHlc, Configuration.ModelFactoryForHlc);
                     WriteIfNotDefault(writer, Configuration.Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.ProtocolMethodList), Configuration.ProtocolMethodList);
@@ -234,11 +236,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
 
             root.TryGetProperty(nameof(Configuration.Options.ProtocolMethodList), out var protocolMethodList);
-            var protocolMethods = protocolMethodList.ValueKind == JsonValueKind.Array
-                ? protocolMethodList.EnumerateArray().Select(t => t.ToString()).ToArray()
-                : Array.Empty<string>();
+            var protocolMethods = Configuration.DeserializeArray(protocolMethodList);
             root.TryGetProperty(nameof(Configuration.Options.SuppressAbstractBaseClasses), out var suppressAbstractBaseClassesElement);
             var suppressAbstractBaseClasses = Configuration.DeserializeArray(suppressAbstractBaseClassesElement);
+            root.TryGetProperty(nameof(Configuration.Options.ModelFactoryForHlc), out var oldModelFactoryEntriesElement);
+            var oldModelFactoryEntries = Configuration.DeserializeArray(oldModelFactoryEntriesElement);
 
             Configuration.Initialize(
                 Path.Combine(outputPath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
@@ -255,6 +257,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
                 ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
+                ReadOption(root, Configuration.Options.GenerateModelFactory),
+                oldModelFactoryEntries,
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
                 protocolMethods,

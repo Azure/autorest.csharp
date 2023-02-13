@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return document;
         }
 
-        private static ImmutableHashSet<string> GetSuppressedTypeNames(Compilation compilation)
+        internal static ImmutableHashSet<string> GetSuppressedTypeNames(Compilation compilation)
         {
             var suppressTypeAttribute = compilation.GetTypeByMetadataName(typeof(CodeGenSuppressTypeAttribute).FullName!)!;
             return compilation.Assembly.GetAttributes()
