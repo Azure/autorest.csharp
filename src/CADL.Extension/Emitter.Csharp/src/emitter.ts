@@ -191,7 +191,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         "clear-output-folder": resolvedOptions["clear-output-folder"],
         "save-inputs": resolvedOptions["save-inputs"],
         "model-namespace": resolvedOptions["model-namespace"],
-        "generate-all-models": resolvedOptions["generate-all-models"],
+        "generate-all-models": resolvedOptions["generate-all-models"]
     };
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -287,7 +287,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
 function deleteFile(filePath: string) {
     if (fs.existsSync(filePath)) {
-        console.log(`File ${filePath} does not exist. No deletion. `)
+        console.log(`File ${filePath} does not exist. No deletion. `);
     } else {
         fs.unlink(filePath, (err) => {
             if (err) {
@@ -313,7 +313,10 @@ function getClient(
     return undefined;
 }
 
-export function createModel(context: EmitContext<NetEmitterOptions>, generateAllModels: boolean = false,): any {
+export function createModel(
+    context: EmitContext<NetEmitterOptions>,
+    generateAllModels: boolean = false
+): any {
     const program = context.program;
     const serviceNamespaceType = getServiceNamespace(program);
     if (!serviceNamespaceType) {
@@ -549,15 +552,20 @@ export function createModel(context: EmitContext<NetEmitterOptions>, generateAll
         // if (options.omitUnreachableTypes) {
         //     return;
         // }
-        const computeModel = (x: Type) => getInputType(program, x, modelMap, enumMap);
+        const computeModel = (x: Type) =>
+            getInputType(program, x, modelMap, enumMap);
         const skipSubNamespaces = isGlobalNamespace(program, namespace);
-        navigateTypesInNamespace(namespace, {
-            model: (x) => x.name !== "" && x.kind === "Model" && computeModel(x),
-            scalar: computeModel,
-            enum: computeModel,
-            union: (x) => x.name !== undefined && computeModel(x),
-          },
-          { skipSubNamespaces })
+        navigateTypesInNamespace(
+            namespace,
+            {
+                model: (x) =>
+                    x.name !== "" && x.kind === "Model" && computeModel(x),
+                scalar: computeModel,
+                enum: computeModel,
+                union: (x) => x.name !== undefined && computeModel(x)
+            },
+            { skipSubNamespaces }
+        );
     }
 }
 
@@ -578,7 +586,10 @@ function setUsage(
     }
 }
 
-function setUsageForAll(usage: Usage, models: Map<string, InputModelType | InputEnumType>) {
+function setUsageForAll(
+    usage: Usage,
+    models: Map<string, InputModelType | InputEnumType>
+) {
     for (const [_, m] of models) {
         m.Usage = usage;
     }

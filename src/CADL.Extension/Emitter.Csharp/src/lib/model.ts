@@ -517,7 +517,6 @@ export function getInputType(
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
                 if (isEnumMember(value.type)) {
-                    
                 }
                 const inputProp = {
                     Name: value.name,
