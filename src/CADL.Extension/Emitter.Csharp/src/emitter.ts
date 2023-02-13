@@ -102,14 +102,15 @@ export type NetEmitterOptions = {
     "single-top-level-client"?: boolean;
     skipSDKGeneration?: boolean;
     "unreferenced-types-handling"?:
-        | "removeOrInternalize"
-        | "internalize"
-        | "keepAll";
+    | "removeOrInternalize"
+    | "internalize"
+    | "keepAll";
     "new-project"?: boolean;
     csharpGeneratorPath?: string;
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
+    debug?: boolean;
 } & DpgEmitterOptions;
 
 const defaultOptions = {
@@ -122,7 +123,8 @@ const defaultOptions = {
     "save-inputs": false,
     "generate-protocol-methods": true,
     "generate-convenience-methods": true,
-    "package-name": undefined
+    "package-name": undefined,
+    debug: false
 };
 
 const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -151,7 +153,8 @@ const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "model-namespace": { type: "boolean", nullable: true },
         "generate-protocol-methods": { type: "boolean", nullable: true },
         "generate-convenience-methods": { type: "boolean", nullable: true },
-        "package-name": { type: "string", nullable: true }
+        "package-name": { type: "string", nullable: true },
+        debug: { type: "boolean", nullable: true },
     },
     required: []
 };
@@ -183,7 +186,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
         csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
         "clear-output-folder": resolvedOptions["clear-output-folder"],
         "save-inputs": resolvedOptions["save-inputs"],
-        "model-namespace": resolvedOptions["model-namespace"]
+        "model-namespace": resolvedOptions["model-namespace"],
+        debug: resolvedOptions.debug
     };
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
@@ -250,11 +254,14 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 const newProjectOption = options["new-project"]
                     ? "--new-project"
                     : "";
+
+                const shouldDebug = options.debug ?? false;
+                let debugFlag = "";
+                if (shouldDebug)
+                    debugFlag = "--debug";
                 const command = `dotnet --roll-forward Major ${resolvePath(
                     options.csharpGeneratorPath ?? dllFilePath
-                )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
-                    options["clear-output-folder"]
-                }`;
+                )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${options["clear-output-folder"]} ${debugFlag}`;
                 console.info(command);
 
                 try {
@@ -429,9 +436,9 @@ export function createModel(context: EmitContext<NetEmitterOptions>): any {
                             apiVersionInOperation.DefaultValue?.Value
                         ) &&
                         apiVersionInOperation.Kind ===
-                            InputOperationParameterKind.Client &&
+                        InputOperationParameterKind.Client &&
                         apiVersionInOperation.Location ===
-                            apiVersionParam.Location
+                        apiVersionParam.Location
                     ) {
                         op.Parameters[apiVersionIndex] = apiVersionParam;
                     }
@@ -610,9 +617,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                      Type: inputType,
-                      Value: mediaTypes[0]
-                  } as InputConstant)
+                    Type: inputType,
+                    Value: mediaTypes[0]
+                } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -850,10 +857,10 @@ function loadOperation(
             isContentType || inputType.Name === "Literal"
                 ? InputOperationParameterKind.Constant
                 : isApiVer
-                ? defaultValue
-                    ? InputOperationParameterKind.Constant
-                    : InputOperationParameterKind.Client
-                : InputOperationParameterKind.Method;
+                    ? defaultValue
+                        ? InputOperationParameterKind.Constant
+                        : InputOperationParameterKind.Client
+                    : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
