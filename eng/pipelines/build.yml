@@ -66,8 +66,8 @@ stages:
               DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
               DOTNET_CLI_TELEMETRY_OPTOUT: 1
               DOTNET_MULTILEVEL_LOOKUP: 0
-          - pwsh: ./eng/CodeChecks.ps1
-            displayName: "Check if code is up-to-date"
+          - pwsh: ./eng/SharedCodeCheck.ps1
+            displayName: "Check if shared source code is up-to-date"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - task: Npm@1
             displayName: 'Build CADL Ranch Mock Api project'
@@ -136,21 +136,21 @@ stages:
               scriptLocation: "inlineScript"
               inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-      - template: smoke-test.yml
+      - template: check-code-generation.yml
         parameters:
-          name: SmokeTest_A_C
+          name: Check_Code_Generation_A_C
           filter: "^[a-b]"
-      - template: smoke-test.yml
+      - template: check-code-generation.yml
         parameters:
-          name: SmokeTest_C_I
+          name: Check_Code_Generation_C_I
           filter: "^[c-i]"
-      - template: smoke-test.yml
+      - template: check-code-generation.yml
         parameters:
-          name: SmokeTest_J_R
+          name: Check_Code_Generation_J_R
           filter: "^[j-r]"
-      - template: smoke-test.yml
+      - template: check-code-generation.yml
         parameters:
-          name: SmokeTest_S_Z
+          name: Check_Code_Generation_S_Z
           filter: "^[s-z]"
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
