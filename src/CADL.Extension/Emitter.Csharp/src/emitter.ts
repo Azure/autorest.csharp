@@ -215,7 +215,7 @@ function getClient(
     return undefined;
 }
 
-function createModel(context: EmitContext<NetEmitterOptions>): any {
+export function createModel(context: EmitContext<NetEmitterOptions>): any {
     const program = context.program;
     const serviceNamespaceType = getServiceNamespace(program);
     if (!serviceNamespaceType) {
@@ -760,9 +760,10 @@ function loadOperation(
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
-        const kind: InputOperationParameterKind = isContentType
-            ? InputOperationParameterKind.Constant
-            : isApiVer
+        const kind: InputOperationParameterKind =
+            isContentType || inputType.Name === "Literal"
+                ? InputOperationParameterKind.Constant
+                : isApiVer
                 ? defaultValue
                     ? InputOperationParameterKind.Constant
                     : InputOperationParameterKind.Client

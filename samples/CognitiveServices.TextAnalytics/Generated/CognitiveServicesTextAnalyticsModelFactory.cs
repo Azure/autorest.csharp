@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class CognitiveServicesTextAnalyticsModelFactory
     {
         /// <summary> Initializes a new instance of EntitiesResult. </summary>

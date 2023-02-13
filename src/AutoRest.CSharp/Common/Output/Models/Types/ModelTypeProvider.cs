@@ -147,6 +147,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         valueSerialization,
                         property.IsRequired,
                         shouldSkipSerialization,
+                        ShouldSkipDeserialization(property),
                         optionalViaNullability));
                 }
             }
@@ -160,6 +161,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
+            if (property.InputModelProperty.Type is InputLiteralType)
+            {
+                return false;
+            }
+
             if (property.InputModelProperty!.IsReadOnly)
             {
                 return true;
@@ -167,11 +173,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (property.Declaration.Type.IsCollectionType())
             {
-                return  _inputModel.Usage is InputModelTypeUsage.Output;
+                return _inputModel.Usage is InputModelTypeUsage.Output;
             }
 
             return property.IsReadOnly && _inputModel.Usage is not InputModelTypeUsage.Input;
         }
+
+        private bool ShouldSkipDeserialization(ObjectTypeProperty property) => property.InputModelProperty?.Type is InputLiteralType;
 
         private ConstructorSignature? CreateSerializationConstructorSignature(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {
@@ -443,7 +451,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.Name, _typeFactory.CreateType(child))).ToArray();
+                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
                 property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
             }
 

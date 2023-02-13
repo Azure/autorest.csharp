@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Reflection;
-using System.Text.Json;
 using System.Xml.Linq;
 using NUnit.Framework;
-using Azure.Core;
 using XmlDeserialization;
-using XmlDeserialization.Models;
-using SingletonResource;
 
 namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 {
