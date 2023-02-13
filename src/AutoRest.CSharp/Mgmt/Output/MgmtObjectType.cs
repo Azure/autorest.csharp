@@ -6,13 +6,12 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -214,8 +213,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 {
                     // if the base type is a TypeProvider, we need to make sure if it is a discriminator provider
                     // by checking if this type is one of its descendants
-                    var baseTypeProvider = inheritedType.Implementation;
-                    if (baseTypeProvider is SchemaObjectType schemaObjectType && IsDescendantOf(schemaObjectType))
+                    if (inheritedType.TryCast<SchemaObjectType>(out var schemaObjectType) && IsDescendantOf(schemaObjectType))
                     {
                         // if the base type has a discriminator and this type is one of them
                         return inheritedType;
