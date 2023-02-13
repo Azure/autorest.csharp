@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Models.Inheritance.Models
 {
-    public partial class Fish : IUtf8JsonSerializable
+    public partial class Shark : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -23,29 +23,36 @@ namespace Models.Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static Fish DeserializeFish(JsonElement element)
+        internal static Shark DeserializeShark(JsonElement element)
         {
-            if (element.TryGetProperty("kind", out JsonElement discriminator))
+            string kind = default;
+            int age = default;
+            foreach (var property in element.EnumerateObject())
             {
-                switch (discriminator.GetString())
+                if (property.NameEquals("kind"u8))
                 {
-                    case "shark": return Shark.DeserializeShark(element);
-                    case "salmon": return Salmon.DeserializeSalmon(element);
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("age"u8))
+                {
+                    age = property.Value.GetInt32();
+                    continue;
                 }
             }
-            return UnknownFish.DeserializeUnknownFish(element);
+            return new Shark(age);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static Fish FromResponse(Response response)
+        internal new static Shark FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFish(document.RootElement);
+            return DeserializeShark(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal override RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

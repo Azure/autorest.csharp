@@ -37,19 +37,19 @@ namespace Models.Inheritance.Models
         /// <summary>
         /// Gets the friends
         /// Please note <see cref="Fish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="Salmon"/>.
+        /// The available derived classes include <see cref="Shark"/> and <see cref="Salmon"/>.
         /// </summary>
         public IList<Fish> Friends { get; }
         /// <summary>
         /// Gets the hate
         /// Please note <see cref="Fish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="Salmon"/>.
+        /// The available derived classes include <see cref="Shark"/> and <see cref="Salmon"/>.
         /// </summary>
         public IDictionary<string, Fish> Hate { get; }
         /// <summary>
         /// Gets or sets the partner
         /// Please note <see cref="Fish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
-        /// The available derived classes include <see cref="Salmon"/>.
+        /// The available derived classes include <see cref="Shark"/> and <see cref="Salmon"/>.
         /// </summary>
         public Fish Partner { get; set; }
     }
