@@ -6,5 +6,6 @@
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],
-  "unreferenced-types-handling": "keepAll"
+  "unreferenced-types-handling": "keepAll",
+  "array-to-page": false
 }

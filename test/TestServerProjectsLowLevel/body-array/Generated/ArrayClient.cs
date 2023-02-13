@@ -57,6 +57,132 @@ namespace body_array_LowLevel
             _endpoint = endpoint;
         }
 
+        /// <summary> Get null array value. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get null array value. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNull(RequestContext)']/*" />
+        public virtual Response GetNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get invalid array [1, 2, 3. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetInvalidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetInvalidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetInvalidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get invalid array [1, 2, 3. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetInvalid(RequestContext)']/*" />
+        public virtual Response GetInvalid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetInvalid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetInvalidRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get empty array value []. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetEmptyRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get empty array value []. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
+        public virtual Response GetEmpty(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetEmptyRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Set array value empty []. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -98,6 +224,48 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutEmptyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get boolean array value [true, false, false, true]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanTfftAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetBooleanTfftAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBooleanTfftRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get boolean array value [true, false, false, true]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanTfft(RequestContext)']/*" />
+        public virtual Response GetBooleanTfft(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBooleanTfftRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -157,6 +325,132 @@ namespace body_array_LowLevel
             }
         }
 
+        /// <summary> Get boolean array value [true, null, false]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetBooleanInvalidNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBooleanInvalidNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get boolean array value [true, null, false]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidNull(RequestContext)']/*" />
+        public virtual Response GetBooleanInvalidNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBooleanInvalidNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidStringAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetBooleanInvalidStringAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBooleanInvalidStringRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidString(RequestContext)']/*" />
+        public virtual Response GetBooleanInvalidString(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBooleanInvalidStringRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntegerValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetIntegerValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntegerValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntegerValid(RequestContext)']/*" />
+        public virtual Response GetIntegerValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntegerValidRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -198,6 +492,132 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutIntegerValidRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get integer array value [1, null, 0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetIntInvalidNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntInvalidNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get integer array value [1, null, 0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidNull(RequestContext)']/*" />
+        public virtual Response GetIntInvalidNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntInvalidNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidStringAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetIntInvalidStringAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntInvalidStringRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidString(RequestContext)']/*" />
+        public virtual Response GetIntInvalidString(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetIntInvalidStringRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetLongValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLongValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongValid(RequestContext)']/*" />
+        public virtual Response GetLongValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLongValidRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -257,6 +677,132 @@ namespace body_array_LowLevel
             }
         }
 
+        /// <summary> Get long array value [1, null, 0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetLongInvalidNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLongInvalidNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get long array value [1, null, 0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidNull(RequestContext)']/*" />
+        public virtual Response GetLongInvalidNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLongInvalidNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidStringAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetLongInvalidStringAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLongInvalidStringRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidString(RequestContext)']/*" />
+        public virtual Response GetLongInvalidString(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetLongInvalidStringRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetFloatValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFloatValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatValid(RequestContext)']/*" />
+        public virtual Response GetFloatValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFloatValidRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -298,6 +844,132 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutFloatValidRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetFloatInvalidNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFloatInvalidNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidNull(RequestContext)']/*" />
+        public virtual Response GetFloatInvalidNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFloatInvalidNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidStringAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetFloatInvalidStringAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFloatInvalidStringRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidString(RequestContext)']/*" />
+        public virtual Response GetFloatInvalidString(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFloatInvalidStringRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDoubleValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDoubleValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleValid(RequestContext)']/*" />
+        public virtual Response GetDoubleValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDoubleValidRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -357,6 +1029,132 @@ namespace body_array_LowLevel
             }
         }
 
+        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDoubleInvalidNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDoubleInvalidNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidNull(RequestContext)']/*" />
+        public virtual Response GetDoubleInvalidNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDoubleInvalidNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidStringAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDoubleInvalidStringAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDoubleInvalidStringRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidString(RequestContext)']/*" />
+        public virtual Response GetDoubleInvalidString(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDoubleInvalidStringRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetStringValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetStringValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringValid(RequestContext)']/*" />
+        public virtual Response GetStringValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetStringValidRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -398,6 +1196,48 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutStringValidRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEnumValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetEnumValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetEnumValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEnumValid(RequestContext)']/*" />
+        public virtual Response GetEnumValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetEnumValidRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -457,6 +1297,48 @@ namespace body_array_LowLevel
             }
         }
 
+        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringEnumValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetStringEnumValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetStringEnumValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringEnumValid(RequestContext)']/*" />
+        public virtual Response GetStringEnumValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetStringEnumValidRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -498,6 +1380,132 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutStringEnumValidRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetStringWithNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetStringWithNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithNull(RequestContext)']/*" />
+        public virtual Response GetStringWithNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetStringWithNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithInvalidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetStringWithInvalidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetStringWithInvalidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithInvalid(RequestContext)']/*" />
+        public virtual Response GetStringWithInvalid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetStringWithInvalidRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetUuidValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetUuidValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidValid(RequestContext)']/*" />
+        public virtual Response GetUuidValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetUuidValidRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -557,6 +1565,90 @@ namespace body_array_LowLevel
             }
         }
 
+        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidInvalidCharsAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetUuidInvalidCharsAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetUuidInvalidCharsRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidInvalidChars(RequestContext)']/*" />
+        public virtual Response GetUuidInvalidChars(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetUuidInvalidCharsRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDateValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateValid(RequestContext)']/*" />
+        public virtual Response GetDateValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateValidRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -598,6 +1690,132 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDateValidRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDateInvalidNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateInvalidNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidNull(RequestContext)']/*" />
+        public virtual Response GetDateInvalidNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateInvalidNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidCharsAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDateInvalidCharsAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateInvalidCharsRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidChars(RequestContext)']/*" />
+        public virtual Response GetDateInvalidChars(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateInvalidCharsRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDateTimeValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateTimeValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeValid(RequestContext)']/*" />
+        public virtual Response GetDateTimeValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateTimeValidRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -657,6 +1875,132 @@ namespace body_array_LowLevel
             }
         }
 
+        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDateTimeInvalidNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateTimeInvalidNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidNull(RequestContext)']/*" />
+        public virtual Response GetDateTimeInvalidNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateTimeInvalidNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidCharsAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDateTimeInvalidCharsAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateTimeInvalidCharsRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidChars(RequestContext)']/*" />
+        public virtual Response GetDateTimeInvalidChars(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateTimeInvalidCharsRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123ValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDateTimeRfc1123ValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateTimeRfc1123ValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123Valid(RequestContext)']/*" />
+        public virtual Response GetDateTimeRfc1123Valid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDateTimeRfc1123ValidRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -698,6 +2042,48 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutDateTimeRfc1123ValidRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDurationValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDurationValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDurationValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDurationValid(RequestContext)']/*" />
+        public virtual Response GetDurationValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDurationValidRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -757,6 +2143,48 @@ namespace body_array_LowLevel
             }
         }
 
+        /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetByteValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetByteValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteValid(RequestContext)']/*" />
+        public virtual Response GetByteValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetByteValidRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -798,6 +2226,300 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutByteValidRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteInvalidNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetByteInvalidNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetByteInvalidNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteInvalidNull(RequestContext)']/*" />
+        public virtual Response GetByteInvalidNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetByteInvalidNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBase64UrlAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetBase64UrlAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBase64UrlRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBase64Url(RequestContext)']/*" />
+        public virtual Response GetBase64Url(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetBase64UrlRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get array of complex type null value. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetComplexNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetComplexNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get array of complex type null value. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexNull(RequestContext)']/*" />
+        public virtual Response GetComplexNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetComplexNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get empty array of complex type []. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexEmptyAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetComplexEmptyAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetComplexEmptyRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get empty array of complex type []. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexEmpty(RequestContext)']/*" />
+        public virtual Response GetComplexEmpty(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetComplexEmptyRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetComplexItemNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetComplexItemNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemNull(RequestContext)']/*" />
+        public virtual Response GetComplexItemNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetComplexItemNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemEmptyAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetComplexItemEmptyAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetComplexItemEmptyRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemEmpty(RequestContext)']/*" />
+        public virtual Response GetComplexItemEmpty(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetComplexItemEmptyRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetComplexValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetComplexValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexValid(RequestContext)']/*" />
+        public virtual Response GetComplexValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetComplexValidRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -857,6 +2579,216 @@ namespace body_array_LowLevel
             }
         }
 
+        /// <summary> Get a null array. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetArrayNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetArrayNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get a null array. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayNull(RequestContext)']/*" />
+        public virtual Response GetArrayNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetArrayNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an empty array []. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayEmptyAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetArrayEmptyAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetArrayEmptyRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an empty array []. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayEmpty(RequestContext)']/*" />
+        public virtual Response GetArrayEmpty(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetArrayEmptyRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetArrayItemNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetArrayItemNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemNull(RequestContext)']/*" />
+        public virtual Response GetArrayItemNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetArrayItemNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemEmptyAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetArrayItemEmptyAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetArrayItemEmptyRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemEmpty(RequestContext)']/*" />
+        public virtual Response GetArrayItemEmpty(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetArrayItemEmptyRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetArrayValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetArrayValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayValid(RequestContext)']/*" />
+        public virtual Response GetArrayValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetArrayValidRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -898,6 +2830,216 @@ namespace body_array_LowLevel
             try
             {
                 using HttpMessage message = CreatePutArrayValidRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of Dictionaries with value null. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDictionaryNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDictionaryNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of Dictionaries with value null. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryNull(RequestContext)']/*" />
+        public virtual Response GetDictionaryNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDictionaryNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryEmptyAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDictionaryEmptyAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDictionaryEmptyRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryEmpty(RequestContext)']/*" />
+        public virtual Response GetDictionaryEmpty(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDictionaryEmptyRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemNullAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDictionaryItemNullAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDictionaryItemNullRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemNull(RequestContext)']/*" />
+        public virtual Response GetDictionaryItemNull(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDictionaryItemNullRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemEmptyAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDictionaryItemEmptyAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDictionaryItemEmptyRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemEmpty(RequestContext)']/*" />
+        public virtual Response GetDictionaryItemEmpty(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDictionaryItemEmptyRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryValidAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetDictionaryValidAsync(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDictionaryValidRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryValid(RequestContext)']/*" />
+        public virtual Response GetDictionaryValid(RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetDictionaryValidRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -955,1128 +3097,6 @@ namespace body_array_LowLevel
                 scope.Failed(e);
                 throw;
             }
-        }
-
-        /// <summary> Get null array value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetNull", "value", null, context);
-        }
-
-        /// <summary> Get null array value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetNull", "value", null, context);
-        }
-
-        /// <summary> Get invalid array [1, 2, 3. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetInvalidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetInvalidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetInvalidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetInvalid", "value", null, context);
-        }
-
-        /// <summary> Get invalid array [1, 2, 3. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetInvalid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetInvalid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetInvalidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetInvalid", "value", null, context);
-        }
-
-        /// <summary> Get empty array value []. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetEmptyAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetEmptyRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetEmpty", "value", null, context);
-        }
-
-        /// <summary> Get empty array value []. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetEmpty(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetEmptyRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetEmpty", "value", null, context);
-        }
-
-        /// <summary> Get boolean array value [true, false, false, true]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanTfftAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetBooleanTfftAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetBooleanTfftRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetBooleanTfft", "value", null, context);
-        }
-
-        /// <summary> Get boolean array value [true, false, false, true]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanTfft(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetBooleanTfft(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetBooleanTfftRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetBooleanTfft", "value", null, context);
-        }
-
-        /// <summary> Get boolean array value [true, null, false]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetBooleanInvalidNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetBooleanInvalidNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetBooleanInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get boolean array value [true, null, false]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetBooleanInvalidNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetBooleanInvalidNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetBooleanInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidStringAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetBooleanInvalidStringAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetBooleanInvalidStringRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetBooleanInvalidString", "value", null, context);
-        }
-
-        /// <summary> Get boolean array value [true, &apos;boolean&apos;, false]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidString(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetBooleanInvalidString(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetBooleanInvalidStringRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetBooleanInvalidString", "value", null, context);
-        }
-
-        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntegerValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetIntegerValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetIntegerValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetIntegerValid", "value", null, context);
-        }
-
-        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntegerValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetIntegerValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetIntegerValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetIntegerValid", "value", null, context);
-        }
-
-        /// <summary> Get integer array value [1, null, 0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetIntInvalidNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetIntInvalidNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetIntInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get integer array value [1, null, 0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetIntInvalidNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetIntInvalidNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetIntInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidStringAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetIntInvalidStringAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetIntInvalidStringRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetIntInvalidString", "value", null, context);
-        }
-
-        /// <summary> Get integer array value [1, &apos;integer&apos;, 0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidString(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetIntInvalidString(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetIntInvalidStringRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetIntInvalidString", "value", null, context);
-        }
-
-        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetLongValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLongValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetLongValid", "value", null, context);
-        }
-
-        /// <summary> Get integer array value [1, -1, 3, 300]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetLongValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLongValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetLongValid", "value", null, context);
-        }
-
-        /// <summary> Get long array value [1, null, 0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetLongInvalidNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLongInvalidNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetLongInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get long array value [1, null, 0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetLongInvalidNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLongInvalidNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetLongInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidStringAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetLongInvalidStringAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLongInvalidStringRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetLongInvalidString", "value", null, context);
-        }
-
-        /// <summary> Get long array value [1, &apos;integer&apos;, 0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidString(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetLongInvalidString(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLongInvalidStringRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetLongInvalidString", "value", null, context);
-        }
-
-        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetFloatValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetFloatValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetFloatValid", "value", null, context);
-        }
-
-        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetFloatValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetFloatValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetFloatValid", "value", null, context);
-        }
-
-        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetFloatInvalidNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetFloatInvalidNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetFloatInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetFloatInvalidNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetFloatInvalidNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetFloatInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidStringAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetFloatInvalidStringAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetFloatInvalidStringRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetFloatInvalidString", "value", null, context);
-        }
-
-        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidString(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetFloatInvalidString(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetFloatInvalidStringRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetFloatInvalidString", "value", null, context);
-        }
-
-        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDoubleValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDoubleValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDoubleValid", "value", null, context);
-        }
-
-        /// <summary> Get float array value [0, -0.01, 1.2e20]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDoubleValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDoubleValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDoubleValid", "value", null, context);
-        }
-
-        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDoubleInvalidNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDoubleInvalidNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDoubleInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get float array value [0.0, null, -1.2e20]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDoubleInvalidNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDoubleInvalidNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDoubleInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidStringAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDoubleInvalidStringAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDoubleInvalidStringRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDoubleInvalidString", "value", null, context);
-        }
-
-        /// <summary> Get boolean array value [1.0, &apos;number&apos;, 0.0]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidString(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDoubleInvalidString(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDoubleInvalidStringRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDoubleInvalidString", "value", null, context);
-        }
-
-        /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetStringValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetStringValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetStringValid", "value", null, context);
-        }
-
-        /// <summary> Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetStringValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetStringValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetStringValid", "value", null, context);
-        }
-
-        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEnumValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetEnumValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetEnumValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetEnumValid", "value", null, context);
-        }
-
-        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEnumValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetEnumValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetEnumValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetEnumValid", "value", null, context);
-        }
-
-        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringEnumValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetStringEnumValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetStringEnumValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetStringEnumValid", "value", null, context);
-        }
-
-        /// <summary> Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringEnumValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetStringEnumValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetStringEnumValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetStringEnumValid", "value", null, context);
-        }
-
-        /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetStringWithNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetStringWithNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetStringWithNull", "value", null, context);
-        }
-
-        /// <summary> Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetStringWithNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetStringWithNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetStringWithNull", "value", null, context);
-        }
-
-        /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithInvalidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetStringWithInvalidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetStringWithInvalidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetStringWithInvalid", "value", null, context);
-        }
-
-        /// <summary> Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithInvalid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetStringWithInvalid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetStringWithInvalidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetStringWithInvalid", "value", null, context);
-        }
-
-        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetUuidValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUuidValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetUuidValid", "value", null, context);
-        }
-
-        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetUuidValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUuidValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetUuidValid", "value", null, context);
-        }
-
-        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidInvalidCharsAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetUuidInvalidCharsAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUuidInvalidCharsRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetUuidInvalidChars", "value", null, context);
-        }
-
-        /// <summary> Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidInvalidChars(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetUuidInvalidChars(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUuidInvalidCharsRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetUuidInvalidChars", "value", null, context);
-        }
-
-        /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDateValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateValid", "value", null, context);
-        }
-
-        /// <summary> Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDateValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateValid", "value", null, context);
-        }
-
-        /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDateInvalidNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateInvalidNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDateInvalidNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateInvalidNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidCharsAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDateInvalidCharsAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateInvalidCharsRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateInvalidChars", "value", null, context);
-        }
-
-        /// <summary> Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidChars(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDateInvalidChars(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateInvalidCharsRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateInvalidChars", "value", null, context);
-        }
-
-        /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDateTimeValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateTimeValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateTimeValid", "value", null, context);
-        }
-
-        /// <summary> Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDateTimeValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateTimeValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateTimeValid", "value", null, context);
-        }
-
-        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDateTimeInvalidNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateTimeInvalidNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateTimeInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDateTimeInvalidNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateTimeInvalidNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateTimeInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidCharsAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDateTimeInvalidCharsAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateTimeInvalidCharsRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateTimeInvalidChars", "value", null, context);
-        }
-
-        /// <summary> Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidChars(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDateTimeInvalidChars(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateTimeInvalidCharsRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateTimeInvalidChars", "value", null, context);
-        }
-
-        /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123ValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDateTimeRfc1123ValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateTimeRfc1123ValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateTimeRfc1123Valid", "value", null, context);
-        }
-
-        /// <summary> Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123Valid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDateTimeRfc1123Valid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDateTimeRfc1123ValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDateTimeRfc1123Valid", "value", null, context);
-        }
-
-        /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDurationValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDurationValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDurationValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDurationValid", "value", null, context);
-        }
-
-        /// <summary> Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDurationValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDurationValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDurationValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDurationValid", "value", null, context);
-        }
-
-        /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetByteValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetByteValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetByteValid", "value", null, context);
-        }
-
-        /// <summary> Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetByteValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetByteValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetByteValid", "value", null, context);
-        }
-
-        /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteInvalidNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetByteInvalidNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetByteInvalidNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetByteInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteInvalidNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetByteInvalidNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetByteInvalidNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetByteInvalidNull", "value", null, context);
-        }
-
-        /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBase64UrlAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetBase64UrlAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetBase64UrlRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetBase64Url", "value", null, context);
-        }
-
-        /// <summary> Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBase64Url(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetBase64Url(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetBase64UrlRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetBase64Url", "value", null, context);
-        }
-
-        /// <summary> Get array of complex type null value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetComplexNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetComplexNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetComplexNull", "value", null, context);
-        }
-
-        /// <summary> Get array of complex type null value. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetComplexNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetComplexNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetComplexNull", "value", null, context);
-        }
-
-        /// <summary> Get empty array of complex type []. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexEmptyAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetComplexEmptyAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetComplexEmptyRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetComplexEmpty", "value", null, context);
-        }
-
-        /// <summary> Get empty array of complex type []. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexEmpty(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetComplexEmpty(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetComplexEmptyRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetComplexEmpty", "value", null, context);
-        }
-
-        /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetComplexItemNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetComplexItemNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetComplexItemNull", "value", null, context);
-        }
-
-        /// <summary> Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetComplexItemNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetComplexItemNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetComplexItemNull", "value", null, context);
-        }
-
-        /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemEmptyAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetComplexItemEmptyAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetComplexItemEmptyRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetComplexItemEmpty", "value", null, context);
-        }
-
-        /// <summary> Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemEmpty(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetComplexItemEmpty(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetComplexItemEmptyRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetComplexItemEmpty", "value", null, context);
-        }
-
-        /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetComplexValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetComplexValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetComplexValid", "value", null, context);
-        }
-
-        /// <summary> Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetComplexValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetComplexValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetComplexValid", "value", null, context);
-        }
-
-        /// <summary> Get a null array. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetArrayNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetArrayNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetArrayNull", "value", null, context);
-        }
-
-        /// <summary> Get a null array. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetArrayNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetArrayNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetArrayNull", "value", null, context);
-        }
-
-        /// <summary> Get an empty array []. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayEmptyAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetArrayEmptyAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetArrayEmptyRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetArrayEmpty", "value", null, context);
-        }
-
-        /// <summary> Get an empty array []. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayEmpty(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetArrayEmpty(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetArrayEmptyRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetArrayEmpty", "value", null, context);
-        }
-
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetArrayItemNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetArrayItemNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetArrayItemNull", "value", null, context);
-        }
-
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetArrayItemNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetArrayItemNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetArrayItemNull", "value", null, context);
-        }
-
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemEmptyAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetArrayItemEmptyAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetArrayItemEmptyRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetArrayItemEmpty", "value", null, context);
-        }
-
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemEmpty(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetArrayItemEmpty(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetArrayItemEmptyRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetArrayItemEmpty", "value", null, context);
-        }
-
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetArrayValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetArrayValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetArrayValid", "value", null, context);
-        }
-
-        /// <summary> Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetArrayValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetArrayValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetArrayValid", "value", null, context);
-        }
-
-        /// <summary> Get an array of Dictionaries with value null. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDictionaryNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDictionaryNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDictionaryNull", "value", null, context);
-        }
-
-        /// <summary> Get an array of Dictionaries with value null. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDictionaryNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDictionaryNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDictionaryNull", "value", null, context);
-        }
-
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryEmptyAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDictionaryEmptyAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDictionaryEmptyRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDictionaryEmpty", "value", null, context);
-        }
-
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value []. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryEmpty(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDictionaryEmpty(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDictionaryEmptyRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDictionaryEmpty", "value", null, context);
-        }
-
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemNullAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDictionaryItemNullAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDictionaryItemNullRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDictionaryItemNull", "value", null, context);
-        }
-
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemNull(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDictionaryItemNull(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDictionaryItemNullRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDictionaryItemNull", "value", null, context);
-        }
-
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemEmptyAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDictionaryItemEmptyAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDictionaryItemEmptyRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDictionaryItemEmpty", "value", null, context);
-        }
-
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemEmpty(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDictionaryItemEmpty(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDictionaryItemEmptyRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDictionaryItemEmpty", "value", null, context);
-        }
-
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryValidAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDictionaryValidAsync(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDictionaryValidRequest(context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDictionaryValid", "value", null, context);
-        }
-
-        /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
-        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryValid(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDictionaryValid(RequestContext context = null)
-        {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDictionaryValidRequest(context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ArrayClient.GetDictionaryValid", "value", null, context);
         }
 
         internal HttpMessage CreateGetNullRequest(RequestContext context)
