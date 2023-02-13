@@ -29,7 +29,8 @@ namespace Models.Inheritance.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "Salmon": return Salmon.DeserializeSalmon(element);
+                    case "shark": return Shark.DeserializeShark(element);
+                    case "salmon": return Salmon.DeserializeSalmon(element);
                 }
             }
             return UnknownFish.DeserializeUnknownFish(element);

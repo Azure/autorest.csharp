@@ -64,6 +64,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
 
+                if (inputModelProperty.Type is InputLiteralType)
+                {
+                    continue; // literal property does not show up in the constructor parameter list
+                }
                 var parameter = Parameter.FromModelProperty(inputModelProperty, existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.FirstCharToLowerCase(), field.Type);
                 parametersToFields[parameter.Name] = field;
                 serializationParameters.Add(parameter);
@@ -95,9 +99,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 inputModelProperty.Type is CodeModelType type && (type.Schema is ArraySchema or DictionarySchema);
             var propertyIsRequiredInNonRoundTripModel = inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
             var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
-            var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
+            var propertyIsLiteralType = inputModelProperty.Type is InputLiteralType;
+            var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsLiteralType || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
 
-            var fieldModifiers = propertyIsReadOnly ? Public | ReadOnly : Public;
+            var fieldModifiers = propertyIsReadOnly ? (propertyIsLiteralType ? Internal : Public ) | ReadOnly : Public;
 
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(fieldName);
             declaration.SetActualName(fieldName);

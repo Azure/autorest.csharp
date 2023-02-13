@@ -20,8 +20,55 @@ namespace CadlFirstTest.Models
             writer.WriteStringValue(Name);
             writer.WritePropertyName("requiredUnion"u8);
             writer.WriteStringValue(RequiredUnion);
-            writer.WritePropertyName("requiredLiteral"u8);
-            writer.WriteStringValue(RequiredLiteral);
+            writer.WritePropertyName("requiredLiteralString"u8);
+            writer.WriteStringValue(RequiredLiteralString);
+            writer.WritePropertyName("requiredLiteralInt"u8);
+            writer.WriteNumberValue(RequiredLiteralInt);
+            writer.WritePropertyName("requiredLiteralDouble"u8);
+            writer.WriteNumberValue(RequiredLiteralDouble);
+            writer.WritePropertyName("requiredLiteralBool"u8);
+            writer.WriteBooleanValue(RequiredLiteralBool);
+            if (Optional.IsDefined(OptionalLiteralString))
+            {
+                writer.WritePropertyName("optionalLiteralString"u8);
+                writer.WriteStringValue(OptionalLiteralString);
+            }
+            if (Optional.IsDefined(OptionalLiteralInt))
+            {
+                if (OptionalLiteralInt != null)
+                {
+                    writer.WritePropertyName("optionalLiteralInt"u8);
+                    writer.WriteNumberValue(OptionalLiteralInt.Value);
+                }
+                else
+                {
+                    writer.WriteNull("optionalLiteralInt");
+                }
+            }
+            if (Optional.IsDefined(OptionalLiteralDouble))
+            {
+                if (OptionalLiteralDouble != null)
+                {
+                    writer.WritePropertyName("optionalLiteralDouble"u8);
+                    writer.WriteNumberValue(OptionalLiteralDouble.Value);
+                }
+                else
+                {
+                    writer.WriteNull("optionalLiteralDouble");
+                }
+            }
+            if (Optional.IsDefined(OptionalLiteralBool))
+            {
+                if (OptionalLiteralBool != null)
+                {
+                    writer.WritePropertyName("optionalLiteralBool"u8);
+                    writer.WriteBooleanValue(OptionalLiteralBool.Value);
+                }
+                else
+                {
+                    writer.WriteNull("optionalLiteralBool");
+                }
+            }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
             writer.WriteEndObject();
@@ -31,7 +78,6 @@ namespace CadlFirstTest.Models
         {
             string name = default;
             string requiredUnion = default;
-            string requiredLiteral = default;
             string requiredBadDescription = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -45,18 +91,13 @@ namespace CadlFirstTest.Models
                     requiredUnion = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredLiteral"u8))
-                {
-                    requiredLiteral = property.Value.GetString();
-                    continue;
-                }
                 if (property.NameEquals("requiredBadDescription"u8))
                 {
                     requiredBadDescription = property.Value.GetString();
                     continue;
                 }
             }
-            return new Thing(name, requiredUnion, requiredLiteral, requiredBadDescription);
+            return new Thing(name, requiredUnion, requiredBadDescription);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
