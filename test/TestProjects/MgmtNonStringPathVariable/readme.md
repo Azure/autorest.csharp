@@ -12,4 +12,7 @@ namespace: MgmtNonStringPathVariable
 
 list-exception:
 - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
+
+check-empty-string-for-types-in-deserialization:
+- Guid
 ```

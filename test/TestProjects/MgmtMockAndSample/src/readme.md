@@ -44,10 +44,6 @@ format-by-name-rules:
   '*Uri': 'Uri'
   '*Uris': 'Uri'
 
-check-empty-string-for-types-in-deserialization:
-- Uri
-- Guid
-
 rename-mapping:
   Type: EncryptionType
   FirewallPolicyThreatIntelWhitelist.ipAddresses: -|ip-address
