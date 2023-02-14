@@ -19,5 +19,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<ModelsInCadlClient, ModelsInCadlClientOptions>((options) => new ModelsInCadlClient(options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<ModelsInCadlClient, ModelsInCadlClientOptions> AddModelsInCadlClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<ModelsInCadlClient, ModelsInCadlClientOptions>(configuration);
+        }
     }
 }

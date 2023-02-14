@@ -26,5 +26,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<ApiVersionInCadlClient, ApiVersionInCadlClientOptions>((options) => new ApiVersionInCadlClient(endpoint, credential, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<ApiVersionInCadlClient, ApiVersionInCadlClientOptions> AddApiVersionInCadlClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<ApiVersionInCadlClient, ApiVersionInCadlClientOptions>(configuration);
+        }
     }
 }

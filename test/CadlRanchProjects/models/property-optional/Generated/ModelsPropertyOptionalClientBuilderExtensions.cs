@@ -21,5 +21,62 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<OptionalClient, OptionalClientOptions>((options) => new OptionalClient(endpoint, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<OptionalClient, OptionalClientOptions> AddOptionalClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<OptionalClient, OptionalClientOptions>(configuration);
+        }
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<Models.Property.Optional.String, OptionalClientOptions> AddString<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<Models.Property.Optional.String, OptionalClientOptions>(configuration);
+        }
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<Bytes, OptionalClientOptions> AddBytes<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<Bytes, OptionalClientOptions>(configuration);
+        }
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<Datetime, OptionalClientOptions> AddDatetime<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<Datetime, OptionalClientOptions>(configuration);
+        }
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<Duration, OptionalClientOptions> AddDuration<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<Duration, OptionalClientOptions>(configuration);
+        }
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<CollectionsByte, OptionalClientOptions> AddCollectionsByte<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<CollectionsByte, OptionalClientOptions>(configuration);
+        }
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<CollectionsModel, OptionalClientOptions> AddCollectionsModel<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<CollectionsModel, OptionalClientOptions>(configuration);
+        }
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<RequiredAndOptional, OptionalClientOptions> AddRequiredAndOptional<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<RequiredAndOptional, OptionalClientOptions>(configuration);
+        }
     }
 }

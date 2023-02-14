@@ -23,5 +23,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<ApiKeyClient, ApiKeyClientOptions>((options) => new ApiKeyClient(credential, endpoint, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<ApiKeyClient, ApiKeyClientOptions> AddApiKeyClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<ApiKeyClient, ApiKeyClientOptions>(configuration);
+        }
     }
 }

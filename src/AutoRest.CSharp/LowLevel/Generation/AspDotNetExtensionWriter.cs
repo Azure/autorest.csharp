@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using AutoRest.CSharp.LowLevel.Output;
 using AutoRest.CSharp.Output.Models;
+using Azure.Core;
 using Azure.Core.Extensions;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -43,14 +44,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteImplementations()
         {
-            foreach (var (signature, (declarations, values)) in This.ExtesnsionMethodsNew)
+            foreach (var (signature, (declarations, values)) in This.ExtesnsionMethods)
             {
                 using (_writer.WriteCommonMethodWithoutValidation(signature, null, false, false))
                 {
                     var builder = signature.Parameters.First();
                     var arguments = signature.ReturnType!.Arguments;
                     var clientType = arguments.First();
-                    _writer.Append($"return {builder.Name:I}.{nameof(IAzureClientFactoryBuilderWithCredential.RegisterClientFactory)}")
+                    _writer.Append($"return {builder.Name:I}.RegisterClientFactory")
                         .AppendRaw("<");
                     foreach (var argument in arguments)
                     {
@@ -72,6 +73,29 @@ namespace AutoRest.CSharp.Generation.Writers
                     _writer.LineRaw("));");
                 }
                 _writer.Line();
+            }
+
+            foreach (var signature in This.ExtensionMethodsWithoutCallback)
+            {
+                using (_writer.WriteCommonMethodWithoutValidation(signature, null, false, false))
+                {
+                    var builder = signature.Parameters.First();
+                    var otherParameters = signature.Parameters.Skip(1);
+                    _writer.Append($"return {builder.Name:I}.RegisterClientFactory")
+                        .AppendRaw("<");
+                    foreach (var argument in signature.ReturnType!.Arguments)
+                    {
+                        _writer.Append($"{argument},");
+                    }
+                    _writer.RemoveTrailingComma();
+                    _writer.AppendRaw(">(");
+                    foreach (var parameter in otherParameters)
+                    {
+                        _writer.Append($"{parameter.Name:I},");
+                    }
+                    _writer.RemoveTrailingComma();
+                    _writer.LineRaw(");");
+                }
             }
         }
 

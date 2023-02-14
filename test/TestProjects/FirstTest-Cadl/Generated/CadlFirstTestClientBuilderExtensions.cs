@@ -31,5 +31,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<CadlFirstTestClient, CadlFirstTestClientOptions>((options, cred) => new CadlFirstTestClient(endpoint, cred, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<CadlFirstTestClient, CadlFirstTestClientOptions> AddCadlFirstTestClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<CadlFirstTestClient, CadlFirstTestClientOptions>(configuration);
+        }
     }
 }

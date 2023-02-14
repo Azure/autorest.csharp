@@ -21,5 +21,27 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<ClientAndOperationGroupServiceClient, ClientAndOperationGroupServiceClientOptions>((options) => new ClientAndOperationGroupServiceClient(endpoint, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<ClientAndOperationGroupServiceClient, ClientAndOperationGroupServiceClientOptions> AddClientAndOperationGroupServiceClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<ClientAndOperationGroupServiceClient, ClientAndOperationGroupServiceClientOptions>(configuration);
+        }
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<Beta, ClientAndOperationGroupServiceClientOptions> AddBeta<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<Beta, ClientAndOperationGroupServiceClientOptions>(configuration);
+        }
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<Gamma, ClientAndOperationGroupServiceClientOptions> AddGamma<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<Gamma, ClientAndOperationGroupServiceClientOptions>(configuration);
+        }
     }
 }

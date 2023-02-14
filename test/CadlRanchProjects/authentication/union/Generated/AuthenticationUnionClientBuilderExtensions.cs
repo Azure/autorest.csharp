@@ -31,5 +31,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<UnionClient, UnionClientOptions>((options, cred) => new UnionClient(cred, endpoint, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<UnionClient, UnionClientOptions>(configuration);
+        }
     }
 }

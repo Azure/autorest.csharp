@@ -21,5 +21,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<MixApiVersionClient, MixApiVersionClientOptions>((options) => new MixApiVersionClient(endpoint, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<MixApiVersionClient, MixApiVersionClientOptions> AddMixApiVersionClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<MixApiVersionClient, MixApiVersionClientOptions>(configuration);
+        }
     }
 }

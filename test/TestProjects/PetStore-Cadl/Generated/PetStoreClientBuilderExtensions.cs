@@ -21,5 +21,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<PetStoreClient, PetStoreClientOptions>((options) => new PetStoreClient(endpoint, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<PetStoreClient, PetStoreClientOptions> AddPetStoreClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<PetStoreClient, PetStoreClientOptions>(configuration);
+        }
     }
 }

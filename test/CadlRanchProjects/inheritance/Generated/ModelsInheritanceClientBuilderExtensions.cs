@@ -21,5 +21,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<InheritanceClient, InheritanceClientOptions>((options) => new InheritanceClient(endpoint, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<InheritanceClient, InheritanceClientOptions> AddInheritanceClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<InheritanceClient, InheritanceClientOptions>(configuration);
+        }
     }
 }

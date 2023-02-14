@@ -38,10 +38,10 @@ namespace AutoRest.CSharp.LowLevel.Output
 
         protected override string DefaultAccessibility => "public";
 
-        private Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)>? _extensionMethodsNew;
-        public IReadOnlyDictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)> ExtesnsionMethodsNew => _extensionMethodsNew ??= EnsureExtensionMethodsNew();
+        private Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)>? _extensionMethods;
+        public IReadOnlyDictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)> ExtesnsionMethods => _extensionMethods ??= EnsureExtensionMethods();
 
-        private Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)> EnsureExtensionMethodsNew()
+        private Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)> EnsureExtensionMethods()
         {
             var result = new Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)>();
             foreach (var client in _clients)
@@ -105,6 +105,31 @@ namespace AutoRest.CSharp.LowLevel.Output
             return result;
         }
 
+        private IEnumerable<MethodSignature>? _extensionMethodsWithoutCallback;
+        public IEnumerable<MethodSignature> ExtensionMethodsWithoutCallback => _extensionMethodsWithoutCallback ??= EnsureExtensionMethodsWithoutCallback();
+
+        private IEnumerable<MethodSignature> EnsureExtensionMethodsWithoutCallback()
+        {
+            foreach (var client in _clients)
+            {
+                var returnType = new CSharpType(typeof(IAzureClientBuilder<,>), client.Type, client.ClientOptions.Type);
+
+                yield return new MethodSignature(
+                    $"Add{client.Declaration.Name}",
+                    $"Registers a <see cref=\"{client.Type}\"/> instance",
+                    null,
+                    MethodSignatureModifiers.Public | MethodSignatureModifiers.Static,
+                    returnType,
+                    null,
+                    new[] { FactoryBuilderParameter, ConfigurationParameter },
+                    GenericArguments: new[] { TBuilderType, TConfigurationType },
+                    GenericParameterConstraints: new Dictionary<CSharpType, FormattableString>()
+                    {
+                        [TBuilderType] = $"{typeof(IAzureClientFactoryBuilderWithConfiguration<>)}"
+                    });
+            }
+        }
+
         private Parameter? _factoryBuilderParameter;
         public Parameter FactoryBuilderParameter => _factoryBuilderParameter ??= new Parameter(
             "builder",
@@ -127,9 +152,9 @@ namespace AutoRest.CSharp.LowLevel.Output
         private static CSharpType? _configurationType;
         // these two properties are getting the open generic parameter type of `TBuilder` and `TConfiguration` so that we could use them on the generated generic method
         // since there is no method to manually construct this kind of open generic argument types.
-        private static CSharpType TBuilderType => _builderType ??= typeof(Template<,>).GetGenericArguments()[0];
-        private static CSharpType TConfigurationType => _configurationType ??= typeof(Template<,>).GetGenericArguments()[1];
+        private static CSharpType TBuilderType => _builderType ??= typeof(Template<>).GetGenericArguments()[0];
+        private static CSharpType TConfigurationType => _configurationType ??= typeof(IAzureClientFactoryBuilderWithConfiguration<>).GetGenericArguments()[0];
 
-        private class Template<TBuilder, TConfiguration> { }
+        private class Template<TBuilder> { }
     }
 }

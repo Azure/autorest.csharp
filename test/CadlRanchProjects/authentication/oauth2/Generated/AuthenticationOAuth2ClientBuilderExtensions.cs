@@ -21,5 +21,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<OAuth2Client, OAuth2ClientOptions>((options, cred) => new OAuth2Client(cred, endpoint, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<OAuth2Client, OAuth2ClientOptions> AddOAuth2Client<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<OAuth2Client, OAuth2ClientOptions>(configuration);
+        }
     }
 }

@@ -21,5 +21,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<RenameGetListClient, RenameGetListClientOptions>((options) => new RenameGetListClient(endpoint, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<RenameGetListClient, RenameGetListClientOptions> AddRenameGetListClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<RenameGetListClient, RenameGetListClientOptions>(configuration);
+        }
     }
 }

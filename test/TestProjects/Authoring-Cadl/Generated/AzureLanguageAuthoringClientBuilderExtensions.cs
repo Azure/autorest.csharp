@@ -21,5 +21,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<AuthoringClient, AuthoringClientOptions>((options) => new AuthoringClient(endpoint, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<AuthoringClient, AuthoringClientOptions> AddAuthoringClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<AuthoringClient, AuthoringClientOptions>(configuration);
+        }
     }
 }

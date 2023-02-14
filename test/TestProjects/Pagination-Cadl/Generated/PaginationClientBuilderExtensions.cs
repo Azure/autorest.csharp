@@ -21,5 +21,13 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<PaginationClient, PaginationClientOptions>((options, cred) => new PaginationClient(endpoint, cred, options));
         }
+
+        /// <param name="builder"></param>
+        /// <param name="configuration"></param>
+        public static IAzureClientBuilder<PaginationClient, PaginationClientOptions> AddPaginationClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
+        {
+            return builder.RegisterClientFactory<PaginationClient, PaginationClientOptions>(configuration);
+        }
     }
 }
