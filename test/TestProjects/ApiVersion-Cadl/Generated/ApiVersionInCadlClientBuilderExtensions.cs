@@ -12,10 +12,11 @@ using Azure.Core.Extensions;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add clients to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="ApiVersionInCadlClient"/> to client builder. </summary>
     public static partial class ApiVersionInCadlClientBuilderExtensions
     {
-        /// <param name="builder"></param>
+        /// <summary> Registers a <see cref="ApiVersionInCadlClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint">
         /// Supported Cognitive Services endpoints (protocol and hostname, for example:
         /// https://westus2.api.cognitive.microsoft.com).
@@ -27,8 +28,9 @@ namespace Microsoft.Extensions.Azure
             return builder.RegisterClientFactory<ApiVersionInCadlClient, ApiVersionInCadlClientOptions>((options) => new ApiVersionInCadlClient(endpoint, credential, options));
         }
 
-        /// <param name="builder"></param>
-        /// <param name="configuration"></param>
+        /// <summary> Registers a <see cref="ApiVersionInCadlClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
+        /// <param name="configuration"> The configuration values. </param>
         public static IAzureClientBuilder<ApiVersionInCadlClient, ApiVersionInCadlClientOptions> AddApiVersionInCadlClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {

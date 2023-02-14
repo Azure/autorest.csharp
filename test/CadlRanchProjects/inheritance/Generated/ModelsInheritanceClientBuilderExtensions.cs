@@ -11,10 +11,11 @@ using Models.Inheritance;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add clients to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="InheritanceClient"/> to client builder. </summary>
     public static partial class ModelsInheritanceClientBuilderExtensions
     {
-        /// <param name="builder"></param>
+        /// <summary> Registers a <see cref="InheritanceClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
         public static IAzureClientBuilder<InheritanceClient, InheritanceClientOptions> AddInheritanceClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
@@ -22,8 +23,9 @@ namespace Microsoft.Extensions.Azure
             return builder.RegisterClientFactory<InheritanceClient, InheritanceClientOptions>((options) => new InheritanceClient(endpoint, options));
         }
 
-        /// <param name="builder"></param>
-        /// <param name="configuration"></param>
+        /// <summary> Registers a <see cref="InheritanceClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
+        /// <param name="configuration"> The configuration values. </param>
         public static IAzureClientBuilder<InheritanceClient, InheritanceClientOptions> AddInheritanceClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {

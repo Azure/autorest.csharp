@@ -12,10 +12,11 @@ using CadlFirstTest;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add clients to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="CadlFirstTestClient"/> to client builder. </summary>
     public static partial class CadlFirstTestClientBuilderExtensions
     {
-        /// <param name="builder"></param>
+        /// <summary> Registers a <see cref="CadlFirstTestClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         public static IAzureClientBuilder<CadlFirstTestClient, CadlFirstTestClientOptions> AddCadlFirstTestClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
@@ -24,7 +25,8 @@ namespace Microsoft.Extensions.Azure
             return builder.RegisterClientFactory<CadlFirstTestClient, CadlFirstTestClientOptions>((options) => new CadlFirstTestClient(endpoint, credential, options));
         }
 
-        /// <param name="builder"></param>
+        /// <summary> Registers a <see cref="CadlFirstTestClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> The Uri to use. </param>
         public static IAzureClientBuilder<CadlFirstTestClient, CadlFirstTestClientOptions> AddCadlFirstTestClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
@@ -32,8 +34,9 @@ namespace Microsoft.Extensions.Azure
             return builder.RegisterClientFactory<CadlFirstTestClient, CadlFirstTestClientOptions>((options, cred) => new CadlFirstTestClient(endpoint, cred, options));
         }
 
-        /// <param name="builder"></param>
-        /// <param name="configuration"></param>
+        /// <summary> Registers a <see cref="CadlFirstTestClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
+        /// <param name="configuration"> The configuration values. </param>
         public static IAzureClientBuilder<CadlFirstTestClient, CadlFirstTestClientOptions> AddCadlFirstTestClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {

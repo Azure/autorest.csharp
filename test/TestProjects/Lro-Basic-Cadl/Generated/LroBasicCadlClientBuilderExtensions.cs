@@ -11,10 +11,11 @@ using LroBasicCadl;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add clients to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="LroBasicCadlClient"/> to client builder. </summary>
     public static partial class LroBasicCadlClientBuilderExtensions
     {
-        /// <param name="builder"></param>
+        /// <summary> Registers a <see cref="LroBasicCadlClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> The Uri to use. </param>
         public static IAzureClientBuilder<LroBasicCadlClient, LroBasicCadlClientOptions> AddLroBasicCadlClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
@@ -22,8 +23,9 @@ namespace Microsoft.Extensions.Azure
             return builder.RegisterClientFactory<LroBasicCadlClient, LroBasicCadlClientOptions>((options) => new LroBasicCadlClient(endpoint, options));
         }
 
-        /// <param name="builder"></param>
-        /// <param name="configuration"></param>
+        /// <summary> Registers a <see cref="LroBasicCadlClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
+        /// <param name="configuration"> The configuration values. </param>
         public static IAzureClientBuilder<LroBasicCadlClient, LroBasicCadlClientOptions> AddLroBasicCadlClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {

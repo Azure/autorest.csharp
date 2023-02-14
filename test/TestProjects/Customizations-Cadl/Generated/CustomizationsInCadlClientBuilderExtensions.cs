@@ -10,18 +10,20 @@ using CustomizationsInCadl;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add clients to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="CustomizationsInCadlClient"/> to client builder. </summary>
     public static partial class CustomizationsInCadlClientBuilderExtensions
     {
-        /// <param name="builder"></param>
+        /// <summary> Registers a <see cref="CustomizationsInCadlClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
         public static IAzureClientBuilder<CustomizationsInCadlClient, CustomizationsInCadlClientOptions> AddCustomizationsInCadlClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<CustomizationsInCadlClient, CustomizationsInCadlClientOptions>((options) => new CustomizationsInCadlClient(options));
         }
 
-        /// <param name="builder"></param>
-        /// <param name="configuration"></param>
+        /// <summary> Registers a <see cref="CustomizationsInCadlClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
+        /// <param name="configuration"> The configuration values. </param>
         public static IAzureClientBuilder<CustomizationsInCadlClient, CustomizationsInCadlClientOptions> AddCustomizationsInCadlClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {

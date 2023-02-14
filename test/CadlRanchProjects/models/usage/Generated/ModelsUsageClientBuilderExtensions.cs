@@ -11,10 +11,11 @@ using Models.Usage;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add clients to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="UsageClient"/> to client builder. </summary>
     public static partial class ModelsUsageClientBuilderExtensions
     {
-        /// <param name="builder"></param>
+        /// <summary> Registers a <see cref="UsageClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
         public static IAzureClientBuilder<UsageClient, UsageClientOptions> AddUsageClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
@@ -22,8 +23,9 @@ namespace Microsoft.Extensions.Azure
             return builder.RegisterClientFactory<UsageClient, UsageClientOptions>((options) => new UsageClient(endpoint, options));
         }
 
-        /// <param name="builder"></param>
-        /// <param name="configuration"></param>
+        /// <summary> Registers a <see cref="UsageClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
+        /// <param name="configuration"> The configuration values. </param>
         public static IAzureClientBuilder<UsageClient, UsageClientOptions> AddUsageClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {

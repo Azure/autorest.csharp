@@ -10,18 +10,20 @@ using ModelsInCadl;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add clients to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="ModelsInCadlClient"/> to client builder. </summary>
     public static partial class ModelsInCadlClientBuilderExtensions
     {
-        /// <param name="builder"></param>
+        /// <summary> Registers a <see cref="ModelsInCadlClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
         public static IAzureClientBuilder<ModelsInCadlClient, ModelsInCadlClientOptions> AddModelsInCadlClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<ModelsInCadlClient, ModelsInCadlClientOptions>((options) => new ModelsInCadlClient(options));
         }
 
-        /// <param name="builder"></param>
-        /// <param name="configuration"></param>
+        /// <summary> Registers a <see cref="ModelsInCadlClient"/> instance. </summary>
+        /// <param name="builder"> The builder to register with. </param>
+        /// <param name="configuration"> The configuration values. </param>
         public static IAzureClientBuilder<ModelsInCadlClient, ModelsInCadlClientOptions> AddModelsInCadlClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
