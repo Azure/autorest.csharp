@@ -180,7 +180,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                     options.csharpGeneratorPath
                 )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
                     options["clear-output-folder"]
-                }`;
+                } ${debugFlag}`;
                 console.info(command);
 
                 try {

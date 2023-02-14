@@ -18,6 +18,7 @@ export type NetEmitterOptions = {
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
+    debug?: boolean;
 } & DpgEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -46,7 +47,8 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "model-namespace": { type: "boolean", nullable: true },
         "generate-protocol-methods": { type: "boolean", nullable: true },
         "generate-convenience-methods": { type: "boolean", nullable: true },
-        "package-name": { type: "string", nullable: true }
+        "package-name": { type: "string", nullable: true },
+        debug: { type: "boolean", nullable: true }
     },
     required: []
 };
@@ -61,7 +63,8 @@ const defaultOptions = {
     "save-inputs": false,
     "generate-protocol-methods": true,
     "generate-convenience-methods": true,
-    "package-name": undefined
+    "package-name": undefined,
+    debug: undefined,
 };
 
 export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
@@ -75,7 +78,7 @@ export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
         logFile: resolvePath(
             emitterOutputDir ?? "./cadl-output",
             resolvedOptions.logFile
-        )
+        ),
     };
 }
 
