@@ -64,7 +64,7 @@ const defaultOptions = {
     "generate-protocol-methods": true,
     "generate-convenience-methods": true,
     "package-name": undefined,
-    debug: undefined,
+    debug: undefined
 };
 
 export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
@@ -78,7 +78,7 @@ export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
         logFile: resolvePath(
             emitterOutputDir ?? "./cadl-output",
             resolvedOptions.logFile
-        ),
+        )
     };
 }
 

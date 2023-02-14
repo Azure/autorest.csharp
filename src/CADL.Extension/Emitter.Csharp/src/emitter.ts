@@ -174,8 +174,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
                 const shouldDebug = options.debug ?? false;
                 let debugFlag = "";
-                if (shouldDebug)
-                    debugFlag = "--debug";
+                if (shouldDebug) debugFlag = "--debug";
                 const command = `dotnet --roll-forward Major ${resolvePath(
                     options.csharpGeneratorPath
                 )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
@@ -355,9 +354,9 @@ export function createModel(context: EmitContext<NetEmitterOptions>): any {
                             apiVersionInOperation.DefaultValue?.Value
                         ) &&
                         apiVersionInOperation.Kind ===
-                        InputOperationParameterKind.Client &&
+                            InputOperationParameterKind.Client &&
                         apiVersionInOperation.Location ===
-                        apiVersionParam.Location
+                            apiVersionParam.Location
                     ) {
                         op.Parameters[apiVersionIndex] = apiVersionParam;
                     }
@@ -536,9 +535,9 @@ function createContentTypeOrAcceptParameter(
         DefaultValue:
             mediaTypes.length === 1
                 ? ({
-                    Type: inputType,
-                    Value: mediaTypes[0]
-                } as InputConstant)
+                      Type: inputType,
+                      Value: mediaTypes[0]
+                  } as InputConstant)
                 : undefined
     } as InputParameter;
 }
@@ -776,10 +775,10 @@ function loadOperation(
             isContentType || inputType.Name === "Literal"
                 ? InputOperationParameterKind.Constant
                 : isApiVer
-                    ? defaultValue
-                        ? InputOperationParameterKind.Constant
-                        : InputOperationParameterKind.Client
-                    : InputOperationParameterKind.Method;
+                ? defaultValue
+                    ? InputOperationParameterKind.Constant
+                    : InputOperationParameterKind.Client
+                : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,
