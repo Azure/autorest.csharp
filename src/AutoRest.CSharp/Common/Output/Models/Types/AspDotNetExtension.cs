@@ -30,10 +30,14 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         public AspDotNetExtension(IReadOnlyList<LowLevelClient> clients, string clientNamespace, SourceInputModel? sourceInputModel) : base(AspDotNetExtensionNamespace, sourceInputModel)
         {
             DefaultName = $"{ClientBuilder.GetClientPrefix(Configuration.LibraryName, clientNamespace)}ClientBuilderExtensions".ToCleanName();
+            //TODO: very bad design that this list is empty when we leave the constructor and is filled in at some point in the future.
+            //creates lots of opportunity run into issues with iterators
             _clients = clients;
         }
 
         public FormattableString Description => $"Extension methods to add {GetClientSeeRefs()} to client builder";
+
+        private IEnumerable<LowLevelClient> _topLevelClients => _clients.Where(client => !client.IsSubClient);
 
         protected override string DefaultName { get; }
 
@@ -45,18 +49,19 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         public string GetClientSeeRefs()
         {
             StringBuilder builder = new StringBuilder();
-            foreach (var client in _clients)
+            foreach (var client in _topLevelClients)
             {
                 builder.Append($"<see cref=\"{client.Declaration.Name}\"/>, ");
             }
-            builder.Length -= 2;
+            if (builder.Length >= 2)
+                builder.Length -= 2;
             return builder.ToString();
         }
 
         private Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)> EnsureExtensionMethods()
         {
             var result = new Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)>();
-            foreach (var client in _clients)
+            foreach (var client in _topLevelClients)
             {
                 var returnType = new CSharpType(typeof(IAzureClientBuilder<,>), client.Type, client.ClientOptions.Type);
                 foreach (var ctor in client.PrimaryConstructors)
@@ -119,7 +124,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         private IEnumerable<MethodSignature> EnsureExtensionMethodsWithoutCallback()
         {
-            foreach (var client in _clients)
+            foreach (var client in _topLevelClients)
             {
                 var returnType = new CSharpType(typeof(IAzureClientBuilder<,>), client.Type, client.ClientOptions.Type);
 
