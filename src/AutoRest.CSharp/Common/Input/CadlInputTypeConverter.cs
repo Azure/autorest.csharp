@@ -66,7 +66,8 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType CreateDerivedType(ref Utf8JsonReader reader, string? propertyName, string? name, string? id, JsonSerializerOptions options) => propertyName switch
         {
-            PrimitiveTypeKind   => ReadPrimitiveType(ref reader, id, _referenceHandler.CurrentResolver),
+            PrimitiveTypeKind when name == InputIntrinsicType.InputIntrinsicTypeName  => ReadIntrinsicType(ref reader, id, _referenceHandler.CurrentResolver),
+            PrimitiveTypeKind => ReadPrimitiveType(ref reader, id, _referenceHandler.CurrentResolver),
             ListElementType     => CadlInputListTypeConverter.CreateListType(ref reader, id, name, options),
             DictionaryKeyType   => CadlInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
             DictionaryValueType => CadlInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
@@ -102,7 +103,6 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             return primitiveType;
-
         }
 
         public static InputPrimitiveType CreatePrimitiveType(string? inputTypeKindString, bool isNullable)
@@ -111,6 +111,38 @@ namespace AutoRest.CSharp.Common.Input
             return Enum.TryParse<InputTypeKind>(inputTypeKindString, ignoreCase: true, out var kind)
                 ? new InputPrimitiveType(kind)
                 : throw new InvalidOperationException($"{inputTypeKindString} type is unknown.");
+        }
+
+        private static InputIntrinsicType ReadIntrinsicType(ref Utf8JsonReader reader, string? id, ReferenceResolver resolver)
+        {
+            var isFirstProperty = id == null;
+            string? inputTypeKindString = null;
+            while (reader.TokenType != JsonTokenType.EndObject)
+            {
+                var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
+                    || reader.TryReadString(nameof(InputIntrinsicType.Kind), ref inputTypeKindString);
+
+                if (!isKnownProperty)
+                {
+                    reader.SkipProperty();
+                }
+            }
+
+            var intrinsicType = CreateIntrinsicType(inputTypeKindString);
+            if (id != null)
+            {
+                resolver.AddReference(id, intrinsicType);
+            }
+
+            return intrinsicType;
+        }
+
+        private static InputIntrinsicType CreateIntrinsicType(string? inputTypeKindString)
+        {
+            Argument.AssertNotNull(inputTypeKindString, nameof(inputTypeKindString));
+            return Enum.TryParse<InputIntrinsicTypeKind>(inputTypeKindString, ignoreCase: true, out var kind)
+                ? new InputIntrinsicType(kind)
+                : throw new InvalidOperationException($"{inputTypeKindString} type is unknown for InputIntrinsicType.");
         }
     }
 }

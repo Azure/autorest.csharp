@@ -3,8 +3,17 @@ import "@cadl-lang/openapi";
 import "@azure-tools/cadl-dpg";
 import "@azure-tools/cadl-azure-core";
 
-@serviceTitle("Models in CADL")
-@serviceVersion("0.1.0")
+@service({
+    title: "Models in CADL",
+    version: "0.1.0",
+})
+@server(
+    "{endpoint}",
+    "Endpoint Service",
+    {
+        endpoint: string,
+    }
+)
 @doc("CADL project to test various types of models.")
 namespace ModelsInCadl;
 
@@ -152,6 +161,9 @@ model RoundTripPrimitiveModel extends BaseModel {
 
   @doc("Required time span, illustrating a value type property.")
   requiredTimeSpan: duration;
+
+  @doc("Required collection of which the element is a nullable float")
+  requiredCollectionWithNullableFloatElement: (float32 | null) [];
 }
 
 @doc("Model used only as input")
@@ -176,6 +188,9 @@ model InputModel {
 
   @doc("Required model record")
   requiredModelRecord: Record<RecordItem>;
+
+  @doc("Required collection of which the element is a nullable float")
+  requiredCollectionWithNullableFloatElement: (null | float32) [];
 }
 
 @doc("Model used only as output")
@@ -237,6 +252,9 @@ model RoundTripOptionalModel {
 
   @doc("Optional plainTime")
   optionalPlainTime?: plainTime;
+
+  @doc("Optional collection of which the element is a nullable int")
+  optionalCollectionWithNullableIntElement?: (int32 | null) [];
 }
 
 @doc("Output model with readonly properties.")
@@ -326,6 +344,12 @@ model RoundTripReadOnlyModel {
   @doc("Optional model record")
   @visibility("read")
   optionalModelRecord?: Record<RecordItem>;
+
+  @doc("Required collection of which the element is a nullable int")
+  requiredCollectionWithNullableIntElement: (null | int32) [];
+
+  @doc("Optional collection of which the element is a nullable boolean")
+  optionalCollectionWithNullableBooleanElement?: (boolean | null) [];
 }
 
 @doc("Output model that has property of its own type")

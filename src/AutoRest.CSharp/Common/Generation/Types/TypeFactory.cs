@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Generation.Types
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
             InputLiteralType literalType       => CreateType(literalType.LiteralValueType), //TODO -- need to support literal type with the value.
-            InputUnionType unionType           => CreateType(unionType.UnionItemTypes[0]), //TODO -- need to support multiple union types.
+            InputUnionType unionType           => CreateTypeFromUnion(unionType),
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),
             InputEnumType enumType             => _library.ResolveEnum(enumType).WithNullable(inputType.IsNullable),
@@ -97,6 +97,22 @@ namespace AutoRest.CSharp.Generation.Types
             _ when ToFrameworkType(schema, format) is Type type => new CSharpType(type, isNullable),
             _ => _library.FindTypeForSchema(schema).WithNullable(isNullable)
         };
+
+        private CSharpType CreateTypeFromUnion(InputUnionType unionType)
+        {
+            if (unionType.UnionItemTypes.Count != 2 || !unionType.UnionItemTypes.Any(t => t is InputIntrinsicType { Kind: InputIntrinsicTypeKind.Null }))
+            {
+                return CreateType(unionType.UnionItemTypes[0]); //TODO -- need to support multiple union types.
+            }
+
+            var nullableTypeCandidate = unionType.UnionItemTypes.FirstOrDefault(t => t is InputPrimitiveType or InputModelType);
+            if (nullableTypeCandidate == null)
+            {
+                return CreateType(unionType.UnionItemTypes[0]);
+            }
+
+            return CreateType(nullableTypeCandidate with { IsNullable = true });
+        }
 
         public static CSharpType GetImplementationType(CSharpType type)
         {

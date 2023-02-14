@@ -49,7 +49,8 @@ import {
     InputModelType,
     InputPrimitiveType,
     InputType,
-    InputUnionType
+    InputUnionType,
+    InputNullType
 } from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 import { Usage } from "../type/Usage.js";
@@ -566,6 +567,12 @@ export function getInputType(
                     Usage: Usage.None,
                     Properties: []
                 } as InputModelType;
+            case "null":
+                return {
+                    Name: "Intrinsic",
+                    Kind: "null",
+                    IsNullable: false
+                } as InputNullType;
             default:
                 throw new Error(`Unsupported type ${type.name}`);
         }

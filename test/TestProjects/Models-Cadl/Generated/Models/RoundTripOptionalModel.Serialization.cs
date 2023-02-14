@@ -151,6 +151,16 @@ namespace ModelsInCadl.Models
                     writer.WriteNull("optionalPlainTime");
                 }
             }
+            if (Optional.IsCollectionDefined(OptionalCollectionWithNullableIntElement))
+            {
+                writer.WritePropertyName("optionalCollectionWithNullableIntElement"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalCollectionWithNullableIntElement)
+                {
+                    writer.WriteNumberValue(item.Value);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
@@ -169,6 +179,7 @@ namespace ModelsInCadl.Models
             Optional<IDictionary<string, RecordItem>> optionalModelRecord = default;
             Optional<DateTimeOffset?> optionalPlainDate = default;
             Optional<TimeSpan?> optionalPlainTime = default;
+            Optional<IList<int?>> optionalCollectionWithNullableIntElement = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("optionalString"u8))
@@ -326,8 +337,30 @@ namespace ModelsInCadl.Models
                     optionalPlainTime = property.Value.GetTimeSpan("T");
                     continue;
                 }
+                if (property.NameEquals("optionalCollectionWithNullableIntElement"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    List<int?> array = new List<int?>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetInt32());
+                        }
+                    }
+                    optionalCollectionWithNullableIntElement = array;
+                    continue;
+                }
             }
-            return new RoundTripOptionalModel(optionalString, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelCollection), optionalModel, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime));
+            return new RoundTripOptionalModel(optionalString, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelCollection), optionalModel, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), Optional.ToList(optionalCollectionWithNullableIntElement));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

@@ -50,6 +50,13 @@ namespace ModelsInCadl.Models
                 writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("requiredCollectionWithNullableFloatElement"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollectionWithNullableFloatElement)
+            {
+                writer.WriteNumberValue(item.Value);
+            }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
 
