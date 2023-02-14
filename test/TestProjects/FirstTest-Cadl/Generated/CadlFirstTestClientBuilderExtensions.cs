@@ -23,6 +23,7 @@ namespace Microsoft.Extensions.Azure
         {
             return builder.RegisterClientFactory<CadlFirstTestClient, CadlFirstTestClientOptions>((options) => new CadlFirstTestClient(endpoint, credential, options));
         }
+
         /// <param name="builder"></param>
         /// <param name="endpoint"> The Uri to use. </param>
         public static IAzureClientBuilder<CadlFirstTestClient, CadlFirstTestClientOptions> AddCadlFirstTestClient<TBuilder>(TBuilder builder, Uri endpoint)

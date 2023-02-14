@@ -3,10 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -15,6 +12,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.Core.Extensions;
 
@@ -30,7 +28,7 @@ namespace AutoRest.CSharp.LowLevel.Output
 
         public AspDotNetExtension(IReadOnlyList<LowLevelClient> clients, string clientNamespace, SourceInputModel? sourceInputModel) : base(AspDotNetExtensionNamespace, sourceInputModel)
         {
-            DefaultName = $"{ClientBuilder.GetClientPrefix(Configuration.LibraryName, clientNamespace)}ClientBuilderExtensions";
+            DefaultName = $"{ClientBuilder.GetClientPrefix(Configuration.LibraryName, clientNamespace)}ClientBuilderExtensions".ToCleanName();
             _clients = clients;
         }
 
