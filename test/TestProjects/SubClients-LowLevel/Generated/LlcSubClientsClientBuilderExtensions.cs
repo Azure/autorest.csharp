@@ -12,7 +12,7 @@ using SubClients_LowLevel;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add <see cref="RootClient"/>, <see cref="Parameter"/> to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="RootClient"/> to client builder. </summary>
     public static partial class LlcSubClientsClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="RootClient"/> instance. </summary>
@@ -33,14 +33,6 @@ namespace Microsoft.Extensions.Azure
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<RootClient, RootClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Parameter"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Parameter, RootClientOptions> AddParameter<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Parameter, RootClientOptions>(configuration);
         }
     }
 }

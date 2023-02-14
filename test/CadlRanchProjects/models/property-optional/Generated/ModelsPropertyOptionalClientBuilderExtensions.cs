@@ -11,7 +11,7 @@ using Models.Property.Optional;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add <see cref="OptionalClient"/>, <see cref="String"/>, <see cref="Bytes"/>, <see cref="Datetime"/>, <see cref="Duration"/>, <see cref="CollectionsByte"/>, <see cref="CollectionsModel"/>, <see cref="RequiredAndOptional"/> to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="OptionalClient"/> to client builder. </summary>
     public static partial class ModelsPropertyOptionalClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="OptionalClient"/> instance. </summary>
@@ -30,62 +30,6 @@ namespace Microsoft.Extensions.Azure
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<OptionalClient, OptionalClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="String"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Models.Property.Optional.String, OptionalClientOptions> AddString<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Models.Property.Optional.String, OptionalClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Bytes"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Bytes, OptionalClientOptions> AddBytes<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Bytes, OptionalClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Datetime"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Datetime, OptionalClientOptions> AddDatetime<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Datetime, OptionalClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Duration"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Duration, OptionalClientOptions> AddDuration<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Duration, OptionalClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="CollectionsByte"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<CollectionsByte, OptionalClientOptions> AddCollectionsByte<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<CollectionsByte, OptionalClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="CollectionsModel"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<CollectionsModel, OptionalClientOptions> AddCollectionsModel<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<CollectionsModel, OptionalClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="RequiredAndOptional"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<RequiredAndOptional, OptionalClientOptions> AddRequiredAndOptional<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<RequiredAndOptional, OptionalClientOptions>(configuration);
         }
     }
 }

@@ -11,7 +11,7 @@ using Azure.Core.Extensions;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add <see cref="PurviewAccountsClient"/>, <see cref="PurviewAccountCollections"/>, <see cref="PurviewAccountResourceSetRules"/> to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="PurviewAccountsClient"/> to client builder. </summary>
     public static partial class PurviewAccountClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="PurviewAccountsClient"/> instance. </summary>
@@ -30,22 +30,6 @@ namespace Microsoft.Extensions.Azure
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<PurviewAccountsClient, PurviewAccountsClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="PurviewAccountCollections"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<PurviewAccountCollections, PurviewAccountsClientOptions> AddPurviewAccountCollections<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<PurviewAccountCollections, PurviewAccountsClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="PurviewAccountResourceSetRules"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<PurviewAccountResourceSetRules, PurviewAccountsClientOptions> AddPurviewAccountResourceSetRules<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<PurviewAccountResourceSetRules, PurviewAccountsClientOptions>(configuration);
         }
     }
 }

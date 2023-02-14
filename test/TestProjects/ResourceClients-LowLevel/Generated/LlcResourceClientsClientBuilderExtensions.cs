@@ -12,7 +12,7 @@ using ResourceClients_LowLevel;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add <see cref="ResourceServiceClient"/>, <see cref="ResourceGroup"/>, <see cref="Resource"/> to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="ResourceServiceClient"/> to client builder. </summary>
     public static partial class LlcResourceClientsClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="ResourceServiceClient"/> instance. </summary>
@@ -32,22 +32,6 @@ namespace Microsoft.Extensions.Azure
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<ResourceServiceClient, ResourceServiceClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="ResourceGroup"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<ResourceGroup, ResourceServiceClientOptions> AddResourceGroup<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<ResourceGroup, ResourceServiceClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Resource"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Resource, ResourceServiceClientOptions> AddResource<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Resource, ResourceServiceClientOptions>(configuration);
         }
     }
 }

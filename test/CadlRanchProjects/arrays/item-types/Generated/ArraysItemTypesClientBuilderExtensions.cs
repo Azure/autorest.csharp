@@ -11,7 +11,7 @@ using Azure.Core.Extensions;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add <see cref="ItemTypesClient"/>, <see cref="Int32Value"/>, <see cref="Int64Value"/>, <see cref="BooleanValue"/>, <see cref="StringValue"/>, <see cref="Float32Value"/>, <see cref="DatetimeValue"/>, <see cref="DurationValue"/>, <see cref="UnknownValue"/>, <see cref="ModelValue"/> to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="ItemTypesClient"/> to client builder. </summary>
     public static partial class ArraysItemTypesClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="ItemTypesClient"/> instance. </summary>
@@ -30,78 +30,6 @@ namespace Microsoft.Extensions.Azure
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<ItemTypesClient, ItemTypesClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Int32Value"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Int32Value, ItemTypesClientOptions> AddInt32Value<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Int32Value, ItemTypesClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Int64Value"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Int64Value, ItemTypesClientOptions> AddInt64Value<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Int64Value, ItemTypesClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="BooleanValue"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<BooleanValue, ItemTypesClientOptions> AddBooleanValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<BooleanValue, ItemTypesClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="StringValue"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<StringValue, ItemTypesClientOptions> AddStringValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<StringValue, ItemTypesClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Float32Value"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Float32Value, ItemTypesClientOptions> AddFloat32Value<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Float32Value, ItemTypesClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="DatetimeValue"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<DatetimeValue, ItemTypesClientOptions> AddDatetimeValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<DatetimeValue, ItemTypesClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="DurationValue"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<DurationValue, ItemTypesClientOptions> AddDurationValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<DurationValue, ItemTypesClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="UnknownValue"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<UnknownValue, ItemTypesClientOptions> AddUnknownValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<UnknownValue, ItemTypesClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="ModelValue"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<ModelValue, ItemTypesClientOptions> AddModelValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<ModelValue, ItemTypesClientOptions>(configuration);
         }
     }
 }

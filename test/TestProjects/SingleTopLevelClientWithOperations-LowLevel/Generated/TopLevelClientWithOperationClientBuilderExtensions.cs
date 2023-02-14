@@ -12,7 +12,7 @@ using SingleTopLevelClientWithOperations_LowLevel;
 
 namespace Microsoft.Extensions.Azure
 {
-    /// <summary> Extension methods to add <see cref="TopLevelClientWithOperationClient"/>, <see cref="Client1"/>, <see cref="Client2"/>, <see cref="Client4"/> to client builder. </summary>
+    /// <summary> Extension methods to add <see cref="TopLevelClientWithOperationClient"/> to client builder. </summary>
     public static partial class TopLevelClientWithOperationClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="TopLevelClientWithOperationClient"/> instance. </summary>
@@ -32,30 +32,6 @@ namespace Microsoft.Extensions.Azure
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<TopLevelClientWithOperationClient, TopLevelClientWithOperationClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Client1"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Client1, TopLevelClientWithOperationClientOptions> AddClient1<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Client1, TopLevelClientWithOperationClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Client2"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Client2, TopLevelClientWithOperationClientOptions> AddClient2<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Client2, TopLevelClientWithOperationClientOptions>(configuration);
-        }
-        /// <summary> Registers a <see cref="Client4"/> instance. </summary>
-        /// <param name="builder"> The builder to register with. </param>
-        /// <param name="configuration"> The configuration values. </param>
-        public static IAzureClientBuilder<Client4, TopLevelClientWithOperationClientOptions> AddClient4<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
-        where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
-        {
-            return builder.RegisterClientFactory<Client4, TopLevelClientWithOperationClientOptions>(configuration);
         }
     }
 }
