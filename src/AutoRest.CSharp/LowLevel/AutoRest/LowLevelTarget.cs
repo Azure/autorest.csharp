@@ -3,6 +3,7 @@
 
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.PostProcessing;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -44,7 +45,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ClientOptionsWriter.WriteClientOptions(optionsWriter, library.ClientOptions);
             project.AddGeneratedFile($"{library.ClientOptions.Type.Name}.cs", optionsWriter.ToString());
 
-            await project.PostProcessAsync();
+            var extensionWriter = new AspDotNetExtensionWriter(library.AspDotNetExtension);
+            extensionWriter.Write();
+            project.AddGeneratedFile($"{library.AspDotNetExtension.Type.Name}.cs", extensionWriter.ToString());
+
+            await project.PostProcessAsync(new PostProcessor(
+                modelFactoryFullName: null,
+                aspExtensionClassName: library.AspDotNetExtension.FullName));
         }
     }
 }

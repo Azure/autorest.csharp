@@ -11,6 +11,7 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.LowLevel.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -53,7 +54,8 @@ namespace AutoRest.CSharp.Output.Models
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
-            var library = new DpgOutputLibrary(enums, models, clients, clientOptions, isCadlInput);
+            var aspDotNetExtension = new AspDotNetExtension(clients, _rootNamespace.Name, _sourceInputModel);
+            var library = new DpgOutputLibrary(enums, models, clients, clientOptions, aspDotNetExtension, isCadlInput);
 
             if (isCadlInput)
             {
