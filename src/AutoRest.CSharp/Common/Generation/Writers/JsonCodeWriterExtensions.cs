@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Generation.Writers
     internal static class JsonCodeWriterExtensions
     {
         private static HashSet<string> _emptyStringCheckTypesFromConfig = new HashSet<string>(Configuration.MgmtConfiguration.CheckEmptyStringForTypesInDeserialization);
-        private static HashSet<string> _emptyStringCheckTypesForDeserializeOnlyProperties = new HashSet<string>() { nameof(Uri), nameof(Guid), nameof(ResourceIdentifier) };
+        private static HashSet<string> _emptyStringCheckTypesForDeserializeOnlyProperties = Configuration.AzureArm ? new HashSet<string>() { nameof(Uri), nameof(Guid), nameof(ResourceIdentifier) } : new HashSet<string>();
 
         public static void ToSerializeCall(this CodeWriter writer, JsonObjectSerialization serialization)
         {

@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Sample.Models
             {
                 if (property.NameEquals("consoleScreenshotBlobUri"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null || property.Value.GetString().Length == 0)
                     {
                         consoleScreenshotBlobUri = null;
                         continue;
@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
                 }
                 if (property.NameEquals("serialConsoleLogBlobUri"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null || property.Value.GetString().Length == 0)
                     {
                         serialConsoleLogBlobUri = null;
                         continue;

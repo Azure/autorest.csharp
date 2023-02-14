@@ -197,7 +197,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("vaultUri"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null || property.Value.GetString().Length == 0)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         vaultUri = null;
                         continue;

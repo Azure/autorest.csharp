@@ -17,10 +17,6 @@
   "GenerateArmResourceExtensions": [
     "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}"
   ],
-  "CheckEmptyStringForTypesInDeserialization": [
-    "Uri",
-    "Guid"
-  ],
   "RequestPathToParent": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}/validate": "/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}"
   },
