@@ -12,5 +12,4 @@ export interface Configuration {
         | "internalize"
         | "keepAll";
     "model-namespace"?: boolean;
-    "array-to-page"?: boolean;
 }

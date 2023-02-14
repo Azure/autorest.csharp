@@ -194,12 +194,4 @@ interface UseFoundationsResourceList {
   @doc("List upload detail for the discovery resource.")
   @convenientAPI(true)
   list is CustomResourceList<LedgerEntry>;  
-}  
-
-// @route("/rawArray")
-// interface UseRawArrayAsResponse {
-//   @doc("Response is int array.")
-//   @get
-//   @convenienceAPI
-//   op getIntArray(): int32[];
-// }
+}
