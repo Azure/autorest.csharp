@@ -120,20 +120,18 @@ namespace AutoRest.CSharp.Output.Models
             return first!.Type.Equals(second!.Type);
         }
 
-        private InputType? GetFirstBodyType(InputOperation operation)
-        {
-            var operationBodyTypes = operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
-            return operationBodyTypes.Length != 0 ? operationBodyTypes[0] : null;
-        }
-
         private ReturnTypeChain BuildReturnTypes()
         {
+            var operationBodyTypes = Operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().ToArray();
             CSharpType? responseType = null;
-            var firstBodyType = GetFirstBodyType(Operation);
-            if (firstBodyType != null)
+            if (operationBodyTypes.Length != 0)
             {
-                responseType = TypeFactory.GetOutputType(_typeFactory.CreateType(firstBodyType));
-            }
+                var firstBodyType = operationBodyTypes[0];
+                if (firstBodyType != null)
+                {
+                    responseType = _typeFactory.CreateType(firstBodyType);
+                }
+            };
 
             if (Operation.Paging != null)
             {
