@@ -293,7 +293,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (property.ValueType?.IsNullable == true)
                     {
-                        using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                        var emptyStringCheck = GetEmptyStringCheckClause(property.ValueSerialization, itemVariable);
+                        using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
                         {
                             writer.Line($"{propertyVariables[property].Declaration} = null;");
                             writer.Append($"continue;");
@@ -304,9 +305,10 @@ namespace AutoRest.CSharp.Generation.Writers
                              property.ValueType?.Equals(typeof(string)) !=
                              true) //https://github.com/Azure/autorest.csharp/issues/922
                     {
+                        var emptyStringCheck = GetEmptyStringCheckClause(property.ValueSerialization, itemVariable);
                         if (Configuration.AzureArm && property.ValueType?.Equals(typeof(Uri)) == true)
                         {
-                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
                             {
                                 writer.Line($"{propertyVariables[property].Declaration} = null;");
                                 writer.Append($"continue;");
@@ -314,7 +316,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
-                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
                             {
                                 writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
                                 writer.Line($"{itemVariable}.{nameof(JsonElementExtensions.ThrowNonNullablePropertyIsNull)}();");
@@ -346,6 +348,18 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"continue;");
                 }
             }
+        }
+
+        private static FormattableString GetEmptyStringCheckClause(JsonSerialization? propertySerialization, FormattableString itemVariable)
+        {
+            FormattableString result = $"";
+            if (propertySerialization is JsonValueSerialization valueSerialization
+                && valueSerialization.Type.IsFrameworkType
+                && Configuration.MgmtConfiguration.CheckEmptyStringForTypesInDeserialization.Contains(valueSerialization.Type.FrameworkType.Name))
+            {
+                result = $" || {itemVariable}.Value.GetString().Length == 0";
+            }
+            return result;
         }
 
         private static FormattableString GetOptionalFormattable(JsonPropertySerialization target, ObjectPropertyVariable variable)
