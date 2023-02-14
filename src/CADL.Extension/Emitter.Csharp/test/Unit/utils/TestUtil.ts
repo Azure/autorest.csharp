@@ -3,7 +3,7 @@ import { RestTestLibrary } from "@cadl-lang/rest/testing";
 import { VersioningTestLibrary } from "@cadl-lang/versioning/testing";
 import { AzureCoreTestLibrary } from "@azure-tools/cadl-azure-core/testing";
 import { EmitContext, Program } from "@cadl-lang/compiler";
-import { NetEmitterOptions } from "../../../src/emitter";
+import { NetEmitterOptions } from "../../../src/options";
 
 export async function createEmitterTestHost(): Promise<TestHost> {
     return createTestHost({
