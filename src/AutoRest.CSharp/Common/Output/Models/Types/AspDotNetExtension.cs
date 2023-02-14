@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -32,7 +33,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             _clients = clients;
         }
 
-        public FormattableString Description => $"Extension methods to add clients to client builder";
+        public FormattableString Description => $"Extension methods to add {GetClientSeeRefs()} to client builder";
 
         protected override string DefaultName { get; }
 
@@ -40,6 +41,17 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         private Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)>? _extensionMethods;
         public IReadOnlyDictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)> ExtesnsionMethods => _extensionMethods ??= EnsureExtensionMethods();
+
+        public string GetClientSeeRefs()
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (var client in _clients)
+            {
+                builder.Append($"<see cref=\"{client.Declaration.Name}\"/>, ");
+            }
+            builder.Length -= 2;
+            return builder.ToString();
+        }
 
         private Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)> EnsureExtensionMethods()
         {
@@ -78,17 +90,14 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                         }
                     }
 
-                    var parameterFs = signatureParameters.Select(parameter => (FormattableString)$"<paramref name=\"{parameter.Name}\"/>").ToArray();
-                    var summary = parameterFs.Any()
-                        ? $"Registers a <see cref=\"{client.Type}\"/> instance with the provided {parameterFs.Join(", ", " and ")}"
-                        : $"Registers a <see cref=\"{client.Type}\"/> instance";
+                    var summary = $"Registers a <see cref=\"{client.Declaration.Name}\"/> instance";
                     var constrait = includeCredential
                         ? (FormattableString)$"{typeof(IAzureClientFactoryBuilderWithCredential)}"
                         : $"{typeof(IAzureClientFactoryBuilder)}";
                     var signature = new MethodSignature(
                         $"Add{client.Declaration.Name}",
                         summary,
-                        null,
+                        summary,
                         MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension,
                         returnType,
                         null,
@@ -114,10 +123,11 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             {
                 var returnType = new CSharpType(typeof(IAzureClientBuilder<,>), client.Type, client.ClientOptions.Type);
 
+                var summary = $"Registers a <see cref=\"{client.Declaration.Name}\"/> instance";
                 yield return new MethodSignature(
                     $"Add{client.Declaration.Name}",
-                    $"Registers a <see cref=\"{client.Type}\"/> instance",
-                    null,
+                    summary,
+                    summary,
                     MethodSignatureModifiers.Public | MethodSignatureModifiers.Static | MethodSignatureModifiers.Extension,
                     returnType,
                     null,
@@ -133,7 +143,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private Parameter? _factoryBuilderParameter;
         public Parameter FactoryBuilderParameter => _factoryBuilderParameter ??= new Parameter(
             "builder",
-            null,
+            "The builder to register with.",
             TBuilderType,
             null,
             ValidationType.None,
@@ -142,7 +152,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private Parameter? _configurationParameter;
         public Parameter ConfigurationParameter => _configurationParameter ??= new Parameter(
             "configuration",
-            null,
+            "The configuration values.",
             TConfigurationType,
             null,
             ValidationType.None,
