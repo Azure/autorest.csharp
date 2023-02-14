@@ -23,6 +23,7 @@ namespace MgmtDiscriminator.Models
         internal static UnknownDeliveryRuleAction DeserializeUnknownDeliveryRuleAction(JsonElement element)
         {
             DeliveryRuleActionType name = "Unknown";
+            Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -30,8 +31,13 @@ namespace MgmtDiscriminator.Models
                     name = new DeliveryRuleActionType(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("foo"u8))
+                {
+                    foo = property.Value.GetString();
+                    continue;
+                }
             }
-            return new UnknownDeliveryRuleAction(name);
+            return new UnknownDeliveryRuleAction(name, foo.Value);
         }
     }
 }

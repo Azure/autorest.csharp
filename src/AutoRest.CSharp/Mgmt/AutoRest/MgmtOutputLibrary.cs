@@ -64,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private CachedDictionary<string, ResourceData> RawRequestPathToResourceData { get; }
 
         /// <summary>
-        /// This is a map from request path to the <see cref="ResourceObjectAssociation"/> which consists from <see cref="ResourceTypeSegment"/>, <see cref="Output.ResourceData"/>, <see cref="Resource"/> and <see cref="ResouColl"/>
+        /// This is a map from request path to the <see cref="ResourceObjectAssociation"/> which consists from <see cref="ResourceTypeSegment"/>, <see cref="Output.ResourceData"/>, <see cref="Resource"/> and <see cref="ResourceCollection"/>
         /// </summary>
         private CachedDictionary<RequestPath, ResourceObjectAssociation> RequestPathToResources { get; }
 
@@ -375,6 +375,26 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             }
 
             return restClientMethods;
+        }
+
+        private ModelFactoryTypeProvider? _modelFactory;
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(GetModelFactoryName(), MgmtContext.Context.DefaultNamespace, AllSchemaMap.Values.Where(ShouldIncludeModel), MgmtContext.Context.SourceInputModel);
+
+        private static string GetModelFactoryName()
+        {
+            var baseName = MgmtContext.Context.DefaultNamespace.Split('.').Last();
+            if (Configuration.MgmtConfiguration.IsArmCore)
+                return baseName;
+
+            return $"Arm{baseName}";
+        }
+
+        private bool ShouldIncludeModel(TypeProvider model)
+        {
+            if (model is MgmtReferenceType)
+                return false;
+
+            return model.Type.Namespace.StartsWith(MgmtContext.Context.DefaultNamespace);
         }
 
         private ArmClientExtensions? _armClientExtensions;

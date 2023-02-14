@@ -13,32 +13,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class FlattenedObjectTypeProperty : ObjectTypeProperty
     {
-        public static FlattenedObjectTypeProperty CreateFrom(ObjectTypeProperty property)
-        {
-            var hierarchyStack = GetHierarchyStack(property);
-            // we can only get in this method when the property has a single property type, therefore the hierarchy stack here is guaranteed to have at least two values
-            var innerProperty = hierarchyStack.Pop();
-            var immediateParentProperty = hierarchyStack.Pop();
-
-            var myPropertyName = GetCombinedPropertyName(innerProperty, immediateParentProperty);
-            var childPropertyName = property.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
-
-            var propertyType = innerProperty.Declaration.Type;
-
-            var isOverriddenValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
-            if (isOverriddenValueType)
-                propertyType = propertyType.WithNullable(isOverriddenValueType);
-
-            var declaration = new MemberDeclarationOptions(innerProperty.Declaration.Accessibility, myPropertyName, propertyType);
-
-            // determines whether this property should has a setter
-            var (isReadOnly, includeGetterNullCheck, includeSetterNullCheck) = GetFlags(property, innerProperty);
-
-            return new FlattenedObjectTypeProperty(declaration, innerProperty.ParameterDescription, property, isReadOnly, includeGetterNullCheck, includeSetterNullCheck, childPropertyName, isOverriddenValueType);
-        }
-
         // The flattened object type property does not participate in the serialization or deserialization process, therefore we pass in null for SchemaProperty.
-        private FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, ObjectTypeProperty underlyingProperty, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, bool isOverriddenValueType, CSharpType? valueType = null, bool optionalViaNullability = false) : base(declaration, parameterDescription, isReadOnly, null, valueType, optionalViaNullability)
+        internal FlattenedObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, ObjectTypeProperty underlyingProperty, bool isReadOnly, bool? includeGetterNullCheck, bool includeSetterNullCheck, string childPropertyName, bool isOverriddenValueType, CSharpType? valueType = null, bool optionalViaNullability = false) : base(declaration, parameterDescription, isReadOnly, null, valueType, optionalViaNullability)
         {
             UnderlyingProperty = underlyingProperty;
             IncludeGetterNullCheck = includeGetterNullCheck;
@@ -49,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         // This is not immutable therefore we have to build this everytime we call it
-        public Stack<ObjectTypeProperty> BuildHierarchyStack() => GetHierarchyStack(UnderlyingProperty);
+        public override Stack<ObjectTypeProperty> BuildHierarchyStack() => GetHierarchyStack(UnderlyingProperty);
 
         public ObjectTypeProperty UnderlyingProperty { get; }
 
@@ -63,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public string ChildPropertyName { get; }
 
-        private static (bool IsReadOnly, bool? IncludeGetterNullCheck, bool IncludeSetterNullCheck) GetFlags(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
+        internal static (bool IsReadOnly, bool? IncludeGetterNullCheck, bool IncludeSetterNullCheck) GetFlags(ObjectTypeProperty property, ObjectTypeProperty innerProperty)
         {
             if (!property.IsReadOnly && innerProperty.IsReadOnly)
             {
@@ -104,7 +80,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return false;
         }
 
-        private static Stack<ObjectTypeProperty> GetHierarchyStack(ObjectTypeProperty property)
+        internal static Stack<ObjectTypeProperty> GetHierarchyStack(ObjectTypeProperty property)
         {
             var hierarchyStack = new Stack<ObjectTypeProperty>();
             var visited = new HashSet<ObjectTypeProperty>();
@@ -196,7 +172,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return $"{immediateParentPropertyName}{innerProperty.Declaration.Name}";
         }
 
-        internal static string GetPropertyName(MemberDeclarationOptions property)
+        private static string GetPropertyName(MemberDeclarationOptions property)
         {
             const string properties = "Properties";
             if (property.Name.Equals(properties, StringComparison.Ordinal))

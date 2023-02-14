@@ -47,6 +47,11 @@ namespace MgmtDiscriminator.Models
                 }
                 writer.WriteEndObject();
             }
+            if (Optional.IsDefined(Pet))
+            {
+                writer.WritePropertyName("pet"u8);
+                writer.WriteObjectValue(Pet);
+            }
             writer.WriteEndObject();
         }
 
@@ -56,6 +61,7 @@ namespace MgmtDiscriminator.Models
             Optional<DeliveryRuleCondition> conditions = default;
             Optional<IList<DeliveryRuleAction>> actions = default;
             Optional<IDictionary<string, DeliveryRuleAction>> extraMappingInfo = default;
+            Optional<Pet> pet = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("order"u8))
@@ -108,8 +114,18 @@ namespace MgmtDiscriminator.Models
                     extraMappingInfo = dictionary;
                     continue;
                 }
+                if (property.NameEquals("pet"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    pet = Pet.DeserializePet(property.Value);
+                    continue;
+                }
             }
-            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, Optional.ToList(actions), Optional.ToDictionary(extraMappingInfo));
+            return new DeliveryRuleProperties(Optional.ToNullable(order), conditions.Value, Optional.ToList(actions), Optional.ToDictionary(extraMappingInfo), pet.Value);
         }
     }
 }
