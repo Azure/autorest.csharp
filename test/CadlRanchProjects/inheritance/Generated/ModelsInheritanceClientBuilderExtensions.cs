@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <param name="builder"></param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<InheritanceClient, InheritanceClientOptions> AddInheritanceClient<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<InheritanceClient, InheritanceClientOptions> AddInheritanceClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<InheritanceClient, InheritanceClientOptions>((options) => new InheritanceClient(endpoint, options));
@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<InheritanceClient, InheritanceClientOptions> AddInheritanceClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<InheritanceClient, InheritanceClientOptions> AddInheritanceClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<InheritanceClient, InheritanceClientOptions>(configuration);

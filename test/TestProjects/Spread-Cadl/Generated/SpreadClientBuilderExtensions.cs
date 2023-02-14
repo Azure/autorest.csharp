@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <param name="builder"></param>
         /// <param name="endpoint"> The Uri to use. </param>
-        public static IAzureClientBuilder<SpreadClient, SpreadClientOptions> AddSpreadClient<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<SpreadClient, SpreadClientOptions> AddSpreadClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<SpreadClient, SpreadClientOptions>((options) => new SpreadClient(endpoint, options));
@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<SpreadClient, SpreadClientOptions> AddSpreadClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<SpreadClient, SpreadClientOptions> AddSpreadClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<SpreadClient, SpreadClientOptions>(configuration);

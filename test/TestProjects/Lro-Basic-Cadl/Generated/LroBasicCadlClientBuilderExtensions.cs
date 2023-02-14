@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <param name="builder"></param>
         /// <param name="endpoint"> The Uri to use. </param>
-        public static IAzureClientBuilder<LroBasicCadlClient, LroBasicCadlClientOptions> AddLroBasicCadlClient<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<LroBasicCadlClient, LroBasicCadlClientOptions> AddLroBasicCadlClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<LroBasicCadlClient, LroBasicCadlClientOptions>((options) => new LroBasicCadlClient(endpoint, options));
@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<LroBasicCadlClient, LroBasicCadlClientOptions> AddLroBasicCadlClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<LroBasicCadlClient, LroBasicCadlClientOptions> AddLroBasicCadlClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<LroBasicCadlClient, LroBasicCadlClientOptions>(configuration);

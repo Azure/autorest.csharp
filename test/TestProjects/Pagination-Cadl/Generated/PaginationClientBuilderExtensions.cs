@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <param name="builder"></param>
         /// <param name="endpoint"> The Uri to use. </param>
-        public static IAzureClientBuilder<PaginationClient, PaginationClientOptions> AddPaginationClient<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<PaginationClient, PaginationClientOptions> AddPaginationClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
             return builder.RegisterClientFactory<PaginationClient, PaginationClientOptions>((options, cred) => new PaginationClient(endpoint, cred, options));
@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<PaginationClient, PaginationClientOptions> AddPaginationClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<PaginationClient, PaginationClientOptions> AddPaginationClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<PaginationClient, PaginationClientOptions>(configuration);

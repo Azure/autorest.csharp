@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <param name="builder"></param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<ItemTypesClient, ItemTypesClientOptions> AddItemTypesClient<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<ItemTypesClient, ItemTypesClientOptions> AddItemTypesClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<ItemTypesClient, ItemTypesClientOptions>((options) => new ItemTypesClient(endpoint, options));
@@ -24,70 +24,70 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<ItemTypesClient, ItemTypesClientOptions> AddItemTypesClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<ItemTypesClient, ItemTypesClientOptions> AddItemTypesClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<ItemTypesClient, ItemTypesClientOptions>(configuration);
         }
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<Int32Value, ItemTypesClientOptions> AddInt32Value<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<Int32Value, ItemTypesClientOptions> AddInt32Value<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<Int32Value, ItemTypesClientOptions>(configuration);
         }
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<Int64Value, ItemTypesClientOptions> AddInt64Value<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<Int64Value, ItemTypesClientOptions> AddInt64Value<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<Int64Value, ItemTypesClientOptions>(configuration);
         }
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<BooleanValue, ItemTypesClientOptions> AddBooleanValue<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<BooleanValue, ItemTypesClientOptions> AddBooleanValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<BooleanValue, ItemTypesClientOptions>(configuration);
         }
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<StringValue, ItemTypesClientOptions> AddStringValue<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<StringValue, ItemTypesClientOptions> AddStringValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<StringValue, ItemTypesClientOptions>(configuration);
         }
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<Float32Value, ItemTypesClientOptions> AddFloat32Value<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<Float32Value, ItemTypesClientOptions> AddFloat32Value<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<Float32Value, ItemTypesClientOptions>(configuration);
         }
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<DatetimeValue, ItemTypesClientOptions> AddDatetimeValue<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<DatetimeValue, ItemTypesClientOptions> AddDatetimeValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<DatetimeValue, ItemTypesClientOptions>(configuration);
         }
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<DurationValue, ItemTypesClientOptions> AddDurationValue<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<DurationValue, ItemTypesClientOptions> AddDurationValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<DurationValue, ItemTypesClientOptions>(configuration);
         }
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<UnknownValue, ItemTypesClientOptions> AddUnknownValue<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<UnknownValue, ItemTypesClientOptions> AddUnknownValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<UnknownValue, ItemTypesClientOptions>(configuration);
         }
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<ModelValue, ItemTypesClientOptions> AddModelValue<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<ModelValue, ItemTypesClientOptions> AddModelValue<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<ModelValue, ItemTypesClientOptions>(configuration);

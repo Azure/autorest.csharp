@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <param name="builder"></param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<OAuth2Client, OAuth2ClientOptions> AddOAuth2Client<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<OAuth2Client, OAuth2ClientOptions> AddOAuth2Client<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
             return builder.RegisterClientFactory<OAuth2Client, OAuth2ClientOptions>((options, cred) => new OAuth2Client(cred, endpoint, options));
@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<OAuth2Client, OAuth2ClientOptions> AddOAuth2Client<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<OAuth2Client, OAuth2ClientOptions> AddOAuth2Client<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<OAuth2Client, OAuth2ClientOptions>(configuration);

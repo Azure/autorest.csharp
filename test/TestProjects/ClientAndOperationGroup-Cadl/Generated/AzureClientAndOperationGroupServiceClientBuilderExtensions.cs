@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <param name="builder"></param>
         /// <param name="endpoint"> The Uri to use. </param>
-        public static IAzureClientBuilder<ClientAndOperationGroupServiceClient, ClientAndOperationGroupServiceClientOptions> AddClientAndOperationGroupServiceClient<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<ClientAndOperationGroupServiceClient, ClientAndOperationGroupServiceClientOptions> AddClientAndOperationGroupServiceClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<ClientAndOperationGroupServiceClient, ClientAndOperationGroupServiceClientOptions>((options) => new ClientAndOperationGroupServiceClient(endpoint, options));
@@ -24,21 +24,21 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<ClientAndOperationGroupServiceClient, ClientAndOperationGroupServiceClientOptions> AddClientAndOperationGroupServiceClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<ClientAndOperationGroupServiceClient, ClientAndOperationGroupServiceClientOptions> AddClientAndOperationGroupServiceClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<ClientAndOperationGroupServiceClient, ClientAndOperationGroupServiceClientOptions>(configuration);
         }
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<Beta, ClientAndOperationGroupServiceClientOptions> AddBeta<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<Beta, ClientAndOperationGroupServiceClientOptions> AddBeta<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<Beta, ClientAndOperationGroupServiceClientOptions>(configuration);
         }
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<Gamma, ClientAndOperationGroupServiceClientOptions> AddGamma<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<Gamma, ClientAndOperationGroupServiceClientOptions> AddGamma<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<Gamma, ClientAndOperationGroupServiceClientOptions>(configuration);

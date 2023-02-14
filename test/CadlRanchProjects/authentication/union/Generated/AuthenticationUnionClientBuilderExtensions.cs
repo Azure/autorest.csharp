@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.Azure
         /// <param name="builder"></param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder>(TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<UnionClient, UnionClientOptions>((options) => new UnionClient(credential, endpoint, options));
@@ -26,7 +26,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
             return builder.RegisterClientFactory<UnionClient, UnionClientOptions>((options, cred) => new UnionClient(cred, endpoint, options));
@@ -34,7 +34,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<UnionClient, UnionClientOptions> AddUnionClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<UnionClient, UnionClientOptions>(configuration);

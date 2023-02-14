@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <param name="builder"></param>
         /// <param name="endpoint"> The Uri to use. </param>
-        public static IAzureClientBuilder<PetStoreClient, PetStoreClientOptions> AddPetStoreClient<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<PetStoreClient, PetStoreClientOptions> AddPetStoreClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<PetStoreClient, PetStoreClientOptions>((options) => new PetStoreClient(endpoint, options));
@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<PetStoreClient, PetStoreClientOptions> AddPetStoreClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<PetStoreClient, PetStoreClientOptions> AddPetStoreClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<PetStoreClient, PetStoreClientOptions>(configuration);

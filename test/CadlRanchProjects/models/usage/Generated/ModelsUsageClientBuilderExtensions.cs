@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <param name="builder"></param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        public static IAzureClientBuilder<UsageClient, UsageClientOptions> AddUsageClient<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<UsageClient, UsageClientOptions> AddUsageClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<UsageClient, UsageClientOptions>((options) => new UsageClient(endpoint, options));
@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<UsageClient, UsageClientOptions> AddUsageClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<UsageClient, UsageClientOptions> AddUsageClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<UsageClient, UsageClientOptions>(configuration);

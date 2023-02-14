@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.Azure
         /// <param name="builder"></param>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<CadlFirstTestClient, CadlFirstTestClientOptions> AddCadlFirstTestClient<TBuilder>(TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<CadlFirstTestClient, CadlFirstTestClientOptions> AddCadlFirstTestClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<CadlFirstTestClient, CadlFirstTestClientOptions>((options) => new CadlFirstTestClient(endpoint, credential, options));
@@ -26,7 +26,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="endpoint"> The Uri to use. </param>
-        public static IAzureClientBuilder<CadlFirstTestClient, CadlFirstTestClientOptions> AddCadlFirstTestClient<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<CadlFirstTestClient, CadlFirstTestClientOptions> AddCadlFirstTestClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilderWithCredential
         {
             return builder.RegisterClientFactory<CadlFirstTestClient, CadlFirstTestClientOptions>((options, cred) => new CadlFirstTestClient(endpoint, cred, options));
@@ -34,7 +34,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<CadlFirstTestClient, CadlFirstTestClientOptions> AddCadlFirstTestClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<CadlFirstTestClient, CadlFirstTestClientOptions> AddCadlFirstTestClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<CadlFirstTestClient, CadlFirstTestClientOptions>(configuration);

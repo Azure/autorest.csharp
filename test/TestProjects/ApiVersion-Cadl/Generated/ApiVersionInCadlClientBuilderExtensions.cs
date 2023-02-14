@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.Azure
         /// https://westus2.api.cognitive.microsoft.com).
         /// </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        public static IAzureClientBuilder<ApiVersionInCadlClient, ApiVersionInCadlClientOptions> AddApiVersionInCadlClient<TBuilder>(TBuilder builder, Uri endpoint, AzureKeyCredential credential)
+        public static IAzureClientBuilder<ApiVersionInCadlClient, ApiVersionInCadlClientOptions> AddApiVersionInCadlClient<TBuilder>(this TBuilder builder, Uri endpoint, AzureKeyCredential credential)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<ApiVersionInCadlClient, ApiVersionInCadlClientOptions>((options) => new ApiVersionInCadlClient(endpoint, credential, options));
@@ -29,7 +29,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<ApiVersionInCadlClient, ApiVersionInCadlClientOptions> AddApiVersionInCadlClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<ApiVersionInCadlClient, ApiVersionInCadlClientOptions> AddApiVersionInCadlClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<ApiVersionInCadlClient, ApiVersionInCadlClientOptions>(configuration);

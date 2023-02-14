@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Azure
     {
         /// <param name="builder"></param>
         /// <param name="endpoint"> The Uri to use. </param>
-        public static IAzureClientBuilder<RenameGetListClient, RenameGetListClientOptions> AddRenameGetListClient<TBuilder>(TBuilder builder, Uri endpoint)
+        public static IAzureClientBuilder<RenameGetListClient, RenameGetListClientOptions> AddRenameGetListClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<RenameGetListClient, RenameGetListClientOptions>((options) => new RenameGetListClient(endpoint, options));
@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<RenameGetListClient, RenameGetListClientOptions> AddRenameGetListClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<RenameGetListClient, RenameGetListClientOptions> AddRenameGetListClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<RenameGetListClient, RenameGetListClientOptions>(configuration);

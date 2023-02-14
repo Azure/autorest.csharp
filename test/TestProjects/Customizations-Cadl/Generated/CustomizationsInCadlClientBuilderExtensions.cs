@@ -14,7 +14,7 @@ namespace Microsoft.Extensions.Azure
     public static partial class CustomizationsInCadlClientBuilderExtensions
     {
         /// <param name="builder"></param>
-        public static IAzureClientBuilder<CustomizationsInCadlClient, CustomizationsInCadlClientOptions> AddCustomizationsInCadlClient<TBuilder>(TBuilder builder)
+        public static IAzureClientBuilder<CustomizationsInCadlClient, CustomizationsInCadlClientOptions> AddCustomizationsInCadlClient<TBuilder>(this TBuilder builder)
         where TBuilder : IAzureClientFactoryBuilder
         {
             return builder.RegisterClientFactory<CustomizationsInCadlClient, CustomizationsInCadlClientOptions>((options) => new CustomizationsInCadlClient(options));
@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.Azure
 
         /// <param name="builder"></param>
         /// <param name="configuration"></param>
-        public static IAzureClientBuilder<CustomizationsInCadlClient, CustomizationsInCadlClientOptions> AddCustomizationsInCadlClient<TBuilder, TConfiguration>(TBuilder builder, TConfiguration configuration)
+        public static IAzureClientBuilder<CustomizationsInCadlClient, CustomizationsInCadlClientOptions> AddCustomizationsInCadlClient<TBuilder, TConfiguration>(this TBuilder builder, TConfiguration configuration)
         where TBuilder : IAzureClientFactoryBuilderWithConfiguration<TConfiguration>
         {
             return builder.RegisterClientFactory<CustomizationsInCadlClient, CustomizationsInCadlClientOptions>(configuration);
