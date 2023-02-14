@@ -49,6 +49,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 singleTopLevelClient: false,
                 skipSerializationFormatXml: false,
                 disablePaginationTopRenaming: false,
+                generateModelFactory: true,
+                modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 projectFolder: ".",
                 protocolMethodList: Array.Empty<string>(),

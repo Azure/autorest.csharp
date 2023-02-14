@@ -10,6 +10,7 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
+  "generate-model-factory": false,
   "NoResourceSuffix": [
     "Disk",
     "Memory"

@@ -26,8 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of UrlRewriteAction. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
+        /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
-        internal UrlRewriteAction(DeliveryRuleActionType name, UrlRewriteActionParameters parameters) : base(name)
+        internal UrlRewriteAction(DeliveryRuleActionType name, string foo, UrlRewriteActionParameters parameters) : base(name, foo)
         {
             Parameters = parameters;
             Name = name;
