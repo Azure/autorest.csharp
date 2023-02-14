@@ -18,7 +18,7 @@ namespace body_complex.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Field))
             {
-                writer.WritePropertyName("field");
+                writer.WritePropertyName("field"u8);
                 writer.WriteStringValue(Field.Value, "P");
             }
             writer.WriteEndObject();
@@ -29,7 +29,7 @@ namespace body_complex.Models
             Optional<TimeSpan> field = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("field"))
+                if (property.NameEquals("field"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

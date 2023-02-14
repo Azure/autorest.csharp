@@ -18,7 +18,7 @@ namespace Models.Property.Optional.Models
             writer.WriteStartObject();
             if (Azure.Core.Optional.IsDefined(Property))
             {
-                writer.WritePropertyName("property");
+                writer.WritePropertyName("property"u8);
                 writer.WriteStringValue(Property);
             }
             writer.WriteEndObject();
@@ -29,7 +29,7 @@ namespace Models.Property.Optional.Models
             Optional<string> property = default;
             foreach (var property0 in element.EnumerateObject())
             {
-                if (property0.NameEquals("property"))
+                if (property0.NameEquals("property"u8))
                 {
                     property = property0.Value.GetString();
                     continue;

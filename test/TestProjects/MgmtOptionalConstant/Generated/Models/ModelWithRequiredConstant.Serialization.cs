@@ -15,11 +15,11 @@ namespace MgmtOptionalConstant.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("passName");
+            writer.WritePropertyName("passName"u8);
             writer.WriteStringValue(PassName.ToString());
             if (Optional.IsDefined(Protocol))
             {
-                writer.WritePropertyName("protocol");
+                writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToSerialString());
             }
             writer.WriteEndObject();
@@ -31,12 +31,12 @@ namespace MgmtOptionalConstant.Models
             Optional<ProtocolType> protocol = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("passName"))
+                if (property.NameEquals("passName"u8))
                 {
                     passName = new PassName(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("protocol"))
+                if (property.NameEquals("protocol"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

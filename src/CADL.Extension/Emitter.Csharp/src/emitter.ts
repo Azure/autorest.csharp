@@ -12,7 +12,6 @@ import {
     getSummary,
     ignoreDiagnostics,
     isErrorModel,
-    JSONSchemaType,
     Model,
     ModelProperty,
     Operation,
@@ -73,15 +72,12 @@ import { getOperationLink } from "@azure-tools/cadl-azure-core";
 import fs from "fs";
 import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
-import { dllFilePath } from "@autorest/csharp";
 import { execSync } from "child_process";
 import {
     Client,
     createDpgContext,
-    DpgEmitterOptions,
     getConvenienceAPIName,
     isApiVersion,
-    isOperationGroup,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
@@ -93,68 +89,12 @@ import { ClientKind } from "./type/ClientKind.js";
 import { getVersions } from "@cadl-lang/versioning";
 import { EmitContext } from "@cadl-lang/compiler/*";
 import { capitalize } from "./lib/utils.js";
-
-export type NetEmitterOptions = {
-    outputFile?: string;
-    logFile?: string;
-    namespace?: string;
-    "library-name"?: string;
-    "single-top-level-client"?: boolean;
-    skipSDKGeneration?: boolean;
-    "unreferenced-types-handling"?:
-        | "removeOrInternalize"
-        | "internalize"
-        | "keepAll";
-    "new-project"?: boolean;
-    csharpGeneratorPath?: string;
-    "clear-output-folder"?: boolean;
-    "save-inputs"?: boolean;
-    "model-namespace"?: boolean;
-} & DpgEmitterOptions;
-
-const defaultOptions = {
-    outputFile: "cadl.json",
-    logFile: "log.json",
-    skipSDKGeneration: false,
-    "new-project": false,
-    csharpGeneratorPath: dllFilePath,
-    "clear-output-folder": false,
-    "save-inputs": false,
-    "generate-protocol-methods": true,
-    "generate-convenience-methods": true,
-    "package-name": undefined
-};
-
-const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
-    type: "object",
-    additionalProperties: false,
-    properties: {
-        outputFile: { type: "string", nullable: true },
-        logFile: { type: "string", nullable: true },
-        namespace: { type: "string", nullable: true },
-        "library-name": { type: "string", nullable: true },
-        "single-top-level-client": { type: "boolean", nullable: true },
-        skipSDKGeneration: { type: "boolean", default: false, nullable: true },
-        "unreferenced-types-handling": {
-            type: "string",
-            enum: ["removeOrInternalize", "internalize", "keepAll"],
-            nullable: true
-        },
-        "new-project": { type: "boolean", nullable: true },
-        csharpGeneratorPath: {
-            type: "string",
-            default: dllFilePath,
-            nullable: true
-        },
-        "clear-output-folder": { type: "boolean", nullable: true },
-        "save-inputs": { type: "boolean", nullable: true },
-        "model-namespace": { type: "boolean", nullable: true },
-        "generate-protocol-methods": { type: "boolean", nullable: true },
-        "generate-convenience-methods": { type: "boolean", nullable: true },
-        "package-name": { type: "string", nullable: true }
-    },
-    required: []
-};
+import {
+    NetEmitterOptions,
+    NetEmitterOptionsSchema,
+    resolveOptions,
+    resolveOutputFolder
+} from "./options.js";
 
 export const $lib = createCadlLibrary({
     name: "cadl-csharp",
@@ -166,26 +106,8 @@ export const $lib = createCadlLibrary({
 
 export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const program: Program = context.program;
-    const emitterOptions = context.options;
-    const emitterOutputDir = context.emitterOutputDir;
-    const resolvedOptions = { ...defaultOptions, ...emitterOptions };
-    const outputFolder = resolvePath(emitterOutputDir ?? "./cadl-output");
-    const options: NetEmitterOptions = {
-        outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
-        logFile: resolvePath(
-            emitterOutputDir ?? "./cadl-output",
-            resolvedOptions.logFile
-        ),
-        skipSDKGeneration: resolvedOptions.skipSDKGeneration,
-        "unreferenced-types-handling":
-            resolvedOptions["unreferenced-types-handling"],
-        "new-project": resolvedOptions["new-project"],
-        csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
-        "clear-output-folder": resolvedOptions["clear-output-folder"],
-        "save-inputs": resolvedOptions["save-inputs"],
-        "model-namespace": resolvedOptions["model-namespace"]
-    };
-
+    const options = resolveOptions(context);
+    const outputFolder = resolveOutputFolder(context);
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
         const namespace = getServiceNamespaceString(program) || "";
@@ -199,12 +121,12 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             const resolvedSharedFolders: string[] = [];
             const sharedFolders = [
                 resolvePath(
-                    options.csharpGeneratorPath ?? dllFilePath,
+                    options.csharpGeneratorPath,
                     "..",
                     "Generator.Shared"
                 ),
                 resolvePath(
-                    options.csharpGeneratorPath ?? dllFilePath,
+                    options.csharpGeneratorPath,
                     "..",
                     "Azure.Core.Shared"
                 )
@@ -231,14 +153,13 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             //emit configuration.json
             const configurations = {
                 OutputFolder: ".",
-                Namespace: resolvedOptions.namespace ?? namespace,
-                LibraryName: resolvedOptions["library-name"] ?? null,
+                Namespace: options.namespace ?? namespace,
+                LibraryName: options["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient:
-                    resolvedOptions["single-top-level-client"],
+                SingleTopLevelClient: options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
-                "model-namespace": resolvedOptions["model-namespace"]
+                "model-namespace": options["model-namespace"]
             } as Configuration;
 
             await program.host.writeFile(
@@ -251,7 +172,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                     ? "--new-project"
                     : "";
                 const command = `dotnet --roll-forward Major ${resolvePath(
-                    options.csharpGeneratorPath ?? dllFilePath
+                    options.csharpGeneratorPath
                 )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
                     options["clear-output-folder"]
                 }`;
@@ -301,7 +222,7 @@ function getClient(
     return undefined;
 }
 
-function createModel(context: EmitContext<NetEmitterOptions>): any {
+export function createModel(context: EmitContext<NetEmitterOptions>): any {
     const program = context.program;
     const serviceNamespaceType = getServiceNamespace(program);
     if (!serviceNamespaceType) {
@@ -846,13 +767,14 @@ function loadOperation(
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
-        const kind: InputOperationParameterKind = isContentType
-            ? InputOperationParameterKind.Constant
-            : isApiVer
-            ? defaultValue
+        const kind: InputOperationParameterKind =
+            isContentType || inputType.Name === "Literal"
                 ? InputOperationParameterKind.Constant
-                : InputOperationParameterKind.Client
-            : InputOperationParameterKind.Method;
+                : isApiVer
+                ? defaultValue
+                    ? InputOperationParameterKind.Constant
+                    : InputOperationParameterKind.Client
+                : InputOperationParameterKind.Method;
         return {
             Name: param.name,
             NameInRequest: name,

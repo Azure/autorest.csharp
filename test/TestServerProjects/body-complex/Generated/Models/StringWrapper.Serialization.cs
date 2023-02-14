@@ -17,17 +17,17 @@ namespace body_complex.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Field))
             {
-                writer.WritePropertyName("field");
+                writer.WritePropertyName("field"u8);
                 writer.WriteStringValue(Field);
             }
             if (Optional.IsDefined(Empty))
             {
-                writer.WritePropertyName("empty");
+                writer.WritePropertyName("empty"u8);
                 writer.WriteStringValue(Empty);
             }
             if (Optional.IsDefined(NullProperty))
             {
-                writer.WritePropertyName("null");
+                writer.WritePropertyName("null"u8);
                 writer.WriteStringValue(NullProperty);
             }
             writer.WriteEndObject();
@@ -40,17 +40,17 @@ namespace body_complex.Models
             Optional<string> @null = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("field"))
+                if (property.NameEquals("field"u8))
                 {
                     field = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("empty"))
+                if (property.NameEquals("empty"u8))
                 {
                     empty = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("null"))
+                if (property.NameEquals("null"u8))
                 {
                     @null = property.Value.GetString();
                     continue;

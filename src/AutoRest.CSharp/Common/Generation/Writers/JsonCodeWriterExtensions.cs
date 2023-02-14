@@ -246,7 +246,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (property.ValueSerialization == null)
                 {
                     // Flattened property
-                    writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L});");
+                    writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
                     writer.Line($"{writerName}.WriteStartObject();");
                     writer.ToSerializeCall(writerName, property.PropertySerializations!);
                     writer.Line($"{writerName}.WriteEndObject();");
@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var propertyType = property.PropertyType;
                         var declarationName = property.PropertyName;
 
-                        writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L});");
+                        writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
 
                         if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
                         {
@@ -286,9 +286,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void DeserializeIntoObjectProperties(this CodeWriter writer, IEnumerable<JsonPropertySerialization> propertySerializations, FormattableString itemVariable, Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables)
         {
-            foreach (JsonPropertySerialization property in propertySerializations)
+            foreach (JsonPropertySerialization property in propertySerializations.Where(p => !p.ShouldSkipDeserialization))
             {
-                writer.Append($"if({itemVariable}.NameEquals({property.SerializedName:L}))");
+                writer.Append($"if({itemVariable}.NameEquals({property.SerializedName:L}u8))");
                 using (writer.Scope())
                 {
                     if (property.ValueType?.IsNullable == true)
@@ -393,9 +393,9 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         /// Collects a list of properties being read from all level of object hierarchy
-        private static void CollectProperties(Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, IEnumerable<JsonPropertySerialization> jsonProperties)
+        private static void CollectPropertiesForDeserialization(Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, IEnumerable<JsonPropertySerialization> jsonProperties)
         {
-            foreach (JsonPropertySerialization jsonProperty in jsonProperties)
+            foreach (JsonPropertySerialization jsonProperty in jsonProperties.Where(p => !p.ShouldSkipDeserialization))
             {
                 if (jsonProperty.ValueType != null)
                 {
@@ -413,7 +413,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else if (jsonProperty.PropertySerializations != null)
                 {
-                    CollectProperties(propertyVariables, jsonProperty.PropertySerializations);
+                    CollectPropertiesForDeserialization(propertyVariables, jsonProperty.PropertySerializations);
                 }
             }
         }
@@ -506,7 +506,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // collect all properties and initialize the dictionary
             var propertyVariables = new Dictionary<JsonPropertySerialization, ObjectPropertyVariable>();
 
-            CollectProperties(propertyVariables, serialization.Properties);
+            CollectPropertiesForDeserialization(propertyVariables, serialization.Properties);
 
             var additionalProperties = serialization.AdditionalProperties;
             if (additionalProperties != null)

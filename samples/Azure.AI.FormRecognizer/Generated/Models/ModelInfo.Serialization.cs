@@ -21,22 +21,22 @@ namespace Azure.AI.FormRecognizer.Models
             DateTimeOffset lastUpdatedDateTime = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("modelId"))
+                if (property.NameEquals("modelId"u8))
                 {
                     modelId = property.Value.GetGuid();
                     continue;
                 }
-                if (property.NameEquals("status"))
+                if (property.NameEquals("status"u8))
                 {
                     status = property.Value.GetString().ToModelStatus();
                     continue;
                 }
-                if (property.NameEquals("createdDateTime"))
+                if (property.NameEquals("createdDateTime"u8))
                 {
                     createdDateTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("lastUpdatedDateTime"))
+                if (property.NameEquals("lastUpdatedDateTime"u8))
                 {
                     lastUpdatedDateTime = property.Value.GetDateTimeOffset("O");
                     continue;

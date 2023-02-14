@@ -18,12 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(OsDisk))
             {
-                writer.WritePropertyName("osDisk");
+                writer.WritePropertyName("osDisk"u8);
                 writer.WriteObjectValue(OsDisk);
             }
             if (Optional.IsCollectionDefined(DataDisks))
             {
-                writer.WritePropertyName("dataDisks");
+                writer.WritePropertyName("dataDisks"u8);
                 writer.WriteStartArray();
                 foreach (var item in DataDisks)
                 {
@@ -33,7 +33,7 @@ namespace Azure.ResourceManager.Sample.Models
             }
             if (Optional.IsDefined(ZoneResilient))
             {
-                writer.WritePropertyName("zoneResilient");
+                writer.WritePropertyName("zoneResilient"u8);
                 writer.WriteBooleanValue(ZoneResilient.Value);
             }
             writer.WriteEndObject();
@@ -46,7 +46,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<bool> zoneResilient = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("osDisk"))
+                if (property.NameEquals("osDisk"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -56,7 +56,7 @@ namespace Azure.ResourceManager.Sample.Models
                     osDisk = ImageOSDisk.DeserializeImageOSDisk(property.Value);
                     continue;
                 }
-                if (property.NameEquals("dataDisks"))
+                if (property.NameEquals("dataDisks"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -71,7 +71,7 @@ namespace Azure.ResourceManager.Sample.Models
                     dataDisks = array;
                     continue;
                 }
-                if (property.NameEquals("zoneResilient"))
+                if (property.NameEquals("zoneResilient"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

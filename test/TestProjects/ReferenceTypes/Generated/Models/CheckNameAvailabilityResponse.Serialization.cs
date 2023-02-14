@@ -20,17 +20,17 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(NameAvailable))
             {
-                writer.WritePropertyName("nameAvailable");
+                writer.WritePropertyName("nameAvailable"u8);
                 writer.WriteBooleanValue(NameAvailable.Value);
             }
             if (Optional.IsDefined(Reason))
             {
-                writer.WritePropertyName("reason");
+                writer.WritePropertyName("reason"u8);
                 writer.WriteStringValue(Reason.Value.ToString());
             }
             if (Optional.IsDefined(Message))
             {
-                writer.WritePropertyName("message");
+                writer.WritePropertyName("message"u8);
                 writer.WriteStringValue(Message);
             }
             writer.WriteEndObject();
@@ -43,7 +43,7 @@ namespace Azure.ResourceManager.Fake.Models
             Optional<string> message = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("nameAvailable"))
+                if (property.NameEquals("nameAvailable"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -53,7 +53,7 @@ namespace Azure.ResourceManager.Fake.Models
                     nameAvailable = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("reason"))
+                if (property.NameEquals("reason"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -63,7 +63,7 @@ namespace Azure.ResourceManager.Fake.Models
                     reason = new CheckNameAvailabilityReason(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("message"))
+                if (property.NameEquals("message"u8))
                 {
                     message = property.Value.GetString();
                     continue;

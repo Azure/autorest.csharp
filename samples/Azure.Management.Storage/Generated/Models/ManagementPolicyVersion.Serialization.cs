@@ -17,17 +17,17 @@ namespace Azure.Management.Storage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(TierToCool))
             {
-                writer.WritePropertyName("tierToCool");
+                writer.WritePropertyName("tierToCool"u8);
                 writer.WriteObjectValue(TierToCool);
             }
             if (Optional.IsDefined(TierToArchive))
             {
-                writer.WritePropertyName("tierToArchive");
+                writer.WritePropertyName("tierToArchive"u8);
                 writer.WriteObjectValue(TierToArchive);
             }
             if (Optional.IsDefined(Delete))
             {
-                writer.WritePropertyName("delete");
+                writer.WritePropertyName("delete"u8);
                 writer.WriteObjectValue(Delete);
             }
             writer.WriteEndObject();
@@ -40,7 +40,7 @@ namespace Azure.Management.Storage.Models
             Optional<DateAfterCreation> delete = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("tierToCool"))
+                if (property.NameEquals("tierToCool"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -50,7 +50,7 @@ namespace Azure.Management.Storage.Models
                     tierToCool = DateAfterCreation.DeserializeDateAfterCreation(property.Value);
                     continue;
                 }
-                if (property.NameEquals("tierToArchive"))
+                if (property.NameEquals("tierToArchive"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -60,7 +60,7 @@ namespace Azure.Management.Storage.Models
                     tierToArchive = DateAfterCreation.DeserializeDateAfterCreation(property.Value);
                     continue;
                 }
-                if (property.NameEquals("delete"))
+                if (property.NameEquals("delete"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

@@ -15,7 +15,7 @@ namespace MgmtParamOrdering.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("instanceIds");
+            writer.WritePropertyName("instanceIds"u8);
             writer.WriteStartArray();
             foreach (var item in InstanceIds)
             {

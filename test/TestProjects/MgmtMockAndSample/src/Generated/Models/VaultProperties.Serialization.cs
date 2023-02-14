@@ -19,21 +19,21 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Duration))
             {
-                writer.WritePropertyName("duration");
+                writer.WritePropertyName("duration"u8);
                 writer.WriteStringValue(Duration.Value, "P");
             }
             if (Optional.IsDefined(CreateOn))
             {
-                writer.WritePropertyName("createOn");
+                writer.WritePropertyName("createOn"u8);
                 writer.WriteStringValue(CreateOn.Value, "O");
             }
-            writer.WritePropertyName("tenantId");
+            writer.WritePropertyName("tenantId"u8);
             writer.WriteStringValue(TenantId);
-            writer.WritePropertyName("sku");
+            writer.WritePropertyName("sku"u8);
             writer.WriteObjectValue(Sku);
             if (Optional.IsCollectionDefined(AccessPolicies))
             {
-                writer.WritePropertyName("accessPolicies");
+                writer.WritePropertyName("accessPolicies"u8);
                 writer.WriteStartArray();
                 foreach (var item in AccessPolicies)
                 {
@@ -43,12 +43,12 @@ namespace MgmtMockAndSample.Models
             }
             if (Optional.IsDefined(VaultUri))
             {
-                writer.WritePropertyName("vaultUri");
+                writer.WritePropertyName("vaultUri"u8);
                 writer.WriteStringValue(VaultUri.AbsoluteUri);
             }
             if (Optional.IsCollectionDefined(Deployments))
             {
-                writer.WritePropertyName("deployments");
+                writer.WritePropertyName("deployments"u8);
                 writer.WriteStartArray();
                 foreach (var item in Deployments)
                 {
@@ -58,67 +58,67 @@ namespace MgmtMockAndSample.Models
             }
             if (Optional.IsDefined(EnabledForDiskEncryption))
             {
-                writer.WritePropertyName("enabledForDiskEncryption");
+                writer.WritePropertyName("enabledForDiskEncryption"u8);
                 writer.WriteBooleanValue(EnabledForDiskEncryption.Value);
             }
             if (Optional.IsDefined(EnabledForTemplateDeployment))
             {
-                writer.WritePropertyName("enabledForTemplateDeployment");
+                writer.WritePropertyName("enabledForTemplateDeployment"u8);
                 writer.WriteBooleanValue(EnabledForTemplateDeployment.Value);
             }
             if (Optional.IsDefined(EnableSoftDelete))
             {
-                writer.WritePropertyName("enableSoftDelete");
+                writer.WritePropertyName("enableSoftDelete"u8);
                 writer.WriteBooleanValue(EnableSoftDelete.Value);
             }
             if (Optional.IsDefined(SoftDeleteRetentionInDays))
             {
-                writer.WritePropertyName("softDeleteRetentionInDays");
+                writer.WritePropertyName("softDeleteRetentionInDays"u8);
                 writer.WriteNumberValue(SoftDeleteRetentionInDays.Value);
             }
             if (Optional.IsDefined(EnableRbacAuthorization))
             {
-                writer.WritePropertyName("enableRbacAuthorization");
+                writer.WritePropertyName("enableRbacAuthorization"u8);
                 writer.WriteBooleanValue(EnableRbacAuthorization.Value);
             }
             if (Optional.IsDefined(CreateMode))
             {
-                writer.WritePropertyName("createMode");
+                writer.WritePropertyName("createMode"u8);
                 writer.WriteStringValue(CreateMode.Value.ToSerialString());
             }
             if (Optional.IsDefined(EnablePurgeProtection))
             {
-                writer.WritePropertyName("enablePurgeProtection");
+                writer.WritePropertyName("enablePurgeProtection"u8);
                 writer.WriteBooleanValue(EnablePurgeProtection.Value);
             }
             if (Optional.IsDefined(NetworkAcls))
             {
-                writer.WritePropertyName("networkAcls");
+                writer.WritePropertyName("networkAcls"u8);
                 writer.WriteObjectValue(NetworkAcls);
             }
             if (Optional.IsDefined(ProvisioningState))
             {
-                writer.WritePropertyName("provisioningState");
+                writer.WritePropertyName("provisioningState"u8);
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             if (Optional.IsDefined(PublicNetworkAccess))
             {
-                writer.WritePropertyName("publicNetworkAccess");
+                writer.WritePropertyName("publicNetworkAccess"u8);
                 writer.WriteStringValue(PublicNetworkAccess);
             }
             if (Optional.IsDefined(ReadWriteSingleStringProperty))
             {
-                writer.WritePropertyName("readWriteSingleStringProperty");
+                writer.WritePropertyName("readWriteSingleStringProperty"u8);
                 writer.WriteObjectValue(ReadWriteSingleStringProperty);
             }
             if (Optional.IsDefined(ReadOnlySingleStringProperty))
             {
-                writer.WritePropertyName("readOnlySingleStringProperty");
+                writer.WritePropertyName("readOnlySingleStringProperty"u8);
                 writer.WriteObjectValue(ReadOnlySingleStringProperty);
             }
             if (Optional.IsDefined(ExtremelyDeepStringProperty))
             {
-                writer.WritePropertyName("extremelyDeepStringProperty");
+                writer.WritePropertyName("extremelyDeepStringProperty"u8);
                 writer.WriteObjectValue(ExtremelyDeepStringProperty);
             }
             writer.WriteEndObject();
@@ -150,7 +150,7 @@ namespace MgmtMockAndSample.Models
             Optional<ExtremelyDeepSinglePropertyModel> extremelyDeepStringProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("duration"))
+                if (property.NameEquals("duration"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -160,7 +160,7 @@ namespace MgmtMockAndSample.Models
                     duration = property.Value.GetTimeSpan("P");
                     continue;
                 }
-                if (property.NameEquals("createOn"))
+                if (property.NameEquals("createOn"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -170,17 +170,17 @@ namespace MgmtMockAndSample.Models
                     createOn = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("tenantId"))
+                if (property.NameEquals("tenantId"u8))
                 {
                     tenantId = property.Value.GetGuid();
                     continue;
                 }
-                if (property.NameEquals("sku"))
+                if (property.NameEquals("sku"u8))
                 {
                     sku = MgmtMockAndSampleSku.DeserializeMgmtMockAndSampleSku(property.Value);
                     continue;
                 }
-                if (property.NameEquals("accessPolicies"))
+                if (property.NameEquals("accessPolicies"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -195,7 +195,7 @@ namespace MgmtMockAndSample.Models
                     accessPolicies = array;
                     continue;
                 }
-                if (property.NameEquals("vaultUri"))
+                if (property.NameEquals("vaultUri"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null || property.Value.GetString().Length == 0)
                     {
@@ -205,12 +205,12 @@ namespace MgmtMockAndSample.Models
                     vaultUri = new Uri(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("hsmPoolResourceId"))
+                if (property.NameEquals("hsmPoolResourceId"u8))
                 {
                     hsmPoolResourceId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("deployments"))
+                if (property.NameEquals("deployments"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -225,7 +225,7 @@ namespace MgmtMockAndSample.Models
                     deployments = array;
                     continue;
                 }
-                if (property.NameEquals("enabledForDiskEncryption"))
+                if (property.NameEquals("enabledForDiskEncryption"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -235,7 +235,7 @@ namespace MgmtMockAndSample.Models
                     enabledForDiskEncryption = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("enabledForTemplateDeployment"))
+                if (property.NameEquals("enabledForTemplateDeployment"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -245,7 +245,7 @@ namespace MgmtMockAndSample.Models
                     enabledForTemplateDeployment = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("enableSoftDelete"))
+                if (property.NameEquals("enableSoftDelete"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -255,7 +255,7 @@ namespace MgmtMockAndSample.Models
                     enableSoftDelete = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("softDeleteRetentionInDays"))
+                if (property.NameEquals("softDeleteRetentionInDays"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -265,7 +265,7 @@ namespace MgmtMockAndSample.Models
                     softDeleteRetentionInDays = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("enableRbacAuthorization"))
+                if (property.NameEquals("enableRbacAuthorization"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -275,7 +275,7 @@ namespace MgmtMockAndSample.Models
                     enableRbacAuthorization = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("createMode"))
+                if (property.NameEquals("createMode"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -285,7 +285,7 @@ namespace MgmtMockAndSample.Models
                     createMode = property.Value.GetString().ToCreateMode();
                     continue;
                 }
-                if (property.NameEquals("enablePurgeProtection"))
+                if (property.NameEquals("enablePurgeProtection"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -295,7 +295,7 @@ namespace MgmtMockAndSample.Models
                     enablePurgeProtection = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("networkAcls"))
+                if (property.NameEquals("networkAcls"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -305,7 +305,7 @@ namespace MgmtMockAndSample.Models
                     networkAcls = NetworkRuleSet.DeserializeNetworkRuleSet(property.Value);
                     continue;
                 }
-                if (property.NameEquals("provisioningState"))
+                if (property.NameEquals("provisioningState"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -315,7 +315,7 @@ namespace MgmtMockAndSample.Models
                     provisioningState = new VaultProvisioningState(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("privateEndpointConnections"))
+                if (property.NameEquals("privateEndpointConnections"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -330,12 +330,12 @@ namespace MgmtMockAndSample.Models
                     privateEndpointConnections = array;
                     continue;
                 }
-                if (property.NameEquals("publicNetworkAccess"))
+                if (property.NameEquals("publicNetworkAccess"u8))
                 {
                     publicNetworkAccess = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("readWriteSingleStringProperty"))
+                if (property.NameEquals("readWriteSingleStringProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -345,7 +345,7 @@ namespace MgmtMockAndSample.Models
                     readWriteSingleStringProperty = SinglePropertyModel.DeserializeSinglePropertyModel(property.Value);
                     continue;
                 }
-                if (property.NameEquals("readOnlySingleStringProperty"))
+                if (property.NameEquals("readOnlySingleStringProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -355,7 +355,7 @@ namespace MgmtMockAndSample.Models
                     readOnlySingleStringProperty = ReadOnlySinglePropertyModel.DeserializeReadOnlySinglePropertyModel(property.Value);
                     continue;
                 }
-                if (property.NameEquals("extremelyDeepStringProperty"))
+                if (property.NameEquals("extremelyDeepStringProperty"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

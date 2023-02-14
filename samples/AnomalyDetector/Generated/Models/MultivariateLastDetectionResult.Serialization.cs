@@ -20,7 +20,7 @@ namespace AnomalyDetector.Models
             Optional<IReadOnlyList<AnomalyState>> results = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("variableStates"))
+                if (property.NameEquals("variableStates"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -35,7 +35,7 @@ namespace AnomalyDetector.Models
                     variableStates = array;
                     continue;
                 }
-                if (property.NameEquals("results"))
+                if (property.NameEquals("results"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

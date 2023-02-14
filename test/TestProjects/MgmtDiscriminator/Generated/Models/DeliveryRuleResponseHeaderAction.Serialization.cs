@@ -15,9 +15,9 @@ namespace MgmtDiscriminator.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("parameters");
+            writer.WritePropertyName("parameters"u8);
             writer.WriteObjectValue(Parameters);
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
             writer.WriteEndObject();
         }
@@ -26,20 +26,26 @@ namespace MgmtDiscriminator.Models
         {
             HeaderActionParameters parameters = default;
             DeliveryRuleActionType name = default;
+            Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("parameters"))
+                if (property.NameEquals("parameters"u8))
                 {
                     parameters = HeaderActionParameters.DeserializeHeaderActionParameters(property.Value);
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = new DeliveryRuleActionType(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("foo"u8))
+                {
+                    foo = property.Value.GetString();
+                    continue;
+                }
             }
-            return new DeliveryRuleResponseHeaderAction(name, parameters);
+            return new DeliveryRuleResponseHeaderAction(name, foo.Value, parameters);
         }
     }
 }

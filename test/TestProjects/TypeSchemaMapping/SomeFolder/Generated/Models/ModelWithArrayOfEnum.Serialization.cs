@@ -18,7 +18,7 @@ namespace TypeSchemaMapping.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(ArrayOfEnum))
             {
-                writer.WritePropertyName("ArrayOfEnum");
+                writer.WritePropertyName("ArrayOfEnum"u8);
                 writer.WriteStartArray();
                 foreach (var item in ArrayOfEnum)
                 {
@@ -28,7 +28,7 @@ namespace TypeSchemaMapping.Models
             }
             if (Optional.IsCollectionDefined(ArrayOfEnumCustomizedToNullable))
             {
-                writer.WritePropertyName("ArrayOfEnumCustomizedToNullable");
+                writer.WritePropertyName("ArrayOfEnumCustomizedToNullable"u8);
                 writer.WriteStartArray();
                 foreach (var item in ArrayOfEnumCustomizedToNullable)
                 {
@@ -45,7 +45,7 @@ namespace TypeSchemaMapping.Models
             Optional<IReadOnlyList<EnumForModelWithArrayOfEnum?>> arrayOfEnumCustomizedToNullable = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ArrayOfEnum"))
+                if (property.NameEquals("ArrayOfEnum"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -60,7 +60,7 @@ namespace TypeSchemaMapping.Models
                     arrayOfEnum = array;
                     continue;
                 }
-                if (property.NameEquals("ArrayOfEnumCustomizedToNullable"))
+                if (property.NameEquals("ArrayOfEnumCustomizedToNullable"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

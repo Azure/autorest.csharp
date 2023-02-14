@@ -17,12 +17,12 @@ namespace MgmtLRO.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(PlatformUpdateDomainCount))
             {
-                writer.WritePropertyName("platformUpdateDomainCount");
+                writer.WritePropertyName("platformUpdateDomainCount"u8);
                 writer.WriteNumberValue(PlatformUpdateDomainCount.Value);
             }
             if (Optional.IsDefined(PlatformFaultDomainCount))
             {
-                writer.WritePropertyName("platformFaultDomainCount");
+                writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
             writer.WriteEndObject();
@@ -34,7 +34,7 @@ namespace MgmtLRO.Models
             Optional<int> platformFaultDomainCount = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("platformUpdateDomainCount"))
+                if (property.NameEquals("platformUpdateDomainCount"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -44,7 +44,7 @@ namespace MgmtLRO.Models
                     platformUpdateDomainCount = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("platformFaultDomainCount"))
+                if (property.NameEquals("platformFaultDomainCount"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

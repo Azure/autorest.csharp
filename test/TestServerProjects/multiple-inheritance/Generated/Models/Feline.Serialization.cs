@@ -17,12 +17,12 @@ namespace multiple_inheritance.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Meows))
             {
-                writer.WritePropertyName("meows");
+                writer.WritePropertyName("meows"u8);
                 writer.WriteBooleanValue(Meows.Value);
             }
             if (Optional.IsDefined(Hisses))
             {
-                writer.WritePropertyName("hisses");
+                writer.WritePropertyName("hisses"u8);
                 writer.WriteBooleanValue(Hisses.Value);
             }
             writer.WriteEndObject();
@@ -34,7 +34,7 @@ namespace multiple_inheritance.Models
             Optional<bool> hisses = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("meows"))
+                if (property.NameEquals("meows"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -44,7 +44,7 @@ namespace multiple_inheritance.Models
                     meows = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("hisses"))
+                if (property.NameEquals("hisses"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

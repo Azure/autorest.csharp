@@ -94,49 +94,50 @@ namespace AutoRest.CSharp.Generation.Writers
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
-            if (property is FlattenedObjectTypeProperty flattenedProperty)
+            writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
+            writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
+            if (property.DefaultValue != null)
             {
-                WriteFlattenedProperty(writer, flattenedProperty);
-            }
-            else
-            {
-                WriteNormalProperty(writer, property);
+                writer.AppendRaw(" = ").Append(property.DefaultValue).Line($";");
             }
 
             writer.Line();
         }
 
-        private static void WriteFlattenedProperty(CodeWriter writer, FlattenedObjectTypeProperty flattenedProperty)
+        private void WriteProperty(CodeWriter writer, FlattenedObjectTypeProperty property)
         {
-            using (writer.Scope($"{flattenedProperty.Declaration.Accessibility} {flattenedProperty.Declaration.Type} {flattenedProperty.Declaration.Name:D}"))
+            writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
+            using (writer.Scope($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}"))
             {
                 // write getter
-                switch (flattenedProperty.IncludeGetterNullCheck)
+                switch (property.IncludeGetterNullCheck)
                 {
                     case true:
-                        WriteGetWithNullCheck(writer, flattenedProperty);
+                        WriteGetWithNullCheck(writer, property);
                         break;
                     case false:
-                        WriteGetWithDefault(writer, flattenedProperty);
+                        WriteGetWithDefault(writer, property);
                         break;
                     default:
-                        WriteGetWithEscape(writer, flattenedProperty);
+                        WriteGetWithEscape(writer, property);
                         break;
                 }
 
                 // only write the setter when it is not readonly
-                if (!flattenedProperty.IsReadOnly)
+                if (!property.IsReadOnly)
                 {
-                    if (flattenedProperty.IncludeSetterNullCheck)
+                    if (property.IncludeSetterNullCheck)
                     {
-                        WriteSetWithNullCheck(writer, flattenedProperty);
+                        WriteSetWithNullCheck(writer, property);
                     }
                     else
                     {
-                        WriteSetWithSingleParamCtor(writer, flattenedProperty);
+                        WriteSetWithSingleParamCtor(writer, property);
                     }
                 }
             }
+
+            writer.Line();
         }
 
         private static void WriteSetWithNullCheck(CodeWriter writer, FlattenedObjectTypeProperty property)
@@ -206,16 +207,6 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Append($"get => {property.UnderlyingProperty.Declaration.Name}")
                 .AppendRawIf("?", property.IsUnderlyingPropertyNullable)
                 .Line($".{property.ChildPropertyName};");
-        }
-
-        private static void WriteNormalProperty(CodeWriter writer, ObjectTypeProperty property)
-        {
-            writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
-            writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
-            if (property.DefaultValue != null)
-            {
-                writer.AppendRaw(" = ").Append(property.DefaultValue).Line($";");
-            }
         }
 
         private FormattableString CreatePropertyDescription(ObjectTypeProperty property, string? overrideName = null)
@@ -309,7 +300,7 @@ Examples:
         {
         }
 
-        public void WriteConstructor(CodeWriter writer, ObjectType schema)
+        private void WriteConstructor(CodeWriter writer, ObjectType schema)
         {
             foreach (var constructor in schema.Constructors)
             {

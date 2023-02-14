@@ -16,16 +16,16 @@ namespace MgmtMockAndSample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("tenantId");
+            writer.WritePropertyName("tenantId"u8);
             writer.WriteStringValue(TenantId);
-            writer.WritePropertyName("objectId");
+            writer.WritePropertyName("objectId"u8);
             writer.WriteStringValue(ObjectId);
             if (Optional.IsDefined(ApplicationId))
             {
-                writer.WritePropertyName("applicationId");
+                writer.WritePropertyName("applicationId"u8);
                 writer.WriteStringValue(ApplicationId.Value);
             }
-            writer.WritePropertyName("permissions");
+            writer.WritePropertyName("permissions"u8);
             writer.WriteObjectValue(Permissions);
             writer.WriteEndObject();
         }
@@ -38,17 +38,17 @@ namespace MgmtMockAndSample.Models
             Permissions permissions = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("tenantId"))
+                if (property.NameEquals("tenantId"u8))
                 {
                     tenantId = property.Value.GetGuid();
                     continue;
                 }
-                if (property.NameEquals("objectId"))
+                if (property.NameEquals("objectId"u8))
                 {
                     objectId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("applicationId"))
+                if (property.NameEquals("applicationId"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null || property.Value.GetString().Length == 0)
                     {
@@ -58,7 +58,7 @@ namespace MgmtMockAndSample.Models
                     applicationId = property.Value.GetGuid();
                     continue;
                 }
-                if (property.NameEquals("permissions"))
+                if (property.NameEquals("permissions"u8))
                 {
                     permissions = Permissions.DeserializePermissions(property.Value);
                     continue;

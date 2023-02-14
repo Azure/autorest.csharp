@@ -16,9 +16,9 @@ namespace Models.Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("kind");
+            writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            writer.WritePropertyName("age");
+            writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }
@@ -29,7 +29,8 @@ namespace Models.Inheritance.Models
             {
                 switch (discriminator.GetString())
                 {
-                    case "Salmon": return Salmon.DeserializeSalmon(element);
+                    case "shark": return Shark.DeserializeShark(element);
+                    case "salmon": return Salmon.DeserializeSalmon(element);
                 }
             }
             return UnknownFish.DeserializeUnknownFish(element);
