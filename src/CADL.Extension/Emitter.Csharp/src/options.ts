@@ -18,7 +18,6 @@ export type NetEmitterOptions = {
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
-    "array-to-page"?: boolean;
 } & DpgEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -47,8 +46,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "model-namespace": { type: "boolean", nullable: true },
         "generate-protocol-methods": { type: "boolean", nullable: true },
         "generate-convenience-methods": { type: "boolean", nullable: true },
-        "package-name": { type: "string", nullable: true },
-        "array-to-page": { type: "boolean", nullable: true }
+        "package-name": { type: "string", nullable: true }
     },
     required: []
 };
@@ -63,8 +61,7 @@ const defaultOptions = {
     "save-inputs": false,
     "generate-protocol-methods": true,
     "generate-convenience-methods": true,
-    "package-name": undefined,
-    "array-to-page": false
+    "package-name": undefined
 };
 
 export function resolveOptions(context: EmitContext<NetEmitterOptions>) {

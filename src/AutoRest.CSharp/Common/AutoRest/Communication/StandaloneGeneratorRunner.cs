@@ -257,7 +257,6 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
                 ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
-                ReadOption(root, Configuration.Options.ArrayToPage), // This option comes from configuration.json
                 ReadOption(root, Configuration.Options.GenerateModelFactory),
                 oldModelFactoryEntries,
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),

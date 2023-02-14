@@ -53,18 +53,9 @@ namespace AutoRest.CSharp.Output.Models
             _orderedParameters = new List<ParameterChain>();
             _requestParts = new List<RequestPartSource>();
 
-            Operation = InitializeOperation(operation);
+            Operation = operation;
             BuildParameters();
             _restClientMethod = RestClientBuilder.BuildRequestMethod(Operation, _orderedParameters.Select(p => p.CreateMessage).WhereNotNull().ToArray(), _requestParts, _protocolBodyParameter, _typeFactory);
-        }
-
-        private InputOperation InitializeOperation(InputOperation operation)
-        {
-            if (Configuration.ArrayToPage && operation.Paging == null && GetFirstBodyType(operation) is InputListType)
-            {
-                operation = operation with { Paging = new OperationPaging() };
-            }
-            return operation;
         }
 
         public void BuildNextPageMethod(IReadOnlyDictionary<InputOperation, OperationMethodChainBuilder> builders)

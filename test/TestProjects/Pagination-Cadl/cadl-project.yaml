@@ -1,6 +1,0 @@
-emit: [
-  "@azure-tools/cadl-csharp"
-]
-options:
-  "@azure-tools/cadl-csharp":
-    array-to-page: true

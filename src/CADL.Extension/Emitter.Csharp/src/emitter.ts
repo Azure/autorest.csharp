@@ -159,8 +159,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 SingleTopLevelClient: options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
-                "model-namespace": options["model-namespace"],
-                "array-to-page": options["array-to-page"] ?? undefined
+                "model-namespace": options["model-namespace"]
             } as Configuration;
 
             await program.host.writeFile(

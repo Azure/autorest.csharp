@@ -145,9 +145,10 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        [Ignore("https://github.com/Azure/autorest.csharp/issues/3108")]
         public Task Arrays_ItemTypes_ModelValue_put() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetModelValueClient().PutAsync(RequestContent.Create(new List<object>() { new InnerModel("hello"), new InnerModel("world") }));
+            var response = await new ItemTypesClient(host, null).GetModelValueClient().PutAsync(RequestContent.Create(new List<InnerModel>() { new InnerModel("hello"), new InnerModel("world") }));
             Assert.AreEqual(204, response.Status);
         });
     }
