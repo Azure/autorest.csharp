@@ -85,6 +85,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType)
         {
+            if (TypeFactory.IsList(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            {
+                return $"{typeof(RequestContent)}.{nameof(RequestContent.Create)}({parameter.Name})";
+            }
+
             var conversionMethod = GetConversionMethod(parameter.Type, toType);
             if (conversionMethod == null)
             {
