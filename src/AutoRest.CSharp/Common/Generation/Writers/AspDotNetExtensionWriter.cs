@@ -3,12 +3,13 @@
 
 using System;
 using System.Linq;
-using AutoRest.CSharp.LowLevel.Output;
+using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using Azure.Core;
 using Azure.Core.Extensions;
 
-namespace AutoRest.CSharp.Generation.Writers
+namespace AutoRest.CSharp.Common.Generation.Writers
 {
     internal class AspDotNetExtensionWriter
     {

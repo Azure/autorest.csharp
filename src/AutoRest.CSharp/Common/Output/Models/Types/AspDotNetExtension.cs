@@ -16,7 +16,7 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.Core.Extensions;
 
-namespace AutoRest.CSharp.LowLevel.Output
+namespace AutoRest.CSharp.Common.Output.Models.Types
 {
     internal class AspDotNetExtension : TypeProvider
     {
