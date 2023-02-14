@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Output.Models
                 var firstBodyType = operationBodyTypes[0];
                 if (firstBodyType != null)
                 {
-                    responseType = _typeFactory.CreateType(firstBodyType);
+                    responseType = TypeFactory.GetOutputType(_typeFactory.CreateType(firstBodyType));
                 }
             };
 
