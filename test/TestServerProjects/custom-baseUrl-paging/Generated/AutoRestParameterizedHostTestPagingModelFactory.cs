@@ -7,7 +7,7 @@
 
 namespace custom_baseUrl_paging.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class AutoRestParameterizedHostTestPagingModelFactory
     {
         /// <summary> Initializes a new instance of Product. </summary>

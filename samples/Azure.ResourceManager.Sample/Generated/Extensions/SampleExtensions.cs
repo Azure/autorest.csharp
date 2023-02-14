@@ -348,7 +348,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, SubscriptionGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
+        public static AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, SubscriptionResourceGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(options, nameof(options));
 
@@ -373,7 +373,7 @@ namespace Azure.ResourceManager.Sample
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<VirtualMachineImageResource> GetVirtualMachineImages(this SubscriptionResource subscriptionResource, SubscriptionGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
+        public static Pageable<VirtualMachineImageResource> GetVirtualMachineImages(this SubscriptionResource subscriptionResource, SubscriptionResourceGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(options, nameof(options));
 

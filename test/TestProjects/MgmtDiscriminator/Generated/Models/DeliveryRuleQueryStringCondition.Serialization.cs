@@ -26,6 +26,7 @@ namespace MgmtDiscriminator.Models
         {
             QueryStringMatchConditionParameters parameters = default;
             MatchVariable name = default;
+            Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("parameters"u8))
@@ -38,8 +39,13 @@ namespace MgmtDiscriminator.Models
                     name = new MatchVariable(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("foo"u8))
+                {
+                    foo = property.Value.GetString();
+                    continue;
+                }
             }
-            return new DeliveryRuleQueryStringCondition(name, parameters);
+            return new DeliveryRuleQueryStringCondition(name, foo.Value, parameters);
         }
     }
 }

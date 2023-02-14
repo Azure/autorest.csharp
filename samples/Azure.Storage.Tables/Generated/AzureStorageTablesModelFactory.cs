@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace Azure.Storage.Tables.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class AzureStorageTablesModelFactory
     {
         /// <summary> Initializes a new instance of TableQueryResponse. </summary>
