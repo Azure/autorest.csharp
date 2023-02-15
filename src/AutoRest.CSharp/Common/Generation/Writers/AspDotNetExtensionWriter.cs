@@ -100,14 +100,6 @@ namespace AutoRest.CSharp.Common.Generation.Writers
             }
         }
 
-        private static string MethodSignatureDistinctFunc(MethodSignature signature)
-        {
-            return string.Join(",", signature.Parameters.Select(parameter => parameter.Type.ToString()));
-        }
-
-        public override string ToString()
-        {
-            return _writer.ToString();
-        }
+        public override string ToString() => _writer.ToString();
     }
 }
