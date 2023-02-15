@@ -1,8 +1,12 @@
 import "@cadl-lang/rest";
 import "@azure-tools/cadl-dpg";
 
-@serviceTitle("client")
-@serviceVersion("2015-06-18")
+@service(
+    {
+        title: "client",
+        version: "2015-06-18"
+    }
+)
 @server(
     "{clientServiceUrl}",
     "Client Service",
