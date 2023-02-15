@@ -15,9 +15,9 @@ namespace AutoRest.CSharp.Common.Generation.Writers
     {
         private CodeWriter _writer;
 
-        private AspDotNetExtension This { get; }
+        private AspDotNetExtensionTypeProvider This { get; }
 
-        public AspDotNetExtensionWriter(AspDotNetExtension aspDotNetExtension)
+        public AspDotNetExtensionWriter(AspDotNetExtensionTypeProvider aspDotNetExtension)
         {
             _writer = new CodeWriter();
             This = aspDotNetExtension;

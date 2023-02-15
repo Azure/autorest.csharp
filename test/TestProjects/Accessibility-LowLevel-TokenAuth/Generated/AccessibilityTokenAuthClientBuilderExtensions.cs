@@ -12,7 +12,7 @@ using Azure.Core.Extensions;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="AccessibilityClient"/> to client builder. </summary>
-    public static partial class AccessibilityClientBuilderExtensions
+    public static partial class AccessibilityTokenAuthClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="AccessibilityClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

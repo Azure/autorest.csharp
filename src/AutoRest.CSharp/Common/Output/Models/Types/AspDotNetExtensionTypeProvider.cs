@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -19,7 +18,7 @@ using Azure.Core.Extensions;
 
 namespace AutoRest.CSharp.Common.Output.Models.Types
 {
-    internal class AspDotNetExtension : TypeProvider
+    internal class AspDotNetExtensionTypeProvider : TypeProvider
     {
         private const string AspDotNetExtensionNamespace = "Microsoft.Extensions.Azure";
 
@@ -27,7 +26,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         private IReadOnlyList<LowLevelClient> _clients;
 
-        public AspDotNetExtension(IReadOnlyList<LowLevelClient> clients, string clientNamespace, SourceInputModel? sourceInputModel) : base(AspDotNetExtensionNamespace, sourceInputModel)
+        public AspDotNetExtensionTypeProvider(IReadOnlyList<LowLevelClient> clients, string clientNamespace, SourceInputModel? sourceInputModel) : base(AspDotNetExtensionNamespace, sourceInputModel)
         {
             DefaultName = $"{ClientBuilder.GetClientPrefix(Configuration.LibraryName, clientNamespace)}ClientBuilderExtensions".ToCleanName();
             //TODO: very bad design that this list is empty when we leave the constructor and is filled in at some point in the future.
@@ -46,16 +45,10 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)>? _extensionMethods;
         public IReadOnlyDictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)> ExtesnsionMethods => _extensionMethods ??= EnsureExtensionMethods();
 
-        public string GetClientSeeRefs()
+        public FormattableString GetClientSeeRefs()
         {
-            StringBuilder builder = new StringBuilder();
-            foreach (var client in _topLevelClients)
-            {
-                builder.Append($"<see cref=\"{client.Declaration.Name}\"/>, ");
-            }
-            if (builder.Length >= 2)
-                builder.Length -= 2;
-            return builder.ToString();
+            var fs = _topLevelClients.Select(client => (FormattableString)$"<see cref=\"{client.Type}\"/>").ToArray();
+            return fs.Join(", ");
         }
 
         private Dictionary<MethodSignature, (IEnumerable<FormattableString> Parameters, IEnumerable<FormattableString> ParameterValues)> EnsureExtensionMethods()
@@ -170,6 +163,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private static CSharpType TBuilderType => _builderType ??= typeof(Template<>).GetGenericArguments()[0];
         private static CSharpType TConfigurationType => _configurationType ??= typeof(IAzureClientFactoryBuilderWithConfiguration<>).GetGenericArguments()[0];
 
+        // this is a private type that provides the open generic type argument "TBuilder" for us to use in the geenrated code
         private class Template<TBuilder> { }
     }
 }
