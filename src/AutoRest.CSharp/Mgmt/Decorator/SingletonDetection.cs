@@ -6,6 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Decorator;
 
@@ -13,22 +14,39 @@ internal static class SingletonDetection
 {
     private static string[] SingletonKeywords = { "default", "latest", "current" };
 
-    private static ConcurrentDictionary<OperationSet, string?> _singletonResourceCache = new ConcurrentDictionary<OperationSet, string?>();
+    private static ConcurrentDictionary<OperationSet, SingletonResourceSuffix?> _singletonResourceCache = new ConcurrentDictionary<OperationSet, SingletonResourceSuffix?>();
 
     public static bool IsSingletonResource(this OperationSet operationSet)
     {
         return operationSet.TryGetSingletonResourceSuffix(out _);
     }
 
-    public static bool TryGetSingletonResourceSuffix(this OperationSet operationSet, [MaybeNullWhen(false)] out string singletonIdSuffix)
+    public static bool TryGetSingletonResourceSuffix(this OperationSet operationSet, [MaybeNullWhen(false)] out SingletonResourceSuffix suffix)
     {
-        singletonIdSuffix = null;
-        if (_singletonResourceCache.TryGetValue(operationSet, out singletonIdSuffix))
-            return singletonIdSuffix != null;
+        suffix = null;
+        if (_singletonResourceCache.TryGetValue(operationSet, out suffix))
+            return suffix != null;
 
-        bool result = IsSingleton(operationSet, out singletonIdSuffix);
-        _singletonResourceCache.TryAdd(operationSet, singletonIdSuffix);
+        bool result = IsSingleton(operationSet, out var singletonIdSuffix);
+        suffix = ParseSingletonIdSuffix(operationSet, singletonIdSuffix);
+        _singletonResourceCache.TryAdd(operationSet, suffix);
         return result;
+    }
+
+    private static SingletonResourceSuffix? ParseSingletonIdSuffix(OperationSet operationSet, string? singletonIdSuffix)
+    {
+        if (singletonIdSuffix == null)
+            return null;
+
+        var segments = singletonIdSuffix.Split('/', System.StringSplitOptions.RemoveEmptyEntries);
+
+        // check if even segments
+        if (segments.Length % 2 != 0)
+        {
+            throw new ErrorHelpers.ErrorException($"the singleton suffix set for operation set {operationSet.RequestPath} must have even segments, but got {singletonIdSuffix}");
+        }
+
+        return SingletonResourceSuffix.Parse(segments);
     }
 
     private static bool IsSingleton(OperationSet operationSet, [MaybeNullWhen(false)] out string singletonIdSuffix)

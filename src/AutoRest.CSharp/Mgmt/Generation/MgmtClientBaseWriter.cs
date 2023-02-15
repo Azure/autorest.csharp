@@ -342,11 +342,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return string.Join(", ", GetParametersForCollectionEntry(resourceCollection).Select(p => p.Name));
         }
 
-        protected virtual void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix, MethodSignature signature)
+        protected virtual void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceIdSuffix, MethodSignature signature)
         {
             // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
             // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, new {typeof(ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
+            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, {singletonResourceIdSuffix.BuildResourceIdentifier($"Id")});");
         }
 
         protected virtual MethodSignatureModifiers GetMethodModifiers() => Public | Virtual;

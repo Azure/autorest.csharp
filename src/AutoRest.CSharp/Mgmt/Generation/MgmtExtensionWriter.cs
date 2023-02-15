@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceSuffix, MethodSignature signature)
+        protected override void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceSuffix, MethodSignature signature)
         {
             if (IsArmCore)
             {
