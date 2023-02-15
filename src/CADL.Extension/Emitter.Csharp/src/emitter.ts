@@ -89,7 +89,7 @@ import {
     shouldGenerateProtocol
 } from "@azure-tools/cadl-dpg";
 import { ClientKind } from "./type/ClientKind.js";
-import { buildVersionProjections, getVersions } from "@cadl-lang/versioning";
+import { getVersions } from "@cadl-lang/versioning";
 import { EmitContext } from "@cadl-lang/compiler/*";
 import { capitalize } from "./lib/utils.js";
 
@@ -187,8 +187,6 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        // const namespace = getServiceNamespaceString(program) || "";
-
         const root = createModel(context);
         const namespace = root.Name;
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
@@ -304,42 +302,24 @@ function getClient(
 export function createModel(context: EmitContext<NetEmitterOptions>): any {
     const services = listServices(context.program);
     if (services.length === 0) {
-      services.push({ type: context.program.getGlobalNamespaceType() });
+        services.push({ type: context.program.getGlobalNamespaceType() });
     }
-    
+
     // TODO: support multiple service. Current only chose the first service.
     const service = services[0];
     const serviceNamespaceType = service.type;
     if (serviceNamespaceType === undefined) {
-      throw Error("Can not emit yaml for a namespace that doesn't exist.");
+        throw Error("Can not emit yaml for a namespace that doesn't exist.");
     }
 
     return createModelForService(context, service);
-
 }
 
-export function createModelForService(context: EmitContext<NetEmitterOptions>, service: Service): any {
+export function createModelForService(
+    context: EmitContext<NetEmitterOptions>,
+    service: Service
+): any {
     const program = context.program;
-    // const services = listServices(program);
-    // if (services.length === 0) {
-    //   services.push({ type: program.getGlobalNamespaceType() });
-    // }
-    
-    // // TODO: support multiple service. Current only chose the first service.
-    // const service = services[0];
-    // const serviceNamespaceType = service.type;
-    // if (serviceNamespaceType === undefined) {
-    //   throw Error("Can not emit yaml for a namespace that doesn't exist.");
-    // }
-
-    //const versions = buildVersionProjections(program, service.type);
-
-
-
-    // const serviceNamespaceType = getServiceNamespace(program);
-    // if (!serviceNamespaceType) {
-    //     return;
-    // }
     const title = service.title;
     const serviceNamespaceType = service.type;
     const apiVersions: Set<string> = new Set<string>();
@@ -347,10 +327,7 @@ export function createModelForService(context: EmitContext<NetEmitterOptions>, s
     if (version && version !== "0000-00-00") {
         apiVersions.add(version);
     }
-    const versions = getVersions(
-        program,
-        service.type
-    )[1]?.getVersions();
+    const versions = getVersions(program, service.type)[1]?.getVersions();
     if (versions) {
         for (const ver of versions) {
             apiVersions.add(ver.value);
@@ -392,7 +369,6 @@ export function createModelForService(context: EmitContext<NetEmitterOptions>, s
             Value: version
         } as InputConstant
     };
-    // const namespace = getServiceNamespaceString(program) || "client";
     const namespace = getNamespaceFullName(serviceNamespaceType) || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
     let auth = undefined;
@@ -690,7 +666,11 @@ function processServiceAuthentication(
     return auth;
 }
 
-function getOperationGroupName(program: Program, operation: Operation, serviceNamespaceType: Namespace): string {
+function getOperationGroupName(
+    program: Program,
+    operation: Operation,
+    serviceNamespaceType: Namespace
+): string {
     const explicitOperationId = getOperationId(program, operation);
     if (explicitOperationId) {
         const ids: string[] = explicitOperationId.split("_");
@@ -705,8 +685,7 @@ function getOperationGroupName(program: Program, operation: Operation, serviceNa
     let namespace = operation.namespace;
     if (!namespace) {
         namespace =
-            program.checker.getGlobalNamespaceType() ??
-            serviceNamespaceType;
+            program.checker.getGlobalNamespaceType() ?? serviceNamespaceType;
     }
 
     if (namespace) return namespace.name;
@@ -798,10 +777,7 @@ function loadOperation(
         mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const generateProtocol: boolean = shouldGenerateProtocol(
-        dpgContext,
-        op
-    );
+    const generateProtocol: boolean = shouldGenerateProtocol(dpgContext, op);
     const generateConvenience: boolean =
         requestMethod !== RequestMethod.PATCH &&
         shouldGenerateConvenient(dpgContext, op);
