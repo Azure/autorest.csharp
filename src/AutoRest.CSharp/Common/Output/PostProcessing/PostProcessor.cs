@@ -20,11 +20,14 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing;
 
 internal class PostProcessor
 {
+    private const string AspDotNetExtensionNamespace = "Microsoft.Extensions.Azure";
     private readonly string? _modelFactoryFullName;
+    private readonly string? _aspExtensionClassName;
 
-    public PostProcessor(string? modelFactoryFullName = null)
+    public PostProcessor(string? modelFactoryFullName = null, string? aspExtensionClassName = null)
     {
         _modelFactoryFullName = modelFactoryFullName;
+        _aspExtensionClassName = aspExtensionClassName;
     }
 
     protected record TypeSymbols(ImmutableHashSet<INamedTypeSymbol> DeclaredSymbols, INamedTypeSymbol? ModelFactorySymbol, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> DocumentsCache);
@@ -46,6 +49,9 @@ internal class PostProcessor
         INamedTypeSymbol? modelFactorySymbol = null;
         if (_modelFactoryFullName != null)
             modelFactorySymbol = compilation.GetTypeByMetadataName(_modelFactoryFullName);
+        INamedTypeSymbol? aspDotNetExtensionSymbol = null;
+        if (_aspExtensionClassName != null)
+            aspDotNetExtensionSymbol = compilation.GetTypeByMetadataName(_aspExtensionClassName);
 
         foreach (var document in project.Documents)
         {
@@ -66,7 +72,8 @@ internal class PostProcessor
                         continue;
 
                     // we do not add the model factory symbol to the declared symbol list so that it will never be included in any process of internalization or removal
-                    if (!SymbolEqualityComparer.Default.Equals(symbol, modelFactorySymbol))
+                    if (!SymbolEqualityComparer.Default.Equals(symbol, modelFactorySymbol)
+                        && !SymbolEqualityComparer.Default.Equals(symbol, aspDotNetExtensionSymbol))
                         result.Add(symbol);
 
                     declarationCache.AddInList(symbol, typeDeclaration);
