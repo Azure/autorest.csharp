@@ -28,6 +28,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 schemasToPrependRPPrefix: Array.Empty<string>(),
                 generateArmResourceExtensions: Array.Empty<string>(),
                 parameterizedScopes: Array.Empty<string>(),
+                checkEmptyStringForTypesInDeserialization: Array.Empty<string>(),
                 mgmtDebug: new MgmtConfiguration.MgmtDebugConfiguration(),
                 requestPathToParent: default,
                 requestPathToResourceName: default,
