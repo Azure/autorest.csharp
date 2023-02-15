@@ -17,10 +17,11 @@ Scenarios.ModelsCald_InputToRoundTripPrimitive = passOnSuccess([
             requiredInt: 1,
             requiredModel: {},
             requiredIntCollection: [],
-            requiredStringCollection: [],
-            requiredModelCollection: [],
+            requiredStringCollection: [null, "test"],
+            requiredModelCollection: [null],
             requiredModelRecord: {},
-            requiredCollectionWithNullableFloatElement: [12.3],
+            requiredCollectionWithNullableFloatElement: [null, 12.3],
+            requiredCollectionWithNullableBooleanElement: [null, true, false],
         });
         return {
             status: 200,
@@ -45,6 +46,7 @@ Scenarios.ModelsCald_InputToRoundTripOptional = passOnSuccess([
         req.expect.bodyEquals({
             optionalPlainDate: "2023-02-14",
             optionalPlainTime: "1.02:59:59",
+            optionalCollectionWithNullableIntElement: [123, null],
         });
         return {
             status: 200,
@@ -59,12 +61,13 @@ Scenarios.ModelsCald_InputToRoundTripReadOnly = passOnSuccess([
         req.expect.bodyEquals({
             requiredString: "test",
             requiredInt: 2,
-            requiredModel: { requiredCollection: [] },
+            requiredModel: { requiredCollection: [null] },
             requiredIntCollection: [1, 2],
-            requiredStringCollection: ["a"],
-            requiredModelCollection: [],
+            requiredStringCollection: ["a", null],
+            requiredModelCollection: [{ requiredModelRecord: {} }],
             requiredModelRecord: {},
             requiredCollectionWithNullableFloatElement: [],
+            requiredCollectionWithNullableBooleanElement: [],
         });
         return {
             status: 200,
@@ -83,7 +86,7 @@ Scenarios.ModelsCald_InputToRoundTripReadOnly = passOnSuccess([
                 requiredReadOnlyIntRecord: { test: 1 },
                 requiredStringRecord: { test: "1" },
                 requiredReadOnlyModelRecord: {},
-                optionalReadonlyStringList: [],
+                optionalReadonlyStringList: [null],
                 optionalReadOnlyModelCollection: [],
                 optionalReadOnlyStringRecord: {},
                 optionalModelRecord: { test: { requiredCollection: [] } },

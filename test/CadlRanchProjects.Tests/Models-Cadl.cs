@@ -21,7 +21,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task InputToRoundTripPrimitive() => Test(async (host) =>
         {
-            InputModel input = new("test", 1, new BaseModel(), new int[] { }, new string[] { }, new CollectionItem[] { }, new Dictionary<string, RecordItem>(), new float?[] { 12.3f });
+            InputModel input = new("test", 1, new BaseModel(), new int[] { }, new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false});
             RoundTripPrimitiveModel result = await new ModelsInCadlClient(host).InputToRoundTripPrimitiveAsync(input);
 
             Assert.AreEqual("test", result.RequiredString);
@@ -44,6 +44,9 @@ namespace CadlRanchProjects.Tests
                 OptionalPlainDate = DateTimeOffset.Parse("2023-02-14Z02:08:47"),
                 OptionalPlainTime = new TimeSpan(1, 2, 59, 59),
             };
+            input.OptionalCollectionWithNullableIntElement.Add(123);
+            input.OptionalCollectionWithNullableIntElement.Add(null);
+
             RoundTripOptionalModel result = await new ModelsInCadlClient(host).InputToRoundTripOptionalAsync(input);
 
             CollectionAssert.AreEqual(new int?[] { null, 123 }, result.OptionalCollectionWithNullableIntElement);
@@ -52,7 +55,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task InputToRoundTripReadOnly() => Test(async (host) =>
         {
-            InputModel input = new("test", 2, new DerivedModel(new CollectionItem[] { }), new int[] { 1, 2 }, new string[] { "a" }, new CollectionItem[] { }, new Dictionary<string, RecordItem>(), new float?[] {});
+            InputModel input = new("test", 2, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), new float?[] {}, new bool?[] { });
             RoundTripReadOnlyModel result = await new ModelsInCadlClient(host).InputToRoundTripReadOnlyAsync(input);
 
             Assert.AreEqual("test", result.RequiredReadonlyString);
@@ -72,7 +75,8 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual(1, result.RequiredStringRecord.Count);
             Assert.AreEqual("1", result.RequiredStringRecord["test"]);
             Assert.IsEmpty(result.RequiredReadOnlyModelRecord);
-            Assert.IsEmpty(result.OptionalReadonlyStringList);
+            Assert.AreEqual(1, result.OptionalReadonlyStringList.Count);
+            Assert.IsNull(result.OptionalReadonlyStringList[0]);
             Assert.IsEmpty(result.OptionalReadOnlyModelCollection);
             Assert.IsEmpty(result.OptionalReadOnlyStringRecord);
             Assert.AreEqual(1, result.OptionalModelRecord.Count);

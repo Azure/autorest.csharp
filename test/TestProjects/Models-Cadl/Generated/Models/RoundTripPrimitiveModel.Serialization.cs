@@ -40,6 +40,11 @@ namespace ModelsInCadl.Models
             writer.WriteStartArray();
             foreach (var item in RequiredCollectionWithNullableFloatElement)
             {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
                 writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();

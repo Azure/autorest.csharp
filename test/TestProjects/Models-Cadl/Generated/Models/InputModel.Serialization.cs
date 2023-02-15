@@ -54,7 +54,24 @@ namespace ModelsInCadl.Models
             writer.WriteStartArray();
             foreach (var item in RequiredCollectionWithNullableFloatElement)
             {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
                 writer.WriteNumberValue(item.Value);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredCollectionWithNullableBooleanElement"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollectionWithNullableBooleanElement)
+            {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+                writer.WriteBooleanValue(item.Value);
             }
             writer.WriteEndArray();
             writer.WriteEndObject();

@@ -157,6 +157,11 @@ namespace ModelsInCadl.Models
                 writer.WriteStartArray();
                 foreach (var item in OptionalCollectionWithNullableIntElement)
                 {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
                     writer.WriteNumberValue(item.Value);
                 }
                 writer.WriteEndArray();

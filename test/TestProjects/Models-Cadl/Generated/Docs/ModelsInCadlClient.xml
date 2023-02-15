@@ -39,6 +39,9 @@ var data = new {
     requiredCollectionWithNullableFloatElement = new[] {
         new {}
     },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        new {}
+    },
 };
 
 Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
@@ -69,6 +72,7 @@ Schema for <c>InputModel</c>:
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
   requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -134,6 +138,9 @@ var data = new {
     requiredCollectionWithNullableFloatElement = new[] {
         new {}
     },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        new {}
+    },
 };
 
 Response response = client.InputToRoundTrip(RequestContent.Create(data));
@@ -164,6 +171,7 @@ Schema for <c>InputModel</c>:
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
   requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -229,6 +237,9 @@ var data = new {
     requiredCollectionWithNullableFloatElement = new[] {
         new {}
     },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        new {}
+    },
 };
 
 Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
@@ -262,6 +273,7 @@ Schema for <c>InputModel</c>:
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
   requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -322,6 +334,9 @@ var data = new {
     requiredCollectionWithNullableFloatElement = new[] {
         new {}
     },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        new {}
+    },
 };
 
 Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data));
@@ -355,6 +370,7 @@ Schema for <c>InputModel</c>:
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
   requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -693,6 +709,9 @@ var data = new {
     requiredCollectionWithNullableFloatElement = new[] {
         new {}
     },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        new {}
+    },
 };
 
 Response response = await client.InputToRoundTripReadOnlyAsync(RequestContent.Create(data));
@@ -734,6 +753,7 @@ Schema for <c>InputModel</c>:
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
   requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -810,6 +830,9 @@ var data = new {
     requiredCollectionWithNullableFloatElement = new[] {
         new {}
     },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        new {}
+    },
 };
 
 Response response = client.InputToRoundTripReadOnly(RequestContent.Create(data));
@@ -851,6 +874,7 @@ Schema for <c>InputModel</c>:
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
   requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
