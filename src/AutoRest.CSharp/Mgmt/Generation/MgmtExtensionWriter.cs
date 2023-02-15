@@ -11,6 +11,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Output.Models.Requests;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -91,6 +92,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceSuffix, MethodSignature signature)
         {
+            _writer.UseNamespace(typeof(ResourceIdentifier).Namespace!);
             if (IsArmCore)
             {
                 base.WriteSingletonResourceEntry(resource, singletonResourceSuffix, signature);
