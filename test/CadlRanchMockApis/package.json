@@ -32,6 +32,6 @@
         "dist/**"
     ],
     "dependencies": {
-        "@azure-tools/cadl-ranch-specs": "0.6.6"
+        "@azure-tools/cadl-ranch-specs": "0.7.0"
     }
 }

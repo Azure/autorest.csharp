@@ -1,8 +1,12 @@
 import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 
-@serviceTitle("Hello world")
-@serviceVersion("0.1.0")
+@service(
+    {
+        title: "Hello world",
+        version: "0.1.0"
+    }
+)
 namespace Demo.HelloWorld;
 
 using Cadl.Http;
