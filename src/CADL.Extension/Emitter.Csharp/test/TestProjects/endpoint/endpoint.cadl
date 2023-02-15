@@ -1,7 +1,11 @@
 import "@cadl-lang/rest";
 
-@serviceTitle("endpoint")
-@serviceVersion("2015-06-18")
+@service(
+    {
+        title: "endpoint",
+        version: "2015-06-18"
+    }
+)
 @server(
     "{endpointServiceUrl}",
     "Endpoint Service",

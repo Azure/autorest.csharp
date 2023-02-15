@@ -7,8 +7,12 @@ import "@azure-tools/cadl-dpg";
 using Cadl.Http;
 using Azure.DPG;
 
-@serviceTitle("Text authoring")
-@serviceVersion("2022-05-15-preview")
+@service(
+    {
+        title: "Text authoring",
+        version: "2022-05-15-preview"
+    }
+)
 namespace ParametersCadl;
 
 

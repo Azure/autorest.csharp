@@ -3,10 +3,12 @@ import "@cadl-lang/openapi";
 import "@azure-tools/cadl-dpg";
 import "@azure-tools/cadl-azure-core";
 
-@service({
-    title: "Models in CADL",
-    version: "0.1.0",
-})
+@service(
+    {
+        title: "Models in CADL",
+        version: "0.1.0"
+    }
+)
 @server(
     "{endpoint}",
     "Endpoint Service",
