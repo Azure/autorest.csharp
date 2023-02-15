@@ -198,4 +198,4 @@ interface UseFoundationsResourceList {
   @doc("List upload detail for the discovery resource.")
   @convenientAPI(true)
   list is CustomResourceList<LedgerEntry>;  
-}  
+}
