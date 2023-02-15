@@ -18,8 +18,12 @@ using Azure.Core;
   }
 )
 
-@serviceTitle("Microsoft Polymorphism Service")
-@serviceVersion("2022-05-15-preview")
+@service(
+    {
+        title: "Microsoft Polymorphism Service",
+        version: "2022-05-15-preview"
+    }
+)
 namespace PolymorphismOperation;
 
 @doc("The endpoint to use.")
