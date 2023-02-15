@@ -37,10 +37,10 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        new {}
+        123.45f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
-        new {}
+        true
     },
 };
 
@@ -71,8 +71,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -136,10 +136,10 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        new {}
+        123.45f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
-        new {}
+        true
     },
 };
 
@@ -170,8 +170,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -235,10 +235,10 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        new {}
+        123.45f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
-        new {}
+        true
     },
 };
 
@@ -272,8 +272,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -290,7 +290,7 @@ Schema for <c>RoundTripPrimitiveModel</c>:
   requiredBoolean: boolean, # Required. Required bolean, illustrating a value type property.
   requiredDateTimeOffset: string (date &amp; time), # Required. Required date time offset, illustrating a reference type property.
   requiredTimeSpan: string (duration ISO 8601 Format), # Required. Required time span, illustrating a value type property.
-  requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
 }
 </code>
 
@@ -332,10 +332,10 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        new {}
+        123.45f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
-        new {}
+        true
     },
 };
 
@@ -369,8 +369,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -387,7 +387,7 @@ Schema for <c>RoundTripPrimitiveModel</c>:
   requiredBoolean: boolean, # Required. Required bolean, illustrating a value type property.
   requiredDateTimeOffset: string (date &amp; time), # Required. Required date time offset, illustrating a reference type property.
   requiredTimeSpan: string (duration ISO 8601 Format), # Required. Required time span, illustrating a value type property.
-  requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
 }
 </code>
 
@@ -461,7 +461,7 @@ var data = new {
     optionalPlainDate = "2022-05-10",
     optionalPlainTime = 01:23:45,
     optionalCollectionWithNullableIntElement = new[] {
-        new {}
+        1234
     },
 };
 
@@ -503,7 +503,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
   optionalPlainDate: string (date), # Optional. Optional plainDate
   optionalPlainTime: string (time), # Optional. Optional plainTime
-  optionalCollectionWithNullableIntElement: [Union], # Optional. Optional collection of which the element is a nullable int
+  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
 }
 </code>
 
@@ -526,7 +526,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
   optionalPlainDate: string (date), # Optional. Optional plainDate
   optionalPlainTime: string (time), # Optional. Optional plainTime
-  optionalCollectionWithNullableIntElement: [Union], # Optional. Optional collection of which the element is a nullable int
+  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
 }
 </code>
 
@@ -600,7 +600,7 @@ var data = new {
     optionalPlainDate = "2022-05-10",
     optionalPlainTime = 01:23:45,
     optionalCollectionWithNullableIntElement = new[] {
-        new {}
+        1234
     },
 };
 
@@ -642,7 +642,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
   optionalPlainDate: string (date), # Optional. Optional plainDate
   optionalPlainTime: string (time), # Optional. Optional plainTime
-  optionalCollectionWithNullableIntElement: [Union], # Optional. Optional collection of which the element is a nullable int
+  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
 }
 </code>
 
@@ -665,7 +665,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
   optionalPlainDate: string (date), # Optional. Optional plainDate
   optionalPlainTime: string (time), # Optional. Optional plainTime
-  optionalCollectionWithNullableIntElement: [Union], # Optional. Optional collection of which the element is a nullable int
+  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
 }
 </code>
 
@@ -707,10 +707,10 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        new {}
+        123.45f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
-        new {}
+        true
     },
 };
 
@@ -752,8 +752,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -785,8 +785,8 @@ Schema for <c>RoundTripReadOnlyModel</c>:
   optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Optional int record
   optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required. Optional string record
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
-  requiredCollectionWithNullableIntElement: [Union], # Required. Required collection of which the element is a nullable int
-  optionalCollectionWithNullableBooleanElement: [Union], # Optional. Optional collection of which the element is a nullable boolean
+  requiredCollectionWithNullableIntElement: [number], # Required. Required collection of which the element is a nullable int
+  optionalCollectionWithNullableBooleanElement: [boolean], # Optional. Optional collection of which the element is a nullable boolean
 }
 </code>
 
@@ -828,10 +828,10 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        new {}
+        123.45f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
-        new {}
+        true
     },
 };
 
@@ -873,8 +873,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
-  requiredCollectionWithNullableFloatElement: [Union], # Required. Required collection of which the element is a nullable float
-  requiredCollectionWithNullableBooleanElement: [Union], # Required. Required collection of which the element is a nullable boolean
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -906,8 +906,8 @@ Schema for <c>RoundTripReadOnlyModel</c>:
   optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Optional int record
   optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required. Optional string record
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
-  requiredCollectionWithNullableIntElement: [Union], # Required. Required collection of which the element is a nullable int
-  optionalCollectionWithNullableBooleanElement: [Union], # Optional. Optional collection of which the element is a nullable boolean
+  requiredCollectionWithNullableIntElement: [number], # Required. Required collection of which the element is a nullable int
+  optionalCollectionWithNullableBooleanElement: [boolean], # Optional. Optional collection of which the element is a nullable boolean
 }
 </code>
 

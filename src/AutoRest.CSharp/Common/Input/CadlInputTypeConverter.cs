@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             Argument.AssertNotNull(inputTypeKindString, nameof(inputTypeKindString));
             return Enum.TryParse<InputTypeKind>(inputTypeKindString, ignoreCase: true, out var kind)
-                ? new InputPrimitiveType(kind)
+                ? new InputPrimitiveType(kind, isNullable)
                 : throw new InvalidOperationException($"{inputTypeKindString} type is unknown.");
         }
 

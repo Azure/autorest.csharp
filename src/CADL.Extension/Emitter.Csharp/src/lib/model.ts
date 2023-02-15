@@ -50,7 +50,8 @@ import {
     InputPrimitiveType,
     InputType,
     InputUnionType,
-    InputNullType
+    InputNullType,
+    InputIntrinsicType
 } from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 import { Usage } from "../type/Usage.js";
@@ -578,17 +579,42 @@ export function getInputType(
         }
     }
 
-    function getInputTypeForUnion(union: Union): InputUnionType {
-        const ItemTypes: InputType[] = [];
+    function getInputTypeForUnion(union: Union): InputType {
+        let ItemTypes: InputType[] = [];
         const variants = Array.from(union.variants.values());
+
+        let hasNullType = false;
         for (const variant of variants) {
-            ItemTypes.push(getInputType(program, variant.type, models, enums));
+            const inputType = getInputType(
+                program,
+                variant.type,
+                models,
+                enums
+            );
+            if (
+                inputType.Name === "Intrinsic" &&
+                (inputType as InputIntrinsicType).Kind === "null"
+            ) {
+                hasNullType = true;
+                continue;
+            }
+            ItemTypes.push(inputType);
         }
-        return {
-            Name: "Union",
-            UnionItemTypes: ItemTypes,
-            IsNullable: false
-        } as InputUnionType;
+
+        if (hasNullType) {
+            ItemTypes = ItemTypes.map((i) => {
+                i.IsNullable = true;
+                return i;
+            });
+        }
+
+        return ItemTypes.length > 1
+            ? ({
+                  Name: "Union",
+                  UnionItemTypes: ItemTypes,
+                  IsNullable: false
+              } as InputUnionType)
+            : ItemTypes[0];
     }
 }
 
