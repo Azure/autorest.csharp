@@ -53,10 +53,11 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
     Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
 }
 
-function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
+function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory, [boolean]$generateConvenience) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
     $cadlMain = Join-Path $cadlRanchFilePath $testName "main.cadl"
-    Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
+    $convenienceOption = If ($generateConvenience) {""} Else {" --option @azure-tools/cadl-csharp.generate-convenience-methods=false"}
+    Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll$convenienceOption"
 }
 
 $testNames =
@@ -252,6 +253,10 @@ if (!($Exclude -contains "Samples"))
 
 # Cadl projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
+$cadlRanchProjectPathsWithoutConvenience = # Needs justification to add item
+    'enums/extensible', # https://github.com/Azure/autorest.csharp/issues/3079
+    'hello' # https://github.com/Azure/autorest.csharp/issues/3110
+
 $cadlRanchProjectPaths =
     'arrays/item-types',
     'authentication/api-key',
@@ -265,7 +270,12 @@ if (!($Exclude -contains "CadlRanchProjects"))
 {
     foreach ($testPath in $cadlRanchProjectPaths)
     {
-        Add-CadlRanch-Cadl $testPath "cadl-" $cadlRanchProjectDirectory
+        Add-CadlRanch-Cadl $testPath "cadl-" $cadlRanchProjectDirectory $TRUE
+    }
+
+    foreach ($testPath in $cadlRanchProjectPathsWithoutConvenience)
+    {
+        Add-CadlRanch-Cadl $testPath "cadl-" $cadlRanchProjectDirectory $FALSE
     }
 }
 
