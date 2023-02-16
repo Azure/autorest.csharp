@@ -138,7 +138,7 @@ namespace AutoRest.CSharp.Output.Models
                     throw new InvalidOperationException($"Method {Operation.Name} has to have a return value");
                 }
 
-                if (!responseType.IsFrameworkType && responseType.Implementation is ModelTypeProvider modelType)
+                if (responseType.TryCast<ModelTypeProvider>(out var modelType))
                 {
                     var property = modelType.GetPropertyBySerializedName(Operation.Paging.ItemName ?? "value");
                     var propertyType = property.ValueType.WithNullable(false);
@@ -223,7 +223,15 @@ namespace AutoRest.CSharp.Output.Models
                     }
                     else
                     {
-                        parameterList.Add(convenienceParameter);
+                        // we do not support arrays as a body type, therefore we change the type to object on purpose to emphasize this: https://github.com/Azure/autorest.csharp/pull/3044
+                        if (TypeFactory.IsList(convenienceParameter.Type))
+                        {
+                            parameterList.Add(convenienceParameter with { Type = new CSharpType(typeof(object)) });
+                        }
+                        else
+                        {
+                            parameterList.Add(convenienceParameter);
+                        }
                         if (protocolParameter != null)
                             protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
                     }
