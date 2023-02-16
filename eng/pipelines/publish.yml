@@ -1,7 +1,6 @@
 trigger:
   branches:
     include:
-    - feature/*
     - eng/split-ci-pr-test
 
 variables:
