@@ -2,6 +2,7 @@ trigger:
   branches:
     include:
     - feature/*
+    - eng/split-ci-pr-test
 
 variables:
   BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
@@ -25,7 +26,7 @@ resources:
       ref: refs/tags/azure-sdk-build-tools_20230119.1
 
 stages:
-  - template: build.yml
+  - template: build-test.yml
   - ${{if eq(variables['System.TeamProject'], 'playground')}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
       parameters:
