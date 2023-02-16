@@ -27,7 +27,7 @@ resources:
 
 stages:
   - template: build.yml
-  - ${{if eq(variables['System.TeamProject'], 'internal')}}:
+  - ${{if eq(variables['System.TeamProject'], 'playground')}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
       parameters:
         ShouldTag: false
