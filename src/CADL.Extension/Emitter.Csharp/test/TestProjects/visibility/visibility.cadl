@@ -2,8 +2,12 @@ import "@cadl-lang/rest";
 
 using Cadl.Http;
 
-@serviceTitle("VisibilityClient")
-@serviceVersion("1.0.0")
+@service(
+    {
+        title: "VisibilityClient",
+        version: "1.0.0"
+    }
+)
 @server("http://localhost:3000", "TestServer endpoint")
 @doc("Illustrates read, write and read/write properties.")
 

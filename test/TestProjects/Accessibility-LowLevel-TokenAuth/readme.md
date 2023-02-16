@@ -10,4 +10,5 @@ input-file: $(this-folder)/../Accessibility-LowLevel/Accessibility-LowLevel.json
 security: AADToken
 security-header-name: Your-Subscription-Key
 security-scopes: https://test.azure.com/.default
+library-name: AccessibilityTokenAuth
 ```
