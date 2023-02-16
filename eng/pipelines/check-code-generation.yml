@@ -8,8 +8,8 @@ parameters:
 jobs:
 - job: ${{ parameters.name }}
   pool:
-    name: azsdk-pool-mms-win-2022-general
-    vmImage: MMS2022Compliant
+    name: azsdk-pool-mms-ubuntu-2204-general
+    vmImage: ubuntu-22.04
   steps:
     - task: NodeTool@0
       displayName: "Install Node 18.13.0"
