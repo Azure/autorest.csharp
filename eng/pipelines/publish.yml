@@ -2,6 +2,7 @@ trigger:
   branches:
     include:
     - feature/*
+    - eng/split-ci-pr
 
 variables:
   BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
