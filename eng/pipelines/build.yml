@@ -47,9 +47,9 @@ stages:
               useGlobalJson: true
               performMultiLevelLookup: true
           - task: NodeTool@0
-            displayName: "Install Node 18.13.0"
+            displayName: "Install Node 18.x"
             inputs:
-              versionSpec: '18.13.0'
+              versionSpec: '18.x'
           - script: |
               npm ci
             displayName: "Install packages"
