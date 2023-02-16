@@ -12,9 +12,9 @@ jobs:
     vmImage: MMS2022Compliant
   steps:
     - task: NodeTool@0
-      displayName: "Install Node 18.13.0"
+      displayName: "Install Node 18.14.0"
       inputs:
-        versionSpec: '18.13.0'
+        versionSpec: '18.14.0'
     - task: UseDotNet@2
       displayName: 'Use .NET Core SDK'
       inputs:

@@ -22,7 +22,7 @@ variables:
   - name: skipComponentGovernanceDetection
     value: true
   - name: NodeVersion
-    value: '18.13.0'
+    value: '18.14.0'
   - name: VAR_ARTIFACT_NAME
     value: 'CadlCsharpEmitter'
   - name: VAR_BUILD_ARTIFACT_STAGING_DIRECTORY
