@@ -94,17 +94,17 @@ stages:
               failOnStderr: false
               displayName: 'Publish to GitHub, npm and coverage report'
               workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          - publish: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage/cadl-ranch-coverage-csharp.json
-            artifact: CoverageReport
-          - task: AzureCLI@2
-            displayName: 'Upload to Cadl Ranch Coverage Report'
-            condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
-            inputs:
-              azureSubscription: "Cadl Ranch Storage"
-              scriptType: "bash"
-              scriptLocation: "inlineScript"
-              inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
-              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+        #   - publish: $(Build.SourcesDirectory)/autorest.csharp/artifacts/coverage/cadl-ranch-coverage-csharp.json
+        #     artifact: CoverageReport
+        #   - task: AzureCLI@2
+        #     displayName: 'Upload to Cadl Ranch Coverage Report'
+        #     condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))
+        #     inputs:
+        #       azureSubscription: "Cadl Ranch Storage"
+        #       scriptType: "bash"
+        #       scriptLocation: "inlineScript"
+        #       inlineScript: npx cadl-ranch upload-coverage --coverageFile ./artifacts/coverage/cadl-ranch-coverage-csharp.json --generatorName csharp --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./src/CADL.Extension/Emitter.Csharp/package.json').version")
+        #       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - template: check-code-generation.yml
         parameters:
           name: Check_Code_Generation_A_C
