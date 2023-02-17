@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using Azure.Core.Extensions;
 using ModelsInCadl;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="ModelsInCadlClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<ModelsInCadlClient, ModelsInCadlClientOptions> AddModelsInCadlClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> The Uri to use. </param>
+        public static IAzureClientBuilder<ModelsInCadlClient, ModelsInCadlClientOptions> AddModelsInCadlClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<ModelsInCadlClient, ModelsInCadlClientOptions>((options) => new ModelsInCadlClient(options));
+            return builder.RegisterClientFactory<ModelsInCadlClient, ModelsInCadlClientOptions>((options) => new ModelsInCadlClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="ModelsInCadlClient"/> instance. </summary>
