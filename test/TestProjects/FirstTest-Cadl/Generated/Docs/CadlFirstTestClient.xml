@@ -622,13 +622,13 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
-    name = "<name>",
+    actualName = "<actualName>",
 };
 
 Response response = await client.FriendlyModelAsync(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("actualName").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -638,7 +638,7 @@ Request Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required. name of the NotFriend
+  actualName: string, # Required. name of the NotFriend
 }
 </code>
 
@@ -646,7 +646,7 @@ Response Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required. name of the NotFriend
+  actualName: string, # Required. name of the NotFriend
 }
 </code>
 
@@ -661,13 +661,13 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
-    name = "<name>",
+    actualName = "<actualName>",
 };
 
 Response response = client.FriendlyModel(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("actualName").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -677,7 +677,7 @@ Request Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required. name of the NotFriend
+  actualName: string, # Required. name of the NotFriend
 }
 </code>
 
@@ -685,7 +685,7 @@ Response Body:
 
 Schema for <c>Friend</c>:
 <code>{
-  name: string, # Required. name of the NotFriend
+  actualName: string, # Required. name of the NotFriend
 }
 </code>
 

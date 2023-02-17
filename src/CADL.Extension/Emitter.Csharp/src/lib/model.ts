@@ -21,15 +21,14 @@ import {
     resolveUsages,
     Type,
     UsageFlags,
-    UsageTracker,
-    TrackableType,
     getDiscriminator,
     IntrinsicType,
     isVoidType,
     isArrayModelType,
     isRecordModelType,
     Scalar,
-    Union
+    Union,
+    getProjectedNames
 } from "@cadl-lang/compiler";
 import { getResourceOperation } from "@cadl-lang/rest";
 import {
@@ -512,15 +511,25 @@ export function getInputType(
                     isReadOnly = true;
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
+                const jsonKey = "json";
+                const csharpKey = "csharp";
+                const clientKey = "client";
+                const projectedNamesMap = getProjectedNames(program, value);
+                const name =
+                    projectedNamesMap?.get(csharpKey) ??
+                    projectedNamesMap?.get(clientKey) ??
+                    value.name;
+                const serializedName =
+                    projectedNamesMap?.get(jsonKey) ?? value.name;
                 const inputProp = {
-                    Name: value.name,
-                    SerializedName: value.name,
+                    Name: name,
+                    SerializedName: serializedName,
                     Description: getDoc(program, value) ?? "",
                     Type: getInputType(program, value.type, models, enums),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
                     IsDiscriminator: false
-                };
+                } as InputModelProperty;
                 outputProperties.push(inputProp);
             }
         });

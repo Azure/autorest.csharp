@@ -364,8 +364,8 @@
    "Properties": [
     {
      "$id": "54",
-     "Name": "name",
-     "SerializedName": "name",
+     "Name": "friendlyName",
+     "SerializedName": "actualName",
      "Description": "name of the NotFriend",
      "Type": {
       "$id": "55",
@@ -388,7 +388,7 @@
    "Properties": [
     {
      "$id": "57",
-     "Name": "requiredString",
+     "Name": "requiredStringProperty",
      "SerializedName": "requiredString",
      "Description": "Required string, illustrating a reference type property.",
      "Type": {

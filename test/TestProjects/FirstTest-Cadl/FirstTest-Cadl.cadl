@@ -86,11 +86,14 @@ model Thing {
 @friendlyName("Friend")
 model NotFriend {
   @doc("name of the NotFriend")
+  @projectedName("json", "actualName")
+  @projectedName("csharp", "friendlyName")
   name: string;
 }
 
 model RoundTripModel {
   @doc("Required string, illustrating a reference type property.")
+  @projectedName("client", "requiredStringProperty")
   requiredString: string;
 
   @doc("Required int, illustrating a value type property.")
