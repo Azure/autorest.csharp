@@ -24,7 +24,7 @@ stages:
          pool:
             vmImage: ubuntu-20.04
          variables:
-            currentDateTime: $[ format('{0:yyyy}-{0:MM}-{0:dd}-{0:HH}-{0:mm}-{0:ss}', pipeline.startTime) ]
+            currentDateTime: $[ format('{0:yyyy}-{0:MM}-{0:dd}_{0:HH}:{0:mm}:{0:ss}', pipeline.startTime) ]
          steps:
             - checkout: self
             - checkout: azure-sdk-tools
@@ -38,7 +38,7 @@ stages:
                 BaseBranchName: feature/v3
                 RepoName: autorest.csharp
                 PROwner: Azure
-                PRBranchName: update-azure-core-shared-codes-$(currentDateTime)
+                PRBranchName: update-azure-core-shared-codes-$(Build.BuildNumber)
                 CommitMsg: Update Azure Core Shared Codes $(currentDateTime)
                 PRBody: Update Azure Core Shared Codes $(currentDateTime)
                 PRTitle:  Update Azure Core Shared Codes $(currentDateTime)
