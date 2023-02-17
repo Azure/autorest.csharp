@@ -44,8 +44,17 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType(Type type, bool isNullable, params CSharpType[] arguments)
         {
+            //flatten Nullable<int> into int with IsNullable true
+            if (type.Equals(typeof(Nullable<>)) && arguments.Length == 1 && arguments[0].IsValueType)
+            {
+                type = arguments[0].FrameworkType;
+                isNullable = true;
+                arguments = Array.Empty<CSharpType>();
+            }
+
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
             Debug.Assert(type.IsGenericTypeDefinition || arguments.Length == 0, "arguments can be added only to the generic type definition.");
+
             _type = type;
 
             Namespace = type.Namespace;

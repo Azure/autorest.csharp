@@ -5,7 +5,8 @@
 <example>
 This sample shows how to call InputToRoundTripAsync with required request content and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -34,6 +35,12 @@ var data = new {
                 }
             },
         },
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
     },
 };
 
@@ -64,6 +71,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -95,7 +104,8 @@ Schema for <c>RoundTripModel</c>:
 <example>
 This sample shows how to call InputToRoundTrip with required request content and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -124,6 +134,12 @@ var data = new {
                 }
             },
         },
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
     },
 };
 
@@ -154,6 +170,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -185,7 +203,8 @@ Schema for <c>RoundTripModel</c>:
 <example>
 This sample shows how to call InputToRoundTripPrimitiveAsync with required request content and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -214,6 +233,12 @@ var data = new {
                 }
             },
         },
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
     },
 };
 
@@ -229,6 +254,7 @@ Console.WriteLine(result.GetProperty("required_Double").ToString());
 Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
 Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
 Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
+Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
 ]]></code>
 </example>
 <remarks>
@@ -246,6 +272,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -262,6 +290,7 @@ Schema for <c>RoundTripPrimitiveModel</c>:
   requiredBoolean: boolean, # Required. Required bolean, illustrating a value type property.
   requiredDateTimeOffset: string (date &amp; time), # Required. Required date time offset, illustrating a reference type property.
   requiredTimeSpan: string (duration ISO 8601 Format), # Required. Required time span, illustrating a value type property.
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
 }
 </code>
 
@@ -271,7 +300,8 @@ Schema for <c>RoundTripPrimitiveModel</c>:
 <example>
 This sample shows how to call InputToRoundTripPrimitive with required request content and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -300,6 +330,12 @@ var data = new {
                 }
             },
         },
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
     },
 };
 
@@ -315,6 +351,7 @@ Console.WriteLine(result.GetProperty("required_Double").ToString());
 Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
 Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
 Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
+Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
 ]]></code>
 </example>
 <remarks>
@@ -332,6 +369,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -348,6 +387,7 @@ Schema for <c>RoundTripPrimitiveModel</c>:
   requiredBoolean: boolean, # Required. Required bolean, illustrating a value type property.
   requiredDateTimeOffset: string (date &amp; time), # Required. Required date time offset, illustrating a reference type property.
   requiredTimeSpan: string (duration ISO 8601 Format), # Required. Required time span, illustrating a value type property.
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
 }
 </code>
 
@@ -357,7 +397,8 @@ Schema for <c>RoundTripPrimitiveModel</c>:
 <example>
 This sample shows how to call InputToRoundTripOptionalAsync and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {};
 
@@ -368,7 +409,8 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call InputToRoundTripOptionalAsync with all request content, and how to parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     optionalString = "<optionalString>",
@@ -418,6 +460,9 @@ var data = new {
     },
     optionalPlainDate = "2022-05-10",
     optionalPlainTime = 01:23:45,
+    optionalCollectionWithNullableIntElement = new[] {
+        1234
+    },
 };
 
 Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
@@ -433,6 +478,7 @@ Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").
 Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
+Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
 ]]></code>
 </example>
 <remarks>
@@ -457,6 +503,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
   optionalPlainDate: string (date), # Optional. Optional plainDate
   optionalPlainTime: string (time), # Optional. Optional plainTime
+  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
 }
 </code>
 
@@ -479,6 +526,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
   optionalPlainDate: string (date), # Optional. Optional plainDate
   optionalPlainTime: string (time), # Optional. Optional plainTime
+  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
 }
 </code>
 
@@ -488,7 +536,8 @@ Schema for <c>RoundTripOptionalModel</c>:
 <example>
 This sample shows how to call InputToRoundTripOptional and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {};
 
@@ -499,7 +548,8 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call InputToRoundTripOptional with all request content, and how to parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     optionalString = "<optionalString>",
@@ -549,6 +599,9 @@ var data = new {
     },
     optionalPlainDate = "2022-05-10",
     optionalPlainTime = 01:23:45,
+    optionalCollectionWithNullableIntElement = new[] {
+        1234
+    },
 };
 
 Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
@@ -564,6 +617,7 @@ Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").
 Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
+Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
 ]]></code>
 </example>
 <remarks>
@@ -588,6 +642,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
   optionalPlainDate: string (date), # Optional. Optional plainDate
   optionalPlainTime: string (time), # Optional. Optional plainTime
+  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
 }
 </code>
 
@@ -610,6 +665,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
   optionalPlainDate: string (date), # Optional. Optional plainDate
   optionalPlainTime: string (time), # Optional. Optional plainTime
+  optionalCollectionWithNullableIntElement: [number], # Optional. Optional collection of which the element is a nullable int
 }
 </code>
 
@@ -619,7 +675,8 @@ Schema for <c>RoundTripOptionalModel</c>:
 <example>
 This sample shows how to call InputToRoundTripReadOnlyAsync with required request content and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -648,6 +705,12 @@ var data = new {
                 }
             },
         },
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
     },
 };
 
@@ -670,6 +733,8 @@ Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString()
 Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
 Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredCollectionWithNullableIntElement")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalCollectionWithNullableBooleanElement")[0].ToString());
 ]]></code>
 </example>
 <remarks>
@@ -687,6 +752,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -718,6 +785,8 @@ Schema for <c>RoundTripReadOnlyModel</c>:
   optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Optional int record
   optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required. Optional string record
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
+  requiredCollectionWithNullableIntElement: [number], # Required. Required collection of which the element is a nullable int
+  optionalCollectionWithNullableBooleanElement: [boolean], # Optional. Optional collection of which the element is a nullable boolean
 }
 </code>
 
@@ -727,7 +796,8 @@ Schema for <c>RoundTripReadOnlyModel</c>:
 <example>
 This sample shows how to call InputToRoundTripReadOnly with required request content and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -757,6 +827,12 @@ var data = new {
             },
         },
     },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
 };
 
 Response response = client.InputToRoundTripReadOnly(RequestContent.Create(data));
@@ -778,6 +854,8 @@ Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString()
 Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
 Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredCollectionWithNullableIntElement")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalCollectionWithNullableBooleanElement")[0].ToString());
 ]]></code>
 </example>
 <remarks>
@@ -795,6 +873,8 @@ Schema for <c>InputModel</c>:
   requiredStringCollection: [string], # Required. Required primitive reference type collection
   requiredModelCollection: [CollectionItem], # Required. Required model collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
+  requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  requiredCollectionWithNullableBooleanElement: [boolean], # Required. Required collection of which the element is a nullable boolean
 }
 </code>
 
@@ -826,6 +906,8 @@ Schema for <c>RoundTripReadOnlyModel</c>:
   optionalReadOnlyIntRecord: Dictionary&lt;string, number&gt;, # Required. Optional int record
   optionalReadOnlyStringRecord: Dictionary&lt;string, string&gt;, # Required. Optional string record
   optionalModelRecord: Dictionary&lt;string, RecordItem&gt;, # Optional. Optional model record
+  requiredCollectionWithNullableIntElement: [number], # Required. Required collection of which the element is a nullable int
+  optionalCollectionWithNullableBooleanElement: [boolean], # Optional. Optional collection of which the element is a nullable boolean
 }
 </code>
 
@@ -835,7 +917,8 @@ Schema for <c>RoundTripReadOnlyModel</c>:
 <example>
 This sample shows how to call RoundTripToOutputAsync with required request content and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -926,7 +1009,8 @@ Schema for <c>OutputModel</c>:
 <example>
 This sample shows how to call RoundTripToOutput with required request content and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1017,7 +1101,8 @@ Schema for <c>OutputModel</c>:
 <example>
 This sample shows how to call InputRecursiveAsync with required request content.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -1028,7 +1113,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call InputRecursiveAsync with all request content.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -1056,7 +1142,8 @@ Schema for <c>InputRecursiveModel</c>:
 <example>
 This sample shows how to call InputRecursive with required request content.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -1067,7 +1154,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call InputRecursive with all request content.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -1095,7 +1183,8 @@ Schema for <c>InputRecursiveModel</c>:
 <example>
 This sample shows how to call RoundTripRecursiveAsync with required request content, and how to parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -1108,7 +1197,8 @@ Console.WriteLine(result.GetProperty("message").ToString());
 ]]></code>
 This sample shows how to call RoundTripRecursiveAsync with all request content, and how to parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -1148,7 +1238,8 @@ Schema for <c>RoundTripRecursiveModel</c>:
 <example>
 This sample shows how to call RoundTripRecursive with required request content, and how to parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -1161,7 +1252,8 @@ Console.WriteLine(result.GetProperty("message").ToString());
 ]]></code>
 This sample shows how to call RoundTripRecursive with all request content, and how to parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     message = "<message>",
@@ -1201,7 +1293,8 @@ Schema for <c>RoundTripRecursiveModel</c>:
 <example>
 This sample shows how to call SelfReferenceAsync and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 Response response = await client.SelfReferenceAsync();
 
@@ -1228,7 +1321,8 @@ Schema for <c>ErrorModel</c>:
 <example>
 This sample shows how to call SelfReference and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 Response response = client.SelfReference();
 
@@ -1255,7 +1349,8 @@ Schema for <c>ErrorModel</c>:
 <example>
 This sample shows how to call RoundTripToOutputWithNoUseBaseAsync with required request content and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     requiredCollection = new[] {
@@ -1311,7 +1406,8 @@ Schema for <c>RoundTripOnNoUse</c>:
 <example>
 This sample shows how to call RoundTripToOutputWithNoUseBase with required request content and parse the result.
 <code><![CDATA[
-var client = new ModelsInCadlClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
 
 var data = new {
     requiredCollection = new[] {
