@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
 
@@ -14,6 +16,7 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly INamedTypeSymbol? _existingType;
         private readonly Dictionary<string, ISymbol> _propertyMappings;
+        private readonly Dictionary<string, List<IMethodSymbol>> _methodMappings;
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
@@ -22,12 +25,18 @@ namespace AutoRest.CSharp.Input.Source
         {
             _existingType = existingType;
             _propertyMappings = new Dictionary<string, ISymbol>();
+            _methodMappings = new Dictionary<string, List<IMethodSymbol>>();
 
             foreach (ISymbol member in GetMembers(existingType))
             {
                 if (SourceInputModel.TryGetName(member, memberAttribute, out var schemaMemberName))
                 {
                     _propertyMappings.Add(schemaMemberName, member);
+                }
+
+                if (member is IMethodSymbol methodSymbol)
+                {
+                    _methodMappings.AddInList(methodSymbol.Name, methodSymbol);
                 }
             }
 
@@ -62,12 +71,12 @@ namespace AutoRest.CSharp.Input.Source
             }
 
             return values
-                .Select(v => (string?) v.Value)
+                .Select(v => (string?)v.Value)
                 .OfType<string>()
                 .ToArray();
         }
 
-        public SourceMemberMapping? GetForMember(string name)
+        internal SourcePropertyMapping? GetForMember(string name)
         {
             if (!_propertyMappings.TryGetValue(name, out var memberSymbol))
             {
@@ -76,10 +85,40 @@ namespace AutoRest.CSharp.Input.Source
 
             if (memberSymbol != null)
             {
-                return new SourceMemberMapping(name, memberSymbol);
+                return new SourcePropertyMapping(name, memberSymbol);
             }
 
             return null;
+        }
+
+        internal SourceMethodMapping? GetForMember(string name, IReadOnlyList<CSharpType> parameterTypes)
+        {
+            if (!_methodMappings.TryGetValue(name, out var methods))
+                return null;
+
+            foreach (var method in methods)
+            {
+                // we cannot say "we can only support framework type" here, therefore using NamedTypeSymbolExtensions.GetCSharpType is not an option here because it only supports getting CSharpType from a framework type
+                var parameterTypeSymbols = method.Parameters.Select(p => (INamedTypeSymbol)p.Type).ToArray();
+                if (IsSameTypeList(parameterTypeSymbols, parameterTypes))
+                    return new SourceMethodMapping(name, parameterTypes, method);
+            }
+
+            return null;
+        }
+
+        private static bool IsSameTypeList(IReadOnlyList<INamedTypeSymbol> typeSymbols, IReadOnlyList<CSharpType> types)
+        {
+            if (typeSymbols.Count != types.Count)
+                return false;
+
+            for (int i = 0; i < typeSymbols.Count; i++)
+            {
+                if (!typeSymbols[i].IsSameType(types[i]))
+                    return false;
+            }
+
+            return true;
         }
 
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)

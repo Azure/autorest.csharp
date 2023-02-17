@@ -38,14 +38,14 @@ namespace AutoRest.CSharp.Generation.Writers
         private readonly CodeWriter _writer;
         private readonly XmlDocWriter _xmlDocWriter;
         private readonly LowLevelClient _client;
-        private readonly LowLevelExampleComposer _exampleComposer;
+        private readonly LowLevelExampleComposer? _exampleComposer;
 
         public LowLevelClientWriter(CodeWriter writer, XmlDocWriter xmlDocWriter, LowLevelClient client)
         {
             _writer = writer;
             _xmlDocWriter = xmlDocWriter;
             _client = client;
-            _exampleComposer = new LowLevelExampleComposer(client);
+            _exampleComposer = LowLevelExampleComposer.TryCreate(client);
         }
 
         public void WriteClient()
@@ -556,12 +556,16 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var remarks = CreateSchemaDocumentationRemarks(clientMethod, out var hasRequestRemarks, out var hasResponseRemarks);
             WriteMethodDocumentation(_writer, methodSignature, clientMethod, hasResponseRemarks);
-            var docRef = GetMethodSignatureString(methodSignature);
-            _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
-            using (_xmlDocWriter.CreateMember(docRef))
+
+            if (_exampleComposer != null)
             {
-                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, async));
-                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
+                var docRef = GetMethodSignatureString(methodSignature);
+                _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
+                using (_xmlDocWriter.CreateMember(docRef))
+                {
+                    _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, async));
+                    WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
+                }
             }
         }
 

@@ -25,14 +25,22 @@ namespace AutoRest.CSharp.Generation.Writers
         private string ClientTypeName { get; }
         private IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
 
-
-        public LowLevelExampleComposer(LowLevelClient client)
+        private LowLevelExampleComposer(string clientTypeName, IReadOnlyList<MethodSignatureBase> invocationChain)
         {
-            ClientTypeName = client.Type.Name;
-            ClientInvocationChain = GetClientInvocationChain(client);
+            ClientTypeName = clientTypeName;
+            ClientInvocationChain = invocationChain;
         }
 
-        public FormattableString Compose(LowLevelClientMethod clientMethod, bool async)
+        public static LowLevelExampleComposer? TryCreate(LowLevelClient client)
+        {
+            var clientInvocationChain = GetClientInvocationChain(client);
+            if (clientInvocationChain == null)
+                return null;
+
+            return new LowLevelExampleComposer(client.Type.Name, clientInvocationChain);
+        }
+
+        public FormattableString? Compose(LowLevelClientMethod clientMethod, bool async)
         {
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
             var requestBodyType = clientMethod.RequestBodyType;
@@ -214,7 +222,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandleLongRunningPageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            if (clientMethod is not { ResponseBodyType: InputModelType {} responseModel})
+            if (clientMethod is not { ResponseBodyType: InputModelType { } responseModel })
             {
                 return;
             }
@@ -267,7 +275,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeParsingLongRunningResponseCodes(bool allProperties, InputType inputType, StringBuilder builder)
         {
-            if (inputType is InputPrimitiveType {Kind: InputTypeKind.Stream})
+            if (inputType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             {
                 using (Scope("using(Stream outFileStream = File.OpenWrite(\"<filePath>\")", 0, builder, true))
                 {
@@ -361,7 +369,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, StringBuilder builder)
         {
-            if (responseBodyType is InputPrimitiveType {Kind: InputTypeKind.Stream})
+            if (responseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             {
                 using (Scope("if (response.ContentStream != null)", 0, builder, true))
                 {
@@ -406,7 +414,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     currentApiInvocationChain.Push($"{parentOp}[0]");
                     ComposeResponseParsingCode(allProperties, listType.ElementType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
                     return;
-                case InputDictionaryType dictionaryType :
+                case InputDictionaryType dictionaryType:
                     if (visitedTypes.Contains(dictionaryType.ValueType))
                     {
                         return;
@@ -604,31 +612,31 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string ComposeRequestContent(bool allProperties, InputType inputType, string? propertyDescription, int indent, HashSet<InputModelType> visitedModels) => inputType switch
         {
-            InputListType listType             => ComposeArrayRequestContent(allProperties, listType.ElementType, indent, visitedModels),
+            InputListType listType => ComposeArrayRequestContent(allProperties, listType.ElementType, indent, visitedModels),
             InputDictionaryType dictionaryType => ComposeDictionaryRequestContent(allProperties, dictionaryType.ValueType, indent, visitedModels),
-            InputEnumType enumType             => $"\"{enumType.AllowedValues.First().Value}\"",
-            InputPrimitiveType primitiveType   => primitiveType.Kind switch
+            InputEnumType enumType => $"\"{enumType.AllowedValues.First().Value}\"",
+            InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
-                InputTypeKind.Stream           => "File.OpenRead(\"<filePath>\")",
-                InputTypeKind.Boolean          => "true",
-                InputTypeKind.Date             => "\"2022-05-10\"",
-                InputTypeKind.DateTime         => "\"2022-05-10T14:57:31.2311892-04:00\"",
-                InputTypeKind.DateTimeISO8601  => "\"2022-05-10T18:57:31.2311892Z\"",
-                InputTypeKind.DateTimeRFC1123  => "\"Tue, 10 May 2022 18:57:31 GMT\"",
-                InputTypeKind.DateTimeUnix     => "\"1652209051\"",
-                InputTypeKind.Float32          => "123.45f",
-                InputTypeKind.Float64          => "123.45d",
-                InputTypeKind.Float128         => "123.45m",
-                InputTypeKind.Guid             => "\"73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a\"",
-                InputTypeKind.Int32            => "1234",
-                InputTypeKind.Int64            => "1234L",
-                InputTypeKind.String           => string.IsNullOrWhiteSpace(propertyDescription) ? "\"<String>\"" : $"\"<{propertyDescription}>\"",
-                InputTypeKind.DurationISO8601  => "PT1H23M45S",
+                InputTypeKind.Stream => "File.OpenRead(\"<filePath>\")",
+                InputTypeKind.Boolean => "true",
+                InputTypeKind.Date => "\"2022-05-10\"",
+                InputTypeKind.DateTime => "\"2022-05-10T14:57:31.2311892-04:00\"",
+                InputTypeKind.DateTimeISO8601 => "\"2022-05-10T18:57:31.2311892Z\"",
+                InputTypeKind.DateTimeRFC1123 => "\"Tue, 10 May 2022 18:57:31 GMT\"",
+                InputTypeKind.DateTimeUnix => "\"1652209051\"",
+                InputTypeKind.Float32 => "123.45f",
+                InputTypeKind.Float64 => "123.45d",
+                InputTypeKind.Float128 => "123.45m",
+                InputTypeKind.Guid => "\"73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a\"",
+                InputTypeKind.Int32 => "1234",
+                InputTypeKind.Int64 => "1234L",
+                InputTypeKind.String => string.IsNullOrWhiteSpace(propertyDescription) ? "\"<String>\"" : $"\"<{propertyDescription}>\"",
+                InputTypeKind.DurationISO8601 => "PT1H23M45S",
                 InputTypeKind.DurationConstant => "01:23:45",
-                InputTypeKind.Time             => "01:23:45",
+                InputTypeKind.Time => "01:23:45",
                 _ => "new {}"
             },
-            InputModelType modelType          => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
+            InputModelType modelType => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
             _ => "new {}"
         };
 
@@ -818,7 +826,7 @@ namespace AutoRest.CSharp.Generation.Writers
         /// It's composed of a constructor of non-subclient and a optional list of subclient factory methods.
         /// </summary>
         /// <returns></returns>
-        private static IReadOnlyList<MethodSignatureBase> GetClientInvocationChain(LowLevelClient client)
+        private static IReadOnlyList<MethodSignatureBase>? GetClientInvocationChain(LowLevelClient client)
         {
             var callChain = new Stack<MethodSignatureBase>();
             while (client.FactoryMethod != null)
@@ -831,7 +839,13 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 client = client.ParentClient;
             }
-            callChain.Push(client.SecondaryConstructors.Where(c => c.Modifiers == MethodSignatureModifiers.Public).OrderBy(c => c.Parameters.Count).First());
+            var ctor = client.SecondaryConstructors.Where(c => c.Modifiers.HasFlag(MethodSignatureModifiers.Public)).OrderBy(c => c.Parameters.Count).FirstOrDefault();
+
+            // if we do not have a public secondary constructor, we have to return null and compose nothing
+            if (ctor == null)
+                return null;
+
+            callChain.Push(ctor);
 
             return callChain.ToList();
         }

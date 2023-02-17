@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 // We use a $ prefix here as AdditionalProperties comes from a swagger concept
                 // and not a swagger model/operation name to disambiguate from a possible property with
                 // the same name.
-                SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember("$AdditionalProperties");
+                SourcePropertyMapping? memberMapping = _sourceTypeMapping?.GetForMember("$AdditionalProperties");
 
                 _additionalPropertiesProperty = new ObjectTypeProperty(
                     BuilderHelpers.CreateMemberDeclaration("AdditionalProperties", ImplementsDictionaryType, "public", memberMapping?.ExistingMember, _typeFactory),
@@ -421,7 +421,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected ObjectTypeProperty CreateProperty(Property property)
         {
             var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
-            SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
+            SourcePropertyMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
 
             var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 

@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             foreach (var client in _topLevelClients)
             {
                 var returnType = new CSharpType(typeof(IAzureClientBuilder<,>), client.Type, client.ClientOptions.Type);
-                foreach (var ctor in client.PrimaryConstructors)
+                foreach (var ctor in client.PrimaryConstructors.Where(c => c.Modifiers.HasFlag(MethodSignatureModifiers.Public)))
                 {
                     var signatureParameters = new List<Parameter>() { FactoryBuilderParameter };
                     var parameterDeclarations = new List<FormattableString>();
