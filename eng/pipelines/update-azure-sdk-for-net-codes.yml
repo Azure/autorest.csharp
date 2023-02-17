@@ -1,0 +1,47 @@
+# Generate projects of smoke tests, projects under `samples` and `test` folders.
+# Also check if projects under `samples` and `test` folders are updated.
+
+parameters:
+  name: ''
+  filter: ''
+
+jobs:
+- job: ${{ parameters.name }}
+  timeoutInMinutes: 60
+  pool:
+    vmImage: ubuntu-20.04
+  variables:
+    AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+    CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
+  dependsOn: Update_Generator_Versions
+  steps:
+  - checkout: self
+    fetchDepth: 1
+  - checkout: azure-sdk-for-net
+  - checkout: azure-sdk-tools
+    fetchDepth: 1
+  - task: UseDotNet@2
+    displayName: 'Use .NET Core SDK'
+    inputs:
+      useGlobalJson: true
+      performMultiLevelLookup: true
+  - task: Powershell@2
+    displayName: Update SDK codes ${{ parameters.filter }}
+    inputs:
+      pwsh: true
+      filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkCodes.ps1
+      arguments: >
+        -Branch auto-update-autorest-$(AutorestCSharpVersion)
+        -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+        -ServiceDirectoryFilters ${{ parameters.filter}}
+      failOnStderr: false
+      workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+  - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
+    parameters:
+      BaseRepoBranch: auto-update-autorest-$(AutorestCSharpVersion)
+      BaseRepoOwner: azure-sdk
+      CommitMsg: Update SDK codes ${{ parameters.filter }}
+      TargetRepoOwner: Azure
+      TargetRepoName: azure-sdk-for-net
+      WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+      ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts

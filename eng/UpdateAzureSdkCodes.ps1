@@ -1,10 +1,4 @@
-param([string]$AutorestCSharpVersion, [string]$CadlEmitterVersion, [string]$SdkRepoRoot, [string[]]$ServiceDirectoryFilters = @("*"))
-
-Import-Module "$PSScriptRoot\UpdateGeneratorMetadata.psm1" -DisableNameChecking -Force;
-
-$SdkRepoRoot = Resolve-Path $SdkRepoRoot
-
-UpdateGeneratorMetaData $AutorestCSharpVersion $CadlEmitterVersion $SdkRepoRoot
+param([string]$Branch, [string]$SdkRepoRoot, [string[]]$ServiceDirectoryFilters)
 
 Write-Host "Generating Azure SDK Codes..."
 foreach ($filter in $ServiceDirectoryFilters) {
