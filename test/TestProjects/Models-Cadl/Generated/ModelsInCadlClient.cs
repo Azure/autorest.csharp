@@ -20,6 +20,7 @@ namespace ModelsInCadl
     public partial class ModelsInCadlClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly Uri _endpoint;
         private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
@@ -28,19 +29,30 @@ namespace ModelsInCadl
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of ModelsInCadlClient. </summary>
-        public ModelsInCadlClient() : this(new ModelsInCadlClientOptions())
+        /// <summary> Initializes a new instance of ModelsInCadlClient for mocking. </summary>
+        protected ModelsInCadlClient()
         {
         }
 
         /// <summary> Initializes a new instance of ModelsInCadlClient. </summary>
-        /// <param name="options"> The options for configuring the client. </param>
-        public ModelsInCadlClient(ModelsInCadlClientOptions options)
+        /// <param name="endpoint"> The Uri to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ModelsInCadlClient(Uri endpoint) : this(endpoint, new ModelsInCadlClientOptions())
         {
+        }
+
+        /// <summary> Initializes a new instance of ModelsInCadlClient. </summary>
+        /// <param name="endpoint"> The Uri to use. </param>
+        /// <param name="options"> The options for configuring the client. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
+        public ModelsInCadlClient(Uri endpoint, ModelsInCadlClientOptions options)
+        {
+            Argument.AssertNotNull(endpoint, nameof(endpoint));
             options ??= new ModelsInCadlClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
+            _endpoint = endpoint;
             _apiVersion = options.Version;
         }
 
@@ -742,6 +754,7 @@ namespace ModelsInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTrip", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -757,6 +770,7 @@ namespace ModelsInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTripPrimitive", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -772,6 +786,7 @@ namespace ModelsInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTripOptional", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -787,6 +802,7 @@ namespace ModelsInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/inputToRoundTripReadOnly", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -802,6 +818,7 @@ namespace ModelsInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/roundTripToOutput", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -817,6 +834,7 @@ namespace ModelsInCadl
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/inputRecursive", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -832,6 +850,7 @@ namespace ModelsInCadl
             var request = message.Request;
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/roundTripRecursive", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -847,6 +866,7 @@ namespace ModelsInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/selfReference", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -860,6 +880,7 @@ namespace ModelsInCadl
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
             uri.AppendPath("/", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
