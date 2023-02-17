@@ -189,7 +189,7 @@ stages:
                 BaseRepoOwner: azure-sdk
                 CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
                 TargetRepoOwner: Azure
-                TargetRepoName: $(Build.Repository.Name)
+                TargetRepoName: azure-sdk-for-net
                 WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
                 ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
         - job: Update_Samples
@@ -218,7 +218,7 @@ stages:
                 BaseRepoOwner: azure-sdk
                 CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
                 TargetRepoOwner: Azure
-                TargetRepoName: $(Build.Repository.Name)
+                TargetRepoName: azure-sdk-for-net
                 WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
                 ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
         - job: Create_PR
