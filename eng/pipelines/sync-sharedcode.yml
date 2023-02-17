@@ -36,6 +36,7 @@ stages:
               parameters:
                 BaseBranchName: feature/v3
                 RepoName: autorest.csharp
+                PROwner: Azure
                 PRBranchName: update-azure-core-shared-codes-$(currentDateTime)
                 CommitMsg: Update Azure Core Shared Codes $(currentDateTime)
                 PRBody: Update Azure Core Shared Codes $(currentDateTime)
