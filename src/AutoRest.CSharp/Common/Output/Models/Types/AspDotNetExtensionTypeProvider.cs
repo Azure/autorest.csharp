@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         public FormattableString Description => $"Extension methods to add {GetClientSeeRefs()} to client builder";
 
-        private IEnumerable<LowLevelClient> _topLevelClients => _clients.Where(client => !client.IsSubClient);
+        private IEnumerable<LowLevelClient> _topLevelClients => _clients.Where(client => !client.IsSubClient && client.Declaration.Accessibility == "public");
 
         protected override string DefaultName { get; }
 
