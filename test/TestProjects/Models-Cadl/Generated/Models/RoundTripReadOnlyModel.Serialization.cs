@@ -38,6 +38,8 @@ namespace ModelsInCadl.Models
             IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord = default;
             IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord = default;
             Optional<IReadOnlyDictionary<string, RecordItem>> optionalModelRecord = default;
+            IReadOnlyList<int?> requiredCollectionWithNullableIntElement = default;
+            Optional<IReadOnlyList<bool?>> optionalCollectionWithNullableBooleanElement = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredReadonlyString"u8))
@@ -240,8 +242,47 @@ namespace ModelsInCadl.Models
                     optionalModelRecord = dictionary;
                     continue;
                 }
+                if (property.NameEquals("requiredCollectionWithNullableIntElement"u8))
+                {
+                    List<int?> array = new List<int?>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetInt32());
+                        }
+                    }
+                    requiredCollectionWithNullableIntElement = array;
+                    continue;
+                }
+                if (property.NameEquals("optionalCollectionWithNullableBooleanElement"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    List<bool?> array = new List<bool?>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetBoolean());
+                        }
+                    }
+                    optionalCollectionWithNullableBooleanElement = array;
+                    continue;
+                }
             }
-            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelCollection, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelCollection), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord));
+            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelCollection, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelCollection), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord), requiredCollectionWithNullableIntElement, Optional.ToList(optionalCollectionWithNullableBooleanElement));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
