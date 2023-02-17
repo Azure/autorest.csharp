@@ -133,12 +133,16 @@ namespace AutoRest.CSharp.Common.Input
             IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
             IsContentType: input.Origin == "modelerfour:synthesized/content-type",
             IsEndpoint: input.Origin == "modelerfour:synthesized/host",
-            ArraySerializationDelimiter: GetArraySerializationDelimiter(input),
+            //ArraySerializationDelimiter: GetArraySerializationDelimiter(input),
+            ArrayFormat: CollectionFormat.None,
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
             VirtualParameter: input is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null
-        );
+        )
+        {
+            ArraySerializationDelimiter =  GetArraySerializationDelimiter(input)
+        };
 
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),

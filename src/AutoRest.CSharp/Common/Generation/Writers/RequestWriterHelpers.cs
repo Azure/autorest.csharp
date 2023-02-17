@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using Azure.Core;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using AutoRest.CSharp.Common.Input;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -354,6 +355,10 @@ namespace AutoRest.CSharp.Generation.Writers
             string method = delimiter != null && !explode
                 ? nameof(RequestUriBuilderExtensions.AppendQueryDelimited)
                 : nameof(RequestUriBuilderExtensions.AppendQuery);
+            if (queryParameter.arrayFormat == CollectionFormat.multi)
+            {
+                method = nameof(RequestUriBuilderExtensions.AppendQueryMuliFormat);
+            }
 
             var value = GetFieldReference(fields, queryParameter.Value);
             var parameter = parameters != null && queryParameter.Name == "api-version" ? parameters.FirstOrDefault(p => p.Name == "apiVersion") : null;

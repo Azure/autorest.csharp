@@ -96,6 +96,7 @@ import {
     resolveOptions,
     resolveOutputFolder
 } from "./options.js";
+import { CollectionFormat } from "./type/CollectionFormat.js";
 
 export const $lib = createCadlLibrary({
     name: "cadl-csharp",
@@ -762,6 +763,10 @@ function loadOperation(
         parameter: HttpOperationParameter
     ): InputParameter {
         const { type: location, name, param } = parameter;
+        let format = undefined;
+        if (parameter.type !== "path") {
+            format = parameter.format;
+        }
         const cadlType = param.type;
         const inputType: InputType = getInputType(
             program,
@@ -803,9 +808,36 @@ function loadOperation(
             IsContentType: isContentType,
             IsEndpoint: false,
             SkipUrlEncoding: false, //TODO: retrieve out value from extension
-            Explode: false,
-            Kind: kind
+            Explode: isExplode(format),
+            Kind: kind,
+            // ArraySerializationDelimiter: getArraySerializationDelimiter(name, format),
+            ArrayFormat: format
         } as InputParameter;
+    }
+
+    function isExplode(format: string | undefined): boolean {
+        if (!format && format === "multi") return true;
+        return false;
+    }
+    function getArraySerializationDelimiter(
+        parameterName: string,
+        format: string | undefined
+    ): string | undefined {
+        if (!format) return undefined;
+        switch(format) {
+            case CollectionFormat.CSV:
+                return ",";
+            case CollectionFormat.SSV:
+                return " ";
+            case CollectionFormat.TSV:
+                return "\t";
+            case CollectionFormat.Pipes:
+                return "|";
+            case CollectionFormat.Multi:
+                return undefined;
+            default:
+                return undefined;
+        }
     }
 
     function loadBodyParameter(

@@ -174,11 +174,15 @@ namespace AutoRest.CSharp.Output.Models
                     IsResourceParameter: Convert.ToBoolean(requestParameter.Extensions.GetValue<string>("x-ms-resource-identifier")),
                     IsContentType: requestParameter.Origin == "modelerfour:synthesized/content-type",
                     IsEndpoint: requestParameter.Origin == "modelerfour:synthesized/host",
-                    ArraySerializationDelimiter: GetArraySerializationDelimiter(requestParameter),
+                    //ArraySerializationDelimiter: GetArraySerializationDelimiter(requestParameter),
+                    ArrayFormat: CollectionFormat.None,
                     Explode: requestParameter.Protocol.Http is HttpParameter { Explode: true },
                     SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
                     HeaderCollectionPrefix: requestParameter.Extensions?.HeaderCollectionPrefix,
-                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null);
+                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null)
+            {
+                ArraySerializationDelimiter = GetArraySerializationDelimiter(requestParameter)
+            };
         }
 
         private static InputConstant? GetDefaultValue(RequestParameter parameter)
@@ -288,7 +292,7 @@ namespace AutoRest.CSharp.Output.Models
                         pathParametersMap.Add(parameterName, new PathSegment(reference, escape, serializationFormat, isRaw: false));
                         break;
                     case HttpParameterIn.Query:
-                        queryParameters.Add(new QueryParameter(parameterName, reference, GetArraySerializationDelimiter(requestParameter), escape, serializationFormat, GetExplode(requestParameter)));
+                        queryParameters.Add(new QueryParameter(parameterName, reference, GetArraySerializationDelimiter(requestParameter), CollectionFormat.None, escape, serializationFormat, GetExplode(requestParameter)));
                         break;
                     case HttpParameterIn.Header:
                         var headerName = requestParameter.Extensions?.HeaderCollectionPrefix ?? parameterName;
