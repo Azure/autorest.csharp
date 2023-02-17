@@ -174,12 +174,12 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
                 const shouldDebug = options.debug ?? false;
                 let debugFlag = "";
-                if (shouldDebug) debugFlag = "--debug";
+                if (shouldDebug) debugFlag = " --debug";
                 const command = `dotnet --roll-forward Major ${resolvePath(
                     options.csharpGeneratorPath
                 )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
                     options["clear-output-folder"]
-                } ${debugFlag}`;
+                }${debugFlag}`;
                 console.info(command);
 
                 try {
