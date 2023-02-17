@@ -505,9 +505,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected Dictionary<string, WriteMethodDelegate> _customMethods = new Dictionary<string, WriteMethodDelegate>();
         private WriteMethodDelegate GetMethodDelegate(MgmtClientOperation clientOperation)
         {
-            if (clientOperation.IsLongRunningOperation && clientOperation.IsPagingOperation)
-                throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
-
             if (!_customMethods.TryGetValue($"Write{clientOperation.Name}Body", out var function))
             {
                 function = GetMethodDelegate(clientOperation.IsLongRunningOperation, clientOperation.IsPagingOperation);
@@ -522,8 +519,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 (true, false) => WriteLROMethodBody,
                 (false, true) => WritePagingMethodBody,
                 (false, false) => WriteNormalMethodBody,
-                _ => throw new InvalidOperationException("Unknown method combination"),
+                (true, true) => WritePagingLROMethodBody,
             };
+
+        private void WritePagingLROMethodBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
+        {
+            throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
+        }
 
         protected IDisposable WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
