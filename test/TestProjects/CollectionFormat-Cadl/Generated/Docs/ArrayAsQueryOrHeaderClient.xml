@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="CsvQueryAsync(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call CsvQueryAsync.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = await client.CsvQueryAsync();
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call CsvQueryAsync with all parameters.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = await client.CsvQueryAsync(new String[]{"<options>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="CsvQuery(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call CsvQuery.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = client.CsvQuery();
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call CsvQuery with all parameters.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = client.CsvQuery(new String[]{"<options>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="MultiQueryAsync(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call MultiQueryAsync.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = await client.MultiQueryAsync();
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call MultiQueryAsync with all parameters.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = await client.MultiQueryAsync(new String[]{"<option>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="MultiQuery(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call MultiQuery.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = client.MultiQuery();
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call MultiQuery with all parameters.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = client.MultiQuery(new String[]{"<option>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="CsvHeaderAsync(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call CsvHeaderAsync.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = await client.CsvHeaderAsync();
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call CsvHeaderAsync with all parameters.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = await client.CsvHeaderAsync(new String[]{"<options>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="CsvHeader(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call CsvHeader.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = client.CsvHeader();
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call CsvHeader with all parameters.
+<code><![CDATA[
+var client = new ArrayAsQueryOrHeaderClient();
+
+Response response = client.CsvHeader(new String[]{"<options>"});
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

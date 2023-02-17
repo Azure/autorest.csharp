@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { CollectionFormat } from "./CollectionFormat.js";
 import { InputConstant } from "./InputConstant";
 import { InputOperationParameterKind } from "./InputOperationParameterKind";
 import { InputType } from "./InputType";
@@ -26,7 +25,6 @@ export interface InputParameter {
     IsEndpoint: boolean;
     SkipUrlEncoding: boolean;
     Explode: boolean;
-    // ArraySerializationDelimiter?: string;
-    ArrayFormat?: CollectionFormat;
+    ArraySerializationDelimiter?: string;
     HeaderCollectionPrefix?: string;
 }

@@ -121,25 +121,5 @@ namespace Azure.Core
         {
             builder.AppendQuery(name, string.Join(delimiter, value), escape);
         }
-        public static void AppendQueryMuliFormat<T>(this RequestUriBuilder builder, string name, IEnumerable<T> value, bool escape = true)
-        {
-            foreach (var item in value)
-            {
-                if (item != null)
-                {
-                    switch (value) {
-                        case string str:
-                            builder.AppendQuery(name, str,escape); break;
-                        case float f:
-                            builder.AppendQuery(name, f, escape); break;
-                    }
-                }
-                else
-                {
-                    builder.AppendQuery(name, "", escape);
-                }
-            }
-        }
-
     }
 }

@@ -1,0 +1,293 @@
+{
+ "$id": "1",
+ "Name": "ArrayAsQueryOrHeader",
+ "Description": "CADL project to test array as query or header.",
+ "ApiVersions": [
+  "0.1.0"
+ ],
+ "Enums": [],
+ "Models": [],
+ "Clients": [
+  {
+   "$id": "2",
+   "Name": "ArrayAsQueryOrHeaderClient",
+   "Description": "CADL project to test array as query or header.",
+   "Operations": [
+    {
+     "$id": "3",
+     "Name": "csvQuery",
+     "ResourceName": "ArrayAsQueryOrHeader",
+     "Parameters": [
+      {
+       "$id": "4",
+       "Name": "options",
+       "NameInRequest": "options",
+       "Type": {
+        "$id": "5",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "6",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method",
+       "ArraySerializationDelimiter": ","
+      },
+      {
+       "$id": "7",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "8",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "9",
+        "Type": {
+         "$ref": "8"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "10",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "11",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "12",
+        "Type": {
+         "$id": "13",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "0.1.0"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "14",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/csvQuery",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "15",
+     "Name": "multiQuery",
+     "ResourceName": "ArrayAsQueryOrHeader",
+     "Parameters": [
+      {
+       "$id": "16",
+       "Name": "option",
+       "NameInRequest": "option",
+       "Type": {
+        "$id": "17",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "18",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": true,
+       "Kind": "Method"
+      },
+      {
+       "$id": "19",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "20",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "21",
+        "Type": {
+         "$ref": "20"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "22",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/multiQuery",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "23",
+     "Name": "csvHeader",
+     "ResourceName": "ArrayAsQueryOrHeader",
+     "Parameters": [
+      {
+       "$id": "24",
+       "Name": "options",
+       "NameInRequest": "options",
+       "Type": {
+        "$id": "25",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "26",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsRequired": false,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method",
+       "ArraySerializationDelimiter": ","
+      },
+      {
+       "$id": "27",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "28",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "29",
+        "Type": {
+         "$ref": "28"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "10"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "30",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "",
+     "Path": "/csvHeader",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "31"
+   },
+   "Creatable": true
+  }
+ ]
+}

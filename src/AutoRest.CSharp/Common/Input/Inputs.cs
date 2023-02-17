@@ -105,8 +105,7 @@ namespace AutoRest.CSharp.Common.Input
         bool IsEndpoint,
         bool SkipUrlEncoding,
         bool Explode,
-        //string? ArraySerializationDelimiter,
-        CollectionFormat ArrayFormat,
+        string? ArraySerializationDelimiter,
         string? HeaderCollectionPrefix)
     {
         public InputParameter() : this(
@@ -126,32 +125,9 @@ namespace AutoRest.CSharp.Common.Input
             IsEndpoint: false,
             SkipUrlEncoding: false,
             Explode: false,
-            //ArraySerializationDelimiter: null,
-            ArrayFormat: CollectionFormat.None,
+            ArraySerializationDelimiter: null,
             HeaderCollectionPrefix: null)
         { }
-        public string? ArraySerializationDelimiter
-        {
-            get { return _arraySerializationDelimiter ??= EnsureArrayDelimiter(); }
-            set { _arraySerializationDelimiter = value; }
-        }
-        private string? _arraySerializationDelimiter;
-        private string? EnsureArrayDelimiter()
-        {
-            switch (ArrayFormat)
-            {
-                case CollectionFormat.csv:
-                    return ",";
-                case CollectionFormat.ssv:
-                    return " ";
-                case CollectionFormat.tsv:
-                    return "\t";
-                case CollectionFormat.pipes:
-                    return "|";
-                default:
-                    return null;
-            }
-        }
     }
 
     internal record OperationResponseHeader(string Name, string NameInResponse, string Description, InputType Type)

@@ -810,13 +810,12 @@ function loadOperation(
             SkipUrlEncoding: false, //TODO: retrieve out value from extension
             Explode: isExplode(format),
             Kind: kind,
-            // ArraySerializationDelimiter: getArraySerializationDelimiter(name, format),
-            ArrayFormat: format
+            ArraySerializationDelimiter: getArraySerializationDelimiter(name, format),
         } as InputParameter;
     }
 
     function isExplode(format: string | undefined): boolean {
-        if (!format && format === "multi") return true;
+        if (format && format === "multi") return true;
         return false;
     }
     function getArraySerializationDelimiter(
