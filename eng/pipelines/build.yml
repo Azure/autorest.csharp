@@ -51,6 +51,8 @@ stages:
             inputs:
               versionSpec: '18.14.0'
           - script: |
+              npm install -g npm@9.4.2
+          - script: |
               npm ci
             displayName: "Install packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
