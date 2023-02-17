@@ -6,6 +6,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Azure.Core;
 
 namespace ModelsInCadl.Models
@@ -23,10 +25,12 @@ namespace ModelsInCadl.Models
         /// <param name="requiredBoolean"> Required bolean, illustrating a value type property. </param>
         /// <param name="requiredDateTimeOffset"> Required date time offset, illustrating a reference type property. </param>
         /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
-        public RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan)
+        /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> or <paramref name="requiredCollectionWithNullableFloatElement"/> is null. </exception>
+        public RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IEnumerable<float?> requiredCollectionWithNullableFloatElement)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
+            Argument.AssertNotNull(requiredCollectionWithNullableFloatElement, nameof(requiredCollectionWithNullableFloatElement));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -37,6 +41,32 @@ namespace ModelsInCadl.Models
             RequiredBoolean = requiredBoolean;
             RequiredDateTimeOffset = requiredDateTimeOffset;
             RequiredTimeSpan = requiredTimeSpan;
+            RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement.ToList();
+        }
+
+        /// <summary> Initializes a new instance of RoundTripPrimitiveModel. </summary>
+        /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
+        /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredInt64"> Required int64, illustrating a value type property. </param>
+        /// <param name="requiredSafeInt"> Required safeint, illustrating a value type property. </param>
+        /// <param name="requiredFloat"> Required float, illustrating a value type property. </param>
+        /// <param name="requiredDouble"> Required double, illustrating a value type property. </param>
+        /// <param name="requiredBoolean"> Required bolean, illustrating a value type property. </param>
+        /// <param name="requiredDateTimeOffset"> Required date time offset, illustrating a reference type property. </param>
+        /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
+        /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
+        internal RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IList<float?> requiredCollectionWithNullableFloatElement)
+        {
+            RequiredString = requiredString;
+            RequiredInt = requiredInt;
+            RequiredInt64 = requiredInt64;
+            RequiredSafeInt = requiredSafeInt;
+            RequiredFloat = requiredFloat;
+            RequiredDouble = requiredDouble;
+            RequiredBoolean = requiredBoolean;
+            RequiredDateTimeOffset = requiredDateTimeOffset;
+            RequiredTimeSpan = requiredTimeSpan;
+            RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement.ToList();
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>
@@ -57,5 +87,7 @@ namespace ModelsInCadl.Models
         public DateTimeOffset RequiredDateTimeOffset { get; set; }
         /// <summary> Required time span, illustrating a value type property. </summary>
         public TimeSpan RequiredTimeSpan { get; set; }
+        /// <summary> Required collection of which the element is a nullable float. </summary>
+        public IList<float?> RequiredCollectionWithNullableFloatElement { get; }
     }
 }

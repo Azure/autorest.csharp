@@ -4,8 +4,12 @@ import "@azure-tools/cadl-azure-core";
 using Cadl.Http;
 using Azure.Core;
 
-@serviceTitle("EnumPropertiesBasicClient")
-@serviceVersion("1.0.0")
+@service(
+    {
+        title: "EnumPropertiesBasicClient",
+        version: "1.0.0"
+    }
+)
 @server("http://localhost:3000", "TestServer endpoint")
 @doc("Illustrates input models with required enum type properties.")
 
