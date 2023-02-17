@@ -278,7 +278,7 @@
     },
     "FirstTest-Cadl": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtPropertyBag\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FirstTest-Cadl\\Generated"
     },
     "FlattenedParameters": {
       "commandName": "Project",
