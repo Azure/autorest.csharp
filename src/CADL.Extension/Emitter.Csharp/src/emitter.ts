@@ -212,17 +212,6 @@ function prettierOutput(output: string) {
     return output + "\n";
 }
 
-function getClient(
-    clients: InputClient[],
-    clientName: string
-): InputClient | undefined {
-    for (const client of clients) {
-        if (client.Name === clientName) return client;
-    }
-
-    return undefined;
-}
-
 export function createModel(
     context: EmitContext<NetEmitterOptions>
 ): CodeModel {
