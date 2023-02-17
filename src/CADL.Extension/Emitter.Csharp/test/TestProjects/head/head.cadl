@@ -2,12 +2,14 @@ import "@cadl-lang/rest";
 
 using Cadl.Http;
 
-@serviceTitle("HeadParameterClient")
-@serviceVersion("1.0.0")
+@service(
+    {
+        title: "HeadParameterClient",
+        version: "1.0.0"
+    }
+)
 @server("http://localhost:3000", "TestServer endpoint")
 @doc("Illustrates clients generated from a Cadl with head parameter.")
-@Cadl.Rest.produces("application/json")
-@Cadl.Rest.consumes("application/json", "image/jpeg")
 namespace Cadl.HeadClient;
 
 model Thing {
