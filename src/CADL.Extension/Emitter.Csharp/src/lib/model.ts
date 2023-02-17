@@ -72,8 +72,8 @@ export function mapCadlTypeToCSharpInputTypeKind(
         case "Enum":
             return InputTypeKind.Enum;
         case "Number":
-            let nubmerValue = cadlType.value;
-            if (nubmerValue % 1 === 0) {
+            let numberValue = cadlType.value;
+            if (numberValue % 1 === 0) {
                 return InputTypeKind.Int32;
             }
             return InputTypeKind.Float64;
