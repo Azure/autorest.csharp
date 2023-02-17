@@ -26,15 +26,21 @@ namespace AutoRest.CSharp.Utilities
         {
             var symbolName = symbol.ToDisplayString(FullyQualifiedNameFormat);
             var assemblyName = symbol.ContainingAssembly.Name;
-            if (symbol.TypeArguments.Length > 0)
+
+            if (symbol.TypeArguments.Length == 1 && symbolName.EndsWith('?'))
+            {
+                symbolName = "System.Nullable`1";
+            }
+            else if (symbol.TypeArguments.Length > 0)
             {
                 symbolName += $"`{symbol.TypeArguments.Length}";
             }
 
             var type = Type.GetType(symbolName) ?? Type.GetType($"{symbolName}, {assemblyName}") ?? throw new InvalidOperationException($"Type '{symbolName}' can't be found in assembly '{assemblyName}'.");
-            return symbol.TypeArguments.Length > 0
+            var result = symbol.TypeArguments.Length > 0
                 ? type.MakeGenericType(symbol.TypeArguments.Cast<INamedTypeSymbol>().Select(GetFrameworkType).ToArray())
                 : type;
+            return result;
         }
     }
 }
