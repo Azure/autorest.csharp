@@ -28,7 +28,7 @@ jobs:
       displayName: Update SDK samples ${{ parameters.filter }}
       inputs:
         pwsh: true
-        filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkSampleForNet.ps1
+        filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkSamples.ps1
         arguments: >
           -Branch auto-update-autorest-$(AutorestCSharpVersion)
           -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
