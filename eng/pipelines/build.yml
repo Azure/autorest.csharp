@@ -24,6 +24,7 @@ resources:
       type: github
       name: Azure/azure-sdk-for-net
       endpoint: azure
+      ref: main
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
@@ -233,7 +234,6 @@ stages:
             - checkout: azure-sdk-tools
             - task: PowerShell@2
               displayName: Create pull request
-              condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
               inputs:
                 pwsh: true
                 filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
