@@ -11,7 +11,6 @@ jobs:
   - checkout: self
     fetchDepth: 1
   - checkout: azure-sdk-for-net
-    fetchDepth: 1
   - checkout: azure-sdk-tools
     fetchDepth: 1
   - task: Powershell@2
