@@ -28,13 +28,14 @@ jobs:
       displayName: Update SDK samples ${{ parameters.filter }}
       inputs:
         pwsh: true
-        filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkSampleForNet.ps1
+        filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkSamples.ps1
         arguments: >
           -Branch auto-update-autorest-$(AutorestCSharpVersion)
           -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
           -ServiceDirectoryFilters ${{ parameters.filter}}
         failOnStderr: false
         workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+      retryCountOnTaskFailure: 3
     - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
       parameters:
         BaseRepoBranch: auto-update-autorest-$(AutorestCSharpVersion)

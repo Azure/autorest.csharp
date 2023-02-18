@@ -24,6 +24,7 @@ resources:
       type: github
       name: Azure/azure-sdk-for-net
       endpoint: azure
+      ref: main
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
@@ -173,16 +174,12 @@ stages:
             filter: "a*,b*,c*"
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
-            name: Update_Codes_D_F
-            filter: "d*,e*,f*"
+            name: Update_Codes_D_E
+            filter: "d*,e*"
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
-            name: Update_Codes_G_I
-            filter: "g*,h*,i*"
-        - template: update-azure-sdk-for-net-codes.yml
-          parameters:
-            name: Update_Codes_J_L
-            filter: "j*,k*,l*"
+            name: Update_Codes_F_L
+            filter: "f*,g*,h*,i*,j*,k*,l*"
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_M_O
@@ -219,9 +216,8 @@ stages:
         - job: Create_PR
           dependsOn:
             - Update_Codes_A_C
-            - Update_Codes_D_F
-            - Update_Codes_G_I
-            - Update_Codes_J_L
+            - Update_Codes_D_E
+            - Update_Codes_F_L
             - Update_Codes_M_O
             - Update_Codes_P_R
             - Update_Codes_S_U
@@ -238,13 +234,12 @@ stages:
             - checkout: azure-sdk-tools
             - task: PowerShell@2
               displayName: Create pull request
-              condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
               inputs:
                 pwsh: true
                 filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
                 arguments: >
                   -RepoOwner "Azure"
-                  -RepoName "$(RepoNameWithoutOwner)"
+                  -RepoName "azure-sdk-for-net"
                   -BaseBranch "main"
                   -PROwner "azure-sdk"
                   -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"

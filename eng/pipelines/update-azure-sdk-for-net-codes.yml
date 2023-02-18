@@ -1,5 +1,4 @@
-# Generate projects of smoke tests, projects under `samples` and `test` folders.
-# Also check if projects under `samples` and `test` folders are updated.
+# Generate SDK codes
 
 parameters:
   name: ''
@@ -36,6 +35,7 @@ jobs:
         -ServiceDirectoryFilters ${{ parameters.filter}}
       failOnStderr: false
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+    retryCountOnTaskFailure: 3
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
       BaseRepoBranch: auto-update-autorest-$(AutorestCSharpVersion)
