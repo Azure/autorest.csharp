@@ -1,5 +1,4 @@
-# Generate projects of smoke tests, projects under `samples` and `test` folders.
-# Also check if projects under `samples` and `test` folders are updated.
+# Generate SDK codes
 
 parameters:
   name: ''

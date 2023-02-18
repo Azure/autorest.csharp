@@ -1,18 +1,7 @@
-param([string]$AutorestCSharpVersion, [string]$CadlEmitterVersion, [string]$SdkRepoRoot, [string[]]$ServiceDirectoryFilters = @("*"))
+param([string]$AutorestCSharpVersion, [string]$CadlEmitterVersion, [string]$SdkRepoRoot)
 
 Import-Module "$PSScriptRoot\UpdateGeneratorMetadata.psm1" -DisableNameChecking -Force;
 
 $SdkRepoRoot = Resolve-Path $SdkRepoRoot
 
 UpdateGeneratorMetaData $AutorestCSharpVersion $CadlEmitterVersion $SdkRepoRoot
-
-Write-Host "Generating Azure SDK Codes..."
-foreach ($filter in $ServiceDirectoryFilters) {
-    Write-Host 'Generating projects under service directory ' -ForegroundColor Green -NoNewline
-    Write-Host "$filter" -ForegroundColor Yellow
-    dotnet msbuild /restore /t:GenerateCode /p:ServiceDirectory=$filter "$SdkRepoRoot\eng\service.proj"
-    if ($LastExitCode -ne 0) {
-        Write-Error 'Generation error'
-        exit 1
-    }
-}
