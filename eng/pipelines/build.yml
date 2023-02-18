@@ -173,16 +173,12 @@ stages:
             filter: "a*,b*,c*"
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
-            name: Update_Codes_D_F
-            filter: "d*,e*,f*"
+            name: Update_Codes_D_E
+            filter: "d*,e*"
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
-            name: Update_Codes_G_I
-            filter: "g*,h*,i*"
-        - template: update-azure-sdk-for-net-codes.yml
-          parameters:
-            name: Update_Codes_J_L
-            filter: "j*,k*,l*"
+            name: Update_Codes_F_L
+            filter: "f*,g*,h*,i*,j*,k*,l*"
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_M_O
@@ -219,9 +215,8 @@ stages:
         - job: Create_PR
           dependsOn:
             - Update_Codes_A_C
-            - Update_Codes_D_F
-            - Update_Codes_G_I
-            - Update_Codes_J_L
+            - Update_Codes_D_E
+            - Update_Codes_F_L
             - Update_Codes_M_O
             - Update_Codes_P_R
             - Update_Codes_S_U
