@@ -239,7 +239,7 @@ stages:
                 filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
                 arguments: >
                   -RepoOwner "Azure"
-                  -RepoName "$(RepoNameWithoutOwner)"
+                  -RepoName "azure-sdk-for-net"
                   -BaseBranch "main"
                   -PROwner "azure-sdk"
                   -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"
