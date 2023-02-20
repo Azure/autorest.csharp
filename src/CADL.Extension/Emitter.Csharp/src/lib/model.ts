@@ -38,7 +38,11 @@ import {
     HttpOperation,
     isStatusCode
 } from "@cadl-lang/rest/http";
-import { projectedNameClientKey, projectedNameCSharpKey, projectedNameJsonKey } from "../constants.js";
+import {
+    projectedNameClientKey,
+    projectedNameCSharpKey,
+    projectedNameJsonKey
+} from "../constants.js";
 import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
 import { InputModelProperty } from "../type/InputModelProperty.js";
 import {
