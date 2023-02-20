@@ -16,10 +16,10 @@ namespace ProjectedName.Models
         }
 
         /// <summary> Only valid value is 'DPG'. </summary>
-        public string Codegen { get; set; }
+        public string ProducedBy { get; set; }
         /// <summary> Only valid value is 'DPG'. </summary>
-        public string Builtfrom { get; set; }
+        public string CreatedBy { get; set; }
         /// <summary> Only valid value is 'customers'. </summary>
-        public string WasMadeFor { get; set; }
+        public string MadeForCS { get; set; }
     }
 }

@@ -15,20 +15,20 @@ namespace ProjectedName.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(Codegen))
+            if (Optional.IsDefined(ProducedBy))
             {
                 writer.WritePropertyName("codegen"u8);
-                writer.WriteStringValue(Codegen);
+                writer.WriteStringValue(ProducedBy);
             }
-            if (Optional.IsDefined(Builtfrom))
+            if (Optional.IsDefined(CreatedBy))
             {
                 writer.WritePropertyName("builtfrom"u8);
-                writer.WriteStringValue(Builtfrom);
+                writer.WriteStringValue(CreatedBy);
             }
-            if (Optional.IsDefined(WasMadeFor))
+            if (Optional.IsDefined(MadeForCS))
             {
                 writer.WritePropertyName("wasMadeFor"u8);
-                writer.WriteStringValue(WasMadeFor);
+                writer.WriteStringValue(MadeForCS);
             }
             writer.WriteEndObject();
         }
