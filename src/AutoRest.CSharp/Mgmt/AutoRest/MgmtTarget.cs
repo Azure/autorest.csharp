@@ -147,11 +147,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
             }
 
+            var modelFactoryProvider = MgmtContext.Library.ModelFactory;
+            if (modelFactoryProvider != null)
+            {
+                var modelFactoryWriter = new ModelFactoryWriter(modelFactoryProvider);
+                modelFactoryWriter.Write();
+                AddGeneratedFile(project, $"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
+            }
+
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
             var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep));
+            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
         }
 
         private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)

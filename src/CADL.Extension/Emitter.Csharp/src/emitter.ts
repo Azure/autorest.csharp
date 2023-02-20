@@ -5,19 +5,19 @@ import {
     createCadlLibrary,
     getDeprecated,
     getDoc,
-    getServiceNamespace,
-    getServiceNamespaceString,
-    getServiceTitle,
-    getServiceVersion,
+    getNamespaceFullName,
     getSummary,
     ignoreDiagnostics,
     isErrorModel,
     JSONSchemaType,
+    listServices,
     Model,
     ModelProperty,
+    Namespace,
     Operation,
     Program,
-    resolvePath
+    resolvePath,
+    Service
 } from "@cadl-lang/compiler";
 import {
     getAllHttpServices,
@@ -73,15 +73,12 @@ import { getOperationLink } from "@azure-tools/cadl-azure-core";
 import fs from "fs";
 import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
-import { dllFilePath } from "@autorest/csharp";
 import { execSync } from "child_process";
 import {
     Client,
     createDpgContext,
     DpgEmitterOptions,
-    getConvenienceAPIName,
     isApiVersion,
-    isOperationGroup,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
@@ -93,68 +90,12 @@ import { ClientKind } from "./type/ClientKind.js";
 import { getVersions } from "@cadl-lang/versioning";
 import { EmitContext } from "@cadl-lang/compiler/*";
 import { capitalize } from "./lib/utils.js";
-
-export type NetEmitterOptions = {
-    outputFile?: string;
-    logFile?: string;
-    namespace?: string;
-    "library-name"?: string;
-    "single-top-level-client"?: boolean;
-    skipSDKGeneration?: boolean;
-    "unreferenced-types-handling"?:
-        | "removeOrInternalize"
-        | "internalize"
-        | "keepAll";
-    "new-project"?: boolean;
-    csharpGeneratorPath?: string;
-    "clear-output-folder"?: boolean;
-    "save-inputs"?: boolean;
-    "model-namespace"?: boolean;
-} & DpgEmitterOptions;
-
-const defaultOptions = {
-    outputFile: "cadl.json",
-    logFile: "log.json",
-    skipSDKGeneration: false,
-    "new-project": false,
-    csharpGeneratorPath: dllFilePath,
-    "clear-output-folder": false,
-    "save-inputs": false,
-    "generate-protocol-methods": true,
-    "generate-convenience-methods": true,
-    "package-name": undefined
-};
-
-const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
-    type: "object",
-    additionalProperties: false,
-    properties: {
-        outputFile: { type: "string", nullable: true },
-        logFile: { type: "string", nullable: true },
-        namespace: { type: "string", nullable: true },
-        "library-name": { type: "string", nullable: true },
-        "single-top-level-client": { type: "boolean", nullable: true },
-        skipSDKGeneration: { type: "boolean", default: false, nullable: true },
-        "unreferenced-types-handling": {
-            type: "string",
-            enum: ["removeOrInternalize", "internalize", "keepAll"],
-            nullable: true
-        },
-        "new-project": { type: "boolean", nullable: true },
-        csharpGeneratorPath: {
-            type: "string",
-            default: dllFilePath,
-            nullable: true
-        },
-        "clear-output-folder": { type: "boolean", nullable: true },
-        "save-inputs": { type: "boolean", nullable: true },
-        "model-namespace": { type: "boolean", nullable: true },
-        "generate-protocol-methods": { type: "boolean", nullable: true },
-        "generate-convenience-methods": { type: "boolean", nullable: true },
-        "package-name": { type: "string", nullable: true }
-    },
-    required: []
-};
+import {
+    NetEmitterOptions,
+    NetEmitterOptionsSchema,
+    resolveOptions,
+    resolveOutputFolder
+} from "./options.js";
 
 export const $lib = createCadlLibrary({
     name: "cadl-csharp",
@@ -166,31 +107,12 @@ export const $lib = createCadlLibrary({
 
 export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const program: Program = context.program;
-    const emitterOptions = context.options;
-    const emitterOutputDir = context.emitterOutputDir;
-    const resolvedOptions = { ...defaultOptions, ...emitterOptions };
-    const outputFolder = resolvePath(emitterOutputDir ?? "./cadl-output");
-    const options: NetEmitterOptions = {
-        outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
-        logFile: resolvePath(
-            emitterOutputDir ?? "./cadl-output",
-            resolvedOptions.logFile
-        ),
-        skipSDKGeneration: resolvedOptions.skipSDKGeneration,
-        "unreferenced-types-handling":
-            resolvedOptions["unreferenced-types-handling"],
-        "new-project": resolvedOptions["new-project"],
-        csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
-        "clear-output-folder": resolvedOptions["clear-output-folder"],
-        "save-inputs": resolvedOptions["save-inputs"],
-        "model-namespace": resolvedOptions["model-namespace"]
-    };
-
+    const options = resolveOptions(context);
+    const outputFolder = resolveOutputFolder(context);
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const namespace = getServiceNamespaceString(program) || "";
-
         const root = createModel(context);
+        const namespace = root.Name;
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const generatedFolder = resolvePath(outputFolder, "Generated");
@@ -199,12 +121,12 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             const resolvedSharedFolders: string[] = [];
             const sharedFolders = [
                 resolvePath(
-                    options.csharpGeneratorPath ?? dllFilePath,
+                    options.csharpGeneratorPath,
                     "..",
                     "Generator.Shared"
                 ),
                 resolvePath(
-                    options.csharpGeneratorPath ?? dllFilePath,
+                    options.csharpGeneratorPath,
                     "..",
                     "Azure.Core.Shared"
                 )
@@ -231,14 +153,13 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             //emit configuration.json
             const configurations = {
                 OutputFolder: ".",
-                Namespace: resolvedOptions.namespace ?? namespace,
-                LibraryName: resolvedOptions["library-name"] ?? null,
+                Namespace: options.namespace ?? namespace,
+                LibraryName: options["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient:
-                    resolvedOptions["single-top-level-client"],
+                SingleTopLevelClient: options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
-                "model-namespace": resolvedOptions["model-namespace"]
+                "model-namespace": options["model-namespace"]
             } as Configuration;
 
             await program.host.writeFile(
@@ -251,7 +172,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                     ? "--new-project"
                     : "";
                 const command = `dotnet --roll-forward Major ${resolvePath(
-                    options.csharpGeneratorPath ?? dllFilePath
+                    options.csharpGeneratorPath
                 )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
                     options["clear-output-folder"]
                 }`;
@@ -302,22 +223,34 @@ function getClient(
 }
 
 export function createModel(context: EmitContext<NetEmitterOptions>): any {
-    const program = context.program;
-    const serviceNamespaceType = getServiceNamespace(program);
-    if (!serviceNamespaceType) {
-        return;
-    }
-    const title = getServiceTitle(program);
-    const apiVersions: Set<string> = new Set<string>();
-    let version = getServiceVersion(program);
-    if (version !== "0000-00-00") {
-        apiVersions.add(version);
+    const services = listServices(context.program);
+    if (services.length === 0) {
+        services.push({ type: context.program.getGlobalNamespaceType() });
     }
 
-    const versions = getVersions(
-        program,
-        serviceNamespaceType
-    )[1]?.getVersions();
+    // TODO: support multiple service. Current only chose the first service.
+    const service = services[0];
+    const serviceNamespaceType = service.type;
+    if (serviceNamespaceType === undefined) {
+        throw Error("Can not emit yaml for a namespace that doesn't exist.");
+    }
+
+    return createModelForService(context, service);
+}
+
+export function createModelForService(
+    context: EmitContext<NetEmitterOptions>,
+    service: Service
+): any {
+    const program = context.program;
+    const title = service.title;
+    const serviceNamespaceType = service.type;
+    const apiVersions: Set<string> = new Set<string>();
+    let version = service.version;
+    if (version && version !== "0000-00-00") {
+        apiVersions.add(version);
+    }
+    const versions = getVersions(program, service.type)[1]?.getVersions();
     if (versions) {
         for (const ver of versions) {
             apiVersions.add(ver.value);
@@ -359,7 +292,7 @@ export function createModel(context: EmitContext<NetEmitterOptions>): any {
             Value: version
         } as InputConstant
     };
-    const namespace = getServiceNamespaceString(program) || "client";
+    const namespace = getNamespaceFullName(serviceNamespaceType) || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
     let auth = undefined;
     if (authentication) {
@@ -372,6 +305,7 @@ export function createModel(context: EmitContext<NetEmitterOptions>): any {
     let url: string = "";
     const convenienceOperations: HttpOperation[] = [];
     let lroMonitorOperations: Set<Operation>;
+    const dpgContext = createDpgContext(context as EmitContext<any>);
     try {
         //create endpoint parameter from servers
         if (servers !== undefined) {
@@ -396,10 +330,10 @@ export function createModel(context: EmitContext<NetEmitterOptions>): any {
 
         lroMonitorOperations = getAllLroMonitorOperations(routes, program);
         const clients: InputClient[] = [];
-        const dpgClients = listClients(program);
+        const dpgClients = listClients(dpgContext);
         for (const client of dpgClients) {
             clients.push(emitClient(client));
-            const dpgOperationGroups = listOperationGroups(program, client);
+            const dpgOperationGroups = listOperationGroups(dpgContext, client);
             for (const dpgGroup of dpgOperationGroups) {
                 clients.push(emitClient(dpgGroup, client));
             }
@@ -467,7 +401,7 @@ export function createModel(context: EmitContext<NetEmitterOptions>): any {
         client: Client | OperationGroup,
         parent?: Client
     ): InputClient {
-        const operations = listOperationsInOperationGroup(program, client);
+        const operations = listOperationsInOperationGroup(dpgContext, client);
         let clientDesc = "";
         if (operations.length > 0) {
             const container = ignoreDiagnostics(
@@ -497,6 +431,7 @@ export function createModel(context: EmitContext<NetEmitterOptions>): any {
                 httpOperation,
                 url,
                 urlParameters,
+                serviceNamespaceType,
                 modelMap,
                 enumMap
             );
@@ -654,7 +589,11 @@ function processServiceAuthentication(
     return auth;
 }
 
-function getOperationGroupName(program: Program, operation: Operation): string {
+function getOperationGroupName(
+    program: Program,
+    operation: Operation,
+    serviceNamespaceType: Namespace
+): string {
     const explicitOperationId = getOperationId(program, operation);
     if (explicitOperationId) {
         const ids: string[] = explicitOperationId.split("_");
@@ -669,8 +608,7 @@ function getOperationGroupName(program: Program, operation: Operation): string {
     let namespace = operation.namespace;
     if (!namespace) {
         namespace =
-            program.checker.getGlobalNamespaceType() ??
-            getServiceNamespace(program);
+            program.checker.getGlobalNamespaceType() ?? serviceNamespaceType;
     }
 
     if (namespace) return namespace.name;
@@ -682,10 +620,12 @@ function loadOperation(
     operation: HttpOperation,
     uri: string,
     urlParameters: InputParameter[] | undefined = undefined,
+    serviceNamespaceType: Namespace,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
     const program = context.program;
+    const dpgContext = createDpgContext(context);
     const {
         path: fullPath,
         operation: op,
@@ -760,14 +700,10 @@ function loadOperation(
         mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const generateProtocol: boolean = shouldGenerateProtocol(
-        createDpgContext(context),
-        op
-    );
+    const generateProtocol: boolean = shouldGenerateProtocol(dpgContext, op);
     const generateConvenience: boolean =
         requestMethod !== RequestMethod.PATCH &&
-        (shouldGenerateConvenient(createDpgContext(context), op) ||
-            getConvenienceAPIName(program, op) !== undefined);
+        shouldGenerateConvenient(dpgContext, op);
 
     /* handle lro */
     /* handle paging. */
@@ -798,7 +734,7 @@ function loadOperation(
         Name: op.name,
         ResourceName:
             resourceOperation?.resourceType.name ??
-            getOperationGroupName(program, op),
+            getOperationGroupName(program, op, serviceNamespaceType),
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
@@ -842,7 +778,7 @@ function loadOperation(
             } as InputConstant;
         }
         const requestLocation = requestLocationMap[location];
-        const isApiVer: boolean = isApiVersion(program, parameter);
+        const isApiVer: boolean = isApiVersion(dpgContext, parameter);
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";

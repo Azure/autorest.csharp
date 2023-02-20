@@ -176,8 +176,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
 
-
-            if (methodBase is MethodSignature method)
+            var method = methodBase as MethodSignature;
+            if (method != null)
             {
                 writer
                     .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
@@ -195,8 +195,21 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
+            writer.Append($"{methodBase.Name}");
+
+            if (method?.GenericArguments != null)
+            {
+                writer.AppendRaw("<");
+                foreach (var argument in method.GenericArguments)
+                {
+                    writer.Append($"{argument:D},");
+                }
+                writer.RemoveTrailingComma();
+                writer.AppendRaw(">");
+            }
+
             writer
-                .Append($"{methodBase.Name}(")
+                .AppendRaw("(")
                 .AppendRawIf("this ", methodBase.Modifiers.HasFlag(Extension));
 
             var outerScope = writer.AmbientScope();
@@ -208,6 +221,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.RemoveTrailingComma();
             writer.Append($")");
+
+            if (method?.GenericParameterConstraints != null)
+            {
+                writer.Line();
+                foreach (var (argument, constraint) in method.GenericParameterConstraints)
+                {
+                    writer.Append($"where {argument:I}: {constraint}");
+                }
+            }
 
             if (methodBase is ConstructorSignature { Initializer: { } } constructor)
             {
@@ -553,7 +575,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        private static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
+        internal static string GetConversion(CodeWriter writer, CSharpType from, CSharpType to)
         {
             if (TypeFactory.RequiresToList(from, to))
             {

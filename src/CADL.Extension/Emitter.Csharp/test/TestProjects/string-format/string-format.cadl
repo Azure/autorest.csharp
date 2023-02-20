@@ -1,7 +1,11 @@
 import "@cadl-lang/rest";
 
-@serviceTitle("stringFormat")
-@serviceVersion("2015-06-18")
+@service(
+    {
+        title: "stringFormat",
+        version: "2015-06-18"
+    }
+)
 namespace stringFormat;
 
 using Cadl.Http;

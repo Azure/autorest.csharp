@@ -23,6 +23,7 @@ namespace MgmtDiscriminator.Models
         internal static UnknownDeliveryRuleCondition DeserializeUnknownDeliveryRuleCondition(JsonElement element)
         {
             MatchVariable name = "Unknown";
+            Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -30,8 +31,13 @@ namespace MgmtDiscriminator.Models
                     name = new MatchVariable(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("foo"u8))
+                {
+                    foo = property.Value.GetString();
+                    continue;
+                }
             }
-            return new UnknownDeliveryRuleCondition(name);
+            return new UnknownDeliveryRuleCondition(name, foo.Value);
         }
     }
 }

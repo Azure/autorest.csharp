@@ -25,6 +25,7 @@ namespace ModelsInCadl.Models
             OptionalIntRecord = new ChangeTrackingDictionary<string, int>();
             OptionalStringRecord = new ChangeTrackingDictionary<string, string>();
             OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
+            OptionalCollectionWithNullableIntElement = new ChangeTrackingList<int?>();
         }
 
         /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
@@ -41,7 +42,8 @@ namespace ModelsInCadl.Models
         /// <param name="optionalModelRecord"> Optional model record. </param>
         /// <param name="optionalPlainDate"> Optional plainDate. </param>
         /// <param name="optionalPlainTime"> Optional plainTime. </param>
-        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime)
+        /// <param name="optionalCollectionWithNullableIntElement"> Optional collection of which the element is a nullable int. </param>
+        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement)
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
@@ -56,6 +58,7 @@ namespace ModelsInCadl.Models
             OptionalModelRecord = optionalModelRecord;
             OptionalPlainDate = optionalPlainDate;
             OptionalPlainTime = optionalPlainTime;
+            OptionalCollectionWithNullableIntElement = optionalCollectionWithNullableIntElement.ToList();
         }
 
         /// <summary> Optional string, illustrating an optional reference type property. </summary>
@@ -84,5 +87,7 @@ namespace ModelsInCadl.Models
         public DateTimeOffset? OptionalPlainDate { get; set; }
         /// <summary> Optional plainTime. </summary>
         public TimeSpan? OptionalPlainTime { get; set; }
+        /// <summary> Optional collection of which the element is a nullable int. </summary>
+        public IList<int?> OptionalCollectionWithNullableIntElement { get; }
     }
 }

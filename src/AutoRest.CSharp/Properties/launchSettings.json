@@ -164,6 +164,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath-LowLevel\\Generated"
     },
+    "cadl-arrays/item-types": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\arrays\\item-types\\Generated"
+    },
     "cadl-authentication/api-key": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\api-key\\Generated"
@@ -175,6 +179,14 @@
     "cadl-authentication/union": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\union\\Generated"
+    },
+    "cadl-enums/extensible": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\enums\\extensible\\Generated"
+    },
+    "cadl-hello": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\hello\\Generated"
     },
     "cadl-models/property-optional": {
       "commandName": "Project",
@@ -432,6 +444,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtScopeResource\\Generated"
     },
+    "MgmtSingletonResource": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSingletonResource\\Generated"
+    },
     "MgmtSubscriptionNameParameter": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtSubscriptionNameParameter\\Generated"
@@ -567,10 +583,6 @@
     "ServiceVersionOverride": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ServiceVersionOverride\\Generated"
-    },
-    "SingletonResource": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SingletonResource\\Generated"
     },
     "SingleTopLevelClientWithOperations-LowLevel": {
       "commandName": "Project",

@@ -11,6 +11,7 @@ azure-arm: true
 model-namespace: false
 input-file: $(this-folder)/MgmtResourceName.json
 namespace: MgmtResourceName
+generate-model-factory: false # this is here only to test this option works
 no-resource-suffix:
   - Disk
   - Memory

@@ -35,6 +35,8 @@ namespace AutoRest.CSharp.Input
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
             public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
             public const string UnreferencedTypesHandling = "unreferenced-types-handling";
+            public const string ModelFactoryForHlc = "model-factory-for-hlc";
+            public const string GenerateModelFactory = "generate-model-factory";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -59,9 +61,11 @@ namespace AutoRest.CSharp.Input
             bool singleTopLevelClient,
             bool skipSerializationFormatXml,
             bool disablePaginationTopRenaming,
+            bool generateModelFactory,
+            IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
             string? projectFolder,
-            string[] protocolMethodList,
+            IReadOnlyList<string> protocolMethodList,
             IReadOnlyList<string> suppressAbstractBaseClasses,
             MgmtConfiguration mgmtConfiguration,
             MgmtTestConfiguration? mgmtTestConfiguration)
@@ -78,6 +82,7 @@ namespace AutoRest.CSharp.Input
             SkipCSProjPackageReference = skipCSProjPackageReference;
             Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
+            GenerateModelFactory = generateModelFactory;
             UnreferencedTypesHandling = unreferencedTypesHandling;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
@@ -93,6 +98,7 @@ namespace AutoRest.CSharp.Input
             _protocolMethodList = protocolMethodList;
             SkipSerializationFormatXml = skipSerializationFormatXml;
             DisablePaginationTopRenaming = disablePaginationTopRenaming;
+            _oldModelFactoryEntries = modelFactoryForHlc;
             _mgmtConfiguration = mgmtConfiguration;
             MgmtTestConfiguration = mgmtTestConfiguration;
             _suppressAbstractBaseClasses = suppressAbstractBaseClasses;
@@ -115,12 +121,15 @@ namespace AutoRest.CSharp.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
+        public static bool GenerateModelFactory { get; private set; }
+        private static IReadOnlyList<string>? _oldModelFactoryEntries;
+        public static IReadOnlyList<string> ModelFactoryForHlc => _oldModelFactoryEntries ?? throw new InvalidOperationException("Configuration has not been initialized");
         public static UnreferencedTypesHandlingOption UnreferencedTypesHandling { get; private set; }
         private static IReadOnlyList<string>? _suppressAbstractBaseClasses;
         public static IReadOnlyList<string> SuppressAbstractBaseClasses => _suppressAbstractBaseClasses ?? throw new InvalidOperationException("Configuration has not been initialized");
 
-        private static string[]? _protocolMethodList;
-        public static string[] ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
+        private static IReadOnlyList<string>? _protocolMethodList;
+        public static IReadOnlyList<string> ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
 
         private static MgmtConfiguration? _mgmtConfiguration;
         public static MgmtConfiguration MgmtConfiguration => _mgmtConfiguration ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -149,6 +158,8 @@ namespace AutoRest.CSharp.Input
                 singleTopLevelClient: GetOptionBoolValue(autoRest, Options.SingleTopLevelClient),
                 skipSerializationFormatXml: GetOptionBoolValue(autoRest, Options.SkipSerializationFormatXml),
                 disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
+                generateModelFactory: GetOptionBoolValue(autoRest, Options.GenerateModelFactory),
+                modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -209,6 +220,8 @@ namespace AutoRest.CSharp.Input
                     return false;
                 case Options.DisablePaginationTopRenaming:
                     return false;
+                case Options.GenerateModelFactory:
+                    return true;
                 default:
                     return null;
             }

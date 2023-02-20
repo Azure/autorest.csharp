@@ -306,6 +306,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     _writer.Line($"return {responseVariable:I};");
                 }
+                else if (TypeFactory.IsReadOnlyList(responseType))
+                {
+                    ResponseWriterHelpers.WriteRawResponseToGeneric(_writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, $"{responseVariable.ActualName}");
+                }
                 else
                 {
                     _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");

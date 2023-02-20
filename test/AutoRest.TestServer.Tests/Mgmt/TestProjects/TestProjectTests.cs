@@ -102,10 +102,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 : methodInfo.ReturnType.Equals(typeof(ArmOperation));
         }
 
+        private static bool IsModelFactory(Type type)
+        {
+            return type.IsPublic && type.IsSealed && type.IsAbstract && type.Name.EndsWith("ModelFactory");
+        }
+
         [Test]
         public void ValidateNoParametersNamedParameter()
         {
-            foreach (var type in MyTypes())
+            // we should exclude the model factory class here, because this is validating all the APIs in our clients not to have a parameter name of `parameters`
+            foreach (var type in MyTypes().Where(type => !IsModelFactory(type)))
             {
                 foreach (var method in type.GetMethods())
                 {
@@ -624,7 +630,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             // CLR does not have a concept of "static class". CLR will treat static class as both abstract and sealed.
             // therefore using this to find all the static class (which are the extension classes)
-            var extensionClasses = MyTypes().Where(type => type.IsAbstract && type.IsSealed && type.IsPublic);
+            // and we currently have two public static classes now: one of them is the extension class for resource group resource, the other is the model factory
+            // we must exclude the model factory here
+            var extensionClasses = MyTypes().Where(type => type.IsAbstract && type.IsSealed && type.IsPublic && !IsModelFactory(type));
             Assert.LessOrEqual(extensionClasses.Count(), 1);
 
             return extensionClasses.FirstOrDefault();
