@@ -16,23 +16,23 @@ namespace CadlFirstTest.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("actualName"u8);
-            writer.WriteStringValue(ActualName);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
 
         internal static Friend DeserializeFriend(JsonElement element)
         {
-            string actualName = default;
+            string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("actualName"u8))
+                if (property.NameEquals("name"u8))
                 {
-                    actualName = property.Value.GetString();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
-            return new Friend(actualName);
+            return new Friend(name);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
