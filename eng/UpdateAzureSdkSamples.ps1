@@ -1,4 +1,8 @@
-param([string]$Branch, [string]$SdkRepoRoot, [string[]]$ServiceDirectoryFilters)
+param(
+    [Parameter(Mandatory)]
+    [string]$SdkRepoRoot,
+
+    [string[]]$ServiceDirectoryFilters = @("*"))
 
 Write-Host "Generating Azure SDK Samples..."
 foreach ($filter in $ServiceDirectoryFilters) {
