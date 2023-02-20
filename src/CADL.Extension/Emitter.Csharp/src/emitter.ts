@@ -816,15 +816,11 @@ function loadOperation(
                     ? true
                     : false,
             Kind: kind,
-            ArraySerializationDelimiter: getArraySerializationDelimiter(
-                name,
-                format
-            )
+            ArraySerializationDelimiter: getArraySerializationDelimiter(format)
         } as InputParameter;
     }
 
     function getArraySerializationDelimiter(
-        parameterName: string,
         format: string | undefined
     ): string | undefined {
         if (!format) return undefined;
