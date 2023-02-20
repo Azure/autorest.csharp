@@ -3,111 +3,363 @@
   <members>
     <member name="CsvQueryAsync(IEnumerable,RequestContext)">
 <example>
-This sample shows how to call CsvQueryAsync.
+This sample shows how to call CsvQueryAsync and parse the result.
 <code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
 
 Response response = await client.CsvQueryAsync();
-Console.WriteLine(response.Status);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call CsvQueryAsync with all parameters.
+This sample shows how to call CsvQueryAsync with all parameters, and how to parse the result.
 <code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
 
 Response response = await client.CsvQueryAsync(new String[]{"<options>"});
-Console.WriteLine(response.Status);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. the object name.
+}
+</code>
+
+</remarks>
     </member>
     <member name="CsvQuery(IEnumerable,RequestContext)">
 <example>
-This sample shows how to call CsvQuery.
+This sample shows how to call CsvQuery and parse the result.
 <code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
 
 Response response = client.CsvQuery();
-Console.WriteLine(response.Status);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call CsvQuery with all parameters.
+This sample shows how to call CsvQuery with all parameters, and how to parse the result.
 <code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
 
 Response response = client.CsvQuery(new String[]{"<options>"});
-Console.WriteLine(response.Status);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. the object name.
+}
+</code>
+
+</remarks>
     </member>
     <member name="MultiQueryAsync(IEnumerable,RequestContext)">
 <example>
-This sample shows how to call MultiQueryAsync.
+This sample shows how to call MultiQueryAsync and parse the result.
 <code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
 
 Response response = await client.MultiQueryAsync();
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call MultiQueryAsync with all parameters.
-<code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
 
-Response response = await client.MultiQueryAsync(new String[]{"<option>"});
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call MultiQueryAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
+
+Response response = await client.MultiQueryAsync(new String[]{"<options>"});
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. the object name.
+}
+</code>
+
+</remarks>
     </member>
     <member name="MultiQuery(IEnumerable,RequestContext)">
 <example>
-This sample shows how to call MultiQuery.
+This sample shows how to call MultiQuery and parse the result.
 <code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
 
 Response response = client.MultiQuery();
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call MultiQuery with all parameters.
-<code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
 
-Response response = client.MultiQuery(new String[]{"<option>"});
-Console.WriteLine(response.Status);
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call MultiQuery with all parameters, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
+
+Response response = client.MultiQuery(new String[]{"<options>"});
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. the object name.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="NoFormatQueryAsync(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call NoFormatQueryAsync and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
+
+Response response = await client.NoFormatQueryAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call NoFormatQueryAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
+
+Response response = await client.NoFormatQueryAsync(new String[]{"<options>"});
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. the object name.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="NoFormatQuery(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call NoFormatQuery and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
+
+Response response = client.NoFormatQuery();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call NoFormatQuery with all parameters, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
+
+Response response = client.NoFormatQuery(new String[]{"<options>"});
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. the object name.
+}
+</code>
+
+</remarks>
     </member>
     <member name="CsvHeaderAsync(IEnumerable,RequestContext)">
 <example>
-This sample shows how to call CsvHeaderAsync.
+This sample shows how to call CsvHeaderAsync and parse the result.
 <code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
 
 Response response = await client.CsvHeaderAsync();
-Console.WriteLine(response.Status);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call CsvHeaderAsync with all parameters.
+This sample shows how to call CsvHeaderAsync with all parameters, and how to parse the result.
 <code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
 
 Response response = await client.CsvHeaderAsync(new String[]{"<options>"});
-Console.WriteLine(response.Status);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. the object name.
+}
+</code>
+
+</remarks>
     </member>
     <member name="CsvHeader(IEnumerable,RequestContext)">
 <example>
-This sample shows how to call CsvHeader.
+This sample shows how to call CsvHeader and parse the result.
 <code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
 
 Response response = client.CsvHeader();
-Console.WriteLine(response.Status);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
-This sample shows how to call CsvHeader with all parameters.
+This sample shows how to call CsvHeader with all parameters, and how to parse the result.
 <code><![CDATA[
-var client = new ArrayAsQueryOrHeaderClient();
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
 
 Response response = client.CsvHeader(new String[]{"<options>"});
-Console.WriteLine(response.Status);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. the object name.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="NoFormatHeaderAsync(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call NoFormatHeaderAsync and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
+
+Response response = await client.NoFormatHeaderAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call NoFormatHeaderAsync with all parameters, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
+
+Response response = await client.NoFormatHeaderAsync(new String[]{"<options>"});
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. the object name.
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="NoFormatHeader(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call NoFormatHeader and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
+
+Response response = client.NoFormatHeader();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+This sample shows how to call NoFormatHeader with all parameters, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ArrayAsQueryOrHeaderClient(endpoint);
+
+Response response = client.NoFormatHeader(new String[]{"<options>"});
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. the object name.
+}
+</code>
+
+</remarks>
     </member>
   </members>
 </doc>

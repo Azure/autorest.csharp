@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using ArrayAsQueryOrHeader;
 using Azure.Core.Extensions;
 
@@ -15,10 +16,11 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="ArrayAsQueryOrHeaderClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
-        public static IAzureClientBuilder<ArrayAsQueryOrHeaderClient, ArrayAsQueryOrHeaderClientOptions> AddArrayAsQueryOrHeaderClient<TBuilder>(this TBuilder builder)
+        /// <param name="endpoint"> The Uri to use. </param>
+        public static IAzureClientBuilder<ArrayAsQueryOrHeaderClient, ArrayAsQueryOrHeaderClientOptions> AddArrayAsQueryOrHeaderClient<TBuilder>(this TBuilder builder, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<ArrayAsQueryOrHeaderClient, ArrayAsQueryOrHeaderClientOptions>((options) => new ArrayAsQueryOrHeaderClient(options));
+            return builder.RegisterClientFactory<ArrayAsQueryOrHeaderClient, ArrayAsQueryOrHeaderClientOptions>((options) => new ArrayAsQueryOrHeaderClient(endpoint, options));
         }
 
         /// <summary> Registers a <see cref="ArrayAsQueryOrHeaderClient"/> instance. </summary>

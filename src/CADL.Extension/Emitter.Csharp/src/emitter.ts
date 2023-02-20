@@ -39,6 +39,7 @@ import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
 import {
     InputEnumType,
+    InputListType,
     InputModelType,
     InputPrimitiveType,
     InputType
@@ -808,22 +809,26 @@ function loadOperation(
             IsContentType: isContentType,
             IsEndpoint: false,
             SkipUrlEncoding: false, //TODO: retrieve out value from extension
-            Explode: isExplode(format),
+            Explode:
+                (inputType as InputListType).ElementType &&
+                format &&
+                format === "multi"
+                    ? true
+                    : false,
             Kind: kind,
-            ArraySerializationDelimiter: getArraySerializationDelimiter(name, format),
+            ArraySerializationDelimiter: getArraySerializationDelimiter(
+                name,
+                format
+            )
         } as InputParameter;
     }
 
-    function isExplode(format: string | undefined): boolean {
-        if (format && format === "multi") return true;
-        return false;
-    }
     function getArraySerializationDelimiter(
         parameterName: string,
         format: string | undefined
     ): string | undefined {
         if (!format) return undefined;
-        switch(format) {
+        switch (format) {
             case CollectionFormat.CSV:
                 return ",";
             case CollectionFormat.SSV:
