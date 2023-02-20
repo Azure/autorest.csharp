@@ -38,6 +38,7 @@ import {
     HttpOperation,
     isStatusCode
 } from "@cadl-lang/rest/http";
+import { projectedNameClientKey, projectedNameCSharpKey, projectedNameJsonKey } from "../constants.js";
 import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
 import { InputModelProperty } from "../type/InputModelProperty.js";
 import {
@@ -511,16 +512,13 @@ export function getInputType(
                     isReadOnly = true;
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
-                const jsonKey = "json";
-                const csharpKey = "csharp";
-                const clientKey = "client";
                 const projectedNamesMap = getProjectedNames(program, value);
                 const name =
-                    projectedNamesMap?.get(csharpKey) ??
-                    projectedNamesMap?.get(clientKey) ??
+                    projectedNamesMap?.get(projectedNameCSharpKey) ??
+                    projectedNamesMap?.get(projectedNameClientKey) ??
                     value.name;
                 const serializedName =
-                    projectedNamesMap?.get(jsonKey) ?? value.name;
+                    projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
                 const inputProp = {
                     Name: name,
                     SerializedName: serializedName,
