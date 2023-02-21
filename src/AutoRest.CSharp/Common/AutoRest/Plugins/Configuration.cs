@@ -97,14 +97,22 @@ namespace AutoRest.CSharp.Input
 
             if (publicClients && generation1ConvenienceClient)
             {
-                //TODO Remove after resolving https://github.com/Azure/autorest.csharp/issues/3151
-                if (_absoluteProjectFolder is not null &&
-                    !_absoluteProjectFolder.Contains("Azure.Analytics.Synapse.Spark", StringComparison.Ordinal) &&
-                    !_absoluteProjectFolder.Contains("Azure.Analytics.Synapse.Monitoring", StringComparison.Ordinal) &&
-                    !_absoluteProjectFolder.Contains("Azure.Analytics.Synapse.ManagedPrivateEndpoints", StringComparison.Ordinal) &&
-                    !_absoluteProjectFolder.Contains("Azure.Analytics.Synapse.Artifacts", StringComparison.Ordinal) &&
-                    !_absoluteProjectFolder.Contains("Azure.Communication.PhoneNumbers", StringComparison.Ordinal))
-                    throw new Exception($"Unsupported combination of settings both {Options.PublicClients} and {Options.Generation1ConvenienceClient} cannot be true at the same time.");
+                var binaryLocationSplit = new HashSet<string>(typeof(Configuration).Assembly.Location.Split(Path.DirectorySeparatorChar), StringComparer.Ordinal);
+                if (!binaryLocationSplit.Contains("autorest.csharp") || !binaryLocationSplit.Contains("artifacts"))
+                {
+                    if (_absoluteProjectFolder is not null)
+                    {
+                        //TODO Remove after resolving https://github.com/Azure/autorest.csharp/issues/3151
+                        var absoluteProjectFolderSPlit = new HashSet<string>(_absoluteProjectFolder.Split(Path.DirectorySeparatorChar), StringComparer.Ordinal);
+                        if (!absoluteProjectFolderSPlit.Contains("src") ||
+                            (!absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Spark") &&
+                            !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Monitoring") &&
+                            !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.ManagedPrivateEndpoints") &&
+                            !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Artifacts") &&
+                            !absoluteProjectFolderSPlit.Contains("Azure.Communication.PhoneNumbers")))
+                            throw new Exception($"Unsupported combination of settings both {Options.PublicClients} and {Options.Generation1ConvenienceClient} cannot be true at the same time.");
+                    }
+                }
             }
 
             _relativeProjectFolder = projectFolder;
