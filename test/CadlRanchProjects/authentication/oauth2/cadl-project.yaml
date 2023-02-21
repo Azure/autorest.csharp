@@ -1,0 +1,3 @@
+options:
+  "@azure-tools/cadl-csharp":
+    unreferenced-types-handling: keepAll
