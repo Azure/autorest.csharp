@@ -13,6 +13,7 @@ $swaggerTestDefinitions = @{};
 $cadlDefinitions = @{};
 
 # Test server test configuration
+$testProjectDataFile = Join-Path $repoRoot 'eng' 'testProjects.json'
 $autoRestPluginProject = (Get-AutoRestProject)
 $testServerDirectory = Join-Path $repoRoot 'test' 'TestServerProjects'
 $sharedSource = Join-Path $repoRoot 'src' 'assets'
@@ -23,30 +24,30 @@ $cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true --option 
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
-        'projectName'=$name;
-        'output'=$output;
-        'arguments'=$arguments
+        'projectName' = $name;
+        'output'      = $output;
+        'arguments'   = $arguments
     }
 }
 
 function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
     $swaggerTestDefinitions[$name] = @{
-        'projectName'=$name;
-        'output'=$output;
-        'arguments'=$arguments
+        'projectName' = $name;
+        'output'      = $output;
+        'arguments'   = $arguments
     }
 }
 
-function Add-Cadl([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
+function Add-Cadl([string]$name, [string]$output, [string]$mainFile = "", [string]$arguments = "") {
     $cadlDefinitions[$name] = @{
-        'projectName'=$name;
-        'output'=$output;
-        'mainFile'=$mainFile;
-        'arguments'="$cadlEmitOptions $arguments"
+        'projectName' = $name;
+        'output'      = $output;
+        'mainFile'    = $mainFile;
+        'arguments'   = "$cadlEmitOptions $arguments"
     }
 }
 
-function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [string]$testServerDirectory, [string]$additionalArgs="") {
+function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [string]$testServerDirectory, [string]$additionalArgs = "") {
     $projectDirectory = Join-Path $testServerDirectory $testName
     $inputFile = Join-Path $testServerSwaggerPath "$testName.json"
     $inputReadme = Join-Path $projectDirectory "readme.md"
@@ -59,54 +60,10 @@ function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$
     Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain
 }
 
-$testNames =
-    'additionalProperties',
-    'azure-parameter-grouping',
-    'azure-special-properties',
-    'body-array',
-    'body-boolean',
-    'body-byte',
-    'body-complex',
-    'body-date',
-    'body-datetime',
-    'body-datetime-rfc1123',
-    'body-dictionary',
-    'body-duration',
-    'body-file',
-    'body-formdata',
-    'body-formdata-urlencoded',
-    'body-integer',
-    'body-number',
-    'body-string',
-    'body-time',
-    'custom-baseUrl',
-    'custom-baseUrl-more-options',
-    'custom-baseUrl-paging',
-    'extensible-enums-swagger',
-    'header',
-    'httpInfrastructure',
-    'lro',
-    'lro-parameterized-endpoints',
-    'media_types',
-    'model-flattening',
-    'multiple-inheritance',
-    'non-string-enum',
-    'object-type',
-    'paging',
-    'required-optional',
-    'subscriptionId-apiVersion',
-    'url',
-    'url-multi-collectionFormat',
-    'validation',
-    'xml-service',
-    'xms-error-responses',
-    'constants',
-    'head';
+$testData = Get-Content $testProjectDataFile -Encoding utf8 -Raw | ConvertFrom-Json
 
-if (!($Exclude -contains "TestServer"))
-{
-    foreach ($testName in $testNames)
-    {
+if (!($Exclude -contains "TestServer")) {
+    foreach ($testName in $testData["TestServerProjects"]) {
         Add-TestServer-Swagger $testName "" $testServerDirectory "--generation1-convenience-client"
     }
 }
@@ -114,38 +71,15 @@ if (!($Exclude -contains "TestServer"))
 $llcArgs = "--data-plane=true --security=AzureKey --security-header-name=Fake-Subscription-Key"
 
 $testServerLowLevelDirectory = Join-Path $repoRoot 'test' 'TestServerProjectsLowLevel'
-$testNamesLowLevel =
-    'body-complex',
-    'body-file',
-    'body-string',
-    'custom-baseUrl',
-    'custom-baseUrl-more-options',
-    'custom-baseUrl-paging',
-    'dpg-customization',
-    'dpg-initial',
-    'dpg-update1',
-    'header',
-    'httpInfrastructure',
-    'media_types',
-    'lro',
-    'paging',
-    'url-multi-collectionFormat',
-    'url',
-    'head',
-    'body-array';
-$testNamesLowLevelWithoutArgs =
-    'security-aad',
-    'security-key';
+$testNamesLowLevel = $testData["TestServerProjectsLowLevel"]
+$testNamesLowLevelWithoutArgs = $testData["TestServerProjectsLowLevelNoArgs"]
 
-if (!($Exclude -contains "TestServerLowLevel"))
-{
-    foreach ($testName in $testNamesLowLevel)
-    {
+if (!($Exclude -contains "TestServerLowLevel")) {
+    foreach ($testName in $testNamesLowLevel) {
         Add-TestServer-Swagger $testName "-LowLevel" $testServerLowLevelDirectory $llcArgs
     }
 
-    foreach ($testName in $testNamesLowLevelWithoutArgs)
-    {
+    foreach ($testName in $testNamesLowLevelWithoutArgs) {
         Add-TestServer-Swagger $testName "-LowLevel" $testServerLowLevelDirectory
     }
 }
@@ -153,14 +87,12 @@ if (!($Exclude -contains "TestServerLowLevel"))
 function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest) {
     $readmeConfigurationPath = Join-Path $directory "readme.md"
     $testArguments = $null
-    if (Test-Path $readmeConfigurationPath)
-    {
+    if (Test-Path $readmeConfigurationPath) {
         $testArguments = "--require=$readmeConfigurationPath"
     }
-    else
-    {
+    else {
         $inputFile = Join-Path $directory "$testName.json"
-        $testArguments ="--require=$configurationPath --input-file=$inputFile --generation1-convenience-client"
+        $testArguments = "--require=$configurationPath --input-file=$inputFile --generation1-convenience-client"
     }
 
     if ($forTest) {
@@ -169,19 +101,18 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
     else {
         if ($testName.EndsWith("Cadl")) {
             Add-Cadl $testName $directory
-        } else {
+        }
+        else {
             Add-Swagger $testName $directory $testArguments
         }
     }
 }
 
-if (!($Exclude -contains "TestProjects"))
-{
+if (!($Exclude -contains "TestProjects")) {
     # Local test projects
-    $testSwaggerPath = Join-Path $repoRoot 'test' 'TestProjects'
+    $testProjectRoot = Join-Path $repoRoot 'test' 'TestProjects'
 
-    foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
-    {
+    foreach ($directory in Get-ChildItem $testProjectRoot -Directory) {
         $testName = $directory.Name
         $readmeConfigurationPath = Join-Path $directory "readme.md"
         $testArguments = $null
@@ -195,15 +126,14 @@ if (!($Exclude -contains "TestProjects"))
         }
         if ($testName.EndsWith("Cadl")) {
             Add-Cadl $testName $directory "" "--option @azure-tools/cadl-csharp.generate-convenience-methods=false"
-        } else {
-            if (Test-Path $readmeConfigurationPath)
-            {
+        }
+        else {
+            if (Test-Path $readmeConfigurationPath) {
                 $testArguments = "--require=$readmeConfigurationPath"
             }
-            else
-            {
+            else {
                 $inputFile = Join-Path $directory "$testName.json"
-                $testArguments ="--require=$configurationPath --input-file=$inputFile --generation1-convenience-client"
+                $testArguments = "--require=$configurationPath --input-file=$inputFile --generation1-convenience-client"
             }
 
             Add-Swagger $testName $directory $testArguments
@@ -211,64 +141,35 @@ if (!($Exclude -contains "TestProjects"))
     }
 }
 
-# Sample configuration
-$projectNames =
-    'AppConfiguration',
-    'CognitiveServices.TextAnalytics',
-    'CognitiveSearch',
-    'Azure.AI.FormRecognizer',
-    'Azure.Storage.Tables',
-    'Azure.ResourceManager.Sample',
-    'Azure.Management.Storage',
-    'Azure.Network.Management.Interface',
-    'Azure.AI.DocumentTranslation',
-    'Azure.Analytics.Purview.Account'
 
-if (!($Exclude -contains "Samples"))
-{
-    foreach ($projectName in $projectNames)
-    {
-        $projectDirectory = Join-Path $repoRoot 'samples' $projectName
+if (!($Exclude -contains "Samples")) {
+    $sampleProjectsRoot = Join-Path $repoRoot 'samples'
+
+    foreach ($directory in Get-ChildItem $sampleProjectsRoot -Directory) {
+        $sampleName = $directory.Name
+        $projectDirectory = Join-Path $sampleProjectsRoot $sampleName
         $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
-        Add-Swagger $projectName $projectDirectory "--require=$sampleConfigurationPath"
-    }
-}
-
-# Sample for cadl project
-$cadlSampleProjectName = 
-    'AnomalyDetector'
-
-if (!($Exclude -contains "Samples"))
-{
-    foreach ($projectName in $cadlSampleProjectName)
-    {
-        $projectDirectory = Join-Path $repoRoot 'samples' $projectName
-        $cadlMain = Join-Path $projectDirectory "main.cadl"
-        $cadlClient = Join-Path $projectDirectory "client.cadl"
-        $mainCadlFile = If (Test-Path "$cadlClient") { Resolve-Path "$cadlClient" } Else { Resolve-Path "$cadlMain"}
-        Add-Cadl $projectName $projectDirectory $mainCadlFile
+        if (Test-Path $sampleConfigurationPath) {
+            # for swagger samples
+            Add-Swagger $sampleName $projectDirectory "--require=$sampleConfigurationPath"
+        }
+        else {
+            # for cadl projects
+            $cadlMain = Join-Path $projectDirectory "main.cadl"
+            $cadlClient = Join-Path $projectDirectory "client.cadl"
+            $mainCadlFile = if (Test-Path $cadlClient) { Resolve-Path $cadlClient } else { Resolve-Path $cadlMain }
+            Add-Cadl $sampleName $projectDirectory $mainCadlFile
+        }
     }
 }
 
 # Cadl projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 
-$cadlRanchProjectPaths =
-    'arrays/item-types',
-    'authentication/api-key',
-    'authentication/oauth2',
-    'authentication/union',
-    'models/property-optional',
-    'models/property-types',
-    'models/usage',
-    "projection",
-    'enums/extensible', # https://github.com/Azure/autorest.csharp/issues/3079
-    'hello' # https://github.com/Azure/autorest.csharp/issues/3110
+$cadlRanchProjectPaths = $testData["CadlRanchProjects"]
 
-if (!($Exclude -contains "CadlRanchProjects"))
-{
-    foreach ($testPath in $cadlRanchProjectPaths)
-    {
+if (!($Exclude -contains "CadlRanchProjects")) {
+    foreach ($testPath in $cadlRanchProjectPaths) {
         Add-CadlRanch-Cadl $testPath "cadl-" $cadlRanchProjectDirectory
     }
 }
@@ -277,12 +178,9 @@ if (!($Exclude -contains "CadlRanchProjects"))
 Add-Cadl "inheritance-cadl" (Join-Path $cadlRanchProjectDirectory "inheritance")
 
 # Smoke tests
-if (!($Exclude -contains "SmokeTests"))
-{
-    foreach ($input in Get-Content (Join-Path $PSScriptRoot "SmokeTestInputs.txt"))
-    {
-        if ($input -match "^(?<input>[^#].*?specification/(?<name>[\w-]+(/[\w-]+)+)/readme.md)(:(?<args>.*))?")
-        {
+if (!($Exclude -contains "SmokeTests")) {
+    foreach ($input in Get-Content (Join-Path $PSScriptRoot "SmokeTestInputs.txt")) {
+        if ($input -match "^(?<input>[^#].*?specification/(?<name>[\w-]+(/[\w-]+)+)/readme.md)(:(?<args>.*))?") {
             $input = $Matches["input"]
             $args = $Matches["args"]
             $projectName = $Matches["name"].Replace("/", "-");
@@ -297,7 +195,7 @@ if (!($Exclude -contains "SmokeTests"))
 # Sorting file names that include '-' and '.' is broken in powershell - https://github.com/PowerShell/PowerShell/issues/3425
 # So map each to characters invalid for file system use '?' and '|', sort, and then map back
 function Sort-FileSafe ($names) {
-    return $names | % {$_.replace("-","?")} | % {$_.replace(".","|")} | Sort-Object |  % {$_.replace("?","-")} | % {$_.replace("|",".")}
+    return $names | % { $_.replace("-", "?") } | % { $_.replace(".", "|") } | Sort-Object | % { $_.replace("?", "-") } | % { $_.replace("|", ".") }
 }
 
 $launchSettings = Join-Path $autoRestPluginProject 'Properties' 'launchSettings.json'
@@ -333,52 +231,44 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     }
 
     $outputPath = Join-Path $definition.output "Generated"
-    if ($key -eq "TypeSchemaMapping")
-    {
+    if ($key -eq "TypeSchemaMapping") {
         $outputPath = Join-Path $definition.output "SomeFolder" "Generated"
     }
     $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
 
     $settings.profiles[$key] = [ordered]@{
-        'commandName'='Project';
-        'commandLineArgs'="--standalone $outputPath"
+        'commandName'     = 'Project';
+        'commandLineArgs' = "--standalone $outputPath"
     }
 }
 
 $settings | ConvertTo-Json | Out-File $launchSettings
 
 $keys = $testProjectEntries.Keys | Sort-Object;
-if (![string]::IsNullOrWhiteSpace($filter))
-{ 
+if (![string]::IsNullOrWhiteSpace($filter)) { 
     Write-Host "Using filter: $filter"
-    if ($continue)
-    {
-        $keys = $keys.Where({$_ -match $filter},'SkipUntil') 
+    if ($continue) {
+        $keys = $keys.Where({ $_ -match $filter }, 'SkipUntil') 
         Write-Host "Continuing with $keys"
     }
-    else
-    {
-        $keys = $keys.Where({$_ -match $filter}) 
+    else {
+        $keys = $keys.Where({ $_ -match $filter }) 
     }
 }
 
-if ($reset -or $env:TF_BUILD)
-{
-    $cadlCount = ([string]::IsNullOrWhiteSpace($filter) ? $cadlDefinitions : $cadlDefinitions.Keys.Where({$_ -match $filter})).Count
+if ($reset -or $env:TF_BUILD) {
+    $cadlCount = ([string]::IsNullOrWhiteSpace($filter) ? $cadlDefinitions : $cadlDefinitions.Keys.Where({ $_ -match $filter })).Count
     $swaggerCount = $keys.Count - $cadlCount
-    if ($swaggerCount -gt 0) 
-    {
+    if ($swaggerCount -gt 0) {
         AutoRest-Reset;
     }
 
-    if ($cadlCount -gt 0) 
-    {
+    if ($cadlCount -gt 0) {
         Invoke-CadlSetup
     }
 }
 
-if (!$noBuild)
-{
+if (!$noBuild) {
     Invoke "dotnet build $autoRestPluginProject"
 
     #build the emitter
@@ -387,21 +277,21 @@ if (!$noBuild)
 }
 
 
-$keys | %{ $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
+$keys | % { $swaggerDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
         Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel
 
-$keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
+$keys | % { $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
         Invoke-AutoRest $_.output $_.projectName $_.arguments $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel
 
-$keys | %{ $cadlDefinitions[$_] } | ForEach-Object -Parallel {
+$keys | % { $cadlDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
         Invoke-Cadl $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
