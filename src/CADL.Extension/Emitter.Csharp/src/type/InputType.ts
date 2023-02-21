@@ -56,3 +56,29 @@ export interface InputDictionaryType extends InputType {
     KeyType: InputType;
     ValueType: InputType;
 }
+
+export interface InputIntrinsicType extends InputType {
+    Name: "Intrinsic";
+    IsNullable: false;
+    Kind: "ErrorType" | "void" | "never" | "unknown" | "null";
+}
+
+export interface InputErrorType extends InputIntrinsicType {
+    Kind: "ErrorType";
+}
+
+export interface InputVoidType extends InputIntrinsicType {
+    Kind: "void";
+}
+
+export interface InputNeverType extends InputIntrinsicType {
+    Kind: "never";
+}
+
+export interface InputUnknownType extends InputIntrinsicType {
+    Kind: "unknown";
+}
+
+export interface InputNullType extends InputIntrinsicType {
+    Kind: "null";
+}

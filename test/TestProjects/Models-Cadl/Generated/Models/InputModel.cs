@@ -23,8 +23,10 @@ namespace ModelsInCadl.Models
         /// <param name="requiredStringCollection"> Required primitive reference type collection. </param>
         /// <param name="requiredModelCollection"> Required model collection. </param>
         /// <param name="requiredModelRecord"> Required model record. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredIntCollection"/>, <paramref name="requiredStringCollection"/>, <paramref name="requiredModelCollection"/> or <paramref name="requiredModelRecord"/> is null. </exception>
-        public InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IEnumerable<int> requiredIntCollection, IEnumerable<string> requiredStringCollection, IEnumerable<CollectionItem> requiredModelCollection, IDictionary<string, RecordItem> requiredModelRecord)
+        /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
+        /// <param name="requiredCollectionWithNullableBooleanElement"> Required collection of which the element is a nullable boolean. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredIntCollection"/>, <paramref name="requiredStringCollection"/>, <paramref name="requiredModelCollection"/>, <paramref name="requiredModelRecord"/>, <paramref name="requiredCollectionWithNullableFloatElement"/> or <paramref name="requiredCollectionWithNullableBooleanElement"/> is null. </exception>
+        public InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IEnumerable<int> requiredIntCollection, IEnumerable<string> requiredStringCollection, IEnumerable<CollectionItem> requiredModelCollection, IDictionary<string, RecordItem> requiredModelRecord, IEnumerable<float?> requiredCollectionWithNullableFloatElement, IEnumerable<bool?> requiredCollectionWithNullableBooleanElement)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
@@ -32,6 +34,8 @@ namespace ModelsInCadl.Models
             Argument.AssertNotNull(requiredStringCollection, nameof(requiredStringCollection));
             Argument.AssertNotNull(requiredModelCollection, nameof(requiredModelCollection));
             Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
+            Argument.AssertNotNull(requiredCollectionWithNullableFloatElement, nameof(requiredCollectionWithNullableFloatElement));
+            Argument.AssertNotNull(requiredCollectionWithNullableBooleanElement, nameof(requiredCollectionWithNullableBooleanElement));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -40,6 +44,8 @@ namespace ModelsInCadl.Models
             RequiredStringCollection = requiredStringCollection.ToList();
             RequiredModelCollection = requiredModelCollection.ToList();
             RequiredModelRecord = requiredModelRecord;
+            RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement.ToList();
+            RequiredCollectionWithNullableBooleanElement = requiredCollectionWithNullableBooleanElement.ToList();
         }
 
         /// <summary> Required string. </summary>
@@ -56,5 +62,9 @@ namespace ModelsInCadl.Models
         public IList<CollectionItem> RequiredModelCollection { get; }
         /// <summary> Required model record. </summary>
         public IDictionary<string, RecordItem> RequiredModelRecord { get; }
+        /// <summary> Required collection of which the element is a nullable float. </summary>
+        public IList<float?> RequiredCollectionWithNullableFloatElement { get; }
+        /// <summary> Required collection of which the element is a nullable boolean. </summary>
+        public IList<bool?> RequiredCollectionWithNullableBooleanElement { get; }
     }
 }
