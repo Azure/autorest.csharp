@@ -788,8 +788,7 @@ function loadOperation(
             IsEndpoint: false,
             SkipUrlEncoding: false, //TODO: retrieve out value from extension
             Explode:
-                (inputType as InputListType).ElementType &&
-                format === "multi"
+                (inputType as InputListType).ElementType && format === "multi"
                     ? true
                     : false,
             Kind: kind,
