@@ -22,10 +22,10 @@ namespace xml_service.Models
 
         public static CopyStatusType ToCopyStatusType(this string value)
         {
-            if (string.Equals(value, "pending", StringComparison.InvariantCultureIgnoreCase)) return CopyStatusType.Pending;
-            if (string.Equals(value, "success", StringComparison.InvariantCultureIgnoreCase)) return CopyStatusType.Success;
-            if (string.Equals(value, "aborted", StringComparison.InvariantCultureIgnoreCase)) return CopyStatusType.Aborted;
-            if (string.Equals(value, "failed", StringComparison.InvariantCultureIgnoreCase)) return CopyStatusType.Failed;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "pending")) return CopyStatusType.Pending;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "success")) return CopyStatusType.Success;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "aborted")) return CopyStatusType.Aborted;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "failed")) return CopyStatusType.Failed;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CopyStatusType value.");
         }
     }

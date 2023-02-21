@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Xml;
@@ -282,9 +283,16 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     foreach (EnumTypeValue value in schema.Values)
                     {
-                        writer.Append($"if ({schema.ValueType}.Equals(value, {value.Value.Value:L}");
-                        writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase");
-                        writer.Line($")) return {declaredTypeName}.{value.Declaration.Name};");
+                        if (value.Value.Value is string strValue && strValue.All(char.IsAscii))
+                        {
+                            writer.Append($"if ({typeof(StringComparer)}.{nameof(StringComparer.OrdinalIgnoreCase)}.{nameof(StringComparer.Equals)}(value, {strValue:L}))");
+                        }
+                        else
+                        {
+                            writer.Append($"if ({schema.ValueType}.Equals(value, {value.Value.Value:L}");
+                            writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase))");
+                        }
+                        writer.Line($" return {declaredTypeName}.{value.Declaration.Name};");
                     }
                 }
                 else// int, and float

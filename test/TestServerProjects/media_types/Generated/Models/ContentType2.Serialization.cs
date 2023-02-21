@@ -21,9 +21,9 @@ namespace media_types.Models
 
         public static ContentType2 ToContentType2(this string value)
         {
-            if (string.Equals(value, "application/json", StringComparison.InvariantCultureIgnoreCase)) return ContentType2.ApplicationJson;
-            if (string.Equals(value, "application/octet-stream", StringComparison.InvariantCultureIgnoreCase)) return ContentType2.ApplicationOctetStream;
-            if (string.Equals(value, "text/plain", StringComparison.InvariantCultureIgnoreCase)) return ContentType2.TextPlain;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "application/json")) return ContentType2.ApplicationJson;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "application/octet-stream")) return ContentType2.ApplicationOctetStream;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "text/plain")) return ContentType2.TextPlain;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ContentType2 value.");
         }
     }
