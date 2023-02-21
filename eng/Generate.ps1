@@ -62,8 +62,9 @@ function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$
 
 $testData = Get-Content $testProjectDataFile -Encoding utf8 -Raw | ConvertFrom-Json
 
+$testNames = $testData.TestServerProjects
 if (!($Exclude -contains "TestServer")) {
-    foreach ($testName in $testData["TestServerProjects"]) {
+    foreach ($testName in $testNames) {
         Add-TestServer-Swagger $testName "" $testServerDirectory "--generation1-convenience-client"
     }
 }
@@ -71,8 +72,8 @@ if (!($Exclude -contains "TestServer")) {
 $llcArgs = "--data-plane=true --security=AzureKey --security-header-name=Fake-Subscription-Key"
 
 $testServerLowLevelDirectory = Join-Path $repoRoot 'test' 'TestServerProjectsLowLevel'
-$testNamesLowLevel = $testData["TestServerProjectsLowLevel"]
-$testNamesLowLevelWithoutArgs = $testData["TestServerProjectsLowLevelNoArgs"]
+$testNamesLowLevel = $testData.TestServerProjectsLowLevel
+$testNamesLowLevelWithoutArgs = $testData.TestServerProjectsLowLevelNoArgs
 
 if (!($Exclude -contains "TestServerLowLevel")) {
     foreach ($testName in $testNamesLowLevel) {
@@ -166,7 +167,7 @@ if (!($Exclude -contains "Samples")) {
 # Cadl projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 
-$cadlRanchProjectPaths = $testData["CadlRanchProjects"]
+$cadlRanchProjectPaths = $testData.CadlRanchProjects
 
 if (!($Exclude -contains "CadlRanchProjects")) {
     foreach ($testPath in $cadlRanchProjectPaths) {
