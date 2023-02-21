@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     initializers.Add(new PropertyInitializer(property.PropertyName, property.PropertyType, property.ShouldSkipSerialization, $"{propertyVariable.Value.ActualName}"));
                 }
 
-                var objectType = (ObjectType) serialization.Type.Implementation;
+                var objectType = (ObjectType)serialization.Type.Implementation;
                 writer.WriteInitialization(v => writer.Line($"return {v};"), objectType, objectType.SerializationConstructor, initializers);
             }
             writer.Line();
@@ -185,6 +185,14 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(JsonElement)} element)"))
             {
+                if (!serialization.Type.IsValueType) // only return null for reference type (e.g. no enum)
+                {
+                    using (writer.Scope($"if (element.{nameof(JsonElement.ValueKind)} == {typeof(JsonValueKind)}.Null)"))
+                    {
+                        writer.Line($"return null;");
+                    }
+                }
+
                 var discriminator = serialization.Discriminator;
 
                 if (discriminator is not null && discriminator.HasDescendants)
