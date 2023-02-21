@@ -789,7 +789,6 @@ function loadOperation(
             SkipUrlEncoding: false, //TODO: retrieve out value from extension
             Explode:
                 (inputType as InputListType).ElementType &&
-                format &&
                 format === "multi"
                     ? true
                     : false,
@@ -801,7 +800,6 @@ function loadOperation(
     function getArraySerializationDelimiter(
         format: string | undefined
     ): string | undefined {
-        if (!format) return undefined;
         switch (format) {
             case CollectionFormat.CSV:
                 return ",";
