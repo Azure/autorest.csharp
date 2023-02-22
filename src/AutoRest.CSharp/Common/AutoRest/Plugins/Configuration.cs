@@ -97,8 +97,8 @@ namespace AutoRest.CSharp.Input
 
             if (publicClients && generation1ConvenienceClient)
             {
-                var binaryLocationSplit = new HashSet<string>(typeof(Configuration).Assembly.Location.Split(Path.DirectorySeparatorChar), StringComparer.Ordinal);
-                if (!binaryLocationSplit.Contains("autorest.csharp") || !binaryLocationSplit.Contains("artifacts"))
+                var binaryLocation = typeof(Configuration).Assembly.Location;
+                if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net6.0", "AutoRest.CSharp.dll")))
                 {
                     if (_absoluteProjectFolder is not null)
                     {
