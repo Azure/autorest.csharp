@@ -91,14 +91,14 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="IgnitionResource" /> object. </returns>
         public virtual IgnitionResource GetIgnition()
         {
-            return new IgnitionResource(Client, new ResourceIdentifier(Id.ToString() + "/ignitions/default"));
+            return new IgnitionResource(Client, Id.AppendChildResource("ignitions", "default"));
         }
 
         /// <summary> Gets an object representing a BrakeResource along with the instance operations that can be performed on it in the Car. </summary>
         /// <returns> Returns a <see cref="BrakeResource" /> object. </returns>
         public virtual BrakeResource GetBrake()
         {
-            return new BrakeResource(Client, new ResourceIdentifier(Id.ToString() + "/brakes/default"));
+            return new BrakeResource(Client, Id.AppendChildResource("brakes", "default"));
         }
 
         /// <summary>

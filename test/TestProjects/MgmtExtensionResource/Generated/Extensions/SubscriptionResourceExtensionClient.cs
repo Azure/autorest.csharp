@@ -51,7 +51,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
         public virtual SubSingletonResource GetSubSingleton()
         {
-            return new SubSingletonResource(Client, new ResourceIdentifier(Id.ToString() + "/providers/Microsoft.Singleton/subSingletons/default"));
+            return new SubSingletonResource(Client, Id.AppendProviderResource("Microsoft.Singleton", "subSingletons", "default"));
         }
 
         /// <summary> Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionResource. </summary>
