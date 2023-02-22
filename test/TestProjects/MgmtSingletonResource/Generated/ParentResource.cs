@@ -92,7 +92,7 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
         public virtual SingletonResource GetSingletonResource()
         {
-            return new SingletonResource(Client, new ResourceIdentifier(Id.ToString() + "/singletonResources/current"));
+            return new SingletonResource(Client, Id.AppendChildResource("singletonResources", "current"));
         }
 
         /// <summary>
