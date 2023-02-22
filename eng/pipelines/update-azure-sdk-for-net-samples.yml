@@ -38,10 +38,10 @@ jobs:
       failOnStderr: false
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     retryCountOnTaskFailure: 3
-  - pwsh: |
-      git restore eng/Packages.Data.props
-      git restore eng/emitter-package.json
-    workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+#   - pwsh: |
+#       git restore eng/Packages.Data.props
+#       git restore eng/emitter-package.json
+#     workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
       BaseRepoBranch: auto-update-autorest-$(AutorestCSharpVersion)
