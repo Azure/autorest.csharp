@@ -33,6 +33,7 @@ jobs:
         -Branch auto-update-autorest-$(AutorestCSharpVersion)
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
         -ServiceDirectoryFilters ${{ parameters.filter}}
+        -ShowSummary
       failOnStderr: false
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     retryCountOnTaskFailure: 3

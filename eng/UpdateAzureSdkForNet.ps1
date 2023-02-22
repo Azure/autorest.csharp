@@ -8,8 +8,11 @@ param(
     [Parameter(Mandatory)]
     [string]$SdkRepoRoot,
     
-    [string[]]$ServiceDirectoryFilters = @("*"))
+    [string[]]$ServiceDirectoryFilters = @("*"),
+
+    [switch]$ShowSummary
+    )
 
 Invoke-Expression "$PSScriptRoot\UpdateGeneratorMetadata.ps1 -AutorestCSharpVersion $AutorestCSharpVersion -CadlEmitterVersion $CadlEmitterVersion -SdkRepoRoot $SdkRepoRoot"
 
-Invoke-Expression "$PSScriptRoot\UpdateAzureSdkCodes.ps1 -SdkRepoRoot $SdkRepoRoot -ServiceDirectoryFilters $($ServiceDirectoryFilters -Join ',')"
+Invoke-Expression "$PSScriptRoot\UpdateAzureSdkCodes.ps1 -SdkRepoRoot $SdkRepoRoot -ServiceDirectoryFilters $($ServiceDirectoryFilters -Join ',') $(if ($ShowSummary) {'-ShowSummary'})"
