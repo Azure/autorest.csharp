@@ -94,6 +94,27 @@ namespace AutoRest.CSharp.Input
             {
                 _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
             }
+
+            if (publicClients && generation1ConvenienceClient)
+            {
+                var binaryLocation = typeof(Configuration).Assembly.Location;
+                if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net6.0", "AutoRest.CSharp.dll")))
+                {
+                    if (_absoluteProjectFolder is not null)
+                    {
+                        //TODO Remove after resolving https://github.com/Azure/autorest.csharp/issues/3151
+                        var absoluteProjectFolderSPlit = new HashSet<string>(_absoluteProjectFolder.Split(Path.DirectorySeparatorChar), StringComparer.Ordinal);
+                        if (!absoluteProjectFolderSPlit.Contains("src") ||
+                            (!absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Spark") &&
+                            !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Monitoring") &&
+                            !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.ManagedPrivateEndpoints") &&
+                            !absoluteProjectFolderSPlit.Contains("Azure.Analytics.Synapse.Artifacts") &&
+                            !absoluteProjectFolderSPlit.Contains("Azure.Communication.PhoneNumbers")))
+                            throw new Exception($"Unsupported combination of settings both {Options.PublicClients} and {Options.Generation1ConvenienceClient} cannot be true at the same time.");
+                    }
+                }
+            }
+
             _relativeProjectFolder = projectFolder;
             _protocolMethodList = protocolMethodList;
             SkipSerializationFormatXml = skipSerializationFormatXml;
