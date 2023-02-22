@@ -264,7 +264,8 @@ $cadlRanchProjectPaths =
     'authentication/union',
     'models/property-optional',
     'models/property-types',
-    'models/usage'
+    'models/usage',
+    "projection"
 
 if (!($Exclude -contains "CadlRanchProjects"))
 {
