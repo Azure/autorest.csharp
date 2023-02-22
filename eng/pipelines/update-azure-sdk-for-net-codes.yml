@@ -28,14 +28,20 @@ jobs:
     displayName: Update SDK codes ${{ parameters.filter }}
     inputs:
       pwsh: true
-      filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkCodes.ps1
+      filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkForNet.ps1
       arguments: >
+        -AutorestCSharpVersion $(AutorestCSharpVersion)
+        -CadlEmitterVersion $(CadlEmitterVersion)
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
         -ServiceDirectoryFilters ${{ parameters.filter}}
         -ShowSummary
       failOnStderr: false
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     retryCountOnTaskFailure: 3
+  - pwsh: |
+      git restore eng/Packages.Data.props
+      git restore eng/emitter-package.json
+    workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
       BaseRepoBranch: auto-update-autorest-$(AutorestCSharpVersion)
