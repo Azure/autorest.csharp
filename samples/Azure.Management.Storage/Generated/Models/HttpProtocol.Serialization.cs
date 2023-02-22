@@ -20,8 +20,8 @@ namespace Azure.Management.Storage.Models
 
         public static HttpProtocol ToHttpProtocol(this string value)
         {
-            if (string.Equals(value, "https,http", StringComparison.InvariantCultureIgnoreCase)) return HttpProtocol.HttpsHttp;
-            if (string.Equals(value, "https", StringComparison.InvariantCultureIgnoreCase)) return HttpProtocol.Https;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "https,http")) return HttpProtocol.HttpsHttp;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "https")) return HttpProtocol.Https;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown HttpProtocol value.");
         }
     }

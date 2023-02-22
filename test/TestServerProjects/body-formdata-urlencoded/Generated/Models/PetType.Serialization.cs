@@ -21,9 +21,9 @@ namespace body_formdata_urlencoded.Models
 
         public static PetType ToPetType(this string value)
         {
-            if (string.Equals(value, "dog", StringComparison.InvariantCultureIgnoreCase)) return PetType.Dog;
-            if (string.Equals(value, "cat", StringComparison.InvariantCultureIgnoreCase)) return PetType.Cat;
-            if (string.Equals(value, "fish", StringComparison.InvariantCultureIgnoreCase)) return PetType.Fish;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "dog")) return PetType.Dog;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "cat")) return PetType.Cat;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "fish")) return PetType.Fish;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown PetType value.");
         }
     }
