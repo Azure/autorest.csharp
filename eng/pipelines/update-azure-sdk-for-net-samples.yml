@@ -30,7 +30,6 @@ jobs:
         pwsh: true
         filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkSamples.ps1
         arguments: >
-          -Branch auto-update-autorest-$(AutorestCSharpVersion)
           -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
           -ServiceDirectoryFilters ${{ parameters.filter}}
           -ShowSummary
