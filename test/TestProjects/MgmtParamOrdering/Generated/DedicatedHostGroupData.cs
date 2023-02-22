@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtParamOrdering
 {
-    /// <summary> A class representing the DedicatedHostGroup data model. </summary>
+    /// <summary>
+    /// A class representing the DedicatedHostGroup data model.
+    /// Specifies information about the Dedicated host.
+    /// </summary>
     public partial class DedicatedHostGroupData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
