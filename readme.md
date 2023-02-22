@@ -10,12 +10,18 @@ ___
 
 # C# code generator for AutoRest V3
 
-- [Prerequisites](#prerequisites)
-- [Build](#build)
-- [Test](#test)
-- [Use in azure-sdk-net repo](#use-in-azure-sdk-net-repo)
-- [Use outside of the azure-sdk-net repo](#use-outside-of-the-azure-sdk-net-repo)
-- [Customizing the generated code](#customizing-the-generated-code)
+- [C# code generator for AutoRest V3](#c-code-generator-for-autorest-v3)
+  - [Prerequisites](#prerequisites)
+  - [Build](#build)
+  - [Test](#test)
+    - [Testing Details](#testing-details)
+    - [Validate generator changes against Azure SDK before merging your autorest.csharp PR](#validate-generator-changes-against-azure-sdk-before-merging-your-autorestcsharp-pr)
+  - [Use in `azure-sdk-for-net` repo](#use-in-azure-sdk-for-net-repo)
+    - [PR Integration with Azure SDK Repository](#pr-integration-with-azure-sdk-repository)
+  - [Use outside of the `azure-sdk-net` repo](#use-outside-of-the-azure-sdk-net-repo)
+  - [Debugging](#debugging)
+  - [Debugging transforms](#debugging-transforms)
+  - [Customizing the generated code](#customizing-the-generated-code)
     - [Make a model internal](#make-a-model-internal)
     - [Rename a model class](#rename-a-model-class)
     - [Change a model or client namespace](#change-a-model-or-client-namespace)
@@ -36,7 +42,7 @@ ___
     - [Change operation accessibility in bulk](#change-operation-accessibility-in-bulk)
     - [Exclude models from namespace](#exclude-models-from-namespace)
     - [Extending a model with additional constructors](#extending-a-model-with-additional-constructors)
-- [Management plane concepts and configurations](#management-plane-concepts-and-configurations)
+  - [Management plane concepts and configurations](#management-plane-concepts-and-configurations)
 
 <!-- /TOC -->
 
@@ -98,17 +104,11 @@ When the automatic PR is created for azure-sdk-for-net if there are any issues f
   }
   ```
   4. Locate the `dll` file generated for the generator, usually it could be found `autorest.csharp` repository in this directory: `artifacts\bin\AutoRest.CSharp\Debug\net6.0\AutoRest.CSharp.dll`
-  5. Go to [this file](https://github.com/Azure/azure-sdk-for-net/blob/285cbdc343f01774b2b33e758662222bc8a3a33b/eng/common/scripts/Cadl-Project-Generate.ps1#L80) in your local `azure-sdk-for-net` repository, and change it like this by appending a new option to the emitter invocation:
-  ```diff
-  -$cadlCompileCommand = "npx cadl compile $mainCadlFile --emit $emitterName$emitterAdditionalOptions"
-  +$cadlCompileCommand = "npx cadl compile $mainCadlFile --emit $emitterName$emitterAdditionalOptions --option @azure-tools/cadl-csharp.csharpGeneratorPath=/absolute/path/to/artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
-  ```
-  This process right now is complicated, and the improvement is tracking in [this issue](https://github.com/Azure/azure-sdk-for-net/issues/34357).
 - At this point there are several ways to generate but the idea is to generate and test all projects that will be affected by your PR.  There are tools such as [this](https://github.com/ArcturusZhang/Regen) which are written to handle specific cases.  If you are unsure you should run against all projects to be safe.
 
 To regen and test everything in azure-sdk-for-net after you have updated to use your new local build do the following:
 
-- First generate all projects in the repo by executing `dotnet build [RepoRoot]/eng/service.proj /t:GenerateCode`
+- First generate all projects in the repo by executing `dotnet build [RepoRoot]/eng/service.proj /t:GenerateCode`. If your generator PR needs to apply to typespec/cadl projects, or your generator PR changes anything in our emitter (the `src\CADL.Extension\Emitter.Csharp` project), you will need to run `dotnet build [RepoRoot]/eng/service.proj /t:GenerateCode  /p:CadlAdditionalOptions="@azure-tools/cadl-csharp.csharpGeneratorPath=/absolute/path/to/artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll`.
 - Next we want to at minimum run the tests against the new generated code by using `dotnet test [RepoRoot]/eng/service.proj --filter "(TestCategory!=Manually) & (TestCategory!=Live)"`
 - For non GA libraries there could be API changes so we want to run the Export-API script with no parameters which will update any projects that now have an API change `[RepoRoot]\eng\scripts\Export-API.ps1`
 - Finally it is very possible that we will need to make test case changes or snippet changes especially for non GA libraries which have expected changes.  All of these should be made in the branch and included in the PR to demonstrate all resulting changes from the autorest.csharp PR.
