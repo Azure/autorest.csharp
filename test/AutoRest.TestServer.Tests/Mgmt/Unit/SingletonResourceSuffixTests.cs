@@ -13,6 +13,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
         [TestCase("test/default", @"Id.AppendChildResource(""test"", ""default"")")]
         [TestCase("providers/Microsoft.Compute/test/default", @"Id.AppendProviderResource(""Microsoft.Compute"", ""test"", ""default"")")]
         [TestCase("providers/Microsoft.Compute/test1/name/test2/default", @"Id.AppendProviderResource(""Microsoft.Compute"", ""test1"", ""name"").AppendChildResource(""test2"", ""default"")")]
+        [TestCase("providers/Microsoft.Compute/test1/name/test2/name2/test3/default", @"Id.AppendProviderResource(""Microsoft.Compute"", ""test1"", ""name"").AppendChildResource(""test2"", ""name2"").AppendChildResource(""test3"", ""default"")")]
         public void ValidateBuildResourceIdentifier(string suffixString, string expected)
         {
             var segments = suffixString.Split('/', StringSplitOptions.RemoveEmptyEntries);
