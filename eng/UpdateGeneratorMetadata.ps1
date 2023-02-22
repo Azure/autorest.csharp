@@ -9,6 +9,8 @@ param(
     [string]$SdkRepoRoot)
 
 
+$ErrorActionPreference = 'Stop'
+
 $SdkRepoRoot = Resolve-Path $SdkRepoRoot
 
 Write-Host "Updating Autorest.CSharp($AutorestCSharpVersion) and Cadl Emitter($CadlEmitterVersion) under $SdkRepoRoot"

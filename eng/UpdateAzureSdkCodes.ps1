@@ -7,6 +7,8 @@ param(
     [switch]$ShowSummary
     )
 
+$ErrorActionPreference = 'Stop'
+
 Write-Host "Generating Azure SDK Codes..."
 foreach ($filter in $ServiceDirectoryFilters) {
     Write-Host 'Generating projects under service directory ' -ForegroundColor Green -NoNewline
