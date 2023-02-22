@@ -172,9 +172,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                     ? "--new-project"
                     : "";
 
-                const shouldDebug = options.debug ?? false;
-                let debugFlag = "";
-                if (shouldDebug) debugFlag = " --debug";
+                const debugFlag = options.debug ?? false ? " --debug" : "";
+
                 const command = `dotnet --roll-forward Major ${resolvePath(
                     options.csharpGeneratorPath
                 )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
