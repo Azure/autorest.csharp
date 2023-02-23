@@ -2,20 +2,11 @@ trigger: none
 pr:
   branches:
     include:
-    - feature/*
+    - feature/v3
 
 variables:
-  BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
   OfficialBuildId: $(Build.BuildNumber)
   NugetSecurityAnalysisWarningLevel: 'none'
-
-resources:
-  repositories:
-    - repository: azure-sdk-tools
-      type: github
-      name: Azure/azure-sdk-tools
-      endpoint: azure
-      ref: refs/tags/azure-sdk-tools_20220404.3
 
 stages:
   - template: build-test.yml

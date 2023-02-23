@@ -8,7 +8,6 @@ stages:
           vmImage: MMS2022Compliant
         steps:
           - checkout: self
-          - checkout: azure-sdk-tools
           - task: UseDotNet@2
             displayName: 'Use .NET Core SDK'
             retryCountOnTaskFailure: 3
