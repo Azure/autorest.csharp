@@ -97,7 +97,7 @@ import {
     resolveOptions,
     resolveOutputFolder
 } from "./options.js";
-import { CollectionFormat } from "./type/CollectionFormat.js";
+import { CollectionFormat, collectionFormatToDelimMap } from "./type/CollectionFormat.js";
 
 export const $lib = createCadlLibrary({
     name: "cadl-csharp",
@@ -792,27 +792,8 @@ function loadOperation(
                     ? true
                     : false,
             Kind: kind,
-            ArraySerializationDelimiter: getArraySerializationDelimiter(format)
+            ArraySerializationDelimiter: format ? collectionFormatToDelimMap[format] : undefined
         } as InputParameter;
-    }
-
-    function getArraySerializationDelimiter(
-        format: string | undefined
-    ): string | undefined {
-        switch (format) {
-            case CollectionFormat.CSV:
-                return ",";
-            case CollectionFormat.SSV:
-                return " ";
-            case CollectionFormat.TSV:
-                return "\t";
-            case CollectionFormat.Pipes:
-                return "|";
-            case CollectionFormat.Multi:
-                return undefined;
-            default:
-                return undefined;
-        }
     }
 
     function loadBodyParameter(

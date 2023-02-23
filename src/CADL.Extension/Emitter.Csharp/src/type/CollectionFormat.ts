@@ -8,3 +8,11 @@ export enum CollectionFormat {
     Pipes = "pipes",
     Multi = "multi"
 }
+
+export const collectionFormatToDelimMap: { [key in CollectionFormat]: string|undefined } = {
+    [CollectionFormat.CSV]: ",",
+    [CollectionFormat.SSV]: " ",
+    [CollectionFormat.TSV]: "\t",
+    [CollectionFormat.Pipes]: "|",
+    [CollectionFormat.Multi]: undefined
+};
