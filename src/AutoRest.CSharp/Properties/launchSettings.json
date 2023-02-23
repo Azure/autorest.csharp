@@ -200,6 +200,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\usage\\Generated"
     },
+    "cadl-projection": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\projection\\Generated"
+    },
     "ClientAndOperationGroup-Cadl": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ClientAndOperationGroup-Cadl\\Generated"

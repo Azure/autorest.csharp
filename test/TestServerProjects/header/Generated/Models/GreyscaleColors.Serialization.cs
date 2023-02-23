@@ -21,9 +21,9 @@ namespace header.Models
 
         public static GreyscaleColors ToGreyscaleColors(this string value)
         {
-            if (string.Equals(value, "White", StringComparison.InvariantCultureIgnoreCase)) return GreyscaleColors.White;
-            if (string.Equals(value, "black", StringComparison.InvariantCultureIgnoreCase)) return GreyscaleColors.Black;
-            if (string.Equals(value, "GREY", StringComparison.InvariantCultureIgnoreCase)) return GreyscaleColors.Grey;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "White")) return GreyscaleColors.White;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "black")) return GreyscaleColors.Black;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "GREY")) return GreyscaleColors.Grey;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown GreyscaleColors value.");
         }
     }

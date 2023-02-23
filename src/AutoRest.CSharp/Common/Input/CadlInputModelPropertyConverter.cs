@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputModelProperty.Name), ref name)
-                    || reader.TryReadString(nameof(InputModelProperty.SerializedName), ref name)
+                    || reader.TryReadString(nameof(InputModelProperty.SerializedName), ref serializedName)
                     || reader.TryReadString(nameof(InputModelProperty.Description), ref description)
                     || reader.TryReadWithConverter(nameof(InputModelProperty.Type), options, ref propertyType)
                     || reader.TryReadBoolean(nameof(InputModelProperty.IsReadOnly), ref isReadOnly)
