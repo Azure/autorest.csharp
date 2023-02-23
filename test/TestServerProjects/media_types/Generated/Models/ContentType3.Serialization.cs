@@ -20,8 +20,8 @@ namespace media_types.Models
 
         public static ContentType3 ToContentType3(this string value)
         {
-            if (string.Equals(value, "application/json", StringComparison.InvariantCultureIgnoreCase)) return ContentType3.ApplicationJson;
-            if (string.Equals(value, "text/plain", StringComparison.InvariantCultureIgnoreCase)) return ContentType3.TextPlain;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "application/json")) return ContentType3.ApplicationJson;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "text/plain")) return ContentType3.TextPlain;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ContentType3 value.");
         }
     }

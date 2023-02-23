@@ -23,11 +23,11 @@ namespace xml_service.Models
 
         public static LeaseStateType ToLeaseStateType(this string value)
         {
-            if (string.Equals(value, "available", StringComparison.InvariantCultureIgnoreCase)) return LeaseStateType.Available;
-            if (string.Equals(value, "leased", StringComparison.InvariantCultureIgnoreCase)) return LeaseStateType.Leased;
-            if (string.Equals(value, "expired", StringComparison.InvariantCultureIgnoreCase)) return LeaseStateType.Expired;
-            if (string.Equals(value, "breaking", StringComparison.InvariantCultureIgnoreCase)) return LeaseStateType.Breaking;
-            if (string.Equals(value, "broken", StringComparison.InvariantCultureIgnoreCase)) return LeaseStateType.Broken;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "available")) return LeaseStateType.Available;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "leased")) return LeaseStateType.Leased;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "expired")) return LeaseStateType.Expired;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "breaking")) return LeaseStateType.Breaking;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "broken")) return LeaseStateType.Broken;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown LeaseStateType value.");
         }
     }

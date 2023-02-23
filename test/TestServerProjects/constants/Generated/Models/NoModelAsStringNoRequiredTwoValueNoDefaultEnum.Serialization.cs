@@ -20,8 +20,8 @@ namespace constants.Models
 
         public static NoModelAsStringNoRequiredTwoValueNoDefaultEnum ToNoModelAsStringNoRequiredTwoValueNoDefaultEnum(this string value)
         {
-            if (string.Equals(value, "value1", StringComparison.InvariantCultureIgnoreCase)) return NoModelAsStringNoRequiredTwoValueNoDefaultEnum.Value1;
-            if (string.Equals(value, "value2", StringComparison.InvariantCultureIgnoreCase)) return NoModelAsStringNoRequiredTwoValueNoDefaultEnum.Value2;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "value1")) return NoModelAsStringNoRequiredTwoValueNoDefaultEnum.Value1;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "value2")) return NoModelAsStringNoRequiredTwoValueNoDefaultEnum.Value2;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown NoModelAsStringNoRequiredTwoValueNoDefaultEnum value.");
         }
     }
