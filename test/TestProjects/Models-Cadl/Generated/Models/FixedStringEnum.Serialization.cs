@@ -21,9 +21,9 @@ namespace ModelsInCadl.Models
 
         public static FixedStringEnum ToFixedStringEnum(this string value)
         {
-            if (string.Equals(value, "1", StringComparison.InvariantCultureIgnoreCase)) return FixedStringEnum.One;
-            if (string.Equals(value, "2", StringComparison.InvariantCultureIgnoreCase)) return FixedStringEnum.Two;
-            if (string.Equals(value, "4", StringComparison.InvariantCultureIgnoreCase)) return FixedStringEnum.Four;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "1")) return FixedStringEnum.One;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "2")) return FixedStringEnum.Two;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "4")) return FixedStringEnum.Four;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown FixedStringEnum value.");
         }
     }

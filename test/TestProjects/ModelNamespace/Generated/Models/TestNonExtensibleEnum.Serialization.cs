@@ -21,9 +21,9 @@ namespace ModelNamespace
 
         public static TestNonExtensibleEnum ToTestNonExtensibleEnum(this string value)
         {
-            if (string.Equals(value, "A", StringComparison.InvariantCultureIgnoreCase)) return TestNonExtensibleEnum.A;
-            if (string.Equals(value, "B", StringComparison.InvariantCultureIgnoreCase)) return TestNonExtensibleEnum.B;
-            if (string.Equals(value, "C", StringComparison.InvariantCultureIgnoreCase)) return TestNonExtensibleEnum.C;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "A")) return TestNonExtensibleEnum.A;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "B")) return TestNonExtensibleEnum.B;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "C")) return TestNonExtensibleEnum.C;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TestNonExtensibleEnum value.");
         }
     }

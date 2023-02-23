@@ -20,8 +20,8 @@ namespace Inheritance.Models
 
         public static BaseClassWithEnumDiscriminatorEnum ToBaseClassWithEnumDiscriminatorEnum(this string value)
         {
-            if (string.Equals(value, "derived", StringComparison.InvariantCultureIgnoreCase)) return BaseClassWithEnumDiscriminatorEnum.Derived;
-            if (string.Equals(value, "other", StringComparison.InvariantCultureIgnoreCase)) return BaseClassWithEnumDiscriminatorEnum.Other;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "derived")) return BaseClassWithEnumDiscriminatorEnum.Derived;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "other")) return BaseClassWithEnumDiscriminatorEnum.Other;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown BaseClassWithEnumDiscriminatorEnum value.");
         }
     }
