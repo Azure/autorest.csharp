@@ -20,8 +20,8 @@ namespace MgmtExpandResourceTypes.Models
 
         public static ZoneType ToZoneType(this string value)
         {
-            if (string.Equals(value, "Public", StringComparison.InvariantCultureIgnoreCase)) return ZoneType.Public;
-            if (string.Equals(value, "Private", StringComparison.InvariantCultureIgnoreCase)) return ZoneType.Private;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Public")) return ZoneType.Public;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Private")) return ZoneType.Private;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ZoneType value.");
         }
     }
