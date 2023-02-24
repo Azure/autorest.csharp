@@ -20,8 +20,8 @@ namespace MgmtHierarchicalNonResource.Models
 
         public static OperatingSystemType ToOperatingSystemType(this string value)
         {
-            if (string.Equals(value, "Windows", StringComparison.InvariantCultureIgnoreCase)) return OperatingSystemType.Windows;
-            if (string.Equals(value, "Linux", StringComparison.InvariantCultureIgnoreCase)) return OperatingSystemType.Linux;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Windows")) return OperatingSystemType.Windows;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Linux")) return OperatingSystemType.Linux;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown OperatingSystemType value.");
         }
     }

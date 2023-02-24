@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace AdditionalPropertiesEx.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for models. </summary>
     public static partial class AdditionalPropertiesModelFactory
     {
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>

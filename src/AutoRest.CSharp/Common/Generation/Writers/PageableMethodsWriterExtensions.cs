@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 var nextPageRequest = GetCreateRequestCall(null, createNextPageRequestMethod);
                 var parameters = new List<Parameter>();
 
-                foreach ((Parameter protocolParameter, Parameter? convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameters)
+                foreach ((Parameter protocolParameter, Parameter? convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameterConverters)
                 {
                     if (protocolParameter.Type.EqualsIgnoreNullable(typeof(RequestContent)) &&
                         convenienceParameter is { Name: var fromName, Type: { IsFrameworkType: false, Implementation: ModelTypeProvider }, IsOptionalInSignature: var isOptional })

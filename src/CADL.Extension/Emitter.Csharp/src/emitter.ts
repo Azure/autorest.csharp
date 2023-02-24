@@ -5,15 +5,13 @@ import {
     createCadlLibrary,
     getDeprecated,
     getDoc,
-    getServiceNamespace,
-    getServiceNamespaceString,
-    getServiceTitle,
-    getServiceVersion,
+    getNamespaceFullName,
     getSummary,
     ignoreDiagnostics,
     isErrorModel,
     isGlobalNamespace,
     JSONSchemaType,
+    listServices,
     Model,
     ModelProperty,
     Namespace,
@@ -21,7 +19,8 @@ import {
     Operation,
     Program,
     resolvePath,
-    Type
+    Type,
+    Service
 } from "@cadl-lang/compiler";
 import {
     getAllHttpServices,
@@ -43,6 +42,7 @@ import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
 import {
     InputEnumType,
+    InputListType,
     InputModelType,
     InputPrimitiveType,
     InputType
@@ -77,15 +77,12 @@ import { getOperationLink } from "@azure-tools/cadl-azure-core";
 import fs from "fs";
 import path from "node:path";
 import { Configuration } from "./type/Configuration.js";
-import { dllFilePath } from "@autorest/csharp";
 import { execSync } from "child_process";
 import {
     Client,
     createDpgContext,
     DpgEmitterOptions,
-    getConvenienceAPIName,
     isApiVersion,
-    isOperationGroup,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
@@ -97,71 +94,16 @@ import { ClientKind } from "./type/ClientKind.js";
 import { getVersions } from "@cadl-lang/versioning";
 import { EmitContext } from "@cadl-lang/compiler/*";
 import { capitalize } from "./lib/utils.js";
-
-export type NetEmitterOptions = {
-    outputFile?: string;
-    logFile?: string;
-    namespace?: string;
-    "library-name"?: string;
-    "single-top-level-client"?: boolean;
-    skipSDKGeneration?: boolean;
-    "unreferenced-types-handling"?:
-        | "removeOrInternalize"
-        | "internalize"
-        | "keepAll";
-    "new-project"?: boolean;
-    csharpGeneratorPath?: string;
-    "clear-output-folder"?: boolean;
-    "save-inputs"?: boolean;
-    "model-namespace"?: boolean;
-    "generate-all-models"?: boolean;
-} & DpgEmitterOptions;
-
-const defaultOptions = {
-    outputFile: "cadl.json",
-    logFile: "log.json",
-    skipSDKGeneration: false,
-    "new-project": false,
-    csharpGeneratorPath: dllFilePath,
-    "clear-output-folder": false,
-    "save-inputs": false,
-    "generate-all-models": false,
-    "generate-protocol-methods": true,
-    "generate-convenience-methods": true,
-    "package-name": undefined
-};
-
-const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
-    type: "object",
-    additionalProperties: false,
-    properties: {
-        outputFile: { type: "string", nullable: true },
-        logFile: { type: "string", nullable: true },
-        namespace: { type: "string", nullable: true },
-        "library-name": { type: "string", nullable: true },
-        "single-top-level-client": { type: "boolean", nullable: true },
-        skipSDKGeneration: { type: "boolean", default: false, nullable: true },
-        "unreferenced-types-handling": {
-            type: "string",
-            enum: ["removeOrInternalize", "internalize", "keepAll"],
-            nullable: true
-        },
-        "new-project": { type: "boolean", nullable: true },
-        csharpGeneratorPath: {
-            type: "string",
-            default: dllFilePath,
-            nullable: true
-        },
-        "clear-output-folder": { type: "boolean", nullable: true },
-        "save-inputs": { type: "boolean", nullable: true },
-        "model-namespace": { type: "boolean", nullable: true },
-        "generate-all-models": { type: "boolean", nullable: true },
-        "generate-protocol-methods": { type: "boolean", nullable: true },
-        "generate-convenience-methods": { type: "boolean", nullable: true },
-        "package-name": { type: "string", nullable: true }
-    },
-    required: []
-};
+import {
+    NetEmitterOptions,
+    NetEmitterOptionsSchema,
+    resolveOptions,
+    resolveOutputFolder
+} from "./options.js";
+import {
+    CollectionFormat,
+    collectionFormatToDelimMap
+} from "./type/CollectionFormat.js";
 
 export const $lib = createCadlLibrary({
     name: "cadl-csharp",
@@ -173,32 +115,12 @@ export const $lib = createCadlLibrary({
 
 export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const program: Program = context.program;
-    const emitterOptions = context.options;
-    const emitterOutputDir = context.emitterOutputDir;
-    const resolvedOptions = { ...defaultOptions, ...emitterOptions };
-    const outputFolder = resolvePath(emitterOutputDir ?? "./cadl-output");
-    const options: NetEmitterOptions = {
-        outputFile: resolvePath(outputFolder, resolvedOptions.outputFile),
-        logFile: resolvePath(
-            emitterOutputDir ?? "./cadl-output",
-            resolvedOptions.logFile
-        ),
-        skipSDKGeneration: resolvedOptions.skipSDKGeneration,
-        "unreferenced-types-handling":
-            resolvedOptions["unreferenced-types-handling"],
-        "new-project": resolvedOptions["new-project"],
-        csharpGeneratorPath: resolvedOptions.csharpGeneratorPath,
-        "clear-output-folder": resolvedOptions["clear-output-folder"],
-        "save-inputs": resolvedOptions["save-inputs"],
-        "model-namespace": resolvedOptions["model-namespace"],
-        "generate-all-models": resolvedOptions["generate-all-models"]
-    };
-
+    const options = resolveOptions(context);
+    const outputFolder = resolveOutputFolder(context);
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
-        const namespace = getServiceNamespaceString(program) || "";
-
-        const root = createModel(context, options["generate-all-models"]);
+        const root = createModel(context);
+        const namespace = root.Name;
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const generatedFolder = resolvePath(outputFolder, "Generated");
@@ -207,12 +129,12 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             const resolvedSharedFolders: string[] = [];
             const sharedFolders = [
                 resolvePath(
-                    options.csharpGeneratorPath ?? dllFilePath,
+                    options.csharpGeneratorPath,
                     "..",
                     "Generator.Shared"
                 ),
                 resolvePath(
-                    options.csharpGeneratorPath ?? dllFilePath,
+                    options.csharpGeneratorPath,
                     "..",
                     "Azure.Core.Shared"
                 )
@@ -239,14 +161,13 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             //emit configuration.json
             const configurations = {
                 OutputFolder: ".",
-                Namespace: resolvedOptions.namespace ?? namespace,
-                LibraryName: resolvedOptions["library-name"] ?? null,
+                Namespace: options.namespace ?? namespace,
+                LibraryName: options["library-name"] ?? null,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient:
-                    resolvedOptions["single-top-level-client"],
+                SingleTopLevelClient: options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
-                "model-namespace": resolvedOptions["model-namespace"]
+                "model-namespace": options["model-namespace"]
             } as Configuration;
 
             await program.host.writeFile(
@@ -258,11 +179,14 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 const newProjectOption = options["new-project"]
                     ? "--new-project"
                     : "";
+
+                const debugFlag = options.debug ?? false ? " --debug" : "";
+
                 const command = `dotnet --roll-forward Major ${resolvePath(
-                    options.csharpGeneratorPath ?? dllFilePath
+                    options.csharpGeneratorPath
                 )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
                     options["clear-output-folder"]
-                }`;
+                }${debugFlag}`;
                 console.info(command);
 
                 try {
@@ -302,37 +226,39 @@ function deleteFile(filePath: string) {
 function prettierOutput(output: string) {
     return output + "\n";
 }
-function getClient(
-    clients: InputClient[],
-    clientName: string
-): InputClient | undefined {
-    for (const client of clients) {
-        if (client.Name === clientName) return client;
-    }
-
-    return undefined;
-}
 
 export function createModel(
-    context: EmitContext<NetEmitterOptions>,
-    generateAllModels: boolean = false
-): any {
-    const program = context.program;
-    const serviceNamespaceType = getServiceNamespace(program);
-    if (!serviceNamespaceType) {
-        return;
-    }
-    const title = getServiceTitle(program);
-    const apiVersions: Set<string> = new Set<string>();
-    let version = getServiceVersion(program);
-    if (version !== "0000-00-00") {
-        apiVersions.add(version);
+    context: EmitContext<NetEmitterOptions>
+): CodeModel {
+    const services = listServices(context.program);
+    if (services.length === 0) {
+        services.push({ type: context.program.getGlobalNamespaceType() });
     }
 
-    const versions = getVersions(
-        program,
-        serviceNamespaceType
-    )[1]?.getVersions();
+    // TODO: support multiple service. Current only chose the first service.
+    const service = services[0];
+    const serviceNamespaceType = service.type;
+    if (serviceNamespaceType === undefined) {
+        throw Error("Can not emit yaml for a namespace that doesn't exist.");
+    }
+
+    return createModelForService(context, service);
+}
+
+export function createModelForService(
+    context: EmitContext<NetEmitterOptions>,
+    service: Service,
+    generateAllModels: boolean = false
+): CodeModel {
+    const program = context.program;
+    const title = service.title;
+    const serviceNamespaceType = service.type;
+    const apiVersions: Set<string> = new Set<string>();
+    let version = service.version;
+    if (version && version !== "0000-00-00") {
+        apiVersions.add(version);
+    }
+    const versions = getVersions(program, service.type)[1]?.getVersions();
     if (versions) {
         for (const ver of versions) {
             apiVersions.add(ver.value);
@@ -374,7 +300,7 @@ export function createModel(
             Value: version
         } as InputConstant
     };
-    const namespace = getServiceNamespaceString(program) || "client";
+    const namespace = getNamespaceFullName(serviceNamespaceType) || "client";
     const authentication = getAuthentication(program, serviceNamespaceType);
     let auth = undefined;
     if (authentication) {
@@ -387,108 +313,95 @@ export function createModel(
     let url: string = "";
     const convenienceOperations: HttpOperation[] = [];
     let lroMonitorOperations: Set<Operation>;
-    try {
-        //create endpoint parameter from servers
-        if (servers !== undefined) {
-            const cadlServers = resolveServers(
-                program,
-                servers,
-                modelMap,
-                enumMap
-            );
-            if (cadlServers.length > 0) {
-                /* choose the first server as endpoint. */
-                url = cadlServers[0].url;
-                urlParameters = cadlServers[0].parameters;
-            }
-        }
-        const [services] = getAllHttpServices(program);
-        const routes = services[0].operations;
-        if (routes.length === 0) {
-            throw `No Route for service ${services[0].namespace.name}`;
-        }
-        console.log("routes:" + routes.length);
+    const dpgContext = createDpgContext(context);
 
-        lroMonitorOperations = getAllLroMonitorOperations(routes, program);
-        const clients: InputClient[] = [];
-        const dpgClients = listClients(program);
-        for (const client of dpgClients) {
-            clients.push(emitClient(client));
-            const dpgOperationGroups = listOperationGroups(program, client);
-            for (const dpgGroup of dpgOperationGroups) {
-                clients.push(emitClient(dpgGroup, client));
-            }
-        }
-
-        for (const client of clients) {
-            for (const op of client.Operations) {
-                const apiVersionIndex = op.Parameters.findIndex(
-                    (value) => value.IsApiVersion
-                );
-                if (apiVersionIndex !== -1) {
-                    const apiVersionInOperation =
-                        op.Parameters[apiVersionIndex];
-                    if (!apiVersionInOperation.DefaultValue?.Value) {
-                        apiVersionInOperation.DefaultValue =
-                            apiVersionParam.DefaultValue;
-                    }
-                    /**
-                     * replace to the global apiVerison parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
-                     * Three checkpoints:
-                     * the parameter is query parameter,
-                     * it is client parameter
-                     * it does not has default value, or the default value is included in the global service apiVersion.
-                     */
-                    if (
-                        apiVersions.has(
-                            apiVersionInOperation.DefaultValue?.Value
-                        ) &&
-                        apiVersionInOperation.Kind ===
-                            InputOperationParameterKind.Client &&
-                        apiVersionInOperation.Location ===
-                            apiVersionParam.Location
-                    ) {
-                        op.Parameters[apiVersionIndex] = apiVersionParam;
-                    }
-                } else {
-                    op.Parameters.push(apiVersionParam);
-                }
-            }
-        }
-
-        if (generateAllModels) {
-            emitUnreferencedModels(serviceNamespaceType);
-            setUsageForAll(Usage.RoundTrip, modelMap);
-            setUsageForAll(Usage.RoundTrip, enumMap);
-        } else {
-            const usages = getUsages(program, convenienceOperations);
-            setUsage(usages, modelMap);
-            setUsage(usages, enumMap);
-        }
-
-        const clientModel = {
-            Name: namespace,
-            Description: description,
-            ApiVersions: Array.from(apiVersions.values()),
-            Enums: Array.from(enumMap.values()),
-            Models: Array.from(modelMap.values()),
-            Clients: clients,
-            Auth: auth
-        } as CodeModel;
-        return clientModel;
-    } catch (err) {
-        if (err instanceof ErrorTypeFoundError) {
-            return;
-        } else {
-            throw err;
+    //create endpoint parameter from servers
+    if (servers !== undefined) {
+        const cadlServers = resolveServers(program, servers, modelMap, enumMap);
+        if (cadlServers.length > 0) {
+            /* choose the first server as endpoint. */
+            url = cadlServers[0].url;
+            urlParameters = cadlServers[0].parameters;
         }
     }
+    const [services] = getAllHttpServices(program);
+    const routes = services[0].operations;
+    if (routes.length === 0) {
+        throw `No Route for service ${services[0].namespace.name}`;
+    }
+    console.log("routes:" + routes.length);
+
+    lroMonitorOperations = getAllLroMonitorOperations(routes, program);
+    const clients: InputClient[] = [];
+    const dpgClients = listClients(dpgContext);
+    for (const client of dpgClients) {
+        clients.push(emitClient(client));
+        const dpgOperationGroups = listOperationGroups(dpgContext, client);
+        for (const dpgGroup of dpgOperationGroups) {
+            clients.push(emitClient(dpgGroup, client));
+        }
+    }
+
+    for (const client of clients) {
+        for (const op of client.Operations) {
+            const apiVersionIndex = op.Parameters.findIndex(
+                (value) => value.IsApiVersion
+            );
+            if (apiVersionIndex !== -1) {
+                const apiVersionInOperation = op.Parameters[apiVersionIndex];
+                if (!apiVersionInOperation.DefaultValue?.Value) {
+                    apiVersionInOperation.DefaultValue =
+                        apiVersionParam.DefaultValue;
+                }
+                /**
+                 * replace to the global apiVerison parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
+                 * Three checkpoints:
+                 * the parameter is query parameter,
+                 * it is client parameter
+                 * it does not has default value, or the default value is included in the global service apiVersion.
+                 */
+                if (
+                    apiVersions.has(
+                        apiVersionInOperation.DefaultValue?.Value
+                    ) &&
+                    apiVersionInOperation.Kind ===
+                        InputOperationParameterKind.Client &&
+                    apiVersionInOperation.Location === apiVersionParam.Location
+                ) {
+                    op.Parameters[apiVersionIndex] = apiVersionParam;
+                }
+            } else {
+                op.Parameters.push(apiVersionParam);
+            }
+        }
+    }
+
+    if (generateAllModels) {
+        emitUnreferencedModels(serviceNamespaceType);
+        setUsageForAll(Usage.RoundTrip, modelMap);
+        setUsageForAll(Usage.RoundTrip, enumMap);
+    } else {
+        const usages = getUsages(program, convenienceOperations);
+        setUsage(usages, modelMap);
+        setUsage(usages, enumMap);
+    }
+    
+    const clientModel = {
+        Name: namespace,
+        Description: description,
+        ApiVersions: Array.from(apiVersions.values()),
+        Enums: Array.from(enumMap.values()),
+        Models: Array.from(modelMap.values()),
+        Clients: clients,
+        Auth: auth
+    } as CodeModel;
+    return clientModel;
 
     function emitClient(
         client: Client | OperationGroup,
         parent?: Client
     ): InputClient {
-        const operations = listOperationsInOperationGroup(program, client);
+        const operations = listOperationsInOperationGroup(dpgContext, client);
         let clientDesc = "";
         if (operations.length > 0) {
             const container = ignoreDiagnostics(
@@ -518,6 +431,7 @@ export function createModel(
                 httpOperation,
                 url,
                 urlParameters,
+                serviceNamespaceType,
                 modelMap,
                 enumMap
             );
@@ -704,7 +618,11 @@ function processServiceAuthentication(
     return auth;
 }
 
-function getOperationGroupName(program: Program, operation: Operation): string {
+function getOperationGroupName(
+    program: Program,
+    operation: Operation,
+    serviceNamespaceType: Namespace
+): string {
     const explicitOperationId = getOperationId(program, operation);
     if (explicitOperationId) {
         const ids: string[] = explicitOperationId.split("_");
@@ -719,8 +637,7 @@ function getOperationGroupName(program: Program, operation: Operation): string {
     let namespace = operation.namespace;
     if (!namespace) {
         namespace =
-            program.checker.getGlobalNamespaceType() ??
-            getServiceNamespace(program);
+            program.checker.getGlobalNamespaceType() ?? serviceNamespaceType;
     }
 
     if (namespace) return namespace.name;
@@ -732,10 +649,12 @@ function loadOperation(
     operation: HttpOperation,
     uri: string,
     urlParameters: InputParameter[] | undefined = undefined,
+    serviceNamespaceType: Namespace,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputOperation {
     const program = context.program;
+    const dpgContext = createDpgContext(context);
     const {
         path: fullPath,
         operation: op,
@@ -810,14 +729,10 @@ function loadOperation(
         mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const generateProtocol: boolean = shouldGenerateProtocol(
-        createDpgContext(context),
-        op
-    );
+    const generateProtocol: boolean = shouldGenerateProtocol(dpgContext, op);
     const generateConvenience: boolean =
         requestMethod !== RequestMethod.PATCH &&
-        (shouldGenerateConvenient(createDpgContext(context), op) ||
-            getConvenienceAPIName(program, op) !== undefined);
+        shouldGenerateConvenient(dpgContext, op);
 
     /* handle lro */
     /* handle paging. */
@@ -848,7 +763,7 @@ function loadOperation(
         Name: op.name,
         ResourceName:
             resourceOperation?.resourceType.name ??
-            getOperationGroupName(program, op),
+            getOperationGroupName(program, op, serviceNamespaceType),
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
@@ -876,6 +791,10 @@ function loadOperation(
         parameter: HttpOperationParameter
     ): InputParameter {
         const { type: location, name, param } = parameter;
+        let format = undefined;
+        if (parameter.type !== "path") {
+            format = parameter.format;
+        }
         const cadlType = param.type;
         const inputType: InputType = getInputType(
             program,
@@ -892,7 +811,7 @@ function loadOperation(
             } as InputConstant;
         }
         const requestLocation = requestLocationMap[location];
-        const isApiVer: boolean = isApiVersion(program, parameter);
+        const isApiVer: boolean = isApiVersion(dpgContext, parameter);
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
@@ -917,8 +836,14 @@ function loadOperation(
             IsContentType: isContentType,
             IsEndpoint: false,
             SkipUrlEncoding: false, //TODO: retrieve out value from extension
-            Explode: false,
-            Kind: kind
+            Explode:
+                (inputType as InputListType).ElementType && format === "multi"
+                    ? true
+                    : false,
+            Kind: kind,
+            ArraySerializationDelimiter: format
+                ? collectionFormatToDelimMap[format]
+                : undefined
         } as InputParameter;
     }
 

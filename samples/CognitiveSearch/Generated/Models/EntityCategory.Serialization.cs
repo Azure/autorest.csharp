@@ -25,13 +25,13 @@ namespace CognitiveSearch.Models
 
         public static EntityCategory ToEntityCategory(this string value)
         {
-            if (string.Equals(value, "location", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Location;
-            if (string.Equals(value, "organization", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Organization;
-            if (string.Equals(value, "person", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Person;
-            if (string.Equals(value, "quantity", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Quantity;
-            if (string.Equals(value, "datetime", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Datetime;
-            if (string.Equals(value, "url", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Url;
-            if (string.Equals(value, "email", StringComparison.InvariantCultureIgnoreCase)) return EntityCategory.Email;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "location")) return EntityCategory.Location;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "organization")) return EntityCategory.Organization;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "person")) return EntityCategory.Person;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "quantity")) return EntityCategory.Quantity;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "datetime")) return EntityCategory.Datetime;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "url")) return EntityCategory.Url;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "email")) return EntityCategory.Email;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EntityCategory value.");
         }
     }
