@@ -1,0 +1,50 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+import "@azure-tools/cadl-dpg";
+import "@azure-tools/cadl-azure-core";
+
+@service(
+    {
+        title: "Array Query and Header",
+        version: "0.1.0"
+    }
+)
+@doc("CADL project to test array as query or header.")
+@server(
+    "{CollectionFormatCadlUrl}",
+    "Endpoint Service",
+    {
+        CollectionFormatCadlUrl: string,
+    }
+)
+namespace ArrayAsQueryOrHeader;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.DPG;
+using Azure.Core;
+
+model Thing {
+    @doc("the object name.")
+    name: string;
+}
+
+@get
+@route("/csvQuery")
+op csvQuery(@query({format: "csv"}) options?: string[]): Thing;
+
+@get
+@route("/multiQuery")
+op multiQuery(@query({format: "multi"}) options?: string[]): Thing;
+
+@get
+@route("/noFormatQuery")
+op noFormatQuery(@query options?: string[]): Thing;
+
+@get
+@route("/csvHeader")
+op csvHeader(@header({format: "csv"}) options?: string[]): Thing;
+
+@get
+@route("/noFormatHeader")
+op noFormatHeader(@header options?: string[]): Thing;
