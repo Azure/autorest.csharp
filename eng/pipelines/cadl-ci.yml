@@ -16,7 +16,7 @@ pr:
 
 pool:
   name: "azsdk-pool-mms-ubuntu-2004-general"
-  vmImage: "MMSUbuntu20.04"
+  vmImage: "ubuntu-20.04"
 
 variables:
   - name: skipComponentGovernanceDetection
