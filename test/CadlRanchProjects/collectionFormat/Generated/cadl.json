@@ -1,0 +1,260 @@
+{
+ "$id": "1",
+ "Name": "CollectionFormat",
+ "Description": "Test for collectionFormat.",
+ "ApiVersions": [
+  "2022-12-16-preview"
+ ],
+ "Enums": [],
+ "Models": [],
+ "Clients": [
+  {
+   "$id": "2",
+   "Name": "CollectionFormatClient",
+   "Description": "Test for collectionFormat.",
+   "Operations": [
+    {
+     "$id": "3",
+     "Name": "testMulti",
+     "ResourceName": "CollectionFormat",
+     "Parameters": [
+      {
+       "$id": "4",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "5",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "6",
+        "Type": {
+         "$id": "7",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "8",
+       "Name": "colors",
+       "NameInRequest": "colors",
+       "Description": "Possible values for colors are [blue,red,green]",
+       "Type": {
+        "$id": "9",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "10",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": true,
+       "Kind": "Method"
+      },
+      {
+       "$id": "11",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "12",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "13",
+        "Type": {
+         "$ref": "12"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "14",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "15",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "16",
+        "Type": {
+         "$id": "17",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2022-12-16-preview"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "18",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "19",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/collectionFormat/multi",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    },
+    {
+     "$id": "20",
+     "Name": "testCsv",
+     "ResourceName": "CollectionFormat",
+     "Parameters": [
+      {
+       "$ref": "4"
+      },
+      {
+       "$id": "21",
+       "Name": "colors",
+       "NameInRequest": "colors",
+       "Description": "Possible values for colors are [blue,red,green]",
+       "Type": {
+        "$id": "22",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "23",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method",
+       "ArraySerializationDelimiter": ","
+      },
+      {
+       "$id": "24",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "25",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "26",
+        "Type": {
+         "$ref": "25"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "14"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "27",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "28",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/collectionFormat/csv",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": false
+    }
+   ],
+   "Protocol": {
+    "$id": "29"
+   },
+   "Creatable": true
+  }
+ ]
+}

@@ -255,7 +255,8 @@ if (!($Exclude -contains "Samples"))
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 $cadlRanchProjectPathsWithoutConvenience = # Needs justification to add item
     'enums/extensible', # https://github.com/Azure/autorest.csharp/issues/3079
-    'hello' # https://github.com/Azure/autorest.csharp/issues/3110
+    'hello', # https://github.com/Azure/autorest.csharp/issues/3110
+    'collectionFormat'
 
 $cadlRanchProjectPaths =
     'arrays/item-types',
@@ -265,7 +266,7 @@ $cadlRanchProjectPaths =
     'models/property-optional',
     'models/property-types',
     'models/usage',
-    "projection"
+    'projection'
 
 if (!($Exclude -contains "CadlRanchProjects"))
 {

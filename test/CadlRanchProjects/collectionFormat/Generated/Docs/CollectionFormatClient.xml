@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="TestMultiAsync(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call TestMultiAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new CollectionFormatClient();
+
+Response response = await client.TestMultiAsync(new String[]{"<colors>"});
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="TestMulti(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call TestMulti with required parameters and parse the result.
+<code><![CDATA[
+var client = new CollectionFormatClient();
+
+Response response = client.TestMulti(new String[]{"<colors>"});
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="TestCsvAsync(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call TestCsvAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new CollectionFormatClient();
+
+Response response = await client.TestCsvAsync(new String[]{"<colors>"});
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="TestCsv(IEnumerable,RequestContext)">
+<example>
+This sample shows how to call TestCsv with required parameters and parse the result.
+<code><![CDATA[
+var client = new CollectionFormatClient();
+
+Response response = client.TestCsv(new String[]{"<colors>"});
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>
