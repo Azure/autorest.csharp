@@ -8,6 +8,7 @@ jobs:
 - job: ${{ parameters.name }}
   timeoutInMinutes: 60
   pool:
+    name: azsdk-pool-mms-ubuntu-2004-general
     vmImage: ubuntu-20.04
   variables:
     AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
