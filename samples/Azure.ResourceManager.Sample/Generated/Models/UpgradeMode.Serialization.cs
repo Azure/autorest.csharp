@@ -21,9 +21,9 @@ namespace Azure.ResourceManager.Sample.Models
 
         public static UpgradeMode ToUpgradeMode(this string value)
         {
-            if (string.Equals(value, "Automatic", StringComparison.InvariantCultureIgnoreCase)) return UpgradeMode.Automatic;
-            if (string.Equals(value, "Manual", StringComparison.InvariantCultureIgnoreCase)) return UpgradeMode.Manual;
-            if (string.Equals(value, "Rolling", StringComparison.InvariantCultureIgnoreCase)) return UpgradeMode.Rolling;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Automatic")) return UpgradeMode.Automatic;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Manual")) return UpgradeMode.Manual;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Rolling")) return UpgradeMode.Rolling;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown UpgradeMode value.");
         }
     }

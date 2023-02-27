@@ -9,7 +9,6 @@ namespace AutoRest.TestServer.Tests.Mgmt
 {
     public class StringExtensionsTests
     {
-
         [TestCase("MetadataRole", "MetadataRoles")]
         [TestCase("KeyInformation", "AllKeyInformation")]
         [TestCase("RoleMetadata", "AllRoleMetadata")]

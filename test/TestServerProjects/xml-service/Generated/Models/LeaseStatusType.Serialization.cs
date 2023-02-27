@@ -20,8 +20,8 @@ namespace xml_service.Models
 
         public static LeaseStatusType ToLeaseStatusType(this string value)
         {
-            if (string.Equals(value, "locked", StringComparison.InvariantCultureIgnoreCase)) return LeaseStatusType.Locked;
-            if (string.Equals(value, "unlocked", StringComparison.InvariantCultureIgnoreCase)) return LeaseStatusType.Unlocked;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "locked")) return LeaseStatusType.Locked;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "unlocked")) return LeaseStatusType.Unlocked;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown LeaseStatusType value.");
         }
     }

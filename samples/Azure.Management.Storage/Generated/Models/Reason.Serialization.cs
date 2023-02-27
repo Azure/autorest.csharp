@@ -20,8 +20,8 @@ namespace Azure.Management.Storage.Models
 
         public static Reason ToReason(this string value)
         {
-            if (string.Equals(value, "AccountNameInvalid", StringComparison.InvariantCultureIgnoreCase)) return Reason.AccountNameInvalid;
-            if (string.Equals(value, "AlreadyExists", StringComparison.InvariantCultureIgnoreCase)) return Reason.AlreadyExists;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "AccountNameInvalid")) return Reason.AccountNameInvalid;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "AlreadyExists")) return Reason.AlreadyExists;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown Reason value.");
         }
     }
