@@ -20,7 +20,7 @@
       <CadlAdditionalOptions></CadlAdditionalOptions>
      
       Allows passing additional cadl command line arguments, for example to run special emitter 
-      use the following command line: dotnet msbuild /t:GenerateCode /p:CadlAdditionalOptions="@azure-tools/cadl-csharp.csharpGeneratorPath=/absolute/path/to/artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
+      use the following command line: dotnet msbuild /t:GenerateCode /p:CadlAdditionalOptions="csharpGeneratorPath=/absolute/path/to/artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
     -->
 
     <IncludeAzureCoreSharedCode Condition="'$(IncludeAzureCoreSharedCode)' == ''">true</IncludeAzureCoreSharedCode>
