@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtMockAndSample
 {
-    /// <summary> A class representing the VirtualMachineExtensionImage data model. </summary>
+    /// <summary>
+    /// A class representing the VirtualMachineExtensionImage data model.
+    /// Describes a Virtual Machine Extension Image.
+    /// </summary>
     public partial class VirtualMachineExtensionImageData : ResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>

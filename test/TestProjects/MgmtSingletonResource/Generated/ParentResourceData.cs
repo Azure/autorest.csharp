@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtSingletonResource
 {
-    /// <summary> A class representing the ParentResource data model. </summary>
+    /// <summary>
+    /// A class representing the ParentResource data model.
+    /// A parent resource.
+    /// </summary>
     public partial class ParentResourceData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ParentResourceData. </summary>

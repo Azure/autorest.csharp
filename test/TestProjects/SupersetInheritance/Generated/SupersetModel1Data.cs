@@ -10,7 +10,10 @@ using Azure.ResourceManager.Models;
 
 namespace SupersetInheritance
 {
-    /// <summary> A class representing the SupersetModel1 data model. </summary>
+    /// <summary>
+    /// A class representing the SupersetModel1 data model.
+    /// This model does not have systemData, but should inherit from Resource.
+    /// </summary>
     public partial class SupersetModel1Data : ResourceData
     {
         /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
