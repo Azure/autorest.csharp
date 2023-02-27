@@ -16,6 +16,7 @@ using AutoRest.CSharp.Mgmt.Decorator.Transformer;
 using AutoRest.CSharp.Mgmt.Generation;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.ResourceManager;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
@@ -109,15 +110,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (!isArmCore && !MgmtContext.Library.ExtensionWrapper.IsEmpty)
                 WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(MgmtContext.Library.ExtensionWrapper));
 
-            WriteExtensionClient(project, MgmtContext.Library.ResourceGroupExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.SubscriptionExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.ManagementGroupExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.TenantExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.ArmResourceExtensions.ExtensionClient);
-
-            if (isArmCore && !MgmtContext.Library.ArmClientExtensions.IsEmpty)
+            foreach (var extension in MgmtContext.Library.ArmExtensions.Values)
             {
-                WriteExtensionPiece(project, new ArmClientExtensionsWriter(MgmtContext.Library.ArmClientExtensions));
+                if (extension is ArmClientExtensions)
+                    continue;
+                WriteExtensionClient(project, extension.ExtensionClient);
+                foreach (var splitExtension in extension.SplitExtensions)
+                {
+                    WriteExtensionClient(project, splitExtension.ExtensionClient);
+                }
+            }
+
+            if (isArmCore && !MgmtContext.Library.ArmExtensions[typeof(ArmClient)].IsEmpty)
+            {
+                WriteExtensionPiece(project, new ArmClientExtensionsWriter((ArmClientExtensions)MgmtContext.Library.ArmExtensions[typeof(ArmClient)]));
             }
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);

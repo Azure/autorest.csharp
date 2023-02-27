@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             : base(publicExtension.ResourceName)
         {
             Extension = publicExtension;
-            _defaultName = $"{ResourceName}ExtensionClient";
+            _defaultName = $"{(publicExtension.WrappedResourceName != null ? publicExtension.WrappedResourceName : ResourceName)}ExtensionClient";
         }
 
         protected override ConstructorSignature? EnsureArmClientCtor()
@@ -41,18 +41,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<MgmtClientOperation> EnsureAllOperations()
         {
-            return Extension.AllRawOperations.Select(operation =>
+            return Extension.AllMgmtOperations.Select(operation =>
             {
-                var operationName = Extension.GetOperationName(operation);
                 // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together, some of the values are calculated multiple times (here and in writers).
                 // we just leave this implementation here since it could work for now
-                return MgmtClientOperation.FromOperation(
-                    new MgmtRestOperation(
-                        operation,
-                        operation.GetRequestPath(),
-                        Extension.ContextualPath,
-                        operationName,
-                        propertyBagName: ResourceName));
+                return MgmtClientOperation.FromOperation(operation);
             });
         }
 
@@ -65,6 +58,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultName => _defaultName;
 
+        protected override string DefaultNamespace => Configuration.MgmtConfiguration.IsArmCore ?
+            base.DefaultNamespace : $"{base.DefaultNamespace}.Mock";
+
         public MgmtExtensions Extension { get; }
 
         public bool IsEmpty => Extension.IsEmpty;
@@ -74,7 +70,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private FormattableString? _description;
         public override FormattableString Description => _description ??= $"A class to add extension methods to {ResourceName}.";
 
-        protected override string DefaultAccessibility => "internal";
+        protected override string DefaultAccessibility => "public";
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations() => Extension.ClientOperations;
     }

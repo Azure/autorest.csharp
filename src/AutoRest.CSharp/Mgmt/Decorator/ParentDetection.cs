@@ -9,6 +9,9 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using Azure.ResourceManager;
+using Azure.ResourceManager.ManagementGroups;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -62,11 +65,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             // if we cannot find a resource as its parent, its parent must be one of the Extensions
             if (parentRequestPath.Equals(RequestPath.ManagementGroup))
-                return MgmtContext.Library.ManagementGroupExtensions.AsIEnumerable();
+                return MgmtContext.Library.ArmExtensions[typeof(ManagementGroupResource)].AsIEnumerable();
             if (parentRequestPath.Equals(RequestPath.ResourceGroup))
-                return MgmtContext.Library.ResourceGroupExtensions.AsIEnumerable();
+                return MgmtContext.Library.ArmExtensions[typeof(ResourceGroupResource)].AsIEnumerable();
             if (parentRequestPath.Equals(RequestPath.Subscription))
-                return MgmtContext.Library.SubscriptionExtensions.AsIEnumerable();
+                return MgmtContext.Library.ArmExtensions[typeof(SubscriptionResource)].AsIEnumerable();
             // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
             scope = parentRequestPath.GetScopePath(); // we do this because some request path its scope is the same as itself
             if (scope.IsParameterizedScope())
@@ -76,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return FindScopeParents(types).Distinct();
             }
             // otherwise we use the tenant as a fallback
-            return MgmtContext.Library.TenantExtensions.AsIEnumerable();
+            return MgmtContext.Library.ArmExtensions[typeof(TenantResource)].AsIEnumerable();
         }
 
         // TODO -- enhence this to support the new arm-id format
@@ -84,22 +87,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Any))
             {
-                yield return MgmtContext.Library.ArmResourceExtensions;
+                yield return MgmtContext.Library.ArmExtensions[typeof(ArmResource)];
                 yield break;
             }
 
             foreach (var type in parameterizedScopeTypes)
             {
                 if (type == ResourceTypeSegment.ManagementGroup)
-                    yield return MgmtContext.Library.ManagementGroupExtensions;
+                    yield return MgmtContext.Library.ArmExtensions[typeof(ManagementGroupResource)];
                 else if (type == ResourceTypeSegment.ResourceGroup)
-                    yield return MgmtContext.Library.ResourceGroupExtensions;
+                    yield return MgmtContext.Library.ArmExtensions[typeof(ResourceGroupResource)];
                 else if (type == ResourceTypeSegment.Subscription)
-                    yield return MgmtContext.Library.SubscriptionExtensions;
+                    yield return MgmtContext.Library.ArmExtensions[typeof(SubscriptionResource)];
                 else if (type == ResourceTypeSegment.Tenant)
-                    yield return MgmtContext.Library.TenantExtensions;
+                    yield return MgmtContext.Library.ArmExtensions[typeof(TenantResource)];
                 else
-                    yield return MgmtContext.Library.ArmResourceExtensions; // we return anything unrecognized scope parent resource type as ArmResourceExtensions
+                    yield return MgmtContext.Library.ArmExtensions[typeof(ArmResource)]; // we return anything unrecognized scope parent resource type as ArmResourceExtensions
             }
         }
 

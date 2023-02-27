@@ -397,32 +397,67 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return model.Type.Namespace.StartsWith(MgmtContext.Context.DefaultNamespace);
         }
 
-        private ArmClientExtensions? _armClientExtensions;
-        public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= EnsureArmClientExtensions();
+        //private ArmClientExtensions? _armClientExtensions;
+        //public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= EnsureArmClientExtensions();
 
-        private MgmtExtensions? _tenantExtensions;
-        private MgmtExtensions? _managementGroupExtensions;
-        private MgmtExtensions? _subscriptionExtensions;
-        private MgmtExtensions? _resourceGroupsExtensions;
-        private MgmtExtensions? _armResourceExtensions;
-        public MgmtExtensions TenantExtensions => _tenantExtensions ??= EnsureExtensions(typeof(TenantResource), RequestPath.Tenant);
-        public MgmtExtensions SubscriptionExtensions => _subscriptionExtensions ??= EnsureExtensions(typeof(SubscriptionResource), RequestPath.Subscription);
-        public MgmtExtensions ResourceGroupExtensions => _resourceGroupsExtensions ??= EnsureExtensions(typeof(ResourceGroupResource), RequestPath.ResourceGroup);
-        public MgmtExtensions ManagementGroupExtensions => _managementGroupExtensions ??= EnsureExtensions(typeof(ManagementGroupResource), RequestPath.ManagementGroup);
-        public MgmtExtensions ArmResourceExtensions => _armResourceExtensions ??= EnsureExtensions(typeof(ArmResource), RequestPath.Any);
+        private Dictionary<Type, MgmtExtensions>? _armExtensions;
+        public Dictionary<Type, MgmtExtensions> ArmExtensions => _armExtensions ??= EnsureArmExtensions();
+        //private MgmtExtensions? _tenantExtensions;
+        //private MgmtExtensions? _managementGroupExtensions;
+        //private MgmtExtensions? _subscriptionExtensions;
+        //private MgmtExtensions? _resourceGroupsExtensions;
+        //private MgmtExtensions? _armResourceExtensions;
+        //public MgmtExtensions TenantExtensions => _tenantExtensions ??= EnsureExtensions(typeof(TenantResource), RequestPath.Tenant);
+        //public MgmtExtensions SubscriptionExtensions => _subscriptionExtensions ??= EnsureExtensions(typeof(SubscriptionResource), RequestPath.Subscription);
+        //public MgmtExtensions ResourceGroupExtensions => _resourceGroupsExtensions ??= EnsureExtensions(typeof(ResourceGroupResource), RequestPath.ResourceGroup);
+        //public MgmtExtensions ManagementGroupExtensions => _managementGroupExtensions ??= EnsureExtensions(typeof(ManagementGroupResource), RequestPath.ManagementGroup);
+        //public MgmtExtensions ArmResourceExtensions => _armResourceExtensions ??= EnsureExtensions(typeof(ArmResource), RequestPath.Any);
 
         private MgmtExtensionsWrapper? _extensionsWrapper;
         public MgmtExtensionsWrapper ExtensionWrapper => _extensionsWrapper ??= EnsureExtensionsWrapper();
 
-        private MgmtExtensionsWrapper EnsureExtensionsWrapper() => IsArmCore ?
-                new MgmtExtensionsWrapper(new[] { TenantExtensions, ManagementGroupExtensions, ArmResourceExtensions }) :
-                new MgmtExtensionsWrapper(new[] { TenantExtensions, SubscriptionExtensions, ResourceGroupExtensions, ManagementGroupExtensions, ArmResourceExtensions, ArmClientExtensions });
+        private MgmtExtensionsWrapper EnsureExtensionsWrapper()
+        {
+            List<MgmtExtensions> extensions = new List<MgmtExtensions>();
+            foreach (var armExtension in ArmExtensions)
+            {
+                if (IsArmCore && (
+                    armExtension.Key == typeof(SubscriptionResource) ||
+                    armExtension.Key == typeof(ResourceGroupResource) ||
+                    armExtension.Key == typeof(ArmClient)))
+                    continue;
+                extensions.Add(armExtension.Value);
+                if (armExtension.Value.SplitExtensions.Any())
+                {
+                    extensions.AddRange(armExtension.Value.SplitExtensions);
+                }
+            }
+            return new MgmtExtensionsWrapper(extensions);
+        }
+
+        private Dictionary<Type, MgmtExtensions> EnsureArmExtensions()
+        {
+            var extensionChoices = new Dictionary<Type, RequestPath>() {
+                { typeof(TenantResource), RequestPath.Tenant },
+                { typeof(ManagementGroupResource), RequestPath.ManagementGroup },
+                { typeof(SubscriptionResource), RequestPath.Subscription },
+                { typeof(ResourceGroupResource), RequestPath.ResourceGroup },
+                { typeof(ArmResource), RequestPath.Any } };
+
+            Dictionary<Type, MgmtExtensions> extensions = new Dictionary<Type, MgmtExtensions>();
+            foreach (var extensionChoice in extensionChoices)
+            {
+                extensions.Add(extensionChoice.Key, EnsureExtensions(extensionChoice.Key, extensionChoice.Value));
+            }
+            extensions.Add(typeof(ArmClient), EnsureArmClientExtensions());
+            return extensions;
+        }
 
         private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath)
         {
             bool shouldGenerateChildren = !Configuration.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
             var operations = shouldGenerateChildren ? GetChildOperations(contextualPath) : Enumerable.Empty<Operation>();
-            return new MgmtExtensions(operations, armCoreType, contextualPath);
+            return new MgmtExtensions(operations, armCoreType, contextualPath, Configuration.MgmtConfiguration.IsArmCore ? false : true);
         }
 
         private ArmClientExtensions EnsureArmClientExtensions() => new ArmClientExtensions(GetChildOperations(RequestPath.Tenant));

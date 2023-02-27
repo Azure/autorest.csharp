@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -17,19 +18,49 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtensions : MgmtTypeProvider
     {
-        public IEnumerable<Operation> AllRawOperations { get; }
+        public IEnumerable<MgmtRestOperation> AllMgmtOperations { get; }
 
-        public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, RequestPath contextualPath)
+        public IEnumerable<MgmtExtensions> SplitExtensions { get; }
+
+        public string? WrappedResourceName { get; }
+
+        public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, RequestPath contextualPath, bool shouldTryToSplit = false, string? wrappedResourceName = null)
             : base(armCoreType.Name)
         {
-            AllRawOperations = allRawOperations;
             ArmCoreType = armCoreType;
-            DefaultName = Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
-            DefaultNamespace = Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
+            DefaultName = Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{(wrappedResourceName != null ? wrappedResourceName : ResourceName)}Extensions";
+            DefaultNamespace = Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : $"{base.DefaultNamespace}.Mock";
             Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {ResourceName}.";
             ContextualPath = contextualPath;
             ArmCoreNamespace = ArmCoreType.Namespace!;
             ChildResources = !Configuration.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != MgmtContext.Context.DefaultNamespace ? base.ChildResources : Enumerable.Empty<Resource>();
+            var allOperations = allRawOperations.Select(operation => new MgmtRestOperation(
+                        operation,
+                        operation.GetRequestPath(),
+                        ContextualPath,
+                        GetOperationName(operation, ResourceName),
+                        propertyBagName: ResourceName));
+            SplitExtensions = Array.Empty<MgmtExtensions>();
+            AllMgmtOperations = allOperations;
+            WrappedResourceName = wrappedResourceName;
+            if (shouldTryToSplit)
+            {
+                var resources = MgmtContext.Library.ArmResources.Select(r => r.Type).ToImmutableHashSet();
+                Dictionary<CSharpType, List<Operation>> resourceOperationsMappings = new Dictionary<CSharpType, List<Operation>>();
+                HashSet<string> operationsToRemove = new HashSet<string>();
+                foreach (var mgmtOperation in allOperations)
+                {
+                    if (mgmtOperation.MgmtReturnType != null && resources.TryGetValue(mgmtOperation.MgmtReturnType, out var resourceType))
+                    {
+                        operationsToRemove.Add(mgmtOperation.OperationId);
+                        if (!resourceOperationsMappings.ContainsKey(resourceType))
+                            resourceOperationsMappings.Add(resourceType, new List<Operation>());
+                        resourceOperationsMappings[resourceType].Add(mgmtOperation.Operation);
+                    }
+                }
+                SplitExtensions = resourceOperationsMappings.Select(mapping => new MgmtExtensions(mapping.Value, armCoreType, contextualPath, false, mapping.Key.Name));
+                AllMgmtOperations = allOperations.Where(o => !operationsToRemove.Contains(o.OperationId));
+           }
         }
 
         protected override ConstructorSignature? EnsureMockingCtor()
@@ -80,20 +111,12 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
             var extensionParamToUse = Configuration.MgmtConfiguration.IsArmCore ? null : ExtensionParameter;
-            return AllRawOperations.Select(operation =>
+            return AllMgmtOperations.Select(operation =>
             {
-                var operationName = GetOperationName(operation, ResourceName);
                 // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together
                 // some of the values are calculated multiple times (here and in writers).
                 // we just leave this implementation here since it could work for now
-                return MgmtClientOperation.FromOperation(
-                    new MgmtRestOperation(
-                        operation,
-                        operation.GetRequestPath(),
-                        ContextualPath,
-                        operationName,
-                        propertyBagName: ResourceName),
-                    extensionParamToUse);
+                return MgmtClientOperation.FromOperation(operation, extensionParamToUse);
             });
         }
 

@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.Line();
             var armClientSignature = new MethodSignature(
-                "GetExtensionClient",
+                $"Get{This.ExtensionClient.Type.Name}",
                 null,
                 null,
                 Private | Static,
@@ -184,7 +184,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             _writer.AppendRaw("return ")
                 .AppendRawIf("await ", isAsync && !isPaging)
-                .Append($"GetExtensionClient({_armClientParameter.Name}, {_scopeParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
+                .Append($"Get{This.ExtensionClient.Type.Name}({_armClientParameter.Name}, {_scopeParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
 
             foreach (var parameter in signature.Parameters.Skip(2))
             {
