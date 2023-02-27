@@ -10,7 +10,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyBag
 {
-    /// <summary> A class representing the Foo data model. </summary>
+    /// <summary>
+    /// A class representing the Foo data model.
+    /// Foo instance details.
+    /// </summary>
     public partial class FooData : ResourceData
     {
         /// <summary> Initializes a new instance of FooData. </summary>

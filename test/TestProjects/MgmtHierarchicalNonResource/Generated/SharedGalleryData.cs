@@ -10,7 +10,10 @@ using MgmtHierarchicalNonResource.Models;
 
 namespace MgmtHierarchicalNonResource
 {
-    /// <summary> A class representing the SharedGallery data model. </summary>
+    /// <summary>
+    /// A class representing the SharedGallery data model.
+    /// Specifies information about the Shared Gallery that you want to create or update.
+    /// </summary>
     public partial class SharedGalleryData : PirSharedGalleryResource
     {
         /// <summary> Initializes a new instance of SharedGalleryData. </summary>

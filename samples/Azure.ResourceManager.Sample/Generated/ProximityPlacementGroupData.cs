@@ -13,7 +13,11 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the ProximityPlacementGroup data model. </summary>
+    /// <summary>
+    /// A class representing the ProximityPlacementGroup data model.
+    /// Specifies information about the proximity placement group.
+    /// Serialized Name: ProximityPlacementGroup
+    /// </summary>
     public partial class ProximityPlacementGroupData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ProximityPlacementGroupData. </summary>

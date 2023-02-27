@@ -13,7 +13,10 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    /// <summary> A class representing the FirewallPolicy data model. </summary>
+    /// <summary>
+    /// A class representing the FirewallPolicy data model.
+    /// FirewallPolicy Resource.
+    /// </summary>
     public partial class FirewallPolicyData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of FirewallPolicyData. </summary>

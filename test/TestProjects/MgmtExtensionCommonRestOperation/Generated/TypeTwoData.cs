@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtExtensionCommonRestOperation
 {
-    /// <summary> A class representing the TypeTwo data model. </summary>
+    /// <summary>
+    /// A class representing the TypeTwo data model.
+    /// The TypeTwo.
+    /// </summary>
     public partial class TypeTwoData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of TypeTwoData. </summary>
