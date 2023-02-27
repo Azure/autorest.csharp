@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace SubscriptionExtensions
 {
-    /// <summary> A class representing the Oven data model. </summary>
+    /// <summary>
+    /// A class representing the Oven data model.
+    /// The Oven.
+    /// </summary>
     public partial class OvenData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of OvenData. </summary>

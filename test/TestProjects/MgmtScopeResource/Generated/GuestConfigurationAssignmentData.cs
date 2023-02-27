@@ -9,7 +9,10 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    /// <summary> A class representing the GuestConfigurationAssignment data model. </summary>
+    /// <summary>
+    /// A class representing the GuestConfigurationAssignment data model.
+    /// Guest configuration assignment is an association between a machine and guest configuration.
+    /// </summary>
     public partial class GuestConfigurationAssignmentData : GuestConfigurationBaseResource
     {
         /// <summary> Initializes a new instance of GuestConfigurationAssignmentData. </summary>

@@ -12,7 +12,10 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    /// <summary> A class representing the DeploymentExtended data model. </summary>
+    /// <summary>
+    /// A class representing the DeploymentExtended data model.
+    /// Deployment information.
+    /// </summary>
     public partial class DeploymentExtendedData : ResourceData
     {
         /// <summary> Initializes a new instance of DeploymentExtendedData. </summary>

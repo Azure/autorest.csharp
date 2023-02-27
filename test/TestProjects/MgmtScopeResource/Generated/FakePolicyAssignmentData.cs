@@ -13,7 +13,10 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    /// <summary> A class representing the FakePolicyAssignment data model. </summary>
+    /// <summary>
+    /// A class representing the FakePolicyAssignment data model.
+    /// The policy assignment.
+    /// </summary>
     public partial class FakePolicyAssignmentData : ResourceData
     {
         /// <summary> Initializes a new instance of FakePolicyAssignmentData. </summary>

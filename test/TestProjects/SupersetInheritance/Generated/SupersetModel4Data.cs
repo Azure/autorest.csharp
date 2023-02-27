@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace SupersetInheritance
 {
-    /// <summary> A class representing the SupersetModel4 data model. </summary>
+    /// <summary>
+    /// A class representing the SupersetModel4 data model.
+    /// This model does not have systemData, but should inherit from TrackedResource.
+    /// </summary>
     public partial class SupersetModel4Data : TrackedResourceData
     {
         /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
