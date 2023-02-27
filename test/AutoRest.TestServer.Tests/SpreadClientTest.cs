@@ -1,11 +1,15 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System.Reflection;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Threading;
+using Azure.Core;
 using NUnit.Framework;
 using Spread;
-using System;
+using Spread.Models;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -14,167 +18,114 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void SpreadModelMethod()
         {
-            var methods = typeof(SpreadClient).GetMethods();
-            var spreadMethods = methods.Where(m => m.Name.Equals("SpreadModel"));
-            foreach (var method in spreadMethods)
+            var expected = new[]
             {
-                var parameters = method.GetParameters();
-                Assert.AreEqual(2, parameters.Length);
-                if (parameters[0].ParameterType.Name.Equals("RequestContent"))
-                    continue;
-                Assert.AreEqual("Thing", parameters[0].ParameterType.Name);
-            }
-
-            var spreadAsyncMethods = methods.Where(m => m.Name.Equals("SpreadModelAsync"));
-            foreach (var method in spreadAsyncMethods)
-            {
-                var parameters = method.GetParameters();
-                Assert.AreEqual(2, parameters.Length);
-                if (parameters[0].ParameterType.Name.Equals("RequestContent"))
-                    continue;
-                Assert.AreEqual("Thing", parameters[0].ParameterType.Name);
-            }
+                (typeof(Thing), "thing", true)
+            };
+            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadModel", expected);
         }
 
         [Test]
         public void SpreadAliasMethod()
         {
-            var methods = typeof(SpreadClient).GetMethods();
-            var spreadMethods = methods.Where(m => m.Name.Equals("SpreadAlias"));
-            foreach (var method in spreadMethods)
+            var expected = new[]
             {
-                var parameters = method.GetParameters();
-                Assert.GreaterOrEqual(parameters.Length, 2);
-                if (parameters[0].ParameterType.Name.Equals("RequestContent"))
-                    continue;
-                Assert.AreEqual("String", parameters[0].ParameterType.Name);
-                Assert.AreEqual("name", parameters[0].Name);
-                Assert.AreEqual("Int32", parameters[1].ParameterType.Name);
-                Assert.AreEqual("age", parameters[1].Name);
-            }
-
-            var spreadAsyncMethods = methods.Where(m => m.Name.Equals("SpreadAliasAsync"));
-            foreach (var method in spreadAsyncMethods)
-            {
-                var parameters = method.GetParameters();
-                Assert.GreaterOrEqual(parameters.Length, 2);
-                if (parameters[0].ParameterType.Name.Equals("RequestContent"))
-                    continue;
-                Assert.AreEqual("String", parameters[0].ParameterType.Name);
-                Assert.AreEqual("name", parameters[0].Name);
-                Assert.AreEqual("Int32", parameters[1].ParameterType.Name);
-                Assert.AreEqual("age", parameters[1].Name);
-            }
+                (typeof(string), "name", true),
+                (typeof(int), "age", true)
+            };
+            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAlias", expected);
         }
+
         [Test]
         public void SpreadMultiTargetAliasMethod()
         {
-            var methods = typeof(SpreadClient).GetMethods();
-            var spreadMethods = methods.Where(m => m.Name.Equals("SpreadMultiTargetAlias"));
-            foreach (var method in spreadMethods)
+            var expected = new[]
             {
-                var parameters = method.GetParameters();
-                Assert.GreaterOrEqual(parameters.Length, 4);
-                if (parameters[2].ParameterType.Name.Equals("RequestContent"))
-                    continue;
-                Assert.AreEqual("String", parameters[0].ParameterType.Name);
-                Assert.AreEqual("id", parameters[0].Name);
-                Assert.AreEqual("Int32", parameters[1].ParameterType.Name);
-                Assert.AreEqual("top", parameters[1].Name);
-                Assert.AreEqual("String", parameters[2].ParameterType.Name);
-                Assert.AreEqual("name", parameters[2].Name);
-                Assert.AreEqual("Int32", parameters[3].ParameterType.Name);
-                Assert.AreEqual("age", parameters[3].Name);
-            }
-
-            var spreadAsyncMethods = methods.Where(m => m.Name.Equals("SpreadMultiTargetAliasAsync"));
-            foreach (var method in spreadAsyncMethods)
-            {
-                var parameters = method.GetParameters();
-                Assert.GreaterOrEqual(parameters.Length, 4);
-                if (parameters[2].ParameterType.Name.Equals("RequestContent"))
-                    continue;
-                Assert.AreEqual("String", parameters[0].ParameterType.Name);
-                Assert.AreEqual("id", parameters[0].Name);
-                Assert.AreEqual("Int32", parameters[1].ParameterType.Name);
-                Assert.AreEqual("top", parameters[1].Name);
-                Assert.AreEqual("String", parameters[2].ParameterType.Name);
-                Assert.AreEqual("name", parameters[2].Name);
-                Assert.AreEqual("Int32", parameters[3].ParameterType.Name);
-                Assert.AreEqual("age", parameters[3].Name);
-            }
+                (typeof(string), "id", true),
+                (typeof(int), "top", true),
+                (typeof(string), "name", true),
+                (typeof(int), "age", true)
+            };
+            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadMultiTargetAlias", expected);
         }
 
         [Test]
         public void SpreadAliasWithModelMethod()
         {
-            var methods = typeof(SpreadClient).GetMethods();
-            var spreadMethods = methods.Where(m => m.Name.Equals("SpreadAliasWithModel"));
-            foreach (var method in spreadMethods)
+            var expected = new[]
             {
-                var parameters = method.GetParameters();
-                Assert.AreEqual(parameters.Length, 4);
-                if (parameters[2].ParameterType.Name.Equals("RequestContent"))
-                    continue;
-                Assert.AreEqual("String", parameters[0].ParameterType.Name);
-                Assert.AreEqual("id", parameters[0].Name);
-                Assert.AreEqual("Int32", parameters[1].ParameterType.Name);
-                Assert.AreEqual("top", parameters[1].Name);
-                Assert.AreEqual("Thing", parameters[2].ParameterType.Name);
-            }
-
-            var spreadAsyncMethods = methods.Where(m => m.Name.Equals("SpreadAliasWithModelAsync"));
-            foreach (var method in spreadAsyncMethods)
-            {
-                var parameters = method.GetParameters();
-                Assert.GreaterOrEqual(parameters.Length, 4);
-                if (parameters[2].ParameterType.Name.Equals("RequestContent"))
-                    continue;
-                Assert.AreEqual("String", parameters[0].ParameterType.Name);
-                Assert.AreEqual("id", parameters[0].Name);
-                Assert.AreEqual("Int32", parameters[1].ParameterType.Name);
-                Assert.AreEqual("top", parameters[1].Name);
-                Assert.AreEqual("Thing", parameters[2].ParameterType.Name);
-            }
+                (typeof(string), "id", true),
+                (typeof(int), "top", true),
+                (typeof(Thing), "thing", true)
+            };
+            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAliasWithModel", expected);
         }
 
         [Test]
         public void SpreadAliasWithSpreadAliasMethod()
         {
-            var methods = typeof(SpreadClient).GetMethods();
-            var spreadMethods = methods.Where(m => m.Name.Equals("SpreadAliasWithSpreadAlias"));
-            foreach (var method in spreadMethods)
+            var expected = new[]
             {
-                var parameters = method.GetParameters();
-                Assert.GreaterOrEqual(parameters.Length, 4);
-                if (parameters[2].ParameterType.Name.Equals("RequestContent"))
-                    continue;
-                Assert.AreEqual("String", parameters[0].ParameterType.Name);
-                Assert.AreEqual("id", parameters[0].Name);
-                Assert.AreEqual("Int32", parameters[1].ParameterType.Name);
-                Assert.AreEqual("top", parameters[1].Name);
-                Assert.AreEqual("String", parameters[2].ParameterType.Name);
-                Assert.AreEqual("name", parameters[2].Name);
-                Assert.AreEqual("Int32", parameters[3].ParameterType.Name);
-                Assert.AreEqual("age", parameters[3].Name);
-            }
+                (typeof(string), "id", true),
+                (typeof(int), "top", true),
+                (typeof(string), "name", true),
+                (typeof(int), "age", true)
+            };
+            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAliasWithSpreadAlias", expected);
+        }
 
-            var spreadAsyncMethods = methods.Where(m => m.Name.Equals("SpreadAliasWithSpreadAliasAsync"));
-            foreach (var method in spreadAsyncMethods)
+        [Test]
+        public void SpreadAliasWithOptionalPropsMethod()
+        {
+            var expected = new[]
             {
-                var parameters = method.GetParameters();
-                Assert.GreaterOrEqual(parameters.Length, 4);
-                if (parameters[2].ParameterType.Name.Equals("RequestContent"))
-                    continue;
-                Assert.AreEqual("String", parameters[0].ParameterType.Name);
-                Assert.AreEqual("id", parameters[0].Name);
-                Assert.AreEqual("Int32", parameters[1].ParameterType.Name);
-                Assert.AreEqual("top", parameters[1].Name);
-                Assert.AreEqual("String", parameters[2].ParameterType.Name);
-                Assert.AreEqual("name", parameters[2].Name);
-                Assert.AreEqual("Int32", parameters[3].ParameterType.Name);
-                Assert.AreEqual("age", parameters[3].Name);
+                (typeof(string), "id", true),
+                (typeof(int), "top", true),
+                (typeof(string), "name", true),
+                (typeof(IEnumerable < int >), "items", true),
+                (typeof(string), "color", false),
+                (typeof(int?), "age", false),
+                (typeof(IEnumerable<string>), "elements", false)
+            };
+            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAliasWithOptionalProps", expected);
+        }
+
+        private static void ValidateConvenienceMethod(Type clientType, string methodName, IEnumerable<(Type ParameterType, string Name, bool IsRequired)> expected)
+        {
+            var methods = FindMethods(clientType, methodName);
+
+            foreach (var method in methods)
+            {
+                ValidateConvenienceMethodParameters(method, expected);
             }
         }
+
+        private static IEnumerable<MethodInfo> FindMethods(Type clientType, string methodName)
+        {
+            var asyncMethodName = $"{methodName}Async";
+            var methods = clientType.GetMethods();
+
+            return methods.Where(m => m.Name.Equals(methodName) || m.Name.Equals(asyncMethodName));
+        }
+
+        private static void ValidateConvenienceMethodParameters(MethodInfo method, IEnumerable<(Type ParameterType, string Name, bool IsRequired)> expected)
+        {
+            if (IsProtocolMethod(method))
+                return;
+            var parameters = method.GetParameters().Where(p => !p.ParameterType.Equals(typeof(CancellationToken)));
+            var parameterTypes = parameters.Select(p => p.ParameterType);
+            var parameterNames = parameters.Select(p => p.Name);
+            var parameterRequiredness = parameters.Select(p => !p.IsOptional);
+            var expectedTypes = expected.Select(p => p.ParameterType);
+            var expectedNames = expected.Select(p => p.Name);
+            var expectedRequiredness = expected.Select(p => p.IsRequired);
+
+            CollectionAssert.AreEqual(expectedTypes, parameterTypes);
+            CollectionAssert.AreEqual(expectedNames, parameterNames);
+            CollectionAssert.AreEqual(expectedRequiredness, parameterRequiredness);
+        }
+
+        private static bool IsProtocolMethod(MethodInfo method)
+            => method.GetParameters().Any(parameter => parameter.ParameterType.Equals(typeof(RequestContent)));
     }
 }

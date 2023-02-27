@@ -20,8 +20,8 @@ namespace media_types.Models
 
         public static ContentType1 ToContentType1(this string value)
         {
-            if (string.Equals(value, "application/json", StringComparison.InvariantCultureIgnoreCase)) return ContentType1.ApplicationJson;
-            if (string.Equals(value, "application/octet-stream", StringComparison.InvariantCultureIgnoreCase)) return ContentType1.ApplicationOctetStream;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "application/json")) return ContentType1.ApplicationJson;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "application/octet-stream")) return ContentType1.ApplicationOctetStream;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ContentType1 value.");
         }
     }

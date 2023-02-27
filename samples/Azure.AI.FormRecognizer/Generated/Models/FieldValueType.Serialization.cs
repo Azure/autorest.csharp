@@ -26,14 +26,14 @@ namespace Azure.AI.FormRecognizer.Models
 
         public static FieldValueType ToFieldValueType(this string value)
         {
-            if (string.Equals(value, "string", StringComparison.InvariantCultureIgnoreCase)) return FieldValueType.String;
-            if (string.Equals(value, "date", StringComparison.InvariantCultureIgnoreCase)) return FieldValueType.Date;
-            if (string.Equals(value, "time", StringComparison.InvariantCultureIgnoreCase)) return FieldValueType.Time;
-            if (string.Equals(value, "phoneNumber", StringComparison.InvariantCultureIgnoreCase)) return FieldValueType.PhoneNumber;
-            if (string.Equals(value, "number", StringComparison.InvariantCultureIgnoreCase)) return FieldValueType.Number;
-            if (string.Equals(value, "integer", StringComparison.InvariantCultureIgnoreCase)) return FieldValueType.Integer;
-            if (string.Equals(value, "array", StringComparison.InvariantCultureIgnoreCase)) return FieldValueType.Array;
-            if (string.Equals(value, "object", StringComparison.InvariantCultureIgnoreCase)) return FieldValueType.Object;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "string")) return FieldValueType.String;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "date")) return FieldValueType.Date;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "time")) return FieldValueType.Time;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "phoneNumber")) return FieldValueType.PhoneNumber;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "number")) return FieldValueType.Number;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "integer")) return FieldValueType.Integer;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "array")) return FieldValueType.Array;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "object")) return FieldValueType.Object;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown FieldValueType value.");
         }
     }
