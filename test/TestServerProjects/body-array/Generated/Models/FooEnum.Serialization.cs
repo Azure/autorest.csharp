@@ -21,9 +21,9 @@ namespace body_array.Models
 
         public static FooEnum ToFooEnum(this string value)
         {
-            if (string.Equals(value, "foo1", StringComparison.InvariantCultureIgnoreCase)) return FooEnum.Foo1;
-            if (string.Equals(value, "foo2", StringComparison.InvariantCultureIgnoreCase)) return FooEnum.Foo2;
-            if (string.Equals(value, "foo3", StringComparison.InvariantCultureIgnoreCase)) return FooEnum.Foo3;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "foo1")) return FooEnum.Foo1;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "foo2")) return FooEnum.Foo2;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "foo3")) return FooEnum.Foo3;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown FooEnum value.");
         }
     }

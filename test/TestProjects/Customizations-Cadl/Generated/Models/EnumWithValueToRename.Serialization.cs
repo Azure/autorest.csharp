@@ -21,9 +21,9 @@ namespace CustomizationsInCadl.Models
 
         public static EnumWithValueToRename ToEnumWithValueToRename(this string value)
         {
-            if (string.Equals(value, "1", StringComparison.InvariantCultureIgnoreCase)) return EnumWithValueToRename.One;
-            if (string.Equals(value, "2", StringComparison.InvariantCultureIgnoreCase)) return EnumWithValueToRename.Two;
-            if (string.Equals(value, "3", StringComparison.InvariantCultureIgnoreCase)) return EnumWithValueToRename.Three;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "1")) return EnumWithValueToRename.One;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "2")) return EnumWithValueToRename.Two;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "3")) return EnumWithValueToRename.Three;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EnumWithValueToRename value.");
         }
     }

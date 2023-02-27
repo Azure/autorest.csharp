@@ -12,7 +12,10 @@ using MgmtCollectionParent.Models;
 
 namespace MgmtCollectionParent
 {
-    /// <summary> A class representing the OrderResource data model. </summary>
+    /// <summary>
+    /// A class representing the OrderResource data model.
+    /// Specifies the properties or parameters for an order. Order is a grouping of one or more order items.
+    /// </summary>
     public partial class OrderResourceData : ResourceData
     {
         /// <summary> Initializes a new instance of OrderResourceData. </summary>

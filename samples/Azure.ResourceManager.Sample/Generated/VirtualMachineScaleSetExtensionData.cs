@@ -12,7 +12,11 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the VirtualMachineScaleSetExtension data model. </summary>
+    /// <summary>
+    /// A class representing the VirtualMachineScaleSetExtension data model.
+    /// Describes a Virtual Machine Scale Set Extension.
+    /// Serialized Name: VirtualMachineScaleSetExtension
+    /// </summary>
     public partial class VirtualMachineScaleSetExtensionData : SubResourceReadOnly
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionData. </summary>

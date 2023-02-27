@@ -11,7 +11,10 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    /// <summary> A class representing the ResourceLink data model. </summary>
+    /// <summary>
+    /// A class representing the ResourceLink data model.
+    /// The resource link.
+    /// </summary>
     public partial class ResourceLinkData : ResourceData
     {
         /// <summary> Initializes a new instance of ResourceLinkData. </summary>

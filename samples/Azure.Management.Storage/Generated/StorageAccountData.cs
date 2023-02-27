@@ -14,7 +14,10 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing the StorageAccount data model. </summary>
+    /// <summary>
+    /// A class representing the StorageAccount data model.
+    /// The storage account.
+    /// </summary>
     public partial class StorageAccountData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of StorageAccountData. </summary>

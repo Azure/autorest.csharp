@@ -39,6 +39,7 @@ import { BodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
 import {
     InputEnumType,
+    InputListType,
     InputModelType,
     InputPrimitiveType,
     InputType
@@ -96,6 +97,10 @@ import {
     resolveOptions,
     resolveOutputFolder
 } from "./options.js";
+import {
+    CollectionFormat,
+    collectionFormatToDelimMap
+} from "./type/CollectionFormat.js";
 
 export const $lib = createCadlLibrary({
     name: "cadl-csharp",
@@ -743,6 +748,10 @@ function loadOperation(
         parameter: HttpOperationParameter
     ): InputParameter {
         const { type: location, name, param } = parameter;
+        let format = undefined;
+        if (parameter.type !== "path") {
+            format = parameter.format;
+        }
         const cadlType = param.type;
         const inputType: InputType = getInputType(
             program,
@@ -784,8 +793,14 @@ function loadOperation(
             IsContentType: isContentType,
             IsEndpoint: false,
             SkipUrlEncoding: false, //TODO: retrieve out value from extension
-            Explode: false,
-            Kind: kind
+            Explode:
+                (inputType as InputListType).ElementType && format === "multi"
+                    ? true
+                    : false,
+            Kind: kind,
+            ArraySerializationDelimiter: format
+                ? collectionFormatToDelimMap[format]
+                : undefined
         } as InputParameter;
     }
 

@@ -9,7 +9,10 @@ using SupersetInheritance.Models;
 
 namespace SupersetInheritance
 {
-    /// <summary> A class representing the SupersetModel7 data model. </summary>
+    /// <summary>
+    /// A class representing the SupersetModel7 data model.
+    /// This model has a systemData different from common type and should not inherit from Resource.
+    /// </summary>
     public partial class SupersetModel7Data
     {
         /// <summary> Initializes a new instance of SupersetModel7Data. </summary>
