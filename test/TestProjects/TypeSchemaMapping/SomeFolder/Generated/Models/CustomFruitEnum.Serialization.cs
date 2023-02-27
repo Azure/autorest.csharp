@@ -20,8 +20,8 @@ namespace NamespaceForEnums
 
         public static CustomFruitEnum ToCustomFruitEnum(this string value)
         {
-            if (string.Equals(value, "apple", StringComparison.InvariantCultureIgnoreCase)) return CustomFruitEnum.Apple2;
-            if (string.Equals(value, "pear", StringComparison.InvariantCultureIgnoreCase)) return CustomFruitEnum.Pear;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "apple")) return CustomFruitEnum.Apple2;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "pear")) return CustomFruitEnum.Pear;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CustomFruitEnum value.");
         }
     }

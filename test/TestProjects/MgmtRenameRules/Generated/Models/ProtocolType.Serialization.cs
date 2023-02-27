@@ -20,8 +20,8 @@ namespace MgmtRenameRules.Models
 
         public static ProtocolType ToProtocolType(this string value)
         {
-            if (string.Equals(value, "Http", StringComparison.InvariantCultureIgnoreCase)) return ProtocolType.Http;
-            if (string.Equals(value, "Https", StringComparison.InvariantCultureIgnoreCase)) return ProtocolType.Https;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Http")) return ProtocolType.Http;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Https")) return ProtocolType.Https;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ProtocolType value.");
         }
     }

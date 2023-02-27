@@ -20,8 +20,8 @@ namespace TypeSchemaMapping.Models
 
         public static EnumForModelWithArrayOfEnum ToEnumForModelWithArrayOfEnum(this string value)
         {
-            if (string.Equals(value, "A", StringComparison.InvariantCultureIgnoreCase)) return EnumForModelWithArrayOfEnum.A;
-            if (string.Equals(value, "B", StringComparison.InvariantCultureIgnoreCase)) return EnumForModelWithArrayOfEnum.B;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "A")) return EnumForModelWithArrayOfEnum.A;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "B")) return EnumForModelWithArrayOfEnum.B;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EnumForModelWithArrayOfEnum value.");
         }
     }

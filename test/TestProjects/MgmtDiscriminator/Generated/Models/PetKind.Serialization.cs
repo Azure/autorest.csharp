@@ -20,8 +20,8 @@ namespace MgmtDiscriminator.Models
 
         public static PetKind ToPetKind(this string value)
         {
-            if (string.Equals(value, "Cat", StringComparison.InvariantCultureIgnoreCase)) return PetKind.Cat;
-            if (string.Equals(value, "Dog", StringComparison.InvariantCultureIgnoreCase)) return PetKind.Dog;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Cat")) return PetKind.Cat;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Dog")) return PetKind.Dog;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown PetKind value.");
         }
     }
