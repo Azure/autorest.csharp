@@ -50,7 +50,7 @@ import {
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
 import {
-    emitUnreferencedModels,
+    navigateModels,
     getDefaultValue,
     getEffectiveSchemaType,
     getInputType,
@@ -243,7 +243,11 @@ export function createModel(
         throw Error("Can not emit yaml for a namespace that doesn't exist.");
     }
 
-    return createModelForService(context, service, context.options["generate-all-models"]);
+    return createModelForService(
+        context,
+        service,
+        context.options["generate-all-models"]
+    );
 }
 
 export function createModelForService(
@@ -378,12 +382,7 @@ export function createModelForService(
     }
 
     if (generateAllModels) {
-        emitUnreferencedModels(
-            program,
-            serviceNamespaceType,
-            modelMap,
-            enumMap
-        );
+        navigateModels(program, serviceNamespaceType, modelMap, enumMap);
         setUsageForAll(Usage.RoundTrip, modelMap);
         setUsageForAll(Usage.RoundTrip, enumMap);
     } else {

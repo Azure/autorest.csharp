@@ -14,7 +14,7 @@ namespace CadlGenerateAllModels.Models
     public partial class NotReferenceModel
     {
         /// <summary> Initializes a new instance of NotReferenceModel. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> name of NotReference Model. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public NotReferenceModel(string name)
         {
@@ -23,7 +23,7 @@ namespace CadlGenerateAllModels.Models
             Name = name;
         }
 
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> name of NotReference Model. </summary>
         public string Name { get; set; }
     }
 }

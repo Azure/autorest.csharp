@@ -639,15 +639,12 @@ export function getInputType(
     }
 }
 
-export function emitUnreferencedModels(
+export function navigateModels(
     program: Program,
     namespace: Namespace,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ) {
-    // if (options.omitUnreachableTypes) {
-    //     return;
-    // }
     const computeModel = (x: Type) => getInputType(program, x, models, enums);
     const skipSubNamespaces = isGlobalNamespace(program, namespace);
     navigateTypesInNamespace(

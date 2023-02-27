@@ -14,7 +14,7 @@ namespace CadlGenerateAllModels.Models
     public partial class Thing
     {
         /// <summary> Initializes a new instance of Thing. </summary>
-        /// <param name="name"></param>
+        /// <param name="name"> name of the Thing. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Thing(string name)
         {
@@ -23,7 +23,7 @@ namespace CadlGenerateAllModels.Models
             Name = name;
         }
 
-        /// <summary> Gets or sets the name. </summary>
+        /// <summary> name of the Thing. </summary>
         public string Name { get; set; }
     }
 }

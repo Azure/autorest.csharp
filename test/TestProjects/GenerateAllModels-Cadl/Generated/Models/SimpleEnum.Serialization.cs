@@ -21,9 +21,9 @@ namespace CadlGenerateAllModels.Models
 
         public static SimpleEnum ToSimpleEnum(this string value)
         {
-            if (string.Equals(value, "1", StringComparison.InvariantCultureIgnoreCase)) return SimpleEnum.One;
-            if (string.Equals(value, "2", StringComparison.InvariantCultureIgnoreCase)) return SimpleEnum.Two;
-            if (string.Equals(value, "4", StringComparison.InvariantCultureIgnoreCase)) return SimpleEnum.Four;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "1")) return SimpleEnum.One;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "2")) return SimpleEnum.Two;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "4")) return SimpleEnum.Four;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SimpleEnum value.");
         }
     }

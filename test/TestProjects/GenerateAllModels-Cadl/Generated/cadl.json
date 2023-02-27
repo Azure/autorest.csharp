@@ -99,7 +99,7 @@
      "$id": "15",
      "Name": "requiredString",
      "SerializedName": "requiredString",
-     "Description": "",
+     "Description": "Required string, illustrating a reference type property.",
      "Type": {
       "$id": "16",
       "Name": "string",
@@ -114,7 +114,7 @@
      "$id": "17",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
-     "Description": "",
+     "Description": "Required int, illustrating a value type property.",
      "Type": {
       "$id": "18",
       "Name": "int32",
@@ -129,7 +129,7 @@
      "$id": "19",
      "Name": "requiredCollection",
      "SerializedName": "requiredCollection",
-     "Description": "",
+     "Description": "Required collection of enums",
      "Type": {
       "$id": "20",
       "Name": "Array",
@@ -146,7 +146,7 @@
      "$id": "21",
      "Name": "requiredDictionary",
      "SerializedName": "requiredDictionary",
-     "Description": "",
+     "Description": "Required dictionary of enums",
      "Type": {
       "$id": "22",
       "Name": "Dictionary",
@@ -169,7 +169,7 @@
      "$id": "24",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
-     "Description": "",
+     "Description": "Required model",
      "Type": {
       "$id": "25",
       "Name": "Thing",
@@ -181,7 +181,7 @@
         "$id": "26",
         "Name": "name",
         "SerializedName": "name",
-        "Description": "",
+        "Description": "name of the Thing",
         "Type": {
          "$id": "27",
          "Name": "string",
@@ -214,7 +214,7 @@
      "$id": "29",
      "Name": "name",
      "SerializedName": "name",
-     "Description": "",
+     "Description": "name of NotReference Model",
      "Type": {
       "$id": "30",
       "Name": "string",
@@ -436,6 +436,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     }
    ],

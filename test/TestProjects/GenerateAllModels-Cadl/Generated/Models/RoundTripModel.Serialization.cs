@@ -17,18 +17,18 @@ namespace CadlGenerateAllModels.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredString");
+            writer.WritePropertyName("requiredString"u8);
             writer.WriteStringValue(RequiredString);
-            writer.WritePropertyName("requiredInt");
+            writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
-            writer.WritePropertyName("requiredCollection");
+            writer.WritePropertyName("requiredCollection"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredCollection)
             {
                 writer.WriteStringValue(item.ToSerialString());
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("requiredDictionary");
+            writer.WritePropertyName("requiredDictionary"u8);
             writer.WriteStartObject();
             foreach (var item in RequiredDictionary)
             {
@@ -36,7 +36,7 @@ namespace CadlGenerateAllModels.Models
                 writer.WriteStringValue(item.Value.ToString());
             }
             writer.WriteEndObject();
-            writer.WritePropertyName("requiredModel");
+            writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
             writer.WriteEndObject();
         }
@@ -50,17 +50,17 @@ namespace CadlGenerateAllModels.Models
             Thing requiredModel = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredString"))
+                if (property.NameEquals("requiredString"u8))
                 {
                     requiredString = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredInt"))
+                if (property.NameEquals("requiredInt"u8))
                 {
                     requiredInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("requiredCollection"))
+                if (property.NameEquals("requiredCollection"u8))
                 {
                     List<SimpleEnum> array = new List<SimpleEnum>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -70,7 +70,7 @@ namespace CadlGenerateAllModels.Models
                     requiredCollection = array;
                     continue;
                 }
-                if (property.NameEquals("requiredDictionary"))
+                if (property.NameEquals("requiredDictionary"u8))
                 {
                     Dictionary<string, ExtensibleEnum> dictionary = new Dictionary<string, ExtensibleEnum>();
                     foreach (var property0 in property.Value.EnumerateObject())
@@ -80,7 +80,7 @@ namespace CadlGenerateAllModels.Models
                     requiredDictionary = dictionary;
                     continue;
                 }
-                if (property.NameEquals("requiredModel"))
+                if (property.NameEquals("requiredModel"u8))
                 {
                     requiredModel = Thing.DeserializeThing(property.Value);
                     continue;
