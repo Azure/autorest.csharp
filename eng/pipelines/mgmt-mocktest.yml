@@ -24,7 +24,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20230119.1
+      ref: refs/tags/azure-sdk-build-tools_20230223.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -33,7 +33,7 @@ stages:
         timeoutInMinutes: 240
         pool:
           name: azsdk-pool-mms-win-2022-general
-          vmImage: MMS2022Compliant
+          vmImage: windows-2022
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
