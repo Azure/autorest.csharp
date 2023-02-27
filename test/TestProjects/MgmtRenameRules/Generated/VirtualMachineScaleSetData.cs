@@ -13,7 +13,11 @@ using MgmtRenameRules.Models;
 
 namespace MgmtRenameRules
 {
-    /// <summary> A class representing the VirtualMachineScaleSet data model. </summary>
+    /// <summary>
+    /// A class representing the VirtualMachineScaleSet data model.
+    /// Describes a Virtual Machine Scale Set.
+    /// Serialized Name: VirtualMachineScaleSet
+    /// </summary>
     public partial class VirtualMachineScaleSetData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetData. </summary>

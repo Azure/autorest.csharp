@@ -13,7 +13,10 @@ using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
 {
-    /// <summary> A class representing the EnvironmentContainerResource data model. </summary>
+    /// <summary>
+    /// A class representing the EnvironmentContainerResource data model.
+    /// Azure Resource Manager resource envelope.
+    /// </summary>
     public partial class EnvironmentContainerResourceData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of EnvironmentContainerResourceData. </summary>
