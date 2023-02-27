@@ -220,6 +220,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CollapseRequestCondition-LowLevel\\Generated"
     },
+    "CollectionFormat-Cadl": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CollectionFormat-Cadl\\Generated"
+    },
     "constants": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"

@@ -20,8 +20,8 @@ namespace MgmtMockAndSample.Models
 
         public static CreateMode ToCreateMode(this string value)
         {
-            if (string.Equals(value, "recover", StringComparison.InvariantCultureIgnoreCase)) return CreateMode.Recover;
-            if (string.Equals(value, "default", StringComparison.InvariantCultureIgnoreCase)) return CreateMode.Default;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "recover")) return CreateMode.Recover;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "default")) return CreateMode.Default;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown CreateMode value.");
         }
     }

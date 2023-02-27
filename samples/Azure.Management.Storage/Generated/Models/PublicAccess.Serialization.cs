@@ -21,9 +21,9 @@ namespace Azure.Management.Storage.Models
 
         public static PublicAccess ToPublicAccess(this string value)
         {
-            if (string.Equals(value, "None", StringComparison.InvariantCultureIgnoreCase)) return PublicAccess.None;
-            if (string.Equals(value, "Container", StringComparison.InvariantCultureIgnoreCase)) return PublicAccess.Container;
-            if (string.Equals(value, "Blob", StringComparison.InvariantCultureIgnoreCase)) return PublicAccess.Blob;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "None")) return PublicAccess.None;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Container")) return PublicAccess.Container;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Blob")) return PublicAccess.Blob;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown PublicAccess value.");
         }
     }

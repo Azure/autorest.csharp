@@ -20,8 +20,8 @@ namespace Azure.Management.Storage.Models
 
         public static AccessTier ToAccessTier(this string value)
         {
-            if (string.Equals(value, "Hot", StringComparison.InvariantCultureIgnoreCase)) return AccessTier.Hot;
-            if (string.Equals(value, "Cool", StringComparison.InvariantCultureIgnoreCase)) return AccessTier.Cool;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Hot")) return AccessTier.Hot;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Cool")) return AccessTier.Cool;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown AccessTier value.");
         }
     }
