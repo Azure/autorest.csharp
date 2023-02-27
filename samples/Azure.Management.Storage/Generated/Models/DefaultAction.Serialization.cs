@@ -20,8 +20,8 @@ namespace Azure.Management.Storage.Models
 
         public static DefaultAction ToDefaultAction(this string value)
         {
-            if (string.Equals(value, "Allow", StringComparison.InvariantCultureIgnoreCase)) return DefaultAction.Allow;
-            if (string.Equals(value, "Deny", StringComparison.InvariantCultureIgnoreCase)) return DefaultAction.Deny;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Allow")) return DefaultAction.Allow;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Deny")) return DefaultAction.Deny;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown DefaultAction value.");
         }
     }

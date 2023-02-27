@@ -25,13 +25,13 @@ namespace MgmtScopeResource.Models
 
         public static ChangeType ToChangeType(this string value)
         {
-            if (string.Equals(value, "Create", StringComparison.InvariantCultureIgnoreCase)) return ChangeType.Create;
-            if (string.Equals(value, "Delete", StringComparison.InvariantCultureIgnoreCase)) return ChangeType.Delete;
-            if (string.Equals(value, "Ignore", StringComparison.InvariantCultureIgnoreCase)) return ChangeType.Ignore;
-            if (string.Equals(value, "Deploy", StringComparison.InvariantCultureIgnoreCase)) return ChangeType.Deploy;
-            if (string.Equals(value, "NoChange", StringComparison.InvariantCultureIgnoreCase)) return ChangeType.NoChange;
-            if (string.Equals(value, "Modify", StringComparison.InvariantCultureIgnoreCase)) return ChangeType.Modify;
-            if (string.Equals(value, "Unsupported", StringComparison.InvariantCultureIgnoreCase)) return ChangeType.Unsupported;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Create")) return ChangeType.Create;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Delete")) return ChangeType.Delete;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Ignore")) return ChangeType.Ignore;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Deploy")) return ChangeType.Deploy;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "NoChange")) return ChangeType.NoChange;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Modify")) return ChangeType.Modify;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Unsupported")) return ChangeType.Unsupported;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ChangeType value.");
         }
     }
