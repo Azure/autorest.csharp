@@ -73,6 +73,9 @@ export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
     const emitterOptions = context.options;
     const emitterOutputDir = context.emitterOutputDir;
     const resolvedOptions = { ...defaultOptions, ...emitterOptions };
+    if (resolvedOptions["generate-all-models"]) {
+        resolvedOptions["unreferenced-types-handling"] = "keepAll";
+    }
     const outputFolder = resolveOutputFolder(context);
     return {
         ...resolvedOptions,

@@ -50,6 +50,7 @@ import {
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
 import {
+    emitUnreferencedModels,
     getDefaultValue,
     getEffectiveSchemaType,
     getInputType,
@@ -242,7 +243,7 @@ export function createModel(
         throw Error("Can not emit yaml for a namespace that doesn't exist.");
     }
 
-    return createModelForService(context, service);
+    return createModelForService(context, service, context.options["generate-all-models"]);
 }
 
 export function createModelForService(
@@ -377,7 +378,12 @@ export function createModelForService(
     }
 
     if (generateAllModels) {
-        emitUnreferencedModels(serviceNamespaceType);
+        emitUnreferencedModels(
+            program,
+            serviceNamespaceType,
+            modelMap,
+            enumMap
+        );
         setUsageForAll(Usage.RoundTrip, modelMap);
         setUsageForAll(Usage.RoundTrip, enumMap);
     } else {
@@ -385,7 +391,7 @@ export function createModelForService(
         setUsage(usages, modelMap);
         setUsage(usages, enumMap);
     }
-    
+
     const clientModel = {
         Name: namespace,
         Description: description,
@@ -460,26 +466,6 @@ export function createModelForService(
             }
         }
         return lroMonitorOperations;
-    }
-
-    function emitUnreferencedModels(namespace: Namespace) {
-        // if (options.omitUnreachableTypes) {
-        //     return;
-        // }
-        const computeModel = (x: Type) =>
-            getInputType(program, x, modelMap, enumMap);
-        const skipSubNamespaces = isGlobalNamespace(program, namespace);
-        navigateTypesInNamespace(
-            namespace,
-            {
-                model: (x) =>
-                    x.name !== "" && x.kind === "Model" && computeModel(x),
-                scalar: computeModel,
-                enum: computeModel,
-                union: (x) => x.name !== undefined && computeModel(x)
-            },
-            { skipSubNamespaces }
-        );
     }
 }
 

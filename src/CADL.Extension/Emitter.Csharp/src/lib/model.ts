@@ -28,7 +28,9 @@ import {
     isRecordModelType,
     Scalar,
     Union,
-    getProjectedNames
+    getProjectedNames,
+    isGlobalNamespace,
+    navigateTypesInNamespace
 } from "@cadl-lang/compiler";
 import { getResourceOperation } from "@cadl-lang/rest";
 import {
@@ -635,6 +637,30 @@ export function getInputType(
               } as InputUnionType)
             : ItemTypes[0];
     }
+}
+
+export function emitUnreferencedModels(
+    program: Program,
+    namespace: Namespace,
+    models: Map<string, InputModelType>,
+    enums: Map<string, InputEnumType>
+) {
+    // if (options.omitUnreachableTypes) {
+    //     return;
+    // }
+    const computeModel = (x: Type) => getInputType(program, x, models, enums);
+    const skipSubNamespaces = isGlobalNamespace(program, namespace);
+    navigateTypesInNamespace(
+        namespace,
+        {
+            model: (x) =>
+                x.name !== "" && x.kind === "Model" && computeModel(x),
+            scalar: computeModel,
+            enum: computeModel,
+            union: (x) => x.name !== undefined && computeModel(x)
+        },
+        { skipSubNamespaces }
+    );
 }
 
 export function getUsages(
