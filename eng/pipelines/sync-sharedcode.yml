@@ -17,6 +17,9 @@ resources:
       endpoint: azure
       ref: refs/tags/azure-sdk-tools_20220404.3
 
+variables:
+- group: Release Secrets for GitHub
+
 stages:
   - stage: Synchronize_Shared_Codes
     jobs:
