@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing the SubParent data model. </summary>
+    /// <summary>
+    /// A class representing the SubParent data model.
+    /// Specifies information.
+    /// </summary>
     public partial class SubParentData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of SubParentData. </summary>

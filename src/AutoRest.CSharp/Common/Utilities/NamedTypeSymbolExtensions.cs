@@ -19,28 +19,17 @@ namespace AutoRest.CSharp.Utilities
                 return GetCSharpType((INamedTypeSymbol)symbol.TypeArguments[0]).WithNullable(true);
             }
 
-            return GetFrameworkType(symbol);
-        }
-
-        private static Type GetFrameworkType(INamedTypeSymbol symbol)
-        {
             var symbolName = symbol.ToDisplayString(FullyQualifiedNameFormat);
             var assemblyName = symbol.ContainingAssembly.Name;
-
-            if (symbol.TypeArguments.Length == 1 && symbolName.EndsWith('?'))
-            {
-                symbolName = "System.Nullable`1";
-            }
-            else if (symbol.TypeArguments.Length > 0)
+            if (symbol.TypeArguments.Length > 0)
             {
                 symbolName += $"`{symbol.TypeArguments.Length}";
             }
 
             var type = Type.GetType(symbolName) ?? Type.GetType($"{symbolName}, {assemblyName}") ?? throw new InvalidOperationException($"Type '{symbolName}' can't be found in assembly '{assemblyName}'.");
-            var result = symbol.TypeArguments.Length > 0
-                ? type.MakeGenericType(symbol.TypeArguments.Cast<INamedTypeSymbol>().Select(GetFrameworkType).ToArray())
+            return symbol.TypeArguments.Length > 0
+                ? new CSharpType(type, symbol.TypeArguments.Cast<INamedTypeSymbol>().Select(GetCSharpType).ToArray())
                 : type;
-            return result;
         }
 
         public static bool IsSameType(this INamedTypeSymbol symbol, CSharpType type)

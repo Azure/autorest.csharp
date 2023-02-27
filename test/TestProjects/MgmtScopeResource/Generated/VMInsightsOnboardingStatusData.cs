@@ -12,7 +12,10 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    /// <summary> A class representing the VMInsightsOnboardingStatus data model. </summary>
+    /// <summary>
+    /// A class representing the VMInsightsOnboardingStatus data model.
+    /// VM Insights onboarding status for a resource.
+    /// </summary>
     public partial class VMInsightsOnboardingStatusData : ResourceData
     {
         /// <summary> Initializes a new instance of VMInsightsOnboardingStatusData. </summary>

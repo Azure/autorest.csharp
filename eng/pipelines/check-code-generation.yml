@@ -9,7 +9,7 @@ jobs:
 - job: ${{ parameters.name }}
   pool:
     name: azsdk-pool-mms-win-2022-general
-    vmImage: MMS2022Compliant
+    vmImage: windows-2022
   steps:
     - task: NodeTool@0
       displayName: "Install Node 18.13.0"
