@@ -25,13 +25,13 @@ namespace CognitiveSearch.Models
 
         public static VisualFeature ToVisualFeature(this string value)
         {
-            if (string.Equals(value, "adult", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Adult;
-            if (string.Equals(value, "brands", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Brands;
-            if (string.Equals(value, "categories", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Categories;
-            if (string.Equals(value, "description", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Description;
-            if (string.Equals(value, "faces", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Faces;
-            if (string.Equals(value, "objects", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Objects;
-            if (string.Equals(value, "tags", StringComparison.InvariantCultureIgnoreCase)) return VisualFeature.Tags;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "adult")) return VisualFeature.Adult;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "brands")) return VisualFeature.Brands;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "categories")) return VisualFeature.Categories;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "description")) return VisualFeature.Description;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "faces")) return VisualFeature.Faces;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "objects")) return VisualFeature.Objects;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "tags")) return VisualFeature.Tags;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown VisualFeature value.");
         }
     }

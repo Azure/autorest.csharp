@@ -21,9 +21,9 @@ namespace ModelWithConverterUsage.Models
 
         public static EnumProperty ToEnumProperty(this string value)
         {
-            if (string.Equals(value, "A", StringComparison.InvariantCultureIgnoreCase)) return EnumProperty.A;
-            if (string.Equals(value, "B", StringComparison.InvariantCultureIgnoreCase)) return EnumProperty.B;
-            if (string.Equals(value, "C", StringComparison.InvariantCultureIgnoreCase)) return EnumProperty.C;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "A")) return EnumProperty.A;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "B")) return EnumProperty.B;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "C")) return EnumProperty.C;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown EnumProperty value.");
         }
     }

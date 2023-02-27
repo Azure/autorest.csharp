@@ -21,9 +21,9 @@ namespace TypeSchemaMapping.Models
 
         public static UnexposedNonExtensibleEnum ToUnexposedNonExtensibleEnum(this string value)
         {
-            if (string.Equals(value, "A", StringComparison.InvariantCultureIgnoreCase)) return UnexposedNonExtensibleEnum.A;
-            if (string.Equals(value, "B", StringComparison.InvariantCultureIgnoreCase)) return UnexposedNonExtensibleEnum.B;
-            if (string.Equals(value, "C", StringComparison.InvariantCultureIgnoreCase)) return UnexposedNonExtensibleEnum.C;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "A")) return UnexposedNonExtensibleEnum.A;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "B")) return UnexposedNonExtensibleEnum.B;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "C")) return UnexposedNonExtensibleEnum.C;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown UnexposedNonExtensibleEnum value.");
         }
     }

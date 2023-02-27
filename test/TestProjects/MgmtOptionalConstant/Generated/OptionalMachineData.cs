@@ -12,7 +12,10 @@ using MgmtOptionalConstant.Models;
 
 namespace MgmtOptionalConstant
 {
-    /// <summary> A class representing the OptionalMachine data model. </summary>
+    /// <summary>
+    /// A class representing the OptionalMachine data model.
+    /// Describes a Virtual Machine.
+    /// </summary>
     public partial class OptionalMachineData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of OptionalMachineData. </summary>

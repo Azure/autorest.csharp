@@ -21,9 +21,9 @@ namespace CustomizationsInCadl.Models
 
         public static RenamedEnum ToRenamedEnum(this string value)
         {
-            if (string.Equals(value, "1", StringComparison.InvariantCultureIgnoreCase)) return RenamedEnum.One;
-            if (string.Equals(value, "2", StringComparison.InvariantCultureIgnoreCase)) return RenamedEnum.Two;
-            if (string.Equals(value, "3", StringComparison.InvariantCultureIgnoreCase)) return RenamedEnum.Three;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "1")) return RenamedEnum.One;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "2")) return RenamedEnum.Two;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "3")) return RenamedEnum.Three;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown RenamedEnum value.");
         }
     }

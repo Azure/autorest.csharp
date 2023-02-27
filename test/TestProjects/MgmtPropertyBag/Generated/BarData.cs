@@ -10,7 +10,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyBag
 {
-    /// <summary> A class representing the Bar data model. </summary>
+    /// <summary>
+    /// A class representing the Bar data model.
+    /// Bar instance details.
+    /// </summary>
     public partial class BarData : ResourceData
     {
         /// <summary> Initializes a new instance of BarData. </summary>
