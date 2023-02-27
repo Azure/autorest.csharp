@@ -13,7 +13,10 @@ using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> A class representing the RecordSet data model. </summary>
+    /// <summary>
+    /// A class representing the RecordSet data model.
+    /// Describes a DNS record set (a collection of DNS records with the same name and type).
+    /// </summary>
     public partial class RecordSetData : ResourceData
     {
         /// <summary> Initializes a new instance of RecordSetData. </summary>

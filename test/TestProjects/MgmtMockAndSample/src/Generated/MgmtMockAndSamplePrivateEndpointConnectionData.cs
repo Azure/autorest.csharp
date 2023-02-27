@@ -13,7 +13,10 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    /// <summary> A class representing the MgmtMockAndSamplePrivateEndpointConnection data model. </summary>
+    /// <summary>
+    /// A class representing the MgmtMockAndSamplePrivateEndpointConnection data model.
+    /// Private endpoint connection resource.
+    /// </summary>
     public partial class MgmtMockAndSamplePrivateEndpointConnectionData : ResourceData
     {
         /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateEndpointConnectionData. </summary>
