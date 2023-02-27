@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtOptionalConstant.Mock;
 using MgmtOptionalConstant.Models;
 
 namespace MgmtOptionalConstant
@@ -19,11 +20,11 @@ namespace MgmtOptionalConstant
     /// <summary> A class to add extension methods to MgmtOptionalConstant. </summary>
     public static partial class MgmtOptionalConstantExtensions
     {
-        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
+        private static OptionalMachineResourceExtensionClient GetOptionalMachineResourceExtensionClient(SubscriptionResource subscriptionResource)
         {
             return subscriptionResource.GetCachedClient((client) =>
             {
-                return new SubscriptionResourceExtensionClient(client, subscriptionResource.Id);
+                return new OptionalMachineResourceExtensionClient(client, subscriptionResource.Id);
             }
             );
         }
@@ -47,7 +48,7 @@ namespace MgmtOptionalConstant
         /// <returns> An async collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OptionalMachineResource> GetOptionalMachinesAsync(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscriptionResource).GetOptionalMachinesAsync(statusOnly, cancellationToken);
+            return GetOptionalMachineResourceExtensionClient(subscriptionResource).GetOptionalMachinesAsync(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -69,10 +70,10 @@ namespace MgmtOptionalConstant
         /// <returns> A collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OptionalMachineResource> GetOptionalMachines(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscriptionResource).GetOptionalMachines(statusOnly, cancellationToken);
+            return GetOptionalMachineResourceExtensionClient(subscriptionResource).GetOptionalMachines(statusOnly, cancellationToken);
         }
 
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
             {
@@ -86,7 +87,7 @@ namespace MgmtOptionalConstant
         /// <returns> An object representing collection of OptionalMachineResources and their operations over a OptionalMachineResource. </returns>
         public static OptionalMachineCollection GetOptionalMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetOptionalMachines();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetOptionalMachines();
         }
 
         /// <summary>

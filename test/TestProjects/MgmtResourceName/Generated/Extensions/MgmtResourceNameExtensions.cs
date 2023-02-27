@@ -12,13 +12,14 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtResourceName.Mock;
 
 namespace MgmtResourceName
 {
     /// <summary> A class to add extension methods to MgmtResourceName. </summary>
     public static partial class MgmtResourceNameExtensions
     {
-        private static TenantResourceExtensionClient GetExtensionClient(TenantResource tenantResource)
+        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(TenantResource tenantResource)
         {
             return tenantResource.GetCachedClient((client) =>
             {
@@ -32,7 +33,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of ProviderOperationResources and their operations over a ProviderOperationResource. </returns>
         public static ProviderOperationCollection GetProviderOperations(this TenantResource tenantResource)
         {
-            return GetExtensionClient(tenantResource).GetProviderOperations();
+            return GetTenantResourceExtensionClient(tenantResource).GetProviderOperations();
         }
 
         /// <summary>
@@ -85,7 +86,7 @@ namespace MgmtResourceName
             return tenantResource.GetProviderOperations().Get(resourceProviderNamespace, expand, cancellationToken);
         }
 
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
             {
@@ -99,7 +100,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of MachineResources and their operations over a MachineResource. </returns>
         public static MachineCollection GetMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetMachines();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetMachines();
         }
 
         /// <summary>
@@ -153,7 +154,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of Disks and their operations over a Disk. </returns>
         public static DiskCollection GetDisks(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetDisks();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDisks();
         }
 
         /// <summary>
@@ -207,7 +208,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of Memories and their operations over a Memory. </returns>
         public static MemoryCollection GetMemories(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetMemories();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetMemories();
         }
 
         /// <summary>
@@ -261,7 +262,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of NetworkResources and their operations over a NetworkResource. </returns>
         public static NetworkCollection GetNetworks(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetNetworks();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNetworks();
         }
 
         /// <summary>
@@ -315,7 +316,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of DisplayResources and their operations over a DisplayResource. </returns>
         public static DisplayResourceCollection GetDisplayResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetDisplayResources();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDisplayResources();
         }
 
         /// <summary>

@@ -12,13 +12,14 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtSingletonResource.Mock;
 
 namespace MgmtSingletonResource
 {
     /// <summary> A class to add extension methods to MgmtSingletonResource. </summary>
     public static partial class MgmtSingletonResourceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
             {
@@ -32,7 +33,7 @@ namespace MgmtSingletonResource
         /// <returns> An object representing collection of CarResources and their operations over a CarResource. </returns>
         public static CarCollection GetCars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetCars();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCars();
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace MgmtSingletonResource
         /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
         public static ParentResourceCollection GetParentResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetParentResources();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetParentResources();
         }
 
         /// <summary>

@@ -10,28 +10,29 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using MgmtOptionalConstant;
 
-namespace MgmtOptionalConstant
+namespace MgmtOptionalConstant.Mock
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    internal partial class SubscriptionResourceExtensionClient : ArmResource
+    public partial class OptionalMachineResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _optionalMachineOptionalsClientDiagnostics;
         private OptionalsRestOperations _optionalMachineOptionalsRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class for mocking. </summary>
-        protected SubscriptionResourceExtensionClient()
+        /// <summary> Initializes a new instance of the <see cref="OptionalMachineResourceExtensionClient"/> class for mocking. </summary>
+        protected OptionalMachineResourceExtensionClient()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="OptionalMachineResourceExtensionClient"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal OptionalMachineResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
-        private ClientDiagnostics OptionalMachineOptionalsClientDiagnostics => _optionalMachineOptionalsClientDiagnostics ??= new ClientDiagnostics("MgmtOptionalConstant", OptionalMachineResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics OptionalMachineOptionalsClientDiagnostics => _optionalMachineOptionalsClientDiagnostics ??= new ClientDiagnostics("MgmtOptionalConstant.Mock", OptionalMachineResource.ResourceType.Namespace, Diagnostics);
         private OptionalsRestOperations OptionalMachineOptionalsRestClient => _optionalMachineOptionalsRestClient ??= new OptionalsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(OptionalMachineResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
@@ -60,7 +61,7 @@ namespace MgmtOptionalConstant
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OptionalMachineOptionalsRestClient.CreateListAllRequest(Id.SubscriptionId, statusOnly);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OptionalMachineOptionalsRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, statusOnly);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOptionalMachines", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineResourceExtensionClient.GetOptionalMachines", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace MgmtOptionalConstant
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => OptionalMachineOptionalsRestClient.CreateListAllRequest(Id.SubscriptionId, statusOnly);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => OptionalMachineOptionalsRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId, statusOnly);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetOptionalMachines", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), OptionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineResourceExtensionClient.GetOptionalMachines", "value", "nextLink", cancellationToken);
         }
     }
 }

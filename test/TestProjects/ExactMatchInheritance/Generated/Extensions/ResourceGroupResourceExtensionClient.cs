@@ -12,12 +12,13 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using ExactMatchInheritance;
 using ExactMatchInheritance.Models;
 
-namespace ExactMatchInheritance
+namespace ExactMatchInheritance.Mock
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class ResourceGroupResourceExtensionClient : ArmResource
+    public partial class ResourceGroupResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _exactMatchModel2sClientDiagnostics;
         private ExactMatchModel2SRestOperations _exactMatchModel2sRestClient;
@@ -38,11 +39,11 @@ namespace ExactMatchInheritance
         {
         }
 
-        private ClientDiagnostics ExactMatchModel2sClientDiagnostics => _exactMatchModel2sClientDiagnostics ??= new ClientDiagnostics("ExactMatchInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics ExactMatchModel2sClientDiagnostics => _exactMatchModel2sClientDiagnostics ??= new ClientDiagnostics("ExactMatchInheritance.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private ExactMatchModel2SRestOperations ExactMatchModel2sRestClient => _exactMatchModel2sRestClient ??= new ExactMatchModel2SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
-        private ClientDiagnostics ExactMatchModel3sClientDiagnostics => _exactMatchModel3sClientDiagnostics ??= new ClientDiagnostics("ExactMatchInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics ExactMatchModel3sClientDiagnostics => _exactMatchModel3sClientDiagnostics ??= new ClientDiagnostics("ExactMatchInheritance.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private ExactMatchModel3SRestOperations ExactMatchModel3sRestClient => _exactMatchModel3sRestClient ??= new ExactMatchModel3SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
-        private ClientDiagnostics ExactMatchModel4sClientDiagnostics => _exactMatchModel4sClientDiagnostics ??= new ClientDiagnostics("ExactMatchInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics ExactMatchModel4sClientDiagnostics => _exactMatchModel4sClientDiagnostics ??= new ClientDiagnostics("ExactMatchInheritance.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private ExactMatchModel4SRestOperations ExactMatchModel4sRestClient => _exactMatchModel4sRestClient ??= new ExactMatchModel4SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
@@ -80,8 +81,13 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
+            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
+
             using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel2");
             scope.Start();
             try
@@ -111,8 +117,13 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
         public virtual Response<ExactMatchModel2> PutExactMatchModel2(string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
+            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
+
             using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel2");
             scope.Start();
             try
@@ -182,8 +193,13 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
+
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel3");
             scope.Start();
             try
@@ -213,8 +229,13 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         public virtual Response<ExactMatchModel3> PutExactMatchModel3(string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
+
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel3");
             scope.Start();
             try
@@ -243,8 +264,12 @@ namespace ExactMatchInheritance
         /// </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetExactMatchModel3");
             scope.Start();
             try
@@ -273,8 +298,12 @@ namespace ExactMatchInheritance
         /// </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public virtual Response<ExactMatchModel3> GetExactMatchModel3(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetExactMatchModel3");
             scope.Start();
             try
@@ -304,8 +333,13 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
+            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
+
             using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel4");
             scope.Start();
             try
@@ -335,8 +369,13 @@ namespace ExactMatchInheritance
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         public virtual Response<ExactMatchModel4> PutExactMatchModel4(string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
+            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
+
             using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutExactMatchModel4");
             scope.Start();
             try

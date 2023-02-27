@@ -12,13 +12,14 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtMultipleParentResource.Mock;
 
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class to add extension methods to MgmtMultipleParentResource. </summary>
     public static partial class MgmtMultipleParentResourceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
             {
@@ -32,7 +33,7 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of AnotherParentResources and their operations over a AnotherParentResource. </returns>
         public static AnotherParentCollection GetAnotherParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetAnotherParents();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAnotherParents();
         }
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of TheParentResources and their operations over a TheParentResource. </returns>
         public static TheParentCollection GetTheParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetTheParents();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTheParents();
         }
 
         /// <summary>

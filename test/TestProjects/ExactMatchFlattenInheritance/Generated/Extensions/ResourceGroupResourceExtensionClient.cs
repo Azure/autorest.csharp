@@ -12,12 +12,13 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using ExactMatchFlattenInheritance;
 using ExactMatchFlattenInheritance.Models;
 
-namespace ExactMatchFlattenInheritance
+namespace ExactMatchFlattenInheritance.Mock
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class ResourceGroupResourceExtensionClient : ArmResource
+    public partial class ResourceGroupResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _azureResourceFlattenModel2sClientDiagnostics;
         private AzureResourceFlattenModel2SRestOperations _azureResourceFlattenModel2sRestClient;
@@ -40,13 +41,13 @@ namespace ExactMatchFlattenInheritance
         {
         }
 
-        private ClientDiagnostics AzureResourceFlattenModel2sClientDiagnostics => _azureResourceFlattenModel2sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics AzureResourceFlattenModel2sClientDiagnostics => _azureResourceFlattenModel2sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private AzureResourceFlattenModel2SRestOperations AzureResourceFlattenModel2sRestClient => _azureResourceFlattenModel2sRestClient ??= new AzureResourceFlattenModel2SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
-        private ClientDiagnostics AzureResourceFlattenModel3sClientDiagnostics => _azureResourceFlattenModel3sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics AzureResourceFlattenModel3sClientDiagnostics => _azureResourceFlattenModel3sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private AzureResourceFlattenModel3SRestOperations AzureResourceFlattenModel3sRestClient => _azureResourceFlattenModel3sRestClient ??= new AzureResourceFlattenModel3SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
-        private ClientDiagnostics AzureResourceFlattenModel4sClientDiagnostics => _azureResourceFlattenModel4sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics AzureResourceFlattenModel4sClientDiagnostics => _azureResourceFlattenModel4sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private AzureResourceFlattenModel4SRestOperations AzureResourceFlattenModel4sRestClient => _azureResourceFlattenModel4sRestClient ??= new AzureResourceFlattenModel4SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
-        private ClientDiagnostics AzureResourceFlattenModel5sClientDiagnostics => _azureResourceFlattenModel5sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics AzureResourceFlattenModel5sClientDiagnostics => _azureResourceFlattenModel5sClientDiagnostics ??= new ClientDiagnostics("ExactMatchFlattenInheritance.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private AzureResourceFlattenModel5SRestOperations AzureResourceFlattenModel5sRestClient => _azureResourceFlattenModel5sRestClient ??= new AzureResourceFlattenModel5SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
@@ -134,8 +135,13 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="azureResourceFlattenModel2"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel2"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel2>> PutAzureResourceFlattenModel2Async(string name, AzureResourceFlattenModel2 azureResourceFlattenModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel2, nameof(azureResourceFlattenModel2));
+
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel2");
             scope.Start();
             try
@@ -166,8 +172,13 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="azureResourceFlattenModel2"> The AzureResourceFlattenModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel2"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel2> PutAzureResourceFlattenModel2(string name, AzureResourceFlattenModel2 azureResourceFlattenModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel2, nameof(azureResourceFlattenModel2));
+
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel2");
             scope.Start();
             try
@@ -197,8 +208,12 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel2>> GetAzureResourceFlattenModel2Async(string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel2");
             scope.Start();
             try
@@ -228,8 +243,12 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2(string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
             using var scope = AzureResourceFlattenModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel2");
             scope.Start();
             try
@@ -302,8 +321,13 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="azureResourceFlattenModel3"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel3"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel3>> PutAzureResourceFlattenModel3Async(string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel3, nameof(azureResourceFlattenModel3));
+
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel3");
             scope.Start();
             try
@@ -334,8 +358,13 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="azureResourceFlattenModel3"> The AzureResourceFlattenModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel3"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel3> PutAzureResourceFlattenModel3(string name, AzureResourceFlattenModel3 azureResourceFlattenModel3, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel3, nameof(azureResourceFlattenModel3));
+
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel3");
             scope.Start();
             try
@@ -365,8 +394,12 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel3>> GetAzureResourceFlattenModel3Async(string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel3");
             scope.Start();
             try
@@ -396,8 +429,12 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3(string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
             using var scope = AzureResourceFlattenModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel3");
             scope.Start();
             try
@@ -470,8 +507,13 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="azureResourceFlattenModel4"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel4"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel4>> PutAzureResourceFlattenModel4Async(string name, AzureResourceFlattenModel4 azureResourceFlattenModel4, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel4, nameof(azureResourceFlattenModel4));
+
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel4");
             scope.Start();
             try
@@ -502,8 +544,13 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="azureResourceFlattenModel4"> The AzureResourceFlattenModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="azureResourceFlattenModel4"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel4> PutAzureResourceFlattenModel4(string name, AzureResourceFlattenModel4 azureResourceFlattenModel4, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+            Argument.AssertNotNull(azureResourceFlattenModel4, nameof(azureResourceFlattenModel4));
+
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel4");
             scope.Start();
             try
@@ -533,8 +580,12 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel4>> GetAzureResourceFlattenModel4Async(string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel4");
             scope.Start();
             try
@@ -564,8 +615,12 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4(string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
             using var scope = AzureResourceFlattenModel4sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel4");
             scope.Start();
             try
@@ -638,8 +693,12 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel5>> PutAzureResourceFlattenModel5Async(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
             using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel5");
             scope.Start();
             try
@@ -670,8 +729,12 @@ namespace ExactMatchFlattenInheritance
         /// <param name="name"> The String to use. </param>
         /// <param name="foo"> New property. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel5> PutAzureResourceFlattenModel5(string name, int? foo = null, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
             using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutAzureResourceFlattenModel5");
             scope.Start();
             try
@@ -701,8 +764,12 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual async Task<Response<AzureResourceFlattenModel5>> GetAzureResourceFlattenModel5Async(string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
             using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel5");
             scope.Start();
             try
@@ -732,8 +799,12 @@ namespace ExactMatchFlattenInheritance
         /// </summary>
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public virtual Response<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5(string name, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
+
             using var scope = AzureResourceFlattenModel5sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetAzureResourceFlattenModel5");
             scope.Start();
             try

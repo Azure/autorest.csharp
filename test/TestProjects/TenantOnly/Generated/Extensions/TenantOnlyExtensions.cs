@@ -12,13 +12,14 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using TenantOnly.Mock;
 
 namespace TenantOnly
 {
     /// <summary> A class to add extension methods to TenantOnly. </summary>
     public static partial class TenantOnlyExtensions
     {
-        private static TenantResourceExtensionClient GetExtensionClient(TenantResource tenantResource)
+        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(TenantResource tenantResource)
         {
             return tenantResource.GetCachedClient((client) =>
             {
@@ -32,7 +33,7 @@ namespace TenantOnly
         /// <returns> An object representing collection of BillingAccountResources and their operations over a BillingAccountResource. </returns>
         public static BillingAccountCollection GetBillingAccounts(this TenantResource tenantResource)
         {
-            return GetExtensionClient(tenantResource).GetBillingAccounts();
+            return GetTenantResourceExtensionClient(tenantResource).GetBillingAccounts();
         }
 
         /// <summary>

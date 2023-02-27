@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtParamOrdering.Mock;
 using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
@@ -19,7 +20,7 @@ namespace MgmtParamOrdering
     /// <summary> A class to add extension methods to MgmtParamOrdering. </summary>
     public static partial class MgmtParamOrderingExtensions
     {
-        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
+        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(SubscriptionResource subscriptionResource)
         {
             return subscriptionResource.GetCachedClient((client) =>
             {
@@ -39,7 +40,7 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
 
-            return GetExtensionClient(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
+            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
         }
 
         /// <summary>
@@ -96,6 +97,15 @@ namespace MgmtParamOrdering
             return subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName).Get(type, version, cancellationToken);
         }
 
+        private static AvailabilitySetResourceExtensionClient GetAvailabilitySetResourceExtensionClient(SubscriptionResource subscriptionResource)
+        {
+            return subscriptionResource.GetCachedClient((client) =>
+            {
+                return new AvailabilitySetResourceExtensionClient(client, subscriptionResource.Id);
+            }
+            );
+        }
+
         /// <summary>
         /// Lists all availability sets in a subscription.
         /// <list type="bullet">
@@ -115,7 +125,7 @@ namespace MgmtParamOrdering
         /// <returns> An async collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AvailabilitySetResource> GetAvailabilitySetsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
+            return GetAvailabilitySetResourceExtensionClient(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -137,10 +147,10 @@ namespace MgmtParamOrdering
         /// <returns> A collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AvailabilitySetResource> GetAvailabilitySets(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetExtensionClient(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);
+            return GetAvailabilitySetResourceExtensionClient(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);
         }
 
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
             {
@@ -154,7 +164,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetAvailabilitySets();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAvailabilitySets();
         }
 
         /// <summary>
@@ -210,7 +220,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
         public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetDedicatedHostGroups();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDedicatedHostGroups();
         }
 
         /// <summary>
@@ -268,7 +278,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of WorkspaceResources and their operations over a WorkspaceResource. </returns>
         public static WorkspaceCollection GetWorkspaces(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetWorkspaces();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetWorkspaces();
         }
 
         /// <summary>
@@ -324,7 +334,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetVirtualMachineScaleSets();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetVirtualMachineScaleSets();
         }
 
         /// <summary>

@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtExpandResourceTypes.Mock;
 using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
@@ -19,57 +20,13 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to MgmtExpandResourceTypes. </summary>
     public static partial class MgmtExpandResourceTypesExtensions
     {
-        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
+        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(SubscriptionResource subscriptionResource)
         {
             return subscriptionResource.GetCachedClient((client) =>
             {
                 return new SubscriptionResourceExtensionClient(client, subscriptionResource.Id);
             }
             );
-        }
-
-        /// <summary>
-        /// Lists the DNS zones in all resource groups in a subscription.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>Zones_List</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<ZoneResource> GetZonesByDnszoneAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
-        }
-
-        /// <summary>
-        /// Lists the DNS zones in all resource groups in a subscription.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>Zones_List</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<ZoneResource> GetZonesByDnszone(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscriptionResource).GetZonesByDnszone(top, cancellationToken);
         }
 
         /// <summary>
@@ -93,7 +50,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return await GetExtensionClient(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(content, cancellationToken).ConfigureAwait(false);
+            return await GetSubscriptionResourceExtensionClient(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -117,10 +74,63 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetExtensionClient(subscriptionResource).GetByTargetResourcesDnsResourceReference(content, cancellationToken);
+            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetByTargetResourcesDnsResourceReference(content, cancellationToken);
         }
 
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ZoneResourceExtensionClient GetZoneResourceExtensionClient(SubscriptionResource subscriptionResource)
+        {
+            return subscriptionResource.GetCachedClient((client) =>
+            {
+                return new ZoneResourceExtensionClient(client, subscriptionResource.Id);
+            }
+            );
+        }
+
+        /// <summary>
+        /// Lists the DNS zones in all resource groups in a subscription.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_List</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<ZoneResource> GetZonesByDnszoneAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
+        {
+            return GetZoneResourceExtensionClient(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
+        }
+
+        /// <summary>
+        /// Lists the DNS zones in all resource groups in a subscription.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Network/dnszones</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Zones_List</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="top"> The maximum number of DNS zones to return. If not specified, returns up to 100 zones. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<ZoneResource> GetZonesByDnszone(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
+        {
+            return GetZoneResourceExtensionClient(subscriptionResource).GetZonesByDnszone(top, cancellationToken);
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
             {
@@ -134,7 +144,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of ZoneResources and their operations over a ZoneResource. </returns>
         public static ZoneCollection GetZones(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetZones();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetZones();
         }
 
         /// <summary>

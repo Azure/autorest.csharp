@@ -12,13 +12,14 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtHierarchicalNonResource.Mock;
 
 namespace MgmtHierarchicalNonResource
 {
     /// <summary> A class to add extension methods to MgmtHierarchicalNonResource. </summary>
     public static partial class MgmtHierarchicalNonResourceExtensions
     {
-        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
+        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(SubscriptionResource subscriptionResource)
         {
             return subscriptionResource.GetCachedClient((client) =>
             {
@@ -37,7 +38,7 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetExtensionClient(subscriptionResource).GetSharedGalleries(location);
+            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSharedGalleries(location);
         }
 
         /// <summary>

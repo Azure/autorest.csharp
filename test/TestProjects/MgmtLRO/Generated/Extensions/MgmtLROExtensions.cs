@@ -12,13 +12,14 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtLRO.Mock;
 
 namespace MgmtLRO
 {
     /// <summary> A class to add extension methods to MgmtLRO. </summary>
     public static partial class MgmtLROExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
             {
@@ -32,7 +33,7 @@ namespace MgmtLRO
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetFakes();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetFakes();
         }
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace MgmtLRO
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetBars();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetBars();
         }
 
         /// <summary>

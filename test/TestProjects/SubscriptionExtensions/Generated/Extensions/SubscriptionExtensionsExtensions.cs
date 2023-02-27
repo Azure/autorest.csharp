@@ -12,13 +12,14 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using SubscriptionExtensions.Mock;
 
 namespace SubscriptionExtensions
 {
     /// <summary> A class to add extension methods to SubscriptionExtensions. </summary>
     public static partial class SubscriptionExtensionsExtensions
     {
-        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
+        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(SubscriptionResource subscriptionResource)
         {
             return subscriptionResource.GetCachedClient((client) =>
             {
@@ -32,7 +33,7 @@ namespace SubscriptionExtensions
         /// <returns> An object representing collection of ToasterResources and their operations over a ToasterResource. </returns>
         public static ToasterCollection GetToasters(this SubscriptionResource subscriptionResource)
         {
-            return GetExtensionClient(subscriptionResource).GetToasters();
+            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetToasters();
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace SubscriptionExtensions
             return subscriptionResource.GetToasters().Get(toasterName, cancellationToken);
         }
 
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
             {
@@ -95,7 +96,7 @@ namespace SubscriptionExtensions
         /// <returns> An object representing collection of OvenResources and their operations over a OvenResource. </returns>
         public static OvenCollection GetOvens(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetOvens();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetOvens();
         }
 
         /// <summary>

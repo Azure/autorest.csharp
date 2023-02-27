@@ -5,13 +5,15 @@
 
 #nullable disable
 
+using System;
 using Azure.Core;
 using Azure.ResourceManager;
+using MgmtHierarchicalNonResource;
 
-namespace MgmtHierarchicalNonResource
+namespace MgmtHierarchicalNonResource.Mock
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    internal partial class SubscriptionResourceExtensionClient : ArmResource
+    public partial class SubscriptionResourceExtensionClient : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class for mocking. </summary>
         protected SubscriptionResourceExtensionClient()
@@ -33,9 +35,13 @@ namespace MgmtHierarchicalNonResource
 
         /// <summary> Gets a collection of SharedGalleryResources in the SubscriptionResource. </summary>
         /// <param name="location"> Resource location. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An object representing collection of SharedGalleryResources and their operations over a SharedGalleryResource. </returns>
         public virtual SharedGalleryCollection GetSharedGalleries(string location)
         {
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+
             return new SharedGalleryCollection(Client, Id, location);
         }
     }

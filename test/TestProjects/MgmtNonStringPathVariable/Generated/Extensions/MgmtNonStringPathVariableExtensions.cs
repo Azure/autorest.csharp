@@ -11,6 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtNonStringPathVariable.Mock;
 using MgmtNonStringPathVariable.Models;
 
 namespace MgmtNonStringPathVariable
@@ -18,7 +19,7 @@ namespace MgmtNonStringPathVariable
     /// <summary> A class to add extension methods to MgmtNonStringPathVariable. </summary>
     public static partial class MgmtNonStringPathVariableExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
             {
@@ -32,7 +33,7 @@ namespace MgmtNonStringPathVariable
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetFakes();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetFakes();
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace MgmtNonStringPathVariable
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetBars();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetBars();
         }
 
         /// <summary>

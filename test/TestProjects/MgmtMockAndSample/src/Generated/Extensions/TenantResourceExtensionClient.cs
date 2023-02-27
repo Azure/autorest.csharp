@@ -12,12 +12,13 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
 
-namespace MgmtMockAndSample
+namespace MgmtMockAndSample.Mock
 {
     /// <summary> A class to add extension methods to TenantResource. </summary>
-    internal partial class TenantResourceExtensionClient : ArmResource
+    public partial class TenantResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _tenantActivityLogsClientDiagnostics;
         private TenantActivityLogsRestOperations _tenantActivityLogsRestClient;
@@ -36,9 +37,9 @@ namespace MgmtMockAndSample
         {
         }
 
-        private ClientDiagnostics TenantActivityLogsClientDiagnostics => _tenantActivityLogsClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics TenantActivityLogsClientDiagnostics => _tenantActivityLogsClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private TenantActivityLogsRestOperations TenantActivityLogsRestClient => _tenantActivityLogsRestClient ??= new TenantActivityLogsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
-        private ClientDiagnostics DeploymentsClientDiagnostics => _deploymentsClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics DeploymentsClientDiagnostics => _deploymentsClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private DeploymentsRestOperations DeploymentsRestClient => _deploymentsRestClient ??= new DeploymentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
@@ -110,8 +111,11 @@ namespace MgmtMockAndSample
         /// </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public virtual async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(BinaryData template, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(template, nameof(template));
+
             using var scope = DeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
             scope.Start();
             try
@@ -141,8 +145,11 @@ namespace MgmtMockAndSample
         /// </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(BinaryData template, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(template, nameof(template));
+
             using var scope = DeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
             scope.Start();
             try

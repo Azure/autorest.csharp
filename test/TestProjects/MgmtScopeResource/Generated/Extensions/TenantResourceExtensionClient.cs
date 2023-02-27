@@ -12,12 +12,13 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using MgmtScopeResource;
 using MgmtScopeResource.Models;
 
-namespace MgmtScopeResource
+namespace MgmtScopeResource.Mock
 {
     /// <summary> A class to add extension methods to TenantResource. </summary>
-    internal partial class TenantResourceExtensionClient : ArmResource
+    public partial class TenantResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _deploymentExtendedDeploymentsClientDiagnostics;
         private DeploymentsRestOperations _deploymentExtendedDeploymentsRestClient;
@@ -34,7 +35,7 @@ namespace MgmtScopeResource
         {
         }
 
-        private ClientDiagnostics DeploymentExtendedDeploymentsClientDiagnostics => _deploymentExtendedDeploymentsClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource", DeploymentExtendedResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics DeploymentExtendedDeploymentsClientDiagnostics => _deploymentExtendedDeploymentsClientDiagnostics ??= new ClientDiagnostics("MgmtScopeResource.Mock", DeploymentExtendedResource.ResourceType.Namespace, Diagnostics);
         private DeploymentsRestOperations DeploymentExtendedDeploymentsRestClient => _deploymentExtendedDeploymentsRestClient ??= new DeploymentsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(DeploymentExtendedResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
@@ -52,9 +53,12 @@ namespace MgmtScopeResource
 
         /// <summary> Gets a collection of ResourceLinkResources in the TenantResource. </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
         public virtual ResourceLinkCollection GetResourceLinks(string scope)
         {
+            Argument.AssertNotNull(scope, nameof(scope));
+
             return new ResourceLinkCollection(Client, Id, scope);
         }
 
@@ -73,8 +77,11 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public virtual async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(BinaryData template, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(template, nameof(template));
+
             using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
             scope.Start();
             try
@@ -104,8 +111,11 @@ namespace MgmtScopeResource
         /// </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(BinaryData template, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(template, nameof(template));
+
             using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("TenantResourceExtensionClient.CalculateTemplateHashDeployment");
             scope.Start();
             try

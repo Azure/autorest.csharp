@@ -12,12 +12,13 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using SupersetInheritance;
 using SupersetInheritance.Models;
 
-namespace SupersetInheritance
+namespace SupersetInheritance.Mock
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class ResourceGroupResourceExtensionClient : ArmResource
+    public partial class ResourceGroupResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _supersetModel2sClientDiagnostics;
         private SupersetModel2SRestOperations _supersetModel2sRestClient;
@@ -36,9 +37,9 @@ namespace SupersetInheritance
         {
         }
 
-        private ClientDiagnostics SupersetModel2sClientDiagnostics => _supersetModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics SupersetModel2sClientDiagnostics => _supersetModel2sClientDiagnostics ??= new ClientDiagnostics("SupersetInheritance.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private SupersetModel2SRestOperations SupersetModel2sRestClient => _supersetModel2sRestClient ??= new SupersetModel2SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
-        private ClientDiagnostics SupersetModel3sClientDiagnostics => _supersetModel3sClientDiagnostics ??= new ClientDiagnostics("SupersetInheritance", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics SupersetModel3sClientDiagnostics => _supersetModel3sClientDiagnostics ??= new ClientDiagnostics("SupersetInheritance.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private SupersetModel3SRestOperations SupersetModel3sRestClient => _supersetModel3sRestClient ??= new SupersetModel3SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
         private string GetApiVersionOrNull(ResourceType resourceType)
@@ -90,8 +91,13 @@ namespace SupersetInheritance
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="supersetModel2"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
         public virtual async Task<Response<SupersetModel2>> PutSupersetModel2Async(string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
+            Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
+
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSupersetModel2");
             scope.Start();
             try
@@ -121,8 +127,13 @@ namespace SupersetInheritance
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="supersetModel2"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
         public virtual Response<SupersetModel2> PutSupersetModel2(string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
+            Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
+
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSupersetModel2");
             scope.Start();
             try
@@ -151,8 +162,12 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public virtual async Task<Response<SupersetModel2>> GetSupersetModel2Async(string supersetModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
+
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetSupersetModel2");
             scope.Start();
             try
@@ -181,8 +196,12 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public virtual Response<SupersetModel2> GetSupersetModel2(string supersetModel2SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
+
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetSupersetModel2");
             scope.Start();
             try
@@ -212,8 +231,13 @@ namespace SupersetInheritance
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         public virtual async Task<Response<SupersetModel3>> PutSupersetModel3Async(string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
+            Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
+
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSupersetModel3");
             scope.Start();
             try
@@ -243,8 +267,13 @@ namespace SupersetInheritance
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         public virtual Response<SupersetModel3> PutSupersetModel3(string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
+            Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
+
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.PutSupersetModel3");
             scope.Start();
             try
@@ -273,8 +302,12 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public virtual async Task<Response<SupersetModel3>> GetSupersetModel3Async(string supersetModel3SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
+
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetSupersetModel3");
             scope.Start();
             try
@@ -303,8 +336,12 @@ namespace SupersetInheritance
         /// </summary>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public virtual Response<SupersetModel3> GetSupersetModel3(string supersetModel3SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
+
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("ResourceGroupResourceExtensionClient.GetSupersetModel3");
             scope.Start();
             try

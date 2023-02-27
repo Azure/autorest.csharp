@@ -13,7 +13,7 @@ using Azure.Core;
 using Azure.Core.TestFramework;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.TestFramework;
-using MgmtMockAndSample;
+using MgmtMockAndSample.Mock;
 
 namespace MgmtMockAndSample.Tests.Mock
 {
@@ -27,18 +27,6 @@ namespace MgmtMockAndSample.Tests.Mock
         }
 
         [RecordedTest]
-        public async Task GetDeletedManagedHsms()
-        {
-            // Example: List deleted managed HSMs in the specified subscription
-
-            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
-            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
-            await foreach (var _ in subscriptionResource.GetDeletedManagedHsmsAsync())
-            {
-            }
-        }
-
-        [RecordedTest]
         public async Task GetDeletedVaults()
         {
             // Example: List deleted vaults in the specified subscription
@@ -46,6 +34,18 @@ namespace MgmtMockAndSample.Tests.Mock
             ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
             SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
             await foreach (var _ in subscriptionResource.GetDeletedVaultsAsync())
+            {
+            }
+        }
+
+        [RecordedTest]
+        public async Task GetDeletedManagedHsms()
+        {
+            // Example: List deleted managed HSMs in the specified subscription
+
+            ResourceIdentifier subscriptionResourceId = SubscriptionResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000");
+            SubscriptionResource subscriptionResource = GetArmClient().GetSubscriptionResource(subscriptionResourceId);
+            await foreach (var _ in subscriptionResource.GetDeletedManagedHsmsAsync())
             {
             }
         }

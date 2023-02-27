@@ -12,13 +12,14 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using NoTypeReplacement.Mock;
 
 namespace NoTypeReplacement
 {
     /// <summary> A class to add extension methods to NoTypeReplacement. </summary>
     public static partial class NoTypeReplacementExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
         {
             return resourceGroupResource.GetCachedClient((client) =>
             {
@@ -32,7 +33,7 @@ namespace NoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel1Resources and their operations over a NoTypeReplacementModel1Resource. </returns>
         public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetNoTypeReplacementModel1s();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel1s();
         }
 
         /// <summary>
@@ -86,7 +87,7 @@ namespace NoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel2Resources and their operations over a NoTypeReplacementModel2Resource. </returns>
         public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetNoTypeReplacementModel2s();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel2s();
         }
 
         /// <summary>
@@ -140,7 +141,7 @@ namespace NoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel3Resources and their operations over a NoTypeReplacementModel3Resource. </returns>
         public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetNoTypeReplacementModel3s();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel3s();
         }
 
         /// <summary>
