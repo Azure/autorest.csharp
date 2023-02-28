@@ -12,5 +12,4 @@ namespace: MgmtNonStringPathVariable
 
 list-exception:
 - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}
-
 ```
