@@ -9,7 +9,10 @@ using ExactMatchFlattenInheritance.Models;
 
 namespace ExactMatchFlattenInheritance
 {
-    /// <summary> A class representing the CustomModel3 data model. </summary>
+    /// <summary>
+    /// A class representing the CustomModel3 data model.
+    /// Pure custom model, the purpose is to pull in a WritableSubResource model so that it can be generated.
+    /// </summary>
     public partial class CustomModel3Data : AzureResourceFlattenModel7
     {
         /// <summary> Initializes a new instance of CustomModel3Data. </summary>
