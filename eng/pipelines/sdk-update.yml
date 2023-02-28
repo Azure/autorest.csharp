@@ -13,7 +13,7 @@ resources:
       ref: refs/tags/azure-sdk-tools_20220404.3
 
 stages:
-  - stage: 'Build'
+  - stage: 'Build And Generate'
     jobs:
     - job: Build
       timeoutInMinutes: 30
@@ -23,6 +23,7 @@ stages:
       steps:
         - checkout: self
         - checkout: azure-sdk-tools
+        - checkout: azure-sdk-for-net
         - task: UseDotNet@2
           displayName: 'Use .NET Core SDK'
           retryCountOnTaskFailure: 3
@@ -45,10 +46,10 @@ stages:
           parameters:
             BaseBranchName: main
             RepoName: azure-sdk-for-net
-            PRBranchName: auto-update-autorest
-            CommitMsg: Update AutoRest C# version to $(AutorestCSharpVersion)
-            PRBody: Update AutoRest C# version to $(AutorestCSharpVersion)
-            PRTitle:  Update AutoRest C# version
+            PRBranchName: AutoGen-$(Build.SourceBranchName)
+            CommitMsg: Update AutoRest version according to $(Build.SourceBranchName)
+            PRBody: Update AutoRest version according to $(Build.SourceBranchName)
+            PRTitle:  Update AutoRest version according to $(Build.SourceBranchName)
             PushArgs: -f
             WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
             ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
