@@ -6,7 +6,7 @@ $emitterPath = Resolve-Path (Join-Path $repoRoot 'src' 'CADL.Extension' 'Emitter
 
 # Pack local autorest.csharp
 $currentDate = $(Get-Date -UFormat "%Y%m%d")
-$packageFolder = Resolve-Path (Join-Path $repoRoot "artifacts" "packages" "Debug")
+$packageFolder = Join-Path $repoRoot "artifacts" "packages" "Debug"
 if (!(Test-Path $packageFolder)) {
     New-Item $packageFolder -ItemType Directory
 }
