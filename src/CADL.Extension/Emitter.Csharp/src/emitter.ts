@@ -687,11 +687,13 @@ function loadOperation(
     if (contentTypeParameter) {
         if (isInputLiteralType(contentTypeParameter.Type)) {
             mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
-        }
-        else if (isInputUnionType(contentTypeParameter.Type)) {
-            const mediaTypeValues = contentTypeParameter.Type.UnionItemTypes.map(item => isInputLiteralType(item)? item.Value: undefined);
-            if (mediaTypeValues.some(item => item === undefined)) {
-                throw "Media type of content type should be string."
+        } else if (isInputUnionType(contentTypeParameter.Type)) {
+            const mediaTypeValues =
+                contentTypeParameter.Type.UnionItemTypes.map((item) =>
+                    isInputLiteralType(item) ? item.Value : undefined
+                );
+            if (mediaTypeValues.some((item) => item === undefined)) {
+                throw "Media type of content type should be string.";
             }
             mediaTypes.push(...mediaTypeValues);
         }

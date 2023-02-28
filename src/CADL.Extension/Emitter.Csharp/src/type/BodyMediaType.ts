@@ -13,17 +13,15 @@ export enum BodyMediaType {
 }
 
 export function typeToBodyMediaType(type: Type | undefined) {
-    if (type === undefined){
+    if (type === undefined) {
         return BodyMediaType.None;
     }
 
     if (type.kind === "Model") {
         return BodyMediaType.Json;
-    }
-    else if (type.kind === "String") {
+    } else if (type.kind === "String") {
         return BodyMediaType.Text;
-    }
-    else if (type.kind === "Scalar" && type.name === "bytes") {
+    } else if (type.kind === "Scalar" && type.name === "bytes") {
         return BodyMediaType.Binary;
     }
     return BodyMediaType.None;
