@@ -7,6 +7,9 @@ $emitterPath = Resolve-Path (Join-Path $repoRoot 'src' 'CADL.Extension' 'Emitter
 # Pack local autorest.csharp
 $currentDate = $(Get-Date -UFormat "%Y%m%d")
 $packageFolder = Resolve-Path (Join-Path $repoRoot "artifacts" "packages" "Debug")
+if (!(Test-Path $packageFolder)) {
+    New-Item $packageFolder -ItemType Directory
+}
 $latestName = Get-ChildItem -Path $packageFolder -Name "Microsoft.Azure.AutoRest.CSharp.3.0.0-beta.$currentDate.*.nupkg" | Sort-Object -Descending -Top 1
 $nextVersion = 100
 if ($latestName) {
