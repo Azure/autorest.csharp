@@ -12,7 +12,11 @@ using MgmtRenameRules.Models;
 
 namespace MgmtRenameRules
 {
-    /// <summary> A class representing the VirtualMachineScaleSetRollingUpgrade data model. </summary>
+    /// <summary>
+    /// A class representing the VirtualMachineScaleSetRollingUpgrade data model.
+    /// The status of the latest virtual machine scale set rolling upgrade.
+    /// Serialized Name: RollingUpgradeStatusInfo
+    /// </summary>
     public partial class VirtualMachineScaleSetRollingUpgradeData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetRollingUpgradeData. </summary>

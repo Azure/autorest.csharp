@@ -13,7 +13,11 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the Image data model. </summary>
+    /// <summary>
+    /// A class representing the Image data model.
+    /// The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist.
+    /// Serialized Name: Image
+    /// </summary>
     public partial class ImageData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ImageData. </summary>

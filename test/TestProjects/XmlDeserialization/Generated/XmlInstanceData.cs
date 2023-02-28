@@ -10,7 +10,10 @@ using Azure.ResourceManager.Models;
 
 namespace XmlDeserialization
 {
-    /// <summary> A class representing the XmlInstance data model. </summary>
+    /// <summary>
+    /// A class representing the XmlInstance data model.
+    /// Xml instance details.
+    /// </summary>
     public partial class XmlInstanceData : ResourceData
     {
         /// <summary> Initializes a new instance of XmlInstanceData. </summary>

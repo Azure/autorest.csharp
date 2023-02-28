@@ -11,7 +11,10 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    /// <summary> A class representing the FirewallPolicyRuleCollectionGroup data model. </summary>
+    /// <summary>
+    /// A class representing the FirewallPolicyRuleCollectionGroup data model.
+    /// Rule Collection Group resource.
+    /// </summary>
     public partial class FirewallPolicyRuleCollectionGroupData : SubResource
     {
         /// <summary> Initializes a new instance of FirewallPolicyRuleCollectionGroupData. </summary>
