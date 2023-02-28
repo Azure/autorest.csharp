@@ -28,7 +28,6 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 schemasToPrependRPPrefix: Array.Empty<string>(),
                 generateArmResourceExtensions: Array.Empty<string>(),
                 parameterizedScopes: Array.Empty<string>(),
-                checkEmptyStringForTypesInDeserialization: Array.Empty<string>(),
                 mgmtDebug: new MgmtConfiguration.MgmtDebugConfiguration(),
                 requestPathToParent: default,
                 requestPathToResourceName: default,
@@ -71,6 +70,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 projectFolder: "/..",
                 protocolMethodList: Array.Empty<string>(),
                 suppressAbstractBaseClasses: Array.Empty<string>(),
+                treatEmptyStringAsNullForModels: Array.Empty<string>(),
+                treatEmptyStringAsNullForTypes: Array.Empty<string>(),
                 mgmtConfiguration: mgmtConfiguration,
                 mgmtTestConfiguration: null);
         }

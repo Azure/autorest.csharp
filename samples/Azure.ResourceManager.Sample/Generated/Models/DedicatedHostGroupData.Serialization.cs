@@ -118,7 +118,7 @@ namespace Azure.ResourceManager.Sample
                 }
                 if (property.NameEquals("tenantId"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null || property.Value.GetString().Length == 0)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;

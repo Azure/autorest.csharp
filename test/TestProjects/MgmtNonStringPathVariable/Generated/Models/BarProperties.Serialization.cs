@@ -31,7 +31,7 @@ namespace MgmtNonStringPathVariable.Models
             {
                 if (property.NameEquals("buzz"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null || property.Value.GetString().Length == 0)
+                    if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;

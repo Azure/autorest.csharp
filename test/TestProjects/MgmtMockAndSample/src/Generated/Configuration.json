@@ -10,6 +10,16 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
+  "TreatEmptyStringAsNullForModels": [
+    "EventData",
+    "ManagedHsmProperties"
+  ],
+  "TreatEmptyStringAsNullForTypes": [
+    "Uri",
+    "Guid",
+    "ResourceIdentifier",
+    "DateTimeOffset"
+  ],
   "ListException": [
     "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedVaults/{vaultName}",
     "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/locations/{location}/deletedManagedHSMs/{name}"

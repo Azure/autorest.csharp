@@ -12,8 +12,5 @@
   "skip-csproj-packagereference": true,
   "ListException": [
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fake/bars/{barName}"
-  ],
-  "CheckEmptyStringForTypesInDeserialization": [
-    "Guid"
   ]
 }

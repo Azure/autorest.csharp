@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Input
 {
@@ -37,6 +38,8 @@ namespace AutoRest.CSharp.Input
             public const string UnreferencedTypesHandling = "unreferenced-types-handling";
             public const string ModelFactoryForHlc = "model-factory-for-hlc";
             public const string GenerateModelFactory = "generate-model-factory";
+            public const string TreatEmptyStringAsNullForModels = "treat-empty-string-as-null-for-models";
+            public const string TreatEmptyStringAsNullForTypes = "treat-empty-string-as-null-for-types";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -67,6 +70,8 @@ namespace AutoRest.CSharp.Input
             string? projectFolder,
             IReadOnlyList<string> protocolMethodList,
             IReadOnlyList<string> suppressAbstractBaseClasses,
+            IReadOnlyList<string> treatEmptyStringAsNullForModels,
+            IReadOnlyList<string> treatEmptyStringAsNullForTypes,
             MgmtConfiguration mgmtConfiguration,
             MgmtTestConfiguration? mgmtTestConfiguration)
         {
@@ -102,6 +107,8 @@ namespace AutoRest.CSharp.Input
             _mgmtConfiguration = mgmtConfiguration;
             MgmtTestConfiguration = mgmtTestConfiguration;
             _suppressAbstractBaseClasses = suppressAbstractBaseClasses;
+            _treatEmptyStringAsNullForModels = new HashSet<string>(treatEmptyStringAsNullForModels);
+            _treatEmptyStringAsNullForTypes.UnionWith(treatEmptyStringAsNullForTypes);
         }
 
         private static string? _outputFolder;
@@ -130,6 +137,12 @@ namespace AutoRest.CSharp.Input
 
         private static IReadOnlyList<string>? _protocolMethodList;
         public static IReadOnlyList<string> ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        private static HashSet<string>? _treatEmptyStringAsNullForModels;
+        public static HashSet<string> TreatEmptyStringAsNullForModels => _treatEmptyStringAsNullForModels ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        private static HashSet<string> _treatEmptyStringAsNullForTypes = new HashSet<string>() { nameof(Uri), nameof(Guid), nameof(ResourceIdentifier), nameof(DateTimeOffset) };
+        public static HashSet<string> TreatEmptyStringAsNullForTypes => _treatEmptyStringAsNullForTypes;
 
         private static MgmtConfiguration? _mgmtConfiguration;
         public static MgmtConfiguration MgmtConfiguration => _mgmtConfiguration ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -164,6 +177,8 @@ namespace AutoRest.CSharp.Input
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                treatEmptyStringAsNullForModels: autoRest.GetValue<string[]?>(Options.TreatEmptyStringAsNullForModels).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                treatEmptyStringAsNullForTypes: autoRest.GetValue<string[]?>(Options.TreatEmptyStringAsNullForTypes).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
                 mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest)
             );
