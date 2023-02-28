@@ -19,7 +19,7 @@ using Azure.DPG;
         endpoint: string,
     }
 )
-namespace MediaTypes;
+namespace MultipleMediaTypes;
 
 model Body {
     id: string;

@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "MediaTypes",
+ "Name": "MultipleMediaTypes",
  "Description": "Play with produces/consumes and media-types in general.",
  "ApiVersions": [
   "2021-03-25"
@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Body",
-   "Namespace": "MediaTypes",
+   "Namespace": "MultipleMediaTypes",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -35,13 +35,13 @@
  "Clients": [
   {
    "$id": "5",
-   "Name": "MediaTypesClient",
+   "Name": "MultipleMediaTypesClient",
    "Description": "Play with produces/consumes and media-types in general.",
    "Operations": [
     {
      "$id": "6",
      "Name": "oneBinaryBodyTwoContentTypes",
-     "ResourceName": "MediaTypes",
+     "ResourceName": "MultipleMediaTypes",
      "Parameters": [
       {
        "$id": "7",
@@ -213,7 +213,7 @@
     {
      "$id": "25",
      "Name": "oneStringBodyThreeContentTypes",
-     "ResourceName": "MediaTypes",
+     "ResourceName": "MultipleMediaTypes",
      "Parameters": [
       {
        "$ref": "7"
@@ -353,7 +353,7 @@
     {
      "$id": "40",
      "Name": "oneModelBodyOneContentType",
-     "ResourceName": "MediaTypes",
+     "ResourceName": "MultipleMediaTypes",
      "Parameters": [
       {
        "$ref": "7"

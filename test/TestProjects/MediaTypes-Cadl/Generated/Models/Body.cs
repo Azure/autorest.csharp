@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace MediaTypes.Models
+namespace MultipleMediaTypes.Models
 {
     /// <summary> The Body. </summary>
     public partial class Body

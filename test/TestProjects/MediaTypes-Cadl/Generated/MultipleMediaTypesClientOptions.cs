@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace MediaTypes
+namespace MultipleMediaTypes
 {
-    /// <summary> Client options for MediaTypesClient. </summary>
-    public partial class MediaTypesClientOptions : ClientOptions
+    /// <summary> Client options for MultipleMediaTypesClient. </summary>
+    public partial class MultipleMediaTypesClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V2021_03_25;
 
@@ -24,8 +24,8 @@ namespace MediaTypes
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of MediaTypesClientOptions. </summary>
-        public MediaTypesClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of MultipleMediaTypesClientOptions. </summary>
+        public MultipleMediaTypesClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace MediaTypes.Models
+namespace MultipleMediaTypes.Models
 {
     public partial class Body : IUtf8JsonSerializable
     {

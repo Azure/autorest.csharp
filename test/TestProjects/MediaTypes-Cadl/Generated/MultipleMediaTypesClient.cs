@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using MediaTypes.Models;
+using MultipleMediaTypes.Models;
 
-namespace MediaTypes
+namespace MultipleMediaTypes
 {
     // Data plane generated client.
     /// <summary> Play with produces/consumes and media-types in general. </summary>
-    public partial class MediaTypesClient
+    public partial class MultipleMediaTypesClient
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -29,26 +29,26 @@ namespace MediaTypes
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of MediaTypesClient for mocking. </summary>
-        protected MediaTypesClient()
+        /// <summary> Initializes a new instance of MultipleMediaTypesClient for mocking. </summary>
+        protected MultipleMediaTypesClient()
         {
         }
 
-        /// <summary> Initializes a new instance of MediaTypesClient. </summary>
+        /// <summary> Initializes a new instance of MultipleMediaTypesClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public MediaTypesClient(Uri endpoint) : this(endpoint, new MediaTypesClientOptions())
+        public MultipleMediaTypesClient(Uri endpoint) : this(endpoint, new MultipleMediaTypesClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of MediaTypesClient. </summary>
+        /// <summary> Initializes a new instance of MultipleMediaTypesClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
-        public MediaTypesClient(Uri endpoint, MediaTypesClientOptions options)
+        public MultipleMediaTypesClient(Uri endpoint, MultipleMediaTypesClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            options ??= new MediaTypesClientOptions();
+            options ??= new MultipleMediaTypesClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
@@ -88,12 +88,12 @@ namespace MediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Response> OneBinaryBodyTwoContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.OneBinaryBodyTwoContentTypes");
+            using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneBinaryBodyTwoContentTypes");
             scope.Start();
             try
             {
@@ -113,12 +113,12 @@ namespace MediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypes(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneBinaryBodyTwoContentTypes(RequestContent,ContentType,RequestContext)']/*" />
         public virtual Response OneBinaryBodyTwoContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.OneBinaryBodyTwoContentTypes");
+            using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneBinaryBodyTwoContentTypes");
             scope.Start();
             try
             {
@@ -166,12 +166,12 @@ namespace MediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
         public virtual async Task<Response> OneStringBodyThreeContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.OneStringBodyThreeContentTypes");
+            using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneStringBodyThreeContentTypes");
             scope.Start();
             try
             {
@@ -191,12 +191,12 @@ namespace MediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypes(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneStringBodyThreeContentTypes(RequestContent,ContentType,RequestContext)']/*" />
         public virtual Response OneStringBodyThreeContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.OneStringBodyThreeContentTypes");
+            using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneStringBodyThreeContentTypes");
             scope.Start();
             try
             {
@@ -239,12 +239,12 @@ namespace MediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentTypeAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentTypeAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> OneModelBodyOneContentTypeAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.OneModelBodyOneContentType");
+            using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneModelBodyOneContentType");
             scope.Start();
             try
             {
@@ -263,12 +263,12 @@ namespace MediaTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentType(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/MultipleMediaTypesClient.xml" path="doc/members/member[@name='OneModelBodyOneContentType(RequestContent,RequestContext)']/*" />
         public virtual Response OneModelBodyOneContentType(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.OneModelBodyOneContentType");
+            using var scope = ClientDiagnostics.CreateScope("MultipleMediaTypesClient.OneModelBodyOneContentType");
             scope.Start();
             try
             {

@@ -6,7 +6,7 @@
 This sample shows how to call OneBinaryBodyTwoContentTypesAsync with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new MediaTypesClient(endpoint);
+var client = new MultipleMediaTypesClient(endpoint);
 
 var data = new {};
 
@@ -20,7 +20,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call OneBinaryBodyTwoContentTypes with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new MediaTypesClient(endpoint);
+var client = new MultipleMediaTypesClient(endpoint);
 
 var data = new {};
 
@@ -34,7 +34,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call OneStringBodyThreeContentTypesAsync with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new MediaTypesClient(endpoint);
+var client = new MultipleMediaTypesClient(endpoint);
 
 var data = "<String>";
 
@@ -48,7 +48,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call OneStringBodyThreeContentTypes with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new MediaTypesClient(endpoint);
+var client = new MultipleMediaTypesClient(endpoint);
 
 var data = "<String>";
 
@@ -62,7 +62,7 @@ Console.WriteLine(response.Status);
 This sample shows how to call OneModelBodyOneContentTypeAsync with required request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new MediaTypesClient(endpoint);
+var client = new MultipleMediaTypesClient(endpoint);
 
 var data = new {
     id = "<id>",
@@ -90,7 +90,7 @@ Schema for <c>Body</c>:
 This sample shows how to call OneModelBodyOneContentType with required request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new MediaTypesClient(endpoint);
+var client = new MultipleMediaTypesClient(endpoint);
 
 var data = new {
     id = "<id>",
