@@ -156,7 +156,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/parameterOrders",
      "BufferResponse": true,
@@ -254,7 +254,7 @@
       }
      ],
      "HttpMethod": "HEAD",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/parameterOrders",
      "BufferResponse": true,
