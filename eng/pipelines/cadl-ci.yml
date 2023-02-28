@@ -16,7 +16,7 @@ pr:
 
 pool:
   name: "azsdk-pool-mms-ubuntu-2004-general"
-  vmImage: "MMSUbuntu20.04"
+  vmImage: "ubuntu-20.04"
 
 variables:
   - name: skipComponentGovernanceDetection
@@ -48,7 +48,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20230119.1
+      ref: refs/tags/azure-sdk-build-tools_20230223.1
 stages:
   - stage: 'Build_and_Test'
     jobs:

@@ -97,21 +97,21 @@ namespace Azure.Management.Storage
         /// <returns> Returns a <see cref="BlobServiceResource" /> object. </returns>
         public virtual BlobServiceResource GetBlobService()
         {
-            return new BlobServiceResource(Client, new ResourceIdentifier(Id.ToString() + "/blobServices/default"));
+            return new BlobServiceResource(Client, Id.AppendChildResource("blobServices", "default"));
         }
 
         /// <summary> Gets an object representing a FileServiceResource along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="FileServiceResource" /> object. </returns>
         public virtual FileServiceResource GetFileService()
         {
-            return new FileServiceResource(Client, new ResourceIdentifier(Id.ToString() + "/fileServices/default"));
+            return new FileServiceResource(Client, Id.AppendChildResource("fileServices", "default"));
         }
 
         /// <summary> Gets an object representing a ManagementPolicyResource along with the instance operations that can be performed on it in the StorageAccount. </summary>
         /// <returns> Returns a <see cref="ManagementPolicyResource" /> object. </returns>
         public virtual ManagementPolicyResource GetManagementPolicy()
         {
-            return new ManagementPolicyResource(Client, new ResourceIdentifier(Id.ToString() + "/managementPolicies/default"));
+            return new ManagementPolicyResource(Client, Id.AppendChildResource("managementPolicies", "default"));
         }
 
         /// <summary> Gets a collection of BlobInventoryPolicyResources in the StorageAccount. </summary>

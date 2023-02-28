@@ -2,8 +2,12 @@ import "@cadl-lang/rest";
 
 using Cadl.Http;
 
-@serviceTitle("SecurityClient")
-@serviceVersion("1.0.0")
+@service(
+    {
+        title: "SecurityClient",
+        version: "1.0.0"
+    }
+)
 @server("http://localhost:3000", "TestServer endpoint")
 @doc("Illustrates clients generated from a Cadl with security.")
 @useAuth(OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">)

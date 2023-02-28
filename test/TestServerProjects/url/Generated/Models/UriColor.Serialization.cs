@@ -21,9 +21,9 @@ namespace url.Models
 
         public static UriColor ToUriColor(this string value)
         {
-            if (string.Equals(value, "red color", StringComparison.InvariantCultureIgnoreCase)) return UriColor.RedColor;
-            if (string.Equals(value, "green color", StringComparison.InvariantCultureIgnoreCase)) return UriColor.GreenColor;
-            if (string.Equals(value, "blue color", StringComparison.InvariantCultureIgnoreCase)) return UriColor.BlueColor;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "red color")) return UriColor.RedColor;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "green color")) return UriColor.GreenColor;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "blue color")) return UriColor.BlueColor;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown UriColor value.");
         }
     }

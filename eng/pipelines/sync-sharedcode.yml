@@ -1,0 +1,47 @@
+trigger: 'none'
+pr: 'none'
+
+schedules:
+- cron: '0 0 * * *'
+  displayName: 'Daily Synchronize Azure Core Shared Codes'
+  branches:
+    include:
+    - feature/v3
+  always: true
+
+resources:
+  repositories:
+    - repository: azure-sdk-tools
+      type: github
+      name: Azure/azure-sdk-tools
+      endpoint: azure
+      ref: refs/tags/azure-sdk-tools_20220404.3
+
+stages:
+  - stage: Synchronize_Shared_Codes
+    jobs:
+       - job: Download_And_Create_PR
+         pool:
+            vmImage: ubuntu-20.04
+         variables:
+            currentDateTime: $[ format('{0:yyyy}-{0:MM}-{0:dd}_{0:HH}:{0:mm}:{0:ss}', pipeline.startTime) ]
+         steps:
+            - checkout: self
+            - checkout: azure-sdk-tools
+            - pwsh: >
+                ./eng/DownloadSharedSource.ps1
+              name: Download
+              displayName: 'Download Azure Core Shared Codes'
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+            - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
+              parameters:
+                BaseBranchName: feature/v3
+                RepoName: autorest.csharp
+                PROwner: Azure
+                PRBranchName: update-azure-core-shared-codes-$(Build.BuildId)
+                CommitMsg: Update Azure Core Shared Codes $(currentDateTime)
+                PRBody: Update Azure Core Shared Codes $(currentDateTime)
+                PRTitle:  Update Azure Core Shared Codes $(currentDateTime)
+                WorkingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+                ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+
