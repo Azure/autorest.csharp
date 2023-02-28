@@ -15,8 +15,8 @@ resources:
 stages:
   - stage: 'Build_And_Generate'
     jobs:
-    - job: Build
-      timeoutInMinutes: 30
+    - job: Build_And_Generate
+      timeoutInMinutes: 120
       pool:
         name: azsdk-pool-mms-win-2022-general
         vmImage: windows-2022
