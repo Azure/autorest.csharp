@@ -48,6 +48,11 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in IPAddresses)
                 {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
                     writer.WriteStringValue(item.ToString());
                 }
                 writer.WriteEndArray();

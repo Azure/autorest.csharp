@@ -32,6 +32,11 @@ namespace ExactMatchInheritance
                 writer.WriteStartArray();
                 foreach (var item in SupportingUris)
                 {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
                     writer.WriteStringValue(item.AbsoluteUri);
                 }
                 writer.WriteEndArray();
