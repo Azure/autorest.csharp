@@ -54,7 +54,14 @@ namespace Models.Property.Optional.Models
                     List<BinaryData> array = new List<BinaryData>();
                     foreach (var item in property0.Value.EnumerateArray())
                     {
-                        array.Add(BinaryData.FromString(item.GetRawText()));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BinaryData.FromString(item.GetRawText()));
+                        }
                     }
                     property = array;
                     continue;
