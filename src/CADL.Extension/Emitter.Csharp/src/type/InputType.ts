@@ -21,7 +21,10 @@ export interface InputLiteralType extends InputType {
 }
 
 export function isInputLiteralType(type: InputType): type is InputLiteralType {
-    return type.Name === "Literal" && (type as InputLiteralType).LiteralValueType !== undefined;
+    return (
+        type.Name === "Literal" &&
+        (type as InputLiteralType).LiteralValueType !== undefined
+    );
 }
 
 export interface InputUnionType extends InputType {
@@ -30,7 +33,10 @@ export interface InputUnionType extends InputType {
 }
 
 export function isInputUnionType(type: InputType): type is InputUnionType {
-    return type.Name === "Union" && (type as InputUnionType).UnionItemTypes !== undefined;
+    return (
+        type.Name === "Union" &&
+        (type as InputUnionType).UnionItemTypes !== undefined
+    );
 }
 
 export interface InputModelType extends InputType {
