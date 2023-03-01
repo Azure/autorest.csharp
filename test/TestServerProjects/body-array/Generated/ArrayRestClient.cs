@@ -4297,12 +4297,19 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -4327,12 +4334,19 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -4457,12 +4471,19 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -4487,12 +4508,19 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -4530,12 +4558,19 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -4560,12 +4595,19 @@ namespace body_array
                         List<IDictionary<string, string>> array = new List<IDictionary<string, string>>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                            foreach (var property in item.EnumerateObject())
+                            if (item.ValueKind == JsonValueKind.Null)
                             {
-                                dictionary.Add(property.Name, property.Value.GetString());
+                                array.Add(null);
                             }
-                            array.Add(dictionary);
+                            else
+                            {
+                                Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                                foreach (var property in item.EnumerateObject())
+                                {
+                                    dictionary.Add(property.Name, property.Value.GetString());
+                                }
+                                array.Add(dictionary);
+                            }
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
