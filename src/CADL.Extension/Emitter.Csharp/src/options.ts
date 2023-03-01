@@ -63,6 +63,7 @@ const defaultOptions = {
     csharpGeneratorPath: dllFilePath,
     "clear-output-folder": false,
     "save-inputs": false,
+    "generate-all-models": false,
     "generate-protocol-methods": true,
     "generate-convenience-methods": true,
     "package-name": undefined,

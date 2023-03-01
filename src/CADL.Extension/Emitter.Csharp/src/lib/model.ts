@@ -524,8 +524,6 @@ export function getInputType(
                     isReadOnly = true;
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
-                if (isEnumMember(value.type)) {
-                }
                 const projectedNamesMap = getProjectedNames(program, value);
                 const name =
                     projectedNamesMap?.get(projectedNameCSharpKey) ??
