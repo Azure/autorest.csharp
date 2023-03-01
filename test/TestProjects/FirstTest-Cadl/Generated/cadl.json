@@ -597,7 +597,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{firstTestCadlUrl}",
      "Path": "/top/{action}",
      "BufferResponse": true,
@@ -659,7 +659,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{firstTestCadlUrl}",
      "Path": "/top2",
      "BufferResponse": true,
@@ -1064,7 +1064,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{firstTestCadlUrl}",
      "Path": "/",
      "BufferResponse": true,
@@ -1186,7 +1186,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{firstTestCadlUrl}",
      "Path": "/hello",
      "BufferResponse": true,
@@ -1552,7 +1552,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{firstTestCadlUrl}",
      "Path": "/demoHi",
      "BufferResponse": true,
@@ -1822,7 +1822,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{firstTestCadlUrl}",
      "Path": "/helloLiteral/{p2}",
      "BufferResponse": true,
@@ -1884,7 +1884,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{firstTestCadlUrl}",
      "Path": "/unknown-value",
      "BufferResponse": true,
@@ -2052,7 +2052,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{firstTestCadlUrl}",
      "Path": "/stillConvenient",
      "BufferResponse": true,

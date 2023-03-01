@@ -13,7 +13,10 @@ using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
 {
-    /// <summary> A class representing the Zone data model. </summary>
+    /// <summary>
+    /// A class representing the Zone data model.
+    /// Describes a DNS zone.
+    /// </summary>
     public partial class ZoneData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ZoneData. </summary>

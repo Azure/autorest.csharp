@@ -1,6 +1,20 @@
-param($AutorestCSharpVersion, $CadlEmitterVersion, $SdkRepoRoot)
+param(
+    [Parameter(Mandatory)]
+    [string]$AutorestCSharpVersion,
 
-& (Join-Path $PSScriptRoot 'UpdateOfficialReference.ps1') -AutorestCSharpVersion $AutorestCSharpVersion -CadlEmitterVersion $CadlEmitterVersion -SdkRepoRoot $SdkRepoRoot
+    [Parameter(Mandatory)]
+    [string]$CadlEmitterVersion,
 
-dotnet msbuild /restore /t:GenerateCode "$SdkRepoRoot\eng\service.proj"
-dotnet msbuild /restore /t:GenerateTests "$SdkRepoRoot\eng\service.proj"
+    [Parameter(Mandatory)]
+    [string]$SdkRepoRoot,
+    
+    [string[]]$ServiceDirectoryFilters = @("*"),
+
+    [switch]$ShowSummary
+    )
+
+$ErrorActionPreference = 'Stop'
+
+Invoke-Expression "$PSScriptRoot\UpdateGeneratorMetadata.ps1 -AutorestCSharpVersion $AutorestCSharpVersion -CadlEmitterVersion $CadlEmitterVersion -SdkRepoRoot $SdkRepoRoot"
+
+Invoke-Expression "$PSScriptRoot\UpdateAzureSdkCodes.ps1 -SdkRepoRoot $SdkRepoRoot -ServiceDirectoryFilters $($ServiceDirectoryFilters -Join ',') $(if ($ShowSummary) {'-ShowSummary'})"
