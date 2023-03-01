@@ -18,7 +18,7 @@ $files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs'
     'OperationInternalBase.cs', 'OperationInternal.cs', 'VoidValue.cs', 'OperationInternalOfT.cs', 'TaskExtensions.cs', 'Argument.cs', 'Multipart/MultipartFormDataContent.cs',
     'Multipart/MultipartContent.cs', 'AzureKeyCredentialPolicy.cs', 'AppContextSwitchHelper.cs',
     'ConstantDelayStrategy.cs', 'DelayStrategy.cs', 'ExponentialDelayStrategy.cs', 'OperationPoller.cs', 'RetryAfterDelayStrategy.cs',
-    'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs', 'DecodedResponse.cs', 'StreamConverter.cs')
+    'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs')
 # TODO: temporary change to target at support_lro_rehydration branch
 $baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/support_lro_rehydration/sdk/core/Azure.Core/src/Shared/'
 DownloadAll $files $baseUrl $downloadPath
