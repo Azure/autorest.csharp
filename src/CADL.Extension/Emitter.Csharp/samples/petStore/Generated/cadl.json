@@ -282,7 +282,7 @@
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": true,
@@ -377,7 +377,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": true,
@@ -586,7 +586,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}/toys",
      "BufferResponse": true,
