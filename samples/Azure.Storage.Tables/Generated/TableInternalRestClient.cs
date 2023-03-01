@@ -518,6 +518,11 @@ namespace Azure.Storage.Tables
                 foreach (var item in tableEntityProperties)
                 {
                     content.JsonWriter.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        content.JsonWriter.WriteNullValue();
+                        continue;
+                    }
                     content.JsonWriter.WriteObjectValue(item.Value);
                 }
                 content.JsonWriter.WriteEndObject();
@@ -730,6 +735,11 @@ namespace Azure.Storage.Tables
                 foreach (var item in tableEntityProperties)
                 {
                     content.JsonWriter.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        content.JsonWriter.WriteNullValue();
+                        continue;
+                    }
                     content.JsonWriter.WriteObjectValue(item.Value);
                 }
                 content.JsonWriter.WriteEndObject();

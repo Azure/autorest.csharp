@@ -38,6 +38,11 @@ namespace CognitiveSearch.Models
                 foreach (var item in Configuration)
                 {
                     writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
                     writer.WriteObjectValue(item.Value);
                 }
                 writer.WriteEndObject();
