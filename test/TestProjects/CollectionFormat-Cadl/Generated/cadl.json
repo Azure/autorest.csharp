@@ -163,7 +163,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{CollectionFormatCadlUrl}",
      "Path": "/csvQuery",
      "BufferResponse": true,
@@ -249,7 +249,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{CollectionFormatCadlUrl}",
      "Path": "/multiQuery",
      "BufferResponse": true,
@@ -335,7 +335,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{CollectionFormatCadlUrl}",
      "Path": "/noFormatQuery",
      "BufferResponse": true,
@@ -422,7 +422,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{CollectionFormatCadlUrl}",
      "Path": "/csvHeader",
      "BufferResponse": true,
@@ -509,7 +509,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{CollectionFormatCadlUrl}",
      "Path": "/noFormatHeader",
      "BufferResponse": true,
