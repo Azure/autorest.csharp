@@ -175,7 +175,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/dogs",
      "BufferResponse": true,
@@ -346,7 +346,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/cats",
      "BufferResponse": true,

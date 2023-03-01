@@ -421,7 +421,7 @@ namespace AutoRest.CSharp.Output.Models
             var name = operationParameter.Name.ToVariableName();
             var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
             var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
-            _orderedParameters.Add(new ParameterChain(null, parameter, parameter));
+            _orderedParameters.Add(new ParameterChain(parameter, parameter, parameter));
 
             AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
         }

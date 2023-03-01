@@ -415,7 +415,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/inheritance/valid",
      "BufferResponse": true,
@@ -584,7 +584,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/inheritance/discriminated/model",
      "BufferResponse": true,
@@ -750,7 +750,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/inheritance/discriminated/recursivemodel",
      "BufferResponse": true,
@@ -916,7 +916,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/inheritance/discriminated/missingdiscriminator",
      "BufferResponse": true,
@@ -977,7 +977,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/inheritance/discriminated/wrongdiscriminator",
      "BufferResponse": true,
