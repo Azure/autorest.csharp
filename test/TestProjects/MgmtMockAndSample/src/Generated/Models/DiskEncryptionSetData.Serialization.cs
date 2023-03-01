@@ -99,7 +99,6 @@ namespace MgmtMockAndSample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -166,7 +165,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<KeyForDiskEncryptionSet> array = new List<KeyForDiskEncryptionSet>();

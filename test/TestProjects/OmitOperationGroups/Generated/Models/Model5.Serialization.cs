@@ -55,7 +55,6 @@ namespace OmitOperationGroups.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ModelQ> array = new List<ModelQ>();

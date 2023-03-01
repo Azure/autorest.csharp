@@ -24,7 +24,6 @@ namespace Pagination.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<PageSizeInt64ModelData> array = new List<PageSizeInt64ModelData>();

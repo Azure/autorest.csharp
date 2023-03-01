@@ -71,7 +71,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<KeyPermission> array = new List<KeyPermission>();
@@ -86,7 +85,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<SecretPermission> array = new List<SecretPermission>();
@@ -101,7 +99,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<CertificatePermission> array = new List<CertificatePermission>();
@@ -116,7 +113,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<StoragePermission> array = new List<StoragePermission>();

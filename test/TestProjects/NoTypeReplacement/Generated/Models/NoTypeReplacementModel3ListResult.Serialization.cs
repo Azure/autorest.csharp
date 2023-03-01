@@ -24,7 +24,6 @@ namespace NoTypeReplacement.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<NoTypeReplacementModel3Data> array = new List<NoTypeReplacementModel3Data>();

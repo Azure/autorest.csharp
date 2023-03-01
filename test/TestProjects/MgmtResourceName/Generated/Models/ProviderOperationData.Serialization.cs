@@ -35,7 +35,6 @@ namespace MgmtResourceName
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Models.ResourceType> array = new List<Models.ResourceType>();
@@ -50,7 +49,6 @@ namespace MgmtResourceName
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ResourceOperation> array = new List<ResourceOperation>();

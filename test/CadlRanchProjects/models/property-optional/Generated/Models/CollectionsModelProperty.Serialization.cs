@@ -39,7 +39,6 @@ namespace Models.Property.Optional.Models
                 {
                     if (property0.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property0.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<StringProperty> array = new List<StringProperty>();

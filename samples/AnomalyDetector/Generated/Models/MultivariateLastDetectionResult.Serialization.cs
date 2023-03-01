@@ -24,7 +24,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<VariableState> array = new List<VariableState>();
@@ -39,7 +38,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<AnomalyState> array = new List<AnomalyState>();

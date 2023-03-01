@@ -24,7 +24,6 @@ namespace MgmtResourceName.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<MachineData> array = new List<MachineData>();

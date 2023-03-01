@@ -24,7 +24,6 @@ namespace MgmtCollectionParent.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<OrderResourceData> array = new List<OrderResourceData>();

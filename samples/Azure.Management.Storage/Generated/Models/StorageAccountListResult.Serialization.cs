@@ -24,7 +24,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<StorageAccountData> array = new List<StorageAccountData>();

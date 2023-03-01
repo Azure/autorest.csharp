@@ -23,7 +23,6 @@ namespace SupersetFlattenInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<CustomModel2> array = new List<CustomModel2>();

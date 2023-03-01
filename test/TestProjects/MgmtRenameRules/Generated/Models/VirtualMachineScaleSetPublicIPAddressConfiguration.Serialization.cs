@@ -102,7 +102,6 @@ namespace MgmtRenameRules.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<VirtualMachineScaleSetIPTag> array = new List<VirtualMachineScaleSetIPTag>();

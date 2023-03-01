@@ -184,7 +184,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<AccessPolicyEntry> array = new List<AccessPolicyEntry>();
@@ -213,7 +212,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<string> array = new List<string>();
@@ -317,7 +315,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<PrivateEndpointConnectionItem> array = new List<PrivateEndpointConnectionItem>();

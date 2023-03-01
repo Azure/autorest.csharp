@@ -180,7 +180,6 @@ namespace MgmtScopeResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<string> array = new List<string>();
@@ -195,7 +194,6 @@ namespace MgmtScopeResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             Dictionary<string, ParameterValuesValue> dictionary = new Dictionary<string, ParameterValuesValue>();
@@ -234,7 +232,6 @@ namespace MgmtScopeResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<NonComplianceMessage> array = new List<NonComplianceMessage>();

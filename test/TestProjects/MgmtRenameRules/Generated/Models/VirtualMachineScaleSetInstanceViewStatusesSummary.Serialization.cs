@@ -22,7 +22,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<VirtualMachineStatusCodeCount> array = new List<VirtualMachineStatusCodeCount>();

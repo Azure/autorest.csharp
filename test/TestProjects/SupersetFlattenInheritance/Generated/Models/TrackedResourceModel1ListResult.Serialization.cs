@@ -24,7 +24,6 @@ namespace SupersetFlattenInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<TrackedResourceModel1Data> array = new List<TrackedResourceModel1Data>();

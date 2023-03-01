@@ -23,7 +23,6 @@ namespace MgmtListMethods.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<UpdateWorkspaceQuotas> array = new List<UpdateWorkspaceQuotas>();

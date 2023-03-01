@@ -50,7 +50,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<CjkBigramTokenFilterScripts> array = new List<CjkBigramTokenFilterScripts>();

@@ -102,7 +102,6 @@ namespace Azure.ResourceManager.Sample.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<VirtualMachineScaleSetIpTag> array = new List<VirtualMachineScaleSetIpTag>();

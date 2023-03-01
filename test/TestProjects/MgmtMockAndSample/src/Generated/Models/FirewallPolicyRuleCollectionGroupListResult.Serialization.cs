@@ -24,7 +24,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<FirewallPolicyRuleCollectionGroupData> array = new List<FirewallPolicyRuleCollectionGroupData>();

@@ -23,7 +23,6 @@ namespace MgmtDiscriminator.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<DeliveryRuleData> array = new List<DeliveryRuleData>();

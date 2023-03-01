@@ -165,7 +165,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<string> array = new List<string>();
@@ -180,7 +179,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<int> array = new List<int>();
@@ -195,7 +193,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<CollectionItem> array = new List<CollectionItem>();
@@ -230,7 +227,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
@@ -262,7 +258,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<bool?> array = new List<bool?>();

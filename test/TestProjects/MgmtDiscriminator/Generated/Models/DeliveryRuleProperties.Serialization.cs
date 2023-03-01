@@ -87,7 +87,6 @@ namespace MgmtDiscriminator.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<DeliveryRuleAction> array = new List<DeliveryRuleAction>();
@@ -102,7 +101,6 @@ namespace MgmtDiscriminator.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, DeliveryRuleAction> dictionary = new Dictionary<string, DeliveryRuleAction>();

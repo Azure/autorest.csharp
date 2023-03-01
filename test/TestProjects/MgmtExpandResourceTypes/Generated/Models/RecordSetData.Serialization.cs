@@ -207,7 +207,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -251,7 +250,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<ARecord> array = new List<ARecord>();
@@ -266,7 +264,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<AaaaRecord> array = new List<AaaaRecord>();
@@ -281,7 +278,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<MxRecord> array = new List<MxRecord>();
@@ -296,7 +292,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<NsRecord> array = new List<NsRecord>();
@@ -311,7 +306,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<PtrRecord> array = new List<PtrRecord>();
@@ -326,7 +320,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<SrvRecord> array = new List<SrvRecord>();
@@ -341,7 +334,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<TxtRecord> array = new List<TxtRecord>();
@@ -374,7 +366,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<CaaRecord> array = new List<CaaRecord>();

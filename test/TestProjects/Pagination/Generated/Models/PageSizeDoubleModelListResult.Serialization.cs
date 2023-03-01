@@ -24,7 +24,6 @@ namespace Pagination.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<PageSizeDoubleModelData> array = new List<PageSizeDoubleModelData>();

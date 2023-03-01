@@ -24,7 +24,6 @@ namespace ExactMatchFlattenInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<CustomModel3Data> array = new List<CustomModel3Data>();

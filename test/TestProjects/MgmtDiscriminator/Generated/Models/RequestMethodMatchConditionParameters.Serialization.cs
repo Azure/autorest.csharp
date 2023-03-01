@@ -81,7 +81,6 @@ namespace MgmtDiscriminator.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Transform> array = new List<Transform>();
@@ -96,7 +95,6 @@ namespace MgmtDiscriminator.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<RequestMethodMatchConditionParametersMatchValuesItem> array = new List<RequestMethodMatchConditionParametersMatchValuesItem>();

@@ -86,7 +86,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<NetworkInterfaceIPConfiguration> array = new List<NetworkInterfaceIPConfiguration>();
@@ -101,7 +100,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<ApplicationGatewayBackendAddress> array = new List<ApplicationGatewayBackendAddress>();
