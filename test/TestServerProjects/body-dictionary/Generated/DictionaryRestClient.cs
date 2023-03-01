@@ -3907,6 +3907,11 @@ namespace body_dictionary
             foreach (var item in arrayBody)
             {
                 content.JsonWriter.WritePropertyName(item.Key);
+                if (item.Value == null)
+                {
+                    content.JsonWriter.WriteNullValue();
+                    continue;
+                }
                 content.JsonWriter.WriteStartArray();
                 foreach (var item0 in item.Value)
                 {
