@@ -1982,14 +1982,7 @@ namespace body_array
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(item.GetString());
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -2014,14 +2007,7 @@ namespace body_array
                         List<string> array = new List<string>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(item.GetString());
-                            }
+                            array.Add(item.GetString());
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
