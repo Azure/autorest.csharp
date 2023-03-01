@@ -4126,6 +4126,11 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
+                if (item == null)
+                {
+                    content.JsonWriter.WriteNullValue();
+                    continue;
+                }
                 content.JsonWriter.WriteStartArray();
                 foreach (var item0 in item)
                 {

@@ -53,6 +53,11 @@ namespace CustomizationsInCadl.Models
             writer.WriteStartArray();
             foreach (var item in GoodListOfListName)
             {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
                 writer.WriteStartArray();
                 foreach (var item0 in item)
                 {
