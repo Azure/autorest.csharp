@@ -70,6 +70,11 @@ namespace CustomizationsInCadl.Models
             writer.WriteStartArray();
             foreach (var item in GoodListOfDictionaryName)
             {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
                 writer.WriteStartObject();
                 foreach (var item0 in item)
                 {
