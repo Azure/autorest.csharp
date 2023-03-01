@@ -11,14 +11,16 @@
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
   "TreatEmptyStringAsNullForModels": [
-    "ExactMatchModel11"
+    "ExactMatchModel11",
+    "ExactMatchModel1Data"
   ],
   "TreatEmptyStringAsNullForTypes": [
     "Uri",
     "Guid",
     "ResourceIdentifier",
     "DateTimeOffset",
-    "ResourceType"
+    "ResourceType",
+    "IPAddress"
   ],
   "KeepOrphanedModels": [
     "ExactMatchModel11"

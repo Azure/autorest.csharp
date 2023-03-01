@@ -28,9 +28,11 @@ rename-mapping:
 
 treat-empty-string-as-null-for-models:
 - ExactMatchModel11
+- ExactMatchModel1Data
 
-treat-empty-string-as-null-for-types:
+treat-empty-string-as-null-for-extra-types:
 - ResourceType
+- IPAddress
 
 directive:
   - from: ExactMatchInheritance.json
