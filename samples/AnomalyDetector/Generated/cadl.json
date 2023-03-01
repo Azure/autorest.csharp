@@ -2513,7 +2513,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/detect-batch/{resultId}",
      "BufferResponse": true,
@@ -2742,7 +2742,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/models",
      "BufferResponse": true,
@@ -2828,7 +2828,7 @@
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/models/{modelId}",
      "BufferResponse": true,
@@ -2912,7 +2912,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{Endpoint}/anomalydetector/{ApiVersion}",
      "Path": "/multivariate/models/{modelId}",
      "BufferResponse": true,

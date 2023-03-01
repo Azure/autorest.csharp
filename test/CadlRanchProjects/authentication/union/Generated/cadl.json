@@ -121,7 +121,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/authentication/union/validkey",
      "BufferResponse": true,
@@ -180,7 +180,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/authentication/union/validtoken",
      "BufferResponse": true,

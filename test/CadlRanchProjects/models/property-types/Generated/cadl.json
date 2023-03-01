@@ -582,7 +582,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/boolean",
      "BufferResponse": true,
@@ -763,7 +763,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/string",
      "BufferResponse": true,
@@ -944,7 +944,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/bytes",
      "BufferResponse": true,
@@ -1125,7 +1125,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/int",
      "BufferResponse": true,
@@ -1306,7 +1306,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/float",
      "BufferResponse": true,
@@ -1487,7 +1487,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/datetime",
      "BufferResponse": true,
@@ -1668,7 +1668,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/duration",
      "BufferResponse": true,
@@ -1849,7 +1849,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/enum",
      "BufferResponse": true,
@@ -2030,7 +2030,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/extensible-enum",
      "BufferResponse": true,
@@ -2211,7 +2211,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/model",
      "BufferResponse": true,
@@ -2392,7 +2392,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/collections/string",
      "BufferResponse": true,
@@ -2573,7 +2573,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/collections/int",
      "BufferResponse": true,
@@ -2754,7 +2754,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/collections/model",
      "BufferResponse": true,
@@ -2935,7 +2935,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/dictionary/string",
      "BufferResponse": true,
@@ -3116,7 +3116,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/models/properties/types/never",
      "BufferResponse": true,
