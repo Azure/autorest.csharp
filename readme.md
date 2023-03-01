@@ -18,7 +18,7 @@ ___
     - [Validate generator changes against Azure SDK before merging your autorest.csharp PR](#validate-generator-changes-against-azure-sdk-before-merging-your-autorestcsharp-pr)
   - [Use in `azure-sdk-for-net` repo](#use-in-azure-sdk-for-net-repo)
     - [PR Integration with Azure SDK Repository](#pr-integration-with-azure-sdk-repository)
-  - [Use outside of the `azure-sdk-net` repo](#use-outside-of-the-azure-sdk-net-repo)
+  - [Use outside of the `azure-sdk-for-net` repo](#use-outside-of-the-azure-sdk-net-repo)
   - [Debugging](#debugging)
   - [Debugging transforms](#debugging-transforms)
   - [Customizing the generated code](#customizing-the-generated-code)
