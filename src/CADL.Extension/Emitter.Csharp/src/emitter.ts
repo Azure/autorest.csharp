@@ -214,8 +214,6 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
 function deleteFile(filePath: string) {
     if (fs.existsSync(filePath)) {
-        console.log(`File ${filePath} does not exist. No deletion. `);
-    } else {
         fs.unlink(filePath, (err) => {
             if (err) {
                 console.log(`stderr: ${err}`);

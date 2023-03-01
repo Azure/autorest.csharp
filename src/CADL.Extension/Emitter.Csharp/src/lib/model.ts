@@ -266,7 +266,7 @@ export function getInputType(
     type: Type,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
-): any {
+): InputType {
     if (type.kind === "Model") {
         return getInputModelType(type);
     } else if (
@@ -643,7 +643,8 @@ export function navigateModels(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ) {
-    const computeModel = (x: Type) => getInputType(program, x, models, enums);
+    const computeModel = (x: Type) =>
+        getInputType(program, x, models, enums) as any;
     const skipSubNamespaces = isGlobalNamespace(program, namespace);
     navigateTypesInNamespace(
         namespace,
