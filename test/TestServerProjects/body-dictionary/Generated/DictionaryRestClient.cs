@@ -3214,14 +3214,7 @@ namespace body_dictionary
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            if (property.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                dictionary.Add(property.Name, null);
-                            }
-                            else
-                            {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                            }
+                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
@@ -3246,14 +3239,7 @@ namespace body_dictionary
                         Dictionary<string, Widget> dictionary = new Dictionary<string, Widget>();
                         foreach (var property in document.RootElement.EnumerateObject())
                         {
-                            if (property.Value.ValueKind == JsonValueKind.Null)
-                            {
-                                dictionary.Add(property.Name, null);
-                            }
-                            else
-                            {
-                                dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
-                            }
+                            dictionary.Add(property.Name, Widget.DeserializeWidget(property.Value));
                         }
                         value = dictionary;
                         return Response.FromValue(value, message.Response);
