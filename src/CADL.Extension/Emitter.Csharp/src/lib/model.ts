@@ -21,15 +21,14 @@ import {
     resolveUsages,
     Type,
     UsageFlags,
-    UsageTracker,
-    TrackableType,
     getDiscriminator,
     IntrinsicType,
     isVoidType,
     isArrayModelType,
     isRecordModelType,
     Scalar,
-    Union
+    Union,
+    getProjectedNames
 } from "@cadl-lang/compiler";
 import { getResourceOperation } from "@cadl-lang/rest";
 import {
@@ -39,6 +38,11 @@ import {
     HttpOperation,
     isStatusCode
 } from "@cadl-lang/rest/http";
+import {
+    projectedNameClientKey,
+    projectedNameCSharpKey,
+    projectedNameJsonKey
+} from "../constants.js";
 import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
 import { InputModelProperty } from "../type/InputModelProperty.js";
 import {
@@ -49,7 +53,9 @@ import {
     InputModelType,
     InputPrimitiveType,
     InputType,
-    InputUnionType
+    InputUnionType,
+    InputNullType,
+    InputIntrinsicType
 } from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 import { Usage } from "../type/Usage.js";
@@ -70,8 +76,8 @@ export function mapCadlTypeToCSharpInputTypeKind(
         case "Enum":
             return InputTypeKind.Enum;
         case "Number":
-            let nubmerValue = cadlType.value;
-            if (nubmerValue % 1 === 0) {
+            let numberValue = cadlType.value;
+            if (numberValue % 1 === 0) {
                 return InputTypeKind.Int32;
             }
             return InputTypeKind.Float64;
@@ -510,15 +516,22 @@ export function getInputType(
                     isReadOnly = true;
                 }
                 if (isNeverType(value.type) || isVoidType(value.type)) return;
+                const projectedNamesMap = getProjectedNames(program, value);
+                const name =
+                    projectedNamesMap?.get(projectedNameCSharpKey) ??
+                    projectedNamesMap?.get(projectedNameClientKey) ??
+                    value.name;
+                const serializedName =
+                    projectedNamesMap?.get(projectedNameJsonKey) ?? value.name;
                 const inputProp = {
-                    Name: value.name,
-                    SerializedName: value.name,
+                    Name: name,
+                    SerializedName: serializedName,
                     Description: getDoc(program, value) ?? "",
                     Type: getInputType(program, value.type, models, enums),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
                     IsDiscriminator: false
-                };
+                } as InputModelProperty;
                 outputProperties.push(inputProp);
             }
         });
@@ -566,22 +579,53 @@ export function getInputType(
                     Usage: Usage.None,
                     Properties: []
                 } as InputModelType;
+            case "null":
+                return {
+                    Name: "Intrinsic",
+                    Kind: "null",
+                    IsNullable: false
+                } as InputNullType;
             default:
                 throw new Error(`Unsupported type ${type.name}`);
         }
     }
 
-    function getInputTypeForUnion(union: Union): InputUnionType {
-        const ItemTypes: InputType[] = [];
+    function getInputTypeForUnion(union: Union): InputType {
+        let ItemTypes: InputType[] = [];
         const variants = Array.from(union.variants.values());
+
+        let hasNullType = false;
         for (const variant of variants) {
-            ItemTypes.push(getInputType(program, variant.type, models, enums));
+            const inputType = getInputType(
+                program,
+                variant.type,
+                models,
+                enums
+            );
+            if (
+                inputType.Name === "Intrinsic" &&
+                (inputType as InputIntrinsicType).Kind === "null"
+            ) {
+                hasNullType = true;
+                continue;
+            }
+            ItemTypes.push(inputType);
         }
-        return {
-            Name: "Union",
-            UnionItemTypes: ItemTypes,
-            IsNullable: false
-        } as InputUnionType;
+
+        if (hasNullType) {
+            ItemTypes = ItemTypes.map((i) => {
+                i.IsNullable = true;
+                return i;
+            });
+        }
+
+        return ItemTypes.length > 1
+            ? ({
+                  Name: "Union",
+                  UnionItemTypes: ItemTypes,
+                  IsNullable: false
+              } as InputUnionType)
+            : ItemTypes[0];
     }
 }
 

@@ -57,18 +57,7 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (serialization)
             {
                 case JsonArraySerialization array:
-                    writer.Line($"{writerName}.WriteStartArray();");
-                    var collectionItemVariable = new CodeWriterDeclaration("item");
-
-                    using (writer.Scope($"foreach (var {collectionItemVariable:D} in {name:I})"))
-                    {
-                        writer.ToSerializeCall(
-                            array.ValueSerialization,
-                            $"{collectionItemVariable:I}",
-                            writerName);
-                    }
-
-                    writer.Line($"{writerName}.WriteEndArray();");
+                    ToArraySerializeCall(writer, name, writerName, array);
                     return;
 
                 case JsonDictionarySerialization dictionary:
@@ -207,7 +196,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             return;
 
                         case ObjectType:
-                        //case ModelTypeProvider:
+                            //case ModelTypeProvider:
                             writer.Line($"{writerName}.WriteObjectValue({name:I});");
                             return;
 
@@ -232,6 +221,30 @@ namespace AutoRest.CSharp.Generation.Writers
                 default:
                     throw new NotSupportedException();
             }
+        }
+
+        private static void ToArraySerializeCall(CodeWriter writer, FormattableString name, FormattableString? writerName, JsonArraySerialization array)
+        {
+            writer.Line($"{writerName}.WriteStartArray();");
+            var collectionItemVariable = new CodeWriterDeclaration("item");
+
+            using (writer.Scope($"foreach (var {collectionItemVariable:D} in {name:I})"))
+            {
+                if (array.ValueSerialization.IsNullable)
+                {
+                    using (writer.Scope($"if ({collectionItemVariable:I} == null)"))
+                    {
+                        writer.Line($"{writerName}.WriteNullValue();");
+                        writer.Line($"continue;");
+                    }
+                }
+                writer.ToSerializeCall(
+                    array.ValueSerialization,
+                    $"{collectionItemVariable:I}",
+                    writerName);
+            }
+
+            writer.Line($"{writerName}.WriteEndArray();");
         }
 
         private static void ToSerializeCall(this CodeWriter writer, FormattableString writerName, IEnumerable<JsonPropertySerialization> propertySerializations)
@@ -505,7 +518,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             foreach (var variable in propertyVariables)
             {
-                string defaultValue ="default";
+                string defaultValue = "default";
                 if (serialization.Discriminator?.SerializedName == variable.Key.SerializedName &&
                     isThisTheDefaultDerivedType &&
                     serialization.Discriminator.Value is not null &&

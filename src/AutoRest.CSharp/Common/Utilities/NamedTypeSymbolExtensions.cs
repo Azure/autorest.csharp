@@ -19,11 +19,6 @@ namespace AutoRest.CSharp.Utilities
                 return GetCSharpType((INamedTypeSymbol)symbol.TypeArguments[0]).WithNullable(true);
             }
 
-            return GetFrameworkType(symbol);
-        }
-
-        private static Type GetFrameworkType(INamedTypeSymbol symbol)
-        {
             var symbolName = symbol.ToDisplayString(FullyQualifiedNameFormat);
             var assemblyName = symbol.ContainingAssembly.Name;
             if (symbol.TypeArguments.Length > 0)
@@ -33,7 +28,7 @@ namespace AutoRest.CSharp.Utilities
 
             var type = Type.GetType(symbolName) ?? Type.GetType($"{symbolName}, {assemblyName}") ?? throw new InvalidOperationException($"Type '{symbolName}' can't be found in assembly '{assemblyName}'.");
             return symbol.TypeArguments.Length > 0
-                ? type.MakeGenericType(symbol.TypeArguments.Cast<INamedTypeSymbol>().Select(GetFrameworkType).ToArray())
+                ? new CSharpType(type, symbol.TypeArguments.Cast<INamedTypeSymbol>().Select(GetCSharpType).ToArray())
                 : type;
         }
     }

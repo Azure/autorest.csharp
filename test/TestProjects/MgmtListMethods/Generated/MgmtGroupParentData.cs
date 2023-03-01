@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing the MgmtGroupParent data model. </summary>
+    /// <summary>
+    /// A class representing the MgmtGroupParent data model.
+    /// Specifies information.
+    /// </summary>
     public partial class MgmtGroupParentData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of MgmtGroupParentData. </summary>

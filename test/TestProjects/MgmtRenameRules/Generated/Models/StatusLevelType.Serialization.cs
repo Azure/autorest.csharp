@@ -21,9 +21,9 @@ namespace MgmtRenameRules.Models
 
         public static StatusLevelType ToStatusLevelType(this string value)
         {
-            if (string.Equals(value, "Info", StringComparison.InvariantCultureIgnoreCase)) return StatusLevelType.Info;
-            if (string.Equals(value, "Warning", StringComparison.InvariantCultureIgnoreCase)) return StatusLevelType.Warning;
-            if (string.Equals(value, "Error", StringComparison.InvariantCultureIgnoreCase)) return StatusLevelType.Error;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Info")) return StatusLevelType.Info;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Warning")) return StatusLevelType.Warning;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Error")) return StatusLevelType.Error;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown StatusLevelType value.");
         }
     }

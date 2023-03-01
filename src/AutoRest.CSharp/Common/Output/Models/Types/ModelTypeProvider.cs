@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (property.Declaration.Type.IsCollectionType())
             {
-                return  _inputModel.Usage is InputModelTypeUsage.Output;
+                return _inputModel.Usage is InputModelTypeUsage.Output;
             }
 
             return property.IsReadOnly && _inputModel.Usage is not InputModelTypeUsage.Input;
@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
-            => TypeFactory.IsList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
+            => p with { Type = TypeFactory.GetInputType(p.Type) };
 
         private static Parameter CreateSerializationConstructorParameter(Parameter p) // we don't validate parameters for serialization constructor
             => p with { Validation = ValidationType.None };
@@ -451,7 +451,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.Name, _typeFactory.CreateType(child))).ToArray();
+                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
                 property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
             }
 

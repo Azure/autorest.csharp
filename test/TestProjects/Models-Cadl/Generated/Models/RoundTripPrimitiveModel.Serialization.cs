@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -35,6 +36,18 @@ namespace ModelsInCadl.Models
             writer.WriteStringValue(RequiredDateTimeOffset, "O");
             writer.WritePropertyName("requiredTimeSpan"u8);
             writer.WriteStringValue(RequiredTimeSpan, "P");
+            writer.WritePropertyName("requiredCollectionWithNullableFloatElement"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollectionWithNullableFloatElement)
+            {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+                writer.WriteNumberValue(item.Value);
+            }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
 
@@ -49,6 +62,7 @@ namespace ModelsInCadl.Models
             bool requiredBoolean = default;
             DateTimeOffset requiredDateTimeOffset = default;
             TimeSpan requiredTimeSpan = default;
+            IList<float?> requiredCollectionWithNullableFloatElement = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -96,8 +110,25 @@ namespace ModelsInCadl.Models
                     requiredTimeSpan = property.Value.GetTimeSpan("P");
                     continue;
                 }
+                if (property.NameEquals("requiredCollectionWithNullableFloatElement"u8))
+                {
+                    List<float?> array = new List<float?>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetSingle());
+                        }
+                    }
+                    requiredCollectionWithNullableFloatElement = array;
+                    continue;
+                }
             }
-            return new RoundTripPrimitiveModel(requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan);
+            return new RoundTripPrimitiveModel(requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

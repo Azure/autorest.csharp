@@ -21,9 +21,9 @@ namespace CognitiveSearch.Models
 
         public static SearchMode ToSearchMode(this string value)
         {
-            if (string.Equals(value, "any", StringComparison.InvariantCultureIgnoreCase)) return SearchMode.Any;
-            if (string.Equals(value, "all", StringComparison.InvariantCultureIgnoreCase)) return SearchMode.All;
-            if (string.Equals(value, "analyzingInfixMatching", StringComparison.InvariantCultureIgnoreCase)) return SearchMode.AnalyzingInfixMatching;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "any")) return SearchMode.Any;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "all")) return SearchMode.All;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "analyzingInfixMatching")) return SearchMode.AnalyzingInfixMatching;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown SearchMode value.");
         }
     }

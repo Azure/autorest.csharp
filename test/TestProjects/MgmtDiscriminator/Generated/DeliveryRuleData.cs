@@ -11,7 +11,10 @@ using MgmtDiscriminator.Models;
 
 namespace MgmtDiscriminator
 {
-    /// <summary> A class representing the DeliveryRule data model. </summary>
+    /// <summary>
+    /// A class representing the DeliveryRule data model.
+    /// A rule that specifies a set of actions and conditions
+    /// </summary>
     public partial class DeliveryRuleData : ResourceData
     {
         /// <summary> Initializes a new instance of DeliveryRuleData. </summary>

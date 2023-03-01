@@ -21,9 +21,9 @@ namespace Azure.AI.FormRecognizer.Models
 
         public static TrainStatus ToTrainStatus(this string value)
         {
-            if (string.Equals(value, "succeeded", StringComparison.InvariantCultureIgnoreCase)) return TrainStatus.Succeeded;
-            if (string.Equals(value, "partiallySucceeded", StringComparison.InvariantCultureIgnoreCase)) return TrainStatus.PartiallySucceeded;
-            if (string.Equals(value, "failed", StringComparison.InvariantCultureIgnoreCase)) return TrainStatus.Failed;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "succeeded")) return TrainStatus.Succeeded;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "partiallySucceeded")) return TrainStatus.PartiallySucceeded;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "failed")) return TrainStatus.Failed;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TrainStatus value.");
         }
     }

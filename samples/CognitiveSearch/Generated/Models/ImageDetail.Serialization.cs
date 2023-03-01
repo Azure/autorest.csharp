@@ -20,8 +20,8 @@ namespace CognitiveSearch.Models
 
         public static ImageDetail ToImageDetail(this string value)
         {
-            if (string.Equals(value, "celebrities", StringComparison.InvariantCultureIgnoreCase)) return ImageDetail.Celebrities;
-            if (string.Equals(value, "landmarks", StringComparison.InvariantCultureIgnoreCase)) return ImageDetail.Landmarks;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "celebrities")) return ImageDetail.Celebrities;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "landmarks")) return ImageDetail.Landmarks;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ImageDetail value.");
         }
     }
