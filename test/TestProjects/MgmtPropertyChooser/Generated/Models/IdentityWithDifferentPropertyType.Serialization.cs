@@ -53,7 +53,6 @@ namespace MgmtPropertyChooser.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     tenantId = property.Value.GetInt32();
@@ -63,7 +62,6 @@ namespace MgmtPropertyChooser.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     type = property.Value.GetString().ToResourceIdentityType();

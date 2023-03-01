@@ -65,7 +65,6 @@ namespace MgmtExtensionResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     type = new ParameterType(property.Value.GetString());

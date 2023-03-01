@@ -44,7 +44,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     status = new MgmtMockAndSamplePrivateEndpointServiceConnectionStatus(property.Value.GetString());
@@ -59,7 +58,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     actionsRequired = new ActionsRequired(property.Value.GetString());

@@ -32,7 +32,6 @@ namespace Azure.Network.Management.Interface.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     name = new PublicIPAddressSkuName(property.Value.GetString());

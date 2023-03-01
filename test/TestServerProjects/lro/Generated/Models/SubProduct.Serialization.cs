@@ -56,7 +56,6 @@ namespace lro.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             provisioningStateValues = new SubProductPropertiesProvisioningStateValues(property0.Value.GetString());

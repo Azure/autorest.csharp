@@ -25,7 +25,6 @@ namespace MgmtCollectionParent.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     stageStatus = new StageStatus(property.Value.GetString());
@@ -35,7 +34,6 @@ namespace MgmtCollectionParent.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     stageName = new StageName(property.Value.GetString());
@@ -50,7 +48,6 @@ namespace MgmtCollectionParent.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     startTime = property.Value.GetDateTimeOffset("O");

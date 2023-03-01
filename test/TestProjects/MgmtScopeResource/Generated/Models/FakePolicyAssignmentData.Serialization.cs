@@ -222,7 +222,6 @@ namespace MgmtScopeResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             enforcementMode = new EnforcementMode(property0.Value.GetString());

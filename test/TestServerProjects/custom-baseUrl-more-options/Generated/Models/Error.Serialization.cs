@@ -22,7 +22,6 @@ namespace custom_baseUrl_more_options.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     status = property.Value.GetInt32();

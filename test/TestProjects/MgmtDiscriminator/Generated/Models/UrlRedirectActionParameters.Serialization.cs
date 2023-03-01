@@ -72,7 +72,6 @@ namespace MgmtDiscriminator.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     destinationProtocol = new DestinationProtocol(property.Value.GetString());

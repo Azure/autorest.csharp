@@ -168,7 +168,6 @@ namespace ExactMatchInheritance
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     type1 = new Type1(property.Value.GetString());
@@ -178,7 +177,6 @@ namespace ExactMatchInheritance
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     type2 = new Type2(property.Value.GetString());
@@ -188,7 +186,6 @@ namespace ExactMatchInheritance
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     type3 = IPAddress.Parse(property.Value.GetString());
@@ -198,7 +195,6 @@ namespace ExactMatchInheritance
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     type4 = property.Value.GetObject();

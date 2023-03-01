@@ -38,7 +38,6 @@ namespace MgmtOptionalConstant.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     passName = new PassName(property.Value.GetString());
@@ -48,7 +47,6 @@ namespace MgmtOptionalConstant.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     settingName = property.Value.GetString().ToSettingName();

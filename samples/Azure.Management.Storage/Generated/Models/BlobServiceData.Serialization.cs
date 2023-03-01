@@ -155,7 +155,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             isVersioningEnabled = property0.Value.GetBoolean();
@@ -165,7 +164,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             automaticSnapshotPolicyEnabled = property0.Value.GetBoolean();

@@ -35,7 +35,6 @@ namespace MgmtListMethods.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     limit = property.Value.GetInt64();
@@ -45,7 +44,6 @@ namespace MgmtListMethods.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     unit = new QuotaUnit(property.Value.GetString());
@@ -55,7 +53,6 @@ namespace MgmtListMethods.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     status = new Status(property.Value.GetString());

@@ -354,7 +354,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             priority = new VirtualMachinePriorityType(property0.Value.GetString());
@@ -364,7 +363,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             evictionPolicy = new VirtualMachineEvictionPolicyType(property0.Value.GetString());

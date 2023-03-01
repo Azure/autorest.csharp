@@ -38,7 +38,6 @@ namespace body_array.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     integer = property.Value.GetInt32();

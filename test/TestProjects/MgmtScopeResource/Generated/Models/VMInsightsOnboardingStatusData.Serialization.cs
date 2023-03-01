@@ -69,7 +69,6 @@ namespace MgmtScopeResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             onboardingStatus = new OnboardingStatus(property0.Value.GetString());
@@ -79,7 +78,6 @@ namespace MgmtScopeResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             dataStatus = new DataStatus(property0.Value.GetString());

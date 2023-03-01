@@ -136,7 +136,6 @@ namespace Azure.ResourceManager.Sample.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             primary = property0.Value.GetBoolean();
@@ -155,7 +154,6 @@ namespace Azure.ResourceManager.Sample.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             privateIPAddressVersion = new IPVersion(property0.Value.GetString());

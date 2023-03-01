@@ -52,7 +52,6 @@ namespace TypeSchemaMapping.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     stringProperty = property.Value.GetInt32();
@@ -76,7 +75,6 @@ namespace TypeSchemaMapping.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());

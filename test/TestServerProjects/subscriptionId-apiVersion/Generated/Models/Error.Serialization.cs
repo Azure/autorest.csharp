@@ -22,7 +22,6 @@ namespace subscriptionId_apiVersion.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     code = property.Value.GetInt32();

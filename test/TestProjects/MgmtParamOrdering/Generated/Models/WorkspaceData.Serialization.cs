@@ -231,7 +231,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             provisioningState = new ProvisioningState(property0.Value.GetString());
@@ -241,7 +240,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             hbiWorkspace = property0.Value.GetBoolean();
@@ -256,7 +254,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             privateLinkCount = property0.Value.GetInt32();
@@ -271,7 +268,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             allowPublicAccessWhenBehindVnet = property0.Value.GetBoolean();
@@ -286,7 +282,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             tenantId = property0.Value.GetGuid();

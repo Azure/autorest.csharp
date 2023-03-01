@@ -38,7 +38,6 @@ namespace multiple_inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     meows = property.Value.GetBoolean();
@@ -48,7 +47,6 @@ namespace multiple_inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     hisses = property.Value.GetBoolean();

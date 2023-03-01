@@ -37,7 +37,6 @@ namespace ExactMatchFlattenInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     foo = property.Value.GetInt32();

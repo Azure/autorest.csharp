@@ -89,7 +89,6 @@ namespace model_flattening.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             maxProductCapacity = new SimpleProductPropertiesMaxProductCapacity(property0.Value.GetString());

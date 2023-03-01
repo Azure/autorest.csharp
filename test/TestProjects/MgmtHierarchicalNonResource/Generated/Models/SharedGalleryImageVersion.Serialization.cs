@@ -45,7 +45,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             publishedDate = property0.Value.GetDateTimeOffset("O");
@@ -55,7 +54,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             endOfLifeDate = property0.Value.GetDateTimeOffset("O");

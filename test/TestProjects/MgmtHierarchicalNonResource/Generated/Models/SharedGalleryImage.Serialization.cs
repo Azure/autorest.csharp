@@ -53,7 +53,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             osType = property0.Value.GetString().ToOperatingSystemType();
@@ -63,7 +62,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             osState = property0.Value.GetString().ToOperatingSystemStateType();
@@ -73,7 +71,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             endOfLifeDate = property0.Value.GetDateTimeOffset("O");
@@ -110,7 +107,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             hyperVGeneration = new HyperVGeneration(property0.Value.GetString());

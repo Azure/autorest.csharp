@@ -26,7 +26,6 @@ namespace MgmtSingletonResource
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     pushButton = property.Value.GetBoolean();

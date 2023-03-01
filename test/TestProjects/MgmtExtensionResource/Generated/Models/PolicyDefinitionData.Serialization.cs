@@ -126,7 +126,6 @@ namespace MgmtExtensionResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             policyType = new PolicyType(property0.Value.GetString());

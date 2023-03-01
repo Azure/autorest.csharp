@@ -180,7 +180,6 @@ namespace MgmtPropertyChooser.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             autoUpgradeMinorVersion = property0.Value.GetBoolean();
@@ -190,7 +189,6 @@ namespace MgmtPropertyChooser.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             enableAutomaticUpgrade = property0.Value.GetBoolean();

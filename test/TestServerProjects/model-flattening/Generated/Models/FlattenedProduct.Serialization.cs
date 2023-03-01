@@ -123,7 +123,6 @@ namespace model_flattening.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             provisioningStateValues = new FlattenedProductPropertiesProvisioningStateValues(property0.Value.GetString());

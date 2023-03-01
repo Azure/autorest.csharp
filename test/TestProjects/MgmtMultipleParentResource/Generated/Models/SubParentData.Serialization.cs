@@ -140,7 +140,6 @@ namespace MgmtMultipleParentResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             asyncExecution = property0.Value.GetBoolean();
@@ -160,7 +159,6 @@ namespace MgmtMultipleParentResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             timeoutInSeconds = property0.Value.GetInt32();

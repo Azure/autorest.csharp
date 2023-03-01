@@ -54,7 +54,6 @@ namespace MgmtLRO
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     properties = BarProperties.DeserializeBarProperties(property.Value);

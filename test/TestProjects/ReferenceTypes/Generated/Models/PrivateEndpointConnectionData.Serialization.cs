@@ -101,7 +101,6 @@ namespace Azure.ResourceManager.Fake.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             provisioningState = new ReferenceTypesPrivateEndpointConnectionProvisioningState(property0.Value.GetString());

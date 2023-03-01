@@ -41,7 +41,6 @@ namespace Azure.ResourceManager.Fake.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     status = new EncryptionStatus(property.Value.GetString());

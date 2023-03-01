@@ -166,7 +166,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             provisioningState = new MgmtMockAndSamplePrivateEndpointConnectionProvisioningState(property0.Value.GetString());

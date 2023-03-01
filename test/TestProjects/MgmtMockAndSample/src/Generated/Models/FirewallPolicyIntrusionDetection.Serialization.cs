@@ -38,7 +38,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     mode = new FirewallPolicyIntrusionDetectionStateType(property.Value.GetString());

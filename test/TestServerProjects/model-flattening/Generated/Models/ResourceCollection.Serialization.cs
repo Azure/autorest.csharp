@@ -56,7 +56,6 @@ namespace model_flattening.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value);
