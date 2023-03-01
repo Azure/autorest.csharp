@@ -162,12 +162,19 @@ namespace CustomizationsInCadl.Models
                     List<IList<string>> array = new List<IList<string>>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        List<string> array0 = new List<string>();
-                        foreach (var item0 in item.EnumerateArray())
+                        if (item.ValueKind == JsonValueKind.Null)
                         {
-                            array0.Add(item0.GetString());
+                            array.Add(null);
                         }
-                        array.Add(array0);
+                        else
+                        {
+                            List<string> array0 = new List<string>();
+                            foreach (var item0 in item.EnumerateArray())
+                            {
+                                array0.Add(item0.GetString());
+                            }
+                            array.Add(array0);
+                        }
                     }
                     badListOfListName = array;
                     continue;

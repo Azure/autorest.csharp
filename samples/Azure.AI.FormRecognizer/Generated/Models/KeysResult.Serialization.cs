@@ -27,12 +27,19 @@ namespace Azure.AI.FormRecognizer.Models
                     Dictionary<string, IList<string>> dictionary = new Dictionary<string, IList<string>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        List<string> array = new List<string>();
-                        foreach (var item in property0.Value.EnumerateArray())
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
                         {
-                            array.Add(item.GetString());
+                            dictionary.Add(property0.Name, null);
                         }
-                        dictionary.Add(property0.Name, array);
+                        else
+                        {
+                            List<string> array = new List<string>();
+                            foreach (var item in property0.Value.EnumerateArray())
+                            {
+                                array.Add(item.GetString());
+                            }
+                            dictionary.Add(property0.Name, array);
+                        }
                     }
                     clusters = dictionary;
                     continue;
