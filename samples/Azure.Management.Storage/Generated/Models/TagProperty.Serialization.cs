@@ -15,6 +15,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static TagProperty DeserializeTagProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> tag = default;
             Optional<DateTimeOffset> timestamp = default;
             Optional<string> objectIdentifier = default;

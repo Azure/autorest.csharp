@@ -64,6 +64,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static DataDisk DeserializeDataDisk(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int lun = default;
             Optional<string> name = default;
             Optional<VirtualHardDisk> vhd = default;

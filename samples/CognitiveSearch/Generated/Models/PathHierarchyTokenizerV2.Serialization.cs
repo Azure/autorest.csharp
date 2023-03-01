@@ -49,6 +49,10 @@ namespace CognitiveSearch.Models
 
         internal static PathHierarchyTokenizerV2 DeserializePathHierarchyTokenizerV2(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<char> delimiter = default;
             Optional<char> replacement = default;
             Optional<int> maxTokenLength = default;

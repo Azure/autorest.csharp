@@ -121,6 +121,10 @@ namespace ExactMatchInheritance
 
         internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @new = default;
             Optional<IList<Uri>> supportingUris = default;
             Optional<Type1> type1 = default;

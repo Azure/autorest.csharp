@@ -31,6 +31,10 @@ namespace Azure.Management.Storage.Models
 
         internal static EncryptionService DeserializeEncryptionService(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> enabled = default;
             Optional<DateTimeOffset> lastEnabledTime = default;
             Optional<KeyType> keyType = default;

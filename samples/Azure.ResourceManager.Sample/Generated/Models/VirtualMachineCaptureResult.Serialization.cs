@@ -27,6 +27,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineCaptureResult DeserializeVirtualMachineCaptureResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> schema = default;
             Optional<string> contentVersion = default;
             Optional<BinaryData> parameters = default;

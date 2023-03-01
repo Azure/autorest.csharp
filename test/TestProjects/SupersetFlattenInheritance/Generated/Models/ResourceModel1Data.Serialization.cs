@@ -26,6 +26,10 @@ namespace SupersetFlattenInheritance
 
         internal static ResourceModel1Data DeserializeResourceModel1Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> foo = default;
             ResourceIdentifier id = default;
             string name = default;

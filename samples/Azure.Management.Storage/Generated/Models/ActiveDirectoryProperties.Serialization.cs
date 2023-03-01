@@ -32,6 +32,10 @@ namespace Azure.Management.Storage.Models
 
         internal static ActiveDirectoryProperties DeserializeActiveDirectoryProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string domainName = default;
             string netBiosDomainName = default;
             string forestName = default;

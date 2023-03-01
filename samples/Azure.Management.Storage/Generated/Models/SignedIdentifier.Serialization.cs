@@ -30,6 +30,10 @@ namespace Azure.Management.Storage.Models
 
         internal static SignedIdentifier DeserializeSignedIdentifier(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<AccessPolicy> accessPolicy = default;
             foreach (var property in element.EnumerateObject())

@@ -75,6 +75,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterface DeserializeNetworkInterface(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> etag = default;
             Optional<string> id = default;
             Optional<string> name = default;

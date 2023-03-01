@@ -42,6 +42,10 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyThreatIntelWhitelist DeserializeFirewallPolicyThreatIntelWhitelist(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<IPAddress>> ipAddresses = default;
             Optional<IList<string>> fqdns = default;
             foreach (var property in element.EnumerateObject())

@@ -55,6 +55,10 @@ namespace MgmtExtensionResource.Models
 
         internal static ParameterDefinitionsValue DeserializeParameterDefinitionsValue(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ParameterType> type = default;
             Optional<IList<BinaryData>> allowedValues = default;
             Optional<BinaryData> defaultValue = default;

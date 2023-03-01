@@ -31,6 +31,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static BootDiagnostics DeserializeBootDiagnostics(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> enabled = default;
             Optional<Uri> storageUri = default;
             foreach (var property in element.EnumerateObject())

@@ -35,6 +35,10 @@ namespace OmitOperationGroups.Models
 
         internal static ModelX DeserializeModelX(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> c = default;
             Optional<string> d = default;
             Optional<string> e = default;

@@ -14,6 +14,10 @@ namespace MgmtLRO.Models
     {
         internal static FakePostResultProperties DeserializeFakePostResultProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> bar = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -47,6 +47,10 @@ namespace CognitiveSearch.Models
 
         internal static IndexingParameters DeserializeIndexingParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> batchSize = default;
             Optional<int> maxFailedItems = default;
             Optional<int> maxFailedItemsPerBatch = default;

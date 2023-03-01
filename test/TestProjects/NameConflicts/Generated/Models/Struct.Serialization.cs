@@ -565,6 +565,10 @@ namespace NameConflicts.Models
 
         internal static Struct DeserializeStruct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> _1 = default;
             Optional<string> @abstract = default;
             Optional<string> @add = default;

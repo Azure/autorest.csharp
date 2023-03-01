@@ -71,6 +71,10 @@ namespace Azure.ResourceManager.Sample
 
         internal static DedicatedHostGroupData DeserializeDedicatedHostGroupData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<string>> zones = default;
             Optional<IList<Uri>> hostUris = default;
             Optional<Guid> tenantId = default;

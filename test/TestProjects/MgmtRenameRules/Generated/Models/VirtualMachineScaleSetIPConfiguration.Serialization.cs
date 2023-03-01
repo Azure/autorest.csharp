@@ -103,6 +103,10 @@ namespace MgmtRenameRules.Models
 
         internal static VirtualMachineScaleSetIPConfiguration DeserializeVirtualMachineScaleSetIPConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<string> id = default;
             Optional<WritableSubResource> subnet = default;

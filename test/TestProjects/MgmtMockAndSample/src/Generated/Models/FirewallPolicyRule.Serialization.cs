@@ -32,6 +32,10 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyRule DeserializeFirewallPolicyRule(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             if (element.TryGetProperty("ruleType", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())

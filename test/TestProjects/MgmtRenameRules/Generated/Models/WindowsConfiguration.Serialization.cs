@@ -56,6 +56,10 @@ namespace MgmtRenameRules.Models
 
         internal static WindowsConfiguration DeserializeWindowsConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> provisionVmAgent = default;
             Optional<bool> enableAutomaticUpdates = default;
             Optional<string> timeZone = default;

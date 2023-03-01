@@ -16,6 +16,10 @@ namespace SubscriptionExtensions.Models
     {
         internal static OvenListResult DeserializeOvenListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<OvenData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

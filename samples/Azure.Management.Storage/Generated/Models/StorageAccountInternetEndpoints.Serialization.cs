@@ -14,6 +14,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static StorageAccountInternetEndpoints DeserializeStorageAccountInternetEndpoints(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> blob = default;
             Optional<string> file = default;
             Optional<string> web = default;

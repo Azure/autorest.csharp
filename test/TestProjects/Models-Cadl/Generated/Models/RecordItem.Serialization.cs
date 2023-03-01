@@ -29,6 +29,10 @@ namespace ModelsInCadl.Models
 
         internal static RecordItem DeserializeRecordItem(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IList<CollectionItem> requiredCollection = default;
             foreach (var property in element.EnumerateObject())
             {

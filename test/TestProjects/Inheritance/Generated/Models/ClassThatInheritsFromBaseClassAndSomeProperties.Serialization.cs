@@ -93,6 +93,10 @@ namespace Inheritance.Models
 
         internal static ClassThatInheritsFromBaseClassAndSomeProperties DeserializeClassThatInheritsFromBaseClassAndSomeProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> someProperty = default;
             Optional<string> someOtherProperty = default;
             Optional<string> baseClassProperty = default;

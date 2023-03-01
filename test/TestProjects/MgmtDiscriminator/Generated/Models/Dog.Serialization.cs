@@ -27,6 +27,10 @@ namespace MgmtDiscriminator.Models
 
         internal static Dog DeserializeDog(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> bark = default;
             PetKind kind = default;
             Optional<string> id = default;

@@ -40,6 +40,10 @@ namespace MgmtExtensionCommonRestOperation
 
         internal static TypeOneData DeserializeTypeOneData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> myType = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

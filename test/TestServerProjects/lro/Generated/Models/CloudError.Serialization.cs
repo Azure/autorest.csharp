@@ -14,6 +14,10 @@ namespace lro.Models
     {
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> code = default;
             Optional<string> message = default;
             foreach (var property in element.EnumerateObject())

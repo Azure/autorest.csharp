@@ -14,6 +14,10 @@ namespace MgmtRenameRules.Models
     {
         internal static InnerError DeserializeInnerError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> exceptiontype = default;
             Optional<string> errordetail = default;
             foreach (var property in element.EnumerateObject())

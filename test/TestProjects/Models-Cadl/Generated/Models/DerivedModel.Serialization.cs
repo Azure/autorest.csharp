@@ -29,6 +29,10 @@ namespace ModelsInCadl.Models
 
         internal static DerivedModel DeserializeDerivedModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IList<CollectionItem> requiredCollection = default;
             foreach (var property in element.EnumerateObject())
             {

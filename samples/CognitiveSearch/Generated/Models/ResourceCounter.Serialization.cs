@@ -14,6 +14,10 @@ namespace CognitiveSearch.Models
     {
         internal static ResourceCounter DeserializeResourceCounter(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             long usage = default;
             Optional<long?> quota = default;
             foreach (var property in element.EnumerateObject())

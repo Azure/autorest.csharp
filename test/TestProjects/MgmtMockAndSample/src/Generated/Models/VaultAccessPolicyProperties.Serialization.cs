@@ -28,6 +28,10 @@ namespace MgmtMockAndSample.Models
 
         internal static VaultAccessPolicyProperties DeserializeVaultAccessPolicyProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IList<AccessPolicyEntry> accessPolicies = default;
             foreach (var property in element.EnumerateObject())
             {

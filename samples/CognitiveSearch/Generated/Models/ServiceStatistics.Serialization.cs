@@ -14,6 +14,10 @@ namespace CognitiveSearch.Models
     {
         internal static ServiceStatistics DeserializeServiceStatistics(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             ServiceCounters counters = default;
             ServiceLimits limits = default;
             foreach (var property in element.EnumerateObject())

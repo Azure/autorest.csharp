@@ -79,6 +79,10 @@ namespace CustomizationsInCadl.Models
 
         internal static ModelWithCustomizedProperties DeserializeModelWithCustomizedProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int propertyToMakeInternal = default;
             int propertyToRename = default;
             float propertyToMakeFloat = default;

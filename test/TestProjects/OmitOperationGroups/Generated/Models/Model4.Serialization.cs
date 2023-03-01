@@ -14,6 +14,10 @@ namespace OmitOperationGroups.Models
     {
         internal static Model4 DeserializeModel4(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> j = default;
             Optional<ModelZ> modelz = default;

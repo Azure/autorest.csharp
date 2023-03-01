@@ -26,6 +26,10 @@ namespace Models.Property.Optional.Models
 
         internal static StringProperty DeserializeStringProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> property = default;
             foreach (var property0 in element.EnumerateObject())
             {

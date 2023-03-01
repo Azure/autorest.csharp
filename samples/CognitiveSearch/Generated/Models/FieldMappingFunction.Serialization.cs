@@ -34,6 +34,10 @@ namespace CognitiveSearch.Models
 
         internal static FieldMappingFunction DeserializeFieldMappingFunction(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<IDictionary<string, object>> parameters = default;
             foreach (var property in element.EnumerateObject())

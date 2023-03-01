@@ -71,6 +71,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static OSProfile DeserializeOSProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> computerName = default;
             Optional<string> adminUsername = default;
             Optional<string> adminPassword = default;

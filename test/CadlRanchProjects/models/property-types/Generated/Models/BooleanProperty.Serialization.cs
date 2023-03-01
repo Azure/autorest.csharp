@@ -23,6 +23,10 @@ namespace Models.Property.Types.Models
 
         internal static BooleanProperty DeserializeBooleanProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             bool property = default;
             foreach (var property0 in element.EnumerateObject())
             {
