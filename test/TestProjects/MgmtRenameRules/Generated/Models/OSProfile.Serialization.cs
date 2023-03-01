@@ -106,7 +106,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     windowsConfiguration = WindowsConfiguration.DeserializeWindowsConfiguration(property.Value);
@@ -116,7 +115,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     linuxConfiguration = LinuxConfiguration.DeserializeLinuxConfiguration(property.Value);

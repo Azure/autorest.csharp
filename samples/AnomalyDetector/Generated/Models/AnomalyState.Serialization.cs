@@ -31,7 +31,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     value = AnomalyValue.DeserializeAnomalyValue(property.Value);

@@ -33,7 +33,6 @@ namespace TypeSchemaMapping.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     uri = new Uri(property.Value.GetString());

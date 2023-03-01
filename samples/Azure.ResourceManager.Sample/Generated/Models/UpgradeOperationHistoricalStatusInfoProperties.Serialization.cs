@@ -26,7 +26,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     runningStatus = UpgradeOperationHistoryStatus.DeserializeUpgradeOperationHistoryStatus(property.Value);
@@ -36,7 +35,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     progress = RollingUpgradeProgressInfo.DeserializeRollingUpgradeProgressInfo(property.Value);
@@ -46,7 +44,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     error = ApiError.DeserializeApiError(property.Value);
@@ -66,7 +63,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     targetImageReference = ImageReference.DeserializeImageReference(property.Value);
@@ -76,7 +72,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     rollbackInfo = RollbackStatusInfo.DeserializeRollbackStatusInfo(property.Value);

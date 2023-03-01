@@ -108,7 +108,6 @@ namespace MgmtMockAndSample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -127,7 +126,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             privateEndpoint = JsonSerializer.Deserialize<Azure.ResourceManager.Resources.Models.SubResource>(property0.Value.GetRawText());
@@ -137,7 +135,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             privateLinkServiceConnectionState = MgmtMockAndSamplePrivateLinkServiceConnectionState.DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(property0.Value);
@@ -147,7 +144,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             provisioningState = new MgmtMockAndSamplePrivateEndpointConnectionProvisioningState(property0.Value.GetString());

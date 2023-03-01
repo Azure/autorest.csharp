@@ -54,7 +54,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     ssh = SshConfiguration.DeserializeSshConfiguration(property.Value);

@@ -22,7 +22,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     template = BinaryData.FromString(property.Value.GetRawText());

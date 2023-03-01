@@ -116,7 +116,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             frontendIPConfiguration = DeserializeSubResource(property0.Value);
@@ -126,7 +125,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             backendIPConfiguration = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(property0.Value);

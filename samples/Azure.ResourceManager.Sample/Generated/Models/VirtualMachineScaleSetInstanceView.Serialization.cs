@@ -25,7 +25,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     virtualMachine = VirtualMachineScaleSetInstanceViewStatusesSummary.DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(property.Value);
@@ -35,7 +34,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<VirtualMachineScaleSetVMExtensionsSummary> array = new List<VirtualMachineScaleSetVMExtensionsSummary>();

@@ -57,7 +57,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        keyvaulturi = null;
                         continue;
                     }
                     keyvaulturi = new Uri(property.Value.GetString());

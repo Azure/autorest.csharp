@@ -119,7 +119,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     schedule = IndexingSchedule.DeserializeIndexingSchedule(property.Value);
@@ -129,7 +128,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     parameters = IndexingParameters.DeserializeIndexingParameters(property.Value);

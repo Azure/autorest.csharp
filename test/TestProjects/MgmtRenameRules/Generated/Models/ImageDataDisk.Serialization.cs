@@ -78,7 +78,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     snapshot = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
@@ -88,7 +87,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     managedDisk = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
@@ -98,7 +96,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        blobUri = null;
                         continue;
                     }
                     blobUri = new Uri(property.Value.GetString());
@@ -138,7 +135,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     diskEncryptionSet = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());

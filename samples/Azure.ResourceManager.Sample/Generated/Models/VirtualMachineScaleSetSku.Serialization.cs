@@ -33,7 +33,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     sku = SampleSku.DeserializeSampleSku(property.Value);
@@ -43,7 +42,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     capacity = VirtualMachineScaleSetSkuCapacity.DeserializeVirtualMachineScaleSetSkuCapacity(property.Value);

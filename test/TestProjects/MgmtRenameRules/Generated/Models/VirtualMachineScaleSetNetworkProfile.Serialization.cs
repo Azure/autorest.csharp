@@ -45,7 +45,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     healthProbe = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());

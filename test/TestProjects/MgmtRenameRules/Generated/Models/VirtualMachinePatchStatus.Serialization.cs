@@ -22,7 +22,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     availablePatchSummary = AvailablePatchSummary.DeserializeAvailablePatchSummary(property.Value);
@@ -32,7 +31,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     lastPatchInstallationSummary = LastPatchInstallationSummary.DeserializeLastPatchInstallationSummary(property.Value);

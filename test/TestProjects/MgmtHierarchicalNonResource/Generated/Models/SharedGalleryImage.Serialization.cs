@@ -83,7 +83,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             identifier = GalleryImageIdentifier.DeserializeGalleryImageIdentifier(property0.Value);
@@ -93,7 +92,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             recommended = RecommendedMachineConfiguration.DeserializeRecommendedMachineConfiguration(property0.Value);
@@ -103,7 +101,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             disallowed = Disallowed.DeserializeDisallowed(property0.Value);
@@ -138,7 +135,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             purchasePlan = ImagePurchasePlan.DeserializeImagePurchasePlan(property0.Value);

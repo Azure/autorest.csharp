@@ -75,7 +75,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        uri = null;
                         continue;
                     }
                     uri = new Uri(property.Value.GetString());
@@ -105,7 +104,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     error = ApiError.DeserializeApiError(property.Value);

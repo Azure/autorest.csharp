@@ -39,7 +39,6 @@ namespace MgmtDiscriminator.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     originGroup = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());

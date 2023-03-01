@@ -44,7 +44,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     diskEncryptionKey = KeyVaultSecretReference.DeserializeKeyVaultSecretReference(property.Value);
@@ -54,7 +53,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     keyEncryptionKey = KeyVaultKeyReference.DeserializeKeyVaultKeyReference(property.Value);

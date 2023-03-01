@@ -45,7 +45,6 @@ namespace MgmtMockAndSample.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             privateEndpoint = JsonSerializer.Deserialize<Azure.ResourceManager.Resources.Models.SubResource>(property0.Value.GetRawText());
@@ -55,7 +54,6 @@ namespace MgmtMockAndSample.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             privateLinkServiceConnectionState = MgmtMockAndSamplePrivateLinkServiceConnectionState.DeserializeMgmtMockAndSamplePrivateLinkServiceConnectionState(property0.Value);

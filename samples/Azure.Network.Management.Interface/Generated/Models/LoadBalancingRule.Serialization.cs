@@ -139,7 +139,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             frontendIPConfiguration = DeserializeSubResource(property0.Value);
@@ -149,7 +148,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             backendAddressPool = DeserializeSubResource(property0.Value);
@@ -159,7 +157,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             probe = DeserializeSubResource(property0.Value);

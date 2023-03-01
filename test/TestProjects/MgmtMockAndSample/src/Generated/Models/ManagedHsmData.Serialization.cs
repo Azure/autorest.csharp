@@ -60,7 +60,6 @@ namespace MgmtMockAndSample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     properties = ManagedHsmProperties.DeserializeManagedHsmProperties(property.Value);
@@ -70,7 +69,6 @@ namespace MgmtMockAndSample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     sku = ManagedHsmSku.DeserializeManagedHsmSku(property.Value);
@@ -115,7 +113,6 @@ namespace MgmtMockAndSample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

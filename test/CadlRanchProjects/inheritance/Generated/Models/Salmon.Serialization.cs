@@ -93,7 +93,6 @@ namespace Models.Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     partner = DeserializeFish(property.Value);

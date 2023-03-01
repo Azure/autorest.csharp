@@ -189,7 +189,6 @@ namespace MgmtExpandResourceTypes
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -243,7 +242,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             targetResource = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
@@ -358,7 +356,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             cnameRecord = CnameRecord.DeserializeCnameRecord(property0.Value);
@@ -368,7 +365,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             soaRecord = SoaRecord.DeserializeSoaRecord(property0.Value);

@@ -76,7 +76,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     optionalReadonlyModel = DerivedModel.DeserializeDerivedModel(property.Value);

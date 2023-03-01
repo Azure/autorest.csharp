@@ -33,7 +33,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        uri = null;
                         continue;
                     }
                     uri = new Uri(property.Value.GetString());

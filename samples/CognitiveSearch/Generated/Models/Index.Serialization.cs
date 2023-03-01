@@ -169,7 +169,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     corsOptions = CorsOptions.DeserializeCorsOptions(property.Value);
@@ -254,7 +253,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);
@@ -264,7 +262,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     similarity = Similarity.DeserializeSimilarity(property.Value);

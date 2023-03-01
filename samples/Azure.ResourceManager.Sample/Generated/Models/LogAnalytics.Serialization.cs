@@ -21,7 +21,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     properties = Models.LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);

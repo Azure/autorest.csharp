@@ -29,7 +29,6 @@ namespace ModelShapes.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     readonlyProperty = ReadonlyModel.DeserializeReadonlyModel(property.Value);

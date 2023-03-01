@@ -28,7 +28,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     innerError = DeserializeErrorModel(property.Value);

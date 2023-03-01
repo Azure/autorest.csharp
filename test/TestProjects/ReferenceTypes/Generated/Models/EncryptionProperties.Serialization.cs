@@ -51,7 +51,6 @@ namespace Azure.ResourceManager.Fake.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     keyVaultProperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);

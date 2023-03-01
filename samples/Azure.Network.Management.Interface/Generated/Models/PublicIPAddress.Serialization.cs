@@ -130,7 +130,6 @@ namespace Azure.Network.Management.Interface.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     sku = PublicIPAddressSku.DeserializePublicIPAddressSku(property.Value);
@@ -224,7 +223,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             ipConfiguration = IPConfiguration.DeserializeIPConfiguration(property0.Value);
@@ -234,7 +232,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             dnsSettings = PublicIPAddressDnsSettings.DeserializePublicIPAddressDnsSettings(property0.Value);
@@ -244,7 +241,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             ddosSettings = DdosSettings.DeserializeDdosSettings(property0.Value);
@@ -274,7 +270,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             publicIPPrefix = SubResource.DeserializeSubResource(property0.Value);

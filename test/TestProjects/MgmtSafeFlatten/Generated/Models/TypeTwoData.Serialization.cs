@@ -65,7 +65,6 @@ namespace MgmtSafeFlatten
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     properties = LayerOneSingle.DeserializeLayerOneSingle(property.Value);
@@ -110,7 +109,6 @@ namespace MgmtSafeFlatten
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

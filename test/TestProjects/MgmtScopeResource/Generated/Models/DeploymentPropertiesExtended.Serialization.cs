@@ -64,7 +64,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     outputs = BinaryData.FromString(property.Value.GetRawText());
@@ -74,7 +73,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     parameters = BinaryData.FromString(property.Value.GetRawText());
@@ -94,7 +92,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);

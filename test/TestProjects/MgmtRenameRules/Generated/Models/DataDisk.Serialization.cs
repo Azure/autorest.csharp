@@ -92,7 +92,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     vhd = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value);
@@ -102,7 +101,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     image = VirtualHardDisk.DeserializeVirtualHardDisk(property.Value);
@@ -147,7 +145,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     managedDisk = ManagedDiskParameters.DeserializeManagedDiskParameters(property.Value);

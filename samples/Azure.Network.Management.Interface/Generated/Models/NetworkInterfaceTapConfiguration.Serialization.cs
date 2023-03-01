@@ -79,7 +79,6 @@ namespace Azure.Network.Management.Interface.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             virtualNetworkTap = VirtualNetworkTap.DeserializeVirtualNetworkTap(property0.Value);

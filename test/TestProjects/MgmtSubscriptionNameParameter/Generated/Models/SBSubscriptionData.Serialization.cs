@@ -133,7 +133,6 @@ namespace MgmtSubscriptionNameParameter
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -302,7 +301,6 @@ namespace MgmtSubscriptionNameParameter
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             clientAffineProperties = SBClientAffineProperties.DeserializeSBClientAffineProperties(property0.Value);

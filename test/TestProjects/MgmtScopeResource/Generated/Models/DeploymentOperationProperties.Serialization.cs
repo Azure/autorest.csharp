@@ -86,7 +86,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     statusMessage = StatusMessage.DeserializeStatusMessage(property.Value);
@@ -96,7 +95,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     request = HttpMessage.DeserializeHttpMessage(property.Value);
@@ -106,7 +104,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     response = HttpMessage.DeserializeHttpMessage(property.Value);

@@ -67,7 +67,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     searchNextPageParameters = SearchRequest.DeserializeSearchRequest(property.Value);

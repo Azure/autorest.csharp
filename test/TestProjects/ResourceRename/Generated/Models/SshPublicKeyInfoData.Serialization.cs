@@ -38,7 +38,6 @@ namespace ResourceRename
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     properties = SshPublicKeyProperties.DeserializeSshPublicKeyProperties(property.Value);
@@ -63,7 +62,6 @@ namespace ResourceRename
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

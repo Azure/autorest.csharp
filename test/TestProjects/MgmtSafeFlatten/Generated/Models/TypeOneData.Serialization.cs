@@ -78,7 +78,6 @@ namespace MgmtSafeFlatten
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     layerOne = LayerOneSingle.DeserializeLayerOneSingle(property.Value);
@@ -88,7 +87,6 @@ namespace MgmtSafeFlatten
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     layerOneType = LayerOneBaseType.DeserializeLayerOneBaseType(property.Value);
@@ -98,7 +96,6 @@ namespace MgmtSafeFlatten
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     layerOneConflict = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
@@ -143,7 +140,6 @@ namespace MgmtSafeFlatten
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

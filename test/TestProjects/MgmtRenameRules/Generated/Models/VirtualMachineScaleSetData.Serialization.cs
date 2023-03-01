@@ -173,7 +173,6 @@ namespace MgmtRenameRules
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     sku = MgmtRenameRulesSku.DeserializeMgmtRenameRulesSku(property.Value);
@@ -183,7 +182,6 @@ namespace MgmtRenameRules
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     plan = MgmtRenameRulesPlan.DeserializeMgmtRenameRulesPlan(property.Value);
@@ -193,7 +191,6 @@ namespace MgmtRenameRules
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
@@ -253,7 +250,6 @@ namespace MgmtRenameRules
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -287,7 +283,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             upgradePolicy = UpgradePolicy.DeserializeUpgradePolicy(property0.Value);
@@ -297,7 +292,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             automaticRepairsPolicy = AutomaticRepairsPolicy.DeserializeAutomaticRepairsPolicy(property0.Value);
@@ -307,7 +301,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             virtualMachineProfile = VirtualMachineScaleSetVmProfile.DeserializeVirtualMachineScaleSetVmProfile(property0.Value);
@@ -377,7 +370,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             proximityPlacementGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
@@ -387,7 +379,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             hostGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
@@ -397,7 +388,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value);
@@ -407,7 +397,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             scaleInPolicy = ScaleInPolicy.DeserializeScaleInPolicy(property0.Value);

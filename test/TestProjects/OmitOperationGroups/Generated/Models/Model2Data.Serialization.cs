@@ -51,7 +51,6 @@ namespace OmitOperationGroups
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     modelx = ModelX.DeserializeModelX(property.Value);
@@ -86,7 +85,6 @@ namespace OmitOperationGroups
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

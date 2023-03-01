@@ -112,7 +112,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     settings = BinaryData.FromString(property.Value.GetRawText());
@@ -122,7 +121,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     protectedSettings = BinaryData.FromString(property.Value.GetRawText());
@@ -132,7 +130,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     rawMessage = property.Value.GetBytesFromBase64("D");
@@ -167,7 +164,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        hsmUri = null;
                         continue;
                     }
                     hsmUri = new Uri(property.Value.GetString());
@@ -232,7 +228,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     networkAcls = MhsmNetworkRuleSet.DeserializeMhsmNetworkRuleSet(property.Value);

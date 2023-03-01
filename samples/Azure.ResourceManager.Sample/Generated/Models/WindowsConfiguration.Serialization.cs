@@ -108,7 +108,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     patchSettings = PatchSettings.DeserializePatchSettings(property.Value);
@@ -118,7 +117,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     winRM = WinRMConfiguration.DeserializeWinRMConfiguration(property.Value);

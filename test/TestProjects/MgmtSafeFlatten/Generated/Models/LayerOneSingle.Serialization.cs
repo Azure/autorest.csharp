@@ -32,7 +32,6 @@ namespace MgmtSafeFlatten.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     layerTwo = LayerTwoSingle.DeserializeLayerTwoSingle(property.Value);

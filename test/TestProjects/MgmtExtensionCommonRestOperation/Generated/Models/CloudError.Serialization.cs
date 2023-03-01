@@ -21,7 +21,6 @@ namespace MgmtExtensionCommonRestOperation.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     error = Models.ErrorResponse.DeserializeErrorResponse(property.Value);

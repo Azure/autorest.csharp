@@ -38,7 +38,6 @@ namespace NoTypeReplacement
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     foo = JsonSerializer.Deserialize<SubResource>(property.Value.GetRawText());
@@ -63,7 +62,6 @@ namespace NoTypeReplacement
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

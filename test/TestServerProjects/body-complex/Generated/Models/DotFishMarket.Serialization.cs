@@ -25,7 +25,6 @@ namespace body_complex.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     sampleSalmon = DotSalmon.DeserializeDotSalmon(property.Value);
@@ -50,7 +49,6 @@ namespace body_complex.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     sampleFish = DotFish.DeserializeDotFish(property.Value);

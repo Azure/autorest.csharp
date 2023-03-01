@@ -127,7 +127,6 @@ namespace Azure.ResourceManager.Sample.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             subnet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
@@ -147,7 +146,6 @@ namespace Azure.ResourceManager.Sample.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             publicIPAddressConfiguration = VirtualMachineScaleSetPublicIPAddressConfiguration.DeserializeVirtualMachineScaleSetPublicIPAddressConfiguration(property0.Value);

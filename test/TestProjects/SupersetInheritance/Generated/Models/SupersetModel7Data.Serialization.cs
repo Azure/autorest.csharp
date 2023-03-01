@@ -57,7 +57,6 @@ namespace SupersetInheritance
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = SupersetModel7SystemData.DeserializeSupersetModel7SystemData(property.Value);

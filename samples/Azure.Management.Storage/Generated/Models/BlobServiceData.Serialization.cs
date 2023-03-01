@@ -90,7 +90,6 @@ namespace Azure.Management.Storage
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     sku = StorageSku.DeserializeStorageSku(property.Value);
@@ -115,7 +114,6 @@ namespace Azure.Management.Storage
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -134,7 +132,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             cors = CorsRules.DeserializeCorsRules(property0.Value);
@@ -149,7 +146,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             deleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
@@ -179,7 +175,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             changeFeed = ChangeFeed.DeserializeChangeFeed(property0.Value);
@@ -189,7 +184,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             restorePolicy = RestorePolicyProperties.DeserializeRestorePolicyProperties(property0.Value);
@@ -199,7 +193,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             containerDeleteRetentionPolicy = DeleteRetentionPolicy.DeserializeDeleteRetentionPolicy(property0.Value);
@@ -209,7 +202,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             lastAccessTimeTrackingPolicy = LastAccessTimeTrackingPolicy.DeserializeLastAccessTimeTrackingPolicy(property0.Value);

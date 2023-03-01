@@ -166,7 +166,6 @@ namespace Azure.Management.Storage
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     sku = StorageSku.DeserializeStorageSku(property.Value);
@@ -197,7 +196,6 @@ namespace Azure.Management.Storage
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     extendedLocation = JsonSerializer.Deserialize<ExtendedLocation>(property.Value.GetRawText());
@@ -242,7 +240,6 @@ namespace Azure.Management.Storage
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -271,7 +268,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             primaryEndpoints = Endpoints.DeserializeEndpoints(property0.Value);
@@ -331,7 +327,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             customDomain = CustomDomain.DeserializeCustomDomain(property0.Value);
@@ -341,7 +336,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             sasPolicy = SasPolicy.DeserializeSasPolicy(property0.Value);
@@ -351,7 +345,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             keyPolicy = KeyPolicy.DeserializeKeyPolicy(property0.Value);
@@ -361,7 +354,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             keyCreationTime = KeyCreationTime.DeserializeKeyCreationTime(property0.Value);
@@ -371,7 +363,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             secondaryEndpoints = Endpoints.DeserializeEndpoints(property0.Value);
@@ -381,7 +372,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             encryption = Encryption.DeserializeEncryption(property0.Value);
@@ -401,7 +391,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             azureFilesIdentityBasedAuthentication = AzureFilesIdentityBasedAuthentication.DeserializeAzureFilesIdentityBasedAuthentication(property0.Value);
@@ -421,7 +410,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             networkAcls = NetworkRuleSet.DeserializeNetworkRuleSet(property0.Value);
@@ -441,7 +429,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             geoReplicationStats = GeoReplicationStats.DeserializeGeoReplicationStats(property0.Value);
@@ -486,7 +473,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             routingPreference = RoutingPreference.DeserializeRoutingPreference(property0.Value);
@@ -496,7 +482,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             blobRestoreStatus = BlobRestoreStatus.DeserializeBlobRestoreStatus(property0.Value);
@@ -576,7 +561,6 @@ namespace Azure.Management.Storage
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             immutableStorageWithVersioning = ImmutableStorageAccount.DeserializeImmutableStorageAccount(property0.Value);

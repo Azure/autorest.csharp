@@ -199,7 +199,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        vaultUri = null;
                         continue;
                     }
                     vaultUri = new Uri(property.Value.GetString());
@@ -299,7 +298,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     networkAcls = NetworkRuleSet.DeserializeNetworkRuleSet(property.Value);
@@ -339,7 +337,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     readWriteSingleStringProperty = SinglePropertyModel.DeserializeSinglePropertyModel(property.Value);
@@ -349,7 +346,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     readOnlySingleStringProperty = ReadOnlySinglePropertyModel.DeserializeReadOnlySinglePropertyModel(property.Value);
@@ -359,7 +355,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     extremelyDeepStringProperty = ExtremelyDeepSinglePropertyModel.DeserializeExtremelyDeepSinglePropertyModel(property.Value);

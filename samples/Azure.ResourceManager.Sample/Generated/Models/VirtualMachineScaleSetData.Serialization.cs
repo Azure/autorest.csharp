@@ -155,7 +155,6 @@ namespace Azure.ResourceManager.Sample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     sku = SampleSku.DeserializeSampleSku(property.Value);
@@ -165,7 +164,6 @@ namespace Azure.ResourceManager.Sample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     plan = SamplePlan.DeserializeSamplePlan(property.Value);
@@ -175,7 +173,6 @@ namespace Azure.ResourceManager.Sample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
@@ -235,7 +232,6 @@ namespace Azure.ResourceManager.Sample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -254,7 +250,6 @@ namespace Azure.ResourceManager.Sample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             upgradePolicy = UpgradePolicy.DeserializeUpgradePolicy(property0.Value);
@@ -264,7 +259,6 @@ namespace Azure.ResourceManager.Sample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             automaticRepairsPolicy = AutomaticRepairsPolicy.DeserializeAutomaticRepairsPolicy(property0.Value);
@@ -274,7 +268,6 @@ namespace Azure.ResourceManager.Sample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             virtualMachineProfile = VirtualMachineScaleSetVMProfile.DeserializeVirtualMachineScaleSetVMProfile(property0.Value);
@@ -344,7 +337,6 @@ namespace Azure.ResourceManager.Sample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             proximityPlacementGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
@@ -354,7 +346,6 @@ namespace Azure.ResourceManager.Sample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             hostGroup = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
@@ -364,7 +355,6 @@ namespace Azure.ResourceManager.Sample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value);
@@ -374,7 +364,6 @@ namespace Azure.ResourceManager.Sample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             scaleInPolicy = ScaleInPolicy.DeserializeScaleInPolicy(property0.Value);

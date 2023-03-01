@@ -136,7 +136,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     alignPolicy = AlignPolicy.DeserializeAlignPolicy(property.Value);
@@ -171,7 +170,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     diagnosticsInfo = DiagnosticsInfo.DeserializeDiagnosticsInfo(property.Value);

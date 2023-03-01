@@ -98,7 +98,6 @@ namespace MgmtOptionalConstant
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -117,7 +116,6 @@ namespace MgmtOptionalConstant
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             listener = ModelWithRequiredConstant.DeserializeModelWithRequiredConstant(property0.Value);
@@ -127,7 +125,6 @@ namespace MgmtOptionalConstant
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             content = ModelWithOptionalConstant.DeserializeModelWithOptionalConstant(property0.Value);

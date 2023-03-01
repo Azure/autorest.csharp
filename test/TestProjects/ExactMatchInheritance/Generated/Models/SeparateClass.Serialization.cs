@@ -46,7 +46,6 @@ namespace ExactMatchInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     modelProperty = ExactMatchModel10.DeserializeExactMatchModel10(property.Value);

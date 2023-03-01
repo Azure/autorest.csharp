@@ -134,7 +134,6 @@ namespace Azure.ResourceManager.Sample.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             plan = PurchasePlan.DeserializePurchasePlan(property0.Value);
@@ -144,7 +143,6 @@ namespace Azure.ResourceManager.Sample.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             osDiskImage = OSDiskImage.DeserializeOSDiskImage(property0.Value);
@@ -169,7 +167,6 @@ namespace Azure.ResourceManager.Sample.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             automaticOSUpgradeProperties = AutomaticOSUpgradeProperties.DeserializeAutomaticOSUpgradeProperties(property0.Value);
@@ -189,7 +186,6 @@ namespace Azure.ResourceManager.Sample.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             disallowed = DisallowedConfiguration.DeserializeDisallowedConfiguration(property0.Value);

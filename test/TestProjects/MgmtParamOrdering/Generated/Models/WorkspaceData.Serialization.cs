@@ -165,7 +165,6 @@ namespace MgmtParamOrdering
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -224,7 +223,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                discoveryUrl = null;
                                 continue;
                             }
                             discoveryUrl = new Uri(property0.Value.GetString());

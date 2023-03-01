@@ -176,7 +176,6 @@ namespace Azure.ResourceManager.Sample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             settings = BinaryData.FromString(property0.Value.GetRawText());

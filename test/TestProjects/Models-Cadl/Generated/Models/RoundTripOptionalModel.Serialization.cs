@@ -251,7 +251,6 @@ namespace ModelsInCadl.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     optionalModel = DerivedModel.DeserializeDerivedModel(property.Value);

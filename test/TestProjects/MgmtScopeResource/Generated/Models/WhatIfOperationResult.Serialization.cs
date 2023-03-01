@@ -29,7 +29,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);

@@ -137,7 +137,6 @@ namespace MgmtRenameRules
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     sku = MgmtRenameRulesSku.DeserializeMgmtRenameRulesSku(property.Value);
@@ -147,7 +146,6 @@ namespace MgmtRenameRules
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     plan = MgmtRenameRulesPlan.DeserializeMgmtRenameRulesPlan(property.Value);
@@ -207,7 +205,6 @@ namespace MgmtRenameRules
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -241,7 +238,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             instanceView = VirtualMachineScaleSetVmInstanceView.DeserializeVirtualMachineScaleSetVmInstanceView(property0.Value);
@@ -251,7 +247,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             hardwareProfile = HardwareProfile.DeserializeHardwareProfile(property0.Value);
@@ -261,7 +256,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             storageProfile = StorageProfile.DeserializeStorageProfile(property0.Value);
@@ -271,7 +265,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             additionalCapabilities = AdditionalCapabilities.DeserializeAdditionalCapabilities(property0.Value);
@@ -281,7 +274,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             osProfile = OSProfile.DeserializeOSProfile(property0.Value);
@@ -291,7 +283,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             securityProfile = SecurityProfile.DeserializeSecurityProfile(property0.Value);
@@ -301,7 +292,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             networkProfile = NetworkProfile.DeserializeNetworkProfile(property0.Value);
@@ -311,7 +301,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             networkProfileConfiguration = VirtualMachineScaleSetVmNetworkProfileConfiguration.DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(property0.Value);
@@ -321,7 +310,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             diagnosticsProfile = DiagnosticsProfile.DeserializeDiagnosticsProfile(property0.Value);
@@ -331,7 +319,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             availabilitySet = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
@@ -356,7 +343,6 @@ namespace MgmtRenameRules
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             protectionPolicy = VirtualMachineScaleSetVmProtectionPolicy.DeserializeVirtualMachineScaleSetVmProtectionPolicy(property0.Value);

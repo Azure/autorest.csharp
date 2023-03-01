@@ -21,7 +21,6 @@ namespace TypeSchemaMapping.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     internalProperty = InternalModel.DeserializeInternalModel(property.Value);

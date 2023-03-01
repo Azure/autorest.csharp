@@ -40,7 +40,6 @@ namespace Azure.AI.FormRecognizer.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     analyzeResult = AnalyzeResult.DeserializeAnalyzeResult(property.Value);

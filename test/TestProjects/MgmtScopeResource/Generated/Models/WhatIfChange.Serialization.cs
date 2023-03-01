@@ -41,7 +41,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     before = BinaryData.FromString(property.Value.GetRawText());
@@ -51,7 +50,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     after = BinaryData.FromString(property.Value.GetRawText());
