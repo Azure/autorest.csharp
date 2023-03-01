@@ -3323,14 +3323,7 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Product.DeserializeProduct(item));
-                            }
+                            array.Add(Product.DeserializeProduct(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3355,14 +3348,7 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Product.DeserializeProduct(item));
-                            }
+                            array.Add(Product.DeserializeProduct(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3463,14 +3449,7 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Product.DeserializeProduct(item));
-                            }
+                            array.Add(Product.DeserializeProduct(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
@@ -3495,14 +3474,7 @@ namespace body_array
                         List<Product> array = new List<Product>();
                         foreach (var item in document.RootElement.EnumerateArray())
                         {
-                            if (item.ValueKind == JsonValueKind.Null)
-                            {
-                                array.Add(null);
-                            }
-                            else
-                            {
-                                array.Add(Product.DeserializeProduct(item));
-                            }
+                            array.Add(Product.DeserializeProduct(item));
                         }
                         value = array;
                         return Response.FromValue(value, message.Response);
