@@ -24,6 +24,10 @@ namespace CognitiveSearch.Models
 
         internal static DistanceScoringParameters DeserializeDistanceScoringParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string referencePointParameter = default;
             double boostingDistance = default;
             foreach (var property in element.EnumerateObject())

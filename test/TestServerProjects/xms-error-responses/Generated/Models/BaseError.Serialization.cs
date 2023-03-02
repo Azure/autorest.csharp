@@ -14,6 +14,10 @@ namespace xms_error_responses.Models
     {
         internal static BaseError DeserializeBaseError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> someBaseProp = default;
             foreach (var property in element.EnumerateObject())
             {

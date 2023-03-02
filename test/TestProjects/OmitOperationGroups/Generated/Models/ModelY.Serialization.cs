@@ -25,6 +25,10 @@ namespace OmitOperationGroups.Models
 
         internal static ModelY DeserializeModelY(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> e = default;
             foreach (var property in element.EnumerateObject())
             {

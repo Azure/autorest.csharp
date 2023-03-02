@@ -57,6 +57,10 @@ namespace AnomalyDetector.Models
 
         internal static AlignPolicy DeserializeAlignPolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<AlignMode?> alignMode = default;
             Optional<FillNAMethod?> fillNAMethod = default;
             Optional<float?> paddingValue = default;

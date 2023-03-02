@@ -40,6 +40,10 @@ namespace SupersetFlattenInheritance
 
         internal static TrackedResourceModel1Data DeserializeTrackedResourceModel1Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> foo = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

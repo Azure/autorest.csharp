@@ -25,6 +25,10 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static NsRecord DeserializeNsRecord(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> nsdname = default;
             foreach (var property in element.EnumerateObject())
             {

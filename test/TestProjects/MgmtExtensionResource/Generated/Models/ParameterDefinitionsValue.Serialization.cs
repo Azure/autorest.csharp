@@ -28,6 +28,11 @@ namespace MgmtExtensionResource.Models
                 writer.WriteStartArray();
                 foreach (var item in AllowedValues)
                 {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item);
 #else
@@ -55,6 +60,10 @@ namespace MgmtExtensionResource.Models
 
         internal static ParameterDefinitionsValue DeserializeParameterDefinitionsValue(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ParameterType> type = default;
             Optional<IList<BinaryData>> allowedValues = default;
             Optional<BinaryData> defaultValue = default;
@@ -81,7 +90,14 @@ namespace MgmtExtensionResource.Models
                     List<BinaryData> array = new List<BinaryData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(BinaryData.FromString(item.GetRawText()));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BinaryData.FromString(item.GetRawText()));
+                        }
                     }
                     allowedValues = array;
                     continue;

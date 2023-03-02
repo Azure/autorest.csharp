@@ -26,6 +26,10 @@ namespace CognitiveSearch.Models
 
         internal static SnowballTokenFilter DeserializeSnowballTokenFilter(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             SnowballTokenFilterLanguage language = default;
             string odataType = default;
             string name = default;

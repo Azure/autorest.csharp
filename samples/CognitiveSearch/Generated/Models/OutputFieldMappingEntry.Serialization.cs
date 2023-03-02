@@ -27,6 +27,10 @@ namespace CognitiveSearch.Models
 
         internal static OutputFieldMappingEntry DeserializeOutputFieldMappingEntry(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<string> targetName = default;
             foreach (var property in element.EnumerateObject())

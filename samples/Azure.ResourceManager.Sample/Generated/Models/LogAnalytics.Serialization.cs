@@ -14,6 +14,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static LogAnalytics DeserializeLogAnalytics(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<LogAnalyticsOutput> properties = default;
             foreach (var property in element.EnumerateObject())
             {

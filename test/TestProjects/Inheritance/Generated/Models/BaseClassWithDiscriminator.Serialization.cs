@@ -85,6 +85,10 @@ namespace Inheritance.Models
 
         internal static BaseClassWithDiscriminator DeserializeBaseClassWithDiscriminator(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             if (element.TryGetProperty("DiscriminatorProperty", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())

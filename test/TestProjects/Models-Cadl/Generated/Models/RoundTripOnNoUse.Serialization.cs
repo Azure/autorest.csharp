@@ -31,6 +31,10 @@ namespace ModelsInCadl.Models
 
         internal static RoundTripOnNoUse DeserializeRoundTripOnNoUse(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IList<CollectionItem> requiredCollection = default;
             string baseModelProp = default;
             foreach (var property in element.EnumerateObject())

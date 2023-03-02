@@ -48,6 +48,10 @@ namespace body_complex.Models
 
         internal static Shark DeserializeShark(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             if (element.TryGetProperty("fishtype", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())

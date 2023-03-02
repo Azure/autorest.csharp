@@ -31,6 +31,10 @@ namespace LroBasicCadl.Models
 
         internal static Project DeserializeProject(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string id = default;
             Optional<string> description = default;
             Optional<string> name = default;

@@ -30,6 +30,10 @@ namespace MgmtRenameRules.Models
 
         internal static VirtualMachineScaleSetIPTag DeserializeVirtualMachineScaleSetIPTag(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> ipTagType = default;
             Optional<string> tag = default;
             foreach (var property in element.EnumerateObject())

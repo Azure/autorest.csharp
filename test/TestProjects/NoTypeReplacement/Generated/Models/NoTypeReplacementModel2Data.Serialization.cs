@@ -27,6 +27,10 @@ namespace NoTypeReplacement
 
         internal static NoTypeReplacementModel2Data DeserializeNoTypeReplacementModel2Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<NoSubResourceModel> foo = default;
             ResourceIdentifier id = default;
             string name = default;

@@ -57,6 +57,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static ImageDisk DeserializeImageDisk(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<WritableSubResource> snapshot = default;
             Optional<WritableSubResource> managedDisk = default;
             Optional<Uri> blobUri = default;

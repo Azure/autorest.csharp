@@ -26,6 +26,10 @@ namespace MgmtSingletonResource
 
         internal static CarData DeserializeCarData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> horsepower = default;
             ResourceIdentifier id = default;
             string name = default;

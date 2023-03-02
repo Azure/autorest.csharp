@@ -14,6 +14,10 @@ namespace CognitiveSearch.Models
     {
         internal static ServiceCounters DeserializeServiceCounters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             ResourceCounter documentCount = default;
             ResourceCounter indexesCount = default;
             ResourceCounter indexersCount = default;

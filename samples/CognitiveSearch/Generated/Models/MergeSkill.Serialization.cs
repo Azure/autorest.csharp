@@ -62,6 +62,10 @@ namespace CognitiveSearch.Models
 
         internal static MergeSkill DeserializeMergeSkill(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> insertPreTag = default;
             Optional<string> insertPostTag = default;
             string odataType = default;

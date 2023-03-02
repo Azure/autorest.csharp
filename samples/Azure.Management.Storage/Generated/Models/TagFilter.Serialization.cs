@@ -26,6 +26,10 @@ namespace Azure.Management.Storage.Models
 
         internal static TagFilter DeserializeTagFilter(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             string op = default;
             string value = default;

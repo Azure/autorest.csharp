@@ -14,6 +14,10 @@ namespace xms_error_responses.Models
     {
         internal static UnknownNotFoundErrorBase DeserializeUnknownNotFoundErrorBase(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> reason = default;
             string whatNotFound = "Unknown";
             Optional<string> someBaseProp = default;

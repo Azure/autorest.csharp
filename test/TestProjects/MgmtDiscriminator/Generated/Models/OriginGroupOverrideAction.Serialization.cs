@@ -24,6 +24,10 @@ namespace MgmtDiscriminator.Models
 
         internal static OriginGroupOverrideAction DeserializeOriginGroupOverrideAction(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             OriginGroupOverrideActionParameters parameters = default;
             DeliveryRuleActionType name = default;
             Optional<string> foo = default;

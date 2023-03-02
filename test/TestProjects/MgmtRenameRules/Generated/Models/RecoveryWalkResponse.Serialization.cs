@@ -14,6 +14,10 @@ namespace MgmtRenameRules.Models
     {
         internal static RecoveryWalkResponse DeserializeRecoveryWalkResponse(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> walkPerformed = default;
             Optional<int> nextPlatformUpdateDomain = default;
             foreach (var property in element.EnumerateObject())
