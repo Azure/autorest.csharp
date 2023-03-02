@@ -51,8 +51,16 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "generate-convenience-methods": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },
         debug: { type: "boolean", nullable: true },
-        "treat-empty-string-as-null-for-models": { type: "array", nullable: true, items: { type: "string" } },
-        "treat-empty-string-as-null-for-extra-types": { type: "array", nullable: true, items: { type: "string" } }
+        "treat-empty-string-as-null-for-models": {
+            type: "array",
+            nullable: true,
+            items: { type: "string" }
+        },
+        "treat-empty-string-as-null-for-extra-types": {
+            type: "array",
+            nullable: true,
+            items: { type: "string" }
+        }
     },
     required: []
 };
