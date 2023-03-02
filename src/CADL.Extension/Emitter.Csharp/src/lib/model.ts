@@ -637,6 +637,7 @@ export function getInputType(
     }
 }
 
+/* Navigate all the models in the whole namespace. */
 export function navigateModels(
     program: Program,
     namespace: Namespace,
