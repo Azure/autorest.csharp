@@ -14,6 +14,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static TemplateHashResult DeserializeTemplateHashResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> minifiedTemplate = default;
             Optional<string> templateHash = default;
             foreach (var property in element.EnumerateObject())

@@ -16,6 +16,10 @@ namespace MgmtOptionalConstant.Models
     {
         internal static OptionalMachineListResult DeserializeOptionalMachineListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<OptionalMachineData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

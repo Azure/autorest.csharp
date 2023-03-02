@@ -114,6 +114,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceIPConfiguration DeserializeNetworkInterfaceIPConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> etag = default;
             Optional<string> id = default;

@@ -16,6 +16,10 @@ namespace AnomalyDetector.Models
     {
         internal static CorrelationChanges DeserializeCorrelationChanges(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<string>> changedVariables = default;
             foreach (var property in element.EnumerateObject())
             {

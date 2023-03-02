@@ -47,6 +47,10 @@ namespace MgmtMockAndSample.Models
 
         internal static Probe DeserializeProbe(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             bool disableProbe = default;
             Optional<int> initialDelaySeconds = default;
             Optional<int> periodSeconds = default;

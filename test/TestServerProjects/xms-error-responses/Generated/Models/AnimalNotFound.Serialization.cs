@@ -14,6 +14,10 @@ namespace xms_error_responses.Models
     {
         internal static AnimalNotFound DeserializeAnimalNotFound(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> reason = default;
             string whatNotFound = default;

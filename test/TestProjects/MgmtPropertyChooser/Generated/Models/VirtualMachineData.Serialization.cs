@@ -106,6 +106,10 @@ namespace MgmtPropertyChooser
 
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ArmPlan> plan = default;
             Optional<IReadOnlyList<VirtualMachineExtension>> resources = default;
             Optional<ManagedServiceIdentity> identity = default;

@@ -27,6 +27,10 @@ namespace Models.Inheritance.Models
 
         internal static Siamese DeserializeSiamese(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             bool smart = default;
             int age = default;
             string name = default;

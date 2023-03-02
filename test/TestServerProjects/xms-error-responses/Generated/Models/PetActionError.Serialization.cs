@@ -14,6 +14,10 @@ namespace xms_error_responses.Models
     {
         internal static PetActionError DeserializePetActionError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             if (element.TryGetProperty("errorType", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())

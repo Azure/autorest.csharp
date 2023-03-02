@@ -24,6 +24,10 @@ namespace MgmtDiscriminator.Models
 
         internal static OriginGroupOverrideActionParameters DeserializeOriginGroupOverrideActionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             OriginGroupOverrideActionParametersTypeName typeName = default;
             WritableSubResource originGroup = default;
             foreach (var property in element.EnumerateObject())

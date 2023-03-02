@@ -17,6 +17,10 @@ namespace Azure.Language.Authoring.Models
     {
         internal static DeploymentJob DeserializeDeploymentJob(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string jobId = default;
             DateTimeOffset createdDateTime = default;
             DateTimeOffset lastUpdatedDateTime = default;

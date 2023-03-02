@@ -14,6 +14,10 @@ namespace body_complex.Models
     {
         internal static MyDerivedType DeserializeMyDerivedType(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> propD1 = default;
             MyKind kind = default;
             Optional<string> propB1 = default;

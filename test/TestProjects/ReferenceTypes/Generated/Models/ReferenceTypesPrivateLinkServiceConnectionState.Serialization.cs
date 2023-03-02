@@ -38,6 +38,10 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static ReferenceTypesPrivateLinkServiceConnectionState DeserializeReferenceTypesPrivateLinkServiceConnectionState(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ReferenceTypesPrivateEndpointServiceConnectionStatus> status = default;
             Optional<string> description = default;
             Optional<string> actionsRequired = default;

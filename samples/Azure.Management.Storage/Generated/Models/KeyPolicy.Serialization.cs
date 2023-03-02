@@ -22,6 +22,10 @@ namespace Azure.Management.Storage.Models
 
         internal static KeyPolicy DeserializeKeyPolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int keyExpirationPeriodInDays = default;
             foreach (var property in element.EnumerateObject())
             {

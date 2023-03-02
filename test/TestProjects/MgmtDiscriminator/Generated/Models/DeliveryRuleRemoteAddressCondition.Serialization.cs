@@ -24,6 +24,10 @@ namespace MgmtDiscriminator.Models
 
         internal static DeliveryRuleRemoteAddressCondition DeserializeDeliveryRuleRemoteAddressCondition(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             RemoteAddressMatchConditionParameters parameters = default;
             MatchVariable name = default;
             Optional<string> foo = default;

@@ -14,6 +14,10 @@ namespace TypeSchemaMapping.Models
     {
         internal static InternalModel DeserializeInternalModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> stringProperty = default;
             foreach (var property in element.EnumerateObject())
             {

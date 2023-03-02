@@ -35,6 +35,10 @@ namespace Azure.Management.Storage.Models
 
         internal static ManagementPolicyVersion DeserializeManagementPolicyVersion(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DateAfterCreation> tierToCool = default;
             Optional<DateAfterCreation> tierToArchive = default;
             Optional<DateAfterCreation> delete = default;

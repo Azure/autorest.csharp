@@ -58,6 +58,10 @@ namespace MgmtMockAndSample
 
         internal static DiskEncryptionSetData DeserializeDiskEncryptionSetData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ManagedServiceIdentity> identity = default;
             Optional<AzureLocation> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;

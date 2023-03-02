@@ -32,6 +32,10 @@ namespace MgmtMockAndSample.Models
 
         internal static UnknownFirewallPolicyRule DeserializeUnknownFirewallPolicyRule(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> description = default;
             FirewallPolicyRuleType ruleType = "Unknown";

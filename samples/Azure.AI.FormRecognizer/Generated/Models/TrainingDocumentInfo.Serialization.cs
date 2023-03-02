@@ -15,6 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TrainingDocumentInfo DeserializeTrainingDocumentInfo(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string documentName = default;
             int pages = default;
             IReadOnlyList<ErrorInformation> errors = default;

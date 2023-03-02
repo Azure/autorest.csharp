@@ -36,6 +36,10 @@ namespace MgmtScopeResource
 
         internal static GuestConfigurationAssignmentData DeserializeGuestConfigurationAssignmentData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<GuestConfigurationAssignmentProperties> properties = default;
             Optional<string> id = default;
             Optional<string> name = default;

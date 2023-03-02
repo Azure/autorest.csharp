@@ -16,6 +16,10 @@ namespace MgmtListMethods.Models
     {
         internal static SubParentWithNonResChWithLocListResult DeserializeSubParentWithNonResChWithLocListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<SubParentWithNonResChWithLocData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

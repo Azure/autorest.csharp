@@ -15,6 +15,10 @@ namespace MgmtScopeResource.Models
     {
         internal static DeploymentOperationsListResult DeserializeDeploymentOperationsListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<DeploymentOperation>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

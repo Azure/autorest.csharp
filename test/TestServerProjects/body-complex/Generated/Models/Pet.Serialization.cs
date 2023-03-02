@@ -30,6 +30,10 @@ namespace body_complex.Models
 
         internal static Pet DeserializePet(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> id = default;
             Optional<string> name = default;
             foreach (var property in element.EnumerateObject())

@@ -25,6 +25,10 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static CnameRecord DeserializeCnameRecord(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> cname = default;
             foreach (var property in element.EnumerateObject())
             {
