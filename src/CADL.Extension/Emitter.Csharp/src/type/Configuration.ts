@@ -12,4 +12,6 @@ export interface Configuration {
         | "internalize"
         | "keepAll";
     "model-namespace"?: boolean;
+    "treat-empty-string-as-null-for-models"?: string[];
+    "treat-empty-string-as-null-for-extra-types"?: string[];
 }

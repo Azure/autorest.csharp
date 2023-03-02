@@ -19,6 +19,8 @@ export type NetEmitterOptions = {
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
     debug?: boolean;
+    "treat-empty-string-as-null-for-models"?: string[];
+    "treat-empty-string-as-null-for-extra-types"?: string[];
 } & DpgEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -48,7 +50,9 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "generate-protocol-methods": { type: "boolean", nullable: true },
         "generate-convenience-methods": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },
-        debug: { type: "boolean", nullable: true }
+        debug: { type: "boolean", nullable: true },
+        "treat-empty-string-as-null-for-models": { type: "array", nullable: true, items: { type: "string" } },
+        "treat-empty-string-as-null-for-extra-types": { type: "array", nullable: true, items: { type: "string" } }
     },
     required: []
 };
@@ -64,7 +68,9 @@ const defaultOptions = {
     "generate-protocol-methods": true,
     "generate-convenience-methods": true,
     "package-name": undefined,
-    debug: undefined
+    debug: undefined,
+    "treat-empty-string-as-null-for-models": undefined,
+    "treat-empty-string-as-null-for-extra-types": []
 };
 
 export function resolveOptions(context: EmitContext<NetEmitterOptions>) {

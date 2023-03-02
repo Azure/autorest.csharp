@@ -6,5 +6,16 @@
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],
-  "unreferenced-types-handling": "keepAll"
+  "unreferenced-types-handling": "keepAll",
+  "TreatEmptyStringAsNullForModels": [
+    "DurationProperty",
+    "DatetimeProperty"
+  ],
+  "TreatEmptyStringAsNullForTypes": [
+    "TimeSpan",
+    "Uri",
+    "Guid",
+    "ResourceIdentifier",
+    "DateTimeOffset"
+  ]
 }
