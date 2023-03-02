@@ -43,6 +43,10 @@ namespace CadlGenerateAllModels.Models
 
         internal static RoundTripModel DeserializeRoundTripModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string requiredString = default;
             int requiredInt = default;
             IList<SimpleEnum> requiredCollection = default;
