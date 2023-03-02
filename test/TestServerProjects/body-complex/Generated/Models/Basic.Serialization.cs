@@ -42,6 +42,10 @@ namespace body_complex.Models
 
         internal static Basic DeserializeBasic(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int?> id = default;
             Optional<string> name = default;
             Optional<CMYKColors> color = default;

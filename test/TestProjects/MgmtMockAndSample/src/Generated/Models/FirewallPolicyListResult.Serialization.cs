@@ -16,6 +16,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static FirewallPolicyListResult DeserializeFirewallPolicyListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<FirewallPolicyData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

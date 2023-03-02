@@ -22,6 +22,10 @@ namespace MgmtSafeFlatten.Models
 
         internal static UnknownLayerOneBaseType DeserializeUnknownLayerOneBaseType(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             LayerOneTypeName name = "Unknown";
             foreach (var property in element.EnumerateObject())
             {

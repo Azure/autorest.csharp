@@ -30,6 +30,10 @@ namespace ResourceRename.Models
 
         internal static SshPublicKeyProperties DeserializeSshPublicKeyProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> path = default;
             Optional<string> keyData = default;
             foreach (var property in element.EnumerateObject())

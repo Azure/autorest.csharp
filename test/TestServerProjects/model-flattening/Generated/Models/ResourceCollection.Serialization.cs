@@ -47,6 +47,10 @@ namespace model_flattening.Models
 
         internal static ResourceCollection DeserializeResourceCollection(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<FlattenedProduct> productresource = default;
             Optional<IList<FlattenedProduct>> arrayofresources = default;
             Optional<IDictionary<string, FlattenedProduct>> dictionaryofresources = default;

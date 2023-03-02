@@ -16,6 +16,10 @@ namespace MgmtExtensionCommonRestOperation.Models
     {
         internal static TypeOneListResult DeserializeTypeOneListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<TypeOneData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

@@ -25,6 +25,10 @@ namespace Inheritance.Models
 
         internal static DerivedClassWithExtensibleEnumDiscriminator DeserializeDerivedClassWithExtensibleEnumDiscriminator(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             BaseClassWithEntensibleEnumDiscriminatorEnum discriminatorProperty = default;
             foreach (var property in element.EnumerateObject())
             {

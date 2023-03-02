@@ -35,6 +35,10 @@ namespace ExactMatchInheritance.Models
 
         internal static ExactMatchModel9 DeserializeExactMatchModel9(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> id = default;
             Optional<string> name = default;
             Optional<string> type = default;

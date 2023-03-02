@@ -14,6 +14,10 @@ namespace Azure.Storage.Tables.Models
     {
         internal static TableResponseProperties DeserializeTableResponseProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> tableName = default;
             Optional<string> odataType = default;
             Optional<string> odataId = default;

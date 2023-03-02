@@ -118,9 +118,15 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task GetDictionaryByteWithNull() => Test((host, pipeline) =>
+        public Task GetDictionaryByteWithNull() => Test(async (host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<InvalidOperationException>(), async () => await new DictionaryClient(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync());
+            var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
+
+            CollectionAssert.AreEqual(new Dictionary<string, byte[]>
+            {
+                { "0", new byte[] { 171, 172, 173 } },
+                { "1", null }
+            }, result.Value);
         });
 
         [Test]

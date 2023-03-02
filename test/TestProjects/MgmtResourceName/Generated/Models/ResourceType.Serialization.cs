@@ -15,6 +15,10 @@ namespace MgmtResourceName.Models
     {
         internal static ResourceType DeserializeResourceType(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> displayName = default;
             Optional<IReadOnlyList<ResourceOperation>> operations = default;

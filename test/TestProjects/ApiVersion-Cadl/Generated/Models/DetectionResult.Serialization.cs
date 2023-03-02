@@ -15,6 +15,10 @@ namespace ApiVersionInCadl.Models
     {
         internal static DetectionResult DeserializeDetectionResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string resultId = default;
             foreach (var property in element.EnumerateObject())
             {

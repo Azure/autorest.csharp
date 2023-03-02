@@ -16,6 +16,10 @@ namespace MgmtSafeFlatten.Models
     {
         internal static TypeTwoListResult DeserializeTypeTwoListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<TypeTwoData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

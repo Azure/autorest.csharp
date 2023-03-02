@@ -16,6 +16,10 @@ namespace MgmtListMethods.Models
     {
         internal static TenantParentWithLocListResult DeserializeTenantParentWithLocListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<TenantParentWithLocData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

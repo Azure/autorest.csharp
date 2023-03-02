@@ -24,6 +24,10 @@ namespace MgmtDiscriminator.Models
 
         internal static DeliveryRuleResponseHeaderAction DeserializeDeliveryRuleResponseHeaderAction(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             HeaderActionParameters parameters = default;
             DeliveryRuleActionType name = default;
             Optional<string> foo = default;

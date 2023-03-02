@@ -24,6 +24,10 @@ namespace validation.Models
 
         internal static ConstantProduct DeserializeConstantProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string constProperty = default;
             string constProperty2 = default;
             foreach (var property in element.EnumerateObject())

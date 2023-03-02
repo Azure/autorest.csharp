@@ -17,6 +17,10 @@ namespace MgmtResourceName
     {
         internal static ProviderOperationData DeserializeProviderOperationData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> displayName = default;
             Optional<IReadOnlyList<Models.ResourceType>> resourceTypes = default;
             Optional<IReadOnlyList<ResourceOperation>> operations = default;

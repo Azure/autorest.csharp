@@ -26,6 +26,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static PurchasePlan DeserializePurchasePlan(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string publisher = default;
             string name = default;
             string product = default;

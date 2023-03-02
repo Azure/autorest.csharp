@@ -14,6 +14,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static VirtualMachineSize DeserializeVirtualMachineSize(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<int> numberOfCores = default;
             Optional<int> osDiskSizeInMB = default;
