@@ -95,7 +95,10 @@ namespace AutoRest.CSharp.Input
                 _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
             }
 
-            if (publicClients && generation1ConvenienceClient)
+            var isAzureProject = ns != null && (ns.StartsWith("Azure.") || ns.StartsWith("Microsoft.Azure"));
+            // we only check the combination for Azure projects whose namespace starts with "Azure." or "Microsoft.Azure."
+            // issue: https://github.com/Azure/autorest.csharp/issues/3179
+            if (publicClients && generation1ConvenienceClient && isAzureProject)
             {
                 var binaryLocation = typeof(Configuration).Assembly.Location;
                 if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net6.0", "AutoRest.CSharp.dll")))
