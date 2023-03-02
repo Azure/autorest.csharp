@@ -35,14 +35,16 @@ import { InputClient } from "./type/InputClient.js";
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
 import { InputOperation, Paging } from "./type/InputOperation.js";
 import { RequestMethod, parseHttpRequestMethod } from "./type/RequestMethod.js";
-import { BodyMediaType } from "./type/BodyMediaType.js";
+import { BodyMediaType, typeToBodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
 import {
     InputEnumType,
     InputListType,
     InputModelType,
     InputPrimitiveType,
-    InputType
+    InputType,
+    isInputLiteralType,
+    isInputUnionType
 } from "./type/InputType.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
@@ -685,7 +687,18 @@ function loadOperation(
         (value) => value.IsContentType
     );
     if (contentTypeParameter) {
-        mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
+        if (isInputLiteralType(contentTypeParameter.Type)) {
+            mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
+        } else if (isInputUnionType(contentTypeParameter.Type)) {
+            const mediaTypeValues =
+                contentTypeParameter.Type.UnionItemTypes.map((item) =>
+                    isInputLiteralType(item) ? item.Value : undefined
+                );
+            if (mediaTypeValues.some((item) => item === undefined)) {
+                throw "Media type of content type should be string.";
+            }
+            mediaTypes.push(...mediaTypeValues);
+        }
     }
     const requestMethod = parseHttpRequestMethod(verb);
     const generateProtocol: boolean = shouldGenerateProtocol(dpgContext, op);
@@ -729,7 +742,7 @@ function loadOperation(
         Parameters: parameters,
         Responses: responses,
         HttpMethod: requestMethod,
-        RequestBodyMediaType: BodyMediaType.Json,
+        RequestBodyMediaType: typeToBodyMediaType(cadlParameters.body?.type),
         Uri: uri,
         Path: fullPath,
         ExternalDocsUrl: externalDocs?.url,

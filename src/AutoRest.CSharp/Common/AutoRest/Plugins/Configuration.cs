@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Input
             public const string ModelFactoryForHlc = "model-factory-for-hlc";
             public const string GenerateModelFactory = "generate-model-factory";
             public const string TreatEmptyStringAsNullForModels = "treat-empty-string-as-null-for-models";
-            public const string TreatEmptyStringAsNullForTypes = "treat-empty-string-as-null-for-types";
+            public const string TreatEmptyStringAsNullForExtraTypes = "treat-empty-string-as-null-for-extra-types";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> protocolMethodList,
             IReadOnlyList<string> suppressAbstractBaseClasses,
             IReadOnlyList<string> treatEmptyStringAsNullForModels,
-            IReadOnlyList<string> treatEmptyStringAsNullForTypes,
+            IReadOnlyList<string> treatEmptyStringAsNullForExtraTypes,
             MgmtConfiguration mgmtConfiguration,
             MgmtTestConfiguration? mgmtTestConfiguration)
         {
@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Input
             MgmtTestConfiguration = mgmtTestConfiguration;
             _suppressAbstractBaseClasses = suppressAbstractBaseClasses;
             _treatEmptyStringAsNullForModels = new HashSet<string>(treatEmptyStringAsNullForModels);
-            _treatEmptyStringAsNullForTypes.UnionWith(treatEmptyStringAsNullForTypes);
+            _treatEmptyStringAsNullForTypes.UnionWith(treatEmptyStringAsNullForExtraTypes);
         }
 
         private static string? _outputFolder;
@@ -199,7 +199,7 @@ namespace AutoRest.CSharp.Input
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 treatEmptyStringAsNullForModels: autoRest.GetValue<string[]?>(Options.TreatEmptyStringAsNullForModels).GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                treatEmptyStringAsNullForTypes: autoRest.GetValue<string[]?>(Options.TreatEmptyStringAsNullForTypes).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                treatEmptyStringAsNullForExtraTypes: autoRest.GetValue<string[]?>(Options.TreatEmptyStringAsNullForExtraTypes).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
                 mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest)
             );
