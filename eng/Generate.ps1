@@ -116,6 +116,9 @@ if (!($Exclude -contains "TestProjects")) {
     foreach ($directory in Get-ChildItem $testProjectRoot -Directory) {
         $testName = $directory.Name
         $readmeConfigurationPath = Join-Path $directory "readme.md"
+        $cadlProjectConfigurationPath = Join-Path $directory "cadl-project.yaml"
+        $alternativeCadlProjectConfigurationPath = Join-Path $directory "cadl-project.yml"
+        $possibleInputJsonFilePath = Join-Path $directory "$testName.json"
         $testArguments = $null
         $srcFolder = Join-Path $directory "src"
         $testsFolder = Join-Path $directory "tests"
@@ -125,19 +128,21 @@ if (!($Exclude -contains "TestProjects")) {
             Add-Directory $testName $testsFolder $TRUE
             continue
         }
-        if ($testName.EndsWith("Cadl")) {
-            Add-Cadl $testName $directory "" "--option @azure-tools/cadl-csharp.generate-convenience-methods=false"
+
+        # if cadl-project.yaml exists, we treat it as a cadl project
+        if ((Test-Path $cadlProjectConfigurationPath) -Or (Test-Path $alternativeCadlProjectConfigurationPath)) {
+            Add-Cadl $testName $directory
+        }
+        elseif (Test-Path $readmeConfigurationPath) {
+            $testArguments = "--require=$readmeConfigurationPath"
+            Add-Swagger $testName $directory $testArguments
+        }
+        elseif (Test-Path $possibleInputJsonFilePath) {
+            $testArguments = "--require=$configurationPath --input-file=$possibleInputJsonFilePath --generation1-convenience-client"
+            Add-Swagger $testName $directory $testArguments
         }
         else {
-            if (Test-Path $readmeConfigurationPath) {
-                $testArguments = "--require=$readmeConfigurationPath"
-            }
-            else {
-                $inputFile = Join-Path $directory "$testName.json"
-                $testArguments = "--require=$configurationPath --input-file=$inputFile --generation1-convenience-client"
-            }
-
-            Add-Swagger $testName $directory $testArguments
+            throw "There is no cadl-project.yaml file or autorest.md file or swagger json file $testName.json found in test project $testName"
         }
     }
 }
@@ -150,16 +155,22 @@ if (!($Exclude -contains "Samples")) {
         $sampleName = $directory.Name
         $projectDirectory = Join-Path $sampleProjectsRoot $sampleName
         $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
+        $cadlProjectConfigurationPath = Join-Path $directory "cadl-project.yaml"
+        $alternativeCadlProjectConfigurationPath = Join-Path $directory "cadl-project.yml"
+
         if (Test-Path $sampleConfigurationPath) {
             # for swagger samples
             Add-Swagger $sampleName $projectDirectory "--require=$sampleConfigurationPath"
         }
-        else {
+        elseif ((Test-Path $cadlProjectConfigurationPath) -Or (Test-Path $alternativeCadlProjectConfigurationPath)) {
             # for cadl projects
             $cadlMain = Join-Path $projectDirectory "main.cadl"
             $cadlClient = Join-Path $projectDirectory "client.cadl"
             $mainCadlFile = if (Test-Path $cadlClient) { Resolve-Path $cadlClient } else { Resolve-Path $cadlMain }
             Add-Cadl $sampleName $projectDirectory $mainCadlFile
+        }
+        else {
+            throw "There is no cadl-project.yaml file or autorest.md file found in sample project $sampleName"
         }
     }
 }
