@@ -9,8 +9,8 @@ npm run build
 
 $packageFile = "$emitterPath\package.json"
 (Get-Content -Raw $packageFile) -replace `
-    '"@azure-tools/cadl-csharp": ".*?"',
-"`"@azure-tools/cadl-csharp`": `"$AutorestVersion`"" | `
+    '"@autorest/csharp": ".*?"',
+"`"@autorest/csharp`": `"$AutorestVersion`"" | `
     Set-Content $packageFile -NoNewline
     
 npm version --no-git-tag-version $AutorestVersion | Out-Null;

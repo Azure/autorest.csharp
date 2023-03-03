@@ -3,6 +3,8 @@
 parameters:
   name: ''
   filter: ''
+  AutorestCSharpVersion: ''
+  CadlEmitterVersion: ''
 
 jobs:
 - job: ${{ parameters.name }}
@@ -10,9 +12,6 @@ jobs:
   pool:
     name: azsdk-pool-mms-ubuntu-2004-general
     vmImage: ubuntu-20.04
-  variables:
-    AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
-    CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
   dependsOn: Update_Generator_Versions
   steps:
   - checkout: self
@@ -31,8 +30,8 @@ jobs:
       pwsh: true
       filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateAzureSdkForNet.ps1
       arguments: >
-        -AutorestCSharpVersion $(AutorestCSharpVersion)
-        -CadlEmitterVersion $(CadlEmitterVersion)
+        -AutorestCSharpVersion ${{ parameters.AutorestCSharpVersion }}
+        -CadlEmitterVersion ${{ parameters.CadlEmitterVersion }}
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
         -ServiceDirectoryFilters ${{ parameters.filter}}
         -ShowSummary
@@ -46,7 +45,7 @@ jobs:
     workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
-      BaseRepoBranch: auto-update-autorest-$(AutorestCSharpVersion)
+      BaseRepoBranch: auto-update-autorest-${{ parameters.AutorestCSharpVersion }}
       BaseRepoOwner: azure-sdk
       CommitMsg: Update SDK codes ${{ parameters.filter }}
       TargetRepoOwner: Azure

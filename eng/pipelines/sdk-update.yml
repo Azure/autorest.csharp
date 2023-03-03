@@ -81,6 +81,12 @@ stages:
         parameters:
           AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
           CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
+      - template: update-azure-sdk-for-net-codes.yml
+          parameters:
+            name: Update_Codes_A_C
+            filter: "a*,b*,c*"
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
+            CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
       - job: Create_PR
         dependsOn: Update_Generator_Versions
         variables:
