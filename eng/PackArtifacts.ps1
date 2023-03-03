@@ -1,7 +1,7 @@
 param($BuildNumber, $StagingDirectory)
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
-$localVersion = "0.0.0-beta.$BuildNumber"
+$localVersion = "$BuildNumber"
 
 # Pack autorest.csharp nuget package "Microsoft.Azure.AutoRest.CSharp"
 Push-Location $repoRoot
