@@ -47,6 +47,10 @@ namespace CognitiveSearch.Models
 
         internal static CustomAnalyzer DeserializeCustomAnalyzer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             TokenizerName tokenizer = default;
             Optional<IList<TokenFilterName>> tokenFilters = default;
             Optional<IList<CharFilterName>> charFilters = default;

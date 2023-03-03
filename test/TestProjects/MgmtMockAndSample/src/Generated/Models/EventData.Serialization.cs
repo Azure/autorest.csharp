@@ -15,6 +15,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static EventData DeserializeEventData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<SenderAuthorization> authorization = default;
             Optional<Guid> tenantId = default;
             foreach (var property in element.EnumerateObject())

@@ -14,6 +14,10 @@ namespace subscriptionId_apiVersion.Models
     {
         internal static SampleResourceGroup DeserializeSampleResourceGroup(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> location = default;
             foreach (var property in element.EnumerateObject())

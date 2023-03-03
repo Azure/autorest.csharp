@@ -24,6 +24,10 @@ namespace Models.Property.Types.Models
 
         internal static DatetimeProperty DeserializeDatetimeProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             DateTimeOffset property = default;
             foreach (var property0 in element.EnumerateObject())
             {

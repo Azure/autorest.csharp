@@ -14,6 +14,10 @@ namespace xms_error_responses.Models
     {
         internal static PetHungryOrThirstyError DeserializePetHungryOrThirstyError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> hungryOrThirsty = default;
             Optional<string> reason = default;
             string errorType = default;

@@ -15,6 +15,10 @@ namespace Pagination.Models
     {
         internal static LedgerEntry DeserializeLedgerEntry(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string contents = default;
             string collectionId = default;
             string transactionId = default;

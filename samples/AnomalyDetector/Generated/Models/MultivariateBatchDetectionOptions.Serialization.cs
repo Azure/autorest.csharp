@@ -30,6 +30,10 @@ namespace AnomalyDetector.Models
 
         internal static MultivariateBatchDetectionOptions DeserializeMultivariateBatchDetectionOptions(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string dataSource = default;
             int topContributorCount = default;
             DateTimeOffset startTime = default;

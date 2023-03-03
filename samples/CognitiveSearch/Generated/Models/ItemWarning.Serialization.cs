@@ -14,6 +14,10 @@ namespace CognitiveSearch.Models
     {
         internal static ItemWarning DeserializeItemWarning(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> key = default;
             string message = default;
             Optional<string> name = default;

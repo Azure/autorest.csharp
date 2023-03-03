@@ -74,6 +74,10 @@ namespace CognitiveSearch.Models
 
         internal static SplitSkill DeserializeSplitSkill(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<SplitSkillLanguage> defaultLanguageCode = default;
             Optional<TextSplitMode> textSplitMode = default;
             Optional<int?> maximumPageLength = default;

@@ -52,6 +52,10 @@ namespace MgmtMockAndSample.Models
 
         internal static MhsmNetworkRuleSet DeserializeMhsmNetworkRuleSet(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<NetworkRuleBypassOption> bypass = default;
             Optional<NetworkRuleAction> defaultAction = default;
             Optional<IList<MhsmipRule>> ipRules = default;

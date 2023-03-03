@@ -56,12 +56,20 @@ namespace Azure.Core
             }
         }
 
-        public static byte[] GetBytesFromBase64(in this JsonElement element, string format) => format switch
+        public static byte[]? GetBytesFromBase64(in this JsonElement element, string format)
         {
-            "U" => TypeFormatters.FromBase64UrlString(element.GetRequiredString()),
-            "D" => element.GetBytesFromBase64(),
-            _ => throw new ArgumentException($"Format is not supported: '{format}'", nameof(format))
-        };
+            if (element.ValueKind== JsonValueKind.Null)
+            {
+                return null;
+            }
+
+            return format switch
+            {
+                "U" => TypeFormatters.FromBase64UrlString(element.GetRequiredString()),
+                "D" => element.GetBytesFromBase64(),
+                _ => throw new ArgumentException($"Format is not supported: '{format}'", nameof(format))
+            };
+         }
 
         public static DateTimeOffset GetDateTimeOffset(in this JsonElement element, string format) => format switch
         {

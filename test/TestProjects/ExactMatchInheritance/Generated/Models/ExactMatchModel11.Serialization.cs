@@ -23,6 +23,10 @@ namespace ExactMatchInheritance.Models
 
         internal static ExactMatchModel11 DeserializeExactMatchModel11(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<ResourceType> type = default;
             foreach (var property in element.EnumerateObject())

@@ -15,6 +15,10 @@ namespace SupersetFlattenInheritance.Models
     {
         internal static TrackedResourceModel2ListResult DeserializeTrackedResourceModel2ListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<TrackedResourceModel2>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

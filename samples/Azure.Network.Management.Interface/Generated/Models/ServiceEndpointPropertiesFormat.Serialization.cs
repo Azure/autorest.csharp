@@ -36,6 +36,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static ServiceEndpointPropertiesFormat DeserializeServiceEndpointPropertiesFormat(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> service = default;
             Optional<IList<string>> locations = default;
             Optional<ProvisioningState> provisioningState = default;

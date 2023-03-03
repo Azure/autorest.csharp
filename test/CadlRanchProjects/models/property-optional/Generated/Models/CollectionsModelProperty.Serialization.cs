@@ -32,6 +32,10 @@ namespace Models.Property.Optional.Models
 
         internal static CollectionsModelProperty DeserializeCollectionsModelProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<StringProperty>> property = default;
             foreach (var property0 in element.EnumerateObject())
             {

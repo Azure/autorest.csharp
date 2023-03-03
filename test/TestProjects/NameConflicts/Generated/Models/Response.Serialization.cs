@@ -25,6 +25,10 @@ namespace NameConflicts.Models
 
         internal static Response DeserializeResponse(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> property = default;
             foreach (var property0 in element.EnumerateObject())
             {

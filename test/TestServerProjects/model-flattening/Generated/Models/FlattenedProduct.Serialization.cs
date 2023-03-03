@@ -55,6 +55,10 @@ namespace model_flattening.Models
 
         internal static FlattenedProduct DeserializeFlattenedProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> type = default;
             Optional<IDictionary<string, string>> tags = default;

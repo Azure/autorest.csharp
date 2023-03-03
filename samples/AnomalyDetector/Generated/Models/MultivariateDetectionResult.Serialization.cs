@@ -16,6 +16,10 @@ namespace AnomalyDetector.Models
     {
         internal static MultivariateDetectionResult DeserializeMultivariateDetectionResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string resultId = default;
             MultivariateBatchDetectionResultSummary summary = default;
             IReadOnlyList<AnomalyState> results = default;

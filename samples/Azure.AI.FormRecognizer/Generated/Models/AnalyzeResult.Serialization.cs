@@ -15,6 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string version = default;
             IReadOnlyList<ReadResult> readResults = default;
             Optional<IReadOnlyList<PageResult>> pageResults = default;

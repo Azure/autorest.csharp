@@ -16,6 +16,10 @@ namespace TenantOnly
     {
         internal static AgreementData DeserializeAgreementData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> foo = default;
             Optional<string> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;

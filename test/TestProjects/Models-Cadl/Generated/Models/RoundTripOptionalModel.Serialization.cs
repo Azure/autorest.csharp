@@ -171,6 +171,10 @@ namespace ModelsInCadl.Models
 
         internal static RoundTripOptionalModel DeserializeRoundTripOptionalModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> optionalString = default;
             Optional<int?> optionalInt = default;
             Optional<IList<string>> optionalStringList = default;

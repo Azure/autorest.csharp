@@ -32,6 +32,11 @@ namespace ExactMatchInheritance
                 writer.WriteStartArray();
                 foreach (var item in SupportingUris)
                 {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
                     writer.WriteStringValue(item.AbsoluteUri);
                 }
                 writer.WriteEndArray();
@@ -121,6 +126,10 @@ namespace ExactMatchInheritance
 
         internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @new = default;
             Optional<IList<Uri>> supportingUris = default;
             Optional<Type1> type1 = default;
@@ -160,7 +169,14 @@ namespace ExactMatchInheritance
                     List<Uri> array = new List<Uri>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(new Uri(item.GetString()));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(new Uri(item.GetString()));
+                        }
                     }
                     supportingUris = array;
                     continue;

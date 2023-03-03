@@ -15,6 +15,10 @@ namespace MgmtScopeResource.Models
     {
         internal static DeploymentPropertiesExtended DeserializeDeploymentPropertiesExtended(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ProvisioningState> provisioningState = default;
             Optional<string> correlationId = default;
             Optional<DateTimeOffset> timestamp = default;

@@ -16,6 +16,10 @@ namespace MgmtDiscriminator.Models
     {
         internal static DeliveryRuleListResult DeserializeDeliveryRuleListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<DeliveryRuleData>> value = default;
             foreach (var property in element.EnumerateObject())
             {

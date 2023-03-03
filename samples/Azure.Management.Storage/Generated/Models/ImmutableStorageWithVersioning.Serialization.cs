@@ -26,6 +26,10 @@ namespace Azure.Management.Storage.Models
 
         internal static ImmutableStorageWithVersioning DeserializeImmutableStorageWithVersioning(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> enabled = default;
             Optional<DateTimeOffset> timeStamp = default;
             Optional<MigrationState> migrationState = default;

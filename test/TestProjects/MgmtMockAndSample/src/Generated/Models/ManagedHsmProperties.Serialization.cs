@@ -90,6 +90,10 @@ namespace MgmtMockAndSample.Models
 
         internal static ManagedHsmProperties DeserializeManagedHsmProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<BinaryData> settings = default;
             Optional<BinaryData> protectedSettings = default;
             Optional<byte[]> rawMessage = default;

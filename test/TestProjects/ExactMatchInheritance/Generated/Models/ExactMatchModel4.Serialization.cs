@@ -40,6 +40,10 @@ namespace ExactMatchInheritance.Models
 
         internal static ExactMatchModel4 DeserializeExactMatchModel4(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @new = default;
             Optional<int> id = default;
             Optional<string> name = default;

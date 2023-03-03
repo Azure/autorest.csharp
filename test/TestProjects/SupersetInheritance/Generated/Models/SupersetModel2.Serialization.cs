@@ -40,6 +40,10 @@ namespace SupersetInheritance.Models
 
         internal static SupersetModel2 DeserializeSupersetModel2(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;

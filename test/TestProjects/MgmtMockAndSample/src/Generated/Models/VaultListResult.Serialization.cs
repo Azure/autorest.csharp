@@ -16,6 +16,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static VaultListResult DeserializeVaultListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<VaultData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

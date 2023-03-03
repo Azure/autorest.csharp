@@ -14,6 +14,10 @@ namespace MgmtRenameRules.Models
     {
         internal static VirtualMachineHealthStatus DeserializeVirtualMachineHealthStatus(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<InstanceViewStatus> status = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -14,6 +14,10 @@ namespace xms_error_responses.Models
     {
         internal static UnknownPetActionError DeserializeUnknownPetActionError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string errorType = "Unknown";
             Optional<string> errorMessage = default;
             Optional<string> actionResponse = default;

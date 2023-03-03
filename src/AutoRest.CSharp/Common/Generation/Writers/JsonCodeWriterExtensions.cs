@@ -67,6 +67,15 @@ namespace AutoRest.CSharp.Generation.Writers
                     using (writer.Scope($"foreach (var {dictionaryItemVariable:D} in {name:I})"))
                     {
                         writer.Line($"{writerName}.WritePropertyName({dictionaryItemVariable:I}.Key);");
+
+                        if (CollectionItemRequiresNullCheckInSerialization(dictionary.ValueSerialization))
+                        {
+                            using (writer.Scope($"if ({dictionaryItemVariable:I}.Value == null)"))
+                            {
+                                writer.Line($"{writerName}.WriteNullValue();");
+                                writer.Line($"continue;");
+                            }
+                        }
                         writer.ToSerializeCall(
                             dictionary.ValueSerialization,
                             $"{dictionaryItemVariable:I}.Value",
@@ -230,7 +239,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             using (writer.Scope($"foreach (var {collectionItemVariable:D} in {name:I})"))
             {
-                if (array.ValueSerialization.IsNullable)
+                if (CollectionItemRequiresNullCheckInSerialization(array.ValueSerialization))
                 {
                     using (writer.Scope($"if ({collectionItemVariable:I} == null)"))
                     {
@@ -446,7 +455,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var collectionItemVariable = new CodeWriterDeclaration("item");
                     using (writer.Scope($"foreach (var {collectionItemVariable:D} in {element}.EnumerateArray())"))
                     {
-                        writer.DeserializeArrayItem(array, arrayVariable, collectionItemVariable);
+                        writer.DeserializeArrayItem(array.ValueSerialization, arrayVariable, collectionItemVariable);
                     }
 
                     return $"{arrayVariable:I}";
@@ -475,9 +484,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void DeserializeArrayItem(this CodeWriter writer, JsonArraySerialization array, CodeWriterDeclaration arrayVariable, CodeWriterDeclaration arrayItemVariable)
+        private static void DeserializeArrayItem(this CodeWriter writer, JsonSerialization serialization, CodeWriterDeclaration arrayVariable, CodeWriterDeclaration arrayItemVariable)
         {
-            if (array.ValueSerialization.IsNullable)
+            if (CollectionItemRequiresNullCheckInSerialization(serialization))
             {
                 using (writer.Scope($"if ({arrayItemVariable}.ValueKind == {typeof(JsonValueKind)}.Null)"))
                 {
@@ -485,20 +494,20 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 using (writer.Scope($"else"))
                 {
-                    var variableOrExpression = writer.DeserializeValue(array.ValueSerialization, $"{arrayItemVariable}");
+                    var variableOrExpression = writer.DeserializeValue(serialization, $"{arrayItemVariable}");
                     writer.Append($"{arrayVariable}.Add({variableOrExpression});");
                 }
             }
             else
             {
-                var variableOrExpression = writer.DeserializeValue(array.ValueSerialization, $"{arrayItemVariable}");
+                var variableOrExpression = writer.DeserializeValue(serialization, $"{arrayItemVariable}");
                 writer.Append($"{arrayVariable}.Add({variableOrExpression});");
             }
         }
 
         private static void DeserializeDictionaryValue(this CodeWriter writer, JsonSerialization serialization, CodeWriterDeclaration dictionaryVariable, CodeWriterDeclaration itemVariable)
         {
-            if (serialization.IsNullable)
+            if (CollectionItemRequiresNullCheckInSerialization(serialization))
             {
                 using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
                 {
@@ -516,6 +525,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"{dictionaryVariable}.Add({itemVariable}.Name, {variableOrExpression});");
             }
         }
+
+        private static bool CollectionItemRequiresNullCheckInSerialization(JsonSerialization serialization) =>
+            serialization is { IsNullable: true } and JsonValueSerialization { Type: { IsValueType: true } } || // nullable value type, like int?
+            serialization is JsonArraySerialization or JsonDictionarySerialization || // list or dictionary
+            serialization is JsonValueSerialization jsonValueSerialization &&
+                jsonValueSerialization is { Type: { IsValueType: false, IsFrameworkType: true } } && // framework reference type, e.g. byte[]
+                jsonValueSerialization.Type.FrameworkType != typeof(string) && // excluding string, because JsonElement.GetString() can handle null
+                jsonValueSerialization.Type.FrameworkType != typeof(byte[]); // excluding byte[], because JsonElement.GetBytesFromBase64() can handle null
 
         public static void WriteObjectInitialization(this CodeWriter writer, JsonObjectSerialization serialization)
         {

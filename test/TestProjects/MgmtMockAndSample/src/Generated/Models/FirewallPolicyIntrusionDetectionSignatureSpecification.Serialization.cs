@@ -30,6 +30,10 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyIntrusionDetectionSignatureSpecification DeserializeFirewallPolicyIntrusionDetectionSignatureSpecification(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<FirewallPolicyIntrusionDetectionStateType> mode = default;
             foreach (var property in element.EnumerateObject())

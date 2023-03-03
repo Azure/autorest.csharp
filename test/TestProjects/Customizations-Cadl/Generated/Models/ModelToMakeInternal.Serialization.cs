@@ -23,6 +23,10 @@ namespace CustomizationsInCadl.Models
 
         internal static ModelToMakeInternal DeserializeModelToMakeInternal(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int requiredInt = default;
             foreach (var property in element.EnumerateObject())
             {

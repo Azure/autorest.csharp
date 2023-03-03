@@ -22,6 +22,10 @@ namespace MgmtDiscriminator.Models
 
         internal static UnknownPet DeserializeUnknownPet(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             PetKind kind = default;
             Optional<string> id = default;
             foreach (var property in element.EnumerateObject())

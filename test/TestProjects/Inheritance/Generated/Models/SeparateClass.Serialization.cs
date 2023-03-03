@@ -33,6 +33,10 @@ namespace Inheritance.Models
 
         internal static SeparateClass DeserializeSeparateClass(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> stringProperty = default;
             Optional<BaseClassWithExtensibleEnumDiscriminator> modelProperty = default;
             foreach (var property in element.EnumerateObject())

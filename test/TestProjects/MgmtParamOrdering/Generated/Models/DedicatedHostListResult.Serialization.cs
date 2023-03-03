@@ -16,6 +16,10 @@ namespace MgmtParamOrdering.Models
     {
         internal static DedicatedHostListResult DeserializeDedicatedHostListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<DedicatedHostData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
