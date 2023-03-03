@@ -6,7 +6,7 @@ param(
     [string]$CadlEmitterVersion,
 
     [Parameter(Mandatory)]
-    [string]$SdkRepoRoot
+    [string]$SdkRepoRoot,
     
     [switch]$UseInternalFeed = $false)
 

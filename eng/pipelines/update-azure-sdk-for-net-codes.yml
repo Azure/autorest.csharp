@@ -5,6 +5,7 @@ parameters:
   filter: ''
   AutorestCSharpVersion: ''
   CadlEmitterVersion: ''
+  IsInternalFeed: false
 
 jobs:
 - job: ${{ parameters.name }}
