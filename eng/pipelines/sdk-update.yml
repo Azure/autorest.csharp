@@ -41,13 +41,8 @@ stages:
           displayName: "Install packages"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
         - pwsh: ./eng/PackArtifacts.ps1
-          displayName: "Pack packages"
+          displayName: "Pack Artifacts"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-        - task: PublishBuildArtifacts@1
-          condition: succeededOrFailed()
-          displayName: 'Publish Artifacts'
-          inputs:
-            ArtifactName: packages
         - task: NuGetCommand@2
           displayName: 'Publish NugetPackage'
           inputs:
@@ -55,3 +50,15 @@ stages:
             packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
             nuGetFeedType: 'internal'
             publishVstsFeed: '69d855e6-8b8f-4ea3-b75c-a6ed394f174d'
+        - task: Npm@1
+          displayName: 'Publish @autorest/csharp'
+          inputs:
+            command: 'publish'
+            workingDir: '$(Build.SourcesDirectory)/autorest.csharp'
+            publishRegistry: 'useFeed'
+            publishFeed: '69d855e6-8b8f-4ea3-b75c-a6ed394f174d'
+        - task: PublishBuildArtifacts@1
+          condition: succeededOrFailed()
+          displayName: 'Publish Artifacts'
+          inputs:
+            ArtifactName: packages
