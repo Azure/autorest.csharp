@@ -3,6 +3,7 @@
 parameters:
   AutorestCSharpVersion: ""
   CadlEmitterVersion: ""
+  IsInternalFeed: false
 
 jobs:
 - job: Update_Generator_Versions
@@ -24,6 +25,7 @@ jobs:
         -AutorestCSharpVersion ${{parameters.AutorestCSharpVersion}}
         -CadlEmitterVersion ${{parameters.CadlEmitterVersion}}
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+        -UseInternalFeed ${{parameters.IsInternalFeed}}
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:

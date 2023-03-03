@@ -6,7 +6,9 @@ param(
     [string]$CadlEmitterVersion,
 
     [Parameter(Mandatory)]
-    [string]$SdkRepoRoot)
+    [string]$SdkRepoRoot
+    
+    [switch]$UseInternalFeed = $false)
 
 
 $ErrorActionPreference = 'Stop'
@@ -26,3 +28,15 @@ $CadlEmitterProps = "$SdkRepoRoot\eng\emitter-package.json"
     '"@azure-tools/cadl-csharp": ".*?"',
 "`"@azure-tools/cadl-csharp`": `"$CadlEmitterVersion`"" | `
     Set-Content $CadlEmitterProps -NoNewline
+
+if ($UseInternalFeed) {
+    $nugetConfigPath = "$SdkRepoRoot\NuGet.Config"
+    $nuGetConfig = [xml](Get-Content -Path $nugetConfigPath)
+    $xmlAdd = $nuGetConfig.configuration.packageSources.LastChild.clone()
+    if ($xmlAdd.key -ne "azure-sdk-for-net-private") {
+        $xmlAdd.key = "azure-sdk-for-net-private"
+        $xmlAdd.value = "https://pkgs.dev.azure.com/azure-sdk/_packaging/azure-sdk-for-net-private/nuget/v3/index.json"
+        $nuGetConfig.configuration.packageSources.AppendChild($xmlAdd)
+        $nuGetConfig.Save($nugetConfigPath)
+    }
+}

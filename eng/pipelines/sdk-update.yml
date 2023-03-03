@@ -84,6 +84,7 @@ stages:
         parameters:
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           CadlEmitterVersion: $(CadlEmitterVersion)
+          IsInternalFeed: true
       - template: update-azure-sdk-for-net-codes.yml
         parameters:
           name: Update_Codes_A_C
