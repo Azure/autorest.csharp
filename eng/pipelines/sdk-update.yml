@@ -13,17 +13,15 @@ resources:
       ref: refs/tags/azure-sdk-tools_20220404.3
 
 stages:
-  - stage: 'Build_And_Generate'
+  - stage: 'Build_and_Publish'
     jobs:
-    - job: Build_And_Generate
+    - job: Build
       timeoutInMinutes: 120
       pool:
         name: azsdk-pool-mms-win-2022-general
         vmImage: windows-2022
       steps:
         - checkout: self
-        - checkout: azure-sdk-tools
-        - checkout: azure-sdk-for-net
         - task: UseDotNet@2
           displayName: 'Use .NET Core SDK'
           retryCountOnTaskFailure: 3
@@ -38,18 +36,17 @@ stages:
             npm ci
           displayName: "Install packages"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-        - pwsh: ./eng/RegenUsingLocalGenerator.ps1 -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-          failOnStderr: false
+        - pwsh: ./eng/PackArtifacts.ps1
+          displayName: "Pack packages"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-          displayName: 'Update generator version in Azure SDK repo'
-        - template: /eng/common/pipelines/templates/steps/create-pull-request.yml@azure-sdk-tools
-          parameters:
-            BaseBranchName: main
-            RepoName: azure-sdk-for-net
-            PRBranchName: AutoGen-$(Build.SourceBranchName)
-            CommitMsg: Update AutoRest version according to $(Build.SourceBranchName)
-            PRBody: Update AutoRest version according to $(Build.SourceBranchName)
-            PRTitle:  Update AutoRest version according to $(Build.SourceBranchName)
-            PushArgs: -f
-            WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
-            ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts
+        - task: PublishBuildArtifacts@1
+          condition: succeededOrFailed()
+          displayName: 'Publish Artifacts'
+          inputs:
+            ArtifactName: packages
+        - task: NuGetCommand@2
+          inputs:
+            command: 'push'
+            packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+            nuGetFeedType: 'internal'
+            publishVstsFeed: '69d855e6-8b8f-4ea3-b75c-a6ed394f174d'
