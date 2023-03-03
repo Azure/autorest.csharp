@@ -40,7 +40,7 @@ stages:
             npm ci
           displayName: "Install packages"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-        - pwsh: ./eng/PackArtifacts.ps1
+        - pwsh: ./eng/PackArtifacts.ps1 -BuildNumber $(Build.BuildNumber) -StagingDirectory $(Build.ArtifactStagingDirectory)
           displayName: "Pack Artifacts"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
         - task: NuGetCommand@2
