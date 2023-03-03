@@ -25,6 +25,7 @@ stages:
         vmImage: windows-2022
       steps:
         - checkout: self
+        - checkout: azure-sdk-tools
         - task: UseDotNet@2
           displayName: 'Use .NET Core SDK'
           retryCountOnTaskFailure: 3
@@ -48,6 +49,7 @@ stages:
           inputs:
             ArtifactName: packages
         - task: NuGetCommand@2
+          displayName: 'Publish NugetPackage'
           inputs:
             command: 'push'
             packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
