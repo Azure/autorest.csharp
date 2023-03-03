@@ -57,6 +57,16 @@ stages:
             workingDir: '$(Build.SourcesDirectory)/autorest.csharp/artifacts/bin/AutoRest.CSharp/Release/net6.0'
             publishRegistry: 'useFeed'
             publishFeed: '69d855e6-8b8f-4ea3-b75c-a6ed394f174d'
+        - pwsh: ./eng/PackEmitter.ps1 -AutorestVersion $(autorestVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)
+          displayName: "Pack Emitter"
+          workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+        - task: Npm@1
+          displayName: 'Publish @azure-tools/cadl-csharp'
+          inputs:
+            command: 'publish'
+            workingDir: '$(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp'
+            publishRegistry: 'useFeed'
+            publishFeed: '69d855e6-8b8f-4ea3-b75c-a6ed394f174d'
         - task: PublishBuildArtifacts@1
           condition: succeededOrFailed()
           displayName: 'Publish Artifacts'
