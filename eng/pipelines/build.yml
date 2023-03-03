@@ -167,6 +167,9 @@ stages:
         - Release
       jobs:
         - template: update-generator-versions.yml
+          parameters:
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
 # update codes
         - template: update-azure-sdk-for-net-codes.yml
           parameters:

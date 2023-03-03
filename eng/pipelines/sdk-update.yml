@@ -41,6 +41,7 @@ stages:
           displayName: "Install packages"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
         - pwsh: ./eng/PackArtifacts.ps1 -BuildNumber $(Build.BuildNumber) -StagingDirectory $(Build.ArtifactStagingDirectory)
+          name: Package
           displayName: "Pack Artifacts"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
         - task: NuGetCommand@2
@@ -57,7 +58,7 @@ stages:
             workingDir: '$(Build.SourcesDirectory)/autorest.csharp/artifacts/bin/AutoRest.CSharp/Release/net6.0'
             publishRegistry: 'useFeed'
             publishFeed: '69d855e6-8b8f-4ea3-b75c-a6ed394f174d'
-        - pwsh: ./eng/PackEmitter.ps1 -AutorestVersion $(autorestVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)
+        - pwsh: ./eng/PackEmitter.ps1 -AutorestVersion $(Package.autorestVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)
           displayName: "Pack Emitter"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
         - task: Npm@1
@@ -72,3 +73,29 @@ stages:
           displayName: 'Publish Artifacts'
           inputs:
             ArtifactName: packages
+  - stage: 'Update_azure_sdk_for_net'
+    dependsOn:
+      - Build_and_Publish
+    jobs:
+      - template: update-generator-versions.yml
+        parameters:
+          AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
+          CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
+      - job: Create_PR
+        steps:
+          - checkout: self
+          - checkout: azure-sdk-tools
+          - task: PowerShell@2
+            displayName: Create pull request
+            inputs:
+              pwsh: true
+              filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
+              arguments: >
+                -RepoOwner "Azure"
+                -RepoName "azure-sdk-for-net"
+                -BaseBranch "main"
+                -PROwner "azure-sdk"
+                -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"
+                -AuthToken "$(azuresdk-github-pat)"
+                -PRTitle "Update AutoRest C# version to $(AutorestCSharpVersion)"
+                -PRBody "Update AutoRest C# version to $(AutorestCSharpVersion)"

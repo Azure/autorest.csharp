@@ -29,4 +29,4 @@ $file = npm pack -q;
 Copy-Item $file -Destination $StagingDirectory
 Pop-Location
 
-Write-Host "##vso[task.setvariable variable=autorestVersion]$devVersion"
+Write-Host "##vso[task.setvariable variable=autorestVersion;isoutput=true]$devVersion"
