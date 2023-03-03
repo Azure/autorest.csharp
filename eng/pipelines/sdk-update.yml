@@ -1,5 +1,8 @@
 trigger: none
 
+variables:
+  NugetSecurityAnalysisWarningLevel: 'none'
+
 resources:
   repositories:
     - repository: azure-sdk-for-net
@@ -44,3 +47,9 @@ stages:
           displayName: 'Publish Artifacts'
           inputs:
             ArtifactName: packages
+        - task: NuGetCommand@2
+          inputs:
+            command: 'push'
+            packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+            nuGetFeedType: 'internal'
+            publishVstsFeed: '69d855e6-8b8f-4ea3-b75c-a6ed394f174d'
