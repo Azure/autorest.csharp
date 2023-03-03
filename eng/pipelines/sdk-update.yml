@@ -54,7 +54,7 @@ stages:
           displayName: 'Publish @autorest/csharp'
           inputs:
             command: 'publish'
-            workingDir: '$(Build.SourcesDirectory)/autorest.csharp'
+            workingDir: '$(Build.SourcesDirectory)/autorest.csharp/artifacts/bin/AutoRest.CSharp/Release/net6.0'
             publishRegistry: 'useFeed'
             publishFeed: '69d855e6-8b8f-4ea3-b75c-a6ed394f174d'
         - task: PublishBuildArtifacts@1

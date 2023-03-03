@@ -1,7 +1,16 @@
 param($BuildNumber, $StagingDirectory)
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
-$localVersion = "$BuildNumber"
+
+$matchString = "(\d{8})\.(\d+)"
+$localVersion = 0
+If ($BuildNumber -match $matchString) {
+    $minorVersion = [int]$Matches[2] + 500
+    $localVersion = $Matches[1].$minorVersion
+}
+else {
+    throw "Invalid build number"
+}
 
 # Pack autorest.csharp nuget package "Microsoft.Azure.AutoRest.CSharp"
 Push-Location $repoRoot
