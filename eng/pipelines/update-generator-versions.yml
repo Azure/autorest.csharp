@@ -27,9 +27,9 @@ jobs:
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
-      BaseRepoBranch: auto-update-autorest-$(AutorestCSharpVersion)
+      BaseRepoBranch: auto-update-autorest-${{parameters.AutorestCSharpVersion}}
       BaseRepoOwner: azure-sdk
-      CommitMsg: Update Generator Version $(AutorestCSharpVersion)
+      CommitMsg: Update Generator Version ${{parameters.AutorestCSharpVersion}}
       TargetRepoOwner: Azure
       TargetRepoName: azure-sdk-for-net
       WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
