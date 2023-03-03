@@ -76,21 +76,24 @@ stages:
   - stage: 'Update_azure_sdk_for_net'
     dependsOn:
       - Build_and_Publish
+    variables:
+      AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
+      CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
     jobs:
       - template: update-generator-versions.yml
         parameters:
-          AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
-          CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
+          AutorestCSharpVersion: $(AutorestCSharpVersion)
+          CadlEmitterVersion: $(CadlEmitterVersion)
       - template: update-azure-sdk-for-net-codes.yml
         parameters:
           name: Update_Codes_A_C
           filter: "a*,b*,c*"
-          AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
-          CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
+          AutorestCSharpVersion: $(AutorestCSharpVersion)
+          CadlEmitterVersion: $(CadlEmitterVersion)
       - job: Create_PR
-        dependsOn: Update_Generator_Versions
-        variables:
-          AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
+        dependsOn: 
+          - Update_Generator_Versions
+          - Update_Codes_A_C
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
