@@ -87,6 +87,8 @@ stages:
           - checkout: self
           - checkout: azure-sdk-tools
           - task: PowerShell@2
+            variables:
+              AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
             displayName: Create pull request
             inputs:
               pwsh: true
@@ -96,7 +98,7 @@ stages:
                 -RepoName "azure-sdk-for-net"
                 -BaseBranch "main"
                 -PROwner "azure-sdk"
-                -PRBranch "auto-update-autorest-${{parameters.AutorestCSharpVersion}}"
+                -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"
                 -AuthToken "$(azuresdk-github-pat)"
-                -PRTitle "Update AutoRest C# version to ${{parameters.AutorestCSharpVersion}}"
-                -PRBody "Update AutoRest C# version to ${{parameters.AutorestCSharpVersion}}"
+                -PRTitle "Update AutoRest C# version to $(AutorestCSharpVersion)"
+                -PRBody "Update AutoRest C# version to $(AutorestCSharpVersion)"
