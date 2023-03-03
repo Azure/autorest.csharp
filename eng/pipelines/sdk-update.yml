@@ -83,12 +83,12 @@ stages:
           CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
       - job: Create_PR
         dependsOn: Update_Generator_Versions
+        variables:
+          AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
           - task: PowerShell@2
-            variables:
-              AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
             displayName: Create pull request
             inputs:
               pwsh: true
