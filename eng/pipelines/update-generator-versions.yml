@@ -16,6 +16,10 @@ jobs:
   - checkout: azure-sdk-for-net
   - checkout: azure-sdk-tools
     fetchDepth: 1
+  - ${{ if eq(parameters.IsInternalFeed, true) }}:
+    - pwsh: ./eng/GenerateInternalNpmrc.ps1 -ContainingFolder $(Build.SourcesDirectory)/azure-sdk-for-net
+      displayName: "Generate Internal Npmrc"
+      workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
   - task: Powershell@2
     displayName: Update SDK Generator Versions
     inputs:
