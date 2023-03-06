@@ -30,7 +30,7 @@ jobs:
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     - task: npmAuthenticate@0
       inputs:
-        workingFile: '$(Build.SourcesDirectory)/azure-sdk-for-net/.npmrc'
+        workingFile: $(Build.SourcesDirectory)/azure-sdk-for-net/.npmrc
       displayName: Setup Internal NPM Auth
     - task: NuGetAuthenticate@1
   - task: Powershell@2
@@ -56,8 +56,8 @@ jobs:
   - ${{ if eq(parameters.IsInternalFeed, true) }}:
     - pwsh: |
         git restore NuGet.Config
-        git restore .npmrc
-        git restore eng\common\scripts\Cadl-Project-Generate.ps1
+        git restore ./.npmrc
+        git restore eng/common/scripts/Cadl-Project-Generate.ps1
       displayName: Discard Internal Change
       workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
