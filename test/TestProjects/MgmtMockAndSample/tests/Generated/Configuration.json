@@ -14,7 +14,7 @@
     "EventData",
     "ManagedHsmProperties"
   ],
-  "TreatEmptyStringAsNullForTypes": [
+  "IntrinsicTypesToTreatEmptyStringAsNull": [
     "Uri",
     "Guid",
     "ResourceIdentifier",
