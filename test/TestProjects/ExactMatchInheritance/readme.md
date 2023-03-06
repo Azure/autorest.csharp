@@ -26,7 +26,7 @@ keep-orphaned-models:
 rename-mapping:
   ExactMatchModel11.type: ResourceType
 
-treat-empty-string-as-null-for-models:
+models-to-treat-empty-string-as-null:
 - ExactMatchModel11
 - ExactMatchModel1Data
 

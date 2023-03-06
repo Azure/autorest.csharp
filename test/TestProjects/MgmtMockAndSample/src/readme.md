@@ -48,7 +48,7 @@ rename-mapping:
   Type: EncryptionType
   FirewallPolicyThreatIntelWhitelist.ipAddresses: -|ip-address
 
-treat-empty-string-as-null-for-models:
+models-to-treat-empty-string-as-null:
 - EventData
 - ManagedHsmProperties
 
