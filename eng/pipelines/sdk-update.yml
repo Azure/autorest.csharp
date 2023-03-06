@@ -88,7 +88,7 @@ stages:
       - template: update-azure-sdk-for-net-codes.yml
         parameters:
           name: Update_Codes_A_C
-          filter: "anomalydetector"
+          filter: "a*,b*,c*"
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           CadlEmitterVersion: $(CadlEmitterVersion)
           IsInternalFeed: true
@@ -153,7 +153,7 @@ stages:
               pwsh: true
               filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
               arguments: >
-                -RepoOwner "Azure"
+                -RepoOwner "pshao25"
                 -RepoName "azure-sdk-for-net"
                 -BaseBranch "main"
                 -PROwner "azure-sdk"
