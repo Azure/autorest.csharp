@@ -167,13 +167,13 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
                 "model-namespace": options["model-namespace"],
-                TreatEmptyStringAsNullForModels:
-                    options["treat-empty-string-as-null-for-models"],
-                TreatEmptyStringAsNullForTypes: options[
-                    "treat-empty-string-as-null-for-models"
+                ModelsToTreatEmptyStringAsNull:
+                    options["models-to-treat-empty-string-as-null"],
+                IntrinsicTypesToTreatEmptyStringAsNull: options[
+                    "models-to-treat-empty-string-as-null"
                 ]
                     ? options[
-                          "treat-empty-string-as-null-for-extra-types"
+                          "additional-intrinsic-types-to-treat-empty-string-as-null"
                       ].concat(
                           [
                               "Uri",
@@ -183,7 +183,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                           ].filter(
                               (item) =>
                                   options[
-                                      "treat-empty-string-as-null-for-extra-types"
+                                      "additional-intrinsic-types-to-treat-empty-string-as-null"
                                   ].indexOf(item) < 0
                           )
                       )

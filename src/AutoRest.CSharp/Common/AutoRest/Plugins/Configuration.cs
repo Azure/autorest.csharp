@@ -38,8 +38,8 @@ namespace AutoRest.CSharp.Input
             public const string UnreferencedTypesHandling = "unreferenced-types-handling";
             public const string ModelFactoryForHlc = "model-factory-for-hlc";
             public const string GenerateModelFactory = "generate-model-factory";
-            public const string TreatEmptyStringAsNullForModels = "treat-empty-string-as-null-for-models";
-            public const string TreatEmptyStringAsNullForExtraTypes = "treat-empty-string-as-null-for-extra-types";
+            public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
+            public const string AdditionalIntrinsicTypesToTreatEmptyStringAsNull = "additional-intrinsic-types-to-treat-empty-string-as-null";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -70,8 +70,8 @@ namespace AutoRest.CSharp.Input
             string? projectFolder,
             IReadOnlyList<string> protocolMethodList,
             IReadOnlyList<string> suppressAbstractBaseClasses,
-            IReadOnlyList<string> treatEmptyStringAsNullForModels,
-            IReadOnlyList<string> treatEmptyStringAsNullForExtraTypes,
+            IReadOnlyList<string> modelsToTreatEmptyStringAsNull,
+            IReadOnlyList<string> additionalIntrinsicTypesToTreatEmptyStringAsNull,
             MgmtConfiguration mgmtConfiguration,
             MgmtTestConfiguration? mgmtTestConfiguration)
         {
@@ -128,8 +128,8 @@ namespace AutoRest.CSharp.Input
             _mgmtConfiguration = mgmtConfiguration;
             MgmtTestConfiguration = mgmtTestConfiguration;
             _suppressAbstractBaseClasses = suppressAbstractBaseClasses;
-            _treatEmptyStringAsNullForModels = new HashSet<string>(treatEmptyStringAsNullForModels);
-            _treatEmptyStringAsNullForTypes.UnionWith(treatEmptyStringAsNullForExtraTypes);
+            _modelsToTreatEmptyStringAsNull = new HashSet<string>(modelsToTreatEmptyStringAsNull);
+            _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
         }
 
         private static string? _outputFolder;
@@ -159,11 +159,11 @@ namespace AutoRest.CSharp.Input
         private static IReadOnlyList<string>? _protocolMethodList;
         public static IReadOnlyList<string> ProtocolMethodList => _protocolMethodList ?? throw new InvalidOperationException("Configuration has not been initialized");
 
-        private static HashSet<string>? _treatEmptyStringAsNullForModels;
-        public static HashSet<string> TreatEmptyStringAsNullForModels => _treatEmptyStringAsNullForModels ?? throw new InvalidOperationException("Configuration has not been initialized");
+        private static HashSet<string>? _modelsToTreatEmptyStringAsNull;
+        public static HashSet<string> ModelsToTreatEmptyStringAsNull => _modelsToTreatEmptyStringAsNull ?? throw new InvalidOperationException("Configuration has not been initialized");
 
-        private static HashSet<string> _treatEmptyStringAsNullForTypes = new HashSet<string>() { nameof(Uri), nameof(Guid), nameof(ResourceIdentifier), nameof(DateTimeOffset) };
-        public static HashSet<string> TreatEmptyStringAsNullForTypes => _treatEmptyStringAsNullForTypes;
+        private static HashSet<string> _intrinsicTypesToTreatEmptyStringAsNull = new HashSet<string>() { nameof(Uri), nameof(Guid), nameof(ResourceIdentifier), nameof(DateTimeOffset) };
+        public static HashSet<string> IntrinsicTypesToTreatEmptyStringAsNull => _intrinsicTypesToTreatEmptyStringAsNull;
 
         private static MgmtConfiguration? _mgmtConfiguration;
         public static MgmtConfiguration MgmtConfiguration => _mgmtConfiguration ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -198,8 +198,8 @@ namespace AutoRest.CSharp.Input
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                treatEmptyStringAsNullForModels: autoRest.GetValue<string[]?>(Options.TreatEmptyStringAsNullForModels).GetAwaiter().GetResult() ?? Array.Empty<string>(),
-                treatEmptyStringAsNullForExtraTypes: autoRest.GetValue<string[]?>(Options.TreatEmptyStringAsNullForExtraTypes).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                modelsToTreatEmptyStringAsNull: autoRest.GetValue<string[]?>(Options.ModelsToTreatEmptyStringAsNull).GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                additionalIntrinsicTypesToTreatEmptyStringAsNull: autoRest.GetValue<string[]?>(Options.AdditionalIntrinsicTypesToTreatEmptyStringAsNull).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
                 mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest)
             );

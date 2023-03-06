@@ -1,4 +1,4 @@
 options:
   "@azure-tools/cadl-csharp":
-    treat-empty-string-as-null-for-models: [DurationProperty, DatetimeProperty]
-    treat-empty-string-as-null-for-extra-types: [TimeSpan]
+    models-to-treat-empty-string-as-null: [DurationProperty, DatetimeProperty]
+    additional-intrinsic-types-to-treat-empty-string-as-null: [TimeSpan]

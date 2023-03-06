@@ -30,7 +30,7 @@ treat-empty-string-as-null-for-models:
 - ExactMatchModel11
 - ExactMatchModel1Data
 
-treat-empty-string-as-null-for-extra-types:
+additional-intrinsic-types-to-treat-empty-string-as-null:
 - ResourceType
 - IPAddress
 

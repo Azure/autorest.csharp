@@ -380,9 +380,9 @@ namespace AutoRest.CSharp.Generation.Writers
             if (property.ValueSerialization is JsonValueSerialization valueSerialization
                 && valueSerialization.Type.IsFrameworkType)
             {
-                if (Configuration.TreatEmptyStringAsNullForTypes.Contains(valueSerialization.Type.FrameworkType.Name))
+                if (Configuration.IntrinsicTypesToTreatEmptyStringAsNull.Contains(valueSerialization.Type.FrameworkType.Name))
                 {
-                    result = $" || ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.{nameof(JsonValueKind.String}} && {itemVariable}.Value.GetString().Length == 0)";
+                    result = $" || {itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.{nameof(JsonValueKind.String)} && {itemVariable}.Value.GetString().Length == 0";
                 }
             }
             return result;
@@ -577,7 +577,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var itemVariable = new CodeWriterDeclaration("property");
             using (writer.Scope($"foreach (var {itemVariable:D} in element.EnumerateObject())"))
             {
-                writer.DeserializeIntoObjectProperties(serialization.Properties, $"{itemVariable:I}", propertyVariables, Configuration.TreatEmptyStringAsNullForModels.Contains(serialization.Type.Name));
+                writer.DeserializeIntoObjectProperties(serialization.Properties, $"{itemVariable:I}", propertyVariables, Configuration.ModelsToTreatEmptyStringAsNull.Contains(serialization.Type.Name));
 
                 if (objAdditionalProperties?.ValueSerialization != null)
                 {

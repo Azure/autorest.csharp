@@ -19,8 +19,8 @@ export type NetEmitterOptions = {
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
     debug?: boolean;
-    "treat-empty-string-as-null-for-models"?: string[];
-    "treat-empty-string-as-null-for-extra-types"?: string[];
+    "models-to-treat-empty-string-as-null"?: string[];
+    "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
 } & DpgEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -51,12 +51,12 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "generate-convenience-methods": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },
         debug: { type: "boolean", nullable: true },
-        "treat-empty-string-as-null-for-models": {
+        "models-to-treat-empty-string-as-null": {
             type: "array",
             nullable: true,
             items: { type: "string" }
         },
-        "treat-empty-string-as-null-for-extra-types": {
+        "additional-intrinsic-types-to-treat-empty-string-as-null": {
             type: "array",
             nullable: true,
             items: { type: "string" }
@@ -77,8 +77,8 @@ const defaultOptions = {
     "generate-convenience-methods": true,
     "package-name": undefined,
     debug: undefined,
-    "treat-empty-string-as-null-for-models": undefined,
-    "treat-empty-string-as-null-for-extra-types": []
+    "models-to-treat-empty-string-as-null": undefined,
+    "additional-intrinsic-types-to-treat-empty-string-as-null": []
 };
 
 export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
