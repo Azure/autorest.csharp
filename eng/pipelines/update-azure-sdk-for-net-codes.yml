@@ -58,12 +58,12 @@ jobs:
         git restore NuGet.Config
         git restore .npmrc
         git restore eng\common\scripts\Cadl-Project-Generate.ps1
-      displayName: Discard Nuget change
+      displayName: Discard Internal Change
       workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
       BaseRepoBranch: auto-update-autorest-${{ parameters.AutorestCSharpVersion }}
-      BaseRepoOwner: azure-sdk
+      BaseRepoOwner: pshao25
       CommitMsg: Update SDK codes ${{ parameters.filter }}
       TargetRepoOwner: Azure
       TargetRepoName: azure-sdk-for-net

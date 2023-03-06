@@ -16,6 +16,14 @@ jobs:
   - checkout: azure-sdk-for-net
   - checkout: azure-sdk-tools
     fetchDepth: 1
+  - ${{ if eq(parameters.IsInternalFeed, true) }}:
+    - pwsh: ./eng/GenerateInternalNpmrc.ps1 -ContainingFolder $(Build.SourcesDirectory)/azure-sdk-for-net
+      displayName: "Generate Internal Npmrc"
+      workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+    - task: npmAuthenticate@0
+      inputs:
+        workingFile: '.npmrc'
+      displayName: Setup Internal NPM Auth
   - task: Powershell@2
     displayName: Update SDK Generator Versions
     inputs:
@@ -30,7 +38,7 @@ jobs:
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
       BaseRepoBranch: auto-update-autorest-${{parameters.AutorestCSharpVersion}}
-      BaseRepoOwner: azure-sdk
+      BaseRepoOwner: pshao25
       CommitMsg: Update Generator Version ${{parameters.AutorestCSharpVersion}}
       TargetRepoOwner: Azure
       TargetRepoName: azure-sdk-for-net
