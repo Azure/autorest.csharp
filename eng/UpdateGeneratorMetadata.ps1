@@ -39,6 +39,8 @@ if ($UseInternalFeed) {
         $nuGetConfig.Save($nugetConfigPath)
     }
 
+    & (Join-Path $PSScriptRoot 'GenerateInternalNpmrc.ps1') -ContainingFolder $SdkRepoRoot
+
     $npmrcFile = "$SdkRepoRoot\.npmrc"
     $projectGeneratePath = "$SdkRepoRoot\eng\common\scripts\Cadl-Project-Generate.ps1"
     (Get-Content -Raw $projectGeneratePath) -replace `
