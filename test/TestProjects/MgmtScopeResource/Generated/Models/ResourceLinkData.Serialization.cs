@@ -27,6 +27,10 @@ namespace MgmtScopeResource
 
         internal static ResourceLinkData DeserializeResourceLinkData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ResourceLinkProperties> properties = default;
             ResourceIdentifier id = default;
             string name = default;

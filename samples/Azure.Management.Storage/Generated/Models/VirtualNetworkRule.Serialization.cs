@@ -32,6 +32,10 @@ namespace Azure.Management.Storage.Models
 
         internal static VirtualNetworkRule DeserializeVirtualNetworkRule(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string id = default;
             Optional<Action> action = default;
             Optional<State> state = default;

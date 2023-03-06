@@ -14,6 +14,10 @@ namespace xml_service.Models
     {
         internal static JsonOutput DeserializeJsonOutput(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> id = default;
             foreach (var property in element.EnumerateObject())
             {

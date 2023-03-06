@@ -24,6 +24,10 @@ namespace Azure.Management.Storage.Models
 
         internal static SasPolicy DeserializeSasPolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string sasExpirationPeriod = default;
             ExpirationAction expirationAction = default;
             foreach (var property in element.EnumerateObject())

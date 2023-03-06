@@ -58,6 +58,10 @@ namespace Azure.ResourceManager.Sample
 
         internal static DedicatedHostData DeserializeDedicatedHostData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             SampleSku sku = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

@@ -25,6 +25,10 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyTransportSecurity DeserializeFirewallPolicyTransportSecurity(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<FirewallPolicyCertificateAuthority> certificateAuthority = default;
             foreach (var property in element.EnumerateObject())
             {

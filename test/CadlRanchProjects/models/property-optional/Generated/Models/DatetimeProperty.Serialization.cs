@@ -34,6 +34,10 @@ namespace Models.Property.Optional.Models
 
         internal static DatetimeProperty DeserializeDatetimeProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DateTimeOffset?> property = default;
             foreach (var property0 in element.EnumerateObject())
             {

@@ -14,6 +14,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static StorageUsage DeserializeStorageUsage(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<UsageUnit> unit = default;
             Optional<int> currentValue = default;
             Optional<int> limit = default;

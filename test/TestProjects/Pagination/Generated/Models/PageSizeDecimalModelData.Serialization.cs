@@ -20,6 +20,10 @@ namespace Pagination
 
         internal static PageSizeDecimalModelData DeserializePageSizeDecimalModelData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;

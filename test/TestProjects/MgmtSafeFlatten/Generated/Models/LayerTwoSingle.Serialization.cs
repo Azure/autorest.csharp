@@ -25,6 +25,10 @@ namespace MgmtSafeFlatten.Models
 
         internal static LayerTwoSingle DeserializeLayerTwoSingle(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> myProp = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -15,6 +15,10 @@ namespace MgmtSingletonResource
     {
         internal static IgnitionData DeserializeIgnitionData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> pushButton = default;
             ResourceIdentifier id = default;
             string name = default;

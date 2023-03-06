@@ -36,6 +36,10 @@ namespace Azure.Management.Storage.Models
 
         internal static AccessPolicy DeserializeAccessPolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DateTimeOffset> startTime = default;
             Optional<DateTimeOffset> expiryTime = default;
             Optional<string> permission = default;

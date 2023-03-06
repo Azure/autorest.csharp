@@ -38,6 +38,10 @@ namespace MgmtPropertyChooser.Models
 
         internal static IdentityWithDifferentPropertyType DeserializeIdentityWithDifferentPropertyType(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> principalId = default;
             Optional<int> tenantId = default;
             Optional<ResourceIdentityType> type = default;

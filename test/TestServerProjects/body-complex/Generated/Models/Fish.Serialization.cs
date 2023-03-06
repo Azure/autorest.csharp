@@ -39,6 +39,10 @@ namespace body_complex.Models
 
         internal static Fish DeserializeFish(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             if (element.TryGetProperty("fishtype", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())

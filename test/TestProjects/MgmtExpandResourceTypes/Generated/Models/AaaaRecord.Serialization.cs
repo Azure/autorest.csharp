@@ -25,6 +25,10 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static AaaaRecord DeserializeAaaaRecord(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> ipv6Address = default;
             foreach (var property in element.EnumerateObject())
             {

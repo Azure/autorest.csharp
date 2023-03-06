@@ -16,6 +16,10 @@ namespace MgmtOperations.Models
     {
         internal static AvailabilitySetChildListResult DeserializeAvailabilitySetChildListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<AvailabilitySetChildData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

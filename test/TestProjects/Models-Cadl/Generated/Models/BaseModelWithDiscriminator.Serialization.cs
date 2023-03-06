@@ -23,6 +23,10 @@ namespace ModelsInCadl.Models
 
         internal static BaseModelWithDiscriminator DeserializeBaseModelWithDiscriminator(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             if (element.TryGetProperty("discriminatorProperty", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())

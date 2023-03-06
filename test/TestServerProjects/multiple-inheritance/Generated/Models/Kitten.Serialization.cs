@@ -42,6 +42,10 @@ namespace multiple_inheritance.Models
 
         internal static Kitten DeserializeKitten(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> eatsMiceYet = default;
             Optional<bool> likesMilk = default;
             Optional<bool> meows = default;
