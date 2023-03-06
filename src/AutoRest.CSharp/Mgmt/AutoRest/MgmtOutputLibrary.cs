@@ -397,6 +397,27 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return model.Type.Namespace.StartsWith(MgmtContext.Context.DefaultNamespace);
         }
 
+        private MgmtExtensionBuilder? _extensionBuilder;
+        internal MgmtExtensionBuilder ExtensionBuilder => _extensionBuilder ??= EnsureExtensionBuilder();
+
+        private MgmtExtensionBuilder EnsureExtensionBuilder()
+        {
+            var extensionOperations = new Dictionary<Type, IEnumerable<Operation>>();
+            foreach (var (armCoreType, extensionContextualPath) in _extensionChoices)
+            {
+                var shouldGenerateChilden = !Configuration.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
+                var operations = shouldGenerateChilden ? GetChildOperations(extensionContextualPath) : Enumerable.Empty<Operation>();
+                extensionOperations.Add(armCoreType, operations);
+            }
+
+            var extensionBuilder = new MgmtExtensionBuilder(extensionOperations);
+            return extensionBuilder;
+        }
+
+        public IEnumerable<MgmtExtension> Extensions => ExtensionBuilder.Extensions;
+        public IEnumerable<NewMgmtExtensionClient> ExtensionClients => ExtensionBuilder.ExtensionClients;
+        public MgmtExtensionWrapper NewExtensionWrapper => ExtensionBuilder.ExtensionWrapper;
+
         //private ArmClientExtensions? _armClientExtensions;
         //public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= EnsureArmClientExtensions();
 
@@ -435,17 +456,20 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return new MgmtExtensionsWrapper(extensions);
         }
 
+        private static readonly Dictionary<Type, RequestPath> _extensionChoices = new()
+        {
+            [typeof(TenantResource)] = RequestPath.Tenant,
+            [typeof(ManagementGroupResource)] = RequestPath.ManagementGroup,
+            [typeof(SubscriptionResource)] = RequestPath.Subscription,
+            [typeof(ResourceGroupResource)] = RequestPath.ResourceGroup,
+            [typeof(ArmResource)] = RequestPath.Any
+        };
+
         private Dictionary<Type, MgmtExtensions> EnsureArmExtensions()
         {
-            var extensionChoices = new Dictionary<Type, RequestPath>() {
-                { typeof(TenantResource), RequestPath.Tenant },
-                { typeof(ManagementGroupResource), RequestPath.ManagementGroup },
-                { typeof(SubscriptionResource), RequestPath.Subscription },
-                { typeof(ResourceGroupResource), RequestPath.ResourceGroup },
-                { typeof(ArmResource), RequestPath.Any } };
-
             Dictionary<Type, MgmtExtensions> extensions = new Dictionary<Type, MgmtExtensions>();
-            foreach (var extensionChoice in extensionChoices)
+
+            foreach (var extensionChoice in _extensionChoices)
             {
                 extensions.Add(extensionChoice.Key, EnsureExtensions(extensionChoice.Key, extensionChoice.Value));
             }

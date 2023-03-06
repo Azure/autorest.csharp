@@ -107,24 +107,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             // write extension class
-            if (!isArmCore && !MgmtContext.Library.ExtensionWrapper.IsEmpty)
-                WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(MgmtContext.Library.ExtensionWrapper));
-
-            foreach (var extension in MgmtContext.Library.ArmExtensions.Values)
-            {
-                if (extension is ArmClientExtensions)
-                    continue;
-                WriteExtensionClient(project, extension.ExtensionClient);
-                foreach (var splitExtension in extension.SplitExtensions)
-                {
-                    WriteExtensionClient(project, splitExtension.ExtensionClient);
-                }
-            }
-
-            if (isArmCore && !MgmtContext.Library.ArmExtensions[typeof(ArmClient)].IsEmpty)
-            {
-                WriteExtensionPiece(project, new ArmClientExtensionsWriter((ArmClientExtensions)MgmtContext.Library.ArmExtensions[typeof(ArmClient)]));
-            }
+            WriteExtensionFiles(project, isArmCore, MgmtContext.Library.NewExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.ExtensionClients);
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
             lroWriter.Write();
@@ -166,6 +149,51 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
+        }
+
+        private static void WriteExtensionFiles(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<NewMgmtExtensionClient> extensionClients)
+        {
+            if (!isArmCore && !extensionWrapper.IsEmpty)
+                WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(extensionWrapper));
+
+            // TODO -- fill in later for arm core
+            if (isArmCore)
+            {
+                foreach (var extension in extensions)
+                {
+
+                }
+            }
+
+            // write ExtensionClients
+            foreach (var extensionClient in extensionClients)
+            {
+                //if (extension is ArmClientExtensions armClientExtension)
+                //{
+                //    if (isArmCore && !armClientExtension.IsEmpty)
+                //    {
+                //        WriteExtensionPiece(project, new ArmClientExtensionsWriter(armClientExtension));
+                //    }
+                //    else
+                //    {
+                //        continue;
+                //    }
+                //}
+                WriteExtensionClient(project, extensionClient);
+                //foreach (var splitExtension in extension.SplitExtensions)
+                //{
+                //    WriteExtensionClient(project, splitExtension.ExtensionClient);
+                //}
+            }
+        }
+
+        private static void WriteExtensionClient(GeneratedCodeWorkspace project, NewMgmtExtensionClient extensionClient)
+        {
+            // armcore does not need ExtensionClients
+            if (!Configuration.MgmtConfiguration.IsArmCore && !extensionClient.IsEmpty)
+            {
+                WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
+            }
         }
 
         private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
