@@ -48,6 +48,10 @@ namespace CognitiveSearch.Models
 
         internal static DataSource DeserializeDataSource(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<string> description = default;
             DataSourceType type = default;

@@ -14,6 +14,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static DedicatedHostAllocatableVM DeserializeDedicatedHostAllocatableVM(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> vmSize = default;
             Optional<double> count = default;
             foreach (var property in element.EnumerateObject())

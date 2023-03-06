@@ -23,6 +23,10 @@ namespace Models.Property.Types.Models
 
         internal static EnumProperty DeserializeEnumProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             FixedInnerEnum property = default;
             foreach (var property0 in element.EnumerateObject())
             {

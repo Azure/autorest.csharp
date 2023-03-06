@@ -91,6 +91,10 @@ namespace CognitiveSearch.Models
 
         internal static EntityRecognitionSkill DeserializeEntityRecognitionSkill(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<EntityCategory>> categories = default;
             Optional<EntityRecognitionSkillLanguage> defaultLanguageCode = default;
             Optional<bool?> includeTypelessEntities = default;

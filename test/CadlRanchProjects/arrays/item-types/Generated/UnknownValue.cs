@@ -62,7 +62,14 @@ namespace Arrays.ItemTypes
                 List<object> array = new List<object>();
                 foreach (var item in document.RootElement.EnumerateArray())
                 {
-                    array.Add(item.GetObject());
+                    if (item.ValueKind == JsonValueKind.Null)
+                    {
+                        array.Add(null);
+                    }
+                    else
+                    {
+                        array.Add(item.GetObject());
+                    }
                 }
                 value = array;
                 return Response.FromValue(value, response);
@@ -88,7 +95,14 @@ namespace Arrays.ItemTypes
                 List<object> array = new List<object>();
                 foreach (var item in document.RootElement.EnumerateArray())
                 {
-                    array.Add(item.GetObject());
+                    if (item.ValueKind == JsonValueKind.Null)
+                    {
+                        array.Add(null);
+                    }
+                    else
+                    {
+                        array.Add(item.GetObject());
+                    }
                 }
                 value = array;
                 return Response.FromValue(value, response);

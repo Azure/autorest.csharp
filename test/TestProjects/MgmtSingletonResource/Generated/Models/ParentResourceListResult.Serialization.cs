@@ -16,6 +16,10 @@ namespace MgmtSingletonResource.Models
     {
         internal static ParentResourceListResult DeserializeParentResourceListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<ParentResourceData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

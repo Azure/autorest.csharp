@@ -30,6 +30,10 @@ namespace MgmtOptionalConstant.Models
 
         internal static ModelWithOptionalConstant DeserializeModelWithOptionalConstant(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<PassName> passName = default;
             Optional<SettingName> settingName = default;
             foreach (var property in element.EnumerateObject())

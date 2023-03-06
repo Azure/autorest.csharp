@@ -65,6 +65,10 @@ namespace MgmtMockAndSample
 
         internal static MhsmPrivateEndpointConnectionData DeserializeMhsmPrivateEndpointConnectionData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> etag = default;
             Optional<ManagedHsmSku> sku = default;
             Optional<IDictionary<string, string>> tags = default;

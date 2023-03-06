@@ -33,6 +33,10 @@ namespace ExactMatchInheritance.Models
 
         internal static SeparateClass DeserializeSeparateClass(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> stringProperty = default;
             Optional<ExactMatchModel10> modelProperty = default;
             foreach (var property in element.EnumerateObject())

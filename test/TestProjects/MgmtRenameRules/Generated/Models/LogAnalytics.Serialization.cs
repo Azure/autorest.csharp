@@ -15,6 +15,10 @@ namespace MgmtRenameRules.Models
     {
         internal static LogAnalytics DeserializeLogAnalytics(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<LogAnalyticsOutput> properties = default;
             Optional<ContentType> contentType = default;
             Optional<BinaryData> content = default;

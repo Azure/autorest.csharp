@@ -15,6 +15,10 @@ namespace MgmtScopeResource.Models
     {
         internal static DeploymentOperationProperties DeserializeDeploymentOperationProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ProvisioningOperation> provisioningOperation = default;
             Optional<string> provisioningState = default;
             Optional<DateTimeOffset> timestamp = default;

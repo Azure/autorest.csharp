@@ -25,6 +25,10 @@ namespace MgmtRenameRules.Models
 
         internal static KeyVaultSecretReference DeserializeKeyVaultSecretReference(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Uri secretUrl = default;
             WritableSubResource sourceVault = default;
             foreach (var property in element.EnumerateObject())

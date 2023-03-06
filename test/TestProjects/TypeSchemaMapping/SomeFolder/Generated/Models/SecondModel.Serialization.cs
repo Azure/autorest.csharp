@@ -43,6 +43,10 @@ namespace TypeSchemaMapping.Models
 
         internal static SecondModel DeserializeSecondModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> stringProperty = default;
             Optional<IReadOnlyDictionary<string, string>> dictionaryProperty = default;
             Optional<CustomDaysOfWeek> daysOfWeek = default;

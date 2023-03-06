@@ -40,6 +40,10 @@ namespace MgmtListMethods
 
         internal static FakeParentWithAncestorData DeserializeFakeParentWithAncestorData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> bar = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

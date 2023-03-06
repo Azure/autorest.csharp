@@ -16,6 +16,10 @@ namespace ResourceRename.Models
     {
         internal static SshPublicKeysGroupListResult DeserializeSshPublicKeysGroupListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<SshPublicKeyInfoData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

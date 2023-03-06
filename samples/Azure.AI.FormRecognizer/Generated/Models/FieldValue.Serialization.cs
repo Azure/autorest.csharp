@@ -16,6 +16,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static FieldValue DeserializeFieldValue(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             FieldValueType type = default;
             Optional<string> valueString = default;
             Optional<DateTimeOffset> valueDate = default;

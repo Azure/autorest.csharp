@@ -14,6 +14,10 @@ namespace httpInfrastructure.Models
     {
         internal static D DeserializeD(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> httpStatusCode = default;
             foreach (var property in element.EnumerateObject())
             {

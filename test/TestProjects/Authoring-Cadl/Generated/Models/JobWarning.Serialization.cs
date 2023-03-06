@@ -15,6 +15,10 @@ namespace Azure.Language.Authoring.Models
     {
         internal static JobWarning DeserializeJobWarning(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string code = default;
             string message = default;
             foreach (var property in element.EnumerateObject())

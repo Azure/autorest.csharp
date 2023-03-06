@@ -24,6 +24,10 @@ namespace MgmtDiscriminator.Models
 
         internal static DeliveryRuleRequestMethodCondition DeserializeDeliveryRuleRequestMethodCondition(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             RequestMethodMatchConditionParameters parameters = default;
             MatchVariable name = default;
             Optional<string> foo = default;

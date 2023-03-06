@@ -32,6 +32,10 @@ namespace Azure.Management.Storage.Models
 
         internal static BlobInventoryPolicySchema DeserializeBlobInventoryPolicySchema(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             bool enabled = default;
             InventoryRuleType type = default;
             IList<BlobInventoryPolicyRule> rules = default;

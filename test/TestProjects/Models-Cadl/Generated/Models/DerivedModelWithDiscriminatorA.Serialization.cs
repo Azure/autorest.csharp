@@ -25,6 +25,10 @@ namespace ModelsInCadl.Models
 
         internal static DerivedModelWithDiscriminatorA DeserializeDerivedModelWithDiscriminatorA(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string requiredString = default;
             string discriminatorProperty = default;
             foreach (var property in element.EnumerateObject())

@@ -39,6 +39,10 @@ namespace CognitiveSearch.Models
 
         internal static PatternTokenizer DeserializePatternTokenizer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> pattern = default;
             Optional<RegexFlags> flags = default;
             Optional<int> group = default;

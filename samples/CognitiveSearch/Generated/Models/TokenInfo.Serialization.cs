@@ -14,6 +14,10 @@ namespace CognitiveSearch.Models
     {
         internal static TokenInfo DeserializeTokenInfo(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string token = default;
             int startOffset = default;
             int endOffset = default;

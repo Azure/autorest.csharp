@@ -14,6 +14,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static VaultKey DeserializeVaultKey(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> key = default;
             Optional<string> content = default;
             foreach (var property in element.EnumerateObject())

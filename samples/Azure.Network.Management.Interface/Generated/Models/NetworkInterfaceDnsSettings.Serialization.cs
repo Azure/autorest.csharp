@@ -36,6 +36,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkInterfaceDnsSettings DeserializeNetworkInterfaceDnsSettings(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<string>> dnsServers = default;
             Optional<IReadOnlyList<string>> appliedDnsServers = default;
             Optional<string> internalDnsNameLabel = default;

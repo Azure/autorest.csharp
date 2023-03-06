@@ -53,6 +53,10 @@ namespace ModelsInCadl.Models
 
         internal static RoundTripPrimitiveModel DeserializeRoundTripPrimitiveModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string requiredString = default;
             int requiredInt = default;
             long requiredInt64 = default;

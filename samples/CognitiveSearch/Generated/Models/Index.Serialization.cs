@@ -115,6 +115,10 @@ namespace CognitiveSearch.Models
 
         internal static Index DeserializeIndex(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             IList<Field> fields = default;
             Optional<IList<ScoringProfile>> scoringProfiles = default;

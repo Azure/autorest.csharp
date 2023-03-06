@@ -210,7 +210,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{pagnationUri}",
      "Path": "/app/transactions",
      "BufferResponse": true,

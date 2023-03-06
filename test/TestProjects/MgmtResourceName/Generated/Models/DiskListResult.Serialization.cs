@@ -16,6 +16,10 @@ namespace MgmtResourceName.Models
     {
         internal static DiskListResult DeserializeDiskListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<DiskData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
