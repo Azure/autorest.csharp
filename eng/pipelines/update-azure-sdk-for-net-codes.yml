@@ -33,6 +33,10 @@ jobs:
       inputs:
         workingFile: '$(Build.SourcesDirectory)/azure-sdk-for-net/.npmrc'
       displayName: Setup Internal NPM Auth
+    - task: CmdLine@2
+      inputs:
+        script: 'sh -c "$(curl -fsSL https://aka.ms/install-artifacts-credprovider.sh)"'
+      displayName: Setup Internal Nuget Auth
   - task: Powershell@2
     displayName: Update SDK codes ${{ parameters.filter }}
     inputs:
