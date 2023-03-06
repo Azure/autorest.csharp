@@ -29,7 +29,7 @@ $CadlEmitterProps = "$SdkRepoRoot\eng\emitter-package.json"
     Set-Content $CadlEmitterProps -NoNewline
 
 if ($UseInternalFeed) {
-    $nugetConfigPath = "$SdkRepoRoot\NuGet.Config"
+    $nugetConfigPath = Resolve-Path (Join-Path $SdkRepoRoot "NuGet.Config")
     $nuGetConfig = [xml](Get-Content -Path $nugetConfigPath)
     $xmlAdd = $nuGetConfig.configuration.packageSources.LastChild.clone()
     if ($xmlAdd.key -ne "azure-sdk-for-net-private") {

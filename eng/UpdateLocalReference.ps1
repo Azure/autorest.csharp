@@ -45,4 +45,4 @@ if ($xmlAdd.key -ne "DEBUG") {
 # There is a step depend on https://github.com/Azure/autorest.csharp/pull/3166
 
 # Update eng\Packages.Data.Props and emitter-package.json
-& (Join-Path $PSScriptRoot 'UpdateOfficialReference.ps1') -AutorestCSharpVersion "3.0.0-beta.$currentDate.$nextVersion" -CadlEmitterVersion $emitterPackagePath -SdkRepoRoot $SdkRepoRoot
+& (Join-Path $PSScriptRoot 'UpdateGeneratorMetadata.ps1') -AutorestCSharpVersion "3.0.0-beta.$currentDate.$nextVersion" -CadlEmitterVersion $emitterPackagePath -SdkRepoRoot $SdkRepoRoot
