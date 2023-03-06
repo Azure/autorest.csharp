@@ -16,6 +16,10 @@ namespace MgmtPartialResource.Models
     {
         internal static ConfigurationProfileAssignmentList DeserializeConfigurationProfileAssignmentList(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<ConfigurationProfileAssignmentData>> value = default;
             foreach (var property in element.EnumerateObject())
             {

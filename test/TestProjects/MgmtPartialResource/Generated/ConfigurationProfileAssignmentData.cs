@@ -12,7 +12,10 @@ using MgmtPartialResource.Models;
 
 namespace MgmtPartialResource
 {
-    /// <summary> A class representing the ConfigurationProfileAssignment data model. </summary>
+    /// <summary>
+    /// A class representing the ConfigurationProfileAssignment data model.
+    /// Configuration profile assignment is an association between a VM and automanage profile configuration.
+    /// </summary>
     public partial class ConfigurationProfileAssignmentData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ConfigurationProfileAssignmentData. </summary>

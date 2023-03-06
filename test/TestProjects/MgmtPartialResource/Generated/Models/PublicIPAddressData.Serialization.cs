@@ -81,6 +81,10 @@ namespace MgmtPartialResource
 
         internal static PublicIPAddressData DeserializePublicIPAddressData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<PublicIPAddressSku> sku = default;
             Optional<string> etag = default;
             Optional<IList<string>> zones = default;

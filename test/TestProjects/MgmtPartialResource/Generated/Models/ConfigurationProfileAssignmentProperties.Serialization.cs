@@ -30,6 +30,10 @@ namespace MgmtPartialResource.Models
 
         internal static ConfigurationProfileAssignmentProperties DeserializeConfigurationProfileAssignmentProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> configurationProfile = default;
             Optional<string> targetId = default;
             Optional<string> status = default;
