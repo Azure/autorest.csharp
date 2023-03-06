@@ -14,6 +14,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static ApiErrorBase DeserializeApiErrorBase(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> code = default;
             Optional<string> target = default;
             Optional<string> message = default;

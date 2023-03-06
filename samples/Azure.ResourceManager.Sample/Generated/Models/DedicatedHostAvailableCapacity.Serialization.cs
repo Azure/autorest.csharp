@@ -15,6 +15,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static DedicatedHostAvailableCapacity DeserializeDedicatedHostAvailableCapacity(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<DedicatedHostAllocatableVM>> allocatableVMs = default;
             foreach (var property in element.EnumerateObject())
             {

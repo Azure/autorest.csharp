@@ -14,6 +14,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static ListAccountSasResponse DeserializeListAccountSasResponse(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> accountSasToken = default;
             foreach (var property in element.EnumerateObject())
             {

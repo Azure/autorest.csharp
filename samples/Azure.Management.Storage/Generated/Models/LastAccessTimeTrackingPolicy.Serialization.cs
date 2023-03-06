@@ -43,6 +43,10 @@ namespace Azure.Management.Storage.Models
 
         internal static LastAccessTimeTrackingPolicy DeserializeLastAccessTimeTrackingPolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             bool enable = default;
             Optional<Name> name = default;
             Optional<int> trackingGranularityInDays = default;

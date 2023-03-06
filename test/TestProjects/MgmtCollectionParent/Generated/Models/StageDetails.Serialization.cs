@@ -15,6 +15,10 @@ namespace MgmtCollectionParent.Models
     {
         internal static StageDetails DeserializeStageDetails(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<StageStatus> stageStatus = default;
             Optional<StageName> stageName = default;
             Optional<string> displayName = default;

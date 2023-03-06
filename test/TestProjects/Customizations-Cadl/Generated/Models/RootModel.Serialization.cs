@@ -77,6 +77,10 @@ namespace CustomizationsInCadl.Models
 
         internal static RootModel DeserializeRootModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ModelToMakeInternal> propertyModelToMakeInternal = default;
             Optional<RenamedModel> propertyModelToRename = default;
             Optional<ModelToChangeNamespace> propertyModelToChangeNamespace = default;

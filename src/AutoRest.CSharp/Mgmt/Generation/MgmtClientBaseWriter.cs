@@ -342,11 +342,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return string.Join(", ", GetParametersForCollectionEntry(resourceCollection).Select(p => p.Name));
         }
 
-        protected virtual void WriteSingletonResourceEntry(Resource resource, string singletonResourceIdSuffix, MethodSignature signature)
+        protected virtual void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceIdSuffix, MethodSignature signature)
         {
             // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
             // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, new {typeof(ResourceIdentifier)}(Id.ToString() + \"/{singletonResourceIdSuffix}\"));");
+            _writer.UseNamespace(typeof(ResourceIdentifier).Namespace!);
+            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, {singletonResourceIdSuffix.BuildResourceIdentifier($"Id")});");
         }
 
         protected virtual MethodSignatureModifiers GetMethodModifiers() => Public | Virtual;
@@ -505,9 +506,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected Dictionary<string, WriteMethodDelegate> _customMethods = new Dictionary<string, WriteMethodDelegate>();
         private WriteMethodDelegate GetMethodDelegate(MgmtClientOperation clientOperation)
         {
-            if (clientOperation.IsLongRunningOperation && clientOperation.IsPagingOperation)
-                throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
-
             if (!_customMethods.TryGetValue($"Write{clientOperation.Name}Body", out var function))
             {
                 function = GetMethodDelegate(clientOperation.IsLongRunningOperation, clientOperation.IsPagingOperation);
@@ -522,8 +520,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 (true, false) => WriteLROMethodBody,
                 (false, true) => WritePagingMethodBody,
                 (false, false) => WriteNormalMethodBody,
-                _ => throw new InvalidOperationException("Unknown method combination"),
+                (true, true) => WritePagingLROMethodBody,
             };
+
+        private void WritePagingLROMethodBody(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
+        {
+            throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
+        }
 
         protected IDisposable WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {

@@ -69,6 +69,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static OutboundRule DeserializeOutboundRule(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> etag = default;
             Optional<string> type = default;

@@ -39,6 +39,10 @@ namespace body_complex.Models
 
         internal static DictionaryWrapper DeserializeDictionaryWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IDictionary<string, string>> defaultProgram = default;
             foreach (var property in element.EnumerateObject())
             {

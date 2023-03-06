@@ -20,8 +20,8 @@ namespace Models.Property.Types.Models
 
         public static FixedInnerEnum ToFixedInnerEnum(this string value)
         {
-            if (string.Equals(value, "ValueOne", StringComparison.InvariantCultureIgnoreCase)) return FixedInnerEnum.ValueOne;
-            if (string.Equals(value, "ValueTwo", StringComparison.InvariantCultureIgnoreCase)) return FixedInnerEnum.ValueTwo;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "ValueOne")) return FixedInnerEnum.ValueOne;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "ValueTwo")) return FixedInnerEnum.ValueTwo;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown FixedInnerEnum value.");
         }
     }

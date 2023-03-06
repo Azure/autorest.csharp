@@ -30,6 +30,10 @@ namespace body_complex.Models
 
         internal static BooleanWrapper DeserializeBooleanWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> fieldTrue = default;
             Optional<bool> fieldFalse = default;
             foreach (var property in element.EnumerateObject())

@@ -58,6 +58,10 @@ namespace body_complex.Models
 
         internal static Goblinshark DeserializeGoblinshark(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> jawsize = default;
             Optional<GoblinSharkColor> color = default;
             Optional<int> age = default;

@@ -14,6 +14,10 @@ namespace TypeSchemaMapping.Models
     {
         internal static DerivedFromAbstractModel DeserializeDerivedFromAbstractModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string discriminatorProperty = default;
             foreach (var property in element.EnumerateObject())
             {

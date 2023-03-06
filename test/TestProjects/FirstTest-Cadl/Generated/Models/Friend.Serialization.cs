@@ -23,6 +23,10 @@ namespace CadlFirstTest.Models
 
         internal static Friend DeserializeFriend(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -31,6 +31,10 @@ namespace body_complex.Models
 
         internal static DateWrapper DeserializeDateWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DateTimeOffset> field = default;
             Optional<DateTimeOffset> leap = default;
             foreach (var property in element.EnumerateObject())

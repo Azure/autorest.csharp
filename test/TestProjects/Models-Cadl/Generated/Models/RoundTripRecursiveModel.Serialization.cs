@@ -28,6 +28,10 @@ namespace ModelsInCadl.Models
 
         internal static RoundTripRecursiveModel DeserializeRoundTripRecursiveModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string message = default;
             Optional<RoundTripRecursiveModel> inner = default;
             foreach (var property in element.EnumerateObject())

@@ -26,6 +26,10 @@ namespace CognitiveSearch.Models
 
         internal static StemmerTokenFilter DeserializeStemmerTokenFilter(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             StemmerTokenFilterLanguage language = default;
             string odataType = default;
             string name = default;

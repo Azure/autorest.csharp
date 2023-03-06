@@ -16,6 +16,10 @@ namespace MgmtParamOrdering.Models
     {
         internal static VirtualMachineScaleSetListResult DeserializeVirtualMachineScaleSetListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<VirtualMachineScaleSetData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

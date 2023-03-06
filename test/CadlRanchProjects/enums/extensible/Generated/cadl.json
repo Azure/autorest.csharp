@@ -170,7 +170,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/enums/extensible/string/known-value",
      "BufferResponse": true,
@@ -231,7 +231,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/enums/extensible/string/unknown-value",
      "BufferResponse": true,
@@ -333,7 +333,7 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/enums/extensible/string/known-value",
      "RequestMediaTypes": [
@@ -438,7 +438,7 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/enums/extensible/string/unknown-value",
      "RequestMediaTypes": [

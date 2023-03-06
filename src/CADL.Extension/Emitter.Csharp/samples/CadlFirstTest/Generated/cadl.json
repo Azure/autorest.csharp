@@ -271,7 +271,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/top/{action}",
      "BufferResponse": true,
@@ -330,7 +330,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/top2",
      "BufferResponse": true,
@@ -495,7 +495,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/hello",
      "BufferResponse": true,
@@ -660,7 +660,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/demoHi",
      "BufferResponse": true,

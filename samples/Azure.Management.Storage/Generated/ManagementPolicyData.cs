@@ -13,7 +13,10 @@ using Azure.ResourceManager.Models;
 
 namespace Azure.Management.Storage
 {
-    /// <summary> A class representing the ManagementPolicy data model. </summary>
+    /// <summary>
+    /// A class representing the ManagementPolicy data model.
+    /// The Get Storage Account ManagementPolicies operation response.
+    /// </summary>
     public partial class ManagementPolicyData : ResourceData
     {
         /// <summary> Initializes a new instance of ManagementPolicyData. </summary>

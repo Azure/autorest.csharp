@@ -3,12 +3,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -140,7 +138,7 @@ namespace AutoRest.CSharp.Output.Models
                     throw new InvalidOperationException($"Method {Operation.Name} has to have a return value");
                 }
 
-                if (!responseType.IsFrameworkType && responseType.Implementation is ModelTypeProvider modelType)
+                if (responseType.TryCast<ModelTypeProvider>(out var modelType))
                 {
                     var property = modelType.GetPropertyBySerializedName(Operation.Paging.ItemName ?? "value");
                     var propertyType = property.ValueType.WithNullable(false);
@@ -197,45 +195,71 @@ namespace AutoRest.CSharp.Output.Models
             {
                 name = _restClientMethod.Name.IsLastWordSingular() ? $"{_restClientMethod.Name}Value" : $"{_restClientMethod.Name.LastWordToSingular()}Values";
             }
-
-            var parameterList = new List<Parameter>();
-            foreach (var parameterChain in _orderedParameters)
-            {
-                if (parameterChain.Input?.Kind == InputOperationParameterKind.Spread)
-                {
-                    InputType type = parameterChain.Input.Type;
-                    if (type is InputModelType modelType)
-                    {
-                        foreach (var prop in modelType.Properties)
-                        {
-                            var parameter = Parameter.FromModelProperty(prop, prop.Name.ToVariableName(), _typeFactory.CreateType(prop.Type));
-                            parameterList.Add(parameter);
-                        }
-                    }
-
-                }
-                else if (parameterChain.Convenience != null)
-                {
-                    if (TypeFactory.IsList(parameterChain.Convenience.Type))
-                    {
-                        parameterList.Add(parameterChain.Convenience with { Type = new CSharpType(typeof(object)) });
-                    }
-                    else
-                    {
-                        parameterList.Add(parameterChain.Convenience);
-                    }
-                }
-            }
             var attributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : null;
-            var protocolToConvenience = _orderedParameters
-                .Where(p => p.Protocol != null)
-                .Select(p => (p.Protocol!, p.Convenience, p.Input))
-                .ToArray();
+
+            var protocolToConvenience = new List<ProtocolToConvenienceParameterConverter>();
+            var parameterList = new List<Parameter>();
+            foreach (var parameterChain in _orderedParameters)
+            {
+                var protocolParameter = parameterChain.Protocol;
+                var convenienceParameter = parameterChain.Convenience;
+                if (convenienceParameter != null)
+                {
+                    if (parameterChain.IsSpreadParameter)
+                    {
+                        if (convenienceParameter.Type.TryCast<ModelTypeProvider>(out var model))
+                        {
+                            var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1);
+
+                            parameterList.AddRange(parameters);
+                            protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter!, convenienceParameter, new ConvenienceParameterSpread(model, parameters)));
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException($"The parameter {convenienceParameter.Name} is marked as Spread but its type is not ModelTypeProvider (got {convenienceParameter.Type})");
+                        }
+                    }
+                    else
+                    {
+                        // we do not support arrays as a body type, therefore we change the type to object on purpose to emphasize this: https://github.com/Azure/autorest.csharp/pull/3044
+                        if (TypeFactory.IsList(convenienceParameter.Type))
+                        {
+                            parameterList.Add(convenienceParameter with { Type = new CSharpType(typeof(object)) });
+                        }
+                        else
+                        {
+                            parameterList.Add(convenienceParameter);
+                        }
+                        if (protocolParameter != null)
+                            protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
+                    }
+                }
+            }
             var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
+        }
+
+        private IEnumerable<Parameter> BuildSpreadParameters(ModelTypeProvider model)
+        {
+            var fields = model.Fields;
+            foreach (var parameter in fields.SerializationParameters)
+            {
+                var field = fields.GetFieldByParameter(parameter);
+                var inputProperty = fields.GetInputByField(field);
+                var inputType = TypeFactory.GetInputType(parameter.Type).WithNullable(!inputProperty.IsRequired);
+                Constant? defaultValue = null;
+                if (!inputProperty.IsRequired)
+                    defaultValue = Constant.Default(inputType);
+
+                yield return parameter with
+                {
+                    Type = inputType,
+                    DefaultValue = defaultValue,
+                };
+            }
         }
 
         private void BuildParameters()
@@ -307,7 +331,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             if (Operation.LongRunning != null)
             {
-                _orderedParameters.Add(new ParameterChain(null, KnownParameters.WaitForCompletion, KnownParameters.WaitForCompletion, null));
+                _orderedParameters.Add(new ParameterChain(KnownParameters.WaitForCompletion, KnownParameters.WaitForCompletion, null, false));
             }
         }
 
@@ -346,7 +370,7 @@ namespace AutoRest.CSharp.Output.Models
             _protocolBodyParameter = bodyParameter.IsRequired
                 ? KnownParameters.RequestContent
                 : KnownParameters.RequestContentNullable;
-            _orderedParameters.Add(new ParameterChain(bodyParameter, BuildParameter(bodyParameter), _protocolBodyParameter, _protocolBodyParameter));
+            _orderedParameters.Add(new ParameterChain(BuildParameter(bodyParameter), _protocolBodyParameter, _protocolBodyParameter, bodyParameter.Kind == InputOperationParameterKind.Spread));
 
             if (contentTypeRequestParameter != null)
             {
@@ -373,7 +397,7 @@ namespace AutoRest.CSharp.Output.Models
             switch (conditionHeaderFlag)
             {
                 case RequestConditionHeaders.IfMatch | RequestConditionHeaders.IfNoneMatch:
-                    _orderedParameters.Add(new ParameterChain(null, KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter));
+                    _orderedParameters.Add(new ParameterChain(KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter, KnownParameters.MatchConditionsParameter));
                     AddReference(KnownParameters.MatchConditionsParameter.Name, null, KnownParameters.MatchConditionsParameter, serializationFormat);
                     break;
                 case RequestConditionHeaders.IfMatch:
@@ -381,7 +405,7 @@ namespace AutoRest.CSharp.Output.Models
                     AddParameter(requestConditionRequestParameter, typeof(ETag));
                     break;
                 default:
-                    _orderedParameters.Add(new ParameterChain(null, KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter));
+                    _orderedParameters.Add(new ParameterChain(KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter, KnownParameters.RequestConditionsParameter));
                     AddReference(KnownParameters.RequestConditionsParameter.Name, null, KnownParameters.RequestConditionsParameter, serializationFormat);
                     break;
             }
@@ -389,7 +413,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public void AddRequestContext()
         {
-            _orderedParameters.Add(new ParameterChain(null, KnownParameters.CancellationTokenParameter, KnownParameters.RequestContext, KnownParameters.RequestContext));
+            _orderedParameters.Add(new ParameterChain(KnownParameters.CancellationTokenParameter, KnownParameters.RequestContext, KnownParameters.RequestContext));
         }
 
         private void AddContentTypeRequestParameter(InputParameter operationParameter, IReadOnlyList<string> requestMediaTypes)
@@ -397,7 +421,7 @@ namespace AutoRest.CSharp.Output.Models
             var name = operationParameter.Name.ToVariableName();
             var description = Parameter.CreateDescription(operationParameter, typeof(ContentType), requestMediaTypes);
             var parameter = new Parameter(name, description, typeof(ContentType), null, ValidationType.None, null, RequestLocation: RequestLocation.Header);
-            _orderedParameters.Add(new ParameterChain(null, null, parameter, parameter));
+            _orderedParameters.Add(new ParameterChain(parameter, parameter, parameter));
 
             AddReference(operationParameter.NameInRequest, operationParameter, parameter, SerializationFormat.Default);
         }
@@ -417,14 +441,14 @@ namespace AutoRest.CSharp.Output.Models
 
             if (inputParameter.Kind == InputOperationParameterKind.Grouped)
             {
-                _orderedParameters.Add(new ParameterChain(inputParameter, null, protocolMethodParameter, protocolMethodParameter));
+                _orderedParameters.Add(new ParameterChain(null, protocolMethodParameter, protocolMethodParameter));
                 return;
             }
 
             var convenienceMethodParameter = BuildParameter(inputParameter);
             var parameterChain = inputParameter.Location == RequestLocation.None
-                ? new ParameterChain(inputParameter, convenienceMethodParameter, null, null)
-                : new ParameterChain(inputParameter, convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
+                ? new ParameterChain(convenienceMethodParameter, null, null)
+                : new ParameterChain(convenienceMethodParameter, protocolMethodParameter, protocolMethodParameter);
 
             _orderedParameters.Add(parameterChain);
         }
@@ -474,6 +498,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private record ReturnTypeChain(CSharpType Convenience, CSharpType Protocol, CSharpType? ConvenienceResponseType);
 
-        private record ParameterChain(InputParameter? Input, Parameter? Convenience, Parameter? Protocol, Parameter? CreateMessage);
+        private record ParameterChain(Parameter? Convenience, Parameter? Protocol, Parameter? CreateMessage, bool IsSpreadParameter = false);
     }
 }

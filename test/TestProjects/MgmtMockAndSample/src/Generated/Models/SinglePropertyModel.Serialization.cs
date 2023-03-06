@@ -25,6 +25,10 @@ namespace MgmtMockAndSample.Models
 
         internal static SinglePropertyModel DeserializeSinglePropertyModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> something = default;
             foreach (var property in element.EnumerateObject())
             {

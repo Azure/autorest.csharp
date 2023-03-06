@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var declaredName = property.Declaration.Name;
                     var serializedName = property.InputModelProperty.SerializedName ?? property.InputModelProperty.Name;
                     var optionalViaNullability = !property.IsRequired && !property.ValueType.IsNullable && !TypeFactory.IsCollectionType(property.ValueType);
-                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType);
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType, false);
                     var paramName = declaredName.StartsWith("_", StringComparison.OrdinalIgnoreCase) ? declaredName.Substring(1) : declaredName.FirstCharToLowerCase();
                     //TODO we should change this property name on the JsonPropertySerialization since it isn't whether it is "readonly"
                     //or not it indicates if we should serialize this or not which is different.  Lists are readonly
@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
-            => TypeFactory.IsList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
+            => p with { Type = TypeFactory.GetInputType(p.Type) };
 
         private static Parameter CreateSerializationConstructorParameter(Parameter p) // we don't validate parameters for serialization constructor
             => p with { Validation = ValidationType.None };

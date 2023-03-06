@@ -49,6 +49,10 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithCustomUsage DeserializeModelWithCustomUsage(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> modelProperty = default;
             foreach (var property in element.EnumerateObject())
             {

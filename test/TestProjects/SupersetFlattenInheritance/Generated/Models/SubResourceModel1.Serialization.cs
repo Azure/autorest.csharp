@@ -25,6 +25,10 @@ namespace SupersetFlattenInheritance.Models
 
         internal static SubResourceModel1 DeserializeSubResourceModel1(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())

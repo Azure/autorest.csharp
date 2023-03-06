@@ -16,6 +16,10 @@ namespace ModelsInCadl.Models
     {
         internal static RoundTripReadOnlyModel DeserializeRoundTripReadOnlyModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string requiredReadonlyString = default;
             int requiredReadonlyInt = default;
             Optional<string> optionalReadonlyString = default;

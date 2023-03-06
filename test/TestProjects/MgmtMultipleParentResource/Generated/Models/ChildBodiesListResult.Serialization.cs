@@ -16,6 +16,10 @@ namespace MgmtMultipleParentResource.Models
     {
         internal static ChildBodiesListResult DeserializeChildBodiesListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<ChildBodyData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

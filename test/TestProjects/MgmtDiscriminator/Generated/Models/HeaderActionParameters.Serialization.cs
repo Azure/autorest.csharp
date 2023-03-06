@@ -31,6 +31,10 @@ namespace MgmtDiscriminator.Models
 
         internal static HeaderActionParameters DeserializeHeaderActionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             HeaderActionParametersTypeName typeName = default;
             HeaderAction headerAction = default;
             string headerName = default;

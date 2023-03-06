@@ -12,7 +12,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtMultipleParentResource
 {
-    /// <summary> A class representing the SubParent data model. </summary>
+    /// <summary>
+    /// A class representing the SubParent data model.
+    /// Describes a Virtual Machine run command.
+    /// </summary>
     public partial class SubParentData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of SubParentData. </summary>

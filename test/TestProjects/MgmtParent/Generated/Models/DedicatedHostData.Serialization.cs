@@ -40,6 +40,10 @@ namespace MgmtParent
 
         internal static DedicatedHostData DeserializeDedicatedHostData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> foo = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

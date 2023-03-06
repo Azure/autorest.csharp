@@ -35,13 +35,16 @@ import { InputClient } from "./type/InputClient.js";
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
 import { InputOperation, Paging } from "./type/InputOperation.js";
 import { RequestMethod, parseHttpRequestMethod } from "./type/RequestMethod.js";
-import { BodyMediaType } from "./type/BodyMediaType.js";
+import { BodyMediaType, typeToBodyMediaType } from "./type/BodyMediaType.js";
 import { InputParameter } from "./type/InputParameter.js";
 import {
     InputEnumType,
+    InputListType,
     InputModelType,
     InputPrimitiveType,
-    InputType
+    InputType,
+    isInputLiteralType,
+    isInputUnionType
 } from "./type/InputType.js";
 import { RequestLocation, requestLocationMap } from "./type/RequestLocation.js";
 import { OperationResponse } from "./type/OperationResponse.js";
@@ -96,6 +99,10 @@ import {
     resolveOptions,
     resolveOutputFolder
 } from "./options.js";
+import {
+    CollectionFormat,
+    collectionFormatToDelimMap
+} from "./type/CollectionFormat.js";
 
 export const $lib = createCadlLibrary({
     name: "cadl-csharp",
@@ -171,11 +178,14 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 const newProjectOption = options["new-project"]
                     ? "--new-project"
                     : "";
+
+                const debugFlag = options.debug ?? false ? " --debug" : "";
+
                 const command = `dotnet --roll-forward Major ${resolvePath(
                     options.csharpGeneratorPath
                 )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
                     options["clear-output-folder"]
-                }`;
+                }${debugFlag}`;
                 console.info(command);
 
                 try {
@@ -211,18 +221,10 @@ function deleteFile(filePath: string) {
 function prettierOutput(output: string) {
     return output + "\n";
 }
-function getClient(
-    clients: InputClient[],
-    clientName: string
-): InputClient | undefined {
-    for (const client of clients) {
-        if (client.Name === clientName) return client;
-    }
 
-    return undefined;
-}
-
-export function createModel(context: EmitContext<NetEmitterOptions>): any {
+export function createModel(
+    context: EmitContext<NetEmitterOptions>
+): CodeModel {
     const services = listServices(context.program);
     if (services.length === 0) {
         services.push({ type: context.program.getGlobalNamespaceType() });
@@ -241,7 +243,7 @@ export function createModel(context: EmitContext<NetEmitterOptions>): any {
 export function createModelForService(
     context: EmitContext<NetEmitterOptions>,
     service: Service
-): any {
+): CodeModel {
     const program = context.program;
     const title = service.title;
     const serviceNamespaceType = service.type;
@@ -305,97 +307,83 @@ export function createModelForService(
     let url: string = "";
     const convenienceOperations: HttpOperation[] = [];
     let lroMonitorOperations: Set<Operation>;
-    const dpgContext = createDpgContext(context as EmitContext<any>);
-    try {
-        //create endpoint parameter from servers
-        if (servers !== undefined) {
-            const cadlServers = resolveServers(
-                program,
-                servers,
-                modelMap,
-                enumMap
-            );
-            if (cadlServers.length > 0) {
-                /* choose the first server as endpoint. */
-                url = cadlServers[0].url;
-                urlParameters = cadlServers[0].parameters;
-            }
-        }
-        const [services] = getAllHttpServices(program);
-        const routes = services[0].operations;
-        if (routes.length === 0) {
-            throw `No Route for service ${services[0].namespace.name}`;
-        }
-        console.log("routes:" + routes.length);
+    const dpgContext = createDpgContext(context);
 
-        lroMonitorOperations = getAllLroMonitorOperations(routes, program);
-        const clients: InputClient[] = [];
-        const dpgClients = listClients(dpgContext);
-        for (const client of dpgClients) {
-            clients.push(emitClient(client));
-            const dpgOperationGroups = listOperationGroups(dpgContext, client);
-            for (const dpgGroup of dpgOperationGroups) {
-                clients.push(emitClient(dpgGroup, client));
-            }
-        }
-
-        for (const client of clients) {
-            for (const op of client.Operations) {
-                const apiVersionIndex = op.Parameters.findIndex(
-                    (value) => value.IsApiVersion
-                );
-                if (apiVersionIndex !== -1) {
-                    const apiVersionInOperation =
-                        op.Parameters[apiVersionIndex];
-                    if (!apiVersionInOperation.DefaultValue?.Value) {
-                        apiVersionInOperation.DefaultValue =
-                            apiVersionParam.DefaultValue;
-                    }
-                    /**
-                     * replace to the global apiVerison parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
-                     * Three checkpoints:
-                     * the parameter is query parameter,
-                     * it is client parameter
-                     * it does not has default value, or the default value is included in the global service apiVersion.
-                     */
-                    if (
-                        apiVersions.has(
-                            apiVersionInOperation.DefaultValue?.Value
-                        ) &&
-                        apiVersionInOperation.Kind ===
-                            InputOperationParameterKind.Client &&
-                        apiVersionInOperation.Location ===
-                            apiVersionParam.Location
-                    ) {
-                        op.Parameters[apiVersionIndex] = apiVersionParam;
-                    }
-                } else {
-                    op.Parameters.push(apiVersionParam);
-                }
-            }
-        }
-
-        const usages = getUsages(program, convenienceOperations);
-        setUsage(usages, modelMap);
-        setUsage(usages, enumMap);
-
-        const clientModel = {
-            Name: namespace,
-            Description: description,
-            ApiVersions: Array.from(apiVersions.values()),
-            Enums: Array.from(enumMap.values()),
-            Models: Array.from(modelMap.values()),
-            Clients: clients,
-            Auth: auth
-        } as CodeModel;
-        return clientModel;
-    } catch (err) {
-        if (err instanceof ErrorTypeFoundError) {
-            return;
-        } else {
-            throw err;
+    //create endpoint parameter from servers
+    if (servers !== undefined) {
+        const cadlServers = resolveServers(program, servers, modelMap, enumMap);
+        if (cadlServers.length > 0) {
+            /* choose the first server as endpoint. */
+            url = cadlServers[0].url;
+            urlParameters = cadlServers[0].parameters;
         }
     }
+    const [services] = getAllHttpServices(program);
+    const routes = services[0].operations;
+    if (routes.length === 0) {
+        throw `No Route for service ${services[0].namespace.name}`;
+    }
+    console.log("routes:" + routes.length);
+
+    lroMonitorOperations = getAllLroMonitorOperations(routes, program);
+    const clients: InputClient[] = [];
+    const dpgClients = listClients(dpgContext);
+    for (const client of dpgClients) {
+        clients.push(emitClient(client));
+        const dpgOperationGroups = listOperationGroups(dpgContext, client);
+        for (const dpgGroup of dpgOperationGroups) {
+            clients.push(emitClient(dpgGroup, client));
+        }
+    }
+
+    for (const client of clients) {
+        for (const op of client.Operations) {
+            const apiVersionIndex = op.Parameters.findIndex(
+                (value) => value.IsApiVersion
+            );
+            if (apiVersionIndex !== -1) {
+                const apiVersionInOperation = op.Parameters[apiVersionIndex];
+                if (!apiVersionInOperation.DefaultValue?.Value) {
+                    apiVersionInOperation.DefaultValue =
+                        apiVersionParam.DefaultValue;
+                }
+                /**
+                 * replace to the global apiVerison parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
+                 * Three checkpoints:
+                 * the parameter is query parameter,
+                 * it is client parameter
+                 * it does not has default value, or the default value is included in the global service apiVersion.
+                 */
+                if (
+                    apiVersions.has(
+                        apiVersionInOperation.DefaultValue?.Value
+                    ) &&
+                    apiVersionInOperation.Kind ===
+                        InputOperationParameterKind.Client &&
+                    apiVersionInOperation.Location === apiVersionParam.Location
+                ) {
+                    op.Parameters[apiVersionIndex] = apiVersionParam;
+                }
+            } else {
+                op.Parameters.push(apiVersionParam);
+            }
+        }
+    }
+
+    const usages = getUsages(program, convenienceOperations);
+    setUsage(usages, modelMap);
+    setUsage(usages, enumMap);
+
+    const clientModel = {
+        Name: namespace,
+        Description: description,
+        ApiVersions: Array.from(apiVersions.values()),
+        Enums: Array.from(enumMap.values()),
+        Models: Array.from(modelMap.values()),
+        Clients: clients,
+        Auth: auth
+    } as CodeModel;
+    return clientModel;
 
     function emitClient(
         client: Client | OperationGroup,
@@ -697,7 +685,18 @@ function loadOperation(
         (value) => value.IsContentType
     );
     if (contentTypeParameter) {
-        mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
+        if (isInputLiteralType(contentTypeParameter.Type)) {
+            mediaTypes.push(contentTypeParameter.DefaultValue?.Value);
+        } else if (isInputUnionType(contentTypeParameter.Type)) {
+            const mediaTypeValues =
+                contentTypeParameter.Type.UnionItemTypes.map((item) =>
+                    isInputLiteralType(item) ? item.Value : undefined
+                );
+            if (mediaTypeValues.some((item) => item === undefined)) {
+                throw "Media type of content type should be string.";
+            }
+            mediaTypes.push(...mediaTypeValues);
+        }
     }
     const requestMethod = parseHttpRequestMethod(verb);
     const generateProtocol: boolean = shouldGenerateProtocol(dpgContext, op);
@@ -741,7 +740,7 @@ function loadOperation(
         Parameters: parameters,
         Responses: responses,
         HttpMethod: requestMethod,
-        RequestBodyMediaType: BodyMediaType.Json,
+        RequestBodyMediaType: typeToBodyMediaType(cadlParameters.body?.type),
         Uri: uri,
         Path: fullPath,
         ExternalDocsUrl: externalDocs?.url,
@@ -762,6 +761,10 @@ function loadOperation(
         parameter: HttpOperationParameter
     ): InputParameter {
         const { type: location, name, param } = parameter;
+        let format = undefined;
+        if (parameter.type !== "path") {
+            format = parameter.format;
+        }
         const cadlType = param.type;
         const inputType: InputType = getInputType(
             program,
@@ -803,8 +806,14 @@ function loadOperation(
             IsContentType: isContentType,
             IsEndpoint: false,
             SkipUrlEncoding: false, //TODO: retrieve out value from extension
-            Explode: false,
-            Kind: kind
+            Explode:
+                (inputType as InputListType).ElementType && format === "multi"
+                    ? true
+                    : false,
+            Kind: kind,
+            ArraySerializationDelimiter: format
+                ? collectionFormatToDelimMap[format]
+                : undefined
         } as InputParameter;
     }
 

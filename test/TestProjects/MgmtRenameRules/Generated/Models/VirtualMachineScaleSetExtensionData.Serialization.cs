@@ -88,6 +88,10 @@ namespace MgmtRenameRules
 
         internal static VirtualMachineScaleSetExtensionData DeserializeVirtualMachineScaleSetExtensionData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> id = default;

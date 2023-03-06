@@ -27,6 +27,10 @@ namespace CognitiveSearch.Models
 
         internal static DataContainer DeserializeDataContainer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<string> query = default;
             foreach (var property in element.EnumerateObject())

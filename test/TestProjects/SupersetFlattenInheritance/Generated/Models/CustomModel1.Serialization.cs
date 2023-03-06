@@ -30,6 +30,10 @@ namespace SupersetFlattenInheritance.Models
 
         internal static CustomModel1 DeserializeCustomModel1(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())

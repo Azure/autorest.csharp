@@ -38,6 +38,11 @@ namespace CognitiveSearch.Models
                 foreach (var item in Configuration)
                 {
                     writer.WritePropertyName(item.Key);
+                    if (item.Value == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
                     writer.WriteObjectValue(item.Value);
                 }
                 writer.WriteEndObject();
@@ -47,6 +52,10 @@ namespace CognitiveSearch.Models
 
         internal static IndexingParameters DeserializeIndexingParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> batchSize = default;
             Optional<int> maxFailedItems = default;
             Optional<int> maxFailedItemsPerBatch = default;
@@ -93,7 +102,14 @@ namespace CognitiveSearch.Models
                     Dictionary<string, object> dictionary = new Dictionary<string, object>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        dictionary.Add(property0.Name, property0.Value.GetObject());
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
+                        {
+                            dictionary.Add(property0.Name, null);
+                        }
+                        else
+                        {
+                            dictionary.Add(property0.Name, property0.Value.GetObject());
+                        }
                     }
                     configuration = dictionary;
                     continue;
