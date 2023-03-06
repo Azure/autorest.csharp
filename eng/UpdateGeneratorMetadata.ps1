@@ -37,8 +37,8 @@ if ($UseInternalFeed) {
         $xmlAdd.value = "https://pkgs.dev.azure.com/azure-sdk/_packaging/azure-sdk-for-net-private/nuget/v3/index.json"
         $nuGetConfig.configuration.packageSources.AppendChild($xmlAdd)
         $nuGetConfig.Save($nugetConfigPath)
-        Write-Host "Updating Nuget.Config"
-        Write-Host $nuGetConfig
+        Write-Host "Updating Nuget.Config:"
+        Get-Content -Raw $nugetConfigPath
     }
 
     & (Join-Path $PSScriptRoot 'GenerateInternalNpmrc.ps1') -ContainingFolder $SdkRepoRoot
