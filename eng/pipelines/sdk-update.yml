@@ -88,7 +88,7 @@ stages:
       - template: update-azure-sdk-for-net-codes.yml
         parameters:
           name: Update_Codes_A_C
-          filter: "a*,b*,c*"
+          filter: "anomalydetector"
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           CadlEmitterVersion: $(CadlEmitterVersion)
           IsInternalFeed: true
