@@ -33,7 +33,6 @@ jobs:
         workingFile: '$(Build.SourcesDirectory)/azure-sdk-for-net/.npmrc'
       displayName: Setup Internal NPM Auth
     - task: NuGetAuthenticate@1
-      inputs:
   - task: Powershell@2
     displayName: Update SDK codes ${{ parameters.filter }}
     inputs:
