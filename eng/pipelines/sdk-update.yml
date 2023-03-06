@@ -91,6 +91,7 @@ stages:
           filter: "a*,b*,c*"
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           CadlEmitterVersion: $(CadlEmitterVersion)
+          IsInternalFeed: true
       - job: Create_PR
         dependsOn: 
           - Update_Generator_Versions

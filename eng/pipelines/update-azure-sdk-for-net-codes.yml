@@ -25,6 +25,14 @@ jobs:
     inputs:
       useGlobalJson: true
       performMultiLevelLookup: true
+  - ${{ if eq(parameters.IsInternalFeed, true) }}:
+    - pwsh: ./eng/GenerateInternalNpmrc.ps1 -ContainingFolder $(Build.SourcesDirectory)/azure-sdk-for-net
+      displayName: "Generate Internal Npmrc"
+      workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+    - task: npmAuthenticate@0
+      inputs:
+        workingFile: '.npmrc'
+      displayName: Setup Internal NPM Auth
   - task: Powershell@2
     displayName: Update SDK codes ${{ parameters.filter }}
     inputs:
@@ -36,6 +44,7 @@ jobs:
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
         -ServiceDirectoryFilters ${{ parameters.filter}}
         -ShowSummary
+        -UseInternalFeed ${{parameters.IsInternalFeed}}
       failOnStderr: false
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     retryCountOnTaskFailure: 3
@@ -44,6 +53,13 @@ jobs:
       git restore eng/emitter-package.json
     displayName: Discard versions change
     workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+  - ${{ if eq(parameters.IsInternalFeed, true) }}:
+    - pwsh: |
+        git restore NuGet.Config
+        git restore .npmrc
+        git restore eng\common\scripts\Cadl-Project-Generate.ps1
+      displayName: Discard Nuget change
+      workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
       BaseRepoBranch: auto-update-autorest-${{ parameters.AutorestCSharpVersion }}

@@ -7,9 +7,8 @@ param(
 
     [Parameter(Mandatory)]
     [string]$SdkRepoRoot,
-    
-    [switch]$UseInternalFeed = $false)
 
+    [bool]$UseInternalFeed = $false)
 
 $ErrorActionPreference = 'Stop'
 
@@ -39,4 +38,11 @@ if ($UseInternalFeed) {
         $nuGetConfig.configuration.packageSources.AppendChild($xmlAdd)
         $nuGetConfig.Save($nugetConfigPath)
     }
+
+    $npmrcFile = "$SdkRepoRoot\.npmrc"
+    $projectGeneratePath = "$SdkRepoRoot\eng\common\scripts\Cadl-Project-Generate.ps1"
+    (Get-Content -Raw $projectGeneratePath) -replace `
+    'npm install --no-lock-file',
+"Copy-Item -Path $npmrcFile -Destination `".npmrc`" -Force`nnpm install --no-lock-file" | `
+    Set-Content $projectGeneratePath -NoNewline
 }

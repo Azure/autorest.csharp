@@ -25,7 +25,7 @@ jobs:
         -AutorestCSharpVersion ${{parameters.AutorestCSharpVersion}}
         -CadlEmitterVersion ${{parameters.CadlEmitterVersion}}
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-        -UseInternalFeed $true
+        -UseInternalFeed ${{parameters.IsInternalFeed}}
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
