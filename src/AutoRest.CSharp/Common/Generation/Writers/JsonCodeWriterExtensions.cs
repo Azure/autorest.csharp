@@ -382,7 +382,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (Configuration.TreatEmptyStringAsNullForTypes.Contains(valueSerialization.Type.FrameworkType.Name))
                 {
-                    result = $" || {itemVariable}.Value.GetString().Length == 0";
+                    result = $" || ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.{nameof(JsonValueKind.String}} && {itemVariable}.Value.GetString().Length == 0)";
                 }
             }
             return result;
