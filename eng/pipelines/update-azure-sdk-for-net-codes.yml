@@ -28,7 +28,7 @@ jobs:
   - ${{ if eq(parameters.IsInternalFeed, true) }}:
     - pwsh: ./eng/GenerateInternalNpmrc.ps1 -ContainingFolder $(Build.SourcesDirectory)/azure-sdk-for-net
       displayName: "Generate Internal Npmrc"
-      workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
+      workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     - task: npmAuthenticate@0
       inputs:
         workingFile: '.npmrc'

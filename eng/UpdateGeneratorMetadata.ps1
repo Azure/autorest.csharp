@@ -41,7 +41,7 @@ if ($UseInternalFeed) {
 
     & (Join-Path $PSScriptRoot 'GenerateInternalNpmrc.ps1') -ContainingFolder $SdkRepoRoot
 
-    $npmrcFile = "$SdkRepoRoot\.npmrc"
+    $npmrcFile = Resolve-Path (Join-Path $SdkRepoRoot ".npmrc")
     $projectGeneratePath = "$SdkRepoRoot\eng\common\scripts\Cadl-Project-Generate.ps1"
     (Get-Content -Raw $projectGeneratePath) -replace `
     'npm install --no-lock-file',
