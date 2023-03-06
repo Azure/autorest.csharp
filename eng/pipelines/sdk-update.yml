@@ -92,6 +92,48 @@ stages:
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           CadlEmitterVersion: $(CadlEmitterVersion)
           IsInternalFeed: true
+      - template: update-azure-sdk-for-net-codes.yml
+        parameters:
+          name: Update_Codes_D_E
+          filter: "d*,e*"
+          AutorestCSharpVersion: $(AutorestCSharpVersion)
+          CadlEmitterVersion: $(CadlEmitterVersion)
+          IsInternalFeed: true
+      - template: update-azure-sdk-for-net-codes.yml
+        parameters:
+          name: Update_Codes_F_L
+          filter: "f*,g*,h*,i*,j*,k*,l*"
+          AutorestCSharpVersion: $(AutorestCSharpVersion)
+          CadlEmitterVersion: $(CadlEmitterVersion)
+          IsInternalFeed: true
+      - template: update-azure-sdk-for-net-codes.yml
+        parameters:
+          name: Update_Codes_M_O
+          filter: "m*,n*,o*"
+          AutorestCSharpVersion: $(AutorestCSharpVersion)
+          CadlEmitterVersion: $(CadlEmitterVersion)
+          IsInternalFeed: true
+      - template: update-azure-sdk-for-net-codes.yml
+        parameters:
+          name: Update_Codes_P_R
+          filter: "p*,q*,r*"
+          AutorestCSharpVersion: $(AutorestCSharpVersion)
+          CadlEmitterVersion: $(CadlEmitterVersion)
+          IsInternalFeed: true
+      - template: update-azure-sdk-for-net-codes.yml
+        parameters:
+          name: Update_Codes_S_U
+          filter: "s*,t*,u*"
+          AutorestCSharpVersion: $(AutorestCSharpVersion)
+          CadlEmitterVersion: $(CadlEmitterVersion)
+          IsInternalFeed: true
+      - template: update-azure-sdk-for-net-codes.yml
+        parameters:
+          name: Update_Codes_V_Z
+          filter: "v*,w*,x*,y*,z*"
+          AutorestCSharpVersion: $(AutorestCSharpVersion)
+          CadlEmitterVersion: $(CadlEmitterVersion)
+          IsInternalFeed: true
       - job: Create_PR
         dependsOn: 
           - Update_Generator_Versions

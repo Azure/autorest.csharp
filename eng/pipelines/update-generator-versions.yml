@@ -16,14 +16,6 @@ jobs:
   - checkout: azure-sdk-for-net
   - checkout: azure-sdk-tools
     fetchDepth: 1
-  - ${{ if eq(parameters.IsInternalFeed, true) }}:
-    - pwsh: ./eng/GenerateInternalNpmrc.ps1 -ContainingFolder $(Build.SourcesDirectory)/autorest.csharp
-      displayName: "Generate Internal Npmrc"
-      workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-    - task: npmAuthenticate@0
-      inputs:
-        workingFile: '$(Build.SourcesDirectory)/autorest.csharp/.npmrc'
-      displayName: Setup Internal NPM Auth
   - task: Powershell@2
     displayName: Update SDK Generator Versions
     inputs:
