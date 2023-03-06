@@ -16,6 +16,10 @@ namespace MgmtSubscriptionNameParameter.Models
     {
         internal static SBSubscriptionListResult DeserializeSBSubscriptionListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<SBSubscriptionData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

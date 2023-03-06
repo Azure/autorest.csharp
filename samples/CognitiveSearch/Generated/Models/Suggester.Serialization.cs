@@ -32,6 +32,10 @@ namespace CognitiveSearch.Models
 
         internal static Suggester DeserializeSuggester(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             SearchMode searchMode = default;
             IList<string> sourceFields = default;

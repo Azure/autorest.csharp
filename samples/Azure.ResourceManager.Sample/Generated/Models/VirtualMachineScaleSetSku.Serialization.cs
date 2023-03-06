@@ -14,6 +14,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static VirtualMachineScaleSetSku DeserializeVirtualMachineScaleSetSku(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ResourceType> resourceType = default;
             Optional<SampleSku> sku = default;
             Optional<VirtualMachineScaleSetSkuCapacity> capacity = default;

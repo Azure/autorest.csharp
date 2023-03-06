@@ -58,6 +58,10 @@ namespace Azure.Management.Storage.Models
 
         internal static NetworkRuleSet DeserializeNetworkRuleSet(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<Bypass> bypass = default;
             Optional<IList<ResourceAccessRule>> resourceAccessRules = default;
             Optional<IList<VirtualNetworkRule>> virtualNetworkRules = default;

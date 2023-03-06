@@ -14,6 +14,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static VaultIssue DeserializeVaultIssue(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> type = default;
             Optional<string> description = default;
             Optional<int> sev = default;

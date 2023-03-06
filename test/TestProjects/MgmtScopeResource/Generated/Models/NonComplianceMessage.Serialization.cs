@@ -27,6 +27,10 @@ namespace MgmtScopeResource.Models
 
         internal static NonComplianceMessage DeserializeNonComplianceMessage(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string message = default;
             Optional<string> policyDefinitionReferenceId = default;
             foreach (var property in element.EnumerateObject())

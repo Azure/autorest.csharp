@@ -22,6 +22,10 @@ namespace multiple_inheritance.Models
 
         internal static Pet DeserializePet(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             foreach (var property in element.EnumerateObject())
             {

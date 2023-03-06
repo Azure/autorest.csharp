@@ -24,6 +24,10 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlSigningParamIdentifier DeserializeUrlSigningParamIdentifier(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             ParamIndicator paramIndicator = default;
             string paramName = default;
             foreach (var property in element.EnumerateObject())

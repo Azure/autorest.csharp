@@ -13,7 +13,10 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    /// <summary> A class representing the Vault data model. </summary>
+    /// <summary>
+    /// A class representing the Vault data model.
+    /// Resource information with extended details.
+    /// </summary>
     public partial class VaultData : ResourceData
     {
         /// <summary> Initializes a new instance of VaultData. </summary>

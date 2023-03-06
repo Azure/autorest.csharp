@@ -30,6 +30,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetIpTag DeserializeVirtualMachineScaleSetIpTag(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> ipTagType = default;
             Optional<string> tag = default;
             foreach (var property in element.EnumerateObject())

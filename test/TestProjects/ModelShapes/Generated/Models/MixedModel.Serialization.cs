@@ -173,6 +173,10 @@ namespace ModelShapes.Models
 
         internal static MixedModel DeserializeMixedModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string requiredString = default;
             int requiredInt = default;
             IList<string> requiredStringList = default;

@@ -15,6 +15,10 @@ namespace AnomalyDetector.Models
     {
         internal static UnivariateLastDetectionResult DeserializeUnivariateLastDetectionResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int period = default;
             int suggestedWindow = default;
             float expectedValue = default;

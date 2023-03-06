@@ -15,6 +15,10 @@ namespace MgmtHierarchicalNonResource.Models
     {
         internal static SharedGalleryImageList DeserializeSharedGalleryImageList(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<SharedGalleryImage> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

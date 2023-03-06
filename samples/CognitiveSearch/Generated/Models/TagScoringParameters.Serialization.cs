@@ -22,6 +22,10 @@ namespace CognitiveSearch.Models
 
         internal static TagScoringParameters DeserializeTagScoringParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string tagsParameter = default;
             foreach (var property in element.EnumerateObject())
             {

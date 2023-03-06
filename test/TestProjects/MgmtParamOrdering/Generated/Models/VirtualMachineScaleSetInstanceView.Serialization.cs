@@ -14,6 +14,10 @@ namespace MgmtParamOrdering.Models
     {
         internal static VirtualMachineScaleSetInstanceView DeserializeVirtualMachineScaleSetInstanceView(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> virtualMachine = default;
             foreach (var property in element.EnumerateObject())
             {

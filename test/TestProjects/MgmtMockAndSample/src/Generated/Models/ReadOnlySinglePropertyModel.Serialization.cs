@@ -20,6 +20,10 @@ namespace MgmtMockAndSample.Models
 
         internal static ReadOnlySinglePropertyModel DeserializeReadOnlySinglePropertyModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> readOnlySomething = default;
             foreach (var property in element.EnumerateObject())
             {

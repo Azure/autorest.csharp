@@ -16,6 +16,10 @@ namespace MgmtListMethods.Models
     {
         internal static FakeParentWithNonResChListResult DeserializeFakeParentWithNonResChListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<FakeParentWithNonResChData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

@@ -24,6 +24,11 @@ namespace Models.Property.Optional.Models
                 writer.WriteStartArray();
                 foreach (var item in Property)
                 {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(item);
 #else
@@ -37,6 +42,10 @@ namespace Models.Property.Optional.Models
 
         internal static CollectionsByteProperty DeserializeCollectionsByteProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<BinaryData>> property = default;
             foreach (var property0 in element.EnumerateObject())
             {
@@ -50,7 +59,14 @@ namespace Models.Property.Optional.Models
                     List<BinaryData> array = new List<BinaryData>();
                     foreach (var item in property0.Value.EnumerateArray())
                     {
-                        array.Add(BinaryData.FromString(item.GetRawText()));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(BinaryData.FromString(item.GetRawText()));
+                        }
                     }
                     property = array;
                     continue;

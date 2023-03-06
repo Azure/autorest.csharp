@@ -35,6 +35,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static LinuxConfiguration DeserializeLinuxConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> disablePasswordAuthentication = default;
             Optional<SshConfiguration> ssh = default;
             Optional<bool> provisionVMAgent = default;

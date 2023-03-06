@@ -16,6 +16,10 @@ namespace ModelsInCadl.Models
     {
         internal static OutputModel DeserializeOutputModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string requiredString = default;
             int requiredInt = default;
             DerivedModel requiredModel = default;

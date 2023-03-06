@@ -42,6 +42,10 @@ namespace Azure.Management.Storage.Models
 
         internal static Encryption DeserializeEncryption(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<EncryptionServices> services = default;
             KeySource keySource = default;
             Optional<bool> requireInfrastructureEncryption = default;

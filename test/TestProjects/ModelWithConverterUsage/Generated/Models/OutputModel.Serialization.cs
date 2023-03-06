@@ -17,6 +17,10 @@ namespace ModelWithConverterUsage.Models
     {
         internal static OutputModel DeserializeOutputModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> outputModelProperty = default;
             foreach (var property in element.EnumerateObject())
             {

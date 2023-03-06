@@ -45,6 +45,10 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static ReferenceTypesSku DeserializeReferenceTypesSku(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<ReferenceTypesSkuTier> tier = default;
             Optional<string> size = default;

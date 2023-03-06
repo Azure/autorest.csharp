@@ -60,6 +60,10 @@ namespace body_complex.Models
 
         internal static SmartSalmon DeserializeSmartSalmon(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> collegeDegree = default;
             Optional<string> location = default;
             Optional<bool> iswild = default;

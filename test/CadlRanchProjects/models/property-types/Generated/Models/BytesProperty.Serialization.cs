@@ -28,6 +28,10 @@ namespace Models.Property.Types.Models
 
         internal static BytesProperty DeserializeBytesProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             BinaryData property = default;
             foreach (var property0 in element.EnumerateObject())
             {

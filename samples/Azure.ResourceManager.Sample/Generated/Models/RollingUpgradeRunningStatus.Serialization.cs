@@ -15,6 +15,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static RollingUpgradeRunningStatus DeserializeRollingUpgradeRunningStatus(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<RollingUpgradeStatusCode> code = default;
             Optional<DateTimeOffset> startTime = default;
             Optional<RollingUpgradeActionType> lastAction = default;

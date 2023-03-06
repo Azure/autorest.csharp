@@ -15,6 +15,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static UpdateHistoryProperty DeserializeUpdateHistoryProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ImmutabilityPolicyUpdateType> update = default;
             Optional<int> immutabilityPeriodSinceCreationInDays = default;
             Optional<DateTimeOffset> timestamp = default;

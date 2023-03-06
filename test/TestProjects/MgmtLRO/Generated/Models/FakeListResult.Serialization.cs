@@ -16,6 +16,10 @@ namespace MgmtLRO.Models
     {
         internal static FakeListResult DeserializeFakeListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<FakeData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

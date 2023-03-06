@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing the FakeParentWithAncestorWithNonResChWithLoc data model. </summary>
+    /// <summary>
+    /// A class representing the FakeParentWithAncestorWithNonResChWithLoc data model.
+    /// Specifies information.
+    /// </summary>
     public partial class FakeParentWithAncestorWithNonResChWithLocData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of FakeParentWithAncestorWithNonResChWithLocData. </summary>
