@@ -38,6 +38,7 @@ if ($UseInternalFeed) {
         $nuGetConfig.configuration.packageSources.AppendChild($xmlAdd)
         $nuGetConfig.Save($nugetConfigPath)
         Write-Host "Updating Nuget.Config"
+        Write-Host $nuGetConfig
     }
 
     & (Join-Path $PSScriptRoot 'GenerateInternalNpmrc.ps1') -ContainingFolder $SdkRepoRoot
