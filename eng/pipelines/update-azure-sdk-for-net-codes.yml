@@ -44,7 +44,7 @@ jobs:
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
         -ServiceDirectoryFilters ${{ parameters.filter}}
         -ShowSummary
-        -UseInternalFeed ${{parameters.IsInternalFeed}}
+        -UseInternalFeed $${{parameters.IsInternalFeed}}
       failOnStderr: false
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     retryCountOnTaskFailure: 3
