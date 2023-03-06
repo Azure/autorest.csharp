@@ -166,7 +166,28 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 SingleTopLevelClient: options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
-                "model-namespace": options["model-namespace"]
+                "model-namespace": options["model-namespace"],
+                ModelsToTreatEmptyStringAsNull:
+                    options["models-to-treat-empty-string-as-null"],
+                IntrinsicTypesToTreatEmptyStringAsNull: options[
+                    "models-to-treat-empty-string-as-null"
+                ]
+                    ? options[
+                          "additional-intrinsic-types-to-treat-empty-string-as-null"
+                      ].concat(
+                          [
+                              "Uri",
+                              "Guid",
+                              "ResourceIdentifier",
+                              "DateTimeOffset"
+                          ].filter(
+                              (item) =>
+                                  options[
+                                      "additional-intrinsic-types-to-treat-empty-string-as-null"
+                                  ].indexOf(item) < 0
+                          )
+                      )
+                    : undefined
             } as Configuration;
 
             await program.host.writeFile(
