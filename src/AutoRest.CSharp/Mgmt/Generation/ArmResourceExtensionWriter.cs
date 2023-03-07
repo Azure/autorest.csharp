@@ -45,33 +45,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Initializer: null);
         }
 
-        // TODO -- figure out how to do this
-        //protected override void WritePrivateHelpers()
-        //{
-        //    if (IsArmCore)
-        //        return;
-
-        //    _writer.Line();
-        //    var armClientSignature = new MethodSignature(
-        //        $"Get{This.ExtensionClient.Type.Name}",
-        //        null,
-        //        null,
-        //        Private | Static,
-        //        This.ExtensionClient.Type,
-        //        null,
-        //        new[] { _armClientParameter, _scopeParameter });
-        //    using (_writer.WriteMethodDeclaration(armClientSignature))
-        //    {
-        //        using (_writer.Scope($"return {_armClientParameter.Name}.GetResourceClient(() =>"))
-        //        {
-        //            _writer.Line($"return new {This.ExtensionClient.Type}({_armClientParameter.Name}, {_scopeParameter.Name});");
-        //        }
-        //        _writer.Line($");");
-        //    }
-
-        //    base.WritePrivateHelpers();
-        //}
-
         protected override void WriteSingletonResourceGetMethod(Resource resource)
         {
             if (Configuration.MgmtConfiguration.GenerateArmResourceExtensions.Contains(resource.RequestPath))

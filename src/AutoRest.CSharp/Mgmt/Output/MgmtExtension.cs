@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtension : MgmtTypeProvider
     {
-        public override bool IsStatic => true;
+        public override bool IsStatic => IsArmCore ? false : true; // explicitly expand this for readability
 
         private readonly IEnumerable<Operation> _allRawOperations;
 
@@ -160,7 +160,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (resourceType != null && Cache.TryGetValue(resourceType, out var extensionClient))
                 return extensionClient;
 
-            return Cache[ArmCoreType]; // TODO -- verify if this works
+            return Cache[ArmCoreType];
         }
 
         private readonly IEnumerable<MgmtExtensionClient> _extensionClients;

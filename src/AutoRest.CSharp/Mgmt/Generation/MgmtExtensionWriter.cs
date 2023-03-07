@@ -13,11 +13,23 @@ using AutoRest.CSharp.Output.Models.Requests;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Azure.Core;
 using AutoRest.CSharp.Generation.Types;
+using Azure.ResourceManager;
+using AutoRest.CSharp.Input;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtExtensionWriter : MgmtClientBaseWriter
     {
+        public static MgmtExtensionWriter GetWriter(MgmtExtension extension) => GetWriter(new CodeWriter(), extension);
+
+        public static MgmtExtensionWriter GetWriter(CodeWriter writer, MgmtExtension extension) => extension switch
+        {
+            ArmClientExtension armClientExtension => new ArmClientExtensionWriter(writer, armClientExtension),
+            // the class ArmResourceExtensionWriter is created to handle scope resources, but in ArmCore we do not have that problem, therefore for ArmCore we just let the regular MgmtExtension class handles that
+            _ when extension.ArmCoreType == typeof(ArmResource) && !Configuration.MgmtConfiguration.IsArmCore => new ArmResourceExtensionWriter(writer, extension),
+            _ => new MgmtExtensionWriter(writer, extension)
+        };
+
         private MgmtExtension This { get; }
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 

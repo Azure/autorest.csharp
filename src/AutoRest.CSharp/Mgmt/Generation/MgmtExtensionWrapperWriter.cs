@@ -22,9 +22,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WritePrivateHelpers()
         {
-            if (IsArmCore)
-                return;
-
             var generalExtensionParameter = new Parameter(
                 "resource",
                 null,
@@ -102,13 +99,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (extension.IsEmpty)
                     continue;
 
-                var extensionWriter = extension switch
-                {
-                    ArmClientExtension armClientExtension => new ArmClientExtensionWriter(_writer, armClientExtension),
-                    _ when extension.ArmCoreType == typeof(ArmResource) => new ArmResourceExtensionWriter(_writer, extension),
-                    _ => new MgmtExtensionWriter(_writer, extension)
-                };
-                extensionWriter.WriteImplementations();
+                MgmtExtensionWriter.GetWriter(_writer, extension).WriteImplementations();
                 _writer.Line();
             }
         }
