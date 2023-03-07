@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteMethodDocumentation(This.ArmClientCtor);
                 using (_writer.WriteMethodDeclaration(This.ArmClientCtor))
                 {
-                    if (This is MgmtExtensionClient)
+                    if (This is OldMgmtExtensionClient)
                         return;
 
                     foreach (var param in This.ExtraConstructorParameters)
@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteResourceCollectionGetMethod(resource);
 
-                    if (!(This is MgmtExtensionClient)) // we don't need to generate `Get{Resource}` methods in ExtensionClient
+                    if (!(This is OldMgmtExtensionClient)) // we don't need to generate `Get{Resource}` methods in ExtensionClient
                     {
                         WriteChildResourceGetMethod(resource.ResourceCollection, true);
                         WriteChildResourceGetMethod(resource.ResourceCollection, false);

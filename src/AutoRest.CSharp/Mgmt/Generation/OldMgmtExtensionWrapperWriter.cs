@@ -10,10 +10,10 @@ using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class NewMgmtExtensionWrapperWriter : MgmtClientBaseWriter
+    internal class OldMgmtExtensionWrapperWriter : MgmtClientBaseWriter
     {
-        private MgmtExtensionWrapper _wrapper;
-        public NewMgmtExtensionWrapperWriter(MgmtExtensionWrapper extensionsWrapper) : base(new CodeWriter(), extensionsWrapper)
+        private OldMgmtExtensionsWrapper _wrapper;
+        public OldMgmtExtensionWrapperWriter(OldMgmtExtensionsWrapper extensionsWrapper) : base(new CodeWriter(), extensionsWrapper)
         {
             _wrapper = extensionsWrapper;
         }
@@ -26,9 +26,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     continue;
                 var extensionWriter = extension switch
                 {
-                    //ArmClientExtensions armClientExtensions => new ArmClientExtensionsWriter(_writer, armClientExtensions),
-                    _ when extension.ArmCoreType == typeof(ArmResource) => new ArmResourceExtensionsWriter(_writer, extension),
-                    _ => new MgmtExtensionWriter(_writer, extension)
+                    ArmClientExtensions armClientExtensions => new OldArmClientExtensionsWriter(_writer, armClientExtensions),
+                    _ when extension.ArmCoreType == typeof(ArmResource) => new OldArmResourceExtensionsWriter(_writer, extension),
+                    _ => new OldMgmtExtensionWriter(_writer, extension)
                 };
                 extensionWriter.WriteImplementations();
                 _writer.Line();

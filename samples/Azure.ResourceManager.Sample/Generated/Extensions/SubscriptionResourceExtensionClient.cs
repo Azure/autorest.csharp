@@ -39,6 +39,17 @@ namespace Azure.ResourceManager.Sample.Mock
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
+            _virtualMachineImagesClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+            _virtualMachineImagesRestClient = new VirtualMachineImagesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+            _usageClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+            _usageRestClient = new UsageRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+            _virtualMachineSizesClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+            _virtualMachineSizesRestClient = new VirtualMachineSizesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+            _logAnalyticsClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+            _logAnalyticsRestClient = new LogAnalyticsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         private ClientDiagnostics VirtualMachineImagesClientDiagnostics => _virtualMachineImagesClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
@@ -54,19 +65,6 @@ namespace Azure.ResourceManager.Sample.Mock
         {
             TryGetApiVersion(resourceType, out string apiVersion);
             return apiVersion;
-        }
-
-        /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource. </summary>
-        /// <param name="location"> The name of a supported Azure region. </param>
-        /// <param name="publisherName"> The String to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/> is null. </exception>
-        /// <returns> An object representing collection of VirtualMachineExtensionImageResources and their operations over a VirtualMachineExtensionImageResource. </returns>
-        public virtual VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(AzureLocation location, string publisherName)
-        {
-            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
-
-            return new VirtualMachineExtensionImageCollection(Client, Id, location, publisherName);
         }
 
         /// <summary>

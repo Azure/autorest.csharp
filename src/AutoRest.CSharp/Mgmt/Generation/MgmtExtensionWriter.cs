@@ -12,21 +12,22 @@ using AutoRest.CSharp.Utilities;
 using AutoRest.CSharp.Output.Models.Requests;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Azure.Core;
+using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtExtensionWriter : MgmtClientBaseWriter
     {
-        private MgmtExtensions This { get; }
+        private MgmtExtension This { get; }
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 
-        public MgmtExtensionWriter(MgmtExtensions extensions)
+        public MgmtExtensionWriter(MgmtExtension extensions)
             : this(new CodeWriter(), extensions)
         {
             This = extensions;
         }
 
-        public MgmtExtensionWriter(CodeWriter writer, MgmtExtensions extensions) : base(writer, extensions)
+        public MgmtExtensionWriter(CodeWriter writer, MgmtExtension extensions) : base(writer, extensions)
         {
             This = extensions;
         }
@@ -35,37 +36,40 @@ namespace AutoRest.CSharp.Mgmt.Generation
             => IsArmCore ? base.GetMethodDelegate(isLongRunning, isPaging) : GetMethodWrapperImpl;
 
         private void GetMethodWrapperImpl(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
-            => WriteMethodBodyWrapper(clientOperation.MethodSignature, isAsync, clientOperation.IsPagingOperation);
+            => WriteMethodBodyWrapper(clientOperation.Resource?.Type, clientOperation.MethodSignature, isAsync, clientOperation.IsPagingOperation);
 
-        protected override void WritePrivateHelpers()
+        // TODO -- move this method to the wrapper
+        //protected override void WritePrivateHelpers()
+        //{
+        //    if (IsArmCore)
+        //        return;
+
+        //    _writer.Line();
+        //    var extensionClientSignature = new MethodSignature(
+        //        $"Get{This.ExtensionClient.Type.Name}",
+        //        null,
+        //        null,
+        //        Private | Static,
+        //        This.ExtensionClient.Type,
+        //        null,
+        //        new[] { This.ExtensionParameter });
+        //    using (_writer.WriteMethodDeclaration(extensionClientSignature))
+        //    {
+        //        using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient(({ArmClientReference.ToVariableName()}) =>"))
+        //        {
+        //            _writer.Line($"return new {extensionClientSignature.ReturnType}({ArmClientReference.ToVariableName()}, {This.ExtensionParameter.Name}.Id);");
+        //        }
+        //        _writer.Line($");");
+        //    }
+        //}
+
+        private void WriteMethodBodyWrapper(CSharpType? resourceType, MethodSignature signature, bool isAsync, bool isPaging)
         {
-            if (IsArmCore)
-                return;
+            var extensionClient = This.GetExtensionClient(resourceType);
 
-            _writer.Line();
-            var extensionClientSignature = new MethodSignature(
-                $"Get{This.ExtensionClient.Type.Name}",
-                null,
-                null,
-                Private | Static,
-                This.ExtensionClient.Type,
-                null,
-                new[] { This.ExtensionParameter });
-            using (_writer.WriteMethodDeclaration(extensionClientSignature))
-            {
-                using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient(({ArmClientReference.ToVariableName()}) =>"))
-                {
-                    _writer.Line($"return new {extensionClientSignature.ReturnType}({ArmClientReference.ToVariableName()}, {This.ExtensionParameter.Name}.Id);");
-                }
-                _writer.Line($");");
-            }
-        }
-
-        private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging)
-        {
             _writer.AppendRaw("return ")
                 .AppendRawIf("await ", isAsync && !isPaging)
-                .Append($"Get{This.ExtensionClient.Type.Name}({This.ExtensionParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
+                .Append($"Get{extensionClient.Type.Name}({This.ExtensionParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
 
             foreach (var parameter in signature.Parameters.Skip(1))
             {
@@ -86,7 +90,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                WriteMethodBodyWrapper(signature, false, false);
+                WriteMethodBodyWrapper(null, signature, false, false);
             }
         }
 
@@ -99,7 +103,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
             else
             {
-                WriteMethodBodyWrapper(signature, false, false);
+                // TODO -- verify if this works fine
+                WriteMethodBodyWrapper(null, signature, false, false);
             }
         }
 

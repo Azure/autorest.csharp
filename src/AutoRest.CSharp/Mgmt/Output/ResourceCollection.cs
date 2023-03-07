@@ -215,7 +215,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var an = ResourceName.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
             var parents = Resource.Parent();
-            var parentTypes = parents.Select(parent => parent is MgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();
+            var parentTypes = parents.Select(parent => parent is OldMgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();
             var parentDescription = CreateParentDescription(parentTypes);
 
             lines.Add($"A class representing a collection of <see cref=\"{Resource.Type}\" /> and their operations.");

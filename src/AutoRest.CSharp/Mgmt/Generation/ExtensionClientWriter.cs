@@ -12,13 +12,13 @@ using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class ResourceExtensionWriter : MgmtClientBaseWriter
+    internal class ExtensionClientWriter : MgmtClientBaseWriter
     {
         protected override bool UseField => false;
 
-        private OldMgmtExtensionClient This { get; }
+        private MgmtExtensionClient This { get; }
 
-        public ResourceExtensionWriter(OldMgmtExtensionClient extensions)
+        public ExtensionClientWriter(MgmtExtensionClient extensions)
             : base(new CodeWriter(), extensions)
         {
             This = extensions;

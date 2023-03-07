@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
         }
 
-        private static void WriteExtensionFiles(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<NewMgmtExtensionClient> extensionClients)
+        private static void WriteExtensionFiles(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients)
         {
             if (!isArmCore && !extensionWrapper.IsEmpty)
                 WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(extensionWrapper));
@@ -187,19 +187,19 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
         }
 
-        private static void WriteExtensionClient(GeneratedCodeWorkspace project, NewMgmtExtensionClient extensionClient)
+        private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
         {
             // armcore does not need ExtensionClients
             if (!Configuration.MgmtConfiguration.IsArmCore && !extensionClient.IsEmpty)
             {
-                WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
+                WriteExtensionPiece(project, new ExtensionClientWriter(extensionClient));
             }
         }
 
-        private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
+        private static void WriteExtensionClient(GeneratedCodeWorkspace project, OldMgmtExtensionClient extensionClient)
         {
             if (Configuration.MgmtConfiguration.IsArmCore && !extensionClient.Extension.IsEmpty)
-                WriteExtensionPiece(project, new MgmtExtensionWriter(extensionClient.Extension));
+                WriteExtensionPiece(project, new OldMgmtExtensionWriter(extensionClient.Extension));
             if (!Configuration.MgmtConfiguration.IsArmCore && !extensionClient.IsEmpty)
                 WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
         }

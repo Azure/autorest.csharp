@@ -14,16 +14,18 @@ using AutoRest.CSharp.Output.Models.Types;
 namespace AutoRest.CSharp.Mgmt.Output
 {
     /// <summary>
-    /// MgmtExtensionsWrapper is a wrapper of all the <see cref="MgmtExtensions"/>, despite the <see cref="MgmtExtensions"/> is inheriting from <see cref="MgmtTypeProvider"/>, currently it will not produce a class in the generated code.
+    /// MgmtExtensionsWrapper is a wrapper of all the <see cref="OldMgmtExtensions"/>, despite the <see cref="OldMgmtExtensions"/> is inheriting from <see cref="MgmtTypeProvider"/>, currently it will not produce a class in the generated code.
     /// Instead, this class will take all the things that are used to be produces into the individual extension classes, producing a big extension class
     /// </summary>
-    internal class MgmtExtensionsWrapper : MgmtTypeProvider
+    internal class OldMgmtExtensionsWrapper : MgmtTypeProvider
     {
-        public IEnumerable<MgmtExtensions> Extensions { get; }
+        public IEnumerable<OldMgmtExtensions> Extensions { get; }
+
+        public override bool IsStatic => true;
 
         public bool IsEmpty => Extensions.All(extension => extension.IsEmpty);
 
-        public MgmtExtensionsWrapper(IEnumerable<MgmtExtensions> extensions) : base(MgmtContext.Context.DefaultNamespace.Split('.').Last())
+        public OldMgmtExtensionsWrapper(IEnumerable<OldMgmtExtensions> extensions) : base(MgmtContext.Context.DefaultNamespace.Split('.').Last())
         {
             DefaultName = $"{ResourceName}Extensions";
             Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {MgmtContext.Context.DefaultNamespace}.";

@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     /// <summary>
     /// MgmtTypeProvider represents the information that corresponds to the generated class in the SDK that contains operations in it.
-    /// This includes <see cref="Resource"/>, <see cref="ResourceCollection"/>, <see cref="ArmClientExtensions"/>, <see cref="MgmtExtensions"/> and <see cref="MgmtExtensionsWrapper"/>
+    /// This includes <see cref="Resource"/>, <see cref="ResourceCollection"/>, <see cref="ArmClientExtensions"/>, <see cref="OldMgmtExtensions"/> and <see cref="OldMgmtExtensionsWrapper"/>
     /// </summary>
     internal abstract class MgmtTypeProvider : TypeProvider
     {
@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             ResourceName = resourceName;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
-            IsStatic = !IsArmCore && BaseType is null && (this is MgmtExtensions extension || this is MgmtExtensionsWrapper);
+            IsStatic = !IsArmCore && BaseType is null;// && (this is MgmtExtensions extension || this is MgmtExtensionsWrapper);
         }
 
         protected virtual string IdParamDescription => $"The identifier of the resource that is the target of operations.";
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 yield return type;
             }
         }
-        public bool IsStatic { get; }
+        public virtual bool IsStatic { get; }
 
         public abstract FormattableString Description { get; }
 

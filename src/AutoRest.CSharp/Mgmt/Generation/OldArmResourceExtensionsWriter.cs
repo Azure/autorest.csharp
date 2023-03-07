@@ -18,14 +18,14 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class ArmResourceExtensionsWriter : MgmtExtensionWriter
+    internal class OldArmResourceExtensionsWriter : OldMgmtExtensionWriter
     {
-        private MgmtExtensions This { get; }
+        private OldMgmtExtensions This { get; }
 
         private readonly Parameter _armClientParameter;
         private readonly Parameter _scopeParameter;
 
-        public ArmResourceExtensionsWriter(CodeWriter writer, MgmtExtensions extension)
+        public OldArmResourceExtensionsWriter(CodeWriter writer, OldMgmtExtensions extension)
             : base(writer, extension)
         {
             This = extension;

@@ -2,28 +2,27 @@
 // Licensed under the MIT License
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Mgmt.AutoRest;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Input;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Azure.ResourceManager;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtensionClient : MgmtTypeProvider
     {
-        private string _defaultName;
-        public MgmtExtensionClient(MgmtExtensions publicExtension)
-            : base(publicExtension.ResourceName)
+        private readonly IEnumerable<MgmtClientOperation> _operations;
+
+        public MgmtExtensionClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations)
+            : base(resourceType.Name)
         {
-            Extension = publicExtension;
-            _defaultName = $"{(publicExtension.WrappedResourceName != null ? publicExtension.WrappedResourceName : ResourceName)}ExtensionClient";
+            _operations = operations;
+            ExtendedResourceType = resourceType;
+            DefaultName = $"{resourceType.Name}ExtensionClient";
         }
 
         protected override ConstructorSignature? EnsureArmClientCtor()
@@ -39,14 +38,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                     arguments: new[] { ArmClientParameter, ResourceIdentifierParameter }));
         }
 
-        protected override IEnumerable<MgmtClientOperation> EnsureAllOperations()
+        protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
-            return Extension.AllMgmtOperations.Select(operation =>
-            {
-                // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together, some of the values are calculated multiple times (here and in writers).
-                // we just leave this implementation here since it could work for now
-                return MgmtClientOperation.FromOperation(operation);
-            });
+            return _operations.Select(operation => MgmtClientOperation.FromOperations(operation)!);
         }
 
         protected override string CalculateOperationName(Operation operation, string clientResourceName)
@@ -54,24 +48,23 @@ namespace AutoRest.CSharp.Mgmt.Output
             return base.CalculateOperationName(operation, clientResourceName);
         }
 
+        public CSharpType ExtendedResourceType { get; }
+
         public override CSharpType? BaseType => typeof(ArmResource);
 
-        protected override string DefaultName => _defaultName;
+        protected override string DefaultName { get; }
 
         protected override string DefaultNamespace => Configuration.MgmtConfiguration.IsArmCore ?
             base.DefaultNamespace : $"{base.DefaultNamespace}.Mock";
 
-        public MgmtExtensions Extension { get; }
+        private bool? _isEmpty;
+        public bool IsEmpty => _isEmpty ??= !_operations.Any();
 
-        public bool IsEmpty => Extension.IsEmpty;
-
-        public override IEnumerable<Resource> ChildResources => Extension.ChildResources;
+        public override IEnumerable<Resource> ChildResources => Enumerable.Empty<Resource>();
 
         private FormattableString? _description;
         public override FormattableString Description => _description ??= $"A class to add extension methods to {ResourceName}.";
 
         protected override string DefaultAccessibility => "public";
-
-        protected override IEnumerable<MgmtClientOperation> EnsureClientOperations() => Extension.ClientOperations;
     }
 }

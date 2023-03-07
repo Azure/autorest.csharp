@@ -16,15 +16,15 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class MgmtExtensions : MgmtTypeProvider
+    internal class OldMgmtExtensions : MgmtTypeProvider
     {
         public IEnumerable<MgmtRestOperation> AllMgmtOperations { get; }
 
-        public IEnumerable<MgmtExtensions> SplitExtensions { get; }
+        public IEnumerable<OldMgmtExtensions> SplitExtensions { get; }
 
         public string? WrappedResourceName { get; }
 
-        public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, RequestPath contextualPath, bool shouldTryToSplit = false, string? wrappedResourceName = null)
+        public OldMgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, RequestPath contextualPath, bool shouldTryToSplit = false, string? wrappedResourceName = null)
             : base(armCoreType.Name)
         {
             ArmCoreType = armCoreType;
@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         ContextualPath,
                         GetOperationName(operation, ResourceName),
                         propertyBagName: ResourceName));
-            SplitExtensions = Array.Empty<MgmtExtensions>();
+            SplitExtensions = Array.Empty<OldMgmtExtensions>();
             AllMgmtOperations = allOperations;
             WrappedResourceName = wrappedResourceName;
             if (shouldTryToSplit)
@@ -58,10 +58,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                         resourceOperationsMappings[resourceType].Add(mgmtOperation.Operation);
                     }
                 }
-                SplitExtensions = resourceOperationsMappings.Select(mapping => new MgmtExtensions(mapping.Value, armCoreType, contextualPath, false, mapping.Key.Name));
+                SplitExtensions = resourceOperationsMappings.Select(mapping => new OldMgmtExtensions(mapping.Value, armCoreType, contextualPath, false, mapping.Key.Name));
                 AllMgmtOperations = allOperations.Where(o => !operationsToRemove.Contains(o.OperationId));
            }
         }
+
+        public override bool IsStatic => true;
 
         protected override ConstructorSignature? EnsureMockingCtor()
         {
@@ -176,7 +178,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
-        private MgmtExtensionClient? _extensionClient;
-        public virtual MgmtExtensionClient ExtensionClient => _extensionClient ??= new MgmtExtensionClient(this);
+        private OldMgmtExtensionClient? _extensionClient;
+        public virtual OldMgmtExtensionClient ExtensionClient => _extensionClient ??= new OldMgmtExtensionClient(this);
     }
 }

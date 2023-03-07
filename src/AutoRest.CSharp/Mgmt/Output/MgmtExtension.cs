@@ -17,9 +17,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtension : MgmtTypeProvider
     {
+        public override bool IsStatic => true;
+
         private readonly IEnumerable<Operation> _allRawOperations;
 
-        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<NewMgmtExtensionClient> extensionClients, Type armCoreType) : base(armCoreType.Name)
+        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtExtensionClient> extensionClients, Type armCoreType) : base(armCoreType.Name)
         {
             _allRawOperations = allRawOperations;
             _extensionClients = extensionClients; // this property is populated later
@@ -153,18 +155,18 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
-        public NewMgmtExtensionClient GetExtensionClient(CSharpType resourceType)
+        public MgmtExtensionClient GetExtensionClient(CSharpType? resourceType)
         {
-            if (Cache.TryGetValue(resourceType, out var extensionClient))
+            if (resourceType != null && Cache.TryGetValue(resourceType, out var extensionClient))
                 return extensionClient;
 
             return Cache[ArmCoreType]; // TODO -- verify if this works
         }
 
-        private readonly IEnumerable<NewMgmtExtensionClient> _extensionClients;
+        private readonly IEnumerable<MgmtExtensionClient> _extensionClients;
 
-        private Dictionary<CSharpType, NewMgmtExtensionClient>? _cache;
-        private Dictionary<CSharpType, NewMgmtExtensionClient> Cache => _cache ??= _extensionClients.ToDictionary(
+        private Dictionary<CSharpType, MgmtExtensionClient>? _cache;
+        private Dictionary<CSharpType, MgmtExtensionClient> Cache => _cache ??= _extensionClients.ToDictionary(
             extensionClient => extensionClient.ExtendedResourceType,
             extensionClient => extensionClient);
     }

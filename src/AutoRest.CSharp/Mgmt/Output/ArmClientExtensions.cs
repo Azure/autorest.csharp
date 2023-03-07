@@ -11,7 +11,7 @@ using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ArmClientExtensions : MgmtExtensions
+    internal class ArmClientExtensions : OldMgmtExtensions
     {
         public ArmClientExtensions(IEnumerable<Operation> allOperations)
             : base(allOperations, typeof(ArmClient), RequestPath.Tenant)
@@ -22,6 +22,6 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : "client";
 
-        public override MgmtExtensionClient ExtensionClient => throw new InvalidOperationException("ArmClientExtension does not have an extension client");
+        public override OldMgmtExtensionClient ExtensionClient => throw new InvalidOperationException("ArmClientExtension does not have an extension client");
     }
 }

@@ -15,18 +15,18 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class NewMgmtExtensionWriter : MgmtClientBaseWriter
+    internal class OldMgmtExtensionWriter : MgmtClientBaseWriter
     {
-        private MgmtExtension This { get; }
+        private OldMgmtExtensions This { get; }
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 
-        public NewMgmtExtensionWriter(MgmtExtension extensions)
+        public OldMgmtExtensionWriter(OldMgmtExtensions extensions)
             : this(new CodeWriter(), extensions)
         {
             This = extensions;
         }
 
-        public NewMgmtExtensionWriter(CodeWriter writer, MgmtExtension extensions) : base(writer, extensions)
+        public OldMgmtExtensionWriter(CodeWriter writer, OldMgmtExtensions extensions) : base(writer, extensions)
         {
             This = extensions;
         }
@@ -35,32 +35,31 @@ namespace AutoRest.CSharp.Mgmt.Generation
             => IsArmCore ? base.GetMethodDelegate(isLongRunning, isPaging) : GetMethodWrapperImpl;
 
         private void GetMethodWrapperImpl(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
-            => WriteMethodBodyWrapper(clientOperation, isAsync, clientOperation.IsPagingOperation);
+            => WriteMethodBodyWrapper(clientOperation.MethodSignature, isAsync, clientOperation.IsPagingOperation);
 
-        // TODO -- move this method to the wrapper
-        //protected override void WritePrivateHelpers()
-        //{
-        //    if (IsArmCore)
-        //        return;
+        protected override void WritePrivateHelpers()
+        {
+            if (IsArmCore)
+                return;
 
-        //    _writer.Line();
-        //    var extensionClientSignature = new MethodSignature(
-        //        $"Get{This.ExtensionClient.Type.Name}",
-        //        null,
-        //        null,
-        //        Private | Static,
-        //        This.ExtensionClient.Type,
-        //        null,
-        //        new[] { This.ExtensionParameter });
-        //    using (_writer.WriteMethodDeclaration(extensionClientSignature))
-        //    {
-        //        using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient(({ArmClientReference.ToVariableName()}) =>"))
-        //        {
-        //            _writer.Line($"return new {extensionClientSignature.ReturnType}({ArmClientReference.ToVariableName()}, {This.ExtensionParameter.Name}.Id);");
-        //        }
-        //        _writer.Line($");");
-        //    }
-        //}
+            _writer.Line();
+            var extensionClientSignature = new MethodSignature(
+                $"Get{This.ExtensionClient.Type.Name}",
+                null,
+                null,
+                Private | Static,
+                This.ExtensionClient.Type,
+                null,
+                new[] { This.ExtensionParameter });
+            using (_writer.WriteMethodDeclaration(extensionClientSignature))
+            {
+                using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient(({ArmClientReference.ToVariableName()}) =>"))
+                {
+                    _writer.Line($"return new {extensionClientSignature.ReturnType}({ArmClientReference.ToVariableName()}, {This.ExtensionParameter.Name}.Id);");
+                }
+                _writer.Line($");");
+            }
+        }
 
         private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging)
         {

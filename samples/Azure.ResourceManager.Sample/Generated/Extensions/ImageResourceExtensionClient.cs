@@ -14,7 +14,7 @@ using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to ImageResource. </summary>
     public partial class ImageResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _imageClientDiagnostics;
@@ -30,6 +30,12 @@ namespace Azure.ResourceManager.Sample.Mock
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ImageResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
+            _imageClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", ImageResource.ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(ImageResource.ResourceType, out string imageApiVersion);
+            _imageRestClient = new ImagesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, imageApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         private ClientDiagnostics ImageClientDiagnostics => _imageClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", ImageResource.ResourceType.Namespace, Diagnostics);

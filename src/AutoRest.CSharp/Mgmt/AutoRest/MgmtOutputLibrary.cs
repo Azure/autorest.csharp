@@ -415,14 +415,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public IEnumerable<MgmtExtension> Extensions => ExtensionBuilder.Extensions;
-        public IEnumerable<NewMgmtExtensionClient> ExtensionClients => ExtensionBuilder.ExtensionClients;
+        public IEnumerable<MgmtExtensionClient> ExtensionClients => ExtensionBuilder.ExtensionClients;
         public MgmtExtensionWrapper NewExtensionWrapper => ExtensionBuilder.ExtensionWrapper;
 
         //private ArmClientExtensions? _armClientExtensions;
         //public ArmClientExtensions ArmClientExtensions => _armClientExtensions ??= EnsureArmClientExtensions();
 
-        private Dictionary<Type, MgmtExtensions>? _armExtensions;
-        public Dictionary<Type, MgmtExtensions> ArmExtensions => _armExtensions ??= EnsureArmExtensions();
+        private Dictionary<Type, OldMgmtExtensions>? _armExtensions;
+        public Dictionary<Type, OldMgmtExtensions> ArmExtensions => _armExtensions ??= EnsureArmExtensions();
         //private MgmtExtensions? _tenantExtensions;
         //private MgmtExtensions? _managementGroupExtensions;
         //private MgmtExtensions? _subscriptionExtensions;
@@ -434,12 +434,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         //public MgmtExtensions ManagementGroupExtensions => _managementGroupExtensions ??= EnsureExtensions(typeof(ManagementGroupResource), RequestPath.ManagementGroup);
         //public MgmtExtensions ArmResourceExtensions => _armResourceExtensions ??= EnsureExtensions(typeof(ArmResource), RequestPath.Any);
 
-        private MgmtExtensionsWrapper? _extensionsWrapper;
-        public MgmtExtensionsWrapper ExtensionWrapper => _extensionsWrapper ??= EnsureExtensionsWrapper();
+        private OldMgmtExtensionsWrapper? _extensionsWrapper;
+        public OldMgmtExtensionsWrapper ExtensionWrapper => _extensionsWrapper ??= EnsureExtensionsWrapper();
 
-        private MgmtExtensionsWrapper EnsureExtensionsWrapper()
+        private OldMgmtExtensionsWrapper EnsureExtensionsWrapper()
         {
-            List<MgmtExtensions> extensions = new List<MgmtExtensions>();
+            List<OldMgmtExtensions> extensions = new List<OldMgmtExtensions>();
             foreach (var armExtension in ArmExtensions)
             {
                 if (IsArmCore && (
@@ -453,7 +453,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                     extensions.AddRange(armExtension.Value.SplitExtensions);
                 }
             }
-            return new MgmtExtensionsWrapper(extensions);
+            return new OldMgmtExtensionsWrapper(extensions);
         }
 
         private static readonly Dictionary<Type, RequestPath> _extensionChoices = new()
@@ -465,9 +465,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             [typeof(ArmResource)] = RequestPath.Any
         };
 
-        private Dictionary<Type, MgmtExtensions> EnsureArmExtensions()
+        private Dictionary<Type, OldMgmtExtensions> EnsureArmExtensions()
         {
-            Dictionary<Type, MgmtExtensions> extensions = new Dictionary<Type, MgmtExtensions>();
+            Dictionary<Type, OldMgmtExtensions> extensions = new Dictionary<Type, OldMgmtExtensions>();
 
             foreach (var extensionChoice in _extensionChoices)
             {
@@ -477,11 +477,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return extensions;
         }
 
-        private MgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath)
+        private OldMgmtExtensions EnsureExtensions(Type armCoreType, RequestPath contextualPath)
         {
             bool shouldGenerateChildren = !Configuration.MgmtConfiguration.IsArmCore || armCoreType.Namespace != MgmtContext.Context.DefaultNamespace;
             var operations = shouldGenerateChildren ? GetChildOperations(contextualPath) : Enumerable.Empty<Operation>();
-            return new MgmtExtensions(operations, armCoreType, contextualPath, Configuration.MgmtConfiguration.IsArmCore ? false : true);
+            return new OldMgmtExtensions(operations, armCoreType, contextualPath, Configuration.MgmtConfiguration.IsArmCore ? false : true);
         }
 
         private ArmClientExtensions EnsureArmClientExtensions() => new ArmClientExtensions(GetChildOperations(RequestPath.Tenant));

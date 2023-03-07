@@ -24,15 +24,6 @@ namespace AutoRest.CSharp.Mgmt.Models;
 /// </summary>
 internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Segment>
 {
-    private static readonly Dictionary<Type, RequestPath> _extensionChoices = new()
-    {
-        [typeof(TenantResource)] = RequestPath.Tenant,
-        [typeof(ManagementGroupResource)] = RequestPath.ManagementGroup,
-        [typeof(SubscriptionResource)] = RequestPath.Subscription,
-        [typeof(ResourceGroupResource)] = RequestPath.ResourceGroup,
-        [typeof(ArmResource)] = RequestPath.Any
-    };
-
     private const string _providerPath = "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}";
     private const string _featurePath = "/subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features";
 
@@ -84,9 +75,19 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         new Segment(new Reference("managementGroupId", typeof(string)), true, false)
     });
 
+    private static Dictionary<Type, RequestPath>? _extensionChoices;
+    private static Dictionary<Type, RequestPath> ExtensionChoices => _extensionChoices ??= new()
+    {
+        [typeof(TenantResource)] = RequestPath.Tenant,
+        [typeof(ManagementGroupResource)] = RequestPath.ManagementGroup,
+        [typeof(SubscriptionResource)] = RequestPath.Subscription,
+        [typeof(ResourceGroupResource)] = RequestPath.ResourceGroup,
+        [typeof(ArmResource)] = RequestPath.Any
+    };
+
     public static RequestPath GetContextualPath(Type armCoreType)
     {
-        return _extensionChoices[armCoreType];
+        return ExtensionChoices[armCoreType];
     }
 
     private readonly IReadOnlyList<Segment> _segments;

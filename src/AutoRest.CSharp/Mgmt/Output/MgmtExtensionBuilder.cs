@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtensionBuilder
     {
-        private record MgmtExtensionInfo(MgmtExtensionWrapper ExtensionWrapper, IEnumerable<MgmtExtension> Extensions, IEnumerable<NewMgmtExtensionClient> ExtensionClients);
+        private record MgmtExtensionInfo(MgmtExtensionWrapper ExtensionWrapper, IEnumerable<MgmtExtension> Extensions, IEnumerable<MgmtExtensionClient> ExtensionClients);
 
         private readonly IReadOnlyDictionary<Type, IEnumerable<Operation>> _extensionOperations;
 
@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<MgmtExtension> Extensions => ExtensionInfo.Extensions;
 
-        public IEnumerable<NewMgmtExtensionClient> ExtensionClients => ExtensionInfo.ExtensionClients;
+        public IEnumerable<MgmtExtensionClient> ExtensionClients => ExtensionInfo.ExtensionClients;
 
         private MgmtExtensionInfo? _info;
         private MgmtExtensionInfo ExtensionInfo => _info ??= EnsureMgmtExtensionInfo();
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private MgmtExtensionInfo EnsureMgmtExtensionInfo()
         {
             var extensions = new List<MgmtExtension>();
-            var extensionClients = new List<NewMgmtExtensionClient>();
+            var extensionClients = new List<MgmtExtensionClient>();
             // create the extensions
             foreach (var (type, operations) in _extensionOperations)
             {
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             // then we construct the extension clients
             foreach (var (resourceType, operations) in resourceToOperationsDict)
             {
-                extensionClients.Add(new NewMgmtExtensionClient(resourceType, operations));
+                extensionClients.Add(new MgmtExtensionClient(resourceType, operations));
             }
 
             return new(new MgmtExtensionWrapper(extensions), extensions, extensionClients);

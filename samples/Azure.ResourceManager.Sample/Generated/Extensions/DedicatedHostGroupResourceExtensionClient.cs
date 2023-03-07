@@ -14,7 +14,7 @@ using Azure.ResourceManager.Sample;
 
 namespace Azure.ResourceManager.Sample.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to DedicatedHostGroupResource. </summary>
     public partial class DedicatedHostGroupResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _dedicatedHostGroupClientDiagnostics;
@@ -30,6 +30,12 @@ namespace Azure.ResourceManager.Sample.Mock
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal DedicatedHostGroupResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
+            _dedicatedHostGroupClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", DedicatedHostGroupResource.ResourceType.Namespace, Diagnostics);
+            TryGetApiVersion(DedicatedHostGroupResource.ResourceType, out string dedicatedHostGroupApiVersion);
+            _dedicatedHostGroupRestClient = new DedicatedHostGroupsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, dedicatedHostGroupApiVersion);
+#if DEBUG
+			ValidateResourceId(Id);
+#endif
         }
 
         private ClientDiagnostics DedicatedHostGroupClientDiagnostics => _dedicatedHostGroupClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", DedicatedHostGroupResource.ResourceType.Namespace, Diagnostics);
