@@ -48,6 +48,10 @@ rename-mapping:
   Type: EncryptionType
   FirewallPolicyThreatIntelWhitelist.ipAddresses: -|ip-address
 
+models-to-treat-empty-string-as-null:
+- EventData
+- ManagedHsmProperties
+
 directive:
   - from: swagger-document
     where: $.paths
