@@ -1,6 +1,6 @@
 import { TestHost } from "@cadl-lang/compiler/testing";
 import assert, { AssertionError, deepStrictEqual } from "assert";
-import { createModel } from "../../src/emitter.js";
+import { createModel } from "../../src/lib/clientModelBuilder.js";
 import { CodeModel } from "../../src/type/CodeModel.js";
 import {
     cadlCompile,

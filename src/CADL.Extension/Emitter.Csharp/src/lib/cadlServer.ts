@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import { getDoc, Program, Type } from "@cadl-lang/compiler";
-import { http } from "@cadl-lang/rest/*";
-import { InputConstant } from "../type/InputConstant";
+import { http } from "@cadl-lang/rest";
+import { InputConstant } from "../type/InputConstant.js";
 import { InputOperationParameterKind } from "../type/InputOperationParameterKind.js";
 import { InputParameter } from "../type/InputParameter.js";
 import {
@@ -14,7 +14,6 @@ import {
 } from "../type/InputType.js";
 import { InputTypeKind } from "../type/InputTypeKind.js";
 import { RequestLocation } from "../type/RequestLocation.js";
-import { Usage } from "../type/Usage.js";
 import { getInputType } from "./model.js";
 
 export interface CadlServer {
