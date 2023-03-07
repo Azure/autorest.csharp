@@ -15,6 +15,10 @@ namespace Authentication.ApiKey.Models
     {
         internal static InvalidAuth DeserializeInvalidAuth(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string error = default;
             foreach (var property in element.EnumerateObject())
             {

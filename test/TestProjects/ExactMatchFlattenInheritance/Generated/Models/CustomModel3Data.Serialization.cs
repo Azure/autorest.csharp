@@ -40,6 +40,10 @@ namespace ExactMatchFlattenInheritance
 
         internal static CustomModel3Data DeserializeCustomModel3Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> foo = default;
             Optional<string> id = default;
             Optional<string> name = default;

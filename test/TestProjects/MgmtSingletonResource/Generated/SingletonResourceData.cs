@@ -10,7 +10,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtSingletonResource
 {
-    /// <summary> A class representing the SingletonResource data model. </summary>
+    /// <summary>
+    /// A class representing the SingletonResource data model.
+    /// A singleton resource.
+    /// </summary>
     public partial class SingletonResourceData : ResourceData
     {
         /// <summary> Initializes a new instance of SingletonResourceData. </summary>

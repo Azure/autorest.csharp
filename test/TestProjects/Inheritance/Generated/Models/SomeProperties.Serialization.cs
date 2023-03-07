@@ -30,6 +30,10 @@ namespace Inheritance.Models
 
         internal static SomeProperties DeserializeSomeProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> someProperty = default;
             Optional<string> someOtherProperty = default;
             foreach (var property in element.EnumerateObject())

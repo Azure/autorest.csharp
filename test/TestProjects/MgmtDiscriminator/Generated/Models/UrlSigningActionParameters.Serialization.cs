@@ -38,6 +38,10 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlSigningActionParameters DeserializeUrlSigningActionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             UrlSigningActionParametersTypeName typeName = default;
             Optional<Algorithm> algorithm = default;
             Optional<IList<UrlSigningParamIdentifier>> parameterNameOverride = default;

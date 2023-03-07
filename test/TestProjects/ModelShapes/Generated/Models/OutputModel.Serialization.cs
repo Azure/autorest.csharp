@@ -15,6 +15,10 @@ namespace ModelShapes.Models
     {
         internal static OutputModel DeserializeOutputModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string requiredString = default;
             int requiredInt = default;
             IReadOnlyList<string> requiredStringList = default;

@@ -15,6 +15,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static StoragePrivateLinkResourceListResult DeserializeStoragePrivateLinkResourceListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<StoragePrivateLinkResource>> value = default;
             foreach (var property in element.EnumerateObject())
             {

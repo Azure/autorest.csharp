@@ -16,6 +16,10 @@ namespace MgmtListMethods.Models
     {
         internal static FakeParentWithAncestorListResult DeserializeFakeParentWithAncestorListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<FakeParentWithAncestorData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

@@ -30,6 +30,10 @@ namespace PetStore.Models
 
         internal static Pet DeserializePet(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<string> tag = default;
             int age = default;

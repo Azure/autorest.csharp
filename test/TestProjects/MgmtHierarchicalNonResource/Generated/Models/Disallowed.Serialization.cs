@@ -15,6 +15,10 @@ namespace MgmtHierarchicalNonResource.Models
     {
         internal static Disallowed DeserializeDisallowed(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<string>> diskTypes = default;
             foreach (var property in element.EnumerateObject())
             {

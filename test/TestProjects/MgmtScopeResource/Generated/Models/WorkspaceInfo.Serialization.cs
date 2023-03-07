@@ -14,6 +14,10 @@ namespace MgmtScopeResource.Models
     {
         internal static WorkspaceInfo DeserializeWorkspaceInfo(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string id = default;
             string location = default;
             string customerId = default;

@@ -14,6 +14,10 @@ namespace custom_baseUrl_paging.Models
     {
         internal static ProductProperties DeserializeProductProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> id = default;
             Optional<string> name = default;
             foreach (var property in element.EnumerateObject())

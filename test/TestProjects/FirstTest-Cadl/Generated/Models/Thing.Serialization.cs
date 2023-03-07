@@ -76,6 +76,10 @@ namespace CadlFirstTest.Models
 
         internal static Thing DeserializeThing(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             string requiredUnion = default;
             string requiredBadDescription = default;

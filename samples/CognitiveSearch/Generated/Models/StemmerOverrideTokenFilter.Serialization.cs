@@ -32,6 +32,10 @@ namespace CognitiveSearch.Models
 
         internal static StemmerOverrideTokenFilter DeserializeStemmerOverrideTokenFilter(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IList<string> rules = default;
             string odataType = default;
             string name = default;

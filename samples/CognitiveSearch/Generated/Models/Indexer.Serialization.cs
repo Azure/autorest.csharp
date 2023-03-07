@@ -77,6 +77,10 @@ namespace CognitiveSearch.Models
 
         internal static Indexer DeserializeIndexer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<string> description = default;
             string dataSourceName = default;

@@ -13,7 +13,10 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    /// <summary> A class representing the MhsmPrivateEndpointConnection data model. </summary>
+    /// <summary>
+    /// A class representing the MhsmPrivateEndpointConnection data model.
+    /// Private endpoint connection resource.
+    /// </summary>
     public partial class MhsmPrivateEndpointConnectionData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionData. </summary>

@@ -14,6 +14,10 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<CloudErrorBody> error = default;
             foreach (var property in element.EnumerateObject())
             {

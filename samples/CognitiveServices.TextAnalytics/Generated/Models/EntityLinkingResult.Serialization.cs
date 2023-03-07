@@ -15,6 +15,10 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static EntityLinkingResult DeserializeEntityLinkingResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<DocumentLinkedEntities> documents = default;
             IReadOnlyList<DocumentError> errors = default;
             Optional<RequestStatistics> statistics = default;

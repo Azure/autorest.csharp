@@ -114,7 +114,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{clientServiceUrl}",
      "Path": "/Alpha",
      "BufferResponse": true,
@@ -189,7 +189,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{clientServiceUrl}",
      "Path": "/Beta",
      "BufferResponse": true,
@@ -264,7 +264,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{clientServiceUrl}",
      "Path": "/Gamma",
      "BufferResponse": true,
@@ -328,7 +328,7 @@
       }
      ],
      "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{clientServiceUrl}",
      "Path": "/Gamma",
      "BufferResponse": true,

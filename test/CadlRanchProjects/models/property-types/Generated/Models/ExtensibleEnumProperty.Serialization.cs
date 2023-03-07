@@ -23,6 +23,10 @@ namespace Models.Property.Types.Models
 
         internal static ExtensibleEnumProperty DeserializeExtensibleEnumProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             InnerEnum property = default;
             foreach (var property0 in element.EnumerateObject())
             {

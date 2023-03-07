@@ -14,6 +14,10 @@ namespace MgmtListMethods.Models
     {
         internal static NonResourceChild DeserializeNonResourceChild(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<int> numberOfCores = default;
             foreach (var property in element.EnumerateObject())

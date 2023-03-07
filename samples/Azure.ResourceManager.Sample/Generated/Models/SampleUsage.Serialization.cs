@@ -14,6 +14,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static SampleUsage DeserializeSampleUsage(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             UsageUnit unit = default;
             int currentValue = default;
             long limit = default;

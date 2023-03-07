@@ -42,6 +42,12 @@ namespace Azure.Core
 
         public static void WriteBase64StringValue(this Utf8JsonWriter writer, byte[] value, string format)
         {
+            if (value == null)
+            {
+                writer.WriteNullValue();
+                return;
+            }
+
             switch (format)
             {
                 case "U":

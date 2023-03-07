@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing the ResGrpParentWithAncestor data model. </summary>
+    /// <summary>
+    /// A class representing the ResGrpParentWithAncestor data model.
+    /// Specifies information.
+    /// </summary>
     public partial class ResGrpParentWithAncestorData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ResGrpParentWithAncestorData. </summary>

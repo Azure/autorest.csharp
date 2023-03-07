@@ -22,6 +22,10 @@ namespace Azure.Management.Storage.Models
 
         internal static DateAfterCreation DeserializeDateAfterCreation(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             float daysAfterCreationGreaterThan = default;
             foreach (var property in element.EnumerateObject())
             {

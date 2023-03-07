@@ -23,6 +23,10 @@ namespace CustomizationsInCadl.Models
 
         internal static ModelToChangeNamespace DeserializeModelToChangeNamespace(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int requiredInt = default;
             foreach (var property in element.EnumerateObject())
             {

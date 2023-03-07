@@ -27,6 +27,10 @@ namespace MgmtDiscriminator
 
         internal static DeliveryRuleData DeserializeDeliveryRuleData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DeliveryRuleProperties> properties = default;
             ResourceIdentifier id = default;
             string name = default;

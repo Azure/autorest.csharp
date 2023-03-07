@@ -12,7 +12,10 @@ using MgmtSubscriptionNameParameter.Models;
 
 namespace MgmtSubscriptionNameParameter
 {
-    /// <summary> A class representing the SBSubscription data model. </summary>
+    /// <summary>
+    /// A class representing the SBSubscription data model.
+    /// Description of subscription resource.
+    /// </summary>
     public partial class SBSubscriptionData : ResourceData
     {
         /// <summary> Initializes a new instance of SBSubscriptionData. </summary>

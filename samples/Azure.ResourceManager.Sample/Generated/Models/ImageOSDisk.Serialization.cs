@@ -61,6 +61,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static ImageOSDisk DeserializeImageOSDisk(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             OperatingSystemType osType = default;
             OperatingSystemStateType osState = default;
             Optional<WritableSubResource> snapshot = default;
