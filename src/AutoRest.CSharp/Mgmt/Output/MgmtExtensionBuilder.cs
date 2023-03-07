@@ -15,7 +15,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtensionBuilder
     {
-        private record MgmtExtensionInfo(MgmtExtensionWrapper ExtensionWrapper, IEnumerable<MgmtExtension> Extensions, IEnumerable<MgmtExtensionClient> ExtensionClients);
+        private record MgmtExtensionInfo(MgmtExtensionWrapper ExtensionWrapper, IReadOnlyDictionary<Type, MgmtExtension> ExtensionsDict, IEnumerable<MgmtExtensionClient> ExtensionClients)
+        {
+            public IEnumerable<MgmtExtension> Extensions => ExtensionsDict.Values;
+        }
 
         private readonly IReadOnlyDictionary<Type, IEnumerable<Operation>> _extensionOperations;
 
@@ -30,23 +33,33 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<MgmtExtensionClient> ExtensionClients => ExtensionInfo.ExtensionClients;
 
+        public MgmtExtension GetExtension(Type armCoreType)
+        {
+            return ExtensionInfo.ExtensionsDict[armCoreType];
+        }
+
         private MgmtExtensionInfo? _info;
         private MgmtExtensionInfo ExtensionInfo => _info ??= EnsureMgmtExtensionInfo();
 
         private MgmtExtensionInfo EnsureMgmtExtensionInfo()
         {
-            var extensions = new List<MgmtExtension>();
+            var extensions = new Dictionary<Type, MgmtExtension>();
             var extensionClients = new List<MgmtExtensionClient>();
             // create the extensions
             foreach (var (type, operations) in _extensionOperations)
             {
                 var extension = new MgmtExtension(operations, extensionClients, type);
-                extensions.Add(extension);
+                extensions.Add(type, extension);
             }
             // construct all possible extension clients
             // first we collection all possible combinations of the resource on operations
             var resourceToOperationsDict = new Dictionary<CSharpType, List<MgmtClientOperation>>();
-            foreach (var extension in extensions)
+            // we need to add the system types in at the beginning because we might not have an operation corresponding to that below to ensure those extension clients will always be constructed
+            foreach (var type in RequestPath.ExtensionChoices.Keys)
+            {
+                resourceToOperationsDict.Add(type, new());
+            }
+            foreach (var (_, extension) in extensions)
             {
                 foreach (var operation in extension.AllOperations)
                 {
@@ -63,10 +76,14 @@ namespace AutoRest.CSharp.Mgmt.Output
             // then we construct the extension clients
             foreach (var (resourceType, operations) in resourceToOperationsDict)
             {
-                extensionClients.Add(new MgmtExtensionClient(resourceType, operations));
+                // find the extension if the resource type here is a framework type (when it is ResourceGroupResource, SubscriptionResource, etc) to ensure the ExtensionClient could property have the child resources
+                MgmtExtension? extensionForChildResources = null;
+                if (resourceType.IsFrameworkType && extensions.TryGetValue(resourceType.FrameworkType, out var extension))
+                    extensionForChildResources = extension;
+                extensionClients.Add(new MgmtExtensionClient(resourceType, operations, extensionForChildResources));
             }
 
-            return new(new MgmtExtensionWrapper(extensions), extensions, extensionClients);
+            return new(new MgmtExtensionWrapper(extensions.Values, extensionClients), extensions, extensionClients);
         }
     }
 }

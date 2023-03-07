@@ -417,7 +417,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var an = ResourceName.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
             var parents = this.Parent();
-            var parentTypes = parents.Select(parent => parent is OldMgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();
+            var parentTypes = parents.Select(parent => parent is MgmtExtension extension ? extension.ArmCoreType : parent.Type).ToList();
             var parentDescription = CreateParentDescription(parentTypes);
 
             lines.Add($"A Class representing {an} {ResourceName} along with the instance operations that can be performed on it.");

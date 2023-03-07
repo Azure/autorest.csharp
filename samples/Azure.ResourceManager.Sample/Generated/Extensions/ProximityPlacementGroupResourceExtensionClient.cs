@@ -30,12 +30,6 @@ namespace Azure.ResourceManager.Sample.Mock
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal ProximityPlacementGroupResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _proximityPlacementGroupClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", ProximityPlacementGroupResource.ResourceType.Namespace, Diagnostics);
-            TryGetApiVersion(ProximityPlacementGroupResource.ResourceType, out string proximityPlacementGroupApiVersion);
-            _proximityPlacementGroupRestClient = new ProximityPlacementGroupsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, proximityPlacementGroupApiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         private ClientDiagnostics ProximityPlacementGroupClientDiagnostics => _proximityPlacementGroupClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", ProximityPlacementGroupResource.ResourceType.Namespace, Diagnostics);

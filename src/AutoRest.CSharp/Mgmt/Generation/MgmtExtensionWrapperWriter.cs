@@ -1,26 +1,69 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtExtensionWrapperWriter : MgmtClientBaseWriter
     {
-        private MgmtExtensionWrapper _wrapper;
+        private MgmtExtensionWrapper This { get; }
         public MgmtExtensionWrapperWriter(MgmtExtensionWrapper extensionsWrapper) : base(new CodeWriter(), extensionsWrapper)
         {
-            _wrapper = extensionsWrapper;
+            This = extensionsWrapper;
+        }
+
+        protected override void WritePrivateHelpers()
+        {
+            if (IsArmCore)
+                return;
+
+            _writer.Line();
+
+            var generalExtensionParametr = new Parameter(
+                "resource",
+                null,
+                typeof(ArmResource),
+                null,
+                ValidationType.None,
+                null);
+            foreach (var extensionClient in This.ExtensionClients)
+            {
+                if (extensionClient.IsEmpty)
+                    continue;
+
+                var extensionClientSignature = new MethodSignature(
+                    $"Get{extensionClient.Type.Name}",
+                    null,
+                    null,
+                    Private | Static,
+                    extensionClient.Type,
+                    null,
+                    new[] { generalExtensionParametr });
+                using (_writer.WriteMethodDeclaration(extensionClientSignature))
+                {
+                    using (_writer.Scope($"return {generalExtensionParametr.Name}.GetCachedClient(({ArmClientReference.ToVariableName()}) =>"))
+                    {
+                        _writer.Line($"return new {extensionClientSignature.ReturnType}({ArmClientReference.ToVariableName()}, {generalExtensionParametr.Name}.Id);");
+                    }
+                    _writer.Line($");");
+                }
+            }
+
+            base.WritePrivateHelpers();
         }
 
         protected internal override void WriteImplementations()
         {
-            foreach (var extension in _wrapper.Extensions)
+            WritePrivateHelpers();
+
+            foreach (var extension in This.Extensions)
             {
                 if (extension.IsEmpty)
                     continue;

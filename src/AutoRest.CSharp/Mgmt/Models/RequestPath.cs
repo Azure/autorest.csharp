@@ -76,7 +76,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
     });
 
     private static Dictionary<Type, RequestPath>? _extensionChoices;
-    private static Dictionary<Type, RequestPath> ExtensionChoices => _extensionChoices ??= new()
+    public static Dictionary<Type, RequestPath> ExtensionChoices => _extensionChoices ??= new()
     {
         [typeof(TenantResource)] = RequestPath.Tenant,
         [typeof(ManagementGroupResource)] = RequestPath.ManagementGroup,

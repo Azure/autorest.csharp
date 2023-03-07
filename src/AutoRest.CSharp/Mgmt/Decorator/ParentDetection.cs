@@ -65,11 +65,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             }
             // if we cannot find a resource as its parent, its parent must be one of the Extensions
             if (parentRequestPath.Equals(RequestPath.ManagementGroup))
-                return MgmtContext.Library.ArmExtensions[typeof(ManagementGroupResource)].AsIEnumerable();
+                return MgmtContext.Library.GetExtension(typeof(ManagementGroupResource)).AsIEnumerable();
             if (parentRequestPath.Equals(RequestPath.ResourceGroup))
-                return MgmtContext.Library.ArmExtensions[typeof(ResourceGroupResource)].AsIEnumerable();
+                return MgmtContext.Library.GetExtension(typeof(ResourceGroupResource)).AsIEnumerable();
             if (parentRequestPath.Equals(RequestPath.Subscription))
-                return MgmtContext.Library.ArmExtensions[typeof(SubscriptionResource)].AsIEnumerable();
+                return MgmtContext.Library.GetExtension(typeof(SubscriptionResource)).AsIEnumerable();
             // the only option left is the tenant. But we have our last chance that its parent could be the scope of this
             scope = parentRequestPath.GetScopePath(); // we do this because some request path its scope is the same as itself
             if (scope.IsParameterizedScope())
@@ -79,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return FindScopeParents(types).Distinct();
             }
             // otherwise we use the tenant as a fallback
-            return MgmtContext.Library.ArmExtensions[typeof(TenantResource)].AsIEnumerable();
+            return MgmtContext.Library.GetExtension(typeof(TenantResource)).AsIEnumerable();
         }
 
         // TODO -- enhence this to support the new arm-id format
@@ -87,22 +87,22 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         {
             if (parameterizedScopeTypes.Contains(ResourceTypeSegment.Any))
             {
-                yield return MgmtContext.Library.ArmExtensions[typeof(ArmResource)];
+                yield return MgmtContext.Library.GetExtension(typeof(ArmResource));
                 yield break;
             }
 
             foreach (var type in parameterizedScopeTypes)
             {
                 if (type == ResourceTypeSegment.ManagementGroup)
-                    yield return MgmtContext.Library.ArmExtensions[typeof(ManagementGroupResource)];
+                    yield return MgmtContext.Library.GetExtension(typeof(ManagementGroupResource));
                 else if (type == ResourceTypeSegment.ResourceGroup)
-                    yield return MgmtContext.Library.ArmExtensions[typeof(ResourceGroupResource)];
+                    yield return MgmtContext.Library.GetExtension(typeof(ResourceGroupResource));
                 else if (type == ResourceTypeSegment.Subscription)
-                    yield return MgmtContext.Library.ArmExtensions[typeof(SubscriptionResource)];
+                    yield return MgmtContext.Library.GetExtension(typeof(SubscriptionResource));
                 else if (type == ResourceTypeSegment.Tenant)
-                    yield return MgmtContext.Library.ArmExtensions[typeof(TenantResource)];
+                    yield return MgmtContext.Library.GetExtension(typeof(TenantResource));
                 else
-                    yield return MgmtContext.Library.ArmExtensions[typeof(ArmResource)]; // we return anything unrecognized scope parent resource type as ArmResourceExtensions
+                    yield return MgmtContext.Library.GetExtension(typeof(ArmResource)); // we return anything unrecognized scope parent resource type as ArmResourceExtensions
             }
         }
 

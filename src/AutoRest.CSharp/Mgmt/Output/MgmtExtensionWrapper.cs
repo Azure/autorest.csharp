@@ -21,15 +21,18 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         public IEnumerable<MgmtExtension> Extensions { get; }
 
+        public IEnumerable<MgmtExtensionClient> ExtensionClients { get; }
+
         public override bool IsStatic => true;
 
         public bool IsEmpty => Extensions.All(extension => extension.IsEmpty);
 
-        public MgmtExtensionWrapper(IEnumerable<MgmtExtension> extensions) : base(MgmtContext.Context.DefaultNamespace.Split('.').Last())
+        public MgmtExtensionWrapper(IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients) : base(MgmtContext.Context.DefaultNamespace.Split('.').Last())
         {
             DefaultName = $"{ResourceName}Extensions";
             Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {MgmtContext.Context.DefaultNamespace}.";
             Extensions = extensions;
+            ExtensionClients = extensionClients;
         }
 
         public override CSharpType? BaseType => null;

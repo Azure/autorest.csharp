@@ -30,12 +30,6 @@ namespace Azure.ResourceManager.Sample.Mock
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal SshPublicKeyResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _sshPublicKeyClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", SshPublicKeyResource.ResourceType.Namespace, Diagnostics);
-            TryGetApiVersion(SshPublicKeyResource.ResourceType, out string sshPublicKeyApiVersion);
-            _sshPublicKeyRestClient = new SshPublicKeysRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, sshPublicKeyApiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         private ClientDiagnostics SshPublicKeyClientDiagnostics => _sshPublicKeyClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", SshPublicKeyResource.ResourceType.Namespace, Diagnostics);

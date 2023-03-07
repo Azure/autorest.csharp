@@ -70,7 +70,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                     {
                         // the operations on ArmClientExtensions are the same as the tenant extension, therefore we skip it here
                         // the source code generator will never write them if it is not in arm core
-                        if (providerForExample.Carrier is ArmClientExtensions)
+                        if (providerForExample.Carrier is ArmClientExtension)
                             continue;
                         var mockTestCase = new MockTestCase(operationId, providerForExample.Carrier, providerForExample.Operation, example);
                         result.AddInList(mockTestCase.Owner, mockTestCase);
@@ -117,11 +117,11 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             return _operationIdToProviders;
         }
 
-        private MgmtMockTestProvider<OldMgmtExtensionsWrapper>? _extensionWrapperMockTest;
-        public MgmtMockTestProvider<OldMgmtExtensionsWrapper> ExtensionWrapperMockTest => _extensionWrapperMockTest ??= new MgmtMockTestProvider<OldMgmtExtensionsWrapper>(MgmtContext.Library.ExtensionWrapper, Enumerable.Empty<MockTestCase>());
+        private MgmtMockTestProvider<MgmtExtensionWrapper>? _extensionWrapperMockTest;
+        public MgmtMockTestProvider<MgmtExtensionWrapper> ExtensionWrapperMockTest => _extensionWrapperMockTest ??= new MgmtMockTestProvider<MgmtExtensionWrapper>(MgmtContext.Library.ExtensionWrapper, Enumerable.Empty<MockTestCase>());
 
-        private IEnumerable<MgmtMockTestProvider<OldMgmtExtensions>>? _extensionMockTests;
-        public IEnumerable<MgmtMockTestProvider<OldMgmtExtensions>> ExtensionMockTests => _extensionMockTests ??= EnsureMockTestProviders<OldMgmtExtensions>();
+        private IEnumerable<MgmtMockTestProvider<MgmtExtension>>? _extensionMockTests;
+        public IEnumerable<MgmtMockTestProvider<MgmtExtension>> ExtensionMockTests => _extensionMockTests ??= EnsureMockTestProviders<MgmtExtension>();
 
         private IEnumerable<MgmtMockTestProvider<ResourceCollection>>? _resourceCollectionMockTests;
         public IEnumerable<MgmtMockTestProvider<ResourceCollection>> ResourceCollectionMockTests => _resourceCollectionMockTests ??= EnsureMockTestProviders<ResourceCollection>();

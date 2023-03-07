@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private readonly IEnumerable<Operation> _allRawOperations;
 
-        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtExtensionClient> extensionClients, Type armCoreType) : base(armCoreType.Name)
+        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtExtensionClient> extensionClients, Type armCoreType, RequestPath? contextualPath = null) : base(armCoreType.Name)
         {
             _allRawOperations = allRawOperations;
             _extensionClients = extensionClients; // this property is populated later
@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             DefaultName = Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
             DefaultNamespace = Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
             Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {ResourceName}.";
-            ContextualPath = RequestPath.GetContextualPath(armCoreType);
+            ContextualPath = contextualPath ?? RequestPath.GetContextualPath(armCoreType);
             ArmCoreNamespace = ArmCoreType.Namespace!;
             ChildResources = !Configuration.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != MgmtContext.Context.DefaultNamespace ? base.ChildResources : Enumerable.Empty<Resource>();
         }
@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultNamespace { get; }
 
-        public virtual RequestPath ContextualPath { get; }
+        public RequestPath ContextualPath { get; }
 
         public override IEnumerable<Resource> ChildResources { get; }
 
@@ -103,7 +103,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CalculateOperationName(Operation operation, string clientResourceName)
         {
-            var opertionName = base.CalculateOperationName(operation, clientResourceName);
+            var operationName = base.CalculateOperationName(operation, clientResourceName);
 
             if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType.TryCastResourceData(out var data))
             {
@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            return opertionName;
+            return operationName;
         }
 
         private IEnumerable<Segment> GetExtraLayers(RequestPath requestPath, Resource resource)

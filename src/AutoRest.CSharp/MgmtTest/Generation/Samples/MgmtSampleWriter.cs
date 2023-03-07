@@ -93,7 +93,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             {
                 ResourceCollection collection => WriteSampleOperationForResourceCollection(clientStepResult, collection, sample),
                 Resource resource => WriteSampleOperationForResource(clientStepResult, resource, sample),
-                OldMgmtExtensions extension => WriteSampleOperationForExtension(clientStepResult, extension, sample),
+                MgmtExtension extension => WriteSampleOperationForExtension(clientStepResult, extension, sample),
                 _ => throw new InvalidOperationException("Should never happen"),
             };
 
@@ -173,7 +173,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
         private string GetResourceName(MgmtTypeProvider provider) => provider switch
         {
             Resource resource => resource.Type.Name,
-            OldMgmtExtensions extension => extension.ArmCoreType.Name,
+            MgmtExtension extension => extension.ArmCoreType.Name,
             _ => throw new InvalidOperationException("Should never happen")
         };
 
@@ -200,7 +200,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return result;
         }
 
-        private CodeWriterVariableDeclaration? WriteSampleOperationForExtension(CodeWriterVariableDeclaration clientVar, OldMgmtExtensions extension, Sample sample)
+        private CodeWriterVariableDeclaration? WriteSampleOperationForExtension(CodeWriterVariableDeclaration clientVar, MgmtExtension extension, Sample sample)
         {
             _writer.Line();
 
@@ -215,7 +215,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 
         private CodeWriterDeclaration? WriteGetParentResource(MgmtTypeProvider parent, MockTestCase testCase, FormattableString clientExpression)
         {
-            if (parent is OldMgmtExtensions extension && extension.ArmCoreType == typeof(ArmResource))
+            if (parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource))
                 return null;
 
             return WriteGetResource(parent, testCase, clientExpression);

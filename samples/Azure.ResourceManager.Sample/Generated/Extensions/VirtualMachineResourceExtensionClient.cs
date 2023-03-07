@@ -30,12 +30,6 @@ namespace Azure.ResourceManager.Sample.Mock
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal VirtualMachineResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _virtualMachineClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", VirtualMachineResource.ResourceType.Namespace, Diagnostics);
-            TryGetApiVersion(VirtualMachineResource.ResourceType, out string virtualMachineApiVersion);
-            _virtualMachineRestClient = new VirtualMachinesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, virtualMachineApiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         private ClientDiagnostics VirtualMachineClientDiagnostics => _virtualMachineClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", VirtualMachineResource.ResourceType.Namespace, Diagnostics);

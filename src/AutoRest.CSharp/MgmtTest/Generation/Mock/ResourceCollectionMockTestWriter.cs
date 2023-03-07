@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 
         private CodeWriterDeclaration? WriteGetParentResource(MgmtTypeProvider parent, MockTestCase testCase)
         {
-            if (parent is OldMgmtExtensions extension && extension.ArmCoreType == typeof(ArmResource))
+            if (parent is MgmtExtension extension && extension.ArmCoreType == typeof(ArmResource))
                 return null;
 
             return WriteGetResource(parent, testCase, GetArmClientExpression);

@@ -38,31 +38,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void GetMethodWrapperImpl(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
             => WriteMethodBodyWrapper(clientOperation.Resource?.Type, clientOperation.MethodSignature, isAsync, clientOperation.IsPagingOperation);
 
-        // TODO -- move this method to the wrapper
-        //protected override void WritePrivateHelpers()
-        //{
-        //    if (IsArmCore)
-        //        return;
-
-        //    _writer.Line();
-        //    var extensionClientSignature = new MethodSignature(
-        //        $"Get{This.ExtensionClient.Type.Name}",
-        //        null,
-        //        null,
-        //        Private | Static,
-        //        This.ExtensionClient.Type,
-        //        null,
-        //        new[] { This.ExtensionParameter });
-        //    using (_writer.WriteMethodDeclaration(extensionClientSignature))
-        //    {
-        //        using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient(({ArmClientReference.ToVariableName()}) =>"))
-        //        {
-        //            _writer.Line($"return new {extensionClientSignature.ReturnType}({ArmClientReference.ToVariableName()}, {This.ExtensionParameter.Name}.Id);");
-        //        }
-        //        _writer.Line($");");
-        //    }
-        //}
-
         private void WriteMethodBodyWrapper(CSharpType? resourceType, MethodSignature signature, bool isAsync, bool isPaging)
         {
             var extensionClient = This.GetExtensionClient(resourceType);

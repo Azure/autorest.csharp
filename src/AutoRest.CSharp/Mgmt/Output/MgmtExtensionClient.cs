@@ -16,14 +16,20 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class MgmtExtensionClient : MgmtTypeProvider
     {
         private readonly IEnumerable<MgmtClientOperation> _operations;
+        private readonly MgmtExtension? _extensionForChildResources;
 
-        public MgmtExtensionClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations)
+        public MgmtExtensionClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources)
             : base(resourceType.Name)
         {
             _operations = operations;
+            _extensionForChildResources = extensionForChildResources;
             ExtendedResourceType = resourceType;
             DefaultName = $"{resourceType.Name}ExtensionClient";
         }
+
+        public override bool IsInitializedByProperties => true;
+
+        public override bool HasChildResourceGetMethods => false;
 
         protected override ConstructorSignature? EnsureArmClientCtor()
         {
@@ -40,6 +46,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
+            // here we capsulate the MgmtClientOperation again to remove the extra "extension parameter" we added when constructing them in MgmtExtension.EnsureClientOperations
             return _operations.Select(operation => MgmtClientOperation.FromOperations(operation)!);
         }
 
@@ -57,10 +64,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string DefaultNamespace => Configuration.MgmtConfiguration.IsArmCore ?
             base.DefaultNamespace : $"{base.DefaultNamespace}.Mock";
 
-        private bool? _isEmpty;
-        public bool IsEmpty => _isEmpty ??= !_operations.Any();
+        public bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 
-        public override IEnumerable<Resource> ChildResources => Enumerable.Empty<Resource>();
+        public override IEnumerable<Resource> ChildResources => _extensionForChildResources?.ChildResources ?? Enumerable.Empty<Resource>();
 
         private FormattableString? _description;
         public override FormattableString Description => _description ??= $"A class to add extension methods to {ResourceName}.";

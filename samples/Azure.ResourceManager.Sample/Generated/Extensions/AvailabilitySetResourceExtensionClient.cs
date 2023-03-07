@@ -30,12 +30,6 @@ namespace Azure.ResourceManager.Sample.Mock
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
         internal AvailabilitySetResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
-            _availabilitySetClientDiagnostics = new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", AvailabilitySetResource.ResourceType.Namespace, Diagnostics);
-            TryGetApiVersion(AvailabilitySetResource.ResourceType, out string availabilitySetApiVersion);
-            _availabilitySetRestClient = new AvailabilitySetsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, availabilitySetApiVersion);
-#if DEBUG
-			ValidateResourceId(Id);
-#endif
         }
 
         private ClientDiagnostics AvailabilitySetClientDiagnostics => _availabilitySetClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", AvailabilitySetResource.ResourceType.Namespace, Diagnostics);

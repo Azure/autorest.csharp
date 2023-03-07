@@ -150,20 +150,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteMethodDocumentation(This.ArmClientCtor);
                 using (_writer.WriteMethodDeclaration(This.ArmClientCtor))
                 {
-                    if (This is OldMgmtExtensionClient)
-                        return;
-
-                    foreach (var param in This.ExtraConstructorParameters)
+                    if (!This.IsInitializedByProperties)
                     {
-                        _writer.Line($"_{param.Name} = {param.Name};");
-                    }
+                        foreach (var param in This.ExtraConstructorParameters)
+                        {
+                            _writer.Line($"_{param.Name} = {param.Name};");
+                        }
 
-                    foreach (var set in This.UniqueSets)
-                    {
-                        WriteRestClientConstructorPair(set.RestClient, set.Resource);
+                        foreach (var set in This.UniqueSets)
+                        {
+                            WriteRestClientConstructorPair(set.RestClient, set.Resource);
+                        }
+                        if (This.CanValidateResourceType)
+                            WriteDebugValidate();
                     }
-                    if (This.CanValidateResourceType)
-                        WriteDebugValidate();
                 }
             }
             _writer.Line();
@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteResourceCollectionGetMethod(resource);
 
-                    if (!(This is OldMgmtExtensionClient)) // we don't need to generate `Get{Resource}` methods in ExtensionClient
+                    if (This.HasChildResourceGetMethods) // we don't need to generate `Get{Resource}` methods in ExtensionClient
                     {
                         WriteChildResourceGetMethod(resource.ResourceCollection, true);
                         WriteChildResourceGetMethod(resource.ResourceCollection, false);

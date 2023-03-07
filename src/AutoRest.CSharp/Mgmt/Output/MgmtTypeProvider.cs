@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     /// <summary>
     /// MgmtTypeProvider represents the information that corresponds to the generated class in the SDK that contains operations in it.
-    /// This includes <see cref="Resource"/>, <see cref="ResourceCollection"/>, <see cref="ArmClientExtensions"/>, <see cref="OldMgmtExtensions"/> and <see cref="OldMgmtExtensionsWrapper"/>
+    /// This includes <see cref="Resource"/>, <see cref="ResourceCollection"/>, <see cref="ArmClientExtension"/>, <see cref="OldMgmtExtensions"/> and <see cref="OldMgmtExtensionsWrapper"/>
     /// </summary>
     internal abstract class MgmtTypeProvider : TypeProvider
     {
@@ -44,6 +44,14 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override string DefaultAccessibility => "public";
 
         public virtual bool CanValidateResourceType => true;
+
+        /// <summary>
+        /// If this is false, all the RestOperation instances will be initialized in the constructor
+        /// If this is true, all the RestOperation instances will be initialized when the property is invoked for the first time
+        /// </summary>
+        public virtual bool IsInitializedByProperties => false;
+
+        public virtual bool HasChildResourceGetMethods => true;
 
         public virtual string BranchIdVariableName => "Id";
 
