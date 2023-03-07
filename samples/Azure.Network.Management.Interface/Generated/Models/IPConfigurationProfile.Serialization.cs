@@ -38,6 +38,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static IPConfigurationProfile DeserializeIPConfigurationProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> etag = default;

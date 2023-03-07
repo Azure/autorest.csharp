@@ -14,6 +14,10 @@ namespace custom_baseUrl.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> status = default;
             Optional<string> message = default;
             foreach (var property in element.EnumerateObject())

@@ -15,6 +15,10 @@ namespace MgmtListMethods.Models
     {
         internal static NonResourceChildListResult DeserializeNonResourceChildListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<NonResourceChild>> value = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -16,6 +16,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static DeletedManagedHsmListResult DeserializeDeletedManagedHsmListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<DeletedManagedHsmData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

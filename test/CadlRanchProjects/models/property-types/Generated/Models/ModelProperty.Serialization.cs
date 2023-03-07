@@ -23,6 +23,10 @@ namespace Models.Property.Types.Models
 
         internal static ModelProperty DeserializeModelProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             InnerModel property = default;
             foreach (var property0 in element.EnumerateObject())
             {

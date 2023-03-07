@@ -24,6 +24,10 @@ namespace MgmtDiscriminator.Models
 
         internal static DeliveryRuleRouteConfigurationOverrideAction DeserializeDeliveryRuleRouteConfigurationOverrideAction(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             RouteConfigurationOverrideActionParameters parameters = default;
             DeliveryRuleActionType name = default;
             Optional<string> foo = default;

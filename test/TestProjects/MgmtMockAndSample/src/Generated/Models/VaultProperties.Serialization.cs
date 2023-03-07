@@ -126,6 +126,10 @@ namespace MgmtMockAndSample.Models
 
         internal static VaultProperties DeserializeVaultProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<TimeSpan> duration = default;
             Optional<DateTimeOffset> createOn = default;
             Guid tenantId = default;

@@ -30,6 +30,10 @@ namespace MgmtLRO.Models
 
         internal static FakeProperties DeserializeFakeProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> platformUpdateDomainCount = default;
             Optional<int> platformFaultDomainCount = default;
             foreach (var property in element.EnumerateObject())

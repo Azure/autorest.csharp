@@ -46,6 +46,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static InstanceViewStatus DeserializeInstanceViewStatus(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> code = default;
             Optional<StatusLevelType> level = default;
             Optional<string> displayStatus = default;

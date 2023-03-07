@@ -25,6 +25,10 @@ namespace MgmtRenameRules.Models
 
         internal static AdditionalCapabilities DeserializeAdditionalCapabilities(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> ultraSSDEnabled = default;
             foreach (var property in element.EnumerateObject())
             {

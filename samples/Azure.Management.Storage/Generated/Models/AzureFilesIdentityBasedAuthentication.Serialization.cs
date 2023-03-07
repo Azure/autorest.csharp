@@ -32,6 +32,10 @@ namespace Azure.Management.Storage.Models
 
         internal static AzureFilesIdentityBasedAuthentication DeserializeAzureFilesIdentityBasedAuthentication(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             DirectoryServiceOption directoryServiceOptions = default;
             Optional<ActiveDirectoryProperties> activeDirectoryProperties = default;
             Optional<DefaultSharePermission> defaultSharePermission = default;

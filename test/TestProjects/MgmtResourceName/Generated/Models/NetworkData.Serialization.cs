@@ -26,6 +26,10 @@ namespace MgmtResourceName
 
         internal static NetworkData DeserializeNetworkData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @new = default;
             ResourceIdentifier id = default;
             string name = default;

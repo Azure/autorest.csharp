@@ -10,6 +10,18 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
+  "ModelsToTreatEmptyStringAsNull": [
+    "ExactMatchModel11",
+    "ExactMatchModel1Data"
+  ],
+  "IntrinsicTypesToTreatEmptyStringAsNull": [
+    "Uri",
+    "Guid",
+    "ResourceIdentifier",
+    "DateTimeOffset",
+    "ResourceType",
+    "IPAddress"
+  ],
   "KeepOrphanedModels": [
     "ExactMatchModel11"
   ],

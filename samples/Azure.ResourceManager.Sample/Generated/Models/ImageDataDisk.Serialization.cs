@@ -59,6 +59,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static ImageDataDisk DeserializeImageDataDisk(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int lun = default;
             Optional<WritableSubResource> snapshot = default;
             Optional<WritableSubResource> managedDisk = default;

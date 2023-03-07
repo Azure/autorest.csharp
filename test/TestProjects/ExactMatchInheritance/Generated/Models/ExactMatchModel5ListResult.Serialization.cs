@@ -16,6 +16,10 @@ namespace ExactMatchInheritance.Models
     {
         internal static ExactMatchModel5ListResult DeserializeExactMatchModel5ListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<ExactMatchModel5Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

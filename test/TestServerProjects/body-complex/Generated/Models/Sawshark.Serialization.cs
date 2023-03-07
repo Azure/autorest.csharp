@@ -53,6 +53,10 @@ namespace body_complex.Models
 
         internal static Sawshark DeserializeSawshark(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<byte[]> picture = default;
             Optional<int> age = default;
             DateTimeOffset birthday = default;

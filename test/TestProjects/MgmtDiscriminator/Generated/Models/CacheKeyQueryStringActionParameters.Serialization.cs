@@ -36,6 +36,10 @@ namespace MgmtDiscriminator.Models
 
         internal static CacheKeyQueryStringActionParameters DeserializeCacheKeyQueryStringActionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             CacheKeyQueryStringActionParametersTypeName typeName = default;
             QueryStringBehavior queryStringBehavior = default;
             Optional<string> queryParameters = default;

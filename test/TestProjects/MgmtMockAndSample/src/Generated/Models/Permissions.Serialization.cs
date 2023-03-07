@@ -61,6 +61,10 @@ namespace MgmtMockAndSample.Models
 
         internal static Permissions DeserializePermissions(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<KeyPermission>> keys = default;
             Optional<IList<SecretPermission>> secrets = default;
             Optional<IList<CertificatePermission>> certificates = default;

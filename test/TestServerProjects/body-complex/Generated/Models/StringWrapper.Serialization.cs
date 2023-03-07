@@ -35,6 +35,10 @@ namespace body_complex.Models
 
         internal static StringWrapper DeserializeStringWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> field = default;
             Optional<string> empty = default;
             Optional<string> @null = default;
