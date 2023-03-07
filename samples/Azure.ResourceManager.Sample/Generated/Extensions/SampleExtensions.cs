@@ -28,6 +28,7 @@ namespace Azure.ResourceManager.Sample
             }
             );
         }
+
         private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
         {
             return resource.GetCachedClient((client) =>
@@ -36,6 +37,7 @@ namespace Azure.ResourceManager.Sample
             }
             );
         }
+
         private static AvailabilitySetResourceExtensionClient GetAvailabilitySetResourceExtensionClient(ArmResource resource)
         {
             return resource.GetCachedClient((client) =>
@@ -44,6 +46,7 @@ namespace Azure.ResourceManager.Sample
             }
             );
         }
+
         private static ProximityPlacementGroupResourceExtensionClient GetProximityPlacementGroupResourceExtensionClient(ArmResource resource)
         {
             return resource.GetCachedClient((client) =>
@@ -52,6 +55,7 @@ namespace Azure.ResourceManager.Sample
             }
             );
         }
+
         private static DedicatedHostGroupResourceExtensionClient GetDedicatedHostGroupResourceExtensionClient(ArmResource resource)
         {
             return resource.GetCachedClient((client) =>
@@ -60,6 +64,7 @@ namespace Azure.ResourceManager.Sample
             }
             );
         }
+
         private static SshPublicKeyResourceExtensionClient GetSshPublicKeyResourceExtensionClient(ArmResource resource)
         {
             return resource.GetCachedClient((client) =>
@@ -68,6 +73,7 @@ namespace Azure.ResourceManager.Sample
             }
             );
         }
+
         private static VirtualMachineResourceExtensionClient GetVirtualMachineResourceExtensionClient(ArmResource resource)
         {
             return resource.GetCachedClient((client) =>
@@ -76,6 +82,7 @@ namespace Azure.ResourceManager.Sample
             }
             );
         }
+
         private static ImageResourceExtensionClient GetImageResourceExtensionClient(ArmResource resource)
         {
             return resource.GetCachedClient((client) =>
@@ -84,6 +91,7 @@ namespace Azure.ResourceManager.Sample
             }
             );
         }
+
         private static VirtualMachineScaleSetResourceExtensionClient GetVirtualMachineScaleSetResourceExtensionClient(ArmResource resource)
         {
             return resource.GetCachedClient((client) =>
@@ -1364,5 +1372,271 @@ namespace Azure.ResourceManager.Sample
         {
             return resourceGroupResource.GetVirtualMachineScaleSets().Get(vmScaleSetName, cancellationToken);
         }
+
+        #region AvailabilitySetResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySetResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
+        public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                AvailabilitySetResource.ValidateResourceId(id);
+                return new AvailabilitySetResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region ProximityPlacementGroupResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ProximityPlacementGroupResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ProximityPlacementGroupResource.CreateResourceIdentifier" /> to create a <see cref="ProximityPlacementGroupResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ProximityPlacementGroupResource" /> object. </returns>
+        public static ProximityPlacementGroupResource GetProximityPlacementGroupResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                ProximityPlacementGroupResource.ValidateResourceId(id);
+                return new ProximityPlacementGroupResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region DedicatedHostGroupResource
+        /// <summary>
+        /// Gets an object representing a <see cref="DedicatedHostGroupResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DedicatedHostGroupResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostGroupResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="DedicatedHostGroupResource" /> object. </returns>
+        public static DedicatedHostGroupResource GetDedicatedHostGroupResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                DedicatedHostGroupResource.ValidateResourceId(id);
+                return new DedicatedHostGroupResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region DedicatedHostResource
+        /// <summary>
+        /// Gets an object representing a <see cref="DedicatedHostResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="DedicatedHostResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="DedicatedHostResource" /> object. </returns>
+        public static DedicatedHostResource GetDedicatedHostResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                DedicatedHostResource.ValidateResourceId(id);
+                return new DedicatedHostResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region SshPublicKeyResource
+        /// <summary>
+        /// Gets an object representing a <see cref="SshPublicKeyResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SshPublicKeyResource.CreateResourceIdentifier" /> to create a <see cref="SshPublicKeyResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SshPublicKeyResource" /> object. </returns>
+        public static SshPublicKeyResource GetSshPublicKeyResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                SshPublicKeyResource.ValidateResourceId(id);
+                return new SshPublicKeyResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VirtualMachineExtensionImageResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineExtensionImageResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineExtensionImageResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImageResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
+        public static VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VirtualMachineExtensionImageResource.ValidateResourceId(id);
+                return new VirtualMachineExtensionImageResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VirtualMachineExtensionResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineExtensionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineExtensionResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineExtensionResource" /> object. </returns>
+        public static VirtualMachineExtensionResource GetVirtualMachineExtensionResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VirtualMachineExtensionResource.ValidateResourceId(id);
+                return new VirtualMachineExtensionResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VirtualMachineScaleSetVirtualMachineExtensionResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource" /> object. </returns>
+        public static VirtualMachineScaleSetVirtualMachineExtensionResource GetVirtualMachineScaleSetVirtualMachineExtensionResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VirtualMachineScaleSetVirtualMachineExtensionResource.ValidateResourceId(id);
+                return new VirtualMachineScaleSetVirtualMachineExtensionResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VirtualMachineResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineResource" /> object. </returns>
+        public static VirtualMachineResource GetVirtualMachineResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VirtualMachineResource.ValidateResourceId(id);
+                return new VirtualMachineResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region ImageResource
+        /// <summary>
+        /// Gets an object representing an <see cref="ImageResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ImageResource.CreateResourceIdentifier" /> to create an <see cref="ImageResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ImageResource" /> object. </returns>
+        public static ImageResource GetImageResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                ImageResource.ValidateResourceId(id);
+                return new ImageResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VirtualMachineScaleSetResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetResource" /> object. </returns>
+        public static VirtualMachineScaleSetResource GetVirtualMachineScaleSetResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VirtualMachineScaleSetResource.ValidateResourceId(id);
+                return new VirtualMachineScaleSetResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VirtualMachineScaleSetExtensionResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetExtensionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetExtensionResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetExtensionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetExtensionResource" /> object. </returns>
+        public static VirtualMachineScaleSetExtensionResource GetVirtualMachineScaleSetExtensionResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VirtualMachineScaleSetExtensionResource.ValidateResourceId(id);
+                return new VirtualMachineScaleSetExtensionResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VirtualMachineScaleSetRollingUpgradeResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetRollingUpgradeResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> object. </returns>
+        public static VirtualMachineScaleSetRollingUpgradeResource GetVirtualMachineScaleSetRollingUpgradeResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VirtualMachineScaleSetRollingUpgradeResource.ValidateResourceId(id);
+                return new VirtualMachineScaleSetRollingUpgradeResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region VirtualMachineScaleSetVMResource
+        /// <summary>
+        /// Gets an object representing a <see cref="VirtualMachineScaleSetVMResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="VirtualMachineScaleSetVMResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVMResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="VirtualMachineScaleSetVMResource" /> object. </returns>
+        public static VirtualMachineScaleSetVMResource GetVirtualMachineScaleSetVMResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                VirtualMachineScaleSetVMResource.ValidateResourceId(id);
+                return new VirtualMachineScaleSetVMResource(client, id);
+            }
+            );
+        }
+        #endregion
     }
 }

@@ -153,31 +153,22 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static void WriteExtensionFiles(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients)
         {
-            if (!isArmCore && !extensionWrapper.IsEmpty)
-                WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(extensionWrapper));
-
-            // TODO -- fill in later for arm core
             if (isArmCore)
             {
-                foreach (var extension in extensions)
+                // fill in later for arm core
+            }
+            else
+            {
+                // write extension wrapper (a big class that contains all the extension methods)
+                if (!extensionWrapper.IsEmpty)
+                    WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(extensionWrapper));
+
+                // write ExtensionClients
+                foreach (var extensionClient in extensionClients)
                 {
-
+                    if (!extensionClient.IsEmpty)
+                        WriteExtensionPiece(project, new MgmtExtensionClientWriter(extensionClient));
                 }
-            }
-
-            // write ExtensionClients
-            foreach (var extensionClient in extensionClients)
-            {
-                WriteExtensionClient(project, extensionClient);
-            }
-        }
-
-        private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
-        {
-            // armcore does not need ExtensionClients
-            if (!Configuration.MgmtConfiguration.IsArmCore && !extensionClient.IsEmpty)
-            {
-                WriteExtensionPiece(project, new MgmtExtensionClientWriter(extensionClient));
             }
         }
 

@@ -10,6 +10,8 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -51,6 +53,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var extension = new MgmtExtension(operations, extensionClients, type);
                 extensions.Add(type, extension);
             }
+            // add the ArmClientExtension
+            extensions.Add(typeof(ArmClient), new ArmClientExtension(_extensionOperations[typeof(TenantResource)]));
+
             // construct all possible extension clients
             // first we collection all possible combinations of the resource on operations
             var resourceToOperationsDict = new Dictionary<CSharpType, List<MgmtClientOperation>>();

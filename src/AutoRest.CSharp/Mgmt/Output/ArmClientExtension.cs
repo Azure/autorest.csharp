@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class ArmClientExtension : MgmtExtension
     {
         public ArmClientExtension(IEnumerable<Operation> allOperations)
-            : base(allOperations, Enumerable.Empty<MgmtExtensionClient>(), typeof(ArmClient), RequestPath.Tenant) // TODO -- find out if this is OK
+            : base(allOperations, Enumerable.Empty<MgmtExtensionClient>(), typeof(ArmClient), RequestPath.Tenant)
         {
         }
 

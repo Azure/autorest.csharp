@@ -24,8 +24,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (IsArmCore)
                 return;
 
-            _writer.Line();
-
             var generalExtensionParametr = new Parameter(
                 "resource",
                 null,
@@ -37,6 +35,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (extensionClient.IsEmpty)
                     continue;
+
+                _writer.Line();
 
                 var extensionClientSignature = new MethodSignature(
                     $"Get{extensionClient.Type.Name}",
@@ -70,8 +70,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 var extensionWriter = extension switch
                 {
-                    // TODO -- temporarily removed
-                    //ArmClientExtensions armClientExtensions => new ArmClientExtensionsWriter(_writer, armClientExtensions),
+                    ArmClientExtension armClientExtension => new ArmClientExtensionWriter(_writer, armClientExtension),
                     _ when extension.ArmCoreType == typeof(ArmResource) => new ArmResourceExtensionWriter(_writer, extension),
                     _ => new MgmtExtensionWriter(_writer, extension)
                 };
