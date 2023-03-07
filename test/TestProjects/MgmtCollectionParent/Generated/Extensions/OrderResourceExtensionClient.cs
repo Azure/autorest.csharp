@@ -14,7 +14,7 @@ using MgmtCollectionParent;
 
 namespace MgmtCollectionParent.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to OrderResource. </summary>
     public partial class OrderResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _orderResourceClientDiagnostics;

@@ -14,7 +14,7 @@ using MgmtParamOrdering;
 
 namespace MgmtParamOrdering.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to AvailabilitySetResource. </summary>
     public partial class AvailabilitySetResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _availabilitySetClientDiagnostics;

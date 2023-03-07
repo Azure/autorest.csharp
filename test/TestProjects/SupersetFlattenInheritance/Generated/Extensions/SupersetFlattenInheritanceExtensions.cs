@@ -20,14 +20,58 @@ namespace SupersetFlattenInheritance
     /// <summary> A class to add extension methods to SupersetFlattenInheritance. </summary>
     public static partial class SupersetFlattenInheritanceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
         {
-            return resourceGroupResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
+        }
+        #region ResourceModel1Resource
+        /// <summary>
+        /// Gets an object representing a <see cref="ResourceModel1Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ResourceModel1Resource.CreateResourceIdentifier" /> to create a <see cref="ResourceModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ResourceModel1Resource" /> object. </returns>
+        public static ResourceModel1Resource GetResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                ResourceModel1Resource.ValidateResourceId(id);
+                return new ResourceModel1Resource(client, id);
             }
             );
         }
+        #endregion
+
+        #region TrackedResourceModel1Resource
+        /// <summary>
+        /// Gets an object representing a <see cref="TrackedResourceModel1Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TrackedResourceModel1Resource.CreateResourceIdentifier" /> to create a <see cref="TrackedResourceModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="TrackedResourceModel1Resource" /> object. </returns>
+        public static TrackedResourceModel1Resource GetTrackedResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                TrackedResourceModel1Resource.ValidateResourceId(id);
+                return new TrackedResourceModel1Resource(client, id);
+            }
+            );
+        }
+        #endregion
 
         /// <summary> Gets a collection of ResourceModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -1356,43 +1400,5 @@ namespace SupersetFlattenInheritance
 
             return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNonResourceModel1(nonResourceModel1SName, cancellationToken);
         }
-
-        #region ResourceModel1Resource
-        /// <summary>
-        /// Gets an object representing a <see cref="ResourceModel1Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ResourceModel1Resource.CreateResourceIdentifier" /> to create a <see cref="ResourceModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ResourceModel1Resource" /> object. </returns>
-        public static ResourceModel1Resource GetResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                ResourceModel1Resource.ValidateResourceId(id);
-                return new ResourceModel1Resource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region TrackedResourceModel1Resource
-        /// <summary>
-        /// Gets an object representing a <see cref="TrackedResourceModel1Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TrackedResourceModel1Resource.CreateResourceIdentifier" /> to create a <see cref="TrackedResourceModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TrackedResourceModel1Resource" /> object. </returns>
-        public static TrackedResourceModel1Resource GetTrackedResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                TrackedResourceModel1Resource.ValidateResourceId(id);
-                return new TrackedResourceModel1Resource(client, id);
-            }
-            );
-        }
-        #endregion
     }
 }

@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
-using MgmtMockAndSample.Mock;
+using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
 
-namespace MgmtMockAndSample.Mock.Samples
+namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_TenantResourceExtensions
     {

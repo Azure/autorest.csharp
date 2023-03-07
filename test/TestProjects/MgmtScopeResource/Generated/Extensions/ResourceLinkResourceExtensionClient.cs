@@ -14,7 +14,7 @@ using MgmtScopeResource;
 
 namespace MgmtScopeResource.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to ResourceLinkResource. </summary>
     public partial class ResourceLinkResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _resourceLinkClientDiagnostics;

@@ -20,14 +20,112 @@ namespace MgmtOperations
     /// <summary> A class to add extension methods to MgmtOperations. </summary>
     public static partial class MgmtOperationsExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static AvailabilitySetResourceExtensionClient GetAvailabilitySetResourceExtensionClient(ArmResource resource)
         {
-            return resourceGroupResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
+                return new AvailabilitySetResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static AvailabilitySetResourceExtensionClient GetAvailabilitySetResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new AvailabilitySetResourceExtensionClient(client, scope);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
+        }
+        #region AvailabilitySetResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySetResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
+        public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                AvailabilitySetResource.ValidateResourceId(id);
+                return new AvailabilitySetResource(client, id);
             }
             );
         }
+        #endregion
+
+        #region AvailabilitySetChildResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AvailabilitySetChildResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySetChildResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetChildResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="AvailabilitySetChildResource" /> object. </returns>
+        public static AvailabilitySetChildResource GetAvailabilitySetChildResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                AvailabilitySetChildResource.ValidateResourceId(id);
+                return new AvailabilitySetChildResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region AvailabilitySetGrandChildResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AvailabilitySetGrandChildResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AvailabilitySetGrandChildResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetGrandChildResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="AvailabilitySetGrandChildResource" /> object. </returns>
+        public static AvailabilitySetGrandChildResource GetAvailabilitySetGrandChildResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                AvailabilitySetGrandChildResource.ValidateResourceId(id);
+                return new AvailabilitySetGrandChildResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region UnpatchableResource
+        /// <summary>
+        /// Gets an object representing an <see cref="UnpatchableResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="UnpatchableResource.CreateResourceIdentifier" /> to create an <see cref="UnpatchableResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="UnpatchableResource" /> object. </returns>
+        public static UnpatchableResource GetUnpatchableResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                UnpatchableResource.ValidateResourceId(id);
+                return new UnpatchableResource(client, id);
+            }
+            );
+        }
+        #endregion
 
         /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -167,7 +265,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).TestLROMethodAvailabilitySetAsync(waitUntil, availabilitySetUpdate, cancellationToken).ConfigureAwait(false);
+            return await GetAvailabilitySetResourceExtensionClient(resourceGroupResource).TestLROMethodAvailabilitySetAsync(waitUntil, availabilitySetUpdate, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -192,83 +290,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).TestLROMethodAvailabilitySet(waitUntil, availabilitySetUpdate, cancellationToken);
+            return GetAvailabilitySetResourceExtensionClient(resourceGroupResource).TestLROMethodAvailabilitySet(waitUntil, availabilitySetUpdate, cancellationToken);
         }
-
-        #region AvailabilitySetResource
-        /// <summary>
-        /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AvailabilitySetResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
-        public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                AvailabilitySetResource.ValidateResourceId(id);
-                return new AvailabilitySetResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region AvailabilitySetChildResource
-        /// <summary>
-        /// Gets an object representing an <see cref="AvailabilitySetChildResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AvailabilitySetChildResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetChildResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetChildResource" /> object. </returns>
-        public static AvailabilitySetChildResource GetAvailabilitySetChildResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                AvailabilitySetChildResource.ValidateResourceId(id);
-                return new AvailabilitySetChildResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region AvailabilitySetGrandChildResource
-        /// <summary>
-        /// Gets an object representing an <see cref="AvailabilitySetGrandChildResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AvailabilitySetGrandChildResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetGrandChildResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AvailabilitySetGrandChildResource" /> object. </returns>
-        public static AvailabilitySetGrandChildResource GetAvailabilitySetGrandChildResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                AvailabilitySetGrandChildResource.ValidateResourceId(id);
-                return new AvailabilitySetGrandChildResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region UnpatchableResource
-        /// <summary>
-        /// Gets an object representing an <see cref="UnpatchableResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="UnpatchableResource.CreateResourceIdentifier" /> to create an <see cref="UnpatchableResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="UnpatchableResource" /> object. </returns>
-        public static UnpatchableResource GetUnpatchableResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                UnpatchableResource.ValidateResourceId(id);
-                return new UnpatchableResource(client, id);
-            }
-            );
-        }
-        #endregion
     }
 }

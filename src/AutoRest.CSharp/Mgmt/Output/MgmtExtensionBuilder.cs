@@ -17,9 +17,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtensionBuilder
     {
-        private record MgmtExtensionInfo(MgmtExtensionWrapper ExtensionWrapper, IReadOnlyDictionary<Type, MgmtExtension> ExtensionsDict, IEnumerable<MgmtExtensionClient> ExtensionClients)
+        private record MgmtExtensionInfo(IReadOnlyDictionary<CSharpType, MgmtExtension> ExtensionDict, IEnumerable<MgmtExtensionClient> ExtensionClients)
         {
-            public IEnumerable<MgmtExtension> Extensions => ExtensionsDict.Values;
+            private IEnumerable<MgmtExtension>? _extensions;
+            public IEnumerable<MgmtExtension> Extensions => _extensions ??= ExtensionDict.Values.OrderBy(e => e.Declaration.Name);
+
+            private MgmtExtensionWrapper? _extensionWrapper;
+            public MgmtExtensionWrapper ExtensionWrapper => _extensionWrapper ??= new MgmtExtensionWrapper(Extensions, ExtensionClients);
         }
 
         private readonly IReadOnlyDictionary<Type, IEnumerable<Operation>> _extensionOperations;
@@ -37,7 +41,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public MgmtExtension GetExtension(Type armCoreType)
         {
-            return ExtensionInfo.ExtensionsDict[armCoreType];
+            return ExtensionInfo.ExtensionDict[armCoreType];
         }
 
         private MgmtExtensionInfo? _info;
@@ -45,28 +49,25 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private MgmtExtensionInfo EnsureMgmtExtensionInfo()
         {
-            var extensions = new Dictionary<Type, MgmtExtension>();
+            var extensionDict = new Dictionary<CSharpType, MgmtExtension>();
             var extensionClients = new List<MgmtExtensionClient>();
             // create the extensions
             foreach (var (type, operations) in _extensionOperations)
             {
                 var extension = new MgmtExtension(operations, extensionClients, type);
-                extensions.Add(type, extension);
+                extensionDict.Add(type, extension);
             }
             // add the ArmClientExtension
-            extensions.Add(typeof(ArmClient), new ArmClientExtension(_extensionOperations[typeof(TenantResource)]));
+            extensionDict.Add(typeof(ArmClient), new ArmClientExtension(_extensionOperations[typeof(TenantResource)]));
 
             // construct all possible extension clients
             // first we collection all possible combinations of the resource on operations
             var resourceToOperationsDict = new Dictionary<CSharpType, List<MgmtClientOperation>>();
-            // we need to add the system types in at the beginning because we might not have an operation corresponding to that below to ensure those extension clients will always be constructed
             foreach (var type in RequestPath.ExtensionChoices.Keys)
             {
+                // we add an empty list for the type to ensure that the corresponding extension client will always be constructed, even empty
                 resourceToOperationsDict.Add(type, new());
-            }
-            foreach (var (_, extension) in extensions)
-            {
-                foreach (var operation in extension.AllOperations)
+                foreach (var operation in extensionDict[type].AllOperations)
                 {
                     if (operation.Resource != null)
                     {
@@ -74,21 +75,21 @@ namespace AutoRest.CSharp.Mgmt.Output
                     }
                     else
                     {
-                        resourceToOperationsDict.AddInList(extension.ArmCoreType, operation);
+                        resourceToOperationsDict.AddInList(type, operation);
                     }
                 }
             }
             // then we construct the extension clients
-            foreach (var (resourceType, operations) in resourceToOperationsDict)
+            // here we sort the keys so that the sequence of extension clients are deterministic
+            foreach (var resourceType in resourceToOperationsDict.Keys.OrderBy(type => type.Name))
             {
+                var operations = resourceToOperationsDict[resourceType];
                 // find the extension if the resource type here is a framework type (when it is ResourceGroupResource, SubscriptionResource, etc) to ensure the ExtensionClient could property have the child resources
-                MgmtExtension? extensionForChildResources = null;
-                if (resourceType.IsFrameworkType && extensions.TryGetValue(resourceType.FrameworkType, out var extension))
-                    extensionForChildResources = extension;
+                extensionDict.TryGetValue(resourceType, out var extensionForChildResources);
                 extensionClients.Add(new MgmtExtensionClient(resourceType, operations, extensionForChildResources));
             }
 
-            return new(new MgmtExtensionWrapper(extensions.Values, extensionClients), extensions, extensionClients);
+            return new(extensionDict, extensionClients);
         }
     }
 }

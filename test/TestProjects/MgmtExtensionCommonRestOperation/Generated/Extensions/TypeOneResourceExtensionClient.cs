@@ -14,7 +14,7 @@ using MgmtExtensionCommonRestOperation;
 
 namespace MgmtExtensionCommonRestOperation.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to TypeOneResource. </summary>
     public partial class TypeOneResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _typeOneCommonClientDiagnostics;

@@ -15,7 +15,7 @@ using MgmtListMethods;
 
 namespace MgmtListMethods.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to FakeParentWithAncestorWithLocResource. </summary>
     public partial class FakeParentWithAncestorWithLocResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _fakeParentWithAncestorWithLocClientDiagnostics;

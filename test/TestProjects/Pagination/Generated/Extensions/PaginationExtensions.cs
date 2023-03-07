@@ -19,14 +19,172 @@ namespace Pagination
     /// <summary> A class to add extension methods to Pagination. </summary>
     public static partial class PaginationExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
         {
-            return resourceGroupResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
+        }
+        #region PageSizeIntegerModelResource
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeIntegerModelResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeIntegerModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeIntegerModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="PageSizeIntegerModelResource" /> object. </returns>
+        public static PageSizeIntegerModelResource GetPageSizeIntegerModelResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                PageSizeIntegerModelResource.ValidateResourceId(id);
+                return new PageSizeIntegerModelResource(client, id);
             }
             );
         }
+        #endregion
+
+        #region PageSizeInt64ModelResource
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeInt64ModelResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeInt64ModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeInt64ModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="PageSizeInt64ModelResource" /> object. </returns>
+        public static PageSizeInt64ModelResource GetPageSizeInt64ModelResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                PageSizeInt64ModelResource.ValidateResourceId(id);
+                return new PageSizeInt64ModelResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region PageSizeInt32ModelResource
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeInt32ModelResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeInt32ModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeInt32ModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="PageSizeInt32ModelResource" /> object. </returns>
+        public static PageSizeInt32ModelResource GetPageSizeInt32ModelResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                PageSizeInt32ModelResource.ValidateResourceId(id);
+                return new PageSizeInt32ModelResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region PageSizeNumericModelResource
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeNumericModelResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeNumericModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeNumericModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="PageSizeNumericModelResource" /> object. </returns>
+        public static PageSizeNumericModelResource GetPageSizeNumericModelResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                PageSizeNumericModelResource.ValidateResourceId(id);
+                return new PageSizeNumericModelResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region PageSizeFloatModelResource
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeFloatModelResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeFloatModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeFloatModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="PageSizeFloatModelResource" /> object. </returns>
+        public static PageSizeFloatModelResource GetPageSizeFloatModelResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                PageSizeFloatModelResource.ValidateResourceId(id);
+                return new PageSizeFloatModelResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region PageSizeDoubleModelResource
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeDoubleModelResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeDoubleModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeDoubleModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="PageSizeDoubleModelResource" /> object. </returns>
+        public static PageSizeDoubleModelResource GetPageSizeDoubleModelResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                PageSizeDoubleModelResource.ValidateResourceId(id);
+                return new PageSizeDoubleModelResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region PageSizeDecimalModelResource
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeDecimalModelResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeDecimalModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeDecimalModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="PageSizeDecimalModelResource" /> object. </returns>
+        public static PageSizeDecimalModelResource GetPageSizeDecimalModelResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                PageSizeDecimalModelResource.ValidateResourceId(id);
+                return new PageSizeDecimalModelResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region PageSizeStringModelResource
+        /// <summary>
+        /// Gets an object representing a <see cref="PageSizeStringModelResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="PageSizeStringModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeStringModelResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="PageSizeStringModelResource" /> object. </returns>
+        public static PageSizeStringModelResource GetPageSizeStringModelResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                PageSizeStringModelResource.ValidateResourceId(id);
+                return new PageSizeStringModelResource(client, id);
+            }
+            );
+        }
+        #endregion
 
         /// <summary> Gets a collection of PageSizeIntegerModelResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -459,157 +617,5 @@ namespace Pagination
         {
             return resourceGroupResource.GetPageSizeStringModels().Get(name, cancellationToken);
         }
-
-        #region PageSizeIntegerModelResource
-        /// <summary>
-        /// Gets an object representing a <see cref="PageSizeIntegerModelResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PageSizeIntegerModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeIntegerModelResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeIntegerModelResource" /> object. </returns>
-        public static PageSizeIntegerModelResource GetPageSizeIntegerModelResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeIntegerModelResource.ValidateResourceId(id);
-                return new PageSizeIntegerModelResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region PageSizeInt64ModelResource
-        /// <summary>
-        /// Gets an object representing a <see cref="PageSizeInt64ModelResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PageSizeInt64ModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeInt64ModelResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeInt64ModelResource" /> object. </returns>
-        public static PageSizeInt64ModelResource GetPageSizeInt64ModelResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeInt64ModelResource.ValidateResourceId(id);
-                return new PageSizeInt64ModelResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region PageSizeInt32ModelResource
-        /// <summary>
-        /// Gets an object representing a <see cref="PageSizeInt32ModelResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PageSizeInt32ModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeInt32ModelResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeInt32ModelResource" /> object. </returns>
-        public static PageSizeInt32ModelResource GetPageSizeInt32ModelResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeInt32ModelResource.ValidateResourceId(id);
-                return new PageSizeInt32ModelResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region PageSizeNumericModelResource
-        /// <summary>
-        /// Gets an object representing a <see cref="PageSizeNumericModelResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PageSizeNumericModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeNumericModelResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeNumericModelResource" /> object. </returns>
-        public static PageSizeNumericModelResource GetPageSizeNumericModelResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeNumericModelResource.ValidateResourceId(id);
-                return new PageSizeNumericModelResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region PageSizeFloatModelResource
-        /// <summary>
-        /// Gets an object representing a <see cref="PageSizeFloatModelResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PageSizeFloatModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeFloatModelResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeFloatModelResource" /> object. </returns>
-        public static PageSizeFloatModelResource GetPageSizeFloatModelResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeFloatModelResource.ValidateResourceId(id);
-                return new PageSizeFloatModelResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region PageSizeDoubleModelResource
-        /// <summary>
-        /// Gets an object representing a <see cref="PageSizeDoubleModelResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PageSizeDoubleModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeDoubleModelResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeDoubleModelResource" /> object. </returns>
-        public static PageSizeDoubleModelResource GetPageSizeDoubleModelResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeDoubleModelResource.ValidateResourceId(id);
-                return new PageSizeDoubleModelResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region PageSizeDecimalModelResource
-        /// <summary>
-        /// Gets an object representing a <see cref="PageSizeDecimalModelResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PageSizeDecimalModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeDecimalModelResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeDecimalModelResource" /> object. </returns>
-        public static PageSizeDecimalModelResource GetPageSizeDecimalModelResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeDecimalModelResource.ValidateResourceId(id);
-                return new PageSizeDecimalModelResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region PageSizeStringModelResource
-        /// <summary>
-        /// Gets an object representing a <see cref="PageSizeStringModelResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="PageSizeStringModelResource.CreateResourceIdentifier" /> to create a <see cref="PageSizeStringModelResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="PageSizeStringModelResource" /> object. </returns>
-        public static PageSizeStringModelResource GetPageSizeStringModelResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeStringModelResource.ValidateResourceId(id);
-                return new PageSizeStringModelResource(client, id);
-            }
-            );
-        }
-        #endregion
     }
 }

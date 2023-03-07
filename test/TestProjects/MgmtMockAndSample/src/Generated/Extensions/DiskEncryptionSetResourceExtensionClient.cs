@@ -14,7 +14,7 @@ using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to DiskEncryptionSetResource. </summary>
     public partial class DiskEncryptionSetResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _diskEncryptionSetClientDiagnostics;

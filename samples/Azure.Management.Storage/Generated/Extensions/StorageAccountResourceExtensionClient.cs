@@ -14,7 +14,7 @@ using Azure.ResourceManager;
 
 namespace Azure.Management.Storage.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to StorageAccountResource. </summary>
     public partial class StorageAccountResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _storageAccountClientDiagnostics;

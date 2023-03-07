@@ -19,8 +19,6 @@ namespace MgmtListMethods.Mock
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
     public partial class SubscriptionResourceExtensionClient : ArmResource
     {
-        private ClientDiagnostics _fakeParentWithAncestorWithNonResChWithLocClientDiagnostics;
-        private FakeParentWithAncestorWithNonResChWithLocsRestOperations _fakeParentWithAncestorWithNonResChWithLocRestClient;
         private ClientDiagnostics _quotasClientDiagnostics;
         private QuotasRestOperations _quotasRestClient;
 
@@ -36,8 +34,6 @@ namespace MgmtListMethods.Mock
         {
         }
 
-        private ClientDiagnostics FakeParentWithAncestorWithNonResChWithLocClientDiagnostics => _fakeParentWithAncestorWithNonResChWithLocClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods.Mock", FakeParentWithAncestorWithNonResChWithLocResource.ResourceType.Namespace, Diagnostics);
-        private FakeParentWithAncestorWithNonResChWithLocsRestOperations FakeParentWithAncestorWithNonResChWithLocRestClient => _fakeParentWithAncestorWithNonResChWithLocRestClient ??= new FakeParentWithAncestorWithNonResChWithLocsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(FakeParentWithAncestorWithNonResChWithLocResource.ResourceType));
         private ClientDiagnostics QuotasClientDiagnostics => _quotasClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private QuotasRestOperations QuotasRestClient => _quotasRestClient ??= new QuotasRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
@@ -80,58 +76,6 @@ namespace MgmtListMethods.Mock
         public virtual SubParentCollection GetSubParents()
         {
             return GetCachedClient(Client => new SubParentCollection(Client, Id));
-        }
-
-        /// <summary>
-        /// Gets all under the specified subscription for the specified location.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/nonResourceChild</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(string location, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-
-            HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithNonResChWithLocRestClient.CreateListTestByLocationsRequest(Id.SubscriptionId, location);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, FakeParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs", "value", null, cancellationToken);
-        }
-
-        /// <summary>
-        /// Gets all under the specified subscription for the specified location.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/locations/{location}/nonResourceChild</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>FakeParentWithAncestorWithNonResChWithLocs_ListTestByLocations</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="location"> The location for which virtual machines under the subscription are queried. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
-        /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(string location, CancellationToken cancellationToken = default)
-        {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-
-            HttpMessage FirstPageRequest(int? pageSizeHint) => FakeParentWithAncestorWithNonResChWithLocRestClient.CreateListTestByLocationsRequest(Id.SubscriptionId, location);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, NonResourceChild.DeserializeNonResourceChild, FakeParentWithAncestorWithNonResChWithLocClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs", "value", null, cancellationToken);
         }
 
         /// <summary>

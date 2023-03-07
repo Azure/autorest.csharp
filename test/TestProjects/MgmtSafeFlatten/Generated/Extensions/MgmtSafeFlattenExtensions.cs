@@ -19,116 +19,90 @@ namespace MgmtSafeFlatten
     /// <summary> A class to add extension methods to MgmtSafeFlatten. </summary>
     public static partial class MgmtSafeFlattenExtensions
     {
-        private static TypeOneResourceExtensionClient GetTypeOneResourceExtensionClient(SubscriptionResource subscriptionResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
         {
-            return subscriptionResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new TypeOneResourceExtensionClient(client, subscriptionResource.Id);
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
+        }
+
+        private static TypeOneResourceExtensionClient GetTypeOneResourceExtensionClient(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new TypeOneResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static TypeOneResourceExtensionClient GetTypeOneResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new TypeOneResourceExtensionClient(client, scope);
+            });
+        }
+
+        private static TypeTwoResourceExtensionClient GetTypeTwoResourceExtensionClient(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new TypeTwoResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static TypeTwoResourceExtensionClient GetTypeTwoResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new TypeTwoResourceExtensionClient(client, scope);
+            });
+        }
+        #region TypeOneResource
+        /// <summary>
+        /// Gets an object representing a <see cref="TypeOneResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TypeOneResource.CreateResourceIdentifier" /> to create a <see cref="TypeOneResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="TypeOneResource" /> object. </returns>
+        public static TypeOneResource GetTypeOneResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                TypeOneResource.ValidateResourceId(id);
+                return new TypeOneResource(client, id);
             }
             );
         }
+        #endregion
 
+        #region TypeTwoResource
         /// <summary>
-        /// Description for Validate information for a certificate order.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>Common_ListTypeOnesBySubscription</description>
-        /// </item>
-        /// </list>
+        /// Gets an object representing a <see cref="TypeTwoResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TypeTwoResource.CreateResourceIdentifier" /> to create a <see cref="TypeTwoResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<TypeOneResource> GetTypeOnesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="TypeTwoResource" /> object. </returns>
+        public static TypeTwoResource GetTypeTwoResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetTypeOneResourceExtensionClient(subscriptionResource).GetTypeOnesAsync(cancellationToken);
-        }
-
-        /// <summary>
-        /// Description for Validate information for a certificate order.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>Common_ListTypeOnesBySubscription</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<TypeOneResource> GetTypeOnes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
-        {
-            return GetTypeOneResourceExtensionClient(subscriptionResource).GetTypeOnes(cancellationToken);
-        }
-
-        private static TypeTwoResourceExtensionClient GetTypeTwoResourceExtensionClient(SubscriptionResource subscriptionResource)
-        {
-            return subscriptionResource.GetCachedClient((client) =>
+            return client.GetResourceClient(() =>
             {
-                return new TypeTwoResourceExtensionClient(client, subscriptionResource.Id);
+                TypeTwoResource.ValidateResourceId(id);
+                return new TypeTwoResource(client, id);
             }
             );
         }
-
-        /// <summary>
-        /// Description for Validate information for a certificate order.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>Common_ListTypeTwosBySubscription</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<TypeTwoResource> GetTypeTwosAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
-        {
-            return GetTypeTwoResourceExtensionClient(subscriptionResource).GetTypeTwosAsync(cancellationToken);
-        }
-
-        /// <summary>
-        /// Description for Validate information for a certificate order.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>Common_ListTypeTwosBySubscription</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<TypeTwoResource> GetTypeTwos(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
-        {
-            return GetTypeTwoResourceExtensionClient(subscriptionResource).GetTypeTwos(cancellationToken);
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
-        {
-            return resourceGroupResource.GetCachedClient((client) =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
-            }
-            );
-        }
+        #endregion
 
         /// <summary> Gets a collection of TypeOneResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -242,42 +216,88 @@ namespace MgmtSafeFlatten
             return resourceGroupResource.GetTypeTwos().Get(typeTwoName, cancellationToken);
         }
 
-        #region TypeOneResource
         /// <summary>
-        /// Gets an object representing a <see cref="TypeOneResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TypeOneResource.CreateResourceIdentifier" /> to create a <see cref="TypeOneResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Description for Validate information for a certificate order.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_ListTypeOnesBySubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TypeOneResource" /> object. </returns>
-        public static TypeOneResource GetTypeOneResource(this ArmClient client, ResourceIdentifier id)
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<TypeOneResource> GetTypeOnesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return client.GetResourceClient(() =>
-            {
-                TypeOneResource.ValidateResourceId(id);
-                return new TypeOneResource(client, id);
-            }
-            );
+            return GetTypeOneResourceExtensionClient(subscriptionResource).GetTypeOnesAsync(cancellationToken);
         }
-        #endregion
 
-        #region TypeTwoResource
         /// <summary>
-        /// Gets an object representing a <see cref="TypeTwoResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TypeTwoResource.CreateResourceIdentifier" /> to create a <see cref="TypeTwoResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Description for Validate information for a certificate order.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeOne/typeOnes</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_ListTypeOnesBySubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TypeTwoResource" /> object. </returns>
-        public static TypeTwoResource GetTypeTwoResource(this ArmClient client, ResourceIdentifier id)
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<TypeOneResource> GetTypeOnes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return client.GetResourceClient(() =>
-            {
-                TypeTwoResource.ValidateResourceId(id);
-                return new TypeTwoResource(client, id);
-            }
-            );
+            return GetTypeOneResourceExtensionClient(subscriptionResource).GetTypeOnes(cancellationToken);
         }
-        #endregion
+
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_ListTypeTwosBySubscription</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<TypeTwoResource> GetTypeTwosAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        {
+            return GetTypeTwoResourceExtensionClient(subscriptionResource).GetTypeTwosAsync(cancellationToken);
+        }
+
+        /// <summary>
+        /// Description for Validate information for a certificate order.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.TypeTwo/typeTwos</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_ListTypeTwosBySubscription</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<TypeTwoResource> GetTypeTwos(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        {
+            return GetTypeTwoResourceExtensionClient(subscriptionResource).GetTypeTwos(cancellationToken);
+        }
     }
 }

@@ -14,7 +14,7 @@ using MgmtRenameRules;
 
 namespace MgmtRenameRules.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to ImageResource. </summary>
     public partial class ImageResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _imageClientDiagnostics;

@@ -14,7 +14,7 @@ using MgmtExpandResourceTypes;
 
 namespace MgmtExpandResourceTypes.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to ZoneResource. </summary>
     public partial class ZoneResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _zoneClientDiagnostics;

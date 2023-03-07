@@ -20,14 +20,58 @@ namespace ExactMatchInheritance
     /// <summary> A class to add extension methods to ExactMatchInheritance. </summary>
     public static partial class ExactMatchInheritanceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
         {
-            return resourceGroupResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
+        }
+        #region ExactMatchModel1Resource
+        /// <summary>
+        /// Gets an object representing an <see cref="ExactMatchModel1Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ExactMatchModel1Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ExactMatchModel1Resource" /> object. </returns>
+        public static ExactMatchModel1Resource GetExactMatchModel1Resource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                ExactMatchModel1Resource.ValidateResourceId(id);
+                return new ExactMatchModel1Resource(client, id);
             }
             );
         }
+        #endregion
+
+        #region ExactMatchModel5Resource
+        /// <summary>
+        /// Gets an object representing an <see cref="ExactMatchModel5Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ExactMatchModel5Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel5Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ExactMatchModel5Resource" /> object. </returns>
+        public static ExactMatchModel5Resource GetExactMatchModel5Resource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                ExactMatchModel5Resource.ValidateResourceId(id);
+                return new ExactMatchModel5Resource(client, id);
+            }
+            );
+        }
+        #endregion
 
         /// <summary> Gets a collection of ExactMatchModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -380,43 +424,5 @@ namespace ExactMatchInheritance
 
             return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutExactMatchModel4(exactMatchModel4SName, exactMatchModel4, cancellationToken);
         }
-
-        #region ExactMatchModel1Resource
-        /// <summary>
-        /// Gets an object representing an <see cref="ExactMatchModel1Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ExactMatchModel1Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel1Resource" /> object. </returns>
-        public static ExactMatchModel1Resource GetExactMatchModel1Resource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                ExactMatchModel1Resource.ValidateResourceId(id);
-                return new ExactMatchModel1Resource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region ExactMatchModel5Resource
-        /// <summary>
-        /// Gets an object representing an <see cref="ExactMatchModel5Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ExactMatchModel5Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel5Resource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ExactMatchModel5Resource" /> object. </returns>
-        public static ExactMatchModel5Resource GetExactMatchModel5Resource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                ExactMatchModel5Resource.ValidateResourceId(id);
-                return new ExactMatchModel5Resource(client, id);
-            }
-            );
-        }
-        #endregion
     }
 }

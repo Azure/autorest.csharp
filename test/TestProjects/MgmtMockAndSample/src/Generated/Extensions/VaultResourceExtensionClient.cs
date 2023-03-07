@@ -5,16 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
+using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
 using MgmtMockAndSample;
+using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to VaultResource. </summary>
     public partial class VaultResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _vaultClientDiagnostics;
@@ -85,6 +88,74 @@ namespace MgmtMockAndSample.Mock
             HttpMessage FirstPageRequest(int? pageSizeHint) => VaultRestClient.CreateListBySubscriptionRequest(Id.SubscriptionId, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => VaultRestClient.CreateListBySubscriptionNextPageRequest(nextLink, Id.SubscriptionId, top);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new VaultResource(Client, VaultData.DeserializeVaultData(e)), VaultClientDiagnostics, Pipeline, "VaultResourceExtensionClient.GetVaults", "value", "nextLink", cancellationToken);
+        }
+
+        /// <summary>
+        /// Checks that the vault name is valid and is not already in use.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/checkNameAvailability</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Vaults_CheckNameAvailability</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The name of the vault. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = VaultClientDiagnostics.CreateScope("VaultResourceExtensionClient.CheckNameAvailabilityVault");
+            scope.Start();
+            try
+            {
+                var response = await VaultRestClient.CheckNameAvailabilityAsync(Id.SubscriptionId, content, cancellationToken).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Checks that the vault name is valid and is not already in use.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/checkNameAvailability</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Vaults_CheckNameAvailability</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The name of the vault. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        public virtual Response<CheckNameAvailabilityResult> CheckNameAvailabilityVault(VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = VaultClientDiagnostics.CreateScope("VaultResourceExtensionClient.CheckNameAvailabilityVault");
+            scope.Start();
+            try
+            {
+                var response = VaultRestClient.CheckNameAvailability(Id.SubscriptionId, content, cancellationToken);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -43,6 +44,15 @@ namespace AutoRest.CSharp.Mgmt.Output
                     isBase: true,
                     arguments: new[] { ArmClientParameter, ResourceIdentifierParameter }));
         }
+
+        private Parameter? _generalExtensionParameter;
+        private Parameter GeneralExtensionParameter => _generalExtensionParameter ??= new Parameter(
+                "resource",
+                null,
+                typeof(ArmResource),
+                null,
+                ValidationType.None,
+                null);
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {

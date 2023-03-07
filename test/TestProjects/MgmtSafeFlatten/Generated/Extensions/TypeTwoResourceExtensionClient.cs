@@ -14,7 +14,7 @@ using MgmtSafeFlatten;
 
 namespace MgmtSafeFlatten.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to TypeTwoResource. </summary>
     public partial class TypeTwoResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _typeTwoCommonClientDiagnostics;

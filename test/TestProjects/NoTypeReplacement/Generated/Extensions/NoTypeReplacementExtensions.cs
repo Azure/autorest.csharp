@@ -19,14 +19,77 @@ namespace NoTypeReplacement
     /// <summary> A class to add extension methods to NoTypeReplacement. </summary>
     public static partial class NoTypeReplacementExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
         {
-            return resourceGroupResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
+        }
+        #region NoTypeReplacementModel1Resource
+        /// <summary>
+        /// Gets an object representing a <see cref="NoTypeReplacementModel1Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="NoTypeReplacementModel1Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource" /> object. </returns>
+        public static NoTypeReplacementModel1Resource GetNoTypeReplacementModel1Resource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                NoTypeReplacementModel1Resource.ValidateResourceId(id);
+                return new NoTypeReplacementModel1Resource(client, id);
             }
             );
         }
+        #endregion
+
+        #region NoTypeReplacementModel2Resource
+        /// <summary>
+        /// Gets an object representing a <see cref="NoTypeReplacementModel2Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="NoTypeReplacementModel2Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource" /> object. </returns>
+        public static NoTypeReplacementModel2Resource GetNoTypeReplacementModel2Resource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                NoTypeReplacementModel2Resource.ValidateResourceId(id);
+                return new NoTypeReplacementModel2Resource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region NoTypeReplacementModel3Resource
+        /// <summary>
+        /// Gets an object representing a <see cref="NoTypeReplacementModel3Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="NoTypeReplacementModel3Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource" /> object. </returns>
+        public static NoTypeReplacementModel3Resource GetNoTypeReplacementModel3Resource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                NoTypeReplacementModel3Resource.ValidateResourceId(id);
+                return new NoTypeReplacementModel3Resource(client, id);
+            }
+            );
+        }
+        #endregion
 
         /// <summary> Gets a collection of NoTypeReplacementModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -189,62 +252,5 @@ namespace NoTypeReplacement
         {
             return resourceGroupResource.GetNoTypeReplacementModel3s().Get(noTypeReplacementModel3SName, cancellationToken);
         }
-
-        #region NoTypeReplacementModel1Resource
-        /// <summary>
-        /// Gets an object representing a <see cref="NoTypeReplacementModel1Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="NoTypeReplacementModel1Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource" /> object. </returns>
-        public static NoTypeReplacementModel1Resource GetNoTypeReplacementModel1Resource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                NoTypeReplacementModel1Resource.ValidateResourceId(id);
-                return new NoTypeReplacementModel1Resource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region NoTypeReplacementModel2Resource
-        /// <summary>
-        /// Gets an object representing a <see cref="NoTypeReplacementModel2Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="NoTypeReplacementModel2Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource" /> object. </returns>
-        public static NoTypeReplacementModel2Resource GetNoTypeReplacementModel2Resource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                NoTypeReplacementModel2Resource.ValidateResourceId(id);
-                return new NoTypeReplacementModel2Resource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region NoTypeReplacementModel3Resource
-        /// <summary>
-        /// Gets an object representing a <see cref="NoTypeReplacementModel3Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="NoTypeReplacementModel3Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource" /> object. </returns>
-        public static NoTypeReplacementModel3Resource GetNoTypeReplacementModel3Resource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                NoTypeReplacementModel3Resource.ValidateResourceId(id);
-                return new NoTypeReplacementModel3Resource(client, id);
-            }
-            );
-        }
-        #endregion
     }
 }

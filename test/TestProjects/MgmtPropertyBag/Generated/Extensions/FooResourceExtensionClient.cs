@@ -14,7 +14,7 @@ using MgmtPropertyBag;
 
 namespace MgmtPropertyBag.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to FooResource. </summary>
     public partial class FooResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _fooClientDiagnostics;

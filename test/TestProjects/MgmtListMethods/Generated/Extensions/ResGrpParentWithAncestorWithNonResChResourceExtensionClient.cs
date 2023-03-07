@@ -14,7 +14,7 @@ using MgmtListMethods;
 
 namespace MgmtListMethods.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to ResGrpParentWithAncestorWithNonResChResource. </summary>
     public partial class ResGrpParentWithAncestorWithNonResChResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _resGrpParentWithAncestorWithNonResChClientDiagnostics;

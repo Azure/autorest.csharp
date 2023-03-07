@@ -20,124 +20,90 @@ namespace MgmtPropertyBag
     /// <summary> A class to add extension methods to MgmtPropertyBag. </summary>
     public static partial class MgmtPropertyBagExtensions
     {
-        private static FooResourceExtensionClient GetFooResourceExtensionClient(SubscriptionResource subscriptionResource)
+        private static BarResourceExtensionClient GetBarResourceExtensionClient(ArmResource resource)
         {
-            return subscriptionResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new FooResourceExtensionClient(client, subscriptionResource.Id);
+                return new BarResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static BarResourceExtensionClient GetBarResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new BarResourceExtensionClient(client, scope);
+            });
+        }
+
+        private static FooResourceExtensionClient GetFooResourceExtensionClient(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new FooResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static FooResourceExtensionClient GetFooResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new FooResourceExtensionClient(client, scope);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
+        }
+        #region FooResource
+        /// <summary>
+        /// Gets an object representing a <see cref="FooResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FooResource.CreateResourceIdentifier" /> to create a <see cref="FooResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="FooResource" /> object. </returns>
+        public static FooResource GetFooResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                FooResource.ValidateResourceId(id);
+                return new FooResource(client, id);
             }
             );
         }
+        #endregion
 
+        #region BarResource
         /// <summary>
-        /// Gets a list of foo with two optional query parameters.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/foos</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>Foos_ListWithSubscription</description>
-        /// </item>
-        /// </list>
+        /// Gets an object representing a <see cref="BarResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="BarResource" /> object. </returns>
+        public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
-            return GetFooResourceExtensionClient(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
-        }
-
-        /// <summary>
-        /// Gets a list of foo with two optional query parameters.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/foos</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>Foos_ListWithSubscription</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
-        {
-            return GetFooResourceExtensionClient(subscriptionResource).GetFoos(filter, top, cancellationToken);
-        }
-
-        private static BarResourceExtensionClient GetBarResourceExtensionClient(SubscriptionResource subscriptionResource)
-        {
-            return subscriptionResource.GetCachedClient((client) =>
+            return client.GetResourceClient(() =>
             {
-                return new BarResourceExtensionClient(client, subscriptionResource.Id);
+                BarResource.ValidateResourceId(id);
+                return new BarResource(client, id);
             }
             );
         }
-
-        /// <summary>
-        /// Gets a list of bar with one required header parameter and one optional query parameter.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/bars</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>Bars_ListWithSubscription</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            return GetBarResourceExtensionClient(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
-        }
-
-        /// <summary>
-        /// Gets a list of bar with one required header parameter and one optional query parameter.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/bars</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>Bars_ListWithSubscription</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
-        /// <param name="top"> The Integer to use. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
-        {
-            return GetBarResourceExtensionClient(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
-        {
-            return resourceGroupResource.GetCachedClient((client) =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
-            }
-            );
-        }
+        #endregion
 
         /// <summary> Gets a collection of FooResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -247,42 +213,96 @@ namespace MgmtPropertyBag
             return resourceGroupResource.GetBars().Get(options, cancellationToken);
         }
 
-        #region FooResource
         /// <summary>
-        /// Gets an object representing a <see cref="FooResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FooResource.CreateResourceIdentifier" /> to create a <see cref="FooResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets a list of foo with two optional query parameters.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/foos</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_ListWithSubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FooResource" /> object. </returns>
-        public static FooResource GetFooResource(this ArmClient client, ResourceIdentifier id)
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
-            return client.GetResourceClient(() =>
-            {
-                FooResource.ValidateResourceId(id);
-                return new FooResource(client, id);
-            }
-            );
+            return GetFooResourceExtensionClient(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
         }
-        #endregion
 
-        #region BarResource
         /// <summary>
-        /// Gets an object representing a <see cref="BarResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// Gets a list of foo with two optional query parameters.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/foos</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Foos_ListWithSubscription</description>
+        /// </item>
+        /// </list>
         /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BarResource" /> object. </returns>
-        public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="filter"> The filter to apply on the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
-            return client.GetResourceClient(() =>
-            {
-                BarResource.ValidateResourceId(id);
-                return new BarResource(client, id);
-            }
-            );
+            return GetFooResourceExtensionClient(subscriptionResource).GetFoos(filter, top, cancellationToken);
         }
-        #endregion
+
+        /// <summary>
+        /// Gets a list of bar with one required header parameter and one optional query parameter.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/bars</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_ListWithSubscription</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
+        {
+            return GetBarResourceExtensionClient(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets a list of bar with one required header parameter and one optional query parameter.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Fake/bars</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Bars_ListWithSubscription</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
+        {
+            return GetBarResourceExtensionClient(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
+        }
     }
 }

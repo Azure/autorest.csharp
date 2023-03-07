@@ -12,7 +12,6 @@ using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using MgmtMockAndSample;
-using MgmtMockAndSample.Mock;
 
 namespace MgmtMockAndSample.Samples
 {

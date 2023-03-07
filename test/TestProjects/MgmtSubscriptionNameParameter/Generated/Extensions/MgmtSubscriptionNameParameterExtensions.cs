@@ -19,14 +19,39 @@ namespace MgmtSubscriptionNameParameter
     /// <summary> A class to add extension methods to MgmtSubscriptionNameParameter. </summary>
     public static partial class MgmtSubscriptionNameParameterExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
         {
-            return resourceGroupResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
+        }
+        #region SBSubscriptionResource
+        /// <summary>
+        /// Gets an object representing a <see cref="SBSubscriptionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SBSubscriptionResource.CreateResourceIdentifier" /> to create a <see cref="SBSubscriptionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SBSubscriptionResource" /> object. </returns>
+        public static SBSubscriptionResource GetSBSubscriptionResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                SBSubscriptionResource.ValidateResourceId(id);
+                return new SBSubscriptionResource(client, id);
             }
             );
         }
+        #endregion
 
         /// <summary> Gets a collection of SBSubscriptionResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -83,24 +108,5 @@ namespace MgmtSubscriptionNameParameter
         {
             return resourceGroupResource.GetSBSubscriptions().Get(subscriptionName, cancellationToken);
         }
-
-        #region SBSubscriptionResource
-        /// <summary>
-        /// Gets an object representing a <see cref="SBSubscriptionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SBSubscriptionResource.CreateResourceIdentifier" /> to create a <see cref="SBSubscriptionResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SBSubscriptionResource" /> object. </returns>
-        public static SBSubscriptionResource GetSBSubscriptionResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                SBSubscriptionResource.ValidateResourceId(id);
-                return new SBSubscriptionResource(client, id);
-            }
-            );
-        }
-        #endregion
     }
 }

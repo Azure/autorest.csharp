@@ -20,14 +20,77 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A class to add extension methods to ExactMatchFlattenInheritance. </summary>
     public static partial class ExactMatchFlattenInheritanceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
         {
-            return resourceGroupResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
+        }
+        #region AzureResourceFlattenModel1Resource
+        /// <summary>
+        /// Gets an object representing an <see cref="AzureResourceFlattenModel1Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AzureResourceFlattenModel1Resource.CreateResourceIdentifier" /> to create an <see cref="AzureResourceFlattenModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="AzureResourceFlattenModel1Resource" /> object. </returns>
+        public static AzureResourceFlattenModel1Resource GetAzureResourceFlattenModel1Resource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                AzureResourceFlattenModel1Resource.ValidateResourceId(id);
+                return new AzureResourceFlattenModel1Resource(client, id);
             }
             );
         }
+        #endregion
+
+        #region CustomModel2Resource
+        /// <summary>
+        /// Gets an object representing a <see cref="CustomModel2Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="CustomModel2Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="CustomModel2Resource" /> object. </returns>
+        public static CustomModel2Resource GetCustomModel2Resource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                CustomModel2Resource.ValidateResourceId(id);
+                return new CustomModel2Resource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region CustomModel3Resource
+        /// <summary>
+        /// Gets an object representing a <see cref="CustomModel3Resource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="CustomModel3Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="CustomModel3Resource" /> object. </returns>
+        public static CustomModel3Resource GetCustomModel3Resource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                CustomModel3Resource.ValidateResourceId(id);
+                return new CustomModel3Resource(client, id);
+            }
+            );
+        }
+        #endregion
 
         /// <summary> Gets a collection of AzureResourceFlattenModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -778,62 +841,5 @@ namespace ExactMatchFlattenInheritance
 
             return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel5(name, cancellationToken);
         }
-
-        #region AzureResourceFlattenModel1Resource
-        /// <summary>
-        /// Gets an object representing an <see cref="AzureResourceFlattenModel1Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AzureResourceFlattenModel1Resource.CreateResourceIdentifier" /> to create an <see cref="AzureResourceFlattenModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AzureResourceFlattenModel1Resource" /> object. </returns>
-        public static AzureResourceFlattenModel1Resource GetAzureResourceFlattenModel1Resource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                AzureResourceFlattenModel1Resource.ValidateResourceId(id);
-                return new AzureResourceFlattenModel1Resource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region CustomModel2Resource
-        /// <summary>
-        /// Gets an object representing a <see cref="CustomModel2Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="CustomModel2Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="CustomModel2Resource" /> object. </returns>
-        public static CustomModel2Resource GetCustomModel2Resource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                CustomModel2Resource.ValidateResourceId(id);
-                return new CustomModel2Resource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region CustomModel3Resource
-        /// <summary>
-        /// Gets an object representing a <see cref="CustomModel3Resource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="CustomModel3Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="CustomModel3Resource" /> object. </returns>
-        public static CustomModel3Resource GetCustomModel3Resource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                CustomModel3Resource.ValidateResourceId(id);
-                return new CustomModel3Resource(client, id);
-            }
-            );
-        }
-        #endregion
     }
 }

@@ -6,6 +6,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Azure.Core;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
@@ -24,10 +25,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
             if (IsArmCore)
                 return;
 
-            var generalExtensionParametr = new Parameter(
+            var generalExtensionParameter = new Parameter(
                 "resource",
                 null,
                 typeof(ArmResource),
+                null,
+                ValidationType.None,
+                null);
+            var armClientParameter = new Parameter(
+                "client",
+                null,
+                typeof(ArmClient),
+                null,
+                ValidationType.None,
+                null);
+            var scopeParameter = new Parameter(
+                "scope",
+                null,
+                typeof(ResourceIdentifier),
                 null,
                 ValidationType.None,
                 null);
@@ -45,14 +60,33 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     Private | Static,
                     extensionClient.Type,
                     null,
-                    new[] { generalExtensionParametr });
+                    new[] { generalExtensionParameter });
                 using (_writer.WriteMethodDeclaration(extensionClientSignature))
                 {
-                    using (_writer.Scope($"return {generalExtensionParametr.Name}.GetCachedClient(({ArmClientReference.ToVariableName()}) =>"))
+                    using (_writer.Scope($"return {generalExtensionParameter.Name}.GetCachedClient(client =>", newLine: false))
                     {
-                        _writer.Line($"return new {extensionClientSignature.ReturnType}({ArmClientReference.ToVariableName()}, {generalExtensionParametr.Name}.Id);");
+                        _writer.Line($"return new {extensionClientSignature.ReturnType}(client, {generalExtensionParameter.Name}.Id);");
                     }
-                    _writer.Line($");");
+                    _writer.LineRaw(");");
+                }
+
+                _writer.Line();
+
+                var scopeExtensionClientSignature = new MethodSignature(
+                    $"Get{extensionClient.Type.Name}",
+                    null,
+                    null,
+                    Private | Static,
+                    extensionClient.Type,
+                    null,
+                    new[] { armClientParameter, scopeParameter });
+                using (_writer.WriteMethodDeclaration(scopeExtensionClientSignature))
+                {
+                    using (_writer.Scope($"return {armClientParameter.Name}.GetResourceClient(() => ", newLine: false))
+                    {
+                        _writer.Line($"return new {extensionClientSignature.ReturnType}({armClientParameter.Name}, {scopeParameter.Name});");
+                    }
+                    _writer.LineRaw(");");
                 }
             }
 

@@ -14,7 +14,7 @@ using MgmtMockAndSample;
 
 namespace MgmtMockAndSample.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to ManagedHsmResource. </summary>
     public partial class ManagedHsmResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _managedHsmClientDiagnostics;

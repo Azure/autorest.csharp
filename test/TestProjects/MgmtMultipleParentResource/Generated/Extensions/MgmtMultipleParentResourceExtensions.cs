@@ -19,14 +19,115 @@ namespace MgmtMultipleParentResource
     /// <summary> A class to add extension methods to MgmtMultipleParentResource. </summary>
     public static partial class MgmtMultipleParentResourceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
         {
-            return resourceGroupResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
+        }
+        #region AnotherParentResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AnotherParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AnotherParentResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="AnotherParentResource" /> object. </returns>
+        public static AnotherParentResource GetAnotherParentResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                AnotherParentResource.ValidateResourceId(id);
+                return new AnotherParentResource(client, id);
             }
             );
         }
+        #endregion
+
+        #region AnotherParentChildResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AnotherParentChildResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AnotherParentChildResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="AnotherParentChildResource" /> object. </returns>
+        public static AnotherParentChildResource GetAnotherParentChildResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                AnotherParentChildResource.ValidateResourceId(id);
+                return new AnotherParentChildResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region TheParentSubParentChildResource
+        /// <summary>
+        /// Gets an object representing a <see cref="TheParentSubParentChildResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TheParentSubParentChildResource.CreateResourceIdentifier" /> to create a <see cref="TheParentSubParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="TheParentSubParentChildResource" /> object. </returns>
+        public static TheParentSubParentChildResource GetTheParentSubParentChildResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                TheParentSubParentChildResource.ValidateResourceId(id);
+                return new TheParentSubParentChildResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region TheParentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="TheParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="TheParentResource.CreateResourceIdentifier" /> to create a <see cref="TheParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="TheParentResource" /> object. </returns>
+        public static TheParentResource GetTheParentResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                TheParentResource.ValidateResourceId(id);
+                return new TheParentResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region SubParentResource
+        /// <summary>
+        /// Gets an object representing a <see cref="SubParentResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubParentResource.CreateResourceIdentifier" /> to create a <see cref="SubParentResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SubParentResource" /> object. </returns>
+        public static SubParentResource GetSubParentResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                SubParentResource.ValidateResourceId(id);
+                return new SubParentResource(client, id);
+            }
+            );
+        }
+        #endregion
 
         /// <summary> Gets a collection of AnotherParentResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
@@ -143,100 +244,5 @@ namespace MgmtMultipleParentResource
         {
             return resourceGroupResource.GetTheParents().Get(theParentName, expand, cancellationToken);
         }
-
-        #region AnotherParentResource
-        /// <summary>
-        /// Gets an object representing an <see cref="AnotherParentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AnotherParentResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AnotherParentResource" /> object. </returns>
-        public static AnotherParentResource GetAnotherParentResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                AnotherParentResource.ValidateResourceId(id);
-                return new AnotherParentResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region AnotherParentChildResource
-        /// <summary>
-        /// Gets an object representing an <see cref="AnotherParentChildResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AnotherParentChildResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AnotherParentChildResource" /> object. </returns>
-        public static AnotherParentChildResource GetAnotherParentChildResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                AnotherParentChildResource.ValidateResourceId(id);
-                return new AnotherParentChildResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region TheParentSubParentChildResource
-        /// <summary>
-        /// Gets an object representing a <see cref="TheParentSubParentChildResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TheParentSubParentChildResource.CreateResourceIdentifier" /> to create a <see cref="TheParentSubParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TheParentSubParentChildResource" /> object. </returns>
-        public static TheParentSubParentChildResource GetTheParentSubParentChildResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                TheParentSubParentChildResource.ValidateResourceId(id);
-                return new TheParentSubParentChildResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region TheParentResource
-        /// <summary>
-        /// Gets an object representing a <see cref="TheParentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="TheParentResource.CreateResourceIdentifier" /> to create a <see cref="TheParentResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="TheParentResource" /> object. </returns>
-        public static TheParentResource GetTheParentResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                TheParentResource.ValidateResourceId(id);
-                return new TheParentResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region SubParentResource
-        /// <summary>
-        /// Gets an object representing a <see cref="SubParentResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SubParentResource.CreateResourceIdentifier" /> to create a <see cref="SubParentResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubParentResource" /> object. </returns>
-        public static SubParentResource GetSubParentResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                SubParentResource.ValidateResourceId(id);
-                return new SubParentResource(client, id);
-            }
-            );
-        }
-        #endregion
     }
 }

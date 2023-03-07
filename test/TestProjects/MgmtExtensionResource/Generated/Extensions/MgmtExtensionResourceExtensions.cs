@@ -21,79 +21,128 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to MgmtExtensionResource. </summary>
     public static partial class MgmtExtensionResourceExtensions
     {
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(TenantResource tenantResource)
+        private static ManagementGroupResourceExtensionClient GetManagementGroupResourceExtensionClient(ArmResource resource)
         {
-            return tenantResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new TenantResourceExtensionClient(client, tenantResource.Id);
+                return new ManagementGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ManagementGroupResourceExtensionClient GetManagementGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ManagementGroupResourceExtensionClient(client, scope);
+            });
+        }
+
+        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new SubscriptionResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new SubscriptionResourceExtensionClient(client, scope);
+            });
+        }
+
+        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new TenantResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new TenantResourceExtensionClient(client, scope);
+            });
+        }
+        #region SubSingletonResource
+        /// <summary>
+        /// Gets an object representing a <see cref="SubSingletonResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubSingletonResource.CreateResourceIdentifier" /> to create a <see cref="SubSingletonResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
+        public static SubSingletonResource GetSubSingletonResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                SubSingletonResource.ValidateResourceId(id);
+                return new SubSingletonResource(client, id);
             }
             );
         }
+        #endregion
 
-        /// <summary> Gets a collection of BuiltInPolicyDefinitionResources in the TenantResource. </summary>
-        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of BuiltInPolicyDefinitionResources and their operations over a BuiltInPolicyDefinitionResource. </returns>
-        public static BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions(this TenantResource tenantResource)
-        {
-            return GetTenantResourceExtensionClient(tenantResource).GetBuiltInPolicyDefinitions();
-        }
-
+        #region SubscriptionPolicyDefinitionResource
         /// <summary>
-        /// This operation retrieves the built-in policy definition with the given name.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>PolicyDefinitions_GetBuiltIn</description>
-        /// </item>
-        /// </list>
+        /// Gets an object representing a <see cref="SubscriptionPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="SubscriptionPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="SubscriptionPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
         /// </summary>
-        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
-        /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        [ForwardsClientCalls]
-        public static async Task<Response<BuiltInPolicyDefinitionResource>> GetBuiltInPolicyDefinitionAsync(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="SubscriptionPolicyDefinitionResource" /> object. </returns>
+        public static SubscriptionPolicyDefinitionResource GetSubscriptionPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return await tenantResource.GetBuiltInPolicyDefinitions().GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// This operation retrieves the built-in policy definition with the given name.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>PolicyDefinitions_GetBuiltIn</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
-        /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
-        [ForwardsClientCalls]
-        public static Response<BuiltInPolicyDefinitionResource> GetBuiltInPolicyDefinition(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
-        {
-            return tenantResource.GetBuiltInPolicyDefinitions().Get(policyDefinitionName, cancellationToken);
-        }
-
-        private static ManagementGroupResourceExtensionClient GetManagementGroupResourceExtensionClient(ManagementGroupResource managementGroupResource)
-        {
-            return managementGroupResource.GetCachedClient((client) =>
+            return client.GetResourceClient(() =>
             {
-                return new ManagementGroupResourceExtensionClient(client, managementGroupResource.Id);
+                SubscriptionPolicyDefinitionResource.ValidateResourceId(id);
+                return new SubscriptionPolicyDefinitionResource(client, id);
             }
             );
         }
+        #endregion
+
+        #region BuiltInPolicyDefinitionResource
+        /// <summary>
+        /// Gets an object representing a <see cref="BuiltInPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="BuiltInPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="BuiltInPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="BuiltInPolicyDefinitionResource" /> object. </returns>
+        public static BuiltInPolicyDefinitionResource GetBuiltInPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                BuiltInPolicyDefinitionResource.ValidateResourceId(id);
+                return new BuiltInPolicyDefinitionResource(client, id);
+            }
+            );
+        }
+        #endregion
+
+        #region ManagementGroupPolicyDefinitionResource
+        /// <summary>
+        /// Gets an object representing a <see cref="ManagementGroupPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="ManagementGroupPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="ManagementGroupPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionResource" /> object. </returns>
+        public static ManagementGroupPolicyDefinitionResource GetManagementGroupPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                ManagementGroupPolicyDefinitionResource.ValidateResourceId(id);
+                return new ManagementGroupPolicyDefinitionResource(client, id);
+            }
+            );
+        }
+        #endregion
 
         /// <summary> Gets a collection of ManagementGroupPolicyDefinitionResources in the ManagementGroupResource. </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>
@@ -149,15 +198,6 @@ namespace MgmtExtensionResource
         public static Response<ManagementGroupPolicyDefinitionResource> GetManagementGroupPolicyDefinition(this ManagementGroupResource managementGroupResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
             return GetManagementGroupPolicyDefinitions(managementGroupResource).Get(policyDefinitionName, cancellationToken);
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(SubscriptionResource subscriptionResource)
-        {
-            return subscriptionResource.GetCachedClient((client) =>
-            {
-                return new SubscriptionResourceExtensionClient(client, subscriptionResource.Id);
-            }
-            );
         }
 
         /// <summary> Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionResource. </summary>
@@ -326,80 +366,60 @@ namespace MgmtExtensionResource
             return GetSubscriptionResourceExtensionClient(subscriptionResource).ValidateSomethingOrphanedPost(content, cancellationToken);
         }
 
-        #region SubSingletonResource
-        /// <summary>
-        /// Gets an object representing a <see cref="SubSingletonResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SubSingletonResource.CreateResourceIdentifier" /> to create a <see cref="SubSingletonResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
-        public static SubSingletonResource GetSubSingletonResource(this ArmClient client, ResourceIdentifier id)
+        /// <summary> Gets a collection of BuiltInPolicyDefinitionResources in the TenantResource. </summary>
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of BuiltInPolicyDefinitionResources and their operations over a BuiltInPolicyDefinitionResource. </returns>
+        public static BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions(this TenantResource tenantResource)
         {
-            return client.GetResourceClient(() =>
-            {
-                SubSingletonResource.ValidateResourceId(id);
-                return new SubSingletonResource(client, id);
-            }
-            );
+            return GetTenantResourceExtensionClient(tenantResource).GetBuiltInPolicyDefinitions();
         }
-        #endregion
 
-        #region SubscriptionPolicyDefinitionResource
         /// <summary>
-        /// Gets an object representing a <see cref="SubscriptionPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="SubscriptionPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="SubscriptionPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// This operation retrieves the built-in policy definition with the given name.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PolicyDefinitions_GetBuiltIn</description>
+        /// </item>
+        /// </list>
         /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="SubscriptionPolicyDefinitionResource" /> object. </returns>
-        public static SubscriptionPolicyDefinitionResource GetSubscriptionPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<BuiltInPolicyDefinitionResource>> GetBuiltInPolicyDefinitionAsync(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return client.GetResourceClient(() =>
-            {
-                SubscriptionPolicyDefinitionResource.ValidateResourceId(id);
-                return new SubscriptionPolicyDefinitionResource(client, id);
-            }
-            );
+            return await tenantResource.GetBuiltInPolicyDefinitions().GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
-        #endregion
 
-        #region BuiltInPolicyDefinitionResource
         /// <summary>
-        /// Gets an object representing a <see cref="BuiltInPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="BuiltInPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="BuiltInPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// This operation retrieves the built-in policy definition with the given name.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/providers/Microsoft.Authorization/policyDefinitions/{policyDefinitionName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PolicyDefinitions_GetBuiltIn</description>
+        /// </item>
+        /// </list>
         /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BuiltInPolicyDefinitionResource" /> object. </returns>
-        public static BuiltInPolicyDefinitionResource GetBuiltInPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
+        /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
+        /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static Response<BuiltInPolicyDefinitionResource> GetBuiltInPolicyDefinition(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return client.GetResourceClient(() =>
-            {
-                BuiltInPolicyDefinitionResource.ValidateResourceId(id);
-                return new BuiltInPolicyDefinitionResource(client, id);
-            }
-            );
+            return tenantResource.GetBuiltInPolicyDefinitions().Get(policyDefinitionName, cancellationToken);
         }
-        #endregion
-
-        #region ManagementGroupPolicyDefinitionResource
-        /// <summary>
-        /// Gets an object representing a <see cref="ManagementGroupPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="ManagementGroupPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="ManagementGroupPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionResource" /> object. </returns>
-        public static ManagementGroupPolicyDefinitionResource GetManagementGroupPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                ManagementGroupPolicyDefinitionResource.ValidateResourceId(id);
-                return new ManagementGroupPolicyDefinitionResource(client, id);
-            }
-            );
-        }
-        #endregion
     }
 }

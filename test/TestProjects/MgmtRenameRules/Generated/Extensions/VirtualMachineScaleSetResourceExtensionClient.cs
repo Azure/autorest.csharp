@@ -14,7 +14,7 @@ using MgmtRenameRules;
 
 namespace MgmtRenameRules.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to VirtualMachineScaleSetResource. </summary>
     public partial class VirtualMachineScaleSetResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _virtualMachineScaleSetClientDiagnostics;

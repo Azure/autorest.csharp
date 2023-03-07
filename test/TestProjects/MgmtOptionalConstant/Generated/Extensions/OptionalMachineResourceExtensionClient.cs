@@ -14,7 +14,7 @@ using MgmtOptionalConstant;
 
 namespace MgmtOptionalConstant.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
+    /// <summary> A class to add extension methods to OptionalMachineResource. </summary>
     public partial class OptionalMachineResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _optionalMachineOptionalsClientDiagnostics;
