@@ -29,18 +29,6 @@ $CadlEmitterProps = "$SdkRepoRoot\eng\emitter-package.json"
     Set-Content $CadlEmitterProps -NoNewline
 
 if ($UseInternalFeed) {
-    $nugetConfigPath = Resolve-Path (Join-Path $SdkRepoRoot "NuGet.Config")
-    $nuGetConfig = [xml](Get-Content -Path $nugetConfigPath)
-    $xmlAdd = $nuGetConfig.configuration.packageSources.LastChild.clone()
-    if ($xmlAdd.key -ne "azure-sdk-for-net-private") {
-        $xmlAdd.key = "azure-sdk-for-net-private"
-        $xmlAdd.value = "https://pkgs.dev.azure.com/azure-sdk/_packaging/azure-sdk-for-net-private/nuget/v3/index.json"
-        $nuGetConfig.configuration.packageSources.AppendChild($xmlAdd)
-        $nuGetConfig.Save($nugetConfigPath)
-        Write-Host "Updating Nuget.Config:"
-        Get-Content -Raw $nugetConfigPath
-    }
-
     $npmrcFile = Resolve-Path (Join-Path $SdkRepoRoot ".npmrc")
     $projectGeneratePath = "$SdkRepoRoot\eng\common\scripts\Cadl-Project-Generate.ps1"
     (Get-Content -Raw $projectGeneratePath) -replace `

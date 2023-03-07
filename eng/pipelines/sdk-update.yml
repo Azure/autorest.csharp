@@ -50,14 +50,14 @@ stages:
             command: 'push'
             packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
             nuGetFeedType: 'internal'
-            publishVstsFeed: '69d855e6-8b8f-4ea3-b75c-a6ed394f174d'
+            publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
         - task: Npm@1
           displayName: 'Publish @autorest/csharp'
           inputs:
             command: 'publish'
             workingDir: '$(Build.SourcesDirectory)/autorest.csharp/artifacts/bin/AutoRest.CSharp/Release/net6.0'
             publishRegistry: 'useFeed'
-            publishFeed: '69d855e6-8b8f-4ea3-b75c-a6ed394f174d'
+            publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
         - pwsh: ./eng/PackEmitter.ps1 -AutorestVersion $(Package.autorestVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)
           displayName: "Pack Emitter"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
@@ -67,7 +67,7 @@ stages:
             command: 'publish'
             workingDir: '$(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp'
             publishRegistry: 'useFeed'
-            publishFeed: '69d855e6-8b8f-4ea3-b75c-a6ed394f174d'
+            publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
         - task: PublishBuildArtifacts@1
           condition: succeededOrFailed()
           displayName: 'Publish Artifacts'
