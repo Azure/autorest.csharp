@@ -15,23 +15,27 @@ namespace Azure.Management.Storage.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("domainName");
+            writer.WritePropertyName("domainName"u8);
             writer.WriteStringValue(DomainName);
-            writer.WritePropertyName("netBiosDomainName");
+            writer.WritePropertyName("netBiosDomainName"u8);
             writer.WriteStringValue(NetBiosDomainName);
-            writer.WritePropertyName("forestName");
+            writer.WritePropertyName("forestName"u8);
             writer.WriteStringValue(ForestName);
-            writer.WritePropertyName("domainGuid");
+            writer.WritePropertyName("domainGuid"u8);
             writer.WriteStringValue(DomainGuid);
-            writer.WritePropertyName("domainSid");
+            writer.WritePropertyName("domainSid"u8);
             writer.WriteStringValue(DomainSid);
-            writer.WritePropertyName("azureStorageSid");
+            writer.WritePropertyName("azureStorageSid"u8);
             writer.WriteStringValue(AzureStorageSid);
             writer.WriteEndObject();
         }
 
         internal static ActiveDirectoryProperties DeserializeActiveDirectoryProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string domainName = default;
             string netBiosDomainName = default;
             string forestName = default;
@@ -40,32 +44,32 @@ namespace Azure.Management.Storage.Models
             string azureStorageSid = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("domainName"))
+                if (property.NameEquals("domainName"u8))
                 {
                     domainName = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("netBiosDomainName"))
+                if (property.NameEquals("netBiosDomainName"u8))
                 {
                     netBiosDomainName = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("forestName"))
+                if (property.NameEquals("forestName"u8))
                 {
                     forestName = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("domainGuid"))
+                if (property.NameEquals("domainGuid"u8))
                 {
                     domainGuid = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("domainSid"))
+                if (property.NameEquals("domainSid"u8))
                 {
                     domainSid = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("azureStorageSid"))
+                if (property.NameEquals("azureStorageSid"u8))
                 {
                     azureStorageSid = property.Value.GetString();
                     continue;

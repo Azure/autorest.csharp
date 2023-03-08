@@ -91,7 +91,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         operation,
                         operation.GetRequestPath(),
                         ContextualPath,
-                        operationName),
+                        operationName,
+                        propertyBagName: ResourceName),
                     extensionParamToUse);
             });
         }

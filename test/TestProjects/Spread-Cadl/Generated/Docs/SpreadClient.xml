@@ -24,8 +24,8 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -54,8 +54,8 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -84,8 +84,8 @@ Request Body:
 
 Schema for <c>SpreadAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -114,8 +114,8 @@ Request Body:
 
 Schema for <c>SpreadAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -144,8 +144,8 @@ Request Body:
 
 Schema for <c>SpreadMultiTargetAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -174,8 +174,8 @@ Request Body:
 
 Schema for <c>SpreadMultiTargetAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -204,8 +204,8 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -234,8 +234,8 @@ Request Body:
 
 Schema for <c>Thing</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -264,8 +264,8 @@ Request Body:
 
 Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
 }
 </code>
 
@@ -294,8 +294,118 @@ Request Body:
 
 Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 <code>{
-  name: string, # Required.
-  age: number, # Required.
+  name: string, # Required. name of the Thing
+  age: number, # Required. age of the Thing
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="SpreadAliasWithOptionalPropsAsync(String,Int32,RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadAliasWithOptionalPropsAsync with required parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
+
+var data = new {
+    name = "<name>",
+    items = new[] {
+        1234
+    },
+};
+
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalPropsAsync with all parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
+
+var data = new {
+    name = "<name>",
+    color = "<color>",
+    age = 1234,
+    items = new[] {
+        1234
+    },
+    elements = new[] {
+        "<String>"
+    },
+};
+
+Response response = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>SpreadAliasWithOptionalPropsRequest</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  color: string, # Optional. optional property of the Thing
+  age: number, # Optional. age of the Thing
+  items: [number], # Required. required array
+  elements: [string], # Optional. optional array
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="SpreadAliasWithOptionalProps(String,Int32,RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadAliasWithOptionalProps with required parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
+
+var data = new {
+    name = "<name>",
+    items = new[] {
+        1234
+    },
+};
+
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithOptionalProps with all parameters and request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadClient(endpoint);
+
+var data = new {
+    name = "<name>",
+    color = "<color>",
+    age = 1234,
+    items = new[] {
+        1234
+    },
+    elements = new[] {
+        "<String>"
+    },
+};
+
+Response response = client.SpreadAliasWithOptionalProps("<id>", 1234, RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>SpreadAliasWithOptionalPropsRequest</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  color: string, # Optional. optional property of the Thing
+  age: number, # Optional. age of the Thing
+  items: [number], # Required. required array
+  elements: [string], # Optional. optional array
 }
 </code>
 

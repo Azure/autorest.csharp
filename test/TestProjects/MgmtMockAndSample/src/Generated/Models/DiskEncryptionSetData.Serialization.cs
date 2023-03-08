@@ -21,35 +21,35 @@ namespace MgmtMockAndSample
             writer.WriteStartObject();
             if (Optional.IsDefined(Identity))
             {
-                writer.WritePropertyName("identity");
+                writer.WritePropertyName("identity"u8);
                 var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
                 JsonSerializer.Serialize(writer, Identity, serializeOptions);
             }
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(EncryptionType))
             {
-                writer.WritePropertyName("encryptionType");
+                writer.WritePropertyName("encryptionType"u8);
                 writer.WriteStringValue(EncryptionType.Value.ToString());
             }
             if (Optional.IsDefined(ActiveKey))
             {
-                writer.WritePropertyName("activeKey");
+                writer.WritePropertyName("activeKey"u8);
                 writer.WriteObjectValue(ActiveKey);
             }
             if (Optional.IsDefined(RotationToLatestKeyVersionEnabled))
             {
-                writer.WritePropertyName("rotationToLatestKeyVersionEnabled");
+                writer.WritePropertyName("rotationToLatestKeyVersionEnabled"u8);
                 writer.WriteBooleanValue(RotationToLatestKeyVersionEnabled.Value);
             }
             if (Optional.IsDefined(FederatedClientId))
             {
-                writer.WritePropertyName("federatedClientId");
+                writer.WritePropertyName("federatedClientId"u8);
                 writer.WriteStringValue(FederatedClientId);
             }
             if (Optional.IsDefined(MinimumTlsVersion))
             {
-                writer.WritePropertyName("minimumTlsVersion");
+                writer.WritePropertyName("minimumTlsVersion"u8);
                 writer.WriteStringValue(MinimumTlsVersion.Value.ToString());
             }
             writer.WriteEndObject();
@@ -58,6 +58,10 @@ namespace MgmtMockAndSample
 
         internal static DiskEncryptionSetData DeserializeDiskEncryptionSetData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ManagedServiceIdentity> identity = default;
             Optional<AzureLocation> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
@@ -75,7 +79,7 @@ namespace MgmtMockAndSample
             Optional<MinimumTlsVersion> minimumTlsVersion = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("identity"))
+                if (property.NameEquals("identity"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -86,7 +90,7 @@ namespace MgmtMockAndSample
                     identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText(), serializeOptions);
                     continue;
                 }
-                if (property.NameEquals("location"))
+                if (property.NameEquals("location"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -96,7 +100,7 @@ namespace MgmtMockAndSample
                     location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("tags"))
+                if (property.NameEquals("tags"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -111,22 +115,22 @@ namespace MgmtMockAndSample
                     tags = dictionary;
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("systemData"))
+                if (property.NameEquals("systemData"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -136,7 +140,7 @@ namespace MgmtMockAndSample
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -145,7 +149,7 @@ namespace MgmtMockAndSample
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("encryptionType"))
+                        if (property0.NameEquals("encryptionType"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -155,7 +159,7 @@ namespace MgmtMockAndSample
                             encryptionType = new DiskEncryptionSetType(property0.Value.GetString());
                             continue;
                         }
-                        if (property0.NameEquals("activeKey"))
+                        if (property0.NameEquals("activeKey"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -165,7 +169,7 @@ namespace MgmtMockAndSample
                             activeKey = KeyForDiskEncryptionSet.DeserializeKeyForDiskEncryptionSet(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("previousKeys"))
+                        if (property0.NameEquals("previousKeys"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -180,12 +184,12 @@ namespace MgmtMockAndSample
                             previousKeys = array;
                             continue;
                         }
-                        if (property0.NameEquals("provisioningState"))
+                        if (property0.NameEquals("provisioningState"u8))
                         {
                             provisioningState = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("rotationToLatestKeyVersionEnabled"))
+                        if (property0.NameEquals("rotationToLatestKeyVersionEnabled"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -195,7 +199,7 @@ namespace MgmtMockAndSample
                             rotationToLatestKeyVersionEnabled = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("lastKeyRotationTimestamp"))
+                        if (property0.NameEquals("lastKeyRotationTimestamp"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -205,12 +209,12 @@ namespace MgmtMockAndSample
                             lastKeyRotationTimestamp = property0.Value.GetDateTimeOffset("O");
                             continue;
                         }
-                        if (property0.NameEquals("federatedClientId"))
+                        if (property0.NameEquals("federatedClientId"u8))
                         {
                             federatedClientId = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("minimumTlsVersion"))
+                        if (property0.NameEquals("minimumTlsVersion"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {

@@ -17,7 +17,7 @@ namespace ModelWithConverterUsage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(ConstProperty))
             {
-                writer.WritePropertyName("Const_Property");
+                writer.WritePropertyName("Const_Property"u8);
                 writer.WriteStringValue(ConstProperty);
             }
             writer.WriteEndObject();
@@ -25,10 +25,14 @@ namespace ModelWithConverterUsage.Models
 
         internal static Product DeserializeProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> constProperty = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("Const_Property"))
+                if (property.NameEquals("Const_Property"u8))
                 {
                     constProperty = property.Value.GetString();
                     continue;

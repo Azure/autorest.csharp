@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtParamOrdering
 {
-    /// <summary> A class representing the VirtualMachineScaleSet data model. </summary>
+    /// <summary>
+    /// A class representing the VirtualMachineScaleSet data model.
+    /// Describes a Virtual Machine Scale Set.
+    /// </summary>
     public partial class VirtualMachineScaleSetData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetData. </summary>

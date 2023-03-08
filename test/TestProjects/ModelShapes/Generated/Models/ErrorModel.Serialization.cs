@@ -14,16 +14,20 @@ namespace ModelShapes.Models
     {
         internal static ErrorModel DeserializeErrorModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> code = default;
             Optional<string> status = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("Code"))
+                if (property.NameEquals("Code"u8))
                 {
                     code = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("Status"))
+                if (property.NameEquals("Status"u8))
                 {
                     status = property.Value.GetString();
                     continue;

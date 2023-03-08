@@ -6,8 +6,12 @@ import "@azure-tools/cadl-dpg";
 using Cadl.Http;
 using Azure.DPG;
 
-@serviceTitle("Pet Store Service")
-@serviceVersion("2021-03-25")
+@service(
+    {
+        title: "Pet Store Service",
+        version: "2021-03-25"
+    }
+)
 @doc("This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.")
 @server(
     "{petStoreUrl}",
@@ -72,22 +76,22 @@ namespace Pets {
   @doc("Delete a pet.")
   @summary("delete.")
   @delete
-  @convenienceAPI
+  @convenientAPI(true)
   op delete(...PetId): Response<200> | Error;
 
   // @fancyDoc("List pets.")
   // op list(@query nextLink?: string): OkResponse<ResponsePage<Pet>> | Error;
 
   @doc("Returns a pet. Supports eTags.")
-  @convenienceAPI
+  @convenientAPI(true)
   op read(...PetId): Pet | (NotModifiedResponse & Pet) | Error;
 
-  @convenienceAPI
+  @convenientAPI(true)
   @post op create(@body pet: Pet): Pet | Error;
 
-  @convenienceAPI
+  @convenientAPI(true)
   @get op getPetByKind(@path kind: PetKind): Pet | Error;
 
-  @convenienceAPI
+  @convenientAPI(true)
   @get op GetFirstPet(@query start?: int32): Pet | Error;
 }

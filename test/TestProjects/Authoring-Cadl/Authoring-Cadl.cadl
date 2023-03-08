@@ -11,7 +11,12 @@ using Azure.DPG;
 
 // NOTE: These features are missing:
 // - Security definition for apiKey
-
+@service(
+    {
+        title: "Microsoft Cognitive Language Service - Analyze Text Authoring",
+        version: "2022-05-15-preview"
+    }
+)
 @server(
   "{Endpoint}/language",
   "Language Service",
@@ -19,8 +24,6 @@ using Azure.DPG;
     Endpoint: Endpoint,
   }
 )
-@serviceTitle("Microsoft Cognitive Language Service - Analyze Text Authoring")
-@serviceVersion("2022-05-15-preview")
 @versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
 @route("/authoring/analyze-text/")
 namespace Azure.Language.Authoring;
@@ -35,6 +38,7 @@ scalar Endpoint extends string;
 
 model Project {
   @key
+  @visibility("read")
   @segment("projects")
   projectName: string;
 
@@ -91,6 +95,7 @@ model ProjectSettings is Record<string>;
 @parentResource(Project)
 model Deployment {
   @key("deploymentName")
+  @visibility("read")
   @segment("deployments")
   name: string;
 }
@@ -147,6 +152,7 @@ model DeploymentJob {
   ...Job;
 
   @key("jobId")
+  @visibility("read")
   @segment("jobs")
   id: string;
 }
@@ -156,6 +162,7 @@ model SwapDeploymentsJob {
   ...Job;
 
   @key("jobId")
+  @visibility("read")
   @segment("swap/jobs")
   id: string;
 }
@@ -283,11 +290,11 @@ interface Deployments {
 
 interface Jobs {
   @doc("Gets the status of an existing deployment job.")
-  @convenienceAPI
+  @convenientAPI(true)
   getDeploymentStatus is ResourceRead<DeploymentJob>;
 
   @doc("Gets the status of an existing swap deployment job.")
-  @convenienceAPI
+  @convenientAPI(true)
   getSwapDeploymentsStatus is ResourceRead<SwapDeploymentsJob>;
 }
 

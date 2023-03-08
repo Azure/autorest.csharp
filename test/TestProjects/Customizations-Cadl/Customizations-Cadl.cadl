@@ -3,8 +3,12 @@ import "@cadl-lang/openapi";
 import "@azure-tools/cadl-dpg";
 import "@azure-tools/cadl-azure-core";
 
-@serviceTitle("Models in CADL")
-@serviceVersion("0.1.0")
+@service(
+    {
+        title: "Models in CADL",
+        version: "0.1.0"
+    }
+)
 @doc("CADL project to test various types of models.")
 namespace CustomizationsInCadl;
 
@@ -55,7 +59,19 @@ model ModelWithCustomizedProperties {
   propertyToMakeJsonElement: string;  
  
   @doc("Field that replaces property (original name: PropertyToField)")
-  propertyToField: string; 
+  propertyToField: string;
+
+  @doc("Property renamed that is list")
+  badListName: string[];
+
+  @doc("Property renamed that is dictionary")
+  badDictionaryName: Record<string>;
+
+  @doc("Property renamed that is listoflist")
+  badListOfListName: string[][];
+
+  @doc("Property renamed that is listofdictionary")
+  badListOfDictionaryName: Record<string>[];
 }
 
 @doc("Renamed enum (original name: EnumToRename)")
@@ -108,5 +124,5 @@ model RootModel {
 @route("/inputToRoundTrip")
 @doc("RoundTrip operation to make RootModel round-trip")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op roundTrip(@body input: RootModel): RootModel;

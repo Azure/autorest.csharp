@@ -18,7 +18,7 @@ namespace TypeSchemaMapping.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(ArrayOfEnum))
             {
-                writer.WritePropertyName("ArrayOfEnum");
+                writer.WritePropertyName("ArrayOfEnum"u8);
                 writer.WriteStartArray();
                 foreach (var item in ArrayOfEnum)
                 {
@@ -28,10 +28,15 @@ namespace TypeSchemaMapping.Models
             }
             if (Optional.IsCollectionDefined(ArrayOfEnumCustomizedToNullable))
             {
-                writer.WritePropertyName("ArrayOfEnumCustomizedToNullable");
+                writer.WritePropertyName("ArrayOfEnumCustomizedToNullable"u8);
                 writer.WriteStartArray();
                 foreach (var item in ArrayOfEnumCustomizedToNullable)
                 {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
                     writer.WriteStringValue(item.Value.ToSerialString());
                 }
                 writer.WriteEndArray();
@@ -41,11 +46,15 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithArrayOfEnum DeserializeModelWithArrayOfEnum(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<EnumForModelWithArrayOfEnum>> arrayOfEnum = default;
             Optional<IReadOnlyList<EnumForModelWithArrayOfEnum?>> arrayOfEnumCustomizedToNullable = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ArrayOfEnum"))
+                if (property.NameEquals("ArrayOfEnum"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -60,7 +69,7 @@ namespace TypeSchemaMapping.Models
                     arrayOfEnum = array;
                     continue;
                 }
-                if (property.NameEquals("ArrayOfEnumCustomizedToNullable"))
+                if (property.NameEquals("ArrayOfEnumCustomizedToNullable"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

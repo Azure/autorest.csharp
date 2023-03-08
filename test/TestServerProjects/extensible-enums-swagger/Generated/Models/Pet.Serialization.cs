@@ -17,32 +17,36 @@ namespace extensible_enums_swagger.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("name");
+                writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
             if (Optional.IsDefined(DaysOfWeek))
             {
-                writer.WritePropertyName("DaysOfWeek");
+                writer.WritePropertyName("DaysOfWeek"u8);
                 writer.WriteStringValue(DaysOfWeek.Value.ToString());
             }
-            writer.WritePropertyName("IntEnum");
+            writer.WritePropertyName("IntEnum"u8);
             writer.WriteStringValue(IntEnum.ToString());
             writer.WriteEndObject();
         }
 
         internal static Pet DeserializePet(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<DaysOfWeekExtensibleEnum> daysOfWeek = default;
             IntEnum intEnum = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("DaysOfWeek"))
+                if (property.NameEquals("DaysOfWeek"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -52,7 +56,7 @@ namespace extensible_enums_swagger.Models
                     daysOfWeek = new DaysOfWeekExtensibleEnum(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("IntEnum"))
+                if (property.NameEquals("IntEnum"u8))
                 {
                     intEnum = new IntEnum(property.Value.GetString());
                     continue;

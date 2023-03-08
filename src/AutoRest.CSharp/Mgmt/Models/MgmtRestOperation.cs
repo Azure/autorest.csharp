@@ -360,6 +360,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (resourceScope.IsParameterizedScope() && !operationScope.IsParameterizedScope())
             {
                 var resourceScopeTypes = resourceScope.GetParameterizedScopeResourceTypes();
+                if (resourceScopeTypes is null)
+                    return false;
                 var operationScopeType = operationScope.GetResourceType();
                 if (resourceScopeTypes.Contains(ResourceTypeSegment.Any) || resourceScopeTypes.Contains(operationScopeType))
                     return true;
@@ -394,7 +396,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             SeparateScope(resourcePath, out var resourceScopePath, out var trimmedResourcePath);
             SeparateScope(operationPath, out var operationScopePath, out var trimmedOperationPath);
 
-            if (trimmedResourcePath.Count > 0 && trimmedOperationPath.Equals(new RequestPath(trimmedResourcePath.SkipLast(1))) && DoesScopeCover(operationScopePath, resourceScopePath, operationPath, resourcePath))
+            if (trimmedResourcePath.Count > 0 && trimmedOperationPath.Equals(RequestPath.FromSegments(trimmedResourcePath.SkipLast(1))) && DoesScopeCover(operationScopePath, resourceScopePath, operationPath, resourcePath))
             {
                 matchType = (resourceScopePath.IsParameterizedScope(), operationScopePath.IsParameterizedScope()) switch
                 {
@@ -556,9 +558,6 @@ namespace AutoRest.CSharp.Mgmt.Models
         {
             //try for list method
             originalType = PagingMethod?.ItemType ?? originalType;
-
-            if (Configuration.MgmtConfiguration.PreventWrappingReturnType.Contains(OperationId))
-                return originalType;
 
             if (originalType == null || !originalType.TryCastResourceData(out var data))
                 return originalType;

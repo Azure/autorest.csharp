@@ -3,8 +3,6 @@
 
 using System;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
 using AutoRest.CSharp.Generation.Types;
 using Microsoft.CodeAnalysis;
 
@@ -23,7 +21,15 @@ namespace AutoRest.CSharp.Utilities
 
             var symbolName = symbol.ToDisplayString(FullyQualifiedNameFormat);
             var assemblyName = symbol.ContainingAssembly.Name;
-            return Type.GetType(symbolName) ?? Type.GetType($"{symbolName}, {assemblyName}") ?? throw new InvalidOperationException($"Type '{symbolName}' can't be found in assembly '{assemblyName}'.");
+            if (symbol.TypeArguments.Length > 0)
+            {
+                symbolName += $"`{symbol.TypeArguments.Length}";
+            }
+
+            var type = Type.GetType(symbolName) ?? Type.GetType($"{symbolName}, {assemblyName}") ?? throw new InvalidOperationException($"Type '{symbolName}' can't be found in assembly '{assemblyName}'.");
+            return symbol.TypeArguments.Length > 0
+                ? new CSharpType(type, symbol.TypeArguments.Cast<INamedTypeSymbol>().Select(GetCSharpType).ToArray())
+                : type;
         }
     }
 }

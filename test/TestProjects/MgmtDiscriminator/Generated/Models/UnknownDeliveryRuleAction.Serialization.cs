@@ -15,23 +15,33 @@ namespace MgmtDiscriminator.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
             writer.WriteEndObject();
         }
 
         internal static UnknownDeliveryRuleAction DeserializeUnknownDeliveryRuleAction(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             DeliveryRuleActionType name = "Unknown";
+            Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = new DeliveryRuleActionType(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("foo"u8))
+                {
+                    foo = property.Value.GetString();
+                    continue;
+                }
             }
-            return new UnknownDeliveryRuleAction(name);
+            return new UnknownDeliveryRuleAction(name, foo.Value);
         }
     }
 }

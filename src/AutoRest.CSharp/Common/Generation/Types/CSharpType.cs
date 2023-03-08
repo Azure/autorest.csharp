@@ -5,6 +5,7 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -45,6 +46,7 @@ namespace AutoRest.CSharp.Generation.Types
         {
             Debug.Assert(type.Namespace != null, "type.Namespace != null");
             Debug.Assert(type.IsGenericTypeDefinition || arguments.Length == 0, "arguments can be added only to the generic type definition.");
+
             _type = type;
 
             Namespace = type.Namespace;
@@ -179,6 +181,16 @@ namespace AutoRest.CSharp.Generation.Types
                 return this;
 
             return IsFrameworkType ? new CSharpType(_type!, false, Arguments) : new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
+        }
+
+        public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider
+        {
+            provider = null;
+            if (this.IsFrameworkType)
+                return false;
+
+            provider = this.Implementation as T;
+            return provider != null;
         }
     }
 }

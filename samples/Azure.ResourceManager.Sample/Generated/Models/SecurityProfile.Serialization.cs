@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(EncryptionAtHost))
             {
-                writer.WritePropertyName("encryptionAtHost");
+                writer.WritePropertyName("encryptionAtHost"u8);
                 writer.WriteBooleanValue(EncryptionAtHost.Value);
             }
             writer.WriteEndObject();
@@ -25,10 +25,14 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static SecurityProfile DeserializeSecurityProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> encryptionAtHost = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("encryptionAtHost"))
+                if (property.NameEquals("encryptionAtHost"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

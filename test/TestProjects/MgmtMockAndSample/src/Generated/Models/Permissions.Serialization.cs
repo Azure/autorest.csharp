@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Keys))
             {
-                writer.WritePropertyName("keys");
+                writer.WritePropertyName("keys"u8);
                 writer.WriteStartArray();
                 foreach (var item in Keys)
                 {
@@ -28,7 +28,7 @@ namespace MgmtMockAndSample.Models
             }
             if (Optional.IsCollectionDefined(Secrets))
             {
-                writer.WritePropertyName("secrets");
+                writer.WritePropertyName("secrets"u8);
                 writer.WriteStartArray();
                 foreach (var item in Secrets)
                 {
@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
             }
             if (Optional.IsCollectionDefined(Certificates))
             {
-                writer.WritePropertyName("certificates");
+                writer.WritePropertyName("certificates"u8);
                 writer.WriteStartArray();
                 foreach (var item in Certificates)
                 {
@@ -48,7 +48,7 @@ namespace MgmtMockAndSample.Models
             }
             if (Optional.IsCollectionDefined(Storage))
             {
-                writer.WritePropertyName("storage");
+                writer.WritePropertyName("storage"u8);
                 writer.WriteStartArray();
                 foreach (var item in Storage)
                 {
@@ -61,13 +61,17 @@ namespace MgmtMockAndSample.Models
 
         internal static Permissions DeserializePermissions(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<KeyPermission>> keys = default;
             Optional<IList<SecretPermission>> secrets = default;
             Optional<IList<CertificatePermission>> certificates = default;
             Optional<IList<StoragePermission>> storage = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("keys"))
+                if (property.NameEquals("keys"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -82,7 +86,7 @@ namespace MgmtMockAndSample.Models
                     keys = array;
                     continue;
                 }
-                if (property.NameEquals("secrets"))
+                if (property.NameEquals("secrets"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -97,7 +101,7 @@ namespace MgmtMockAndSample.Models
                     secrets = array;
                     continue;
                 }
-                if (property.NameEquals("certificates"))
+                if (property.NameEquals("certificates"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -112,7 +116,7 @@ namespace MgmtMockAndSample.Models
                     certificates = array;
                     continue;
                 }
-                if (property.NameEquals("storage"))
+                if (property.NameEquals("storage"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

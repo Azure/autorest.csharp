@@ -20,7 +20,7 @@ namespace ModelWithConverterUsage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(InputModelProperty))
             {
-                writer.WritePropertyName("Input_Model_Property");
+                writer.WritePropertyName("Input_Model_Property"u8);
                 writer.WriteStringValue(InputModelProperty);
             }
             writer.WriteEndObject();

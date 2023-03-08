@@ -262,49 +262,31 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line();
         }
 
-        private void DeclareMethodParameter(CodeWriter writer, ConvenienceMethod convenienceMethod)
-        {
-            foreach (var parameterChain in convenienceMethod.ProtocolToConvenienceParameters)
-            {
-                if (parameterChain.Input?.Kind == InputOperationParameterKind.Spread)
-                {
-                    var type = parameterChain.Convenience?.Type;
-                    var paraName = parameterChain.Convenience?.Name;
-                    writer.Append($"{type} {paraName:D} = ");
-                    writer.Append($"new {type}(");
-                    InputType? inputType = parameterChain.Input?.Type ?? null;
-                    if (inputType is InputModelType modelType)
-                    {
-                        foreach (var prop in modelType.Properties)
-                        {
-                            writer.Append($"{prop.Name.ToVariableName()},");
-                        }
-                    }
-                    writer.RemoveTrailingComma();
-                    writer.Line($");");
-                }
-            }
-        }
         private void WriteConvenienceMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
         {
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
-                DeclareMethodParameter(_writer, convenienceMethod);
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-                WriteCancellationTokenToRequestContext(_writer, contextVariable);
 
-                IReadOnlyList<FormattableString> parameters = PrepareConvenienceMethodParameters(convenienceMethod, contextVariable);
+                var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
+
+                // write whatever we need to convert the parameters
+                converter(_writer);
 
                 var responseVariable = new CodeWriterDeclaration("response");
                 _writer
                     .Append($"{typeof(Response)} {responseVariable:D} = ")
-                    .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameters, async)
+                    .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
                     .LineRaw(";");
 
                 var responseType = convenienceMethod.ResponseType;
                 if (responseType == null)
                 {
                     _writer.Line($"return {responseVariable:I};");
+                }
+                else if (TypeFactory.IsReadOnlyList(responseType))
+                {
+                    ResponseWriterHelpers.WriteRawResponseToGeneric(_writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, $"{responseVariable.ActualName}");
                 }
                 else
                 {
@@ -318,18 +300,20 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
-                DeclareMethodParameter(_writer, convenienceMethod);
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-                WriteCancellationTokenToRequestContext(_writer, contextVariable);
 
-                IReadOnlyList<FormattableString> parameters = PrepareConvenienceMethodParameters(convenienceMethod, contextVariable);
+                var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
+
+                // write whatever we need to convert the parameters
+                converter(_writer);
+
                 var responseType = convenienceMethod.ResponseType;
                 if (responseType == null)
                 {
                     // return [await] protocolMethod(parameters...)[.ConfigureAwait(false)];
                     _writer
                         .Append($"return ")
-                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameters, async)
+                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
                         .LineRaw(";");
                 }
                 else
@@ -338,7 +322,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var responseVariable = new CodeWriterDeclaration("response");
                     _writer
                         .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
-                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameters, async)
+                        .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
                         .LineRaw(";");
                     // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
                     var diagnostic = convenienceMethod.Diagnostic ?? clientMethod.ProtocolMethodDiagnostic;
@@ -348,38 +332,10 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line();
         }
 
-        // RequestContext context = FromCancellationToken(cancellationToken);
-        private static void WriteCancellationTokenToRequestContext(CodeWriter writer, CodeWriterDeclaration contextVariable)
-        {
-            writer.Line($"{typeof(RequestContext)} {contextVariable:D} = FromCancellationToken({KnownParameters.CancellationTokenParameter.Name});");
-        }
-
-        private static IReadOnlyList<FormattableString> PrepareConvenienceMethodParameters(ConvenienceMethod convenienceMethod, CodeWriterDeclaration contextVariable)
-        {
-            var parameters = new List<FormattableString>();
-            foreach (var (protocolParameter, convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameters)
-            {
-                if (convenienceParameter == KnownParameters.CancellationTokenParameter)
-                {
-                    parameters.Add($"{contextVariable:I}");
-                }
-                else if (convenienceParameter != null)
-                {
-                    parameters.Add(convenienceParameter.GetConversionFormattable(protocolParameter.Type));
-                }
-                else
-                {
-                    throw new InvalidOperationException($"{protocolParameter.Name} protocol method parameter doesn't have matching field or parameter in convenience method {convenienceMethod.Signature.Name}");
-                }
-            }
-
-            return parameters;
-        }
-
         private void WriteConveniencePageableMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ProtocolMethodPaging pagingInfo, ClientFields fields, bool async)
         {
             WriteConvenienceMethodDocumentation(_writer, convenienceMethod.Signature);
-            _writer.WritePageable(convenienceMethod.Signature, convenienceMethod.ResponseType, null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
+            _writer.WritePageable(convenienceMethod, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
         }
 
         private static void WriteProtocolPageableMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, bool async)

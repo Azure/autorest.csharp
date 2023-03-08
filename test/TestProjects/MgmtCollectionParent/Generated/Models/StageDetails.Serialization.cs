@@ -15,13 +15,17 @@ namespace MgmtCollectionParent.Models
     {
         internal static StageDetails DeserializeStageDetails(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<StageStatus> stageStatus = default;
             Optional<StageName> stageName = default;
             Optional<string> displayName = default;
             Optional<DateTimeOffset> startTime = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("stageStatus"))
+                if (property.NameEquals("stageStatus"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -31,7 +35,7 @@ namespace MgmtCollectionParent.Models
                     stageStatus = new StageStatus(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("stageName"))
+                if (property.NameEquals("stageName"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -41,12 +45,12 @@ namespace MgmtCollectionParent.Models
                     stageName = new StageName(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("displayName"))
+                if (property.NameEquals("displayName"u8))
                 {
                     displayName = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("startTime"))
+                if (property.NameEquals("startTime"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

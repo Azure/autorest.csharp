@@ -16,13 +16,13 @@ pr:
 
 pool:
   name: "azsdk-pool-mms-ubuntu-2004-general"
-  vmImage: "MMSUbuntu20.04"
+  vmImage: "ubuntu-20.04"
 
 variables:
   - name: skipComponentGovernanceDetection
     value: true
   - name: NodeVersion
-    value: '16.x'
+    value: '18.13.0'
   - name: VAR_ARTIFACT_NAME
     value: 'CadlCsharpEmitter'
   - name: VAR_BUILD_ARTIFACT_STAGING_DIRECTORY
@@ -48,7 +48,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20230112.1
+      ref: refs/tags/azure-sdk-build-tools_20230307.1
 stages:
   - stage: 'Build_and_Test'
     jobs:
@@ -77,7 +77,11 @@ stages:
             customCommand: pack
             workingDir: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
         - pwsh: ./eng/ExecuteCadlEmitterUnitTests.ps1
-          displayName: 'Unit_Test for CADL emitter'
+          displayName: 'E2E_Test for CADL emitter'
+          workingDirectory: $(Build.SourcesDirectory)
+        - script: |
+            npm run test --prefix src/CADL.Extension/Emitter.Csharp
+          displayName: 'Unit Test'
           workingDirectory: $(Build.SourcesDirectory)
         - script: |
             mkdir -p $(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)/packages

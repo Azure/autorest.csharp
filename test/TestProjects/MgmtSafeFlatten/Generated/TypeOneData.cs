@@ -13,7 +13,10 @@ using MgmtSafeFlatten.Models;
 
 namespace MgmtSafeFlatten
 {
-    /// <summary> A class representing the TypeOne data model. </summary>
+    /// <summary>
+    /// A class representing the TypeOne data model.
+    /// The TypeOne.
+    /// </summary>
     public partial class TypeOneData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of TypeOneData. </summary>

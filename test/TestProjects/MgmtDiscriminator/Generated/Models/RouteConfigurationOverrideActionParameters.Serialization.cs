@@ -15,11 +15,11 @@ namespace MgmtDiscriminator.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("typeName");
+            writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
             if (Optional.IsDefined(OriginGroupOverride))
             {
-                writer.WritePropertyName("originGroupOverride");
+                writer.WritePropertyName("originGroupOverride"u8);
                 writer.WriteObjectValue(OriginGroupOverride);
             }
             writer.WriteEndObject();
@@ -27,16 +27,20 @@ namespace MgmtDiscriminator.Models
 
         internal static RouteConfigurationOverrideActionParameters DeserializeRouteConfigurationOverrideActionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             RouteConfigurationOverrideActionParametersTypeName typeName = default;
             Optional<OriginGroupOverride> originGroupOverride = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("typeName"))
+                if (property.NameEquals("typeName"u8))
                 {
                     typeName = new RouteConfigurationOverrideActionParametersTypeName(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("originGroupOverride"))
+                if (property.NameEquals("originGroupOverride"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

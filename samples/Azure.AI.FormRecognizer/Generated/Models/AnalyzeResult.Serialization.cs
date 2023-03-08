@@ -15,6 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string version = default;
             IReadOnlyList<ReadResult> readResults = default;
             Optional<IReadOnlyList<PageResult>> pageResults = default;
@@ -22,12 +26,12 @@ namespace Azure.AI.FormRecognizer.Models
             Optional<IReadOnlyList<ErrorInformation>> errors = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("version"))
+                if (property.NameEquals("version"u8))
                 {
                     version = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("readResults"))
+                if (property.NameEquals("readResults"u8))
                 {
                     List<ReadResult> array = new List<ReadResult>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -37,7 +41,7 @@ namespace Azure.AI.FormRecognizer.Models
                     readResults = array;
                     continue;
                 }
-                if (property.NameEquals("pageResults"))
+                if (property.NameEquals("pageResults"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -52,7 +56,7 @@ namespace Azure.AI.FormRecognizer.Models
                     pageResults = array;
                     continue;
                 }
-                if (property.NameEquals("documentResults"))
+                if (property.NameEquals("documentResults"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -67,7 +71,7 @@ namespace Azure.AI.FormRecognizer.Models
                     documentResults = array;
                     continue;
                 }
-                if (property.NameEquals("errors"))
+                if (property.NameEquals("errors"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

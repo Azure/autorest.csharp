@@ -18,15 +18,15 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("name");
+                writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
             if (Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("id");
+                writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             writer.WriteEndObject();
             writer.WriteEndObject();
@@ -34,6 +34,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static BackendAddressPool DeserializeBackendAddressPool(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> etag = default;
             Optional<string> type = default;
@@ -45,27 +49,27 @@ namespace Azure.Network.Management.Interface.Models
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("etag"))
+                if (property.NameEquals("etag"u8))
                 {
                     etag = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -74,7 +78,7 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("backendIPConfigurations"))
+                        if (property0.NameEquals("backendIPConfigurations"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -89,7 +93,7 @@ namespace Azure.Network.Management.Interface.Models
                             backendIPConfigurations = array;
                             continue;
                         }
-                        if (property0.NameEquals("loadBalancingRules"))
+                        if (property0.NameEquals("loadBalancingRules"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -104,7 +108,7 @@ namespace Azure.Network.Management.Interface.Models
                             loadBalancingRules = array;
                             continue;
                         }
-                        if (property0.NameEquals("outboundRule"))
+                        if (property0.NameEquals("outboundRule"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -114,7 +118,7 @@ namespace Azure.Network.Management.Interface.Models
                             outboundRule = DeserializeSubResource(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("outboundRules"))
+                        if (property0.NameEquals("outboundRules"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -129,7 +133,7 @@ namespace Azure.Network.Management.Interface.Models
                             outboundRules = array;
                             continue;
                         }
-                        if (property0.NameEquals("provisioningState"))
+                        if (property0.NameEquals("provisioningState"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {

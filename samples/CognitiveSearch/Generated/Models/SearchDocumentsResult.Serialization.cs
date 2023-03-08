@@ -15,6 +15,10 @@ namespace CognitiveSearch.Models
     {
         internal static SearchDocumentsResult DeserializeSearchDocumentsResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<long> odataCount = default;
             Optional<double> searchCoverage = default;
             Optional<IReadOnlyDictionary<string, IList<FacetResult>>> searchFacets = default;
@@ -23,7 +27,7 @@ namespace CognitiveSearch.Models
             Optional<string> odataNextLink = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("@odata.count"))
+                if (property.NameEquals("@odata.count"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -33,7 +37,7 @@ namespace CognitiveSearch.Models
                     odataCount = property.Value.GetInt64();
                     continue;
                 }
-                if (property.NameEquals("@search.coverage"))
+                if (property.NameEquals("@search.coverage"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -43,7 +47,7 @@ namespace CognitiveSearch.Models
                     searchCoverage = property.Value.GetDouble();
                     continue;
                 }
-                if (property.NameEquals("@search.facets"))
+                if (property.NameEquals("@search.facets"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -53,17 +57,24 @@ namespace CognitiveSearch.Models
                     Dictionary<string, IList<FacetResult>> dictionary = new Dictionary<string, IList<FacetResult>>();
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        List<FacetResult> array = new List<FacetResult>();
-                        foreach (var item in property0.Value.EnumerateArray())
+                        if (property0.Value.ValueKind == JsonValueKind.Null)
                         {
-                            array.Add(FacetResult.DeserializeFacetResult(item));
+                            dictionary.Add(property0.Name, null);
                         }
-                        dictionary.Add(property0.Name, array);
+                        else
+                        {
+                            List<FacetResult> array = new List<FacetResult>();
+                            foreach (var item in property0.Value.EnumerateArray())
+                            {
+                                array.Add(FacetResult.DeserializeFacetResult(item));
+                            }
+                            dictionary.Add(property0.Name, array);
+                        }
                     }
                     searchFacets = dictionary;
                     continue;
                 }
-                if (property.NameEquals("@search.nextPageParameters"))
+                if (property.NameEquals("@search.nextPageParameters"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -73,7 +84,7 @@ namespace CognitiveSearch.Models
                     searchNextPageParameters = SearchRequest.DeserializeSearchRequest(property.Value);
                     continue;
                 }
-                if (property.NameEquals("value"))
+                if (property.NameEquals("value"u8))
                 {
                     List<SearchResult> array = new List<SearchResult>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -83,7 +94,7 @@ namespace CognitiveSearch.Models
                     value = array;
                     continue;
                 }
-                if (property.NameEquals("@odata.nextLink"))
+                if (property.NameEquals("@odata.nextLink"u8))
                 {
                     odataNextLink = property.Value.GetString();
                     continue;

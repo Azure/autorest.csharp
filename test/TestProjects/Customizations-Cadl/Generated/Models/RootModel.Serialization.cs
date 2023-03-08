@@ -18,29 +18,29 @@ namespace CustomizationsInCadl.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(PropertyModelToMakeInternal))
             {
-                writer.WritePropertyName("propertyModelToMakeInternal");
+                writer.WritePropertyName("propertyModelToMakeInternal"u8);
                 writer.WriteObjectValue(PropertyModelToMakeInternal);
             }
             if (Optional.IsDefined(PropertyModelToRename))
             {
-                writer.WritePropertyName("propertyModelToRename");
+                writer.WritePropertyName("propertyModelToRename"u8);
                 writer.WriteObjectValue(PropertyModelToRename);
             }
             if (Optional.IsDefined(PropertyModelToChangeNamespace))
             {
-                writer.WritePropertyName("propertyModelToChangeNamespace");
+                writer.WritePropertyName("propertyModelToChangeNamespace"u8);
                 writer.WriteObjectValue(PropertyModelToChangeNamespace);
             }
             if (Optional.IsDefined(PropertyModelWithCustomizedProperties))
             {
-                writer.WritePropertyName("propertyModelWithCustomizedProperties");
+                writer.WritePropertyName("propertyModelWithCustomizedProperties"u8);
                 writer.WriteObjectValue(PropertyModelWithCustomizedProperties);
             }
             if (Optional.IsDefined(PropertyEnumToRename))
             {
                 if (PropertyEnumToRename != null)
                 {
-                    writer.WritePropertyName("propertyEnumToRename");
+                    writer.WritePropertyName("propertyEnumToRename"u8);
                     writer.WriteStringValue(PropertyEnumToRename.Value.ToSerialString());
                 }
                 else
@@ -52,7 +52,7 @@ namespace CustomizationsInCadl.Models
             {
                 if (PropertyEnumWithValueToRename != null)
                 {
-                    writer.WritePropertyName("propertyEnumWithValueToRename");
+                    writer.WritePropertyName("propertyEnumWithValueToRename"u8);
                     writer.WriteStringValue(PropertyEnumWithValueToRename.Value.ToSerialString());
                 }
                 else
@@ -64,7 +64,7 @@ namespace CustomizationsInCadl.Models
             {
                 if (PropertyEnumToBeMadeExtensible != null)
                 {
-                    writer.WritePropertyName("propertyEnumToBeMadeExtensible");
+                    writer.WritePropertyName("propertyEnumToBeMadeExtensible"u8);
                     writer.WriteStringValue(PropertyEnumToBeMadeExtensible.Value.ToString());
                 }
                 else
@@ -77,6 +77,10 @@ namespace CustomizationsInCadl.Models
 
         internal static RootModel DeserializeRootModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ModelToMakeInternal> propertyModelToMakeInternal = default;
             Optional<RenamedModel> propertyModelToRename = default;
             Optional<ModelToChangeNamespace> propertyModelToChangeNamespace = default;
@@ -86,7 +90,7 @@ namespace CustomizationsInCadl.Models
             Optional<EnumToBeMadeExtensible?> propertyEnumToBeMadeExtensible = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("propertyModelToMakeInternal"))
+                if (property.NameEquals("propertyModelToMakeInternal"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -96,7 +100,7 @@ namespace CustomizationsInCadl.Models
                     propertyModelToMakeInternal = ModelToMakeInternal.DeserializeModelToMakeInternal(property.Value);
                     continue;
                 }
-                if (property.NameEquals("propertyModelToRename"))
+                if (property.NameEquals("propertyModelToRename"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -106,7 +110,7 @@ namespace CustomizationsInCadl.Models
                     propertyModelToRename = RenamedModel.DeserializeRenamedModel(property.Value);
                     continue;
                 }
-                if (property.NameEquals("propertyModelToChangeNamespace"))
+                if (property.NameEquals("propertyModelToChangeNamespace"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -116,7 +120,7 @@ namespace CustomizationsInCadl.Models
                     propertyModelToChangeNamespace = ModelToChangeNamespace.DeserializeModelToChangeNamespace(property.Value);
                     continue;
                 }
-                if (property.NameEquals("propertyModelWithCustomizedProperties"))
+                if (property.NameEquals("propertyModelWithCustomizedProperties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -126,7 +130,7 @@ namespace CustomizationsInCadl.Models
                     propertyModelWithCustomizedProperties = ModelWithCustomizedProperties.DeserializeModelWithCustomizedProperties(property.Value);
                     continue;
                 }
-                if (property.NameEquals("propertyEnumToRename"))
+                if (property.NameEquals("propertyEnumToRename"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -136,7 +140,7 @@ namespace CustomizationsInCadl.Models
                     propertyEnumToRename = property.Value.GetString().ToRenamedEnum();
                     continue;
                 }
-                if (property.NameEquals("propertyEnumWithValueToRename"))
+                if (property.NameEquals("propertyEnumWithValueToRename"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -146,7 +150,7 @@ namespace CustomizationsInCadl.Models
                     propertyEnumWithValueToRename = property.Value.GetString().ToEnumWithValueToRename();
                     continue;
                 }
-                if (property.NameEquals("propertyEnumToBeMadeExtensible"))
+                if (property.NameEquals("propertyEnumToBeMadeExtensible"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

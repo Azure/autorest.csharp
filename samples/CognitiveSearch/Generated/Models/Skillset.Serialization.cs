@@ -16,11 +16,11 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
-            writer.WritePropertyName("description");
+            writer.WritePropertyName("description"u8);
             writer.WriteStringValue(Description);
-            writer.WritePropertyName("skills");
+            writer.WritePropertyName("skills"u8);
             writer.WriteStartArray();
             foreach (var item in Skills)
             {
@@ -29,12 +29,12 @@ namespace CognitiveSearch.Models
             writer.WriteEndArray();
             if (Optional.IsDefined(CognitiveServicesAccount))
             {
-                writer.WritePropertyName("cognitiveServices");
+                writer.WritePropertyName("cognitiveServices"u8);
                 writer.WriteObjectValue(CognitiveServicesAccount);
             }
             if (Optional.IsDefined(ETag))
             {
-                writer.WritePropertyName("@odata.etag");
+                writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
             }
             writer.WriteEndObject();
@@ -42,6 +42,10 @@ namespace CognitiveSearch.Models
 
         internal static Skillset DeserializeSkillset(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             string description = default;
             IList<Skill> skills = default;
@@ -49,17 +53,17 @@ namespace CognitiveSearch.Models
             Optional<string> odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("description"))
+                if (property.NameEquals("description"u8))
                 {
                     description = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("skills"))
+                if (property.NameEquals("skills"u8))
                 {
                     List<Skill> array = new List<Skill>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -69,7 +73,7 @@ namespace CognitiveSearch.Models
                     skills = array;
                     continue;
                 }
-                if (property.NameEquals("cognitiveServices"))
+                if (property.NameEquals("cognitiveServices"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -79,7 +83,7 @@ namespace CognitiveSearch.Models
                     cognitiveServices = CognitiveServicesAccount.DeserializeCognitiveServicesAccount(property.Value);
                     continue;
                 }
-                if (property.NameEquals("@odata.etag"))
+                if (property.NameEquals("@odata.etag"u8))
                 {
                     odataEtag = property.Value.GetString();
                     continue;

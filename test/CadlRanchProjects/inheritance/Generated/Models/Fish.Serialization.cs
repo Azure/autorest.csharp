@@ -16,20 +16,25 @@ namespace Models.Inheritance.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("kind");
+            writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            writer.WritePropertyName("age");
+            writer.WritePropertyName("age"u8);
             writer.WriteNumberValue(Age);
             writer.WriteEndObject();
         }
 
         internal static Fish DeserializeFish(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             if (element.TryGetProperty("kind", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())
                 {
-                    case "Salmon": return Salmon.DeserializeSalmon(element);
+                    case "shark": return Shark.DeserializeShark(element);
+                    case "salmon": return Salmon.DeserializeSalmon(element);
                 }
             }
             return UnknownFish.DeserializeUnknownFish(element);

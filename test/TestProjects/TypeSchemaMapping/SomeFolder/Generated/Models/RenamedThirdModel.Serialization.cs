@@ -19,12 +19,12 @@ namespace CustomNamespace
             writer.WriteStartObject();
             if (Optional.IsDefined(CustomizedETagProperty))
             {
-                writer.WritePropertyName("ETag");
+                writer.WritePropertyName("ETag"u8);
                 writer.WriteStringValue(CustomizedETagProperty.ToString());
             }
             if (Optional.IsDefined(CustomizedCreatedAtProperty))
             {
-                writer.WritePropertyName("CreatedAt");
+                writer.WritePropertyName("CreatedAt"u8);
                 writer.WriteStringValue(CustomizedCreatedAtProperty);
             }
             writer.WriteEndObject();
@@ -32,11 +32,15 @@ namespace CustomNamespace
 
         internal static RenamedThirdModel DeserializeRenamedThirdModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ETag> eTag = default;
             Optional<DateTime> createdAt = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ETag"))
+                if (property.NameEquals("ETag"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -46,7 +50,7 @@ namespace CustomNamespace
                     eTag = new ETag(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("CreatedAt"))
+                if (property.NameEquals("CreatedAt"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

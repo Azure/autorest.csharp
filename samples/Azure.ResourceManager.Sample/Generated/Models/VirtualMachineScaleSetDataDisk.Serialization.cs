@@ -17,41 +17,41 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("name");
+                writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
-            writer.WritePropertyName("lun");
+            writer.WritePropertyName("lun"u8);
             writer.WriteNumberValue(Lun);
             if (Optional.IsDefined(Caching))
             {
-                writer.WritePropertyName("caching");
+                writer.WritePropertyName("caching"u8);
                 writer.WriteStringValue(Caching.Value.ToSerialString());
             }
             if (Optional.IsDefined(WriteAcceleratorEnabled))
             {
-                writer.WritePropertyName("writeAcceleratorEnabled");
+                writer.WritePropertyName("writeAcceleratorEnabled"u8);
                 writer.WriteBooleanValue(WriteAcceleratorEnabled.Value);
             }
-            writer.WritePropertyName("createOption");
+            writer.WritePropertyName("createOption"u8);
             writer.WriteStringValue(CreateOption.ToString());
             if (Optional.IsDefined(DiskSizeGB))
             {
-                writer.WritePropertyName("diskSizeGB");
+                writer.WritePropertyName("diskSizeGB"u8);
                 writer.WriteNumberValue(DiskSizeGB.Value);
             }
             if (Optional.IsDefined(ManagedDisk))
             {
-                writer.WritePropertyName("managedDisk");
+                writer.WritePropertyName("managedDisk"u8);
                 writer.WriteObjectValue(ManagedDisk);
             }
             if (Optional.IsDefined(DiskIopsReadWrite))
             {
-                writer.WritePropertyName("diskIOPSReadWrite");
+                writer.WritePropertyName("diskIOPSReadWrite"u8);
                 writer.WriteNumberValue(DiskIopsReadWrite.Value);
             }
             if (Optional.IsDefined(DiskMBpsReadWrite))
             {
-                writer.WritePropertyName("diskMBpsReadWrite");
+                writer.WritePropertyName("diskMBpsReadWrite"u8);
                 writer.WriteNumberValue(DiskMBpsReadWrite.Value);
             }
             writer.WriteEndObject();
@@ -59,6 +59,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetDataDisk DeserializeVirtualMachineScaleSetDataDisk(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             int lun = default;
             Optional<CachingType> caching = default;
@@ -70,17 +74,17 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<long> diskMBpsReadWrite = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("lun"))
+                if (property.NameEquals("lun"u8))
                 {
                     lun = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("caching"))
+                if (property.NameEquals("caching"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -90,7 +94,7 @@ namespace Azure.ResourceManager.Sample.Models
                     caching = property.Value.GetString().ToCachingType();
                     continue;
                 }
-                if (property.NameEquals("writeAcceleratorEnabled"))
+                if (property.NameEquals("writeAcceleratorEnabled"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -100,12 +104,12 @@ namespace Azure.ResourceManager.Sample.Models
                     writeAcceleratorEnabled = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("createOption"))
+                if (property.NameEquals("createOption"u8))
                 {
                     createOption = new DiskCreateOptionType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("diskSizeGB"))
+                if (property.NameEquals("diskSizeGB"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -115,7 +119,7 @@ namespace Azure.ResourceManager.Sample.Models
                     diskSizeGB = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("managedDisk"))
+                if (property.NameEquals("managedDisk"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -125,7 +129,7 @@ namespace Azure.ResourceManager.Sample.Models
                     managedDisk = VirtualMachineScaleSetManagedDiskParameters.DeserializeVirtualMachineScaleSetManagedDiskParameters(property.Value);
                     continue;
                 }
-                if (property.NameEquals("diskIOPSReadWrite"))
+                if (property.NameEquals("diskIOPSReadWrite"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -135,7 +139,7 @@ namespace Azure.ResourceManager.Sample.Models
                     diskIOPSReadWrite = property.Value.GetInt64();
                     continue;
                 }
-                if (property.NameEquals("diskMBpsReadWrite"))
+                if (property.NameEquals("diskMBpsReadWrite"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

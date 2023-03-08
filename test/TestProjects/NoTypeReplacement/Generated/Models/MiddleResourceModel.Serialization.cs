@@ -17,7 +17,7 @@ namespace NoTypeReplacement.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
             {
-                writer.WritePropertyName("foo");
+                writer.WritePropertyName("foo"u8);
                 writer.WriteObjectValue(Foo);
             }
             writer.WriteEndObject();
@@ -25,10 +25,14 @@ namespace NoTypeReplacement.Models
 
         internal static MiddleResourceModel DeserializeMiddleResourceModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<NoSubResourceModel2> foo = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("foo"))
+                if (property.NameEquals("foo"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

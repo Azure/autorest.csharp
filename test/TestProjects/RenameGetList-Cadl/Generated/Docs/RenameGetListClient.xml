@@ -32,16 +32,16 @@ Response Body:
 Schema for <c>Project</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -78,16 +78,16 @@ Response Body:
 Schema for <c>Project</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -145,7 +145,7 @@ Schema for <c>Deployment</c>:
 
 </remarks>
     </member>
-    <member name="GetProjectsAsync(Int32,Int32,Int32,RequestContext)">
+    <member name="GetProjectsAsync(RequestContext)">
 <example>
 This sample shows how to call GetProjectsAsync and parse the result.
 <code><![CDATA[
@@ -158,24 +158,6 @@ await foreach (var data in client.GetProjectsAsync())
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-}
-]]></code>
-This sample shows how to call GetProjectsAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new RenameGetListClient(endpoint);
-
-await foreach (var data in client.GetProjectsAsync(1234, 1234, 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
     Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
     Console.WriteLine(result.GetProperty("multilingual").ToString());
     Console.WriteLine(result.GetProperty("description").ToString());
@@ -195,22 +177,22 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
 </remarks>
     </member>
-    <member name="GetProjects(Int32,Int32,Int32,RequestContext)">
+    <member name="GetProjects(RequestContext)">
 <example>
 This sample shows how to call GetProjects and parse the result.
 <code><![CDATA[
@@ -223,24 +205,6 @@ foreach (var data in client.GetProjects())
     Console.WriteLine(result.GetProperty("projectName").ToString());
     Console.WriteLine(result.GetProperty("projectKind").ToString());
     Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-}
-]]></code>
-This sample shows how to call GetProjects with all parameters, and how to parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new RenameGetListClient(endpoint);
-
-foreach (var data in client.GetProjects(1234, 1234, 1234))
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
     Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
     Console.WriteLine(result.GetProperty("multilingual").ToString());
     Console.WriteLine(result.GetProperty("description").ToString());
@@ -260,16 +224,16 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -307,16 +271,16 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 
@@ -354,16 +318,16 @@ Response Body:
 Schema for <c>Array</c>:
 <code>{
   projectName: string, # Required.
-  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required.
-  storageInputContainerName: string, # Required.
-  settings: Dictionary&lt;string, string&gt;, # Optional.
-  multilingual: boolean, # Optional.
-  description: string, # Optional.
-  language: string, # Required.
-  createdDateTime: string (date &amp; time), # Required.
-  lastModifiedDateTime: string (date &amp; time), # Required.
-  lastTrainedDateTime: string (date &amp; time), # Required.
-  lastDeployedDateTime: string (date &amp; time), # Required.
+  projectKind: &quot;CustomSingleLabelClassification&quot; | &quot;CustomMultiLabelClassification&quot; | &quot;CustomEntityRecognition&quot;, # Required. The project kind.
+  storageInputContainerName: string, # Required. The storage container name.
+  settings: Dictionary&lt;string, string&gt;, # Optional. The project settings.
+  multilingual: boolean, # Optional. Whether the project would be used for multiple languages or not.
+  description: string, # Optional. The project description.
+  language: string, # Required. The project language. This is BCP-47 representation of a language. For example, use &quot;en&quot; for English, &quot;en-gb&quot; for English (UK), &quot;es&quot; for Spanish etc.
+  createdDateTime: string (date &amp; time), # Required. Represents the project creation datetime.
+  lastModifiedDateTime: string (date &amp; time), # Required. Represents the project last modification datetime.
+  lastTrainedDateTime: string (date &amp; time), # Required. Represents the project last training datetime.
+  lastDeployedDateTime: string (date &amp; time), # Required. Represents the project last deployment datetime.
 }
 </code>
 

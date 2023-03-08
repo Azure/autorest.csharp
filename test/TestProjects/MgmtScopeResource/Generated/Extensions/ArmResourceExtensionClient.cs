@@ -42,7 +42,14 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public virtual VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus()
         {
-            return new VMInsightsOnboardingStatusResource(Client, new ResourceIdentifier(Id.ToString() + "/providers/Microsoft.Insights/vmInsightsOnboardingStatuses/default"));
+            return new VMInsightsOnboardingStatusResource(Client, Id.AppendProviderResource("Microsoft.Insights", "vmInsightsOnboardingStatuses", "default"));
+        }
+
+        /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>
+        /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
+        public virtual GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments()
+        {
+            return GetCachedClient(Client => new GuestConfigurationAssignmentCollection(Client, Id));
         }
     }
 }

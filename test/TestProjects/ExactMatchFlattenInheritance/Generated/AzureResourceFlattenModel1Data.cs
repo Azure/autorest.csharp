@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace ExactMatchFlattenInheritance
 {
-    /// <summary> A class representing the AzureResourceFlattenModel1 data model. </summary>
+    /// <summary>
+    /// A class representing the AzureResourceFlattenModel1 data model.
+    /// This model is x-ms-azure-resource, has flatten properties, and it contains all reference type properties.
+    /// </summary>
     public partial class AzureResourceFlattenModel1Data : TrackedResourceData
     {
         /// <summary> Initializes a new instance of AzureResourceFlattenModel1Data. </summary>

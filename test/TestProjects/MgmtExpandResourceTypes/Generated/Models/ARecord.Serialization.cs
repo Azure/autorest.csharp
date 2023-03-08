@@ -17,7 +17,7 @@ namespace MgmtExpandResourceTypes.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Ipv4Address))
             {
-                writer.WritePropertyName("ipv4Address");
+                writer.WritePropertyName("ipv4Address"u8);
                 writer.WriteStringValue(Ipv4Address);
             }
             writer.WriteEndObject();
@@ -25,10 +25,14 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static ARecord DeserializeARecord(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> ipv4Address = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ipv4Address"))
+                if (property.NameEquals("ipv4Address"u8))
                 {
                     ipv4Address = property.Value.GetString();
                     continue;

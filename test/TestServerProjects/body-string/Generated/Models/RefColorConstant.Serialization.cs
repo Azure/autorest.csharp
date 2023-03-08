@@ -15,11 +15,11 @@ namespace body_string.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("ColorConstant");
+            writer.WritePropertyName("ColorConstant"u8);
             writer.WriteStringValue(ColorConstant);
             if (Optional.IsDefined(Field1))
             {
-                writer.WritePropertyName("field1");
+                writer.WritePropertyName("field1"u8);
                 writer.WriteStringValue(Field1);
             }
             writer.WriteEndObject();
@@ -27,16 +27,20 @@ namespace body_string.Models
 
         internal static RefColorConstant DeserializeRefColorConstant(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string colorConstant = default;
             Optional<string> field1 = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ColorConstant"))
+                if (property.NameEquals("ColorConstant"u8))
                 {
                     colorConstant = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("field1"))
+                if (property.NameEquals("field1"u8))
                 {
                     field1 = property.Value.GetString();
                     continue;

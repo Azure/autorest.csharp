@@ -17,31 +17,31 @@ namespace MgmtMockAndSample
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(OperatingSystem))
             {
-                writer.WritePropertyName("operatingSystem");
+                writer.WritePropertyName("operatingSystem"u8);
                 writer.WriteStringValue(OperatingSystem);
             }
             if (Optional.IsDefined(ComputeRole))
             {
-                writer.WritePropertyName("computeRole");
+                writer.WritePropertyName("computeRole"u8);
                 writer.WriteStringValue(ComputeRole);
             }
             if (Optional.IsDefined(HandlerSchema))
             {
-                writer.WritePropertyName("handlerSchema");
+                writer.WritePropertyName("handlerSchema"u8);
                 writer.WriteStringValue(HandlerSchema);
             }
             if (Optional.IsDefined(VmScaleSetEnabled))
             {
-                writer.WritePropertyName("vmScaleSetEnabled");
+                writer.WritePropertyName("vmScaleSetEnabled"u8);
                 writer.WriteBooleanValue(VmScaleSetEnabled.Value);
             }
             if (Optional.IsDefined(SupportsMultipleExtensions))
             {
-                writer.WritePropertyName("supportsMultipleExtensions");
+                writer.WritePropertyName("supportsMultipleExtensions"u8);
                 writer.WriteBooleanValue(SupportsMultipleExtensions.Value);
             }
             writer.WriteEndObject();
@@ -50,6 +50,10 @@ namespace MgmtMockAndSample
 
         internal static VirtualMachineExtensionImageData DeserializeVirtualMachineExtensionImageData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<AzureLocation> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             ResourceIdentifier id = default;
@@ -63,7 +67,7 @@ namespace MgmtMockAndSample
             Optional<bool> supportsMultipleExtensions = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("location"))
+                if (property.NameEquals("location"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -73,7 +77,7 @@ namespace MgmtMockAndSample
                     location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("tags"))
+                if (property.NameEquals("tags"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -88,22 +92,22 @@ namespace MgmtMockAndSample
                     tags = dictionary;
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("systemData"))
+                if (property.NameEquals("systemData"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -113,7 +117,7 @@ namespace MgmtMockAndSample
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -122,22 +126,22 @@ namespace MgmtMockAndSample
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("operatingSystem"))
+                        if (property0.NameEquals("operatingSystem"u8))
                         {
                             operatingSystem = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("computeRole"))
+                        if (property0.NameEquals("computeRole"u8))
                         {
                             computeRole = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("handlerSchema"))
+                        if (property0.NameEquals("handlerSchema"u8))
                         {
                             handlerSchema = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("vmScaleSetEnabled"))
+                        if (property0.NameEquals("vmScaleSetEnabled"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -147,7 +151,7 @@ namespace MgmtMockAndSample
                             vmScaleSetEnabled = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("supportsMultipleExtensions"))
+                        if (property0.NameEquals("supportsMultipleExtensions"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {

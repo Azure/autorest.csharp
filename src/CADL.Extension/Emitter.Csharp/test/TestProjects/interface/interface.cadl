@@ -5,8 +5,12 @@ import "@azure-tools/cadl-dpg";
 using Cadl.Http;
 using Azure.DPG;
 
-@serviceTitle("MultiInterfaceClient")
-@serviceVersion("1.0.0")
+@service(
+    {
+        title: "MultiInterfaceClient",
+        version: "1.0.0"
+    }
+)
 @server("http://localhost:3000", "TestServer endpoint")
 @doc("Illustrates clients generated from a Cadl with multiple interfaces.")
 namespace Cadl.TestServer.MultiInterfaceClient;
@@ -27,7 +31,7 @@ model Cat {
 interface dogs {
   @doc("Illustrate grouping operations on subclient.")
   @get
-  @convenienceAPI
+  @convenientAPI(true)
   getDogsConvenient(): Dog;
 
   @doc("Illustrate grouping operations on subclient.")

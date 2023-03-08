@@ -20,14 +20,14 @@ namespace ModelsInCadl.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(OptionalString))
             {
-                writer.WritePropertyName("optionalString");
+                writer.WritePropertyName("optionalString"u8);
                 writer.WriteStringValue(OptionalString);
             }
             if (Optional.IsDefined(OptionalInt))
             {
                 if (OptionalInt != null)
                 {
-                    writer.WritePropertyName("optionalInt");
+                    writer.WritePropertyName("optionalInt"u8);
                     writer.WriteNumberValue(OptionalInt.Value);
                 }
                 else
@@ -37,7 +37,7 @@ namespace ModelsInCadl.Models
             }
             if (Optional.IsCollectionDefined(OptionalStringList))
             {
-                writer.WritePropertyName("optionalStringList");
+                writer.WritePropertyName("optionalStringList"u8);
                 writer.WriteStartArray();
                 foreach (var item in OptionalStringList)
                 {
@@ -47,7 +47,7 @@ namespace ModelsInCadl.Models
             }
             if (Optional.IsCollectionDefined(OptionalIntList))
             {
-                writer.WritePropertyName("optionalIntList");
+                writer.WritePropertyName("optionalIntList"u8);
                 writer.WriteStartArray();
                 foreach (var item in OptionalIntList)
                 {
@@ -57,7 +57,7 @@ namespace ModelsInCadl.Models
             }
             if (Optional.IsCollectionDefined(OptionalModelCollection))
             {
-                writer.WritePropertyName("optionalModelCollection");
+                writer.WritePropertyName("optionalModelCollection"u8);
                 writer.WriteStartArray();
                 foreach (var item in OptionalModelCollection)
                 {
@@ -67,14 +67,14 @@ namespace ModelsInCadl.Models
             }
             if (Optional.IsDefined(OptionalModel))
             {
-                writer.WritePropertyName("optionalModel");
+                writer.WritePropertyName("optionalModel"u8);
                 writer.WriteObjectValue(OptionalModel);
             }
             if (Optional.IsDefined(OptionalFixedStringEnum))
             {
                 if (OptionalFixedStringEnum != null)
                 {
-                    writer.WritePropertyName("optionalFixedStringEnum");
+                    writer.WritePropertyName("optionalFixedStringEnum"u8);
                     writer.WriteStringValue(OptionalFixedStringEnum.Value.ToSerialString());
                 }
                 else
@@ -86,7 +86,7 @@ namespace ModelsInCadl.Models
             {
                 if (OptionalExtensibleEnum != null)
                 {
-                    writer.WritePropertyName("optionalExtensibleEnum");
+                    writer.WritePropertyName("optionalExtensibleEnum"u8);
                     writer.WriteStringValue(OptionalExtensibleEnum.Value.ToString());
                 }
                 else
@@ -96,7 +96,7 @@ namespace ModelsInCadl.Models
             }
             if (Optional.IsCollectionDefined(OptionalIntRecord))
             {
-                writer.WritePropertyName("optionalIntRecord");
+                writer.WritePropertyName("optionalIntRecord"u8);
                 writer.WriteStartObject();
                 foreach (var item in OptionalIntRecord)
                 {
@@ -107,7 +107,7 @@ namespace ModelsInCadl.Models
             }
             if (Optional.IsCollectionDefined(OptionalStringRecord))
             {
-                writer.WritePropertyName("optionalStringRecord");
+                writer.WritePropertyName("optionalStringRecord"u8);
                 writer.WriteStartObject();
                 foreach (var item in OptionalStringRecord)
                 {
@@ -118,7 +118,7 @@ namespace ModelsInCadl.Models
             }
             if (Optional.IsCollectionDefined(OptionalModelRecord))
             {
-                writer.WritePropertyName("optionalModelRecord");
+                writer.WritePropertyName("optionalModelRecord"u8);
                 writer.WriteStartObject();
                 foreach (var item in OptionalModelRecord)
                 {
@@ -131,7 +131,7 @@ namespace ModelsInCadl.Models
             {
                 if (OptionalPlainDate != null)
                 {
-                    writer.WritePropertyName("optionalPlainDate");
+                    writer.WritePropertyName("optionalPlainDate"u8);
                     writer.WriteStringValue(OptionalPlainDate.Value, "D");
                 }
                 else
@@ -143,7 +143,7 @@ namespace ModelsInCadl.Models
             {
                 if (OptionalPlainTime != null)
                 {
-                    writer.WritePropertyName("optionalPlainTime");
+                    writer.WritePropertyName("optionalPlainTime"u8);
                     writer.WriteStringValue(OptionalPlainTime.Value, "T");
                 }
                 else
@@ -151,11 +151,30 @@ namespace ModelsInCadl.Models
                     writer.WriteNull("optionalPlainTime");
                 }
             }
+            if (Optional.IsCollectionDefined(OptionalCollectionWithNullableIntElement))
+            {
+                writer.WritePropertyName("optionalCollectionWithNullableIntElement"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalCollectionWithNullableIntElement)
+                {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteNumberValue(item.Value);
+                }
+                writer.WriteEndArray();
+            }
             writer.WriteEndObject();
         }
 
         internal static RoundTripOptionalModel DeserializeRoundTripOptionalModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> optionalString = default;
             Optional<int?> optionalInt = default;
             Optional<IList<string>> optionalStringList = default;
@@ -169,14 +188,15 @@ namespace ModelsInCadl.Models
             Optional<IDictionary<string, RecordItem>> optionalModelRecord = default;
             Optional<DateTimeOffset?> optionalPlainDate = default;
             Optional<TimeSpan?> optionalPlainTime = default;
+            Optional<IList<int?>> optionalCollectionWithNullableIntElement = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("optionalString"))
+                if (property.NameEquals("optionalString"u8))
                 {
                     optionalString = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("optionalInt"))
+                if (property.NameEquals("optionalInt"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -186,7 +206,7 @@ namespace ModelsInCadl.Models
                     optionalInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("optionalStringList"))
+                if (property.NameEquals("optionalStringList"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -201,7 +221,7 @@ namespace ModelsInCadl.Models
                     optionalStringList = array;
                     continue;
                 }
-                if (property.NameEquals("optionalIntList"))
+                if (property.NameEquals("optionalIntList"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -216,7 +236,7 @@ namespace ModelsInCadl.Models
                     optionalIntList = array;
                     continue;
                 }
-                if (property.NameEquals("optionalModelCollection"))
+                if (property.NameEquals("optionalModelCollection"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -231,7 +251,7 @@ namespace ModelsInCadl.Models
                     optionalModelCollection = array;
                     continue;
                 }
-                if (property.NameEquals("optionalModel"))
+                if (property.NameEquals("optionalModel"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -241,7 +261,7 @@ namespace ModelsInCadl.Models
                     optionalModel = DerivedModel.DeserializeDerivedModel(property.Value);
                     continue;
                 }
-                if (property.NameEquals("optionalFixedStringEnum"))
+                if (property.NameEquals("optionalFixedStringEnum"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -251,7 +271,7 @@ namespace ModelsInCadl.Models
                     optionalFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
                     continue;
                 }
-                if (property.NameEquals("optionalExtensibleEnum"))
+                if (property.NameEquals("optionalExtensibleEnum"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -261,7 +281,7 @@ namespace ModelsInCadl.Models
                     optionalExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("optionalIntRecord"))
+                if (property.NameEquals("optionalIntRecord"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -276,7 +296,7 @@ namespace ModelsInCadl.Models
                     optionalIntRecord = dictionary;
                     continue;
                 }
-                if (property.NameEquals("optionalStringRecord"))
+                if (property.NameEquals("optionalStringRecord"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -291,7 +311,7 @@ namespace ModelsInCadl.Models
                     optionalStringRecord = dictionary;
                     continue;
                 }
-                if (property.NameEquals("optionalModelRecord"))
+                if (property.NameEquals("optionalModelRecord"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -306,7 +326,7 @@ namespace ModelsInCadl.Models
                     optionalModelRecord = dictionary;
                     continue;
                 }
-                if (property.NameEquals("optionalPlainDate"))
+                if (property.NameEquals("optionalPlainDate"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -316,7 +336,7 @@ namespace ModelsInCadl.Models
                     optionalPlainDate = property.Value.GetDateTimeOffset("D");
                     continue;
                 }
-                if (property.NameEquals("optionalPlainTime"))
+                if (property.NameEquals("optionalPlainTime"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -326,8 +346,30 @@ namespace ModelsInCadl.Models
                     optionalPlainTime = property.Value.GetTimeSpan("T");
                     continue;
                 }
+                if (property.NameEquals("optionalCollectionWithNullableIntElement"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    List<int?> array = new List<int?>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(item.GetInt32());
+                        }
+                    }
+                    optionalCollectionWithNullableIntElement = array;
+                    continue;
+                }
             }
-            return new RoundTripOptionalModel(optionalString, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelCollection), optionalModel, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime));
+            return new RoundTripOptionalModel(optionalString, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelCollection), optionalModel, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), Optional.ToList(optionalCollectionWithNullableIntElement));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

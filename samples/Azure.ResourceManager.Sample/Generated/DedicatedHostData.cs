@@ -14,7 +14,11 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the DedicatedHost data model. </summary>
+    /// <summary>
+    /// A class representing the DedicatedHost data model.
+    /// Specifies information about the Dedicated host.
+    /// Serialized Name: DedicatedHost
+    /// </summary>
     public partial class DedicatedHostData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>

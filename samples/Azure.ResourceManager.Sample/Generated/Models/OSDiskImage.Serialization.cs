@@ -15,17 +15,21 @@ namespace Azure.ResourceManager.Sample.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("operatingSystem");
+            writer.WritePropertyName("operatingSystem"u8);
             writer.WriteStringValue(OperatingSystem.ToSerialString());
             writer.WriteEndObject();
         }
 
         internal static OSDiskImage DeserializeOSDiskImage(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             OperatingSystemType operatingSystem = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("operatingSystem"))
+                if (property.NameEquals("operatingSystem"u8))
                 {
                     operatingSystem = property.Value.GetString().ToOperatingSystemType();
                     continue;

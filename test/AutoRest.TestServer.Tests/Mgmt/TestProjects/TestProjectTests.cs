@@ -102,10 +102,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 : methodInfo.ReturnType.Equals(typeof(ArmOperation));
         }
 
+        private static bool IsModelFactory(Type type)
+        {
+            return type.IsPublic && type.IsSealed && type.IsAbstract && type.Name.EndsWith("ModelFactory");
+        }
+
         [Test]
         public void ValidateNoParametersNamedParameter()
         {
-            foreach (var type in MyTypes())
+            // we should exclude the model factory class here, because this is validating all the APIs in our clients not to have a parameter name of `parameters`
+            foreach (var type in MyTypes().Where(type => !IsModelFactory(type)))
             {
                 foreach (var method in type.GetMethods())
                 {
@@ -620,7 +626,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             // CLR does not have a concept of "static class". CLR will treat static class as both abstract and sealed.
             // therefore using this to find all the static class (which are the extension classes)
-            var extensionClasses = MyTypes().Where(type => type.IsAbstract && type.IsSealed && type.IsPublic);
+            // and we currently have two public static classes now: one of them is the extension class for resource group resource, the other is the model factory
+            // we must exclude the model factory here
+            var extensionClasses = MyTypes().Where(type => type.IsAbstract && type.IsSealed && type.IsPublic && !IsModelFactory(type));
             Assert.LessOrEqual(extensionClasses.Count(), 1);
 
             return extensionClasses.FirstOrDefault();
@@ -833,8 +841,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 bool matches = false;
                 foreach (var candidate in candidates)
                 {
-                    var parameters = candidate.GetParameters().Skip(1).ToArray(); // skip the first since it is the instance we are extending on
-                    matches |= ValidateParameters(expectedParameters, parameters);
+                    var parameters = candidate.GetParameters();
+                    matches |= ValidateExtensionMethod(expectedParameters, candidate);
                 }
                 Assert.IsTrue(matches, $"Method {method.Name} is defined in extension client class {method.DeclaringType} but not found in extension class with all the same parameters");
             }
@@ -843,6 +851,24 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private static IEnumerable<MethodInfo> GetMethodDefinedByMyself(Type type)
         {
             return type.GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(m => m.DeclaringType == type);
+        }
+
+        private static bool ValidateExtensionMethod(ParameterInfo[] expected, MethodInfo extensionMethod)
+        {
+            var parameters = extensionMethod.GetParameters();
+            // try to skip the first and see if this matches
+            // skip the first since it is the instance we are extending on
+            var result = ValidateParameters(expected, parameters.Skip(1).ToArray());
+            if (result)
+                return result;
+            // if not match, we do some more testing
+            // for the scope resource, we usually have this: public XXXCollection GetXXXs(this ArmClient client, ResourceIdentifier scope, ...) to replace the extension on ArmResource
+            if (parameters.Length >= 2 && parameters[0].ParameterType == typeof(ArmClient) && parameters[1].ParameterType == typeof(ResourceIdentifier))
+            {
+                return ValidateParameters(expected, parameters.Skip(2).ToArray());
+            }
+
+            return false;
         }
 
         private static bool ValidateParameters(ParameterInfo[] expected, ParameterInfo[] parameters)

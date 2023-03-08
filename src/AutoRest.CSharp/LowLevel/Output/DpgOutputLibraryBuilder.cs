@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
@@ -53,7 +54,8 @@ namespace AutoRest.CSharp.Output.Models
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
-            var library = new DpgOutputLibrary(enums, models, clients, clientOptions, isCadlInput);
+            var aspDotNetExtension = new AspDotNetExtensionTypeProvider(clients, _rootNamespace.Name, _sourceInputModel);
+            var library = new DpgOutputLibrary(enums, models, clients, clientOptions, aspDotNetExtension, isCadlInput);
 
             if (isCadlInput)
             {
@@ -69,10 +71,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var inputEnum in _rootNamespace.Enums)
             {
-                if (inputEnum.Usage != InputModelTypeUsage.None)
-                {
-                    dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null,_defaultNamespace), "public", typeFactory, _sourceInputModel));
-                }
+                dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
             }
         }
 
@@ -96,13 +95,10 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var model in _rootNamespace.Models)
             {
-                if (model.Usage != InputModelTypeUsage.None)
-                {
-                    derivedTypesLookup.TryGetValue(model, out var children);
-                    InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
-                    ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
-                    models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
-                }
+                derivedTypesLookup.TryGetValue(model, out var children);
+                InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
+                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
+                models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
             }
         }
 

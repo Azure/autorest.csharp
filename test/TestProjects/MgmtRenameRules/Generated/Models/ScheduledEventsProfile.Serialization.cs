@@ -17,7 +17,7 @@ namespace MgmtRenameRules.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(TerminateNotificationProfile))
             {
-                writer.WritePropertyName("terminateNotificationProfile");
+                writer.WritePropertyName("terminateNotificationProfile"u8);
                 writer.WriteObjectValue(TerminateNotificationProfile);
             }
             writer.WriteEndObject();
@@ -25,10 +25,14 @@ namespace MgmtRenameRules.Models
 
         internal static ScheduledEventsProfile DeserializeScheduledEventsProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<TerminateNotificationProfile> terminateNotificationProfile = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("terminateNotificationProfile"))
+                if (property.NameEquals("terminateNotificationProfile"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

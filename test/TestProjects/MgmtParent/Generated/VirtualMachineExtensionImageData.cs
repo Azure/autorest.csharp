@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtParent
 {
-    /// <summary> A class representing the VirtualMachineExtensionImage data model. </summary>
+    /// <summary>
+    /// A class representing the VirtualMachineExtensionImage data model.
+    /// The VirtualMachineExtensionImage.
+    /// </summary>
     public partial class VirtualMachineExtensionImageData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>

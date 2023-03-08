@@ -17,12 +17,12 @@ namespace body_complex.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Field1))
             {
-                writer.WritePropertyName("field1");
+                writer.WritePropertyName("field1"u8);
                 writer.WriteNumberValue(Field1.Value);
             }
             if (Optional.IsDefined(Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose))
             {
-                writer.WritePropertyName("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose");
+                writer.WritePropertyName("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"u8);
                 writer.WriteNumberValue(Field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose.Value);
             }
             writer.WriteEndObject();
@@ -30,11 +30,15 @@ namespace body_complex.Models
 
         internal static DoubleWrapper DeserializeDoubleWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<double> field1 = default;
             Optional<double> field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("field1"))
+                if (property.NameEquals("field1"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -44,7 +48,7 @@ namespace body_complex.Models
                     field1 = property.Value.GetDouble();
                     continue;
                 }
-                if (property.NameEquals("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"))
+                if (property.NameEquals("field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

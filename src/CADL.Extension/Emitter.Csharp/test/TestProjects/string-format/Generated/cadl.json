@@ -109,11 +109,12 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/zonedDateTime/{time}",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "14",
@@ -184,11 +185,12 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "",
      "Path": "/uri/{uri}",
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

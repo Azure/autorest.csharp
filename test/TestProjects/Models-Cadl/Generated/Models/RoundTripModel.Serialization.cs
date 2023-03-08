@@ -17,26 +17,26 @@ namespace ModelsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredString");
+            writer.WritePropertyName("requiredString"u8);
             writer.WriteStringValue(RequiredString);
-            writer.WritePropertyName("requiredInt");
+            writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
-            writer.WritePropertyName("requiredModel");
+            writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
-            writer.WritePropertyName("requiredFixedStringEnum");
+            writer.WritePropertyName("requiredFixedStringEnum"u8);
             writer.WriteStringValue(RequiredFixedStringEnum.ToSerialString());
-            writer.WritePropertyName("requiredFixedIntEnum");
+            writer.WritePropertyName("requiredFixedIntEnum"u8);
             writer.WriteNumberValue((int)RequiredFixedIntEnum);
-            writer.WritePropertyName("requiredExtensibleEnum");
+            writer.WritePropertyName("requiredExtensibleEnum"u8);
             writer.WriteStringValue(RequiredExtensibleEnum.ToString());
-            writer.WritePropertyName("requiredCollection");
+            writer.WritePropertyName("requiredCollection"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredCollection)
             {
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("requiredIntRecord");
+            writer.WritePropertyName("requiredIntRecord"u8);
             writer.WriteStartObject();
             foreach (var item in RequiredIntRecord)
             {
@@ -44,7 +44,7 @@ namespace ModelsInCadl.Models
                 writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndObject();
-            writer.WritePropertyName("requiredStringRecord");
+            writer.WritePropertyName("requiredStringRecord"u8);
             writer.WriteStartObject();
             foreach (var item in RequiredStringRecord)
             {
@@ -52,7 +52,7 @@ namespace ModelsInCadl.Models
                 writer.WriteStringValue(item.Value);
             }
             writer.WriteEndObject();
-            writer.WritePropertyName("requiredModelRecord");
+            writer.WritePropertyName("requiredModelRecord"u8);
             writer.WriteStartObject();
             foreach (var item in RequiredModelRecord)
             {
@@ -65,6 +65,10 @@ namespace ModelsInCadl.Models
 
         internal static RoundTripModel DeserializeRoundTripModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string requiredString = default;
             int requiredInt = default;
             BaseModelWithDiscriminator requiredModel = default;
@@ -77,37 +81,37 @@ namespace ModelsInCadl.Models
             IDictionary<string, RecordItem> requiredModelRecord = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredString"))
+                if (property.NameEquals("requiredString"u8))
                 {
                     requiredString = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredInt"))
+                if (property.NameEquals("requiredInt"u8))
                 {
                     requiredInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("requiredModel"))
+                if (property.NameEquals("requiredModel"u8))
                 {
                     requiredModel = BaseModelWithDiscriminator.DeserializeBaseModelWithDiscriminator(property.Value);
                     continue;
                 }
-                if (property.NameEquals("requiredFixedStringEnum"))
+                if (property.NameEquals("requiredFixedStringEnum"u8))
                 {
                     requiredFixedStringEnum = property.Value.GetString().ToFixedStringEnum();
                     continue;
                 }
-                if (property.NameEquals("requiredFixedIntEnum"))
+                if (property.NameEquals("requiredFixedIntEnum"u8))
                 {
                     requiredFixedIntEnum = property.Value.GetInt32().ToFixedIntEnum();
                     continue;
                 }
-                if (property.NameEquals("requiredExtensibleEnum"))
+                if (property.NameEquals("requiredExtensibleEnum"u8))
                 {
                     requiredExtensibleEnum = new ExtensibleEnum(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("requiredCollection"))
+                if (property.NameEquals("requiredCollection"u8))
                 {
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -117,7 +121,7 @@ namespace ModelsInCadl.Models
                     requiredCollection = array;
                     continue;
                 }
-                if (property.NameEquals("requiredIntRecord"))
+                if (property.NameEquals("requiredIntRecord"u8))
                 {
                     Dictionary<string, int> dictionary = new Dictionary<string, int>();
                     foreach (var property0 in property.Value.EnumerateObject())
@@ -127,7 +131,7 @@ namespace ModelsInCadl.Models
                     requiredIntRecord = dictionary;
                     continue;
                 }
-                if (property.NameEquals("requiredStringRecord"))
+                if (property.NameEquals("requiredStringRecord"u8))
                 {
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
                     foreach (var property0 in property.Value.EnumerateObject())
@@ -137,7 +141,7 @@ namespace ModelsInCadl.Models
                     requiredStringRecord = dictionary;
                     continue;
                 }
-                if (property.NameEquals("requiredModelRecord"))
+                if (property.NameEquals("requiredModelRecord"u8))
                 {
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())
@@ -153,7 +157,7 @@ namespace ModelsInCadl.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static RoundTripModel FromResponse(Response response)
+        internal static RoundTripModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeRoundTripModel(document.RootElement);

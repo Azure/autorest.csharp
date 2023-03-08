@@ -15,15 +15,15 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("keyVaultKeyName");
+            writer.WritePropertyName("keyVaultKeyName"u8);
             writer.WriteStringValue(KeyVaultKeyName);
-            writer.WritePropertyName("keyVaultKeyVersion");
+            writer.WritePropertyName("keyVaultKeyVersion"u8);
             writer.WriteStringValue(KeyVaultKeyVersion);
-            writer.WritePropertyName("keyVaultUri");
+            writer.WritePropertyName("keyVaultUri"u8);
             writer.WriteStringValue(KeyVaultUri);
             if (Optional.IsDefined(AccessCredentials))
             {
-                writer.WritePropertyName("accessCredentials");
+                writer.WritePropertyName("accessCredentials"u8);
                 writer.WriteObjectValue(AccessCredentials);
             }
             writer.WriteEndObject();
@@ -31,28 +31,32 @@ namespace CognitiveSearch.Models
 
         internal static EncryptionKey DeserializeEncryptionKey(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string keyVaultKeyName = default;
             string keyVaultKeyVersion = default;
             string keyVaultUri = default;
             Optional<AzureActiveDirectoryApplicationCredentials> accessCredentials = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("keyVaultKeyName"))
+                if (property.NameEquals("keyVaultKeyName"u8))
                 {
                     keyVaultKeyName = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("keyVaultKeyVersion"))
+                if (property.NameEquals("keyVaultKeyVersion"u8))
                 {
                     keyVaultKeyVersion = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("keyVaultUri"))
+                if (property.NameEquals("keyVaultUri"u8))
                 {
                     keyVaultUri = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("accessCredentials"))
+                if (property.NameEquals("accessCredentials"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

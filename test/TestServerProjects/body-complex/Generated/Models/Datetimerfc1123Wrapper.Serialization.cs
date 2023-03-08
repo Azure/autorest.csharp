@@ -18,12 +18,12 @@ namespace body_complex.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Field))
             {
-                writer.WritePropertyName("field");
+                writer.WritePropertyName("field"u8);
                 writer.WriteStringValue(Field.Value, "R");
             }
             if (Optional.IsDefined(Now))
             {
-                writer.WritePropertyName("now");
+                writer.WritePropertyName("now"u8);
                 writer.WriteStringValue(Now.Value, "R");
             }
             writer.WriteEndObject();
@@ -31,11 +31,15 @@ namespace body_complex.Models
 
         internal static Datetimerfc1123Wrapper DeserializeDatetimerfc1123Wrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DateTimeOffset> field = default;
             Optional<DateTimeOffset> now = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("field"))
+                if (property.NameEquals("field"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -45,7 +49,7 @@ namespace body_complex.Models
                     field = property.Value.GetDateTimeOffset("R");
                     continue;
                 }
-                if (property.NameEquals("now"))
+                if (property.NameEquals("now"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

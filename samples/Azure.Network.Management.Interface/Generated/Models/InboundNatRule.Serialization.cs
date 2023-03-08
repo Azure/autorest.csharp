@@ -17,49 +17,49 @@ namespace Azure.Network.Management.Interface.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("name");
+                writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
             if (Optional.IsDefined(Id))
             {
-                writer.WritePropertyName("id");
+                writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(FrontendIPConfiguration))
             {
-                writer.WritePropertyName("frontendIPConfiguration");
+                writer.WritePropertyName("frontendIPConfiguration"u8);
                 writer.WriteObjectValue(FrontendIPConfiguration);
             }
             if (Optional.IsDefined(Protocol))
             {
-                writer.WritePropertyName("protocol");
+                writer.WritePropertyName("protocol"u8);
                 writer.WriteStringValue(Protocol.Value.ToString());
             }
             if (Optional.IsDefined(FrontendPort))
             {
-                writer.WritePropertyName("frontendPort");
+                writer.WritePropertyName("frontendPort"u8);
                 writer.WriteNumberValue(FrontendPort.Value);
             }
             if (Optional.IsDefined(BackendPort))
             {
-                writer.WritePropertyName("backendPort");
+                writer.WritePropertyName("backendPort"u8);
                 writer.WriteNumberValue(BackendPort.Value);
             }
             if (Optional.IsDefined(IdleTimeoutInMinutes))
             {
-                writer.WritePropertyName("idleTimeoutInMinutes");
+                writer.WritePropertyName("idleTimeoutInMinutes"u8);
                 writer.WriteNumberValue(IdleTimeoutInMinutes.Value);
             }
             if (Optional.IsDefined(EnableFloatingIP))
             {
-                writer.WritePropertyName("enableFloatingIP");
+                writer.WritePropertyName("enableFloatingIP"u8);
                 writer.WriteBooleanValue(EnableFloatingIP.Value);
             }
             if (Optional.IsDefined(EnableTcpReset))
             {
-                writer.WritePropertyName("enableTcpReset");
+                writer.WritePropertyName("enableTcpReset"u8);
                 writer.WriteBooleanValue(EnableTcpReset.Value);
             }
             writer.WriteEndObject();
@@ -68,6 +68,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static InboundNatRule DeserializeInboundNatRule(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> etag = default;
             Optional<string> type = default;
@@ -83,27 +87,27 @@ namespace Azure.Network.Management.Interface.Models
             Optional<ProvisioningState> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("etag"))
+                if (property.NameEquals("etag"u8))
                 {
                     etag = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -112,7 +116,7 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("frontendIPConfiguration"))
+                        if (property0.NameEquals("frontendIPConfiguration"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -122,7 +126,7 @@ namespace Azure.Network.Management.Interface.Models
                             frontendIPConfiguration = DeserializeSubResource(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("backendIPConfiguration"))
+                        if (property0.NameEquals("backendIPConfiguration"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -132,7 +136,7 @@ namespace Azure.Network.Management.Interface.Models
                             backendIPConfiguration = NetworkInterfaceIPConfiguration.DeserializeNetworkInterfaceIPConfiguration(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("protocol"))
+                        if (property0.NameEquals("protocol"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -142,7 +146,7 @@ namespace Azure.Network.Management.Interface.Models
                             protocol = new TransportProtocol(property0.Value.GetString());
                             continue;
                         }
-                        if (property0.NameEquals("frontendPort"))
+                        if (property0.NameEquals("frontendPort"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -152,7 +156,7 @@ namespace Azure.Network.Management.Interface.Models
                             frontendPort = property0.Value.GetInt32();
                             continue;
                         }
-                        if (property0.NameEquals("backendPort"))
+                        if (property0.NameEquals("backendPort"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -162,7 +166,7 @@ namespace Azure.Network.Management.Interface.Models
                             backendPort = property0.Value.GetInt32();
                             continue;
                         }
-                        if (property0.NameEquals("idleTimeoutInMinutes"))
+                        if (property0.NameEquals("idleTimeoutInMinutes"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -172,7 +176,7 @@ namespace Azure.Network.Management.Interface.Models
                             idleTimeoutInMinutes = property0.Value.GetInt32();
                             continue;
                         }
-                        if (property0.NameEquals("enableFloatingIP"))
+                        if (property0.NameEquals("enableFloatingIP"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -182,7 +186,7 @@ namespace Azure.Network.Management.Interface.Models
                             enableFloatingIP = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("enableTcpReset"))
+                        if (property0.NameEquals("enableTcpReset"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -192,7 +196,7 @@ namespace Azure.Network.Management.Interface.Models
                             enableTcpReset = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("provisioningState"))
+                        if (property0.NameEquals("provisioningState"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {

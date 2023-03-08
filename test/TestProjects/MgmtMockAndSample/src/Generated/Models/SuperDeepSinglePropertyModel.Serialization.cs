@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Super))
             {
-                writer.WritePropertyName("super");
+                writer.WritePropertyName("super"u8);
                 writer.WriteObjectValue(Super);
             }
             writer.WriteEndObject();
@@ -25,10 +25,14 @@ namespace MgmtMockAndSample.Models
 
         internal static SuperDeepSinglePropertyModel DeserializeSuperDeepSinglePropertyModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<VeryDeepSinglePropertyModel> super = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("super"))
+                if (property.NameEquals("super"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

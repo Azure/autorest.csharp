@@ -3,13 +3,25 @@
   "Namespace": "ExactMatchInheritance",
   "LibraryName": null,
   "SharedSourceFolders": [
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
   "azure-arm": true,
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
+  "ModelsToTreatEmptyStringAsNull": [
+    "ExactMatchModel11",
+    "ExactMatchModel1Data"
+  ],
+  "IntrinsicTypesToTreatEmptyStringAsNull": [
+    "Uri",
+    "Guid",
+    "ResourceIdentifier",
+    "DateTimeOffset",
+    "ResourceType",
+    "IPAddress"
+  ],
   "KeepOrphanedModels": [
     "ExactMatchModel11"
   ],

@@ -11,13 +11,13 @@ namespace CustomizationsInCadl.Models
     public partial class ModelToChangeNamespace
     {
         /// <summary> Initializes a new instance of ModelToChangeNamespace. </summary>
-        /// <param name="requiredInt"></param>
+        /// <param name="requiredInt"> Required int. </param>
         public ModelToChangeNamespace(int requiredInt)
         {
             RequiredInt = requiredInt;
         }
 
-        /// <summary> Gets or sets the required int. </summary>
+        /// <summary> Required int. </summary>
         public int RequiredInt { get; set; }
     }
 }

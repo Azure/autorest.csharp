@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
+using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample.Samples

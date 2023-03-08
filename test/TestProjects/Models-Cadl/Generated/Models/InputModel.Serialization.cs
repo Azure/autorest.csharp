@@ -15,34 +15,34 @@ namespace ModelsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredString");
+            writer.WritePropertyName("requiredString"u8);
             writer.WriteStringValue(RequiredString);
-            writer.WritePropertyName("requiredInt");
+            writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
-            writer.WritePropertyName("requiredModel");
+            writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
-            writer.WritePropertyName("requiredIntCollection");
+            writer.WritePropertyName("requiredIntCollection"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredIntCollection)
             {
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("requiredStringCollection");
+            writer.WritePropertyName("requiredStringCollection"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredStringCollection)
             {
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("requiredModelCollection");
+            writer.WritePropertyName("requiredModelCollection"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredModelCollection)
             {
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("requiredModelRecord");
+            writer.WritePropertyName("requiredModelRecord"u8);
             writer.WriteStartObject();
             foreach (var item in RequiredModelRecord)
             {
@@ -50,6 +50,30 @@ namespace ModelsInCadl.Models
                 writer.WriteObjectValue(item.Value);
             }
             writer.WriteEndObject();
+            writer.WritePropertyName("requiredCollectionWithNullableFloatElement"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollectionWithNullableFloatElement)
+            {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+                writer.WriteNumberValue(item.Value);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("requiredCollectionWithNullableBooleanElement"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollectionWithNullableBooleanElement)
+            {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+                writer.WriteBooleanValue(item.Value);
+            }
+            writer.WriteEndArray();
             writer.WriteEndObject();
         }
 

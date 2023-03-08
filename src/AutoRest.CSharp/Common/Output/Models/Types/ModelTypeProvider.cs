@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var declaredName = property.Declaration.Name;
                     var serializedName = property.InputModelProperty.SerializedName ?? property.InputModelProperty.Name;
                     var optionalViaNullability = !property.IsRequired && !property.ValueType.IsNullable && !TypeFactory.IsCollectionType(property.ValueType);
-                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType);
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType, false);
                     var paramName = declaredName.StartsWith("_", StringComparison.OrdinalIgnoreCase) ? declaredName.Substring(1) : declaredName.FirstCharToLowerCase();
                     //TODO we should change this property name on the JsonPropertySerialization since it isn't whether it is "readonly"
                     //or not it indicates if we should serialize this or not which is different.  Lists are readonly
@@ -147,6 +147,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         valueSerialization,
                         property.IsRequired,
                         shouldSkipSerialization,
+                        ShouldSkipDeserialization(property),
                         optionalViaNullability));
                 }
             }
@@ -160,6 +161,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
             }
 
+            if (property.InputModelProperty.Type is InputLiteralType)
+            {
+                return false;
+            }
+
             if (property.InputModelProperty!.IsReadOnly)
             {
                 return true;
@@ -167,11 +173,13 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (property.Declaration.Type.IsCollectionType())
             {
-                return  _inputModel.Usage is InputModelTypeUsage.Output;
+                return _inputModel.Usage is InputModelTypeUsage.Output;
             }
 
             return property.IsReadOnly && _inputModel.Usage is not InputModelTypeUsage.Input;
         }
+
+        private bool ShouldSkipDeserialization(ObjectTypeProperty property) => property.InputModelProperty?.Type is InputLiteralType;
 
         private ConstructorSignature? CreateSerializationConstructorSignature(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {
@@ -251,7 +259,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
-            => TypeFactory.IsList(p.Type) ? p with { Type = new CSharpType(typeof(IEnumerable<>), p.Type.IsNullable, p.Type.Arguments) } : p;
+            => p with { Type = TypeFactory.GetInputType(p.Type) };
 
         private static Parameter CreateSerializationConstructorParameter(Parameter p) // we don't validate parameters for serialization constructor
             => p with { Validation = ValidationType.None };
@@ -443,7 +451,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             else
             {
                 //only load implementations for the base type
-                implementations = _derivedTypes.Select(child => new ObjectTypeDiscriminatorImplementation(child.Name, _typeFactory.CreateType(child))).ToArray();
+                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
                 property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
             }
 

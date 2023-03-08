@@ -14,11 +14,15 @@ namespace MgmtScopeResource.Models
     {
         internal static DeploymentValidateResult DeserializeDeploymentValidateResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ErrorResponse> errorResponse = default;
             Optional<DeploymentPropertiesExtended> properties = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("errorResponse"))
+                if (property.NameEquals("errorResponse"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -28,7 +32,7 @@ namespace MgmtScopeResource.Models
                     errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

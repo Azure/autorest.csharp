@@ -16,35 +16,35 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             if (Optional.IsDefined(Description))
             {
-                writer.WritePropertyName("description");
+                writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
-            writer.WritePropertyName("dataSourceName");
+            writer.WritePropertyName("dataSourceName"u8);
             writer.WriteStringValue(DataSourceName);
             if (Optional.IsDefined(SkillsetName))
             {
-                writer.WritePropertyName("skillsetName");
+                writer.WritePropertyName("skillsetName"u8);
                 writer.WriteStringValue(SkillsetName);
             }
-            writer.WritePropertyName("targetIndexName");
+            writer.WritePropertyName("targetIndexName"u8);
             writer.WriteStringValue(TargetIndexName);
             if (Optional.IsDefined(Schedule))
             {
-                writer.WritePropertyName("schedule");
+                writer.WritePropertyName("schedule"u8);
                 writer.WriteObjectValue(Schedule);
             }
             if (Optional.IsDefined(Parameters))
             {
-                writer.WritePropertyName("parameters");
+                writer.WritePropertyName("parameters"u8);
                 writer.WriteObjectValue(Parameters);
             }
             if (Optional.IsCollectionDefined(FieldMappings))
             {
-                writer.WritePropertyName("fieldMappings");
+                writer.WritePropertyName("fieldMappings"u8);
                 writer.WriteStartArray();
                 foreach (var item in FieldMappings)
                 {
@@ -54,7 +54,7 @@ namespace CognitiveSearch.Models
             }
             if (Optional.IsCollectionDefined(OutputFieldMappings))
             {
-                writer.WritePropertyName("outputFieldMappings");
+                writer.WritePropertyName("outputFieldMappings"u8);
                 writer.WriteStartArray();
                 foreach (var item in OutputFieldMappings)
                 {
@@ -64,12 +64,12 @@ namespace CognitiveSearch.Models
             }
             if (Optional.IsDefined(IsDisabled))
             {
-                writer.WritePropertyName("disabled");
+                writer.WritePropertyName("disabled"u8);
                 writer.WriteBooleanValue(IsDisabled.Value);
             }
             if (Optional.IsDefined(ETag))
             {
-                writer.WritePropertyName("@odata.etag");
+                writer.WritePropertyName("@odata.etag"u8);
                 writer.WriteStringValue(ETag);
             }
             writer.WriteEndObject();
@@ -77,6 +77,10 @@ namespace CognitiveSearch.Models
 
         internal static Indexer DeserializeIndexer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<string> description = default;
             string dataSourceName = default;
@@ -90,32 +94,32 @@ namespace CognitiveSearch.Models
             Optional<string> odataEtag = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("description"))
+                if (property.NameEquals("description"u8))
                 {
                     description = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("dataSourceName"))
+                if (property.NameEquals("dataSourceName"u8))
                 {
                     dataSourceName = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("skillsetName"))
+                if (property.NameEquals("skillsetName"u8))
                 {
                     skillsetName = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("targetIndexName"))
+                if (property.NameEquals("targetIndexName"u8))
                 {
                     targetIndexName = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("schedule"))
+                if (property.NameEquals("schedule"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -125,7 +129,7 @@ namespace CognitiveSearch.Models
                     schedule = IndexingSchedule.DeserializeIndexingSchedule(property.Value);
                     continue;
                 }
-                if (property.NameEquals("parameters"))
+                if (property.NameEquals("parameters"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -135,7 +139,7 @@ namespace CognitiveSearch.Models
                     parameters = IndexingParameters.DeserializeIndexingParameters(property.Value);
                     continue;
                 }
-                if (property.NameEquals("fieldMappings"))
+                if (property.NameEquals("fieldMappings"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -150,7 +154,7 @@ namespace CognitiveSearch.Models
                     fieldMappings = array;
                     continue;
                 }
-                if (property.NameEquals("outputFieldMappings"))
+                if (property.NameEquals("outputFieldMappings"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -165,7 +169,7 @@ namespace CognitiveSearch.Models
                     outputFieldMappings = array;
                     continue;
                 }
-                if (property.NameEquals("disabled"))
+                if (property.NameEquals("disabled"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -175,7 +179,7 @@ namespace CognitiveSearch.Models
                     disabled = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("@odata.etag"))
+                if (property.NameEquals("@odata.etag"u8))
                 {
                     odataEtag = property.Value.GetString();
                     continue;

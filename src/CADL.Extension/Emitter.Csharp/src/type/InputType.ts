@@ -20,9 +20,23 @@ export interface InputLiteralType extends InputType {
     Value: any;
 }
 
+export function isInputLiteralType(type: InputType): type is InputLiteralType {
+    return (
+        type.Name === "Literal" &&
+        (type as InputLiteralType).LiteralValueType !== undefined
+    );
+}
+
 export interface InputUnionType extends InputType {
     Name: "Union";
     UnionItemTypes: InputType[];
+}
+
+export function isInputUnionType(type: InputType): type is InputUnionType {
+    return (
+        type.Name === "Union" &&
+        (type as InputUnionType).UnionItemTypes !== undefined
+    );
 }
 
 export interface InputModelType extends InputType {
@@ -55,4 +69,30 @@ export interface InputListType extends InputType {
 export interface InputDictionaryType extends InputType {
     KeyType: InputType;
     ValueType: InputType;
+}
+
+export interface InputIntrinsicType extends InputType {
+    Name: "Intrinsic";
+    IsNullable: false;
+    Kind: "ErrorType" | "void" | "never" | "unknown" | "null";
+}
+
+export interface InputErrorType extends InputIntrinsicType {
+    Kind: "ErrorType";
+}
+
+export interface InputVoidType extends InputIntrinsicType {
+    Kind: "void";
+}
+
+export interface InputNeverType extends InputIntrinsicType {
+    Kind: "never";
+}
+
+export interface InputUnknownType extends InputIntrinsicType {
+    Kind: "unknown";
+}
+
+export interface InputNullType extends InputIntrinsicType {
+    Kind: "null";
 }

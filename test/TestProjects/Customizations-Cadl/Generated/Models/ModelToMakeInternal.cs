@@ -11,13 +11,13 @@ namespace CustomizationsInCadl.Models
     internal partial class ModelToMakeInternal
     {
         /// <summary> Initializes a new instance of ModelToMakeInternal. </summary>
-        /// <param name="requiredInt"></param>
+        /// <param name="requiredInt"> Required int. </param>
         public ModelToMakeInternal(int requiredInt)
         {
             RequiredInt = requiredInt;
         }
 
-        /// <summary> Gets or sets the required int. </summary>
+        /// <summary> Required int. </summary>
         public int RequiredInt { get; set; }
     }
 }

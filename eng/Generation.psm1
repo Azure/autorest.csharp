@@ -2,10 +2,10 @@ $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 $autoRestBinary = "npx --no-install autorest"
 $AutoRestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CSharp')
 
-function Invoke($command)
+function Invoke($command, $executePath=$repoRoot)
 {
     Write-Host "> $command"
-    pushd $repoRoot
+    pushd $executePath
     if ($IsLinux -or $IsMacOs)
     {
         sh -c "$command 2>&1"
@@ -72,12 +72,12 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
         $repoRootPath = Join-Path $PSScriptRoot ".."
         $repoRootPath = Resolve-Path -Path $repoRootPath
         Push-Location $repoRootPath
-        $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/netcoreapp3.1/AutoRest.CSharp.dll"
+        $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
         Try
         {
             $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
             $emitCommand = "npx cadl compile $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.emitter-output-dir=$outputPath --option @azure-tools/cadl-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
-            Invoke $emitCommand    
+            Invoke $emitCommand $outputPath
         }
         Finally 
         {

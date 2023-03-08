@@ -15,6 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static ReadResult DeserializeReadResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int page = default;
             float angle = default;
             float width = default;
@@ -24,32 +28,32 @@ namespace Azure.AI.FormRecognizer.Models
             Optional<IReadOnlyList<TextLine>> lines = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("page"))
+                if (property.NameEquals("page"u8))
                 {
                     page = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("angle"))
+                if (property.NameEquals("angle"u8))
                 {
                     angle = property.Value.GetSingle();
                     continue;
                 }
-                if (property.NameEquals("width"))
+                if (property.NameEquals("width"u8))
                 {
                     width = property.Value.GetSingle();
                     continue;
                 }
-                if (property.NameEquals("height"))
+                if (property.NameEquals("height"u8))
                 {
                     height = property.Value.GetSingle();
                     continue;
                 }
-                if (property.NameEquals("unit"))
+                if (property.NameEquals("unit"u8))
                 {
                     unit = property.Value.GetString().ToLengthUnit();
                     continue;
                 }
-                if (property.NameEquals("language"))
+                if (property.NameEquals("language"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -59,7 +63,7 @@ namespace Azure.AI.FormRecognizer.Models
                     language = new Language(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("lines"))
+                if (property.NameEquals("lines"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

@@ -17,7 +17,7 @@ namespace MgmtSafeFlatten.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(LayerTwo))
             {
-                writer.WritePropertyName("layerTwo");
+                writer.WritePropertyName("layerTwo"u8);
                 writer.WriteObjectValue(LayerTwo);
             }
             writer.WriteEndObject();
@@ -25,10 +25,14 @@ namespace MgmtSafeFlatten.Models
 
         internal static LayerOneSingle DeserializeLayerOneSingle(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<LayerTwoSingle> layerTwo = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("layerTwo"))
+                if (property.NameEquals("layerTwo"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

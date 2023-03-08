@@ -14,10 +14,14 @@ namespace httpInfrastructure.Models
     {
         internal static C DeserializeC(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> httpCode = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("httpCode"))
+                if (property.NameEquals("httpCode"u8))
                 {
                     httpCode = property.Value.GetString();
                     continue;

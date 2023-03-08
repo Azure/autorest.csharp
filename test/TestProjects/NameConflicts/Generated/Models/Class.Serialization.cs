@@ -17,542 +17,542 @@ namespace NameConflicts.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Abstract))
             {
-                writer.WritePropertyName("abstract");
+                writer.WritePropertyName("abstract"u8);
                 writer.WriteStringValue(Abstract);
             }
             if (Optional.IsDefined(Add))
             {
-                writer.WritePropertyName("add");
+                writer.WritePropertyName("add"u8);
                 writer.WriteStringValue(Add);
             }
             if (Optional.IsDefined(Alias))
             {
-                writer.WritePropertyName("alias");
+                writer.WritePropertyName("alias"u8);
                 writer.WriteStringValue(Alias);
             }
             if (Optional.IsDefined(As))
             {
-                writer.WritePropertyName("as");
+                writer.WritePropertyName("as"u8);
                 writer.WriteStringValue(As);
             }
             if (Optional.IsDefined(Ascending))
             {
-                writer.WritePropertyName("ascending");
+                writer.WritePropertyName("ascending"u8);
                 writer.WriteStringValue(Ascending);
             }
             if (Optional.IsDefined(Async))
             {
-                writer.WritePropertyName("async");
+                writer.WritePropertyName("async"u8);
                 writer.WriteStringValue(Async);
             }
             if (Optional.IsDefined(Await))
             {
-                writer.WritePropertyName("await");
+                writer.WritePropertyName("await"u8);
                 writer.WriteStringValue(Await);
             }
             if (Optional.IsDefined(Base))
             {
-                writer.WritePropertyName("base");
+                writer.WritePropertyName("base"u8);
                 writer.WriteStringValue(Base);
             }
             if (Optional.IsDefined(Bool))
             {
-                writer.WritePropertyName("bool");
+                writer.WritePropertyName("bool"u8);
                 writer.WriteStringValue(Bool);
             }
             if (Optional.IsDefined(Break))
             {
-                writer.WritePropertyName("break");
+                writer.WritePropertyName("break"u8);
                 writer.WriteStringValue(Break);
             }
             if (Optional.IsDefined(By))
             {
-                writer.WritePropertyName("by");
+                writer.WritePropertyName("by"u8);
                 writer.WriteStringValue(By);
             }
             if (Optional.IsDefined(Byte))
             {
-                writer.WritePropertyName("byte");
+                writer.WritePropertyName("byte"u8);
                 writer.WriteStringValue(Byte);
             }
             if (Optional.IsDefined(Catch))
             {
-                writer.WritePropertyName("catch");
+                writer.WritePropertyName("catch"u8);
                 writer.WriteStringValue(Catch);
             }
             if (Optional.IsDefined(Char))
             {
-                writer.WritePropertyName("char");
+                writer.WritePropertyName("char"u8);
                 writer.WriteStringValue(Char);
             }
             if (Optional.IsDefined(Checked))
             {
-                writer.WritePropertyName("checked");
+                writer.WritePropertyName("checked"u8);
                 writer.WriteStringValue(Checked);
             }
             if (Optional.IsDefined(Const))
             {
-                writer.WritePropertyName("const");
+                writer.WritePropertyName("const"u8);
                 writer.WriteStringValue(Const);
             }
             if (Optional.IsDefined(Continue))
             {
-                writer.WritePropertyName("continue");
+                writer.WritePropertyName("continue"u8);
                 writer.WriteStringValue(Continue);
             }
             if (Optional.IsDefined(ClassValue))
             {
-                writer.WritePropertyName("class");
+                writer.WritePropertyName("class"u8);
                 writer.WriteStringValue(ClassValue);
             }
             if (Optional.IsDefined(Decimal))
             {
-                writer.WritePropertyName("decimal");
+                writer.WritePropertyName("decimal"u8);
                 writer.WriteStringValue(Decimal);
             }
             if (Optional.IsDefined(Default))
             {
-                writer.WritePropertyName("default");
+                writer.WritePropertyName("default"u8);
                 writer.WriteStringValue(Default);
             }
             if (Optional.IsDefined(Delegate))
             {
-                writer.WritePropertyName("delegate");
+                writer.WritePropertyName("delegate"u8);
                 writer.WriteStringValue(Delegate);
             }
             if (Optional.IsDefined(Descending))
             {
-                writer.WritePropertyName("descending");
+                writer.WritePropertyName("descending"u8);
                 writer.WriteStringValue(Descending);
             }
             if (Optional.IsDefined(Do))
             {
-                writer.WritePropertyName("do");
+                writer.WritePropertyName("do"u8);
                 writer.WriteStringValue(Do);
             }
             if (Optional.IsDefined(Double))
             {
-                writer.WritePropertyName("double");
+                writer.WritePropertyName("double"u8);
                 writer.WriteStringValue(Double);
             }
             if (Optional.IsDefined(Dynamic))
             {
-                writer.WritePropertyName("dynamic");
+                writer.WritePropertyName("dynamic"u8);
                 writer.WriteStringValue(Dynamic);
             }
             if (Optional.IsDefined(Else))
             {
-                writer.WritePropertyName("else");
+                writer.WritePropertyName("else"u8);
                 writer.WriteStringValue(Else);
             }
             if (Optional.IsDefined(Enum))
             {
-                writer.WritePropertyName("enum");
+                writer.WritePropertyName("enum"u8);
                 writer.WriteStringValue(Enum);
             }
             if (Optional.IsDefined(Event))
             {
-                writer.WritePropertyName("event");
+                writer.WritePropertyName("event"u8);
                 writer.WriteStringValue(Event);
             }
             if (Optional.IsDefined(Explicit))
             {
-                writer.WritePropertyName("explicit");
+                writer.WritePropertyName("explicit"u8);
                 writer.WriteStringValue(Explicit);
             }
             if (Optional.IsDefined(Extern))
             {
-                writer.WritePropertyName("extern");
+                writer.WritePropertyName("extern"u8);
                 writer.WriteStringValue(Extern);
             }
             if (Optional.IsDefined(False))
             {
-                writer.WritePropertyName("false");
+                writer.WritePropertyName("false"u8);
                 writer.WriteStringValue(False);
             }
             if (Optional.IsDefined(Finally))
             {
-                writer.WritePropertyName("finally");
+                writer.WritePropertyName("finally"u8);
                 writer.WriteStringValue(Finally);
             }
             if (Optional.IsDefined(Fixed))
             {
-                writer.WritePropertyName("fixed");
+                writer.WritePropertyName("fixed"u8);
                 writer.WriteStringValue(Fixed);
             }
             if (Optional.IsDefined(Float))
             {
-                writer.WritePropertyName("float");
+                writer.WritePropertyName("float"u8);
                 writer.WriteStringValue(Float);
             }
             if (Optional.IsDefined(For))
             {
-                writer.WritePropertyName("for");
+                writer.WritePropertyName("for"u8);
                 writer.WriteStringValue(For);
             }
             if (Optional.IsDefined(Foreach))
             {
-                writer.WritePropertyName("foreach");
+                writer.WritePropertyName("foreach"u8);
                 writer.WriteStringValue(Foreach);
             }
             if (Optional.IsDefined(From))
             {
-                writer.WritePropertyName("from");
+                writer.WritePropertyName("from"u8);
                 writer.WriteStringValue(From);
             }
             if (Optional.IsDefined(Get))
             {
-                writer.WritePropertyName("get");
+                writer.WritePropertyName("get"u8);
                 writer.WriteStringValue(Get);
             }
             if (Optional.IsDefined(Global))
             {
-                writer.WritePropertyName("global");
+                writer.WritePropertyName("global"u8);
                 writer.WriteStringValue(Global);
             }
             if (Optional.IsDefined(Goto))
             {
-                writer.WritePropertyName("goto");
+                writer.WritePropertyName("goto"u8);
                 writer.WriteStringValue(Goto);
             }
             if (Optional.IsDefined(Group))
             {
-                writer.WritePropertyName("group");
+                writer.WritePropertyName("group"u8);
                 writer.WriteStringValue(Group);
             }
             if (Optional.IsDefined(If))
             {
-                writer.WritePropertyName("if");
+                writer.WritePropertyName("if"u8);
                 writer.WriteStringValue(If);
             }
             if (Optional.IsDefined(Implicit))
             {
-                writer.WritePropertyName("implicit");
+                writer.WritePropertyName("implicit"u8);
                 writer.WriteStringValue(Implicit);
             }
             if (Optional.IsDefined(In))
             {
-                writer.WritePropertyName("in");
+                writer.WritePropertyName("in"u8);
                 writer.WriteStringValue(In);
             }
             if (Optional.IsDefined(Int))
             {
-                writer.WritePropertyName("int");
+                writer.WritePropertyName("int"u8);
                 writer.WriteStringValue(Int);
             }
             if (Optional.IsDefined(Interface))
             {
-                writer.WritePropertyName("interface");
+                writer.WritePropertyName("interface"u8);
                 writer.WriteStringValue(Interface);
             }
             if (Optional.IsDefined(Internal))
             {
-                writer.WritePropertyName("internal");
+                writer.WritePropertyName("internal"u8);
                 writer.WriteStringValue(Internal);
             }
             if (Optional.IsDefined(Into))
             {
-                writer.WritePropertyName("into");
+                writer.WritePropertyName("into"u8);
                 writer.WriteStringValue(Into);
             }
             if (Optional.IsDefined(Is))
             {
-                writer.WritePropertyName("is");
+                writer.WritePropertyName("is"u8);
                 writer.WriteStringValue(Is);
             }
             if (Optional.IsDefined(Join))
             {
-                writer.WritePropertyName("join");
+                writer.WritePropertyName("join"u8);
                 writer.WriteStringValue(Join);
             }
             if (Optional.IsDefined(Let))
             {
-                writer.WritePropertyName("let");
+                writer.WritePropertyName("let"u8);
                 writer.WriteStringValue(Let);
             }
             if (Optional.IsDefined(Lock))
             {
-                writer.WritePropertyName("lock");
+                writer.WritePropertyName("lock"u8);
                 writer.WriteStringValue(Lock);
             }
             if (Optional.IsDefined(Long))
             {
-                writer.WritePropertyName("long");
+                writer.WritePropertyName("long"u8);
                 writer.WriteStringValue(Long);
             }
             if (Optional.IsDefined(Nameof))
             {
-                writer.WritePropertyName("nameof");
+                writer.WritePropertyName("nameof"u8);
                 writer.WriteStringValue(Nameof);
             }
             if (Optional.IsDefined(Namespace))
             {
-                writer.WritePropertyName("namespace");
+                writer.WritePropertyName("namespace"u8);
                 writer.WriteStringValue(Namespace);
             }
             if (Optional.IsDefined(New))
             {
-                writer.WritePropertyName("new");
+                writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
             if (Optional.IsDefined(NullProperty))
             {
-                writer.WritePropertyName("null");
+                writer.WritePropertyName("null"u8);
                 writer.WriteStringValue(NullProperty);
             }
             if (Optional.IsDefined(Object))
             {
-                writer.WritePropertyName("object");
+                writer.WritePropertyName("object"u8);
                 writer.WriteStringValue(Object);
             }
             if (Optional.IsDefined(On))
             {
-                writer.WritePropertyName("on");
+                writer.WritePropertyName("on"u8);
                 writer.WriteStringValue(On);
             }
             if (Optional.IsDefined(Operator))
             {
-                writer.WritePropertyName("operator");
+                writer.WritePropertyName("operator"u8);
                 writer.WriteStringValue(Operator);
             }
             if (Optional.IsDefined(Orderby))
             {
-                writer.WritePropertyName("orderby");
+                writer.WritePropertyName("orderby"u8);
                 writer.WriteStringValue(Orderby);
             }
             if (Optional.IsDefined(Out))
             {
-                writer.WritePropertyName("out");
+                writer.WritePropertyName("out"u8);
                 writer.WriteStringValue(Out);
             }
             if (Optional.IsDefined(Override))
             {
-                writer.WritePropertyName("override");
+                writer.WritePropertyName("override"u8);
                 writer.WriteStringValue(Override);
             }
             if (Optional.IsDefined(Params))
             {
-                writer.WritePropertyName("params");
+                writer.WritePropertyName("params"u8);
                 writer.WriteStringValue(Params);
             }
             if (Optional.IsDefined(Partial))
             {
-                writer.WritePropertyName("partial");
+                writer.WritePropertyName("partial"u8);
                 writer.WriteStringValue(Partial);
             }
             if (Optional.IsDefined(Private))
             {
-                writer.WritePropertyName("private");
+                writer.WritePropertyName("private"u8);
                 writer.WriteStringValue(Private);
             }
             if (Optional.IsDefined(Protected))
             {
-                writer.WritePropertyName("protected");
+                writer.WritePropertyName("protected"u8);
                 writer.WriteStringValue(Protected);
             }
             if (Optional.IsDefined(Public))
             {
-                writer.WritePropertyName("public");
+                writer.WritePropertyName("public"u8);
                 writer.WriteStringValue(Public);
             }
             if (Optional.IsDefined(Readonly))
             {
-                writer.WritePropertyName("readonly");
+                writer.WritePropertyName("readonly"u8);
                 writer.WriteStringValue(Readonly);
             }
             if (Optional.IsDefined(Ref))
             {
-                writer.WritePropertyName("ref");
+                writer.WritePropertyName("ref"u8);
                 writer.WriteStringValue(Ref);
             }
             if (Optional.IsDefined(Remove))
             {
-                writer.WritePropertyName("remove");
+                writer.WritePropertyName("remove"u8);
                 writer.WriteStringValue(Remove);
             }
             if (Optional.IsDefined(Return))
             {
-                writer.WritePropertyName("return");
+                writer.WritePropertyName("return"u8);
                 writer.WriteStringValue(Return);
             }
             if (Optional.IsDefined(Sbyte))
             {
-                writer.WritePropertyName("sbyte");
+                writer.WritePropertyName("sbyte"u8);
                 writer.WriteStringValue(Sbyte);
             }
             if (Optional.IsDefined(Sealed))
             {
-                writer.WritePropertyName("sealed");
+                writer.WritePropertyName("sealed"u8);
                 writer.WriteStringValue(Sealed);
             }
             if (Optional.IsDefined(Select))
             {
-                writer.WritePropertyName("select");
+                writer.WritePropertyName("select"u8);
                 writer.WriteStringValue(Select);
             }
             if (Optional.IsDefined(Set))
             {
-                writer.WritePropertyName("set");
+                writer.WritePropertyName("set"u8);
                 writer.WriteStringValue(Set);
             }
             if (Optional.IsDefined(Short))
             {
-                writer.WritePropertyName("short");
+                writer.WritePropertyName("short"u8);
                 writer.WriteStringValue(Short);
             }
             if (Optional.IsDefined(Sizeof))
             {
-                writer.WritePropertyName("sizeof");
+                writer.WritePropertyName("sizeof"u8);
                 writer.WriteStringValue(Sizeof);
             }
             if (Optional.IsDefined(Stackalloc))
             {
-                writer.WritePropertyName("stackalloc");
+                writer.WritePropertyName("stackalloc"u8);
                 writer.WriteStringValue(Stackalloc);
             }
             if (Optional.IsDefined(Static))
             {
-                writer.WritePropertyName("static");
+                writer.WritePropertyName("static"u8);
                 writer.WriteStringValue(Static);
             }
             if (Optional.IsDefined(String))
             {
-                writer.WritePropertyName("string");
+                writer.WritePropertyName("string"u8);
                 writer.WriteStringValue(String);
             }
             if (Optional.IsDefined(Struct))
             {
-                writer.WritePropertyName("struct");
+                writer.WritePropertyName("struct"u8);
                 writer.WriteStringValue(Struct);
             }
             if (Optional.IsDefined(Switch))
             {
-                writer.WritePropertyName("switch");
+                writer.WritePropertyName("switch"u8);
                 writer.WriteStringValue(Switch);
             }
             if (Optional.IsDefined(This))
             {
-                writer.WritePropertyName("this");
+                writer.WritePropertyName("this"u8);
                 writer.WriteStringValue(This);
             }
             if (Optional.IsDefined(Throw))
             {
-                writer.WritePropertyName("throw");
+                writer.WritePropertyName("throw"u8);
                 writer.WriteStringValue(Throw);
             }
             if (Optional.IsDefined(True))
             {
-                writer.WritePropertyName("true");
+                writer.WritePropertyName("true"u8);
                 writer.WriteStringValue(True);
             }
             if (Optional.IsDefined(Try))
             {
-                writer.WritePropertyName("try");
+                writer.WritePropertyName("try"u8);
                 writer.WriteStringValue(Try);
             }
             if (Optional.IsDefined(Typeof))
             {
-                writer.WritePropertyName("typeof");
+                writer.WritePropertyName("typeof"u8);
                 writer.WriteStringValue(Typeof);
             }
             if (Optional.IsDefined(Uint))
             {
-                writer.WritePropertyName("uint");
+                writer.WritePropertyName("uint"u8);
                 writer.WriteStringValue(Uint);
             }
             if (Optional.IsDefined(Ulong))
             {
-                writer.WritePropertyName("ulong");
+                writer.WritePropertyName("ulong"u8);
                 writer.WriteStringValue(Ulong);
             }
             if (Optional.IsDefined(Unchecked))
             {
-                writer.WritePropertyName("unchecked");
+                writer.WritePropertyName("unchecked"u8);
                 writer.WriteStringValue(Unchecked);
             }
             if (Optional.IsDefined(Unmanaged))
             {
-                writer.WritePropertyName("unmanaged");
+                writer.WritePropertyName("unmanaged"u8);
                 writer.WriteStringValue(Unmanaged);
             }
             if (Optional.IsDefined(Unsafe))
             {
-                writer.WritePropertyName("unsafe");
+                writer.WritePropertyName("unsafe"u8);
                 writer.WriteStringValue(Unsafe);
             }
             if (Optional.IsDefined(Ushort))
             {
-                writer.WritePropertyName("ushort");
+                writer.WritePropertyName("ushort"u8);
                 writer.WriteStringValue(Ushort);
             }
             if (Optional.IsDefined(Using))
             {
-                writer.WritePropertyName("using");
+                writer.WritePropertyName("using"u8);
                 writer.WriteStringValue(Using);
             }
             if (Optional.IsDefined(Value))
             {
-                writer.WritePropertyName("value");
+                writer.WritePropertyName("value"u8);
                 writer.WriteStringValue(Value);
             }
             if (Optional.IsDefined(Var))
             {
-                writer.WritePropertyName("var");
+                writer.WritePropertyName("var"u8);
                 writer.WriteStringValue(Var);
             }
             if (Optional.IsDefined(Virtual))
             {
-                writer.WritePropertyName("virtual");
+                writer.WritePropertyName("virtual"u8);
                 writer.WriteStringValue(Virtual);
             }
             if (Optional.IsDefined(Void))
             {
-                writer.WritePropertyName("void");
+                writer.WritePropertyName("void"u8);
                 writer.WriteStringValue(Void);
             }
             if (Optional.IsDefined(Volatile))
             {
-                writer.WritePropertyName("volatile");
+                writer.WritePropertyName("volatile"u8);
                 writer.WriteStringValue(Volatile);
             }
             if (Optional.IsDefined(When))
             {
-                writer.WritePropertyName("when");
+                writer.WritePropertyName("when"u8);
                 writer.WriteStringValue(When);
             }
             if (Optional.IsDefined(Where))
             {
-                writer.WritePropertyName("where");
+                writer.WritePropertyName("where"u8);
                 writer.WriteStringValue(Where);
             }
             if (Optional.IsDefined(While))
             {
-                writer.WritePropertyName("while");
+                writer.WritePropertyName("while"u8);
                 writer.WriteStringValue(While);
             }
             if (Optional.IsDefined(Yield))
             {
-                writer.WritePropertyName("yield");
+                writer.WritePropertyName("yield"u8);
                 writer.WriteStringValue(Yield);
             }
             if (Optional.IsDefined(System))
             {
-                writer.WritePropertyName("System");
+                writer.WritePropertyName("System"u8);
                 writer.WriteStringValue(System.Value.ToString());
             }
             if (Optional.IsDefined(ToStringValue))
             {
-                writer.WritePropertyName("ToString");
+                writer.WritePropertyName("ToString"u8);
                 writer.WriteStringValue(ToStringValue);
             }
             if (Optional.IsDefined(EqualsValue))
             {
-                writer.WritePropertyName("Equals");
+                writer.WritePropertyName("Equals"u8);
                 writer.WriteStringValue(EqualsValue);
             }
             if (Optional.IsDefined(GetHashCodeValue))
             {
-                writer.WritePropertyName("GetHashCode");
+                writer.WritePropertyName("GetHashCode"u8);
                 writer.WriteStringValue(GetHashCodeValue);
             }
             writer.WriteEndObject();
@@ -560,6 +560,10 @@ namespace NameConflicts.Models
 
         internal static Class DeserializeClass(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @abstract = default;
             Optional<string> @add = default;
             Optional<string> @alias = default;
@@ -670,527 +674,527 @@ namespace NameConflicts.Models
             Optional<string> getHashCode = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("abstract"))
+                if (property.NameEquals("abstract"u8))
                 {
                     @abstract = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("add"))
+                if (property.NameEquals("add"u8))
                 {
                     @add = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("alias"))
+                if (property.NameEquals("alias"u8))
                 {
                     @alias = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("as"))
+                if (property.NameEquals("as"u8))
                 {
                     @as = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("ascending"))
+                if (property.NameEquals("ascending"u8))
                 {
                     @ascending = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("async"))
+                if (property.NameEquals("async"u8))
                 {
                     @async = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("await"))
+                if (property.NameEquals("await"u8))
                 {
                     @await = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("base"))
+                if (property.NameEquals("base"u8))
                 {
                     @base = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("bool"))
+                if (property.NameEquals("bool"u8))
                 {
                     @bool = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("break"))
+                if (property.NameEquals("break"u8))
                 {
                     @break = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("by"))
+                if (property.NameEquals("by"u8))
                 {
                     @by = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("byte"))
+                if (property.NameEquals("byte"u8))
                 {
                     @byte = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("catch"))
+                if (property.NameEquals("catch"u8))
                 {
                     @catch = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("char"))
+                if (property.NameEquals("char"u8))
                 {
                     @char = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("checked"))
+                if (property.NameEquals("checked"u8))
                 {
                     @checked = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("const"))
+                if (property.NameEquals("const"u8))
                 {
                     @const = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("continue"))
+                if (property.NameEquals("continue"u8))
                 {
                     @continue = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("class"))
+                if (property.NameEquals("class"u8))
                 {
                     @class = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("decimal"))
+                if (property.NameEquals("decimal"u8))
                 {
                     @decimal = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("default"))
+                if (property.NameEquals("default"u8))
                 {
                     @default = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("delegate"))
+                if (property.NameEquals("delegate"u8))
                 {
                     @delegate = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("descending"))
+                if (property.NameEquals("descending"u8))
                 {
                     @descending = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("do"))
+                if (property.NameEquals("do"u8))
                 {
                     @do = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("double"))
+                if (property.NameEquals("double"u8))
                 {
                     @double = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("dynamic"))
+                if (property.NameEquals("dynamic"u8))
                 {
                     @dynamic = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("else"))
+                if (property.NameEquals("else"u8))
                 {
                     @else = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("enum"))
+                if (property.NameEquals("enum"u8))
                 {
                     @enum = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("event"))
+                if (property.NameEquals("event"u8))
                 {
                     @event = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("explicit"))
+                if (property.NameEquals("explicit"u8))
                 {
                     @explicit = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("extern"))
+                if (property.NameEquals("extern"u8))
                 {
                     @extern = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("false"))
+                if (property.NameEquals("false"u8))
                 {
                     @false = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("finally"))
+                if (property.NameEquals("finally"u8))
                 {
                     @finally = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("fixed"))
+                if (property.NameEquals("fixed"u8))
                 {
                     @fixed = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("float"))
+                if (property.NameEquals("float"u8))
                 {
                     @float = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("for"))
+                if (property.NameEquals("for"u8))
                 {
                     @for = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("foreach"))
+                if (property.NameEquals("foreach"u8))
                 {
                     @foreach = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("from"))
+                if (property.NameEquals("from"u8))
                 {
                     @from = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("get"))
+                if (property.NameEquals("get"u8))
                 {
                     @get = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("global"))
+                if (property.NameEquals("global"u8))
                 {
                     @global = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("goto"))
+                if (property.NameEquals("goto"u8))
                 {
                     @goto = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("group"))
+                if (property.NameEquals("group"u8))
                 {
                     group = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("if"))
+                if (property.NameEquals("if"u8))
                 {
                     @if = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("implicit"))
+                if (property.NameEquals("implicit"u8))
                 {
                     @implicit = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("in"))
+                if (property.NameEquals("in"u8))
                 {
                     @in = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("int"))
+                if (property.NameEquals("int"u8))
                 {
                     @int = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("interface"))
+                if (property.NameEquals("interface"u8))
                 {
                     @interface = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("internal"))
+                if (property.NameEquals("internal"u8))
                 {
                     @internal = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("into"))
+                if (property.NameEquals("into"u8))
                 {
                     @into = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("is"))
+                if (property.NameEquals("is"u8))
                 {
                     @is = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("join"))
+                if (property.NameEquals("join"u8))
                 {
                     @join = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("let"))
+                if (property.NameEquals("let"u8))
                 {
                     @let = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("lock"))
+                if (property.NameEquals("lock"u8))
                 {
                     @lock = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("long"))
+                if (property.NameEquals("long"u8))
                 {
                     @long = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("nameof"))
+                if (property.NameEquals("nameof"u8))
                 {
                     @nameof = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("namespace"))
+                if (property.NameEquals("namespace"u8))
                 {
                     @namespace = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("new"))
+                if (property.NameEquals("new"u8))
                 {
                     @new = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("null"))
+                if (property.NameEquals("null"u8))
                 {
                     @null = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("object"))
+                if (property.NameEquals("object"u8))
                 {
                     @object = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("on"))
+                if (property.NameEquals("on"u8))
                 {
                     @on = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("operator"))
+                if (property.NameEquals("operator"u8))
                 {
                     @operator = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("orderby"))
+                if (property.NameEquals("orderby"u8))
                 {
                     orderby = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("out"))
+                if (property.NameEquals("out"u8))
                 {
                     @out = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("override"))
+                if (property.NameEquals("override"u8))
                 {
                     @override = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("params"))
+                if (property.NameEquals("params"u8))
                 {
                     @params = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("partial"))
+                if (property.NameEquals("partial"u8))
                 {
                     @partial = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("private"))
+                if (property.NameEquals("private"u8))
                 {
                     @private = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("protected"))
+                if (property.NameEquals("protected"u8))
                 {
                     @protected = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("public"))
+                if (property.NameEquals("public"u8))
                 {
                     @public = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("readonly"))
+                if (property.NameEquals("readonly"u8))
                 {
                     @readonly = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("ref"))
+                if (property.NameEquals("ref"u8))
                 {
                     @ref = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("remove"))
+                if (property.NameEquals("remove"u8))
                 {
                     @remove = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("return"))
+                if (property.NameEquals("return"u8))
                 {
                     @return = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("sbyte"))
+                if (property.NameEquals("sbyte"u8))
                 {
                     @sbyte = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("sealed"))
+                if (property.NameEquals("sealed"u8))
                 {
                     @sealed = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("select"))
+                if (property.NameEquals("select"u8))
                 {
                     select = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("set"))
+                if (property.NameEquals("set"u8))
                 {
                     @set = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("short"))
+                if (property.NameEquals("short"u8))
                 {
                     @short = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("sizeof"))
+                if (property.NameEquals("sizeof"u8))
                 {
                     @sizeof = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("stackalloc"))
+                if (property.NameEquals("stackalloc"u8))
                 {
                     @stackalloc = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("static"))
+                if (property.NameEquals("static"u8))
                 {
                     @static = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("string"))
+                if (property.NameEquals("string"u8))
                 {
                     @string = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("struct"))
+                if (property.NameEquals("struct"u8))
                 {
                     @struct = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("switch"))
+                if (property.NameEquals("switch"u8))
                 {
                     @switch = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("this"))
+                if (property.NameEquals("this"u8))
                 {
                     @this = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("throw"))
+                if (property.NameEquals("throw"u8))
                 {
                     @throw = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("true"))
+                if (property.NameEquals("true"u8))
                 {
                     @true = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("try"))
+                if (property.NameEquals("try"u8))
                 {
                     @try = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("typeof"))
+                if (property.NameEquals("typeof"u8))
                 {
                     @typeof = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("uint"))
+                if (property.NameEquals("uint"u8))
                 {
                     @uint = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("ulong"))
+                if (property.NameEquals("ulong"u8))
                 {
                     @ulong = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("unchecked"))
+                if (property.NameEquals("unchecked"u8))
                 {
                     @unchecked = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("unmanaged"))
+                if (property.NameEquals("unmanaged"u8))
                 {
                     @unmanaged = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("unsafe"))
+                if (property.NameEquals("unsafe"u8))
                 {
                     @unsafe = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("ushort"))
+                if (property.NameEquals("ushort"u8))
                 {
                     @ushort = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("using"))
+                if (property.NameEquals("using"u8))
                 {
                     @using = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("value"))
+                if (property.NameEquals("value"u8))
                 {
                     value = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("var"))
+                if (property.NameEquals("var"u8))
                 {
                     @var = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("virtual"))
+                if (property.NameEquals("virtual"u8))
                 {
                     @virtual = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("void"))
+                if (property.NameEquals("void"u8))
                 {
                     @void = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("volatile"))
+                if (property.NameEquals("volatile"u8))
                 {
                     @volatile = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("when"))
+                if (property.NameEquals("when"u8))
                 {
                     @when = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("where"))
+                if (property.NameEquals("where"u8))
                 {
                     @where = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("while"))
+                if (property.NameEquals("while"u8))
                 {
                     @while = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("yield"))
+                if (property.NameEquals("yield"u8))
                 {
                     @yield = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("System"))
+                if (property.NameEquals("System"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -1200,17 +1204,17 @@ namespace NameConflicts.Models
                     system = new SystemEnum(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("ToString"))
+                if (property.NameEquals("ToString"u8))
                 {
                     toString = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("Equals"))
+                if (property.NameEquals("Equals"u8))
                 {
                     @equals = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("GetHashCode"))
+                if (property.NameEquals("GetHashCode"u8))
                 {
                     getHashCode = property.Value.GetString();
                     continue;

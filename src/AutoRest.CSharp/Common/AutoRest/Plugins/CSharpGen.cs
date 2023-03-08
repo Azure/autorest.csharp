@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
             Console.SetOut(Console.Error); //if you send anything to stdout there is an autorest error so this protects us against that happening
-            string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
+            string? codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
             if (string.IsNullOrEmpty(codeModelFileName))
                 throw new Exception("Generator did not receive the code model file.");
 

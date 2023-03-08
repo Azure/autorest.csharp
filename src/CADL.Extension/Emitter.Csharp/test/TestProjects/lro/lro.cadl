@@ -18,8 +18,12 @@ using Azure.Core;
   }
 )
 
-@serviceTitle("Microsoft Cognitive Language Service - Analyze Text Authoring")
-@serviceVersion("2022-05-15-preview")
+@service(
+    {
+        title: "Microsoft Cognitive Language Service - Analyze Text Authoring",
+        version: "2022-05-15-preview"
+    }
+)
 @versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
 @route("/authoring/analyze-text/")
 namespace LroOperation;
@@ -31,6 +35,7 @@ scalar Endpoint extends string;
 @resource("Pet")
 model Pet {
   @key
+  @visibility("read")
   name: string;
   tag?: string;
 

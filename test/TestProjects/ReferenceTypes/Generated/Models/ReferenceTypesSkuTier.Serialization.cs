@@ -22,10 +22,10 @@ namespace Azure.ResourceManager.Fake.Models
 
         public static ReferenceTypesSkuTier ToReferenceTypesSkuTier(this string value)
         {
-            if (string.Equals(value, "Free", StringComparison.InvariantCultureIgnoreCase)) return ReferenceTypesSkuTier.Free;
-            if (string.Equals(value, "Basic", StringComparison.InvariantCultureIgnoreCase)) return ReferenceTypesSkuTier.Basic;
-            if (string.Equals(value, "Standard", StringComparison.InvariantCultureIgnoreCase)) return ReferenceTypesSkuTier.Standard;
-            if (string.Equals(value, "Premium", StringComparison.InvariantCultureIgnoreCase)) return ReferenceTypesSkuTier.Premium;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Free")) return ReferenceTypesSkuTier.Free;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Basic")) return ReferenceTypesSkuTier.Basic;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Standard")) return ReferenceTypesSkuTier.Standard;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "Premium")) return ReferenceTypesSkuTier.Premium;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ReferenceTypesSkuTier value.");
         }
     }

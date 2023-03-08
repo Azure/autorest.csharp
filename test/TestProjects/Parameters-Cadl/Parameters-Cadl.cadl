@@ -7,8 +7,12 @@ import "@azure-tools/cadl-dpg";
 using Cadl.Http;
 using Azure.DPG;
 
-@serviceTitle("Text authoring")
-@serviceVersion("2022-05-15-preview")
+@service(
+    {
+        title: "Text authoring",
+        version: "2022-05-15-preview"
+    }
+)
 namespace ParametersCadl;
 
 
@@ -18,10 +22,10 @@ namespace ParameterOrders {
         id: string
     }
 
-    @convenienceAPI
+    @convenientAPI(true)
     op Operation(@query start: int32, @query end?: int32): Result;
 
-    @convenienceAPI
+    @convenientAPI(true)
     @head
     op Operation2(@query start?: int32, @query end: int32): Result;
 }

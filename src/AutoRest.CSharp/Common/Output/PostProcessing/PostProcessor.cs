@@ -20,11 +20,17 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing;
 
 internal class PostProcessor
 {
-    public PostProcessor()
+    private const string AspDotNetExtensionNamespace = "Microsoft.Extensions.Azure";
+    private readonly string? _modelFactoryFullName;
+    private readonly string? _aspExtensionClassName;
+
+    public PostProcessor(string? modelFactoryFullName = null, string? aspExtensionClassName = null)
     {
+        _modelFactoryFullName = modelFactoryFullName;
+        _aspExtensionClassName = aspExtensionClassName;
     }
 
-    protected record TypeSymbols(ImmutableHashSet<INamedTypeSymbol> DeclaredSymbols, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> DocumentsCache);
+    protected record TypeSymbols(ImmutableHashSet<INamedTypeSymbol> DeclaredSymbols, INamedTypeSymbol? ModelFactorySymbol, IReadOnlyDictionary<INamedTypeSymbol, ImmutableHashSet<BaseTypeDeclarationSyntax>> DeclaredNodesCache, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> DocumentsCache);
 
     /// <summary>
     /// This method reads the project, returns the types defined in it and build symbol caches to acceralate the calculation
@@ -39,6 +45,14 @@ internal class PostProcessor
         var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         var declarationCache = new Dictionary<INamedTypeSymbol, HashSet<BaseTypeDeclarationSyntax>>(SymbolEqualityComparer.Default);
         var documentCache = new Dictionary<Document, HashSet<INamedTypeSymbol>>();
+
+        INamedTypeSymbol? modelFactorySymbol = null;
+        if (_modelFactoryFullName != null)
+            modelFactorySymbol = compilation.GetTypeByMetadataName(_modelFactoryFullName);
+        INamedTypeSymbol? aspDotNetExtensionSymbol = null;
+        if (_aspExtensionClassName != null)
+            aspDotNetExtensionSymbol = compilation.GetTypeByMetadataName(_aspExtensionClassName);
+
         foreach (var document in project.Documents)
         {
             if (ShouldIncludeDocument(document))
@@ -56,7 +70,12 @@ internal class PostProcessor
                         continue;
                     if (publicOnly && symbol.DeclaredAccessibility != Accessibility.Public)
                         continue;
-                    result.Add(symbol);
+
+                    // we do not add the model factory symbol to the declared symbol list so that it will never be included in any process of internalization or removal
+                    if (!SymbolEqualityComparer.Default.Equals(symbol, modelFactorySymbol)
+                        && !SymbolEqualityComparer.Default.Equals(symbol, aspDotNetExtensionSymbol))
+                        result.Add(symbol);
+
                     declarationCache.AddInList(symbol, typeDeclaration);
                     documentCache.AddInList(document, symbol, () => new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default));
                 }
@@ -64,6 +83,7 @@ internal class PostProcessor
         }
 
         return new TypeSymbols(result.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default),
+            modelFactorySymbol,
             declarationCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet(), (IEqualityComparer<INamedTypeSymbol>)SymbolEqualityComparer.Default),
             documentCache.ToDictionary(kv => kv.Key, kv => kv.Value.ToImmutableHashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default)));
     }
@@ -86,6 +106,8 @@ internal class PostProcessor
         if (compilation == null)
             return project;
 
+        // get the type names suppressed by the attribute
+        var suppressedTypeNames = GeneratedCodeWorkspace.GetSuppressedTypeNames(compilation);
         // first get all the declared symbols
         var definitions = await GetTypeSymbolsAsync(compilation, project, true);
         // build the reference map
@@ -108,7 +130,54 @@ internal class PostProcessor
             project = MarkInternal(project, model);
         }
 
+        var modelNamesToRemove = nodesToInternalize.Select(item => item.Identifier.Text).Concat(suppressedTypeNames);
+        project = await RemoveMethodsFromModelFactoryAsync(project, definitions, modelNamesToRemove.ToHashSet());
+
         return project;
+    }
+
+    private async Task<Project> RemoveMethodsFromModelFactoryAsync(Project project, TypeSymbols definitions, HashSet<string> namesToRemove)
+    {
+        var modelFactorySymbol = definitions.ModelFactorySymbol;
+        if (modelFactorySymbol == null)
+            return project;
+
+        var nodesToRemove = new List<SyntaxNode>();
+
+        foreach (var method in modelFactorySymbol.GetMembers().OfType<IMethodSymbol>())
+        {
+            if (namesToRemove.Contains(method.Name))
+            {
+                foreach (var reference in method.DeclaringSyntaxReferences)
+                {
+                    var node = await reference.GetSyntaxAsync();
+                    nodesToRemove.Add(node);
+                }
+            }
+        }
+
+        // find the GENERATED document of model factory (we may have the customized document of this for overloads)
+        Document? modelFactoryGeneratedDocument = null;
+        // the nodes corresponding to the model factory symbol has never been changed therefore the nodes inside the cache are still usable
+        foreach (var declarationNode in definitions.DeclaredNodesCache[modelFactorySymbol])
+        {
+            var document = project.GetDocument(declarationNode.SyntaxTree);
+            if (document != null && GeneratedCodeWorkspace.IsGeneratedDocument(document))
+            {
+                modelFactoryGeneratedDocument = document;
+                break;
+            }
+        }
+
+        // maybe this is possible, for instance, we could be adding the customization all entries previously inside the generated model factory so that the generated model factory is empty and removed.
+        if (modelFactoryGeneratedDocument == null)
+            return project;
+
+        var root = await modelFactoryGeneratedDocument.GetSyntaxRootAsync();
+        root = root?.RemoveNodes(nodesToRemove, SyntaxRemoveOptions.KeepNoTrivia);
+        modelFactoryGeneratedDocument = modelFactoryGeneratedDocument.WithSyntaxRoot(root!);
+
+        return modelFactoryGeneratedDocument.Project;
     }
 
     /// <summary>
@@ -145,7 +214,9 @@ internal class PostProcessor
         }
 
         // remove them one by one
-        return await RemoveModelsAsync(project, nodesToRemove);
+        project = await RemoveModelsAsync(project, nodesToRemove);
+
+        return project;
     }
 
     /// <summary>
@@ -301,9 +372,14 @@ internal class PostProcessor
 
     private static IEnumerable<SyntaxNode> FilterTriviaWithDiscriminator(List<SyntaxNode>? nodes)
     {
+        if (nodes is null)
+        {
+            return Enumerable.Empty<SyntaxNode>();
+        }
+
         // If the base class has discriminator, we will add a description at the end of the original description to add the known derived types
         // Here we use the added description to filter the syntax nodes coming from xml comment to get all the derived types exactly
-        var targetIndex = nodes?.FindLastIndex(node => node.ToFullString().Contains(DiscriminatorDescFixedPart.Last()));
+        var targetIndex = nodes.FindLastIndex(node => node.ToFullString().Contains(DiscriminatorDescFixedPart.Last()));
         return nodes.Where((val, index) => index >= targetIndex);
     }
 

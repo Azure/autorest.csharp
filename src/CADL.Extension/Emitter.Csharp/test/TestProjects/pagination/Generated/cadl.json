@@ -12,13 +12,13 @@
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of LedgerEntry items",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "3",
      "Name": "value",
      "SerializedName": "value",
-     "Description": "",
+     "Description": "The LedgerEntry items on this page",
      "Type": {
       "$id": "4",
       "Name": "Array",
@@ -27,13 +27,13 @@
        "Name": "LedgerEntry",
        "Namespace": "Pagination",
        "IsNullable": false,
-       "Usage": "None",
+       "Usage": "Output",
        "Properties": [
         {
          "$id": "6",
          "Name": "contents",
          "SerializedName": "contents",
-         "Description": "",
+         "Description": "Contents of the ledger entry.",
          "Type": {
           "$id": "7",
           "Name": "string",
@@ -86,7 +86,7 @@
      "$id": "12",
      "Name": "nextLink",
      "SerializedName": "nextLink",
-     "Description": "",
+     "Description": "The link to the next page of items",
      "Type": {
       "$id": "13",
       "Name": "ResourceLocation",
@@ -210,7 +210,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{pagnationUri}",
      "Path": "/app/transactions",
      "BufferResponse": true,
@@ -219,7 +219,8 @@
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
