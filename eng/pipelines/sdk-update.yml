@@ -159,5 +159,5 @@ stages:
                 -AuthToken "$(azuresdk-github-pat)"
                 -PRTitle "Autorest Regen Preview to $(AutorestCSharpVersion)"
                 -PRBody "Triggered from $(Build.SourceBranch)"
-                -OpenAsDraft true
+                -OpenAsDraft $true
                 -PRLabels "Do Not Merge"
