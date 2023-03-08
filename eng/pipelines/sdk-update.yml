@@ -137,10 +137,8 @@ stages:
       - job: Create_PR
         dependsOn: 
           - Update_Generator_Versions
-          - Update_Codes_A_C
           - Update_Codes_D_E
           - Update_Codes_F_L
-          - Update_Codes_M_O
           - Update_Codes_P_R
           - Update_Codes_S_U
           - Update_Codes_V_Z
@@ -153,11 +151,13 @@ stages:
               pwsh: true
               filePath: $(Build.SourcesDirectory)/azure-sdk-tools/eng/common/scripts/Submit-PullRequest.ps1
               arguments: >
-                -RepoOwner "pshao25"
+                -RepoOwner "Azure"
                 -RepoName "azure-sdk-for-net"
                 -BaseBranch "main"
                 -PROwner "azure-sdk"
                 -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"
                 -AuthToken "$(azuresdk-github-pat)"
-                -PRTitle "Update AutoRest C# version to $(AutorestCSharpVersion)"
-                -PRBody "Update AutoRest C# version to $(AutorestCSharpVersion)"
+                -PRTitle "Autorest Regen Preview to $(AutorestCSharpVersion)"
+                -PRBody "Triggered from $(Build.SourceBranch)"
+                -OpenAsDraft true
+                -PRLabels "Do Not Merge"
