@@ -422,7 +422,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var extensionClient in FindAllExtensionClients())
             {
-                Assert.IsFalse(extensionClient.IsPublic);
+                // for mocking, we made all the extension clients public
+                Assert.IsTrue(extensionClient.IsPublic);
             }
         }
 

@@ -71,8 +71,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultName { get; }
 
-        protected override string DefaultNamespace => Configuration.MgmtConfiguration.IsArmCore ?
-            base.DefaultNamespace : $"{base.DefaultNamespace}.Mock";
+        protected override string DefaultNamespace => $"{base.DefaultNamespace}.Mock";
 
         public bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 

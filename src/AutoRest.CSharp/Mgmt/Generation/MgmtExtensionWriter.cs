@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public static MgmtExtensionWriter GetWriter(CodeWriter writer, MgmtExtension extension) => extension switch
         {
             ArmClientExtension armClientExtension => new ArmClientExtensionWriter(writer, armClientExtension),
-            // the class ArmResourceExtensionWriter is created to handle scope resources, but in ArmCore we do not have that problem, therefore for ArmCore we just let the regular MgmtExtension class handles that
+            // the class ArmResourceExtensionWriter is created to handle scope resources, but in ArmCore we do not have that problem, therefore for ArmCore we just let the regular MgmtExtension class handle that
             _ when extension.ArmCoreType == typeof(ArmResource) && !Configuration.MgmtConfiguration.IsArmCore => new ArmResourceExtensionWriter(writer, extension),
             _ => new MgmtExtensionWriter(writer, extension)
         };

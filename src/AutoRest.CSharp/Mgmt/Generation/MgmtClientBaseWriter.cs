@@ -229,14 +229,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceTypeExpression)}", DiagnosticsProperty);
             var diagFieldName = GetDiagnosticFieldName(restClient, resource);
             _writer.Line($"{diagFieldName} = {ctorString};");
-            string apiVersionText = string.Empty;
+            FormattableString? apiVersionExpression = null;
             if (resourceTypeExpression is not null)
             {
                 string apiVersionVariable = GetApiVersionVariableName(restClient, resource);
                 _writer.Line($"TryGetApiVersion({resourceTypeExpression}, out string {apiVersionVariable});");
-                apiVersionText = $", {apiVersionVariable}";
+                apiVersionExpression = $"{apiVersionVariable}";
             }
-            _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, apiVersionText)};");
+            _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, apiVersionExpression)};");
         }
 
         protected FormattableString? ConstructResourceTypeExpression(Resource? resource)
@@ -422,12 +422,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
-        protected string GetRestConstructorString(MgmtRestClient restClient, string apiVersionVariable)
+        protected FormattableString GetRestConstructorString(MgmtRestClient restClient, FormattableString? apiVersionExpression)
         {
-            string subIdVariable = ", Id.SubscriptionId";
-            if (!restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")))
-                subIdVariable = string.Empty;
-            return $"new {restClient.Type.Name}({PipelineProperty}, {DiagnosticsProperty}.ApplicationId{subIdVariable}, {EndpointProperty}{apiVersionVariable})";
+            var paramList = new List<FormattableString>()
+            {
+                $"{PipelineProperty}",
+                $"{DiagnosticsProperty}.ApplicationId"
+            };
+
+            if (restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")))
+            {
+                paramList.Add($"Id.SubscriptionId");
+            }
+            paramList.Add($"{EndpointProperty}");
+            if (apiVersionExpression != null)
+            {
+                paramList.Add(apiVersionExpression);
+            }
+            return $"new {restClient.Type}({paramList.Join(", ")})";
         }
 
         protected string GetRestClientName(MgmtRestOperation operation) => GetRestClientName(operation.RestClient, operation.Resource);
