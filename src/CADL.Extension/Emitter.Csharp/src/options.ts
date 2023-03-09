@@ -1,5 +1,5 @@
-import { DpgEmitterOptions } from "@azure-tools/cadl-dpg";
-import { EmitContext, JSONSchemaType, resolvePath } from "@cadl-lang/compiler";
+import { DpgEmitterOptions } from "@azure-tools/typespec-client-generator-core";
+import { EmitContext, JSONSchemaType, resolvePath } from "@typespec/compiler";
 import { dllFilePath } from "@autorest/csharp";
 import { LoggerLevel } from "./lib/logger.js";
 

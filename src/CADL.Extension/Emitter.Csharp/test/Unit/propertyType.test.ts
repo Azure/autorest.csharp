@@ -1,9 +1,9 @@
-import { TestHost } from "@cadl-lang/compiler/testing";
+import { TestHost } from "@typespec/compiler/testing";
 import assert, { AssertionError, deepStrictEqual } from "assert";
 import { createModel } from "../../src/lib/clientModelBuilder.js";
 import { CodeModel } from "../../src/type/codeModel.js";
 import {
-    cadlCompile,
+    typeSpecCompile,
     createEmitterContext,
     createEmitterTestHost
 } from "./utils/TestUtil.js";
@@ -25,7 +25,7 @@ import {
     navigateTypesInNamespace,
     Program,
     Type
-} from "@cadl-lang/compiler";
+} from "@typespec/compiler";
 import { getInputType } from "../../src/lib/model.js";
 
 describe("Test GetInputType for array", () => {
@@ -36,7 +36,7 @@ describe("Test GetInputType for array", () => {
     });
 
     it("array as request", async () => {
-        const program = await cadlCompile(
+        const program = await typeSpecCompile(
             `
         op test(@body input: string[]): string[];
       `,
@@ -66,7 +66,7 @@ describe("Test GetInputType for array", () => {
     });
 
     it("array as response", async () => {
-        const program = await cadlCompile(
+        const program = await typeSpecCompile(
             `
         op test(): string[];
       `,
@@ -103,7 +103,7 @@ describe("Test GetInputType for enum", () => {
     });
 
     it("Fixed string enum", async () => {
-        const program = await cadlCompile(
+        const program = await typeSpecCompile(
             `
         #suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "Enums should be defined without the @fixed decorator."
         @doc("fixed string enum")
@@ -151,7 +151,7 @@ describe("Test GetInputType for enum", () => {
         deepStrictEqual(type.IsExtensible, false);
     });
     it("Fixed int enum", async () => {
-        const program = await cadlCompile(
+        const program = await typeSpecCompile(
             `
       #suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "Enums should be defined without the @fixed decorator."
       @doc("Fixed int enum")
@@ -200,7 +200,7 @@ describe("Test GetInputType for enum", () => {
     });
 
     it("extensible enum", async () => {
-        const program = await cadlCompile(
+        const program = await typeSpecCompile(
             `
         @doc("Extensible enum")
         enum ExtensibleEnum {
