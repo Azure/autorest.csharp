@@ -348,13 +348,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                 if (!ShouldIncludeOperation(operation))
                     continue; // meaning this operation will be included in the collection
                 var method = operation.GetHttpMethod();
-                // considering the case of parameterized scope, we might do not have direct parenting relationship between the two paths
-                // therefore we trim the scope off and then calculate the diff
+                // we use the "unique" part of this operation's request path comparing with its containing resource's path as the key to categorize the operations
                 var requestPath = operation.GetRequestPath(ResourceType);
-                var requestTrimmedPath = requestPath.TrimScope();
-                var resourceTrimmedPath = resourceRequestPath.TrimScope();
-                // the operations are grouped by the following key
-                var key = $"{method}{resourceTrimmedPath.Minus(requestTrimmedPath)}";
+                var key = $"{method}{resourceRequestPath.Minus(requestPath)}";
                 var contextualPath = GetContextualPath(OperationSet, requestPath);
                 var methodName = IsListOperation(operation, OperationSet) ?
                     "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
