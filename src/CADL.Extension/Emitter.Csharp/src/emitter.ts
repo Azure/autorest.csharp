@@ -22,6 +22,7 @@ import {
 } from "./options.js";
 import { createModel } from "./lib/clientModelBuilder.js";
 import { logger, LoggerLevel } from "./lib/logger.js";
+import { cadlOutputFileName, configurationFileName } from "./constants.js";
 
 export const $lib = createCadlLibrary({
     name: "cadl-csharp",
@@ -76,7 +77,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             }
 
             await program.host.writeFile(
-                resolvePath(generatedFolder, "cadl.json"),
+                resolvePath(generatedFolder, cadlOutputFileName),
                 prettierOutput(
                     stringifyRefs(root, null, 1, PreserveType.Objects)
                 )
@@ -116,7 +117,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             } as Configuration;
 
             await program.host.writeFile(
-                resolvePath(generatedFolder, "Configuration.json"),
+                resolvePath(generatedFolder, configurationFileName),
                 prettierOutput(JSON.stringify(configurations, null, 2))
             );
 
@@ -146,8 +147,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
             if (!options["save-inputs"]) {
                 // delete
-                deleteFile(resolvePath(generatedFolder, "cadl.json"));
-                deleteFile(resolvePath(generatedFolder, "Configuration.json"));
+                deleteFile(resolvePath(generatedFolder, cadlOutputFileName));
+                deleteFile(resolvePath(generatedFolder, configurationFileName));
             }
         }
     }

@@ -65,7 +65,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         },
         logLevel: {
             type: "string",
-            enum: ["error", "warn", "info", "debug", "verbose"],
+            enum: [LoggerLevel.ERROR, LoggerLevel.WARN, LoggerLevel.INFO, LoggerLevel.DEBUG, LoggerLevel.VERBOSE],
             nullable: true
         }
     },
