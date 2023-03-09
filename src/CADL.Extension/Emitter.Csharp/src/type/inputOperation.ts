@@ -1,12 +1,12 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { BodyMediaType } from "./BodyMediaType";
-import { OperationLongRunning } from "./OperationLongRunning";
-import { OperationPaging } from "./OperationPaging";
-import { InputParameter } from "./InputParameter";
-import { OperationResponse } from "./OperationResponse";
-import { RequestMethod } from "./RequestMethod";
+import { BodyMediaType } from "./bodyMediaType";
+import { OperationLongRunning } from "./operationLongRunning";
+import { OperationPaging } from "./operationPaging";
+import { InputParameter } from "./inputParameter";
+import { OperationResponse } from "./operationResponse";
+import { RequestMethod } from "./requestMethod";
 
 export interface Paging {
     NextLinkName?: string;
