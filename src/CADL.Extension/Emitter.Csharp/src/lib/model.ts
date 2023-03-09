@@ -43,8 +43,8 @@ import {
     projectedNameCSharpKey,
     projectedNameJsonKey
 } from "../constants.js";
-import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
-import { InputModelProperty } from "../type/InputModelProperty.js";
+import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
+import { InputModelProperty } from "../type/inputModelProperty.js";
 import {
     InputDictionaryType,
     InputEnumType,
@@ -56,9 +56,10 @@ import {
     InputUnionType,
     InputNullType,
     InputIntrinsicType
-} from "../type/InputType.js";
-import { InputTypeKind } from "../type/InputTypeKind.js";
-import { Usage } from "../type/Usage.js";
+} from "../type/inputType.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
+import { Usage } from "../type/usage.js";
+import { logger } from "./logger.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -260,6 +261,7 @@ export function getInputType(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputType {
+    logger.debug(`getInputType for kind: ${type.kind}`);
     if (type.kind === "Model") {
         return getInputModelType(type);
     } else if (
