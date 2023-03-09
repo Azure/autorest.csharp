@@ -28,28 +28,30 @@ import {
 } from "@cadl-lang/rest/http";
 import { getVersions } from "@cadl-lang/versioning";
 import { NetEmitterOptions } from "../options.js";
-import { CodeModel } from "../type/CodeModel.js";
-import { InputConstant } from "../type/InputConstant.js";
-import { InputOperationParameterKind } from "../type/InputOperationParameterKind.js";
-import { InputParameter } from "../type/InputParameter.js";
+import { CodeModel } from "../type/codeModel.js";
+import { InputConstant } from "../type/inputConstant.js";
+import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
+import { InputParameter } from "../type/inputParameter.js";
 import {
     InputEnumType,
     InputModelType,
     InputPrimitiveType,
     InputType
-} from "../type/InputType.js";
-import { InputTypeKind } from "../type/InputTypeKind.js";
-import { RequestLocation } from "../type/RequestLocation.js";
+} from "../type/inputType.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
+import { RequestLocation } from "../type/requestLocation.js";
 import { getExternalDocs } from "./decorators.js";
-import { processServiceAuthentication } from "./ServiceAuthentication.js";
+import { processServiceAuthentication } from "./serviceAuthentication.js";
 import { resolveServers } from "./cadlServer.js";
-import { InputClient } from "../type/InputClient.js";
-import { ClientKind } from "../type/ClientKind.js";
-import { InputOperation } from "../type/InputOperation.js";
+import { InputClient } from "../type/inputClient.js";
+import { ClientKind } from "../type/clientKind.js";
+import { InputOperation } from "../type/inputOperation.js";
 import { getOperationLink } from "@azure-tools/cadl-azure-core";
 import { getUsages } from "./model.js";
-import { Usage } from "../type/Usage.js";
+import { Usage } from "../type/usage.js";
 import { loadOperation } from "./operation.js";
+import { mockApiVersion } from "../constants.js";
+import { logger } from "./logger.js";
 
 export function createModel(
     context: EmitContext<NetEmitterOptions>
@@ -78,7 +80,7 @@ export function createModelForService(
     const serviceNamespaceType = service.type;
     const apiVersions: Set<string> = new Set<string>();
     let version = service.version;
-    if (version && version !== "0000-00-00") {
+    if (version && version !== mockApiVersion) {
         apiVersions.add(version);
     }
     const versions = getVersions(program, service.type)[1]?.getVersions();
@@ -152,7 +154,7 @@ export function createModelForService(
     if (routes.length === 0) {
         throw `No Route for service ${services[0].namespace.name}`;
     }
-    console.log("routes:" + routes.length);
+    logger.info("routes:" + routes.length);
 
     lroMonitorOperations = getAllLroMonitorOperations(routes, program);
     const clients: InputClient[] = [];

@@ -27,13 +27,13 @@ import {
     HttpOperationResponse
 } from "@cadl-lang/rest/http";
 import { NetEmitterOptions } from "../options.js";
-import { BodyMediaType, typeToBodyMediaType } from "../type/BodyMediaType.js";
-import { collectionFormatToDelimMap } from "../type/CollectionFormat.js";
-import { HttpResponseHeader } from "../type/HttpResponseHeader.js";
-import { InputConstant } from "../type/InputConstant.js";
-import { InputOperation } from "../type/InputOperation.js";
-import { InputOperationParameterKind } from "../type/InputOperationParameterKind.js";
-import { InputParameter } from "../type/InputParameter.js";
+import { BodyMediaType, typeToBodyMediaType } from "../type/bodyMediaType.js";
+import { collectionFormatToDelimMap } from "../type/collectionFormat.js";
+import { HttpResponseHeader } from "../type/httpResponseHeader.js";
+import { InputConstant } from "../type/inputConstant.js";
+import { InputOperation } from "../type/inputOperation.js";
+import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
+import { InputParameter } from "../type/inputParameter.js";
 import {
     InputEnumType,
     InputListType,
@@ -41,20 +41,21 @@ import {
     InputType,
     isInputLiteralType,
     isInputUnionType
-} from "../type/InputType.js";
-import { OperationFinalStateVia } from "../type/OperationFinalStateVia.js";
-import { OperationLongRunning } from "../type/OperationLongRunning.js";
-import { OperationPaging } from "../type/OperationPaging.js";
-import { OperationResponse } from "../type/OperationResponse.js";
+} from "../type/inputType.js";
+import { OperationFinalStateVia } from "../type/operationFinalStateVia.js";
+import { OperationLongRunning } from "../type/operationLongRunning.js";
+import { OperationPaging } from "../type/operationPaging.js";
+import { OperationResponse } from "../type/operationResponse.js";
 import {
     RequestLocation,
     requestLocationMap
-} from "../type/RequestLocation.js";
+} from "../type/requestLocation.js";
 import {
     parseHttpRequestMethod,
     RequestMethod
-} from "../type/RequestMethod.js";
+} from "../type/requestMethod.js";
 import { getExternalDocs, getOperationId, hasDecorator } from "./decorators.js";
+import { logger } from "./logger.js";
 import {
     getDefaultValue,
     getEffectiveSchemaType,
@@ -79,7 +80,7 @@ export function loadOperation(
         verb,
         parameters: cadlParameters
     } = operation;
-    console.log(`load operation: ${op.name}, path:${fullPath} `);
+    logger.info(`load operation: ${op.name}, path:${fullPath} `);
     const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
     const summary = getSummary(program, op);
@@ -205,7 +206,7 @@ export function loadOperation(
         ExternalDocsUrl: externalDocs?.url,
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
-        LongRunning: loadOperationLongRunning(
+        LongRunning: loadLongRunningOperation(
             program,
             operation,
             resourceOperation
@@ -220,10 +221,7 @@ export function loadOperation(
         parameter: HttpOperationParameter
     ): InputParameter {
         const { type: location, name, param } = parameter;
-        let format = undefined;
-        if (parameter.type !== "path") {
-            format = parameter.format;
-        }
+        const format = parameter.type === "path" ? undefined : parameter.format;
         const cadlType = param.type;
         const inputType: InputType = getInputType(
             program,
@@ -363,12 +361,12 @@ export function loadOperation(
         } as OperationResponse;
     }
 
-    function loadOperationLongRunning(
+    function loadLongRunningOperation(
         program: Program,
         op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationLongRunning | undefined {
-        if (!isLroOperation(program, op.operation)) return undefined;
+        if (!isLongRunningOperation(program, op.operation)) return undefined;
 
         const finalResponse = loadLongRunningFinalResponse(
             program,
@@ -414,7 +412,7 @@ export function loadOperation(
         );
     }
 
-    function isLroOperation(program: Program, op: Operation) {
+    function isLongRunningOperation(program: Program, op: Operation) {
         return getOperationLink(program, op, "polling") !== undefined;
     }
 }

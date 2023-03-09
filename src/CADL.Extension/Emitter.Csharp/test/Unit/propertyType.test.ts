@@ -1,7 +1,7 @@
 import { TestHost } from "@cadl-lang/compiler/testing";
 import assert, { AssertionError, deepStrictEqual } from "assert";
 import { createModel } from "../../src/lib/clientModelBuilder.js";
-import { CodeModel } from "../../src/type/CodeModel.js";
+import { CodeModel } from "../../src/type/codeModel.js";
 import {
     cadlCompile,
     createEmitterContext,
@@ -16,7 +16,7 @@ import {
     InputPrimitiveType,
     InputType,
     InputUnionType
-} from "../../src/type/InputType.js";
+} from "../../src/type/inputType.js";
 import isEqual from "lodash.isequal";
 import {
     EmitContext,

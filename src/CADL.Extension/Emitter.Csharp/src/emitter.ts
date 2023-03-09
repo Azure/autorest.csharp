@@ -11,7 +11,7 @@ import {
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
 import fs from "fs";
 import path from "node:path";
-import { Configuration } from "./type/Configuration.js";
+import { Configuration } from "./type/configuration.js";
 import { execSync } from "child_process";
 import { EmitContext } from "@cadl-lang/compiler";
 import {
@@ -21,6 +21,7 @@ import {
     resolveOutputFolder
 } from "./options.js";
 import { createModel } from "./lib/clientModelBuilder.js";
+import { logger, LoggerLevel } from "./lib/logger.js";
 
 export const $lib = createCadlLibrary({
     name: "cadl-csharp",
@@ -34,6 +35,12 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
     const program: Program = context.program;
     const options = resolveOptions(context);
     const outputFolder = resolveOutputFolder(context);
+
+    /* set the loglevel. */
+    for (const transport of logger.transports) {
+        transport.level = options.logLevel ?? LoggerLevel.INFO;
+    }
+
     if (!program.compilerOptions.noEmit && !program.hasError()) {
         // Write out the dotnet model to the output path
         const root = createModel(context);
@@ -125,22 +132,21 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
                     options["clear-output-folder"]
                 }${debugFlag}`;
-                console.info(command);
+                logger.verbose(command);
 
                 try {
                     execSync(command, { stdio: "inherit" });
                 } catch (error: any) {
-                    if (error.message) console.log(error.message);
-                    if (error.stderr) console.error(error.stderr);
-                    if (error.stdout) console.log(error.stdout);
-
+                    if (error.message) logger.info(error.message);
+                    if (error.stderr) logger.error(error.stderr);
+                    if (error.stdout) logger.verbose(error.stdout);
                     throw error;
                 }
             }
 
             if (!options["save-inputs"]) {
                 // delete
-                deleteFile(resolvePath(generatedFolder, "cadl.json"));
+                deleteFile(resolvePath(generatedFolder, "cadl2.json"));
                 deleteFile(resolvePath(generatedFolder, "Configuration.json"));
             }
         }
@@ -150,10 +156,10 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 function deleteFile(filePath: string) {
     fs.unlink(filePath, (err) => {
         if (err) {
-            console.log(`stderr: ${err}`);
+            logger.error(`stderr: ${err}`);
+        } else {
+            logger.info(`File ${filePath} is deleted.`);
         }
-
-        console.log(`File ${filePath} is deleted.`);
     });
 }
 

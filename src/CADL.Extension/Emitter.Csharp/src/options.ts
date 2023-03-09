@@ -1,6 +1,7 @@
 import { DpgEmitterOptions } from "@azure-tools/cadl-dpg";
 import { EmitContext, JSONSchemaType, resolvePath } from "@cadl-lang/compiler";
 import { dllFilePath } from "@autorest/csharp";
+import { LoggerLevel } from "./lib/logger.js";
 
 export type NetEmitterOptions = {
     outputFile?: string;
@@ -21,6 +22,7 @@ export type NetEmitterOptions = {
     debug?: boolean;
     "models-to-treat-empty-string-as-null"?: string[];
     "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
+    logLevel?: string;
 } & DpgEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -60,6 +62,11 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
             type: "array",
             nullable: true,
             items: { type: "string" }
+        },
+        logLevel: {
+            type: "string",
+            enum: ["error", "warn", "info", "debug", "verbose"],
+            nullable: true
         }
     },
     required: []
@@ -78,7 +85,8 @@ const defaultOptions = {
     "package-name": undefined,
     debug: undefined,
     "models-to-treat-empty-string-as-null": undefined,
-    "additional-intrinsic-types-to-treat-empty-string-as-null": []
+    "additional-intrinsic-types-to-treat-empty-string-as-null": [],
+    logLevel: LoggerLevel.INFO
 };
 
 export function resolveOptions(context: EmitContext<NetEmitterOptions>) {
