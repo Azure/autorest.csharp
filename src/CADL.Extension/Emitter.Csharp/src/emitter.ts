@@ -146,7 +146,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
             if (!options["save-inputs"]) {
                 // delete
-                deleteFile(resolvePath(generatedFolder, "cadl2.json"));
+                deleteFile(resolvePath(generatedFolder, "cadl.json"));
                 deleteFile(resolvePath(generatedFolder, "Configuration.json"));
             }
         }
