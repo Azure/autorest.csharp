@@ -12,130 +12,44 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtPartialResource.Mock;
 
 namespace MgmtPartialResource
 {
     /// <summary> A class to add extension methods to MgmtPartialResource. </summary>
     public static partial class MgmtPartialResourceExtensions
     {
-        private static SubscriptionResourceExtensionClient GetExtensionClient(SubscriptionResource subscriptionResource)
+        private static PublicIPAddressResourceExtensionClient GetPublicIPAddressResourceExtensionClient(ArmResource resource)
         {
-            return subscriptionResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, subscriptionResource.Id);
-            }
-            );
+                return new PublicIPAddressResourceExtensionClient(client, resource.Id);
+            });
         }
 
-        /// <summary>
-        /// Gets all the public IP addresses in a subscription.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Network/publicIPAddresses</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>PublicIPAddresses_ListAll</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> An async collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
-        public static AsyncPageable<PublicIPAddressResource> GetPublicIPAddressesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        private static PublicIPAddressResourceExtensionClient GetPublicIPAddressResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
         {
-            return GetExtensionClient(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
-        }
-
-        /// <summary>
-        /// Gets all the public IP addresses in a subscription.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Network/publicIPAddresses</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>PublicIPAddresses_ListAll</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <returns> A collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
-        public static Pageable<PublicIPAddressResource> GetPublicIPAddresses(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
-        {
-            return GetExtensionClient(subscriptionResource).GetPublicIPAddresses(cancellationToken);
-        }
-
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
-        {
-            return resourceGroupResource.GetCachedClient((client) =>
+            return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
-            }
-            );
+                return new PublicIPAddressResourceExtensionClient(client, scope);
+            });
         }
 
-        /// <summary> Gets a collection of PublicIPAddressResources in the ResourceGroupResource. </summary>
-        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
-        /// <returns> An object representing collection of PublicIPAddressResources and their operations over a PublicIPAddressResource. </returns>
-        public static PublicIPAddressCollection GetPublicIPAddresses(this ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
         {
-            return GetExtensionClient(resourceGroupResource).GetPublicIPAddresses();
+            return resource.GetCachedClient(client =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
         }
 
-        /// <summary>
-        /// Gets the specified public IP address in a specified resource group.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>PublicIPAddresses_Get</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
-        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
-        /// <param name="expand"> Expands referenced resources. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
-        [ForwardsClientCalls]
-        public static async Task<Response<PublicIPAddressResource>> GetPublicIPAddressAsync(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
         {
-            return await resourceGroupResource.GetPublicIPAddresses().GetAsync(publicIpAddressName, expand, cancellationToken).ConfigureAwait(false);
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
         }
-
-        /// <summary>
-        /// Gets the specified public IP address in a specified resource group.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>PublicIPAddresses_Get</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
-        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
-        /// <param name="expand"> Expands referenced resources. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
-        [ForwardsClientCalls]
-        public static Response<PublicIPAddressResource> GetPublicIPAddress(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
-        {
-            return resourceGroupResource.GetPublicIPAddresses().Get(publicIpAddressName, expand, cancellationToken);
-        }
-
         #region PublicIPAddressResource
         /// <summary>
         /// Gets an object representing a <see cref="PublicIPAddressResource" /> along with the instance operations that can be performed on it but with no data.
@@ -211,5 +125,105 @@ namespace MgmtPartialResource
             );
         }
         #endregion
+
+        /// <summary> Gets a collection of PublicIPAddressResources in the ResourceGroupResource. </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <returns> An object representing collection of PublicIPAddressResources and their operations over a PublicIPAddressResource. </returns>
+        public static PublicIPAddressCollection GetPublicIPAddresses(this ResourceGroupResource resourceGroupResource)
+        {
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPublicIPAddresses();
+        }
+
+        /// <summary>
+        /// Gets the specified public IP address in a specified resource group.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PublicIPAddresses_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
+        /// <param name="expand"> Expands referenced resources. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static async Task<Response<PublicIPAddressResource>> GetPublicIPAddressAsync(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return await resourceGroupResource.GetPublicIPAddresses().GetAsync(publicIpAddressName, expand, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Gets the specified public IP address in a specified resource group.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPAddresses/{publicIpAddressName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PublicIPAddresses_Get</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
+        /// <param name="publicIpAddressName"> The name of the public IP address. </param>
+        /// <param name="expand"> Expands referenced resources. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
+        [ForwardsClientCalls]
+        public static Response<PublicIPAddressResource> GetPublicIPAddress(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
+        {
+            return resourceGroupResource.GetPublicIPAddresses().Get(publicIpAddressName, expand, cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets all the public IP addresses in a subscription.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Network/publicIPAddresses</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PublicIPAddresses_ListAll</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> An async collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
+        public static AsyncPageable<PublicIPAddressResource> GetPublicIPAddressesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        {
+            return GetPublicIPAddressResourceExtensionClient(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
+        }
+
+        /// <summary>
+        /// Gets all the public IP addresses in a subscription.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/providers/Microsoft.Network/publicIPAddresses</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>PublicIPAddresses_ListAll</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <returns> A collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
+        public static Pageable<PublicIPAddressResource> GetPublicIPAddresses(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
+        {
+            return GetPublicIPAddressResourceExtensionClient(subscriptionResource).GetPublicIPAddresses(cancellationToken);
+        }
     }
 }

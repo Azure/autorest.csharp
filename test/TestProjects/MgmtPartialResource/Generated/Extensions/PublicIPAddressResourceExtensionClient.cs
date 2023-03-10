@@ -10,28 +10,29 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.ResourceManager;
+using MgmtPartialResource;
 
-namespace MgmtPartialResource
+namespace MgmtPartialResource.Mock
 {
-    /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    internal partial class SubscriptionResourceExtensionClient : ArmResource
+    /// <summary> A class to add extension methods to PublicIPAddressResource. </summary>
+    public partial class PublicIPAddressResourceExtensionClient : ArmResource
     {
         private ClientDiagnostics _publicIPAddressClientDiagnostics;
         private PublicIPAddressesRestOperations _publicIPAddressRestClient;
 
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class for mocking. </summary>
-        protected SubscriptionResourceExtensionClient()
+        /// <summary> Initializes a new instance of the <see cref="PublicIPAddressResourceExtensionClient"/> class for mocking. </summary>
+        protected PublicIPAddressResourceExtensionClient()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="SubscriptionResourceExtensionClient"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="PublicIPAddressResourceExtensionClient"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal SubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal PublicIPAddressResourceExtensionClient(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 
-        private ClientDiagnostics PublicIPAddressClientDiagnostics => _publicIPAddressClientDiagnostics ??= new ClientDiagnostics("MgmtPartialResource", PublicIPAddressResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics PublicIPAddressClientDiagnostics => _publicIPAddressClientDiagnostics ??= new ClientDiagnostics("MgmtPartialResource.Mock", PublicIPAddressResource.ResourceType.Namespace, Diagnostics);
         private PublicIPAddressesRestOperations PublicIPAddressRestClient => _publicIPAddressRestClient ??= new PublicIPAddressesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(PublicIPAddressResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
@@ -59,7 +60,7 @@ namespace MgmtPartialResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => PublicIPAddressRestClient.CreateListAllRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PublicIPAddressRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "PublicIPAddressResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -81,7 +82,7 @@ namespace MgmtPartialResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => PublicIPAddressRestClient.CreateListAllRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => PublicIPAddressRestClient.CreateListAllNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new PublicIPAddressResource(Client, PublicIPAddressData.DeserializePublicIPAddressData(e)), PublicIPAddressClientDiagnostics, Pipeline, "PublicIPAddressResourceExtensionClient.GetPublicIPAddresses", "value", "nextLink", cancellationToken);
         }
     }
 }
