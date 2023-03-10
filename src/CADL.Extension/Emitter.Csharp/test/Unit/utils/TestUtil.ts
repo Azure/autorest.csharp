@@ -1,5 +1,6 @@
 import { createTestHost, TestHost } from "@typespec/compiler/testing";
 import { RestTestLibrary } from "@typespec/rest/testing";
+import { HttpTestLibrary } from "@typespec/http/testing";
 import { VersioningTestLibrary } from "@typespec/versioning/testing";
 import { AzureCoreTestLibrary } from "@azure-tools/typespec-azure-core/testing";
 import { EmitContext, Program } from "@typespec/compiler";
@@ -9,6 +10,7 @@ export async function createEmitterTestHost(): Promise<TestHost> {
     return createTestHost({
         libraries: [
             RestTestLibrary,
+            HttpTestLibrary,
             VersioningTestLibrary,
             AzureCoreTestLibrary
         ]
@@ -32,11 +34,12 @@ export async function typeSpecCompile(
         "main.tsp",
         `
     import "@typespec/rest";
+    import "@typespec/http";
     import "@typespec/versioning";
     ${needAzureCore ? 'import "@azure-tools/typespec-azure-core";' : ""} 
-    using Typespec.Rest; 
-    using Typespec.Http;
-    using Typespec.Versioning;
+    using TypeSpec.Rest; 
+    using TypeSpec.Http;
+    using TypeSpec.Versioning;
     ${needAzureCore ? "using Azure.Core;" : ""}
     
     ${needNamespaces ? namespace : ""}

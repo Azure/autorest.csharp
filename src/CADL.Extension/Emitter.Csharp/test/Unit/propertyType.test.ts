@@ -105,7 +105,7 @@ describe("Test GetInputType for enum", () => {
     it("Fixed string enum", async () => {
         const program = await typeSpecCompile(
             `
-        #suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "Enums should be defined without the @fixed decorator."
+        #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the @fixed decorator."
         @doc("fixed string enum")
         @fixed
         enum SimpleEnum {
@@ -113,7 +113,7 @@ describe("Test GetInputType for enum", () => {
             Two: "2",
             Four: "4"
         }
-        #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Operation 'test' should be defined using a signature from the Azure.Core namespace."
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'test' should be defined using a signature from the Azure.Core namespace."
         @doc("test fixed enum.")
         op test(@doc("fixed enum as input.")@body input: SimpleEnum): string[];
       `,
@@ -153,7 +153,7 @@ describe("Test GetInputType for enum", () => {
     it("Fixed int enum", async () => {
         const program = await typeSpecCompile(
             `
-      #suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "Enums should be defined without the @fixed decorator."
+      #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the @fixed decorator."
       @doc("Fixed int enum")
       @fixed
       enum FixedIntEnum {
@@ -161,7 +161,7 @@ describe("Test GetInputType for enum", () => {
           Two: 2,
           Four: 4
       }
-      #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Operation 'test' should be defined using a signature from the Azure.Core namespace."
+      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'test' should be defined using a signature from the Azure.Core namespace."
       @doc("test fixed enum.")
       op test(@doc("fixed enum as input.")@body input: FixedIntEnum): string[];
     `,
