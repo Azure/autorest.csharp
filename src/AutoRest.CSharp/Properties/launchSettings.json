@@ -508,9 +508,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ParameterSequence-LowLevel\\Generated"
     },
-    "PetStore-Cadl": {
+    "PetStore-Typespec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-Cadl\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\PetStore-Typespec\\Generated"
     },
     "ProtocolMethodsInRestClient": {
       "commandName": "Project",
