@@ -164,46 +164,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\BodyAndPath-LowLevel\\Generated"
     },
-    "cadl-arrays/item-types": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\arrays\\item-types\\Generated"
-    },
-    "cadl-authentication/api-key": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\api-key\\Generated"
-    },
-    "cadl-authentication/oauth2": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\oauth2\\Generated"
-    },
-    "cadl-authentication/union": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\union\\Generated"
-    },
-    "cadl-enums/extensible": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\enums\\extensible\\Generated"
-    },
-    "cadl-hello": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\hello\\Generated"
-    },
-    "cadl-models/property-optional": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\property-optional\\Generated"
-    },
-    "cadl-models/property-types": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\property-types\\Generated"
-    },
-    "cadl-models/usage": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\usage\\Generated"
-    },
-    "cadl-projection": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\projection\\Generated"
-    },
     "ClientAndOperationGroup-Typespec": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ClientAndOperationGroup-Typespec\\Generated"
@@ -635,6 +595,46 @@
     "TypeSchemaMapping": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\TypeSchemaMapping\\SomeFolder\\Generated"
+    },
+    "typespec-arrays/item-types": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\arrays\\item-types\\Generated"
+    },
+    "typespec-authentication/api-key": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\api-key\\Generated"
+    },
+    "typespec-authentication/oauth2": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\oauth2\\Generated"
+    },
+    "typespec-authentication/union": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\union\\Generated"
+    },
+    "typespec-enums/extensible": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\enums\\extensible\\Generated"
+    },
+    "typespec-hello": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\hello\\Generated"
+    },
+    "typespec-models/property-optional": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\property-optional\\Generated"
+    },
+    "typespec-models/property-types": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\property-types\\Generated"
+    },
+    "typespec-models/usage": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\models\\usage\\Generated"
+    },
+    "typespec-projection": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\projection\\Generated"
     },
     "url": {
       "commandName": "Project",
