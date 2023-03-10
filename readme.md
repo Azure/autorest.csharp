@@ -92,14 +92,14 @@ When the automatic PR is created for azure-sdk-for-net if there are any issues f
   - This is not intended to be checked in but is a temporary change so `dotnet restore` can find the package
 - If your generator PR needs to apply to typespec/cadl projects, or your generator PR changes anything in our emitter (the `src\CADL.Extension\Emitter.Csharp` project), you will need to
   1. Update the `version` in `src\CADL.Extension\Emitter.Csharp\package.json`
-  2. Run `npm pack` command in `src\CADL.Extension\Emitter.Csharp` directory. This will produce a pack like `src\CADL.Extension\Emitter.Csharp\azure-tools-cadl-csharp-x.y.z.tgz` where `x.y.z` is the version number you set in step 1.
+  2. Run `npm pack` command in `src\CADL.Extension\Emitter.Csharp` directory. This will produce a pack like `src\CADL.Extension\Emitter.Csharp\azure-tools-typespec-csharp-x.y.z.tgz` where `x.y.z` is the version number you set in step 1.
   3. Change the emitter version used in our `azure-sdk-for-net` repo in this file `eng\emitter-package.json` like this:
   ```diff
   {
     "main": "dist/src/index.js",
     "dependencies": {
-  -   "@azure-tools/cadl-csharp": "0.1.11-beta.20230212.4"
-  +   "@azure-tools/cadl-csharp": "/absolute/path/to/src/CADL.Extension/Emitter.Csharp/azure-tools-cadl-csharp-x.y.z.tgz"
+  -   "@azure-tools/typespec-csharp": "0.1.11-beta.20230212.4"
+  +   "@azure-tools/typespec-csharp": "/absolute/path/to/src/CADL.Extension/Emitter.Csharp/azure-tools-typespec-csharp-x.y.z.tgz"
     }
   }
   ```
