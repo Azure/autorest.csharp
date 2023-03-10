@@ -85,7 +85,7 @@ stages:
           workingDirectory: $(Build.SourcesDirectory)
         - script: |
             mkdir -p $(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)/packages
-            cp azure-tools-cadl-csharp-*.tgz $(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)/packages/
+            cp azure-tools-typespec-csharp-*.tgz $(VAR_BUILD_ARTIFACT_STAGING_DIRECTORY)/packages/
           displayName: 'Copy CADL Csharp emitter library to staging dir'
           workingDirectory: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
         - task: PublishBuildArtifacts@1

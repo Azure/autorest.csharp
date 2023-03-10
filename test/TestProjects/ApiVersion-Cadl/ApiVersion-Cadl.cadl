@@ -1,11 +1,13 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-dpg";
-import "@cadl-lang/versioning";
 
-using Cadl.Rest;
-using Cadl.Http;
-using Azure.DPG;
-using Cadl.Versioning;
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 @versioned(Versions)
 @service({title: "Anomaly Detector"})

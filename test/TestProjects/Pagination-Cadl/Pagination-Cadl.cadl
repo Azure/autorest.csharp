@@ -1,16 +1,16 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-autorest";
-import "@cadl-lang/openapi";
-import "@azure-tools/cadl-dpg";
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 using OpenAPI;
-using Azure.DPG;
+using Azure.ClientGenerator.Core;
 
 //
 // ** Service description **

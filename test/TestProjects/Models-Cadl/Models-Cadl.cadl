@@ -1,7 +1,8 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi";
-import "@azure-tools/cadl-dpg";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-core";
 
 @service(
     {
@@ -19,9 +20,9 @@ import "@azure-tools/cadl-azure-core";
 @doc("CADL project to test various types of models.")
 namespace ModelsInCadl;
 
-using Cadl.Http;
-using Cadl.Rest;
-using Azure.DPG;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.Core;
 
 @doc("Base model")

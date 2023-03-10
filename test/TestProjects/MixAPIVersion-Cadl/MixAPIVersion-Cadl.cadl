@@ -1,14 +1,15 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-import "@cadl-lang/openapi";
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
-using Azure.Core;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using OpenAPI;
+using Azure.Core;
 
 
 @service({title:"PetStore", version:"2022-11-30-preview"})

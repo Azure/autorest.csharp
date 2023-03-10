@@ -19,7 +19,7 @@ $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http'
-$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true --option @azure-tools/cadl-csharp.clear-output-folder=true'
+$cadlEmitOptions = '--option @azure-tools/typespec-csharp.save-inputs=true --option @azure-tools/typespec-csharp.clear-output-folder=true'
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -56,8 +56,8 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
 function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory, [boolean]$generateConvenience) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
     $cadlMain = Join-Path $cadlRanchFilePath $testName "main.cadl"
-    $convenienceOption = If ($generateConvenience) {""} Else {" --option @azure-tools/cadl-csharp.generate-convenience-methods=false"}
-    Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll$convenienceOption"
+    $convenienceOption = If ($generateConvenience) {""} Else {" --option @azure-tools/typespec-csharp.generate-convenience-methods=false"}
+    Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/typespec-csharp.unreferenced-types-handling=keepAll$convenienceOption"
 }
 
 $testNames =
@@ -195,7 +195,7 @@ if (!($Exclude -contains "TestProjects"))
             continue
         }
         if ($testName.EndsWith("Cadl")) {
-            Add-Cadl $testName $directory "" "--option @azure-tools/cadl-csharp.generate-convenience-methods=false"
+            Add-Cadl $testName $directory "" "--option @azure-tools/typespec-csharp.generate-convenience-methods=false"
         } else {
             if (Test-Path $readmeConfigurationPath)
             {

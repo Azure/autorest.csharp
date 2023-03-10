@@ -25,7 +25,7 @@ import { logger, LoggerLevel } from "./lib/logger.js";
 import { cadlOutputFileName, configurationFileName } from "./constants.js";
 
 export const $lib = createCadlLibrary({
-    name: "cadl-csharp",
+    name: "typespec-csharp",
     diagnostics: {},
     emitter: {
         options: NetEmitterOptionsSchema

@@ -1,12 +1,14 @@
-import "@azure-tools/cadl-azure-core";
-import "@cadl-lang/openapi";
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-dpg";
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
+import "@typespec/openapi";
+import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
-using Azure.DPG;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 @service(
     {
@@ -25,7 +27,7 @@ using Cadl.Versioning;
 namespace LroBasicCadl;
 
 
-@Cadl.Rest.resource("projects")
+@resource("projects")
 model Project {
   @key
   @visibility("read")
@@ -56,13 +58,13 @@ interface Authoring {
 }
 
 namespace CustomCore {
-  @Cadl.Rest.parentResource(T)
-  @Cadl.Rest.resource("operations")
+  @parentResource(T)
+  @resource("operations")
   model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
     operationId: string;
   }
 
-  @Cadl.Http.route("operations")
+  @route("operations")
   @convenientAPI(true)
   op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
 

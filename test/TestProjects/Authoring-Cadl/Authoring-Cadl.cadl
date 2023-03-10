@@ -1,13 +1,14 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-dpg";
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
+import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.DPG;
+using Azure.ClientGenerator.Core;
 
 // NOTE: These features are missing:
 // - Security definition for apiKey
@@ -35,7 +36,6 @@ namespace Azure.Language.Authoring;
 scalar Endpoint extends string;
 
 // Models
-
 model Project {
   @key
   @visibility("read")
@@ -245,7 +245,7 @@ interface Projects {
   export is ResourceAction<
     Project,
     ExportParams,
-    Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation
+    TypeSpec.Http.AcceptedResponse & Foundations.LongRunningStatusLocation
   >;
 
   // NOTE: `import` is a reserved keyword
@@ -253,7 +253,7 @@ interface Projects {
   importx is ResourceAction<
     Project,
     ExportedProject,
-    Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation
+    TypeSpec.Http.AcceptedResponse & Foundations.LongRunningStatusLocation
   >;
 
   @doc("Triggers a training job for a project.")
@@ -262,7 +262,7 @@ interface Projects {
     {
       @body body: TrainingJobOptions;
     },
-    Cadl.Http.AcceptedResponse & Foundations.LongRunningStatusLocation
+    TypeSpec.Http.AcceptedResponse & Foundations.LongRunningStatusLocation
   >;
 }
 
