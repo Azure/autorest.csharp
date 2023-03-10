@@ -49,49 +49,32 @@ namespace Models.Property.Optional
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<StringProperty>> GetAllValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<StringProperty>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("String.GetAllValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetAllAsync(context).ConfigureAwait(false);
-                return Response.FromValue(StringProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetAllAsync(context).ConfigureAwait(false);
+            return Response.FromValue(StringProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<StringProperty> GetAllValue(CancellationToken cancellationToken = default)
+        public virtual Response<StringProperty> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("String.GetAllValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetAll(context);
-                return Response.FromValue(StringProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetAll(context);
+            return Response.FromValue(StringProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetAllAsync(RequestContext context = null)
+        public virtual async Task<Response> GetAllAsync(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("String.GetAll");
             scope.Start();
             try
@@ -108,11 +91,14 @@ namespace Models.Property.Optional
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
-        public virtual Response GetAll(RequestContext context = null)
+        public virtual Response GetAll(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("String.GetAll");
             scope.Start();
             try
@@ -129,49 +115,32 @@ namespace Models.Property.Optional
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<StringProperty>> GetDefaultValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<StringProperty>> GetDefaultAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("String.GetDefaultValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetDefaultAsync(context).ConfigureAwait(false);
-                return Response.FromValue(StringProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetDefaultAsync(context).ConfigureAwait(false);
+            return Response.FromValue(StringProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<StringProperty> GetDefaultValue(CancellationToken cancellationToken = default)
+        public virtual Response<StringProperty> GetDefault(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("String.GetDefaultValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetDefault(context);
-                return Response.FromValue(StringProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetDefault(context);
+            return Response.FromValue(StringProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetDefaultAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDefaultAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDefaultAsync(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("String.GetDefault");
             scope.Start();
             try
@@ -188,11 +157,14 @@ namespace Models.Property.Optional
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetDefault(RequestContext)']/*" />
-        public virtual Response GetDefault(RequestContext context = null)
+        public virtual Response GetDefault(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("String.GetDefault");
             scope.Start();
             try

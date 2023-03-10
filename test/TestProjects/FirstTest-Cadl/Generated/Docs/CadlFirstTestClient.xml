@@ -1393,7 +1393,7 @@ Schema for <c>Thing</c>:
     </member>
     <member name="HelloDemo2Async(RequestContext)">
 <example>
-This sample shows how to call HelloDemo2Async and parse the result.
+This sample shows how to call HelloDemo2Async with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1440,7 +1440,7 @@ Schema for <c>Thing</c>:
     </member>
     <member name="HelloDemo2(RequestContext)">
 <example>
-This sample shows how to call HelloDemo2 and parse the result.
+This sample shows how to call HelloDemo2 with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1699,7 +1699,7 @@ Schema for <c>Thing</c>:
     </member>
     <member name="HelloLiteralAsync(RequestContext)">
 <example>
-This sample shows how to call HelloLiteralAsync and parse the result.
+This sample shows how to call HelloLiteralAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1746,7 +1746,7 @@ Schema for <c>Thing</c>:
     </member>
     <member name="HelloLiteral(RequestContext)">
 <example>
-This sample shows how to call HelloLiteral and parse the result.
+This sample shows how to call HelloLiteral with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -2035,7 +2035,7 @@ Schema for <c>Thing</c>:
     </member>
     <member name="StillConvenientAsync(RequestContext)">
 <example>
-This sample shows how to call StillConvenientAsync.
+This sample shows how to call StillConvenientAsync with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -2048,7 +2048,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="StillConvenient(RequestContext)">
 <example>
-This sample shows how to call StillConvenient.
+This sample shows how to call StillConvenient with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");

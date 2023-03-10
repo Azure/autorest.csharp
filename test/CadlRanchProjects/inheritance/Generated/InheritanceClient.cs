@@ -75,14 +75,13 @@ namespace Models.Inheritance
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValidAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> PostValidAsync(RequestContent content, RequestContext context)
+        public virtual async Task<Response> PostValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.PostValid");
             scope.Start();
@@ -100,14 +99,13 @@ namespace Models.Inheritance
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValid(RequestContent,RequestContext)']/*" />
-        public virtual Response PostValid(RequestContent content, RequestContext context)
+        public virtual Response PostValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.PostValid");
             scope.Start();
@@ -211,14 +209,13 @@ namespace Models.Inheritance
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValidAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context)
+        public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.PutValid");
             scope.Start();
@@ -236,14 +233,13 @@ namespace Models.Inheritance
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValid(RequestContent,RequestContext)']/*" />
-        public virtual Response PutValid(RequestContent content, RequestContext context)
+        public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.PutValid");
             scope.Start();
@@ -347,14 +343,13 @@ namespace Models.Inheritance
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModelAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> PutModelAsync(RequestContent content, RequestContext context)
+        public virtual async Task<Response> PutModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.PutModel");
             scope.Start();
@@ -372,14 +367,13 @@ namespace Models.Inheritance
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModel(RequestContent,RequestContext)']/*" />
-        public virtual Response PutModel(RequestContent content, RequestContext context)
+        public virtual Response PutModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.PutModel");
             scope.Start();
@@ -483,14 +477,13 @@ namespace Models.Inheritance
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> PutRecursiveModelAsync(RequestContent content, RequestContext context)
+        public virtual async Task<Response> PutRecursiveModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.PutRecursiveModel");
             scope.Start();
@@ -508,14 +501,13 @@ namespace Models.Inheritance
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModel(RequestContent,RequestContext)']/*" />
-        public virtual Response PutRecursiveModel(RequestContent content, RequestContext context)
+        public virtual Response PutRecursiveModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.PutRecursiveModel");
             scope.Start();

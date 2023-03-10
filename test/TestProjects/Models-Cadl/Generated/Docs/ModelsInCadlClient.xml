@@ -1291,7 +1291,7 @@ Schema for <c>RoundTripRecursiveModel</c>:
     </member>
     <member name="SelfReferenceAsync(RequestContext)">
 <example>
-This sample shows how to call SelfReferenceAsync and parse the result.
+This sample shows how to call SelfReferenceAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -1319,7 +1319,7 @@ Schema for <c>ErrorModel</c>:
     </member>
     <member name="SelfReference(RequestContext)">
 <example>
-This sample shows how to call SelfReference and parse the result.
+This sample shows how to call SelfReference with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);

@@ -3,7 +3,7 @@
   <members>
     <member name="GetAllAsync(RequestContext)">
 <example>
-This sample shows how to call GetAllAsync and parse the result.
+This sample shows how to call GetAllAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
 
@@ -30,7 +30,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
     </member>
     <member name="GetAll(RequestContext)">
 <example>
-This sample shows how to call GetAll and parse the result.
+This sample shows how to call GetAll with required parameters and parse the result.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
 
@@ -57,7 +57,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
     </member>
     <member name="GetRequiredOnlyAsync(RequestContext)">
 <example>
-This sample shows how to call GetRequiredOnlyAsync and parse the result.
+This sample shows how to call GetRequiredOnlyAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
 
@@ -84,7 +84,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
     </member>
     <member name="GetRequiredOnly(RequestContext)">
 <example>
-This sample shows how to call GetRequiredOnly and parse the result.
+This sample shows how to call GetRequiredOnly with required parameters and parse the result.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient(<1.0.0>);
 

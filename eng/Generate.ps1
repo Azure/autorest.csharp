@@ -194,12 +194,10 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
     }
 }
 
-$cadlTestProjectNames = ""
 if (!($Exclude -contains "TestProjects"))
 {
     # Local test projects
     $testSwaggerPath = Join-Path $repoRoot 'test' 'TestProjects'
-    $cadlTestProjectNames = Get-ChildItem $testSwaggerPath -Directory -Filter "*-Cadl" | ForEach-Object {$_.Name}
 
     foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
     {

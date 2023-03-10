@@ -49,63 +49,46 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<long>>> GetInt64ValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<long>>> GetInt64ValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Int64Value.GetInt64ValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetInt64ValueAsync(context).ConfigureAwait(false);
+            IReadOnlyList<long> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            List<long> array = new List<long>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetInt64ValueAsync(context).ConfigureAwait(false);
-                IReadOnlyList<long> value = default;
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                List<long> array = new List<long>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetInt64());
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetInt64());
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<long>> GetInt64ValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<long>> GetInt64Value(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Int64Value.GetInt64ValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetInt64Value(context);
+            IReadOnlyList<long> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            List<long> array = new List<long>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetInt64Value(context);
-                IReadOnlyList<long> value = default;
-                using var document = JsonDocument.Parse(response.ContentStream);
-                List<long> array = new List<long>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetInt64());
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetInt64());
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64ValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetInt64ValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetInt64ValueAsync(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("Int64Value.GetInt64Value");
             scope.Start();
             try
@@ -121,11 +104,14 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64Value(RequestContext)']/*" />
-        public virtual Response GetInt64Value(RequestContext context = null)
+        public virtual Response GetInt64Value(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("Int64Value.GetInt64Value");
             scope.Start();
             try

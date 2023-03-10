@@ -49,49 +49,32 @@ namespace Models.Property.Types
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<CollectionsModelProperty>> GetCollectionsModelValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CollectionsModelProperty>> GetCollectionsModelAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CollectionsModel.GetCollectionsModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetCollectionsModelAsync(context).ConfigureAwait(false);
-                return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetCollectionsModelAsync(context).ConfigureAwait(false);
+            return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<CollectionsModelProperty> GetCollectionsModelValue(CancellationToken cancellationToken = default)
+        public virtual Response<CollectionsModelProperty> GetCollectionsModel(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CollectionsModel.GetCollectionsModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetCollectionsModel(context);
-                return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetCollectionsModel(context);
+            return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionsModel.xml" path="doc/members/member[@name='GetCollectionsModelAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetCollectionsModelAsync(RequestContext context = null)
+        public virtual async Task<Response> GetCollectionsModelAsync(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("CollectionsModel.GetCollectionsModel");
             scope.Start();
             try
@@ -108,11 +91,14 @@ namespace Models.Property.Types
 
         /// <summary> Get call. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionsModel.xml" path="doc/members/member[@name='GetCollectionsModel(RequestContext)']/*" />
-        public virtual Response GetCollectionsModel(RequestContext context = null)
+        public virtual Response GetCollectionsModel(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("CollectionsModel.GetCollectionsModel");
             scope.Start();
             try

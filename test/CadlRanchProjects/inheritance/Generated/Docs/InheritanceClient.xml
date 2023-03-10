@@ -3,7 +3,7 @@
   <members>
     <member name="PostValidAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PostValidAsync with required parameters and request content.
+This sample shows how to call PostValidAsync with required request content.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -34,7 +34,7 @@ Schema for <c>Siamese</c>:
     </member>
     <member name="PostValid(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PostValid with required parameters and request content.
+This sample shows how to call PostValid with required request content.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -123,7 +123,7 @@ Schema for <c>Siamese</c>:
     </member>
     <member name="PutValidAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PutValidAsync with required parameters and request content and parse the result.
+This sample shows how to call PutValidAsync with required request content and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -168,7 +168,7 @@ Schema for <c>Siamese</c>:
     </member>
     <member name="PutValid(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PutValid with required parameters and request content and parse the result.
+This sample shows how to call PutValid with required request content and parse the result.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -263,7 +263,7 @@ Schema for <c>Fish</c>:
     </member>
     <member name="PutModelAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PutModelAsync with required parameters and request content.
+This sample shows how to call PutModelAsync with required request content.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -290,7 +290,7 @@ Schema for <c>Fish</c>:
     </member>
     <member name="PutModel(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PutModel with required parameters and request content.
+This sample shows how to call PutModel with required request content.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -367,7 +367,7 @@ Schema for <c>Fish</c>:
     </member>
     <member name="PutRecursiveModelAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PutRecursiveModelAsync with required parameters and request content.
+This sample shows how to call PutRecursiveModelAsync with required request content.
 <code><![CDATA[
 var client = new InheritanceClient();
 
@@ -394,7 +394,7 @@ Schema for <c>Fish</c>:
     </member>
     <member name="PutRecursiveModel(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PutRecursiveModel with required parameters and request content.
+This sample shows how to call PutRecursiveModel with required request content.
 <code><![CDATA[
 var client = new InheritanceClient();
 
