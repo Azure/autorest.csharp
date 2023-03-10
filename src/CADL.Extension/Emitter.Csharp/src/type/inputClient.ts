@@ -1,9 +1,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { InputOperation } from "./InputOperation";
-import { InputParameter } from "./InputParameter";
-import { Protocols } from "./Protocols";
+import { InputOperation } from "./inputOperation";
+import { InputParameter } from "./inputParameter";
+import { Protocols } from "./protocols";
 
 export interface InputClient {
     Name: string;
