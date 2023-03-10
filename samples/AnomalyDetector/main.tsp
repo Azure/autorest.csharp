@@ -1,8 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "./univariate/routes.cadl";
-import "./multivariate/routes.cadl";
+import "./univariate/routes.tsp";
+import "./multivariate/routes.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

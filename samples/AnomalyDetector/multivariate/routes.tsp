@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
-import "./models.cadl";
+import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

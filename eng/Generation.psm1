@@ -81,7 +81,7 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
         $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
         Try
         {
-            $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
+            $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.tsp"
             $emitCommand = "npx tsp compile $cadlFileName --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$outputPath --option @azure-tools/typespec-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
             Invoke $emitCommand $outputPath
         }

@@ -194,7 +194,7 @@ if (!($Exclude -contains "TestProjects"))
             Add-Directory $testName $testsFolder $TRUE
             continue
         }
-        if ($testName.EndsWith("Cadl")) {
+        if ($testName.EndsWith("Typespec")) {
             Add-Cadl $testName $directory "" "--option @azure-tools/typespec-csharp.generate-convenience-methods=false"
         } else {
             if (Test-Path $readmeConfigurationPath)
@@ -244,10 +244,10 @@ if (!($Exclude -contains "Samples"))
     foreach ($projectName in $cadlSampleProjectName)
     {
         $projectDirectory = Join-Path $repoRoot 'samples' $projectName
-        $cadlMain = Join-Path $projectDirectory "main.cadl"
-        $cadlClient = Join-Path $projectDirectory "client.cadl"
-        $mainCadlFile = If (Test-Path "$cadlClient") { Resolve-Path "$cadlClient" } Else { Resolve-Path "$cadlMain"}
-        Add-Cadl $projectName $projectDirectory $mainCadlFile
+        $tspMain = Join-Path $projectDirectory "main.tsp"
+        $tspClient = Join-Path $projectDirectory "client.tsp"
+        $mainTspFile = If (Test-Path "$tspClient") { Resolve-Path "$tspClient" } Else { Resolve-Path "$tspMain"}
+        Add-Cadl $projectName $projectDirectory $mainTspFile
     }
 }
 
