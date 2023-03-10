@@ -38,6 +38,9 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
 }
 
 function Add-Cadl([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
+    if ($mainFile -eq "") {
+        $mainFile = Get-Cadl-Entry $output
+    }
     $cadlDefinitions[$name] = @{
         'projectName'=$name;
         'output'=$output;
@@ -201,6 +204,9 @@ if (!($Exclude -contains "TestProjects"))
     foreach ($directory in Get-ChildItem $testSwaggerPath -Directory)
     {
         $testName = $directory.Name
+        if ($testName -eq "ConvenienceInitial-Cadl") {
+            continue;
+        }
         $readmeConfigurationPath = Join-Path $directory "readme.md"
         $testArguments = $null
         $srcFolder = Join-Path $directory "src"
@@ -364,10 +370,6 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     elseif ($key -eq "ConvenienceUpdate-Cadl" -or $key -eq "ConvenienceInitial-Cadl")
     {
         $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." "ConvenienceInitial-Cadl" "Generated"))"
-    }
-    elseif ($key -in $cadlSampleProjectName -or $key -in $cadlTestProjectNames)
-    {
-        $outputPath = "$outputPath --existing-project-folder $outputPath"
     }
     $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
 

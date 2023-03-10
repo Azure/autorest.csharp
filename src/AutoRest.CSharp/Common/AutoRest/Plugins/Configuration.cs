@@ -68,6 +68,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
             string? projectFolder,
+            string? existingProjectFolder,
             IReadOnlyList<string> protocolMethodList,
             IReadOnlyList<string> suppressAbstractBaseClasses,
             IReadOnlyList<string> modelsToTreatEmptyStringAsNull,
@@ -89,8 +90,8 @@ namespace AutoRest.CSharp.Input
             SingleTopLevelClient = singleTopLevelClient;
             GenerateModelFactory = generateModelFactory;
             UnreferencedTypesHandling = unreferencedTypesHandling;
-            ExistingProjectFolder = existingProjectFolder;
             projectFolder ??= ProjectFolderDefault;
+            ExistingProjectFolder = existingProjectFolder == null ? null : Path.GetFullPath(Path.Combine(projectFolder, existingProjectFolder));
             if (Path.IsPathRooted(projectFolder))
             {
                 _absoluteProjectFolder = projectFolder;

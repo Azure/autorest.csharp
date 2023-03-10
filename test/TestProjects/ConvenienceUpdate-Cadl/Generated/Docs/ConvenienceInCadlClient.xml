@@ -61,6 +61,17 @@ var data = new {
     id = "<id>",
 };
 
+Response response = await client.ConvenienceOptionalBeforeRequiredAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with all parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
 Response response = await client.ConvenienceOptionalBeforeRequiredAsync(RequestContent.Create(data), 1234);
 Console.WriteLine(response.Status);
 ]]></code>
@@ -81,6 +92,17 @@ Schema for <c>Model</c>:
     <member name="ConvenienceOptionalBeforeRequired(RequestContent,Int32,RequestContext)">
 <example>
 This sample shows how to call ConvenienceOptionalBeforeRequired with required parameters and request content.
+<code><![CDATA[
+var client = new ConvenienceInCadlClient();
+
+var data = new {
+    id = "<id>",
+};
+
+Response response = client.ConvenienceOptionalBeforeRequired(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call ConvenienceOptionalBeforeRequired with all parameters and request content.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -907,7 +929,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ConvenienceRequiredModelWithRequiredAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ConvenienceRequiredModelWithRequiredAsync with required parameters and request content.
+This sample shows how to call ConvenienceRequiredModelWithRequiredAsync with required request content.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -934,7 +956,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ConvenienceRequiredModelWithRequired(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ConvenienceRequiredModelWithRequired with required parameters and request content.
+This sample shows how to call ConvenienceRequiredModelWithRequired with required request content.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 

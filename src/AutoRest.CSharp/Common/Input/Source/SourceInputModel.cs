@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Input.Source
 
         internal IMethodSymbol? FindMethod(string namespaceName, string typeName, string methodName, IEnumerable<CSharpType> parameters)
         {
-            return _existingCompilation != null ? _existingCompilation.FindMethod(namespaceName, typeName, methodName, parameters) : null;
+            return _existingCompilation?.FindMethod(namespaceName, typeName, methodName, parameters);
         }
 
         public INamedTypeSymbol? FindForType(string ns, string name, bool includeArmCore = false)

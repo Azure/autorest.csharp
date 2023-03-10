@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
+using Azure;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Input.Source
@@ -13,6 +14,7 @@ namespace AutoRest.CSharp.Input.Source
     public class ProtocolCompilationInput : CompilationInput
     {
         private List<IMethodSymbol>? _methodSet;
+        private List<IMethodSymbol> MethodSet => _methodSet ??= EnsureMethodSet();
 
         public static async Task<CompilationInput?> TryCreate(string? existingProjectFolder)
         {
@@ -23,9 +25,9 @@ namespace AutoRest.CSharp.Input.Source
         private ProtocolCompilationInput(Compilation compilation)
             : base(compilation) { }
 
-        private protected override void FilterSymbols()
+        private protected List<IMethodSymbol> EnsureMethodSet()
         {
-            _methodSet = new List<IMethodSymbol>();
+            var result = new List<IMethodSymbol>();
             foreach (IModuleSymbol module in _compilation.Assembly.Modules)
             {
                 foreach (var type in SourceInputHelper.GetSymbols(module.GlobalNamespace))
@@ -36,22 +38,18 @@ namespace AutoRest.CSharp.Input.Source
                         {
                             if (member is IMethodSymbol methodSymbol && IsProtocolMethod(methodSymbol))
                             {
-                                _methodSet.Add(methodSymbol);
+                                result.Add(methodSymbol);
                             }
                         }
                     }
                 }
             }
+            return result;
         }
 
         internal override IMethodSymbol? FindMethod(string namespaceName, string typeName, string methodName, IEnumerable<CSharpType> parameters)
         {
-            if (_methodSet == null)
-            {
-                FilterSymbols();
-            }
-
-            var methods = _methodSet.Where(m =>
+            var methods = MethodSet.Where(m =>
                 m.ContainingNamespace.ToString() == namespaceName &&
                 m.ContainingType.Name == typeName &&
                 m.Name == methodName).ToArray();

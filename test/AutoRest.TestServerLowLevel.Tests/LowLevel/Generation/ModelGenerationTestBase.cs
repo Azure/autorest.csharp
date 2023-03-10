@@ -53,6 +53,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 projectFolder: ".",
+                existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),
                 suppressAbstractBaseClasses: Array.Empty<string>(),
                 modelsToTreatEmptyStringAsNull: Array.Empty<string>(),

@@ -199,12 +199,14 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 const newProjectOption = options["new-project"]
                     ? "--new-project"
                     : "";
-
+                const existingProjectOption = options["existing-project-folder"]
+                ? `--existing-project-folder ${options["existing-project-folder"]}`
+                : "";
                 const debugFlag = options.debug ?? false ? " --debug" : "";
 
                 const command = `dotnet --roll-forward Major ${resolvePath(
                     options.csharpGeneratorPath
-                )} --project-path ${outputFolder} ${newProjectOption} --clear-output-folder ${
+                )} --project-path ${outputFolder} ${newProjectOption} ${existingProjectOption} --clear-output-folder ${
                     options["clear-output-folder"]
                 }${debugFlag}`;
                 console.info(command);

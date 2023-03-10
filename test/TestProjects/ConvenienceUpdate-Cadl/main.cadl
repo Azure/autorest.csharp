@@ -6,29 +6,29 @@ using Cadl.Http;
 using Cadl.Rest;
 using Azure.DPG;
 
-@@convenienceAPI(protocol)
+@@convenientAPI(protocol, true)
 @@doc(protocol, "Initial operation only has protocol method. In the updated version, we add the convenience method.")
-@@convenienceAPI(protocolShouldNotGenerateConvenience)
+@@convenientAPI(protocolShouldNotGenerateConvenience, true)
 @@doc(protocolShouldNotGenerateConvenience, "Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.")
-@@convenienceAPI(protocolOptionalQuery)
+@@convenientAPI(protocolOptionalQuery, true)
 @@doc(protocolOptionalQuery, "Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.")
-@@convenienceAPI(protocolRequiredQuery)
+@@convenientAPI(protocolRequiredQuery, true)
 @@doc(protocolRequiredQuery, "Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.")
-@@convenienceAPI(protocolOptionalModel)
+@@convenientAPI(protocolOptionalModel, true)
 @@doc(protocolOptionalModel, "Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.")
-@@convenienceAPI(protocolRequiredModel)
+@@convenientAPI(protocolRequiredModel, true)
 @@doc(protocolRequiredModel, "Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.")
-@@convenienceAPI(protocolOptionalBeforeRequired)
+@@convenientAPI(protocolOptionalBeforeRequired, true)
 @@doc(protocolOptionalBeforeRequired, "Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.")
 
 @route("/updateConvenience")
 @doc("No initial operation methods. In the updated version, we add the protocol method and convenience method.")
 @get
-@convenienceAPI()
+@convenientAPI(true)
 op updateConvenience(): Model;
 
 @route("/convenienceOptionalBeforeRequired")
 @doc("No initial operation methods. In the updated version, we add the protocol method and convenience method.")
 @post
-@convenienceAPI()
+@convenientAPI(true)
 op convenienceOptionalBeforeRequired(@query optional?: int32, @body required: Model): Response<200>;

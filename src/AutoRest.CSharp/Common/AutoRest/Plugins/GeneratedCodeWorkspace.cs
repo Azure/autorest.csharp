@@ -179,7 +179,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         }
 
         // TODO: Currently the outputDirectory is expected to be generated folder. We will handle the customization folder if there is a case.
-        public static GeneratedCodeWorkspace CreateExistingCodeProject(string outputDirectory, Func<string, bool>? skipPredicate = null)
+        public static GeneratedCodeWorkspace CreateExistingCodeProject(string outputDirectory)
         {
             var workspace = new AdhocWorkspace();
             Project project = workspace.AddProject("ExistingCode", LanguageNames.CSharp);
@@ -187,7 +187,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (Path.IsPathRooted(outputDirectory))
             {
                 outputDirectory = Path.GetFullPath(outputDirectory);
-                project = AddDirectory(project, outputDirectory, skipPredicate);
+                project = AddDirectory(project, outputDirectory, null);
             }
 
             return new GeneratedCodeWorkspace(project);

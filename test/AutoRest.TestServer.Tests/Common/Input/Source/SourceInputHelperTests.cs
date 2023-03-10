@@ -69,7 +69,7 @@ namespace SourceInputHelperTests
                 }
             }
 
-            Configuration.Initialize("Generated", "", "", new string[] { }, false, false, true, false, false, false, false, false, false, false, Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize, ".", null, new string[] { }, new List<string>(), null, null);
+            Configuration.Initialize("Generated", "", "", new string[] { }, false, false, true, false, false, false, false, false, false, false, false, new List<string> { }, Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize, ".", null, new string[] { }, new List<string>(), new List<string>(), new List<string>(), null, null);
         }
 
         [Test]

@@ -2,9 +2,13 @@ import "@cadl-lang/rest";
 import "@cadl-lang/openapi";
 import "@azure-tools/cadl-dpg";
 
-@serviceTitle("Convenience method in CADL")
-@serviceVersion("0.1.0")
-@doc("CADL project to test convenience method.")
+@service(
+    {
+        title: "Convenience methods in CADL",
+        version: "0.1.0"
+    }
+)
+@doc("CADL project to test various types of convenience methods.")
 namespace ConvenienceInCadl;
 
 using Cadl.Http;
@@ -24,19 +28,19 @@ op protocol(): Model;
 @route("/convenienceWithOptional")
 @doc("Operation has protocol method with optional RequestContext and convenience method.")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op convenienceWithOptional(): Model;
 
 @route("/convenienceWithRequired")
 @doc("Operation has protocol method with required RequestContext and convenience method.")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op convenienceWithRequired(): Model;
 
 @route("/convenienceShouldNotGenerate")
 @doc("Operation has protocol method marked with convenience method, but the convenience method should not be generated.")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op convenienceShouldNotGenerate(): Response<200>;
 
 @route("/protocolShouldNotGenerateConvenience")
@@ -67,49 +71,49 @@ op protocolRequiredModel(@body required: Model): Response<200>;
 @route("/convenienceOptionalQueryWithOptional")
 @doc("Operation has protocol method with optional query parameter and optional RequestContext and convenience method.")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op convenienceOptionalQueryWithOptional(@query optional?: int32): Model;
 
 @route("/convenienceRequiredQueryWithOptional")
 @doc("Operation has protocol method with required query parameter and optional RequestContext and convenience method.")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op convenienceRequiredQueryWithOptional(@query required: int32): Model;
 
 @route("/convenienceOptionalQueryWithRequired")
 @doc("Operation has protocol method with optional query parameter and required RequestContext and convenience method.")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op convenienceOptionalQueryWithRequired(@query optional?: int32): Model;
 
 @route("/convenienceRequiredQueryWithRequired")
 @doc("Operation has protocol method with required query parameter and required RequestContext and convenience method.")
 @get
-@convenienceAPI
+@convenientAPI(true)
 op convenienceRequiredQueryWithRequired(@query required: int32): Model;
 
 @route("/convenienceOptionalModelWithOptional")
 @doc("Operation has protocol method with optional body parameter and optional RequestContext and convenience method.")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op convenienceOptionalModelWithOptional(@body optional?: Model): Response<200>;
 
 @route("/convenienceRequiredModelWithOptional")
 @doc("Operation has protocol method with required body parameter and optional RequestContext and convenience method.")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op convenienceRequiredModelWithOptional(@body required: Model): Response<200>;
 
 @route("/convenienceOptionalModelWithRequired")
 @doc("Operation has protocol method with optional body parameter and required RequestContext and convenience method.")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op convenienceOptionalModelWithRequired(@body optional?: Model): Response<200>;
 
 @route("/convenienceRequiredModelWithRequired")
 @doc("Operation has protocol method with required body parameter and required RequestContext and convenience method.")
 @post
-@convenienceAPI
+@convenientAPI(true)
 op convenienceRequiredModelWithRequired(@body required: Model): Response<200>;
 
 @route("/protocolOptionalBeforeRequired")

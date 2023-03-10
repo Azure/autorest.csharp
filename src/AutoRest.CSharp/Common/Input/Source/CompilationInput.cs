@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.Input.Source
             _compilation= compilation;
         }
 
-        private protected abstract void FilterSymbols();
         internal abstract IMethodSymbol? FindMethod(string namespaceName, string typeName, string methodName, IEnumerable<CSharpType> parameters);
     }
 }

@@ -89,11 +89,11 @@ namespace AutoRest.CSharp.Output.Models
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : Array.Empty<CSharpAttribute>();
 
-            var shouldOverloadConvenienceMethod = ShouldOverloadConvenienceMethod();
-            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => shouldOverloadConvenienceMethod ? p.ToRequired() : p).ToArray();
+            var shouldRequestContextOptional = ShouldRequestContextOptional();
+            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
             var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : MethodSignatureModifiers.Internal) | Virtual;
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
-            var convenienceMethod = ShouldGenerateConvenienceMethod() ? BuildConvenienceMethod(shouldOverloadConvenienceMethod) : null;
+            var convenienceMethod = ShouldGenerateConvenienceMethod() ? BuildConvenienceMethod(shouldRequestContextOptional) : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
@@ -110,20 +110,28 @@ namespace AutoRest.CSharp.Output.Models
                 || !_returnType.Convenience.Equals(_returnType.Protocol));
         }
 
-        private bool ShouldOverloadConvenienceMethod()
+        private bool HasAmbiguityBetweenProtocolAndConvenience()
         {
-            if (!ShouldGenerateConvenienceMethod() || _sourceInputModel == null)
-            {
-                return false;
-            }
-            var existingMethod = _sourceInputModel.FindMethod(_namespaceName, _clientName, Operation.CleanName, _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p.Type));
-            // If there is no existing protocol method with optional RequestContext
-            if (existingMethod == null || existingMethod.Parameters.Length < 1 || existingMethod.Parameters.Last().IsOptional == false)
+            return _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeHasValueOverlap(parameter.Convenience, parameter.Protocol));
+        }
+
+        private bool ShouldRequestContextOptional()
+        {
+            if (!ShouldGenerateConvenienceMethod())
             {
                 return true;
             }
 
-            return false;
+            if (_sourceInputModel != null)
+            {
+                var existingMethod = _sourceInputModel.FindMethod(_namespaceName, _clientName, Operation.CleanName, _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p.Type));
+                if (existingMethod != null && existingMethod.Parameters.Length > 0 && existingMethod.Parameters.Last().IsOptional)
+                {
+                    return true;
+                }
+            }
+
+            return !HasAmbiguityBetweenProtocolAndConvenience();
         }
 
         private bool IsParameterTypeSame(Parameter? first, Parameter? second)
@@ -226,9 +234,9 @@ namespace AutoRest.CSharp.Output.Models
             return new ReturnTypeChain(typeof(Response), typeof(Response), null);
         }
 
-        private ConvenienceMethod BuildConvenienceMethod(bool shouldOverloadConvenienceMethod)
+        private ConvenienceMethod BuildConvenienceMethod(bool shouldRequestContextOptional)
         {
-            bool needNameChange = !shouldOverloadConvenienceMethod && _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeHasValueOverlap(parameter.Convenience, parameter.Protocol));
+            bool needNameChange = shouldRequestContextOptional && HasAmbiguityBetweenProtocolAndConvenience();
             string name = _restClientMethod.Name;
             if (needNameChange)
             {
@@ -454,7 +462,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _orderedParameters.Add(new ParameterChain(
                 KnownParameters.CancellationTokenParameter,
-                ShouldOverloadConvenienceMethod() ? KnownParameters.RequestContextRequired : KnownParameters.RequestContext,
+                ShouldRequestContextOptional() ? KnownParameters.RequestContext : KnownParameters.RequestContextRequired,
                 KnownParameters.RequestContext));
         }
 

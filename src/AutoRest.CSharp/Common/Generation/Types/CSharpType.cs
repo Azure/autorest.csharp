@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Generation.Types
             if (!IsNullable)
                 return this;
 
-            return IsFrameworkType ? new CSharpType(_type!, false, Arguments) : new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
+            return IsFrameworkType ? new CSharpType(FrameworkType, false, Arguments) : new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
         }
 
         public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider
