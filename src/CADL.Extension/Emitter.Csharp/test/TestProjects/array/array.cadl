@@ -1,6 +1,7 @@
-import "@cadl-lang/rest";
+import "@typespec/rest";
+import "@typespec/http";
 
-using Cadl.Http;
+using TypeSpec.Http;
 
 @service(
     {
@@ -11,7 +12,7 @@ using Cadl.Http;
 @server("http://localhost:3000", "TestServer endpoint")
 @doc("Illustrates input, output, and round-trip models with required enum type properties.")
 
-namespace Cadl.TestServer.ArrayBasic;
+namespace TypeSpec.TestServer.ArrayBasic;
 
 // Model types
 model Pet {

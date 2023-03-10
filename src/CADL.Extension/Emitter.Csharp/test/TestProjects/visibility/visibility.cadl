@@ -1,6 +1,7 @@
-import "@cadl-lang/rest";
+import "@typespec/rest";
+import "@typespec/http";
 
-using Cadl.Http;
+using TypeSpec.Http;
 
 @service(
     {
@@ -11,7 +12,7 @@ using Cadl.Http;
 @server("http://localhost:3000", "TestServer endpoint")
 @doc("Illustrates read, write and read/write properties.")
 
-namespace Cadl.visibility;
+namespace TypeSpec.visibility;
 
 model Dog {
   // the service will generate an ID, so you dont need to send it.

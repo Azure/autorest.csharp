@@ -1,4 +1,5 @@
-import "@cadl-lang/rest";
+import "@typespec/rest";
+import "@typespec/http";
 
 @service(
     {
@@ -15,7 +16,7 @@ import "@cadl-lang/rest";
 )
 namespace endpoint;
 
-using Cadl.Http;
+using TypeSpec.Http;
 
 @route("/endpoint")
 @doc("Path parameter is string with format")

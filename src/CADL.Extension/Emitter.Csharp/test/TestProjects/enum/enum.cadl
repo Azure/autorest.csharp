@@ -1,7 +1,8 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
+using TypeSpec.Http;
 using Azure.Core;
 
 @service(
@@ -13,7 +14,7 @@ using Azure.Core;
 @server("http://localhost:3000", "TestServer endpoint")
 @doc("Illustrates input models with required enum type properties.")
 
-namespace Cadl.EnumPropertiesBasic;
+namespace TypeSpec.EnumPropertiesBasic;
 
 @doc("The language to translate the input text into.")
 @knownValues(TranslationLanguageValues)

@@ -1,6 +1,7 @@
-import "@cadl-lang/rest";
+import "@typespec/rest";
+import "@typespec/http";
 
-using Cadl.Http;
+using TypeSpec.Http;
 
 @service(
     {
@@ -10,7 +11,7 @@ using Cadl.Http;
 )
 @server("http://localhost:3000", "TestServer endpoint")
 @doc("Illustrates clients generated from a Cadl with head parameter.")
-namespace Cadl.HeadClient;
+namespace TypeSpec.HeadClient;
 
 model Thing {
   @doc("name of the Thing")

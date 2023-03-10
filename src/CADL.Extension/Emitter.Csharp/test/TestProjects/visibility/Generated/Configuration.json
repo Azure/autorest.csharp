@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "Cadl.visibility",
+  "Namespace": "TypeSpec.visibility",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",

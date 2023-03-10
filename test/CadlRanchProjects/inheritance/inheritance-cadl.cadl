@@ -1,10 +1,11 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-dpg";
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/cadl-ranch-expect";
 
-using Cadl.Rest;
-using Cadl.Http;
-using Azure.DPG;
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ClientGenerator.Core;
 
 @doc("Illustrates inheritance and polymorphic model.")
 @service({
