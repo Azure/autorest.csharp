@@ -59,6 +59,7 @@ stages:
             publishRegistry: 'useFeed'
             publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
         - pwsh: ./eng/PackEmitter.ps1 -AutorestVersion $(Package.autorestVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)
+          name: PackEmitter
           displayName: "Pack Emitter"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
         - task: Npm@1
@@ -78,7 +79,7 @@ stages:
       - Build_and_Publish
     variables:
       AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
-      CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
+      CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['PackEmitter.emitterVersion']]
     jobs:
       - template: update-generator-versions.yml
         parameters:

@@ -28,11 +28,6 @@ jobs:
     - pwsh: ./eng/GenerateInternalNpmrc.ps1 -ContainingFolder $(Build.SourcesDirectory)/azure-sdk-for-net
       displayName: "Generate Internal Npmrc"
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
-    - task: npmAuthenticate@0
-      inputs:
-        workingFile: $(Build.SourcesDirectory)/azure-sdk-for-net/.npmrc
-      displayName: Setup Internal NPM Auth
-    - task: NuGetAuthenticate@1
   - task: Powershell@2
     displayName: Update SDK codes ${{ parameters.filter }}
     inputs:

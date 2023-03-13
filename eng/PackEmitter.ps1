@@ -12,8 +12,14 @@ $packageFile = "$emitterPath\package.json"
     '"@autorest/csharp": ".*?"',
 "`"@autorest/csharp`": `"$AutorestVersion`"" | `
     Set-Content $packageFile -NoNewline
-    
-npm version --no-git-tag-version $AutorestVersion | Out-Null;
+
+$currentVersion = node -p -e "require('./package.json').version";
+$alphaVersion = "$currentVersion-alpha.$BuildNumber"
+Write-Host "Alpha version: $alphaVersion"
+
+npm version --no-git-tag-version $alphaVersion | Out-Null;
 $file = npm pack -q;
 Copy-Item $file -Destination $StagingDirectory
 Pop-Location
+
+Write-Host "##vso[task.setvariable variable=emitterVersion;isoutput=true]$alphaVersion"
