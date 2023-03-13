@@ -412,7 +412,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var an = ResourceName.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
             var parents = this.GetParents();
-            var parentTypes = parents.Select(parent => parent.GetTypeAsResource()).ToList();
+            var parentTypes = parents.Select(parent => parent.TypeAsResource).ToList();
             var parentDescription = CreateParentDescription(parentTypes);
 
             lines.Add($"A Class representing {an} {ResourceName} along with the instance operations that can be performed on it.");
@@ -472,8 +472,6 @@ namespace AutoRest.CSharp.Mgmt.Output
                 return $"{dataExpression}.Id";
             }
         }
-
-        public override CSharpType GetTypeAsResource() => Type;
 
         public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, ValidationType.None, null);
         public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, ValidationType.None, null);

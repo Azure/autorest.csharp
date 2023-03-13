@@ -65,8 +65,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             return base.CalculateOperationName(operation, clientResourceName);
         }
 
-        public override CSharpType GetTypeAsResource() => throw new InvalidOperationException("ExtensionClient should never be other resource's parent");
-
         public CSharpType ExtendedResourceType { get; }
 
         public override CSharpType? BaseType => typeof(ArmResource);

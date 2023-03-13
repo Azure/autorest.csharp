@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public virtual bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 
-        public override CSharpType GetTypeAsResource() => ArmCoreType;
+        protected internal override CSharpType TypeAsResource => ArmCoreType;
 
         protected override IEnumerable<FieldDeclaration> EnsureFieldDeclaration()
         {

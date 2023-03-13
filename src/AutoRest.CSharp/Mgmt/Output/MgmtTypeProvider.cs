@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         public string Namespace => DefaultNamespace;
         public abstract CSharpType? BaseType { get; }
 
-        public abstract CSharpType GetTypeAsResource();
+        protected internal virtual CSharpType TypeAsResource => Type;
 
         private IReadOnlyList<CSharpType>? _enumerableInterfaces;
         public IEnumerable<CSharpType> EnumerableInterfaces => _enumerableInterfaces ??= EnsureGetInterfaces();
