@@ -1,4 +1,4 @@
-param($AutorestVersion, $StagingDirectory)
+param($BuildNumber, $AutorestVersion, $StagingDirectory)
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 $emitterPath = Resolve-Path (Join-Path $repoRoot 'src' 'CADL.Extension' 'Emitter.Csharp')
