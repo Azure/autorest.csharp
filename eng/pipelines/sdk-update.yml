@@ -146,6 +146,10 @@ stages:
         steps:
           - checkout: self
           - checkout: azure-sdk-tools
+          - pwsh: ./eng/BuildPRUrl.ps1 -SourceBranch $(Build.SourceBranch)
+            name: PRUrl
+            displayName: "Build PR Url"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - task: PowerShell@2
             displayName: Create pull request
             inputs:
@@ -159,6 +163,6 @@ stages:
                 -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"
                 -AuthToken "$(azuresdk-github-pat)"
                 -PRTitle "Autorest Regen Preview to $(AutorestCSharpVersion)"
-                -PRBody "Triggered from $(Build.SourceBranch)"
+                -PRBody "Triggered from $(PRUrl.PRUrl)"
                 -OpenAsDraft $true
                 -PRLabels "Do Not Merge"
