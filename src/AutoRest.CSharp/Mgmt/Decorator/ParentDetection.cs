@@ -27,7 +27,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// This is not initialized while the TypeProviders are constructing and can only be used in the writers.
         /// </summary>
         /// <param name="resource"></param>
-        /// <param name="context"></param>
         /// <returns></returns>
         public static IEnumerable<MgmtTypeProvider> Parent(this Resource resource)
         {
@@ -102,7 +101,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 else if (type == ResourceTypeSegment.Tenant)
                     yield return MgmtContext.Library.GetExtension(typeof(TenantResource));
                 else
-                    yield return MgmtContext.Library.GetExtension(typeof(ArmResource)); // we return anything unrecognized scope parent resource type as ArmResourceExtensions
+                    yield return MgmtContext.Library.GetExtension(typeof(ArmResource)); // we return anything unrecognized scope parent resource type as ArmResourceExtension
             }
         }
 
@@ -128,7 +127,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// 3. If neither of above meets, return the parent request path of an existing resource
         /// </summary>
         /// <param name="operation"></param>
-        /// <param name="context"></param>
         /// <returns></returns>
         public static RequestPath ParentRequestPath(this Operation operation)
         {

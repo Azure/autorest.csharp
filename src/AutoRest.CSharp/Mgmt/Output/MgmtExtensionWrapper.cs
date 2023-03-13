@@ -4,18 +4,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
     /// <summary>
-    /// MgmtExtensionsWrapper is a wrapper of all the <see cref="MgmtExtension"/>, despite the <see cref="OldMgmtExtensions"/> is inheriting from <see cref="MgmtTypeProvider"/>, currently it will not produce a class in the generated code.
-    /// Instead, this class will take all the things that are used to be produces into the individual extension classes, producing a big extension class
+    /// MgmtExtensionsWrapper is a wrapper of all the <see cref="MgmtExtension"/>, despite the <see cref="MgmtExtension"/> is inheriting from <see cref="MgmtTypeProvider"/>, currently it will not produce a class in the generated code.
+    /// In ArmCore, we will not use this class because Azure.ResourceManager does not need to generate extension classes, we just need to generate partial classes to extend them because those "to be extended" types are defined in Azure.ResourceManager.
+    /// In other packages, we need this TypeProvider to generate one big extension class that contains all the extension methods.
     /// </summary>
     internal class MgmtExtensionWrapper : MgmtTypeProvider
     {
