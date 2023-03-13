@@ -52,5 +52,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
         }
+
+        public override CSharpType GetTypeAsResource() => throw new InvalidOperationException("MgmtExtensionWrapper should never be other resource's parent");
     }
 }

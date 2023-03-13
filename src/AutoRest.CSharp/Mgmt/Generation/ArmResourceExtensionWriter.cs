@@ -201,21 +201,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override Parameter[] GetParametersForSingletonEntry()
-        {
-            throw new InvalidOperationException("We should not call this in ArmResourceExtensionWriter");
-        }
-
         private Parameter[] GetParametersForSingletonEntry(ICollection<FormattableString>? types)
             => new[] {
                     _armClientParameter,
                     GetScopeParameter(types)
                 };
-
-        protected override Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
-        {
-            throw new InvalidOperationException("We should not call this in ArmResourceExtensionWriter");
-        }
 
         private Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection, ICollection<FormattableString>? types)
             => resourceCollection.ExtraConstructorParameters.Prepend(GetScopeParameter(types)).Prepend(_armClientParameter).ToArray();
