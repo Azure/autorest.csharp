@@ -19,7 +19,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         {
             var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
             Assert.IsNotNull(resource);
-            Assert.IsTrue(resource.Parent().Any(parent => parent is MgmtExtension extension && extension.ArmCoreType == typeof(TenantResource)));
+            Assert.IsTrue(resource.GetParents().Any(parent => parent is MgmtExtension extension && extension.ArmCoreType == typeof(TenantResource)));
         }
     }
 }

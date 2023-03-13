@@ -28,17 +28,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// </summary>
         /// <param name="resource"></param>
         /// <returns></returns>
-        public static IEnumerable<MgmtTypeProvider> Parent(this Resource resource)
+        public static IEnumerable<MgmtTypeProvider> GetParents(this Resource resource)
         {
             if (_resourceParentCache.TryGetValue(resource, out var parentList))
                 return parentList;
 
-            parentList = resource.GetParent();
+            parentList = resource.DoGetParents();
             _resourceParentCache.TryAdd(resource, parentList);
             return parentList;
         }
 
-        private static IEnumerable<MgmtTypeProvider> GetParent(this Resource resource)
+        private static IEnumerable<MgmtTypeProvider> DoGetParents(this Resource resource)
         {
             var scope = resource.RequestPath.GetScopePath();
             var resourceOperationSet = resource.OperationSet;

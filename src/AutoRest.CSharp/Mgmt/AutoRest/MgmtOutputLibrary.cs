@@ -407,16 +407,14 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 extensionOperations.Add(armCoreType, operations);
             }
 
-            var extensionBuilder = new MgmtExtensionBuilder(extensionOperations);
-            return extensionBuilder;
+            return new MgmtExtensionBuilder(extensionOperations);
         }
 
         public IEnumerable<MgmtExtension> Extensions => ExtensionBuilder.Extensions;
         public IEnumerable<MgmtExtensionClient> ExtensionClients => ExtensionBuilder.ExtensionClients;
         public MgmtExtensionWrapper ExtensionWrapper => ExtensionBuilder.ExtensionWrapper;
 
-        public MgmtExtension GetExtension(Type armCoreType)
-            => ExtensionBuilder.GetExtension(armCoreType);
+        public MgmtExtension GetExtension(Type armCoreType) => ExtensionBuilder.GetExtension(armCoreType);
 
         private IEnumerable<ResourceData>? _resourceDatas;
         public IEnumerable<ResourceData> ResourceData => _resourceDatas ??= RawRequestPathToResourceData.Values.Distinct();

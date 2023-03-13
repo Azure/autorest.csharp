@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private record MgmtExtensionInfo(IReadOnlyDictionary<CSharpType, MgmtExtension> ExtensionDict, IEnumerable<MgmtExtensionClient> ExtensionClients)
         {
             private IEnumerable<MgmtExtension>? _extensions;
-            public IEnumerable<MgmtExtension> Extensions => _extensions ??= ExtensionDict.Values.OrderBy(e => e.Declaration.Name);
+            public IEnumerable<MgmtExtension> Extensions => _extensions ??= ExtensionDict.Values;
 
             private MgmtExtensionWrapper? _extensionWrapper;
             public MgmtExtensionWrapper ExtensionWrapper => _extensionWrapper ??= new MgmtExtensionWrapper(Extensions, ExtensionClients);
@@ -49,8 +49,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private MgmtExtensionInfo EnsureMgmtExtensionInfo()
         {
-            var extensionDict = new Dictionary<CSharpType, MgmtExtension>();
-            var extensionClients = new List<MgmtExtensionClient>();
+            // we use a SortedDictionary or SortedSet here to make sure the order of extensions or extension clients is deterministic
+            var extensionDict = new SortedDictionary<CSharpType, MgmtExtension>(new CSharpTypeNameComparer());
+            var extensionClients = new SortedSet<MgmtExtensionClient>(new MgmtExtensionClientComparer());
             // create the extensions
             foreach (var (type, operations) in _extensionOperations)
             {
@@ -80,16 +81,30 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
             // then we construct the extension clients
-            // here we sort the keys so that the sequence of extension clients are deterministic
-            foreach (var resourceType in resourceToOperationsDict.Keys.OrderBy(type => type.Name))
+            foreach (var (resourceType, operations) in resourceToOperationsDict)
             {
-                var operations = resourceToOperationsDict[resourceType];
                 // find the extension if the resource type here is a framework type (when it is ResourceGroupResource, SubscriptionResource, etc) to ensure the ExtensionClient could property have the child resources
                 extensionDict.TryGetValue(resourceType, out var extensionForChildResources);
                 extensionClients.Add(new MgmtExtensionClient(resourceType, operations, extensionForChildResources));
             }
 
             return new(extensionDict, extensionClients);
+        }
+
+        private struct CSharpTypeNameComparer : IComparer<CSharpType>
+        {
+            public int Compare(CSharpType? x, CSharpType? y)
+            {
+                return string.Compare(x?.Name, y?.Name);
+            }
+        }
+
+        private struct MgmtExtensionClientComparer : IComparer<MgmtExtensionClient>
+        {
+            public int Compare(MgmtExtensionClient? x, MgmtExtensionClient? y)
+            {
+                return string.Compare(x?.Declaration.Name, y?.Declaration.Name);
+            }
         }
     }
 }

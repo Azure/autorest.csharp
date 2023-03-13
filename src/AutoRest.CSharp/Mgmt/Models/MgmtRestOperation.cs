@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (matchType == ResourceMatchType.CheckName)
                 return null;
 
-            var parent = first.Parent().First();
+            var parent = first.GetParents().First();
             if (parent is not null && AllMatchesSameParent(matchTypeMatches, parent, out bool areAllSingleton) && areAllSingleton)
                 return parent as Resource;
 
@@ -329,7 +329,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             foreach (var resource in matches)
             {
                 areAllSingleton &= resource.IsSingleton;
-                var current = resource.Parent().FirstOrDefault();
+                var current = resource.GetParents().FirstOrDefault();
                 if (current is null)
                     return false;
                 if (!current.Equals(parent))

@@ -58,6 +58,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         public string Namespace => DefaultNamespace;
         public abstract CSharpType? BaseType { get; }
 
+        public abstract CSharpType GetTypeAsResource();
+
         private IReadOnlyList<CSharpType>? _enumerableInterfaces;
         public IEnumerable<CSharpType> EnumerableInterfaces => _enumerableInterfaces ??= EnsureGetInterfaces();
         protected virtual IReadOnlyList<CSharpType> EnsureGetInterfaces()
@@ -207,7 +209,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// <summary>
         /// The collection of <see cref="Resource"/> that is a child of this generated class.
         /// </summary>
-        public virtual IEnumerable<Resource> ChildResources => _childResources ??= MgmtContext.Library.ArmResources.Where(resource => resource.Parent().Contains(this));
+        public virtual IEnumerable<Resource> ChildResources => _childResources ??= MgmtContext.Library.ArmResources.Where(resource => resource.GetParents().Contains(this));
 
         protected string GetOperationName(Operation operation, string clientResourceName)
         {
