@@ -50,7 +50,7 @@ foreach ($directory in Get-ChildItem $samplePath -Directory)
     node node_modules/@typespec/compiler/dist/core/cli/cli.js compile $projectPath/$testName.tsp --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$projectPath --option @azure-tools/typespec-csharp.skipSDKGeneration=true --option @azure-tools/typespec-csharp.save-inputs=true
     if (!$?) {
         Pop-Location
-        throw "Failed to emit cadl model for $testName."
+        throw "Failed to emit typespec model for $testName."
     }
 }
 
