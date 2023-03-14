@@ -70,6 +70,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 projectFolder: "/..",
                 protocolMethodList: Array.Empty<string>(),
                 suppressAbstractBaseClasses: Array.Empty<string>(),
+                modelsToTreatEmptyStringAsNull: Array.Empty<string>(),
+                additionalIntrinsicTypesToTreatEmptyStringAsNull: Array.Empty<string>(),
                 mgmtConfiguration: mgmtConfiguration,
                 mgmtTestConfiguration: null);
         }

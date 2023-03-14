@@ -1,6 +1,7 @@
 import { DpgEmitterOptions } from "@azure-tools/cadl-dpg";
 import { EmitContext, JSONSchemaType, resolvePath } from "@cadl-lang/compiler";
 import { dllFilePath } from "@autorest/csharp";
+import { LoggerLevel } from "./lib/logger.js";
 
 export type NetEmitterOptions = {
     outputFile?: string;
@@ -19,6 +20,9 @@ export type NetEmitterOptions = {
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
     debug?: boolean;
+    "models-to-treat-empty-string-as-null"?: string[];
+    "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
+    logLevel?: string;
 } & DpgEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
@@ -48,7 +52,28 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "generate-protocol-methods": { type: "boolean", nullable: true },
         "generate-convenience-methods": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },
-        debug: { type: "boolean", nullable: true }
+        debug: { type: "boolean", nullable: true },
+        "models-to-treat-empty-string-as-null": {
+            type: "array",
+            nullable: true,
+            items: { type: "string" }
+        },
+        "additional-intrinsic-types-to-treat-empty-string-as-null": {
+            type: "array",
+            nullable: true,
+            items: { type: "string" }
+        },
+        logLevel: {
+            type: "string",
+            enum: [
+                LoggerLevel.ERROR,
+                LoggerLevel.WARN,
+                LoggerLevel.INFO,
+                LoggerLevel.DEBUG,
+                LoggerLevel.VERBOSE
+            ],
+            nullable: true
+        }
     },
     required: []
 };
@@ -64,7 +89,10 @@ const defaultOptions = {
     "generate-protocol-methods": true,
     "generate-convenience-methods": true,
     "package-name": undefined,
-    debug: undefined
+    debug: undefined,
+    "models-to-treat-empty-string-as-null": undefined,
+    "additional-intrinsic-types-to-treat-empty-string-as-null": [],
+    logLevel: LoggerLevel.INFO
 };
 
 export function resolveOptions(context: EmitContext<NetEmitterOptions>) {

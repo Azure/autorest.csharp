@@ -144,7 +144,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("tenantId"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null || property.Value.ValueKind == JsonValueKind.String && property.Value.GetString().Length == 0)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
@@ -169,7 +169,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("hsmUri"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null || property.Value.ValueKind == JsonValueKind.String && property.Value.GetString().Length == 0)
                     {
                         hsmUri = null;
                         continue;
@@ -269,7 +269,7 @@ namespace MgmtMockAndSample.Models
                 }
                 if (property.NameEquals("scheduledPurgeDate"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    if (property.Value.ValueKind == JsonValueKind.Null || property.Value.ValueKind == JsonValueKind.String && property.Value.GetString().Length == 0)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
