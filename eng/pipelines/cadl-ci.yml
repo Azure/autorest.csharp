@@ -76,8 +76,8 @@ stages:
             command: custom
             customCommand: pack
             workingDir: $(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp
-        - pwsh: ./eng/ExecuteCadlEmitterUnitTests.ps1
-          displayName: 'E2E_Test for CADL emitter'
+        - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
+          displayName: 'E2E_Test for TypeSpec emitter'
           workingDirectory: $(Build.SourcesDirectory)
         - script: |
             npm run test --prefix src/CADL.Extension/Emitter.Csharp
