@@ -1,6 +1,6 @@
 {
     "name": "@azure-tools/typespec-csharp",
-    "version": "0.1.11",
+    "version": "0.2.0",
     "author": "Microsoft Corporation",
     "description": "Cadl library for emitting csharp model from the Cadl REST protocol binding",
     "homepage": "https://github.com/Microsoft/typespec",
