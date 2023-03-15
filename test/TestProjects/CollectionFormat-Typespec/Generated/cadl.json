@@ -12,7 +12,7 @@
    "Name": "Thing",
    "Namespace": "ArrayAsQueryOrHeader",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Output",
    "Properties": [
     {
      "$id": "3",
@@ -168,7 +168,7 @@
      "Path": "/csvQuery",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "20",
@@ -254,7 +254,7 @@
      "Path": "/multiQuery",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "28",
@@ -340,7 +340,7 @@
      "Path": "/noFormatQuery",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "36",
@@ -427,7 +427,7 @@
      "Path": "/csvHeader",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "44",
@@ -514,7 +514,7 @@
      "Path": "/noFormatHeader",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

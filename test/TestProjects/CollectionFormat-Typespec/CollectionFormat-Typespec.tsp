@@ -32,20 +32,25 @@ model Thing {
 
 @get
 @route("/csvQuery")
+@convenientAPI(true)
 op csvQuery(@query({format: "csv"}) options?: string[]): Thing;
 
 @get
 @route("/multiQuery")
+@convenientAPI(true)
 op multiQuery(@query({format: "multi"}) options?: string[]): Thing;
 
 @get
 @route("/noFormatQuery")
+@convenientAPI(true)
 op noFormatQuery(@query options?: string[]): Thing;
 
 @get
 @route("/csvHeader")
+@convenientAPI(true)
 op csvHeader(@header({format: "csv"}) options?: string[]): Thing;
 
 @get
 @route("/noFormatHeader")
+@convenientAPI(true)
 op noFormatHeader(@header options?: string[]): Thing;
