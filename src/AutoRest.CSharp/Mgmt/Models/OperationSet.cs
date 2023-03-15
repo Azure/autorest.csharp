@@ -4,14 +4,12 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Mgmt.Models
 {
@@ -104,10 +102,42 @@ namespace AutoRest.CSharp.Mgmt.Models
         private RequestPath GetNonHintRequestPath()
         {
             var operation = FindBestOperation();
-            return Models.RequestPath.FromOperation(operation, MgmtContext.Library.GetOperationGroup(operation));
+            if (operation != null)
+                return Models.RequestPath.FromOperation(operation, MgmtContext.Library.GetOperationGroup(operation));
+
+            // we do not have an operation in this operation set to construct the RequestPath
+            // therefore this must be a request path for a virtual resource
+            // we find an operation with a prefix of this and take that many segment from its path as the request path of this operation set
+            OperationSet? hintOperationSet = null;
+            foreach (var operationSet in MgmtContext.Library.RawRequestPathToOperationSets.Values)
+            {
+                // skip myself
+                if (operationSet == this)
+                    continue;
+                // also skip the sets that with zero operations, they are operation set of partial resources as well
+                if (operationSet.Count == 0)
+                    continue;
+
+                if (operationSet.RequestPath.StartsWith(RequestPath))
+                {
+                    hintOperationSet = operationSet;
+                    break;
+                }
+            }
+
+            Debug.Assert(hintOperationSet != null);
+            return BuildRequestPathFromHint(hintOperationSet);
         }
 
-        private Operation FindBestOperation()
+        private RequestPath BuildRequestPathFromHint(OperationSet hint)
+        {
+            var hintPath = hint.GetRequestPath();
+            var segmentsCount = RequestPath.Split('/', StringSplitOptions.RemoveEmptyEntries).Length;
+            var segments = hintPath.Take(segmentsCount);
+            return Models.RequestPath.FromSegments(segments);
+        }
+
+        private Operation? FindBestOperation()
         {
             // first we try GET operation
             var getOperation = FindOperation(HttpMethod.Get);
@@ -119,7 +149,7 @@ namespace AutoRest.CSharp.Mgmt.Models
                 return putOperation;
 
             // if no PUT or GET, we just return the first one
-            return Operations.First();
+            return Operations.FirstOrDefault();
         }
 
         public Operation? FindOperation(HttpMethod method)
