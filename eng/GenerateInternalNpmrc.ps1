@@ -5,4 +5,4 @@ param(
 
 $ContainingFolder = Resolve-Path $ContainingFolder
 
-"registry=https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/npm/registry/ `n`nalways-auth=true" | Out-File -FilePath (Join-Path $ContainingFolder '.npmrc')
+"registry=https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/ `n`nalways-auth=true" | Out-File -FilePath (Join-Path $ContainingFolder '.npmrc')
