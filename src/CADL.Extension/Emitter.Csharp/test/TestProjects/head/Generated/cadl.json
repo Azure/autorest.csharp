@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Cadl.HeadClient",
+ "Name": "TypeSpec.HeadClient",
  "Description": "Illustrates clients generated from a Cadl with head parameter.",
  "ApiVersions": [
   "1.0.0"
@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Thing",
-   "Namespace": "Cadl.HeadClient",
+   "Namespace": "TypeSpec.HeadClient",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [

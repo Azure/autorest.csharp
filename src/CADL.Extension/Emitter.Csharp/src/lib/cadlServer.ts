@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { getDoc, Program, Type } from "@cadl-lang/compiler";
-import { http } from "@cadl-lang/rest";
+import { getDoc, Program, Type } from "@typespec/compiler";
+import { HttpServer } from "@typespec/http";
 import { InputConstant } from "../type/inputConstant.js";
 import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
 import { InputParameter } from "../type/inputParameter.js";
@@ -39,7 +39,7 @@ function getDefaultValue(type: Type): any {
 
 export function resolveServers(
     program: Program,
-    servers: http.HttpServer[],
+    servers: HttpServer[],
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): CadlServer[] {

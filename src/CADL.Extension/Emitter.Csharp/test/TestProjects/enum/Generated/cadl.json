@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Cadl.EnumPropertiesBasic",
+ "Name": "TypeSpec.EnumPropertiesBasic",
  "Description": "Illustrates input models with required enum type properties.",
  "ApiVersions": [
   "1.0.0"
@@ -9,7 +9,7 @@
   {
    "$id": "2",
    "Name": "DayOfTheWeek",
-   "Namespace": "Cadl.EnumPropertiesBasic",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
    "Description": "Represents the days of the week using a standard, non-string enum.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -57,7 +57,7 @@
   {
    "$id": "10",
    "Name": "FixedDayOfTheWeek",
-   "Namespace": "Cadl.EnumPropertiesBasic",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
    "Description": "Represents the days of the week using a standard, non-string enum.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -105,7 +105,7 @@
   {
    "$id": "18",
    "Name": "TranslationLanguage",
-   "Namespace": "Cadl.EnumPropertiesBasic",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
    "Description": "The language to translate the input text into.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -140,7 +140,7 @@
   {
    "$id": "23",
    "Name": "EnumWithStringValue",
-   "Namespace": "Cadl.EnumPropertiesBasic",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
    "Description": "Represents the simple enum with enum string value.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -169,7 +169,7 @@
   {
    "$id": "27",
    "Name": "InputModel",
-   "Namespace": "Cadl.EnumPropertiesBasic",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
    "Description": "Input model with enum properties.",
    "IsNullable": false,
    "Usage": "Input",
