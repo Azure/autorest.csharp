@@ -100,7 +100,7 @@ stages:
               command: custom
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
-          - pwsh: ./eng/ExecuteCadlEmitterUnitTests.ps1
+          - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
             displayName: 'E2E Test for CADL emitter'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |
