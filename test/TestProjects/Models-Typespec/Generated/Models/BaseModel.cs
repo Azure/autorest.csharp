@@ -14,5 +14,8 @@ namespace ModelsInCadl.Models
         public BaseModel()
         {
         }
+
+        /// <summary> Optional property on base. </summary>
+        public string OptionalPropertyOnBase { get; set; }
     }
 }

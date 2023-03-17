@@ -27,7 +27,8 @@ using Azure.Core;
 
 @doc("Base model")
 model BaseModel {
-
+  @doc("Optional property on base")
+  optionalPropertyOnBase?: string;
 }
 
 @doc("Derived model")
@@ -38,7 +39,13 @@ model DerivedModel extends BaseModel {
 
 @discriminator("discriminatorProperty")
 @doc("Base model with discriminator property.")
-model BaseModelWithDiscriminator {}
+model BaseModelWithDiscriminator {
+  @doc("Optional property on base")
+  optionalPropertyOnBase?: string;
+
+  @doc("Required property on base")
+  requiredPropertyOnBase: int32;
+}
 
 @doc("Deriver model with discriminator property.")
 model DerivedModelWithDiscriminatorA extends BaseModelWithDiscriminator {

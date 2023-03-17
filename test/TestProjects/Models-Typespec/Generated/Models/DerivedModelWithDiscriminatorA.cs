@@ -14,9 +14,10 @@ namespace ModelsInCadl.Models
     public partial class DerivedModelWithDiscriminatorA : BaseModelWithDiscriminator
     {
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>
+        /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         /// <param name="requiredString"> Required string. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/> is null. </exception>
-        public DerivedModelWithDiscriminatorA(string requiredString) : base("A")
+        public DerivedModelWithDiscriminatorA(int requiredPropertyOnBase, string requiredString) : base("A", requiredPropertyOnBase)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
 

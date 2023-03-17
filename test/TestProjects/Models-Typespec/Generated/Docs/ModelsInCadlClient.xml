@@ -3,7 +3,7 @@
   <members>
     <member name="InputToRoundTripAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripAsync with required request content and parse the result.
+This sample shows how to call InputToRoundTripAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -49,11 +49,76 @@ Response response = await client.InputToRoundTripAsync(RequestContent.Create(dat
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call InputToRoundTripAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+    },
+    requiredIntCollection = new[] {
+        1234
+    },
+    requiredStringCollection = new[] {
+        "<String>"
+    },
+    requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
+            },
+        }
+    },
+    requiredModelRecord = new {
+        key = new {
+            requiredCollection = new[] {
+                new {
+                    requiredModelRecord = new {},
+                }
+            },
+            optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        },
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+};
+
+Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -66,6 +131,7 @@ Schema for <c>InputModel</c>:
   requiredString: string, # Required. Required string
   requiredInt: number, # Required. Required int
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Required. Required model
   requiredIntCollection: [number], # Required. Required primitive value type collection
   requiredStringCollection: [string], # Required. Required primitive reference type collection
@@ -83,6 +149,8 @@ Schema for <c>RoundTripModel</c>:
   requiredString: string, # Required. Required string, illustrating a reference type property.
   requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
+    requiredPropertyOnBase: number, # Required. Required property on base
   }, # Required. Required model with discriminator
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
   requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
@@ -95,6 +163,7 @@ Schema for <c>RoundTripModel</c>:
   requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
   requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
+  optionalPropertyOnBase: string, # Optional. Optional property on base
 }
 </code>
 
@@ -102,7 +171,7 @@ Schema for <c>RoundTripModel</c>:
     </member>
     <member name="InputToRoundTrip(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTrip with required request content and parse the result.
+This sample shows how to call InputToRoundTrip with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -148,11 +217,76 @@ Response response = client.InputToRoundTrip(RequestContent.Create(data));
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call InputToRoundTrip with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+    },
+    requiredIntCollection = new[] {
+        1234
+    },
+    requiredStringCollection = new[] {
+        "<String>"
+    },
+    requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
+            },
+        }
+    },
+    requiredModelRecord = new {
+        key = new {
+            requiredCollection = new[] {
+                new {
+                    requiredModelRecord = new {},
+                }
+            },
+            optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        },
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+};
+
+Response response = client.InputToRoundTrip(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -165,6 +299,7 @@ Schema for <c>InputModel</c>:
   requiredString: string, # Required. Required string
   requiredInt: number, # Required. Required int
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Required. Required model
   requiredIntCollection: [number], # Required. Required primitive value type collection
   requiredStringCollection: [string], # Required. Required primitive reference type collection
@@ -182,6 +317,8 @@ Schema for <c>RoundTripModel</c>:
   requiredString: string, # Required. Required string, illustrating a reference type property.
   requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
+    requiredPropertyOnBase: number, # Required. Required property on base
   }, # Required. Required model with discriminator
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
   requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
@@ -194,6 +331,7 @@ Schema for <c>RoundTripModel</c>:
   requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
   requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
+  optionalPropertyOnBase: string, # Optional. Optional property on base
 }
 </code>
 
@@ -201,7 +339,7 @@ Schema for <c>RoundTripModel</c>:
     </member>
     <member name="InputToRoundTripPrimitiveAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripPrimitiveAsync with required request content and parse the result.
+This sample shows how to call InputToRoundTripPrimitiveAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -255,6 +393,67 @@ Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
 Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
 Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
 Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call InputToRoundTripPrimitiveAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+    },
+    requiredIntCollection = new[] {
+        1234
+    },
+    requiredStringCollection = new[] {
+        "<String>"
+    },
+    requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
+            },
+        }
+    },
+    requiredModelRecord = new {
+        key = new {
+            requiredCollection = new[] {
+                new {
+                    requiredModelRecord = new {},
+                }
+            },
+            optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        },
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+};
+
+Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredInt64").ToString());
+Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
+Console.WriteLine(result.GetProperty("requiredFloat").ToString());
+Console.WriteLine(result.GetProperty("required_Double").ToString());
+Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
+Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
+Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
+Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -267,6 +466,7 @@ Schema for <c>InputModel</c>:
   requiredString: string, # Required. Required string
   requiredInt: number, # Required. Required int
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Required. Required model
   requiredIntCollection: [number], # Required. Required primitive value type collection
   requiredStringCollection: [string], # Required. Required primitive reference type collection
@@ -291,6 +491,7 @@ Schema for <c>RoundTripPrimitiveModel</c>:
   requiredDateTimeOffset: string (date &amp; time), # Required. Required date time offset, illustrating a reference type property.
   requiredTimeSpan: string (duration ISO 8601 Format), # Required. Required time span, illustrating a value type property.
   requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  optionalPropertyOnBase: string, # Optional. Optional property on base
 }
 </code>
 
@@ -298,7 +499,7 @@ Schema for <c>RoundTripPrimitiveModel</c>:
     </member>
     <member name="InputToRoundTripPrimitive(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripPrimitive with required request content and parse the result.
+This sample shows how to call InputToRoundTripPrimitive with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -352,6 +553,67 @@ Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
 Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
 Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
 Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+Console.WriteLine(result.ToString());
+]]></code>
+This sample shows how to call InputToRoundTripPrimitive with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+    },
+    requiredIntCollection = new[] {
+        1234
+    },
+    requiredStringCollection = new[] {
+        "<String>"
+    },
+    requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
+            },
+        }
+    },
+    requiredModelRecord = new {
+        key = new {
+            requiredCollection = new[] {
+                new {
+                    requiredModelRecord = new {},
+                }
+            },
+            optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        },
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+};
+
+Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredInt64").ToString());
+Console.WriteLine(result.GetProperty("requiredSafeInt").ToString());
+Console.WriteLine(result.GetProperty("requiredFloat").ToString());
+Console.WriteLine(result.GetProperty("required_Double").ToString());
+Console.WriteLine(result.GetProperty("requiredBoolean").ToString());
+Console.WriteLine(result.GetProperty("requiredDateTimeOffset").ToString());
+Console.WriteLine(result.GetProperty("requiredTimeSpan").ToString());
+Console.WriteLine(result.GetProperty("requiredCollectionWithNullableFloatElement")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -364,6 +626,7 @@ Schema for <c>InputModel</c>:
   requiredString: string, # Required. Required string
   requiredInt: number, # Required. Required int
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Required. Required model
   requiredIntCollection: [number], # Required. Required primitive value type collection
   requiredStringCollection: [string], # Required. Required primitive reference type collection
@@ -388,6 +651,7 @@ Schema for <c>RoundTripPrimitiveModel</c>:
   requiredDateTimeOffset: string (date &amp; time), # Required. Required date time offset, illustrating a reference type property.
   requiredTimeSpan: string (duration ISO 8601 Format), # Required. Required time span, illustrating a value type property.
   requiredCollectionWithNullableFloatElement: [number], # Required. Required collection of which the element is a nullable float
+  optionalPropertyOnBase: string, # Optional. Optional property on base
 }
 </code>
 
@@ -426,6 +690,7 @@ var data = new {
             requiredModelRecord = new {
                 key = new {
                     requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
                 },
             },
         }
@@ -436,10 +701,12 @@ var data = new {
                 requiredModelRecord = new {
                     key = new {
                         requiredCollection = new[] {},
+                        optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     },
                 },
             }
         },
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
     },
     optionalFixedStringEnum = "1",
     optionalExtensibleEnum = "1",
@@ -456,6 +723,7 @@ var data = new {
                     requiredModelRecord = new {},
                 }
             },
+            optionalPropertyOnBase = "<optionalPropertyOnBase>",
         },
     },
     optionalPlainDate = "2022-05-10",
@@ -472,10 +740,14 @@ Console.WriteLine(result.GetProperty("optionalString").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
 Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalModelCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalModel").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
 Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
@@ -495,6 +767,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelCollection: [CollectionItem], # Optional. Optional model collection
   optionalModel: {
     requiredCollection: [CollectionItem], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Optional. Optional model.
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
@@ -518,6 +791,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelCollection: [CollectionItem], # Optional. Optional model collection
   optionalModel: {
     requiredCollection: [CollectionItem], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Optional. Optional model.
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
@@ -565,6 +839,7 @@ var data = new {
             requiredModelRecord = new {
                 key = new {
                     requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
                 },
             },
         }
@@ -575,10 +850,12 @@ var data = new {
                 requiredModelRecord = new {
                     key = new {
                         requiredCollection = new[] {},
+                        optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     },
                 },
             }
         },
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
     },
     optionalFixedStringEnum = "1",
     optionalExtensibleEnum = "1",
@@ -595,6 +872,7 @@ var data = new {
                     requiredModelRecord = new {},
                 }
             },
+            optionalPropertyOnBase = "<optionalPropertyOnBase>",
         },
     },
     optionalPlainDate = "2022-05-10",
@@ -611,10 +889,14 @@ Console.WriteLine(result.GetProperty("optionalString").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
 Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalModelCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalModel").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
 Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
@@ -634,6 +916,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelCollection: [CollectionItem], # Optional. Optional model collection
   optionalModel: {
     requiredCollection: [CollectionItem], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Optional. Optional model.
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
@@ -657,6 +940,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelCollection: [CollectionItem], # Optional. Optional model collection
   optionalModel: {
     requiredCollection: [CollectionItem], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Optional. Optional model.
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
@@ -673,7 +957,7 @@ Schema for <c>RoundTripOptionalModel</c>:
     </member>
     <member name="InputToRoundTripReadOnlyAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripReadOnlyAsync with required request content and parse the result.
+This sample shows how to call InputToRoundTripReadOnlyAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -719,20 +1003,94 @@ Response response = await client.InputToRoundTripReadOnlyAsync(RequestContent.Cr
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredReadonlyString").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyModel").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredReadOnlyModelCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("requiredReadOnlyIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredReadOnlyModelRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredCollectionWithNullableIntElement")[0].ToString());
+]]></code>
+This sample shows how to call InputToRoundTripReadOnlyAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+    },
+    requiredIntCollection = new[] {
+        1234
+    },
+    requiredStringCollection = new[] {
+        "<String>"
+    },
+    requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
+            },
+        }
+    },
+    requiredModelRecord = new {
+        key = new {
+            requiredCollection = new[] {
+                new {
+                    requiredModelRecord = new {},
+                }
+            },
+            optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        },
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+};
+
+Response response = await client.InputToRoundTripReadOnlyAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredReadonlyString").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyModel").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyModel").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyExtensibleEnum").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredReadOnlyModelCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredReadOnlyIntRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredReadOnlyModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalReadOnlyModelCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredCollectionWithNullableIntElement")[0].ToString());
 Console.WriteLine(result.GetProperty("optionalCollectionWithNullableBooleanElement")[0].ToString());
 ]]></code>
@@ -747,6 +1105,7 @@ Schema for <c>InputModel</c>:
   requiredString: string, # Required. Required string
   requiredInt: number, # Required. Required int
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Required. Required model
   requiredIntCollection: [number], # Required. Required primitive value type collection
   requiredStringCollection: [string], # Required. Required primitive reference type collection
@@ -767,6 +1126,7 @@ Schema for <c>RoundTripReadOnlyModel</c>:
   optionalReadonlyInt: number, # Optional. Optional int, illustrating a readonly value type property.
   requiredReadonlyModel: {
     requiredCollection: [CollectionItem], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Required. Required readonly model.
   optionalReadonlyModel: DerivedModel, # Optional. Optional readonly model.
   requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required readonly fixed string enum
@@ -794,7 +1154,7 @@ Schema for <c>RoundTripReadOnlyModel</c>:
     </member>
     <member name="InputToRoundTripReadOnly(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripReadOnly with required request content and parse the result.
+This sample shows how to call InputToRoundTripReadOnly with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -840,20 +1200,94 @@ Response response = client.InputToRoundTripReadOnly(RequestContent.Create(data))
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredReadonlyString").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyModel").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredReadonlyIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredReadOnlyModelCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("requiredReadOnlyIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString());
-Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredReadOnlyModelRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredCollectionWithNullableIntElement")[0].ToString());
+]]></code>
+This sample shows how to call InputToRoundTripReadOnly with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+    },
+    requiredIntCollection = new[] {
+        1234
+    },
+    requiredStringCollection = new[] {
+        "<String>"
+    },
+    requiredModelCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
+            },
+        }
+    },
+    requiredModelRecord = new {
+        key = new {
+            requiredCollection = new[] {
+                new {
+                    requiredModelRecord = new {},
+                }
+            },
+            optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        },
+    },
+    requiredCollectionWithNullableFloatElement = new[] {
+        123.45f
+    },
+    requiredCollectionWithNullableBooleanElement = new[] {
+        true
+    },
+};
+
+Response response = client.InputToRoundTripReadOnly(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredReadonlyString").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyInt").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyString").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyInt").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyModel").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyModel").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyFixedStringEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyExtensibleEnum").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyFixedStringEnum").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyExtensibleEnum").ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyStringList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredReadonlyIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredReadOnlyModelCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredReadOnlyIntRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredReadOnlyModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyStringList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalReadonlyIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalReadOnlyModelCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("optionalReadOnlyIntRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalReadOnlyStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredCollectionWithNullableIntElement")[0].ToString());
 Console.WriteLine(result.GetProperty("optionalCollectionWithNullableBooleanElement")[0].ToString());
 ]]></code>
@@ -868,6 +1302,7 @@ Schema for <c>InputModel</c>:
   requiredString: string, # Required. Required string
   requiredInt: number, # Required. Required int
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Required. Required model
   requiredIntCollection: [number], # Required. Required primitive value type collection
   requiredStringCollection: [string], # Required. Required primitive reference type collection
@@ -888,6 +1323,7 @@ Schema for <c>RoundTripReadOnlyModel</c>:
   optionalReadonlyInt: number, # Optional. Optional int, illustrating a readonly value type property.
   requiredReadonlyModel: {
     requiredCollection: [CollectionItem], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Required. Required readonly model.
   optionalReadonlyModel: DerivedModel, # Optional. Optional readonly model.
   requiredReadonlyFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required readonly fixed string enum
@@ -915,7 +1351,7 @@ Schema for <c>RoundTripReadOnlyModel</c>:
     </member>
     <member name="RoundTripToOutputAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call RoundTripToOutputAsync with required request content and parse the result.
+This sample shows how to call RoundTripToOutputAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -923,7 +1359,9 @@ var client = new ModelsInCadlClient(endpoint);
 var data = new {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredModel = new {},
+    requiredModel = new {
+        requiredPropertyOnBase = 1234,
+    },
     requiredFixedStringEnum = "1",
     requiredFixedIntEnum = "1",
     requiredExtensibleEnum = "1",
@@ -958,6 +1396,64 @@ Response response = await client.RoundTripToOutputAsync(RequestContent.Create(da
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
+]]></code>
+This sample shows how to call RoundTripToOutputAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        requiredPropertyOnBase = 1234,
+    },
+    requiredFixedStringEnum = "1",
+    requiredFixedIntEnum = "1",
+    requiredExtensibleEnum = "1",
+    requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
+            },
+        }
+    },
+    requiredIntRecord = new {
+        key = 1234,
+    },
+    requiredStringRecord = new {
+        key = "<String>",
+    },
+    requiredModelRecord = new {
+        key = new {
+            requiredCollection = new[] {
+                new {
+                    requiredModelRecord = new {},
+                }
+            },
+            optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        },
+    },
+    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+};
+
+Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -970,6 +1466,8 @@ Schema for <c>RoundTripModel</c>:
   requiredString: string, # Required. Required string, illustrating a reference type property.
   requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
+    requiredPropertyOnBase: number, # Required. Required property on base
   }, # Required. Required model with discriminator
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
   requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
@@ -982,6 +1480,7 @@ Schema for <c>RoundTripModel</c>:
   requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
   requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
+  optionalPropertyOnBase: string, # Optional. Optional property on base
 }
 </code>
 
@@ -997,6 +1496,7 @@ Schema for <c>OutputModel</c>:
         requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
       }
     ], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Required. Required model
   requiredCollection: [CollectionItem], # Required. Required collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
@@ -1007,7 +1507,7 @@ Schema for <c>OutputModel</c>:
     </member>
     <member name="RoundTripToOutput(RequestContent,RequestContext)">
 <example>
-This sample shows how to call RoundTripToOutput with required request content and parse the result.
+This sample shows how to call RoundTripToOutput with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -1015,7 +1515,9 @@ var client = new ModelsInCadlClient(endpoint);
 var data = new {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredModel = new {},
+    requiredModel = new {
+        requiredPropertyOnBase = 1234,
+    },
     requiredFixedStringEnum = "1",
     requiredFixedIntEnum = "1",
     requiredExtensibleEnum = "1",
@@ -1050,6 +1552,64 @@ Response response = client.RoundTripToOutput(RequestContent.Create(data));
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<test>").ToString());
+]]></code>
+This sample shows how to call RoundTripToOutput with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        requiredPropertyOnBase = 1234,
+    },
+    requiredFixedStringEnum = "1",
+    requiredFixedIntEnum = "1",
+    requiredExtensibleEnum = "1",
+    requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+                },
+            },
+        }
+    },
+    requiredIntRecord = new {
+        key = 1234,
+    },
+    requiredStringRecord = new {
+        key = "<String>",
+    },
+    requiredModelRecord = new {
+        key = new {
+            requiredCollection = new[] {
+                new {
+                    requiredModelRecord = new {},
+                }
+            },
+            optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        },
+    },
+    optionalPropertyOnBase = "<optionalPropertyOnBase>",
+};
+
+Response response = client.RoundTripToOutput(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1062,6 +1622,8 @@ Schema for <c>RoundTripModel</c>:
   requiredString: string, # Required. Required string, illustrating a reference type property.
   requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
+    requiredPropertyOnBase: number, # Required. Required property on base
   }, # Required. Required model with discriminator
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
   requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
@@ -1074,6 +1636,7 @@ Schema for <c>RoundTripModel</c>:
   requiredIntRecord: Dictionary&lt;string, number&gt;, # Required. Required int record
   requiredStringRecord: Dictionary&lt;string, string&gt;, # Required. Required string record
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required Model Record
+  optionalPropertyOnBase: string, # Optional. Optional property on base
 }
 </code>
 
@@ -1089,6 +1652,7 @@ Schema for <c>OutputModel</c>:
         requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
       }
     ], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional property on base
   }, # Required. Required model
   requiredCollection: [CollectionItem], # Required. Required collection
   requiredModelRecord: Dictionary&lt;string, RecordItem&gt;, # Required. Required model record
@@ -1358,6 +1922,7 @@ var data = new {
             requiredModelRecord = new {
                 key = new {
                     requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
                 },
             },
         }
@@ -1368,6 +1933,7 @@ var data = new {
 Response response = await client.RoundTripToOutputWithNoUseBaseAsync(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("baseModelProp").ToString());
 ]]></code>
 </example>
@@ -1415,6 +1981,7 @@ var data = new {
             requiredModelRecord = new {
                 key = new {
                     requiredCollection = new[] {},
+                    optionalPropertyOnBase = "<optionalPropertyOnBase>",
                 },
             },
         }
@@ -1425,6 +1992,7 @@ var data = new {
 Response response = client.RoundTripToOutputWithNoUseBase(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredCollection")[0].GetProperty("requiredModelRecord").GetProperty("<test>").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("baseModelProp").ToString());
 ]]></code>
 </example>
