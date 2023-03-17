@@ -8,7 +8,7 @@ import {
     listOperationGroups,
     listOperationsInOperationGroup,
     OperationGroup
-} from "@azure-tools/cadl-dpg";
+} from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
     listServices,
@@ -18,15 +18,15 @@ import {
     Operation,
     ignoreDiagnostics,
     Program
-} from "@cadl-lang/compiler";
+} from "@typespec/compiler";
 import {
     getAuthentication,
     getServers,
     HttpOperation,
     getAllHttpServices,
     getHttpOperation
-} from "@cadl-lang/rest/http";
-import { getVersions } from "@cadl-lang/versioning";
+} from "@typespec/http";
+import { getVersions } from "@typespec/versioning";
 import { NetEmitterOptions } from "../options.js";
 import { CodeModel } from "../type/codeModel.js";
 import { InputConstant } from "../type/inputConstant.js";
@@ -46,7 +46,7 @@ import { resolveServers } from "./cadlServer.js";
 import { InputClient } from "../type/inputClient.js";
 import { ClientKind } from "../type/clientKind.js";
 import { InputOperation } from "../type/inputOperation.js";
-import { getOperationLink } from "@azure-tools/cadl-azure-core";
+import { getOperationLink } from "@azure-tools/typespec-azure-core";
 import { getUsages } from "./model.js";
 import { Usage } from "../type/usage.js";
 import { loadOperation } from "./operation.js";

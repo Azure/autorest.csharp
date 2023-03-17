@@ -5,15 +5,15 @@ import {
     createCadlLibrary,
     Program,
     resolvePath,
-    Service
-} from "@cadl-lang/compiler";
+    Service,
+    EmitContext
+} from "@typespec/compiler";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
 import fs from "fs";
 import path from "node:path";
 import { Configuration } from "./type/configuration.js";
 import { execSync } from "child_process";
-import { EmitContext } from "@cadl-lang/compiler";
 import {
     NetEmitterOptions,
     NetEmitterOptionsSchema,
@@ -25,7 +25,7 @@ import { logger, LoggerLevel } from "./lib/logger.js";
 import { cadlOutputFileName, configurationFileName } from "./constants.js";
 
 export const $lib = createCadlLibrary({
-    name: "cadl-csharp",
+    name: "typespec-csharp",
     diagnostics: {},
     emitter: {
         options: NetEmitterOptionsSchema
