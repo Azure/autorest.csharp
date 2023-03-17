@@ -40,7 +40,7 @@ namespace ModelsInCadl.Models
                     continue;
                 }
             }
-            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, requiredPropertyOnBase);
+            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

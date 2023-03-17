@@ -24,6 +24,15 @@ namespace ModelsInCadl.Models
             RequiredString = requiredString;
         }
 
+        /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>
+        /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
+        /// <param name="requiredPropertyOnBase"> Required property on base. </param>
+        /// <param name="requiredString"> Required string. </param>
+        internal DerivedModelWithDiscriminatorA(string optionalPropertyOnBase, int requiredPropertyOnBase, string requiredString) : base("A", optionalPropertyOnBase, requiredPropertyOnBase)
+        {
+            RequiredString = requiredString;
+        }
+
         /// <summary> Required string. </summary>
         public string RequiredString { get; set; }
     }

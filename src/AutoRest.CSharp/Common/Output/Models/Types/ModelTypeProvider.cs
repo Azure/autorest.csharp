@@ -113,9 +113,26 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ConstructorSignature EnsureSerializationConstructorSignature()
         {
-            return IncludeDeserializer
-                ? CreateSerializationConstructorSignature(Declaration.Name, Fields.PublicConstructorParameters, Fields.SerializationParameters) ?? InitializationConstructorSignature
-                : InitializationConstructorSignature;
+            if (!IncludeDeserializer)
+                return InitializationConstructorSignature;
+
+            var serializationCtorSignature = CreateSerializationConstructorSignature(Declaration.Name, Fields.PublicConstructorParameters, Fields.SerializationParameters);
+
+            // verifies if this new ctor is the same as the public one
+            if (!serializationCtorSignature.Parameters.Any(p => TypeFactory.IsList(p.Type)) && InitializationConstructorSignature.Parameters.SequenceEqual(serializationCtorSignature.Parameters, new ParameterByTypeEqualityComparer()))
+                return InitializationConstructorSignature;
+
+            return serializationCtorSignature;
+        }
+
+        private struct ParameterByTypeEqualityComparer : IEqualityComparer<Parameter>
+        {
+            public bool Equals(Parameter? x, Parameter? y)
+            {
+                return Object.Equals(x?.Type, y?.Type);
+            }
+
+            public int GetHashCode([DisallowNull] Parameter obj) => obj.Type.GetHashCode();
         }
 
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
@@ -181,11 +198,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private bool ShouldSkipDeserialization(ObjectTypeProperty property) => property.InputModelProperty?.Type is InputLiteralType;
 
-        private ConstructorSignature? CreateSerializationConstructorSignature(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
+        private ConstructorSignature CreateSerializationConstructorSignature(string name, IReadOnlyList<Parameter> publicParameters, IReadOnlyList<Parameter> serializationParameters)
         {
-            if (!serializationParameters.Any(p => TypeFactory.IsList(p.Type)) && publicParameters.SequenceEqual(serializationParameters))
-                return null;
-
             //get base public ctor params
             List<Parameter> fullParameterList;
             IEnumerable<Parameter> parametersToPassToBase;
