@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <PowerShellExe Condition="'$(PowerShellExe)' == ''">pwsh</PowerShellExe>
-    <CadlProjectSyncScriptPath Condition="'$(CadlProjectSyncScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/common/scripts/Cadl-Project-Sync.ps1</CadlProjectSyncScriptPath>
-    <CadlProjectGenerateScriptPath Condition="'$(CadlProjectGenerateScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/common/scripts/Cadl-Project-Generate.ps1</CadlProjectGenerateScriptPath>
+    <TypeSpecProjectSyncScriptPath Condition="'$(TypeSpecProjectSyncScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/common/scripts/TypeSpec-Project-Sync.ps1</TypeSpecProjectSyncScriptPath>
+    <TypeSpecProjectGenerateScriptPath Condition="'$(TypeSpecProjectGenerateScriptPath)' == ''">$(MSBuildProjectDirectory)/../../../../eng/common/scripts/TypeSpec-Project-Generate.ps1</TypeSpecProjectGenerateScriptPath>
     <_DefaultInputName Condition="Exists('$(MSBuildProjectDirectory)/autorest.md')">$(MSBuildProjectDirectory)/autorest.md</_DefaultInputName>
-    <CadlInput Condition="Exists('$(MSBuildProjectDirectory)/../cadl-location.yaml') and $(MSBuildProjectDirectory.EndsWith('src'))">$(MSBuildProjectDirectory)/../cadl-location.yaml</CadlInput>
+    <TypeSpecInput Condition="Exists('$(MSBuildProjectDirectory)/../tsp-location.yaml') and $(MSBuildProjectDirectory.EndsWith('src'))">$(MSBuildProjectDirectory)/../tsp-location.yaml</TypeSpecInput>
     <AutoRestInput Condition="'$(AutoRestInput)' == ''">$(_DefaultInputName)</AutoRestInput>
     <AutoRestTestsInput Condition="Exists('$(MSBuildProjectDirectory)/autorest.tests.md')">$(MSBuildProjectDirectory)/autorest.tests.md</AutoRestTestsInput>
     <AutoRestEntryPoint Condition="'$(AutoRestEntryPoint)' == ''">$(MSBuildThisFileDirectory)../tools/autorest/entrypoints/app.js</AutoRestEntryPoint>
@@ -17,10 +17,10 @@
     -->
 
     <!--
-      <CadlAdditionalOptions></CadlAdditionalOptions>
+      <typespecAdditionalOptions></typespecAdditionalOptions>
      
-      Allows passing additional cadl command line arguments, for example to run special emitter 
-      use the following command line: dotnet msbuild /t:GenerateCode /p:CadlAdditionalOptions="csharpGeneratorPath=/absolute/path/to/artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
+      Allows passing additional tsp command line arguments, for example to run special emitter 
+      use the following command line: dotnet msbuild /t:GenerateCode /p:typespecAdditionalOptions="csharpGeneratorPath=/absolute/path/to/artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
     -->
 
     <IncludeAzureCoreSharedCode Condition="'$(IncludeAzureCoreSharedCode)' == ''">true</IncludeAzureCoreSharedCode>
@@ -28,13 +28,13 @@
     <AutoRestSharedCodeDirectory>$(MSBuildThisFileDirectory)../content/Generator.Shared/</AutoRestSharedCodeDirectory>
     <ManagementSharedCodeDirectory>$(MSBuildThisFileDirectory)../content/Management.Shared/</ManagementSharedCodeDirectory>
 
-    <_GenerateCode Condition="'$(AutoRestInput)' != '' OR '$(CadlInput)' != ''">true</_GenerateCode>
+    <_GenerateCode Condition="'$(AutoRestInput)' != '' OR '$(TypeSpecInput)' != ''">true</_GenerateCode>
     <UseDefaultNamespaceAndOutputFolder Condition="'$(UseDefaultNamespaceAndOutputFolder)' == ''">true</UseDefaultNamespaceAndOutputFolder>
     <_AutoRestCommand>node $(AutoRestEntryPoint) --max-memory-size=8192 --skip-csproj --skip-upgrade-check --version=$(AutoRestCoreVersion) $(AutoRestInput) $(AutoRestAdditionalParameters) --use=$(MSBuildThisFileDirectory)../tools/net6.0/any/ --clear-output-folder=true --shared-source-folders=&quot;$(AzureCoreSharedCodeDirectory);$(AutoRestSharedCodeDirectory)&quot;</_AutoRestCommand>
     <_AutoRestCommand Condition="'$(UseDefaultNamespaceAndOutputFolder)' == 'true'">$(_AutoRestCommand) --output-folder=$(MSBuildProjectDirectory)/Generated --namespace=$(RootNamespace)</_AutoRestCommand>
   </PropertyGroup>
 
-  <Target Name="GenerateCode" DependsOnTargets="_GenerateCodeForAutorest;_GenerateCodeForCadl"/>
+  <Target Name="GenerateCode" DependsOnTargets="_GenerateCodeForAutorest;_GenerateCodeForTypeSpec"/>
   <Target Name="_GenerateCodeForAutorest" Condition="'$(_GenerateCode)' == 'true' AND Exists('$(AutoRestInput)')">
     <ReadLinesFromFile File="$(AutoRestInput)">
       <Output TaskParameter="Lines" ItemName="AutoRestInputLines"/>
@@ -47,13 +47,13 @@
     </ItemGroup>
 
     <Error Text="Following GitHub URLs do not contain commit hash: @(GithubUrlsWithoutHash) please use permalinks for code generation inputs (see https://help.github.com/en/github/managing-files-in-a-repository/getting-permanent-links-to-files) " Condition="'@(GithubUrlsWithoutHash)' != ''" />
-    <Error Text="Cannot define both $(AutoRestInput) and $(CadlInput) in the same project" Condition="'$(CadlInput)' != ''" />
+    <Error Text="Cannot define both $(AutoRestInput) and $(TypeSpecInput) in the same project" Condition="'$(TypeSpecInput)' != ''" />
     <Exec Command="$(_AutoRestCommand)"/>
   </Target>
 
-  <Target Name="_GenerateCodeForCadl" Condition="'$(_GenerateCode)' == 'true' AND '$(CadlInput)' != ''" >
-    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(CadlProjectSyncScriptPath) $(MSBuildProjectDirectory)/.."/>
-    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(CadlProjectGenerateScriptPath) $(MSBuildProjectDirectory)/.. $(CadlAdditionalOptions)"/>
+  <Target Name="_GenerateCodeForTypeSpec" Condition="'$(_GenerateCode)' == 'true' AND '$(TypeSpecInput)' != ''" >
+    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectSyncScriptPath) $(MSBuildProjectDirectory)/.."/>
+    <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectGenerateScriptPath) $(MSBuildProjectDirectory)/.. $(typespecAdditionalOptions)"/>
   </Target>
 
   <Target Name="GenerateTest" Condition="'$(AutoRestTestsInput)' != ''">

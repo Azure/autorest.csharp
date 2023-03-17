@@ -1,13 +1,13 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { getOperationLink } from "@azure-tools/cadl-azure-core";
+import { getOperationLink } from "@azure-tools/typespec-azure-core";
 import {
     createDpgContext,
     isApiVersion,
     shouldGenerateConvenient,
     shouldGenerateProtocol
-} from "@azure-tools/cadl-dpg";
+} from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
     getDeprecated,
@@ -19,13 +19,13 @@ import {
     Namespace,
     Operation,
     Program
-} from "@cadl-lang/compiler";
-import { getResourceOperation, ResourceOperation } from "@cadl-lang/rest";
+} from "@typespec/compiler";
+import { getResourceOperation, ResourceOperation } from "@typespec/rest";
 import {
     HttpOperation,
     HttpOperationParameter,
     HttpOperationResponse
-} from "@cadl-lang/rest/http";
+} from "@typespec/http";
 import { NetEmitterOptions } from "../options.js";
 import { BodyMediaType, typeToBodyMediaType } from "../type/bodyMediaType.js";
 import { collectionFormatToDelimMap } from "../type/collectionFormat.js";
