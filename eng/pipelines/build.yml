@@ -28,7 +28,7 @@ resources:
     - repository: azure-sdk-build-tools
       type: git
       name: internal/azure-sdk-build-tools
-      ref: refs/tags/azure-sdk-build-tools_20230223.1
+      ref: refs/tags/azure-sdk-build-tools_20230307.1
 
 stages:
   - stage: 'Build_and_Test'
@@ -100,7 +100,7 @@ stages:
               command: custom
               customCommand: run build
               workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp
-          - pwsh: ./eng/ExecuteCadlEmitterUnitTests.ps1
+          - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
             displayName: 'E2E Test for CADL emitter'
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |

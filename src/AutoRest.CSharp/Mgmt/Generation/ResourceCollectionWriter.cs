@@ -31,7 +31,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
     {
         private ResourceCollection This { get; }
 
-        public ResourceCollectionWriter(CodeWriter writer, ResourceCollection resourceCollection)
+        public ResourceCollectionWriter(ResourceCollection resourceCollection) : this(new CodeWriter(), resourceCollection)
+        {
+        }
+
+        protected ResourceCollectionWriter(CodeWriter writer, ResourceCollection resourceCollection)
             : base(writer, resourceCollection)
         {
             This = resourceCollection;

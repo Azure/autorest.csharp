@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using AutoRest.CSharp.Mgmt.Models;
 
@@ -10,18 +11,41 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 {
     internal static class RequestPathExtensions
     {
-        public static string Minus(this RequestPath requestPath, RequestPath other)
+        private static bool TryMinus(RequestPath requestPath, RequestPath other, [MaybeNullWhen(false)] out string diff)
         {
+            diff = null;
             if (requestPath == other)
-                return RequestPath.Tenant;
+            {
+                diff = RequestPath.Tenant;
+                return true;
+            }
 
             if (requestPath.IsAncestorOf(other))
-                return $"-{requestPath.TrimAncestorFrom(other)}";
+            {
+                diff = $"-{requestPath.TrimAncestorFrom(other)}";
+                return true;
+            }
 
             if (other.IsAncestorOf(requestPath))
-                return other.TrimAncestorFrom(requestPath);
+            {
+                diff = other.TrimAncestorFrom(requestPath);
+                return true;
+            }
 
-            return requestPath;
+            return false;
+        }
+
+        public static string Minus(this RequestPath requestPath, RequestPath other)
+        {
+            if (TryMinus(requestPath, other, out var diff))
+                return diff;
+
+            // if they do not have parent relationship, this could be because of the different scopes
+            // therefore we trim the scope out of them and then minus
+            var requestTrimmed = requestPath.TrimScope();
+            var otherTrimmed = other.TrimScope();
+
+            return TryMinus(requestTrimmed, otherTrimmed, out diff) ? diff : requestTrimmed;
         }
     }
 }

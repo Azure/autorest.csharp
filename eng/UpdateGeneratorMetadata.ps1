@@ -24,8 +24,8 @@ $PackagesProps = "$SdkRepoRoot\eng\Packages.Data.props"
 
 $CadlEmitterProps = "$SdkRepoRoot\eng\emitter-package.json"
 (Get-Content -Raw $CadlEmitterProps) -replace `
-    '"@azure-tools/cadl-csharp": ".*?"',
-"`"@azure-tools/cadl-csharp`": `"$CadlEmitterVersion`"" | `
+    '"@azure-tools/typespec-csharp": ".*?"',
+"`"@azure-tools/typespec-csharp`": `"$CadlEmitterVersion`"" | `
     Set-Content $CadlEmitterProps -NoNewline
 
 if ($UseInternalFeed) {

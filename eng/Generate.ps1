@@ -19,7 +19,7 @@ $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http'
-$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true --option @azure-tools/cadl-csharp.clear-output-folder=true'
+$cadlEmitOptions = '--option @azure-tools/typespec-csharp.save-inputs=true --option @azure-tools/typespec-csharp.clear-output-folder=true'
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -37,7 +37,7 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
     }
 }
 
-function Add-Cadl([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
+function Add-Typespec([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
     $cadlDefinitions[$name] = @{
         'projectName'=$name;
         'output'=$output;
@@ -53,11 +53,11 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
     Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
 }
 
-function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory, [boolean]$generateConvenience) {
+function Add-CadlRanch-Typespec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory, [boolean]$generateConvenience) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
     $cadlMain = Join-Path $cadlRanchFilePath $testName "main.cadl"
-    $convenienceOption = If ($generateConvenience) {""} Else {" --option @azure-tools/cadl-csharp.generate-convenience-methods=false"}
-    Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll$convenienceOption"
+    $convenienceOption = If ($generateConvenience) {""} Else {" --option @azure-tools/typespec-csharp.generate-convenience-methods=false"}
+    Add-Typespec "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/typespec-csharp.unreferenced-types-handling=keepAll$convenienceOption"
 }
 
 $testNames =
@@ -168,8 +168,8 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
         Add-Swagger-Test $testName $directory $testArguments
     }
     else {
-        if ($testName.EndsWith("Cadl")) {
-            Add-Cadl $testName $directory
+        if ($testName.EndsWith("Typespec")) {
+            Add-Typespec $testName $directory
         } else {
             Add-Swagger $testName $directory $testArguments
         }
@@ -194,8 +194,8 @@ if (!($Exclude -contains "TestProjects"))
             Add-Directory $testName $testsFolder $TRUE
             continue
         }
-        if ($testName.EndsWith("Cadl")) {
-            Add-Cadl $testName $directory "" "--option @azure-tools/cadl-csharp.generate-convenience-methods=false"
+        if ($testName.EndsWith("Typespec")) {
+            Add-Typespec $testName $directory "" "--option @azure-tools/typespec-csharp.generate-convenience-methods=false"
         } else {
             if (Test-Path $readmeConfigurationPath)
             {
@@ -244,14 +244,14 @@ if (!($Exclude -contains "Samples"))
     foreach ($projectName in $cadlSampleProjectName)
     {
         $projectDirectory = Join-Path $repoRoot 'samples' $projectName
-        $cadlMain = Join-Path $projectDirectory "main.cadl"
-        $cadlClient = Join-Path $projectDirectory "client.cadl"
-        $mainCadlFile = If (Test-Path "$cadlClient") { Resolve-Path "$cadlClient" } Else { Resolve-Path "$cadlMain"}
-        Add-Cadl $projectName $projectDirectory $mainCadlFile
+        $tspMain = Join-Path $projectDirectory "main.tsp"
+        $tspClient = Join-Path $projectDirectory "client.tsp"
+        $mainTspFile = If (Test-Path "$tspClient") { Resolve-Path "$tspClient" } Else { Resolve-Path "$tspMain"}
+        Add-Typespec $projectName $projectDirectory $mainTspFile
     }
 }
 
-# Cadl projects
+# Typespec projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 $cadlRanchProjectPathsWithoutConvenience = # Needs justification to add item
     'enums/extensible', # https://github.com/Azure/autorest.csharp/issues/3079
@@ -271,17 +271,17 @@ if (!($Exclude -contains "CadlRanchProjects"))
 {
     foreach ($testPath in $cadlRanchProjectPaths)
     {
-        Add-CadlRanch-Cadl $testPath "cadl-" $cadlRanchProjectDirectory $TRUE
+        Add-CadlRanch-Typespec $testPath "typespec-" $cadlRanchProjectDirectory $TRUE
     }
 
     foreach ($testPath in $cadlRanchProjectPathsWithoutConvenience)
     {
-        Add-CadlRanch-Cadl $testPath "cadl-" $cadlRanchProjectDirectory $FALSE
+        Add-CadlRanch-Typespec $testPath "typespec-" $cadlRanchProjectDirectory $FALSE
     }
 }
 
 # TODO: remove later after cadl-ranch fixes the discriminator tests
-Add-Cadl "inheritance-cadl" (Join-Path $cadlRanchProjectDirectory "inheritance")
+Add-Typespec "inheritance-typespec" (Join-Path $cadlRanchProjectDirectory "inheritance")
 
 # Smoke tests
 if (!($Exclude -contains "SmokeTests"))
@@ -380,7 +380,7 @@ if ($reset -or $env:TF_BUILD)
 
     if ($cadlCount -gt 0) 
     {
-        Invoke-CadlSetup
+        Invoke-TypespecSetup
     }
 }
 
@@ -411,6 +411,6 @@ $keys | %{ $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
 $keys | %{ $cadlDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-Cadl $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
+        Invoke-Typespec $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel
