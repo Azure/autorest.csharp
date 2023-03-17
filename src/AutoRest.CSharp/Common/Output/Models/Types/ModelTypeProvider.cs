@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var baseInitializers = ConstructorInitializer.ParametersToFormattableString(parametersToPassToBase).ToArray();
             if (Discriminator?.Value is not null && !_inputModel.IsDefaultDiscriminator)
             {
-                FormattableString discriminatorInitializer = Discriminator.Value.Value.Type.Equals(typeof(string)) ? (FormattableString)$"\"{Discriminator.Value.Value.Value}\"" : (FormattableString)$"{Discriminator.Value.Value.Value}";
+                FormattableString discriminatorInitializer = Discriminator.Value.Value.GetConstantFormattable();
                 for (int i = 0; i < baseInitializers.Length; i++)
                 {
                     if (baseInitializers[i].ToString() == Discriminator.SerializedName)
