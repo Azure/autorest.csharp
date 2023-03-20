@@ -516,20 +516,8 @@ namespace Spread
             Argument.AssertNotNull(items, nameof(items));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
-            {
-                Color = color,
-                Age = age
-            };
-            if (elements != null)
-            {
-                foreach (var value in elements)
-                {
-                    spreadAliasWithOptionalPropsRequest.Elements.Add(value);
-                }
-            }
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest0 = spreadAliasWithOptionalPropsRequest;
-            Response response = await SpreadAliasWithOptionalPropsAsync(id, top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context).ConfigureAwait(false);
+            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, color, age, items.ToList(), elements?.ToList());
+            Response response = await SpreadAliasWithOptionalPropsAsync(id, top, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -551,20 +539,8 @@ namespace Spread
             Argument.AssertNotNull(items, nameof(items));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
-            {
-                Color = color,
-                Age = age
-            };
-            if (elements != null)
-            {
-                foreach (var value in elements)
-                {
-                    spreadAliasWithOptionalPropsRequest.Elements.Add(value);
-                }
-            }
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest0 = spreadAliasWithOptionalPropsRequest;
-            Response response = SpreadAliasWithOptionalProps(id, top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context);
+            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, color, age, items.ToList(), elements?.ToList());
+            Response response = SpreadAliasWithOptionalProps(id, top, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context);
             return response;
         }
 
