@@ -48,11 +48,6 @@ namespace ModelsInCadl.Models
                 writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(OptionalPropertyOnBase))
-            {
-                writer.WritePropertyName("optionalPropertyOnBase"u8);
-                writer.WriteStringValue(OptionalPropertyOnBase);
-            }
             writer.WriteEndObject();
         }
 
@@ -72,7 +67,6 @@ namespace ModelsInCadl.Models
             DateTimeOffset requiredDateTimeOffset = default;
             TimeSpan requiredTimeSpan = default;
             IList<float?> requiredCollectionWithNullableFloatElement = default;
-            Optional<string> optionalPropertyOnBase = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -135,11 +129,6 @@ namespace ModelsInCadl.Models
                         }
                     }
                     requiredCollectionWithNullableFloatElement = array;
-                    continue;
-                }
-                if (property.NameEquals("optionalPropertyOnBase"u8))
-                {
-                    optionalPropertyOnBase = property.Value.GetString();
                     continue;
                 }
             }

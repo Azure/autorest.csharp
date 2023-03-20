@@ -27,8 +27,6 @@ using Azure.Core;
 
 @doc("Base model")
 model BaseModel {
-  @doc("Optional property on base")
-  optionalPropertyOnBase?: string;
 }
 
 @doc("Derived model")

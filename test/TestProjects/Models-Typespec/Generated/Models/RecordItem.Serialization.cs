@@ -24,11 +24,6 @@ namespace ModelsInCadl.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsDefined(OptionalPropertyOnBase))
-            {
-                writer.WritePropertyName("optionalPropertyOnBase"u8);
-                writer.WriteStringValue(OptionalPropertyOnBase);
-            }
             writer.WriteEndObject();
         }
 
@@ -39,7 +34,6 @@ namespace ModelsInCadl.Models
                 return null;
             }
             IList<CollectionItem> requiredCollection = default;
-            Optional<string> optionalPropertyOnBase = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredCollection"u8))
@@ -50,11 +44,6 @@ namespace ModelsInCadl.Models
                         array.Add(CollectionItem.DeserializeCollectionItem(item));
                     }
                     requiredCollection = array;
-                    continue;
-                }
-                if (property.NameEquals("optionalPropertyOnBase"u8))
-                {
-                    optionalPropertyOnBase = property.Value.GetString();
                     continue;
                 }
             }

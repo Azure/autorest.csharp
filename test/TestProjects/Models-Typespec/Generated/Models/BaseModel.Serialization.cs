@@ -15,11 +15,6 @@ namespace ModelsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(OptionalPropertyOnBase))
-            {
-                writer.WritePropertyName("optionalPropertyOnBase"u8);
-                writer.WriteStringValue(OptionalPropertyOnBase);
-            }
             writer.WriteEndObject();
         }
 
