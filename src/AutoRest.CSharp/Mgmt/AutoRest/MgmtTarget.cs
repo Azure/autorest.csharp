@@ -82,15 +82,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var resourceCollection in MgmtContext.Library.ResourceCollections)
             {
-                var codeWriter = new CodeWriter();
-                new ResourceCollectionWriter(codeWriter, resourceCollection).Write();
+                var writer = new ResourceCollectionWriter(resourceCollection);
+                writer.Write();
 
-                AddGeneratedFile(project, $"{resourceCollection.Type.Name}.cs", codeWriter.ToString());
+                AddGeneratedFile(project, $"{resourceCollection.Type.Name}.cs", writer.ToString());
             }
 
             foreach (var model in MgmtContext.Library.ResourceData)
             {
-                if (TypeReferenceTypeChooser.HasMatch(model.ObjectSchema))
+                if (model is EmptyResourceData)
                     continue;
 
                 var name = model.Type.Name;
@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
-                var writer = new ResourceWriter(resource);
+                var writer = ResourceWriter.GetWriter(resource);
                 writer.Write();
 
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());

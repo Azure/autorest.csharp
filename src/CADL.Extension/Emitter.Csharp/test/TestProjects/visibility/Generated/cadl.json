@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Cadl.visibility",
+ "Name": "TypeSpec.visibility",
  "Description": "Illustrates read, write and read/write properties.",
  "ApiVersions": [
   "1.0.0"
@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Dog",
-   "Namespace": "Cadl.visibility",
+   "Namespace": "TypeSpec.visibility",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [

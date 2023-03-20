@@ -20,7 +20,7 @@ $sharedSource = Join-Path $repoRoot 'src' 'assets'
 $configurationPath = Join-Path $repoRoot 'readme.md'
 $testServerSwaggerPath = Join-Path $repoRoot 'node_modules' '@microsoft.azure' 'autorest.testserver' 'swagger'
 $cadlRanchFilePath = Join-Path $repoRoot 'node_modules' '@azure-tools' 'cadl-ranch-specs' 'http'
-$cadlEmitOptions = '--option @azure-tools/cadl-csharp.save-inputs=true --option @azure-tools/cadl-csharp.clear-output-folder=true'
+$cadlEmitOptions = '--option @azure-tools/typespec-csharp.save-inputs=true --option @azure-tools/typespec-csharp.clear-output-folder=true'
 
 function Add-Swagger ([string]$name, [string]$output, [string]$arguments) {
     $swaggerDefinitions[$name] = @{
@@ -38,7 +38,7 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
     }
 }
 
-function Add-Cadl([string]$name, [string]$output, [string]$mainFile = "", [string]$arguments = "") {
+function Add-Typespec([string]$name, [string]$output, [string]$mainFile = "", [string]$arguments = "") {
     $cadlDefinitions[$name] = @{
         'projectName' = $name;
         'output'      = $output;
@@ -54,10 +54,10 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
     Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
 }
 
-function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
+function Add-CadlRanch-Typespec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
     $cadlMain = Join-Path $cadlRanchFilePath $testName "main.cadl"
-    Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain
+    Add-Typespec "$projectPrefix$testName" $projectDirectory $cadlMain
 }
 
 $testData = Get-Content $testProjectDataFile -Encoding utf8 -Raw | ConvertFrom-Json
@@ -100,8 +100,8 @@ function Add-Directory ([string]$testName, [string]$directory, [boolean]$forTest
         Add-Swagger-Test $testName $directory $testArguments
     }
     else {
-        if ($testName.EndsWith("Cadl")) {
-            Add-Cadl $testName $directory
+        if ($testName.EndsWith("Typespec")) {
+            Add-Typespec $testName $directory
         }
         else {
             Add-Swagger $testName $directory $testArguments
@@ -116,8 +116,7 @@ if (!($Exclude -contains "TestProjects")) {
     foreach ($directory in Get-ChildItem $testProjectRoot -Directory) {
         $testName = $directory.Name
         $readmeConfigurationPath = Join-Path $directory "readme.md"
-        $cadlProjectConfigurationPath = Join-Path $directory "cadl-project.yaml"
-        $alternativeCadlProjectConfigurationPath = Join-Path $directory "cadl-project.yml"
+        $tspConfigConfigurationPath = Join-Path $directory "tspconfig.yaml"
         $possibleInputJsonFilePath = Join-Path $directory "$testName.json"
         $testArguments = $null
         $srcFolder = Join-Path $directory "src"
@@ -129,9 +128,9 @@ if (!($Exclude -contains "TestProjects")) {
             continue
         }
 
-        # if cadl-project.yaml exists, we treat it as a cadl project
-        if ((Test-Path $cadlProjectConfigurationPath) -Or (Test-Path $alternativeCadlProjectConfigurationPath)) {
-            Add-Cadl $testName $directory
+        # if tspconfig.yaml exists, we treat it as a typespec project
+        if (Test-Path $tspConfigConfigurationPath) {
+            Add-Typespec $testName $directory
         }
         elseif (Test-Path $readmeConfigurationPath) {
             $testArguments = "--require=$readmeConfigurationPath"
@@ -142,7 +141,7 @@ if (!($Exclude -contains "TestProjects")) {
             Add-Swagger $testName $directory $testArguments
         }
         else {
-            throw "There is no cadl-project.yaml file or autorest.md file or swagger json file $testName.json found in test project $testName"
+            throw "There is no tspconfig.yaml file or autorest.md file or swagger json file $testName.json found in test project $testName"
         }
     }
 }
@@ -155,39 +154,38 @@ if (!($Exclude -contains "Samples")) {
         $sampleName = $directory.Name
         $projectDirectory = Join-Path $sampleProjectsRoot $sampleName
         $sampleConfigurationPath = Join-Path $projectDirectory 'readme.md'
-        $cadlProjectConfigurationPath = Join-Path $directory "cadl-project.yaml"
-        $alternativeCadlProjectConfigurationPath = Join-Path $directory "cadl-project.yml"
+        $tspConfigPath = Join-Path $directory "tspconfig.yaml"
 
         if (Test-Path $sampleConfigurationPath) {
             # for swagger samples
             Add-Swagger $sampleName $projectDirectory "--require=$sampleConfigurationPath"
         }
-        elseif ((Test-Path $cadlProjectConfigurationPath) -Or (Test-Path $alternativeCadlProjectConfigurationPath)) {
-            # for cadl projects
-            $cadlMain = Join-Path $projectDirectory "main.cadl"
-            $cadlClient = Join-Path $projectDirectory "client.cadl"
-            $mainCadlFile = if (Test-Path $cadlClient) { Resolve-Path $cadlClient } else { Resolve-Path $cadlMain }
-            Add-Cadl $sampleName $projectDirectory $mainCadlFile
+        elseif (Test-Path $tspConfigPath) {
+            # for typespec projects
+            $tspMain = Join-Path $projectDirectory "main.tsp"
+            $tspClient = Join-Path $projectDirectory "client.tsp"
+            $mainTspFile = if (Test-Path $tspClient) { Resolve-Path $tspClient } else { Resolve-Path $tspMain }
+            Add-Typespec $sampleName $projectDirectory $mainTspFile
         }
         else {
-            throw "There is no cadl-project.yaml file or autorest.md file found in sample project $sampleName"
+            throw "There is no tspconfig.yaml file or autorest.md file found in sample project $sampleName"
         }
     }
 }
 
-# Cadl projects
+# Typespec projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
 
 $cadlRanchProjectPaths = $testData.CadlRanchProjects
 
 if (!($Exclude -contains "CadlRanchProjects")) {
     foreach ($testPath in $cadlRanchProjectPaths) {
-        Add-CadlRanch-Cadl $testPath "cadl-" $cadlRanchProjectDirectory
+        Add-CadlRanch-Typespec $testPath "typespec-" $cadlRanchProjectDirectory
     }
 }
 
 # TODO: remove later after cadl-ranch fixes the discriminator tests
-Add-Cadl "inheritance-cadl" (Join-Path $cadlRanchProjectDirectory "inheritance")
+Add-Typespec "inheritance-typespec" (Join-Path $cadlRanchProjectDirectory "inheritance")
 
 # Smoke tests
 if (!($Exclude -contains "SmokeTests")) {
@@ -276,7 +274,7 @@ if ($reset -or $env:TF_BUILD) {
     }
 
     if ($cadlCount -gt 0) {
-        Invoke-CadlSetup
+        Invoke-TypespecSetup
     }
 }
 
@@ -306,6 +304,6 @@ $keys | % { $swaggerTestDefinitions[$_] } | ForEach-Object -Parallel {
 $keys | % { $cadlDefinitions[$_] } | ForEach-Object -Parallel {
     if ($_.output -ne $null) {
         Import-Module "$using:PSScriptRoot\Generation.psm1" -DisableNameChecking;
-        Invoke-Cadl $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
+        Invoke-Typespec $_.output $_.projectName $_.mainFile $_.arguments $using:sharedSource $using:fast $using:debug;
     }
 } -ThrottleLimit $parallel

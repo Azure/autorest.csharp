@@ -50,7 +50,7 @@ function AutoRest-Reset()
     Invoke "$script:autoRestBinary --reset"
 }
 
-function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
+function Invoke-Typespec($baseOutput, $projectName, $mainFile, $arguments="", $sharedSource="", $fast="", $debug="")
 {
     if (!(Test-Path $baseOutput)) {
         New-Item $baseOutput -ItemType Directory
@@ -81,8 +81,8 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
         $autorestCsharpBinPath = Join-Path $repoRootPath "artifacts/bin/AutoRest.CSharp/Debug/net6.0/AutoRest.CSharp.dll"
         Try
         {
-            $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.cadl"
-            $emitCommand = "npx cadl compile $cadlFileName --emit @azure-tools/cadl-csharp --option @azure-tools/cadl-csharp.emitter-output-dir=$outputPath --option @azure-tools/cadl-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
+            $cadlFileName = $mainFile ? $mainFile : "$baseOutput/$projectName.tsp"
+            $emitCommand = "npx tsp compile $cadlFileName --emit @azure-tools/typespec-csharp --option @azure-tools/typespec-csharp.emitter-output-dir=$outputPath --option @azure-tools/typespec-csharp.csharpGeneratorPath=$autorestCsharpBinPath $arguments"
             Invoke $emitCommand $outputPath
         }
         Finally 
@@ -94,7 +94,7 @@ function Invoke-Cadl($baseOutput, $projectName, $mainFile, $arguments="", $share
     Invoke "dotnet build $baseOutput --verbosity quiet /nologo"
 }
 
-function Invoke-CadlSetup()
+function Invoke-TypespecSetup()
 {
     # build emitter
     $emitterPath = Join-Path $PSScriptRoot ".." "src" "CADL.Extension" "Emitter.Csharp"
@@ -133,5 +133,5 @@ Export-ModuleMember -Function "Invoke"
 Export-ModuleMember -Function "Invoke-AutoRest"
 Export-ModuleMember -Function "AutoRest-Reset"
 Export-ModuleMember -Function "Get-AutoRestProject"
-Export-ModuleMember -Function "Invoke-Cadl"
-Export-ModuleMember -Function "Invoke-CadlSetup"
+Export-ModuleMember -Function "Invoke-Typespec"
+Export-ModuleMember -Function "Invoke-TypespecSetup"
