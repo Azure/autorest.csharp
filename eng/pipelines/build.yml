@@ -176,30 +176,44 @@ stages:
           parameters:
             name: Update_Codes_A_C
             filter: "a*,b*,c*"
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_D_E
             filter: "d*,e*"
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_F_L
             filter: "f*,g*,h*,i*,j*,k*,l*"
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_M_O
             filter: "m*,n*,o*"
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_P_R
             filter: "p*,q*,r*"
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_S_U
             filter: "s*,t*,u*"
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_V_Z
             filter: "v*,w*,x*,y*,z*"
+            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
 # update samples
         - template: update-azure-sdk-for-net-samples.yml
           parameters:

@@ -63,7 +63,7 @@ stages:
           displayName: "Pack Emitter"
           workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
         - task: Npm@1
-          displayName: 'Publish @azure-tools/cadl-csharp'
+          displayName: 'Publish @azure-tools/typespec-csharp'
           inputs:
             command: 'publish'
             workingDir: '$(Build.SourcesDirectory)/autorest.csharp/src/CADL.Extension/Emitter.Csharp'
@@ -138,8 +138,10 @@ stages:
       - job: Create_PR
         dependsOn: 
           - Update_Generator_Versions
+          - Update_Codes_A_C
           - Update_Codes_D_E
           - Update_Codes_F_L
+          - Update_Codes_M_O
           - Update_Codes_P_R
           - Update_Codes_S_U
           - Update_Codes_V_Z
