@@ -113,6 +113,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ConstructorSignature EnsureSerializationConstructorSignature()
         {
+            // the property bag never needs deserialization, therefore we return the initialization constructor here so that we do not write it in the generated code
+            if (IsPropertyBag)
+                return InitializationConstructorSignature;
+
             var serializationCtorSignature = CreateSerializationConstructorSignature(Declaration.Name, Fields.PublicConstructorParameters, Fields.SerializationParameters);
 
             // verifies if this new ctor is the same as the public one

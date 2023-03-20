@@ -65,7 +65,6 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 false,
                 true);
             return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.TypeFactory);
-            ;
         }
 
         protected override bool EnsureShouldValidateParameter()
