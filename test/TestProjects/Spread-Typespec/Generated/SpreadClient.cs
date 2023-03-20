@@ -516,7 +516,7 @@ namespace Spread
             Argument.AssertNotNull(items, nameof(items));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, color, age, items.ToList(), elements?.ToList());
+            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList());
             Response response = await SpreadAliasWithOptionalPropsAsync(id, top, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
@@ -539,7 +539,7 @@ namespace Spread
             Argument.AssertNotNull(items, nameof(items));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, color, age, items.ToList(), elements?.ToList());
+            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList());
             Response response = SpreadAliasWithOptionalProps(id, top, spreadAliasWithOptionalPropsRequest.ToRequestContent(), context);
             return response;
         }

@@ -66,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models
             if (spreadVariable == null || convenienceSpread == null)
                 return writer => WriteCancellationTokenToRequestContext(writer, contextVariable);
 
-            var ctor = convenienceSpread.BackingModel.SerializationConstructor;
+            var ctor = convenienceSpread.BackingModel.InitializationConstructor; // use initialization constructor here because our parameters here do not have initializers, we get null reference exception if we use serialization constructor.
             var initializers = new List<PropertyInitializer>();
             foreach (var parameter in convenienceSpread.SpreadedParameters)
             {
