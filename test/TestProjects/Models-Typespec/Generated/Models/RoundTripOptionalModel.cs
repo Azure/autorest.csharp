@@ -17,16 +17,11 @@ namespace ModelsInCadl.Models
     public partial class RoundTripOptionalModel
     {
         /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
-        /// <param name="optionalModelWithPropertiesOnBase"> Optional model with properties on base. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="optionalModelWithPropertiesOnBase"/> is null. </exception>
-        public RoundTripOptionalModel(DerivedModelWithProperties optionalModelWithPropertiesOnBase)
+        public RoundTripOptionalModel()
         {
-            Argument.AssertNotNull(optionalModelWithPropertiesOnBase, nameof(optionalModelWithPropertiesOnBase));
-
             OptionalStringList = new ChangeTrackingList<string>();
             OptionalIntList = new ChangeTrackingList<int>();
             OptionalModelCollection = new ChangeTrackingList<CollectionItem>();
-            OptionalModelWithPropertiesOnBase = optionalModelWithPropertiesOnBase;
             OptionalIntRecord = new ChangeTrackingDictionary<string, int>();
             OptionalStringRecord = new ChangeTrackingDictionary<string, string>();
             OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();

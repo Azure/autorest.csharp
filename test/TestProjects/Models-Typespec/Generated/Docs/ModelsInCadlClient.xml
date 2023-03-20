@@ -403,29 +403,17 @@ Schema for <c>RoundTripPrimitiveModel</c>:
     </member>
     <member name="InputToRoundTripOptionalAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripOptionalAsync with required request content, and how to parse the result.
+This sample shows how to call InputToRoundTripOptionalAsync and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var data = new {
-    optionalModelWithPropertiesOnBase = new {
-        requiredCollection = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {
-                        requiredCollection = new[] {},
-                    },
-                },
-            }
-        },
-    },
-};
+var data = new {};
 
 Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").ToString());
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call InputToRoundTripOptionalAsync with all request content, and how to parse the result.
 <code><![CDATA[
@@ -532,7 +520,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelWithPropertiesOnBase: {
     requiredCollection: [CollectionItem], # Required. Required collection
     optionalPropertyOnBase: string, # Optional. Optional properties on base
-  }, # Required. Optional model with properties on base
+  }, # Optional. Optional model with properties on base
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
@@ -559,7 +547,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelWithPropertiesOnBase: {
     requiredCollection: [CollectionItem], # Required. Required collection
     optionalPropertyOnBase: string, # Optional. Optional properties on base
-  }, # Required. Optional model with properties on base
+  }, # Optional. Optional model with properties on base
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
@@ -575,29 +563,17 @@ Schema for <c>RoundTripOptionalModel</c>:
     </member>
     <member name="InputToRoundTripOptional(RequestContent,RequestContext)">
 <example>
-This sample shows how to call InputToRoundTripOptional with required request content, and how to parse the result.
+This sample shows how to call InputToRoundTripOptional and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
 
-var data = new {
-    optionalModelWithPropertiesOnBase = new {
-        requiredCollection = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {
-                        requiredCollection = new[] {},
-                    },
-                },
-            }
-        },
-    },
-};
+var data = new {};
 
 Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").ToString());
+Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call InputToRoundTripOptional with all request content, and how to parse the result.
 <code><![CDATA[
@@ -704,7 +680,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelWithPropertiesOnBase: {
     requiredCollection: [CollectionItem], # Required. Required collection
     optionalPropertyOnBase: string, # Optional. Optional properties on base
-  }, # Required. Optional model with properties on base
+  }, # Optional. Optional model with properties on base
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
@@ -731,7 +707,7 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModelWithPropertiesOnBase: {
     requiredCollection: [CollectionItem], # Required. Required collection
     optionalPropertyOnBase: string, # Optional. Optional properties on base
-  }, # Required. Optional model with properties on base
+  }, # Optional. Optional model with properties on base
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record

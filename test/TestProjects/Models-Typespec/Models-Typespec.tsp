@@ -256,7 +256,7 @@ model RoundTripOptionalModel {
   optionalModel?: DerivedModel;
 
   @doc("Optional model with properties on base")
-  optionalModelWithPropertiesOnBase: DerivedModelWithProperties;
+  optionalModelWithPropertiesOnBase?: DerivedModelWithProperties;
 
   @doc("Optional fixed string enum")
   optionalFixedStringEnum?: FixedStringEnum;
