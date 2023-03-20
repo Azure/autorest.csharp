@@ -30,7 +30,7 @@ $CadlEmitterProps = "$SdkRepoRoot\eng\emitter-package.json"
 
 if ($UseInternalFeed) {
     $npmrcFile = Resolve-Path (Join-Path $SdkRepoRoot ".npmrc")
-    $projectGeneratePath = "$SdkRepoRoot\eng\common\scripts\Cadl-Project-Generate.ps1"
+    $projectGeneratePath = "$SdkRepoRoot\eng\common\scripts\TypeSpec-Project-Generate.ps1"
     (Get-Content -Raw $projectGeneratePath) -replace `
     'npm install --no-lock-file',
 "Copy-Item -Path $npmrcFile -Destination `".npmrc`" -Force`nnpm install --no-lock-file" | `
