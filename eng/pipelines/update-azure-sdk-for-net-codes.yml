@@ -51,7 +51,7 @@ jobs:
   - ${{ if eq(parameters.IsInternalFeed, true) }}:
     - pwsh: |
         git restore NuGet.Config
-        git restore eng/common/scripts/Cadl-Project-Generate.ps1
+        git restore eng/common/scripts/TypeSpec-Project-Generate.ps1
         rm .npmrc
       displayName: Discard Internal Change
       workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
