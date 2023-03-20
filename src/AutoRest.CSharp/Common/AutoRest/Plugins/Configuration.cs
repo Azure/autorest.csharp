@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -31,6 +32,7 @@ namespace AutoRest.CSharp.Input
             public const string SingleTopLevelClient = "single-top-level-client";
             public const string AttachDebuggerFormat = "{0}.attach";
             public const string ProjectFolder = "project-folder";
+            public const string ExistingProjectfolder = "existing-project-folder";
             public const string ProtocolMethodList = "protocol-method-list";
             public const string SkipSerializationFormatXml = "skip-serialization-format-xml";
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
@@ -91,7 +93,6 @@ namespace AutoRest.CSharp.Input
             GenerateModelFactory = generateModelFactory;
             UnreferencedTypesHandling = unreferencedTypesHandling;
             projectFolder ??= ProjectFolderDefault;
-            ExistingProjectFolder = existingProjectFolder == null ? null : Path.GetFullPath(Path.Combine(projectFolder, existingProjectFolder));
             if (Path.IsPathRooted(projectFolder))
             {
                 _absoluteProjectFolder = projectFolder;
@@ -102,6 +103,7 @@ namespace AutoRest.CSharp.Input
                 _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
             }
 
+            ExistingProjectFolder = existingProjectFolder == null ? DownloadLatestContract(_absoluteProjectFolder) : Path.GetFullPath(Path.Combine(projectFolder, existingProjectFolder));
             if (publicClients && generation1ConvenienceClient)
             {
                 var binaryLocation = typeof(Configuration).Assembly.Location;
@@ -199,7 +201,7 @@ namespace AutoRest.CSharp.Input
                 modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
-                existingProjectFolder: null, // Currently this is for standalone, but could reuse for autorest later
+                existingProjectFolder: autoRest.GetValue<string?>(Options.ExistingProjectfolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 modelsToTreatEmptyStringAsNull: autoRest.GetValue<string[]?>(Options.ModelsToTreatEmptyStringAsNull).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -207,6 +209,61 @@ namespace AutoRest.CSharp.Input
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
                 mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest)
             );
+        }
+
+        private static string DownloadLatestContract(string projectFolder)
+        {
+            var gitStartInfo = new ProcessStartInfo("git", "rev-parse --show-toplevel")
+            {
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+            var gitProcess = Process.Start(gitStartInfo);
+            string rootFolder = string.Empty;
+            if (gitProcess != null)
+            {
+                rootFolder = gitProcess.StandardOutput.ReadToEnd();
+                gitProcess.WaitForExit();
+            }
+
+            if (rootFolder != string.Empty)
+            {
+                rootFolder = rootFolder.TrimEnd(Environment.NewLine.ToCharArray());
+                var scriptPath = Path.Join(rootFolder, "eng", "common", "scripts", "Download-Latest-Contract.ps1");
+                // var scriptPath = "D:\\GIT\\sdk-for-pr\\eng\\common\\scripts\\Download-Latest-Contract.ps1";
+                if (File.Exists(scriptPath))
+                {
+                    if (projectFolder.EndsWith("src"))
+                    {
+                        projectFolder = Path.Join(projectFolder, "..");
+                    }
+                    projectFolder = "D:\\GIT\\sdk-for-pr\\sdk\\analysisservices\\Azure.ResourceManager.Analysis";
+                    var scriptStartInfo = new ProcessStartInfo("pwsh", $"-ExecutionPolicy ByPass {scriptPath} {projectFolder}")
+                    {
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true
+                    };
+                    var scriptProcess = Process.Start(scriptStartInfo);
+                    if (scriptProcess != null)
+                    {
+                        var scriptOutput = scriptProcess.StandardOutput.ReadToEnd();
+                        scriptProcess.WaitForExit();
+
+                        if (scriptOutput != null)
+                        {
+                            string anchor = "Latest contract found: ";
+                            var indexOfPath = scriptOutput.IndexOf(anchor);
+                            if (indexOfPath > 0)
+                            {
+                                string latestPath = scriptOutput.Substring(indexOfPath + anchor.Length);
+                                return latestPath;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return string.Empty;
         }
 
         private static T GetOptionEnumValue<T>(IPluginCommunication autoRest, string option) where T : struct, Enum
