@@ -26,8 +26,9 @@ namespace ModelsInCadl.Models
         }
 
         /// <summary> Initializes a new instance of DerivedModelWithProperties. </summary>
+        /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
         /// <param name="requiredCollection"> Required collection. </param>
-        internal DerivedModelWithProperties(IList<CollectionItem> requiredCollection)
+        internal DerivedModelWithProperties(string optionalPropertyOnBase, IList<CollectionItem> requiredCollection) : base(optionalPropertyOnBase)
         {
             RequiredCollection = requiredCollection.ToList();
         }

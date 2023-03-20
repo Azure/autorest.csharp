@@ -113,9 +113,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private ConstructorSignature EnsureSerializationConstructorSignature()
         {
-            if (!IncludeDeserializer)
-                return InitializationConstructorSignature;
-
             var serializationCtorSignature = CreateSerializationConstructorSignature(Declaration.Name, Fields.PublicConstructorParameters, Fields.SerializationParameters);
 
             // verifies if this new ctor is the same as the public one

@@ -15,6 +15,13 @@ namespace ModelsInCadl.Models
         {
         }
 
+        /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
+        /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
+        internal BaseModelWithProperties(string optionalPropertyOnBase)
+        {
+            OptionalPropertyOnBase = optionalPropertyOnBase;
+        }
+
         /// <summary> Optional properties on base. </summary>
         public string OptionalPropertyOnBase { get; set; }
     }
