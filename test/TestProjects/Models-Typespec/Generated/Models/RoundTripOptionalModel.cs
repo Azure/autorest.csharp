@@ -17,11 +17,16 @@ namespace ModelsInCadl.Models
     public partial class RoundTripOptionalModel
     {
         /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
-        public RoundTripOptionalModel()
+        /// <param name="optionalModelWithPropertiesOnBase"> Optional model with properties on base. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="optionalModelWithPropertiesOnBase"/> is null. </exception>
+        public RoundTripOptionalModel(DerivedModelWithProperties optionalModelWithPropertiesOnBase)
         {
+            Argument.AssertNotNull(optionalModelWithPropertiesOnBase, nameof(optionalModelWithPropertiesOnBase));
+
             OptionalStringList = new ChangeTrackingList<string>();
             OptionalIntList = new ChangeTrackingList<int>();
             OptionalModelCollection = new ChangeTrackingList<CollectionItem>();
+            OptionalModelWithPropertiesOnBase = optionalModelWithPropertiesOnBase;
             OptionalIntRecord = new ChangeTrackingDictionary<string, int>();
             OptionalStringRecord = new ChangeTrackingDictionary<string, string>();
             OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
@@ -35,6 +40,7 @@ namespace ModelsInCadl.Models
         /// <param name="optionalIntList"> Optional int collection. </param>
         /// <param name="optionalModelCollection"> Optional model collection. </param>
         /// <param name="optionalModel"> Optional model. </param>
+        /// <param name="optionalModelWithPropertiesOnBase"> Optional model with properties on base. </param>
         /// <param name="optionalFixedStringEnum"> Optional fixed string enum. </param>
         /// <param name="optionalExtensibleEnum"> Optional extensible enum. </param>
         /// <param name="optionalIntRecord"> Optional int record. </param>
@@ -43,7 +49,7 @@ namespace ModelsInCadl.Models
         /// <param name="optionalPlainDate"> Optional plainDate. </param>
         /// <param name="optionalPlainTime"> Optional plainTime. </param>
         /// <param name="optionalCollectionWithNullableIntElement"> Optional collection of which the element is a nullable int. </param>
-        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement)
+        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, DerivedModelWithProperties optionalModelWithPropertiesOnBase, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement)
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
@@ -51,6 +57,7 @@ namespace ModelsInCadl.Models
             OptionalIntList = optionalIntList.ToList();
             OptionalModelCollection = optionalModelCollection.ToList();
             OptionalModel = optionalModel;
+            OptionalModelWithPropertiesOnBase = optionalModelWithPropertiesOnBase;
             OptionalFixedStringEnum = optionalFixedStringEnum;
             OptionalExtensibleEnum = optionalExtensibleEnum;
             OptionalIntRecord = optionalIntRecord;
@@ -73,6 +80,8 @@ namespace ModelsInCadl.Models
         public IList<CollectionItem> OptionalModelCollection { get; }
         /// <summary> Optional model. </summary>
         public DerivedModel OptionalModel { get; set; }
+        /// <summary> Optional model with properties on base. </summary>
+        public DerivedModelWithProperties OptionalModelWithPropertiesOnBase { get; set; }
         /// <summary> Optional fixed string enum. </summary>
         public FixedStringEnum? OptionalFixedStringEnum { get; set; }
         /// <summary> Optional extensible enum. </summary>

@@ -29,8 +29,20 @@ using Azure.Core;
 model BaseModel {
 }
 
+@doc("Base model with properties")
+model BaseModelWithProperties {
+  @doc("Optional properties on base")
+  optionalPropertyOnBase?: string;
+}
+
 @doc("Derived model")
 model DerivedModel extends BaseModel {
+  @doc("Required collection")
+  requiredCollection: CollectionItem[];
+}
+
+@doc("Derived model with properties")
+model DerivedModelWithProperties extends BaseModelWithProperties {
   @doc("Required collection")
   requiredCollection: CollectionItem[];
 }
@@ -242,6 +254,9 @@ model RoundTripOptionalModel {
 
   @doc("Optional model.")
   optionalModel?: DerivedModel;
+
+  @doc("Optional model with properties on base")
+  optionalModelWithPropertiesOnBase: DerivedModelWithProperties;
 
   @doc("Optional fixed string enum")
   optionalFixedStringEnum?: FixedStringEnum;
