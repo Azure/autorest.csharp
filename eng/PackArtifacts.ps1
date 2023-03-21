@@ -13,15 +13,25 @@ Write-Host "Alpha version: $alphaVersion"
 
 # Pack autorest.csharp nuget package "Microsoft.Azure.AutoRest.CSharp"
 Push-Location $repoRoot
-dotnet pack /p:Version=$alphaVersion -o $StagingDirectory -warnaserror -c Release
-Pop-Location
+try {
+    dotnet pack /p:Version=$alphaVersion -o $StagingDirectory -warnaserror -c Release
+    if ($LASTEXITCODE) { exit $LASTEXITCODE }
+}
+finally {
+    Pop-Location
+}
 
 # Pack autorest.csharp npm package "@autorest/csharp"
 $artifactsPath = Resolve-Path (Join-Path $repoRoot '/artifacts/bin/AutoRest.CSharp/Release/net6.0/')
 Push-Location $artifactsPath
-npm version --no-git-tag-version $alphaVersion | Out-Null;
-$file = npm pack -q;
-Copy-Item $file -Destination $StagingDirectory
-Pop-Location
+try {
+    npm version --no-git-tag-version $alphaVersion | Out-Null;
+    $file = npm pack -q;
+    Copy-Item $file -Destination $StagingDirectory
+    if ($LASTEXITCODE) { exit $LASTEXITCODE }
+}
+finally {
+    Pop-Location
+}
 
 Write-Host "##vso[task.setvariable variable=autorestVersion;isoutput=true]$alphaVersion"
