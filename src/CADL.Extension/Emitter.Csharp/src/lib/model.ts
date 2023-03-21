@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { isFixed } from "@azure-tools/cadl-azure-core";
+import { isFixed } from "@azure-tools/typespec-azure-core";
 import {
     Enum,
     EnumMember,
@@ -29,22 +29,22 @@ import {
     Scalar,
     Union,
     getProjectedNames
-} from "@cadl-lang/compiler";
-import { getResourceOperation } from "@cadl-lang/rest";
+} from "@typespec/compiler";
+import { getResourceOperation } from "@typespec/rest";
 import {
     getHeaderFieldName,
     getPathParamName,
     getQueryParamName,
     HttpOperation,
     isStatusCode
-} from "@cadl-lang/rest/http";
+} from "@typespec/http";
 import {
     projectedNameClientKey,
     projectedNameCSharpKey,
     projectedNameJsonKey
 } from "../constants.js";
-import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
-import { InputModelProperty } from "../type/InputModelProperty.js";
+import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
+import { InputModelProperty } from "../type/inputModelProperty.js";
 import {
     InputDictionaryType,
     InputEnumType,
@@ -56,9 +56,10 @@ import {
     InputUnionType,
     InputNullType,
     InputIntrinsicType
-} from "../type/InputType.js";
-import { InputTypeKind } from "../type/InputTypeKind.js";
-import { Usage } from "../type/Usage.js";
+} from "../type/inputType.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
+import { Usage } from "../type/usage.js";
+import { logger } from "./logger.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -260,6 +261,7 @@ export function getInputType(
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputType {
+    logger.debug(`getInputType for kind: ${type.kind}`);
     if (type.kind === "Model") {
         return getInputModelType(type);
     } else if (

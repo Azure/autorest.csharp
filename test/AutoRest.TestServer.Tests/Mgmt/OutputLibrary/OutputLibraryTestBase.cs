@@ -136,8 +136,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 var name = $"{_projectName}.{resource.Type.Name}";
+                Console.WriteLine(name);
                 var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(generatedResourceType))
+                Assert.NotNull(generatedResourceType, $"class {name} is not found in {MgmtContext.RPName}");
+                if (IsSingletonOperation(generatedResourceType) || resource is PartialResource)
                 {
                     continue;
                 }
@@ -163,7 +165,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             {
                 var name = $"{_projectName}.{resource.Type.Name}";
                 var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(generatedResourceType))
+                Assert.NotNull(generatedResourceType, $"class {name} is not found");
+                if (IsSingletonOperation(generatedResourceType) || resource is PartialResource)
                 {
                     continue;
                 }
