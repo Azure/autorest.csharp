@@ -81,7 +81,15 @@ This document contains some additional [technical details](https://github.com/Az
 
 ### Validate generator changes against Azure SDK before merging your autorest.csharp PR
 
-When the automatic PR is created for azure-sdk-for-net if there are any issues found all other changes to autorest.csharp are blocked until those issues are resolved.  This means we should be certain that the changes we are making create the expected result in azure-sdk-for-net prior to merging our PR.  In time we should build this into the autorest.csharp CI such that it happens automatically, but in the meantime a few manual steps can help avoid any delays.
+When the automatic PR is created for azure-sdk-for-net if there are any issues found all other changes to autorest.csharp are blocked until those issues are resolved.  This means we should be certain that the changes we are making create the expected result in azure-sdk-for-net prior to merging our PR. 
+
+#### Automatical steps
+
+Go to [Autorest Regen Preview](https://dev.azure.com/azure-sdk/internal/_build?definitionId=5990&_a=summary) pipeline, and click "Run Pipeline". In "Branch/tag", type in your PR ref, i.e. refs/pull/3215/head, or refs/pull/3215/merge. Click "Run". After the build finishes, there will be a PR starting with "Autorest Regen Preview".
+
+#### Manual steps
+
+You could do these manually.
 
 - Run `dotnet pack /p:OfficialBuildId=yyyyMMdd.100` at the root directory of this repository to package up a version of the generator
   - Since there can be real versions with the same date starting at `.100` can ensure no conflicts with official builds.
