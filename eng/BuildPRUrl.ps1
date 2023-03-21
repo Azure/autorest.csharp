@@ -1,6 +1,6 @@
 param($SourceBranch)
 
-$matchString = "refs/pull/(\d+)/head"
+$matchString = "refs/pull/(\d+)/\w+"
 $PRUrl = ""
 if ($SourceBranch -match $matchString) {
     $PRUrl = "https://github.com/Azure/autorest.csharp/pull/$($Matches[1])"
