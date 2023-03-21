@@ -19,19 +19,19 @@ namespace Pagination
     /// <summary> A class to add extension methods to Pagination. </summary>
     public static partial class PaginationExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new ResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new ResourceGroupResourceExtension(client, scope);
             });
         }
         #region PageSizeIntegerModelResource
@@ -191,7 +191,7 @@ namespace Pagination
         /// <returns> An object representing collection of PageSizeIntegerModelResources and their operations over a PageSizeIntegerModelResource. </returns>
         public static PageSizeIntegerModelCollection GetPageSizeIntegerModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeIntegerModels();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetPageSizeIntegerModels();
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace Pagination
         /// <returns> An object representing collection of PageSizeInt64ModelResources and their operations over a PageSizeInt64ModelResource. </returns>
         public static PageSizeInt64ModelCollection GetPageSizeInt64Models(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeInt64Models();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetPageSizeInt64Models();
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace Pagination
         /// <returns> An object representing collection of PageSizeInt32ModelResources and their operations over a PageSizeInt32ModelResource. </returns>
         public static PageSizeInt32ModelCollection GetPageSizeInt32Models(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeInt32Models();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetPageSizeInt32Models();
         }
 
         /// <summary>
@@ -353,7 +353,7 @@ namespace Pagination
         /// <returns> An object representing collection of PageSizeNumericModelResources and their operations over a PageSizeNumericModelResource. </returns>
         public static PageSizeNumericModelCollection GetPageSizeNumericModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeNumericModels();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetPageSizeNumericModels();
         }
 
         /// <summary>
@@ -407,7 +407,7 @@ namespace Pagination
         /// <returns> An object representing collection of PageSizeFloatModelResources and their operations over a PageSizeFloatModelResource. </returns>
         public static PageSizeFloatModelCollection GetPageSizeFloatModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeFloatModels();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetPageSizeFloatModels();
         }
 
         /// <summary>
@@ -461,7 +461,7 @@ namespace Pagination
         /// <returns> An object representing collection of PageSizeDoubleModelResources and their operations over a PageSizeDoubleModelResource. </returns>
         public static PageSizeDoubleModelCollection GetPageSizeDoubleModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeDoubleModels();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetPageSizeDoubleModels();
         }
 
         /// <summary>
@@ -515,7 +515,7 @@ namespace Pagination
         /// <returns> An object representing collection of PageSizeDecimalModelResources and their operations over a PageSizeDecimalModelResource. </returns>
         public static PageSizeDecimalModelCollection GetPageSizeDecimalModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeDecimalModels();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetPageSizeDecimalModels();
         }
 
         /// <summary>
@@ -569,7 +569,7 @@ namespace Pagination
         /// <returns> An object representing collection of PageSizeStringModelResources and their operations over a PageSizeStringModelResource. </returns>
         public static PageSizeStringModelCollection GetPageSizeStringModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeStringModels();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetPageSizeStringModels();
         }
 
         /// <summary>

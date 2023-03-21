@@ -20,147 +20,147 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class to add extension methods to Azure.ResourceManager.Sample. </summary>
     public static partial class SampleExtensions
     {
-        private static AvailabilitySetResourceExtensionClient GetAvailabilitySetResourceExtensionClient(ArmResource resource)
+        private static AvailabilitySetResourceExtension GetAvailabilitySetResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new AvailabilitySetResourceExtensionClient(client, resource.Id);
+                return new AvailabilitySetResourceExtension(client, resource.Id);
             });
         }
 
-        private static AvailabilitySetResourceExtensionClient GetAvailabilitySetResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static AvailabilitySetResourceExtension GetAvailabilitySetResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new AvailabilitySetResourceExtensionClient(client, scope);
+                return new AvailabilitySetResourceExtension(client, scope);
             });
         }
 
-        private static DedicatedHostGroupResourceExtensionClient GetDedicatedHostGroupResourceExtensionClient(ArmResource resource)
+        private static DedicatedHostGroupResourceExtension GetDedicatedHostGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new DedicatedHostGroupResourceExtensionClient(client, resource.Id);
+                return new DedicatedHostGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static DedicatedHostGroupResourceExtensionClient GetDedicatedHostGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static DedicatedHostGroupResourceExtension GetDedicatedHostGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new DedicatedHostGroupResourceExtensionClient(client, scope);
+                return new DedicatedHostGroupResourceExtension(client, scope);
             });
         }
 
-        private static ImageResourceExtensionClient GetImageResourceExtensionClient(ArmResource resource)
+        private static ImageResourceExtension GetImageResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ImageResourceExtensionClient(client, resource.Id);
+                return new ImageResourceExtension(client, resource.Id);
             });
         }
 
-        private static ImageResourceExtensionClient GetImageResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ImageResourceExtension GetImageResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ImageResourceExtensionClient(client, scope);
+                return new ImageResourceExtension(client, scope);
             });
         }
 
-        private static ProximityPlacementGroupResourceExtensionClient GetProximityPlacementGroupResourceExtensionClient(ArmResource resource)
+        private static ProximityPlacementGroupResourceExtension GetProximityPlacementGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ProximityPlacementGroupResourceExtensionClient(client, resource.Id);
+                return new ProximityPlacementGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ProximityPlacementGroupResourceExtensionClient GetProximityPlacementGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ProximityPlacementGroupResourceExtension GetProximityPlacementGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ProximityPlacementGroupResourceExtensionClient(client, scope);
+                return new ProximityPlacementGroupResourceExtension(client, scope);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new ResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new ResourceGroupResourceExtension(client, scope);
             });
         }
 
-        private static SshPublicKeyResourceExtensionClient GetSshPublicKeyResourceExtensionClient(ArmResource resource)
+        private static SshPublicKeyResourceExtension GetSshPublicKeyResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SshPublicKeyResourceExtensionClient(client, resource.Id);
+                return new SshPublicKeyResourceExtension(client, resource.Id);
             });
         }
 
-        private static SshPublicKeyResourceExtensionClient GetSshPublicKeyResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static SshPublicKeyResourceExtension GetSshPublicKeyResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new SshPublicKeyResourceExtensionClient(client, scope);
+                return new SshPublicKeyResourceExtension(client, scope);
             });
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
+                return new SubscriptionResourceExtension(client, resource.Id);
             });
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new SubscriptionResourceExtension(client, scope);
             });
         }
 
-        private static VirtualMachineResourceExtensionClient GetVirtualMachineResourceExtensionClient(ArmResource resource)
+        private static VirtualMachineResourceExtension GetVirtualMachineResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new VirtualMachineResourceExtensionClient(client, resource.Id);
+                return new VirtualMachineResourceExtension(client, resource.Id);
             });
         }
 
-        private static VirtualMachineResourceExtensionClient GetVirtualMachineResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static VirtualMachineResourceExtension GetVirtualMachineResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new VirtualMachineResourceExtensionClient(client, scope);
+                return new VirtualMachineResourceExtension(client, scope);
             });
         }
 
-        private static VirtualMachineScaleSetResourceExtensionClient GetVirtualMachineScaleSetResourceExtensionClient(ArmResource resource)
+        private static VirtualMachineScaleSetResourceExtension GetVirtualMachineScaleSetResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new VirtualMachineScaleSetResourceExtensionClient(client, resource.Id);
+                return new VirtualMachineScaleSetResourceExtension(client, resource.Id);
             });
         }
 
-        private static VirtualMachineScaleSetResourceExtensionClient GetVirtualMachineScaleSetResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static VirtualMachineScaleSetResourceExtension GetVirtualMachineScaleSetResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new VirtualMachineScaleSetResourceExtensionClient(client, scope);
+                return new VirtualMachineScaleSetResourceExtension(client, scope);
             });
         }
         #region AvailabilitySetResource
@@ -434,7 +434,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAvailabilitySets();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAvailabilitySets();
         }
 
         /// <summary>
@@ -490,7 +490,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An object representing collection of ProximityPlacementGroupResources and their operations over a ProximityPlacementGroupResource. </returns>
         public static ProximityPlacementGroupCollection GetProximityPlacementGroups(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetProximityPlacementGroups();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetProximityPlacementGroups();
         }
 
         /// <summary>
@@ -548,7 +548,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
         public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDedicatedHostGroups();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetDedicatedHostGroups();
         }
 
         /// <summary>
@@ -606,7 +606,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An object representing collection of SshPublicKeyResources and their operations over a SshPublicKeyResource. </returns>
         public static SshPublicKeyCollection GetSshPublicKeys(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSshPublicKeys();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetSshPublicKeys();
         }
 
         /// <summary>
@@ -662,7 +662,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetVirtualMachines();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetVirtualMachines();
         }
 
         /// <summary>
@@ -720,7 +720,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An object representing collection of ImageResources and their operations over a ImageResource. </returns>
         public static ImageCollection GetImages(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetImages();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetImages();
         }
 
         /// <summary>
@@ -778,7 +778,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetVirtualMachineScaleSets();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetVirtualMachineScaleSets();
         }
 
         /// <summary>
@@ -840,7 +840,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
         }
 
         /// <summary>
@@ -916,7 +916,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AvailabilitySetResource> GetAvailabilitySetsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetAvailabilitySetResourceExtensionClient(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
+            return GetAvailabilitySetResourceExtension(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -938,7 +938,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AvailabilitySetResource> GetAvailabilitySets(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetAvailabilitySetResourceExtensionClient(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);
+            return GetAvailabilitySetResourceExtension(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);
         }
 
         /// <summary>
@@ -959,7 +959,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="ProximityPlacementGroupResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ProximityPlacementGroupResource> GetProximityPlacementGroupsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetProximityPlacementGroupResourceExtensionClient(subscriptionResource).GetProximityPlacementGroupsAsync(cancellationToken);
+            return GetProximityPlacementGroupResourceExtension(subscriptionResource).GetProximityPlacementGroupsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -980,7 +980,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="ProximityPlacementGroupResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ProximityPlacementGroupResource> GetProximityPlacementGroups(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetProximityPlacementGroupResourceExtensionClient(subscriptionResource).GetProximityPlacementGroups(cancellationToken);
+            return GetProximityPlacementGroupResourceExtension(subscriptionResource).GetProximityPlacementGroups(cancellationToken);
         }
 
         /// <summary>
@@ -1001,7 +1001,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<DedicatedHostGroupResource> GetDedicatedHostGroupsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetDedicatedHostGroupResourceExtensionClient(subscriptionResource).GetDedicatedHostGroupsAsync(cancellationToken);
+            return GetDedicatedHostGroupResourceExtension(subscriptionResource).GetDedicatedHostGroupsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1022,7 +1022,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="DedicatedHostGroupResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<DedicatedHostGroupResource> GetDedicatedHostGroups(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetDedicatedHostGroupResourceExtensionClient(subscriptionResource).GetDedicatedHostGroups(cancellationToken);
+            return GetDedicatedHostGroupResourceExtension(subscriptionResource).GetDedicatedHostGroups(cancellationToken);
         }
 
         /// <summary>
@@ -1043,7 +1043,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="SshPublicKeyResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SshPublicKeyResource> GetSshPublicKeysAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSshPublicKeyResourceExtensionClient(subscriptionResource).GetSshPublicKeysAsync(cancellationToken);
+            return GetSshPublicKeyResourceExtension(subscriptionResource).GetSshPublicKeysAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1064,7 +1064,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="SshPublicKeyResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SshPublicKeyResource> GetSshPublicKeys(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSshPublicKeyResourceExtensionClient(subscriptionResource).GetSshPublicKeys(cancellationToken);
+            return GetSshPublicKeyResourceExtension(subscriptionResource).GetSshPublicKeys(cancellationToken);
         }
 
         /// <summary>
@@ -1096,7 +1096,7 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(skus, nameof(skus));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            return await GetSubscriptionResourceExtensionClient(subscriptionResource).GetVirtualMachineImageAsync(location, publisherName, offer, skus, version, cancellationToken).ConfigureAwait(false);
+            return await GetSubscriptionResourceExtension(subscriptionResource).GetVirtualMachineImageAsync(location, publisherName, offer, skus, version, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1128,7 +1128,7 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(skus, nameof(skus));
             Argument.AssertNotNullOrEmpty(version, nameof(version));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVirtualMachineImage(location, publisherName, offer, skus, version, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetVirtualMachineImage(location, publisherName, offer, skus, version, cancellationToken);
         }
 
         /// <summary>
@@ -1153,7 +1153,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(options, nameof(options));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVirtualMachineImagesAsync(options, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetVirtualMachineImagesAsync(options, cancellationToken);
         }
 
         /// <summary>
@@ -1178,7 +1178,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(options, nameof(options));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVirtualMachineImages(options, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetVirtualMachineImages(options, cancellationToken);
         }
 
         /// <summary>
@@ -1205,7 +1205,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetOffersVirtualMachineImagesAsync(location, publisherName, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetOffersVirtualMachineImagesAsync(location, publisherName, cancellationToken);
         }
 
         /// <summary>
@@ -1232,7 +1232,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetOffersVirtualMachineImages(location, publisherName, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetOffersVirtualMachineImages(location, publisherName, cancellationToken);
         }
 
         /// <summary>
@@ -1254,7 +1254,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetPublishersVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetPublishersVirtualMachineImagesAsync(location, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetPublishersVirtualMachineImagesAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -1276,7 +1276,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetPublishersVirtualMachineImages(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetPublishersVirtualMachineImages(location, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetPublishersVirtualMachineImages(location, cancellationToken);
         }
 
         /// <summary>
@@ -1305,7 +1305,7 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
             Argument.AssertNotNullOrEmpty(offer, nameof(offer));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSkusVirtualMachineImagesAsync(location, publisherName, offer, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetSkusVirtualMachineImagesAsync(location, publisherName, offer, cancellationToken);
         }
 
         /// <summary>
@@ -1334,7 +1334,7 @@ namespace Azure.ResourceManager.Sample
             Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
             Argument.AssertNotNullOrEmpty(offer, nameof(offer));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSkusVirtualMachineImages(location, publisherName, offer, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetSkusVirtualMachineImages(location, publisherName, offer, cancellationToken);
         }
 
         /// <summary>
@@ -1356,7 +1356,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="SampleUsage" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SampleUsage> GetUsagesAsync(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetUsagesAsync(location, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetUsagesAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -1378,7 +1378,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="SampleUsage" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SampleUsage> GetUsages(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetUsages(location, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetUsages(location, cancellationToken);
         }
 
         /// <summary>
@@ -1400,7 +1400,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineResource> GetVirtualMachinesByLocationAsync(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetVirtualMachineResourceExtensionClient(subscriptionResource).GetVirtualMachinesByLocationAsync(location, cancellationToken);
+            return GetVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachinesByLocationAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -1422,7 +1422,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineResource> GetVirtualMachinesByLocation(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetVirtualMachineResourceExtensionClient(subscriptionResource).GetVirtualMachinesByLocation(location, cancellationToken);
+            return GetVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachinesByLocation(location, cancellationToken);
         }
 
         /// <summary>
@@ -1444,7 +1444,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineResource> GetVirtualMachinesAsync(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetVirtualMachineResourceExtensionClient(subscriptionResource).GetVirtualMachinesAsync(statusOnly, cancellationToken);
+            return GetVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachinesAsync(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -1466,7 +1466,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineResource> GetVirtualMachines(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetVirtualMachineResourceExtensionClient(subscriptionResource).GetVirtualMachines(statusOnly, cancellationToken);
+            return GetVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachines(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -1488,7 +1488,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineSize" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineSize> GetVirtualMachineSizesAsync(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVirtualMachineSizesAsync(location, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetVirtualMachineSizesAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -1510,7 +1510,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineSize" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineSize> GetVirtualMachineSizes(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVirtualMachineSizes(location, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetVirtualMachineSizes(location, cancellationToken);
         }
 
         /// <summary>
@@ -1531,7 +1531,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ImageResource> GetImagesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetImageResourceExtensionClient(subscriptionResource).GetImagesAsync(cancellationToken);
+            return GetImageResourceExtension(subscriptionResource).GetImagesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1552,7 +1552,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ImageResource> GetImages(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetImageResourceExtensionClient(subscriptionResource).GetImages(cancellationToken);
+            return GetImageResourceExtension(subscriptionResource).GetImages(cancellationToken);
         }
 
         /// <summary>
@@ -1573,7 +1573,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetVirtualMachineScaleSetResourceExtensionClient(subscriptionResource).GetVirtualMachineScaleSetsAsync(cancellationToken);
+            return GetVirtualMachineScaleSetResourceExtension(subscriptionResource).GetVirtualMachineScaleSetsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1594,7 +1594,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSets(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetVirtualMachineScaleSetResourceExtensionClient(subscriptionResource).GetVirtualMachineScaleSets(cancellationToken);
+            return GetVirtualMachineScaleSetResourceExtension(subscriptionResource).GetVirtualMachineScaleSets(cancellationToken);
         }
 
         /// <summary>
@@ -1620,7 +1620,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return await GetSubscriptionResourceExtensionClient(subscriptionResource).ExportRequestRateByIntervalLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
+            return await GetSubscriptionResourceExtension(subscriptionResource).ExportRequestRateByIntervalLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1646,7 +1646,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).ExportRequestRateByIntervalLogAnalytic(waitUntil, location, content, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).ExportRequestRateByIntervalLogAnalytic(waitUntil, location, content, cancellationToken);
         }
 
         /// <summary>
@@ -1672,7 +1672,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return await GetSubscriptionResourceExtensionClient(subscriptionResource).ExportThrottledRequestsLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
+            return await GetSubscriptionResourceExtension(subscriptionResource).ExportThrottledRequestsLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1698,7 +1698,7 @@ namespace Azure.ResourceManager.Sample
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).ExportThrottledRequestsLogAnalytic(waitUntil, location, content, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).ExportThrottledRequestsLogAnalytic(waitUntil, location, content, cancellationToken);
         }
     }
 }

@@ -20,51 +20,51 @@ namespace MgmtPropertyBag
     /// <summary> A class to add extension methods to MgmtPropertyBag. </summary>
     public static partial class MgmtPropertyBagExtensions
     {
-        private static BarResourceExtensionClient GetBarResourceExtensionClient(ArmResource resource)
+        private static BarResourceExtension GetBarResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new BarResourceExtensionClient(client, resource.Id);
+                return new BarResourceExtension(client, resource.Id);
             });
         }
 
-        private static BarResourceExtensionClient GetBarResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static BarResourceExtension GetBarResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new BarResourceExtensionClient(client, scope);
+                return new BarResourceExtension(client, scope);
             });
         }
 
-        private static FooResourceExtensionClient GetFooResourceExtensionClient(ArmResource resource)
+        private static FooResourceExtension GetFooResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new FooResourceExtensionClient(client, resource.Id);
+                return new FooResourceExtension(client, resource.Id);
             });
         }
 
-        private static FooResourceExtensionClient GetFooResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static FooResourceExtension GetFooResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new FooResourceExtensionClient(client, scope);
+                return new FooResourceExtension(client, scope);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new ResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new ResourceGroupResourceExtension(client, scope);
             });
         }
         #region FooResource
@@ -110,7 +110,7 @@ namespace MgmtPropertyBag
         /// <returns> An object representing collection of FooResources and their operations over a FooResource. </returns>
         public static FooCollection GetFoos(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetFoos();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetFoos();
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace MgmtPropertyBag
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetBars();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetBars();
         }
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace MgmtPropertyBag
         /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
-            return GetFooResourceExtensionClient(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
+            return GetFooResourceExtension(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
         }
 
         /// <summary>
@@ -256,7 +256,7 @@ namespace MgmtPropertyBag
         /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
         {
-            return GetFooResourceExtensionClient(subscriptionResource).GetFoos(filter, top, cancellationToken);
+            return GetFooResourceExtension(subscriptionResource).GetFoos(filter, top, cancellationToken);
         }
 
         /// <summary>
@@ -279,7 +279,7 @@ namespace MgmtPropertyBag
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetBarResourceExtensionClient(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
+            return GetBarResourceExtension(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
         }
 
         /// <summary>
@@ -302,7 +302,7 @@ namespace MgmtPropertyBag
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetBarResourceExtensionClient(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
+            return GetBarResourceExtension(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _operations = operations;
             _extensionForChildResources = extensionForChildResources;
             ExtendedResourceType = resourceType;
-            DefaultName = $"{resourceType.Name}ExtensionClient";
+            DefaultName = $"{resourceType.Name}Extension";
         }
 
         public override bool IsInitializedByProperties => true;

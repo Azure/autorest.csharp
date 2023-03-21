@@ -21,115 +21,115 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to MgmtScopeResource. </summary>
     public static partial class MgmtScopeResourceExtensions
     {
-        private static ArmResourceExtensionClient GetArmResourceExtensionClient(ArmResource resource)
+        private static ArmResourceExtension GetArmResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ArmResourceExtensionClient(client, resource.Id);
+                return new ArmResourceExtension(client, resource.Id);
             });
         }
 
-        private static ArmResourceExtensionClient GetArmResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ArmResourceExtension GetArmResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ArmResourceExtensionClient(client, scope);
+                return new ArmResourceExtension(client, scope);
             });
         }
 
-        private static DeploymentExtendedResourceExtensionClient GetDeploymentExtendedResourceExtensionClient(ArmResource resource)
+        private static DeploymentExtendedResourceExtension GetDeploymentExtendedResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new DeploymentExtendedResourceExtensionClient(client, resource.Id);
+                return new DeploymentExtendedResourceExtension(client, resource.Id);
             });
         }
 
-        private static DeploymentExtendedResourceExtensionClient GetDeploymentExtendedResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static DeploymentExtendedResourceExtension GetDeploymentExtendedResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new DeploymentExtendedResourceExtensionClient(client, scope);
+                return new DeploymentExtendedResourceExtension(client, scope);
             });
         }
 
-        private static ManagementGroupResourceExtensionClient GetManagementGroupResourceExtensionClient(ArmResource resource)
+        private static ManagementGroupResourceExtension GetManagementGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ManagementGroupResourceExtensionClient(client, resource.Id);
+                return new ManagementGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ManagementGroupResourceExtensionClient GetManagementGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ManagementGroupResourceExtension GetManagementGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ManagementGroupResourceExtensionClient(client, scope);
+                return new ManagementGroupResourceExtension(client, scope);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new ResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new ResourceGroupResourceExtension(client, scope);
             });
         }
 
-        private static ResourceLinkResourceExtensionClient GetResourceLinkResourceExtensionClient(ArmResource resource)
+        private static ResourceLinkResourceExtension GetResourceLinkResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceLinkResourceExtensionClient(client, resource.Id);
+                return new ResourceLinkResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceLinkResourceExtensionClient GetResourceLinkResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceLinkResourceExtension GetResourceLinkResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceLinkResourceExtensionClient(client, scope);
+                return new ResourceLinkResourceExtension(client, scope);
             });
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
+                return new SubscriptionResourceExtension(client, resource.Id);
             });
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new SubscriptionResourceExtension(client, scope);
             });
         }
 
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmResource resource)
+        private static TenantResourceExtension GetTenantResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new TenantResourceExtensionClient(client, resource.Id);
+                return new TenantResourceExtension(client, resource.Id);
             });
         }
 
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static TenantResourceExtension GetTenantResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new TenantResourceExtensionClient(client, scope);
+                return new TenantResourceExtension(client, scope);
             });
         }
         #region FakePolicyAssignmentResource
@@ -232,7 +232,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)
         {
-            return GetArmResourceExtensionClient(armResource).GetFakePolicyAssignments();
+            return GetArmResourceExtension(armResource).GetFakePolicyAssignments();
         }
 
         /// <summary> Gets a collection of FakePolicyAssignmentResources in the ArmResource. </summary>
@@ -241,7 +241,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmClient client, ResourceIdentifier scope)
         {
-            return GetArmResourceExtensionClient(client, scope).GetFakePolicyAssignments();
+            return GetArmResourceExtension(client, scope).GetFakePolicyAssignments();
         }
 
         /// <summary>
@@ -347,7 +347,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmResource armResource)
         {
-            return GetArmResourceExtensionClient(armResource).GetVMInsightsOnboardingStatus();
+            return GetArmResourceExtension(armResource).GetVMInsightsOnboardingStatus();
         }
 
         /// <summary> Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource. </summary>
@@ -356,7 +356,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmClient client, ResourceIdentifier scope)
         {
-            return GetArmResourceExtensionClient(client, scope).GetVMInsightsOnboardingStatus();
+            return GetArmResourceExtension(client, scope).GetVMInsightsOnboardingStatus();
         }
 
         /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>
@@ -364,7 +364,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmResource armResource)
         {
-            return GetArmResourceExtensionClient(armResource).GetGuestConfigurationAssignments();
+            return GetArmResourceExtension(armResource).GetGuestConfigurationAssignments();
         }
 
         /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>
@@ -377,7 +377,7 @@ namespace MgmtScopeResource
             {
                 throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
             }
-            return GetArmResourceExtensionClient(client, scope).GetGuestConfigurationAssignments();
+            return GetArmResourceExtension(client, scope).GetGuestConfigurationAssignments();
         }
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ManagementGroupResource managementGroupResource)
         {
-            return GetManagementGroupResourceExtensionClient(managementGroupResource).GetDeploymentExtendeds();
+            return GetManagementGroupResourceExtension(managementGroupResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -547,7 +547,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDeploymentExtendeds();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -603,7 +603,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeploymentExtendeds();
+            return GetSubscriptionResourceExtension(subscriptionResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -673,7 +673,7 @@ namespace MgmtScopeResource
         /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceLinkResource> GetResourceLinksAsync(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
-            return GetResourceLinkResourceExtensionClient(subscriptionResource).GetResourceLinksAsync(filter, cancellationToken);
+            return GetResourceLinkResourceExtension(subscriptionResource).GetResourceLinksAsync(filter, cancellationToken);
         }
 
         /// <summary>
@@ -695,7 +695,7 @@ namespace MgmtScopeResource
         /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceLinkResource> GetResourceLinks(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
-            return GetResourceLinkResourceExtensionClient(subscriptionResource).GetResourceLinks(filter, cancellationToken);
+            return GetResourceLinkResourceExtension(subscriptionResource).GetResourceLinks(filter, cancellationToken);
         }
 
         /// <summary> Gets a collection of DeploymentExtendedResources in the TenantResource. </summary>
@@ -703,7 +703,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of DeploymentExtendedResources and their operations over a DeploymentExtendedResource. </returns>
         public static DeploymentExtendedCollection GetDeploymentExtendeds(this TenantResource tenantResource)
         {
-            return GetTenantResourceExtensionClient(tenantResource).GetDeploymentExtendeds();
+            return GetTenantResourceExtension(tenantResource).GetDeploymentExtendeds();
         }
 
         /// <summary>
@@ -763,7 +763,7 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNull(scope, nameof(scope));
 
-            return GetTenantResourceExtensionClient(tenantResource).GetResourceLinks(scope);
+            return GetTenantResourceExtension(tenantResource).GetResourceLinks(scope);
         }
 
         /// <summary>
@@ -833,7 +833,7 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNull(template, nameof(template));
 
-            return await GetDeploymentExtendedResourceExtensionClient(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
+            return await GetDeploymentExtendedResourceExtension(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -857,7 +857,7 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNull(template, nameof(template));
 
-            return GetDeploymentExtendedResourceExtensionClient(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
+            return GetDeploymentExtendedResourceExtension(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
         }
     }
 }

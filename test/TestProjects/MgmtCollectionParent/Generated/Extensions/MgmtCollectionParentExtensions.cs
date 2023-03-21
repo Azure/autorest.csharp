@@ -19,35 +19,35 @@ namespace MgmtCollectionParent
     /// <summary> A class to add extension methods to MgmtCollectionParent. </summary>
     public static partial class MgmtCollectionParentExtensions
     {
-        private static OrderResourceExtensionClient GetOrderResourceExtensionClient(ArmResource resource)
+        private static OrderResourceExtension GetOrderResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new OrderResourceExtensionClient(client, resource.Id);
+                return new OrderResourceExtension(client, resource.Id);
             });
         }
 
-        private static OrderResourceExtensionClient GetOrderResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static OrderResourceExtension GetOrderResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new OrderResourceExtensionClient(client, scope);
+                return new OrderResourceExtension(client, scope);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new ResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new ResourceGroupResourceExtension(client, scope);
             });
         }
         #region OrderResource
@@ -74,7 +74,7 @@ namespace MgmtCollectionParent
         /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
         public static OrderResourceCollection GetOrderResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetOrderResources();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetOrderResources();
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace MgmtCollectionParent
         /// <returns> An async collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OrderResource> GetOrderResourcesAsync(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetOrderResourceExtensionClient(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
+            return GetOrderResourceExtension(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace MgmtCollectionParent
         /// <returns> A collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OrderResource> GetOrderResources(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetOrderResourceExtensionClient(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
+            return GetOrderResourceExtension(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
         }
     }
 }

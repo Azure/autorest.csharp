@@ -20,19 +20,19 @@ namespace ExactMatchFlattenInheritance
     /// <summary> A class to add extension methods to ExactMatchFlattenInheritance. </summary>
     public static partial class ExactMatchFlattenInheritanceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new ResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new ResourceGroupResourceExtension(client, scope);
             });
         }
         #region AzureResourceFlattenModel1Resource
@@ -97,7 +97,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An object representing collection of AzureResourceFlattenModel1Resources and their operations over a AzureResourceFlattenModel1Resource. </returns>
         public static AzureResourceFlattenModel1Collection GetAzureResourceFlattenModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel1s();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel1s();
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An object representing collection of CustomModel2Resources and their operations over a CustomModel2Resource. </returns>
         public static CustomModel2Collection GetCustomModel2s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCustomModel2s();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetCustomModel2s();
         }
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An object representing collection of CustomModel3Resources and their operations over a CustomModel3Resource. </returns>
         public static CustomModel3Collection GetCustomModel3s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCustomModel3s();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetCustomModel3s();
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel2sAsync(cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel2sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel2> GetAzureResourceFlattenModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel2s(cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel2s(cancellationToken);
         }
 
         /// <summary>
@@ -326,7 +326,7 @@ namespace ExactMatchFlattenInheritance
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(azureResourceFlattenModel2, nameof(azureResourceFlattenModel2));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutAzureResourceFlattenModel2Async(name, azureResourceFlattenModel2, cancellationToken).ConfigureAwait(false);
+            return await GetResourceGroupResourceExtension(resourceGroupResource).PutAzureResourceFlattenModel2Async(name, azureResourceFlattenModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -353,7 +353,7 @@ namespace ExactMatchFlattenInheritance
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(azureResourceFlattenModel2, nameof(azureResourceFlattenModel2));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutAzureResourceFlattenModel2(name, azureResourceFlattenModel2, cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).PutAzureResourceFlattenModel2(name, azureResourceFlattenModel2, cancellationToken);
         }
 
         /// <summary>
@@ -378,7 +378,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel2Async(name, cancellationToken).ConfigureAwait(false);
+            return await GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel2Async(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -403,7 +403,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel2(name, cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel2(name, cancellationToken);
         }
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel3" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel3sAsync(cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel3sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -445,7 +445,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel3" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel3> GetAzureResourceFlattenModel3s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel3s(cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel3s(cancellationToken);
         }
 
         /// <summary>
@@ -472,7 +472,7 @@ namespace ExactMatchFlattenInheritance
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(azureResourceFlattenModel3, nameof(azureResourceFlattenModel3));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutAzureResourceFlattenModel3Async(name, azureResourceFlattenModel3, cancellationToken).ConfigureAwait(false);
+            return await GetResourceGroupResourceExtension(resourceGroupResource).PutAzureResourceFlattenModel3Async(name, azureResourceFlattenModel3, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -499,7 +499,7 @@ namespace ExactMatchFlattenInheritance
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(azureResourceFlattenModel3, nameof(azureResourceFlattenModel3));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutAzureResourceFlattenModel3(name, azureResourceFlattenModel3, cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).PutAzureResourceFlattenModel3(name, azureResourceFlattenModel3, cancellationToken);
         }
 
         /// <summary>
@@ -524,7 +524,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel3Async(name, cancellationToken).ConfigureAwait(false);
+            return await GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel3Async(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -549,7 +549,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel3(name, cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel3(name, cancellationToken);
         }
 
         /// <summary>
@@ -570,7 +570,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel4" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel4sAsync(cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel4sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -591,7 +591,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel4" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel4> GetAzureResourceFlattenModel4s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel4s(cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel4s(cancellationToken);
         }
 
         /// <summary>
@@ -618,7 +618,7 @@ namespace ExactMatchFlattenInheritance
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(azureResourceFlattenModel4, nameof(azureResourceFlattenModel4));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutAzureResourceFlattenModel4Async(name, azureResourceFlattenModel4, cancellationToken).ConfigureAwait(false);
+            return await GetResourceGroupResourceExtension(resourceGroupResource).PutAzureResourceFlattenModel4Async(name, azureResourceFlattenModel4, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -645,7 +645,7 @@ namespace ExactMatchFlattenInheritance
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(azureResourceFlattenModel4, nameof(azureResourceFlattenModel4));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutAzureResourceFlattenModel4(name, azureResourceFlattenModel4, cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).PutAzureResourceFlattenModel4(name, azureResourceFlattenModel4, cancellationToken);
         }
 
         /// <summary>
@@ -670,7 +670,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel4Async(name, cancellationToken).ConfigureAwait(false);
+            return await GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel4Async(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -695,7 +695,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel4(name, cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel4(name, cancellationToken);
         }
 
         /// <summary>
@@ -716,7 +716,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> An async collection of <see cref="AzureResourceFlattenModel5" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel5sAsync(cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel5sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -737,7 +737,7 @@ namespace ExactMatchFlattenInheritance
         /// <returns> A collection of <see cref="AzureResourceFlattenModel5" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AzureResourceFlattenModel5> GetAzureResourceFlattenModel5s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel5s(cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel5s(cancellationToken);
         }
 
         /// <summary>
@@ -763,7 +763,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutAzureResourceFlattenModel5Async(name, foo, cancellationToken).ConfigureAwait(false);
+            return await GetResourceGroupResourceExtension(resourceGroupResource).PutAzureResourceFlattenModel5Async(name, foo, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -789,7 +789,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutAzureResourceFlattenModel5(name, foo, cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).PutAzureResourceFlattenModel5(name, foo, cancellationToken);
         }
 
         /// <summary>
@@ -814,7 +814,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel5Async(name, cancellationToken).ConfigureAwait(false);
+            return await GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel5Async(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -839,7 +839,7 @@ namespace ExactMatchFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAzureResourceFlattenModel5(name, cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetAzureResourceFlattenModel5(name, cancellationToken);
         }
     }
 }

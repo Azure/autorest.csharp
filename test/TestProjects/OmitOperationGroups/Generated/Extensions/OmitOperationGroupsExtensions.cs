@@ -20,19 +20,19 @@ namespace OmitOperationGroups
     /// <summary> A class to add extension methods to OmitOperationGroups. </summary>
     public static partial class OmitOperationGroupsExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new ResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new ResourceGroupResourceExtension(client, scope);
             });
         }
         #region Model2Resource
@@ -59,7 +59,7 @@ namespace OmitOperationGroups
         /// <returns> An object representing collection of Model2Resources and their operations over a Model2Resource. </returns>
         public static Model2Collection GetModel2s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetModel2s();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetModel2s();
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace OmitOperationGroups
         /// <returns> An async collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<Model5> GetModel5sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetModel5sAsync(cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetModel5sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace OmitOperationGroups
         /// <returns> A collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<Model5> GetModel5s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetModel5s(cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetModel5s(cancellationToken);
         }
 
         /// <summary>
@@ -171,7 +171,7 @@ namespace OmitOperationGroups
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
             Argument.AssertNotNull(model5, nameof(model5));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).CreateOrUpdateModel5Async(model5SName, model5, cancellationToken).ConfigureAwait(false);
+            return await GetResourceGroupResourceExtension(resourceGroupResource).CreateOrUpdateModel5Async(model5SName, model5, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace OmitOperationGroups
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
             Argument.AssertNotNull(model5, nameof(model5));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).CreateOrUpdateModel5(model5SName, model5, cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).CreateOrUpdateModel5(model5SName, model5, cancellationToken);
         }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace OmitOperationGroups
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetModel5Async(model5SName, cancellationToken).ConfigureAwait(false);
+            return await GetResourceGroupResourceExtension(resourceGroupResource).GetModel5Async(model5SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace OmitOperationGroups
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetModel5(model5SName, cancellationToken);
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetModel5(model5SName, cancellationToken);
         }
     }
 }

@@ -20,131 +20,131 @@ namespace MgmtMockAndSample
     /// <summary> A class to add extension methods to MgmtMockAndSample. </summary>
     public static partial class MgmtMockAndSampleExtensions
     {
-        private static ArmResourceExtensionClient GetArmResourceExtensionClient(ArmResource resource)
+        private static ArmResourceExtension GetArmResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ArmResourceExtensionClient(client, resource.Id);
+                return new ArmResourceExtension(client, resource.Id);
             });
         }
 
-        private static ArmResourceExtensionClient GetArmResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ArmResourceExtension GetArmResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ArmResourceExtensionClient(client, scope);
+                return new ArmResourceExtension(client, scope);
             });
         }
 
-        private static DiskEncryptionSetResourceExtensionClient GetDiskEncryptionSetResourceExtensionClient(ArmResource resource)
+        private static DiskEncryptionSetResourceExtension GetDiskEncryptionSetResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new DiskEncryptionSetResourceExtensionClient(client, resource.Id);
+                return new DiskEncryptionSetResourceExtension(client, resource.Id);
             });
         }
 
-        private static DiskEncryptionSetResourceExtensionClient GetDiskEncryptionSetResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static DiskEncryptionSetResourceExtension GetDiskEncryptionSetResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new DiskEncryptionSetResourceExtensionClient(client, scope);
+                return new DiskEncryptionSetResourceExtension(client, scope);
             });
         }
 
-        private static FirewallPolicyResourceExtensionClient GetFirewallPolicyResourceExtensionClient(ArmResource resource)
+        private static FirewallPolicyResourceExtension GetFirewallPolicyResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new FirewallPolicyResourceExtensionClient(client, resource.Id);
+                return new FirewallPolicyResourceExtension(client, resource.Id);
             });
         }
 
-        private static FirewallPolicyResourceExtensionClient GetFirewallPolicyResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static FirewallPolicyResourceExtension GetFirewallPolicyResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new FirewallPolicyResourceExtensionClient(client, scope);
+                return new FirewallPolicyResourceExtension(client, scope);
             });
         }
 
-        private static ManagedHsmResourceExtensionClient GetManagedHsmResourceExtensionClient(ArmResource resource)
+        private static ManagedHsmResourceExtension GetManagedHsmResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ManagedHsmResourceExtensionClient(client, resource.Id);
+                return new ManagedHsmResourceExtension(client, resource.Id);
             });
         }
 
-        private static ManagedHsmResourceExtensionClient GetManagedHsmResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ManagedHsmResourceExtension GetManagedHsmResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ManagedHsmResourceExtensionClient(client, scope);
+                return new ManagedHsmResourceExtension(client, scope);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new ResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new ResourceGroupResourceExtension(client, scope);
             });
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
+                return new SubscriptionResourceExtension(client, resource.Id);
             });
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new SubscriptionResourceExtension(client, scope);
             });
         }
 
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmResource resource)
+        private static TenantResourceExtension GetTenantResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new TenantResourceExtensionClient(client, resource.Id);
+                return new TenantResourceExtension(client, resource.Id);
             });
         }
 
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static TenantResourceExtension GetTenantResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new TenantResourceExtensionClient(client, scope);
+                return new TenantResourceExtension(client, scope);
             });
         }
 
-        private static VaultResourceExtensionClient GetVaultResourceExtensionClient(ArmResource resource)
+        private static VaultResourceExtension GetVaultResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new VaultResourceExtensionClient(client, resource.Id);
+                return new VaultResourceExtension(client, resource.Id);
             });
         }
 
-        private static VaultResourceExtensionClient GetVaultResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static VaultResourceExtension GetVaultResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new VaultResourceExtensionClient(client, scope);
+                return new VaultResourceExtension(client, scope);
             });
         }
         #region VaultResource
@@ -380,7 +380,7 @@ namespace MgmtMockAndSample
         /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
         public static RoleAssignmentCollection GetRoleAssignments(this ArmResource armResource)
         {
-            return GetArmResourceExtensionClient(armResource).GetRoleAssignments();
+            return GetArmResourceExtension(armResource).GetRoleAssignments();
         }
 
         /// <summary> Gets a collection of RoleAssignmentResources in the ArmResource. </summary>
@@ -389,7 +389,7 @@ namespace MgmtMockAndSample
         /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
         public static RoleAssignmentCollection GetRoleAssignments(this ArmClient client, ResourceIdentifier scope)
         {
-            return GetArmResourceExtensionClient(client, scope).GetRoleAssignments();
+            return GetArmResourceExtension(client, scope).GetRoleAssignments();
         }
 
         /// <summary>
@@ -500,7 +500,7 @@ namespace MgmtMockAndSample
             {
                 throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
             }
-            return GetArmResourceExtensionClient(client, scope).GetGuestConfigurationAssignments();
+            return GetArmResourceExtension(client, scope).GetGuestConfigurationAssignments();
         }
 
         /// <summary>
@@ -566,7 +566,7 @@ namespace MgmtMockAndSample
         /// <returns> An object representing collection of VaultResources and their operations over a VaultResource. </returns>
         public static VaultCollection GetVaults(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetVaults();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetVaults();
         }
 
         /// <summary>
@@ -622,7 +622,7 @@ namespace MgmtMockAndSample
         /// <returns> An object representing collection of DiskEncryptionSetResources and their operations over a DiskEncryptionSetResource. </returns>
         public static DiskEncryptionSetCollection GetDiskEncryptionSets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDiskEncryptionSets();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetDiskEncryptionSets();
         }
 
         /// <summary>
@@ -678,7 +678,7 @@ namespace MgmtMockAndSample
         /// <returns> An object representing collection of ManagedHsmResources and their operations over a ManagedHsmResource. </returns>
         public static ManagedHsmCollection GetManagedHsms(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetManagedHsms();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetManagedHsms();
         }
 
         /// <summary>
@@ -734,7 +734,7 @@ namespace MgmtMockAndSample
         /// <returns> An object representing collection of FirewallPolicyResources and their operations over a FirewallPolicyResource. </returns>
         public static FirewallPolicyCollection GetFirewallPolicies(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetFirewallPolicies();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetFirewallPolicies();
         }
 
         /// <summary>
@@ -792,7 +792,7 @@ namespace MgmtMockAndSample
         /// <returns> An object representing collection of DeletedVaultResources and their operations over a DeletedVaultResource. </returns>
         public static DeletedVaultCollection GetDeletedVaults(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedVaults();
+            return GetSubscriptionResourceExtension(subscriptionResource).GetDeletedVaults();
         }
 
         /// <summary>
@@ -856,7 +856,7 @@ namespace MgmtMockAndSample
         {
             Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
         }
 
         /// <summary>
@@ -918,7 +918,7 @@ namespace MgmtMockAndSample
         /// <returns> An object representing collection of DeletedManagedHsmResources and their operations over a DeletedManagedHsmResource. </returns>
         public static DeletedManagedHsmCollection GetDeletedManagedHsms(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedManagedHsms();
+            return GetSubscriptionResourceExtension(subscriptionResource).GetDeletedManagedHsms();
         }
 
         /// <summary>
@@ -990,7 +990,7 @@ namespace MgmtMockAndSample
         /// <returns> An async collection of <see cref="VaultResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VaultResource> GetVaultsAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetVaultResourceExtensionClient(subscriptionResource).GetVaultsAsync(top, cancellationToken);
+            return GetVaultResourceExtension(subscriptionResource).GetVaultsAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -1012,7 +1012,7 @@ namespace MgmtMockAndSample
         /// <returns> A collection of <see cref="VaultResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VaultResource> GetVaults(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetVaultResourceExtensionClient(subscriptionResource).GetVaults(top, cancellationToken);
+            return GetVaultResourceExtension(subscriptionResource).GetVaults(top, cancellationToken);
         }
 
         /// <summary>
@@ -1033,7 +1033,7 @@ namespace MgmtMockAndSample
         /// <returns> An async collection of <see cref="DeletedVaultResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<DeletedVaultResource> GetDeletedVaultsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedVaultsAsync(cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetDeletedVaultsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1054,7 +1054,7 @@ namespace MgmtMockAndSample
         /// <returns> A collection of <see cref="DeletedVaultResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<DeletedVaultResource> GetDeletedVaults(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedVaults(cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetDeletedVaults(cancellationToken);
         }
 
         /// <summary>
@@ -1078,7 +1078,7 @@ namespace MgmtMockAndSample
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return await GetVaultResourceExtensionClient(subscriptionResource).CheckNameAvailabilityVaultAsync(content, cancellationToken).ConfigureAwait(false);
+            return await GetVaultResourceExtension(subscriptionResource).CheckNameAvailabilityVaultAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1102,7 +1102,7 @@ namespace MgmtMockAndSample
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetVaultResourceExtensionClient(subscriptionResource).CheckNameAvailabilityVault(content, cancellationToken);
+            return GetVaultResourceExtension(subscriptionResource).CheckNameAvailabilityVault(content, cancellationToken);
         }
 
         /// <summary>
@@ -1123,7 +1123,7 @@ namespace MgmtMockAndSample
         /// <returns> An async collection of <see cref="DiskEncryptionSetResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<DiskEncryptionSetResource> GetDiskEncryptionSetsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetDiskEncryptionSetResourceExtensionClient(subscriptionResource).GetDiskEncryptionSetsAsync(cancellationToken);
+            return GetDiskEncryptionSetResourceExtension(subscriptionResource).GetDiskEncryptionSetsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1144,7 +1144,7 @@ namespace MgmtMockAndSample
         /// <returns> A collection of <see cref="DiskEncryptionSetResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<DiskEncryptionSetResource> GetDiskEncryptionSets(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetDiskEncryptionSetResourceExtensionClient(subscriptionResource).GetDiskEncryptionSets(cancellationToken);
+            return GetDiskEncryptionSetResourceExtension(subscriptionResource).GetDiskEncryptionSets(cancellationToken);
         }
 
         /// <summary>
@@ -1166,7 +1166,7 @@ namespace MgmtMockAndSample
         /// <returns> An async collection of <see cref="ManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ManagedHsmResource> GetManagedHsmsAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetManagedHsmResourceExtensionClient(subscriptionResource).GetManagedHsmsAsync(top, cancellationToken);
+            return GetManagedHsmResourceExtension(subscriptionResource).GetManagedHsmsAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -1188,7 +1188,7 @@ namespace MgmtMockAndSample
         /// <returns> A collection of <see cref="ManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ManagedHsmResource> GetManagedHsms(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetManagedHsmResourceExtensionClient(subscriptionResource).GetManagedHsms(top, cancellationToken);
+            return GetManagedHsmResourceExtension(subscriptionResource).GetManagedHsms(top, cancellationToken);
         }
 
         /// <summary>
@@ -1209,7 +1209,7 @@ namespace MgmtMockAndSample
         /// <returns> An async collection of <see cref="DeletedManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<DeletedManagedHsmResource> GetDeletedManagedHsmsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedManagedHsmsAsync(cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetDeletedManagedHsmsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1230,7 +1230,7 @@ namespace MgmtMockAndSample
         /// <returns> A collection of <see cref="DeletedManagedHsmResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<DeletedManagedHsmResource> GetDeletedManagedHsms(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetDeletedManagedHsms(cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).GetDeletedManagedHsms(cancellationToken);
         }
 
         /// <summary>
@@ -1251,7 +1251,7 @@ namespace MgmtMockAndSample
         /// <returns> An async collection of <see cref="FirewallPolicyResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FirewallPolicyResource> GetFirewallPoliciesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetFirewallPolicyResourceExtensionClient(subscriptionResource).GetFirewallPoliciesAsync(cancellationToken);
+            return GetFirewallPolicyResourceExtension(subscriptionResource).GetFirewallPoliciesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1272,7 +1272,7 @@ namespace MgmtMockAndSample
         /// <returns> A collection of <see cref="FirewallPolicyResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FirewallPolicyResource> GetFirewallPolicies(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetFirewallPolicyResourceExtensionClient(subscriptionResource).GetFirewallPolicies(cancellationToken);
+            return GetFirewallPolicyResourceExtension(subscriptionResource).GetFirewallPolicies(cancellationToken);
         }
 
         /// <summary>
@@ -1295,7 +1295,7 @@ namespace MgmtMockAndSample
         /// <returns> An async collection of <see cref="EventData" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<EventData> GetTenantActivityLogsAsync(this TenantResource tenantResource, string filter = null, string select = null, CancellationToken cancellationToken = default)
         {
-            return GetTenantResourceExtensionClient(tenantResource).GetTenantActivityLogsAsync(filter, select, cancellationToken);
+            return GetTenantResourceExtension(tenantResource).GetTenantActivityLogsAsync(filter, select, cancellationToken);
         }
 
         /// <summary>
@@ -1318,7 +1318,7 @@ namespace MgmtMockAndSample
         /// <returns> A collection of <see cref="EventData" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<EventData> GetTenantActivityLogs(this TenantResource tenantResource, string filter = null, string select = null, CancellationToken cancellationToken = default)
         {
-            return GetTenantResourceExtensionClient(tenantResource).GetTenantActivityLogs(filter, select, cancellationToken);
+            return GetTenantResourceExtension(tenantResource).GetTenantActivityLogs(filter, select, cancellationToken);
         }
 
         /// <summary>
@@ -1342,7 +1342,7 @@ namespace MgmtMockAndSample
         {
             Argument.AssertNotNull(template, nameof(template));
 
-            return await GetTenantResourceExtensionClient(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
+            return await GetTenantResourceExtension(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1366,7 +1366,7 @@ namespace MgmtMockAndSample
         {
             Argument.AssertNotNull(template, nameof(template));
 
-            return GetTenantResourceExtensionClient(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
+            return GetTenantResourceExtension(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
         }
     }
 }

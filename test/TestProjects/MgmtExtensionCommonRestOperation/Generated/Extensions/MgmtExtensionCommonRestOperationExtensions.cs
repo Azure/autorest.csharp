@@ -19,51 +19,51 @@ namespace MgmtExtensionCommonRestOperation
     /// <summary> A class to add extension methods to MgmtExtensionCommonRestOperation. </summary>
     public static partial class MgmtExtensionCommonRestOperationExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new ResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new ResourceGroupResourceExtension(client, scope);
             });
         }
 
-        private static TypeOneResourceExtensionClient GetTypeOneResourceExtensionClient(ArmResource resource)
+        private static TypeOneResourceExtension GetTypeOneResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new TypeOneResourceExtensionClient(client, resource.Id);
+                return new TypeOneResourceExtension(client, resource.Id);
             });
         }
 
-        private static TypeOneResourceExtensionClient GetTypeOneResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static TypeOneResourceExtension GetTypeOneResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new TypeOneResourceExtensionClient(client, scope);
+                return new TypeOneResourceExtension(client, scope);
             });
         }
 
-        private static TypeTwoResourceExtensionClient GetTypeTwoResourceExtensionClient(ArmResource resource)
+        private static TypeTwoResourceExtension GetTypeTwoResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new TypeTwoResourceExtensionClient(client, resource.Id);
+                return new TypeTwoResourceExtension(client, resource.Id);
             });
         }
 
-        private static TypeTwoResourceExtensionClient GetTypeTwoResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static TypeTwoResourceExtension GetTypeTwoResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new TypeTwoResourceExtensionClient(client, scope);
+                return new TypeTwoResourceExtension(client, scope);
             });
         }
         #region TypeOneResource
@@ -109,7 +109,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An object representing collection of TypeOneResources and their operations over a TypeOneResource. </returns>
         public static TypeOneCollection GetTypeOnes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTypeOnes();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetTypeOnes();
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An object representing collection of TypeTwoResources and their operations over a TypeTwoResource. </returns>
         public static TypeTwoCollection GetTypeTwos(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTypeTwos();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetTypeTwos();
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeOneResource> GetTypeOnesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetTypeOneResourceExtensionClient(subscriptionResource).GetTypeOnesAsync(cancellationToken);
+            return GetTypeOneResourceExtension(subscriptionResource).GetTypeOnesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeOneResource> GetTypeOnes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetTypeOneResourceExtensionClient(subscriptionResource).GetTypeOnes(cancellationToken);
+            return GetTypeOneResourceExtension(subscriptionResource).GetTypeOnes(cancellationToken);
         }
 
         /// <summary>
@@ -276,7 +276,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeTwoResource> GetTypeTwosAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetTypeTwoResourceExtensionClient(subscriptionResource).GetTypeTwosAsync(cancellationToken);
+            return GetTypeTwoResourceExtension(subscriptionResource).GetTypeTwosAsync(cancellationToken);
         }
 
         /// <summary>
@@ -297,7 +297,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeTwoResource> GetTypeTwos(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetTypeTwoResourceExtensionClient(subscriptionResource).GetTypeTwos(cancellationToken);
+            return GetTypeTwoResourceExtension(subscriptionResource).GetTypeTwos(cancellationToken);
         }
     }
 }

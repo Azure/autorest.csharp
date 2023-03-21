@@ -19,19 +19,19 @@ namespace NoTypeReplacement
     /// <summary> A class to add extension methods to NoTypeReplacement. </summary>
     public static partial class NoTypeReplacementExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new ResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new ResourceGroupResourceExtension(client, scope);
             });
         }
         #region NoTypeReplacementModel1Resource
@@ -96,7 +96,7 @@ namespace NoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel1Resources and their operations over a NoTypeReplacementModel1Resource. </returns>
         public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel1s();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetNoTypeReplacementModel1s();
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace NoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel2Resources and their operations over a NoTypeReplacementModel2Resource. </returns>
         public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel2s();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetNoTypeReplacementModel2s();
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace NoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel3Resources and their operations over a NoTypeReplacementModel3Resource. </returns>
         public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel3s();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetNoTypeReplacementModel3s();
         }
 
         /// <summary>

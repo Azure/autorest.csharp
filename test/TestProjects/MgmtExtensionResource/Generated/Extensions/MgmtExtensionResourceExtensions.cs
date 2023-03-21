@@ -21,51 +21,51 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to MgmtExtensionResource. </summary>
     public static partial class MgmtExtensionResourceExtensions
     {
-        private static ManagementGroupResourceExtensionClient GetManagementGroupResourceExtensionClient(ArmResource resource)
+        private static ManagementGroupResourceExtension GetManagementGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ManagementGroupResourceExtensionClient(client, resource.Id);
+                return new ManagementGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ManagementGroupResourceExtensionClient GetManagementGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ManagementGroupResourceExtension GetManagementGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ManagementGroupResourceExtensionClient(client, scope);
+                return new ManagementGroupResourceExtension(client, scope);
             });
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
+                return new SubscriptionResourceExtension(client, resource.Id);
             });
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new SubscriptionResourceExtension(client, scope);
             });
         }
 
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmResource resource)
+        private static TenantResourceExtension GetTenantResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new TenantResourceExtensionClient(client, resource.Id);
+                return new TenantResourceExtension(client, resource.Id);
             });
         }
 
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static TenantResourceExtension GetTenantResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new TenantResourceExtensionClient(client, scope);
+                return new TenantResourceExtension(client, scope);
             });
         }
         #region SubSingletonResource
@@ -149,7 +149,7 @@ namespace MgmtExtensionResource
         /// <returns> An object representing collection of ManagementGroupPolicyDefinitionResources and their operations over a ManagementGroupPolicyDefinitionResource. </returns>
         public static ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions(this ManagementGroupResource managementGroupResource)
         {
-            return GetManagementGroupResourceExtensionClient(managementGroupResource).GetManagementGroupPolicyDefinitions();
+            return GetManagementGroupResourceExtension(managementGroupResource).GetManagementGroupPolicyDefinitions();
         }
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
         public static SubSingletonResource GetSubSingleton(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSubSingleton();
+            return GetSubscriptionResourceExtension(subscriptionResource).GetSubSingleton();
         }
 
         /// <summary> Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionResource. </summary>
@@ -213,7 +213,7 @@ namespace MgmtExtensionResource
         /// <returns> An object representing collection of SubscriptionPolicyDefinitionResources and their operations over a SubscriptionPolicyDefinitionResource. </returns>
         public static SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitions(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSubscriptionPolicyDefinitions();
+            return GetSubscriptionResourceExtension(subscriptionResource).GetSubscriptionPolicyDefinitions();
         }
 
         /// <summary>
@@ -288,7 +288,7 @@ namespace MgmtExtensionResource
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
 
-            return await GetSubscriptionResourceExtensionClient(subscriptionResource).CheckDnsNameAvailabilityAsync(location, domainNameLabel, cancellationToken).ConfigureAwait(false);
+            return await GetSubscriptionResourceExtension(subscriptionResource).CheckDnsNameAvailabilityAsync(location, domainNameLabel, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -315,7 +315,7 @@ namespace MgmtExtensionResource
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).CheckDnsNameAvailability(location, domainNameLabel, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).CheckDnsNameAvailability(location, domainNameLabel, cancellationToken);
         }
 
         /// <summary>
@@ -339,7 +339,7 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return await GetSubscriptionResourceExtensionClient(subscriptionResource).ValidateSomethingOrphanedPostAsync(content, cancellationToken).ConfigureAwait(false);
+            return await GetSubscriptionResourceExtension(subscriptionResource).ValidateSomethingOrphanedPostAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -363,7 +363,7 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).ValidateSomethingOrphanedPost(content, cancellationToken);
+            return GetSubscriptionResourceExtension(subscriptionResource).ValidateSomethingOrphanedPost(content, cancellationToken);
         }
 
         /// <summary> Gets a collection of BuiltInPolicyDefinitionResources in the TenantResource. </summary>
@@ -371,7 +371,7 @@ namespace MgmtExtensionResource
         /// <returns> An object representing collection of BuiltInPolicyDefinitionResources and their operations over a BuiltInPolicyDefinitionResource. </returns>
         public static BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions(this TenantResource tenantResource)
         {
-            return GetTenantResourceExtensionClient(tenantResource).GetBuiltInPolicyDefinitions();
+            return GetTenantResourceExtension(tenantResource).GetBuiltInPolicyDefinitions();
         }
 
         /// <summary>

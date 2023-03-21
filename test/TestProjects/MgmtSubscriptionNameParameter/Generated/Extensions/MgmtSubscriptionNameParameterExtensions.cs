@@ -19,19 +19,19 @@ namespace MgmtSubscriptionNameParameter
     /// <summary> A class to add extension methods to MgmtSubscriptionNameParameter. </summary>
     public static partial class MgmtSubscriptionNameParameterExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new ResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new ResourceGroupResourceExtension(client, scope);
             });
         }
         #region SBSubscriptionResource
@@ -58,7 +58,7 @@ namespace MgmtSubscriptionNameParameter
         /// <returns> An object representing collection of SBSubscriptionResources and their operations over a SBSubscriptionResource. </returns>
         public static SBSubscriptionCollection GetSBSubscriptions(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSBSubscriptions();
+            return GetResourceGroupResourceExtension(resourceGroupResource).GetSBSubscriptions();
         }
 
         /// <summary>
