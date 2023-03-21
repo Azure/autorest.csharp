@@ -5,7 +5,7 @@ $AutoRestPluginProject = Resolve-Path (Join-Path $repoRoot 'src' 'AutoRest.CShar
 function Invoke($command, $executePath=$repoRoot)
 {
     Write-Host "> $command"
-    pushd $executePath
+    Push-Location $executePath
     if ($IsLinux -or $IsMacOs)
     {
         sh -c "$command 2>&1"
@@ -14,7 +14,7 @@ function Invoke($command, $executePath=$repoRoot)
     {
         cmd /c "$command 2>&1"
     }
-    popd
+    Pop-Location
     
     if($LastExitCode -ne 0)
     {

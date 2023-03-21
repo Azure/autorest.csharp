@@ -50,9 +50,9 @@ stages:
               useGlobalJson: true
               performMultiLevelLookup: true
           - task: NodeTool@0
-            displayName: "Install Node 18.13.0"
+            displayName: "Install Node 18.x"
             inputs:
-              versionSpec: '18.13.0'
+              versionSpec: '18.x'
           - script: |
               npm ci
             displayName: "Install packages"
@@ -166,37 +166,57 @@ stages:
       dependsOn:
         - Build_and_Test
         - Release
+      variables:
+        AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
+        CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
       jobs:
         - template: update-generator-versions.yml
+          parameters:
+            AutorestCSharpVersion: $(AutorestCSharpVersion)
+            CadlEmitterVersion: $(CadlEmitterVersion)
 # update codes
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_A_C
             filter: "a*,b*,c*"
+            AutorestCSharpVersion: $(AutorestCSharpVersion)
+            CadlEmitterVersion: $(CadlEmitterVersion)
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_D_E
             filter: "d*,e*"
+            AutorestCSharpVersion: $(AutorestCSharpVersion)
+            CadlEmitterVersion: $(CadlEmitterVersion)
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_F_L
             filter: "f*,g*,h*,i*,j*,k*,l*"
+            AutorestCSharpVersion: $(AutorestCSharpVersion)
+            CadlEmitterVersion: $(CadlEmitterVersion)
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_M_O
             filter: "m*,n*,o*"
+            AutorestCSharpVersion: $(AutorestCSharpVersion)
+            CadlEmitterVersion: $(CadlEmitterVersion)
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_P_R
             filter: "p*,q*,r*"
+            AutorestCSharpVersion: $(AutorestCSharpVersion)
+            CadlEmitterVersion: $(CadlEmitterVersion)
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_S_U
             filter: "s*,t*,u*"
+            AutorestCSharpVersion: $(AutorestCSharpVersion)
+            CadlEmitterVersion: $(CadlEmitterVersion)
         - template: update-azure-sdk-for-net-codes.yml
           parameters:
             name: Update_Codes_V_Z
             filter: "v*,w*,x*,y*,z*"
+            AutorestCSharpVersion: $(AutorestCSharpVersion)
+            CadlEmitterVersion: $(CadlEmitterVersion)
 # update samples
         - template: update-azure-sdk-for-net-samples.yml
           parameters:
@@ -227,9 +247,6 @@ stages:
             - Update_Samples_G_L
             - Update_Samples_M_R
             - Update_Samples_S_Z
-          variables:
-            AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
-            CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
           steps:
             - checkout: self
             - checkout: azure-sdk-tools
