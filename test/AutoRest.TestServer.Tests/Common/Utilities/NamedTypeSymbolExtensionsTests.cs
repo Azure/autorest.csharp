@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.Utilities.Tests
         [OneTimeSetUp]
         public void SetUp()
         {
+            // we cannot directly construct the symbols therefore we have to construct them from a segment of source code text below
             var tree = CSharpSyntaxTree.ParseText(@"
 using System.Collections.Generic;
 namespace NamedTypeSymbolExtensionsTests
