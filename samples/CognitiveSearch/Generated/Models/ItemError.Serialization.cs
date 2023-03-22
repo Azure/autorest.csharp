@@ -14,6 +14,10 @@ namespace CognitiveSearch.Models
     {
         internal static ItemError DeserializeItemError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> key = default;
             string errorMessage = default;
             int statusCode = default;

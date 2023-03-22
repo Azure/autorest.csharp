@@ -16,6 +16,10 @@ namespace MgmtScopeResource.Models
     {
         internal static ResourceLinkResult DeserializeResourceLinkResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<ResourceLinkData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

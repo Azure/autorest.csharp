@@ -28,6 +28,10 @@ namespace Models.Property.Optional.Models
 
         internal static RequiredAndOptionalProperty DeserializeRequiredAndOptionalProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> optionalProperty = default;
             int requiredProperty = default;
             foreach (var property in element.EnumerateObject())

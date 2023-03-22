@@ -53,6 +53,10 @@ namespace SupersetFlattenInheritance.Models
 
         internal static TrackedResourceModel2 DeserializeTrackedResourceModel2(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> foo = default;
             Optional<string> bar = default;
             Optional<IDictionary<string, string>> tags = default;

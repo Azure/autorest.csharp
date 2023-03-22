@@ -83,6 +83,10 @@ namespace Inheritance.Models
 
         internal static ClassThatInheritsFromBaseClass DeserializeClassThatInheritsFromBaseClass(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> baseClassProperty = default;
             Optional<DataFactoryExpression<string>> dfeString = default;
             Optional<DataFactoryExpression<double>> dfeDouble = default;

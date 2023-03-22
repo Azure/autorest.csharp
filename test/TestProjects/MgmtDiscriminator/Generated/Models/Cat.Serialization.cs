@@ -27,6 +27,10 @@ namespace MgmtDiscriminator.Models
 
         internal static Cat DeserializeCat(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> meow = default;
             PetKind kind = default;
             Optional<string> id = default;

@@ -25,6 +25,10 @@ namespace MgmtRenameRules.Models
 
         internal static SubResource DeserializeSubResource(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             foreach (var property in element.EnumerateObject())
             {

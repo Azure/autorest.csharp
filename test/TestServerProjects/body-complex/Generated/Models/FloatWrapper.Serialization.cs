@@ -30,6 +30,10 @@ namespace body_complex.Models
 
         internal static FloatWrapper DeserializeFloatWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<float> field1 = default;
             Optional<float> field2 = default;
             foreach (var property in element.EnumerateObject())

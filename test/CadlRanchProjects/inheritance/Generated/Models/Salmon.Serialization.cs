@@ -52,6 +52,10 @@ namespace Models.Inheritance.Models
 
         internal static Salmon DeserializeSalmon(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<Fish>> friends = default;
             Optional<IDictionary<string, Fish>> hate = default;
             Optional<Fish> partner = default;

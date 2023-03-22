@@ -29,6 +29,10 @@ namespace CognitiveSearch.Models
 
         internal static TruncateTokenFilter DeserializeTruncateTokenFilter(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> length = default;
             string odataType = default;
             string name = default;

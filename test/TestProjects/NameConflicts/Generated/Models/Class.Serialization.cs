@@ -560,6 +560,10 @@ namespace NameConflicts.Models
 
         internal static Class DeserializeClass(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @abstract = default;
             Optional<string> @add = default;
             Optional<string> @alias = default;

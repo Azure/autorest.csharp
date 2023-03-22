@@ -21,7 +21,13 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class LowLevelClient : TypeProvider
     {
-        private SourceInputModel? _sourceInputModel;
+        private readonly string _libraryName;
+        private readonly TypeFactory _typeFactory;
+        private readonly IEnumerable<InputParameter> _clientParameters;
+        private readonly InputAuth _authorization;
+        private readonly IEnumerable<InputOperation> _operations;
+        private readonly SourceInputModel? _sourceInputModel;
+
         protected override string DefaultName { get; }
         protected override string DefaultNamespace { get; }
         protected override string DefaultAccessibility => "public";
@@ -29,27 +35,24 @@ namespace AutoRest.CSharp.Output.Models
         private ConstructorSignature? _subClientInternalConstructor;
 
         public string Description { get; }
-        public ConstructorSignature[] PrimaryConstructors { get; }
-        public ConstructorSignature[] SecondaryConstructors { get; }
         public ConstructorSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
         public IReadOnlyList<LowLevelClient> SubClients { get; init; }
-        public IReadOnlyList<RestClientMethod> RequestMethods { get; }
-        public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes { get; }
-        public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
         public LowLevelClient? ParentClient;
-        public LowLevelSubClientFactoryMethod? FactoryMethod { get; }
 
         public ClientOptionsTypeProvider ClientOptions { get; }
-        public IReadOnlyList<Parameter> Parameters { get; }
-        public ClientFields Fields { get; }
+
         public bool IsSubClient { get; }
-        public bool IsResourceClient { get; }
+
+        private bool? _isResourceClient;
+        public bool IsResourceClient => _isResourceClient ??= Parameters.Any(p => p.IsResourceIdentifier);
 
         public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             _sourceInputModel = sourceInputModel;
+            _libraryName = libraryName;
+            _typeFactory = typeFactory;
             DefaultName = name;
             DefaultNamespace = ns;
             Description = description;
@@ -58,29 +61,43 @@ namespace AutoRest.CSharp.Output.Models
 
             ClientOptions = clientOptions;
 
-            Parameters = new RestClientBuilder(clientParameters, typeFactory).GetOrderedParametersByRequired();
-            IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
-            Fields = ClientFields.CreateForClient(Parameters, authorization);
+            _clientParameters = clientParameters;
+            _authorization = authorization;
+            _operations = operations;
 
-            (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters, _sourceInputModel?.CreateForModel(ExistingType));
+            SubClients = Array.Empty<LowLevelClient>();
+        }
 
-            var clientMethods = BuildMethods(typeFactory, operations, Fields, Declaration.Name).ToArray();
+        private IReadOnlyList<Parameter>? _parameters;
+        public IReadOnlyList<Parameter> Parameters => _parameters ??= new RestClientBuilder(_clientParameters, _typeFactory).GetOrderedParametersByRequired();
 
-            ClientMethods = clientMethods
+        private ClientFields? _fields;
+        public ClientFields Fields => _fields ??= ClientFields.CreateForClient(Parameters, _authorization);
+
+        private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors)? _constructors;
+        private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) Constructors => _constructors ??= BuildPublicConstructors(Parameters, _sourceInputModel?.CreateForModel(ExistingType));
+        public ConstructorSignature[] PrimaryConstructors => Constructors.PrimaryConstructors;
+        public ConstructorSignature[] SecondaryConstructors => Constructors.SecondaryConstructors;
+
+        private IReadOnlyList<LowLevelClientMethod>? _allClientMethods;
+        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(_typeFactory, _operations, Fields, Declaration.Name).ToArray();
+
+        private IReadOnlyList<LowLevelClientMethod>? _clientMethods;
+        public IReadOnlyList<LowLevelClientMethod> ClientMethods => _clientMethods ??= AllClientMethods
                 .OrderBy(m => m.LongRunning != null ? 2 : m.PagingInfo != null ? 1 : 0) // Temporary sorting to minimize amount of changed files. Will be removed when new LRO is implemented
                 .ToArray();
 
-            RequestMethods = clientMethods.Select(m => m.RequestMethod)
+        private IReadOnlyList<RestClientMethod>? _requestMethods;
+        public IReadOnlyList<RestClientMethod> RequestMethods => _requestMethods ??= AllClientMethods.Select(m => m.RequestMethod)
                 .Concat(ClientMethods.Select(m => m.PagingInfo?.NextPageMethod).WhereNotNull())
                 .Distinct()
                 .ToArray();
 
-            ResponseClassifierTypes = RequestMethods.Select(m => m.ResponseClassifierType).ToArray();
+        private IReadOnlyList<ResponseClassifierType>? _responseClassifierTypes;
+        public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes => _responseClassifierTypes ??= RequestMethods.Select(m => m.ResponseClassifierType).ToArray();
 
-            FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
-
-            SubClients = Array.Empty<LowLevelClient>();
-        }
+        private LowLevelSubClientFactoryMethod? _factoryMethod;
+        public LowLevelSubClientFactoryMethod? FactoryMethod => _factoryMethod ??= ParentClient != null ? BuildFactoryMethod(ParentClient.Fields, _libraryName) : null;
 
         public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName)
         {

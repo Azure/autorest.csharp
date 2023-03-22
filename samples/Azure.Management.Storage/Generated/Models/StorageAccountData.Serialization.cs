@@ -117,6 +117,10 @@ namespace Azure.Management.Storage
 
         internal static StorageAccountData DeserializeStorageAccountData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<StorageSku> sku = default;
             Optional<StorageKind> kind = default;
             Optional<ManagedServiceIdentity> identity = default;

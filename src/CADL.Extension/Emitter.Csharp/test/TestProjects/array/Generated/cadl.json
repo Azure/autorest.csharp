@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Cadl.TestServer.ArrayBasic",
+ "Name": "TypeSpec.TestServer.ArrayBasic",
  "Description": "Illustrates input, output, and round-trip models with required enum type properties.",
  "ApiVersions": [
   "1.0.0"
@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Pet",
-   "Namespace": "Cadl.TestServer.ArrayBasic",
+   "Namespace": "TypeSpec.TestServer.ArrayBasic",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -205,7 +205,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/pets",
      "BufferResponse": true,

@@ -14,6 +14,10 @@ namespace MgmtHierarchicalNonResource.Models
     {
         internal static GalleryImageIdentifier DeserializeGalleryImageIdentifier(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string publisher = default;
             string offer = default;
             string sku = default;

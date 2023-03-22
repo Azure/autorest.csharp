@@ -23,6 +23,10 @@ namespace Models.Property.Types.Models
 
         internal static FloatProperty DeserializeFloatProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             float property = default;
             foreach (var property0 in element.EnumerateObject())
             {

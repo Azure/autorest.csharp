@@ -29,6 +29,10 @@ namespace CognitiveSearch.Models
 
         internal static AsciiFoldingTokenFilter DeserializeAsciiFoldingTokenFilter(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> preserveOriginal = default;
             string odataType = default;
             string name = default;

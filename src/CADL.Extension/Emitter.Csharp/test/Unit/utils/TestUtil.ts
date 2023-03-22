@@ -1,21 +1,23 @@
-import { createTestHost, TestHost } from "@cadl-lang/compiler/testing";
-import { RestTestLibrary } from "@cadl-lang/rest/testing";
-import { VersioningTestLibrary } from "@cadl-lang/versioning/testing";
-import { AzureCoreTestLibrary } from "@azure-tools/cadl-azure-core/testing";
-import { EmitContext, Program } from "@cadl-lang/compiler";
+import { createTestHost, TestHost } from "@typespec/compiler/testing";
+import { RestTestLibrary } from "@typespec/rest/testing";
+import { HttpTestLibrary } from "@typespec/http/testing";
+import { VersioningTestLibrary } from "@typespec/versioning/testing";
+import { AzureCoreTestLibrary } from "@azure-tools/typespec-azure-core/testing";
+import { EmitContext, Program } from "@typespec/compiler";
 import { NetEmitterOptions } from "../../../src/options";
 
 export async function createEmitterTestHost(): Promise<TestHost> {
     return createTestHost({
         libraries: [
             RestTestLibrary,
+            HttpTestLibrary,
             VersioningTestLibrary,
             AzureCoreTestLibrary
         ]
     });
 }
 
-export async function cadlCompile(
+export async function typeSpecCompile(
     content: string,
     host: TestHost,
     needNamespaces: boolean = true,
@@ -28,15 +30,16 @@ export async function cadlCompile(
     })
     namespace Azure.Csharp.Testing;
     `;
-    host.addCadlFile(
-        "main.cadl",
+    host.addTypeSpecFile(
+        "main.tsp",
         `
-    import "@cadl-lang/rest";
-    import "@cadl-lang/versioning";
-    ${needAzureCore ? 'import "@azure-tools/cadl-azure-core";' : ""} 
-    using Cadl.Rest; 
-    using Cadl.Http;
-    using Cadl.Versioning;
+    import "@typespec/rest";
+    import "@typespec/http";
+    import "@typespec/versioning";
+    ${needAzureCore ? 'import "@azure-tools/typespec-azure-core";' : ""} 
+    using TypeSpec.Rest; 
+    using TypeSpec.Http;
+    using TypeSpec.Versioning;
     ${needAzureCore ? "using Azure.Core;" : ""}
     
     ${needNamespaces ? namespace : ""}

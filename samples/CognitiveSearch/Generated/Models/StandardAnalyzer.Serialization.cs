@@ -40,6 +40,10 @@ namespace CognitiveSearch.Models
 
         internal static StandardAnalyzer DeserializeStandardAnalyzer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> maxTokenLength = default;
             Optional<IList<string>> stopwords = default;
             string odataType = default;

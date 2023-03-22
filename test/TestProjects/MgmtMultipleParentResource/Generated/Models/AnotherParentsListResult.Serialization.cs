@@ -16,6 +16,10 @@ namespace MgmtMultipleParentResource.Models
     {
         internal static AnotherParentsListResult DeserializeAnotherParentsListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<AnotherParentData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

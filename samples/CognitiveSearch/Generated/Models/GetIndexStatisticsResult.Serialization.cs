@@ -14,6 +14,10 @@ namespace CognitiveSearch.Models
     {
         internal static GetIndexStatisticsResult DeserializeGetIndexStatisticsResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             long documentCount = default;
             long storageSize = default;
             foreach (var property in element.EnumerateObject())

@@ -23,6 +23,10 @@ namespace Models.Usage.Models
 
         internal static InputOutputRecord DeserializeInputOutputRecord(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string requiredProp = default;
             foreach (var property in element.EnumerateObject())
             {

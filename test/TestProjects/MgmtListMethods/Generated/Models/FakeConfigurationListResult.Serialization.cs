@@ -32,6 +32,10 @@ namespace MgmtListMethods.Models
 
         internal static FakeConfigurationListResult DeserializeFakeConfigurationListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<FakeConfigurationData>> value = default;
             foreach (var property in element.EnumerateObject())
             {

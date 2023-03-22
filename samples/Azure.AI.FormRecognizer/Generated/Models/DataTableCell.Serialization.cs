@@ -15,6 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static DataTableCell DeserializeDataTableCell(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int rowIndex = default;
             int columnIndex = default;
             Optional<int> rowSpan = default;

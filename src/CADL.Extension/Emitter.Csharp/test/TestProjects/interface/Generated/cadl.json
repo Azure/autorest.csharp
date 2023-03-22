@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Cadl.TestServer.MultiInterfaceClient",
+ "Name": "TypeSpec.TestServer.MultiInterfaceClient",
  "Description": "Illustrates clients generated from a Cadl with multiple interfaces.",
  "ApiVersions": [
   "1.0.0"
@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Dog",
-   "Namespace": "Cadl.TestServer.MultiInterfaceClient",
+   "Namespace": "TypeSpec.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
    "Usage": "RoundTrip",
@@ -35,7 +35,7 @@
   {
    "$id": "5",
    "Name": "Cat",
-   "Namespace": "Cadl.TestServer.MultiInterfaceClient",
+   "Namespace": "TypeSpec.TestServer.MultiInterfaceClient",
    "Description": "Simple model.",
    "IsNullable": false,
    "Usage": "RoundTrip",
@@ -175,7 +175,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/dogs",
      "BufferResponse": true,
@@ -346,7 +346,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{host}",
      "Path": "/cats",
      "BufferResponse": true,

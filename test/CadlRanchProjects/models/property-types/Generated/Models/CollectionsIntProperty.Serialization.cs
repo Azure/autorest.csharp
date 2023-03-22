@@ -29,6 +29,10 @@ namespace Models.Property.Types.Models
 
         internal static CollectionsIntProperty DeserializeCollectionsIntProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IList<int> property = default;
             foreach (var property0 in element.EnumerateObject())
             {

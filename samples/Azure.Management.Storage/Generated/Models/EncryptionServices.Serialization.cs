@@ -40,6 +40,10 @@ namespace Azure.Management.Storage.Models
 
         internal static EncryptionServices DeserializeEncryptionServices(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<EncryptionService> blob = default;
             Optional<EncryptionService> file = default;
             Optional<EncryptionService> table = default;

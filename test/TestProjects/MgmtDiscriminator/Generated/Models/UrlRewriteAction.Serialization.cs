@@ -24,6 +24,10 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlRewriteAction DeserializeUrlRewriteAction(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             UrlRewriteActionParameters parameters = default;
             DeliveryRuleActionType name = default;
             Optional<string> foo = default;

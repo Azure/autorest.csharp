@@ -57,6 +57,10 @@ namespace MgmtSafeFlatten
 
         internal static TypeOneData DeserializeTypeOneData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> myType = default;
             Optional<LayerOneSingle> layerOne = default;
             Optional<LayerOneBaseType> layerOneType = default;

@@ -97,9 +97,11 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        public Task GetArrayByteWithNull() => Test((host, pipeline) =>
+        public Task GetArrayByteWithNull() => Test(async (host, pipeline) =>
         {
-            Assert.ThrowsAsync(Is.InstanceOf<InvalidOperationException>(), async () => await new ArrayClient(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync());
+            var result = await new ArrayClient(ClientDiagnostics, pipeline, host).GetByteInvalidNullAsync();
+
+            CollectionAssert.AreEqual(new[] { new[] { 0x0AB, 0x0AC, 0x0AD } , null }, result.Value);
         });
 
         [Test]

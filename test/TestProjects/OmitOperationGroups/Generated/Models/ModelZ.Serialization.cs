@@ -25,6 +25,10 @@ namespace OmitOperationGroups.Models
 
         internal static ModelZ DeserializeModelZ(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> h = default;
             Optional<string> i = default;
             foreach (var property in element.EnumerateObject())

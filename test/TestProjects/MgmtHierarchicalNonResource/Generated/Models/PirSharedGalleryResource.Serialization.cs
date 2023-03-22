@@ -14,6 +14,10 @@ namespace MgmtHierarchicalNonResource.Models
     {
         internal static PirSharedGalleryResource DeserializePirSharedGalleryResource(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> location = default;
             Optional<string> uniqueId = default;
