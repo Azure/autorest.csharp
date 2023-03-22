@@ -63,12 +63,12 @@ namespace ModelsInCadl.Models
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
-            RequiredIntCollection = requiredIntCollection.ToList();
-            RequiredStringCollection = requiredStringCollection.ToList();
-            RequiredModelCollection = requiredModelCollection.ToList();
+            RequiredIntCollection = requiredIntCollection;
+            RequiredStringCollection = requiredStringCollection;
+            RequiredModelCollection = requiredModelCollection;
             RequiredModelRecord = requiredModelRecord;
-            RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement.ToList();
-            RequiredCollectionWithNullableBooleanElement = requiredCollectionWithNullableBooleanElement.ToList();
+            RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement;
+            RequiredCollectionWithNullableBooleanElement = requiredCollectionWithNullableBooleanElement;
         }
 
         /// <summary> Required string. </summary>

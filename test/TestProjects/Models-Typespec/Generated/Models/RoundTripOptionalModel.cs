@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace ModelsInCadl.Models
@@ -48,9 +47,9 @@ namespace ModelsInCadl.Models
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
-            OptionalStringList = optionalStringList.ToList();
-            OptionalIntList = optionalIntList.ToList();
-            OptionalModelCollection = optionalModelCollection.ToList();
+            OptionalStringList = optionalStringList;
+            OptionalIntList = optionalIntList;
+            OptionalModelCollection = optionalModelCollection;
             OptionalModel = optionalModel;
             OptionalModelWithPropertiesOnBase = optionalModelWithPropertiesOnBase;
             OptionalFixedStringEnum = optionalFixedStringEnum;
@@ -60,7 +59,7 @@ namespace ModelsInCadl.Models
             OptionalModelRecord = optionalModelRecord;
             OptionalPlainDate = optionalPlainDate;
             OptionalPlainTime = optionalPlainTime;
-            OptionalCollectionWithNullableIntElement = optionalCollectionWithNullableIntElement.ToList();
+            OptionalCollectionWithNullableIntElement = optionalCollectionWithNullableIntElement;
         }
 
         /// <summary> Optional string, illustrating an optional reference type property. </summary>

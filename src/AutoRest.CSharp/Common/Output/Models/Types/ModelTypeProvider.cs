@@ -283,14 +283,14 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.InitializationConstructor;
 
-            return new ObjectTypeConstructor(InitializationConstructorSignature, GetPropertyInitializers(Fields.PublicConstructorParameters), baseCtor);
+            return new ObjectTypeConstructor(InitializationConstructorSignature, GetPropertyInitializers(InitializationConstructorSignature.Parameters), baseCtor);
         }
 
         protected override ObjectTypeConstructor BuildSerializationConstructor()
         {
             ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.SerializationConstructor;
 
-            return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(Fields.SerializationParameters), baseCtor);
+            return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(SerializationConstructorSignature.Parameters), baseCtor);
         }
 
         private ObjectPropertyInitializer[] GetPropertyInitializers(IReadOnlyList<Parameter> parameters)
@@ -307,7 +307,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Constant? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
-                if (IsStruct || parameterMap.ContainsKey(property.Declaration.Name.FirstCharToLowerCase()))
+                if (parameterMap.TryGetValue(property.Declaration.Name.FirstCharToLowerCase(), out var parameter) || IsStruct)
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
@@ -317,7 +317,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultInitializationValue = defaultParameterValue;
                     }
 
-                    var inputType = TypeFactory.GetInputType(propertyType);
+                    var inputType = parameter?.Type ?? TypeFactory.GetInputType(propertyType);
                     if (defaultParameterValue != null && !TypeFactory.CanBeInitializedInline(property.ValueType, defaultParameterValue))
                     {
                         inputType = inputType.WithNullable(true);

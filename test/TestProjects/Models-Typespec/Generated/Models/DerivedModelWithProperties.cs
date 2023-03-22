@@ -30,7 +30,7 @@ namespace ModelsInCadl.Models
         /// <param name="requiredCollection"> Required collection. </param>
         internal DerivedModelWithProperties(string optionalPropertyOnBase, IList<CollectionItem> requiredCollection) : base(optionalPropertyOnBase)
         {
-            RequiredCollection = requiredCollection.ToList();
+            RequiredCollection = requiredCollection;
         }
 
         /// <summary> Required collection. </summary>
