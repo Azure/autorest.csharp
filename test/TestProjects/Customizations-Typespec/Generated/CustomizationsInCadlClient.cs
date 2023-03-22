@@ -28,22 +28,6 @@ namespace CustomizationsInCadl
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of CustomizationsInCadlClient. </summary>
-        public CustomizationsInCadlClient() : this(new CustomizationsInCadlClientOptions())
-        {
-        }
-
-        /// <summary> Initializes a new instance of CustomizationsInCadlClient. </summary>
-        /// <param name="options"> The options for configuring the client. </param>
-        public CustomizationsInCadlClient(CustomizationsInCadlClientOptions options)
-        {
-            options ??= new CustomizationsInCadlClientOptions();
-
-            ClientDiagnostics = new ClientDiagnostics(options, true);
-            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), Array.Empty<HttpPipelinePolicy>(), new ResponseClassifier());
-            _apiVersion = options.Version;
-        }
-
         /// <summary> RoundTrip operation to make RootModel round-trip. </summary>
         /// <param name="input"> The RootModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -76,7 +60,6 @@ namespace CustomizationsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CustomizationsInCadlClient.xml" path="doc/members/member[@name='RoundTripAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RoundTripAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -101,7 +84,6 @@ namespace CustomizationsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CustomizationsInCadlClient.xml" path="doc/members/member[@name='RoundTrip(RequestContent,RequestContext)']/*" />
         public virtual Response RoundTrip(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
