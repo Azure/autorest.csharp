@@ -17,7 +17,7 @@ using Azure.Core;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<ProtocolToConvenienceParameterConverter> ProtocolToConvenienceParameterConverters, CSharpType? ResponseType, Diagnostic? Diagnostic)
+    internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<ProtocolToExpandedConvenienceParameterConverter> ProtocolToConvenienceParameterConverters, CSharpType? ResponseType, Diagnostic? Diagnostic, LowLevelPropertyBag? PropertyBag)
     {
         public (IReadOnlyList<FormattableString> ParameterValues, Action<CodeWriter> Converter) GetParameterValues(CodeWriterDeclaration contextVariable)
         {
@@ -73,7 +73,7 @@ namespace AutoRest.CSharp.Output.Models
                 var property = ctor.FindPropertyInitializedByParameter(parameter);
                 if (property == null)
                     continue;
-                initializers.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{parameter.Name:I}", parameter.Type));
+                initializers.Add(new PropertyInitializer(property.Declaration.Name, property.Declaration.Type, property.IsReadOnly, $"{parameter.NameExpression:I}", parameter.Type));
             }
 
             return writer =>
@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models
         }
     }
 
-    internal record ProtocolToConvenienceParameterConverter(Parameter Protocol, Parameter Convenience, ConvenienceParameterSpread? ConvenienceSpread);
+    internal record ProtocolToExpandedConvenienceParameterConverter(Parameter Protocol, Parameter Convenience, ConvenienceParameterSpread? ConvenienceSpread);
 
     internal record ConvenienceParameterSpread(ModelTypeProvider BackingModel, IEnumerable<Parameter> SpreadedParameters);
 }

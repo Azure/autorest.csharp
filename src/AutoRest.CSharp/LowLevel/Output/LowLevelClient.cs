@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Output.Models
     {
         private readonly string _libraryName;
         private readonly TypeFactory _typeFactory;
+        private readonly SourceInputModel? _sourceInputModel;
         private readonly IEnumerable<InputParameter> _clientParameters;
         private readonly InputAuth _authorization;
         private readonly IEnumerable<InputOperation> _operations;
@@ -50,6 +51,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _libraryName = libraryName;
             _typeFactory = typeFactory;
+            _sourceInputModel = sourceInputModel;
             DefaultName = name;
             DefaultNamespace = ns;
             Description = description;
@@ -77,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature[] SecondaryConstructors => Constructors.SecondaryConstructors;
 
         private IReadOnlyList<LowLevelClientMethod>? _allClientMethods;
-        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(_typeFactory, _operations, Fields, Declaration.Name).ToArray();
+        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(_typeFactory, _operations, Fields, Declaration.Name, DefaultNamespace, _sourceInputModel).ToArray();
 
         private IReadOnlyList<LowLevelClientMethod>? _clientMethods;
         public IReadOnlyList<LowLevelClientMethod> ClientMethods => _clientMethods ??= AllClientMethods
@@ -99,6 +101,21 @@ namespace AutoRest.CSharp.Output.Models
         public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName)
         {
             var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, clientName, fields, typeFactory));
+            foreach (var (_, builder) in builders)
+            {
+                builder.BuildNextPageMethod(builders);
+            }
+
+            foreach (var (_, builder) in builders)
+            {
+                yield return builder.BuildOperationMethodChain();
+            }
+        }
+
+        private IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName, string rootNamespace, SourceInputModel? sourceInputModel)
+        {
+            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, clientName, fields, typeFactory,
+                new OperationMethodChainBuilder.ConvenienceMethodParameterGroupingStrategy(rootNamespace, sourceInputModel)));
             foreach (var (_, builder) in builders)
             {
                 builder.BuildNextPageMethod(builders);

@@ -541,6 +541,10 @@ namespace AutoRest.CSharp.Generation.Writers
             var methodSignature = convenienceMethod.Signature.WithAsync(async);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
+            if (convenienceMethod.PropertyBag != null)
+            {
+                WritePropertyBagParametersValidation(convenienceMethod.PropertyBag.Parameters, writer);
+            }
 
             if (convenienceMethod.Diagnostic != null)
             {
@@ -903,6 +907,34 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputDictionaryType dictionaryType => $"Dictionary<string, {StringifyTypeForTable(dictionaryType.ValueType)}>",
                 InputListType listType => $"{StringifyTypeForTable(listType.ElementType)}[]",
                 _ => RemovePrefix(type.Name, "Json")
+            };
+        }
+
+        private static void WritePropertyBagParametersValidation(IEnumerable<Parameter> parameters, CodeWriter writer)
+        {
+            foreach (Parameter parameter in parameters)
+            {
+                WritePropertyBagParameterValidation(parameter, writer);
+            }
+
+            writer.Line();
+        }
+
+        private static void WritePropertyBagParameterValidation(Parameter parameter, CodeWriter writer)
+        {
+            if (parameter.Validation == ValidationType.None && parameter.Initializer != null)
+            {
+                writer.Line($"{parameter.NameExpression:I} ??= {parameter.Initializer};");
+            }
+
+            switch (parameter.Validation)
+            {
+                case ValidationType.AssertNotNullOrEmpty:
+                    writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNullOrEmpty)}({parameter.NameExpression:I}, nameof({parameter.NameExpression:I}));");
+                    break;
+                case ValidationType.AssertNotNull:
+                    writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNull)}({parameter.NameExpression:I}, nameof({parameter.NameExpression:I}));");
+                    break;
             };
         }
 

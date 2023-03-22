@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         protected string Name { get; }
 
         private bool? _shouldValidateParameter;
-        private bool ShouldValidateParameter => _shouldValidateParameter ??= EnsureShouldValidateParameter();
+        protected bool ShouldValidateParameter => _shouldValidateParameter ??= EnsureShouldValidateParameter();
 
         protected abstract bool EnsureShouldValidateParameter();
 
@@ -31,15 +31,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
         private Parameter? _packParameter;
         public Parameter PackParameter => _packParameter ??= EnsurePackParameter();
 
-        private Parameter EnsurePackParameter()
-        {
-            return new Parameter(
-                "options",
-                "A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter.",
-                TypeFactory.GetInputType(PackModel.Type),
-                null,
-                ShouldValidateParameter ? ValidationType.AssertNotNull : ValidationType.None,
-                ShouldValidateParameter ? (FormattableString?)null : $"new {PackModel.Type.Name}()") with { IsPropertyBag = true };
-        }
+        protected abstract Parameter EnsurePackParameter();
     }
 }

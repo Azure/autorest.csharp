@@ -79,15 +79,19 @@ namespace AutoRest.TestServer.Tests
         {
             var expected = new[]
             {
-                (typeof(string), "id", true),
-                (typeof(int), "top", true),
-                (typeof(string), "name", true),
-                (typeof(IEnumerable < int >), "items", true),
-                (typeof(string), "color", false),
-                (typeof(int?), "age", false),
-                (typeof(IEnumerable<string>), "elements", false)
+                (typeof(SpreadAliasWithOptionalPropsOptions), "options", true),
             };
             ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAliasWithOptionalProps", expected);
+        }
+
+        [Test]
+        public void SpreadAliasWithSpreadAliasExceed5Method()
+        {
+            var expected = new[]
+            {
+                (typeof(SpreadAliasWithSpreadAliasExceed5Options), "options", true),
+            };
+            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAliasWithSpreadAliasExceed5", expected);
         }
 
         private static void ValidateConvenienceMethod(Type clientType, string methodName, IEnumerable<(Type ParameterType, string Name, bool IsRequired)> expected)

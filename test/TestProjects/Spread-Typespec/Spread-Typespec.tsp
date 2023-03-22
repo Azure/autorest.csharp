@@ -76,6 +76,18 @@ alias ThingAliasWithOptionalProps = {
   elements?: string[];
 };
 
+alias ThingAliasWithSpreadAliasExceed5 = {
+  @path id: string;
+  ...ThingAlias;
+  @doc("optional property of the Thing")
+  color?: string;
+  @doc("required array")
+  items: int32[];
+  @doc("optional array")
+  elements?: string[];
+  @header top: int32;
+};
+
 @route("/spreadModel")
 @doc("spread a model as body.")
 @post
@@ -111,3 +123,9 @@ op spreadAliasWithSpreadAlias( ...ThingAliasWithSpreadAlias ): void;
 @post
 @convenientAPI(true)
 op spreadAliasWithOptionalProps( ...ThingAliasWithOptionalProps ): void;
+
+@route("/spreadAliasWithSpreadAliasExceed5")
+@doc("spread an alias with contains another alias property as body.")
+@post
+@convenientAPI(true)
+op spreadAliasWithSpreadAliasExceed5( ...ThingAliasWithSpreadAliasExceed5 ): void;

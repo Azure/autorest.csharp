@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -499,72 +498,62 @@ namespace Spread
         }
 
         /// <summary> spread an alias with contains optional properties as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="items"> required array. </param>
-        /// <param name="color"> optional property of the Thing. </param>
-        /// <param name="age"> age of the Thing. </param>
-        /// <param name="elements"> optional array. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and cancellation token parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(SpreadAliasWithOptionalPropsOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(items, nameof(items));
+            Argument.AssertNotNull(options, nameof(options));
+
+            Argument.AssertNotNullOrEmpty(options.Id, nameof(options.Id));
+            Argument.AssertNotNull(options.Name, nameof(options.Name));
+            Argument.AssertNotNull(options.Items, nameof(options.Items));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
+            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(options.Name, options.Items.ToList())
             {
-                Color = color,
-                Age = age
+                Color = options.Color,
+                Age = options.Age
             };
-            if (elements != null)
+            if (options.Elements != null)
             {
-                foreach (var value in elements)
+                foreach (var value in options.Elements)
                 {
                     spreadAliasWithOptionalPropsRequest.Elements.Add(value);
                 }
             }
             SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest0 = spreadAliasWithOptionalPropsRequest;
-            Response response = await SpreadAliasWithOptionalPropsAsync(id, top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAliasWithOptionalPropsAsync(options.Id, options.Top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> spread an alias with contains optional properties as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="items"> required array. </param>
-        /// <param name="color"> optional property of the Thing. </param>
-        /// <param name="age"> age of the Thing. </param>
-        /// <param name="elements"> optional array. </param>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and cancellation token parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response SpreadAliasWithOptionalProps(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual Response SpreadAliasWithOptionalProps(SpreadAliasWithOptionalPropsOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
-            Argument.AssertNotNull(items, nameof(items));
+            Argument.AssertNotNull(options, nameof(options));
+
+            Argument.AssertNotNullOrEmpty(options.Id, nameof(options.Id));
+            Argument.AssertNotNull(options.Name, nameof(options.Name));
+            Argument.AssertNotNull(options.Items, nameof(options.Items));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
+            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(options.Name, options.Items.ToList())
             {
-                Color = color,
-                Age = age
+                Color = options.Color,
+                Age = options.Age
             };
-            if (elements != null)
+            if (options.Elements != null)
             {
-                foreach (var value in elements)
+                foreach (var value in options.Elements)
                 {
                     spreadAliasWithOptionalPropsRequest.Elements.Add(value);
                 }
             }
             SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest0 = spreadAliasWithOptionalPropsRequest;
-            Response response = SpreadAliasWithOptionalProps(id, top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context);
+            Response response = SpreadAliasWithOptionalProps(options.Id, options.Top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context);
             return response;
         }
 
@@ -617,6 +606,122 @@ namespace Spread
             try
             {
                 using HttpMessage message = CreateSpreadAliasWithOptionalPropsRequest(id, top, content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> spread an alias with contains another alias property as body. </summary>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and cancellation token parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual async Task<Response> SpreadAliasWithSpreadAliasExceed5Async(SpreadAliasWithSpreadAliasExceed5Options options, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(options, nameof(options));
+
+            Argument.AssertNotNullOrEmpty(options.Id, nameof(options.Id));
+            Argument.AssertNotNull(options.Name, nameof(options.Name));
+            Argument.AssertNotNull(options.Items, nameof(options.Items));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            SpreadAliasWithSpreadAliasExceed5Request spreadAliasWithSpreadAliasExceed5Request = new SpreadAliasWithSpreadAliasExceed5Request(options.Name, options.Age, options.Items.ToList())
+            {
+                Color = options.Color
+            };
+            if (options.Elements != null)
+            {
+                foreach (var value in options.Elements)
+                {
+                    spreadAliasWithSpreadAliasExceed5Request.Elements.Add(value);
+                }
+            }
+            SpreadAliasWithSpreadAliasExceed5Request spreadAliasWithSpreadAliasExceed5Request0 = spreadAliasWithSpreadAliasExceed5Request;
+            Response response = await SpreadAliasWithSpreadAliasExceed5Async(options.Id, options.Top, spreadAliasWithSpreadAliasExceed5Request0.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> spread an alias with contains another alias property as body. </summary>
+        /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and cancellation token parameter. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
+        public virtual Response SpreadAliasWithSpreadAliasExceed5(SpreadAliasWithSpreadAliasExceed5Options options, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(options, nameof(options));
+
+            Argument.AssertNotNullOrEmpty(options.Id, nameof(options.Id));
+            Argument.AssertNotNull(options.Name, nameof(options.Name));
+            Argument.AssertNotNull(options.Items, nameof(options.Items));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            SpreadAliasWithSpreadAliasExceed5Request spreadAliasWithSpreadAliasExceed5Request = new SpreadAliasWithSpreadAliasExceed5Request(options.Name, options.Age, options.Items.ToList())
+            {
+                Color = options.Color
+            };
+            if (options.Elements != null)
+            {
+                foreach (var value in options.Elements)
+                {
+                    spreadAliasWithSpreadAliasExceed5Request.Elements.Add(value);
+                }
+            }
+            SpreadAliasWithSpreadAliasExceed5Request spreadAliasWithSpreadAliasExceed5Request0 = spreadAliasWithSpreadAliasExceed5Request;
+            Response response = SpreadAliasWithSpreadAliasExceed5(options.Id, options.Top, spreadAliasWithSpreadAliasExceed5Request0.ToRequestContent(), context);
+            return response;
+        }
+
+        /// <summary> spread an alias with contains another alias property as body. </summary>
+        /// <param name="id"> The String to use. </param>
+        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasExceed5Async(String,Int32,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadAliasWithSpreadAliasExceed5Async(string id, int top, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAliasWithSpreadAliasExceed5");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasWithSpreadAliasExceed5Request(id, top, content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> spread an alias with contains another alias property as body. </summary>
+        /// <param name="id"> The String to use. </param>
+        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasExceed5(String,Int32,RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadAliasWithSpreadAliasExceed5(string id, int top, RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNullOrEmpty(id, nameof(id));
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("SpreadClient.SpreadAliasWithSpreadAliasExceed5");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasWithSpreadAliasExceed5Request(id, top, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -720,6 +825,24 @@ namespace Spread
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/spreadAliasWithOptionalProps/", false);
+            uri.AppendPath(id, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("top", top);
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSpreadAliasWithSpreadAliasExceed5Request(string id, int top, RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/spreadAliasWithSpreadAliasExceed5/", false);
             uri.AppendPath(id, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

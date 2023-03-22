@@ -7,6 +7,8 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Mgmt.Output.Models;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -41,15 +43,18 @@ namespace AutoRest.CSharp.Output.Models
         private ProtocolMethodPaging? _protocolMethodPaging;
         private RequestConditionHeaders _conditionHeaderFlag = RequestConditionHeaders.None;
 
+        private readonly ConvenienceMethodParameterGroupingStrategy? _convenienceMethodGroupStrategy;
+
         private InputOperation Operation { get; }
 
-        public OperationMethodChainBuilder(InputOperation operation, string clientName, ClientFields fields, TypeFactory typeFactory)
+        public OperationMethodChainBuilder(InputOperation operation, string clientName, ClientFields fields, TypeFactory typeFactory, ConvenienceMethodParameterGroupingStrategy? convenienceMethodGroupStrategy = null)
         {
             _clientName = clientName;
             _fields = fields;
             _typeFactory = typeFactory;
             _orderedParameters = new List<ParameterChain>();
             _requestParts = new List<RequestPartSource>();
+            _convenienceMethodGroupStrategy = convenienceMethodGroupStrategy;
 
             Operation = operation;
             BuildParameters();
@@ -85,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
             var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : MethodSignatureModifiers.Internal) | Virtual;
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, protocolMethodModifiers, returnTypeChain.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
-            var convenienceMethod = ShouldConvenienceMethodGenerated(returnTypeChain) ? BuildConvenienceMethod(returnTypeChain) : null;
+            var convenienceMethod = ShouldConvenienceMethodGenerated(returnTypeChain) ? BuildConvenienceMethod(returnTypeChain, Operation.Parameters) : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
@@ -187,8 +192,16 @@ namespace AutoRest.CSharp.Output.Models
             return new ReturnTypeChain(typeof(Response), typeof(Response), null);
         }
 
-        private ConvenienceMethod BuildConvenienceMethod(ReturnTypeChain returnTypeChain)
+        private ConvenienceMethod BuildConvenienceMethod(ReturnTypeChain returnTypeChain, IReadOnlyList<InputParameter> inputParameters)
         {
+            LowLevelPropertyBag? propertyBag = null;
+            (var protocolToConvenience, var parameterList) = GetExpandedConvenienceMethodParameters();
+
+            if (_convenienceMethodGroupStrategy != null)
+            {
+                (protocolToConvenience, parameterList, propertyBag) = _convenienceMethodGroupStrategy.GroupConvenienceMethodParameters(protocolToConvenience, parameterList, inputParameters, Operation.Name, _typeFactory);
+            }
+
             bool needNameChange = _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeSame(parameter.Convenience, parameter.Protocol));
             string name = _restClientMethod.Name;
             if (needNameChange)
@@ -199,47 +212,49 @@ namespace AutoRest.CSharp.Output.Models
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : null;
 
-            var protocolToConvenience = new List<ProtocolToConvenienceParameterConverter>();
-            var parameterList = new List<Parameter>();
-            foreach (var parameterChain in _orderedParameters)
-            {
-                var protocolParameter = parameterChain.Protocol;
-                var convenienceParameter = parameterChain.Convenience;
-                if (convenienceParameter != null)
-                {
-                    if (parameterChain.IsSpreadParameter)
-                    {
-                        if (convenienceParameter.Type.TryCast<ModelTypeProvider>(out var model))
-                        {
-                            var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1);
+            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
+            var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
+            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic, propertyBag);
+        }
 
-                            parameterList.AddRange(parameters);
-                            protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter!, convenienceParameter, new ConvenienceParameterSpread(model, parameters)));
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException($"The parameter {convenienceParameter.Name} is marked as Spread but its type is not ModelTypeProvider (got {convenienceParameter.Type})");
-                        }
+        private (List<ProtocolToExpandedConvenienceParameterConverter> Converters, List<Parameter> Parameters) GetExpandedConvenienceMethodParameters()
+        {
+            List<ProtocolToExpandedConvenienceParameterConverter> protocolToConvenience = new List<ProtocolToExpandedConvenienceParameterConverter>();
+            List<Parameter> parameterList = new List<Parameter>();
+            foreach (var parameterChain in _orderedParameters.Where(p => p.Convenience != null))
+            {
+                (var protocolParameter, var convenienceParameter) = (parameterChain.Protocol, parameterChain.Convenience!);
+
+                if (parameterChain.IsSpreadParameter)
+                {
+                    if (convenienceParameter.Type.TryCast<ModelTypeProvider>(out var model))
+                    {
+                        var parameters = BuildSpreadParameters(model).OrderBy(p => p.DefaultValue == null ? 0 : 1);
+
+                        parameterList.AddRange(parameters);
+                        protocolToConvenience.Add(new ProtocolToExpandedConvenienceParameterConverter(protocolParameter!, convenienceParameter, new ConvenienceParameterSpread(model, parameters)));
                     }
                     else
                     {
-                        // we do not support arrays as a body type, therefore we change the type to object on purpose to emphasize this: https://github.com/Azure/autorest.csharp/pull/3044
-                        if (TypeFactory.IsList(convenienceParameter.Type) && convenienceParameter.RequestLocation == RequestLocation.Body)
-                        {
-                            parameterList.Add(convenienceParameter with { Type = new CSharpType(typeof(object)) });
-                        }
-                        else
-                        {
-                            parameterList.Add(convenienceParameter);
-                        }
-                        if (protocolParameter != null)
-                            protocolToConvenience.Add(new ProtocolToConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
+                        throw new InvalidOperationException($"The parameter {convenienceParameter.Name} is marked as Spread but its type is not ModelTypeProvider (got {convenienceParameter.Type})");
                     }
                 }
+                else
+                {
+                    // we do not support arrays as a body type, therefore we change the type to object on purpose to emphasize this: https://github.com/Azure/autorest.csharp/pull/3044
+                    if (TypeFactory.IsList(convenienceParameter.Type) && convenienceParameter.RequestLocation == RequestLocation.Body)
+                    {
+                        parameterList.Add(convenienceParameter with { Type = new CSharpType(typeof(object)) });
+                    }
+                    else
+                    {
+                        parameterList.Add(convenienceParameter);
+                    }
+                    if (protocolParameter != null)
+                        protocolToConvenience.Add(new ProtocolToExpandedConvenienceParameterConverter(protocolParameter, convenienceParameter, null));
+                }
             }
-            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, returnTypeChain.Convenience, null, parameterList, attributes);
-            var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
-            return new ConvenienceMethod(convenienceSignature, protocolToConvenience, returnTypeChain.ConvenienceResponseType, diagnostic);
+            return (protocolToConvenience, parameterList);
         }
 
         private IEnumerable<Parameter> BuildSpreadParameters(ModelTypeProvider model)
@@ -499,5 +514,69 @@ namespace AutoRest.CSharp.Output.Models
         private record ReturnTypeChain(CSharpType Convenience, CSharpType Protocol, CSharpType? ConvenienceResponseType);
 
         private record ParameterChain(Parameter? Convenience, Parameter? Protocol, Parameter? CreateMessage, bool IsSpreadParameter = false);
+
+        public class ConvenienceMethodParameterGroupingStrategy
+        {
+            private readonly string _rootNamespace;
+            private readonly SourceInputModel? _sourceInputModel;
+
+            public ConvenienceMethodParameterGroupingStrategy(string rootNamespace, SourceInputModel? sourceInputModel)
+            {
+                _rootNamespace = rootNamespace;
+                _sourceInputModel = sourceInputModel;
+            }
+
+            public (List<ProtocolToExpandedConvenienceParameterConverter> NewConverters, List<Parameter> NewParameters, LowLevelPropertyBag? PrpertyBag) GroupConvenienceMethodParameters(List<ProtocolToExpandedConvenienceParameterConverter> protocolToConvenience, List<Parameter> parameterList, IReadOnlyList<InputParameter> inputParameters, string operationName, TypeFactory typeFactory)
+            {
+                if (parameterList.Where(p => p != KnownParameters.WaitForCompletion && p != KnownParameters.CancellationTokenParameter).Count() <= 5)
+                {
+                    return (protocolToConvenience, parameterList, null);
+                }
+
+                var groupedParameters = parameterList.Where(p => p == KnownParameters.WaitForCompletion || p == KnownParameters.CancellationTokenParameter).ToList();
+                var parametersToGroup = parameterList.Where(p => p != KnownParameters.WaitForCompletion && p != KnownParameters.CancellationTokenParameter);
+
+                var newConverters = new List<ProtocolToExpandedConvenienceParameterConverter>(protocolToConvenience.Count());
+                foreach (var converter in protocolToConvenience)
+                {
+                    if (converter.Convenience == KnownParameters.WaitForCompletion || converter.Convenience == KnownParameters.CancellationTokenParameter)
+                    {
+                        newConverters.Add(converter);
+                        continue;
+                    }
+
+                    var newConverter = converter with
+                    {
+                        Convenience = converter.Convenience with { IsPropertyBag = true }
+                    };
+                    if (converter.ConvenienceSpread != null)
+                    {
+                        var newSpreadParameters = new List<Parameter>(converter.ConvenienceSpread.SpreadedParameters.Count());
+                        foreach (var p in converter.ConvenienceSpread.SpreadedParameters)
+                        {
+                            newSpreadParameters.Add(p with { IsPropertyBag = true });
+                        };
+
+                        newConverter = newConverter with
+                        {
+                            ConvenienceSpread = converter.ConvenienceSpread with { SpreadedParameters = newSpreadParameters }
+                        };
+                    }
+                    newConverters.Add(newConverter);
+                }
+
+                var parametersInPropertyBag = new List<Parameter>(parametersToGroup.Count());
+                foreach (var parameter in parametersToGroup)
+                {
+                    parametersInPropertyBag.Add(parameter with { IsPropertyBag = true });
+                }
+
+                var spreadBackingModel = protocolToConvenience.FirstOrDefault(p => p.ConvenienceSpread != null)?.ConvenienceSpread?.BackingModel;
+                var propertyGroup = new LowLevelPropertyBag(operationName, $"{_rootNamespace}.Models", parametersInPropertyBag, typeFactory, inputParameters, spreadBackingModel, _sourceInputModel);
+
+                groupedParameters.Insert(groupedParameters.Count == 1 ? 0 : 1, propertyGroup.PackParameter); // if only cancallation token, then insert property bag as the first parameter, otherwise insert after WaitUntil
+                return (newConverters, groupedParameters, propertyGroup);
+            }
+        };
     }
 }

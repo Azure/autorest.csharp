@@ -87,21 +87,21 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (TypeFactory.IsList(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
             {
-                return $"{typeof(RequestContent)}.{nameof(RequestContent.Create)}({parameter.Name})";
+                return $"{typeof(RequestContent)}.{nameof(RequestContent.Create)}({parameter.NameExpression})";
             }
 
             var conversionMethod = GetConversionMethod(parameter.Type, toType);
             if (conversionMethod == null)
             {
-                return $"{parameter.Name:I}";
+                return $"{parameter.NameExpression:I}";
             }
 
             if (parameter.IsOptionalInSignature)
             {
-                return $"{parameter.Name:I}?{conversionMethod}";
+                return $"{parameter.NameExpression:I}?{conversionMethod}";
             }
 
-            return $"{parameter.Name:I}{conversionMethod}";
+            return $"{parameter.NameExpression:I}{conversionMethod}";
         }
 
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)

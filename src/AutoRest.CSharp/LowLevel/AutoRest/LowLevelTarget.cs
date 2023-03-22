@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
@@ -9,6 +10,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.AutoRest.Plugins
 {
@@ -40,6 +42,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 lowLevelClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
                 project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", xmlDocWriter.ToString());
+                foreach (var convenienceMethod in client.ClientMethods.Where(m => m.ConvenienceMethod != null).Select(m => m.ConvenienceMethod!))
+                {
+                    var propertyBag = convenienceMethod.PropertyBag;
+                    if (propertyBag != null)
+                    {
+                        WritePropertyBagModel(project, propertyBag);
+                    }
+                }
             }
 
             var optionsWriter = new CodeWriter();
@@ -53,6 +63,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             await project.PostProcessAsync(new PostProcessor(
                 modelFactoryFullName: null,
                 aspExtensionClassName: library.AspDotNetExtension.FullName));
+        }
+
+        private static void WritePropertyBagModel(GeneratedCodeWorkspace project, Output.Models.Shared.PropertyBag propertyBag)
+        {
+            var codeWriter = new CodeWriter();
+            var modelWriter = new ModelWriter();
+            modelWriter.WriteModel(codeWriter, propertyBag.PackModel);
+            var folderPath = Configuration.ModelNamespace ? "Models/" : "";
+            project.AddGeneratedFile($"{folderPath}{propertyBag.PackModel.Type.Name}.cs", codeWriter.ToString());
         }
     }
 }

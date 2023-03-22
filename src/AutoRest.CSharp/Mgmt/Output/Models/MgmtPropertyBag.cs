@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -75,6 +76,17 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 return mgmtPackModel.Properties.Any(p => p.IsRequired);
             }
             return false;
+        }
+
+        protected override Parameter EnsurePackParameter()
+        {
+            return new Parameter(
+                "options",
+                "A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter.",
+                TypeFactory.GetInputType(PackModel.Type),
+                null,
+                ShouldValidateParameter ? ValidationType.AssertNotNull : ValidationType.None,
+                ShouldValidateParameter ? (FormattableString?)null : $"new {PackModel.Type.Name}()") with { IsPropertyBag = true };
         }
 
         private FormattableString? GetDefaultValue(Parameter parameter)
