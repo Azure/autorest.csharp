@@ -29,11 +29,9 @@ jobs:
         -AutorestCSharpVersion ${{parameters.AutorestCSharpVersion}}
         -CadlEmitterVersion ${{parameters.CadlEmitterVersion}}
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-        -UseInternalFeed $${{parameters.IsInternalFeed}}
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
   - ${{ if eq(parameters.IsInternalFeed, true) }}: # This stage needs to be remove after https://github.com/Azure/autorest.csharp/issues/3216
     - pwsh: |
-        git restore eng/common/scripts/TypeSpec-Project-Generate.ps1
         rm .npmrc
       displayName: Discard Internal Change
       workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net

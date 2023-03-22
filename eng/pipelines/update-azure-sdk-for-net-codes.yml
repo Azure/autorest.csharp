@@ -43,7 +43,6 @@ jobs:
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
         -ServiceDirectoryFilters ${{ parameters.filter}}
         -ShowSummary
-        -UseInternalFeed $${{parameters.IsInternalFeed}}
       failOnStderr: false
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
     retryCountOnTaskFailure: 3
@@ -55,7 +54,6 @@ jobs:
   - ${{ if eq(parameters.IsInternalFeed, true) }}:
     - pwsh: |
         git restore NuGet.Config
-        git restore eng/common/scripts/TypeSpec-Project-Generate.ps1
         rm .npmrc
       displayName: Discard Internal Change
       workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net

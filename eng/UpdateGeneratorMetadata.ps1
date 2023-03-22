@@ -6,9 +6,7 @@ param(
     [string]$CadlEmitterVersion,
 
     [Parameter(Mandatory)]
-    [string]$SdkRepoRoot,
-
-    [bool]$UseInternalFeed = $false)
+    [string]$SdkRepoRoot)
 
 $ErrorActionPreference = 'Stop'
 
