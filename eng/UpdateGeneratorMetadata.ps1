@@ -27,12 +27,3 @@ $CadlEmitterProps = "$SdkRepoRoot\eng\emitter-package.json"
     '"@azure-tools/typespec-csharp": ".*?"',
 "`"@azure-tools/typespec-csharp`": `"$CadlEmitterVersion`"" | `
     Set-Content $CadlEmitterProps -NoNewline
-
-if ($UseInternalFeed) {
-    $npmrcFile = Resolve-Path (Join-Path $SdkRepoRoot ".npmrc")
-    $projectGeneratePath = "$SdkRepoRoot\eng\common\scripts\TypeSpec-Project-Generate.ps1"
-    (Get-Content -Raw $projectGeneratePath) -replace `
-    'npm install --no-lock-file',
-"Copy-Item -Path $npmrcFile -Destination `".npmrc`" -Force`nnpm install --no-lock-file" | `
-    Set-Content $projectGeneratePath -NoNewline
-}
