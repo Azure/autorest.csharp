@@ -110,7 +110,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
-            // here we capsulate the MgmtClientOperation again to remove the extra "extension parameter" we added when constructing them in MgmtExtension.EnsureClientOperations
+            // here we have to capsulate the MgmtClientOperation again to remove the extra "extension parameter" we added when constructing them in MgmtExtension.EnsureClientOperations
+            // and here we need to regroup the MgmtRestOperation in these MgmtClientOperation in case there are method name collisions
             return _operations.Select(operation => MgmtClientOperation.FromOperations(operation)!);
         }
 
