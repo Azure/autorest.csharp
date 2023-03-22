@@ -46,7 +46,7 @@ namespace CadlFirstTest.Models
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
-            RequiredCollection = requiredCollection.ToList();
+            RequiredCollection = requiredCollection;
             RequiredDictionary = requiredDictionary;
             RequiredModel = requiredModel;
         }

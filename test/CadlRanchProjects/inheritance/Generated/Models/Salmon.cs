@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace Models.Inheritance.Models
@@ -29,7 +28,7 @@ namespace Models.Inheritance.Models
         /// <param name="partner"></param>
         internal Salmon(int age, IList<Fish> friends, IDictionary<string, Fish> hate, Fish partner) : base("salmon", age)
         {
-            Friends = friends.ToList();
+            Friends = friends;
             Hate = hate;
             Partner = partner;
         }

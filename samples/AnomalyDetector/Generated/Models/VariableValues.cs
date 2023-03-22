@@ -38,8 +38,8 @@ namespace AnomalyDetector.Models
         internal VariableValues(string variable, IList<string> timestamps, IList<float> values)
         {
             Variable = variable;
-            Timestamps = timestamps.ToList();
-            Values = values.ToList();
+            Timestamps = timestamps;
+            Values = values;
         }
 
         /// <summary> Variable name of last detection request. </summary>

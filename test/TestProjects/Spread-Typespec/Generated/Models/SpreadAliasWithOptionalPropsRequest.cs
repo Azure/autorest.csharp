@@ -40,8 +40,8 @@ namespace Spread.Models
             Name = name;
             Color = color;
             Age = age;
-            Items = items.ToList();
-            Elements = elements.ToList();
+            Items = items;
+            Elements = elements;
         }
 
         /// <summary> name of the Thing. </summary>

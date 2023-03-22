@@ -62,7 +62,7 @@ namespace AnomalyDetector.Models
         /// </param>
         internal UnivariateChangePointDetectionOptions(IList<TimeSeriesPoint> series, TimeGranularity granularity, int? customInterval, int? period, int? stableTrendWindow, float? threshold)
         {
-            Series = series.ToList();
+            Series = series;
             Granularity = granularity;
             CustomInterval = customInterval;
             Period = period;

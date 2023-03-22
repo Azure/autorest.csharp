@@ -68,7 +68,7 @@ namespace AnomalyDetector.Models
         /// </param>
         internal UnivariateDetectionOptions(IList<TimeSeriesPoint> series, TimeGranularity? granularity, int? customInterval, int? period, float? maxAnomalyRatio, int? sensitivity, ImputeMode? imputeMode, float? imputeFixedValue)
         {
-            Series = series.ToList();
+            Series = series;
             Granularity = granularity;
             CustomInterval = customInterval;
             Period = period;

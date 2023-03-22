@@ -46,7 +46,7 @@ namespace AnomalyDetector.Models
         /// </param>
         internal MultivariateLastDetectionOptions(IList<VariableValues> variables, int topContributorCount)
         {
-            Variables = variables.ToList();
+            Variables = variables;
             TopContributorCount = topContributorCount;
         }
 
