@@ -34,12 +34,10 @@ namespace AutoRest.CSharp.Utilities
 
         public static bool IsSameType(this INamedTypeSymbol symbol, CSharpType type)
         {
-            if (type.IsValueType && type.IsNullable)
+            if (type.IsValueType && type.IsNullable) // for cases such as `int?`
             {
-                if (symbol.Name != "Nullable" || symbol.TypeArguments.Length != 1)
-                {
+                if (symbol.ConstructedFrom.SpecialType != SpecialType.System_Nullable_T)
                     return false;
-                }
                 return IsSameType((INamedTypeSymbol)symbol.TypeArguments.Single(), type.GetNonNullable());
             }
 

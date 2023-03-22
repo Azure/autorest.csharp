@@ -163,24 +163,12 @@ namespace AutoRest.CSharp.Generation.Types
         internal static CSharpType FromSystemType(BuildContext context, Type type)
             => FromSystemType(type, context.DefaultNamespace, context.SourceInputModel);
 
-        public bool IsCollectionType()
-        {
-            if (!IsFrameworkType)
-                return false;
-
-            return FrameworkType.Equals(typeof(IList<>)) ||
-                FrameworkType.Equals(typeof(IEnumerable<>)) ||
-                FrameworkType == typeof(IReadOnlyList<>) ||
-                FrameworkType.Equals(typeof(IDictionary<,>)) ||
-                FrameworkType == typeof(IReadOnlyDictionary<,>);
-        }
-
         public CSharpType GetNonNullable()
         {
             if (!IsNullable)
                 return this;
 
-            return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
+            return IsFrameworkType ? new CSharpType(FrameworkType, false, Arguments) : new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
         }
 
         public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider

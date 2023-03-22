@@ -171,7 +171,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return true;
             }
 
-            if (property.Declaration.Type.IsCollectionType())
+            if (TypeFactory.IsCollectionType(property.Declaration.Type))
             {
                 return _inputModel.Usage is InputModelTypeUsage.Output;
             }
