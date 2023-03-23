@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             "The builder to register with.",
             TBuilderType,
             null,
-            ValidationType.None,
+            Validation.None,
             null);
 
         private Parameter? _configurationParameter;
@@ -153,7 +153,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
             "The configuration values.",
             TConfigurationType,
             null,
-            ValidationType.None,
+            Validation.None,
             null);
 
         private static CSharpType? _builderType;
@@ -163,7 +163,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private static CSharpType TBuilderType => _builderType ??= typeof(Template<>).GetGenericArguments()[0];
         private static CSharpType TConfigurationType => _configurationType ??= typeof(IAzureClientFactoryBuilderWithConfiguration<>).GetGenericArguments()[0];
 
-        // this is a private type that provides the open generic type argument "TBuilder" for us to use in the geenrated code
+        // this is a private type that provides the open generic type argument "TBuilder" for us to use in the generated code
         private class Template<TBuilder> { }
     }
 }
