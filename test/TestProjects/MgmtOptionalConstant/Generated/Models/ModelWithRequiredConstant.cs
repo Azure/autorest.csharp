@@ -14,7 +14,7 @@ namespace MgmtOptionalConstant.Models
         public ModelWithRequiredConstant()
         {
             RequiredStringConstant = StringConstant.Default;
-            RequiredIntConstant = new IntConstant("0");
+            RequiredIntConstant = IntConstant._0;
         }
 
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
