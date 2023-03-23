@@ -9,34 +9,34 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace ArrayAsQueryOrHeader.Models
+namespace CollectionFormat.Models
 {
-    public partial class Thing
+    public partial class MessageResponse
     {
-        internal static Thing DeserializeThing(JsonElement element)
+        internal static MessageResponse DeserializeMessageResponse(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            string name = default;
+            string message = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"u8))
+                if (property.NameEquals("message"u8))
                 {
-                    name = property.Value.GetString();
+                    message = property.Value.GetString();
                     continue;
                 }
             }
-            return new Thing(name);
+            return new MessageResponse(message);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static Thing FromResponse(Response response)
+        internal static MessageResponse FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeThing(document.RootElement);
+            return DeserializeMessageResponse(document.RootElement);
         }
     }
 }
