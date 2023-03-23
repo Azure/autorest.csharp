@@ -13,20 +13,25 @@ namespace MgmtOptionalConstant.Models
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
         public ModelWithRequiredConstant()
         {
-            PassName = PassName.OobeSystem;
+            RequiredStringConstant = StringConstant.Default;
+            RequiredIntConstant = new IntConstant("0");
         }
 
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
-        /// <param name="passName"> The pass name. Currently, the only allowable value is OobeSystem. </param>
+        /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>
+        /// <param name="requiredIntConstant"> A constant based on integer. </param>
         /// <param name="protocol"> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </param>
-        internal ModelWithRequiredConstant(PassName passName, ProtocolType? protocol)
+        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, ProtocolType? protocol)
         {
-            PassName = passName;
+            RequiredStringConstant = requiredStringConstant;
+            RequiredIntConstant = requiredIntConstant;
             Protocol = protocol;
         }
 
-        /// <summary> The pass name. Currently, the only allowable value is OobeSystem. </summary>
-        public PassName PassName { get; set; }
+        /// <summary> A constant based on string, the only allowable value is default. </summary>
+        public StringConstant RequiredStringConstant { get; set; }
+        /// <summary> A constant based on integer. </summary>
+        public IntConstant RequiredIntConstant { get; set; }
         /// <summary> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </summary>
         public ProtocolType? Protocol { get; set; }
     }
