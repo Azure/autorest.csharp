@@ -264,7 +264,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteConvenienceMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
         {
-            using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
+            using (WriteConvenienceMethodDeclaration(convenienceMethod, fields, async))
             {
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
 
@@ -298,7 +298,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteConvenienceLroMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
         {
-            using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
+            using (WriteConvenienceMethodDeclaration(convenienceMethod, fields, async))
             {
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
 
@@ -334,7 +334,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteConveniencePageableMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ProtocolMethodPaging pagingInfo, ClientFields fields, bool async)
         {
-            WriteConvenienceMethodDocumentation(_writer, convenienceMethod.Signature);
+            WriteConvenienceMethodDocumentation(convenienceMethod.Signature);
             _writer.WritePageable(convenienceMethod, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
         }
 
@@ -534,21 +534,21 @@ namespace AutoRest.CSharp.Generation.Writers
             WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
         }
 
-        private static IDisposable WriteConvenienceMethodDeclaration(CodeWriter writer, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
+        private IDisposable WriteConvenienceMethodDeclaration(ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
         {
-            WriteConvenienceMethodDocumentation(writer, convenienceMethod.Signature);
+            WriteConvenienceMethodDocumentation(convenienceMethod.Signature);
 
             var methodSignature = convenienceMethod.Signature.WithAsync(async);
-            var scope = writer.WriteMethodDeclaration(methodSignature);
-            writer.WriteParametersValidation(methodSignature.Parameters);
+            var scope = _writer.WriteMethodDeclaration(methodSignature);
+            _writer.WriteParametersValidation(methodSignature.Parameters);
             if (convenienceMethod.PropertyBag != null)
             {
-                WritePropertyBagParametersValidation(convenienceMethod.PropertyBag.Parameters, writer);
+                WritePropertyBagParametersValidation(convenienceMethod.PropertyBag.Parameters);
             }
 
             if (convenienceMethod.Diagnostic != null)
             {
-                var diagnosticScope = writer.WriteDiagnosticScope(convenienceMethod.Diagnostic, fields.ClientDiagnosticsProperty);
+                var diagnosticScope = _writer.WriteDiagnosticScope(convenienceMethod.Diagnostic, fields.ClientDiagnosticsProperty);
                 return Disposable.Create(() =>
                 {
                     diagnosticScope.Dispose();
@@ -559,10 +559,10 @@ namespace AutoRest.CSharp.Generation.Writers
             return scope;
         }
 
-        private static void WriteConvenienceMethodDocumentation(CodeWriter writer, MethodSignature convenienceMethod)
+        private void WriteConvenienceMethodDocumentation(MethodSignature convenienceMethod)
         {
-            writer.WriteMethodDocumentation(convenienceMethod);
-            writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
+            _writer.WriteMethodDocumentation(convenienceMethod);
+            _writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
         }
 
         private void WriteCancellationTokenToRequestContextMethod()
@@ -910,30 +910,30 @@ namespace AutoRest.CSharp.Generation.Writers
             };
         }
 
-        private static void WritePropertyBagParametersValidation(IEnumerable<Parameter> parameters, CodeWriter writer)
+        private void WritePropertyBagParametersValidation(IEnumerable<Parameter> parameters)
         {
             foreach (Parameter parameter in parameters)
             {
-                WritePropertyBagParameterValidation(parameter, writer);
+                WritePropertyBagParameterValidation(parameter);
             }
 
-            writer.Line();
+            _writer.Line();
         }
 
-        private static void WritePropertyBagParameterValidation(Parameter parameter, CodeWriter writer)
+        private void WritePropertyBagParameterValidation(Parameter parameter)
         {
             if (parameter.Validation == ValidationType.None && parameter.Initializer != null)
             {
-                writer.Line($"{parameter.NameExpression:I} ??= {parameter.Initializer};");
+                _writer.Line($"{parameter.NameExpression:I} ??= {parameter.Initializer};");
             }
 
             switch (parameter.Validation)
             {
                 case ValidationType.AssertNotNullOrEmpty:
-                    writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNullOrEmpty)}({parameter.NameExpression:I}, nameof({parameter.NameExpression:I}));");
+                    _writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNullOrEmpty)}({parameter.NameExpression:I}, nameof({parameter.NameExpression:I}));");
                     break;
                 case ValidationType.AssertNotNull:
-                    writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNull)}({parameter.NameExpression:I}, nameof({parameter.NameExpression:I}));");
+                    _writer.Line($"{typeof(Argument)}.{nameof(Argument.AssertNotNull)}({parameter.NameExpression:I}, nameof({parameter.NameExpression:I}));");
                     break;
             };
         }

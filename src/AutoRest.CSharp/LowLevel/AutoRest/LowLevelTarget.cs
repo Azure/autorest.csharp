@@ -42,13 +42,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 lowLevelClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
                 project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", xmlDocWriter.ToString());
-                foreach (var convenienceMethod in client.ClientMethods.Where(m => m.ConvenienceMethod != null).Select(m => m.ConvenienceMethod!))
+
+                foreach (var propertyBag in client.ClientMethods.Where(m => m.ConvenienceMethod != null && m.ConvenienceMethod.PropertyBag != null).Select(m => m.ConvenienceMethod!.PropertyBag!))
                 {
-                    var propertyBag = convenienceMethod.PropertyBag;
-                    if (propertyBag != null)
-                    {
-                        WritePropertyBagModel(project, propertyBag);
-                    }
+                    WritePropertyBagModel(project, propertyBag);
                 }
             }
 
@@ -65,7 +62,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 aspExtensionClassName: library.AspDotNetExtension.FullName));
         }
 
-        private static void WritePropertyBagModel(GeneratedCodeWorkspace project, Output.Models.Shared.PropertyBag propertyBag)
+        private static void WritePropertyBagModel(GeneratedCodeWorkspace project, LowLevelPropertyBag propertyBag)
         {
             var codeWriter = new CodeWriter();
             var modelWriter = new ModelWriter();

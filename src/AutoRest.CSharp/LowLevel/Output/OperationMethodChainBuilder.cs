@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models
             var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().ToArray();
             var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : MethodSignatureModifiers.Internal) | Virtual;
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, protocolMethodModifiers, returnTypeChain.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
-            var convenienceMethod = ShouldConvenienceMethodGenerated(returnTypeChain) ? BuildConvenienceMethod(returnTypeChain, Operation.Parameters) : null;
+            var convenienceMethod = ShouldConvenienceMethodGenerated(returnTypeChain) ? BuildConvenienceMethod(returnTypeChain) : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
@@ -192,14 +192,14 @@ namespace AutoRest.CSharp.Output.Models
             return new ReturnTypeChain(typeof(Response), typeof(Response), null);
         }
 
-        private ConvenienceMethod BuildConvenienceMethod(ReturnTypeChain returnTypeChain, IReadOnlyList<InputParameter> inputParameters)
+        private ConvenienceMethod BuildConvenienceMethod(ReturnTypeChain returnTypeChain)
         {
             LowLevelPropertyBag? propertyBag = null;
             (var protocolToConvenience, var parameterList) = GetExpandedConvenienceMethodParameters();
 
             if (_convenienceMethodGroupStrategy != null)
             {
-                (protocolToConvenience, parameterList, propertyBag) = _convenienceMethodGroupStrategy.GroupConvenienceMethodParameters(protocolToConvenience, parameterList, inputParameters, Operation.Name, _typeFactory);
+                (protocolToConvenience, parameterList, propertyBag) = _convenienceMethodGroupStrategy.GroupConvenienceMethodParameters(protocolToConvenience, parameterList, Operation.Parameters, Operation.Name, _typeFactory);
             }
 
             bool needNameChange = _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeSame(parameter.Convenience, parameter.Protocol));

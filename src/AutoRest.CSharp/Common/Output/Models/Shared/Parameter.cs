@@ -22,7 +22,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         /// Expression to refer to the parameter under different. It could be name of the parameter, or "optiona.{Name}" depends on the context.
         /// This is used for expanded parameters.
         /// </summary>
-        public string NameExpression => (IsPropertyBag ? $"options.{Name.FirstCharToUpperCase()}" : Name);
+        public string NameExpression => IsPropertyBag ? $"options.{Name.FirstCharToUpperCase()}" : Name;
 
         public static Parameter FromModelProperty(in InputModelProperty property, string name, CSharpType propertyType)
         {

@@ -90,6 +90,12 @@ namespace AutoRest.CSharp.Output.Models
         }
     }
 
+    /// <summary>
+    /// [protocol, expanded convenience] parameter mapping.
+    /// </summary>
+    /// <param name="Protocol">protocol parameter</param>
+    /// <param name="Convenience">expanded (e.g. intermediate) convenience parameter</param>
+    /// <param name="ConvenienceSpread">spread mapping</param>
     internal record ProtocolToExpandedConvenienceParameterConverter(Parameter Protocol, Parameter Convenience, ConvenienceParameterSpread? ConvenienceSpread);
 
     internal record ConvenienceParameterSpread(ModelTypeProvider BackingModel, IEnumerable<Parameter> SpreadedParameters);
