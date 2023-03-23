@@ -1,175 +1,81 @@
-# CADL to .Net
+# TypeSpec csharp emitter library
 
-DPG 1.1 requires CADL as input, if service would like to generate models.
+This is a TypeSpec library that will emit a .NET SDK from TypeSpec.
 
-## Pipeline
+## Prerequisite
 
-Cadl->net.emitter-> json -> outputLibrary -> sdk
+Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node --version`)
+Install **.NET 6.0 SDK** for your specific platform. (or a higher version)
+## Getting started
 
-![E2E flow](flow.png)
+### Initialize TypeSpec Project
 
-## Components
+Follow [TypeSpec Getting Started](https://github.com/microsoft/typespec/#using-node--npm) to initialize your TypeSpec project.
 
-### csharp emitter
+Make sure `npx tsp compile .` runs correctly.
 
-The emitter will emit the cadl model into json file from input CADL file
+### Add typespec-csharp
 
-#### Code Model
+Include @azure-tools/typespec-csharp dependencies in `package.json`
 
-code Model:
-![Model](codemodel.png)
-
-Parameter:
-
-``` code
-
-string Name,
-string NameInRequest,
-string? Description,
-InputType Type,
-RequestLocation Location,
-InputConstant? DefaultValue,
-VirtualParameter? VirtualParameter,
-InputParameter? GroupedBy,
-InputOperationParameterKind Kind,
-bool IsRequired,
-bool IsApiVersion,
-bool IsResourceParameter,
-bool IsContentType,
-bool IsEndpoint,
-bool SkipUrlEncoding,
-bool Explode,
-string? ArraySerializationDelimiter,
-string? HeaderCollectionPrefix
+```diff
+ "dependencies": {
++      "@azure-tools/typespec-csharp": "latest"
+  },
 ```
 
-TypeModel: InputType
+Run `npm install` to install the dependency
 
-```code
-string Name
-InputTypeKind Kind
-bool IsNullable
-InputTypeSerializationFormat SerializationFormat
-schema
-```
+### Generate .NET SDK
 
-#### Map CADL features in Code Model
-
-##### Namespace / interface
-
-Map operations grouped by namespace/interface => client
-
-#### Spread
-
-The spread operator takes the members of a source model and copies them into a target model.
-
-In Code Model, the target model will contain the members of the source model together with its members. There will no relationship between the target model and the source model.
-
-#### Extend
-
-We will add parent relationship in target model.
-
-#### server decorator
-
-Map server to endpoint client parameter.
-
-#### run csharp emitter
-
-cadl compile [--emit <csharp-emitter>] [--output-path <outputDirectory>] <cadl-file-path>
+Run command `npx tsp compile --emit @azure-tools/typespec-csharp <path-to-typespec-file>`
 
 e.g.
 
 ```cmd
-
-cadl compile --output-path test\TestProjects\string-format test\TestProjects\string-format\string-format.cadl --emit @azure-tools/cadl-csharp
+npx tsp compile main.tsp --emit @azure-tools/typespec-csharp
 ```
 
-#### debug
-
-node --inspect-brk node_modules\@cadl-lang\compiler\dist\core\cli.js compile main.cadl
-
-node --inspect-brk node_modules\@cadl-lang\compiler\dist\core\cli.js compile --output-path samples\petStore\Generated samples\petStore\petstore.cadl --emit @azure-tools/cadl-csharp
-
-### serialize
-
-CadlSerialization will serialize the cadl json to C# object (json file -> c# codemodel (c# object)).
-
-CalSerialization defines converters to handle special type/model serialization
-
-#### Enum converter
-
-In the json model, the value of the property is the enum variable name, the Enum converter will transfer to the enum value.
-
-### OutputLibrary Constructor
-DpgOutputLibraryBuilder will convert c# cadl model to output library for DPG.
-
-### codeModelConvertor
-
-CodeModelConverter will convert modelfoure to the cadl code model (m4 codemodel c# object -> cadl codemodel c# object).
-
-## Generate SDK from CADL
-
-### Generate SDK step by step
-You can generate sdk step by step as following:
-- install libraries : install the libraries under the directory of the cadl file or its parent directory
-  - install cadl dependencies: cadl compile and cadl rest
-  ```cmd
-  npm install @cadl-lang/compiler@0.34.0
-  npm install @cadl-lang/rest@0.16.0
-  ```
-  **Note**: if your cadl file imports other libraries, such as cadl-azure-core, you need to install them.
-- install csharp cadl emitter
-  ```cmd
-  npm install @azure-tools/cadl-csharp
-  ```
-- emit cadl model json
-  
-    ```cmd
-    cadl compile [--output-path <path-of-output-folder>] --emit @azure-tools/cadl-csharp <path-to-cadl-file>
-    ```
-    e.g
-
-    ```
-    cadl compile --output-path test\TestProjects\Petstore-Cadl\Generated --emit @azure-tools/cadl-csharp test\TestProjects\Petstore-Cadl\PetStore-Cadl.cadl
-    ```
-
-- add `Configuration.json` file under the same directory with cadl json file, e.g. test\TestProjects\Petstore-Cadl\Generated
-  
-  `Configuration.json` is to define some configuration meta-data, as following:
-
-  ```
-  {
-    "OutputFolder": ".",
-    "Namespace": "CadlFirstTest",
-    "LibraryName": null,
-    "SharedSourceFolders": [
-      "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-      "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
-    ]
-  }
-  ````
-
-- generate sdk from cadl json
-  
-  ```cmd
-
-  artifacts\bin\AutoRest.CSharp\Debug\netcoreapp3.1\AutoRest.CSharp.exe --standalone <path-to-cadl-file-directory>
-  ```
-
-  e.g.
-
-  ```cmd
-
-  artifacts\bin\AutoRest.CSharp\Debug\netcoreapp3.1\AutoRest.CSharp.exe --standalone test\TestProjects\Petstore-Cadl\Generated
-  ```
-
-### Generate SDK by Generate.ps1
-
-You can generate SDK via Generate.ps1 script
+or
 
 ```cmd
-eng/Generate.ps1 Petstore-Cadl
+npx tsp compile client.tsp --emit @azure-tools/typespec-csharp
 ```
 
-## E2E flow
-Integrate autorst.csharp into CADL compile
+## Configuration
+
+You can further configure the SDK generated, using the emitter options on @azure-tools/typespec-csharp.
+
+You can set options in the command line directly via `--option @azure-tools/typespec-csharp.<optionName>=XXX`, e.g. `--option @azure-tools/typespec-csharp.namespace=azure.AI.DeviceUpdate`
+
+or
+
+Modify `tspconfig.yaml` in typespec project, add emitter options under options/@azure-tools/typespec-csharp.
+
+```diff
+emit:
+  - "@azure-tools/typespec-csharp"
+options:
+  "@azure-tools/typespec-csharp":
++    namespace: Azure.Template.MyCadlProject
+```
+
+**Supported Emitter options**:
+- `namespace` define the client library namespace. e.g. Azure.IoT.DeviceUpdate.
+- `emitter-output-dir` define the output dire path which will store the generated code.
+- `generate-protocol-methods` indicate if you want to generate **protocol method** for each operation. By default is true.
+- `generate-convenience-methods` indicate if you want to generate **convenience method** for each operation. By default is true.
+- `unreferenced-types-handling` define the strategy how to handle the unreferenced types. It can be `removeOrInternalize`, `internalize` or `keepAll`
+- `model-namespace` indicate if we want to put the models in their own namespace which is a sub namespace of the client library namespace plus ".Models". if it is set `false`, the models will be put in the same namespace of the client. The default value is `true`.
+- `clear-output-folder` indicate if you want to clear up the output folder.
+- `package-name` define the package folder name which will be used as service directory name under `sdk/` in azure-sdk-for-net repo.
+- `save-inputs` indicate if you want to keep the intermediate files for debug purpose, e.g. the model json file parsed from typespec file.
+
+## Convenience API
+
+By default, TypeSpec-csharp generates all protocol APIs and convenience APIs.
+A few exceptions are API of JSON Merge Patch, and API of long-running operation with ambiguous response type.
+
+You can configure whether generate convenience API or not via `convenienceAPI` decorator.
+
+See "convenientAPI" decorator from [typespec-client-generator-core](https://github.com/Azure/typespec-azure/tree/main/packages/typespec-client-generator-core).

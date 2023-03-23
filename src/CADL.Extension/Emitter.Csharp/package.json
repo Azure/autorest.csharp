@@ -4,7 +4,7 @@
     "author": "Microsoft Corporation",
     "description": "Cadl library for emitting csharp model from the Cadl REST protocol binding",
     "homepage": "https://github.com/Microsoft/typespec",
-    "readme": "https://github.com/Microsoft/typespec/blob/master/README.md",
+    "readme": "https://github.com/Azure/autorest.csharp/blob/feature/v3/src/CADL.Extension/readme.md",
     "license": "MIT",
     "repository": {
         "type": "git",
