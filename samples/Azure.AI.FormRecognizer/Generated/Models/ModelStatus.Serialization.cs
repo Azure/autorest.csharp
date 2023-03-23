@@ -21,9 +21,9 @@ namespace Azure.AI.FormRecognizer.Models
 
         public static ModelStatus ToModelStatus(this string value)
         {
-            if (string.Equals(value, "creating", StringComparison.InvariantCultureIgnoreCase)) return ModelStatus.Creating;
-            if (string.Equals(value, "ready", StringComparison.InvariantCultureIgnoreCase)) return ModelStatus.Ready;
-            if (string.Equals(value, "invalid", StringComparison.InvariantCultureIgnoreCase)) return ModelStatus.Invalid;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "creating")) return ModelStatus.Creating;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "ready")) return ModelStatus.Ready;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "invalid")) return ModelStatus.Invalid;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ModelStatus value.");
         }
     }

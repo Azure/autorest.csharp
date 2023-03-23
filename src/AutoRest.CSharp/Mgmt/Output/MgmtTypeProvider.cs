@@ -100,15 +100,13 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
 
             var additionalFields = GetAdditionalFields();
-            if (additionalFields is null)
-                yield break;
-
             foreach (var field in additionalFields)
             {
                 yield return field;
             }
         }
-        protected virtual IEnumerable<FieldDeclaration>? GetAdditionalFields() => null;
+
+        protected virtual IEnumerable<FieldDeclaration> GetAdditionalFields() => Enumerable.Empty<FieldDeclaration>();
 
         private ConstructorSignature? _mockingCtor;
         public ConstructorSignature? MockingCtor => _mockingCtor ??= EnsureMockingCtor();

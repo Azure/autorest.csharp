@@ -15,6 +15,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -109,11 +110,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                 .Select(param => new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, Validation.None, null))
                 .ToArray();
 
+            // we should only add initializers when there is a corresponding parameter
             List<ObjectPropertyInitializer> initializers = new List<ObjectPropertyInitializer>();
             foreach (var autoRestProperty in Properties)
             {
-                Reference reference = new Reference(ToCamelCase(autoRestProperty.Declaration.Name), autoRestProperty.ValueType);
-                initializers.Add(new ObjectPropertyInitializer(autoRestProperty, reference));
+                if (parameters.Any(parameter => parameter.Name == autoRestProperty.Declaration.Name.ToVariableName()))
+                {
+                    Reference reference = new Reference(ToCamelCase(autoRestProperty.Declaration.Name), autoRestProperty.ValueType);
+                    initializers.Add(new ObjectPropertyInitializer(autoRestProperty, reference));
+                }
             }
 
             var modifiers = ctor.IsFamily ? Protected : Public;

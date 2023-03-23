@@ -18,12 +18,12 @@ namespace Azure.Management.Storage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Enabled))
             {
-                writer.WritePropertyName("enabled");
+                writer.WritePropertyName("enabled"u8);
                 writer.WriteBooleanValue(Enabled.Value);
             }
             if (Optional.IsDefined(KeyType))
             {
-                writer.WritePropertyName("keyType");
+                writer.WritePropertyName("keyType"u8);
                 writer.WriteStringValue(KeyType.Value.ToString());
             }
             writer.WriteEndObject();
@@ -31,12 +31,16 @@ namespace Azure.Management.Storage.Models
 
         internal static EncryptionService DeserializeEncryptionService(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> enabled = default;
             Optional<DateTimeOffset> lastEnabledTime = default;
             Optional<KeyType> keyType = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("enabled"))
+                if (property.NameEquals("enabled"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -46,7 +50,7 @@ namespace Azure.Management.Storage.Models
                     enabled = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("lastEnabledTime"))
+                if (property.NameEquals("lastEnabledTime"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -56,7 +60,7 @@ namespace Azure.Management.Storage.Models
                     lastEnabledTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("keyType"))
+                if (property.NameEquals("keyType"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

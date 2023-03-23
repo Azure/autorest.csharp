@@ -18,7 +18,7 @@ namespace TypeSchemaMapping.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Uri))
             {
-                writer.WritePropertyName("Uri");
+                writer.WritePropertyName("Uri"u8);
                 writer.WriteStringValue(Uri.AbsoluteUri);
             }
             writer.WriteEndObject();
@@ -26,10 +26,14 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithUriProperty DeserializeModelWithUriProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<Uri> uri = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("Uri"))
+                if (property.NameEquals("Uri"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

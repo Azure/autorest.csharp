@@ -17,7 +17,7 @@ namespace MgmtOptionalConstant.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName("tags");
+                writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
                 foreach (var item in Tags)
                 {
@@ -26,16 +26,16 @@ namespace MgmtOptionalConstant.Models
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(Listener))
             {
-                writer.WritePropertyName("listener");
+                writer.WritePropertyName("listener"u8);
                 writer.WriteObjectValue(Listener);
             }
             if (Optional.IsDefined(Content))
             {
-                writer.WritePropertyName("content");
+                writer.WritePropertyName("content"u8);
                 writer.WriteObjectValue(Content);
             }
             writer.WriteEndObject();

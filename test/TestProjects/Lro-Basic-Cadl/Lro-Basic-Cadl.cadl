@@ -8,8 +8,12 @@ using Cadl.Http;
 using Azure.DPG;
 using Cadl.Versioning;
 
-@serviceTitle("Text authoring")
-@serviceVersion("2022-05-15-preview")
+@service(
+    {
+        title: "Text authoring",
+        version: "2022-05-15-preview"
+    }
+)
 @versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
 @server(
     "{lroBasicUrl}",
@@ -38,15 +42,15 @@ model Thing {
 interface Authoring {
   createProjectStatusMonitor is CustomCore.PollingOperation<Project>;
 
-  @convenienceAPI
+  @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
   createProject is Azure.Core.LongRunningResourceCreateWithServiceProvidedName<Project>;
   
-  @convenienceAPI
+  @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
   op updateProject is Azure.Core.LongRunningResourceCreateOrReplace<Project, Project>;
 
-  @convenienceAPI
+  @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
   op createThing is CustomCore.LongRunningRpcOperation<Thing, Thing>;
 }
@@ -59,7 +63,7 @@ namespace CustomCore {
   }
 
   @Cadl.Http.route("operations")
-  @convenienceAPI
+  @convenientAPI(true)
   op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
 
   @doc("Long running RPC operation template")

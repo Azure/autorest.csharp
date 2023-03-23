@@ -17,22 +17,22 @@ namespace Azure.Management.Storage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(TierToCool))
             {
-                writer.WritePropertyName("tierToCool");
+                writer.WritePropertyName("tierToCool"u8);
                 writer.WriteObjectValue(TierToCool);
             }
             if (Optional.IsDefined(TierToArchive))
             {
-                writer.WritePropertyName("tierToArchive");
+                writer.WritePropertyName("tierToArchive"u8);
                 writer.WriteObjectValue(TierToArchive);
             }
             if (Optional.IsDefined(Delete))
             {
-                writer.WritePropertyName("delete");
+                writer.WritePropertyName("delete"u8);
                 writer.WriteObjectValue(Delete);
             }
             if (Optional.IsDefined(EnableAutoTierToHotFromCool))
             {
-                writer.WritePropertyName("enableAutoTierToHotFromCool");
+                writer.WritePropertyName("enableAutoTierToHotFromCool"u8);
                 writer.WriteBooleanValue(EnableAutoTierToHotFromCool.Value);
             }
             writer.WriteEndObject();
@@ -40,13 +40,17 @@ namespace Azure.Management.Storage.Models
 
         internal static ManagementPolicyBaseBlob DeserializeManagementPolicyBaseBlob(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DateAfterModification> tierToCool = default;
             Optional<DateAfterModification> tierToArchive = default;
             Optional<DateAfterModification> delete = default;
             Optional<bool> enableAutoTierToHotFromCool = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("tierToCool"))
+                if (property.NameEquals("tierToCool"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -56,7 +60,7 @@ namespace Azure.Management.Storage.Models
                     tierToCool = DateAfterModification.DeserializeDateAfterModification(property.Value);
                     continue;
                 }
-                if (property.NameEquals("tierToArchive"))
+                if (property.NameEquals("tierToArchive"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -66,7 +70,7 @@ namespace Azure.Management.Storage.Models
                     tierToArchive = DateAfterModification.DeserializeDateAfterModification(property.Value);
                     continue;
                 }
-                if (property.NameEquals("delete"))
+                if (property.NameEquals("delete"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -76,7 +80,7 @@ namespace Azure.Management.Storage.Models
                     delete = DateAfterModification.DeserializeDateAfterModification(property.Value);
                     continue;
                 }
-                if (property.NameEquals("enableAutoTierToHotFromCool"))
+                if (property.NameEquals("enableAutoTierToHotFromCool"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

@@ -26,8 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> Initializes a new instance of UrlRedirectAction. </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
+        /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
-        internal UrlRedirectAction(DeliveryRuleActionType name, UrlRedirectActionParameters parameters) : base(name)
+        internal UrlRedirectAction(DeliveryRuleActionType name, string foo, UrlRedirectActionParameters parameters) : base(name, foo)
         {
             Parameters = parameters;
             Name = name;

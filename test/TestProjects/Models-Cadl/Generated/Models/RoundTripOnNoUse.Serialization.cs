@@ -17,25 +17,29 @@ namespace ModelsInCadl.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredCollection");
+            writer.WritePropertyName("requiredCollection"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredCollection)
             {
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("baseModelProp");
+            writer.WritePropertyName("baseModelProp"u8);
             writer.WriteStringValue(BaseModelProp);
             writer.WriteEndObject();
         }
 
         internal static RoundTripOnNoUse DeserializeRoundTripOnNoUse(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IList<CollectionItem> requiredCollection = default;
             string baseModelProp = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredCollection"))
+                if (property.NameEquals("requiredCollection"u8))
                 {
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -45,7 +49,7 @@ namespace ModelsInCadl.Models
                     requiredCollection = array;
                     continue;
                 }
-                if (property.NameEquals("baseModelProp"))
+                if (property.NameEquals("baseModelProp"u8))
                 {
                     baseModelProp = property.Value.GetString();
                     continue;

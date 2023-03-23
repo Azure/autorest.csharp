@@ -40,9 +40,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var modelFactoryType = library.ModelFactory;
             if (modelFactoryType != default)
             {
-                var codeWriter = new CodeWriter();
-                ModelFactoryWriter.WriteModelFactory(codeWriter, modelFactoryType);
-                project.AddGeneratedFile($"{modelFactoryType.Type.Name}.cs", codeWriter.ToString());
+                var modelFactoryWriter = new ModelFactoryWriter(modelFactoryType);
+                modelFactoryWriter.Write();
+                project.AddGeneratedFile($"{modelFactoryType.Type.Name}.cs", modelFactoryWriter.ToString());
             }
 
             foreach (var client in library.RestClients)

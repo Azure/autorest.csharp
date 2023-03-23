@@ -19,12 +19,12 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(HealthProbe))
             {
-                writer.WritePropertyName("healthProbe");
+                writer.WritePropertyName("healthProbe"u8);
                 JsonSerializer.Serialize(writer, HealthProbe);
             }
             if (Optional.IsCollectionDefined(NetworkInterfaceConfigurations))
             {
-                writer.WritePropertyName("networkInterfaceConfigurations");
+                writer.WritePropertyName("networkInterfaceConfigurations"u8);
                 writer.WriteStartArray();
                 foreach (var item in NetworkInterfaceConfigurations)
                 {
@@ -37,11 +37,15 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetNetworkProfile DeserializeVirtualMachineScaleSetNetworkProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<WritableSubResource> healthProbe = default;
             Optional<IList<VirtualMachineScaleSetNetworkConfiguration>> networkInterfaceConfigurations = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("healthProbe"))
+                if (property.NameEquals("healthProbe"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -51,7 +55,7 @@ namespace Azure.ResourceManager.Sample.Models
                     healthProbe = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("networkInterfaceConfigurations"))
+                if (property.NameEquals("networkInterfaceConfigurations"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

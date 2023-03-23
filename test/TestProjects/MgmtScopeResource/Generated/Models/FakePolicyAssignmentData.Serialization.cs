@@ -21,29 +21,29 @@ namespace MgmtScopeResource
             writer.WriteStartObject();
             if (Optional.IsDefined(Location))
             {
-                writer.WritePropertyName("location");
+                writer.WritePropertyName("location"u8);
                 writer.WriteStringValue(Location);
             }
             if (Optional.IsDefined(Identity))
             {
-                writer.WritePropertyName("identity");
+                writer.WritePropertyName("identity"u8);
                 JsonSerializer.Serialize(writer, Identity);
             }
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(DisplayName))
             {
-                writer.WritePropertyName("displayName");
+                writer.WritePropertyName("displayName"u8);
                 writer.WriteStringValue(DisplayName);
             }
             if (Optional.IsDefined(PolicyDefinitionId))
             {
-                writer.WritePropertyName("policyDefinitionId");
+                writer.WritePropertyName("policyDefinitionId"u8);
                 writer.WriteStringValue(PolicyDefinitionId);
             }
             if (Optional.IsCollectionDefined(NotScopes))
             {
-                writer.WritePropertyName("notScopes");
+                writer.WritePropertyName("notScopes"u8);
                 writer.WriteStartArray();
                 foreach (var item in NotScopes)
                 {
@@ -53,7 +53,7 @@ namespace MgmtScopeResource
             }
             if (Optional.IsCollectionDefined(Parameters))
             {
-                writer.WritePropertyName("parameters");
+                writer.WritePropertyName("parameters"u8);
                 writer.WriteStartObject();
                 foreach (var item in Parameters)
                 {
@@ -64,12 +64,12 @@ namespace MgmtScopeResource
             }
             if (Optional.IsDefined(Description))
             {
-                writer.WritePropertyName("description");
+                writer.WritePropertyName("description"u8);
                 writer.WriteStringValue(Description);
             }
             if (Optional.IsDefined(Metadata))
             {
-                writer.WritePropertyName("metadata");
+                writer.WritePropertyName("metadata"u8);
 #if NET6_0_OR_GREATER
 				writer.WriteRawValue(Metadata);
 #else
@@ -78,12 +78,12 @@ namespace MgmtScopeResource
             }
             if (Optional.IsDefined(EnforcementMode))
             {
-                writer.WritePropertyName("enforcementMode");
+                writer.WritePropertyName("enforcementMode"u8);
                 writer.WriteStringValue(EnforcementMode.Value.ToString());
             }
             if (Optional.IsCollectionDefined(NonComplianceMessages))
             {
-                writer.WritePropertyName("nonComplianceMessages");
+                writer.WritePropertyName("nonComplianceMessages"u8);
                 writer.WriteStartArray();
                 foreach (var item in NonComplianceMessages)
                 {
@@ -97,6 +97,10 @@ namespace MgmtScopeResource
 
         internal static FakePolicyAssignmentData DeserializeFakePolicyAssignmentData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> location = default;
             Optional<ManagedServiceIdentity> identity = default;
             ResourceIdentifier id = default;
@@ -114,12 +118,12 @@ namespace MgmtScopeResource
             Optional<IList<NonComplianceMessage>> nonComplianceMessages = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("location"))
+                if (property.NameEquals("location"u8))
                 {
                     location = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("identity"))
+                if (property.NameEquals("identity"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -129,22 +133,22 @@ namespace MgmtScopeResource
                     identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("systemData"))
+                if (property.NameEquals("systemData"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -154,7 +158,7 @@ namespace MgmtScopeResource
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -163,22 +167,22 @@ namespace MgmtScopeResource
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("displayName"))
+                        if (property0.NameEquals("displayName"u8))
                         {
                             displayName = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("policyDefinitionId"))
+                        if (property0.NameEquals("policyDefinitionId"u8))
                         {
                             policyDefinitionId = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("scope"))
+                        if (property0.NameEquals("scope"u8))
                         {
                             scope = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("notScopes"))
+                        if (property0.NameEquals("notScopes"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -193,7 +197,7 @@ namespace MgmtScopeResource
                             notScopes = array;
                             continue;
                         }
-                        if (property0.NameEquals("parameters"))
+                        if (property0.NameEquals("parameters"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -208,12 +212,12 @@ namespace MgmtScopeResource
                             parameters = dictionary;
                             continue;
                         }
-                        if (property0.NameEquals("description"))
+                        if (property0.NameEquals("description"u8))
                         {
                             description = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("metadata"))
+                        if (property0.NameEquals("metadata"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -223,7 +227,7 @@ namespace MgmtScopeResource
                             metadata = BinaryData.FromString(property0.Value.GetRawText());
                             continue;
                         }
-                        if (property0.NameEquals("enforcementMode"))
+                        if (property0.NameEquals("enforcementMode"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -233,7 +237,7 @@ namespace MgmtScopeResource
                             enforcementMode = new EnforcementMode(property0.Value.GetString());
                             continue;
                         }
-                        if (property0.NameEquals("nonComplianceMessages"))
+                        if (property0.NameEquals("nonComplianceMessages"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {

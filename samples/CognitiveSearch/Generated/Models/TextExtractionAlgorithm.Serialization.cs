@@ -20,8 +20,8 @@ namespace CognitiveSearch.Models
 
         public static TextExtractionAlgorithm ToTextExtractionAlgorithm(this string value)
         {
-            if (string.Equals(value, "printed", StringComparison.InvariantCultureIgnoreCase)) return TextExtractionAlgorithm.Printed;
-            if (string.Equals(value, "handwritten", StringComparison.InvariantCultureIgnoreCase)) return TextExtractionAlgorithm.Handwritten;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "printed")) return TextExtractionAlgorithm.Printed;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "handwritten")) return TextExtractionAlgorithm.Handwritten;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown TextExtractionAlgorithm value.");
         }
     }

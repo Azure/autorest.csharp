@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -23,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
 
-        public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isCadlInput)
+        public DpgOutputLibrary(IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, AspDotNetExtensionTypeProvider aspDotNetExtension, bool isCadlInput)
         {
             TypeFactory = new TypeFactory(this);
             _enums = enums;
@@ -31,7 +33,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             _isCadlInput = isCadlInput;
             RestClients = restClients;
             ClientOptions = clientOptions;
+            AspDotNetExtension = aspDotNetExtension;
         }
+
+        public AspDotNetExtensionTypeProvider AspDotNetExtension { get; }
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {

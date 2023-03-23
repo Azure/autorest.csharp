@@ -20,7 +20,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             : this(new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type), field.Description?.ToString() ?? String.Empty, field.Modifiers.HasFlag(FieldModifiers.ReadOnly), null, field.IsRequired, inputModelProperty: inputModelProperty)
         {
             // now the default value will be set only when the model is generated from property bag
-            if (enclosingType is ModelTypeProvider model && model.IsPropertyBag)
+            if ((enclosingType is ModelTypeProvider model && model.IsPropertyBag) ||
+                (inputModelProperty.Type is InputLiteralType)) // or the property is a literal type
             {
                 DefaultValue = field.DefaultValue;
             }
@@ -71,10 +72,40 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (IsFlattenedProperty && _flattenedProperty == null)
             {
-                _flattenedProperty = FlattenedObjectTypeProperty.CreateFrom(this);
+                var hierarchyStack = FlattenedObjectTypeProperty.GetHierarchyStack(this);
+                // we can only get in this method when the property has a single property type, therefore the hierarchy stack here is guaranteed to have at least two values
+                var innerProperty = hierarchyStack.Pop();
+                var immediateParentProperty = hierarchyStack.Pop();
+
+                var myPropertyName = FlattenedObjectTypeProperty.GetCombinedPropertyName(innerProperty, immediateParentProperty);
+                var childPropertyName = this.Equals(immediateParentProperty) ? innerProperty.Declaration.Name : myPropertyName;
+
+                var propertyType = innerProperty.Declaration.Type;
+
+                var isOverriddenValueType = innerProperty.Declaration.Type.IsValueType && !innerProperty.Declaration.Type.IsNullable;
+                if (isOverriddenValueType)
+                    propertyType = propertyType.WithNullable(isOverriddenValueType);
+
+                var declaration = new MemberDeclarationOptions(innerProperty.Declaration.Accessibility, myPropertyName, propertyType);
+
+                // determines whether this property should has a setter
+                var (isReadOnly, includeGetterNullCheck, includeSetterNullCheck) = FlattenedObjectTypeProperty.GetFlags(this, innerProperty);
+
+                _flattenedProperty = new FlattenedObjectTypeProperty(declaration, innerProperty._baseParameterDescription, this, isReadOnly, includeGetterNullCheck, includeSetterNullCheck, childPropertyName, isOverriddenValueType);
             }
 
             return _flattenedProperty;
+        }
+
+        public virtual Stack<ObjectTypeProperty> BuildHierarchyStack()
+        {
+            if (FlattenedProperty != null)
+                return FlattenedProperty.BuildHierarchyStack();
+
+            var stack =  new Stack<ObjectTypeProperty>();
+            stack.Push(this);
+
+            return stack;
         }
 
         public static FormattableString CreateDefaultPropertyDescription(string nameToUse, bool isReadOnly)
@@ -98,7 +129,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public Property? SchemaProperty { get; }
         public InputModelProperty? InputModelProperty { get; }
         private string? _parameterDescription;
-        private string _baseParameterDescription;
+        private string _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
         public string ParameterDescription => _parameterDescription ??= _baseParameterDescription + CreateExtraPropertyDiscriminatorSummary(ValueType);
 
         /// <summary>

@@ -15,16 +15,20 @@ namespace ModelsInCadl.Models
     {
         internal static ErrorModel DeserializeErrorModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string message = default;
             Optional<ErrorModel> innerError = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("message"))
+                if (property.NameEquals("message"u8))
                 {
                     message = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("innerError"))
+                if (property.NameEquals("innerError"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

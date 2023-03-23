@@ -16,16 +16,16 @@ namespace CognitiveSearch.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             if (Optional.IsDefined(TextWeights))
             {
-                writer.WritePropertyName("text");
+                writer.WritePropertyName("text"u8);
                 writer.WriteObjectValue(TextWeights);
             }
             if (Optional.IsCollectionDefined(Functions))
             {
-                writer.WritePropertyName("functions");
+                writer.WritePropertyName("functions"u8);
                 writer.WriteStartArray();
                 foreach (var item in Functions)
                 {
@@ -35,7 +35,7 @@ namespace CognitiveSearch.Models
             }
             if (Optional.IsDefined(FunctionAggregation))
             {
-                writer.WritePropertyName("functionAggregation");
+                writer.WritePropertyName("functionAggregation"u8);
                 writer.WriteStringValue(FunctionAggregation.Value.ToSerialString());
             }
             writer.WriteEndObject();
@@ -43,18 +43,22 @@ namespace CognitiveSearch.Models
 
         internal static ScoringProfile DeserializeScoringProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<TextWeights> text = default;
             Optional<IList<ScoringFunction>> functions = default;
             Optional<ScoringFunctionAggregation> functionAggregation = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("text"))
+                if (property.NameEquals("text"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -64,7 +68,7 @@ namespace CognitiveSearch.Models
                     text = TextWeights.DeserializeTextWeights(property.Value);
                     continue;
                 }
-                if (property.NameEquals("functions"))
+                if (property.NameEquals("functions"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -79,7 +83,7 @@ namespace CognitiveSearch.Models
                     functions = array;
                     continue;
                 }
-                if (property.NameEquals("functionAggregation"))
+                if (property.NameEquals("functionAggregation"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

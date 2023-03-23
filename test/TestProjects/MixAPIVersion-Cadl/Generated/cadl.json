@@ -284,10 +284,11 @@
       }
      ],
      "HttpMethod": "DELETE",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{petStoreUrl}",
      "Path": "/pets/Pet/{name}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -378,10 +379,11 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{petStoreUrl}",
      "Path": "/pets/{petId}",
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -519,6 +521,7 @@
       "application/json"
      ],
      "BufferResponse": true,
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     },
     {
@@ -577,7 +580,7 @@
       }
      ],
      "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
+     "RequestBodyMediaType": "None",
      "Uri": "{petStoreUrl}",
      "Path": "/pets/toys/Toy",
      "BufferResponse": true,
@@ -586,6 +589,7 @@
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
+     "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],

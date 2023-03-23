@@ -52,7 +52,7 @@
    ],
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   },
   {
    "$id": "10",
@@ -100,7 +100,7 @@
    ],
    "IsExtensible": false,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   },
   {
    "$id": "18",
@@ -162,7 +162,7 @@
    ],
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "Input"
   }
  ],
  "Models": [
@@ -172,7 +172,7 @@
    "Namespace": "Cadl.EnumPropertiesBasic",
    "Description": "Input model with enum properties.",
    "IsNullable": false,
-   "Usage": "None",
+   "Usage": "Input",
    "Properties": [
     {
      "$id": "28",
@@ -389,7 +389,8 @@
       "application/json"
      ],
      "BufferResponse": true,
-     "GenerateConvenienceMethod": false
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

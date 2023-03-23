@@ -112,7 +112,7 @@ To rename a type (models and enumerations included), you could just use this syn
 rename-mapping:
   OriginalName: NewName
 ```
-where the `OriginalName` is the original name of this model in the swagger. **Please be sure the name is its original swagger name**, because our generator will dynamically change names of some models from their context and roles inside the SDK.
+where the `OriginalName` is the original name of this model in the swagger. **Please be sure the name is its original swagger name**, because our generator will dynamically change names of some models from their context and roles inside the SDK. About how to get their original name of a model, please refer to [`How to get original name` section](#how-to-get-original-name).
 
 After applying this configuration, you will see the following changes:
 ```diff
@@ -130,7 +130,7 @@ To rename a property in a class, you could just use this syntax:
 rename-mapping:
   Model.oldProperty: NewProperty
 ```
-where the `Model` is the original name of this model in the **swagger**, and the `oldProperty` is its original name of this property in the **swagger**.
+where the `Model` is the original name of this model in the **swagger**, and the `oldProperty` is its original name of this property in the **swagger**. About how to get their original name of a property in model, please refer to [`How to get original name` section](#how-to-get-original-name).
 
 After applying this configuration, you will see the following changes:
 ```diff
@@ -142,51 +142,6 @@ public partial class Model
 +    public string NewProperty { get; set; }
 
     /* other things inside the class */
-}
-```
-
-It is special that some properties might be "flattened" from another model into this property. When this happens, you will have to include a full path of the property to make sure that the generator could precisely locate the property. For instance, we might have this inside our swagger:
-```json
-"definitions": {
-    "Model": {
-        "type": "object",
-        "properties": {
-            "properties": {
-                "$ref": "#definitions/ModelProperties",
-                "x-ms-client-flatten": true
-            }
-        }
-    },
-    "ModelProperties": {
-        "type": "object",
-        "properties": {
-            "flattenedProperty": {
-                "type": "string"
-            }
-        }
-    }
-}
-```
-This piece of swagger will generate into the following code:
-```csharp
-public partial class Model
-{
-    /* constructors */
-    public string FlattenedProperty { get; set; }
-}
-```
-The model `ModelProperties` will disappear in our generated code, and the properties inside `ModelProperties` will be promoted into the owner class. In case the name of this property needs to be changed, you will have to use the following configuration:
-```yaml
-rename-mapping:
-  Model.properties.flattenedProperty: NewFlattenedProperty
-```
-After applying this configuration, you will see the following changes:
-```diff
-public partial class Model
-{
-    /* constructors */
--   public string FlattenedProperty { get; set; }
-+   public string NewFlattenedProperty { get; set; }
 }
 ```
 
@@ -217,6 +172,8 @@ rename-mapping:
 ```
 Please note that the dash and slash `-|` here are mandatory as a placeholder for the property name. The generator uses this symbol to separate the part for property name and its format.
 
+About how to get their original name of a property in model, please refer to [`How to get original name` section](#how-to-get-original-name).
+
 ### Rename an enumeration value in an enumeration type
 
 The generator regards the enumeration values as static properties, therefore you could use basically the same syntax as renaming a property to rename an enumeration value:
@@ -224,7 +181,62 @@ The generator regards the enumeration values as static properties, therefore you
 rename-mapping:
   EnumType.enum_value: NewValue
 ```
-where the `EnumType` is the original name of the enumeration type in the **swagger**, and `enum_value` is the original name of the enumeration value in the **swagger**. In case we have spaces or other special character, you might need to use quotes to enclosing the key in this mapping to ensure everything is good without compile errors.
+where the `EnumType` is the original name of the enumeration type in the **swagger**, and `enum_value` is the original name of the enumeration value in the **swagger**. In case we have spaces or other special character, you might need to use quotes to enclosing the key in this mapping to ensure everything is good without compile errors. About how to get their original name of enum classes or enum values, please refer to [`How to get original name` section](#how-to-get-original-name).
+
+### How to get original name
+
+The `rename-mapping` configuration requires an "original name" as its key to rename an element (model name, property name, enum name, enum value name or format of a property) in the generated SDK. We have a debug flag to show the original names of those elements that support to rename.
+
+Add the following configuration to your `autorest.md` and regenerate the SDK:
+```yaml
+mgmt-debug:
+  show-serialized-names: true
+```
+You will see changes like this:
+```diff
+    /// <summary>
+    /// A class representing the Image data model.
+    /// The source user image virtual hard disk. The virtual hard disk will be copied before being attached to the virtual machine. If SourceImage is provided, the destination virtual hard drive must not exist.
++   /// Serialized Name: Image
+    /// </summary>
+    public partial class ImageData : TrackedResourceData
+```
+or on a property:
+```diff
+    /// <summary>
+    /// Specifies the storage settings for the virtual machine disks.
++   /// Serialized Name: Image.properties.storageProfile
+    /// </summary>
+    public ImageStorageProfile StorageProfile { get; set; }
+```
+or on an enum and its values:
+```diff
+    /// <summary>
+    /// Specifies the caching requirements. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **None** &lt;br&gt;&lt;br&gt; **ReadOnly** &lt;br&gt;&lt;br&gt; **ReadWrite** &lt;br&gt;&lt;br&gt; Default: **None for Standard storage. ReadOnly for Premium storage**
++   /// Serialized Name: CachingTypes
+    /// </summary>
+    public enum CachingType
+    {
+        /// <summary>
+        /// None
++       /// Serialized Name: CachingTypes.None
+        /// </summary>
+        None,
+        /// <summary>
+        /// ReadOnly
++       /// Serialized Name: CachingTypes.ReadOnly
+        /// </summary>
+        ReadOnly,
+        /// <summary>
+        /// ReadWrite
++       /// Serialized Name: CachingTypes.ReadWrite
+        /// </summary>
+        ReadWrite
+    }
+```
+The content after `Serialized Name:` is the "original name" you would like to use as keys in `rename-mapping`.
+
+Because this configuration adds quite a few extra content to the xml documents, it is not recommended to have this flag on an official SDK, be sure to remove the configuration and regenerate the SDK after all the rename work is done.
 
 ## Rename a parameter in an operation
 

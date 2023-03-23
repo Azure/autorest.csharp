@@ -12,7 +12,10 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    /// <summary> A class representing the ManagedHsm data model. </summary>
+    /// <summary>
+    /// A class representing the ManagedHsm data model.
+    /// Resource information with extended details.
+    /// </summary>
     public partial class ManagedHsmData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of ManagedHsmData. </summary>

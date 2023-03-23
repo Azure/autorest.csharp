@@ -14,6 +14,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static StorageAccountMicrosoftEndpoints DeserializeStorageAccountMicrosoftEndpoints(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> blob = default;
             Optional<string> queue = default;
             Optional<string> table = default;
@@ -22,32 +26,32 @@ namespace Azure.Management.Storage.Models
             Optional<string> dfs = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("blob"))
+                if (property.NameEquals("blob"u8))
                 {
                     blob = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("queue"))
+                if (property.NameEquals("queue"u8))
                 {
                     queue = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("table"))
+                if (property.NameEquals("table"u8))
                 {
                     table = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("file"))
+                if (property.NameEquals("file"u8))
                 {
                     file = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("web"))
+                if (property.NameEquals("web"u8))
                 {
                     web = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("dfs"))
+                if (property.NameEquals("dfs"u8))
                 {
                     dfs = property.Value.GetString();
                     continue;

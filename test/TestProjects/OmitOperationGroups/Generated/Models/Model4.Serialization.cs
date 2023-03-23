@@ -14,22 +14,26 @@ namespace OmitOperationGroups.Models
     {
         internal static Model4 DeserializeModel4(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> j = default;
             Optional<ModelZ> modelz = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("j"))
+                if (property.NameEquals("j"u8))
                 {
                     j = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("modelz"))
+                if (property.NameEquals("modelz"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

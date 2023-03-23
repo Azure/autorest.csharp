@@ -15,17 +15,21 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static KeyValueElement DeserializeKeyValueElement(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string text = default;
             Optional<IReadOnlyList<float>> boundingBox = default;
             Optional<IReadOnlyList<string>> elements = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("text"))
+                if (property.NameEquals("text"u8))
                 {
                     text = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("boundingBox"))
+                if (property.NameEquals("boundingBox"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -40,7 +44,7 @@ namespace Azure.AI.FormRecognizer.Models
                     boundingBox = array;
                     continue;
                 }
-                if (property.NameEquals("elements"))
+                if (property.NameEquals("elements"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

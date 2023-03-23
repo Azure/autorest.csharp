@@ -18,17 +18,17 @@ namespace Azure.Management.Storage.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(StartOn))
             {
-                writer.WritePropertyName("startTime");
+                writer.WritePropertyName("startTime"u8);
                 writer.WriteStringValue(StartOn.Value, "O");
             }
             if (Optional.IsDefined(ExpiryOn))
             {
-                writer.WritePropertyName("expiryTime");
+                writer.WritePropertyName("expiryTime"u8);
                 writer.WriteStringValue(ExpiryOn.Value, "O");
             }
             if (Optional.IsDefined(Permission))
             {
-                writer.WritePropertyName("permission");
+                writer.WritePropertyName("permission"u8);
                 writer.WriteStringValue(Permission);
             }
             writer.WriteEndObject();
@@ -36,12 +36,16 @@ namespace Azure.Management.Storage.Models
 
         internal static AccessPolicy DeserializeAccessPolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DateTimeOffset> startTime = default;
             Optional<DateTimeOffset> expiryTime = default;
             Optional<string> permission = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("startTime"))
+                if (property.NameEquals("startTime"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -51,7 +55,7 @@ namespace Azure.Management.Storage.Models
                     startTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("expiryTime"))
+                if (property.NameEquals("expiryTime"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -61,7 +65,7 @@ namespace Azure.Management.Storage.Models
                     expiryTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("permission"))
+                if (property.NameEquals("permission"u8))
                 {
                     permission = property.Value.GetString();
                     continue;

@@ -4,13 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -24,12 +23,18 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class ResourceWriter : MgmtClientBaseWriter
     {
+        public static ResourceWriter GetWriter(Resource resource) => resource switch
+        {
+            PartialResource partialResource => new PartialResourceWriter(partialResource),
+            _ => new ResourceWriter(resource)
+        };
+
         private Resource This { get; }
 
-        public ResourceWriter(Resource resource) : this(new CodeWriter(), resource)
+        protected ResourceWriter(Resource resource) : this(new CodeWriter(), resource)
         { }
 
-        public ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
+        protected ResourceWriter(CodeWriter writer, Resource resource) : base(writer, resource)
         {
             This = resource;
             _customMethods.Add(nameof(WriteAddTagBody), WriteAddTagBody);

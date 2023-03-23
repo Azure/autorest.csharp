@@ -17,22 +17,22 @@ namespace ExactMatchInheritance.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
             {
-                writer.WritePropertyName("new");
+                writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
             if (Optional.IsDefined(ID))
             {
-                writer.WritePropertyName("iD");
+                writer.WritePropertyName("iD"u8);
                 writer.WriteStringValue(ID);
             }
             if (Optional.IsDefined(Name))
             {
-                writer.WritePropertyName("name");
+                writer.WritePropertyName("name"u8);
                 writer.WriteStringValue(Name);
             }
             if (Optional.IsDefined(ExactMatchModel7Type))
             {
-                writer.WritePropertyName("type");
+                writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ExactMatchModel7Type);
             }
             writer.WriteEndObject();
@@ -40,28 +40,32 @@ namespace ExactMatchInheritance.Models
 
         internal static ExactMatchModel2 DeserializeExactMatchModel2(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @new = default;
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("new"))
+                if (property.NameEquals("new"u8))
                 {
                     @new = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("iD"))
+                if (property.NameEquals("iD"u8))
                 {
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = property.Value.GetString();
                     continue;

@@ -15,18 +15,22 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentEntities DeserializeDocumentEntities(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string id = default;
             IReadOnlyList<Entity> entities = default;
             IReadOnlyList<TextAnalyticsWarning> warnings = default;
             Optional<DocumentStatistics> statistics = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("entities"))
+                if (property.NameEquals("entities"u8))
                 {
                     List<Entity> array = new List<Entity>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -36,7 +40,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     entities = array;
                     continue;
                 }
-                if (property.NameEquals("warnings"))
+                if (property.NameEquals("warnings"u8))
                 {
                     List<TextAnalyticsWarning> array = new List<TextAnalyticsWarning>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -46,7 +50,7 @@ namespace CognitiveServices.TextAnalytics.Models
                     warnings = array;
                     continue;
                 }
-                if (property.NameEquals("statistics"))
+                if (property.NameEquals("statistics"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

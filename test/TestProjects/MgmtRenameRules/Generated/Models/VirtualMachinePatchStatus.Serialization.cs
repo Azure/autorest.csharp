@@ -14,11 +14,15 @@ namespace MgmtRenameRules.Models
     {
         internal static VirtualMachinePatchStatus DeserializeVirtualMachinePatchStatus(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<AvailablePatchSummary> availablePatchSummary = default;
             Optional<LastPatchInstallationSummary> lastPatchInstallationSummary = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("availablePatchSummary"))
+                if (property.NameEquals("availablePatchSummary"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -28,7 +32,7 @@ namespace MgmtRenameRules.Models
                     availablePatchSummary = AvailablePatchSummary.DeserializeAvailablePatchSummary(property.Value);
                     continue;
                 }
-                if (property.NameEquals("lastPatchInstallationSummary"))
+                if (property.NameEquals("lastPatchInstallationSummary"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

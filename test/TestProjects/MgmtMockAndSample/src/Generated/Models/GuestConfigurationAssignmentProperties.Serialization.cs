@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Context))
             {
-                writer.WritePropertyName("context");
+                writer.WritePropertyName("context"u8);
                 writer.WriteStringValue(Context);
             }
             writer.WriteEndObject();
@@ -26,6 +26,10 @@ namespace MgmtMockAndSample.Models
 
         internal static GuestConfigurationAssignmentProperties DeserializeGuestConfigurationAssignmentProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> targetResourceId = default;
             Optional<ComplianceStatus> complianceStatus = default;
             Optional<DateTimeOffset?> lastComplianceStatusChecked = default;
@@ -37,7 +41,7 @@ namespace MgmtMockAndSample.Models
             Optional<ResourceType?> resourceType = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("targetResourceId"))
+                if (property.NameEquals("targetResourceId"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -47,7 +51,7 @@ namespace MgmtMockAndSample.Models
                     targetResourceId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("complianceStatus"))
+                if (property.NameEquals("complianceStatus"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -57,7 +61,7 @@ namespace MgmtMockAndSample.Models
                     complianceStatus = new ComplianceStatus(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("lastComplianceStatusChecked"))
+                if (property.NameEquals("lastComplianceStatusChecked"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -67,7 +71,7 @@ namespace MgmtMockAndSample.Models
                     lastComplianceStatusChecked = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("latestReportId"))
+                if (property.NameEquals("latestReportId"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -77,7 +81,7 @@ namespace MgmtMockAndSample.Models
                     latestReportId = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("parameterHash"))
+                if (property.NameEquals("parameterHash"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -87,12 +91,12 @@ namespace MgmtMockAndSample.Models
                     parameterHash = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("context"))
+                if (property.NameEquals("context"u8))
                 {
                     context = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("assignmentHash"))
+                if (property.NameEquals("assignmentHash"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -102,7 +106,7 @@ namespace MgmtMockAndSample.Models
                     assignmentHash = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("provisioningState"))
+                if (property.NameEquals("provisioningState"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -112,7 +116,7 @@ namespace MgmtMockAndSample.Models
                     provisioningState = new ProvisioningState(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("resourceType"))
+                if (property.NameEquals("resourceType"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

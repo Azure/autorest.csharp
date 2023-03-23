@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(ActivePlacementGroupId))
             {
-                writer.WritePropertyName("activePlacementGroupId");
+                writer.WritePropertyName("activePlacementGroupId"u8);
                 writer.WriteStringValue(ActivePlacementGroupId);
             }
             writer.WriteEndObject();

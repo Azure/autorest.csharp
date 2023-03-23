@@ -16,6 +16,10 @@ namespace ModelsInCadl.Models
     {
         internal static OutputModel DeserializeOutputModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string requiredString = default;
             int requiredInt = default;
             DerivedModel requiredModel = default;
@@ -23,22 +27,22 @@ namespace ModelsInCadl.Models
             IReadOnlyDictionary<string, RecordItem> requiredModelRecord = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredString"))
+                if (property.NameEquals("requiredString"u8))
                 {
                     requiredString = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredInt"))
+                if (property.NameEquals("requiredInt"u8))
                 {
                     requiredInt = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("requiredModel"))
+                if (property.NameEquals("requiredModel"u8))
                 {
                     requiredModel = DerivedModel.DeserializeDerivedModel(property.Value);
                     continue;
                 }
-                if (property.NameEquals("requiredCollection"))
+                if (property.NameEquals("requiredCollection"u8))
                 {
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
@@ -48,7 +52,7 @@ namespace ModelsInCadl.Models
                     requiredCollection = array;
                     continue;
                 }
-                if (property.NameEquals("requiredModelRecord"))
+                if (property.NameEquals("requiredModelRecord"u8))
                 {
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();
                     foreach (var property0 in property.Value.EnumerateObject())

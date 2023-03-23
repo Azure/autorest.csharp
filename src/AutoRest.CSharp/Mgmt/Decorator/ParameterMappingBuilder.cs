@@ -73,6 +73,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // get the segment in pairs
                 var segmentPairs = SplitDiffIntoPairs(diffPath).ToList();
                 var indexOfProvidersPair = segmentPairs.FindIndex(pair => pair[0] == Segment.Providers);
+                var resourceTypeIdVariableName = idVariableName;
                 // from the tail, check these segments in pairs
                 for (int i = 0; i < segmentPairs.Count; i++)
                 {

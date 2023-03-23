@@ -19,12 +19,12 @@ namespace MgmtPropertyChooser.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(ResourceIdentityType))
             {
-                writer.WritePropertyName("type");
+                writer.WritePropertyName("type"u8);
                 writer.WriteStringValue(ResourceIdentityType.Value.ToSerialString());
             }
             if (Optional.IsCollectionDefined(UserAssignedIdentities))
             {
-                writer.WritePropertyName("userAssignedIdentities");
+                writer.WritePropertyName("userAssignedIdentities"u8);
                 writer.WriteStartObject();
                 foreach (var item in UserAssignedIdentities)
                 {
@@ -38,11 +38,15 @@ namespace MgmtPropertyChooser.Models
 
         internal static IdentityWithNoSystemIdentity DeserializeIdentityWithNoSystemIdentity(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ResourceIdentityType> type = default;
             Optional<IDictionary<string, UserAssignedIdentity>> userAssignedIdentities = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -52,7 +56,7 @@ namespace MgmtPropertyChooser.Models
                     type = property.Value.GetString().ToResourceIdentityType();
                     continue;
                 }
-                if (property.NameEquals("userAssignedIdentities"))
+                if (property.NameEquals("userAssignedIdentities"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

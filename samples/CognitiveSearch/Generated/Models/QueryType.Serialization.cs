@@ -20,8 +20,8 @@ namespace CognitiveSearch.Models
 
         public static QueryType ToQueryType(this string value)
         {
-            if (string.Equals(value, "simple", StringComparison.InvariantCultureIgnoreCase)) return QueryType.Simple;
-            if (string.Equals(value, "full", StringComparison.InvariantCultureIgnoreCase)) return QueryType.Full;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "simple")) return QueryType.Simple;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "full")) return QueryType.Full;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown QueryType value.");
         }
     }

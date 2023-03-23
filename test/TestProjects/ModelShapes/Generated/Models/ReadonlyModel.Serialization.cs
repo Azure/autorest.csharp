@@ -14,10 +14,14 @@ namespace ModelShapes.Models
     {
         internal static ReadonlyModel DeserializeReadonlyModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("Name"))
+                if (property.NameEquals("Name"u8))
                 {
                     name = property.Value.GetString();
                     continue;

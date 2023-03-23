@@ -16,6 +16,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             SchemaUsageTransformer.Transform(MgmtContext.CodeModel);
             DefaultDerivedSchema.AddDefaultDerivedSchemas(MgmtContext.CodeModel);
             OmitOperationGroups.RemoveOperationGroups();
+            PartialResourceResolver.Update();
             SubscriptionIdUpdater.Update();
             ConstantSchemaTransformer.TransformToChoice();
             SchemaNameAndFormatUpdater.ApplyRenameMapping();

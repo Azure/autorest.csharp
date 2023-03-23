@@ -15,11 +15,11 @@ namespace validation.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("constProperty");
+            writer.WritePropertyName("constProperty"u8);
             writer.WriteStringValue(ConstProperty);
             if (Optional.IsDefined(Count))
             {
-                writer.WritePropertyName("count");
+                writer.WritePropertyName("count"u8);
                 writer.WriteNumberValue(Count.Value);
             }
             writer.WriteEndObject();
@@ -27,16 +27,20 @@ namespace validation.Models
 
         internal static ChildProduct DeserializeChildProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string constProperty = default;
             Optional<int> count = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("constProperty"))
+                if (property.NameEquals("constProperty"u8))
                 {
                     constProperty = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("count"))
+                if (property.NameEquals("count"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

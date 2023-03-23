@@ -17,7 +17,7 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(TempDisk))
             {
-                writer.WritePropertyName("tempDisk");
+                writer.WritePropertyName("tempDisk"u8);
                 writer.WriteBooleanValue(TempDisk.Value);
             }
             writer.WriteEndObject();

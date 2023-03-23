@@ -17,7 +17,7 @@ namespace required_optional.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Value))
             {
-                writer.WritePropertyName("value");
+                writer.WritePropertyName("value"u8);
                 writer.WriteObjectValue(Value);
             }
             writer.WriteEndObject();

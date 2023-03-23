@@ -6,14 +6,22 @@
 This sample shows how to call TopActionAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.TopActionAsync("<action>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -26,7 +34,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -38,14 +53,22 @@ Schema for <c>Thing</c>:
 This sample shows how to call TopAction with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.TopAction("<action>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -58,7 +81,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -70,14 +100,22 @@ Schema for <c>Thing</c>:
 This sample shows how to call TopAction2Async and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.TopAction2Async();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -90,7 +128,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -102,14 +147,22 @@ Schema for <c>Thing</c>:
 This sample shows how to call TopAction2 and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.TopAction2();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -122,7 +175,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -131,15 +191,19 @@ Schema for <c>Thing</c>:
     </member>
     <member name="PatchActionAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PatchActionAsync with required request content and parse the result.
+This sample shows how to call PatchActionAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteral = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -148,7 +212,45 @@ Response response = await client.PatchActionAsync(RequestContent.Create(data));
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+This sample shows how to call PatchActionAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    optionalLiteralString = new {},
+    optionalLiteralInt = new {},
+    optionalLiteralDouble = new {},
+    optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = await client.PatchActionAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -161,7 +263,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -172,7 +281,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -181,15 +297,19 @@ Schema for <c>Thing</c>:
     </member>
     <member name="PatchAction(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PatchAction with required request content and parse the result.
+This sample shows how to call PatchAction with required request content, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteral = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -198,7 +318,45 @@ Response response = client.PatchAction(RequestContent.Create(data));
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+This sample shows how to call PatchAction with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    optionalLiteralString = new {},
+    optionalLiteralInt = new {},
+    optionalLiteralDouble = new {},
+    optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = client.PatchAction(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -211,7 +369,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -222,7 +387,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -231,15 +403,19 @@ Schema for <c>Thing</c>:
     </member>
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call AnonymousBodyAsync with required request content and parse the result.
+This sample shows how to call AnonymousBodyAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteral = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -248,7 +424,45 @@ Response response = await client.AnonymousBodyAsync(RequestContent.Create(data))
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+This sample shows how to call AnonymousBodyAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    optionalLiteralString = new {},
+    optionalLiteralInt = new {},
+    optionalLiteralDouble = new {},
+    optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -261,7 +475,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -272,7 +493,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -281,15 +509,19 @@ Schema for <c>Thing</c>:
     </member>
     <member name="AnonymousBody(RequestContent,RequestContext)">
 <example>
-This sample shows how to call AnonymousBody with required request content and parse the result.
+This sample shows how to call AnonymousBody with required request content, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
     requiredUnion = new {},
-    requiredLiteral = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
 };
 
@@ -298,7 +530,45 @@ Response response = client.AnonymousBody(RequestContent.Create(data));
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+This sample shows how to call AnonymousBody with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    optionalLiteralString = new {},
+    optionalLiteralInt = new {},
+    optionalLiteralDouble = new {},
+    optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = client.AnonymousBody(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -311,7 +581,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -322,7 +599,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -334,7 +618,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call FriendlyModelAsync with required request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -372,7 +657,8 @@ Schema for <c>Friend</c>:
 This sample shows how to call FriendlyModel with required request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -410,7 +696,8 @@ Schema for <c>Friend</c>:
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.AddTimeHeaderAsync();
 Console.WriteLine(response.Status);
@@ -418,7 +705,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AddTimeHeaderAsync with all parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
@@ -430,7 +718,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.AddTimeHeader();
 Console.WriteLine(response.Status);
@@ -438,7 +727,8 @@ Console.WriteLine(response.Status);
 This sample shows how to call AddTimeHeader with all parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.AddTimeHeader(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
@@ -450,27 +740,39 @@ Console.WriteLine(response.Status);
 This sample shows how to call SayHiAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -483,7 +785,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -495,27 +804,39 @@ Schema for <c>Thing</c>:
 This sample shows how to call SayHi with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 This sample shows how to call SayHi with all parameters, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -528,7 +849,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -537,10 +865,11 @@ Schema for <c>Thing</c>:
     </member>
     <member name="HelloAgainAsync(String,String,RequestContent,RequestContext)">
 <example>
-This sample shows how to call HelloAgainAsync with required parameters and request content and parse the result.
+This sample shows how to call HelloAgainAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -554,7 +883,10 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteral = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
+        requiredLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
     },
 };
@@ -564,7 +896,55 @@ Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+This sample shows how to call HelloAgainAsync with all parameters and request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredCollection = new[] {
+        "1"
+    },
+    requiredDictionary = new {
+        key = "1",
+    },
+    requiredModel = new {
+        name = "<name>",
+        requiredUnion = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
+        requiredLiteralBool = new {},
+        optionalLiteralString = new {},
+        optionalLiteralInt = new {},
+        optionalLiteralDouble = new {},
+        optionalLiteralBool = new {},
+        requiredBadDescription = "<requiredBadDescription>",
+    },
+};
+
+Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -582,7 +962,14 @@ Schema for <c>RoundTripModel</c>:
   requiredModel: {
     name: string, # Required. name of the Thing
     requiredUnion: Union, # Required. required Union
-    requiredLiteral: Literal, # Required. required literal type
+    requiredLiteralString: Literal, # Required. required literal string
+    requiredLiteralInt: Literal, # Required. required literal int
+    requiredLiteralDouble: Literal, # Required. required literal double
+    requiredLiteralBool: Literal, # Required. required literal bool
+    optionalLiteralString: Literal, # Optional. optional literal string
+    optionalLiteralInt: Literal, # Optional. optional literal int
+    optionalLiteralDouble: Literal, # Optional. optional literal double
+    optionalLiteralBool: Literal, # Optional. optional literal bool
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
 }
@@ -594,7 +981,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -603,10 +997,11 @@ Schema for <c>Thing</c>:
     </member>
     <member name="HelloAgain(String,String,RequestContent,RequestContext)">
 <example>
-This sample shows how to call HelloAgain with required parameters and request content and parse the result.
+This sample shows how to call HelloAgain with required parameters and request content, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -620,7 +1015,10 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteral = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
+        requiredLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
     },
 };
@@ -630,7 +1028,55 @@ Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+This sample shows how to call HelloAgain with all parameters and request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredCollection = new[] {
+        "1"
+    },
+    requiredDictionary = new {
+        key = "1",
+    },
+    requiredModel = new {
+        name = "<name>",
+        requiredUnion = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
+        requiredLiteralBool = new {},
+        optionalLiteralString = new {},
+        optionalLiteralInt = new {},
+        optionalLiteralDouble = new {},
+        optionalLiteralBool = new {},
+        requiredBadDescription = "<requiredBadDescription>",
+    },
+};
+
+Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -648,7 +1094,14 @@ Schema for <c>RoundTripModel</c>:
   requiredModel: {
     name: string, # Required. name of the Thing
     requiredUnion: Union, # Required. required Union
-    requiredLiteral: Literal, # Required. required literal type
+    requiredLiteralString: Literal, # Required. required literal string
+    requiredLiteralInt: Literal, # Required. required literal int
+    requiredLiteralDouble: Literal, # Required. required literal double
+    requiredLiteralBool: Literal, # Required. required literal bool
+    optionalLiteralString: Literal, # Optional. optional literal string
+    optionalLiteralInt: Literal, # Optional. optional literal int
+    optionalLiteralDouble: Literal, # Optional. optional literal double
+    optionalLiteralBool: Literal, # Optional. optional literal bool
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
 }
@@ -660,7 +1113,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -669,10 +1129,11 @@ Schema for <c>Thing</c>:
     </member>
     <member name="NoContentTypeAsync(String,String,RequestContent,RequestContext)">
 <example>
-This sample shows how to call NoContentTypeAsync with required parameters and request content and parse the result.
+This sample shows how to call NoContentTypeAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -686,7 +1147,10 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteral = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
+        requiredLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
     },
 };
@@ -696,49 +1160,17 @@ Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestConte
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
-</example>
-<remarks>
-Below is the JSON schema for the request and response payloads.
-
-Request Body:
-
-Schema for <c>RoundTripModel</c>:
-<code>{
-  requiredString: string, # Required. Required string, illustrating a reference type property.
-  requiredInt: number, # Required. Required int, illustrating a value type property.
-  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
-  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
-  requiredModel: {
-    name: string, # Required. name of the Thing
-    requiredUnion: Union, # Required. required Union
-    requiredLiteral: Literal, # Required. required literal type
-    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  }, # Required. Required model
-}
-</code>
-
-Response Body:
-
-Schema for <c>Thing</c>:
-<code>{
-  name: string, # Required. name of the Thing
-  requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
-  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-}
-</code>
-
-</remarks>
-    </member>
-    <member name="NoContentType(String,String,RequestContent,RequestContext)">
-<example>
-This sample shows how to call NoContentType with required parameters and request content and parse the result.
+This sample shows how to call NoContentTypeAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -752,17 +1184,31 @@ var data = new {
     requiredModel = new {
         name = "<name>",
         requiredUnion = new {},
-        requiredLiteral = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
+        requiredLiteralBool = new {},
+        optionalLiteralString = new {},
+        optionalLiteralInt = new {},
+        optionalLiteralDouble = new {},
+        optionalLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
     },
 };
 
-Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
+Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -780,7 +1226,14 @@ Schema for <c>RoundTripModel</c>:
   requiredModel: {
     name: string, # Required. name of the Thing
     requiredUnion: Union, # Required. required Union
-    requiredLiteral: Literal, # Required. required literal type
+    requiredLiteralString: Literal, # Required. required literal string
+    requiredLiteralInt: Literal, # Required. required literal int
+    requiredLiteralDouble: Literal, # Required. required literal double
+    requiredLiteralBool: Literal, # Required. required literal bool
+    optionalLiteralString: Literal, # Optional. optional literal string
+    optionalLiteralInt: Literal, # Optional. optional literal int
+    optionalLiteralDouble: Literal, # Optional. optional literal double
+    optionalLiteralBool: Literal, # Optional. optional literal bool
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
 }
@@ -792,7 +1245,146 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="NoContentType(String,String,RequestContent,RequestContext)">
+<example>
+This sample shows how to call NoContentType with required parameters and request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredCollection = new[] {
+        "1"
+    },
+    requiredDictionary = new {
+        key = "1",
+    },
+    requiredModel = new {
+        name = "<name>",
+        requiredUnion = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
+        requiredLiteralBool = new {},
+        requiredBadDescription = "<requiredBadDescription>",
+    },
+};
+
+Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+This sample shows how to call NoContentType with all parameters and request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredCollection = new[] {
+        "1"
+    },
+    requiredDictionary = new {
+        key = "1",
+    },
+    requiredModel = new {
+        name = "<name>",
+        requiredUnion = new {},
+        requiredLiteralString = new {},
+        requiredLiteralInt = new {},
+        requiredLiteralDouble = new {},
+        requiredLiteralBool = new {},
+        optionalLiteralString = new {},
+        optionalLiteralInt = new {},
+        optionalLiteralDouble = new {},
+        optionalLiteralBool = new {},
+        requiredBadDescription = "<requiredBadDescription>",
+    },
+};
+
+Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>RoundTripModel</c>:
+<code>{
+  requiredString: string, # Required. Required string, illustrating a reference type property.
+  requiredInt: number, # Required. Required int, illustrating a value type property.
+  requiredCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Required. Required collection of enums
+  requiredDictionary: Dictionary&lt;string, &quot;1&quot; | &quot;2&quot; | &quot;4&quot;&gt;, # Required. Required dictionary of enums
+  requiredModel: {
+    name: string, # Required. name of the Thing
+    requiredUnion: Union, # Required. required Union
+    requiredLiteralString: Literal, # Required. required literal string
+    requiredLiteralInt: Literal, # Required. required literal int
+    requiredLiteralDouble: Literal, # Required. required literal double
+    requiredLiteralBool: Literal, # Required. required literal bool
+    optionalLiteralString: Literal, # Optional. optional literal string
+    optionalLiteralInt: Literal, # Optional. optional literal int
+    optionalLiteralDouble: Literal, # Optional. optional literal double
+    optionalLiteralBool: Literal, # Optional. optional literal bool
+    requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+  }, # Required. Required model
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -804,14 +1396,22 @@ Schema for <c>Thing</c>:
 This sample shows how to call HelloDemo2Async and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.HelloDemo2Async();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -824,7 +1424,14 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -836,14 +1443,22 @@ Schema for <c>Thing</c>:
 This sample shows how to call HelloDemo2 and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.HelloDemo2();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
 Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteral").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
@@ -856,7 +1471,320 @@ Schema for <c>Thing</c>:
 <code>{
   name: string, # Required. name of the Thing
   requiredUnion: Union, # Required. required Union
-  requiredLiteral: Literal, # Required. required literal type
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="CreateLiteralAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateLiteralAsync with required request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+This sample shows how to call CreateLiteralAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    optionalLiteralString = new {},
+    optionalLiteralInt = new {},
+    optionalLiteralDouble = new {},
+    optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="CreateLiteral(RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateLiteral with required request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = client.CreateLiteral(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+This sample shows how to call CreateLiteral with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    optionalLiteralString = new {},
+    optionalLiteralInt = new {},
+    optionalLiteralDouble = new {},
+    optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = client.CreateLiteral(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="HelloLiteralAsync(RequestContext)">
+<example>
+This sample shows how to call HelloLiteralAsync and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+Response response = await client.HelloLiteralAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="HelloLiteral(RequestContext)">
+<example>
+This sample shows how to call HelloLiteral and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+Response response = client.HelloLiteral();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
 }
 </code>
@@ -868,7 +1796,8 @@ Schema for <c>Thing</c>:
 This sample shows how to call GetUnknownValueAsync and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = await client.GetUnknownValueAsync();
 
@@ -882,12 +1811,251 @@ Console.WriteLine(result.ToString());
 This sample shows how to call GetUnknownValue and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new CadlFirstTestClient(credential);
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
 
 Response response = client.GetUnknownValue();
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="InternalProtocolAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call InternalProtocolAsync with required request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = await client.InternalProtocolAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+This sample shows how to call InternalProtocolAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    optionalLiteralString = new {},
+    optionalLiteralInt = new {},
+    optionalLiteralDouble = new {},
+    optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = await client.InternalProtocolAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="InternalProtocol(RequestContent,RequestContext)">
+<example>
+This sample shows how to call InternalProtocol with required request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = client.InternalProtocol(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+This sample shows how to call InternalProtocol with all request content, and how to parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+var data = new {
+    name = "<name>",
+    requiredUnion = new {},
+    requiredLiteralString = new {},
+    requiredLiteralInt = new {},
+    requiredLiteralDouble = new {},
+    requiredLiteralBool = new {},
+    optionalLiteralString = new {},
+    optionalLiteralInt = new {},
+    optionalLiteralDouble = new {},
+    optionalLiteralBool = new {},
+    requiredBadDescription = "<requiredBadDescription>",
+};
+
+Response response = client.InternalProtocol(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralString").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
+Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request and response payloads.
+
+Request Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+Response Body:
+
+Schema for <c>Thing</c>:
+<code>{
+  name: string, # Required. name of the Thing
+  requiredUnion: Union, # Required. required Union
+  requiredLiteralString: Literal, # Required. required literal string
+  requiredLiteralInt: Literal, # Required. required literal int
+  requiredLiteralDouble: Literal, # Required. required literal double
+  requiredLiteralBool: Literal, # Required. required literal bool
+  optionalLiteralString: Literal, # Optional. optional literal string
+  optionalLiteralInt: Literal, # Optional. optional literal int
+  optionalLiteralDouble: Literal, # Optional. optional literal double
+  optionalLiteralBool: Literal, # Optional. optional literal bool
+  requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="StillConvenientAsync(RequestContext)">
+<example>
+This sample shows how to call StillConvenientAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+Response response = await client.StillConvenientAsync();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="StillConvenient(RequestContext)">
+<example>
+This sample shows how to call StillConvenient.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new CadlFirstTestClient(endpoint, credential);
+
+Response response = client.StillConvenient();
+Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>

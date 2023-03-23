@@ -17,8 +17,12 @@ using Azure.DPG;
 //
 
 // TODO: Use `Uri` type when available: https://github.com/microsoft/cadl/issues/654
-@serviceTitle("Pagination Service")
-@serviceVersion("2022-05-13")
+@service(
+    {
+        title: "Pagination Service",
+        version: "2022-05-13"
+    }
+)
 @versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
 @server(
   "{pagnationUri}",
@@ -185,13 +189,13 @@ namespace Pagination {
 
   @summary("Gets ledger entries from a collection corresponding to a range.")
   @doc("A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.")
-  @convenienceAPI
+  @convenientAPI(true)
   op ListPaginationLedgerEntries is Azure.Core.Foundations.ResourceList<LedgerEntry, ListLedgerEntryInput, PagedLedgerEntries>;
 }
 
 @route("/adp")
 interface UseFoundationsResourceList {
   @doc("List upload detail for the discovery resource.")
-  @convenienceAPI
+  @convenientAPI(true)
   list is CustomResourceList<LedgerEntry>;  
-}  
+}

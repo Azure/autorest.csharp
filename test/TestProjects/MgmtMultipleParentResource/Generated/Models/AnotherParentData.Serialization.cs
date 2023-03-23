@@ -20,7 +20,7 @@ namespace MgmtMultipleParentResource
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName("tags");
+                writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
                 foreach (var item in Tags)
                 {
@@ -29,38 +29,38 @@ namespace MgmtMultipleParentResource
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("location");
+            writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(AsyncExecution))
             {
-                writer.WritePropertyName("asyncExecution");
+                writer.WritePropertyName("asyncExecution"u8);
                 writer.WriteBooleanValue(AsyncExecution.Value);
             }
             if (Optional.IsDefined(RunAsUser))
             {
-                writer.WritePropertyName("runAsUser");
+                writer.WritePropertyName("runAsUser"u8);
                 writer.WriteStringValue(RunAsUser);
             }
             if (Optional.IsDefined(RunAsPassword))
             {
-                writer.WritePropertyName("runAsPassword");
+                writer.WritePropertyName("runAsPassword"u8);
                 writer.WriteStringValue(RunAsPassword);
             }
             if (Optional.IsDefined(TimeoutInSeconds))
             {
-                writer.WritePropertyName("timeoutInSeconds");
+                writer.WritePropertyName("timeoutInSeconds"u8);
                 writer.WriteNumberValue(TimeoutInSeconds.Value);
             }
             if (Optional.IsDefined(OutputBlobUri))
             {
-                writer.WritePropertyName("outputBlobUri");
+                writer.WritePropertyName("outputBlobUri"u8);
                 writer.WriteStringValue(OutputBlobUri.AbsoluteUri);
             }
             if (Optional.IsDefined(ErrorBlobUri))
             {
-                writer.WritePropertyName("errorBlobUri");
+                writer.WritePropertyName("errorBlobUri"u8);
                 writer.WriteStringValue(ErrorBlobUri.AbsoluteUri);
             }
             writer.WriteEndObject();
@@ -69,6 +69,10 @@ namespace MgmtMultipleParentResource
 
         internal static AnotherParentData DeserializeAnotherParentData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
@@ -84,7 +88,7 @@ namespace MgmtMultipleParentResource
             Optional<string> provisioningState = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("tags"))
+                if (property.NameEquals("tags"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -99,27 +103,27 @@ namespace MgmtMultipleParentResource
                     tags = dictionary;
                     continue;
                 }
-                if (property.NameEquals("location"))
+                if (property.NameEquals("location"u8))
                 {
                     location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("systemData"))
+                if (property.NameEquals("systemData"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -129,7 +133,7 @@ namespace MgmtMultipleParentResource
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -138,7 +142,7 @@ namespace MgmtMultipleParentResource
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("asyncExecution"))
+                        if (property0.NameEquals("asyncExecution"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -148,17 +152,17 @@ namespace MgmtMultipleParentResource
                             asyncExecution = property0.Value.GetBoolean();
                             continue;
                         }
-                        if (property0.NameEquals("runAsUser"))
+                        if (property0.NameEquals("runAsUser"u8))
                         {
                             runAsUser = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("runAsPassword"))
+                        if (property0.NameEquals("runAsPassword"u8))
                         {
                             runAsPassword = property0.Value.GetString();
                             continue;
                         }
-                        if (property0.NameEquals("timeoutInSeconds"))
+                        if (property0.NameEquals("timeoutInSeconds"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -168,7 +172,7 @@ namespace MgmtMultipleParentResource
                             timeoutInSeconds = property0.Value.GetInt32();
                             continue;
                         }
-                        if (property0.NameEquals("outputBlobUri"))
+                        if (property0.NameEquals("outputBlobUri"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -178,7 +182,7 @@ namespace MgmtMultipleParentResource
                             outputBlobUri = new Uri(property0.Value.GetString());
                             continue;
                         }
-                        if (property0.NameEquals("errorBlobUri"))
+                        if (property0.NameEquals("errorBlobUri"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -188,7 +192,7 @@ namespace MgmtMultipleParentResource
                             errorBlobUri = new Uri(property0.Value.GetString());
                             continue;
                         }
-                        if (property0.NameEquals("provisioningState"))
+                        if (property0.NameEquals("provisioningState"u8))
                         {
                             provisioningState = property0.Value.GetString();
                             continue;

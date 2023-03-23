@@ -14,22 +14,26 @@ namespace MgmtHierarchicalNonResource.Models
     {
         internal static GalleryImageIdentifier DeserializeGalleryImageIdentifier(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string publisher = default;
             string offer = default;
             string sku = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("publisher"))
+                if (property.NameEquals("publisher"u8))
                 {
                     publisher = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("offer"))
+                if (property.NameEquals("offer"u8))
                 {
                     offer = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("sku"))
+                if (property.NameEquals("sku"u8))
                 {
                     sku = property.Value.GetString();
                     continue;

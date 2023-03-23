@@ -53,14 +53,11 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
     Add-Swagger "$testName$projectSuffix" $projectDirectory "--require=$configurationPath --try-require=$inputReadme --input-file=$inputFile $additionalArgs"
 }
 
-function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
+function Add-CadlRanch-Cadl([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory, [boolean]$generateConvenience) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
-    $cadlFolders = Get-ChildItem -Path $cadlRanchFilePath -Depth 2 -Directory $testName
-    if ($cadlFolders) {
-        $cadlFolder = $cadlFolders[0]
-        $cadlMain = Join-Path $cadlFolder "main.cadl"
-        Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true --option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll"
-    }
+    $cadlMain = Join-Path $cadlRanchFilePath $testName "main.cadl"
+    $convenienceOption = If ($generateConvenience) {""} Else {" --option @azure-tools/cadl-csharp.generate-convenience-methods=false"}
+    Add-Cadl "$projectPrefix$testName" $projectDirectory $cadlMain "--option @azure-tools/cadl-csharp.unreferenced-types-handling=keepAll$convenienceOption"
 }
 
 $testNames =
@@ -198,7 +195,7 @@ if (!($Exclude -contains "TestProjects"))
             continue
         }
         if ($testName.EndsWith("Cadl")) {
-            Add-Cadl $testName $directory
+            Add-Cadl $testName $directory "" "--option @azure-tools/cadl-csharp.generate-convenience-methods=false"
         } else {
             if (Test-Path $readmeConfigurationPath)
             {
@@ -250,23 +247,36 @@ if (!($Exclude -contains "Samples"))
         $cadlMain = Join-Path $projectDirectory "main.cadl"
         $cadlClient = Join-Path $projectDirectory "client.cadl"
         $mainCadlFile = If (Test-Path "$cadlClient") { Resolve-Path "$cadlClient" } Else { Resolve-Path "$cadlMain"}
-        Add-Cadl $projectName $projectDirectory $mainCadlFile "--option @azure-tools/cadl-csharp.generateConvenienceAPI=true"
+        Add-Cadl $projectName $projectDirectory $mainCadlFile
     }
 }
 
 # Cadl projects
 $cadlRanchProjectDirectory = Join-Path $repoRoot 'test' 'CadlRanchProjects'
-$cadlRanchProjectNames =
-    'api-key',
-    'oauth2',
-    'property-optional',
-    'property-types'
+$cadlRanchProjectPathsWithoutConvenience = # Needs justification to add item
+    'enums/extensible', # https://github.com/Azure/autorest.csharp/issues/3079
+    'hello' # https://github.com/Azure/autorest.csharp/issues/3110
+
+$cadlRanchProjectPaths =
+    'arrays/item-types',
+    'authentication/api-key',
+    'authentication/oauth2',
+    'authentication/union',
+    'models/property-optional',
+    'models/property-types',
+    'models/usage',
+    "projection"
 
 if (!($Exclude -contains "CadlRanchProjects"))
 {
-    foreach ($testName in $cadlRanchProjectNames)
+    foreach ($testPath in $cadlRanchProjectPaths)
     {
-        Add-CadlRanch-Cadl $testName "cadl-" $cadlRanchProjectDirectory
+        Add-CadlRanch-Cadl $testPath "cadl-" $cadlRanchProjectDirectory $TRUE
+    }
+
+    foreach ($testPath in $cadlRanchProjectPathsWithoutConvenience)
+    {
+        Add-CadlRanch-Cadl $testPath "cadl-" $cadlRanchProjectDirectory $FALSE
     }
 }
 

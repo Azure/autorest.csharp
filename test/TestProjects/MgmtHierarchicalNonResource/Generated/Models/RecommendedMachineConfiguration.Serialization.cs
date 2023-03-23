@@ -14,11 +14,15 @@ namespace MgmtHierarchicalNonResource.Models
     {
         internal static RecommendedMachineConfiguration DeserializeRecommendedMachineConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ResourceRange> vCpus = default;
             Optional<ResourceRange> memory = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("vCPUs"))
+                if (property.NameEquals("vCPUs"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -28,7 +32,7 @@ namespace MgmtHierarchicalNonResource.Models
                     vCpus = ResourceRange.DeserializeResourceRange(property.Value);
                     continue;
                 }
-                if (property.NameEquals("memory"))
+                if (property.NameEquals("memory"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

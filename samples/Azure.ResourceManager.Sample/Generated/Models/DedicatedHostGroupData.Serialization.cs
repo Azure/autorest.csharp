@@ -22,7 +22,7 @@ namespace Azure.ResourceManager.Sample
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Zones))
             {
-                writer.WritePropertyName("zones");
+                writer.WritePropertyName("zones"u8);
                 writer.WriteStartArray();
                 foreach (var item in Zones)
                 {
@@ -32,17 +32,22 @@ namespace Azure.ResourceManager.Sample
             }
             if (Optional.IsCollectionDefined(HostUris))
             {
-                writer.WritePropertyName("hostUris");
+                writer.WritePropertyName("hostUris"u8);
                 writer.WriteStartArray();
                 foreach (var item in HostUris)
                 {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
                     writer.WriteStringValue(item.AbsoluteUri);
                 }
                 writer.WriteEndArray();
             }
             if (Optional.IsCollectionDefined(Tags))
             {
-                writer.WritePropertyName("tags");
+                writer.WritePropertyName("tags"u8);
                 writer.WriteStartObject();
                 foreach (var item in Tags)
                 {
@@ -51,18 +56,18 @@ namespace Azure.ResourceManager.Sample
                 }
                 writer.WriteEndObject();
             }
-            writer.WritePropertyName("location");
+            writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
-            writer.WritePropertyName("properties");
+            writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             if (Optional.IsDefined(PlatformFaultDomainCount))
             {
-                writer.WritePropertyName("platformFaultDomainCount");
+                writer.WritePropertyName("platformFaultDomainCount"u8);
                 writer.WriteNumberValue(PlatformFaultDomainCount.Value);
             }
             if (Optional.IsDefined(SupportAutomaticPlacement))
             {
-                writer.WritePropertyName("supportAutomaticPlacement");
+                writer.WritePropertyName("supportAutomaticPlacement"u8);
                 writer.WriteBooleanValue(SupportAutomaticPlacement.Value);
             }
             writer.WriteEndObject();
@@ -71,6 +76,10 @@ namespace Azure.ResourceManager.Sample
 
         internal static DedicatedHostGroupData DeserializeDedicatedHostGroupData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<string>> zones = default;
             Optional<IList<Uri>> hostUris = default;
             Optional<Guid> tenantId = default;
@@ -86,7 +95,7 @@ namespace Azure.ResourceManager.Sample
             Optional<bool> supportAutomaticPlacement = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("zones"))
+                if (property.NameEquals("zones"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -101,7 +110,7 @@ namespace Azure.ResourceManager.Sample
                     zones = array;
                     continue;
                 }
-                if (property.NameEquals("hostUris"))
+                if (property.NameEquals("hostUris"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -111,12 +120,19 @@ namespace Azure.ResourceManager.Sample
                     List<Uri> array = new List<Uri>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(new Uri(item.GetString()));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(new Uri(item.GetString()));
+                        }
                     }
                     hostUris = array;
                     continue;
                 }
-                if (property.NameEquals("tenantId"))
+                if (property.NameEquals("tenantId"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -126,7 +142,7 @@ namespace Azure.ResourceManager.Sample
                     tenantId = property.Value.GetGuid();
                     continue;
                 }
-                if (property.NameEquals("tags"))
+                if (property.NameEquals("tags"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -141,27 +157,27 @@ namespace Azure.ResourceManager.Sample
                     tags = dictionary;
                     continue;
                 }
-                if (property.NameEquals("location"))
+                if (property.NameEquals("location"u8))
                 {
                     location = new AzureLocation(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = new ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("systemData"))
+                if (property.NameEquals("systemData"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -171,7 +187,7 @@ namespace Azure.ResourceManager.Sample
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
-                if (property.NameEquals("properties"))
+                if (property.NameEquals("properties"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -180,7 +196,7 @@ namespace Azure.ResourceManager.Sample
                     }
                     foreach (var property0 in property.Value.EnumerateObject())
                     {
-                        if (property0.NameEquals("platformFaultDomainCount"))
+                        if (property0.NameEquals("platformFaultDomainCount"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -190,7 +206,7 @@ namespace Azure.ResourceManager.Sample
                             platformFaultDomainCount = property0.Value.GetInt32();
                             continue;
                         }
-                        if (property0.NameEquals("hosts"))
+                        if (property0.NameEquals("hosts"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -205,7 +221,7 @@ namespace Azure.ResourceManager.Sample
                             hosts = array;
                             continue;
                         }
-                        if (property0.NameEquals("instanceView"))
+                        if (property0.NameEquals("instanceView"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
@@ -215,7 +231,7 @@ namespace Azure.ResourceManager.Sample
                             instanceView = DedicatedHostGroupInstanceView.DeserializeDedicatedHostGroupInstanceView(property0.Value);
                             continue;
                         }
-                        if (property0.NameEquals("supportAutomaticPlacement"))
+                        if (property0.NameEquals("supportAutomaticPlacement"u8))
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {

@@ -17,12 +17,12 @@ namespace MgmtOptionalConstant.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(PassName))
             {
-                writer.WritePropertyName("passName");
+                writer.WritePropertyName("passName"u8);
                 writer.WriteStringValue(PassName.Value.ToString());
             }
             if (Optional.IsDefined(SettingName))
             {
-                writer.WritePropertyName("settingName");
+                writer.WritePropertyName("settingName"u8);
                 writer.WriteStringValue(SettingName.Value.ToSerialString());
             }
             writer.WriteEndObject();
@@ -30,11 +30,15 @@ namespace MgmtOptionalConstant.Models
 
         internal static ModelWithOptionalConstant DeserializeModelWithOptionalConstant(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<PassName> passName = default;
             Optional<SettingName> settingName = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("passName"))
+                if (property.NameEquals("passName"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -44,7 +48,7 @@ namespace MgmtOptionalConstant.Models
                     passName = new PassName(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("settingName"))
+                if (property.NameEquals("settingName"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

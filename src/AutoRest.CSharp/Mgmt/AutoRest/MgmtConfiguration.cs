@@ -120,7 +120,8 @@ namespace AutoRest.CSharp.Input
             JsonElement? singletonRequiresKeyword = default,
             JsonElement? operationIdMappings = default,
             JsonElement? updateRequiredCopy = default,
-            JsonElement? patchInitializerCustomization = default)
+            JsonElement? patchInitializerCustomization = default,
+            JsonElement? partialResources = default)
         {
             RequestPathToParent = DeserializeDictionary<string, string>(requestPathToParent);
             RequestPathToResourceName = DeserializeDictionary<string, string>(requestPathToResourceName);
@@ -135,6 +136,7 @@ namespace AutoRest.CSharp.Input
             RenameMapping = DeserializeDictionary<string, string>(renameMapping);
             ParameterRenameMapping = DeserializeDictionary<string, IReadOnlyDictionary<string, string>>(parameterRenameMapping);
             IrregularPluralWords = DeserializeDictionary<string, string>(irregularPluralWords);
+            PartialResources = DeserializeDictionary<string, string>(partialResources);
             try
             {
                 OperationPositions = DeserializeDictionary<string, string[]>(operationPositions);
@@ -209,6 +211,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyDictionary<string, string[]> RequestPathToScopeResourceTypes { get; }
         public IReadOnlyDictionary<string, string[]> OperationPositions { get; }
         public IReadOnlyDictionary<string, string[]> MergeOperations { get; }
+        public IReadOnlyDictionary<string, string> PartialResources { get; }
         public IReadOnlyList<string> RawParameterizedScopes { get; }
         private ImmutableHashSet<RequestPath>? _parameterizedScopes;
         internal ImmutableHashSet<RequestPath> ParameterizedScopes
@@ -268,7 +271,8 @@ namespace AutoRest.CSharp.Input
                 singletonRequiresKeyword: autoRest.GetValue<JsonElement?>("singleton-resource-requires-keyword").GetAwaiter().GetResult(),
                 operationIdMappings: autoRest.GetValue<JsonElement?>("operation-id-mappings").GetAwaiter().GetResult(),
                 updateRequiredCopy: autoRest.GetValue<JsonElement?>("update-required-copy").GetAwaiter().GetResult(),
-                patchInitializerCustomization: autoRest.GetValue<JsonElement?>("patch-initializer-customization").GetAwaiter().GetResult());
+                patchInitializerCustomization: autoRest.GetValue<JsonElement?>("patch-initializer-customization").GetAwaiter().GetResult(),
+                partialResources: autoRest.GetValue<JsonElement?>("partial-resources").GetAwaiter().GetResult());
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
@@ -297,6 +301,7 @@ namespace AutoRest.CSharp.Input
             WriteNonEmptySettings(writer, nameof(ParameterRenameMapping), ParameterRenameMapping);
             WriteNonEmptySettings(writer, nameof(IrregularPluralWords), IrregularPluralWords);
             WriteNonEmptySettings(writer, nameof(OverrideOperationName), OverrideOperationName);
+            WriteNonEmptySettings(writer, nameof(PartialResources), PartialResources);
             MgmtDebug.Write(writer, nameof(MgmtDebug));
             if (IsArmCore)
                 writer.WriteBoolean("ArmCore", IsArmCore);
@@ -340,6 +345,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(OverrideOperationName), out var operationIdToName);
             root.TryGetProperty(nameof(MergeOperations), out var mergeOperations);
             root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValuesElement);
+            root.TryGetProperty(nameof(PartialResources), out var virtualResources);
             root.TryGetProperty(nameof(RawParameterizedScopes), out var parameterizedScopesElement);
 
             var operationGroupToOmit = Configuration.DeserializeArray(operationGroupsToOmitElement);
@@ -399,7 +405,8 @@ namespace AutoRest.CSharp.Input
                 singletonRequiresKeyword: singletonRequiresKeyword,
                 operationIdMappings: operationIdMappings,
                 updateRequiredCopy: updateRequiredCopy,
-                patchInitializerCustomization: patchInitializerCustomization);
+                patchInitializerCustomization: patchInitializerCustomization,
+                partialResources: virtualResources);
         }
 
         private static void WriteNonEmptySettings(

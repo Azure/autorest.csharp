@@ -18,22 +18,22 @@ namespace MgmtRenameRules.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(ProvisionVmAgent))
             {
-                writer.WritePropertyName("provisionVMAgent");
+                writer.WritePropertyName("provisionVMAgent"u8);
                 writer.WriteBooleanValue(ProvisionVmAgent.Value);
             }
             if (Optional.IsDefined(EnableAutomaticUpdates))
             {
-                writer.WritePropertyName("enableAutomaticUpdates");
+                writer.WritePropertyName("enableAutomaticUpdates"u8);
                 writer.WriteBooleanValue(EnableAutomaticUpdates.Value);
             }
             if (Optional.IsDefined(TimeZone))
             {
-                writer.WritePropertyName("timeZone");
+                writer.WritePropertyName("timeZone"u8);
                 writer.WriteStringValue(TimeZone);
             }
             if (Optional.IsCollectionDefined(AdditionalUnattendContent))
             {
-                writer.WritePropertyName("additionalUnattendContent");
+                writer.WritePropertyName("additionalUnattendContent"u8);
                 writer.WriteStartArray();
                 foreach (var item in AdditionalUnattendContent)
                 {
@@ -43,12 +43,12 @@ namespace MgmtRenameRules.Models
             }
             if (Optional.IsDefined(PatchSettings))
             {
-                writer.WritePropertyName("patchSettings");
+                writer.WritePropertyName("patchSettings"u8);
                 writer.WriteObjectValue(PatchSettings);
             }
             if (Optional.IsDefined(WinRM))
             {
-                writer.WritePropertyName("winRM");
+                writer.WritePropertyName("winRM"u8);
                 writer.WriteObjectValue(WinRM);
             }
             writer.WriteEndObject();
@@ -56,6 +56,10 @@ namespace MgmtRenameRules.Models
 
         internal static WindowsConfiguration DeserializeWindowsConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> provisionVmAgent = default;
             Optional<bool> enableAutomaticUpdates = default;
             Optional<string> timeZone = default;
@@ -64,7 +68,7 @@ namespace MgmtRenameRules.Models
             Optional<WinRMConfiguration> winRM = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("provisionVMAgent"))
+                if (property.NameEquals("provisionVMAgent"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -74,7 +78,7 @@ namespace MgmtRenameRules.Models
                     provisionVmAgent = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("enableAutomaticUpdates"))
+                if (property.NameEquals("enableAutomaticUpdates"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -84,12 +88,12 @@ namespace MgmtRenameRules.Models
                     enableAutomaticUpdates = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("timeZone"))
+                if (property.NameEquals("timeZone"u8))
                 {
                     timeZone = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("additionalUnattendContent"))
+                if (property.NameEquals("additionalUnattendContent"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -104,7 +108,7 @@ namespace MgmtRenameRules.Models
                     additionalUnattendContent = array;
                     continue;
                 }
-                if (property.NameEquals("patchSettings"))
+                if (property.NameEquals("patchSettings"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -114,7 +118,7 @@ namespace MgmtRenameRules.Models
                     patchSettings = PatchSettings.DeserializePatchSettings(property.Value);
                     continue;
                 }
-                if (property.NameEquals("winRM"))
+                if (property.NameEquals("winRM"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {

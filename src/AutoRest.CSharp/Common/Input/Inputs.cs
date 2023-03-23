@@ -60,6 +60,7 @@ namespace AutoRest.CSharp.Common.Input
         bool BufferResponse,
         OperationLongRunning? LongRunning,
         OperationPaging? Paging,
+        bool GenerateProtocolMethod,
         bool GenerateConvenienceMethod)
     {
         public InputOperation() : this(
@@ -80,6 +81,7 @@ namespace AutoRest.CSharp.Common.Input
             BufferResponse: false,
             LongRunning: null,
             Paging: null,
+            GenerateProtocolMethod: true,
             GenerateConvenienceMethod: false)
         { }
     }
@@ -205,6 +207,17 @@ namespace AutoRest.CSharp.Common.Input
         public string GetValueString() => (Value.ToString() ?? string.Empty);
     }
 
+    internal record InputIntrinsicType(InputIntrinsicTypeKind Kind) : InputType(InputIntrinsicTypeName, false)
+    {
+        public const string InputIntrinsicTypeName = "Intrinsic";
+
+        public static InputIntrinsicType ErrorType { get; } = new(InputIntrinsicTypeKind.ErrorType);
+        public static InputIntrinsicType Void { get; } = new(InputIntrinsicTypeKind.Void);
+        public static InputIntrinsicType Never { get; } = new(InputIntrinsicTypeKind.Never);
+        public static InputIntrinsicType Unknown { get; } = new(InputIntrinsicTypeKind.Unknown);
+        public static InputIntrinsicType Null { get; } = new(InputIntrinsicTypeKind.Null);
+    };
+
     internal record InputEnumTypeStringValue(string Name, string StringValue, string? Description) : InputEnumTypeValue(Name, StringValue, Description);
     internal record InputEnumTypeIntegerValue(string Name, Int32 IntegerValue, string? Description) : InputEnumTypeValue(Name, IntegerValue, Description);
     internal record InputEnumTypeFloatValue(string Name, float FloatValue, string? Description) : InputEnumTypeValue(Name, FloatValue, Description);
@@ -269,5 +282,14 @@ namespace AutoRest.CSharp.Common.Input
         Input = 1,
         Output = 2,
         RoundTrip = Input | Output
+    }
+
+    internal enum InputIntrinsicTypeKind
+    {
+        ErrorType,
+        Void,
+        Never,
+        Unknown,
+        Null,
     }
 }

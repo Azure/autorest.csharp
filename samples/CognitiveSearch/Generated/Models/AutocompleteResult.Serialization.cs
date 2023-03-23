@@ -15,11 +15,15 @@ namespace CognitiveSearch.Models
     {
         internal static AutocompleteResult DeserializeAutocompleteResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<double> searchCoverage = default;
             IReadOnlyList<AutocompleteItem> value = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("@search.coverage"))
+                if (property.NameEquals("@search.coverage"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -29,7 +33,7 @@ namespace CognitiveSearch.Models
                     searchCoverage = property.Value.GetDouble();
                     continue;
                 }
-                if (property.NameEquals("value"))
+                if (property.NameEquals("value"u8))
                 {
                     List<AutocompleteItem> array = new List<AutocompleteItem>();
                     foreach (var item in property.Value.EnumerateArray())
