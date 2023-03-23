@@ -10,11 +10,11 @@
   "public-clients": true,
   "head-as-boolean": true,
   "skip-csproj-packagereference": true,
-  "ModelsToTreatEmptyStringAsNull": [
+  "models-to-treat-empty-string-as-null": [
     "EventData",
     "ManagedHsmProperties"
   ],
-  "IntrinsicTypesToTreatEmptyStringAsNull": [
+  "intrinsic-types-to-treat-empty-string-as-null": [
     "Uri",
     "Guid",
     "ResourceIdentifier",

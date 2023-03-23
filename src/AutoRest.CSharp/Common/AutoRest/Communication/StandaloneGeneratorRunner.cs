@@ -170,18 +170,19 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.ModelNamespace, Configuration.ModelNamespace);
                     WriteIfNotDefault(writer, Configuration.Options.HeadAsBoolean, Configuration.HeadAsBoolean);
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
+                    WriteIfNotDefault(writer, Configuration.Options.DisablePaginationTopRenaming, Configuration.DisablePaginationTopRenaming);
                     WriteIfNotDefault(writer, Configuration.Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
                     WriteIfNotDefault(writer, Configuration.Options.GenerateModelFactory, Configuration.GenerateModelFactory);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ModelFactoryForHlc, Configuration.ModelFactoryForHlc);
                     WriteIfNotDefault(writer, Configuration.Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
-                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.ProtocolMethodList), Configuration.ProtocolMethodList);
-                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);
-                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.ModelsToTreatEmptyStringAsNull), Configuration.ModelsToTreatEmptyStringAsNull.ToList<string>());
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ProtocolMethodList, Configuration.ProtocolMethodList);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.SuppressAbstractBaseClasses, Configuration.SuppressAbstractBaseClasses);
+                    Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ModelsToTreatEmptyStringAsNull, Configuration.ModelsToTreatEmptyStringAsNull.ToList());
                     if (Configuration.ModelsToTreatEmptyStringAsNull.Any())
                     {
-                        Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.IntrinsicTypesToTreatEmptyStringAsNull), Configuration.IntrinsicTypesToTreatEmptyStringAsNull.ToList<string>());
+                        Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.IntrinsicTypesToTreatEmptyStringAsNull, Configuration.IntrinsicTypesToTreatEmptyStringAsNull.ToList());
                     }
 
                     Configuration.MgmtConfiguration.SaveConfiguration(writer);
@@ -240,15 +241,15 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 sharedSourceFolders.Add(Path.Combine(outputPath, sharedSourceFolder.GetString()!));
             }
 
-            root.TryGetProperty(nameof(Configuration.Options.ProtocolMethodList), out var protocolMethodList);
+            root.TryGetProperty(Configuration.Options.ProtocolMethodList, out var protocolMethodList);
             var protocolMethods = Configuration.DeserializeArray(protocolMethodList);
-            root.TryGetProperty(nameof(Configuration.Options.SuppressAbstractBaseClasses), out var suppressAbstractBaseClassesElement);
+            root.TryGetProperty(Configuration.Options.SuppressAbstractBaseClasses, out var suppressAbstractBaseClassesElement);
             var suppressAbstractBaseClasses = Configuration.DeserializeArray(suppressAbstractBaseClassesElement);
-            root.TryGetProperty(nameof(Configuration.Options.ModelsToTreatEmptyStringAsNull), out var modelsToTreatEmptyStringAsNullElement);
+            root.TryGetProperty(Configuration.Options.ModelsToTreatEmptyStringAsNull, out var modelsToTreatEmptyStringAsNullElement);
             var modelsToTreatEmptyStringAsNull = Configuration.DeserializeArray(modelsToTreatEmptyStringAsNullElement);
-            root.TryGetProperty(nameof(Configuration.IntrinsicTypesToTreatEmptyStringAsNull), out var intrinsicTypesToTreatEmptyStringAsNullElement);
+            root.TryGetProperty(Configuration.Options.IntrinsicTypesToTreatEmptyStringAsNull, out var intrinsicTypesToTreatEmptyStringAsNullElement);
             var intrinsicTypesToTreatEmptyStringAsNull = Configuration.DeserializeArray(intrinsicTypesToTreatEmptyStringAsNullElement);
-            root.TryGetProperty(nameof(Configuration.Options.ModelFactoryForHlc), out var oldModelFactoryEntriesElement);
+            root.TryGetProperty(Configuration.Options.ModelFactoryForHlc, out var oldModelFactoryEntriesElement);
             var oldModelFactoryEntries = Configuration.DeserializeArray(oldModelFactoryEntriesElement);
 
             Configuration.Initialize(

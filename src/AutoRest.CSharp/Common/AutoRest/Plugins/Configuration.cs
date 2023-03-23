@@ -39,6 +39,7 @@ namespace AutoRest.CSharp.Input
             public const string ModelFactoryForHlc = "model-factory-for-hlc";
             public const string GenerateModelFactory = "generate-model-factory";
             public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
+            public const string IntrinsicTypesToTreatEmptyStringAsNull = "intrinsic-types-to-treat-empty-string-as-null";
             public const string AdditionalIntrinsicTypesToTreatEmptyStringAsNull = "additional-intrinsic-types-to-treat-empty-string-as-null";
         }
 
