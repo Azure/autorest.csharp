@@ -210,61 +210,80 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var methodName = string.Empty;
+            var callStaticExtension = false;
             if (frameworkType == typeof(JsonElement))
-                methodName = "Clone";
+                methodName = nameof(JsonElement.Clone);
             if (frameworkType == typeof(object))
-                methodName = "GetObject";
+            {
+                methodName = nameof(JsonElementExtensions.GetObject);
+                callStaticExtension = true;
+            }
+
             if (frameworkType == typeof(bool))
-                methodName = "GetBoolean";
+                methodName = nameof(JsonElement.GetBoolean);
             if (frameworkType == typeof(char))
-                methodName = "GetChar";
+            {
+                methodName = nameof(JsonElementExtensions.GetChar);
+                callStaticExtension = true;
+            }
+
             if (frameworkType == typeof(short))
-                methodName = "GetInt16";
+                methodName = nameof(JsonElement.GetInt16);
             if (frameworkType == typeof(int))
-                methodName = "GetInt32";
+                methodName = nameof(JsonElement.GetInt32);
             if (frameworkType == typeof(long))
-                methodName = "GetInt64";
+                methodName = nameof(JsonElement.GetInt64);
             if (frameworkType == typeof(float))
-                methodName = "GetSingle";
+                methodName = nameof(JsonElement.GetSingle);
             if (frameworkType == typeof(double))
-                methodName = "GetDouble";
+                methodName = nameof(JsonElement.GetDouble);
             if (frameworkType == typeof(decimal))
-                methodName = "GetDecimal";
+                methodName = nameof(JsonElement.GetDecimal);
             if (frameworkType == typeof(string))
-                methodName = "GetString";
+                methodName = nameof(JsonElement.GetString);
             if (frameworkType == typeof(Guid))
-                methodName = "GetGuid";
+                methodName = nameof(JsonElement.GetGuid);
 
             if (frameworkType == typeof(byte[]))
             {
-                methodName = "GetBytesFromBase64";
+                methodName = nameof(JsonElementExtensions.GetBytesFromBase64);
+                callStaticExtension = true;
                 includeFormat = true;
             }
 
             if (frameworkType == typeof(DateTimeOffset))
             {
-                methodName = "GetDateTimeOffset";
+                methodName = nameof(JsonElementExtensions.GetDateTimeOffset);
+                callStaticExtension = true;
                 includeFormat = true;
             }
 
             if (frameworkType == typeof(DateTime))
             {
-                methodName = "GetDateTime";
+                methodName = nameof(JsonElement.GetDateTime);
                 includeFormat = true;
             }
 
             if (frameworkType == typeof(TimeSpan))
             {
-                methodName = "GetTimeSpan";
+                methodName = nameof(JsonElementExtensions.GetTimeSpan);
+                callStaticExtension = true;
                 includeFormat = true;
             }
 
+            var arguments = new List<ValueExpression>();
+            if (callStaticExtension)
+            {
+                arguments.Add(element);
+            }
             if (includeFormat && format.ToFormatSpecifier() is { } formatString)
             {
-                return new StaticMethodCallExpression(typeof(JsonElementExtensions), methodName, new[]{element, new FormattableStringToExpression($"{formatString:L}")}, CallAsExtension: true);
+                arguments.Add(new FormattableStringToExpression($"{formatString:L}"));
             }
 
-            return Call.Instance(element, methodName);
+            return callStaticExtension
+                ? new StaticMethodCallExpression(typeof(JsonElementExtensions), methodName, arguments, CallAsExtension: true)
+                : new InstanceMethodCallExpression(element, methodName, arguments, false);
         }
 
         private static bool IsCustomJsonConverterAdded(Type type)
