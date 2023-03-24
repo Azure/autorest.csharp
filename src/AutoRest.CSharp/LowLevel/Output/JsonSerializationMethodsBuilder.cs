@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models
                 case JsonDictionarySerialization jsonDictionary:
                     var dictionary = new CodeWriterDeclaration("dictionary");
                     var property = new CodeWriterDeclaration("property");
-                    value = property;
+                    value = dictionary;
 
                     var declareDictionaryVariable = new DeclareVariableLine(jsonDictionary.Type, dictionary, New(jsonDictionary.Type));
                     var iterateOverJsonObject = new ForeachBlock(property, Call.JsonElement.EnumerateObject(element), DeserializeDictionaryValue(jsonDictionary.ValueSerialization, dictionary, property));
