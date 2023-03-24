@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return new IfElseBlock
                 (
-                    new FormattableStringToExpression($"{itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"),
+                    new FormattableStringToExpression($"{itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null"),
                     LineCall.Dictionary.Add(dictionaryVariable, key, Null),
                     new MethodBodyBlocks(deserializeValueBlock, addValueLine)
                 );
