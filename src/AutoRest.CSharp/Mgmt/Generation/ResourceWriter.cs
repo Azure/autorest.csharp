@@ -295,7 +295,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {
-                _writer.Line(Assign.ResponseValueId(originalResponse, CallCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, originalResponse)));
+                _writer.WriteLine(Assign.ResponseValueId(originalResponse, CallCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, originalResponse)));
             }
 
             var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);

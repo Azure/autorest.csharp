@@ -4,12 +4,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
 
@@ -32,6 +32,7 @@ namespace AutoRest.CSharp.Output.Models
         public static ValueExpression GetResponseValueId(CodeWriterDeclaration response) =>
             new MemberReference(GetResponseValue(response), "Id");
 
+        public static ValueExpression Default { get; } = new FormattableStringToExpression($"default");
         public static ValueExpression Null { get; } = new FormattableStringToExpression($"null");
 
         private static ValueExpression CheckNull(this Parameter parameter)
@@ -66,7 +67,8 @@ namespace AutoRest.CSharp.Output.Models
 
             public static ValueExpression ToString(ValueExpression reference) => new InstanceMethodCallExpression(reference , "ToString", Array.Empty<ValueExpression>(), false);
             public static ValueExpression ToRequestContent(ValueExpression reference) => new InstanceMethodCallExpression(reference, "ToRequestContent", Array.Empty<ValueExpression>(), false);
-            public static ValueExpression ToSerialString(CSharpType type, ValueExpression reference) => new StaticMethodCallExpression(type, "ToSerialString", new[] { reference }, true, false);
+            public static ValueExpression ToSerialString(CSharpType type, ValueExpression reference) => new StaticMethodCallExpression(type, "ToSerialString", new[] { reference }, null, true);
+            public static ValueExpression ToEnum(CSharpType enumType, ValueExpression stringValue) => new StaticMethodCallExpression(enumType, $"To{enumType.Implementation.Declaration.Name}", new[]{ stringValue }, null, true);
 
             public static ValueExpression CreateRequestMethod(string methodName, IEnumerable<Parameter> parameters)
             {
@@ -77,6 +79,11 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var protocolMethodName = async ? methodName + "Async" : methodName;
                 return new InstanceMethodCallExpression(null, protocolMethodName, arguments, async);
+            }
+
+            public static class BinaryData
+            {
+                public static ValueExpression FromString(ValueExpression data) => Static(typeof(System.BinaryData), nameof(System.BinaryData.FromString), data);
             }
 
             public static class HttpPipelineExtensions
@@ -98,7 +105,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
 
                     var methodName = async ? nameof(Azure.Core.HttpPipelineExtensions.ProcessMessageAsync) : nameof(Azure.Core.HttpPipelineExtensions.ProcessMessage);
-                    return new StaticMethodCallExpression(HttpPipelineExtensionsType, methodName, arguments, true, async);
+                    return new StaticMethodCallExpression(HttpPipelineExtensionsType, methodName, arguments, null, true, async);
                 }
 
                 public static ValueExpression ProcessHeadAsBoolMessage(CodeWriterDeclaration pipeline, CodeWriterDeclaration message, CodeWriterDeclaration clientDiagnostics, Parameter? requestContext, bool async)
@@ -112,13 +119,41 @@ namespace AutoRest.CSharp.Output.Models
                     };
 
                     var methodName = async ? nameof(Azure.Core.HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(Azure.Core.HttpPipelineExtensions.ProcessHeadAsBoolMessage);
-                    return new StaticMethodCallExpression(HttpPipelineExtensionsType, methodName, arguments, true, async);
+                    return new StaticMethodCallExpression(HttpPipelineExtensionsType, methodName, arguments, null, true, async);
+                }
+            }
+
+            public static class JsonDocument
+            {
+                public static ValueExpression Parse(CodeWriterDeclaration responseVariable, bool async)
+                {
+                    var contentStream = new MemberReference(responseVariable, nameof(Azure.Response.ContentStream));
+                    return new StaticMethodCallExpression(typeof(System.Text.Json.JsonDocument), nameof(System.Text.Json.JsonDocument.Parse), new[]{contentStream}, null, false, async);
+                }
+            }
+
+            public static class JsonElement
+            {
+                public static ValueExpression EnumerateArray(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.EnumerateArray));
+                public static ValueExpression EnumerateObject(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.EnumerateObject));
+                public static ValueExpression GetString(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetString));
+                public static ValueExpression GetRawText(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetRawText));
+            }
+
+            public static class JsonSerializer
+            {
+                public static ValueExpression Deserialize(ValueExpression element, CSharpType serializationType, ValueExpression? options = null)
+                {
+                    var arguments = options is null
+                        ? new[]{ JsonElement.GetRawText(element) }
+                        : new[]{ JsonElement.GetRawText(element), options };
+                    return new StaticMethodCallExpression(typeof(System.Text.Json.JsonSerializer), nameof(System.Text.Json.JsonSerializer.Deserialize), arguments, new[] { serializationType });
                 }
             }
 
             public static class PageableHelpers
             {
-                private static readonly CSharpType BinaryDataType = typeof(BinaryData);
+                private static readonly CSharpType BinaryDataType = typeof(System.BinaryData);
                 private static readonly CSharpType PageableHelpersType = typeof(Azure.Core.PageableHelpers);
 
                 public static ValueExpression CreatePageable(
@@ -151,7 +186,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
 
                     var methodName = async ? nameof(Azure.Core.PageableHelpers.CreateAsyncPageable) : nameof(Azure.Core.PageableHelpers.CreatePageable);
-                    return new StaticMethodCallExpression(PageableHelpersType, methodName, arguments, false, false);
+                    return new StaticMethodCallExpression(PageableHelpersType, methodName, arguments);
                 }
 
                 public static ValueExpression CreatePageable(
@@ -187,7 +222,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
 
                     var methodName = async ? nameof(Azure.Core.PageableHelpers.CreateAsyncPageable) : nameof(Azure.Core.PageableHelpers.CreatePageable);
-                    return new StaticMethodCallExpression(PageableHelpersType, methodName, arguments, false, async);
+                    return new StaticMethodCallExpression(PageableHelpersType, methodName, arguments, null, false, async);
                 }
 
                 public static ValueExpression GetValueFactory(CSharpType? pageItemType)
@@ -202,16 +237,17 @@ namespace AutoRest.CSharp.Output.Models
                         // When `JsonElement` provides access to its UTF8 buffer, change this code to create `BinaryData` from it.
                         // See also PageableHelpers.ParseResponseForBinaryData
                         var e = new CodeWriterDeclaration("e");
-                        return Func(e, Call.Static(BinaryDataType, nameof(BinaryData.FromString), Call.Instance(e, nameof(JsonElement.GetRawText))));
+                        return Func(e, BinaryData.FromString(JsonElement.GetRawText(e)));
                     }
 
-                    if (!pageItemType.IsFrameworkType && pageItemType.Implementation is SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type)
+                    if (pageItemType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type })
                     {
                         return new MemberReference(new TypeReference(type.Type), $"Deserialize{type.Declaration.Name}");
                     }
 
-                    var deserializeImplementation = new FormattableStringToExpression(JsonCodeWriterExtensions.GetDeserializeValueFormattable($"e", pageItemType));
-                    return Func(new CodeWriterDeclaration("e"), deserializeImplementation);
+                    var variable = new CodeWriterDeclaration("e");
+                    var deserializeImplementation = JsonCodeWriterExtensions.GetDeserializeValueExpression(variable, pageItemType);
+                    return Func(variable, deserializeImplementation);
                 }
             }
 
@@ -241,7 +277,7 @@ namespace AutoRest.CSharp.Output.Models
                         new ParameterReference(KnownParameters.WaitForCompletion)
                     };
 
-                    return new StaticMethodCallExpression(typeof(Azure.Core.ProtocolOperationHelpers), methodName, arguments, false, async);
+                    return new StaticMethodCallExpression(typeof(Azure.Core.ProtocolOperationHelpers), methodName, arguments, null, false, async);
                 }
 
                 public static ValueExpression Convert(CSharpType responseType, CodeWriterDeclaration response, CodeWriterDeclaration clientDiagnostics, string scopeName)
@@ -256,11 +292,16 @@ namespace AutoRest.CSharp.Output.Models
 
             public static class Response
             {
-                public static ValueExpression FromValue(CSharpType responseType, CodeWriterDeclaration response)
+                public static ValueExpression FromValue(ValueExpression value, CodeWriterDeclaration response)
                 {
                     var responseVariable = new VariableReference(response);
-                    var fromResponseCall = new StaticMethodCallExpression(responseType, "FromResponse", new[]{responseVariable}, false, false);
-                    return new StaticMethodCallExpression(typeof(Azure.Response), nameof(Azure.Response.FromValue), new ValueExpression[]{fromResponseCall, responseVariable});
+                    return new StaticMethodCallExpression(typeof(Azure.Response), nameof(Azure.Response.FromValue), new[]{value, responseVariable});
+                }
+
+                public static ValueExpression FromValue(CSharpType responseType, CodeWriterDeclaration response)
+                {
+                    var fromResponseCall = new StaticMethodCallExpression(responseType, "FromResponse", new[]{new VariableReference(response)});
+                    return FromValue(fromResponseCall, response);
                 }
             }
         }
@@ -272,6 +313,7 @@ namespace AutoRest.CSharp.Output.Models
         public static implicit operator ValueExpression(CodeWriterDeclaration name) => new VariableReference(name);
     }
 
+    internal record CastExpression(ValueExpression Inner, CSharpType Type) : ValueExpression;
     internal record DefaultValueExpression(CSharpType Type) : ValueExpression;
     internal record NewInstanceExpression(CSharpType Type, IReadOnlyList<ValueExpression> Arguments) : ValueExpression
     {
@@ -285,7 +327,7 @@ namespace AutoRest.CSharp.Output.Models
     internal record VariableReference(CodeWriterDeclaration Name) : ValueExpression;
     internal record FormattableStringToExpression(FormattableString Value) : ValueExpression; // Shim between formattable strings and expressions
     internal record NullConditionalExpression(ValueExpression Inner) : ValueExpression;
-    internal record StaticMethodCallExpression(CSharpType? MethodType, string MethodName, IReadOnlyList<ValueExpression> Arguments, bool CallAsExtension = false, bool CallAsAsync = false) : ValueExpression;
+    internal record StaticMethodCallExpression(CSharpType? MethodType, string MethodName, IReadOnlyList<ValueExpression> Arguments, IReadOnlyList<CSharpType>? TypeArguments = null, bool CallAsExtension = false, bool CallAsAsync = false) : ValueExpression;
     internal record InstanceMethodCallExpression(ValueExpression? InstanceReference, string MethodName, IReadOnlyList<ValueExpression> Arguments, bool CallAsAsync) : ValueExpression;
     internal record FuncExpression(IReadOnlyList<CodeWriterDeclaration> Parameters, ValueExpression Inner) : ValueExpression;
 }

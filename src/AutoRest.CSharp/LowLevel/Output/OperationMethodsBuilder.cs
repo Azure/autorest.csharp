@@ -157,7 +157,7 @@ namespace AutoRest.CSharp.Output.Models
             var responseType = firstResponseBodyType is not null ? typeFactory.CreateType(firstResponseBodyType) : null;
             if (operation.Paging is not { } paging)
             {
-                return responseType;
+                return responseType is null ? null : TypeFactory.GetOutputType(responseType);
             }
 
             if (responseType is null)
@@ -332,13 +332,19 @@ namespace AutoRest.CSharp.Output.Models
 
             lines.CreateProtocolMethodArguments(_parameterLinks, out var protocolMethodArguments);
             lines.Add(Declare.Response(_protocolMethodReturnType, Call.ProtocolMethod(_protocolMethodName, protocolMethodArguments, async), out var response));
-            if (_responseType is not null)
+            if (_responseType is null)
             {
-                lines.Add(Return(Call.Response.FromValue(_responseType, response)));
+                lines.Add(Return(response));
+            }
+            else if (TypeFactory.IsList(_responseType))
+            {
+                lines.Add(Declare.Default(_responseType, "value", out var value));
+                lines.Add(Declare.JsonDocument(Call.JsonDocument.Parse(response, async), out var document));
+                lines.Add(Return(Call.Response.FromValue(value, response)));
             }
             else
             {
-                lines.Add(Return(response));
+                lines.Add(Return(Call.Response.FromValue(_responseType, response)));
             }
 
             return lines;

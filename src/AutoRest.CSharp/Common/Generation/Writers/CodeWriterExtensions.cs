@@ -75,15 +75,6 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
 
-        public static CodeWriter WriteParseJsonDocument(this CodeWriter writer, CodeWriterDeclaration responseVariable, bool async, out CodeWriterDeclaration documentVariable)
-        {
-            documentVariable = new CodeWriterDeclaration("document");
-
-            return async
-                ? writer.Line($"using var {documentVariable:D} = await {typeof(JsonDocument)}.{nameof(JsonDocument.ParseAsync)}({responseVariable}.{nameof(Response.ContentStream)}, default, cancellationToken).ConfigureAwait(false);")
-                : writer.Line($"using var {documentVariable:D} = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}({responseVariable}.{nameof(Response.ContentStream)});");
-        }
-
         public static CodeWriter WriteField(this CodeWriter writer, FieldDeclaration field, bool declareInCurrentScope = true)
         {
             if (field.Description != null)
@@ -378,28 +369,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {RequestConditionHeaders.IfUnmodifiedSince, "IfUnmodifiedSince" }
         };
 
-        public static CodeWriter.CodeWriterScope WriteUsingStatement(this CodeWriter writer, string variableName, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters, out CodeWriterDeclaration variable)
-        {
-            variable = new CodeWriterDeclaration(variableName);
-            return writer.Scope($"using (var {variable:D} = {GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)})");
-        }
-
-        public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString methodName, FormattableString parameters)
-            => writer.WriteMethodCall(asyncCall, methodName, methodName, parameters);
-
         public static CodeWriter WriteMethodCall(this CodeWriter writer, bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
             => writer.Append(GetMethodCallFormattableString(asyncCall, asyncMethodName, syncMethodName, parameters)).LineRaw(";");
-
-        public static CodeWriter WriteMethodCall(this CodeWriter writer, MethodSignature method, IEnumerable<FormattableString> parameters, bool asyncCall)
-        {
-            var parametersFs = parameters.ToArray().Join(", ");
-            if (asyncCall)
-            {
-                return writer.Append($"await {method.WithAsync(true).Name}({parametersFs}).ConfigureAwait(false)");
-            }
-
-            return writer.Append($"{method.WithAsync(false).Name}({parametersFs})");
-        }
 
         private static FormattableString GetMethodCallFormattableString(bool asyncCall, FormattableString asyncMethodName, FormattableString syncMethodName, FormattableString parameters)
             => asyncCall ? (FormattableString)$"await {asyncMethodName}({parameters}).ConfigureAwait(false)" : (FormattableString)$"{syncMethodName}({parameters})";
@@ -650,7 +621,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        private static void WriteBodyBlock(CodeWriter writer, MethodBodyBlock bodyBlock)
+        public static void WriteBodyBlock(this CodeWriter writer, MethodBodyBlock bodyBlock)
         {
             switch (bodyBlock)
             {
@@ -663,30 +634,64 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteBodyBlock(writer, diagnosticScope.InnerBlock);
                     }
                     break;
-                case MethodBodyLines lines:
-                    foreach (var line in lines.MethodBodySingleLine)
+                case IfElseBlock(var condition, var ifBlock, var elseBlock):
+                    writer.Append($"if(");
+                    writer.WriteValueExpression(condition);
+                    writer.Line($")");
+                    using (writer.Scope())
                     {
-                        writer.Line(line);
+                        WriteBodyBlock(writer, ifBlock);
                     }
+
+                    if (elseBlock is not null)
+                    {
+                        using (writer.Scope($"else"))
+                        {
+                            WriteBodyBlock(writer, elseBlock);
+                        }
+                    }
+                    break;
+                case ForeachBlock(var item, var enumerable, var body):
+                    writer.Append($"foreach(var {item:D} in ");
+                    writer.WriteValueExpression(enumerable);
+                    writer.Line($")");
+                    using (writer.Scope())
+                    {
+                        WriteBodyBlock(writer, body);
+                    }
+                    break;
+                case MethodBodyLine line:
+                    writer.WriteLine(line);
                     break;
             }
         }
 
-        public static CodeWriter Line(this CodeWriter writer, MethodBodyLine line)
+        public static CodeWriter WriteLine(this CodeWriter writer, MethodBodyLine line)
         {
             switch (line)
             {
+                case InstanceMethodCallLine(var instance, var methodName, var arguments, var callAsAsync):
+                    writer.WriteValueExpression(new InstanceMethodCallExpression(instance, methodName, arguments, callAsAsync));
+                    break;
                 case SetValueLine setValue:
                     writer.WriteValueExpression(setValue.To);
                     writer.AppendRaw(" = ");
                     writer.WriteValueExpression(setValue.From);
                     break;
+                case DeclareVariableLine {Type: {} type} declareVariable:
+                    writer.Append($"{type} {declareVariable.Name:D} = ");
+                    writer.WriteValueExpression(declareVariable.Value);
+                    break;
                 case DeclareVariableLine declareVariable:
-                    writer.Append($"{declareVariable.Type} {declareVariable.Name:D} = ");
+                    writer.Append($"var {declareVariable.Name:D} = ");
+                    writer.WriteValueExpression(declareVariable.Value);
+                    break;
+                case UsingDeclareVariableLine {Type: {} type} declareVariable:
+                    writer.Append($"using {type} {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
                     break;
                 case UsingDeclareVariableLine declareVariable:
-                    writer.Append($"using {declareVariable.Type} {declareVariable.Name:D} = ");
+                    writer.Append($"using var {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
                     break;
                 case OneLineLocalFunction localFunction:
@@ -712,6 +717,10 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (expression)
             {
+                case CastExpression cast:
+                    writer.Append($"({cast.Type})");
+                    writer.WriteValueExpression(cast.Inner);
+                    break;
                 case MemberReference memberReference:
                     writer.WriteValueExpression(memberReference.Inner);
                     writer.Append($".{memberReference.MemberName}");
@@ -725,6 +734,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteValueExpression(methodCall.Arguments[0]);
                     writer.AppendRaw(".");
                     writer.AppendRaw(methodCall.MethodName);
+                    WriteTypeArguments(writer, methodCall.TypeArguments);
                     WriteArguments(writer, methodCall.Arguments.Skip(1));
                     writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync);
                     break;
@@ -735,6 +745,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.Append($"{methodCall.MethodType}.");
                     }
                     writer.AppendRaw(methodCall.MethodName);
+                    WriteTypeArguments(writer, methodCall.TypeArguments);
                     WriteArguments(writer, methodCall.Arguments);
                     writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync);
                     break;
@@ -832,6 +843,22 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 writer.RemoveTrailingComma();
                 writer.AppendRaw(")");
+            }
+
+            static void WriteTypeArguments(CodeWriter writer, IEnumerable<CSharpType>? typeArguments)
+            {
+                if (typeArguments is null)
+                {
+                    return;
+                }
+
+                writer.AppendRaw("<");
+                foreach (var argument in typeArguments)
+                {
+                    writer.Append($"{argument}, ");
+                }
+                writer.RemoveTrailingComma();
+                writer.AppendRaw(">");
             }
         }
     }

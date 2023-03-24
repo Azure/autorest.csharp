@@ -141,14 +141,37 @@ namespace AutoRest.CSharp.Output.Models
 
         public static class Assign
         {
-            public static MethodBodyLine ResponseValueId(CodeWriterDeclaration response, ValueExpression from)
+            public static MethodBodyLine Value(CodeWriterDeclaration to, ValueExpression from) => new SetValueLine(to, from);
+            public static MethodBodyLine ResponseValueId(CodeWriterDeclaration response, ValueExpression from) => new SetValueLine(GetResponseValueId(response), from);
+        }
+
+        public static class LineCall
+        {
+            public static class Dictionary
             {
-                return new SetValueLine(GetResponseValueId(response), from);
+                public static MethodBodyLine Add(ValueExpression dictionary, ValueExpression key, ValueExpression value) => new InstanceMethodCallLine(dictionary, nameof(Dictionary<object, object>.Add), new[]{key, value}, false);
+            }
+
+            public static class List
+            {
+                public static MethodBodyLine Add(ValueExpression list, ValueExpression value) => new InstanceMethodCallLine(list, nameof(List<object>.Add), new[]{value}, false);
             }
         }
 
         public static class Declare
         {
+            public static MethodBodyLine Default(CSharpType type, string name, out CodeWriterDeclaration declaration)
+            {
+                declaration = new CodeWriterDeclaration(name);
+                return new DeclareVariableLine(type, declaration, ValueExpressions.Default);
+            }
+
+            public static MethodBodyLine JsonDocument(ValueExpression value, out CodeWriterDeclaration document)
+            {
+                document = new CodeWriterDeclaration("document");
+                return new UsingDeclareVariableLine(typeof(System.Text.Json.JsonDocument), document, value);
+            }
+
             public static MethodBodyLine FirstPageRequest(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
             {
                 var requestMethodCall = new InstanceMethodCallExpression(restClient, methodName, arguments.ToList(), false);
@@ -196,20 +219,19 @@ namespace AutoRest.CSharp.Output.Models
     internal record Method(MethodSignature Signature, MethodBody Body);
     internal record MethodBody(IReadOnlyList<MethodBodyBlock> Blocks);
 
-    internal record MethodBodyBlock
-    {
-        public static MethodBodyBlock Create(params MethodBodyLine[] lines) => new MethodBodyLines(lines);
-    }
+    internal record MethodBodyBlock;
 
     internal record ParameterValidationBlock(IReadOnlyList<Parameter> Parameters) : MethodBodyBlock;
     internal record DiagnosticScopeMethodBodyBlock(Diagnostic Diagnostic, Reference ClientDiagnosticsReference, MethodBodyBlock InnerBlock) : MethodBodyBlock;
     internal record TryCatchFinallyBlock(MethodBodyBlock Try, MethodBodyBlock? Catch, MethodBodyBlock? Finally) : MethodBodyBlock;
+    internal record IfElseBlock(ValueExpression Condition, MethodBodyBlock If, MethodBodyBlock? Else) : MethodBodyBlock;
+    internal record ForeachBlock(CodeWriterDeclaration Item, ValueExpression Enumerable, MethodBodyBlock Body) : MethodBodyBlock;
+    
+    internal record MethodBodyLine : MethodBodyBlock;
 
-    internal record MethodBodyLines(IReadOnlyList<MethodBodyLine> MethodBodySingleLine) : MethodBodyBlock;
-    internal record MethodBodyLine;
-
-    internal record UsingDeclareVariableLine(CSharpType Type, CodeWriterDeclaration Name, ValueExpression Value) : MethodBodyLine;
-    internal record DeclareVariableLine(CSharpType Type, CodeWriterDeclaration Name, ValueExpression Value) : MethodBodyLine;
+    internal record InstanceMethodCallLine(ValueExpression? InstanceReference, string MethodName, IReadOnlyList<ValueExpression> Arguments, bool CallAsAsync) : MethodBodyLine;
+    internal record UsingDeclareVariableLine(CSharpType? Type, CodeWriterDeclaration Name, ValueExpression Value) : MethodBodyLine;
+    internal record DeclareVariableLine(CSharpType? Type, CodeWriterDeclaration Name, ValueExpression Value) : MethodBodyLine;
     internal record ReturnValueLine(ValueExpression Value) : MethodBodyLine;
     internal record SetValueLine(ValueExpression To, ValueExpression From) : MethodBodyLine;
     internal record OneLineLocalFunction(CodeWriterDeclaration Name, IReadOnlyList<Parameter> Parameters, CSharpType ReturnType, ValueExpression Body) : MethodBodyLine;

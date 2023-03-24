@@ -596,12 +596,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var firstPageRequestArguments = GetArguments(_writer, parameterMappings);
             var restClient = new FormattableStringToExpression($"{GetRestClientName(operation)}");
 
-            _writer.Line(Declare.FirstPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(pagingMethod.Method), firstPageRequestArguments, out var firstPageRequest));
+            _writer.WriteLine(Declare.FirstPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(pagingMethod.Method), firstPageRequestArguments, out var firstPageRequest));
             CodeWriterDeclaration? nextPageRequest = null;
             if (pagingMethod.NextPageMethod is {} nextPageMethod)
             {
                 var nextPageRequestArguments = firstPageRequestArguments.Prepend(KnownParameters.NextLink);
-                _writer.Line(Declare.NextPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(nextPageMethod), nextPageRequestArguments, out nextPageRequest));
+                _writer.WriteLine(Declare.NextPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(nextPageMethod), nextPageRequestArguments, out nextPageRequest));
             }
 
             var clientDiagnostics = new FormattableStringToExpression($"{clientDiagnosticsReference.Name}");
@@ -609,7 +609,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
-            _writer.Line(Return(Call.PageableHelpers.CreatePageable(firstPageRequest, nextPageRequest, clientDiagnostics, pipeline, itemType, scopeName, itemName, nextLinkName, KnownParameters.CancellationTokenParameter, async)));
+            _writer.WriteLine(Return(Call.PageableHelpers.CreatePageable(firstPageRequest, nextPageRequest, clientDiagnostics, pipeline, itemType, scopeName, itemName, nextLinkName, KnownParameters.CancellationTokenParameter, async)));
         }
 
         protected ValueExpression CallCreateResourceIdentifier(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, CodeWriterDeclaration response)
@@ -678,7 +678,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
-                    _writer.Line(Assign.ResponseValueId(response, CallCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, response)));
+                    _writer.WriteLine(Assign.ResponseValueId(response, CallCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, response)));
                 }
 
                 // the case that we did not need to wrap the result

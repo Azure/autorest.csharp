@@ -282,7 +282,11 @@ namespace AutoRest.CSharp.Output.Models
             }
             else
             {
-                var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _typeFactory);
+                var convenienceMethodParameterType = inputParameter.Type is InputListType
+                    ? new CSharpType(typeof(object))
+                    : _typeFactory.CreateType(inputParameter.Type);
+
+                var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, convenienceMethodParameterType, _typeFactory);
                 _parameterLinks.Add(new ParameterLink(convenienceMethodParameter, protocolMethodParameter));
             }
         }

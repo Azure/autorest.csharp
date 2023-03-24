@@ -183,11 +183,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization)
         {
-            using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(JsonElement)} element)"))
+            var element = new CodeWriterDeclaration("element");
+            using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(JsonElement)} {element:D})"))
             {
                 if (!serialization.Type.IsValueType) // only return null for reference type (e.g. no enum)
                 {
-                    using (writer.Scope($"if (element.{nameof(JsonElement.ValueKind)} == {typeof(JsonValueKind)}.Null)"))
+                    using (writer.Scope($"if ({element}.{nameof(JsonElement.ValueKind)} == {typeof(JsonValueKind)}.Null)"))
                     {
                         writer.Line($"return null;");
                     }
@@ -197,15 +198,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (discriminator is not null && discriminator.HasDescendants)
                 {
-                    using (writer.Scope($"if (element.TryGetProperty({discriminator.SerializedName:L}, out {typeof(JsonElement)} discriminator))"))
+                    using (writer.Scope($"if ({element}.TryGetProperty({discriminator.SerializedName:L}, out {typeof(JsonElement)} discriminator))"))
                     {
                         writer.Line($"switch (discriminator.GetString())");
                         using (writer.Scope())
                         {
                             foreach (var implementation in discriminator.Implementations)
                             {
-                                var implementationFormattable = JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(implementation.Type.Implementation, $"element", JsonSerializationOptions.None);
-                                writer.Line($"case {implementation.Key:L}: return {implementationFormattable};");
+                                var returnImplementation = ClientMethodBodyLines.Return(JsonCodeWriterExtensions.GetDeserializeImplementation(implementation.Type.Implementation, element, JsonSerializationOptions.None));
+                                writer
+                                    .Append($"case {implementation.Key:L}: ")
+                                    .WriteLine(returnImplementation);
                             }
                         }
                     }
@@ -213,7 +216,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (discriminator is not null && !serialization.Type.HasParent && !serialization.Type.Equals(discriminator.DefaultObjectType.Type))
                 {
-                    writer.Line($"return {JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(discriminator.DefaultObjectType.Type.Implementation, $"element", JsonSerializationOptions.None)};");
+                    writer.WriteLine(ClientMethodBodyLines.Return(JsonCodeWriterExtensions.GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, element, JsonSerializationOptions.None)));
                 }
                 else
                 {

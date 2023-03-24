@@ -12,6 +12,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Utilities;
@@ -146,19 +147,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var resourceData = _opSource.Resource!.ResourceData;
                 Debug.Assert(resourceData.IncludeDeserializer);
 
-                _writer.WriteParseJsonDocument(responseVariable, async, out var documentVariable);
+                _writer.WriteLine(ClientMethodBodyLines.Declare.JsonDocument(ValueExpressions.Call.JsonDocument.Parse(responseVariable, async), out var documentVariable));
 
                 var dataVariable = new CodeWriterDeclaration("data");
-                var deserializeExpression = JsonCodeWriterExtensions.GetDeserializeImplementationFormattable(resourceData, $"{documentVariable}.RootElement", JsonSerializationOptions.None);
+                var deserializeExpression = JsonCodeWriterExtensions.GetDeserializeImplementation(resourceData, new MemberReference(documentVariable, nameof(JsonDocument.RootElement)), JsonSerializationOptions.None);
                 if (_operationIdMappings is not null)
                 {
-                    _writer.Line($"var {dataVariable:D} = ScrubId({deserializeExpression});");
-                }
-                else
-                {
-                    _writer.Line($"var {dataVariable:D} = {deserializeExpression};");
+                    deserializeExpression = ValueExpressions.Call.Instance(null, "ScrubId", deserializeExpression);
                 }
 
+                _writer.WriteLine(new DeclareVariableLine(null, dataVariable, deserializeExpression));
                 if (resourceData.ShouldSetResourceIdentifier)
                 {
                     _writer.Line($"{dataVariable}.Id = {_opSource.ArmClientField.Name}.Id;");
