@@ -317,7 +317,7 @@ namespace AutoRest.CSharp.Generation.Writers
                              property.ValueType?.Equals(typeof(string)) !=
                              true) //https://github.com/Azure/autorest.csharp/issues/922
                     {
-                        if (!property.IsClientFlattenedProperty) // if flatten property, then we should not try to assign null/default to parent property
+                        if (property.PropertySerializations is null)
                         {
                             using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
                             {
@@ -359,13 +359,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
         }
-
-        private static FormattableString GetNewCollectionExpression(JsonSerialization serialization) => serialization switch
-        {
-            JsonArraySerialization array => $"new {array.ImplementationType}()",
-            JsonDictionarySerialization dictionary => $"new {dictionary.Type}()",
-            _ => throw new InvalidOperationException($"{serialization.GetType()} is not supported."),
-        };
 
         private static FormattableString GetOptionalFormattable(JsonPropertySerialization target, ObjectPropertyVariable variable)
         {
