@@ -396,16 +396,16 @@ namespace AutoRest.CSharp.Generation.Writers
             var returnType = methodSignature.ReturnType;
 
             FormattableString text;
-            if (clientMethod.PagingInfo != null && clientMethod.LongRunning != null)
+            if (clientMethod is { IsPaging: true, IsLongRunning: true })
             {
                 CSharpType pageableType = methodSignature.Modifiers.HasFlag(Async) ? typeof(AsyncPageable<>) : typeof(Pageable<>);
                 text = $"The <see cref=\"{nameof(Operation)}{{T}}\"/> from the service that will contain a <see cref=\"{pageableType.Name}{{T}}\"/> containing a list of <see cref=\"{nameof(BinaryData)}\"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.";
             }
-            else if (clientMethod.PagingInfo != null)
+            else if (clientMethod.IsPaging)
             {
                 text = $"The <see cref=\"{returnType.Name}{{T}}\"/> from the service containing a list of <see cref=\"{returnType.Arguments[0]}\"/> objects. Details of the body schema for each item in the collection are in the Remarks section below.";
             }
-            else if (clientMethod.LongRunning != null)
+            else if (clientMethod.IsLongRunning)
             {
                 text = hasResponseRemarks
                     ? $"The <see cref=\"{nameof(Operation)}{{T}}\"/> from the service that will contain a <see cref=\"{nameof(BinaryData)}\"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below."
@@ -436,9 +436,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             hasRequestSchema = AddRequestOrResponseInputType(schemas, clientMethod.RequestBodyType, "Request Body");
 
-            if (clientMethod.PagingInfo != null && clientMethod.ResponseBodyType is InputModelType modelType)
+            if (clientMethod is { IsPaging: true, ResponseBodyType: InputModelType modelType })
             {
-                var itemType = modelType.Properties.FirstOrDefault(p => p.Name == clientMethod.PagingInfo.ItemName)?.Type;
+                var itemType = modelType.Properties.FirstOrDefault(p => p.Name == clientMethod.PagingItemName)?.Type;
                 hasResponseSchema = AddRequestOrResponseSchema(schemas, itemType, "Response Body");
             }
             else
@@ -527,7 +527,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var schemaDesription = "";
             if (hasRequestRemarks && hasResponseRemarks)
             {
-                if (clientMethod.PagingInfo == null)
+                if (!clientMethod.IsPaging)
                 {
                     schemaDesription = "Below is the JSON schema for the request and response payloads.";
                 }
@@ -542,7 +542,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else if (hasResponseRemarks)
             {
-                if (clientMethod.PagingInfo == null)
+                if (!clientMethod.IsPaging)
                 {
                     schemaDesription = "Below is the JSON schema for the response payload.";
                 }

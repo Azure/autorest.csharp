@@ -26,7 +26,7 @@ using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using static AutoRest.CSharp.Output.Models.ClientMethodBodyLines;
+using static AutoRest.CSharp.Output.Models.MethodBodyLines;
 using static AutoRest.CSharp.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Mgmt.Generation

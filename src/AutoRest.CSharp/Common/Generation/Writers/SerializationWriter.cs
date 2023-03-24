@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             foreach (var implementation in discriminator.Implementations)
                             {
-                                var returnImplementation = ClientMethodBodyLines.Return(JsonCodeWriterExtensions.GetDeserializeImplementation(implementation.Type.Implementation, element, JsonSerializationOptions.None));
+                                var returnImplementation = MethodBodyLines.Return(JsonSerializationMethodsBuilder.GetDeserializeImplementation(implementation.Type.Implementation, element, JsonSerializationOptions.None));
                                 writer
                                     .Append($"case {implementation.Key:L}: ")
                                     .WriteLine(returnImplementation);
@@ -216,7 +216,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (discriminator is not null && !serialization.Type.HasParent && !serialization.Type.Equals(discriminator.DefaultObjectType.Type))
                 {
-                    writer.WriteLine(ClientMethodBodyLines.Return(JsonCodeWriterExtensions.GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, element, JsonSerializationOptions.None)));
+                    writer.WriteLine(MethodBodyLines.Return(JsonSerializationMethodsBuilder.GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, element, JsonSerializationOptions.None)));
                 }
                 else
                 {

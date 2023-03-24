@@ -17,7 +17,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
-using static AutoRest.CSharp.Output.Models.ClientMethodBodyLines;
+using static AutoRest.CSharp.Output.Models.MethodBodyLines;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {

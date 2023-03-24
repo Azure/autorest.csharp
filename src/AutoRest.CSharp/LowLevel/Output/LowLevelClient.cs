@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models
 
             // Temporary sorting to minimize amount of changes.
             ClientMethods = methods
-                .OrderBy(b => b.LongRunning != null ? 2 : b.PagingInfo != null ? 1 : 0)
+                .OrderBy(b => b.IsLongRunning ? 2 : b.IsPaging ? 1 : 0)
                 .ToArray();
 
             // Temporary sorting to minimize amount of changes.

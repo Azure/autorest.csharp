@@ -7,14 +7,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record LowLevelClientMethod(
-        IReadOnlyList<Method> ConvenienceMethods,
-        IReadOnlyList<Method> ProtocolMethods,
-        IReadOnlyList<RestClientMethod> RequestMethods,
-        InputType? RequestBodyType,
-        InputType? ResponseBodyType,
-        ProtocolMethodPaging? PagingInfo,
-        OperationLongRunning? LongRunning);
+    internal record LowLevelClientMethod(IReadOnlyList<Method> ConvenienceMethods, IReadOnlyList<Method> ProtocolMethods, IReadOnlyList<RestClientMethod> RequestMethods, InputType? RequestBodyType, InputType? ResponseBodyType, bool IsPaging, bool IsLongRunning, string PagingItemName);
 
     internal record HlcMethods(InputOperation Operation, IReadOnlyList<RestClientMethod> CreateMessageMethods, IReadOnlyList<Method> ConvenienceMethods);
 }

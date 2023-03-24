@@ -83,6 +83,13 @@ namespace AutoRest.CSharp.Output.Models
 
             public static class BinaryData
             {
+                public static ValueExpression FromStream(ValueExpression response, bool async)
+                {
+                    var methodName = async ? nameof(System.BinaryData.FromStreamAsync) : nameof(System.BinaryData.FromStream);
+                    var contentStream = new MemberReference(response, nameof(Azure.Response.ContentStream));
+                    return Static(typeof(System.BinaryData), methodName, contentStream);
+                }
+
                 public static ValueExpression FromString(ValueExpression data) => Static(typeof(System.BinaryData), nameof(System.BinaryData.FromString), data);
             }
 
@@ -123,12 +130,22 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
+            public static class HttpMessage
+            {
+                public static ValueExpression FromStream(ValueExpression message) => Instance(message, nameof(Azure.Core.HttpMessage.ExtractResponseContent));
+            }
+
             public static class JsonDocument
             {
-                public static ValueExpression Parse(CodeWriterDeclaration responseVariable, bool async)
+                public static ValueExpression GetRootElement(ValueExpression response)
+                    => new MemberReference(response, nameof(System.Text.Json.JsonDocument.RootElement));
+
+                public static ValueExpression Parse(ValueExpression response, bool async)
                 {
-                    var contentStream = new MemberReference(responseVariable, nameof(Azure.Response.ContentStream));
-                    return new StaticMethodCallExpression(typeof(System.Text.Json.JsonDocument), nameof(System.Text.Json.JsonDocument.Parse), new[]{contentStream}, null, false, async);
+                    var contentStream = new MemberReference(response, nameof(Azure.Response.ContentStream));
+                    return async
+                        ? new StaticMethodCallExpression(typeof(System.Text.Json.JsonDocument), nameof(System.Text.Json.JsonDocument.ParseAsync), new[]{contentStream, Default, KnownParameters.CancellationTokenParameter}, null, false, true)
+                        : new StaticMethodCallExpression(typeof(System.Text.Json.JsonDocument), nameof(System.Text.Json.JsonDocument.Parse), new[]{contentStream});
                 }
             }
 
@@ -246,7 +263,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
 
                     var variable = new CodeWriterDeclaration("e");
-                    var deserializeImplementation = JsonCodeWriterExtensions.GetDeserializeValueExpression(variable, pageItemType);
+                    var deserializeImplementation = JsonSerializationMethodsBuilder.GetDeserializeValueExpression(variable, pageItemType);
                     return Func(variable, deserializeImplementation);
                 }
             }
@@ -288,6 +305,11 @@ namespace AutoRest.CSharp.Output.Models
                     var arguments = new ValueExpression[] { responseVariable, fromResponseReference, diagnosticsReference, new FormattableStringToExpression($"{scopeName:L}") };
                     return new StaticMethodCallExpression(typeof(Azure.Core.ProtocolOperationHelpers), nameof(Azure.Core.ProtocolOperationHelpers.Convert), arguments);
                 }
+            }
+
+            public static class RequestContent
+            {
+                public static ValueExpression Create(ValueExpression serializable) => Static(typeof(Azure.Core.RequestContent), nameof(Azure.Core.RequestContent.Create), serializable);
             }
 
             public static class Response

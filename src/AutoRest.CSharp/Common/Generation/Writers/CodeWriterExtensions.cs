@@ -663,6 +663,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 case MethodBodyLine line:
                     writer.WriteLine(line);
                     break;
+                case MethodBodyBlocks(var blocks):
+                    foreach (var block in blocks)
+                    {
+                        writer.WriteBodyBlock(block);
+                    }
+                    break;
             }
         }
 

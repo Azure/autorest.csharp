@@ -188,9 +188,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 builder.AppendLine();
             }
 
-            if (clientMethod.LongRunning is not null)
+            if (clientMethod.IsLongRunning)
             {
-                if (clientMethod.PagingInfo is not null)
+                if (clientMethod.IsPaging)
                 {
                     ComposeHandleLongRunningPageableResponseCode(clientMethod, signature, async, allParameters, builder);
                 }
@@ -199,7 +199,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     ComposeHandleLongRunningResponseCode(clientMethod, signature, async, allParameters, builder);
                 }
             }
-            else if (clientMethod.PagingInfo is not null)
+            else if (clientMethod.IsPaging)
             {
                 ComposeHandlePageableResponseCode(clientMethod, signature, async, allParameters, builder);
             }
@@ -234,7 +234,7 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.AppendLine();
             using (Scope($"{(async ? "await " : "")}foreach (var data in operation.Value)", 0, builder, true))
             {
-                ComposeParsingPageableResponseCodes(responseModel, clientMethod.PagingInfo!.ItemName, allParameters, builder);
+                ComposeParsingPageableResponseCodes(responseModel, clientMethod.PagingItemName, allParameters, builder);
             }
         }
 
@@ -311,7 +311,7 @@ namespace AutoRest.CSharp.Generation.Writers
              */
             using (Scope($"{(async ? "await " : "")}foreach (var data in client.{signature.Name}({MockParameterValues(signature.Parameters.SkipLast(1).ToList(), allParameters)}))", 0, builder, true))
             {
-                ComposeParsingPageableResponseCodes(modelType, clientMethod.PagingInfo!.ItemName, allParameters, builder);
+                ComposeParsingPageableResponseCodes(modelType, clientMethod.PagingItemName, allParameters, builder);
             }
         }
 

@@ -23,8 +23,6 @@ using Azure.ResourceManager.Models;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 using Configuration = AutoRest.CSharp.Input.Configuration;
 using AutoRest.CSharp.Output.Models;
-using static AutoRest.CSharp.Output.Models.ClientMethodBodyLines;
-using static AutoRest.CSharp.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -352,7 +350,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (property.ValueSerialization is not null)
                     {
                         // Reading a property value
-                        var value = writer.DeserializeValue(property.ValueSerialization, new MemberReference(itemVariable, "Value"));
+                        writer.WriteBodyBlock(JsonSerializationMethodsBuilder.DeserializeValue(property.ValueSerialization, new MemberReference(itemVariable, "Value"), out var value));
                         writer.WriteLine(new SetValueLine(propertyVariables[property].Declaration, value));
                     }
                     else if (property.PropertySerializations is not null)
@@ -446,80 +444,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static ValueExpression DeserializeValue(this CodeWriter writer, JsonSerialization serialization, ValueExpression element)
-        {
-            switch (serialization)
-            {
-                case JsonArraySerialization array:
-                    var arrayVariable = new CodeWriterDeclaration("array");
-                    writer.Line($"{array.ImplementationType} {arrayVariable:D} = new {array.ImplementationType}();");
-
-                    var collectionItemVariable = new CodeWriterDeclaration("item");
-                    var foreachBlock = new ForeachBlock(collectionItemVariable, Call.JsonElement.EnumerateArray(element), writer.DeserializeArrayItem(array.ValueSerialization, arrayVariable, collectionItemVariable));
-                    writer.WriteBodyBlock(foreachBlock);
-                    return arrayVariable;
-                case JsonDictionarySerialization dictionary:
-                    var dictionaryVariable = new CodeWriterDeclaration("dictionary");
-                    writer.Line($"{dictionary.Type} {dictionaryVariable:D} = new {dictionary.Type}();");
-
-                    var dictionaryItemVariable = new CodeWriterDeclaration("property");
-                    using (writer.Scope($"foreach (var {dictionaryItemVariable:D} in {element}.EnumerateObject())"))
-                    {
-                        writer.DeserializeDictionaryValue(dictionary.ValueSerialization, dictionaryVariable, dictionaryItemVariable);
-                    }
-
-                    return dictionaryVariable;
-                case JsonValueSerialization valueSerialization:
-                    if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
-                    {
-                        writer.UseNamespace("Azure.ResourceManager.Models");
-                        writer.Line($"var serializeOptions = new {typeof(JsonSerializerOptions)} {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
-                    }
-
-                    writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
-                    return GetDeserializeValueExpression(valueSerialization, element);
-                default:
-                    throw new InvalidOperationException($"{serialization.GetType()} is not supported.");
-            }
-        }
-
-        private static MethodBodyBlock DeserializeArrayItem(this CodeWriter writer, JsonSerialization serialization, CodeWriterDeclaration arrayVariable, CodeWriterDeclaration arrayItemVariable)
-        {
-            if (CollectionItemRequiresNullCheckInSerialization(serialization))
-            {
-                return new IfElseBlock
-                (
-                    new FormattableStringToExpression($"{arrayItemVariable}.ValueKind == {typeof(JsonValueKind)}.Null"),
-                    LineCall.List.Add(arrayVariable, Null),
-                    LineCall.List.Add(arrayVariable, writer.DeserializeValue(serialization, arrayItemVariable))
-                );
-            }
-
-            return LineCall.List.Add(arrayVariable, writer.DeserializeValue(serialization, arrayItemVariable));
-        }
-
-        private static void DeserializeDictionaryValue(this CodeWriter writer, JsonSerialization serialization, CodeWriterDeclaration dictionaryVariable, CodeWriterDeclaration itemVariable)
-        {
-            var key = new MemberReference(itemVariable, "Name");
-            var value = new MemberReference(itemVariable, "Value");
-            if (CollectionItemRequiresNullCheckInSerialization(serialization))
-            {
-                using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
-                {
-                    writer.Line($"{dictionaryVariable}.Add({itemVariable}.Name, null);");
-                }
-                using (writer.Scope($"else"))
-                {
-                    writer.WriteLine(LineCall.Dictionary.Add(dictionaryVariable, key, writer.DeserializeValue(serialization, value)));
-                }
-            }
-            else
-            {
-                writer.WriteLine(LineCall.Dictionary.Add(dictionaryVariable, key, writer.DeserializeValue(serialization, value)));
-            }
-        }
-
-        private static bool CollectionItemRequiresNullCheckInSerialization(JsonSerialization serialization) =>
+        public static bool CollectionItemRequiresNullCheckInSerialization(JsonSerialization serialization) =>
             serialization is { IsNullable: true } and JsonValueSerialization { Type: { IsValueType: true } } || // nullable value type, like int?
             serialization is JsonArraySerialization or JsonDictionarySerialization || // list or dictionary
             serialization is JsonValueSerialization jsonValueSerialization &&
@@ -575,8 +500,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (objAdditionalProperties?.ValueSerialization != null)
                 {
                     var key = new MemberReference(itemVariable, "Name");
-                    var value = new MemberReference(itemVariable, "Value");
-                    writer.WriteLine(LineCall.Dictionary.Add(dictionaryVariable, key, writer.DeserializeValue(objAdditionalProperties.ValueSerialization, value)));
+                    writer.WriteBodyBlock(JsonSerializationMethodsBuilder.DeserializeValue(objAdditionalProperties.ValueSerialization, new MemberReference(itemVariable, "Value"), out var value));
+                    writer.WriteLine(MethodBodyLines.LineCall.Dictionary.Add(dictionaryVariable, key, value));
                 }
             }
 
@@ -591,144 +516,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 .ToArray();
 
             writer.Append($"return new {serialization.Type}({parameters.Join(", ")});");
-        }
-
-        private static ValueExpression GetDeserializeValueExpression(JsonValueSerialization serialization, ValueExpression element)
-            => GetDeserializeValueExpression(element, serialization.Type, serialization.Format, serialization.Options);
-
-        public static ValueExpression GetDeserializeValueExpression(ValueExpression element, CSharpType serializationType, SerializationFormat serializationFormat = SerializationFormat.Default, JsonSerializationOptions serializationOptions = JsonSerializationOptions.None)
-        {
-            if (serializationType.SerializeAs != null)
-            {
-                return new CastExpression(GetFrameworkTypeValueExpression(serializationType.SerializeAs, element, serializationFormat, serializationType), serializationType);
-            }
-
-            if (serializationType.IsFrameworkType)
-            {
-                var frameworkType = serializationType.FrameworkType;
-                if (frameworkType == typeof(Nullable<>))
-                {
-                    frameworkType = serializationType.Arguments[0].FrameworkType;
-                }
-
-                return GetFrameworkTypeValueExpression(frameworkType, element, serializationFormat, serializationType);
-            }
-
-            return GetDeserializeImplementation(serializationType.Implementation, element, serializationOptions);
-        }
-
-        public static ValueExpression GetFrameworkTypeValueExpression(Type frameworkType, ValueExpression element, SerializationFormat format, CSharpType? serializationType)
-        {
-            bool includeFormat = false;
-
-            if (frameworkType == typeof(ETag) ||
-                frameworkType == typeof(Uri) ||
-                frameworkType == typeof(ResourceIdentifier) ||
-                frameworkType == typeof(ResourceType) ||
-                frameworkType == typeof(ContentType) ||
-                frameworkType == typeof(RequestMethod) ||
-                frameworkType == typeof(AzureLocation))
-            {
-                return New(frameworkType, Call.JsonElement.GetString(element));
-            }
-
-            if (frameworkType == typeof(IPAddress))
-            {
-                return Call.Static(typeof(IPAddress), nameof(IPAddress.Parse), Call.JsonElement.GetString(element));
-            }
-
-            if (frameworkType == typeof(BinaryData))
-            {
-                return Call.BinaryData.FromString(Call.JsonElement.GetRawText(element));
-            }
-
-            if (IsCustomJsonConverterAdded(frameworkType) && serializationType is not null)
-            {
-                return Call.JsonSerializer.Deserialize(element, serializationType);
-            }
-
-            var methodName = string.Empty;
-            if (frameworkType == typeof(JsonElement))
-                methodName = "Clone";
-            if (frameworkType == typeof(object))
-                methodName = "GetObject";
-            if (frameworkType == typeof(bool))
-                methodName = "GetBoolean";
-            if (frameworkType == typeof(char))
-                methodName = "GetChar";
-            if (frameworkType == typeof(short))
-                methodName = "GetInt16";
-            if (frameworkType == typeof(int))
-                methodName = "GetInt32";
-            if (frameworkType == typeof(long))
-                methodName = "GetInt64";
-            if (frameworkType == typeof(float))
-                methodName = "GetSingle";
-            if (frameworkType == typeof(double))
-                methodName = "GetDouble";
-            if (frameworkType == typeof(decimal))
-                methodName = "GetDecimal";
-            if (frameworkType == typeof(string))
-                methodName = "GetString";
-            if (frameworkType == typeof(Guid))
-                methodName = "GetGuid";
-
-            if (frameworkType == typeof(byte[]))
-            {
-                methodName = "GetBytesFromBase64";
-                includeFormat = true;
-            }
-
-            if (frameworkType == typeof(DateTimeOffset))
-            {
-                methodName = "GetDateTimeOffset";
-                includeFormat = true;
-            }
-
-            if (frameworkType == typeof(DateTime))
-            {
-                methodName = "GetDateTime";
-                includeFormat = true;
-            }
-
-            if (frameworkType == typeof(TimeSpan))
-            {
-                methodName = "GetTimeSpan";
-                includeFormat = true;
-            }
-
-            if (includeFormat && format.ToFormatSpecifier() is { } formatString)
-            {
-                return Call.Instance(element, methodName, new FormattableStringToExpression($"{formatString:L})"));
-            }
-
-            return Call.Instance(element, methodName);
-        }
-
-        public static ValueExpression GetDeserializeImplementation(TypeProvider implementation, ValueExpression element, JsonSerializationOptions options)
-        {
-            switch (implementation)
-            {
-                case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? new FormattableStringToExpression($"serializeOptions") : null;
-                    return Call.JsonSerializer.Deserialize(element, implementation.Type, optionalSerializeOptions);
-
-                case Resource { ResourceData: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } resourceDataType } resource:
-                    return New(resource.Type, new FormattableStringToExpression($"Client"), Call.Static(resourceDataType.Type, $"Deserialize{resourceDataType.Declaration.Name}", element));
-
-                case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
-                    return Call.JsonSerializer.Deserialize(element, implementation.Type);
-
-                case SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type:
-                    return Call.Static(type.Type, $"Deserialize{type.Declaration.Name}", element);
-
-                case EnumType clientEnum:
-                    var value = GetFrameworkTypeValueExpression(clientEnum.ValueType.FrameworkType, element, SerializationFormat.Default, null);
-                    return clientEnum.IsExtensible ? New(clientEnum.Type, value) : Call.ToEnum(clientEnum.Type, value);
-
-                default:
-                    throw new NotSupportedException($"No deserialization logic exists for {implementation.Declaration.Name}");
-            }
         }
 
         private static bool IsCustomJsonConverterAdded(Type type)
@@ -751,47 +538,7 @@ namespace AutoRest.CSharp.Generation.Writers
         };
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, JsonSerialization serialization, bool async, CodeWriterDeclaration? variable, FormattableString response, bool isBinaryData)
-        {
-            if (isBinaryData)
-            {
-                var expression = async
-                    ? (FormattableString)$"await {typeof(BinaryData)}.FromStreamAsync({response}.ContentStream).ConfigureAwait(false)"
-                    : (FormattableString)$"{typeof(BinaryData)}.FromStream({response}.ContentStream)";
-
-                writer.Line(variable is not null ? (FormattableString)$"{variable} = {expression};" : $"return {expression};");
-            }
-            else
-            {
-                var documentVariable = new CodeWriterDeclaration("document");
-                writer.Append($"using var {documentVariable:D} = ");
-                if (async)
-                {
-                    writer.Line($"await {typeof(JsonDocument)}.ParseAsync({response}.ContentStream, default, cancellationToken).ConfigureAwait(false);");
-                }
-                else
-                {
-                    writer.Line($"{typeof(JsonDocument)}.Parse({response}.ContentStream);");
-                }
-
-                if (serialization.IsNullable)
-                {
-                    using (writer.Scope($"if ({documentVariable}.RootElement.ValueKind == {typeof(JsonValueKind)}.Null)"))
-                    {
-                        writer.Line(variable is not null ? (FormattableString)$"{variable} = null;" : $"return null;");
-                    }
-                    using (writer.Scope($"else"))
-                    {
-                        var value = writer.DeserializeValue(serialization, new MemberReference(documentVariable, nameof(JsonDocument.RootElement)));
-                        writer.WriteLine(variable is not null ? new SetValueLine(variable, value) : new ReturnValueLine(value));
-                    }
-                }
-                else
-                {
-                    var value = writer.DeserializeValue(serialization, new MemberReference(documentVariable, nameof(JsonDocument.RootElement)));
-                    writer.WriteLine(variable is not null ? new SetValueLine(variable, value) : new ReturnValueLine(value));
-                }
-            }
-        }
+            => writer.WriteBodyBlock(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, variable, new FormattableStringToExpression(response), isBinaryData));
 
         private readonly struct ObjectPropertyVariable
         {
