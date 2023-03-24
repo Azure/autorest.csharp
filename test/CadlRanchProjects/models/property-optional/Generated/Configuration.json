@@ -7,11 +7,11 @@
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],
   "unreferenced-types-handling": "keepAll",
-  "ModelsToTreatEmptyStringAsNull": [
+  "models-to-treat-empty-string-as-null": [
     "DurationProperty",
     "DatetimeProperty"
   ],
-  "IntrinsicTypesToTreatEmptyStringAsNull": [
+  "additional-intrinsic-types-to-treat-empty-string-as-null": [
     "TimeSpan",
     "Uri",
     "Guid",

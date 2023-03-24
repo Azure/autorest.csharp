@@ -93,9 +93,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
                 "model-namespace": options["model-namespace"],
-                ModelsToTreatEmptyStringAsNull:
+                "models-to-treat-empty-string-as-null":
                     options["models-to-treat-empty-string-as-null"],
-                IntrinsicTypesToTreatEmptyStringAsNull: options[
+                "additional-intrinsic-types-to-treat-empty-string-as-null": options[
                     "models-to-treat-empty-string-as-null"
                 ]
                     ? options[

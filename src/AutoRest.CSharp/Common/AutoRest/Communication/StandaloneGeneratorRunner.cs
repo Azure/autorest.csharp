@@ -182,7 +182,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ModelsToTreatEmptyStringAsNull, Configuration.ModelsToTreatEmptyStringAsNull.ToList());
                     if (Configuration.ModelsToTreatEmptyStringAsNull.Any())
                     {
-                        Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.IntrinsicTypesToTreatEmptyStringAsNull, Configuration.IntrinsicTypesToTreatEmptyStringAsNull.ToList());
+                        Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.AdditionalIntrinsicTypesToTreatEmptyStringAsNull , Configuration.IntrinsicTypesToTreatEmptyStringAsNull.ToList());
                     }
 
                     Configuration.MgmtConfiguration.SaveConfiguration(writer);
@@ -247,7 +247,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             var suppressAbstractBaseClasses = Configuration.DeserializeArray(suppressAbstractBaseClassesElement);
             root.TryGetProperty(Configuration.Options.ModelsToTreatEmptyStringAsNull, out var modelsToTreatEmptyStringAsNullElement);
             var modelsToTreatEmptyStringAsNull = Configuration.DeserializeArray(modelsToTreatEmptyStringAsNullElement);
-            root.TryGetProperty(Configuration.Options.IntrinsicTypesToTreatEmptyStringAsNull, out var intrinsicTypesToTreatEmptyStringAsNullElement);
+            root.TryGetProperty(Configuration.Options.AdditionalIntrinsicTypesToTreatEmptyStringAsNull, out var intrinsicTypesToTreatEmptyStringAsNullElement);
             var intrinsicTypesToTreatEmptyStringAsNull = Configuration.DeserializeArray(intrinsicTypesToTreatEmptyStringAsNullElement);
             root.TryGetProperty(Configuration.Options.ModelFactoryForHlc, out var oldModelFactoryEntriesElement);
             var oldModelFactoryEntries = Configuration.DeserializeArray(oldModelFactoryEntriesElement);
