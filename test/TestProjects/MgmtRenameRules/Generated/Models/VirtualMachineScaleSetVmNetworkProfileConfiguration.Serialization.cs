@@ -31,6 +31,10 @@ namespace MgmtRenameRules.Models
 
         internal static VirtualMachineScaleSetVmNetworkProfileConfiguration DeserializeVirtualMachineScaleSetVmNetworkProfileConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<VirtualMachineScaleSetNetworkConfiguration>> networkInterfaceConfigurations = default;
             foreach (var property in element.EnumerateObject())
             {

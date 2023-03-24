@@ -17,6 +17,10 @@ namespace MgmtScopeResource
     {
         internal static DeploymentExtendedData DeserializeDeploymentExtendedData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> location = default;
             Optional<DeploymentPropertiesExtended> properties = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;

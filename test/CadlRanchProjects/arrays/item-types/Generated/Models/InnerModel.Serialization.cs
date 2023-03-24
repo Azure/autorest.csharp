@@ -34,6 +34,10 @@ namespace Arrays.ItemTypes.Models
 
         internal static InnerModel DeserializeInnerModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string property = default;
             Optional<IList<InnerModel>> children = default;
             foreach (var property0 in element.EnumerateObject())

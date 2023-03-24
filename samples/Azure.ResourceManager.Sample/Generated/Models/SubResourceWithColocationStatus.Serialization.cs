@@ -30,6 +30,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static SubResourceWithColocationStatus DeserializeSubResourceWithColocationStatus(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<InstanceViewStatus> colocationStatus = default;
             Optional<string> id = default;
             foreach (var property in element.EnumerateObject())

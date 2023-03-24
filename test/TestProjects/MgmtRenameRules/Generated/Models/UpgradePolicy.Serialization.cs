@@ -35,6 +35,10 @@ namespace MgmtRenameRules.Models
 
         internal static UpgradePolicy DeserializeUpgradePolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<UpgradeMode> mode = default;
             Optional<RollingUpgradePolicy> rollingUpgradePolicy = default;
             Optional<AutomaticOSUpgradePolicy> automaticOSUpgradePolicy = default;

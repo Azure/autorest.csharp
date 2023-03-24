@@ -15,6 +15,10 @@ namespace SupersetFlattenInheritance.Models
     {
         internal static CustomModel2ListResult DeserializeCustomModel2ListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<CustomModel2>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

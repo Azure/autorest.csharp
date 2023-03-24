@@ -67,6 +67,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetNetworkConfiguration DeserializeVirtualMachineScaleSetNetworkConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<string> id = default;
             Optional<bool> primary = default;

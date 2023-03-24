@@ -36,6 +36,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static ManagedDiskParameters DeserializeManagedDiskParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<StorageAccountType> storageAccountType = default;
             Optional<WritableSubResource> diskEncryptionSet = default;
             Optional<string> id = default;

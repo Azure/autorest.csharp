@@ -39,6 +39,10 @@ namespace CognitiveSearch.Models
 
         internal static EdgeNGramTokenFilterV2 DeserializeEdgeNGramTokenFilterV2(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> minGram = default;
             Optional<int> maxGram = default;
             Optional<EdgeNGramTokenFilterSide> side = default;

@@ -16,6 +16,10 @@ namespace MgmtMockAndSample
     {
         internal static DeletedVaultData DeserializeDeletedVaultData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DeletedVaultProperties> properties = default;
             ResourceIdentifier id = default;
             string name = default;

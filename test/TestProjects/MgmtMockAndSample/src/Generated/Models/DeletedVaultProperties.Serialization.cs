@@ -16,6 +16,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static DeletedVaultProperties DeserializeDeletedVaultProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> vaultId = default;
             Optional<AzureLocation> location = default;
             Optional<DateTimeOffset> deletionDate = default;

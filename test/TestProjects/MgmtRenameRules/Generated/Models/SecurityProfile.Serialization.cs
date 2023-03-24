@@ -25,6 +25,10 @@ namespace MgmtRenameRules.Models
 
         internal static SecurityProfile DeserializeSecurityProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> encryptionAtHost = default;
             foreach (var property in element.EnumerateObject())
             {

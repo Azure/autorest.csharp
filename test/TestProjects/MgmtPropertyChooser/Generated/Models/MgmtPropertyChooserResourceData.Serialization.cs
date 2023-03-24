@@ -35,6 +35,10 @@ namespace MgmtPropertyChooser.Models
 
         internal static MgmtPropertyChooserResourceData DeserializeMgmtPropertyChooserResourceData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string location = default;
             Optional<IDictionary<string, string>> tags = default;
             ResourceIdentifier id = default;

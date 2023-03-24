@@ -30,6 +30,10 @@ namespace body_complex.Models
 
         internal static IntWrapper DeserializeIntWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> field1 = default;
             Optional<int> field2 = default;
             foreach (var property in element.EnumerateObject())

@@ -48,6 +48,10 @@ namespace MgmtParamOrdering.Models
 
         internal static EnvironmentContainer DeserializeEnvironmentContainer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> description = default;
             Optional<IDictionary<string, string>> properties = default;
             Optional<IDictionary<string, string>> tags = default;

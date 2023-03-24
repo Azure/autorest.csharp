@@ -55,6 +55,8 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 projectFolder: ".",
                 protocolMethodList: Array.Empty<string>(),
                 suppressAbstractBaseClasses: Array.Empty<string>(),
+                modelsToTreatEmptyStringAsNull: Array.Empty<string>(),
+                additionalIntrinsicTypesToTreatEmptyStringAsNull: Array.Empty<string>(),
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null);
         }

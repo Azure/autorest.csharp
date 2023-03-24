@@ -31,6 +31,10 @@ namespace body_complex.Models
 
         internal static ArrayWrapper DeserializeArrayWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<string>> array = default;
             foreach (var property in element.EnumerateObject())
             {

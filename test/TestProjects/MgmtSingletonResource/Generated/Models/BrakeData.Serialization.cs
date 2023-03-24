@@ -15,6 +15,10 @@ namespace MgmtSingletonResource
     {
         internal static BrakeData DeserializeBrakeData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> hitBrake = default;
             ResourceIdentifier id = default;
             string name = default;

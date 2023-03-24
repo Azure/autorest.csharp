@@ -36,6 +36,11 @@ namespace Azure.ResourceManager.Sample
                 writer.WriteStartArray();
                 foreach (var item in HostUris)
                 {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
                     writer.WriteStringValue(item.AbsoluteUri);
                 }
                 writer.WriteEndArray();
@@ -71,6 +76,10 @@ namespace Azure.ResourceManager.Sample
 
         internal static DedicatedHostGroupData DeserializeDedicatedHostGroupData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<string>> zones = default;
             Optional<IList<Uri>> hostUris = default;
             Optional<Guid> tenantId = default;
@@ -109,7 +118,14 @@ namespace Azure.ResourceManager.Sample
                     List<Uri> array = new List<Uri>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
-                        array.Add(new Uri(item.GetString()));
+                        if (item.ValueKind == JsonValueKind.Null)
+                        {
+                            array.Add(null);
+                        }
+                        else
+                        {
+                            array.Add(new Uri(item.GetString()));
+                        }
                     }
                     hostUris = array;
                     continue;

@@ -25,6 +25,10 @@ namespace MgmtMockAndSample.Models
 
         internal static VeryDeepSinglePropertyModel DeserializeVeryDeepSinglePropertyModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DeepSinglePropertyModel> very = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -15,6 +15,10 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentSentiment DeserializeDocumentSentiment(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string id = default;
             DocumentSentimentValue sentiment = default;
             Optional<DocumentStatistics> statistics = default;

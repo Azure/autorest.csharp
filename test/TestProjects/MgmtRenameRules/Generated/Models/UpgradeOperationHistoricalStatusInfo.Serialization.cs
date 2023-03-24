@@ -14,6 +14,10 @@ namespace MgmtRenameRules.Models
     {
         internal static UpgradeOperationHistoricalStatusInfo DeserializeUpgradeOperationHistoricalStatusInfo(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<UpgradeOperationHistoricalStatusInfoProperties> properties = default;
             Optional<ResourceType> type = default;
             Optional<AzureLocation> location = default;

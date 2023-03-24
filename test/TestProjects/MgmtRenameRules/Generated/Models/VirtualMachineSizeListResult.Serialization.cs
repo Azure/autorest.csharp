@@ -15,6 +15,10 @@ namespace MgmtRenameRules.Models
     {
         internal static VirtualMachineSizeListResult DeserializeVirtualMachineSizeListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<VirtualMachineSize>> value = default;
             foreach (var property in element.EnumerateObject())
             {

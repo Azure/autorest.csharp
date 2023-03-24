@@ -27,6 +27,10 @@ namespace MgmtMockAndSample.Models
 
         internal static VirtualNetworkRule DeserializeVirtualNetworkRule(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string id = default;
             Optional<bool> ignoreMissingVnetServiceEndpoint = default;
             foreach (var property in element.EnumerateObject())

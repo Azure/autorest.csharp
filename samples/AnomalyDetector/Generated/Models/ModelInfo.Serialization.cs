@@ -80,6 +80,10 @@ namespace AnomalyDetector.Models
 
         internal static ModelInfo DeserializeModelInfo(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string dataSource = default;
             Optional<DataSchema?> dataSchema = default;
             DateTimeOffset startTime = default;

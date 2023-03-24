@@ -15,6 +15,10 @@ namespace AppConfiguration.Models
     {
         internal static KeyListResult DeserializeKeyListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<Key>> items = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

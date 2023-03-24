@@ -16,6 +16,10 @@ namespace MgmtExpandResourceTypes.Models
     {
         internal static ZoneListResult DeserializeZoneListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<ZoneData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

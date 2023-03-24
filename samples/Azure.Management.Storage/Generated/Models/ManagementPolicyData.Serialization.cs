@@ -31,6 +31,10 @@ namespace Azure.Management.Storage
 
         internal static ManagementPolicyData DeserializeManagementPolicyData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

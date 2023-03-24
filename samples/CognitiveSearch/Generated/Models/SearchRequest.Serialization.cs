@@ -116,6 +116,10 @@ namespace CognitiveSearch.Models
 
         internal static SearchRequest DeserializeSearchRequest(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> count = default;
             Optional<IList<string>> facets = default;
             Optional<string> filter = default;

@@ -30,6 +30,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetVMProtectionPolicy DeserializeVirtualMachineScaleSetVMProtectionPolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> protectFromScaleIn = default;
             Optional<bool> protectFromScaleSetActions = default;
             foreach (var property in element.EnumerateObject())

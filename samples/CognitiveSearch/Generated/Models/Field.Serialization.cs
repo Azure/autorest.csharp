@@ -90,6 +90,10 @@ namespace CognitiveSearch.Models
 
         internal static Field DeserializeField(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             DataType type = default;
             Optional<bool> key = default;

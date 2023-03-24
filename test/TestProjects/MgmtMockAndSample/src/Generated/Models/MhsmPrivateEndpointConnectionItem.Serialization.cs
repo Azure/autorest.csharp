@@ -15,6 +15,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static MhsmPrivateEndpointConnectionItem DeserializeMhsmPrivateEndpointConnectionItem(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<Azure.ResourceManager.Resources.Models.SubResource> privateEndpoint = default;
             Optional<MhsmPrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<MgmtMockAndSamplePrivateEndpointConnectionProvisioningState> provisioningState = default;

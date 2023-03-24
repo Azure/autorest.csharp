@@ -16,6 +16,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static VirtualMachineScaleSetListOSUpgradeHistory DeserializeVirtualMachineScaleSetListOSUpgradeHistory(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value = default;
             Optional<ETag> etag = default;
             Optional<string> nextLink = default;

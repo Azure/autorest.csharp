@@ -125,6 +125,10 @@ namespace Azure.ResourceManager.Sample
 
         internal static VirtualMachineScaleSetData DeserializeVirtualMachineScaleSetData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<SampleSku> sku = default;
             Optional<SamplePlan> plan = default;
             Optional<ManagedServiceIdentity> identity = default;

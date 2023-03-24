@@ -45,6 +45,10 @@ namespace MgmtMockAndSample
 
         internal static FirewallPolicyRuleCollectionGroupData DeserializeFirewallPolicyRuleCollectionGroupData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> etag = default;
             Optional<ResourceType> type = default;

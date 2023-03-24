@@ -55,6 +55,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static NetworkSecurityGroup DeserializeNetworkSecurityGroup(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> etag = default;
             Optional<string> id = default;
             Optional<string> name = default;

@@ -14,6 +14,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static CheckNameAvailabilityResult DeserializeCheckNameAvailabilityResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> nameAvailable = default;
             Optional<Reason> reason = default;
             Optional<string> message = default;

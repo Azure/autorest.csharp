@@ -35,6 +35,10 @@ namespace Azure.Management.Storage.Models
 
         internal static StoragePrivateLinkResource DeserializeStoragePrivateLinkResource(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

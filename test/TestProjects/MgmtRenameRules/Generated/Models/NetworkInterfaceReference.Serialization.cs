@@ -33,6 +33,10 @@ namespace MgmtRenameRules.Models
 
         internal static NetworkInterfaceReference DeserializeNetworkInterfaceReference(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<bool> primary = default;
             foreach (var property in element.EnumerateObject())

@@ -30,6 +30,10 @@ namespace body_complex.Models
 
         internal static LongWrapper DeserializeLongWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<long> field1 = default;
             Optional<long> field2 = default;
             foreach (var property in element.EnumerateObject())

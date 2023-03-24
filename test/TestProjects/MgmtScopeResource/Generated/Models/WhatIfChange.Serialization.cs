@@ -15,6 +15,10 @@ namespace MgmtScopeResource.Models
     {
         internal static WhatIfChange DeserializeWhatIfChange(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string resourceId = default;
             ChangeType changeType = default;
             Optional<string> unsupportedReason = default;

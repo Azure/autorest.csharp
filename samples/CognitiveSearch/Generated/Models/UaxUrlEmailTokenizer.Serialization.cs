@@ -29,6 +29,10 @@ namespace CognitiveSearch.Models
 
         internal static UaxUrlEmailTokenizer DeserializeUaxUrlEmailTokenizer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> maxTokenLength = default;
             string odataType = default;
             string name = default;

@@ -17,6 +17,10 @@ namespace AnomalyDetector.Models
     {
         internal static AnomalyState DeserializeAnomalyState(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             DateTimeOffset timestamp = default;
             Optional<AnomalyValue> value = default;
             Optional<IReadOnlyList<ErrorResponse>> errors = default;

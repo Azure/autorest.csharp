@@ -48,6 +48,10 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyNatRuleCollection DeserializeFirewallPolicyNatRuleCollection(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<FirewallPolicyNatRuleCollectionAction> action = default;
             Optional<IList<FirewallPolicyRule>> rules = default;
             FirewallPolicyRuleCollectionType ruleCollectionType = default;

@@ -16,6 +16,10 @@ namespace MgmtScopeResource.Models
     {
         internal static DeploymentListResult DeserializeDeploymentListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<DeploymentExtendedData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

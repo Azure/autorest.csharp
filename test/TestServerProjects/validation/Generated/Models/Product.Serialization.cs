@@ -54,6 +54,10 @@ namespace validation.Models
 
         internal static Product DeserializeProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<string>> displayNames = default;
             Optional<int> capacity = default;
             Optional<string> image = default;

@@ -29,6 +29,10 @@ namespace CognitiveSearch.Models
 
         internal static StandardTokenizerV2 DeserializeStandardTokenizerV2(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> maxTokenLength = default;
             string odataType = default;
             string name = default;

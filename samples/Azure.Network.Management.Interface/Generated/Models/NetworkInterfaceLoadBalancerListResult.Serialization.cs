@@ -15,6 +15,10 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static NetworkInterfaceLoadBalancerListResult DeserializeNetworkInterfaceLoadBalancerListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<LoadBalancer>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

@@ -45,6 +45,10 @@ namespace MgmtParamOrdering
 
         internal static VirtualMachineScaleSetData DeserializeVirtualMachineScaleSetData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<string>> zones = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

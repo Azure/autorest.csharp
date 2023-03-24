@@ -14,6 +14,10 @@ namespace MgmtRenameRules.Models
     {
         internal static VirtualMachineScaleSetSku DeserializeVirtualMachineScaleSetSku(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> resourceType = default;
             Optional<MgmtRenameRulesSku> sku = default;
             Optional<VirtualMachineScaleSetSkuCapacity> capacity = default;

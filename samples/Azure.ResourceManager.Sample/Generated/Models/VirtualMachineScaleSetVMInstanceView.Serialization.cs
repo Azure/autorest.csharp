@@ -15,6 +15,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static VirtualMachineScaleSetVMInstanceView DeserializeVirtualMachineScaleSetVMInstanceView(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> platformUpdateDomain = default;
             Optional<int> platformFaultDomain = default;
             Optional<string> rdpThumbPrint = default;

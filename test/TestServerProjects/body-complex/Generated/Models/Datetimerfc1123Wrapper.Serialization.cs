@@ -31,6 +31,10 @@ namespace body_complex.Models
 
         internal static Datetimerfc1123Wrapper DeserializeDatetimerfc1123Wrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DateTimeOffset> field = default;
             Optional<DateTimeOffset> now = default;
             foreach (var property in element.EnumerateObject())

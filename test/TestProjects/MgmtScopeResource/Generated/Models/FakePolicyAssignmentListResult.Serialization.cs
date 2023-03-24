@@ -16,6 +16,10 @@ namespace MgmtScopeResource.Models
     {
         internal static FakePolicyAssignmentListResult DeserializeFakePolicyAssignmentListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<FakePolicyAssignmentData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

@@ -21,6 +21,10 @@ namespace ModelShapes.Models
 
         internal static MixedModelWithReadonlyProperty DeserializeMixedModelWithReadonlyProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ReadonlyModel> readonlyProperty = default;
             Optional<IReadOnlyList<ReadonlyModel>> readonlyListProperty = default;
             foreach (var property in element.EnumerateObject())

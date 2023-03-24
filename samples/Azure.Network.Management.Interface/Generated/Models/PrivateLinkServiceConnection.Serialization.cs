@@ -59,6 +59,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static PrivateLinkServiceConnection DeserializePrivateLinkServiceConnection(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> type = default;
             Optional<string> etag = default;

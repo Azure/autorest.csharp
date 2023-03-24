@@ -15,6 +15,10 @@ namespace MgmtScopeResource.Models
     {
         internal static HttpMessage DeserializeHttpMessage(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<BinaryData> content = default;
             foreach (var property in element.EnumerateObject())
             {

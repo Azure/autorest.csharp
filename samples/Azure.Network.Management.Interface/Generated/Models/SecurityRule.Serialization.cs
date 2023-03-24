@@ -139,6 +139,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static SecurityRule DeserializeSecurityRule(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> etag = default;
             Optional<string> id = default;

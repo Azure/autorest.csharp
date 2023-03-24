@@ -34,6 +34,10 @@ namespace CognitiveSearch.Models
 
         internal static NGramTokenFilterV2 DeserializeNGramTokenFilterV2(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> minGram = default;
             Optional<int> maxGram = default;
             string odataType = default;

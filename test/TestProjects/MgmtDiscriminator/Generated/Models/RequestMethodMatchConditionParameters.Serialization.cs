@@ -50,6 +50,10 @@ namespace MgmtDiscriminator.Models
 
         internal static RequestMethodMatchConditionParameters DeserializeRequestMethodMatchConditionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             RequestMethodMatchConditionParametersTypeName typeName = default;
             RequestMethodOperator @operator = default;
             Optional<bool> negateCondition = default;

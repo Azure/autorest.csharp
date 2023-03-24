@@ -27,6 +27,10 @@ namespace Azure.Management.Storage.Models
 
         internal static IPRule DeserializeIPRule(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string value = default;
             Optional<Action> action = default;
             foreach (var property in element.EnumerateObject())

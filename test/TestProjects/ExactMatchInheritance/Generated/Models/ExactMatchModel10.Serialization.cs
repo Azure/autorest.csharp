@@ -41,6 +41,10 @@ namespace ExactMatchInheritance.Models
 
         internal static ExactMatchModel10 DeserializeExactMatchModel10(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<AzureLocation> location = default;
             Optional<IDictionary<string, string>> tags = default;
             ResourceIdentifier id = default;

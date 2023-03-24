@@ -32,6 +32,10 @@ namespace CustomNamespace
 
         internal static RenamedThirdModel DeserializeRenamedThirdModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ETag> eTag = default;
             Optional<DateTime> createdAt = default;
             foreach (var property in element.EnumerateObject())

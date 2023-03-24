@@ -15,6 +15,10 @@ namespace MgmtRenameRules.Models
     {
         internal static VirtualMachineAgentInstanceView DeserializeVirtualMachineAgentInstanceView(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> vmAgentVersion = default;
             Optional<IReadOnlyList<VirtualMachineExtensionHandlerInstanceView>> extensionHandlers = default;
             Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;

@@ -35,6 +35,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static SampleSku DeserializeSampleSku(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> tier = default;
             Optional<long> capacity = default;

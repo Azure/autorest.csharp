@@ -85,6 +85,10 @@ namespace Inheritance.Models
 
         internal static ClassThatInheritsFromBaseClassWithDiscriminator DeserializeClassThatInheritsFromBaseClassWithDiscriminator(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string discriminatorProperty = default;
             Optional<string> baseClassProperty = default;
             Optional<DataFactoryExpression<string>> dfeString = default;

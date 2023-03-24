@@ -12,6 +12,7 @@
     - [Change Singleton Resources](#change-singleton-resources)
     - [Change the Name of Operations](#change-the-name-of-operations)
     - [List Exception](#list-exception)
+    - [Partial Resources](#partial-resources)
     - [Scope Resources](#scope-resources)
     - [SDK Polishing Configurations](#sdk-polishing-configurations)
     - [Management Debug Options](#management-debug-options)
@@ -624,6 +625,42 @@ If all the above efforts are not met, you need to use the `list-exception` confi
 list-exception:
 - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}
 ```
+
+### Partial resources
+
+Some operations might be operations of a resource from another RP, or some resources might have a parent resource from another RP. 
+
+For instance, in the RP `compute`, we have a resource `VirtualMachine` with the path of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}`, in the meantime, in the RP `network`, which is completely a different SDK, we have an operation with the path of `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/publicIps` which is clearly listing something on the virtual machine. During the generation of network RP, the generator has no knowledge of the resources in another RP, therefore by default this operation will be generated like the following code as an operation on the `ResourceGroupResource` because this is the best parent the generator could find within this RP.
+```csharp
+public static partial class NetworkExtensions
+{
+    public static Pageable<PublicIPAddress> GetPublicIPs(this ResourceGroupResource resourceGroup, string vmName)
+    {
+        /* the implementation */
+    }
+} 
+```
+
+The following configuration
+```yaml
+partial-resources:
+  /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}: VirtualMachine
+```
+will tell the generator that this path `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}` is also a valid resource, and the generator will put it into the list of its known resources, and generates a "partial resource" from it and the operation in above example will show up here:
+```csharp
+public partial class VirtualMachineNetworkResource
+{
+    public virtual Pageable<PublicIPAddress> GetPublicIPs()
+    {
+        /* the implementation */
+    }
+}
+```
+
+The naming pattern of a partial resource is like `[ResourceName][RPName]Resource`, where `ResourceName` is the value you assigned in the configuration, `RPName` is the name of this RP (for instance, `Network`). The name of a partial resource is also configurable using the `request-path-to-resource-name` configuration, please see [change resource name](#change-resource-name) section for more details.
+
+The difference between a normal resource and a partial resource is that the partial resource is not a concrete resource, therefore it does not have a corresponding collection, and you cannot get the list of it from its direct parent (ResourceGroupResource in the above example).
+But like normal resources, partial resources will have an extension method of `Get[PartialResourceName]` on the `ArmClient` to let you get it from its full Id.
 
 ### Scope resources
 

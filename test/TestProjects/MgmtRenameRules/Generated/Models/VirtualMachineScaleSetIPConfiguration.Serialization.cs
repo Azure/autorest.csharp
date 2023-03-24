@@ -48,6 +48,11 @@ namespace MgmtRenameRules.Models
                 writer.WriteStartArray();
                 foreach (var item in IPAddresses)
                 {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
                     writer.WriteStringValue(item.ToString());
                 }
                 writer.WriteEndArray();
@@ -103,6 +108,10 @@ namespace MgmtRenameRules.Models
 
         internal static VirtualMachineScaleSetIPConfiguration DeserializeVirtualMachineScaleSetIPConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             Optional<string> id = default;
             Optional<WritableSubResource> subnet = default;
@@ -171,7 +180,14 @@ namespace MgmtRenameRules.Models
                             List<IPAddress> array = new List<IPAddress>();
                             foreach (var item in property0.Value.EnumerateArray())
                             {
-                                array.Add(IPAddress.Parse(item.GetString()));
+                                if (item.ValueKind == JsonValueKind.Null)
+                                {
+                                    array.Add(null);
+                                }
+                                else
+                                {
+                                    array.Add(IPAddress.Parse(item.GetString()));
+                                }
                             }
                             ipAddresses = array;
                             continue;

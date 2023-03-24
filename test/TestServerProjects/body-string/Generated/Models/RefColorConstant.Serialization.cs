@@ -27,6 +27,10 @@ namespace body_string.Models
 
         internal static RefColorConstant DeserializeRefColorConstant(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string colorConstant = default;
             Optional<string> field1 = default;
             foreach (var property in element.EnumerateObject())

@@ -14,6 +14,10 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveNetworkSecurityGroupAssociation DeserializeEffectiveNetworkSecurityGroupAssociation(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<SubResource> subnet = default;
             Optional<SubResource> networkInterface = default;
             foreach (var property in element.EnumerateObject())

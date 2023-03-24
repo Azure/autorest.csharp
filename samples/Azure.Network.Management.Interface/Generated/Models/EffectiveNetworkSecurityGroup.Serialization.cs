@@ -15,6 +15,10 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static EffectiveNetworkSecurityGroup DeserializeEffectiveNetworkSecurityGroup(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<SubResource> networkSecurityGroup = default;
             Optional<EffectiveNetworkSecurityGroupAssociation> association = default;
             Optional<IReadOnlyList<EffectiveNetworkSecurityRule>> effectiveSecurityRules = default;

@@ -16,6 +16,10 @@ namespace SupersetInheritance.Models
     {
         internal static SupersetModel7ListResult DeserializeSupersetModel7ListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<SupersetModel7Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

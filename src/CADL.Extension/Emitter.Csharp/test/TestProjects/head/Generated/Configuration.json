@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "Cadl.HeadClient",
+  "Namespace": "TypeSpec.HeadClient",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",

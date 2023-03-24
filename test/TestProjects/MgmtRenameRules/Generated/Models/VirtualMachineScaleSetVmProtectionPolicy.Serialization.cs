@@ -30,6 +30,10 @@ namespace MgmtRenameRules.Models
 
         internal static VirtualMachineScaleSetVmProtectionPolicy DeserializeVirtualMachineScaleSetVmProtectionPolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> protectFromScaleIn = default;
             Optional<bool> protectFromScaleSetActions = default;
             foreach (var property in element.EnumerateObject())

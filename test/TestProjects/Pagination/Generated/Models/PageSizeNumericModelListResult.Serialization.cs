@@ -16,6 +16,10 @@ namespace Pagination.Models
     {
         internal static PageSizeNumericModelListResult DeserializePageSizeNumericModelListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<PageSizeNumericModelData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

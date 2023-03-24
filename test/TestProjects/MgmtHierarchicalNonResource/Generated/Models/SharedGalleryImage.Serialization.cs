@@ -16,6 +16,10 @@ namespace MgmtHierarchicalNonResource.Models
     {
         internal static SharedGalleryImage DeserializeSharedGalleryImage(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> location = default;
             Optional<OperatingSystemType> osType = default;

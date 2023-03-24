@@ -16,6 +16,10 @@ namespace NoTypeReplacement.Models
     {
         internal static NoTypeReplacementModel2ListResult DeserializeNoTypeReplacementModel2ListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<NoTypeReplacementModel2Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

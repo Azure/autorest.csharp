@@ -35,6 +35,10 @@ namespace MgmtMockAndSample.Models
 
         internal static MhsmPrivateLinkServiceConnectionState DeserializeMhsmPrivateLinkServiceConnectionState(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<MgmtMockAndSamplePrivateEndpointServiceConnectionStatus> status = default;
             Optional<string> description = default;
             Optional<ActionsRequired> actionsRequired = default;

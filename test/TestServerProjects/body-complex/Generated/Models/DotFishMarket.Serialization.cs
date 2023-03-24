@@ -15,6 +15,10 @@ namespace body_complex.Models
     {
         internal static DotFishMarket DeserializeDotFishMarket(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DotSalmon> sampleSalmon = default;
             Optional<IReadOnlyList<DotSalmon>> salmons = default;
             Optional<DotFish> sampleFish = default;

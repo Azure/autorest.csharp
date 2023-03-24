@@ -45,6 +45,10 @@ namespace SupersetInheritance.Models
 
         internal static SupersetModel5 DeserializeSupersetModel5(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> foo = default;
             Optional<string> @new = default;
             Optional<IDictionary<string, string>> tags = default;

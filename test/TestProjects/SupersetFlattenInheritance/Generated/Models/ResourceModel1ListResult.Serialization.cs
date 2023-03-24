@@ -16,6 +16,10 @@ namespace SupersetFlattenInheritance.Models
     {
         internal static ResourceModel1ListResult DeserializeResourceModel1ListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<ResourceModel1Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

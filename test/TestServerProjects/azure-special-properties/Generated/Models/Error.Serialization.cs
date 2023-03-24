@@ -14,6 +14,10 @@ namespace azure_special_properties.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> status = default;
             int constantId = default;
             Optional<string> message = default;

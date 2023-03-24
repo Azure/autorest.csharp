@@ -15,6 +15,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static VirtualMachineScaleSetInstanceViewStatusesSummary DeserializeVirtualMachineScaleSetInstanceViewStatusesSummary(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<VirtualMachineStatusCodeCount>> statusesSummary = default;
             foreach (var property in element.EnumerateObject())
             {

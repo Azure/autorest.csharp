@@ -40,6 +40,10 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static SrvRecord DeserializeSrvRecord(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> priority = default;
             Optional<int> weight = default;
             Optional<int> port = default;

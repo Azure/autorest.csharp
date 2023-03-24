@@ -39,6 +39,10 @@ namespace XmlDeserialization.Models
 
         internal static XmlCollection DeserializeXmlCollection(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<XmlInstanceData>> value = default;
             Optional<long> count = default;
             Optional<string> nextLink = default;

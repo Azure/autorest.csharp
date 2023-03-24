@@ -47,6 +47,10 @@ namespace MgmtMockAndSample
 
         internal static MgmtMockAndSamplePrivateEndpointConnectionData DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> etag = default;
             Optional<AzureLocation> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;

@@ -16,6 +16,10 @@ namespace CognitiveSearch.Models
     {
         internal static IndexerExecutionResult DeserializeIndexerExecutionResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IndexerExecutionStatus status = default;
             Optional<string> errorMessage = default;
             Optional<DateTimeOffset> startTime = default;

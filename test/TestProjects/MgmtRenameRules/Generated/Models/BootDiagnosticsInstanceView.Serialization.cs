@@ -15,6 +15,10 @@ namespace MgmtRenameRules.Models
     {
         internal static BootDiagnosticsInstanceView DeserializeBootDiagnosticsInstanceView(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<Uri> consoleScreenshotBlobUri = default;
             Optional<Uri> serialConsoleLogBlobUri = default;
             Optional<InstanceViewStatus> status = default;

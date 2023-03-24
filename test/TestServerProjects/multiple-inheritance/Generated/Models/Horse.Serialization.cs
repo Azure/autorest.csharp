@@ -27,6 +27,10 @@ namespace multiple_inheritance.Models
 
         internal static Horse DeserializeHorse(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> isAShowHorse = default;
             string name = default;
             foreach (var property in element.EnumerateObject())

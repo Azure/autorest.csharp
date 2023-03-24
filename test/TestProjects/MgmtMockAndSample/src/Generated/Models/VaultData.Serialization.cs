@@ -17,6 +17,10 @@ namespace MgmtMockAndSample
     {
         internal static VaultData DeserializeVaultData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<AzureLocation> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
             VaultProperties properties = default;

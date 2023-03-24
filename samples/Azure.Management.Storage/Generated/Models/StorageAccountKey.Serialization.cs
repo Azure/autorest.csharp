@@ -15,6 +15,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static StorageAccountKey DeserializeStorageAccountKey(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> keyName = default;
             Optional<string> value = default;
             Optional<KeyPermission> permissions = default;

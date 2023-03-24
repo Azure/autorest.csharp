@@ -15,6 +15,10 @@ namespace MgmtExtensionResource
     {
         internal static SubSingletonData DeserializeSubSingletonData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> something = default;
             ResourceIdentifier id = default;
             string name = default;

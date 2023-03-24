@@ -72,6 +72,10 @@ namespace MgmtRenameRules.Models
 
         internal static OSDisk DeserializeOSDisk(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<OperatingSystemType> osType = default;
             Optional<DiskEncryptionSettings> encryptionSettings = default;
             Optional<string> name = default;

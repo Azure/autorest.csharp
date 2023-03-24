@@ -31,6 +31,10 @@ namespace MgmtRenameRules.Models
 
         internal static NetworkProfile DeserializeNetworkProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<NetworkInterfaceReference>> networkInterfaces = default;
             foreach (var property in element.EnumerateObject())
             {

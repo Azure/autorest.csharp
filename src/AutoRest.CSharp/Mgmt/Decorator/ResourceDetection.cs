@@ -47,6 +47,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return true;
             }
 
+            // try to find it in the partial resource list
+            if (Configuration.MgmtConfiguration.PartialResources.TryGetValue(set.RequestPath, out resourceSchemaName))
+            {
+                resourceSchema = FindObjectSchemaWithName(resourceSchemaName);
+                if (resourceSchema == null)
+                {
+                    throw new ErrorHelpers.ErrorException($"cannot find an object schema with name {resourceSchemaName} in the request-path-to-resource-data configuration");
+                }
+                _resourceDataSchemaCache.TryAdd(set.RequestPath, resourceSchema);
+                return true;
+            }
+
             // try to get another configuration to see if this is marked as not a resource
             if (Configuration.MgmtConfiguration.RequestPathIsNonResource.Contains(set.RequestPath))
             {

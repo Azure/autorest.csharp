@@ -42,6 +42,10 @@ namespace CognitiveSearch.Models
 
         internal static Skillset DeserializeSkillset(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             string description = default;
             IList<Skill> skills = default;

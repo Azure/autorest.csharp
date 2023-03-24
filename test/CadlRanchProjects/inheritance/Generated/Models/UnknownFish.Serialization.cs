@@ -15,6 +15,10 @@ namespace Models.Inheritance.Models
     {
         internal static UnknownFish DeserializeUnknownFish(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string kind = "Unknown";
             int age = default;
             foreach (var property in element.EnumerateObject())

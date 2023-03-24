@@ -55,6 +55,10 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static SoaRecord DeserializeSoaRecord(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> host = default;
             Optional<string> email = default;
             Optional<long> serialNumber = default;

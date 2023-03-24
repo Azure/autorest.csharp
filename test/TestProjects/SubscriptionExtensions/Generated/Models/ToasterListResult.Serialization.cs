@@ -16,6 +16,10 @@ namespace SubscriptionExtensions.Models
     {
         internal static ToasterListResult DeserializeToasterListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<ToasterData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

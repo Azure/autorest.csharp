@@ -70,6 +70,10 @@ namespace MgmtRenameRules.Models
 
         internal static VirtualMachineScaleSetUpdateNetworkConfiguration DeserializeVirtualMachineScaleSetUpdateNetworkConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> id = default;
             Optional<bool> primary = default;

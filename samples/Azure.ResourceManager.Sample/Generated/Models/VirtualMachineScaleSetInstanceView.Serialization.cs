@@ -15,6 +15,10 @@ namespace Azure.ResourceManager.Sample.Models
     {
         internal static VirtualMachineScaleSetInstanceView DeserializeVirtualMachineScaleSetInstanceView(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<VirtualMachineScaleSetInstanceViewStatusesSummary> virtualMachine = default;
             Optional<IReadOnlyList<VirtualMachineScaleSetVMExtensionsSummary>> extensions = default;
             Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;

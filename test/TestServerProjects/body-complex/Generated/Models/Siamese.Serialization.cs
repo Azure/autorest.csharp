@@ -51,6 +51,10 @@ namespace body_complex.Models
 
         internal static Siamese DeserializeSiamese(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> breed = default;
             Optional<string> color = default;
             Optional<IList<Dog>> hates = default;

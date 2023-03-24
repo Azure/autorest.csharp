@@ -26,6 +26,10 @@ namespace MgmtPropertyBag
 
         internal static FooData DeserializeFooData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> details = default;
             ResourceIdentifier id = default;
             string name = default;

@@ -31,6 +31,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static ScaleInPolicy DeserializeScaleInPolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<VirtualMachineScaleSetScaleInRule>> rules = default;
             foreach (var property in element.EnumerateObject())
             {

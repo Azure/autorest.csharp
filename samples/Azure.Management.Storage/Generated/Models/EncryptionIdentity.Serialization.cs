@@ -25,6 +25,10 @@ namespace Azure.Management.Storage.Models
 
         internal static EncryptionIdentity DeserializeEncryptionIdentity(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> userAssignedIdentity = default;
             foreach (var property in element.EnumerateObject())
             {

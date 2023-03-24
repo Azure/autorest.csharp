@@ -25,6 +25,10 @@ namespace body_complex.Models
 
         internal static ReadonlyObj DeserializeReadonlyObj(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<int> size = default;
             foreach (var property in element.EnumerateObject())

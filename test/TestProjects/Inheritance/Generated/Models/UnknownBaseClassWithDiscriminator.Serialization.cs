@@ -85,6 +85,10 @@ namespace Inheritance.Models
 
         internal static UnknownBaseClassWithDiscriminator DeserializeUnknownBaseClassWithDiscriminator(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string discriminatorProperty = "Unknown";
             Optional<string> baseClassProperty = default;
             Optional<DataFactoryExpression<string>> dfeString = default;

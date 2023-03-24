@@ -6,8 +6,9 @@ param(
     [string]$CadlEmitterVersion,
 
     [Parameter(Mandatory)]
-    [string]$SdkRepoRoot)
+    [string]$SdkRepoRoot,
 
+    [bool]$UseInternalFeed = $false)
 
 $ErrorActionPreference = 'Stop'
 
@@ -23,6 +24,15 @@ $PackagesProps = "$SdkRepoRoot\eng\Packages.Data.props"
 
 $CadlEmitterProps = "$SdkRepoRoot\eng\emitter-package.json"
 (Get-Content -Raw $CadlEmitterProps) -replace `
-    '"@azure-tools/cadl-csharp": ".*?"',
-"`"@azure-tools/cadl-csharp`": `"$CadlEmitterVersion`"" | `
+    '"@azure-tools/typespec-csharp": ".*?"',
+"`"@azure-tools/typespec-csharp`": `"$CadlEmitterVersion`"" | `
     Set-Content $CadlEmitterProps -NoNewline
+
+if ($UseInternalFeed) {
+    $npmrcFile = Resolve-Path (Join-Path $SdkRepoRoot ".npmrc")
+    $projectGeneratePath = "$SdkRepoRoot\eng\common\scripts\TypeSpec-Project-Generate.ps1"
+    (Get-Content -Raw $projectGeneratePath) -replace `
+    'npm install --no-lock-file',
+"Copy-Item -Path $npmrcFile -Destination `".npmrc`" -Force`nnpm install --no-lock-file" | `
+    Set-Content $projectGeneratePath -NoNewline
+}

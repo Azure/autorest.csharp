@@ -143,6 +143,10 @@ namespace MgmtExpandResourceTypes
 
         internal static RecordSetData DeserializeRecordSetData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> etag = default;
             ResourceIdentifier id = default;
             string name = default;

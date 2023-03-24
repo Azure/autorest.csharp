@@ -15,6 +15,10 @@ namespace CognitiveSearch.Models
     {
         internal static SearchError DeserializeSearchError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> code = default;
             string message = default;
             Optional<IReadOnlyList<SearchError>> details = default;

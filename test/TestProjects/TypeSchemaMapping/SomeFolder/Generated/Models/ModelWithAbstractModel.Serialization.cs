@@ -14,6 +14,10 @@ namespace TypeSchemaMapping.Models
     {
         internal static ModelWithAbstractModel DeserializeModelWithAbstractModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<AbstractModel> abstractModelProperty = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -16,6 +16,10 @@ namespace ExactMatchFlattenInheritance.Models
     {
         internal static CustomModel3ListResult DeserializeCustomModel3ListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<CustomModel3Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

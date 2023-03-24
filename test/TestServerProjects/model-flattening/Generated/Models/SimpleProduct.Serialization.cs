@@ -53,6 +53,10 @@ namespace model_flattening.Models
 
         internal static SimpleProduct DeserializeSimpleProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string baseProductId = default;
             Optional<string> baseProductDescription = default;
             Optional<string> maxProductDisplayName = default;

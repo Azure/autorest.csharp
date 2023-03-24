@@ -30,6 +30,10 @@ namespace body_dictionary.Models
 
         internal static Widget DeserializeWidget(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> integer = default;
             Optional<string> @string = default;
             foreach (var property in element.EnumerateObject())

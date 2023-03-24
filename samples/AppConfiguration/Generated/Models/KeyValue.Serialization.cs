@@ -68,6 +68,10 @@ namespace AppConfiguration.Models
 
         internal static KeyValue DeserializeKeyValue(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> key = default;
             Optional<string> label = default;
             Optional<string> contentType = default;

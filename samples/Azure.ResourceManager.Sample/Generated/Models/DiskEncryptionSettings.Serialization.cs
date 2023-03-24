@@ -35,6 +35,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static DiskEncryptionSettings DeserializeDiskEncryptionSettings(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<KeyVaultSecretReference> diskEncryptionKey = default;
             Optional<KeyVaultKeyReference> keyEncryptionKey = default;
             Optional<bool> enabled = default;

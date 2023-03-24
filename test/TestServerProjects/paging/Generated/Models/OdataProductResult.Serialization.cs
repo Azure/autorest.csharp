@@ -15,6 +15,10 @@ namespace paging.Models
     {
         internal static OdataProductResult DeserializeOdataProductResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<Product>> values = default;
             Optional<string> odataNextLink = default;
             foreach (var property in element.EnumerateObject())

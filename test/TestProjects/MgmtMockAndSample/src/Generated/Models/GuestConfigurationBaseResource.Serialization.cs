@@ -30,6 +30,10 @@ namespace MgmtMockAndSample.Models
 
         internal static GuestConfigurationBaseResource DeserializeGuestConfigurationBaseResource(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<AzureLocation> location = default;

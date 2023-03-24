@@ -28,6 +28,10 @@ namespace lro.Models
 
         internal static SubProduct DeserializeSubProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> provisioningState = default;
             Optional<SubProductPropertiesProvisioningStateValues> provisioningStateValues = default;

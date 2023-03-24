@@ -40,6 +40,10 @@ namespace SubscriptionExtensions
 
         internal static OvenData DeserializeOvenData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> bar = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

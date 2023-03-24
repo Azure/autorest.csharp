@@ -15,6 +15,10 @@ namespace MgmtScopeResource.Models
     {
         internal static WhatIfOperationResult DeserializeWhatIfOperationResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> status = default;
             Optional<ErrorResponse> errorResponse = default;
             Optional<IReadOnlyList<WhatIfChange>> changes = default;

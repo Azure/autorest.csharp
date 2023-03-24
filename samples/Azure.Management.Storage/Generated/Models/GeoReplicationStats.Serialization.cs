@@ -15,6 +15,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static GeoReplicationStats DeserializeGeoReplicationStats(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<GeoReplicationStatus> status = default;
             Optional<DateTimeOffset> lastSyncTime = default;
             Optional<bool> canFailover = default;

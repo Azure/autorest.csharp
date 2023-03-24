@@ -101,6 +101,10 @@ namespace MgmtMockAndSample
 
         internal static FirewallPolicyData DeserializeFirewallPolicyData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> etag = default;
             Optional<ManagedServiceIdentity> identity = default;
             Optional<IDictionary<string, string>> tags = default;

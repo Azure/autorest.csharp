@@ -26,6 +26,10 @@ namespace ExactMatchFlattenInheritance
 
         internal static CustomModel2Data DeserializeCustomModel2Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> foo = default;
             ResourceIdentifier id = default;
             string name = default;

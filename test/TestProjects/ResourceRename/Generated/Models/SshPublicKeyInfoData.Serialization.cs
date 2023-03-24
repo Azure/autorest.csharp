@@ -27,6 +27,10 @@ namespace ResourceRename
 
         internal static SshPublicKeyInfoData DeserializeSshPublicKeyInfoData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<SshPublicKeyProperties> properties = default;
             ResourceIdentifier id = default;
             string name = default;

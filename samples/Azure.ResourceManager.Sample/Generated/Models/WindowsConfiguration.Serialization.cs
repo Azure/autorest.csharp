@@ -56,6 +56,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static WindowsConfiguration DeserializeWindowsConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> provisionVMAgent = default;
             Optional<bool> enableAutomaticUpdates = default;
             Optional<string> timeZone = default;

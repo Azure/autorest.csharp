@@ -53,6 +53,10 @@ namespace MgmtMockAndSample.Models
 
         internal static MhsmPrivateLinkResource DeserializeMhsmPrivateLinkResource(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ManagedHsmSku> sku = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

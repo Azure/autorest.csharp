@@ -26,6 +26,14 @@ keep-orphaned-models:
 rename-mapping:
   ExactMatchModel11.type: ResourceType
 
+models-to-treat-empty-string-as-null:
+- ExactMatchModel11
+- ExactMatchModel1Data
+
+additional-intrinsic-types-to-treat-empty-string-as-null:
+- ResourceType
+- IPAddress
+
 directive:
   - from: ExactMatchInheritance.json
     where: $.definitions.ExactMatchModel1.properties

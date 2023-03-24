@@ -50,6 +50,10 @@ namespace MgmtDiscriminator.Models
 
         internal static QueryStringMatchConditionParameters DeserializeQueryStringMatchConditionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             QueryStringMatchConditionParametersTypeName typeName = default;
             QueryStringOperator @operator = default;
             Optional<bool> negateCondition = default;

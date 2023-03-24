@@ -16,6 +16,10 @@ namespace MgmtExpandResourceTypes.Models
     {
         internal static DnsResourceReference DeserializeDnsResourceReference(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<WritableSubResource>> dnsResources = default;
             Optional<WritableSubResource> targetResource = default;
             foreach (var property in element.EnumerateObject())

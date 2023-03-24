@@ -30,6 +30,10 @@ namespace Azure.Management.Storage.Models
 
         internal static ChangeFeed DeserializeChangeFeed(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> enabled = default;
             Optional<int> retentionInDays = default;
             foreach (var property in element.EnumerateObject())

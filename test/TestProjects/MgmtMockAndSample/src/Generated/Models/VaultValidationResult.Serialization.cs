@@ -15,6 +15,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static VaultValidationResult DeserializeVaultValidationResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<VaultIssue>> issues = default;
             Optional<string> result = default;
             foreach (var property in element.EnumerateObject())

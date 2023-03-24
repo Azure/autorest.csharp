@@ -46,6 +46,10 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithArrayOfEnum DeserializeModelWithArrayOfEnum(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<EnumForModelWithArrayOfEnum>> arrayOfEnum = default;
             Optional<IReadOnlyList<EnumForModelWithArrayOfEnum?>> arrayOfEnumCustomizedToNullable = default;
             foreach (var property in element.EnumerateObject())

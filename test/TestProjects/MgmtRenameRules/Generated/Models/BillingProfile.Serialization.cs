@@ -25,6 +25,10 @@ namespace MgmtRenameRules.Models
 
         internal static BillingProfile DeserializeBillingProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<double> maxPrice = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -120,6 +120,10 @@ namespace Azure.Network.Management.Interface.Models
 
         internal static LoadBalancer DeserializeLoadBalancer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<LoadBalancerSku> sku = default;
             Optional<string> etag = default;
             Optional<string> id = default;

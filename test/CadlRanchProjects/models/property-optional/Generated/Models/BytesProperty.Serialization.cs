@@ -31,6 +31,10 @@ namespace Models.Property.Optional.Models
 
         internal static BytesProperty DeserializeBytesProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<BinaryData> property = default;
             foreach (var property0 in element.EnumerateObject())
             {

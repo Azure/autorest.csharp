@@ -15,6 +15,10 @@ namespace CognitiveSearch.Models
     {
         internal static IndexerLimits DeserializeIndexerLimits(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<TimeSpan> maxRunTime = default;
             Optional<long> maxDocumentExtractionSize = default;
             Optional<long> maxDocumentContentCharactersToExtract = default;

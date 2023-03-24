@@ -32,6 +32,10 @@ namespace extensible_enums_swagger.Models
 
         internal static Pet DeserializePet(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<DaysOfWeekExtensibleEnum> daysOfWeek = default;
             IntEnum intEnum = default;

@@ -26,6 +26,10 @@ namespace TypeSchemaMapping.Models
 
         internal static ModelWithUriProperty DeserializeModelWithUriProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<Uri> uri = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -37,6 +37,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetNetworkProfile DeserializeVirtualMachineScaleSetNetworkProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<WritableSubResource> healthProbe = default;
             Optional<IList<VirtualMachineScaleSetNetworkConfiguration>> networkInterfaceConfigurations = default;
             foreach (var property in element.EnumerateObject())

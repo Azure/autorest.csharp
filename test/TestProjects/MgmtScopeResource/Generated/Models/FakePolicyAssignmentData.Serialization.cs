@@ -97,6 +97,10 @@ namespace MgmtScopeResource
 
         internal static FakePolicyAssignmentData DeserializeFakePolicyAssignmentData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> location = default;
             Optional<ManagedServiceIdentity> identity = default;
             ResourceIdentifier id = default;

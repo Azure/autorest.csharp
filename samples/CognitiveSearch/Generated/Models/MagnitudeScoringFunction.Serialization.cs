@@ -33,6 +33,10 @@ namespace CognitiveSearch.Models
 
         internal static MagnitudeScoringFunction DeserializeMagnitudeScoringFunction(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             MagnitudeScoringParameters magnitude = default;
             string type = default;
             string fieldName = default;

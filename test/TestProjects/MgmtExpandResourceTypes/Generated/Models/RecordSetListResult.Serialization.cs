@@ -16,6 +16,10 @@ namespace MgmtExpandResourceTypes.Models
     {
         internal static RecordSetListResult DeserializeRecordSetListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<RecordSetData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

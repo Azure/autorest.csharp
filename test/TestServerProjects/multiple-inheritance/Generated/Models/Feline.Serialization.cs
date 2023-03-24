@@ -30,6 +30,10 @@ namespace multiple_inheritance.Models
 
         internal static Feline DeserializeFeline(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> meows = default;
             Optional<bool> hisses = default;
             foreach (var property in element.EnumerateObject())

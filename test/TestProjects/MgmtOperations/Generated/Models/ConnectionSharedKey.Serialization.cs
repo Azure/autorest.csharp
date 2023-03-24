@@ -37,6 +37,10 @@ namespace MgmtOperations.Models
 
         internal static ConnectionSharedKey DeserializeConnectionSharedKey(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string value = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

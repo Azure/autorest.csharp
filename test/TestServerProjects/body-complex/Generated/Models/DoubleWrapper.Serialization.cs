@@ -30,6 +30,10 @@ namespace body_complex.Models
 
         internal static DoubleWrapper DeserializeDoubleWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<double> field1 = default;
             Optional<double> field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = default;
             foreach (var property in element.EnumerateObject())

@@ -26,6 +26,10 @@ namespace ExactMatchFlattenInheritance.Models
 
         internal static AzureResourceFlattenModel5 DeserializeAzureResourceFlattenModel5(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> foo = default;
             ResourceIdentifier id = default;
             string name = default;

@@ -15,6 +15,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static PrivateEndpointConnectionItem DeserializePrivateEndpointConnectionItem(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> etag = default;
             Optional<Azure.ResourceManager.Resources.Models.SubResource> privateEndpoint = default;

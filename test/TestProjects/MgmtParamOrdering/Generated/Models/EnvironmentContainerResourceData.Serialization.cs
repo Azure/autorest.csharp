@@ -38,6 +38,10 @@ namespace MgmtParamOrdering
 
         internal static EnvironmentContainerResourceData DeserializeEnvironmentContainerResourceData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             EnvironmentContainer properties = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

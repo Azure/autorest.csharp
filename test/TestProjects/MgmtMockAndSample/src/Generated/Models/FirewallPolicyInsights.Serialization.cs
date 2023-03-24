@@ -35,6 +35,10 @@ namespace MgmtMockAndSample.Models
 
         internal static FirewallPolicyInsights DeserializeFirewallPolicyInsights(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> isEnabled = default;
             Optional<int> retentionDays = default;
             Optional<FirewallPolicyLogAnalyticsResources> logAnalyticsResources = default;

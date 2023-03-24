@@ -34,6 +34,10 @@ namespace CognitiveSearch.Models
 
         internal static LengthTokenFilter DeserializeLengthTokenFilter(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> min = default;
             Optional<int> max = default;
             string odataType = default;

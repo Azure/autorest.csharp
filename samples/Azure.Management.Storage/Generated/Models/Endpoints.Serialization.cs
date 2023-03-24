@@ -14,6 +14,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static Endpoints DeserializeEndpoints(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> blob = default;
             Optional<string> queue = default;
             Optional<string> table = default;

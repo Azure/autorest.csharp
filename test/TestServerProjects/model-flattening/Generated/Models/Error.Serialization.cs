@@ -14,6 +14,10 @@ namespace model_flattening.Models
     {
         internal static Error DeserializeError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> status = default;
             Optional<string> message = default;
             Optional<Error> parentError = default;

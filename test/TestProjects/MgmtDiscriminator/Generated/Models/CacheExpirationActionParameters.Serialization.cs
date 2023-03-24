@@ -39,6 +39,10 @@ namespace MgmtDiscriminator.Models
 
         internal static CacheExpirationActionParameters DeserializeCacheExpirationActionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             CacheExpirationActionParametersTypeName typeName = default;
             CacheBehavior cacheBehavior = default;
             CacheType cacheType = default;

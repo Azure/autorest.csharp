@@ -25,6 +25,10 @@ namespace Azure.Management.Storage.Models
 
         internal static ProtocolSettings DeserializeProtocolSettings(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<SmbSetting> smb = default;
             foreach (var property in element.EnumerateObject())
             {

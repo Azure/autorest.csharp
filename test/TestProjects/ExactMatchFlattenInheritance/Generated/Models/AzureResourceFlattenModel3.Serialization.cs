@@ -40,6 +40,10 @@ namespace ExactMatchFlattenInheritance.Models
 
         internal static AzureResourceFlattenModel3 DeserializeAzureResourceFlattenModel3(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> foo = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

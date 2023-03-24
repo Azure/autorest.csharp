@@ -26,6 +26,10 @@ namespace MgmtNonStringPathVariable.Models
 
         internal static BarProperties DeserializeBarProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<Guid> buzz = default;
             foreach (var property in element.EnumerateObject())
             {

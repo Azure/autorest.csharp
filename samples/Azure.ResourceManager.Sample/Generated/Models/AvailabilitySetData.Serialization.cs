@@ -70,6 +70,10 @@ namespace Azure.ResourceManager.Sample
 
         internal static AvailabilitySetData DeserializeAvailabilitySetData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<SampleSku> sku = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

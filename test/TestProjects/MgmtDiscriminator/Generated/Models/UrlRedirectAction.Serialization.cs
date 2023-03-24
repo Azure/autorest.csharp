@@ -24,6 +24,10 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlRedirectAction DeserializeUrlRedirectAction(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             UrlRedirectActionParameters parameters = default;
             DeliveryRuleActionType name = default;
             Optional<string> foo = default;

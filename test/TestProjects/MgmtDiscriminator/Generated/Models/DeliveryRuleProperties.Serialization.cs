@@ -57,6 +57,10 @@ namespace MgmtDiscriminator.Models
 
         internal static DeliveryRuleProperties DeserializeDeliveryRuleProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> order = default;
             Optional<DeliveryRuleCondition> conditions = default;
             Optional<IList<DeliveryRuleAction>> actions = default;

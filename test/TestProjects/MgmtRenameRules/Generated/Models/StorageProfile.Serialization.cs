@@ -41,6 +41,10 @@ namespace MgmtRenameRules.Models
 
         internal static StorageProfile DeserializeStorageProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ImageReference> imageReference = default;
             Optional<OSDisk> osDisk = default;
             Optional<IList<DataDisk>> dataDisks = default;

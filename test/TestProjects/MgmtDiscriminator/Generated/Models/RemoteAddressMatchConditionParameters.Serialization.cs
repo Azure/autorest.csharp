@@ -50,6 +50,10 @@ namespace MgmtDiscriminator.Models
 
         internal static RemoteAddressMatchConditionParameters DeserializeRemoteAddressMatchConditionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             RemoteAddressMatchConditionParametersTypeName typeName = default;
             RemoteAddressOperator @operator = default;
             Optional<bool> negateCondition = default;

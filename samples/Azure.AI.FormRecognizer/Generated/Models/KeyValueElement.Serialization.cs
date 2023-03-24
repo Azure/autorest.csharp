@@ -15,6 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static KeyValueElement DeserializeKeyValueElement(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string text = default;
             Optional<IReadOnlyList<float>> boundingBox = default;
             Optional<IReadOnlyList<string>> elements = default;

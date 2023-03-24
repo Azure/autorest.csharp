@@ -25,6 +25,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static ScheduledEventsProfile DeserializeScheduledEventsProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<TerminateNotificationProfile> terminateNotificationProfile = default;
             foreach (var property in element.EnumerateObject())
             {

@@ -16,6 +16,10 @@ namespace MgmtScopeResource.Models
     {
         internal static GuestConfigurationAssignmentList DeserializeGuestConfigurationAssignmentList(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<GuestConfigurationAssignmentData>> value = default;
             foreach (var property in element.EnumerateObject())
             {

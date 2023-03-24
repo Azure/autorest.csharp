@@ -16,6 +16,10 @@ namespace MgmtMockAndSample
     {
         internal static DeletedManagedHsmData DeserializeDeletedManagedHsmData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DeletedManagedHsmProperties> properties = default;
             ResourceIdentifier id = default;
             string name = default;

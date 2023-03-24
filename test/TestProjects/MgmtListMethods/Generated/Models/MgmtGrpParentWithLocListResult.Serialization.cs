@@ -16,6 +16,10 @@ namespace MgmtListMethods.Models
     {
         internal static MgmtGrpParentWithLocListResult DeserializeMgmtGrpParentWithLocListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<MgmtGrpParentWithLocData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

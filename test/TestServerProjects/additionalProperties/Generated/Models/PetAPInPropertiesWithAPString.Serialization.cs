@@ -46,6 +46,10 @@ namespace additionalProperties.Models
 
         internal static PetAPInPropertiesWithAPString DeserializePetAPInPropertiesWithAPString(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int id = default;
             Optional<string> name = default;
             Optional<bool> status = default;

@@ -41,6 +41,10 @@ namespace MgmtLRO
 
         internal static BarData DeserializeBarData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<BarProperties> properties = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

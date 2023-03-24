@@ -75,6 +75,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static VirtualMachineScaleSetVMProfile DeserializeVirtualMachineScaleSetVMProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<VirtualMachineScaleSetOSProfile> osProfile = default;
             Optional<VirtualMachineScaleSetStorageProfile> storageProfile = default;
             Optional<VirtualMachineScaleSetNetworkProfile> networkProfile = default;

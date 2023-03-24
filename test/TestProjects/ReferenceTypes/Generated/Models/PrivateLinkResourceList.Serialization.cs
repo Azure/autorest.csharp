@@ -24,6 +24,10 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static PrivateLinkResourceList DeserializePrivateLinkResourceList(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<PrivateLinkResourceData>> value = default;
             foreach (var property in element.EnumerateObject())
             {

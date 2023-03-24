@@ -15,6 +15,10 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static LinkedEntity DeserializeLinkedEntity(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             IReadOnlyList<Match> matches = default;
             string language = default;

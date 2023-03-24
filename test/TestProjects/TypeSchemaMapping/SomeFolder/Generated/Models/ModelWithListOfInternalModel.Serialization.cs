@@ -15,6 +15,10 @@ namespace TypeSchemaMapping.Models
     {
         internal static ModelWithListOfInternalModel DeserializeModelWithListOfInternalModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> stringProperty = default;
             Optional<IReadOnlyList<InternalModel>> internalListProperty = default;
             foreach (var property in element.EnumerateObject())

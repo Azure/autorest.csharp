@@ -35,6 +35,10 @@ namespace ModelWithConverterUsage.Models
 
         internal static ModelClass DeserializeModelClass(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> stringProperty = default;
             EnumProperty enumProperty = default;
             Optional<Product> objProperty = default;

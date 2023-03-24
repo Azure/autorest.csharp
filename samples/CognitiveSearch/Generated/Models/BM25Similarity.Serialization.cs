@@ -32,6 +32,10 @@ namespace CognitiveSearch.Models
 
         internal static BM25Similarity DeserializeBM25Similarity(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<double> k1 = default;
             Optional<double> b = default;
             string odataType = default;

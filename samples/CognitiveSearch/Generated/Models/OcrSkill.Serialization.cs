@@ -67,6 +67,10 @@ namespace CognitiveSearch.Models
 
         internal static OcrSkill DeserializeOcrSkill(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<TextExtractionAlgorithm> textExtractionAlgorithm = default;
             Optional<OcrSkillLanguage> defaultLanguageCode = default;
             Optional<bool> detectOrientation = default;

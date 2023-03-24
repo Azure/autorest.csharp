@@ -37,6 +37,10 @@ namespace AnomalyDetector.Models
 
         internal static DiagnosticsInfo DeserializeDiagnosticsInfo(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ModelState> modelState = default;
             Optional<IList<VariableState>> variableStates = default;
             foreach (var property in element.EnumerateObject())

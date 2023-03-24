@@ -140,6 +140,10 @@ namespace MgmtRenameRules
 
         internal static VirtualMachineScaleSetData DeserializeVirtualMachineScaleSetData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<MgmtRenameRulesSku> sku = default;
             Optional<MgmtRenameRulesPlan> plan = default;
             Optional<ManagedServiceIdentity> identity = default;

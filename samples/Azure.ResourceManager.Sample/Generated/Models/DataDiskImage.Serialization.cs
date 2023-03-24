@@ -20,6 +20,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static DataDiskImage DeserializeDataDiskImage(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> lun = default;
             foreach (var property in element.EnumerateObject())
             {

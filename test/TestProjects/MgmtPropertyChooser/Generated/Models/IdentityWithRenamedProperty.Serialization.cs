@@ -38,6 +38,10 @@ namespace MgmtPropertyChooser.Models
 
         internal static IdentityWithRenamedProperty DeserializeIdentityWithRenamedProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> testPrincipalId = default;
             Optional<string> tenantId = default;
             Optional<ResourceIdentityType> type = default;

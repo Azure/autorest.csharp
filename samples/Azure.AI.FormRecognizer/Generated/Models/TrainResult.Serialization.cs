@@ -15,6 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static TrainResult DeserializeTrainResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<TrainingDocumentInfo> trainingDocuments = default;
             Optional<IReadOnlyList<FormFieldsReport>> fields = default;
             Optional<float> averageModelAccuracy = default;

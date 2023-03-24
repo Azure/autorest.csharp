@@ -30,6 +30,10 @@ namespace MgmtRenameRules.Models
 
         internal static TerminateNotificationProfile DeserializeTerminateNotificationProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> notBeforeTimeout = default;
             Optional<bool> enable = default;
             foreach (var property in element.EnumerateObject())

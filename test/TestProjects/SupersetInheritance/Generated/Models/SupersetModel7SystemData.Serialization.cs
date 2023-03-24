@@ -15,6 +15,10 @@ namespace SupersetInheritance.Models
     {
         internal static SupersetModel7SystemData DeserializeSupersetModel7SystemData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> createdBy = default;
             Optional<DateTimeOffset> createdAt = default;
             Optional<string> lastModifiedBy = default;

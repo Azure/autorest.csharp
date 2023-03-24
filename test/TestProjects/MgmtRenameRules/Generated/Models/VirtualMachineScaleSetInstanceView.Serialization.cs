@@ -15,6 +15,10 @@ namespace MgmtRenameRules.Models
     {
         internal static VirtualMachineScaleSetInstanceView DeserializeVirtualMachineScaleSetInstanceView(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<VirtualMachineScaleSetInstanceViewStatusesSummary> virtualMachine = default;
             Optional<IReadOnlyList<VirtualMachineScaleSetVmExtensionsSummary>> extensions = default;
             Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;

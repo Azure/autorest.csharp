@@ -23,6 +23,10 @@ namespace MgmtMockAndSample.Models
 
         internal static VaultAccessPolicyParameters DeserializeVaultAccessPolicyParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<AzureLocation> location = default;
             VaultAccessPolicyProperties properties = default;
             ResourceIdentifier id = default;

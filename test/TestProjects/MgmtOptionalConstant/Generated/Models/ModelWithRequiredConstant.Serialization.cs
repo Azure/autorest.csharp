@@ -27,6 +27,10 @@ namespace MgmtOptionalConstant.Models
 
         internal static ModelWithRequiredConstant DeserializeModelWithRequiredConstant(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             PassName passName = default;
             Optional<ProtocolType> protocol = default;
             foreach (var property in element.EnumerateObject())
