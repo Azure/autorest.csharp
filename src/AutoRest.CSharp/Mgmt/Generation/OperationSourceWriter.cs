@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteLine(MethodBodyLines.Declare.JsonDocument(ValueExpressions.Call.JsonDocument.Parse(responseVariable, async), out var documentVariable));
 
                 var dataVariable = new CodeWriterDeclaration("data");
-                var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, ValueExpressions.Call.JsonDocument.GetRootElement(documentVariable), JsonSerializationOptions.None);
+                var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, ValueExpressions.Call.JsonDocument.GetRootElement(documentVariable), null);
                 if (_operationIdMappings is not null)
                 {
                     deserializeExpression = ValueExpressions.Call.Instance(null, "ScrubId", deserializeExpression);

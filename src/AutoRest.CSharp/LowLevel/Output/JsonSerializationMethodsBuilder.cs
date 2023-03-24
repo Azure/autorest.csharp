@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -17,6 +19,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Output.Models.MethodBodyLines;
 using static AutoRest.CSharp.Output.Models.ValueExpressions;
 
@@ -36,19 +39,17 @@ namespace AutoRest.CSharp.Output.Models
             var deserializeValueBlock = DeserializeValue(serialization, Call.JsonDocument.GetRootElement(document), out var value);
             MethodBodyLine setOrReturnValue = variable is not null ? new SetValueLine(variable, value) : new ReturnValueLine(value);
 
-            var deserialization = new MethodBodyBlocks(declareDocument, deserializeValueBlock, setOrReturnValue);
-
             if (!serialization.IsNullable)
             {
-                return deserialization;
+                return new MethodBodyBlocks(declareDocument, deserializeValueBlock, setOrReturnValue);
             }
 
-            return new IfElseBlock
+            return new MethodBodyBlocks(declareDocument, new IfElseBlock
             (
                 new FormattableStringToExpression($"{document}.RootElement.ValueKind == {typeof(JsonValueKind)}.Null"),
                 variable is not null ? new SetValueLine(variable, Null) : new ReturnValueLine(Null),
-                deserialization
-            );
+                new MethodBodyBlocks(deserializeValueBlock, setOrReturnValue)
+            ));
         }
 
         public static MethodBodyBlock DeserializeValue(JsonSerialization serialization, ValueExpression element, out ValueExpression value)
@@ -73,16 +74,22 @@ namespace AutoRest.CSharp.Output.Models
                     var iterateOverJsonObject = new ForeachBlock(property, Call.JsonElement.EnumerateObject(element), DeserializeDictionaryValue(jsonDictionary.ValueSerialization, dictionary, property));
 
                     return new MethodBodyBlocks(declareDictionaryVariable, iterateOverJsonObject);
-                case JsonValueSerialization valueSerialization:
-                    //if (valueSerialization.Options == JsonSerializationOptions.UseManagedServiceIdentityV3)
-                    //{
-                    //    writer.UseNamespace("Azure.ResourceManager.Models");
-                    //    writer.Line($"var serializeOptions = new {typeof(JsonSerializerOptions)} {{ Converters = {{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }} }};");
-                    //}
 
-                    //writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
-                    value = GetDeserializeValueExpression(valueSerialization, element);
+                case JsonValueSerialization { Options: JsonSerializationOptions.UseManagedServiceIdentityV3 } valueSerialization:
+                    var serializeOptions = new CodeWriterDeclaration("serializeOptions");
+                    var properties = new Dictionary<string, ValueExpression>
+                    {
+                        [nameof(JsonSerializerOptions.Converters)] = new FormattableStringToExpression($"{{ new {nameof(ManagedServiceIdentityTypeV3Converter)}() }}")
+                    };
+
+                    var declareSerializeOptions = new DeclareVariableLine(null, serializeOptions, New(typeof(JsonSerializerOptions), properties));
+                    value = GetDeserializeValueExpression(element, valueSerialization.Type, valueSerialization.Format, serializeOptions);
+                    return declareSerializeOptions;
+
+                case JsonValueSerialization valueSerialization:
+                    value = GetDeserializeValueExpression(element, valueSerialization.Type, valueSerialization.Format);
                     return new MethodBodyBlock();
+
                 default:
                     throw new InvalidOperationException($"{serialization.GetType()} is not supported.");
             }
@@ -126,10 +133,7 @@ namespace AutoRest.CSharp.Output.Models
             return new MethodBodyBlocks(deserializeValueBlock, addValueLine);
         }
 
-        private static ValueExpression GetDeserializeValueExpression(JsonValueSerialization serialization, ValueExpression element)
-            => GetDeserializeValueExpression(element, serialization.Type, serialization.Format, serialization.Options);
-
-        public static ValueExpression GetDeserializeValueExpression(ValueExpression element, CSharpType serializationType, SerializationFormat serializationFormat = SerializationFormat.Default, JsonSerializationOptions serializationOptions = JsonSerializationOptions.None)
+        public static ValueExpression GetDeserializeValueExpression(ValueExpression element, CSharpType serializationType, SerializationFormat serializationFormat = SerializationFormat.Default, ValueExpression? serializerOptions = null)
         {
             if (serializationType.SerializeAs != null)
             {
@@ -147,16 +151,15 @@ namespace AutoRest.CSharp.Output.Models
                 return GetFrameworkTypeValueExpression(frameworkType, element, serializationFormat, serializationType);
             }
 
-            return GetDeserializeImplementation(serializationType.Implementation, element, serializationOptions);
+            return GetDeserializeImplementation(serializationType.Implementation, element, serializerOptions);
         }
 
-        public static ValueExpression GetDeserializeImplementation(TypeProvider implementation, ValueExpression element, JsonSerializationOptions options)
+        public static ValueExpression GetDeserializeImplementation(TypeProvider implementation, ValueExpression element, ValueExpression? serializerOptions)
         {
             switch (implementation)
             {
                 case SystemObjectType systemObjectType when IsCustomJsonConverterAdded(systemObjectType.SystemType):
-                    var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? new FormattableStringToExpression($"serializeOptions") : null;
-                    return Call.JsonSerializer.Deserialize(element, implementation.Type, optionalSerializeOptions);
+                    return Call.JsonSerializer.Deserialize(element, implementation.Type, serializerOptions);
 
                 case Resource { ResourceData: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } resourceDataType } resource:
                     return New(resource.Type, new FormattableStringToExpression($"Client"), Call.Static(resourceDataType.Type, $"Deserialize{resourceDataType.Declaration.Name}", element));
@@ -258,7 +261,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (includeFormat && format.ToFormatSpecifier() is { } formatString)
             {
-                return Call.Instance(element, methodName, new FormattableStringToExpression($"{formatString:L}"));
+                return new StaticMethodCallExpression(typeof(JsonElementExtensions), methodName, new[]{element, new FormattableStringToExpression($"{formatString:L}")}, CallAsExtension: true);
             }
 
             return Call.Instance(element, methodName);
