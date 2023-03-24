@@ -57,7 +57,7 @@ emit:
   - "@azure-tools/typespec-csharp"
 options:
   "@azure-tools/typespec-csharp":
-+    namespace: Azure.Template.MyCadlProject
++    namespace: Azure.Template.MyTypeSpecProject
 ```
 
 **Supported Emitter options**:
