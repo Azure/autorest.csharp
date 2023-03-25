@@ -14,7 +14,7 @@
     "ExactMatchModel11",
     "ExactMatchModel1Data"
   ],
-  "intrinsic-types-to-treat-empty-string-as-null": [
+  "additional-intrinsic-types-to-treat-empty-string-as-null": [
     "Uri",
     "Guid",
     "ResourceIdentifier",
