@@ -295,7 +295,7 @@ namespace AutoRest.CSharp.Output.Models
             var parameter = new Parameter(name, description, typeof(ContentType), null, Validation.None, null, RequestLocation: RequestLocation.Header);
 
             _createMessageParameters.Add(parameter);
-            _parameterLinks.Add(new ParameterLink(Array.Empty<Parameter>(), new[]{ parameter }, null));
+            _parameterLinks.Add(new ParameterLink(new[]{ parameter }, new[]{ parameter }, null));
             AddReference(inputParameter.NameInRequest, inputParameter, parameter, SerializationFormat.Default);
         }
 

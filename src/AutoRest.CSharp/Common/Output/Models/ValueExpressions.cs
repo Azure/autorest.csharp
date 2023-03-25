@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models
         public static ValueExpression Default { get; } = new FormattableStringToExpression($"default");
         public static ValueExpression Null { get; } = new FormattableStringToExpression($"null");
 
-        private static ValueExpression CheckNull(this Parameter parameter)
+        public static ValueExpression CheckNull(this Parameter parameter)
             => parameter.Type.IsNullable
                 ? new NullConditionalExpression(parameter)
                 : new ParameterReference(parameter);
@@ -60,10 +60,6 @@ namespace AutoRest.CSharp.Output.Models
             public static ValueExpression Static(CSharpType? methodType, string methodName, ValueExpression arg) => new StaticMethodCallExpression(methodType, methodName, new[]{ arg });
 
             public static ValueExpression FromCancellationToken() => new StaticMethodCallExpression(null, "FromCancellationToken", new[]{ new ParameterReference(KnownParameters.CancellationTokenParameter) });
-
-            public static ValueExpression ToString(Parameter parameter) => ToString(parameter.CheckNull());
-            public static ValueExpression ToRequestContent(Parameter parameter) => ToRequestContent(parameter.CheckNull());
-            public static ValueExpression ToSerialString(Parameter parameter) => ToSerialString(parameter.Type, parameter.CheckNull());
 
             public static ValueExpression ToString(ValueExpression reference) => new InstanceMethodCallExpression(reference , "ToString", Array.Empty<ValueExpression>(), false);
             public static ValueExpression ToRequestContent(ValueExpression reference) => new InstanceMethodCallExpression(reference, "ToRequestContent", Array.Empty<ValueExpression>(), false);

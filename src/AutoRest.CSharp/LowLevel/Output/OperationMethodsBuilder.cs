@@ -489,14 +489,9 @@ namespace AutoRest.CSharp.Output.Models
 
         private static ValueExpression CreateConversion(Parameter fromParameter, CSharpType toType)
         {
-            return fromParameter.Type switch
-            {
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } }  when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToString(fromParameter),
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToSerialString(fromParameter),
-                { IsFrameworkType: false, Implementation: ModelTypeProvider }                when toType.EqualsIgnoreNullable(typeof(RequestContent)) => Call.ToRequestContent(fromParameter),
-                { IsFrameworkType: true }                                                    when toType.EqualsIgnoreNullable(typeof(RequestContent)) => Call.RequestContent.Create(fromParameter),
-                _ => new ParameterReference(fromParameter)
-            };
+            return fromParameter.Type.IsFrameworkType
+                ? CreateConversion(fromParameter.CheckNull(), fromParameter.Type.FrameworkType, toType)
+                : CreateConversion(fromParameter.CheckNull(), fromParameter.Type.Implementation, toType);
         }
 
         private static ValueExpression CreateConversion(ValueExpression fromExpression, CSharpType fromType, CSharpType toType)
@@ -506,12 +501,28 @@ namespace AutoRest.CSharp.Output.Models
                 fromExpression = new NullConditionalExpression(fromExpression);
             }
 
-            return fromType switch
+            return fromType.IsFrameworkType
+                ? CreateConversion(fromExpression, fromType.FrameworkType, toType)
+                : CreateConversion(fromExpression, fromType.Implementation, toType);
+        }
+
+        private static ValueExpression CreateConversion(ValueExpression fromExpression, Type fromFrameworkType, CSharpType toType)
+        {
+            if ((fromFrameworkType == typeof(BinaryData) || fromFrameworkType == typeof(string)) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
             {
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } }  when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToString(fromExpression),
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToSerialString(fromType, fromExpression),
-                { IsFrameworkType: false, Implementation: ModelTypeProvider }                when toType.EqualsIgnoreNullable(typeof(RequestContent)) => Call.ToRequestContent(fromExpression),
-                { IsFrameworkType: true }                                                    when toType.EqualsIgnoreNullable(typeof(RequestContent)) => Call.RequestContent.Create(fromExpression),
+                return fromExpression;
+            }
+
+            return Call.RequestContent.Create(fromExpression);
+        }
+
+        private static ValueExpression CreateConversion(ValueExpression fromExpression, TypeProvider fromTypeImplementation, CSharpType toType)
+        {
+            return fromTypeImplementation switch
+            {
+                EnumType { IsExtensible: true }  when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToString(fromExpression),
+                EnumType { IsExtensible: false } when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToSerialString(fromTypeImplementation.Type, fromExpression),
+                ModelTypeProvider                when toType.EqualsIgnoreNullable(typeof(RequestContent)) => Call.ToRequestContent(fromExpression),
                 _ => fromExpression
             };
         }
