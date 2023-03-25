@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { isFixed } from "@azure-tools/cadl-azure-core";
+import { isFixed } from "@azure-tools/typespec-azure-core";
 import {
     Enum,
     EnumMember,
@@ -29,15 +29,15 @@ import {
     Scalar,
     Union,
     getProjectedNames
-} from "@cadl-lang/compiler";
-import { getResourceOperation } from "@cadl-lang/rest";
+} from "@typespec/compiler";
+import { getResourceOperation } from "@typespec/rest";
 import {
     getHeaderFieldName,
     getPathParamName,
     getQueryParamName,
     HttpOperation,
     isStatusCode
-} from "@cadl-lang/rest/http";
+} from "@typespec/http";
 import {
     projectedNameClientKey,
     projectedNameCSharpKey,

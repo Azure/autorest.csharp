@@ -1,34 +1,47 @@
 # Update `autorest.csharp` and cadl emitter versions
 
+parameters:
+  AutorestCSharpVersion: ""
+  CadlEmitterVersion: ""
+  IsInternalFeed: false
+
 jobs:
 - job: Update_Generator_Versions
   pool:
     name: azsdk-pool-mms-ubuntu-2004-general
     vmImage: ubuntu-20.04
-  variables:
-    AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.AutorestCSharpVersion']]
-    CadlEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['Publish.CadlEmitterVersion']]
   steps:
   - checkout: self
     fetchDepth: 1
   - checkout: azure-sdk-for-net
   - checkout: azure-sdk-tools
     fetchDepth: 1
+  - ${{ if eq(parameters.IsInternalFeed, true) }}:
+    - pwsh: ./eng/GenerateInternalNpmrc.ps1 -ContainingFolder $(Build.SourcesDirectory)/azure-sdk-for-net
+      displayName: "Generate Internal Npmrc"
+      workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
   - task: Powershell@2
     displayName: Update SDK Generator Versions
     inputs:
       pwsh: true
       filePath: $(Build.SourcesDirectory)/autorest.csharp/eng/UpdateGeneratorMetadata.ps1
       arguments: >
-        -AutorestCSharpVersion $(AutorestCSharpVersion)
-        -CadlEmitterVersion $(CadlEmitterVersion)
+        -AutorestCSharpVersion ${{parameters.AutorestCSharpVersion}}
+        -CadlEmitterVersion ${{parameters.CadlEmitterVersion}}
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
+        -UseInternalFeed $${{parameters.IsInternalFeed}}
       workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+  - ${{ if eq(parameters.IsInternalFeed, true) }}: # This stage needs to be remove after https://github.com/Azure/autorest.csharp/issues/3216
+    - pwsh: |
+        git restore eng/common/scripts/TypeSpec-Project-Generate.ps1
+        rm .npmrc
+      displayName: Discard Internal Change
+      workingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
   - template: /eng/common/pipelines/templates/steps/git-push-changes.yml@azure-sdk-tools
     parameters:
-      BaseRepoBranch: auto-update-autorest-$(AutorestCSharpVersion)
+      BaseRepoBranch: auto-update-autorest-${{parameters.AutorestCSharpVersion}}
       BaseRepoOwner: azure-sdk
-      CommitMsg: Update Generator Version $(AutorestCSharpVersion)
+      CommitMsg: Update Generator Version ${{parameters.AutorestCSharpVersion}}
       TargetRepoOwner: Azure
       TargetRepoName: azure-sdk-for-net
       WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
