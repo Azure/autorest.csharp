@@ -219,9 +219,15 @@ namespace AutoRest.CSharp.Output.Models
 
             if (valueType == typeof(DateTimeOffset) || valueType == typeof(DateTime) || valueType == typeof(TimeSpan))
             {
-                return valueSerialization.Format == SerializationFormat.DateTime_Unix
-                    ? LineCall.Utf8JsonWriter.WriteNumberValue(utf8JsonWriter, value, valueSerialization.Format.ToFormatSpecifier())
-                    : LineCall.Utf8JsonWriter.WriteStringValue(utf8JsonWriter, value, valueSerialization.Format.ToFormatSpecifier());
+                if (valueSerialization.Format == SerializationFormat.DateTime_Unix)
+                {
+                    return LineCall.Utf8JsonWriter.WriteNumberValue(utf8JsonWriter, value, valueSerialization.Format.ToFormatSpecifier());
+                }
+
+                var format = valueSerialization.Format.ToFormatSpecifier();
+                return format is not null
+                    ? LineCall.Utf8JsonWriter.WriteStringValue(utf8JsonWriter, value, format)
+                    : LineCall.Utf8JsonWriter.WriteStringValue(utf8JsonWriter, value);
             }
 
             if (valueType == typeof(ETag) || valueType == typeof(ContentType) || valueType == typeof(IPAddress))

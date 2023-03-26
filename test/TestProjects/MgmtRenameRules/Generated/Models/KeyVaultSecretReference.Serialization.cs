@@ -20,7 +20,8 @@ namespace MgmtRenameRules.Models
             writer.WritePropertyName("secretUrl"u8);
             writer.WriteStringValue(SecretUri.AbsoluteUri);
             writer.WritePropertyName("sourceVault"u8);
-            JsonSerializer.Serialize(writer, SourceVault); writer.WriteEndObject();
+            JsonSerializer.Serialize(writer, SourceVault);
+            writer.WriteEndObject();
         }
 
         internal static KeyVaultSecretReference DeserializeKeyVaultSecretReference(JsonElement element)
