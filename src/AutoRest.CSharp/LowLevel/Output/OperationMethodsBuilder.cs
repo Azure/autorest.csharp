@@ -520,9 +520,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             return fromTypeImplementation switch
             {
-                EnumType { IsExtensible: true }  when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToString(fromExpression),
-                EnumType { IsExtensible: false } when toType.EqualsIgnoreNullable(typeof(string)) => Call.ToSerialString(fromTypeImplementation.Type, fromExpression),
-                ModelTypeProvider                when toType.EqualsIgnoreNullable(typeof(RequestContent)) => Call.ToRequestContent(fromExpression),
+                EnumType enumType when toType.EqualsIgnoreNullable(typeof(string)) => Call.Enum.ToString(fromExpression, enumType),
+                ModelTypeProvider when toType.EqualsIgnoreNullable(typeof(RequestContent)) => Call.ToRequestContent(fromExpression),
                 _ => fromExpression
             };
         }

@@ -651,13 +651,26 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
                     break;
-                case ForeachBlock(var item, var enumerable, var body):
-                    writer.Append($"foreach(var {item:D} in ");
-                    writer.WriteValueExpression(enumerable);
-                    writer.Line($")");
-                    using (writer.Scope())
+                case IfElsePreprocessorBlock(var condition, var ifBlock, var elseBlock):
+                    writer.Line($"#if {condition}");
+                    writer.AppendRaw("\t\t\t\t");
+                    writer.WriteBodyBlock(ifBlock);
+                    if (elseBlock is not null)
                     {
+                        writer.LineRaw("#else");
+                        writer.WriteBodyBlock(elseBlock);
+                    }
+                    writer.LineRaw("#endif");
+                    break;
+                case ForeachBlock(var item, var enumerable, var body):
+                    using (writer.AmbientScope())
+                    {
+                        writer.Append($"foreach(var {item:D} in ");
+                        writer.WriteValueExpression(enumerable);
+                        writer.LineRaw(")");
+                        writer.LineRaw("{");
                         WriteBodyBlock(writer, body);
+                        writer.LineRaw("}");
                     }
                     break;
                 case MethodBodyLine line:
@@ -678,6 +691,9 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 case InstanceMethodCallLine(var instance, var methodName, var arguments, var callAsAsync):
                     writer.WriteValueExpression(new InstanceMethodCallExpression(instance, methodName, arguments, callAsAsync));
+                    break;
+                case StaticMethodCallLine(var methodType, var methodName, var arguments, var typeArguments, var callAsExtension, var callAsAsync):
+                    writer.WriteValueExpression(new StaticMethodCallExpression(methodType, methodName, arguments, typeArguments, callAsExtension, callAsAsync));
                     break;
                 case SetValueLine setValue:
                     writer.WriteValueExpression(setValue.To);
@@ -714,6 +730,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw("return ");
                     writer.WriteValueExpression(returnValue.Value);
                     break;
+                case KeywordLine(var keyword):
+                    writer.AppendRaw(keyword);
+                    break;
             }
 
             return writer.LineRaw(";");
@@ -726,6 +745,16 @@ namespace AutoRest.CSharp.Generation.Writers
                 case CastExpression cast:
                     writer.Append($"({cast.Type})");
                     writer.WriteValueExpression(cast.Inner);
+                    break;
+                case CollectionInitializerExpression(var items):
+                    writer.AppendRaw("{ ");
+                    foreach (var item in items)
+                    {
+                        writer.WriteValueExpression(item);
+                        writer.AppendRaw(",");
+                    }
+                    writer.RemoveTrailingComma();
+                    writer.AppendRaw(" }");
                     break;
                 case MemberReference memberReference:
                     writer.WriteValueExpression(memberReference.Inner);
@@ -795,6 +824,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 case NullConditionalExpression nullConditional:
                     writer.WriteValueExpression(nullConditional.Inner);
                     writer.AppendRaw("?");
+                    break;
+                case BinaryOperatorExpression(var op, var left, var right):
+                    writer.WriteValueExpression(left);
+                    writer.AppendRaw(" ").AppendRaw(op).AppendRaw(" ");
+                    writer.WriteValueExpression(right);
                     break;
                 case TernaryConditionalOperator ternary:
                     writer.WriteValueExpression(ternary.Condition);

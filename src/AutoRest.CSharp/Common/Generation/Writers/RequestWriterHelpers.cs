@@ -239,7 +239,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var content = new CodeWriterDeclaration("content");
 
                         writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
-                        writer.ToSerializeCall(jsonSerialization, value, writerName: $"{content}.{nameof(Utf8JsonRequestContent.JsonWriter)}");
+                        writer.WriteBodyBlock(JsonSerializationMethodsBuilder.SerializeExpression(new MemberReference(content, nameof(Utf8JsonRequestContent.JsonWriter)), jsonSerialization, new FormattableStringToExpression(value)));
                         writer.Line($"{request}.Content = {content};");
                         break;
                     }

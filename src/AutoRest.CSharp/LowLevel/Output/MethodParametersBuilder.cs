@@ -275,14 +275,17 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             _createMessageParameters.Add(protocolMethodParameter);
-            if (inputParameter.Kind == InputOperationParameterKind.Spread && inputParameter.Type is InputModelType)
+            if (inputParameter is { Kind: InputOperationParameterKind.Spread, Type: InputModelType })
             {
                 var model = (ModelTypeProvider)_typeFactory.CreateType(inputParameter.Type).Implementation;
                 _parameterLinks.Add(new ParameterLink(model.SerializationConstructorSignature.Parameters, new[]{protocolMethodParameter}, model));
             }
             else
             {
-                var convenienceMethodParameterType = _typeFactory.CreateType(inputParameter.Type);
+                var convenienceMethodParameterType = inputParameter is { Location: RequestLocation.Body, Type: InputListType }
+                    ? new CSharpType(typeof(object))
+                    : _typeFactory.CreateType(inputParameter.Type);
+
                 var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, convenienceMethodParameterType, _typeFactory);
                 _parameterLinks.Add(new ParameterLink(convenienceMethodParameter, protocolMethodParameter));
             }
