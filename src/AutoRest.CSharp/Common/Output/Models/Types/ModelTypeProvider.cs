@@ -120,20 +120,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             var serializationCtorSignature = CreateSerializationConstructorSignature(Declaration.Name, Fields.PublicConstructorParameters, Fields.SerializationParameters);
 
             // verifies if this new ctor is the same as the public one
-            if (!serializationCtorSignature.Parameters.Any(p => TypeFactory.IsList(p.Type)) && InitializationConstructorSignature.Parameters.SequenceEqual(serializationCtorSignature.Parameters, new ParameterByTypeEqualityComparer()))
+            if (!serializationCtorSignature.Parameters.Any(p => TypeFactory.IsList(p.Type)) && InitializationConstructorSignature.Parameters.SequenceEqual(serializationCtorSignature.Parameters, Parameter.EqualityComparerByType))
                 return InitializationConstructorSignature;
 
             return serializationCtorSignature;
-        }
-
-        private struct ParameterByTypeEqualityComparer : IEqualityComparer<Parameter>
-        {
-            public bool Equals(Parameter? x, Parameter? y)
-            {
-                return Object.Equals(x?.Type, y?.Type);
-            }
-
-            public int GetHashCode([DisallowNull] Parameter obj) => obj.Type.GetHashCode();
         }
 
         private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
@@ -356,17 +346,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return defaultCtorInitializers.ToArray();
-        }
-
-        private ReferenceOrConstant? GetPropertyDefaultValue(ObjectTypeProperty property)
-        {
-            if (property == Discriminator?.Property &&
-                Discriminator.Value != null)
-            {
-                return Discriminator.Value;
-            }
-
-            return null;
         }
 
         protected override CSharpType? CreateInheritedType()
