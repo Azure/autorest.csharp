@@ -82,13 +82,14 @@ namespace AutoRest.CSharp.Output.Models
         /// Build CmcRestClientMethod for mgmt and HLC
         /// </summary>
         /// <param name="operation"></param>
+        /// <param name="inputOperation"></param>
         /// <param name="httpRequest"></param>
         /// <param name="requestParameters"></param>
         /// <param name="responseHeaderModel"></param>
         /// <param name="accessibility"></param>
         /// <param name="returnNullOn404Func"></param>
         /// <returns></returns>
-        public RestClientMethod BuildMethod(Operation operation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
+        public RestClientMethod BuildMethod(Operation operation, InputOperation inputOperation, HttpRequest httpRequest, IEnumerable<RequestParameter> requestParameters, DataPlaneResponseHeaderGroupType? responseHeaderModel, string accessibility, Func<string?, bool>? returnNullOn404Func = null)
         {
             var allParameters = GetOperationAllParameters(operation, requestParameters);
             var methodParameters = BuildMethodParameters(allParameters);
@@ -109,106 +110,8 @@ namespace AutoRest.CSharp.Output.Models
                 responseHeaderModel,
                 operation.Extensions?.BufferResponse ?? true,
                 accessibility: accessibility,
-                CreateInputOperation(operation)
+                inputOperation
             );
-        }
-
-        // TODO:
-        // This is a temporary function that pass some properties from 'Operation' to 'InputOperation'.
-        // Will be removed and re-use the `CodeModelConverter` once merged 2 builders together.
-        private InputOperation CreateInputOperation(Operation operation)
-        {
-            foreach (var serviceRequest in operation.Requests)
-            {
-                if (serviceRequest.Protocol.Http is not HttpRequest httpRequest)
-                {
-                    continue;
-                }
-                return new InputOperation(
-                    Name: operation.Language.Default.Name,
-                    ResourceName: null,
-                    Summary: operation.Language.Default.Summary,
-                    Deprecated: operation.Deprecated?.Reason,
-                    Description: operation.Language.Default.Description,
-                    Accessibility: operation.Accessibility,
-                    Parameters: CreateInputParameters(operation.Parameters.Concat(serviceRequest.Parameters).ToList()),
-                    Responses: new List<OperationResponse>(),
-                    HttpMethod: httpRequest.Method.ToCoreRequestMethod(),
-                    RequestBodyMediaType: BodyMediaType.None,
-                    Uri: httpRequest.Uri,
-                    Path: httpRequest.Path,
-                    ExternalDocsUrl: operation.ExternalDocs?.Url,
-                    RequestMediaTypes: operation.RequestMediaTypes?.Keys.ToList(),
-                    BufferResponse: operation.Extensions?.BufferResponse ?? true,
-                    LongRunning: null,
-                    Paging: CreateOperationPaging(operation),
-                    true,
-                    false);
-            }
-            return new InputOperation();
-        }
-
-        private static IReadOnlyList<InputParameter> CreateInputParameters(IEnumerable<RequestParameter> requestParameters)
-        {
-            var parameters = new List<InputParameter>();
-            foreach (var requestParameter in requestParameters)
-            {
-                parameters.Add(CreateInputParameter(requestParameter));
-            }
-            return parameters;
-        }
-
-        private static InputParameter CreateInputParameter(RequestParameter requestParameter)
-        {
-            return new(
-                    Name: requestParameter.Language.Default.Name,
-                    NameInRequest: requestParameter.Language.Default.SerializedName ?? requestParameter.Language.Default.Name,
-                    Description: requestParameter.Language.Default.Description,
-                    Type: CodeModelConverter.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, null) with { IsNullable = requestParameter.IsNullable || !requestParameter.IsRequired },
-                    Location: CodeModelConverter.GetRequestLocation(requestParameter),
-                    DefaultValue: GetDefaultValue(requestParameter),
-                    IsRequired: requestParameter.IsRequired,
-                    GroupedBy: requestParameter.GroupedBy != null ? CreateInputParameter(requestParameter.GroupedBy) : null,
-                    Kind: CodeModelConverter.GetOperationParameterKind(requestParameter),
-                    IsApiVersion: requestParameter.Origin == "modelerfour:synthesized/api-version",
-                    IsResourceParameter: Convert.ToBoolean(requestParameter.Extensions.GetValue<string>("x-ms-resource-identifier")),
-                    IsContentType: requestParameter.Origin == "modelerfour:synthesized/content-type",
-                    IsEndpoint: requestParameter.Origin == "modelerfour:synthesized/host",
-                    ArraySerializationDelimiter: GetArraySerializationDelimiter(requestParameter),
-                    Explode: requestParameter.Protocol.Http is HttpParameter { Explode: true },
-                    SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
-                    HeaderCollectionPrefix: requestParameter.Extensions?.HeaderCollectionPrefix,
-                    VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null);
-        }
-
-        private static InputConstant? GetDefaultValue(RequestParameter parameter)
-        {
-            if (parameter.ClientDefaultValue != null)
-            {
-                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CodeModelConverter.CreateType(parameter.Schema, parameter.Extensions?.Format, null) with { IsNullable = parameter.IsNullable });
-            }
-
-            if (parameter.Schema is ConstantSchema constantSchema)
-            {
-                return new InputConstant(Value: constantSchema.Value.Value, Type: CodeModelConverter.CreateType(constantSchema.ValueType, constantSchema.Extensions?.Format, null) with { IsNullable = constantSchema.Value.Value == null});
-            }
-
-            if (!parameter.IsRequired)
-            {
-                return new InputConstant(Value: null, Type: CodeModelConverter.CreateType(parameter.Schema, parameter.Extensions?.Format, null) with { IsNullable = parameter.IsNullable });
-            }
-
-            return null;
-        }
-
-        private OperationPaging? CreateOperationPaging(Operation operation)
-        {
-            var paging = operation.Language.Default.Paging;
-            if (paging == null)
-            {
-                return null;
-            }
-            return new OperationPaging(NextLinkName: paging.NextLinkName, ItemName: paging.ItemName);
         }
 
         private Dictionary<RequestParameter, Parameter> GetOperationAllParameters(Operation operation, IEnumerable<RequestParameter> requestParameters)
