@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Builders
                 }
 
                 var stringValue = Convert.ToString(value);
-                var enumTypeValue = enumType.Values.SingleOrDefault(v => (v.Value.Value as string) == stringValue);
+                var enumTypeValue = enumType.Values.SingleOrDefault(v => v.Value.Value?.ToString() == stringValue);
 
                 // Fallback to the string value if we can't find an appropriate enum member (would work only for extensible enums)
                 return new Constant((object?)enumTypeValue ?? stringValue, type);
