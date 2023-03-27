@@ -40,7 +40,7 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
 
 function Add-Typespec([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
     if ($mainFile -eq "") {
-        $mainFile = Get-Cadl-Entry $output
+        $mainFile = Get-TypeSpec-Entry $output
     }
     $cadlDefinitions[$name] = @{
         'projectName' = $name;
@@ -63,18 +63,18 @@ function Add-CadlRanch-Typespec([string]$testName, [string]$projectPrefix, [stri
     Add-Typespec "$projectPrefix$testName" $projectDirectory $cadlMain
 }
 
-function Get-Cadl-Entry([System.IO.DirectoryInfo]$directory) {
-    $clientPath = Join-Path $directory "client.cadl"
+function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
+    $clientPath = Join-Path $directory "client.tsp"
     if (Test-Path $clientPath) {
         return $clientPath
     }
 
-    $mainPath = Join-Path $directory "main.cadl"
+    $mainPath = Join-Path $directory "main.tsp"
     if (Test-Path $mainPath) {
         return $mainPath
     }
 
-    $projectNamePath = Join-Path $directory "$($directory.Name).cadl"
+    $projectNamePath = Join-Path $directory "$($directory.Name).tsp"
     return $projectNamePath
 }
 
@@ -133,7 +133,7 @@ if (!($Exclude -contains "TestProjects")) {
 
     foreach ($directory in Get-ChildItem $testProjectRoot -Directory) {
         $testName = $directory.Name
-        if ($testName -eq "ConvenienceInitial-Cadl") {
+        if ($testName -eq "ConvenienceInitial-Typespec") {
             continue;
         }
         $readmeConfigurationPath = Join-Path $directory "readme.md"
@@ -265,9 +265,9 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     if ($key -eq "TypeSchemaMapping") {
         $outputPath = Join-Path $definition.output "SomeFolder" "Generated"
     }
-    elseif ($key -eq "ConvenienceUpdate-Cadl" -or $key -eq "ConvenienceInitial-Cadl")
+    elseif ($key -eq "ConvenienceUpdate-Typespec" -or $key -eq "ConvenienceInitial-Typespec")
     {
-        $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." "ConvenienceInitial-Cadl" "Generated"))"
+        $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." "ConvenienceInitial-Typespec" "Generated"))"
     }
     $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
 
