@@ -26,18 +26,18 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal static class JsonSerializationMethodsBuilder
     {
-        public static MethodBodyBlock SerializeObject(ValueExpression utf8JsonWriter, JsonObjectSerialization serialization)
+        public static MethodBodyBlock WriteObject(ValueExpression utf8JsonWriter, JsonObjectSerialization serialization)
         {
             return new MethodBodyBlocks
             (
                 LineCall.Utf8JsonWriter.WriteStartObject(utf8JsonWriter),
-                SerializeProperties(utf8JsonWriter, serialization.Properties),
+                WritProperties(utf8JsonWriter, serialization.Properties),
                 SerializeAdditionalProperties(utf8JsonWriter, serialization.AdditionalProperties),
                 LineCall.Utf8JsonWriter.WriteEndObject(utf8JsonWriter)
             );
         }
 
-        private static MethodBodyBlock SerializeProperties(ValueExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties)
+        public static MethodBodyBlock WritProperties(ValueExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties)
         {
             var blocks = new List<MethodBodyBlock>();
             foreach (JsonPropertySerialization property in properties)
@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models
                     // Flattened property
                     blocks.Add(LineCall.Utf8JsonWriter.WritePropertyName(utf8JsonWriter, property.SerializedName));
                     blocks.Add(LineCall.Utf8JsonWriter.WriteStartObject(utf8JsonWriter));
-                    blocks.Add(SerializeProperties(utf8JsonWriter, property.PropertySerializations!));
+                    blocks.Add(WritProperties(utf8JsonWriter, property.PropertySerializations!));
                     blocks.Add(LineCall.Utf8JsonWriter.WriteEndObject(utf8JsonWriter));
                 }
                 else

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -46,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 string? description = parameter.Description;
                 if (description == null)
                     description = $"The {parameter.Name}";
-                var property = new InputModelProperty(parameter.Name, null, description, inputParameter!.Type, parameter.DefaultValue == null, false, false, GetDefaultValue(parameter));
+                var property = new InputModelProperty(parameter.Name, null, description, inputParameter!.Type, parameter.DefaultValue == null, false, false, inputParameter.DefaultValue);
                 properties.Add(property);
             }
             var defaultNamespace = $"{MgmtContext.Context.DefaultNamespace}.Models";
@@ -65,7 +64,6 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 false,
                 true);
             return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.TypeFactory);
-            ;
         }
 
         protected override bool EnsureShouldValidateParameter()
@@ -75,15 +73,6 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 return mgmtPackModel.Properties.Any(p => p.IsRequired);
             }
             return false;
-        }
-
-        private FormattableString? GetDefaultValue(Parameter parameter)
-        {
-            if (parameter.DefaultValue != null)
-            {
-                return parameter.DefaultValue?.GetConstantFormattable();
-            }
-            return null;
         }
     }
 }

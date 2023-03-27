@@ -231,7 +231,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var utf8JsonWriter = new CodeWriterDeclaration("writer");
             using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} {utf8JsonWriter:D})"))
             {
-                writer.WriteBodyBlock(JsonSerializationMethodsBuilder.SerializeObject(utf8JsonWriter, jsonSerialization));
+                writer.WriteBodyBlock(JsonSerializationMethodsBuilder.WriteObject(utf8JsonWriter, jsonSerialization));
             }
             writer.Line();
         }

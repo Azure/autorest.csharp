@@ -409,7 +409,7 @@ namespace AutoRest.CSharp.Output.Models
                         }
                         // Skip the convenience-only parameters
                         break;
-                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters: [var convenienceParameter], IntermediateModel: null }:
+                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters: [var convenienceParameter], IntermediateSerialization: null }:
                         if (protocolParameter == KnownParameters.RequestContext && convenienceParameter == KnownParameters.CancellationTokenParameter)
                         {
                             conversions.Add(Declare.RequestContext(Instantiate.IfCancellationTokenCanBeCanceled(), out var requestContext));
@@ -433,11 +433,17 @@ namespace AutoRest.CSharp.Output.Models
                             arguments.Add(new ParameterReference(protocolParameter));
                         }
                         break;
-                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateModel: {} model }:
-                        conversions.Add(Declare.NewModelInstance(model, parameterLink.ConvenienceParameters, out var variable));
-                        arguments.Add(CreateConversion(new VariableReference(variable), model.Type, protocolParameter.Type));
+                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateSerialization: {} serializations }:
+                        conversions.Add(new MethodBodyBlocks
+                        (
+                            Declare.New(typeof(Utf8JsonRequestContent), protocolParameter.Name, out var requestContent),
+                            LineCall.Utf8JsonWriter.WriteStartObject(new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter))),
+                            JsonSerializationMethodsBuilder.WritProperties(new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter)), serializations),
+                            LineCall.Utf8JsonWriter.WriteEndObject(new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter)))
+                        ));
+                        arguments.Add(requestContent);
                         break;
-                    case { ProtocolParameters.Count: > 1, ConvenienceParameters.Count: 1, IntermediateModel: {} model }:
+                    case { ProtocolParameters.Count: > 1, ConvenienceParameters.Count: 1, IntermediateSerialization: {} serializations }:
                         // Grouping is not supported yet
                         break;
                 }
@@ -458,7 +464,7 @@ namespace AutoRest.CSharp.Output.Models
                     case { ProtocolParameters.Count: 0 }:
                         // Skip the convenience-only parameters
                         break;
-                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters: [var convenienceParameter], IntermediateModel: null }:
+                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters: [var convenienceParameter], IntermediateSerialization: null }:
                         if (protocolParameter == KnownParameters.RequestContext && convenienceParameter == KnownParameters.CancellationTokenParameter)
                         {
                             conversions.Add(Declare.RequestContext(Call.FromCancellationToken(), out var requestContext));
@@ -473,11 +479,20 @@ namespace AutoRest.CSharp.Output.Models
                             arguments.Add(new ParameterReference(protocolParameter));
                         }
                         break;
-                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateModel: {} model }:
-                        conversions.Add(Declare.NewModelInstance(model, parameterLink.ConvenienceParameters, out var variable));
-                        arguments.Add(CreateConversion(new VariableReference(variable), model.Type, protocolParameter.Type));
+                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateSerialization: {} serializations }:
+                        var conversion = new MethodBodyBlocks
+                        (
+                            Declare.New(typeof(Utf8JsonRequestContent), protocolParameter.Name, out var requestContent),
+                            Declare.Var("writer", new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter)), out var utf8JsonWriter),
+                            LineCall.Utf8JsonWriter.WriteStartObject(utf8JsonWriter),
+                            JsonSerializationMethodsBuilder.WritProperties(utf8JsonWriter, serializations),
+                            LineCall.Utf8JsonWriter.WriteEndObject(utf8JsonWriter)
+                        );
+
+                        conversions.Add(conversion);
+                        arguments.Add(requestContent);
                         break;
-                    case { ProtocolParameters.Count: > 1, ConvenienceParameters.Count: 1, IntermediateModel: {} model }:
+                    case { ProtocolParameters.Count: > 1, ConvenienceParameters.Count: 1, IntermediateSerialization: {} model }:
                         // Grouping is not supported yet
                         break;
                 }

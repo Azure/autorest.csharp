@@ -64,26 +64,19 @@ namespace AutoRest.CSharp.Common.Input
             return property;
         }
 
-        private static FormattableString? GetDefaultValue(InputType propertyType)
+        private static InputConstant? GetDefaultValue(InputType propertyType)
         {
             if (propertyType is not InputLiteralType literalType)
             {
                 return null;
             }
 
-            return literalType.LiteralValueType switch
+            if (literalType.LiteralValueType is InputPrimitiveType { Kind: InputTypeKind.Boolean or InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128 or InputTypeKind.Int32 or InputTypeKind.Int64 or InputTypeKind.String } primitiveType)
             {
-                InputPrimitiveType primitiveType => primitiveType.Kind switch
-                {
-                    InputTypeKind.Boolean => $"{literalType.Value.ToString()!.ToLower()}",
-                    InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128
-                        or InputTypeKind.Int32 or InputTypeKind.Int64 => $"{literalType.Value.ToString()}",
-                    InputTypeKind.String => $"\"{(literalType.Value).ToString()}\"",
-                    _ => throw new Exception($"Unsupported literal value type: {primitiveType}"),
+                return new InputConstant(literalType.Value, primitiveType);
+            }
 
-                },
-                _ => throw new Exception($"Unsupported literal value type: {literalType.LiteralValueType}"),
-            };
+            throw new Exception($"Unsupported literal value type: {literalType.LiteralValueType}");
         }
     }
 }

@@ -29,44 +29,48 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory)
         {
             var name = operationParameter.Name.ToVariableName();
-            var skipUrlEncoding = operationParameter.SkipUrlEncoding;
+            var description = CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()));
             var requestLocation = operationParameter.Location;
+            var isRequired = operationParameter.IsRequired;
 
-            var defaultValue = operationParameter.DefaultValue != null
-                ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type))
-                : (Constant?)null;
+            CreateDefaultValue(ref type, typeFactory, operationParameter.DefaultValue, operationParameter.Kind, isRequired, out Constant? defaultValue, out FormattableString? initializer);
 
-            var initializer = (FormattableString?)null;
-
-            if (defaultValue != null && operationParameter.Kind != InputOperationParameterKind.Constant && !TypeFactory.CanBeInitializedInline(type, defaultValue))
-            {
-                initializer = type.GetParameterInitializer(defaultValue.Value);
-                type = type.WithNullable(true);
-                defaultValue = Constant.Default(type);
-            }
-
-            if (!operationParameter.IsRequired && defaultValue == null)
-            {
-                type = type.WithNullable(true);
-                defaultValue = Constant.Default(type);
-            }
-
-            var validation = operationParameter.IsRequired && initializer == null
-                ? GetValidation(type, requestLocation, skipUrlEncoding)
+            var validation = isRequired && initializer == null
+                ? GetValidation(type, requestLocation, operationParameter.SkipUrlEncoding)
                 : Validation.None;
 
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString())),
+                description,
                 inputType,
                 defaultValue,
                 validation,
                 initializer,
                 IsApiVersionParameter: operationParameter.IsApiVersion,
                 IsResourceIdentifier: operationParameter.IsResourceParameter,
-                SkipUrlEncoding: skipUrlEncoding,
+                SkipUrlEncoding: operationParameter.SkipUrlEncoding,
                 RequestLocation: requestLocation);
+        }
+
+        public static void CreateDefaultValue(ref CSharpType type, TypeFactory typeFactory, InputConstant? inputDefaultValue, InputOperationParameterKind parameterKind, bool isRequired, out Constant? defaultValue, out FormattableString? initializer)
+        {
+            defaultValue = inputDefaultValue != null ? BuilderHelpers.ParseConstant(inputDefaultValue.Value, typeFactory.CreateType(inputDefaultValue.Type)) : null;
+
+            initializer = null;
+
+            if (defaultValue != null && parameterKind != InputOperationParameterKind.Constant && !TypeFactory.CanBeInitializedInline(type, defaultValue))
+            {
+                initializer = type.GetParameterInitializer(defaultValue.Value);
+                type = type.WithNullable(true);
+                defaultValue = Constant.Default(type);
+            }
+
+            if (!isRequired && defaultValue == null)
+            {
+                type = type.WithNullable(true);
+                defaultValue = Constant.Default(type);
+            }
         }
 
         public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values)

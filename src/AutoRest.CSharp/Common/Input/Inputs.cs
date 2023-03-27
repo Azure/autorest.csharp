@@ -193,7 +193,7 @@ namespace AutoRest.CSharp.Common.Input
 
     internal record InputDictionaryType(string Name, InputType KeyType, InputType ValueType, bool IsNullable = false) : InputType(Name, IsNullable) { }
 
-    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, FormattableString? DefaultValue = null)
+    internal record InputModelProperty(string Name, string? SerializedName, string Description, InputType Type, bool IsRequired, bool IsReadOnly, bool IsDiscriminator, InputConstant? DefaultValue = null)
     {
     }
 

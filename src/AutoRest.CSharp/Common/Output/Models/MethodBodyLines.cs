@@ -93,6 +93,18 @@ namespace AutoRest.CSharp.Output.Models
 
         public static class Declare
         {
+            public static MethodBodyLine Var(string name, ValueExpression value, out CodeWriterDeclaration declaration)
+            {
+                declaration = new CodeWriterDeclaration(name);
+                return new DeclareVariableLine(null, declaration, value);
+            }
+
+            public static MethodBodyLine New(CSharpType type, string name, out CodeWriterDeclaration declaration)
+            {
+                declaration = new CodeWriterDeclaration(name);
+                return new DeclareVariableLine(null, declaration, ValueExpressions.New(type));
+            }
+
             public static MethodBodyLine Default(CSharpType type, string name, out CodeWriterDeclaration declaration)
             {
                 declaration = new CodeWriterDeclaration(name);
@@ -135,16 +147,6 @@ namespace AutoRest.CSharp.Output.Models
             {
                 requestContext = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
                 return new DeclareVariableLine(KnownParameters.RequestContext.Type, requestContext, value);
-            }
-
-            public static MethodBodyLine NewModelInstance(ModelTypeProvider model, IEnumerable<Parameter> arguments, out CodeWriterDeclaration variable)
-                => NewModelInstance(model, arguments.Select(p => new ParameterReference(p)).ToList(), out variable);
-
-            public static MethodBodyLine NewModelInstance(ModelTypeProvider model, IReadOnlyList<ValueExpression> arguments, out CodeWriterDeclaration variable)
-            {
-                variable = new CodeWriterDeclaration(model.Type.Name.ToVariableName());
-                var newInstance = new NewInstanceExpression(model.Type, arguments);
-                return new DeclareVariableLine(model.Type, variable, newInstance);
             }
         }
     }

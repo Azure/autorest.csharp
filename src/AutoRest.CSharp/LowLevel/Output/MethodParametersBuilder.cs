@@ -8,10 +8,9 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Builders;
-using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -20,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class MethodParametersBuilder
     {
-        internal sealed record ParameterLink(IReadOnlyList<Parameter> ConvenienceParameters, IReadOnlyList<Parameter> ProtocolParameters, ModelTypeProvider? IntermediateModel)
+        internal sealed record ParameterLink(IReadOnlyList<Parameter> ConvenienceParameters, IReadOnlyList<Parameter> ProtocolParameters, IReadOnlyList<JsonPropertySerialization>? IntermediateSerialization)
         {
             public ParameterLink(Parameter parameter) : this(new[]{parameter}, new[]{parameter}, null){}
             public ParameterLink(Parameter convenienceParameters, Parameter protocolParameters) : this(new[]{convenienceParameters}, new[]{protocolParameters}, null){}
@@ -275,10 +274,9 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             _createMessageParameters.Add(protocolMethodParameter);
-            if (inputParameter is { Kind: InputOperationParameterKind.Spread, Type: InputModelType })
+            if (inputParameter is { Kind: InputOperationParameterKind.Spread })
             {
-                var model = (ModelTypeProvider)_typeFactory.CreateType(inputParameter.Type).Implementation;
-                _parameterLinks.Add(new ParameterLink(model.SerializationConstructorSignature.Parameters, new[]{protocolMethodParameter}, model));
+                _parameterLinks.Add(CreateSpreadParameterLink(inputParameter, protocolMethodParameter));
             }
             else
             {
@@ -289,6 +287,49 @@ namespace AutoRest.CSharp.Output.Models
                 var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, convenienceMethodParameterType, _typeFactory);
                 _parameterLinks.Add(new ParameterLink(convenienceMethodParameter, protocolMethodParameter));
             }
+        }
+
+        private ParameterLink CreateSpreadParameterLink(InputParameter inputParameter, Parameter protocolMethodParameter)
+        {
+            var model = inputParameter.Type as InputModelType;
+            var requiredConvenienceMethodParameters = new List<Parameter>();
+            var optionalConvenienceMethodParameters = new List<Parameter>();
+            var intermediateSerialization = new List<JsonPropertySerialization>();
+            while (model is not null)
+            {
+                foreach (var property in model.Properties)
+                {
+                    if (property is { IsReadOnly: true, IsDiscriminator: false, Type: not InputLiteralType })
+                    {
+                        continue;
+                    }
+
+                    var convenienceMethodParameterType = TypeFactory.GetInputType(_typeFactory.CreateType(property.Type));
+                    Parameter.CreateDefaultValue(ref convenienceMethodParameterType, _typeFactory, property.DefaultValue, InputOperationParameterKind.Method, property.IsRequired, out var defaultValue, out var initializer);
+                    var validation = property.IsRequired && initializer == null ? Parameter.GetValidation(convenienceMethodParameterType, inputParameter.Location, false) : Validation.None;
+                    var parameter = new Parameter(property.Name, property.Description, convenienceMethodParameterType, defaultValue, validation, initializer);
+
+                    var serializedName = property.SerializedName ?? property.Name;
+                    var optionalViaNullability = parameter is { IsOptionalInSignature: true, Type.IsNullable: false } && !TypeFactory.IsCollectionType(parameter.Type);
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, parameter.Type, false);
+                    var propertySerialization = new JsonPropertySerialization(string.Empty, parameter.Name, serializedName, parameter.Type, parameter.Type, valueSerialization, !parameter.IsOptionalInSignature, false, false, optionalViaNullability);
+
+                    if (parameter.IsOptionalInSignature)
+                    {
+                        optionalConvenienceMethodParameters.Add(parameter);
+                    }
+                    else
+                    {
+                        requiredConvenienceMethodParameters.Add(parameter);
+                    }
+                    intermediateSerialization.Add(propertySerialization);
+                }
+
+                model = model.BaseModel;
+            }
+
+            var convenienceMethodParameters = requiredConvenienceMethodParameters.Concat(optionalConvenienceMethodParameters).ToArray();
+            return new ParameterLink(convenienceMethodParameters, new[] { protocolMethodParameter }, intermediateSerialization);
         }
 
         private void AddContentTypeRequestParameter(InputParameter inputParameter, IReadOnlyList<string> requestMediaTypes)
