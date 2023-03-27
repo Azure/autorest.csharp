@@ -49,7 +49,8 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string _protocolMethodName;
         private readonly string? _summary;
         private readonly string? _description;
-        private readonly MethodSignatureModifiers _accessibility;
+        private readonly MethodSignatureModifiers _protocolAccessibility;
+        private readonly MethodSignatureModifiers _convenienceAccessibility;
 
         public InputOperation Operation { get; }
 
@@ -73,12 +74,13 @@ namespace AutoRest.CSharp.Output.Models
             _requestParts = requestParts;
             _summary = operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null;
             _description = BuilderHelpers.EscapeXmlDescription(operation.Description);
-            _accessibility = GetAccessibility(operation.Accessibility);
             _headAsBoolean = operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
             _isLongRunning = operation.LongRunning is not null;
             _isPageable = operation.Paging is not null;
 
             _protocolMethodName = operation.Name.ToCleanName();
+            _protocolAccessibility = operation.GenerateProtocolMethod ? GetAccessibility(operation.Accessibility) : Internal;
+            _convenienceAccessibility = GetAccessibility(operation.Accessibility);
             _createMessageMethodName = $"Create{_protocolMethodName}Request";
             _createNextPageMessageMethodName = operation.Paging is { NextLinkOperation: { } nextLinkOperation }
                 ? $"Create{nextLinkOperation.Name.ToCleanName()}Request"
@@ -143,7 +145,7 @@ namespace AutoRest.CSharp.Output.Models
                 return false;
             }
 
-            if (_responseType is null && _convenienceMethodParameters.Where(p => p != KnownParameters.CancellationTokenParameter)
+            if (Operation.GenerateProtocolMethod && _responseType is null && _convenienceMethodParameters.Where(p => p != KnownParameters.CancellationTokenParameter)
                     .SequenceEqual(_protocolMethodParameters.Where(p => p != KnownParameters.RequestContext)))
             {
                 return false;
@@ -204,7 +206,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private Method BuildProtocolMethod(bool async)
         {
-            var signature = CreateMethodSignature(_protocolMethodName, _protocolMethodParameters, _protocolMethodReturnType);
+            var signature = CreateMethodSignature(_protocolMethodName, _protocolAccessibility, _protocolMethodParameters, _protocolMethodReturnType);
             var body = CreateMethodBody(new MethodBodyBlocks(CreateProtocolMethodBody(async).ToList()), signature, !_isPageable || _isLongRunning);
             return new Method(signature.WithAsync(async), body);
         }
@@ -219,18 +221,18 @@ namespace AutoRest.CSharp.Output.Models
                     : $"{methodName.LastWordToSingular()}Values";
             }
 
-            var signature = CreateMethodSignature(methodName, _convenienceMethodParameters, _convenienceMethodReturnType);
+            var signature = CreateMethodSignature(methodName, _convenienceAccessibility, _convenienceMethodParameters, _convenienceMethodReturnType);
             var body = CreateMethodBody(CreateConvenienceMethodMainBodyBlock(methodName, async), signature, !_isPageable && needNameChange);
             return new Method(signature.WithAsync(async), body);
         }
 
-        private MethodSignature CreateMethodSignature(string name, IReadOnlyList<Parameter> parameters, CSharpType returnType)
+        private MethodSignature CreateMethodSignature(string name, MethodSignatureModifiers accessibility, IReadOnlyList<Parameter> parameters, CSharpType returnType)
         {
             var attributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : null;
 
-            return new MethodSignature(name, _summary, _description, _accessibility | Virtual, returnType, null, parameters, attributes);
+            return new MethodSignature(name, _summary, _description, accessibility | Virtual, returnType, null, parameters, attributes);
         }
 
         private MethodBody CreateMethodBody(MethodBodyBlock mainBodyBlock, MethodSignature signature, bool addDiagnosticScope)
