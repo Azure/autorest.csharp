@@ -202,7 +202,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public virtual ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
-            throw new InvalidOperationException($"Tried to get a branch resource type from a type provider that doesn't support it {GetType().Name}.");
+            throw new InvalidOperationException($"Tried to get a branch resource type from a type provider that doesn't support in {GetType().Name}.");
         }
 
         private IEnumerable<Resource>? _childResources;

@@ -36,8 +36,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             }
         }
 
-        [TestCase(typeof(TypeOneResourceExtensionClient), "_typeOneCommonRestClient", typeof(CommonRestOperations), "_typeOneCommonClientDiagnostics")]
-        [TestCase(typeof(TypeTwoResourceExtensionClient), "_typeTwoCommonRestClient", typeof(CommonRestOperations), "_typeTwoCommonClientDiagnostics")]
+        [TestCase(typeof(TypeOneResourceExtension), "_typeOneCommonRestClient", typeof(CommonRestOperations), "_typeOneCommonClientDiagnostics")]
+        [TestCase(typeof(TypeTwoResourceExtension), "_typeTwoCommonRestClient", typeof(CommonRestOperations), "_typeTwoCommonClientDiagnostics")]
         public void ValidateFieldsInExtensionClients(Type extensionClient, string restOperationName, Type restOperationType, string clientDiagnosticName)
         {
             var fields = extensionClient.GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
