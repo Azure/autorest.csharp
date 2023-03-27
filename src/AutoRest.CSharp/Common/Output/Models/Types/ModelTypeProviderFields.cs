@@ -41,14 +41,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (discriminator is not null)
             {
                 var originalFieldName = discriminator.FirstCharToUpperCase();
-                var inputModelProperty = new InputModelProperty(originalFieldName, discriminator, "Discriminator", InputPrimitiveType.String, true, true, true);
+                var inputModelProperty = new InputModelProperty(discriminator, discriminator, "Discriminator", InputPrimitiveType.String, true, false, true);
                 var field = CreateField(originalFieldName, typeof(string), inputModel, inputModelProperty);
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
                 var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type);
                 parametersToFields[parameter.Name] = field;
                 serializationParameters.Add(parameter);
-                publicParameters.Add(parameter);
             }
 
             foreach (var inputModelProperty in inputModel.Properties)
@@ -101,8 +100,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
             var propertyIsLiteralType = inputModelProperty.Type is InputLiteralType;
             var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsLiteralType || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
+            var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
 
-            var fieldModifiers = propertyIsReadOnly ? (propertyIsLiteralType ? Internal : Public ) | ReadOnly : Public;
+            FieldModifiers fieldModifiers = propertyIsLiteralType || propertyIsDiscriminator
+                ? Internal : Public;
+            if (propertyIsReadOnly)
+                fieldModifiers |= ReadOnly;
 
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(fieldName);
             declaration.SetActualName(fieldName);

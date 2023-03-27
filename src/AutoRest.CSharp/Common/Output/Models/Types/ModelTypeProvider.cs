@@ -283,17 +283,17 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.InitializationConstructor;
 
-            return new ObjectTypeConstructor(InitializationConstructorSignature, GetPropertyInitializers(InitializationConstructorSignature.Parameters), baseCtor);
+            return new ObjectTypeConstructor(InitializationConstructorSignature, GetPropertyInitializers(InitializationConstructorSignature.Parameters, true), baseCtor);
         }
 
         protected override ObjectTypeConstructor BuildSerializationConstructor()
         {
             ObjectTypeConstructor? baseCtor = GetBaseObjectType()?.SerializationConstructor;
 
-            return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(SerializationConstructorSignature.Parameters), baseCtor);
+            return new ObjectTypeConstructor(SerializationConstructorSignature, GetPropertyInitializers(SerializationConstructorSignature.Parameters, false), baseCtor);
         }
 
-        private ObjectPropertyInitializer[] GetPropertyInitializers(IReadOnlyList<Parameter> parameters)
+        private ObjectPropertyInitializer[] GetPropertyInitializers(IReadOnlyList<Parameter> parameters, bool includeDiscriminator)
         {
             List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
 
@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in Properties)
             {
-                ReferenceOrConstant? initializationValue;
+                ReferenceOrConstant? initializationValue = null;
                 Constant? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
@@ -338,8 +338,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
                 else
                 {
-                    initializationValue = null;// need to get discriminator value from here GetPropertyDefaultValue(property);
-
                     if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
                     {
                         initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
@@ -352,7 +350,23 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
+            if (Discriminator?.Value != null && includeDiscriminator)
+            {
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, Discriminator.Value.Value));
+            }
+
             return defaultCtorInitializers.ToArray();
+        }
+
+        private ReferenceOrConstant? GetPropertyDefaultValue(ObjectTypeProperty property)
+        {
+            if (property == Discriminator?.Property &&
+                Discriminator.Value != null)
+            {
+                return Discriminator.Value;
+            }
+
+            return null;
         }
 
         protected override CSharpType? CreateInheritedType()

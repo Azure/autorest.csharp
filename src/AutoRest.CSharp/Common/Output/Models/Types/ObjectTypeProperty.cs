@@ -58,7 +58,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 IsRequired,
                 valueType: ValueType,
                 optionalViaNullability: OptionalViaNullability,
-                inputModelProperty: InputModelProperty, true);
+                inputModelProperty: InputModelProperty,
+                isFlattenedProperty: true);
         }
 
         public FormattableString? DefaultValue { get; }
