@@ -4,7 +4,7 @@ info: !Info
   title: ComputeManagementClient
 schemas: !Schemas 
   booleans:
-    - !BooleanSchema &ref_33
+    - !BooleanSchema &ref_35
       type: boolean
       apiVersions:
         - !ApiVersion 
@@ -14,6 +14,18 @@ schemas: !Schemas
           name: Boolean
           description: ''
       protocol: !Protocols {}
+  numbers:
+    - !NumberSchema &ref_1
+      type: integer
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      precision: 32
+      language: !Languages 
+        default:
+          name: IntConstant
+          description: A constant based on integer
+      protocol: !Protocols {}
   strings:
     - !StringSchema &ref_0
       type: string
@@ -22,7 +34,7 @@ schemas: !Schemas
           name: String
           description: simple string
       protocol: !Protocols {}
-    - !StringSchema &ref_1
+    - !StringSchema &ref_2
       type: string
       apiVersions:
         - !ApiVersion 
@@ -32,7 +44,7 @@ schemas: !Schemas
           name: String
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_3
+    - !StringSchema &ref_4
       type: string
       apiVersions:
         - !ApiVersion 
@@ -42,7 +54,7 @@ schemas: !Schemas
           name: ResourceId
           description: Resource Id
       protocol: !Protocols {}
-    - !StringSchema &ref_4
+    - !StringSchema &ref_5
       type: string
       apiVersions:
         - !ApiVersion 
@@ -52,7 +64,7 @@ schemas: !Schemas
           name: ResourceName
           description: Resource name
       protocol: !Protocols {}
-    - !StringSchema &ref_5
+    - !StringSchema &ref_6
       type: string
       apiVersions:
         - !ApiVersion 
@@ -62,7 +74,7 @@ schemas: !Schemas
           name: ResourceType
           description: Resource type
       protocol: !Protocols {}
-    - !StringSchema &ref_6
+    - !StringSchema &ref_7
       type: string
       apiVersions:
         - !ApiVersion 
@@ -72,7 +84,7 @@ schemas: !Schemas
           name: ResourceLocation
           description: Resource location
       protocol: !Protocols {}
-    - !StringSchema &ref_17
+    - !StringSchema &ref_19
       type: string
       apiVersions:
         - !ApiVersion 
@@ -83,7 +95,7 @@ schemas: !Schemas
           description: The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines.
       protocol: !Protocols {}
   sealedChoices:
-    - !SealedChoiceSchema &ref_10
+    - !SealedChoiceSchema &ref_12
       choices:
         - !ChoiceValue 
           value: Http
@@ -107,7 +119,7 @@ schemas: !Schemas
           name: ProtocolTypes
           description: 'Specifies the protocol of WinRM listener. <br><br> Possible values are: <br>**http** <br><br> **https**'
       protocol: !Protocols {}
-    - !SealedChoiceSchema &ref_11
+    - !SealedChoiceSchema &ref_13
       choices:
         - !ChoiceValue 
           value: AutoLogon
@@ -132,7 +144,7 @@ schemas: !Schemas
           description: 'Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon.'
       protocol: !Protocols {}
   constants:
-    - !ConstantSchema &ref_19
+    - !ConstantSchema &ref_21
       type: constant
       value: !ConstantValue 
         value: '2020-06-01'
@@ -142,7 +154,7 @@ schemas: !Schemas
           name: ApiVersion20200601
           description: Api Version (2020-06-01)
       protocol: !Protocols {}
-    - !ConstantSchema &ref_23
+    - !ConstantSchema &ref_25
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -152,20 +164,33 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_9
+    - !ConstantSchema &ref_10
       type: constant
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       value: !ConstantValue 
-        value: OobeSystem
+        value: default
       valueType: *ref_0
       language: !Languages 
         default:
-          name: PassNames
-          description: The pass name. Currently, the only allowable value is OobeSystem.
+          name: StringConstant
+          description: A constant based on string, the only allowable value is default.
       protocol: !Protocols {}
-    - !ConstantSchema &ref_24
+    - !ConstantSchema &ref_11
+      type: constant
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      value: !ConstantValue 
+        value: 0
+      valueType: *ref_1
+      language: !Languages 
+        default:
+          name: IntConstant
+          description: A constant based on integer
+      protocol: !Protocols {}
+    - !ConstantSchema &ref_26
       type: constant
       value: !ConstantValue 
         value: application/json
@@ -175,7 +200,7 @@ schemas: !Schemas
           name: Accept
           description: 'Accept: application/json'
       protocol: !Protocols {}
-    - !ConstantSchema &ref_37
+    - !ConstantSchema &ref_39
       type: constant
       apiVersions:
         - !ApiVersion 
@@ -189,43 +214,43 @@ schemas: !Schemas
           description: ''
       protocol: !Protocols {}
   dictionaries:
-    - !DictionarySchema &ref_7
+    - !DictionarySchema &ref_8
       type: dictionary
-      elementType: *ref_1
+      elementType: *ref_2
       language: !Languages 
         default:
           name: ResourceTags
           description: Resource tags
       protocol: !Protocols {}
-    - !DictionarySchema &ref_15
+    - !DictionarySchema &ref_17
       type: dictionary
-      elementType: *ref_1
+      elementType: *ref_2
       language: !Languages 
         default:
           name: UpdateResourceTags
           description: Resource tags
       protocol: !Protocols {}
   objects:
-    - !ObjectSchema &ref_2
+    - !ObjectSchema &ref_3
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       parents: !Relations 
         all:
-          - !ObjectSchema &ref_8
+          - !ObjectSchema &ref_9
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             children: !Relations 
               all:
-                - *ref_2
+                - *ref_3
               immediate:
-                - *ref_2
+                - *ref_3
             properties:
               - !Property 
-                schema: *ref_3
+                schema: *ref_4
                 readOnly: true
                 required: false
                 serializedName: id
@@ -235,7 +260,7 @@ schemas: !Schemas
                     description: Resource Id
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_4
+                schema: *ref_5
                 readOnly: true
                 required: false
                 serializedName: name
@@ -245,7 +270,7 @@ schemas: !Schemas
                     description: Resource name
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_5
+                schema: *ref_6
                 readOnly: true
                 required: false
                 serializedName: type
@@ -255,7 +280,7 @@ schemas: !Schemas
                     description: Resource type
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_6
+                schema: *ref_7
                 required: true
                 serializedName: location
                 language: !Languages 
@@ -264,7 +289,7 @@ schemas: !Schemas
                     description: Resource location
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_7
+                schema: *ref_8
                 required: false
                 serializedName: tags
                 language: !Languages 
@@ -286,26 +311,35 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_8
+          - *ref_9
       properties:
         - !Property 
-          schema: !ObjectSchema &ref_12
+          schema: !ObjectSchema &ref_14
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             properties:
               - !Property 
-                schema: *ref_9
+                schema: *ref_10
                 required: true
-                serializedName: passName
+                serializedName: requiredStringConstant
                 language: !Languages 
                   default:
-                    name: passName
-                    description: The pass name. Currently, the only allowable value is OobeSystem.
+                    name: requiredStringConstant
+                    description: A constant based on string, the only allowable value is default.
                 protocol: !Protocols {}
               - !Property 
-                schema: *ref_10
+                schema: *ref_11
+                required: true
+                serializedName: requiredIntConstant
+                language: !Languages 
+                  default:
+                    name: requiredIntConstant
+                    description: A constant based on integer
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_12
                 required: false
                 serializedName: protocol
                 language: !Languages 
@@ -334,22 +368,30 @@ schemas: !Schemas
               description: Describes Protocol and thumbprint of Windows Remote Management listener
           protocol: !Protocols {}
         - !Property 
-          schema: !ObjectSchema &ref_13
+          schema: !ObjectSchema &ref_15
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             properties:
               - !Property 
-                schema: *ref_9
-                serializedName: passName
+                schema: *ref_10
+                serializedName: optionalStringConstant
                 language: !Languages 
                   default:
-                    name: passName
-                    description: The pass name. Currently, the only allowable value is OobeSystem.
+                    name: optionalStringConstant
+                    description: A constant based on string, the only allowable value is default.
                 protocol: !Protocols {}
               - !Property 
                 schema: *ref_11
+                serializedName: optionalIntConstant
+                language: !Languages 
+                  default:
+                    name: optionalIntConstant
+                    description: A constant based on integer
+                protocol: !Protocols {}
+              - !Property 
+                schema: *ref_13
                 serializedName: settingName
                 language: !Languages 
                   default:
@@ -391,29 +433,29 @@ schemas: !Schemas
           description: Describes a Virtual Machine.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_12
-    - *ref_13
-    - *ref_8
-    - !ObjectSchema &ref_14
+    - *ref_14
+    - *ref_15
+    - *ref_9
+    - !ObjectSchema &ref_16
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       parents: !Relations 
         all:
-          - !ObjectSchema &ref_16
+          - !ObjectSchema &ref_18
             type: object
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
             children: !Relations 
               all:
-                - *ref_14
+                - *ref_16
               immediate:
-                - *ref_14
+                - *ref_16
             properties:
               - !Property 
-                schema: *ref_15
+                schema: *ref_17
                 serializedName: tags
                 language: !Languages 
                   default:
@@ -431,10 +473,10 @@ schemas: !Schemas
                 namespace: ''
             protocol: !Protocols {}
         immediate:
-          - *ref_16
+          - *ref_18
       properties:
         - !Property 
-          schema: *ref_12
+          schema: *ref_14
           flattenedNames:
             - properties
             - listener
@@ -445,7 +487,7 @@ schemas: !Schemas
               description: Describes Protocol and thumbprint of Windows Remote Management listener
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_13
+          schema: *ref_15
           flattenedNames:
             - properties
             - content
@@ -467,20 +509,20 @@ schemas: !Schemas
           description: Describes a Virtual Machine Update.
           namespace: ''
       protocol: !Protocols {}
-    - *ref_16
-    - !ObjectSchema &ref_41
+    - *ref_18
+    - !ObjectSchema &ref_43
       type: object
       apiVersions:
         - !ApiVersion 
           version: '2020-06-01'
       properties:
         - !Property 
-          schema: !ArraySchema &ref_18
+          schema: !ArraySchema &ref_20
             type: array
             apiVersions:
               - !ApiVersion 
                 version: '2020-06-01'
-            elementType: *ref_2
+            elementType: *ref_3
             language: !Languages 
               default:
                 name: OptionalMachineListResultValue
@@ -494,7 +536,7 @@ schemas: !Schemas
               description: The list of virtual machines.
           protocol: !Protocols {}
         - !Property 
-          schema: *ref_17
+          schema: *ref_19
           required: false
           serializedName: nextLink
           language: !Languages 
@@ -513,10 +555,10 @@ schemas: !Schemas
           namespace: ''
       protocol: !Protocols {}
   arrays:
-    - *ref_18
+    - *ref_20
 globalParameters:
-  - !Parameter &ref_22
-    schema: *ref_1
+  - !Parameter &ref_24
+    schema: *ref_2
     implementation: Client
     required: true
     extensions:
@@ -529,7 +571,7 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: path
-  - !Parameter &ref_20
+  - !Parameter &ref_22
     schema: *ref_0
     clientDefaultValue: https://management.azure.com
     implementation: Client
@@ -545,8 +587,8 @@ globalParameters:
     protocol: !Protocols 
       http: !HttpParameter 
         in: uri
-  - !Parameter &ref_21
-    schema: *ref_19
+  - !Parameter &ref_23
+    schema: *ref_21
     implementation: Client
     origin: modelerfour:synthesized/api-version
     required: true
@@ -568,9 +610,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_20
-          - !Parameter &ref_27
-            schema: *ref_1
+          - *ref_22
+          - !Parameter &ref_29
+            schema: *ref_2
             implementation: Method
             required: true
             language: !Languages 
@@ -581,8 +623,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_28
-            schema: *ref_1
+          - !Parameter &ref_30
+            schema: *ref_2
             implementation: Method
             required: true
             language: !Languages 
@@ -593,13 +635,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_21
-          - *ref_22
+          - *ref_23
+          - *ref_24
         requestMediaTypes:
-          application/json: !Request &ref_26
+          application/json: !Request &ref_28
             parameters:
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_25
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -611,8 +653,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_25
-                schema: *ref_2
+              - !Parameter &ref_27
+                schema: *ref_3
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -624,7 +666,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_24
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -637,7 +679,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_25
+              - *ref_27
             language: !Languages 
               default:
                 name: ''
@@ -651,13 +693,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_26
-        signatureParameters:
-          - *ref_27
           - *ref_28
+        signatureParameters:
+          - *ref_29
+          - *ref_30
         responses:
           - !SchemaResponse 
-            schema: *ref_2
+            schema: *ref_3
             language: !Languages 
               default:
                 name: ''
@@ -670,7 +712,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_2
+            schema: *ref_3
             language: !Languages 
               default:
                 name: ''
@@ -695,9 +737,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_20
-          - !Parameter &ref_31
-            schema: *ref_1
+          - *ref_22
+          - !Parameter &ref_33
+            schema: *ref_2
             implementation: Method
             required: true
             language: !Languages 
@@ -708,8 +750,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_32
-            schema: *ref_1
+          - !Parameter &ref_34
+            schema: *ref_2
             implementation: Method
             required: true
             language: !Languages 
@@ -720,13 +762,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_21
-          - *ref_22
+          - *ref_23
+          - *ref_24
         requestMediaTypes:
-          application/json: !Request &ref_30
+          application/json: !Request &ref_32
             parameters:
               - !Parameter 
-                schema: *ref_23
+                schema: *ref_25
                 implementation: Method
                 origin: modelerfour:synthesized/content-type
                 required: true
@@ -738,8 +780,8 @@ operationGroups:
                 protocol: !Protocols 
                   http: !HttpParameter 
                     in: header
-              - !Parameter &ref_29
-                schema: *ref_14
+              - !Parameter &ref_31
+                schema: *ref_16
                 implementation: Method
                 required: true
                 language: !Languages 
@@ -751,7 +793,7 @@ operationGroups:
                     in: body
                     style: json
               - !Parameter 
-                schema: *ref_24
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -764,7 +806,7 @@ operationGroups:
                   http: !HttpParameter 
                     in: header
             signatureParameters:
-              - *ref_29
+              - *ref_31
             language: !Languages 
               default:
                 name: ''
@@ -778,13 +820,13 @@ operationGroups:
                   - application/json
                 uri: '{$host}'
         requests:
-          - *ref_30
-        signatureParameters:
-          - *ref_31
           - *ref_32
+        signatureParameters:
+          - *ref_33
+          - *ref_34
         responses:
           - !SchemaResponse 
-            schema: *ref_2
+            schema: *ref_3
             language: !Languages 
               default:
                 name: ''
@@ -797,7 +839,7 @@ operationGroups:
                 statusCodes:
                   - '200'
           - !SchemaResponse 
-            schema: *ref_2
+            schema: *ref_3
             language: !Languages 
               default:
                 name: ''
@@ -822,9 +864,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_20
-          - !Parameter &ref_34
-            schema: *ref_1
+          - *ref_22
+          - !Parameter &ref_36
+            schema: *ref_2
             implementation: Method
             required: true
             language: !Languages 
@@ -835,8 +877,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_35
-            schema: *ref_1
+          - !Parameter &ref_37
+            schema: *ref_2
             implementation: Method
             required: true
             language: !Languages 
@@ -847,8 +889,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_36
-            schema: *ref_33
+          - !Parameter &ref_38
+            schema: *ref_35
             implementation: Method
             language: !Languages 
               default:
@@ -858,8 +900,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_21
-          - *ref_22
+          - *ref_23
+          - *ref_24
         requests:
           - !Request 
             language: !Languages 
@@ -872,9 +914,9 @@ operationGroups:
                 method: delete
                 uri: '{$host}'
         signatureParameters:
-          - *ref_34
-          - *ref_35
           - *ref_36
+          - *ref_37
+          - *ref_38
         responses:
           - !Response 
             language: !Languages 
@@ -916,9 +958,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_20
-          - !Parameter &ref_38
-            schema: *ref_1
+          - *ref_22
+          - !Parameter &ref_40
+            schema: *ref_2
             implementation: Method
             required: true
             language: !Languages 
@@ -929,8 +971,8 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - !Parameter &ref_39
-            schema: *ref_1
+          - !Parameter &ref_41
+            schema: *ref_2
             implementation: Method
             required: true
             language: !Languages 
@@ -942,7 +984,7 @@ operationGroups:
               http: !HttpParameter 
                 in: path
           - !Parameter 
-            schema: *ref_37
+            schema: *ref_39
             implementation: Method
             language: !Languages 
               default:
@@ -952,13 +994,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: query
-          - *ref_21
-          - *ref_22
+          - *ref_23
+          - *ref_24
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_24
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -981,11 +1023,11 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_38
-          - *ref_39
+          - *ref_40
+          - *ref_41
         responses:
           - !SchemaResponse 
-            schema: *ref_2
+            schema: *ref_3
             language: !Languages 
               default:
                 name: ''
@@ -1008,9 +1050,9 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_20
-          - !Parameter &ref_40
-            schema: *ref_1
+          - *ref_22
+          - !Parameter &ref_42
+            schema: *ref_2
             implementation: Method
             required: true
             language: !Languages 
@@ -1021,13 +1063,13 @@ operationGroups:
             protocol: !Protocols 
               http: !HttpParameter 
                 in: path
-          - *ref_21
-          - *ref_22
+          - *ref_23
+          - *ref_24
         requests:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_24
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1050,10 +1092,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_40
+          - *ref_42
         responses:
           - !SchemaResponse 
-            schema: *ref_41
+            schema: *ref_43
             language: !Languages 
               default:
                 name: ''
@@ -1081,11 +1123,11 @@ operationGroups:
           - !ApiVersion 
             version: '2020-06-01'
         parameters:
-          - *ref_20
-          - *ref_21
           - *ref_22
-          - !Parameter &ref_42
-            schema: *ref_1
+          - *ref_23
+          - *ref_24
+          - !Parameter &ref_44
+            schema: *ref_2
             implementation: Method
             language: !Languages 
               default:
@@ -1099,7 +1141,7 @@ operationGroups:
           - !Request 
             parameters:
               - !Parameter 
-                schema: *ref_24
+                schema: *ref_26
                 implementation: Method
                 origin: modelerfour:synthesized/accept
                 required: true
@@ -1122,10 +1164,10 @@ operationGroups:
                 method: get
                 uri: '{$host}'
         signatureParameters:
-          - *ref_42
+          - *ref_44
         responses:
           - !SchemaResponse 
-            schema: *ref_41
+            schema: *ref_43
             language: !Languages 
               default:
                 name: ''
