@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -139,13 +138,21 @@ namespace Spread
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Response> SpreadAliasAsync(string name, int age, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
-            Response response = await SpreadAliasAsync(spreadAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAliasAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -154,13 +161,21 @@ namespace Spread
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Response SpreadAlias(string name, int age, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
-            Response response = SpreadAlias(spreadAliasRequest.ToRequestContent(), context);
+            Response response = SpreadAlias(content, context);
             return response;
         }
 
@@ -221,15 +236,22 @@ namespace Spread
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Response> SpreadMultiTargetAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
-            Response response = await SpreadMultiTargetAliasAsync(id, top, spreadMultiTargetAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadMultiTargetAliasAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -240,15 +262,22 @@ namespace Spread
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Response SpreadMultiTargetAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
-            Response response = SpreadMultiTargetAlias(id, top, spreadMultiTargetAliasRequest.ToRequestContent(), context);
+            Response response = SpreadMultiTargetAlias(id, top, content, context);
             return response;
         }
 
@@ -409,15 +438,22 @@ namespace Spread
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age);
-            Response response = await SpreadAliasWithSpreadAliasAsync(id, top, spreadAliasWithSpreadAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAliasWithSpreadAliasAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -428,15 +464,22 @@ namespace Spread
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Response SpreadAliasWithSpreadAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age);
-            Response response = SpreadAliasWithSpreadAlias(id, top, spreadAliasWithSpreadAliasRequest.ToRequestContent(), context);
+            Response response = SpreadAliasWithSpreadAlias(id, top, content, context);
             return response;
         }
 
@@ -508,28 +551,69 @@ namespace Spread
         /// <param name="elements"> optional array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(items, nameof(items));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            if (Optional.IsDefined(color))
             {
-                Color = color,
-                Age = age
-            };
-            if (elements != null)
-            {
-                foreach (var value in elements)
+                if (color != null)
                 {
-                    spreadAliasWithOptionalPropsRequest.Elements.Add(value);
+                    writer.WritePropertyName("color"u8);
+                    writer.WriteStringValue(color);
+                }
+                else
+                {
+                    writer.WriteNull("color");
                 }
             }
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest0 = spreadAliasWithOptionalPropsRequest;
-            Response response = await SpreadAliasWithOptionalPropsAsync(id, top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context).ConfigureAwait(false);
+            if (Optional.IsDefined(age))
+            {
+                if (age != null)
+                {
+                    writer.WritePropertyName("age"u8);
+                    writer.WriteNumberValue(age.Value);
+                }
+                else
+                {
+                    writer.WriteNull("age");
+                }
+            }
+            writer.WritePropertyName("items"u8);
+            writer.WriteStartArray();
+            foreach (var item in items)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(elements))
+            {
+                if (elements != null)
+                {
+                    writer.WritePropertyName("elements"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in elements)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("elements");
+                }
+            }
+            writer.WriteEndObject();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SpreadAliasWithOptionalPropsAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -543,28 +627,69 @@ namespace Spread
         /// <param name="elements"> optional array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         public virtual Response SpreadAliasWithOptionalProps(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(items, nameof(items));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            if (Optional.IsDefined(color))
             {
-                Color = color,
-                Age = age
-            };
-            if (elements != null)
-            {
-                foreach (var value in elements)
+                if (color != null)
                 {
-                    spreadAliasWithOptionalPropsRequest.Elements.Add(value);
+                    writer.WritePropertyName("color"u8);
+                    writer.WriteStringValue(color);
+                }
+                else
+                {
+                    writer.WriteNull("color");
                 }
             }
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest0 = spreadAliasWithOptionalPropsRequest;
-            Response response = SpreadAliasWithOptionalProps(id, top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context);
+            if (Optional.IsDefined(age))
+            {
+                if (age != null)
+                {
+                    writer.WritePropertyName("age"u8);
+                    writer.WriteNumberValue(age.Value);
+                }
+                else
+                {
+                    writer.WriteNull("age");
+                }
+            }
+            writer.WritePropertyName("items"u8);
+            writer.WriteStartArray();
+            foreach (var item in items)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(elements))
+            {
+                if (elements != null)
+                {
+                    writer.WritePropertyName("elements"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in elements)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("elements");
+                }
+            }
+            writer.WriteEndObject();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SpreadAliasWithOptionalProps(id, top, content, context);
             return response;
         }
 

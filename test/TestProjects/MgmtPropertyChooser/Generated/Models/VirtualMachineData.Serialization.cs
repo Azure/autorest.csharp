@@ -52,7 +52,7 @@ namespace MgmtPropertyChooser
             if (Optional.IsDefined(IdentityV3))
             {
                 writer.WritePropertyName("identityV3"u8);
-                var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
+                var serializeOptions = new JsonSerializerOptions { Converters = { new Azure.ResourceManager.Models.ManagedServiceIdentityTypeV3Converter() } };
                 JsonSerializer.Serialize(writer, IdentityV3, serializeOptions);
             }
             if (Optional.IsCollectionDefined(Zones))
@@ -216,7 +216,7 @@ namespace MgmtPropertyChooser
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
+                    var serializeOptions = new JsonSerializerOptions { Converters = { new Azure.ResourceManager.Models.ManagedServiceIdentityTypeV3Converter() } };
                     identityV3 = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText(), serializeOptions);
                     continue;
                 }
