@@ -7,6 +7,7 @@ using System.Text;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
@@ -34,11 +35,15 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         private XmlObjectSerialization? _xmlSerialization;
         public XmlObjectSerialization? XmlSerialization => HasXmlSerialization ? _xmlSerialization ??= EnsureXmlSerialization() : null;
 
+        private IEnumerable<Method>? _methods;
+        public IEnumerable<Method> Methods => _methods ??= BuildSerializationMethods();
+
         private bool? _hasJsonSerialization;
         private bool HasJsonSerialization => _hasJsonSerialization ??= EnsureHasJsonSerialization();
 
         private bool? _hasXmlSerialization;
         private bool HasXmlSerialization => _hasXmlSerialization ??= EnsureHasXmlSerialization();
+
 
         public abstract ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false);
 
@@ -48,5 +53,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected abstract bool EnsureIncludeDeserializer();
         protected abstract JsonObjectSerialization? EnsureJsonSerialization();
         protected abstract XmlObjectSerialization? EnsureXmlSerialization();
+        protected abstract IEnumerable<Method> BuildSerializationMethods();
     }
 }

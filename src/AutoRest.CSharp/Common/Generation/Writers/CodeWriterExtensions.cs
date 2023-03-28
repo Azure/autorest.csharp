@@ -170,11 +170,15 @@ namespace AutoRest.CSharp.Generation.Writers
             var method = methodBase as MethodSignature;
             if (method != null)
             {
-                writer
-                    .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
-                    .AppendRawIf("override ", methodBase.Modifiers.HasFlag(Override))
-                    .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
-                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
+                if (method.ExplicitInterface is null)
+                {
+                    writer
+                        .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
+                        .AppendRawIf("override ", methodBase.Modifiers.HasFlag(Override))
+                        .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static));
+                }
+
+                writer.AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
 
                 if (method.ReturnType != null)
                 {
@@ -183,6 +187,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 else
                 {
                     writer.AppendRaw("void ");
+                }
+
+                if (method.ExplicitInterface is not null)
+                {
+                    writer.Append($"{method.ExplicitInterface}.");
                 }
             }
 
@@ -254,14 +263,18 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
         {
-            return writer
-                .WriteXmlDocumentationSummary($"{methodBase.SummaryText}")
-                .WriteMethodDocumentationSignature(methodBase);
+            if (methodBase.SummaryText is { } summaryText)
+            {
+                writer.WriteXmlDocumentationSummary($"{summaryText}");
+            }
+
+            return writer.WriteMethodDocumentationSignature(methodBase);
         }
 
         public static CodeWriter WriteMethodDocumentationSignature(this CodeWriter writer, MethodSignatureBase methodBase)
         {
-            writer.WriteXmlDocumentationParameters(methodBase.Parameters);
+            writer.WriteXmlDocumentationParameters(methodBase.Modifiers.HasFlag(Public) ? methodBase.Parameters : methodBase.Parameters.Where(p => p.FormattableDescription is not null));
+
             writer.WriteXmlDocumentationRequiredParametersException(methodBase.Parameters);
             writer.WriteXmlDocumentationNonEmptyParametersException(methodBase.Parameters);
             if (methodBase is MethodSignature { ReturnDescription: { } } method)
@@ -418,7 +431,8 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    writer.WriteDeserializationForMethods(jsonSerialization, async, variable, responseVariable, type is not null && type.Equals(typeof(BinaryData)));
+                    bool isBinaryData = type is not null && type.Equals(typeof(BinaryData));
+                    writer.WriteBodyBlock(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, new FormattableStringToExpression(responseVariable), isBinaryData));
                     break;
                 case XmlElementSerialization xmlSerialization:
                     writer.WriteDeserializationForMethods(xmlSerialization, variable, responseVariable);
@@ -611,6 +625,15 @@ namespace AutoRest.CSharp.Generation.Writers
             return scope;
         }
 
+        public static void WriteMethod(this CodeWriter writer, Method method)
+        {
+            using (writer.WriteMethodDeclaration(method.Signature))
+            {
+                writer.WriteBody(method.Body);
+            }
+            writer.Line();
+        }
+
         public static CodeWriter WriteBody(this CodeWriter writer, MethodBody methodBody)
         {
             foreach (var block in methodBody.Blocks)
@@ -621,9 +644,9 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static void WriteBodyBlock(this CodeWriter writer, MethodBodyBlock bodyBlock)
+        public static void WriteBodyBlock(this CodeWriter writer, MethodBodyStatement bodyStatement)
         {
-            switch (bodyBlock)
+            switch (bodyStatement)
             {
                 case ParameterValidationBlock parameterValidation:
                     writer.WriteParametersValidation(parameterValidation.Parameters);
@@ -631,10 +654,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 case DiagnosticScopeMethodBodyBlock diagnosticScope:
                     using (writer.WriteDiagnosticScope(diagnosticScope.Diagnostic, diagnosticScope.ClientDiagnosticsReference))
                     {
-                        WriteBodyBlock(writer, diagnosticScope.InnerBlock);
+                        WriteBodyBlock(writer, diagnosticScope.InnerStatement);
                     }
                     break;
-                case IfElseBlock(var condition, var ifBlock, var elseBlock):
+                case IfElseStatement(var condition, var ifBlock, var elseBlock):
                     writer.Append($"if(");
                     writer.WriteValueExpression(condition);
                     writer.Line($")");
@@ -651,7 +674,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
                     break;
-                case IfElsePreprocessorBlock(var condition, var ifBlock, var elseBlock):
+                case IfElsePreprocessorDirective(var condition, var ifBlock, var elseBlock):
                     writer.Line($"#if {condition}");
                     writer.AppendRaw("\t\t\t\t");
                     writer.WriteBodyBlock(ifBlock);
@@ -662,7 +685,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     writer.LineRaw("#endif");
                     break;
-                case ForeachBlock(var item, var enumerable, var body):
+                case ForeachStatement(var item, var enumerable, var body):
                     using (writer.AmbientScope())
                     {
                         writer.Append($"foreach(var {item:D} in ");
@@ -676,7 +699,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 case MethodBodyLine line:
                     writer.WriteLine(line);
                     break;
-                case MethodBodyBlocks(var blocks):
+                case MethodBodyStatements(var blocks):
                     foreach (var block in blocks)
                     {
                         writer.WriteBodyBlock(block);

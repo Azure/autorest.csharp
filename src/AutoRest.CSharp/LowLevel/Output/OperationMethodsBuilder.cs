@@ -207,7 +207,7 @@ namespace AutoRest.CSharp.Output.Models
         private Method BuildProtocolMethod(bool async)
         {
             var signature = CreateMethodSignature(_protocolMethodName, _protocolAccessibility, _protocolMethodParameters, _protocolMethodReturnType);
-            var body = CreateMethodBody(new MethodBodyBlocks(CreateProtocolMethodBody(async).ToList()), signature, !_isPageable || _isLongRunning);
+            var body = CreateMethodBody(CreateProtocolMethodBody(async).AsStatement(), signature, !_isPageable || _isLongRunning);
             return new Method(signature.WithAsync(async), body);
         }
 
@@ -222,7 +222,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var signature = CreateMethodSignature(methodName, _convenienceAccessibility, _convenienceMethodParameters, _convenienceMethodReturnType);
-            var body = CreateMethodBody(CreateConvenienceMethodMainBodyBlock(methodName, async), signature, !_isPageable && needNameChange);
+            var body = CreateMethodBody(CreateConvenienceMethodLogic(methodName, async), signature, !_isPageable && needNameChange);
             return new Method(signature.WithAsync(async), body);
         }
 
@@ -235,13 +235,13 @@ namespace AutoRest.CSharp.Output.Models
             return new MethodSignature(name, _summary, _description, accessibility | Virtual, returnType, null, parameters, attributes);
         }
 
-        private MethodBody CreateMethodBody(MethodBodyBlock mainBodyBlock, MethodSignature signature, bool addDiagnosticScope)
+        private MethodBody CreateMethodBody(MethodBodyStatement methodBodyLogic, MethodSignature signature, bool addDiagnosticScope)
         {
             if (addDiagnosticScope)
             {
-                mainBodyBlock = new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{signature.Name}"), _fields.ClientDiagnosticsProperty, mainBodyBlock);
+                methodBodyLogic = new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{signature.Name}"), _fields.ClientDiagnosticsProperty, methodBodyLogic);
             }
-            return new MethodBody(new[] { new ParameterValidationBlock(signature.Parameters), mainBodyBlock });
+            return new MethodBody(new[] { new ParameterValidationBlock(signature.Parameters), methodBodyLogic });
         }
 
         private IEnumerable<MethodBodyLine> CreateProtocolMethodBody(bool async)
@@ -319,54 +319,59 @@ namespace AutoRest.CSharp.Output.Models
             yield return Return(Call.PageableHelpers.CreatePageable(message, createNextPageRequest, clientDiagnostics, pipeline, typeof(BinaryData), longRunning.FinalStateVia, scopeName, itemPropertyName, nextLinkName, requestContext, async));
         }
 
-        private MethodBodyBlock CreateConvenienceMethodMainBodyBlock(string methodName, bool async)
+        private MethodBodyStatement CreateConvenienceMethodLogic(string methodName, bool async)
             => (Operation.Paging, Operation.LongRunning) switch
             {
                 { Paging: { } paging, LongRunning: null } => CreatePagingConvenienceMethodLines(methodName, paging, async),
-                { Paging: null, LongRunning: not null }   => CreateLroConvenienceMethodLines(methodName, async),
-                _                                         => CreateConvenienceMethodLines(async)
+                { Paging: null, LongRunning: not null }   => CreateLroConvenienceMethodLogic(methodName, async).AsStatement(),
+                _                                         => CreateConvenienceMethodLogic(async).AsStatement()
             };
 
-        private MethodBodyBlock CreateConvenienceMethodLines(bool async)
+        private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(bool async)
         {
-            var parameterConversions = CreateProtocolMethodArguments(_parameterLinks, out var protocolMethodArguments);
-            var declareResponse = Declare.Response(_protocolMethodReturnType, Call.ProtocolMethod(_protocolMethodName, protocolMethodArguments, async), out var response);
+            var protocolMethodArguments = new List<ValueExpression>();
+            var parameterConversions = AddProtocolMethodArguments(_parameterLinks, protocolMethodArguments).AsStatement();
+
+            yield return parameterConversions;
+            yield return Declare.Response(_protocolMethodReturnType, Call.ProtocolMethod(_protocolMethodName, protocolMethodArguments, async), out var response);
+
             if (_responseType is null)
             {
-                return new MethodBodyBlocks(parameterConversions, declareResponse, Return(response));
+                yield return Return(response);
             }
-
-            if (_responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true }})
+            else if (_responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true }})
             {
-                var returnTypedResponse = Return(Call.Response.FromValue(_responseType, response));
-                return new MethodBodyBlocks(parameterConversions, declareResponse, returnTypedResponse);
+                yield return Return(Call.Response.FromValue(_responseType, response));
             }
+            else
+            {
+                var firstResponseBodyType = Operation.Responses.Where(r => r is { IsErrorResponse: false, BodyType: {} }).Select(r => r.BodyType).Distinct().First();
+                var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType!, _responseType, false);
 
-            var firstResponseBodyType = Operation.Responses.Where(r => r is { IsErrorResponse: false, BodyType: {} }).Select(r => r.BodyType).Distinct().First();
-            var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType!, _responseType, false);
-
-            var declareVariable = Declare.Default(_responseType, "value", out var value);
-            var deserializationBlock = JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, response, false);
-            var returnResponse = Return(Call.Response.FromValue(value, response));
-
-            return new MethodBodyBlocks(parameterConversions, declareResponse, declareVariable, deserializationBlock, returnResponse);
+                yield return Declare.Default(_responseType, "value", out var value);
+                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, response, false);
+                yield return Return(Call.Response.FromValue(value, response));
+            }
         }
 
-        private MethodBodyBlock CreateLroConvenienceMethodLines(string methodName, bool async)
+        private IEnumerable<MethodBodyStatement> CreateLroConvenienceMethodLogic(string methodName, bool async)
         {
-            var parameterConversions = CreateProtocolMethodArguments(_parameterLinks, out var protocolMethodArguments);
+            var protocolMethodArguments = new List<ValueExpression>();
+            var parameterConversions = AddProtocolMethodArguments(_parameterLinks, protocolMethodArguments).AsStatement();
+            yield return parameterConversions;
+
             if (_responseType == null)
             {
-                return new MethodBodyBlocks(parameterConversions, Return(Call.ProtocolMethod(_protocolMethodName, protocolMethodArguments, async)));
+                yield return Return(Call.ProtocolMethod(_protocolMethodName, protocolMethodArguments, async));
             }
-
-            var declareResponse = Declare.Response(_protocolMethodReturnType, Call.ProtocolMethod(_protocolMethodName, protocolMethodArguments, async), out var response);
-            var returnTypedResponse = Return(Call.ProtocolOperationHelpers.Convert(_responseType, response, _fields.ClientDiagnosticsProperty.Declaration, $"{_clientName}.{methodName}"));
-
-            return new MethodBodyBlocks(parameterConversions, declareResponse, returnTypedResponse);
+            else
+            {
+                yield return Declare.Response(_protocolMethodReturnType, Call.ProtocolMethod(_protocolMethodName, protocolMethodArguments, async), out var response);
+                yield return Return(Call.ProtocolOperationHelpers.Convert(_responseType, response, _fields.ClientDiagnosticsProperty.Declaration, $"{_clientName}.{methodName}"));
+            }
         }
 
-        private MethodBodyBlock CreatePagingConvenienceMethodLines(string methodName, OperationPaging paging, bool async)
+        private MethodBodyStatement CreatePagingConvenienceMethodLines(string methodName, OperationPaging paging, bool async)
         {
             ValueExpression clientDiagnostics = _restClient != null
                 ? new FormattableStringToExpression($"_{KnownParameters.ClientDiagnostics.Name}")
@@ -377,7 +382,8 @@ namespace AutoRest.CSharp.Output.Models
             var itemPropertyName = paging.ItemName ?? "value";
             var nextLinkName = paging.NextLinkName;
 
-            var parameterConversions = CreatePageableMethodArguments(_parameterLinks, out var createRequestArguments, out var requestContextVariable);
+            var createRequestArguments = new List<ValueExpression>();
+            var parameterConversions = AddPageableMethodArguments(_parameterLinks, createRequestArguments, out var requestContextVariable).AsStatement();
             var firstPageRequestLine = Declare.FirstPageRequest(_restClient, _createMessageMethodName, createRequestArguments, out var createFirstPageRequest);
 
             CodeWriterDeclaration? createNextPageRequest = null;
@@ -391,14 +397,13 @@ namespace AutoRest.CSharp.Output.Models
             var returnLine = Return(Call.PageableHelpers.CreatePageable(createFirstPageRequest, createNextPageRequest, clientDiagnostics, pipeline, _responseType, scopeName, itemPropertyName, nextLinkName, requestContextVariable, async));
 
             return nextPageRequestLine is not null
-                ? new MethodBodyBlocks(parameterConversions, firstPageRequestLine, nextPageRequestLine, returnLine)
-                : new MethodBodyBlocks(parameterConversions, firstPageRequestLine, returnLine);
+                ? new MethodBodyStatements(parameterConversions, firstPageRequestLine, nextPageRequestLine, returnLine)
+                : new MethodBodyStatements(parameterConversions, firstPageRequestLine, returnLine);
         }
 
-        public static MethodBodyBlock CreatePageableMethodArguments(IReadOnlyList<MethodParametersBuilder.ParameterLink> parameters, out IReadOnlyList<ValueExpression> createRequestArguments, out ValueExpression? requestContextVariable)
+        public static IEnumerable<MethodBodyStatement> AddPageableMethodArguments(IReadOnlyList<MethodParametersBuilder.ParameterLink> parameters, List<ValueExpression> createRequestArguments, out ValueExpression? requestContextVariable)
         {
-            var conversions = new List<MethodBodyBlock>();
-            var arguments = new List<ValueExpression>();
+            var statements = new List<MethodBodyStatement>();
             requestContextVariable = null;
             foreach (var parameterLink in parameters)
             {
@@ -409,41 +414,39 @@ namespace AutoRest.CSharp.Output.Models
                         {
                             requestContextVariable = KnownParameters.CancellationTokenParameter;
                         }
-                        // Skip the convenience-only parameters
                         break;
                     case { ProtocolParameters: [var protocolParameter], ConvenienceParameters: [var convenienceParameter], IntermediateSerialization: null }:
                         if (protocolParameter == KnownParameters.RequestContext && convenienceParameter == KnownParameters.CancellationTokenParameter)
                         {
-                            conversions.Add(Declare.RequestContext(Instantiate.IfCancellationTokenCanBeCanceled(), out var requestContext));
+                            statements.Add(Declare.RequestContext(Instantiate.IfCancellationTokenCanBeCanceled(), out var requestContext));
                             requestContextVariable = new VariableReference(requestContext);
-                            arguments.Add(new VariableReference(requestContext));
+                            createRequestArguments.Add(new VariableReference(requestContext));
                         }
                         else if (convenienceParameter != protocolParameter)
                         {
                             var conversion = CreateConversion(convenienceParameter, protocolParameter.Type);
                             var argument = new CodeWriterDeclaration(protocolParameter.Name);
-                            conversions.Add(new DeclareVariableLine(protocolParameter.Type, argument, conversion));
-                            arguments.Add(new VariableReference(argument));
+                            statements.Add(new DeclareVariableLine(protocolParameter.Type, argument, conversion));
+                            createRequestArguments.Add(new VariableReference(argument));
                         }
                         else if (protocolParameter == KnownParameters.RequestContext)
                         {
                             requestContextVariable = new ParameterReference(protocolParameter);
-                            arguments.Add(requestContextVariable);
+                            createRequestArguments.Add(requestContextVariable);
                         }
                         else
                         {
-                            arguments.Add(new ParameterReference(protocolParameter));
+                            createRequestArguments.Add(new ParameterReference(protocolParameter));
                         }
                         break;
                     case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateSerialization: {} serializations }:
-                        conversions.Add(new MethodBodyBlocks
-                        (
-                            Declare.New(typeof(Utf8JsonRequestContent), protocolParameter.Name, out var requestContent),
-                            LineCall.Utf8JsonWriter.WriteStartObject(new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter))),
-                            JsonSerializationMethodsBuilder.WritProperties(new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter)), serializations),
-                            LineCall.Utf8JsonWriter.WriteEndObject(new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter)))
-                        ));
-                        arguments.Add(requestContent);
+                        statements.Add(Declare.New(typeof(Utf8JsonRequestContent), protocolParameter.Name, out var requestContent));
+                        statements.Add(Declare.Var("writer", new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter)), out var utf8JsonWriter));
+                        statements.Add(LineCall.Utf8JsonWriter.WriteStartObject(utf8JsonWriter));
+                        statements.Add(JsonSerializationMethodsBuilder.WritProperties(utf8JsonWriter, serializations).AsStatement());
+                        statements.Add(LineCall.Utf8JsonWriter.WriteEndObject(utf8JsonWriter));
+
+                        createRequestArguments.Add(requestContent);
                         break;
                     case { ProtocolParameters.Count: > 1, ConvenienceParameters.Count: 1, IntermediateSerialization: {} serializations }:
                         // Grouping is not supported yet
@@ -451,14 +454,11 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            createRequestArguments = arguments;
-            return new MethodBodyBlocks(conversions);
+            return statements;
         }
 
-        public static MethodBodyBlock CreateProtocolMethodArguments(IReadOnlyList<MethodParametersBuilder.ParameterLink> parameters, out IReadOnlyList<ValueExpression> protocolMethodArguments)
+        public static IEnumerable<MethodBodyStatement> AddProtocolMethodArguments(IReadOnlyList<MethodParametersBuilder.ParameterLink> parameters, List<ValueExpression> protocolMethodArguments)
         {
-            var conversions = new List<MethodBodyBlock>();
-            var arguments = new List<ValueExpression>();
             foreach (var parameterLink in parameters)
             {
                 switch (parameterLink)
@@ -469,39 +469,32 @@ namespace AutoRest.CSharp.Output.Models
                     case { ProtocolParameters: [var protocolParameter], ConvenienceParameters: [var convenienceParameter], IntermediateSerialization: null }:
                         if (protocolParameter == KnownParameters.RequestContext && convenienceParameter == KnownParameters.CancellationTokenParameter)
                         {
-                            conversions.Add(Declare.RequestContext(Call.FromCancellationToken(), out var requestContext));
-                            arguments.Add(new VariableReference(requestContext));
+                            yield return Declare.RequestContext(Call.FromCancellationToken(), out var requestContext);
+                            protocolMethodArguments.Add(new VariableReference(requestContext));
                         }
                         else if (convenienceParameter != protocolParameter)
                         {
-                            arguments.Add(CreateConversion(convenienceParameter, protocolParameter.Type));
+                            protocolMethodArguments.Add(CreateConversion(convenienceParameter, protocolParameter.Type));
                         }
                         else
                         {
-                            arguments.Add(new ParameterReference(protocolParameter));
+                            protocolMethodArguments.Add(new ParameterReference(protocolParameter));
                         }
                         break;
                     case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateSerialization: {} serializations }:
-                        var conversion = new MethodBodyBlocks
-                        (
-                            Declare.New(typeof(Utf8JsonRequestContent), protocolParameter.Name, out var requestContent),
-                            Declare.Var("writer", new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter)), out var utf8JsonWriter),
-                            LineCall.Utf8JsonWriter.WriteStartObject(utf8JsonWriter),
-                            JsonSerializationMethodsBuilder.WritProperties(utf8JsonWriter, serializations),
-                            LineCall.Utf8JsonWriter.WriteEndObject(utf8JsonWriter)
-                        );
+                        yield return Declare.New(typeof(Utf8JsonRequestContent), protocolParameter.Name, out var requestContent);
+                        yield return Declare.Var("writer", new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter)), out var utf8JsonWriter);
+                        yield return LineCall.Utf8JsonWriter.WriteStartObject(utf8JsonWriter);
+                        yield return JsonSerializationMethodsBuilder.WritProperties(utf8JsonWriter, serializations).AsStatement();
+                        yield return LineCall.Utf8JsonWriter.WriteEndObject(utf8JsonWriter);
 
-                        conversions.Add(conversion);
-                        arguments.Add(requestContent);
+                        protocolMethodArguments.Add(requestContent);
                         break;
                     case { ProtocolParameters.Count: > 1, ConvenienceParameters.Count: 1, IntermediateSerialization: {} model }:
                         // Grouping is not supported yet
                         break;
                 }
             }
-
-            protocolMethodArguments = arguments;
-            return new MethodBodyBlocks(conversions);
         }
 
         private static ValueExpression CreateConversion(Parameter fromParameter, CSharpType toType)

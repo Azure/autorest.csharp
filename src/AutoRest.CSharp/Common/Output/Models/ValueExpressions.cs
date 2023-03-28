@@ -27,6 +27,8 @@ namespace AutoRest.CSharp.Output.Models
 
         public static ValueExpression IsNull(ValueExpression value) => new BinaryOperatorExpression("==", value, Null);
         public static ValueExpression IsNotNull(ValueExpression value) => new BinaryOperatorExpression("!=", value, Null);
+        public static ValueExpression Or(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("||", left, right);
+        public static ValueExpression And(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("&&", left, right);
 
         public static ValueExpression GetResponseValue(CodeWriterDeclaration response) =>
             new MemberReference(new VariableReference(response), nameof(Response<object>.Value));
@@ -39,6 +41,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public static ValueExpression Default { get; } = new FormattableStringToExpression($"default");
         public static ValueExpression Null { get; } = new FormattableStringToExpression($"null");
+        public static ValueExpression This { get; } = new FormattableStringToExpression($"this");
 
         public static ValueExpression CheckNull(this Parameter parameter)
             => parameter.Type.IsNullable
@@ -63,6 +66,8 @@ namespace AutoRest.CSharp.Output.Models
             public static ValueExpression Instance(ValueExpression? instanceReference, string methodName, ValueExpression arg) => new InstanceMethodCallExpression(instanceReference, methodName, new[]{ arg }, false);
             public static ValueExpression Static(CSharpType? methodType, string methodName) => new StaticMethodCallExpression(methodType, methodName, Array.Empty<ValueExpression>());
             public static ValueExpression Static(CSharpType? methodType, string methodName, ValueExpression arg) => new StaticMethodCallExpression(methodType, methodName, new[]{ arg });
+            public static ValueExpression Extension(CSharpType? methodType, string methodName, ValueExpression instanceReference) => new StaticMethodCallExpression(methodType, methodName, new[]{ instanceReference }, CallAsExtension: true);
+            public static ValueExpression Extension(CSharpType? methodType, string methodName, ValueExpression instanceReference, ValueExpression arg) => new StaticMethodCallExpression(methodType, methodName, new[]{ instanceReference, arg }, CallAsExtension: true);
 
             public static ValueExpression FromCancellationToken() => new StaticMethodCallExpression(null, "FromCancellationToken", new[]{ new ParameterReference(KnownParameters.CancellationTokenParameter) });
 
@@ -162,10 +167,42 @@ namespace AutoRest.CSharp.Output.Models
 
             public static class JsonElement
             {
+                public static ValueExpression Clone(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.Clone));
                 public static ValueExpression EnumerateArray(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.EnumerateArray));
                 public static ValueExpression EnumerateObject(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.EnumerateObject));
-                public static ValueExpression GetString(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetString));
+                public static ValueExpression GetBoolean(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetBoolean));
+                public static ValueExpression GetBytesFromBase64(ValueExpression element, string? format) => Extension(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.GetBytesFromBase64), element, Literal(format));
+                public static ValueExpression GetChar(ValueExpression element) => Extension(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.GetChar), element);
+                public static ValueExpression GetDateTimeOffset(ValueExpression element, string? format) => Extension(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.GetDateTimeOffset), element, Literal(format));
+                public static ValueExpression GetDateTime(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetDateTime));
+                public static ValueExpression GetDecimal(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetDecimal));
+                public static ValueExpression GetDouble(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetDouble));
+                public static ValueExpression GetGuid(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetGuid));
+                public static ValueExpression GetInt16(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetInt16));
+                public static ValueExpression GetInt32(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetInt32));
+                public static ValueExpression GetInt64(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetInt64));
+                public static ValueExpression GetObject(ValueExpression element) => Extension(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.GetObject), element);
                 public static ValueExpression GetRawText(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetRawText));
+                public static ValueExpression GetSingle(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetSingle));
+                public static ValueExpression GetString(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetString));
+                public static ValueExpression GetTimeSpan(ValueExpression element, string? format) => Extension(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.GetTimeSpan), element, Literal(format));
+
+                public static ValueExpression TryGetProperty(ValueExpression element, string propertyName, out ValueExpression discriminator)
+                {
+                    discriminator = new CodeWriterDeclaration("discriminator");
+                    return Instance(element, nameof(System.Text.Json.JsonElement.TryGetProperty), Literal(propertyName));
+                }
+
+                public static ValueExpression ValueKindEqualsNull(ValueExpression element)
+                    => new BinaryOperatorExpression("==", new MemberReference(element, nameof(System.Text.Json.JsonElement.ValueKind)), new FormattableStringToExpression($"{typeof(System.Text.Json.JsonValueKind)}.Null"));
+
+                public static ValueExpression ValueKindEqualsString(ValueExpression element)
+                    => new BinaryOperatorExpression("==", new MemberReference(element, nameof(System.Text.Json.JsonElement.ValueKind)), new FormattableStringToExpression($"{typeof(System.Text.Json.JsonValueKind)}.String"));
+            }
+
+            public static class JsonProperty
+            {
+                public static ValueExpression NameEquals(ValueExpression element, string value) => Instance(element, nameof(System.Text.Json.JsonProperty.NameEquals), LiteralU8(value));
             }
 
             public static class JsonSerializer
@@ -183,6 +220,9 @@ namespace AutoRest.CSharp.Output.Models
             {
                 public static ValueExpression IsCollectionDefined(ValueExpression collection) => Static(typeof(Azure.Core.Optional), nameof(Azure.Core.Optional.IsCollectionDefined), collection);
                 public static ValueExpression IsDefined(ValueExpression value) => Static(typeof(Azure.Core.Optional), nameof(Azure.Core.Optional.IsDefined), value);
+                public static ValueExpression ToDictionary(ValueExpression dictionary) => Static(typeof(Azure.Core.Optional), nameof(Azure.Core.Optional.ToDictionary), dictionary);
+                public static ValueExpression ToList(ValueExpression collection) => Static(typeof(Azure.Core.Optional), nameof(Azure.Core.Optional.ToList), collection);
+                public static ValueExpression ToNullable(ValueExpression optional) => Static(typeof(Azure.Core.Optional), nameof(Azure.Core.Optional.ToNullable), optional);
             }
 
             public static class PageableHelpers

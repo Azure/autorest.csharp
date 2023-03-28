@@ -60,13 +60,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         foreach (var method in clientMethod.ConvenienceMethods)
                         {
                             WriteConvenienceMethodDocumentation(_writer, method.Signature);
-                            WriteMethod(_writer, method);
+                            _writer.WriteMethod(method);
                         }
 
                         WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, clientMethod.ProtocolMethods[0].Signature, true);
-                        WriteMethod(_writer, clientMethod.ProtocolMethods[0]);
+                        _writer.WriteMethod(clientMethod.ProtocolMethods[0]);
                         WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, clientMethod.ProtocolMethods[1].Signature, false);
-                        WriteMethod(_writer, clientMethod.ProtocolMethods[1]);
+                        _writer.WriteMethod(clientMethod.ProtocolMethods[1]);
                     }
 
                     WriteSubClientFactoryMethod();
@@ -95,17 +95,8 @@ namespace AutoRest.CSharp.Generation.Writers
             foreach (var protocolMethod in clientMethod.ProtocolMethods)
             {
                 WriteProtocolMethodDocumentation(writer, clientMethod, protocolMethod.Signature);
-                WriteMethod(writer, protocolMethod);
+                writer.WriteMethod(protocolMethod);
             }
-        }
-
-        private static void WriteMethod(CodeWriter writer, Method method)
-        {
-            using (writer.WriteMethodDeclaration(method.Signature))
-            {
-                writer.WriteBody(method.Body);
-            }
-            writer.Line();
         }
 
         private void WriteDPGIdentificationComment() => _writer.Line($"// Data plane generated {(_client.IsSubClient ? "sub-client" : "client")}.");

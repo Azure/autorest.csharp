@@ -22,9 +22,6 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class SerializationWriter
     {
-        public static readonly ModelWriter.MethodBodyImplementation JsonFromResponseMethod = WriteJsonFromResponseMethod;
-        public static readonly ModelWriter.MethodBodyImplementation JsonToRequestContentMethod = WriteJsonToRequestContentMethod;
-
         public void WriteSerialization(CodeWriter writer, TypeProvider schema)
         {
             switch (schema)
@@ -88,26 +85,10 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    if (jsonSerialization != null)
+                    foreach (var method in model.Methods)
                     {
-                        if (includeSerializer)
-                        {
-                            WriteJsonSerialize(writer, jsonSerialization);
-                        }
-
-                        if (includeDeserializer)
-                        {
-                            WriteJsonDeserialize(writer, declaration, jsonSerialization);
-                        }
-                    }
-
-                    foreach (var methodDefinition in model.Methods)
-                    {
-                        using (writer.WriteCommonMethod(methodDefinition.Signature, null, false, methodDefinition.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public)))
-                        {
-                            methodDefinition.BodyImplementation(writer, model);
-                        }
-                        writer.Line();
+                        writer.WriteMethodDocumentation(method.Signature);
+                        writer.WriteMethod(method);
                     }
 
                     if (jsonSerialization is { IncludeConverter: true })
@@ -179,78 +160,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteInitialization(v => writer.Line($"return {v};"), objectType, objectType.SerializationConstructor, initializers);
             }
             writer.Line();
-        }
-
-        private static void WriteJsonDeserialize(CodeWriter writer, TypeDeclarationOptions declaration, JsonObjectSerialization serialization)
-        {
-            var element = new CodeWriterDeclaration("element");
-            using (writer.Scope($"internal static {serialization.Type} Deserialize{declaration.Name}({typeof(JsonElement)} {element:D})"))
-            {
-                if (!serialization.Type.IsValueType) // only return null for reference type (e.g. no enum)
-                {
-                    using (writer.Scope($"if ({element}.{nameof(JsonElement.ValueKind)} == {typeof(JsonValueKind)}.Null)"))
-                    {
-                        writer.Line($"return null;");
-                    }
-                }
-
-                var discriminator = serialization.Discriminator;
-
-                if (discriminator is not null && discriminator.HasDescendants)
-                {
-                    using (writer.Scope($"if ({element}.TryGetProperty({discriminator.SerializedName:L}, out {typeof(JsonElement)} discriminator))"))
-                    {
-                        writer.Line($"switch (discriminator.GetString())");
-                        using (writer.Scope())
-                        {
-                            foreach (var implementation in discriminator.Implementations)
-                            {
-                                var returnImplementation = MethodBodyLines.Return(JsonSerializationMethodsBuilder.GetDeserializeImplementation(implementation.Type.Implementation, element, null));
-                                writer
-                                    .Append($"case {implementation.Key:L}: ")
-                                    .WriteLine(returnImplementation);
-                            }
-                        }
-                    }
-                }
-
-                if (discriminator is not null && !serialization.Type.HasParent && !serialization.Type.Equals(discriminator.DefaultObjectType.Type))
-                {
-                    writer.WriteLine(MethodBodyLines.Return(JsonSerializationMethodsBuilder.GetDeserializeImplementation(discriminator.DefaultObjectType.Type.Implementation, element, null)));
-                }
-                else
-                {
-                    writer.WriteObjectInitialization(serialization);
-                }
-            }
-            writer.Line();
-        }
-
-        private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization)
-        {
-            var utf8JsonWriter = new CodeWriterDeclaration("writer");
-            using (writer.Scope($"void {typeof(IUtf8JsonSerializable)}.{nameof(IUtf8JsonSerializable.Write)}({typeof(Utf8JsonWriter)} {utf8JsonWriter:D})"))
-            {
-                writer.WriteBodyBlock(JsonSerializationMethodsBuilder.WriteObject(utf8JsonWriter, jsonSerialization));
-            }
-            writer.Line();
-        }
-
-        private static void WriteJsonToRequestContentMethod(CodeWriter writer, ObjectType objectType)
-        {
-            var contentVariable = new CodeWriterDeclaration("content");
-            writer
-                .Line($"var {contentVariable:D} = new {typeof(Utf8JsonRequestContent)}();")
-                .Line($"{contentVariable:I}.{nameof(Utf8JsonRequestContent.JsonWriter)}.{nameof(Utf8JsonWriterExtensions.WriteObjectValue)}(this);")
-                .Line($"return {contentVariable:I};");
-        }
-
-        private static void WriteJsonFromResponseMethod(CodeWriter writer, ObjectType objectType)
-        {
-            var documentVariable = new CodeWriterDeclaration("document");
-            writer
-                .Line($"using var {documentVariable:D} = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}(response.{nameof(Response.Content)});")
-                .Line($"return Deserialize{objectType.Declaration.Name}({documentVariable:I}.{nameof(JsonDocument.RootElement)});");
         }
 
         public static void WriteEnumSerialization(CodeWriter writer, EnumType schema)

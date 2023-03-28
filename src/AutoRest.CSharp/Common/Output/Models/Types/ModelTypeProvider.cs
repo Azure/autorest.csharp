@@ -26,12 +26,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelTypeProvider : SerializableObjectType
     {
-        private static readonly Parameter[] _fromResponseParameters = { new Parameter("response", "The response to deserialize the model from.", new CSharpType(typeof(Response)), null, Validation.None, null) };
-        private MethodSignature FromResponseSignature => new MethodSignature("FromResponse", null, "Deserializes the model from a raw response.", GetFromResponseModifiers(), Type, null, _fromResponseParameters);
-
-        private static readonly Parameter[] _toRequestContentParameters = Array.Empty<Parameter>();
-        private MethodSignature ToRequestContentSignature => new MethodSignature("ToRequestContent", null, "Convert into a Utf8JsonRequestContent.", GetToRequestContentModifiers(), typeof(RequestContent), null, _toRequestContentParameters);
-
         private ModelTypeProviderFields? _fields;
         private ConstructorSignature? _publicConstructor;
         private ConstructorSignature? _serializationConstructor;
@@ -395,12 +389,28 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
-        protected override IEnumerable<ModelMethodDefinition> BuildMethods()
+        protected override IEnumerable<Method> BuildSerializationMethods()
         {
-            if (EnsureIncludeDeserializer())
-                yield return new ModelMethodDefinition(FromResponseSignature, SerializationWriter.JsonFromResponseMethod);
-            if (EnsureIncludeSerializer())
-                yield return new ModelMethodDefinition(ToRequestContentSignature, SerializationWriter.JsonToRequestContentMethod);
+            if (JsonSerialization is not { } serialization)
+            {
+                yield break;
+            }
+
+            if (IncludeSerializer)
+            {
+                yield return JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(serialization);
+            }
+
+            if (IncludeDeserializer)
+            {
+                yield return JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization);
+                yield return JsonSerializationMethodsBuilder.BuildFromResponse(Type, GetFromResponseModifiers());
+            }
+
+            if (IncludeSerializer)
+            {
+                yield return JsonSerializationMethodsBuilder.BuildToRequestContent(GetToRequestContentModifiers());
+            }
         }
 
         public override ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)

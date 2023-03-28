@@ -3,9 +3,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -20,7 +18,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeConstructor? _serializationConstructor;
         private ObjectTypeConstructor? _initializationConstructor;
         private string? _description;
-        private IEnumerable<ModelMethodDefinition>? _methods;
         private ObjectTypeDiscriminator? _discriminator;
 
         protected ObjectType(BuildContext context)
@@ -39,7 +36,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
         public ObjectTypeConstructor SerializationConstructor => _serializationConstructor ??= BuildSerializationConstructor();
-        public IEnumerable<ModelMethodDefinition> Methods => _methods ??= BuildMethods();
         public ObjectTypeDiscriminator? Discriminator => _discriminator ??= BuildDiscriminator();
 
         public ObjectTypeConstructor InitializationConstructor => _initializationConstructor ??= BuildInitializationConstructor();
@@ -52,11 +48,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected abstract IEnumerable<ObjectTypeProperty> BuildProperties();
         protected abstract string CreateDescription();
         public abstract bool IncludeConverter { get; }
-
-        protected virtual IEnumerable<ModelMethodDefinition> BuildMethods()
-        {
-            return Array.Empty<ModelMethodDefinition>();
-        }
 
         public IEnumerable<ObjectType> EnumerateHierarchy()
         {

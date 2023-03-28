@@ -21,6 +21,8 @@ namespace AutoRest.CSharp.Output.Models
         public static MethodBodyLine Return(CodeWriterDeclaration name) => new ReturnValueLine(new VariableReference(name));
         public static MethodBodyLine Return(ValueExpression value) => new ReturnValueLine(value);
 
+        public static MethodBodyStatement AsStatement(this IEnumerable<MethodBodyStatement> statements) => new MethodBodyStatements(statements.ToArray());
+
         public static class Assign
         {
             public static MethodBodyLine Value(CodeWriterDeclaration to, ValueExpression from) => new SetValueLine(to, from);
@@ -42,6 +44,12 @@ namespace AutoRest.CSharp.Output.Models
             public static class JsonElement
             {
                 public static MethodBodyLine WriteTo(ValueExpression jsonElement, ValueExpression writer) => new InstanceMethodCallLine(jsonElement, nameof(System.Text.Json.JsonElement.WriteTo), new[]{writer}, false);
+            }
+
+            public static class JsonProperty
+            {
+                public static MethodBodyLine ThrowNonNullablePropertyIsNull(ValueExpression jsonProperty)
+                    => new StaticMethodCallLine(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.ThrowNonNullablePropertyIsNull), new[]{jsonProperty}, CallAsExtension: true);
             }
 
             public static class JsonSerializer
@@ -152,22 +160,23 @@ namespace AutoRest.CSharp.Output.Models
     }
 
     internal record Method(MethodSignature Signature, MethodBody Body);
-    internal record MethodBody(IReadOnlyList<MethodBodyBlock> Blocks);
+    internal record MethodBody(IReadOnlyList<MethodBodyStatement> Blocks);
 
-    internal record MethodBodyBlock;
+    internal record MethodBodyStatement;
 
-    internal record ParameterValidationBlock(IReadOnlyList<Parameter> Parameters) : MethodBodyBlock;
-    internal record DiagnosticScopeMethodBodyBlock(Diagnostic Diagnostic, Reference ClientDiagnosticsReference, MethodBodyBlock InnerBlock) : MethodBodyBlock;
-    internal record TryCatchFinallyBlock(MethodBodyBlock Try, MethodBodyBlock? Catch, MethodBodyBlock? Finally) : MethodBodyBlock;
-    internal record IfElseBlock(ValueExpression Condition, MethodBodyBlock If, MethodBodyBlock? Else) : MethodBodyBlock;
-    internal record IfElsePreprocessorBlock(string Condition, MethodBodyBlock If, MethodBodyBlock? Else) : MethodBodyBlock;
-    internal record ForeachBlock(CodeWriterDeclaration Item, ValueExpression Enumerable, MethodBodyBlock Body) : MethodBodyBlock;
-    internal record MethodBodyBlocks(IReadOnlyList<MethodBodyBlock> Blocks) : MethodBodyBlock
+    internal record ParameterValidationBlock(IReadOnlyList<Parameter> Parameters) : MethodBodyStatement;
+    internal record DiagnosticScopeMethodBodyBlock(Diagnostic Diagnostic, Reference ClientDiagnosticsReference, MethodBodyStatement InnerStatement) : MethodBodyStatement;
+    internal record TryCatchFinallyStatement(MethodBodyStatement Try, MethodBodyStatement? Catch, MethodBodyStatement? Finally) : MethodBodyStatement;
+    internal record IfElseStatement(ValueExpression Condition, MethodBodyStatement If, MethodBodyStatement? Else) : MethodBodyStatement;
+    internal record SwitchStatement(ValueExpression MatchExpression, params MethodBodyStatement[] Statements) : MethodBodyStatement;
+    internal record IfElsePreprocessorDirective(string Condition, MethodBodyStatement If, MethodBodyStatement? Else) : MethodBodyStatement;
+    internal record ForeachStatement(CodeWriterDeclaration Item, ValueExpression Enumerable, MethodBodyStatement Body) : MethodBodyStatement;
+    internal record MethodBodyStatements(IReadOnlyList<MethodBodyStatement> Blocks) : MethodBodyStatement
     {
-        public MethodBodyBlocks(MethodBodyBlock firstBlock, params MethodBodyBlock[] blocks) : this(blocks.Prepend(firstBlock).ToArray()) {}
+        public MethodBodyStatements(MethodBodyStatement firstStatement, params MethodBodyStatement[] blocks) : this(blocks.Prepend(firstStatement).ToArray()) {}
     }
 
-    internal record MethodBodyLine : MethodBodyBlock;
+    internal record MethodBodyLine : MethodBodyStatement;
 
     internal record InstanceMethodCallLine(ValueExpression? InstanceReference, string MethodName, IReadOnlyList<ValueExpression> Arguments, bool CallAsAsync) : MethodBodyLine;
     internal record StaticMethodCallLine(CSharpType? MethodType, string MethodName, IReadOnlyList<ValueExpression> Arguments, IReadOnlyList<CSharpType>? TypeArguments = null, bool CallAsExtension = false, bool CallAsAsync = false) : MethodBodyLine;

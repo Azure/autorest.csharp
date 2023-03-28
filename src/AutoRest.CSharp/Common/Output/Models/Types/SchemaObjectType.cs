@@ -202,6 +202,24 @@ namespace AutoRest.CSharp.Output.Models.Types
             return null;
         }
 
+        protected override IEnumerable<Method> BuildSerializationMethods()
+        {
+            if (JsonSerialization is not { } serialization)
+            {
+                yield break;
+            }
+
+            if (IncludeSerializer)
+            {
+                yield return JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(serialization);
+            }
+
+            if (IncludeDeserializer)
+            {
+                yield return JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization);
+            }
+        }
+
         protected override ObjectTypeConstructor BuildInitializationConstructor()
         {
             List<Parameter> defaultCtorParameters = new List<Parameter>();
