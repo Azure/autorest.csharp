@@ -15,10 +15,15 @@ namespace MgmtOptionalConstant.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(PassName))
+            if (Optional.IsDefined(OptionalStringConstant))
             {
-                writer.WritePropertyName("passName"u8);
-                writer.WriteStringValue(PassName.Value.ToString());
+                writer.WritePropertyName("optionalStringConstant"u8);
+                writer.WriteStringValue(OptionalStringConstant.Value.ToString());
+            }
+            if (Optional.IsDefined(OptionalIntConstant))
+            {
+                writer.WritePropertyName("optionalIntConstant"u8);
+                writer.WriteStringValue(OptionalIntConstant.Value.ToString());
             }
             if (Optional.IsDefined(SettingName))
             {
@@ -34,18 +39,29 @@ namespace MgmtOptionalConstant.Models
             {
                 return null;
             }
-            Optional<PassName> passName = default;
+            Optional<StringConstant> optionalStringConstant = default;
+            Optional<IntConstant> optionalIntConstant = default;
             Optional<SettingName> settingName = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("passName"u8))
+                if (property.NameEquals("optionalStringConstant"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    passName = new PassName(property.Value.GetString());
+                    optionalStringConstant = new StringConstant(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("optionalIntConstant"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    optionalIntConstant = new IntConstant(property.Value.GetInt32());
                     continue;
                 }
                 if (property.NameEquals("settingName"u8))
@@ -59,7 +75,7 @@ namespace MgmtOptionalConstant.Models
                     continue;
                 }
             }
-            return new ModelWithOptionalConstant(Optional.ToNullable(passName), Optional.ToNullable(settingName));
+            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(settingName));
         }
     }
 }
