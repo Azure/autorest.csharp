@@ -40,6 +40,7 @@ namespace AutoRest.CSharp.Input
             public const string GenerateModelFactory = "generate-model-factory";
             public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
             public const string AdditionalIntrinsicTypesToTreatEmptyStringAsNull = "additional-intrinsic-types-to-treat-empty-string-as-null";
+            public const string PublicDiscriminatorProperty = "public-discriminator-property";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -65,6 +66,7 @@ namespace AutoRest.CSharp.Input
             bool skipSerializationFormatXml,
             bool disablePaginationTopRenaming,
             bool generateModelFactory,
+            bool publicDiscriminatorProperty,
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
             string? projectFolder,
@@ -88,6 +90,7 @@ namespace AutoRest.CSharp.Input
             Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
             GenerateModelFactory = generateModelFactory;
+            PublicDiscriminatorProperty = publicDiscriminatorProperty;
             UnreferencedTypesHandling = unreferencedTypesHandling;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
@@ -150,6 +153,9 @@ namespace AutoRest.CSharp.Input
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
         public static bool GenerateModelFactory { get; private set; }
+
+        public static bool PublicDiscriminatorProperty { get; private set; }
+
         private static IReadOnlyList<string>? _oldModelFactoryEntries;
         public static IReadOnlyList<string> ModelFactoryForHlc => _oldModelFactoryEntries ?? throw new InvalidOperationException("Configuration has not been initialized");
         public static UnreferencedTypesHandlingOption UnreferencedTypesHandling { get; private set; }
@@ -177,22 +183,24 @@ namespace AutoRest.CSharp.Input
 
         public static void Initialize(IPluginCommunication autoRest)
         {
+            var isAzureArm = GetOptionBoolValue(autoRest, Options.AzureArm, default);
             Initialize(
                 outputFolder: TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder)),
                 ns: autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult(),
                 name: autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult(),
                 sharedSourceFolders: GetRequiredOption<string[]>(autoRest, Options.SharedSourceFolders).Select(TrimFileSuffix).ToArray(),
-                saveInputs: GetOptionBoolValue(autoRest, Options.SaveInputs),
-                azureArm: GetOptionBoolValue(autoRest, Options.AzureArm),
-                publicClients: GetOptionBoolValue(autoRest, Options.PublicClients),
-                modelNamespace: GetOptionBoolValue(autoRest, Options.ModelNamespace),
-                headAsBoolean: GetOptionBoolValue(autoRest, Options.HeadAsBoolean),
-                skipCSProjPackageReference: GetOptionBoolValue(autoRest, Options.SkipCSProjPackageReference),
-                generation1ConvenienceClient: GetOptionBoolValue(autoRest, Options.Generation1ConvenienceClient),
-                singleTopLevelClient: GetOptionBoolValue(autoRest, Options.SingleTopLevelClient),
-                skipSerializationFormatXml: GetOptionBoolValue(autoRest, Options.SkipSerializationFormatXml),
-                disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
-                generateModelFactory: GetOptionBoolValue(autoRest, Options.GenerateModelFactory),
+                saveInputs: GetOptionBoolValue(autoRest, Options.SaveInputs, isAzureArm),
+                azureArm: isAzureArm,
+                publicClients: GetOptionBoolValue(autoRest, Options.PublicClients, isAzureArm),
+                modelNamespace: GetOptionBoolValue(autoRest, Options.ModelNamespace, isAzureArm),
+                headAsBoolean: GetOptionBoolValue(autoRest, Options.HeadAsBoolean, isAzureArm),
+                skipCSProjPackageReference: GetOptionBoolValue(autoRest, Options.SkipCSProjPackageReference, isAzureArm),
+                generation1ConvenienceClient: GetOptionBoolValue(autoRest, Options.Generation1ConvenienceClient, isAzureArm),
+                singleTopLevelClient: GetOptionBoolValue(autoRest, Options.SingleTopLevelClient, isAzureArm),
+                skipSerializationFormatXml: GetOptionBoolValue(autoRest, Options.SkipSerializationFormatXml, isAzureArm),
+                disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming, isAzureArm),
+                generateModelFactory: GetOptionBoolValue(autoRest, Options.GenerateModelFactory, isAzureArm),
+                publicDiscriminatorProperty: GetOptionBoolValue(autoRest, Options.PublicDiscriminatorProperty, isAzureArm),
                 modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
@@ -227,12 +235,12 @@ namespace AutoRest.CSharp.Input
             _ => null
         };
 
-        private static bool GetOptionBoolValue(IPluginCommunication autoRest, string option)
+        private static bool GetOptionBoolValue(IPluginCommunication autoRest, string option, bool isAzureArm)
         {
-            return autoRest.GetValue<bool?>(option).GetAwaiter().GetResult() ?? GetDefaultBoolOptionValue(option)!.Value;
+            return autoRest.GetValue<bool?>(option).GetAwaiter().GetResult() ?? GetDefaultBoolOptionValue(option, isAzureArm)!.Value;
         }
 
-        public static bool? GetDefaultBoolOptionValue(string option)
+        public static bool? GetDefaultBoolOptionValue(string option, bool isAzureArm)
         {
             switch (option)
             {
@@ -258,6 +266,8 @@ namespace AutoRest.CSharp.Input
                     return false;
                 case Options.GenerateModelFactory:
                     return true;
+                case Options.PublicDiscriminatorProperty:
+                    return isAzureArm ? false : true;
                 default:
                     return null;
             }
