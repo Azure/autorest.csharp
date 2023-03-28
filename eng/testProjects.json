@@ -9,7 +9,8 @@
         "models/usage",
         "projection",
         "enums/extensible",
-        "hello"
+        "hello",
+        "collectionFormat"
     ],
     "TestServerProjects": [
         "additionalProperties",
