@@ -33,7 +33,7 @@ namespace ModelsInCadl.Models
         }
 
         /// <summary> Discriminator. </summary>
-        internal string DiscriminatorProperty { get; set; }
+        public string DiscriminatorProperty { get; internal protected set; }
         /// <summary> Optional property on base. </summary>
         public string OptionalPropertyOnBase { get; set; }
         /// <summary> Required property on base. </summary>

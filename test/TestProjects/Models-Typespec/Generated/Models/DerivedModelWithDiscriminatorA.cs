@@ -21,8 +21,8 @@ namespace ModelsInCadl.Models
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
 
-            RequiredString = requiredString;
             DiscriminatorProperty = "A";
+            RequiredString = requiredString;
         }
 
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorA. </summary>

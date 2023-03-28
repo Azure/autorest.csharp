@@ -17,7 +17,14 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class ObjectTypeProperty
     {
         public ObjectTypeProperty(FieldDeclaration field, InputModelProperty inputModelProperty, ObjectType enclosingType)
-            : this(new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type), field.Description?.ToString() ?? String.Empty, field.Modifiers.HasFlag(FieldModifiers.ReadOnly), null, field.IsRequired, inputModelProperty: inputModelProperty)
+            : this(declaration: new MemberDeclarationOptions(field.Accessibility, field.Name, field.Type),
+                  parameterDescription: field.Description?.ToString() ?? string.Empty,
+                  isReadOnly: field.Modifiers.HasFlag(FieldModifiers.ReadOnly),
+                  schemaProperty: null,
+                  isRequired: field.IsRequired,
+                  inputModelProperty: inputModelProperty,
+                  getterModifiers: field.GetterModifiers,
+                  setterModifiers: field.SetterModifiers)
         {
             // now the default value will be set only when the model is generated from property bag
             if ((enclosingType is ModelTypeProvider model && model.IsPropertyBag) ||
@@ -28,11 +35,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
-            : this(declaration, parameterDescription, isReadOnly, schemaProperty, (schemaProperty is null ? false : schemaProperty.IsRequired), valueType, optionalViaNullability)
+            : this(declaration, parameterDescription, isReadOnly, schemaProperty, schemaProperty?.IsRequired ?? false, valueType, optionalViaNullability)
         {
         }
 
-        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false)
+        private ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, bool isRequired, CSharpType? valueType = null, bool optionalViaNullability = false, InputModelProperty? inputModelProperty = null, bool isFlattenedProperty = false, FieldModifiers? getterModifiers = null, FieldModifiers? setterModifiers = null)
         {
             IsReadOnly = isReadOnly;
             SchemaProperty = schemaProperty;
@@ -42,8 +49,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsRequired = isRequired;
             InputModelProperty = inputModelProperty;
             _baseParameterDescription = parameterDescription;
-            Description = string.IsNullOrEmpty(parameterDescription) ? CreateDefaultPropertyDescription(Declaration.Name, IsReadOnly).ToString() : parameterDescription;
+            Description = string.IsNullOrEmpty(parameterDescription) ? CreateDefaultPropertyDescription(Declaration.Name, isReadOnly).ToString() : parameterDescription;
             IsFlattenedProperty = isFlattenedProperty;
+            GetterModifiers = getterModifiers;
+            SetterModifiers = setterModifiers;
         }
 
         public ObjectTypeProperty MarkFlatten()
@@ -103,7 +112,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (FlattenedProperty != null)
                 return FlattenedProperty.BuildHierarchyStack();
 
-            var stack =  new Stack<ObjectTypeProperty>();
+            var stack = new Stack<ObjectTypeProperty>();
             stack.Push(this);
 
             return stack;
@@ -145,6 +154,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         /// </summary>
         public CSharpType ValueType { get; }
         public bool IsReadOnly { get; }
+
+        public FieldModifiers? GetterModifiers { get; }
+        public FieldModifiers? SetterModifiers { get; }
 
         internal string CreateExtraDescriptionWithManagedServiceIdentity()
         {

@@ -85,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public FieldDeclaration GetFieldByParameter(Parameter parameter) => _parameterNamesToFields[parameter.Name];
-        public bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)]out FieldDeclaration fieldDeclaration) => _parameterNamesToFields.TryGetValue(parameter.Name, out fieldDeclaration);
+        public bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)] out FieldDeclaration fieldDeclaration) => _parameterNamesToFields.TryGetValue(parameter.Name, out fieldDeclaration);
         public InputModelProperty GetInputByField(FieldDeclaration field) => _fieldsToInputs[field];
 
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
@@ -102,14 +102,32 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyIsReadOnly = inputModelProperty.IsReadOnly || propertyIsLiteralType || propertyIsCollection || propertyIsRequiredInNonRoundTripModel || propertyIsOptionalInOutputModel;
             var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
 
-            FieldModifiers fieldModifiers = propertyIsLiteralType || propertyIsDiscriminator
-                ? Internal : Public;
+            FieldModifiers fieldModifiers;
+            FieldModifiers? setterModifiers = null;
+            if (inputModelProperty.IsDiscriminator)
+            {
+                fieldModifiers = Configuration.PublicDiscriminatorProperty ? Public : Internal;
+                setterModifiers = Configuration.PublicDiscriminatorProperty ? Internal | Protected : Protected;
+            }
+            else
+            {
+                fieldModifiers = propertyIsLiteralType ? Internal : Public;
+            }
             if (propertyIsReadOnly)
                 fieldModifiers |= ReadOnly;
 
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(fieldName);
             declaration.SetActualName(fieldName);
-            return new FieldDeclaration($"{inputModelProperty.Description}", fieldModifiers, fieldType, declaration, GetPropertyDefaultValue(fieldType, inputModelProperty), inputModelProperty.IsRequired, false, true);
+            return new FieldDeclaration(
+                $"{inputModelProperty.Description}",
+                fieldModifiers,
+                fieldType,
+                declaration,
+                GetPropertyDefaultValue(fieldType, inputModelProperty),
+                inputModelProperty.IsRequired,
+                IsField: false,
+                WriteAsProperty: true,
+                SetterModifiers: setterModifiers);
         }
 
         private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, CSharpType originalType, InputModelProperty inputModelProperty, TypeFactory typeFactory)

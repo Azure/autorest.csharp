@@ -64,8 +64,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
-            _defaultDerivedType = defaultDerivedType ?? (inputModel.IsDefaultDiscriminator ? this : null);
+            _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
         }
+
         private MethodSignatureModifiers GetFromResponseModifiers()
         {
             var signatures = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static;
@@ -242,7 +243,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var ctor = isInitializer ? parent.InitializationConstructor : parent.SerializationConstructor;
                 parametersToPassToBase = ctor.Signature.Parameters;
-                fullParameterList.AddRange(_inputModel.IsDefaultDiscriminator ? parametersToPassToBase : parametersToPassToBase.Where(p => p.Name != Discriminator?.SerializedName));
+                fullParameterList.AddRange(_inputModel.IsUnknownDiscriminatorModel ? parametersToPassToBase : parametersToPassToBase.Where(p => p.Name != Discriminator?.SerializedName));
             }
             fullParameterList.AddRange(parameters.Select(creator));
         }
@@ -250,9 +251,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         private FormattableString[] GetInitializersFromParameters(IEnumerable<Parameter> parametersToPassToBase)
         {
             var baseInitializers = ConstructorInitializer.ParametersToFormattableString(parametersToPassToBase).ToArray();
-            if (Discriminator?.Value is not null && !_inputModel.IsDefaultDiscriminator)
+            if (Discriminator is not null && Discriminator.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
             {
-                FormattableString discriminatorInitializer = Discriminator.Value.Value.GetConstantFormattable();
+                FormattableString discriminatorInitializer = discriminatorValue.GetConstantFormattable();
                 for (int i = 0; i < baseInitializers.Length; i++)
                 {
                     if (baseInitializers[i].ToString() == Discriminator.SerializedName)
@@ -286,6 +287,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectPropertyInitializer[] GetPropertyInitializers(IReadOnlyList<Parameter> parameters, bool includeDiscriminator)
         {
             List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
+
+            if (includeDiscriminator && Discriminator is not null && Discriminator.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
+            {
+                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
+            }
 
             Dictionary<string, Parameter> parameterMap = parameters.ToDictionary(
                 parameter => parameter.Name,
@@ -338,11 +344,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value, defaultInitializationValue));
                 }
-            }
-
-            if (Discriminator?.Value != null && includeDiscriminator)
-            {
-                defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, Discriminator.Value.Value));
             }
 
             return defaultCtorInitializers.ToArray();

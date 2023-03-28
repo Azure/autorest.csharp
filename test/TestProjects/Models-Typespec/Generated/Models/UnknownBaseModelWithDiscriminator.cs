@@ -14,7 +14,6 @@ namespace ModelsInCadl.Models
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         internal UnknownBaseModelWithDiscriminator(int requiredPropertyOnBase) : base(requiredPropertyOnBase)
         {
-            DiscriminatorProperty = "Unknown";
         }
 
         /// <summary> Initializes a new instance of UnknownBaseModelWithDiscriminator. </summary>

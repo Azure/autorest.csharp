@@ -15,8 +15,8 @@ namespace ModelsInCadl.Models
         /// <param name="requiredInt"> Required int. </param>
         public DerivedModelWithDiscriminatorB(int requiredPropertyOnBase, int requiredInt) : base(requiredPropertyOnBase)
         {
-            RequiredInt = requiredInt;
             DiscriminatorProperty = "B";
+            RequiredInt = requiredInt;
         }
 
         /// <summary> Initializes a new instance of DerivedModelWithDiscriminatorB. </summary>

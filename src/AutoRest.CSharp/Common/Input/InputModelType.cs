@@ -5,9 +5,18 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName, bool IsDefaultDiscriminator = false, bool IsPropertyBag = false)
+    internal record InputModelType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string? Description, InputModelTypeUsage Usage, IReadOnlyList<InputModelProperty> Properties, InputModelType? BaseModel, IReadOnlyList<InputModelType> DerivedModels, string? DiscriminatorValue, string? DiscriminatorPropertyName)
         : InputType(Name)
     {
+        /// <summary>
+        /// Indicates if this model is the Unknown derived version of a model with discriminator
+        /// </summary>
+        public bool IsUnknownDiscriminatorModel { get; init; } = false;
+        /// <summary>
+        /// Indicates if this model is a property bag
+        /// </summary>
+        public bool IsPropertyBag { get; init; } = false;
+        
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
         public IEnumerable<InputModelType> GetAllBaseModels() => EnumerateBase(BaseModel);
