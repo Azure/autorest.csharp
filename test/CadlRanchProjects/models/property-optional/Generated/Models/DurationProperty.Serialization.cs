@@ -34,12 +34,16 @@ namespace Models.Property.Optional.Models
 
         internal static DurationProperty DeserializeDurationProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<TimeSpan?> property = default;
             foreach (var property0 in element.EnumerateObject())
             {
                 if (property0.NameEquals("property"u8))
                 {
-                    if (property0.Value.ValueKind == JsonValueKind.Null)
+                    if (property0.Value.ValueKind == JsonValueKind.Null || property0.Value.ValueKind == JsonValueKind.String && property0.Value.GetString().Length == 0)
                     {
                         property = null;
                         continue;

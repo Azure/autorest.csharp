@@ -13,6 +13,10 @@ namespace TypeSchemaMapping.Models
     {
         internal static AbstractModel DeserializeAbstractModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             if (element.TryGetProperty("DiscriminatorProperty", out JsonElement discriminator))
             {
                 switch (discriminator.GetString())

@@ -15,8 +15,10 @@ namespace MgmtOptionalConstant.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("passName"u8);
-            writer.WriteStringValue(PassName.ToString());
+            writer.WritePropertyName("requiredStringConstant"u8);
+            writer.WriteStringValue(RequiredStringConstant.ToString());
+            writer.WritePropertyName("requiredIntConstant"u8);
+            writer.WriteStringValue(RequiredIntConstant.ToString());
             if (Optional.IsDefined(Protocol))
             {
                 writer.WritePropertyName("protocol"u8);
@@ -27,13 +29,23 @@ namespace MgmtOptionalConstant.Models
 
         internal static ModelWithRequiredConstant DeserializeModelWithRequiredConstant(JsonElement element)
         {
-            PassName passName = default;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            StringConstant requiredStringConstant = default;
+            IntConstant requiredIntConstant = default;
             Optional<ProtocolType> protocol = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("passName"u8))
+                if (property.NameEquals("requiredStringConstant"u8))
                 {
-                    passName = new PassName(property.Value.GetString());
+                    requiredStringConstant = new StringConstant(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("requiredIntConstant"u8))
+                {
+                    requiredIntConstant = new IntConstant(property.Value.GetInt32());
                     continue;
                 }
                 if (property.NameEquals("protocol"u8))
@@ -47,7 +59,7 @@ namespace MgmtOptionalConstant.Models
                     continue;
                 }
             }
-            return new ModelWithRequiredConstant(passName, Optional.ToNullable(protocol));
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, Optional.ToNullable(protocol));
         }
     }
 }

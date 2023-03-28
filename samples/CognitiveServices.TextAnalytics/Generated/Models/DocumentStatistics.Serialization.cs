@@ -14,6 +14,10 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static DocumentStatistics DeserializeDocumentStatistics(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int charactersCount = default;
             int transactionsCount = default;
             foreach (var property in element.EnumerateObject())

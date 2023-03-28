@@ -25,6 +25,10 @@ namespace ModelWithConverterUsage.Models
 
         internal static Product DeserializeProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> constProperty = default;
             foreach (var property in element.EnumerateObject())
             {

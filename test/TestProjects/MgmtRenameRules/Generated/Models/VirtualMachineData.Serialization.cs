@@ -145,6 +145,10 @@ namespace MgmtRenameRules
 
         internal static VirtualMachineData DeserializeVirtualMachineData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<MgmtRenameRulesPlan> plan = default;
             Optional<ManagedServiceIdentity> identity = default;
             Optional<IList<string>> zones = default;

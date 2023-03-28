@@ -41,6 +41,10 @@ namespace MgmtNonStringPathVariable
 
         internal static FakeData DeserializeFakeData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<FakeProperties> properties = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

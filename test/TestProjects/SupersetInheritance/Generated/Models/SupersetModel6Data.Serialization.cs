@@ -26,6 +26,10 @@ namespace SupersetInheritance
 
         internal static SupersetModel6Data DeserializeSupersetModel6Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @new = default;
             ResourceIdentifier id = default;
             string name = default;

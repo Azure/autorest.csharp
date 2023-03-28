@@ -16,6 +16,10 @@ namespace MgmtListMethods.Models
     {
         internal static ResGrpParentWithAncestorWithNonResChListResult DeserializeResGrpParentWithAncestorWithNonResChListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<ResGrpParentWithAncestorWithNonResChData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

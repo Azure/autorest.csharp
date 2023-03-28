@@ -15,6 +15,10 @@ namespace MgmtListMethods.Models
     {
         internal static UpdateWorkspaceQuotasResult DeserializeUpdateWorkspaceQuotasResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<UpdateWorkspaceQuotas>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

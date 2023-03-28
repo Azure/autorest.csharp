@@ -37,6 +37,10 @@ namespace ExtensionClientName.Models
 
         internal static RenamedSchema DeserializeRenamedSchema(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IDictionary<string, string>> originalProperty = default;
             Optional<string> originalPropertyString = default;
             foreach (var property in element.EnumerateObject())

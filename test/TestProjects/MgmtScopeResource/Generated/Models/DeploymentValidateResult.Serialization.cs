@@ -14,6 +14,10 @@ namespace MgmtScopeResource.Models
     {
         internal static DeploymentValidateResult DeserializeDeploymentValidateResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ErrorResponse> errorResponse = default;
             Optional<DeploymentPropertiesExtended> properties = default;
             foreach (var property in element.EnumerateObject())

@@ -25,6 +25,10 @@ namespace MgmtExpandResourceTypes.Models
 
         internal static PtrRecord DeserializePtrRecord(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> ptrdname = default;
             foreach (var property in element.EnumerateObject())
             {

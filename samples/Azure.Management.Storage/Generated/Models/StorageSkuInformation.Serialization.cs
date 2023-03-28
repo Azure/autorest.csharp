@@ -15,6 +15,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static StorageSkuInformation DeserializeStorageSkuInformation(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             StorageSkuName name = default;
             Optional<StorageSkuTier> tier = default;
             Optional<ResourceType> resourceType = default;

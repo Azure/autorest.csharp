@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "Cadl.TestServer.MultiInterfaceClient",
+  "Namespace": "TypeSpec.TestServer.MultiInterfaceClient",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",

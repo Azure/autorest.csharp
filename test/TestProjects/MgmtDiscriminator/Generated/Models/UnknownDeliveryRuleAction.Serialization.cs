@@ -22,6 +22,10 @@ namespace MgmtDiscriminator.Models
 
         internal static UnknownDeliveryRuleAction DeserializeUnknownDeliveryRuleAction(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             DeliveryRuleActionType name = "Unknown";
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())

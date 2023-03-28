@@ -1,20 +1,19 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { getDoc, Program, Type } from "@cadl-lang/compiler";
-import { http } from "@cadl-lang/rest/*";
-import { InputConstant } from "../type/InputConstant";
-import { InputOperationParameterKind } from "../type/InputOperationParameterKind.js";
-import { InputParameter } from "../type/InputParameter.js";
+import { getDoc, Program, Type } from "@typespec/compiler";
+import { HttpServer } from "@typespec/http";
+import { InputConstant } from "../type/inputConstant.js";
+import { InputOperationParameterKind } from "../type/inputOperationParameterKind.js";
+import { InputParameter } from "../type/inputParameter.js";
 import {
     InputEnumType,
     InputModelType,
     InputPrimitiveType,
     InputType
-} from "../type/InputType.js";
-import { InputTypeKind } from "../type/InputTypeKind.js";
-import { RequestLocation } from "../type/RequestLocation.js";
-import { Usage } from "../type/Usage.js";
+} from "../type/inputType.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
+import { RequestLocation } from "../type/requestLocation.js";
 import { getInputType } from "./model.js";
 
 export interface CadlServer {
@@ -40,7 +39,7 @@ function getDefaultValue(type: Type): any {
 
 export function resolveServers(
     program: Program,
-    servers: http.HttpServer[],
+    servers: HttpServer[],
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): CadlServer[] {
@@ -94,7 +93,7 @@ export function resolveServers(
             parameters.push(variable);
         }
         /* add default server. */
-        if (server.url && parameters.length == 0) {
+        if (server.url && parameters.length === 0) {
             const variable: InputParameter = {
                 Name: "host",
                 NameInRequest: "host",

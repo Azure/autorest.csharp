@@ -15,6 +15,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static ModelInfo DeserializeModelInfo(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Guid modelId = default;
             ModelStatus status = default;
             DateTimeOffset createdDateTime = default;

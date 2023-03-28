@@ -46,6 +46,10 @@ namespace MgmtSafeFlatten
 
         internal static TypeTwoData DeserializeTypeTwoData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> myType = default;
             Optional<LayerOneSingle> properties = default;
             Optional<IDictionary<string, string>> tags = default;

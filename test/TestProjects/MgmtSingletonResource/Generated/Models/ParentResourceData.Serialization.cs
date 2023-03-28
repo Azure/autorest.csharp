@@ -40,6 +40,10 @@ namespace MgmtSingletonResource
 
         internal static ParentResourceData DeserializeParentResourceData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @new = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;

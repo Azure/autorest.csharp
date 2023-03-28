@@ -24,6 +24,10 @@ namespace MgmtMockAndSample.Models
 
         internal static MgmtMockAndSampleSku DeserializeMgmtMockAndSampleSku(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             MgmtMockAndSampleSkuFamily family = default;
             MgmtMockAndSampleSkuName name = default;
             foreach (var property in element.EnumerateObject())

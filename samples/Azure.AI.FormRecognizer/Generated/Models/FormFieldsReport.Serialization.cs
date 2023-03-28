@@ -14,6 +14,10 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static FormFieldsReport DeserializeFormFieldsReport(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string fieldName = default;
             float accuracy = default;
             foreach (var property in element.EnumerateObject())

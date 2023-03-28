@@ -15,6 +15,10 @@ namespace MgmtScopeResource.Models
     {
         internal static DeploymentExportResult DeserializeDeploymentExportResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<BinaryData> template = default;
             foreach (var property in element.EnumerateObject())
             {

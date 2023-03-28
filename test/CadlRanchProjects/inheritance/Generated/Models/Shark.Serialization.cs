@@ -25,6 +25,10 @@ namespace Models.Inheritance.Models
 
         internal static Shark DeserializeShark(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string kind = default;
             int age = default;
             foreach (var property in element.EnumerateObject())

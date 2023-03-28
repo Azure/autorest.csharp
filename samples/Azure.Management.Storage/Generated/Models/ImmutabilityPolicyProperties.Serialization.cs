@@ -16,6 +16,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static ImmutabilityPolicyProperties DeserializeImmutabilityPolicyProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ETag> etag = default;
             Optional<IReadOnlyList<UpdateHistoryProperty>> updateHistory = default;
             Optional<int> immutabilityPeriodSinceCreationInDays = default;

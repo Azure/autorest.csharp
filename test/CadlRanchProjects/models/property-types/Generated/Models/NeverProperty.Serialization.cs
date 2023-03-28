@@ -21,6 +21,10 @@ namespace Models.Property.Types.Models
 
         internal static NeverProperty DeserializeNeverProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             foreach (var property in element.EnumerateObject())
             {
             }

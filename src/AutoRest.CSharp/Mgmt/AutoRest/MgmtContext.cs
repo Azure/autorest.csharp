@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System;
+using System.Linq;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -15,6 +16,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public static MgmtOutputLibrary Library => Context.Library;
 
         public static CodeModel CodeModel => Context.CodeModel;
+
+        public static string DefaultNamespace => Context.DefaultNamespace;
+
+        public static string RPName => DefaultNamespace.Split('.').Last();
 
         public static bool IsInitialized => _context is not null;
 

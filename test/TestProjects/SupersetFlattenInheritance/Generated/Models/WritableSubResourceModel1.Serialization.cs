@@ -30,6 +30,10 @@ namespace SupersetFlattenInheritance.Models
 
         internal static WritableSubResourceModel1 DeserializeWritableSubResourceModel1(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())

@@ -32,6 +32,10 @@ namespace OmitOperationGroups
 
         internal static Model2Data DeserializeModel2Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> b = default;
             Optional<ModelX> modelx = default;
             Optional<string> f = default;
