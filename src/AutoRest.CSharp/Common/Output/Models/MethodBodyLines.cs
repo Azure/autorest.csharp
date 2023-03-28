@@ -168,7 +168,7 @@ namespace AutoRest.CSharp.Output.Models
     internal record DiagnosticScopeMethodBodyBlock(Diagnostic Diagnostic, Reference ClientDiagnosticsReference, MethodBodyStatement InnerStatement) : MethodBodyStatement;
     internal record TryCatchFinallyStatement(MethodBodyStatement Try, MethodBodyStatement? Catch, MethodBodyStatement? Finally) : MethodBodyStatement;
     internal record IfElseStatement(ValueExpression Condition, MethodBodyStatement If, MethodBodyStatement? Else) : MethodBodyStatement;
-    internal record SwitchStatement(ValueExpression MatchExpression, params MethodBodyStatement[] Statements) : MethodBodyStatement;
+    internal record SwitchStatement(ValueExpression MatchExpression, params SwitchCase[] Cases) : MethodBodyStatement;
     internal record IfElsePreprocessorDirective(string Condition, MethodBodyStatement If, MethodBodyStatement? Else) : MethodBodyStatement;
     internal record ForeachStatement(CodeWriterDeclaration Item, ValueExpression Enumerable, MethodBodyStatement Body) : MethodBodyStatement;
     internal record MethodBodyStatements(IReadOnlyList<MethodBodyStatement> Blocks) : MethodBodyStatement
@@ -186,4 +186,7 @@ namespace AutoRest.CSharp.Output.Models
     internal record ReturnValueLine(ValueExpression Value) : MethodBodyLine;
     internal record SetValueLine(ValueExpression To, ValueExpression From) : MethodBodyLine;
     internal record OneLineLocalFunction(CodeWriterDeclaration Name, IReadOnlyList<Parameter> Parameters, CSharpType ReturnType, ValueExpression Body) : MethodBodyLine;
+
+    internal record SwitchCase : MethodBodyStatement;
+    internal record SwitchCaseLine(string Case, MethodBodyLine Value) : SwitchCase;
 }

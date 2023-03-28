@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(ValueExpression element, JsonObjectSerialization serialization)
+        private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(Parameter element, JsonObjectSerialization serialization)
         {
             if (!serialization.Type.IsValueType) // only return null for reference type (e.g. no enum)
             {
@@ -343,11 +343,11 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private static IEnumerable<MethodBodyStatement> GetDiscriminatorCases(ValueExpression element, ObjectTypeDiscriminator discriminator)
+        private static IEnumerable<SwitchCase> GetDiscriminatorCases(ValueExpression element, ObjectTypeDiscriminator discriminator)
         {
             foreach (var implementation in discriminator.Implementations)
             {
-                yield return Return(GetDeserializeImplementation(implementation.Type.Implementation, element, null));
+                yield return new SwitchCaseLine(implementation.Key, Return(GetDeserializeImplementation(implementation.Type.Implementation, element, null)));
             }
         }
 

@@ -187,10 +187,10 @@ namespace AutoRest.CSharp.Output.Models
                 public static ValueExpression GetString(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetString));
                 public static ValueExpression GetTimeSpan(ValueExpression element, string? format) => Extension(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.GetTimeSpan), element, Literal(format));
 
-                public static ValueExpression TryGetProperty(ValueExpression element, string propertyName, out ValueExpression discriminator)
+                public static ValueExpression TryGetProperty(Parameter element, string propertyName, out CodeWriterDeclaration discriminator)
                 {
                     discriminator = new CodeWriterDeclaration("discriminator");
-                    return Instance(element, nameof(System.Text.Json.JsonElement.TryGetProperty), Literal(propertyName));
+                    return new FormattableStringToExpression($"{element.Name}.{nameof(System.Text.Json.JsonElement.TryGetProperty)}({propertyName:L}, out {typeof(System.Text.Json.JsonElement)} {discriminator:D})");
                 }
 
                 public static ValueExpression ValueKindEqualsNull(ValueExpression element)
