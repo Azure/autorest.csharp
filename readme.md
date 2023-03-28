@@ -15,7 +15,8 @@ ___
   - [Build](#build)
   - [Test](#test)
     - [Testing Details](#testing-details)
-    - [Validate generator changes against Azure SDK before merging your autorest.csharp PR](#validate-generator-changes-against-azure-sdk-before-merging-your-autorestcsharp-pr)
+    - [Preview changes in azure-sdk-for-net](#preview-changes-in-azure-sdk-for-net)
+    - [Make sure changes in azure-sdk-for-net is expected before merging your autorest.csharp PR](#make-sure-changes-in-azure-sdk-for-net-is-expected-before-merging-your-autorestcsharp-pr)
     - [Merge azure-sdk-for-net PR](#merge-azure-sdk-for-net-pr)
   - [Use in `azure-sdk-for-net` repo](#use-in-azure-sdk-for-net-repo)
     - [PR Integration with Azure SDK Repository](#pr-integration-with-azure-sdk-repository)
@@ -80,15 +81,20 @@ The swagger files are compiled, and then run, which pings the mock server (to ve
 
 This document contains some additional [technical details](https://github.com/Azure/autorest.csharp/blob/feature/v3/test/README.md).
 
-### Validate generator changes against Azure SDK before merging your autorest.csharp PR
+### Preview changes in azure-sdk-for-net
 
 When the automatic PR is created for azure-sdk-for-net if there are any issues found all other changes to autorest.csharp are blocked until those issues are resolved.  This means we should be certain that the changes we are making create the expected result in azure-sdk-for-net prior to merging our PR. 
 
 This step could be done [manually](./docs/manually_regen_sdk.md) or automatically with below steps:
 
-Go to [Autorest Regen Preview](https://dev.azure.com/azure-sdk/internal/_build?definitionId=5990&_a=summary) pipeline, and click "Run Pipeline". In "Branch/tag", type in your PR ref, i.e. refs/pull/3215/head, or refs/pull/3215/merge. Click "Run". After the build finishes, there will be a PR starting with "Autorest Regen Preview".
+Go to [Autorest Regen Preview](https://dev.azure.com/azure-sdk/internal/_build?definitionId=5990&_a=summary) pipeline, and click "Run Pipeline". In "Branch/tag", type in your PR ref, i.e. refs/pull/3215/head, or refs/pull/3215/merge. Click "Run". After the build finishes, there will be a PR starting with "Autorest Regen Preview" in azure-sdk-for-net.
 
-Same with [manually](./docs/manually_regen_sdk.md) steps, we want to ensure this regen PR is discoverable as well as the key stakeholders who would need to sign off mark this PR as either approved or request changes.
+### Make sure changes in azure-sdk-for-net is expected before merging your autorest.csharp PR
+Once this is done we want to ensure this regen PR is discoverable as well as the key stakeholders who would need to sign off mark this PR as either approved or request changes.
+- In the autorest.csharp PR description please add a line at the very top indicating which azure-sdk-for-net PR is the regeneration for this PR.  An example would look like this
+![PR example image](./docs/images/regenPRLink.png)
+- Next have any stakeholders that would need to review do so in this PR and mark it as approved or request changes.
+- Once all stakeholders review and approve of the PR we are ready for the next step of merging the autorest.csharp PR.
 
 ### Merge azure-sdk-for-net PR
 

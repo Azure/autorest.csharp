@@ -32,9 +32,4 @@ To regen and test everything in azure-sdk-for-net after you have updated to use 
 - For non GA libraries there could be API changes so we want to run the Export-API script with no parameters which will update any projects that now have an API change `[RepoRoot]\eng\scripts\Export-API.ps1`
 - Finally it is very possible that we will need to make test case changes or snippet changes especially for non GA libraries which have expected changes.  All of these should be made in the branch and included in the PR to demonstrate all resulting changes from the autorest.csharp PR.
 
-Once all of that is successful, we can commit all of the local changes except the NuGet file and `Packages.Data.props` and push those to a branch.  Once this is done we want to ensure this regen PR is discoverable as well as the key stakeholders who would need to sign off mark this PR as either approved or request changes.
-
-- In the autorest.csharp PR description please add a line at the very top indicating which azure-sdk-for-net PR is the regeneration for this PR.  An example would look like this
-![PR example image](./docs/images/regenPRLink.png)
-- Next have any stakeholders that would need to review do so in this PR and mark it as approved or request changes.
-- Once all stakeholders review and approve of the PR we are ready for the next step of merging the autorest.csharp PR.
+Once all of that is successful, we can commit all of the local changes except the NuGet file and `Packages.Data.props` and push those to a branch.  
