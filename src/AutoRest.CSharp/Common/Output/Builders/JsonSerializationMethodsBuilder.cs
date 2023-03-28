@@ -496,7 +496,7 @@ namespace AutoRest.CSharp.Output.Models
             if (jsonPropertySerialization.ValueSerialization is JsonValueSerialization { Type.IsFrameworkType: true } valueSerialization)
             {
                 return Configuration.IntrinsicTypesToTreatEmptyStringAsNull.Contains(valueSerialization.Type.FrameworkType.Name)
-                    ? Or(Call.JsonElement.ValueKindEqualsNull(jsonElement), And(Call.JsonElement.ValueKindEqualsString(jsonElement), Call.JsonElement.GetString(jsonElement)))
+                    ? Or(Call.JsonElement.ValueKindEqualsNull(jsonElement), And(Call.JsonElement.ValueKindEqualsString(jsonElement), StringLengthEqualsZero(Call.JsonElement.GetString(jsonElement))))
                     : Call.JsonElement.ValueKindEqualsNull(jsonElement);
             }
 

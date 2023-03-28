@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models
         public static ValueExpression Literal(string? value) => new FormattableStringToExpression($"{value:L}");
         public static ValueExpression LiteralU8(string value) => new FormattableStringToExpression($"{value:L}u8");
 
+        public static ValueExpression StringLengthEqualsZero(ValueExpression str) => new BinaryOperatorExpression("==", new MemberReference(str, nameof(string.Length)), new FormattableStringToExpression($"0"));
         public static ValueExpression IsNull(ValueExpression value) => new BinaryOperatorExpression("==", value, Null);
         public static ValueExpression IsNotNull(ValueExpression value) => new BinaryOperatorExpression("!=", value, Null);
         public static ValueExpression Or(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("||", left, right);
