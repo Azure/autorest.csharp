@@ -56,26 +56,6 @@
     <Exec Command="$(PowerShellExe) -NoProfile -NonInteractive -executionpolicy Unrestricted -File $(TypeSpecProjectGenerateScriptPath) $(MSBuildProjectDirectory)/.. $(typespecAdditionalOptions)"/>
   </Target>
 
-  <Target Name="GenerateTest" Condition="'$(AutoRestTestsInput)' != ''">
-    <PropertyGroup>
-
-    </PropertyGroup>
-
-    <ReadLinesFromFile File="$(AutoRestTestsInput)">
-      <Output TaskParameter="Lines" ItemName="AutoRestInputLines"/>
-    </ReadLinesFromFile>
-
-    <ItemGroup>
-      <GithubUrls Include="$([System.Text.RegularExpressions.Regex]::Match('%(AutoRestInputLines.Identity)', 'https?://(raw.)?github.+'))" />
-      <GithubUrlsWithoutIssues Include="%(GithubUrls.Identity)" Condition="! ($([System.Text.RegularExpressions.Regex]::IsMatch('%(GithubUrls.Identity)', '/issues/\d+')))" />
-      <GithubUrlsWithoutHash Include="%(GithubUrlsWithoutIssues.Identity)" Condition="! ($([System.Text.RegularExpressions.Regex]::IsMatch('%(GithubUrlsWithoutIssues.Identity)', '[\w\d]{40}')))" />
-    </ItemGroup>
-
-    <Error Text="Following GitHub URLs do not contain commit hash: @(GithubUrlsWithoutHash) please use permalinks for code generation inputs (see https://help.github.com/en/github/managing-files-in-a-repository/getting-permanent-links-to-files) " Condition="'@(GithubUrlsWithoutHash)' != ''" />
-
-    <Exec Command="npx autorest@$(AutoRestVersion) --max-memory-size=8192 --skip-csproj --skip-upgrade-check --version=$(AutoRestCoreVersion) $(AutoRestTestsInput) $(AutoRestAdditionalParameters) --use=$(MSBuildThisFileDirectory)../tools/net6.0/any/ --output-folder=$(MSBuildProjectDirectory)/Generated --clear-output-folder=true --shared-source-folders=&quot;$(AzureCoreSharedCodeDirectory);$(AutoRestSharedCodeDirectory)&quot; --testmodeler={}" />
-  </Target>
-
   <Target Name="GenerateTests" Condition="'$(AutoRestTestsInput)' != ''">
     <PropertyGroup>
 
