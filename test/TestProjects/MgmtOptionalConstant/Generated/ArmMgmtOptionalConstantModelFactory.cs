@@ -31,5 +31,15 @@ namespace MgmtOptionalConstant.Models
 
             return new OptionalMachineData(id, name, resourceType, systemData, tags, location, listener, content);
         }
+
+        /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
+        /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>
+        /// <param name="requiredIntConstant"> A constant based on integer. </param>
+        /// <param name="protocol"> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </param>
+        /// <returns> A new <see cref="Models.ModelWithRequiredConstant"/> instance for mocking. </returns>
+        public static ModelWithRequiredConstant ModelWithRequiredConstant(StringConstant requiredStringConstant = default, IntConstant requiredIntConstant = default, ProtocolType? protocol = null)
+        {
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, protocol);
+        }
     }
 }

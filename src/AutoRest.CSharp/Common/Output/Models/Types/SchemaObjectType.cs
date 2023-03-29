@@ -459,6 +459,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                               !_usage.HasFlag(SchemaTypeUsage.Input) ||
                               property.IsReadOnly;
 
+
             if (isCollection)
             {
                 isReadOnly |= !property.IsNullable;
@@ -469,6 +470,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 isReadOnly |= property.IsRequired &&
                               _usage.HasFlag(SchemaTypeUsage.Input) &&
                               !_usage.HasFlag(SchemaTypeUsage.Output);
+            }
+
+            // we should remove the setter of required constant
+            if (property.Schema is ConstantSchema && property.IsRequired)
+            {
+                isReadOnly = true;
             }
 
             if (property.IsDiscriminator == true)

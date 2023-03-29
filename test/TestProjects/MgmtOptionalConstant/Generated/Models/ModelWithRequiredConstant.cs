@@ -29,9 +29,9 @@ namespace MgmtOptionalConstant.Models
         }
 
         /// <summary> A constant based on string, the only allowable value is default. </summary>
-        public StringConstant RequiredStringConstant { get; set; }
+        public StringConstant RequiredStringConstant { get; }
         /// <summary> A constant based on integer. </summary>
-        public IntConstant RequiredIntConstant { get; set; }
+        public IntConstant RequiredIntConstant { get; }
         /// <summary> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </summary>
         public ProtocolType? Protocol { get; set; }
     }
