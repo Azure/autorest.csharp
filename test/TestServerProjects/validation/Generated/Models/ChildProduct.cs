@@ -26,7 +26,7 @@ namespace validation.Models
         }
 
         /// <summary> Constant string. </summary>
-        public string ConstProperty { get; set; }
+        public string ConstProperty { get; }
         /// <summary> Count. </summary>
         public int? Count { get; set; }
     }

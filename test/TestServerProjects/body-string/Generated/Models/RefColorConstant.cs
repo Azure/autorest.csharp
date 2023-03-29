@@ -26,7 +26,7 @@ namespace body_string.Models
         }
 
         /// <summary> Referenced Color Constant Description. </summary>
-        public string ColorConstant { get; set; }
+        public string ColorConstant { get; }
         /// <summary> Sample string. </summary>
         public string Field1 { get; set; }
     }
