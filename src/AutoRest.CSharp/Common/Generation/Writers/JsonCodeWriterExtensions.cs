@@ -20,9 +20,8 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
-using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 using Configuration = AutoRest.CSharp.Input.Configuration;
-using System.Linq.Expressions;
+using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -352,13 +351,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         var variableOrExpression = writer.DeserializeValue(property.ValueSerialization, $"{itemVariable}.Value");
                         writer.Line($"{propertyVariables[property].Declaration} = {variableOrExpression};");
                     }
-                    else if (property.IsClientFlattenedProperty)
+                    else if (property.PropertySerializations is not null)
                     {
                         // Reading a nested object
                         var nestedItemVariable = new CodeWriterDeclaration("property");
                         using (writer.Scope($"foreach (var {nestedItemVariable:D} in {itemVariable:I}.Value.EnumerateObject())"))
                         {
-                            writer.DeserializeIntoObjectProperties(property.PropertySerializations!, $"{nestedItemVariable:I}", propertyVariables, shouldTreatEmptyStringAsNull);
+                            writer.DeserializeIntoObjectProperties(property.PropertySerializations, $"{nestedItemVariable:I}", propertyVariables, shouldTreatEmptyStringAsNull);
                         }
                     }
                     else

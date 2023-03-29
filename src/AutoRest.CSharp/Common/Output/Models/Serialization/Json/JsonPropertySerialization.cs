@@ -26,11 +26,9 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         public string ParameterName { get;  }
         public bool OptionalViaNullability { get; }
         public JsonSerialization? ValueSerialization { get; }
-        public JsonPropertySerialization[]? PropertySerializations { get; }
-
         /// <summary>
-        /// Whether the property is flattened in generated client sdk, e.g. "x-ms-client-flatten: true".
+        /// This is not null when the property is flattened in generated client SDK `x-ms-client-flatten: true`
         /// </summary>
-        public bool IsClientFlattenedProperty => PropertySerializations is not null;
+        public JsonPropertySerialization[]? PropertySerializations { get; }
     }
 }
