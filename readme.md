@@ -15,7 +15,7 @@ ___
   - [Build](#build)
   - [Test](#test)
     - [Testing Details](#testing-details)
-  - [Prepare to merge](#prepare-to-merge)
+  - [PR Merge Process](#pr-merge-process)
     - [Preview changes in azure-sdk-for-net](#preview-changes-in-azure-sdk-for-net)
     - [Make sure changes in azure-sdk-for-net is expected before merging your autorest.csharp PR](#make-sure-changes-in-azure-sdk-for-net-is-expected-before-merging-your-autorestcsharp-pr)
     - [Merge azure-sdk-for-net PR](#merge-azure-sdk-for-net-pr)
@@ -82,7 +82,7 @@ The swagger files are compiled, and then run, which pings the mock server (to ve
 
 This document contains some additional [technical details](https://github.com/Azure/autorest.csharp/blob/feature/v3/test/README.md).
 
-## Prepare to merge
+## PR Merge Process
 
 When the automatic PR is created for azure-sdk-for-net if there are any issues found all other changes to autorest.csharp are blocked until those issues are resolved.  This means we should be certain that the changes we are making create the expected result in azure-sdk-for-net prior to merging our PR. 
 
