@@ -50,63 +50,46 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<InnerModel>>> GetModelValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<InnerModel>>> GetModelValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ModelValue.GetModelValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetModelValueAsync(context).ConfigureAwait(false);
+            IReadOnlyList<InnerModel> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            List<InnerModel> array = new List<InnerModel>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetModelValueAsync(context).ConfigureAwait(false);
-                IReadOnlyList<InnerModel> value = default;
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                List<InnerModel> array = new List<InnerModel>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(InnerModel.DeserializeInnerModel(item));
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(InnerModel.DeserializeInnerModel(item));
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<InnerModel>> GetModelValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<InnerModel>> GetModelValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ModelValue.GetModelValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetModelValue(context);
+            IReadOnlyList<InnerModel> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            List<InnerModel> array = new List<InnerModel>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetModelValue(context);
-                IReadOnlyList<InnerModel> value = default;
-                using var document = JsonDocument.Parse(response.ContentStream);
-                List<InnerModel> array = new List<InnerModel>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(InnerModel.DeserializeInnerModel(item));
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(InnerModel.DeserializeInnerModel(item));
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ModelValue.xml" path="doc/members/member[@name='GetModelValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetModelValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetModelValueAsync(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("ModelValue.GetModelValue");
             scope.Start();
             try
@@ -122,11 +105,14 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ModelValue.xml" path="doc/members/member[@name='GetModelValue(RequestContext)']/*" />
-        public virtual Response GetModelValue(RequestContext context = null)
+        public virtual Response GetModelValue(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("ModelValue.GetModelValue");
             scope.Start();
             try

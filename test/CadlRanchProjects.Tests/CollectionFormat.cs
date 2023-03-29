@@ -16,7 +16,7 @@ namespace CadlRanchProjects.Tests
         public Task CollectionFormat_testMulti() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).TestMultiAsync(colors);
+            Response response = await new CollectionFormatClient(host, null).TestMultiAsync(colors, new RequestContext());
             Assert.AreEqual(200, response.Status);
         });
 
@@ -24,7 +24,7 @@ namespace CadlRanchProjects.Tests
         public Task CollectionFormat_testCsv() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).TestCsvAsync(colors);
+            Response response = await new CollectionFormatClient(host, null).TestCsvAsync(colors, new RequestContext());
             Assert.AreEqual(200, response.Status);
         });
 
@@ -32,7 +32,7 @@ namespace CadlRanchProjects.Tests
         public Task CollectionFormat_testCsvHeader() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).TestCsvHeaderAsync(colors);
+            Response response = await new CollectionFormatClient(host, null).TestCsvHeaderAsync(colors, new RequestContext());
             Assert.AreEqual(200, response.Status);
         });
 
@@ -40,7 +40,7 @@ namespace CadlRanchProjects.Tests
         public Task CollectionFormat_testDefaultHeader() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).TestDefaultHeaderAsync(colors);
+            Response response = await new CollectionFormatClient(host, null).TestDefaultHeaderAsync(colors, new RequestContext());
             Assert.AreEqual(200, response.Status);
         });
     }

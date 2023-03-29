@@ -22,7 +22,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task GetValid() => Test(async (host) =>
         {
-            var response = await new InheritanceClient(host, null).GetValidValueAsync();
+            var response = await new InheritanceClient(host, null).GetValidAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual("abc", response.Value.Name);
             Assert.AreEqual(32, response.Value.Age);
@@ -43,7 +43,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task GetModel() => Test(async (host) =>
         {
-            var response = await new InheritanceClient(host, null).GetModelValueAsync();
+            var response = await new InheritanceClient(host, null).GetModelAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(1, response.Value.Age);
             Assert.IsInstanceOf<Shark>(response.Value);
@@ -64,7 +64,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task GetRecursiveModel() => Test(async (host) =>
         {
-            var response = await new InheritanceClient(host, null).GetRecursiveModelValueAsync();
+            var response = await new InheritanceClient(host, null).GetRecursiveModelAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.AreEqual(1, response.Value.Age);
             /*Assert.IsInstanceOf<Salmon>(response.Value);*/
@@ -81,7 +81,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task GetMissingDiscriminator() => Test(async (host) =>
         {
-            var response = await new InheritanceClient(host, null).GetMissingDiscriminatorValueAsync();
+            var response = await new InheritanceClient(host, null).GetMissingDiscriminatorAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.IsNotInstanceOf<Salmon>(response.Value);
             //Assert.IsNotInstanceOf<Shark>(response.Value);
@@ -91,7 +91,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task GetWrongDiscriminator() => Test(async (host) =>
         {
-            var response = await new InheritanceClient(host, null).GetWrongDiscriminatorValueAsync();
+            var response = await new InheritanceClient(host, null).GetWrongDiscriminatorAsync();
             Assert.AreEqual(200, response.GetRawResponse().Status);
             Assert.IsNotInstanceOf<Salmon>(response.Value);
             //Assert.IsNotInstanceOf<Shark>(response.Value);

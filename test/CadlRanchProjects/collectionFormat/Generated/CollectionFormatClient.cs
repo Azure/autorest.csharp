@@ -53,56 +53,37 @@ namespace CollectionFormat
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
-        public virtual async Task<Response<MessageResponse>> TestMultiValueAsync(IEnumerable<string> colors, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MessageResponse>> TestMultiAsync(IEnumerable<string> colors, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(colors, nameof(colors));
 
-            using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestMultiValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await TestMultiAsync(colors, context).ConfigureAwait(false);
-                return Response.FromValue(MessageResponse.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await TestMultiAsync(colors, context).ConfigureAwait(false);
+            return Response.FromValue(MessageResponse.FromResponse(response), response);
         }
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
-        public virtual Response<MessageResponse> TestMultiValue(IEnumerable<string> colors, CancellationToken cancellationToken = default)
+        public virtual Response<MessageResponse> TestMulti(IEnumerable<string> colors, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(colors, nameof(colors));
 
-            using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestMultiValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = TestMulti(colors, context);
-                return Response.FromValue(MessageResponse.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = TestMulti(colors, context);
+            return Response.FromValue(MessageResponse.FromResponse(response), response);
         }
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> or <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionFormatClient.xml" path="doc/members/member[@name='TestMultiAsync(IEnumerable,RequestContext)']/*" />
-        public virtual async Task<Response> TestMultiAsync(IEnumerable<string> colors, RequestContext context = null)
+        public virtual async Task<Response> TestMultiAsync(IEnumerable<string> colors, RequestContext context)
         {
             Argument.AssertNotNull(colors, nameof(colors));
+            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestMulti");
             scope.Start();
@@ -120,13 +101,14 @@ namespace CollectionFormat
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> or <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionFormatClient.xml" path="doc/members/member[@name='TestMulti(IEnumerable,RequestContext)']/*" />
-        public virtual Response TestMulti(IEnumerable<string> colors, RequestContext context = null)
+        public virtual Response TestMulti(IEnumerable<string> colors, RequestContext context)
         {
             Argument.AssertNotNull(colors, nameof(colors));
+            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestMulti");
             scope.Start();
@@ -145,56 +127,37 @@ namespace CollectionFormat
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
-        public virtual async Task<Response<MessageResponse>> TestCsvValueAsync(IEnumerable<string> colors, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MessageResponse>> TestCsvAsync(IEnumerable<string> colors, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(colors, nameof(colors));
 
-            using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestCsvValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await TestCsvAsync(colors, context).ConfigureAwait(false);
-                return Response.FromValue(MessageResponse.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await TestCsvAsync(colors, context).ConfigureAwait(false);
+            return Response.FromValue(MessageResponse.FromResponse(response), response);
         }
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
-        public virtual Response<MessageResponse> TestCsvValue(IEnumerable<string> colors, CancellationToken cancellationToken = default)
+        public virtual Response<MessageResponse> TestCsv(IEnumerable<string> colors, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(colors, nameof(colors));
 
-            using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestCsvValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = TestCsv(colors, context);
-                return Response.FromValue(MessageResponse.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = TestCsv(colors, context);
+            return Response.FromValue(MessageResponse.FromResponse(response), response);
         }
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> or <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionFormatClient.xml" path="doc/members/member[@name='TestCsvAsync(IEnumerable,RequestContext)']/*" />
-        public virtual async Task<Response> TestCsvAsync(IEnumerable<string> colors, RequestContext context = null)
+        public virtual async Task<Response> TestCsvAsync(IEnumerable<string> colors, RequestContext context)
         {
             Argument.AssertNotNull(colors, nameof(colors));
+            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestCsv");
             scope.Start();
@@ -212,13 +175,14 @@ namespace CollectionFormat
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> or <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionFormatClient.xml" path="doc/members/member[@name='TestCsv(IEnumerable,RequestContext)']/*" />
-        public virtual Response TestCsv(IEnumerable<string> colors, RequestContext context = null)
+        public virtual Response TestCsv(IEnumerable<string> colors, RequestContext context)
         {
             Argument.AssertNotNull(colors, nameof(colors));
+            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestCsv");
             scope.Start();
@@ -237,56 +201,37 @@ namespace CollectionFormat
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
-        public virtual async Task<Response<MessageResponse>> TestCsvHeaderValueAsync(IEnumerable<string> colors, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MessageResponse>> TestCsvHeaderAsync(IEnumerable<string> colors, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(colors, nameof(colors));
 
-            using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestCsvHeaderValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await TestCsvHeaderAsync(colors, context).ConfigureAwait(false);
-                return Response.FromValue(MessageResponse.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await TestCsvHeaderAsync(colors, context).ConfigureAwait(false);
+            return Response.FromValue(MessageResponse.FromResponse(response), response);
         }
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
-        public virtual Response<MessageResponse> TestCsvHeaderValue(IEnumerable<string> colors, CancellationToken cancellationToken = default)
+        public virtual Response<MessageResponse> TestCsvHeader(IEnumerable<string> colors, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(colors, nameof(colors));
 
-            using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestCsvHeaderValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = TestCsvHeader(colors, context);
-                return Response.FromValue(MessageResponse.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = TestCsvHeader(colors, context);
+            return Response.FromValue(MessageResponse.FromResponse(response), response);
         }
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> or <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionFormatClient.xml" path="doc/members/member[@name='TestCsvHeaderAsync(IEnumerable,RequestContext)']/*" />
-        public virtual async Task<Response> TestCsvHeaderAsync(IEnumerable<string> colors, RequestContext context = null)
+        public virtual async Task<Response> TestCsvHeaderAsync(IEnumerable<string> colors, RequestContext context)
         {
             Argument.AssertNotNull(colors, nameof(colors));
+            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestCsvHeader");
             scope.Start();
@@ -304,13 +249,14 @@ namespace CollectionFormat
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> or <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionFormatClient.xml" path="doc/members/member[@name='TestCsvHeader(IEnumerable,RequestContext)']/*" />
-        public virtual Response TestCsvHeader(IEnumerable<string> colors, RequestContext context = null)
+        public virtual Response TestCsvHeader(IEnumerable<string> colors, RequestContext context)
         {
             Argument.AssertNotNull(colors, nameof(colors));
+            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestCsvHeader");
             scope.Start();
@@ -329,56 +275,37 @@ namespace CollectionFormat
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
-        public virtual async Task<Response<MessageResponse>> TestDefaultHeaderValueAsync(IEnumerable<string> colors, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<MessageResponse>> TestDefaultHeaderAsync(IEnumerable<string> colors, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(colors, nameof(colors));
 
-            using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestDefaultHeaderValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await TestDefaultHeaderAsync(colors, context).ConfigureAwait(false);
-                return Response.FromValue(MessageResponse.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await TestDefaultHeaderAsync(colors, context).ConfigureAwait(false);
+            return Response.FromValue(MessageResponse.FromResponse(response), response);
         }
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
-        public virtual Response<MessageResponse> TestDefaultHeaderValue(IEnumerable<string> colors, CancellationToken cancellationToken = default)
+        public virtual Response<MessageResponse> TestDefaultHeader(IEnumerable<string> colors, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(colors, nameof(colors));
 
-            using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestDefaultHeaderValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = TestDefaultHeader(colors, context);
-                return Response.FromValue(MessageResponse.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = TestDefaultHeader(colors, context);
+            return Response.FromValue(MessageResponse.FromResponse(response), response);
         }
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> or <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionFormatClient.xml" path="doc/members/member[@name='TestDefaultHeaderAsync(IEnumerable,RequestContext)']/*" />
-        public virtual async Task<Response> TestDefaultHeaderAsync(IEnumerable<string> colors, RequestContext context = null)
+        public virtual async Task<Response> TestDefaultHeaderAsync(IEnumerable<string> colors, RequestContext context)
         {
             Argument.AssertNotNull(colors, nameof(colors));
+            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestDefaultHeader");
             scope.Start();
@@ -396,13 +323,14 @@ namespace CollectionFormat
 
         /// <param name="colors"> Possible values for colors are [blue,red,green]. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="colors"/> or <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionFormatClient.xml" path="doc/members/member[@name='TestDefaultHeader(IEnumerable,RequestContext)']/*" />
-        public virtual Response TestDefaultHeader(IEnumerable<string> colors, RequestContext context = null)
+        public virtual Response TestDefaultHeader(IEnumerable<string> colors, RequestContext context)
         {
             Argument.AssertNotNull(colors, nameof(colors));
+            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CollectionFormatClient.TestDefaultHeader");
             scope.Start();

@@ -47,51 +47,34 @@ namespace ParametersCadl
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Result>> OperationValueAsync(int start, int? end = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Result>> OperationAsync(int start, int? end = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.OperationValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await OperationAsync(start, end, context).ConfigureAwait(false);
-                return Response.FromValue(Result.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await OperationAsync(start, end, context).ConfigureAwait(false);
+            return Response.FromValue(Result.FromResponse(response), response);
         }
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Result> OperationValue(int start, int? end = null, CancellationToken cancellationToken = default)
+        public virtual Response<Result> Operation(int start, int? end = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.OperationValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = Operation(start, end, context);
-                return Response.FromValue(Result.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Operation(start, end, context);
+            return Response.FromValue(Result.FromResponse(response), response);
         }
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='OperationAsync(Int32,Int32,RequestContext)']/*" />
-        public virtual async Task<Response> OperationAsync(int start, int? end = null, RequestContext context = null)
+        public virtual async Task<Response> OperationAsync(int start, int? end, RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.Operation");
             scope.Start();
             try
@@ -109,11 +92,14 @@ namespace ParametersCadl
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation(Int32,Int32,RequestContext)']/*" />
-        public virtual Response Operation(int start, int? end = null, RequestContext context = null)
+        public virtual Response Operation(int start, int? end, RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.Operation");
             scope.Start();
             try
@@ -131,51 +117,34 @@ namespace ParametersCadl
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Result>> Operation2ValueAsync(int end, int? start = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Result>> Operation2Async(int end, int? start = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.Operation2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await Operation2Async(end, start, context).ConfigureAwait(false);
-                return Response.FromValue(Result.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await Operation2Async(end, start, context).ConfigureAwait(false);
+            return Response.FromValue(Result.FromResponse(response), response);
         }
 
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Result> Operation2Value(int end, int? start = null, CancellationToken cancellationToken = default)
+        public virtual Response<Result> Operation2(int end, int? start = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.Operation2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = Operation2(end, start, context);
-                return Response.FromValue(Result.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Operation2(end, start, context);
+            return Response.FromValue(Result.FromResponse(response), response);
         }
 
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2Async(Int32,Int32,RequestContext)']/*" />
-        public virtual async Task<Response> Operation2Async(int end, int? start = null, RequestContext context = null)
+        public virtual async Task<Response> Operation2Async(int end, int? start, RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.Operation2");
             scope.Start();
             try
@@ -193,11 +162,14 @@ namespace ParametersCadl
         /// <param name="end"> The Int32 to use. </param>
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ParametersCadlClient.xml" path="doc/members/member[@name='Operation2(Int32,Int32,RequestContext)']/*" />
-        public virtual Response Operation2(int end, int? start = null, RequestContext context = null)
+        public virtual Response Operation2(int end, int? start, RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("ParametersCadlClient.Operation2");
             scope.Start();
             try

@@ -3,7 +3,7 @@
   <members>
     <member name="GetFloatAsync(RequestContext)">
 <example>
-This sample shows how to call GetFloatAsync and parse the result.
+This sample shows how to call GetFloatAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetFloatClient(<1.0.0>);
 
@@ -28,7 +28,7 @@ Schema for <c>FloatProperty</c>:
     </member>
     <member name="GetFloat(RequestContext)">
 <example>
-This sample shows how to call GetFloat and parse the result.
+This sample shows how to call GetFloat with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetFloatClient(<1.0.0>);
 

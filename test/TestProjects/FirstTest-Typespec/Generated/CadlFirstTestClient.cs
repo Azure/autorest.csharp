@@ -95,23 +95,13 @@ namespace CadlFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual async Task<Response<Thing>> TopActionValueAsync(string action, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> TopActionAsync(string action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopActionValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await TopActionAsync(action, context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await TopActionAsync(action, context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> top level method. </summary>
@@ -119,36 +109,27 @@ namespace CadlFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
-        public virtual Response<Thing> TopActionValue(string action, CancellationToken cancellationToken = default)
+        public virtual Response<Thing> TopAction(string action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopActionValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = TopAction(action, context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = TopAction(action, context);
+            return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> top level method. </summary>
         /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> or <paramref name="context"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(String,RequestContext)']/*" />
-        public virtual async Task<Response> TopActionAsync(string action, RequestContext context = null)
+        public virtual async Task<Response> TopActionAsync(string action, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
+            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
             scope.Start();
@@ -167,14 +148,15 @@ namespace CadlFirstTest
         /// <summary> top level method. </summary>
         /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> or <paramref name="context"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='TopAction(String,RequestContext)']/*" />
-        public virtual Response TopAction(string action, RequestContext context = null)
+        public virtual Response TopAction(string action, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
+            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
             scope.Start();
@@ -690,49 +672,32 @@ namespace CadlFirstTest
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> HelloDemo2ValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await HelloDemo2Async(context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await HelloDemo2Async(context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> HelloDemo2Value(CancellationToken cancellationToken = default)
+        public virtual Response<Thing> HelloDemo2(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2Value");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = HelloDemo2(context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = HelloDemo2(context);
+            return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(RequestContext)']/*" />
-        public virtual async Task<Response> HelloDemo2Async(RequestContext context = null)
+        public virtual async Task<Response> HelloDemo2Async(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2");
             scope.Start();
             try
@@ -749,11 +714,14 @@ namespace CadlFirstTest
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(RequestContext)']/*" />
-        public virtual Response HelloDemo2(RequestContext context = null)
+        public virtual Response HelloDemo2(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2");
             scope.Start();
             try
@@ -846,49 +814,32 @@ namespace CadlFirstTest
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Thing>> HelloLiteralValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteralValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await HelloLiteralAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await HelloLiteralAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Thing> HelloLiteralValue(CancellationToken cancellationToken = default)
+        public virtual Response<Thing> HelloLiteral(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteralValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = HelloLiteral(context);
-                return Response.FromValue(Thing.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = HelloLiteral(context);
+            return Response.FromValue(Thing.FromResponse(response), response);
         }
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
-        public virtual async Task<Response> HelloLiteralAsync(RequestContext context = null)
+        public virtual async Task<Response> HelloLiteralAsync(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteral");
             scope.Start();
             try
@@ -905,11 +856,14 @@ namespace CadlFirstTest
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
-        public virtual Response HelloLiteral(RequestContext context = null)
+        public virtual Response HelloLiteral(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteral");
             scope.Start();
             try
@@ -1044,49 +998,32 @@ namespace CadlFirstTest
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> StillConvenientValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> StillConvenientAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.StillConvenientValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await StillConvenientAsync(context).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await StillConvenientAsync(context).ConfigureAwait(false);
+            return response;
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response StillConvenientValue(CancellationToken cancellationToken = default)
+        public virtual Response StillConvenient(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.StillConvenientValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = StillConvenient(context);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = StillConvenient(context);
+            return response;
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
-        internal virtual async Task<Response> StillConvenientAsync(RequestContext context = null)
+        internal virtual async Task<Response> StillConvenientAsync(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.StillConvenient");
             scope.Start();
             try
@@ -1103,11 +1040,14 @@ namespace CadlFirstTest
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
-        internal virtual Response StillConvenient(RequestContext context = null)
+        internal virtual Response StillConvenient(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.StillConvenient");
             scope.Start();
             try

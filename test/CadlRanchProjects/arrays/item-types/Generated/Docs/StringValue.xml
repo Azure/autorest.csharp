@@ -3,7 +3,7 @@
   <members>
     <member name="GetStringValueAsync(RequestContext)">
 <example>
-This sample shows how to call GetStringValueAsync and parse the result.
+This sample shows how to call GetStringValueAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetStringValueClient(<1.0.0>);
 
@@ -16,7 +16,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetStringValue(RequestContext)">
 <example>
-This sample shows how to call GetStringValue and parse the result.
+This sample shows how to call GetStringValue with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetStringValueClient(<1.0.0>);
 

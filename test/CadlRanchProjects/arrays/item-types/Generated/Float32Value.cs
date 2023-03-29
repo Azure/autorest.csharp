@@ -49,63 +49,46 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<float>>> GetFloat32ValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<float>>> GetFloat32ValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Float32Value.GetFloat32ValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetFloat32ValueAsync(context).ConfigureAwait(false);
+            IReadOnlyList<float> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            List<float> array = new List<float>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetFloat32ValueAsync(context).ConfigureAwait(false);
-                IReadOnlyList<float> value = default;
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                List<float> array = new List<float>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetSingle());
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetSingle());
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<float>> GetFloat32ValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<float>> GetFloat32Value(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Float32Value.GetFloat32ValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetFloat32Value(context);
+            IReadOnlyList<float> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            List<float> array = new List<float>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetFloat32Value(context);
-                IReadOnlyList<float> value = default;
-                using var document = JsonDocument.Parse(response.ContentStream);
-                List<float> array = new List<float>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetSingle());
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetSingle());
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Float32Value.xml" path="doc/members/member[@name='GetFloat32ValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetFloat32ValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetFloat32ValueAsync(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("Float32Value.GetFloat32Value");
             scope.Start();
             try
@@ -121,11 +104,14 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Float32Value.xml" path="doc/members/member[@name='GetFloat32Value(RequestContext)']/*" />
-        public virtual Response GetFloat32Value(RequestContext context = null)
+        public virtual Response GetFloat32Value(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("Float32Value.GetFloat32Value");
             scope.Start();
             try

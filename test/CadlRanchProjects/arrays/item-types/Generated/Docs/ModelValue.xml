@@ -3,7 +3,7 @@
   <members>
     <member name="GetModelValueAsync(RequestContext)">
 <example>
-This sample shows how to call GetModelValueAsync and parse the result.
+This sample shows how to call GetModelValueAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetModelValueClient(<1.0.0>);
 
@@ -30,7 +30,7 @@ Schema for <c>InnerModel</c>:
     </member>
     <member name="GetModelValue(RequestContext)">
 <example>
-This sample shows how to call GetModelValue and parse the result.
+This sample shows how to call GetModelValue with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetModelValueClient(<1.0.0>);
 
