@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -236,11 +237,9 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 case JsonSerialization jsonSerialization:
                     {
-                        var content = new CodeWriterDeclaration("content");
-
-                        writer.Line($"var {content:D} = new {typeof(Utf8JsonRequestContent)}();");
-                        writer.WriteBodyBlock(JsonSerializationMethodsBuilder.SerializeExpression(new MemberReference(content, nameof(Utf8JsonRequestContent.JsonWriter)), jsonSerialization, new FormattableStringToExpression(value)));
-                        writer.Line($"{request}.Content = {content};");
+                        writer.WriteLine(MethodBodyLines.New("content", out Utf8JsonRequestContentExpression content));
+                        writer.WriteBodyBlock(JsonSerializationMethodsBuilder.SerializeExpression(content.JsonWriter, jsonSerialization, new FormattableStringToExpression(value)));
+                        writer.WriteLine(new SetValueLine(new MemberReference(request, nameof(Azure.Core.Request.Content)), content));
                         break;
                     }
                 case XmlElementSerialization xmlSerialization:

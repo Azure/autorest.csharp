@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -147,10 +148,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var resourceData = _opSource.Resource!.ResourceData;
                 Debug.Assert(resourceData.IncludeDeserializer);
 
-                _writer.WriteLine(MethodBodyLines.Declare.JsonDocument(ValueExpressions.Call.JsonDocument.Parse(responseVariable, async), out var documentVariable));
+                _writer.WriteLine(MethodBodyLines.UsingVar("document", JsonDocumentExpression.Parse(responseVariable, async), out var document));
 
                 var dataVariable = new CodeWriterDeclaration("data");
-                var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, ValueExpressions.Call.JsonDocument.GetRootElement(documentVariable), null);
+                var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.RootElement, null);
                 if (_operationIdMappings is not null)
                 {
                     deserializeExpression = ValueExpressions.Call.Instance(null, "ScrubId", deserializeExpression);

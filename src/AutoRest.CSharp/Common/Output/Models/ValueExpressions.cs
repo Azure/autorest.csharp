@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -18,7 +19,7 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal static class ValueExpressions
     {
-        public static ValueExpression Func(CodeWriterDeclaration arg, ValueExpression expression) => new FuncExpression(new[]{ arg }, expression);
+        public static FuncExpression Func(CodeWriterDeclaration arg, ValueExpression expression) => new(new[]{ arg }, expression);
         public static ValueExpression New(CSharpType type, params ValueExpression[] arguments) => new NewInstanceExpression(type, arguments);
         public static ValueExpression New(CSharpType type, IReadOnlyDictionary<string, ValueExpression> properties) => new NewInstanceExpression(type, Array.Empty<ValueExpression>()) { Properties = properties };
 
@@ -142,77 +143,23 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            public static class HttpMessage
-            {
-                public static ValueExpression FromStream(ValueExpression message) => Instance(message, nameof(Azure.Core.HttpMessage.ExtractResponseContent));
-            }
-
-            public static class JsonDocument
-            {
-                public static ValueExpression GetRootElement(ValueExpression response)
-                    => new MemberReference(response, nameof(System.Text.Json.JsonDocument.RootElement));
-
-                public static ValueExpression Parse(ValueExpression json)
-                {
-                    return new StaticMethodCallExpression(typeof(System.Text.Json.JsonDocument), nameof(System.Text.Json.JsonDocument.Parse), new[]{json});
-                }
-
-                public static ValueExpression Parse(ValueExpression response, bool async)
-                {
-                    var contentStream = new MemberReference(response, nameof(Azure.Response.ContentStream));
-                    return async
-                        ? new StaticMethodCallExpression(typeof(System.Text.Json.JsonDocument), nameof(System.Text.Json.JsonDocument.ParseAsync), new[]{contentStream, Default, KnownParameters.CancellationTokenParameter}, null, false, true)
-                        : new StaticMethodCallExpression(typeof(System.Text.Json.JsonDocument), nameof(System.Text.Json.JsonDocument.Parse), new[]{contentStream});
-                }
-            }
-
             public static class JsonElement
             {
-                public static ValueExpression Clone(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.Clone));
-                public static ValueExpression EnumerateArray(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.EnumerateArray));
-                public static ValueExpression EnumerateObject(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.EnumerateObject));
-                public static ValueExpression GetBoolean(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetBoolean));
-                public static ValueExpression GetBytesFromBase64(ValueExpression element, string? format) => Extension(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.GetBytesFromBase64), element, Literal(format));
-                public static ValueExpression GetChar(ValueExpression element) => Extension(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.GetChar), element);
-                public static ValueExpression GetDateTimeOffset(ValueExpression element, string? format) => Extension(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.GetDateTimeOffset), element, Literal(format));
-                public static ValueExpression GetDateTime(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetDateTime));
-                public static ValueExpression GetDecimal(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetDecimal));
-                public static ValueExpression GetDouble(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetDouble));
-                public static ValueExpression GetGuid(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetGuid));
-                public static ValueExpression GetInt16(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetInt16));
-                public static ValueExpression GetInt32(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetInt32));
-                public static ValueExpression GetInt64(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetInt64));
-                public static ValueExpression GetObject(ValueExpression element) => Extension(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.GetObject), element);
-                public static ValueExpression GetRawText(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetRawText));
-                public static ValueExpression GetSingle(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetSingle));
-                public static ValueExpression GetString(ValueExpression element) => Instance(element, nameof(System.Text.Json.JsonElement.GetString));
-                public static ValueExpression GetTimeSpan(ValueExpression element, string? format) => Extension(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.GetTimeSpan), element, Literal(format));
-
-                public static ValueExpression TryGetProperty(Parameter element, string propertyName, out CodeWriterDeclaration discriminator)
+                public static ValueExpression TryGetProperty(Parameter element, string propertyName, out JsonElementExpression discriminator)
                 {
-                    discriminator = new CodeWriterDeclaration("discriminator");
-                    return new FormattableStringToExpression($"{element.Name}.{nameof(System.Text.Json.JsonElement.TryGetProperty)}({propertyName:L}, out {typeof(System.Text.Json.JsonElement)} {discriminator:D})");
+                    var discriminatorDeclaration = new CodeWriterDeclaration("discriminator");
+                    discriminator = new JsonElementExpression(discriminatorDeclaration);
+                    return new FormattableStringToExpression($"{element.Name}.{nameof(System.Text.Json.JsonElement.TryGetProperty)}({propertyName:L}, out {typeof(System.Text.Json.JsonElement)} {discriminatorDeclaration:D})");
                 }
-
-                public static ValueExpression ValueKindEqualsNull(ValueExpression element)
-                    => new BinaryOperatorExpression("==", new MemberReference(element, nameof(System.Text.Json.JsonElement.ValueKind)), new FormattableStringToExpression($"{typeof(System.Text.Json.JsonValueKind)}.Null"));
-
-                public static ValueExpression ValueKindEqualsString(ValueExpression element)
-                    => new BinaryOperatorExpression("==", new MemberReference(element, nameof(System.Text.Json.JsonElement.ValueKind)), new FormattableStringToExpression($"{typeof(System.Text.Json.JsonValueKind)}.String"));
-            }
-
-            public static class JsonProperty
-            {
-                public static ValueExpression NameEquals(ValueExpression element, string value) => Instance(element, nameof(System.Text.Json.JsonProperty.NameEquals), LiteralU8(value));
             }
 
             public static class JsonSerializer
             {
-                public static ValueExpression Deserialize(ValueExpression element, CSharpType serializationType, ValueExpression? options = null)
+                public static ValueExpression Deserialize(JsonElementExpression element, CSharpType serializationType, ValueExpression? options = null)
                 {
                     var arguments = options is null
-                        ? new[]{ JsonElement.GetRawText(element) }
-                        : new[]{ JsonElement.GetRawText(element), options };
+                        ? new[]{ element.GetRawText() }
+                        : new[]{ element.GetRawText(), options };
                     return new StaticMethodCallExpression(typeof(System.Text.Json.JsonSerializer), nameof(System.Text.Json.JsonSerializer.Deserialize), arguments, new[] { serializationType });
                 }
             }
@@ -312,7 +259,7 @@ namespace AutoRest.CSharp.Output.Models
                         // When `JsonElement` provides access to its UTF8 buffer, change this code to create `BinaryData` from it.
                         // See also PageableHelpers.ParseResponseForBinaryData
                         var e = new CodeWriterDeclaration("e");
-                        return Func(e, BinaryData.FromString(JsonElement.GetRawText(e)));
+                        return Func(e, BinaryData.FromString(new JsonElementExpression(e).GetRawText()));
                     }
 
                     if (pageItemType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type })
@@ -321,7 +268,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
 
                     var variable = new CodeWriterDeclaration("e");
-                    var deserializeImplementation = JsonSerializationMethodsBuilder.GetDeserializeValueExpression(variable, pageItemType);
+                    var deserializeImplementation = JsonSerializationMethodsBuilder.GetDeserializeValueExpression(new JsonElementExpression(variable), pageItemType);
                     return Func(variable, deserializeImplementation);
                 }
             }
@@ -392,6 +339,9 @@ namespace AutoRest.CSharp.Output.Models
         public static implicit operator ValueExpression(Parameter parameter) => new ParameterReference(parameter);
         public static implicit operator ValueExpression(CodeWriterDeclaration name) => new VariableReference(name);
     }
+
+    internal record TypedValueExpression(ValueExpression Untyped) : ValueExpression;
+    internal record ValueExpression<TReturn>(ValueExpression Untyped) : TypedValueExpression(Untyped);
 
     internal record CastExpression(ValueExpression Inner, CSharpType Type) : ValueExpression;
     internal record DefaultValueExpression(CSharpType Type) : ValueExpression;

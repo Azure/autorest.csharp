@@ -282,6 +282,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 case VariableReference variable:
                     writer.Append($"{variable.Name:I}");
                     break;
+                case TypedValueExpression typed:
+                    writer.WriteValueExpression(typed.Untyped);
+                    break;
             }
 
             static void WriteNewInstance(CodeWriter writer, NewInstanceExpression newInstanceExpression)

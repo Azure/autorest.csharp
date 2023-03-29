@@ -4,12 +4,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.ValueExpressions;
 
@@ -18,8 +17,32 @@ namespace AutoRest.CSharp.Output.Models
     internal static class MethodBodyLines
     {
         public static MethodBodyLine Continue { get; } = new KeywordLine("continue");
+
+        public static MethodBodyLine New(string name, out Utf8JsonRequestContentExpression variable)
+            => Var(null, name, new Utf8JsonRequestContentExpression(ValueExpressions.New(typeof(Utf8JsonRequestContent))), d => new Utf8JsonRequestContentExpression(d), out variable);
+
         public static MethodBodyLine Return(CodeWriterDeclaration name) => new ReturnValueLine(new VariableReference(name));
         public static MethodBodyLine Return(ValueExpression value) => new ReturnValueLine(value);
+
+        public static MethodBodyLine UsingVar(string name, JsonDocumentExpression value, out JsonDocumentExpression variable)
+            => UsingVar(null, name, value, d => new JsonDocumentExpression(d), out variable);
+
+        public static MethodBodyLine Var(string name, Utf8JsonWriterExpression value, out Utf8JsonWriterExpression variable)
+            => Var(null, name, value, d => new Utf8JsonWriterExpression(d), out variable);
+
+        private static MethodBodyLine Var<T>(CSharpType? type, string name, T value, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression
+        {
+            var declaration = new CodeWriterDeclaration(name);
+            variable = factory(declaration);
+            return new DeclareVariableLine(type, declaration, value);
+        }
+
+        private static MethodBodyLine UsingVar<T>(CSharpType? type, string name, T value, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression
+        {
+            var declaration = new CodeWriterDeclaration(name);
+            variable = factory(declaration);
+            return new UsingDeclareVariableLine(type, declaration, value);
+        }
 
         public static MethodBodyStatement AsStatement(this IEnumerable<MethodBodyStatement> statements) => new MethodBodyStatements(statements.ToArray());
 
@@ -46,12 +69,6 @@ namespace AutoRest.CSharp.Output.Models
                 public static MethodBodyLine WriteTo(ValueExpression jsonElement, ValueExpression writer) => new InstanceMethodCallLine(jsonElement, nameof(System.Text.Json.JsonElement.WriteTo), new[]{writer}, false);
             }
 
-            public static class JsonProperty
-            {
-                public static MethodBodyLine ThrowNonNullablePropertyIsNull(ValueExpression jsonProperty)
-                    => new StaticMethodCallLine(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.ThrowNonNullablePropertyIsNull), new[]{jsonProperty}, CallAsExtension: true);
-            }
-
             public static class JsonSerializer
             {
                 public static MethodBodyLine Serialize(ValueExpression writer, ValueExpression value)
@@ -60,69 +77,14 @@ namespace AutoRest.CSharp.Output.Models
                 public static MethodBodyLine Serialize(ValueExpression writer, ValueExpression value, ValueExpression options)
                     => new StaticMethodCallLine(typeof(System.Text.Json.JsonSerializer), nameof(System.Text.Json.JsonSerializer.Serialize), new[]{writer, value, options});
             }
-
-            public static class Utf8JsonWriter
-            {
-                public static MethodBodyLine WriteStartObject(ValueExpression utf8JsonWriter) => new InstanceMethodCallLine(utf8JsonWriter, nameof(System.Text.Json.Utf8JsonWriter.WriteStartObject), Array.Empty<ValueExpression>(), false);
-                public static MethodBodyLine WriteEndObject(ValueExpression utf8JsonWriter) => new InstanceMethodCallLine(utf8JsonWriter, nameof(System.Text.Json.Utf8JsonWriter.WriteEndObject), Array.Empty<ValueExpression>(), false);
-                public static MethodBodyLine WriteStartArray(ValueExpression utf8JsonWriter) => new InstanceMethodCallLine(utf8JsonWriter, nameof(System.Text.Json.Utf8JsonWriter.WriteStartArray), Array.Empty<ValueExpression>(), false);
-                public static MethodBodyLine WriteEndArray(ValueExpression utf8JsonWriter) => new InstanceMethodCallLine(utf8JsonWriter, nameof(System.Text.Json.Utf8JsonWriter.WriteEndArray), Array.Empty<ValueExpression>(), false);
-                public static MethodBodyLine WritePropertyName(ValueExpression utf8JsonWriter, string propertyName) => WritePropertyName(utf8JsonWriter, LiteralU8(propertyName));
-                public static MethodBodyLine WritePropertyName(ValueExpression utf8JsonWriter, ValueExpression propertyName) => new InstanceMethodCallLine(utf8JsonWriter, nameof(System.Text.Json.Utf8JsonWriter.WritePropertyName), new[]{propertyName}, false);
-                public static MethodBodyLine WriteNull(ValueExpression utf8JsonWriter, string propertyName) => WriteNull(utf8JsonWriter, Literal(propertyName));
-                public static MethodBodyLine WriteNull(ValueExpression utf8JsonWriter, ValueExpression propertyName) => new InstanceMethodCallLine(utf8JsonWriter, nameof(System.Text.Json.Utf8JsonWriter.WriteNull), new[]{propertyName}, false);
-                public static MethodBodyLine WriteNullValue(ValueExpression utf8JsonWriter) => new InstanceMethodCallLine(utf8JsonWriter, nameof(System.Text.Json.Utf8JsonWriter.WriteNullValue), Array.Empty<ValueExpression>(), false);
-
-                public static MethodBodyLine WriteNumberValue(ValueExpression utf8JsonWriter, ValueExpression value)
-                    => new InstanceMethodCallLine(utf8JsonWriter, nameof(System.Text.Json.Utf8JsonWriter.WriteNumberValue), new[]{value}, false);
-
-                public static MethodBodyLine WriteStringValue(ValueExpression utf8JsonWriter, ValueExpression value)
-                    => new InstanceMethodCallLine(utf8JsonWriter, nameof(System.Text.Json.Utf8JsonWriter.WriteStringValue), new[]{value}, false);
-
-                public static MethodBodyLine WriteBooleanValue(ValueExpression utf8JsonWriter, ValueExpression value)
-                    => new InstanceMethodCallLine(utf8JsonWriter, nameof(System.Text.Json.Utf8JsonWriter.WriteBooleanValue), new[]{value}, false);
-
-                public static MethodBodyLine WriteRawValue(ValueExpression utf8JsonWriter, ValueExpression value)
-                    => new InstanceMethodCallLine(utf8JsonWriter, nameof(System.Text.Json.Utf8JsonWriter.WriteRawValue), new[]{value}, false);
-
-                public static MethodBodyLine WriteNumberValue(ValueExpression utf8JsonWriter, ValueExpression value, string? format)
-                    => new StaticMethodCallLine(typeof(Azure.Core.Utf8JsonWriterExtensions), nameof(Azure.Core.Utf8JsonWriterExtensions.WriteNumberValue), new[]{utf8JsonWriter, value, Literal(format)}, null, true);
-
-                public static MethodBodyLine WriteStringValue(ValueExpression utf8JsonWriter, ValueExpression value, string? format)
-                    => new StaticMethodCallLine(typeof(Azure.Core.Utf8JsonWriterExtensions), nameof(Azure.Core.Utf8JsonWriterExtensions.WriteStringValue), new[]{utf8JsonWriter, value, Literal(format)}, null, true);
-
-                public static MethodBodyLine WriteObjectValue(ValueExpression utf8JsonWriter, ValueExpression value)
-                    => new StaticMethodCallLine(typeof(Azure.Core.Utf8JsonWriterExtensions), nameof(Azure.Core.Utf8JsonWriterExtensions.WriteObjectValue), new[]{utf8JsonWriter, value}, null, true);
-
-                public static MethodBodyLine WriteBase64StringValue(ValueExpression utf8JsonWriter, ValueExpression value, string? format)
-                    => new StaticMethodCallLine(typeof(Azure.Core.Utf8JsonWriterExtensions), nameof(Azure.Core.Utf8JsonWriterExtensions.WriteBase64StringValue), new[]{utf8JsonWriter, value, Literal(format)}, null, true);
-            }
         }
 
         public static class Declare
         {
-            public static MethodBodyLine Var(string name, ValueExpression value, out CodeWriterDeclaration declaration)
-            {
-                declaration = new CodeWriterDeclaration(name);
-                return new DeclareVariableLine(null, declaration, value);
-            }
-
-            public static MethodBodyLine New(CSharpType type, string name, out CodeWriterDeclaration declaration)
-            {
-                declaration = new CodeWriterDeclaration(name);
-                return new DeclareVariableLine(null, declaration, ValueExpressions.New(type));
-            }
-
             public static MethodBodyLine Default(CSharpType type, string name, out CodeWriterDeclaration declaration)
             {
                 declaration = new CodeWriterDeclaration(name);
                 return new DeclareVariableLine(type, declaration, ValueExpressions.Default);
-            }
-
-            public static MethodBodyLine JsonDocument(ValueExpression value, out CodeWriterDeclaration document)
-            {
-                document = new CodeWriterDeclaration("document");
-                return new UsingDeclareVariableLine(null, document, value);
             }
 
             public static MethodBodyLine FirstPageRequest(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)

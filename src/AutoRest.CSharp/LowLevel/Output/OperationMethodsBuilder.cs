@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Builders;
@@ -440,11 +441,11 @@ namespace AutoRest.CSharp.Output.Models
                         }
                         break;
                     case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateSerialization: {} serializations }:
-                        statements.Add(Declare.New(typeof(Utf8JsonRequestContent), protocolParameter.Name, out var requestContent));
-                        statements.Add(Declare.Var("writer", new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter)), out var utf8JsonWriter));
-                        statements.Add(LineCall.Utf8JsonWriter.WriteStartObject(utf8JsonWriter));
+                        statements.Add(New(protocolParameter.Name, out Utf8JsonRequestContentExpression requestContent));
+                        statements.Add(Var("writer", requestContent.JsonWriter, out var utf8JsonWriter));
+                        statements.Add(utf8JsonWriter.WriteStartObject());
                         statements.Add(JsonSerializationMethodsBuilder.WritProperties(utf8JsonWriter, serializations).AsStatement());
-                        statements.Add(LineCall.Utf8JsonWriter.WriteEndObject(utf8JsonWriter));
+                        statements.Add(utf8JsonWriter.WriteEndObject());
 
                         createRequestArguments.Add(requestContent);
                         break;
@@ -482,11 +483,11 @@ namespace AutoRest.CSharp.Output.Models
                         }
                         break;
                     case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateSerialization: {} serializations }:
-                        yield return Declare.New(typeof(Utf8JsonRequestContent), protocolParameter.Name, out var requestContent);
-                        yield return Declare.Var("writer", new MemberReference(requestContent, nameof(Utf8JsonRequestContent.JsonWriter)), out var utf8JsonWriter);
-                        yield return LineCall.Utf8JsonWriter.WriteStartObject(utf8JsonWriter);
+                        yield return New(protocolParameter.Name, out Utf8JsonRequestContentExpression requestContent);
+                        yield return Var("writer", requestContent.JsonWriter, out var utf8JsonWriter);
+                        yield return utf8JsonWriter.WriteStartObject();
                         yield return JsonSerializationMethodsBuilder.WritProperties(utf8JsonWriter, serializations).AsStatement();
-                        yield return LineCall.Utf8JsonWriter.WriteEndObject(utf8JsonWriter);
+                        yield return utf8JsonWriter.WriteEndObject();
 
                         protocolMethodArguments.Add(requestContent);
                         break;
