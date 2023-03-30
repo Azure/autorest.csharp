@@ -17,9 +17,9 @@ namespace Models.Inheritance.Models
         /// <param name="age"></param>
         public Salmon(int age) : base(age)
         {
+            Kind = "salmon";
             Friends = new ChangeTrackingList<Fish>();
             Hate = new ChangeTrackingDictionary<string, Fish>();
-            Kind = "salmon";
         }
 
         /// <summary> Initializes a new instance of Salmon. </summary>

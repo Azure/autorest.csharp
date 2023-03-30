@@ -14,7 +14,6 @@ namespace Models.Inheritance.Models
         /// <param name="age"></param>
         internal UnknownFish(int age) : base(age)
         {
-            Kind = "Unknown";
         }
 
         /// <summary> Initializes a new instance of UnknownFish. </summary>
