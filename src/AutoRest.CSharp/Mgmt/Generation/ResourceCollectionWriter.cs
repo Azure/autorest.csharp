@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -105,7 +106,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (This.Resource.ResourceData.ShouldSetResourceIdentifier)
             {
-                writer.WriteLine(Assign.ResponseValueId(response, CallCreateResourceIdentifier(This.Resource, operation.RequestPath, parameterMappings, response)));
+                var responseExpression = new ResponseOfTExpression(response);
+                writer.WriteLine(Assign.ResponseValueId(responseExpression, InvokeCreateResourceIdentifier(This.Resource, operation.RequestPath, parameterMappings, responseExpression)));
             }
 
             writer.Line($"return {typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");

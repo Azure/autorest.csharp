@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -26,8 +28,9 @@ using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using static AutoRest.CSharp.Output.Models.MethodBodyLines;
 using static AutoRest.CSharp.Output.Models.ValueExpressions;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -596,12 +599,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var firstPageRequestArguments = GetArguments(_writer, parameterMappings);
             var restClient = new FormattableStringToExpression($"{GetRestClientName(operation)}");
 
-            _writer.WriteLine(Declare.FirstPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(pagingMethod.Method), firstPageRequestArguments, out var firstPageRequest));
+            _writer.MethodBodyStatement(MethodBodyLines.Declare.FirstPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(pagingMethod.Method), firstPageRequestArguments, out var firstPageRequest));
             CodeWriterDeclaration? nextPageRequest = null;
             if (pagingMethod.NextPageMethod is {} nextPageMethod)
             {
                 var nextPageRequestArguments = firstPageRequestArguments.Prepend(KnownParameters.NextLink);
-                _writer.WriteLine(Declare.NextPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(nextPageMethod), nextPageRequestArguments, out nextPageRequest));
+                _writer.MethodBodyStatement(MethodBodyLines.Declare.NextPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(nextPageMethod), nextPageRequestArguments, out nextPageRequest));
             }
 
             var clientDiagnostics = new FormattableStringToExpression($"{clientDiagnosticsReference.Name}");
@@ -609,10 +612,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
-            _writer.WriteLine(Return(Call.PageableHelpers.CreatePageable(firstPageRequest, nextPageRequest, clientDiagnostics, pipeline, itemType, scopeName, itemName, nextLinkName, KnownParameters.CancellationTokenParameter, async)));
+            _writer.MethodBodyStatement(Return(Call.PageableHelpers.CreatePageable(firstPageRequest, nextPageRequest, clientDiagnostics, pipeline, itemType, scopeName, itemName, nextLinkName, KnownParameters.CancellationTokenParameter, async)));
         }
 
-        protected ValueExpression CallCreateResourceIdentifier(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, CodeWriterDeclaration response)
+        protected ResourceIdentifierExpression InvokeCreateResourceIdentifier(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, ResponseOfTExpression response)
         {
             var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature;
             var cache = new List<ParameterMapping>(parameterMappings);
@@ -629,7 +632,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (resource.ResourceData.GetTypeOfName() != null)
                 {
-                    parameterInvocations.Add(GetResponseValueName(response));
+                    parameterInvocations.Add(new MemberReference(new MemberReference(response, nameof(Response<object>.Value)), "Name"));
                 }
                 else
                 {
@@ -637,7 +640,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
 
-            return new StaticMethodCallExpression(resource.Type, "CreateResourceIdentifier", parameterInvocations);
+            return new ResourceIdentifierExpression(new StaticMethodCallExpression(resource.Type, "CreateResourceIdentifier", parameterInvocations));
         }
         #endregion
 
@@ -678,7 +681,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
-                    _writer.WriteLine(Assign.ResponseValueId(response, CallCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, response)));
+                    var responseExpression = new ResponseOfTExpression(response);
+                    _writer.MethodBodyStatement(MethodBodyLines.Assign.ResponseValueId(responseExpression, InvokeCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, responseExpression)));
                 }
 
                 // the case that we did not need to wrap the result
@@ -851,7 +855,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     else
                     {
                         if (passNullForOptionalParameters && parameter.Parameter.Validation == Validation.None)
-                            args.Add(ValueExpressions.Null);
+                            args.Add(Null);
                         else if (parameter.Parameter.IsPropertyBag)
                             args.Add(parameter.ValueExpression);
                         else

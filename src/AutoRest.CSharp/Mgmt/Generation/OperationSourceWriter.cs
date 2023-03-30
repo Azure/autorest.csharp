@@ -4,18 +4,17 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
-using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -148,7 +147,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var resourceData = _opSource.Resource!.ResourceData;
                 Debug.Assert(resourceData.IncludeDeserializer);
 
-                _writer.WriteLine(MethodBodyLines.UsingVar("document", JsonDocumentExpression.Parse(responseVariable, async), out var document));
+                _writer.MethodBodyStatement(Snippets.UsingVar("document", JsonDocumentExpression.Parse(responseVariable, async), out var document));
 
                 var dataVariable = new CodeWriterDeclaration("data");
                 var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.RootElement, null);
@@ -157,7 +156,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     deserializeExpression = ValueExpressions.Call.Instance(null, "ScrubId", deserializeExpression);
                 }
 
-                _writer.WriteLine(new DeclareVariableLine(null, dataVariable, deserializeExpression));
+                _writer.MethodBodyStatement(new DeclareVariable(null, dataVariable, deserializeExpression));
                 if (resourceData.ShouldSetResourceIdentifier)
                 {
                     _writer.Line($"{dataVariable}.Id = {_opSource.ArmClientField.Name}.Id;");

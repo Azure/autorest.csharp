@@ -19,6 +19,8 @@ using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using System.Text.Json;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -430,9 +432,13 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (serialization)
             {
+                case JsonSerialization when type is not null && type.Equals(typeof(BinaryData)):
+                    var callFromStream = ValueExpressions.Call.BinaryData.FromStream(new FormattableStringToExpression(responseVariable), async);
+                    var variableExpression = variable is not null ? new VariableReference(variable) : null;
+                    writer.MethodBodyStatement(Snippets.AssignOrReturn(variableExpression, callFromStream));
+                    break;
                 case JsonSerialization jsonSerialization:
-                    bool isBinaryData = type is not null && type.Equals(typeof(BinaryData));
-                    writer.WriteBodyBlock(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable, new FormattableStringToExpression(responseVariable), isBinaryData));
+                    writer.MethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable is not null ? new VariableReference(variable) : null, new FormattableStringToExpression(responseVariable)));
                     break;
                 case XmlElementSerialization xmlSerialization:
                     writer.WriteDeserializationForMethods(xmlSerialization, variable, responseVariable);

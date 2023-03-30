@@ -3,6 +3,8 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.Statements;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 
@@ -12,41 +14,49 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         public static CodeWriter WriteBody(this CodeWriter writer, MethodBody methodBody)
         {
-            foreach (var block in methodBody.Blocks)
+            foreach (var statement in methodBody.Statements)
             {
-                WriteBodyBlock(writer, block);
+                MethodBodyStatement(writer, statement);
             }
 
             return writer;
         }
 
-        public static void WriteBodyBlock(this CodeWriter writer, MethodBodyStatement bodyStatement)
+        public static void MethodBodyStatement(this CodeWriter writer, MethodBodyStatement bodyStatement)
         {
             switch (bodyStatement)
             {
+                case InstanceMethodCallLine(var instance, var methodName, var arguments, var callAsAsync):
+                    writer.WriteValueExpression(new InstanceMethodCallExpression(instance, methodName, arguments, callAsAsync));
+                    writer.LineRaw(";");
+                    break;
+                case StaticMethodCallLine(var methodType, var methodName, var arguments, var typeArguments, var callAsExtension, var callAsAsync):
+                    writer.WriteValueExpression(new StaticMethodCallExpression(methodType, methodName, arguments, typeArguments, callAsExtension, callAsAsync));
+                    writer.LineRaw(";");
+                    break;
                 case ParameterValidationBlock parameterValidation:
                     writer.WriteParametersValidation(parameterValidation.Parameters);
                     break;
                 case DiagnosticScopeMethodBodyBlock diagnosticScope:
                     using (writer.WriteDiagnosticScope(diagnosticScope.Diagnostic, diagnosticScope.ClientDiagnosticsReference))
                     {
-                        WriteBodyBlock(writer, diagnosticScope.InnerStatement);
+                        MethodBodyStatement(writer, diagnosticScope.InnerStatement);
                     }
                     break;
                 case IfElseStatement(var condition, var ifBlock, var elseBlock):
-                    writer.Append($"if(");
+                    writer.AppendRaw("if(");
                     writer.WriteValueExpression(condition);
-                    writer.Line($")");
+                    writer.LineRaw(")");
                     using (writer.Scope())
                     {
-                        WriteBodyBlock(writer, ifBlock);
+                        MethodBodyStatement(writer, ifBlock);
                     }
 
                     if (elseBlock is not null)
                     {
                         using (writer.Scope($"else"))
                         {
-                            WriteBodyBlock(writer, elseBlock);
+                            MethodBodyStatement(writer, elseBlock);
                         }
                     }
 
@@ -54,11 +64,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 case IfElsePreprocessorDirective(var condition, var ifBlock, var elseBlock):
                     writer.Line($"#if {condition}");
                     writer.AppendRaw("\t\t\t\t");
-                    writer.WriteBodyBlock(ifBlock);
+                    writer.MethodBodyStatement(ifBlock);
                     if (elseBlock is not null)
                     {
                         writer.LineRaw("#else");
-                        writer.WriteBodyBlock(elseBlock);
+                        writer.MethodBodyStatement(elseBlock);
                     }
 
                     writer.LineRaw("#endif");
@@ -70,17 +80,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.WriteValueExpression(enumerable);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
-                        WriteBodyBlock(writer, body);
+                        MethodBodyStatement(writer, body);
                         writer.LineRaw("}");
                     }
 
                     break;
-                case MethodBodyLine line:
+                case DeclarationStatement line:
                     writer.WriteLine(line);
-                    break;
-                case SwitchCaseLine(var switchCase, var valueExpression):
-                    writer.Append($"case {switchCase:L}: ");
-                    writer.WriteLine(valueExpression);
                     break;
 
                 case SwitchStatement(var matchExpression, var cases):
@@ -90,55 +96,64 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.WriteValueExpression(matchExpression);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
-                        foreach (var statement in cases)
+                        foreach (var switchCase in cases)
                         {
-                            writer.WriteBodyBlock(statement);
+                            if (switchCase.Inline)
+                            {
+                                writer.Append($"case {switchCase.Case:L}: ");
+                            }
+                            else
+                            {
+                                writer.Line($"case {switchCase.Case:L}: ");
+                            }
+
+                            writer.MethodBodyStatement(switchCase.Statement);
                         }
                         writer.LineRaw("}");
                     }
-
                     break;
+
+                case KeywordStatement(var keyword, var expression):
+                    writer.AppendRaw(keyword);
+                    if (expression is not null)
+                    {
+                        writer.AppendRaw(" ").WriteValueExpression(expression);
+                    }
+                    writer.LineRaw(";");
+                    break;
+
                 case MethodBodyStatements(var blocks):
                     foreach (var block in blocks)
                     {
-                        writer.WriteBodyBlock(block);
+                        writer.MethodBodyStatement(block);
                     }
 
                     break;
             }
         }
 
-        public static CodeWriter WriteLine(this CodeWriter writer, MethodBodyLine line)
+        public static CodeWriter WriteLine(this CodeWriter writer, DeclarationStatement line)
         {
             switch (line)
             {
-                case InstanceMethodCallLine(var instance, var methodName, var arguments, var callAsAsync):
-                    writer.WriteValueExpression(new InstanceMethodCallExpression(instance, methodName, arguments,
-                        callAsAsync));
-                    break;
-                case StaticMethodCallLine(var methodType, var methodName, var arguments, var typeArguments, var
-                    callAsExtension, var callAsAsync):
-                    writer.WriteValueExpression(new StaticMethodCallExpression(methodType, methodName, arguments,
-                        typeArguments, callAsExtension, callAsAsync));
-                    break;
-                case SetValueLine setValue:
+                case AssignValue setValue:
                     writer.WriteValueExpression(setValue.To);
                     writer.AppendRaw(" = ");
                     writer.WriteValueExpression(setValue.From);
                     break;
-                case DeclareVariableLine { Type: { } type } declareVariable:
+                case DeclareVariable { Type: { } type } declareVariable:
                     writer.Append($"{type} {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
                     break;
-                case DeclareVariableLine declareVariable:
+                case DeclareVariable declareVariable:
                     writer.Append($"var {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
                     break;
-                case UsingDeclareVariableLine { Type: { } type } declareVariable:
+                case UsingDeclareVariable { Type: { } type } declareVariable:
                     writer.Append($"using {type} {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
                     break;
-                case UsingDeclareVariableLine declareVariable:
+                case UsingDeclareVariable declareVariable:
                     writer.Append($"using var {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
                     break;
@@ -152,13 +167,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.RemoveTrailingComma();
                     writer.AppendRaw(") => ");
                     writer.WriteValueExpression(localFunction.Body);
-                    break;
-                case ReturnValueLine returnValue:
-                    writer.AppendRaw("return ");
-                    writer.WriteValueExpression(returnValue.Value);
-                    break;
-                case KeywordLine(var keyword):
-                    writer.AppendRaw(keyword);
                     break;
             }
 
@@ -284,6 +292,15 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
                 case TypedValueExpression typed:
                     writer.WriteValueExpression(typed.Untyped);
+                    break;
+                case KeywordExpression(var keyword):
+                    writer.AppendRaw(keyword);
+                    break;
+                case LiteralExpression({} literal, true):
+                    writer.Literal(literal).AppendRaw("u8");
+                    break;
+                case LiteralExpression({} literal, false):
+                    writer.Literal(literal);
                     break;
             }
 

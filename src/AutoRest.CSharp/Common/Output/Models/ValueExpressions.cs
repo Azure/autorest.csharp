@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -14,53 +16,21 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal static class ValueExpressions
     {
         public static FuncExpression Func(CodeWriterDeclaration arg, ValueExpression expression) => new(new[]{ arg }, expression);
-        public static ValueExpression New(CSharpType type, params ValueExpression[] arguments) => new NewInstanceExpression(type, arguments);
-        public static ValueExpression New(CSharpType type, IReadOnlyDictionary<string, ValueExpression> properties) => new NewInstanceExpression(type, Array.Empty<ValueExpression>()) { Properties = properties };
-
-        public static ValueExpression Literal(string? value) => new FormattableStringToExpression($"{value:L}");
-        public static ValueExpression LiteralU8(string value) => new FormattableStringToExpression($"{value:L}u8");
-
-        public static ValueExpression StringLengthEqualsZero(ValueExpression str) => new BinaryOperatorExpression("==", new MemberReference(str, nameof(string.Length)), new FormattableStringToExpression($"0"));
-        public static ValueExpression IsNull(ValueExpression value) => new BinaryOperatorExpression("==", value, Null);
-        public static ValueExpression IsNotNull(ValueExpression value) => new BinaryOperatorExpression("!=", value, Null);
-        public static ValueExpression Or(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("||", left, right);
-        public static ValueExpression And(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("&&", left, right);
 
         public static ValueExpression GetResponseValue(CodeWriterDeclaration response) =>
             new MemberReference(new VariableReference(response), nameof(Response<object>.Value));
-
-        public static ValueExpression GetResponseValueName(CodeWriterDeclaration response) =>
-            new MemberReference(GetResponseValue(response), "Name");
-
-        public static ValueExpression GetResponseValueId(CodeWriterDeclaration response) =>
-            new MemberReference(GetResponseValue(response), "Id");
-
-        public static ValueExpression Default { get; } = new FormattableStringToExpression($"default");
-        public static ValueExpression Null { get; } = new FormattableStringToExpression($"null");
-        public static ValueExpression This { get; } = new FormattableStringToExpression($"this");
 
         public static ValueExpression CheckNull(this Parameter parameter)
             => parameter.Type.IsNullable
                 ? new NullConditionalExpression(parameter)
                 : new ParameterReference(parameter);
-
-        public static class Instantiate
-        {
-            public static ValueExpression IfCancellationTokenCanBeCanceled()
-            {
-                var cancellationToken = new ParameterReference(KnownParameters.CancellationTokenParameter);
-                return new TernaryConditionalOperator(
-                    new MemberReference(cancellationToken, nameof(CancellationToken.CanBeCanceled)),
-                    New(typeof(RequestContext), new Dictionary<string, ValueExpression>{ [nameof(RequestContext.CancellationToken)] = cancellationToken }),
-                    Null);
-            }
-        }
 
         public static class Call
         {
@@ -71,16 +41,9 @@ namespace AutoRest.CSharp.Output.Models
             public static ValueExpression Extension(CSharpType? methodType, string methodName, ValueExpression instanceReference) => new StaticMethodCallExpression(methodType, methodName, new[]{ instanceReference }, CallAsExtension: true);
             public static ValueExpression Extension(CSharpType? methodType, string methodName, ValueExpression instanceReference, ValueExpression arg) => new StaticMethodCallExpression(methodType, methodName, new[]{ instanceReference, arg }, CallAsExtension: true);
 
-            public static ValueExpression FromCancellationToken() => new StaticMethodCallExpression(null, "FromCancellationToken", new[]{ new ParameterReference(KnownParameters.CancellationTokenParameter) });
-
             public static ValueExpression ToString(ValueExpression reference) => Instance(reference , "ToString");
             public static ValueExpression ToRequestContent(ValueExpression reference) => new InstanceMethodCallExpression(reference, "ToRequestContent", Array.Empty<ValueExpression>(), false);
             public static ValueExpression ToEnum(CSharpType enumType, ValueExpression stringValue) => new StaticMethodCallExpression(enumType, $"To{enumType.Implementation.Declaration.Name}", new[]{ stringValue }, null, true);
-
-            public static ValueExpression CreateRequestMethod(string methodName, IEnumerable<Parameter> parameters)
-            {
-                return new InstanceMethodCallExpression(null, methodName, parameters.Select(p => new ParameterReference(p)).ToList(), false);
-            }
 
             public static ValueExpression ProtocolMethod(string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
             {
@@ -108,49 +71,6 @@ namespace AutoRest.CSharp.Output.Models
 
             public static class HttpPipelineExtensions
             {
-                private static readonly CSharpType HttpPipelineExtensionsType = typeof(Azure.Core.HttpPipelineExtensions);
-
-                public static ValueExpression ProcessMessage(CodeWriterDeclaration pipeline, CodeWriterDeclaration message, Parameter? requestContext, Parameter? cancellationToken, bool async)
-                {
-                    var arguments = new List<ValueExpression>
-                    {
-                        new VariableReference(pipeline),
-                        new VariableReference(message),
-                        requestContext != null ? new ParameterReference(requestContext) : Null,
-                    };
-
-                    if (cancellationToken != null)
-                    {
-                        arguments.Add(new ParameterReference(cancellationToken));
-                    }
-
-                    var methodName = async ? nameof(Azure.Core.HttpPipelineExtensions.ProcessMessageAsync) : nameof(Azure.Core.HttpPipelineExtensions.ProcessMessage);
-                    return new StaticMethodCallExpression(HttpPipelineExtensionsType, methodName, arguments, null, true, async);
-                }
-
-                public static ValueExpression ProcessHeadAsBoolMessage(CodeWriterDeclaration pipeline, CodeWriterDeclaration message, CodeWriterDeclaration clientDiagnostics, Parameter? requestContext, bool async)
-                {
-                    var arguments = new List<ValueExpression>
-                    {
-                        new VariableReference(pipeline),
-                        new VariableReference(message),
-                        new VariableReference(clientDiagnostics),
-                        requestContext != null ? new ParameterReference(requestContext) : Null
-                    };
-
-                    var methodName = async ? nameof(Azure.Core.HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(Azure.Core.HttpPipelineExtensions.ProcessHeadAsBoolMessage);
-                    return new StaticMethodCallExpression(HttpPipelineExtensionsType, methodName, arguments, null, true, async);
-                }
-            }
-
-            public static class JsonElement
-            {
-                public static ValueExpression TryGetProperty(Parameter element, string propertyName, out JsonElementExpression discriminator)
-                {
-                    var discriminatorDeclaration = new CodeWriterDeclaration("discriminator");
-                    discriminator = new JsonElementExpression(discriminatorDeclaration);
-                    return new FormattableStringToExpression($"{element.Name}.{nameof(System.Text.Json.JsonElement.TryGetProperty)}({propertyName:L}, out {typeof(System.Text.Json.JsonElement)} {discriminatorDeclaration:D})");
-                }
             }
 
             public static class JsonSerializer
@@ -212,10 +132,10 @@ namespace AutoRest.CSharp.Output.Models
                 }
 
                 public static ValueExpression CreatePageable(
-                    CodeWriterDeclaration message,
+                    HttpMessageExpression message,
                     CodeWriterDeclaration? createNextPageRequest,
                     CodeWriterDeclaration clientDiagnostics,
-                    CodeWriterDeclaration pipeline,
+                    HttpPipelineExpression pipeline,
                     CSharpType? pageItemType,
                     OperationFinalStateVia finalStateVia,
                     string scopeName,
@@ -227,11 +147,11 @@ namespace AutoRest.CSharp.Output.Models
                     var arguments = new List<ValueExpression>
                     {
                         new ParameterReference(KnownParameters.WaitForCompletion),
-                        new VariableReference(message),
+                        message,
                         createNextPageRequest is not null ? new VariableReference(createNextPageRequest) : Null,
                         GetValueFactory(pageItemType),
-                        new VariableReference(clientDiagnostics),
-                        new VariableReference(pipeline),
+                        clientDiagnostics,
+                        pipeline,
                         new FormattableStringToExpression($"{typeof(OperationFinalStateVia)}.{finalStateVia}"),
                         Literal(scopeName),
                         Literal(itemPropertyName),
@@ -275,39 +195,38 @@ namespace AutoRest.CSharp.Output.Models
 
             public static class ProtocolOperationHelpers
             {
-                public static ValueExpression ProcessMessage(CodeWriterDeclaration pipeline, CodeWriterDeclaration message, CodeWriterDeclaration clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, bool async)
+                public static ValueExpression ProcessMessage(HttpPipelineExpression pipeline, HttpMessageExpression message, CodeWriterDeclaration clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, bool async)
                 {
                     var methodName = async ? nameof(Azure.Core.ProtocolOperationHelpers.ProcessMessageAsync) : nameof(Azure.Core.ProtocolOperationHelpers.ProcessMessage);
                     return ProcessMessage(pipeline, message, clientDiagnostics, scopeName, finalStateVia, async, methodName);
                 }
 
-                public static ValueExpression ProcessMessageWithoutResponseValue(CodeWriterDeclaration pipeline, CodeWriterDeclaration message, CodeWriterDeclaration clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, bool async)
+                public static ValueExpression ProcessMessageWithoutResponseValue(HttpPipelineExpression pipeline, HttpMessageExpression message, CodeWriterDeclaration clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, bool async)
                 {
                     var methodName = async ? nameof(Azure.Core.ProtocolOperationHelpers.ProcessMessageWithoutResponseValueAsync) : nameof(Azure.Core.ProtocolOperationHelpers.ProcessMessageWithoutResponseValue);
                     return ProcessMessage(pipeline, message, clientDiagnostics, scopeName, finalStateVia, async, methodName);
                 }
 
-                private static ValueExpression ProcessMessage(CodeWriterDeclaration pipeline, CodeWriterDeclaration message, CodeWriterDeclaration clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, bool async, string methodName)
+                private static ValueExpression ProcessMessage(HttpPipelineExpression pipeline, HttpMessageExpression message, CodeWriterDeclaration clientDiagnostics, string scopeName, OperationFinalStateVia finalStateVia, bool async, string methodName)
                 {
                     var arguments = new List<ValueExpression> {
-                        new VariableReference(pipeline),
-                        new VariableReference(message),
-                        new VariableReference(clientDiagnostics),
+                        pipeline,
+                        message,
+                        clientDiagnostics,
                         Literal(scopeName),
                         new FormattableStringToExpression($"{typeof(OperationFinalStateVia)}.{finalStateVia}"),
-                        new ParameterReference(KnownParameters.RequestContext),
-                        new ParameterReference(KnownParameters.WaitForCompletion)
+                        KnownParameters.RequestContext,
+                        KnownParameters.WaitForCompletion
                     };
 
                     return new StaticMethodCallExpression(typeof(Azure.Core.ProtocolOperationHelpers), methodName, arguments, null, false, async);
                 }
 
-                public static ValueExpression Convert(CSharpType responseType, CodeWriterDeclaration response, CodeWriterDeclaration clientDiagnostics, string scopeName)
+                public static ValueExpression Convert(CSharpType responseType, ResponseExpression response, CodeWriterDeclaration clientDiagnostics, string scopeName)
                 {
-                    var responseVariable = new VariableReference(response);
                     var fromResponseReference = new MemberReference(new TypeReference(responseType), "FromResponse");
                     var diagnosticsReference = new VariableReference(clientDiagnostics);
-                    var arguments = new[] { responseVariable, fromResponseReference, diagnosticsReference, Literal(scopeName) };
+                    var arguments = new[] { response, fromResponseReference, diagnosticsReference, Literal(scopeName) };
                     return new StaticMethodCallExpression(typeof(Azure.Core.ProtocolOperationHelpers), nameof(Azure.Core.ProtocolOperationHelpers.Convert), arguments);
                 }
             }
@@ -325,24 +244,20 @@ namespace AutoRest.CSharp.Output.Models
                     return new StaticMethodCallExpression(typeof(Azure.Response), nameof(Azure.Response.FromValue), new[]{value, responseVariable});
                 }
 
-                public static ValueExpression FromValue(CSharpType responseType, CodeWriterDeclaration response)
+                public static ValueExpression FromValue(CSharpType responseType, ResponseExpression response)
                 {
-                    var fromResponseCall = new StaticMethodCallExpression(responseType, "FromResponse", new[]{new VariableReference(response)});
-                    return FromValue(fromResponseCall, response);
+                    var fromResponseCall = new StaticMethodCallExpression(responseType, "FromResponse", new[]{response});
+                    return ResponseExpression.FromValue(fromResponseCall, response);
                 }
             }
         }
     }
 
-    internal record ValueExpression
+    internal record TypedValueExpression(CSharpType Type, ValueExpression Untyped) : ValueExpression
     {
-        public static implicit operator ValueExpression(Parameter parameter) => new ParameterReference(parameter);
-        public static implicit operator ValueExpression(CodeWriterDeclaration name) => new VariableReference(name);
     }
 
-    internal record TypedValueExpression(ValueExpression Untyped) : ValueExpression;
-    internal record ValueExpression<TReturn>(ValueExpression Untyped) : TypedValueExpression(Untyped);
-
+    internal record DeclareExpression(CSharpType? Type, string Name) : ValueExpression;
     internal record CastExpression(ValueExpression Inner, CSharpType Type) : ValueExpression;
     internal record DefaultValueExpression(CSharpType Type) : ValueExpression;
     internal record CollectionInitializerExpression(params ValueExpression[] Items) : ValueExpression;
@@ -354,8 +269,6 @@ namespace AutoRest.CSharp.Output.Models
     internal record TernaryConditionalOperator(ValueExpression Condition, ValueExpression Consequent, ValueExpression Alternative) : ValueExpression;
     internal record TypeReference(CSharpType Type) : ValueExpression;
     internal record MemberReference(ValueExpression Inner, string MemberName) : ValueExpression;
-    internal record ParameterReference(Parameter Parameter) : ValueExpression;
-    internal record VariableReference(CodeWriterDeclaration Name) : ValueExpression;
     internal record FormattableStringToExpression(FormattableString Value) : ValueExpression; // Shim between formattable strings and expressions
     internal record NullConditionalExpression(ValueExpression Inner) : ValueExpression;
     internal record BinaryOperatorExpression(string Operator, ValueExpression Left, ValueExpression Right) : ValueExpression;

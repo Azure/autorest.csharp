@@ -2,12 +2,15 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using static AutoRest.CSharp.Output.Models.ValueExpressions;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
-    internal sealed record JsonElementExpression(ValueExpression Untyped) : ValueExpression<JsonElement>(Untyped)
+    internal sealed record JsonElementExpression(ValueExpression Untyped) : TypedValueExpression(typeof(JsonElement), Untyped)
     {
         public ValueExpression CallClone() => Call.Instance(Untyped, nameof(JsonElement.Clone));
         public ValueExpression EnumerateArray() => Call.Instance(Untyped, nameof(JsonElement.EnumerateArray));
@@ -34,5 +37,14 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 
         public ValueExpression ValueKindEqualsString()
             => new BinaryOperatorExpression("==", new MemberReference(Untyped, nameof(JsonElement.ValueKind)), new FormattableStringToExpression($"{typeof(JsonValueKind)}.{nameof(JsonValueKind.String)}"));
+
+        public MethodBodyStatement WriteTo(ValueExpression writer) => new InstanceMethodCallLine(Untyped, nameof(JsonElement.WriteTo), new[]{writer}, false);
+
+        public ValueExpression TryGetProperty(string elementName, string propertyName, out JsonElementExpression discriminator)
+        {
+            var discriminatorDeclaration = new CodeWriterDeclaration("discriminator");
+            discriminator = new JsonElementExpression(discriminatorDeclaration);
+            return new FormattableStringToExpression($"{elementName}.{nameof(System.Text.Json.JsonElement.TryGetProperty)}({propertyName:L}, out {typeof(JsonElement)} {discriminatorDeclaration:D})");
+        }
     }
 }

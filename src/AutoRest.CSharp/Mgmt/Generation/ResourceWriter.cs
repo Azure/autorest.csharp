@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
@@ -295,7 +296,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {
-                _writer.WriteLine(Assign.ResponseValueId(originalResponse, CallCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, originalResponse)));
+                var responseExpression = new ResponseOfTExpression(originalResponse);
+                _writer.WriteLine(Assign.ResponseValueId(responseExpression, InvokeCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, responseExpression)));
             }
 
             var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);
