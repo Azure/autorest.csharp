@@ -62,8 +62,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }
         public bool IsStringValueType => ValueType.Equals(typeof(string));
-        public bool IsIntValueType => ValueType.Equals(typeof(Int32)) || IsLongValueType;
-        public bool IsLongValueType => ValueType.Equals(typeof(Int64));
+        public bool IsIntValueType => ValueType.Equals(typeof(int)) || IsLongValueType;
+        public bool IsLongValueType => ValueType.Equals(typeof(long));
         public string? Description { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
