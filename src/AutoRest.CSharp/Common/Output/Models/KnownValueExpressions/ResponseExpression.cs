@@ -9,9 +9,9 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record ResponseExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Response), Untyped)
     {
-        public static ResponseOfTExpression FromValue(ValueExpression value, ResponseExpression response)
+        public static ResponseExpression<T> FromValue<T>(T valueExpression, ResponseExpression response) where T : TypedValueExpression
         {
-            return new ResponseOfTExpression(new StaticMethodCallExpression(typeof(Response), nameof(Response.FromValue), new[]{value, response}));
+            return new ResponseExpression<T>(new StaticMethodCallExpression(typeof(Response), nameof(Response.FromValue), new ValueExpression[]{valueExpression, response}));
         }
     }
 }

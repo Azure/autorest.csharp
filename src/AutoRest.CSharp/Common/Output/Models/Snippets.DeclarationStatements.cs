@@ -16,9 +16,6 @@ namespace AutoRest.CSharp.Common.Output.Models
 {
     internal static partial class Snippets
     {
-        public static MethodBodyStatement AssignOrReturn<T>(T? variable, T expression) where T : ValueExpression
-            => variable != null ? new AssignValue(variable, expression) : Return(expression);
-
         public static DeclarationStatement Declare(CSharpType responseType, string name, ResponseExpression value, out ResponseExpression variable)
             => Var(responseType, name, value, d => new ResponseExpression(d), out variable);
 

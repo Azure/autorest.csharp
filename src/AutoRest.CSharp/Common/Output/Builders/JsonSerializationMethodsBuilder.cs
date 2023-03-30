@@ -275,7 +275,7 @@ namespace AutoRest.CSharp.Output.Models
                 (
                     "NET6_0_OR_GREATER",
                     utf8JsonWriter.WriteRawValue(value),
-                    LineCall.JsonSerializer.Serialize(utf8JsonWriter, JsonDocumentExpression.Parse(Call.ToString(value)).RootElement)
+                    LineCall.JsonSerializer.Serialize(utf8JsonWriter, JsonDocumentExpression.Parse(Call.ToString(value)).Get_RootElement())
                 );
             }
 
@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Output.Models
                 new MethodBody(new MethodBodyStatement[]
                 {
                     UsingVar("document", JsonDocumentExpression.Parse(new MemberReference(fromResponse, nameof(Response.Content))), out var document),
-                    Return(Call.Static(null, $"Deserialize{returnType.Name}", document.RootElement))
+                    Return(Call.Static(null, $"Deserialize{returnType.Name}", document.Get_RootElement()))
                 })
             );
         }
@@ -542,7 +542,7 @@ namespace AutoRest.CSharp.Output.Models
         public static MethodBodyStatement BuildDeserializationForMethods(JsonSerialization serialization, bool async, ValueExpression? variable, ValueExpression response)
         {
             var declareDocument = UsingVar("document", JsonDocumentExpression.Parse(response, async), out var document);
-            var deserializeValueBlock = DeserializeValue(serialization, document.RootElement, out var value);
+            var deserializeValueBlock = DeserializeValue(serialization, document.Get_RootElement(), out var value);
 
             if (!serialization.IsNullable)
             {
@@ -554,7 +554,7 @@ namespace AutoRest.CSharp.Output.Models
                 declareDocument,
                 new IfElseStatement
                 (
-                    document.RootElement.ValueKindEqualsNull(),
+                    document.Get_RootElement().ValueKindEqualsNull(),
                     AssignOrReturn(variable, Null),
                     new MethodBodyStatements(deserializeValueBlock, AssignOrReturn(variable, value))
                 )

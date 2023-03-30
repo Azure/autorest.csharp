@@ -16,13 +16,13 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             foreach (var statement in methodBody.Statements)
             {
-                MethodBodyStatement(writer, statement);
+                WriteMethodBodyStatement(writer, statement);
             }
 
             return writer;
         }
 
-        public static void MethodBodyStatement(this CodeWriter writer, MethodBodyStatement bodyStatement)
+        public static void WriteMethodBodyStatement(this CodeWriter writer, MethodBodyStatement bodyStatement)
         {
             switch (bodyStatement)
             {
@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 case DiagnosticScopeMethodBodyBlock diagnosticScope:
                     using (writer.WriteDiagnosticScope(diagnosticScope.Diagnostic, diagnosticScope.ClientDiagnosticsReference))
                     {
-                        MethodBodyStatement(writer, diagnosticScope.InnerStatement);
+                        WriteMethodBodyStatement(writer, diagnosticScope.InnerStatement);
                     }
                     break;
                 case IfElseStatement(var condition, var ifBlock, var elseBlock):
@@ -49,14 +49,14 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.LineRaw(")");
                     using (writer.Scope())
                     {
-                        MethodBodyStatement(writer, ifBlock);
+                        WriteMethodBodyStatement(writer, ifBlock);
                     }
 
                     if (elseBlock is not null)
                     {
                         using (writer.Scope($"else"))
                         {
-                            MethodBodyStatement(writer, elseBlock);
+                            WriteMethodBodyStatement(writer, elseBlock);
                         }
                     }
 
@@ -64,11 +64,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 case IfElsePreprocessorDirective(var condition, var ifBlock, var elseBlock):
                     writer.Line($"#if {condition}");
                     writer.AppendRaw("\t\t\t\t");
-                    writer.MethodBodyStatement(ifBlock);
+                    writer.WriteMethodBodyStatement(ifBlock);
                     if (elseBlock is not null)
                     {
                         writer.LineRaw("#else");
-                        writer.MethodBodyStatement(elseBlock);
+                        writer.WriteMethodBodyStatement(elseBlock);
                     }
 
                     writer.LineRaw("#endif");
@@ -80,13 +80,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.WriteValueExpression(enumerable);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
-                        MethodBodyStatement(writer, body);
+                        WriteMethodBodyStatement(writer, body);
                         writer.LineRaw("}");
                     }
 
                     break;
                 case DeclarationStatement line:
-                    writer.WriteLine(line);
+                    writer.WriteDeclaration(line);
                     break;
 
                 case SwitchStatement(var matchExpression, var cases):
@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                 writer.Line($"case {switchCase.Case:L}: ");
                             }
 
-                            writer.MethodBodyStatement(switchCase.Statement);
+                            writer.WriteMethodBodyStatement(switchCase.Statement);
                         }
                         writer.LineRaw("}");
                     }
@@ -125,16 +125,16 @@ namespace AutoRest.CSharp.Generation.Writers
                 case MethodBodyStatements(var blocks):
                     foreach (var block in blocks)
                     {
-                        writer.MethodBodyStatement(block);
+                        writer.WriteMethodBodyStatement(block);
                     }
 
                     break;
             }
         }
 
-        public static CodeWriter WriteLine(this CodeWriter writer, DeclarationStatement line)
+        private static void WriteDeclaration(this CodeWriter writer, DeclarationStatement declaration)
         {
-            switch (line)
+            switch (declaration)
             {
                 case AssignValue setValue:
                     writer.WriteValueExpression(setValue.To);
@@ -170,7 +170,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
             }
 
-            return writer.LineRaw(";");
+            writer.LineRaw(";");
         }
 
         public static void WriteValueExpression(this CodeWriter writer, ValueExpression expression)

@@ -239,9 +239,9 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 case JsonSerialization jsonSerialization:
                     {
-                        writer.MethodBodyStatement(Snippets.Var("content", Utf8JsonRequestContentExpression.New(), out var content));
-                        writer.MethodBodyStatement(JsonSerializationMethodsBuilder.SerializeExpression(content.JsonWriter, jsonSerialization, new FormattableStringToExpression(value)));
-                        writer.MethodBodyStatement(new AssignValue(new MemberReference(request, nameof(Azure.Core.Request.Content)), content));
+                        writer.WriteMethodBodyStatement(Snippets.Var("content", Utf8JsonRequestContentExpression.New(), out var content));
+                        writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.SerializeExpression(content.JsonWriter, jsonSerialization, new FormattableStringToExpression(value)));
+                        writer.WriteMethodBodyStatement(new AssignValue(new MemberReference(request, nameof(Azure.Core.Request.Content)), content));
                         break;
                     }
                 case XmlElementSerialization xmlSerialization:

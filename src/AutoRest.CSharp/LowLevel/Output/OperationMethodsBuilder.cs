@@ -345,7 +345,7 @@ namespace AutoRest.CSharp.Output.Models
             }
             else if (_responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true }})
             {
-                yield return Return(Call.Response.FromValue(_responseType, response));
+                yield return Return(ResponseExpression.FromValue(new TypedValueExpression(_responseType, Call.Static(_responseType, "FromResponse", response)), response));
             }
             else
             {

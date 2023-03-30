@@ -30,5 +30,11 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static KeywordStatement Continue => new("continue", null);
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
+
+        public static MethodBodyStatement Assign<T>(T variable, T expression) where T : ValueExpression
+            => new AssignValue(variable, expression);
+
+        public static MethodBodyStatement AssignOrReturn<T>(T? variable, T expression) where T : ValueExpression
+            => variable != null ? new AssignValue(variable, expression) : Return(expression);
     }
 }

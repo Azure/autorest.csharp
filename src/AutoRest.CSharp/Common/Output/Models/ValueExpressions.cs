@@ -69,10 +69,6 @@ namespace AutoRest.CSharp.Output.Models
                     => enumType.IsExtensible ? Call.ToString(enumValue) : new StaticMethodCallExpression(enumType.Type, $"ToSerial{enumType.ValueType.Name.FirstCharToUpperCase()}", new[] { enumValue }, null, true);
             }
 
-            public static class HttpPipelineExtensions
-            {
-            }
-
             public static class JsonSerializer
             {
                 public static ValueExpression Deserialize(JsonElementExpression element, CSharpType serializationType, ValueExpression? options = null)
@@ -234,21 +230,6 @@ namespace AutoRest.CSharp.Output.Models
             public static class RequestContent
             {
                 public static ValueExpression Create(ValueExpression serializable) => Static(typeof(Azure.Core.RequestContent), nameof(Azure.Core.RequestContent.Create), serializable);
-            }
-
-            public static class Response
-            {
-                public static ValueExpression FromValue(ValueExpression value, CodeWriterDeclaration response)
-                {
-                    var responseVariable = new VariableReference(response);
-                    return new StaticMethodCallExpression(typeof(Azure.Response), nameof(Azure.Response.FromValue), new[]{value, responseVariable});
-                }
-
-                public static ValueExpression FromValue(CSharpType responseType, ResponseExpression response)
-                {
-                    var fromResponseCall = new StaticMethodCallExpression(responseType, "FromResponse", new[]{response});
-                    return ResponseExpression.FromValue(fromResponseCall, response);
-                }
             }
         }
     }

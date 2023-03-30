@@ -7,7 +7,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -16,8 +15,8 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
-using static AutoRest.CSharp.Output.Models.MethodBodyLines;
 using Resource = AutoRest.CSharp.Mgmt.Output.Resource;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -296,8 +295,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {
-                var responseExpression = new ResponseOfTExpression(originalResponse);
-                _writer.WriteLine(Assign.ResponseValueId(responseExpression, InvokeCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, responseExpression)));
+                var responseExpression = new ResponseExpression<ArmResourceExpression>(originalResponse);
+                _writer.WriteMethodBodyStatement(Assign(responseExpression.Value.Id, InvokeCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, responseExpression)));
             }
 
             var valueConverter = getOperation.GetValueConverter($"{ArmClientReference}", $"{originalResponse}.Value", getOperation.MgmtReturnType);

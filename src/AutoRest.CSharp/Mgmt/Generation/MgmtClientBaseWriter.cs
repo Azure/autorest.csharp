@@ -599,12 +599,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var firstPageRequestArguments = GetArguments(_writer, parameterMappings);
             var restClient = new FormattableStringToExpression($"{GetRestClientName(operation)}");
 
-            _writer.MethodBodyStatement(MethodBodyLines.Declare.FirstPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(pagingMethod.Method), firstPageRequestArguments, out var firstPageRequest));
+            _writer.WriteMethodBodyStatement(MethodBodyLines.Declare.FirstPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(pagingMethod.Method), firstPageRequestArguments, out var firstPageRequest));
             CodeWriterDeclaration? nextPageRequest = null;
             if (pagingMethod.NextPageMethod is {} nextPageMethod)
             {
                 var nextPageRequestArguments = firstPageRequestArguments.Prepend(KnownParameters.NextLink);
-                _writer.MethodBodyStatement(MethodBodyLines.Declare.NextPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(nextPageMethod), nextPageRequestArguments, out nextPageRequest));
+                _writer.WriteMethodBodyStatement(MethodBodyLines.Declare.NextPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(nextPageMethod), nextPageRequestArguments, out nextPageRequest));
             }
 
             var clientDiagnostics = new FormattableStringToExpression($"{clientDiagnosticsReference.Name}");
@@ -612,10 +612,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
-            _writer.MethodBodyStatement(Return(Call.PageableHelpers.CreatePageable(firstPageRequest, nextPageRequest, clientDiagnostics, pipeline, itemType, scopeName, itemName, nextLinkName, KnownParameters.CancellationTokenParameter, async)));
+            _writer.WriteMethodBodyStatement(Return(Call.PageableHelpers.CreatePageable(firstPageRequest, nextPageRequest, clientDiagnostics, pipeline, itemType, scopeName, itemName, nextLinkName, KnownParameters.CancellationTokenParameter, async)));
         }
 
-        protected ResourceIdentifierExpression InvokeCreateResourceIdentifier(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, ResponseOfTExpression response)
+        protected ResourceIdentifierExpression InvokeCreateResourceIdentifier(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, ResponseExpression<ArmResourceExpression> response)
         {
             var methodWithLeastParameters = resource.CreateResourceIdentifierMethodSignature;
             var cache = new List<ParameterMapping>(parameterMappings);
@@ -632,7 +632,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (resource.ResourceData.GetTypeOfName() != null)
                 {
-                    parameterInvocations.Add(new MemberReference(new MemberReference(response, nameof(Response<object>.Value)), "Name"));
+                    parameterInvocations.Add(new MemberReference(response.Value, "Name"));
                 }
                 else
                 {
@@ -681,8 +681,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
-                    var responseExpression = new ResponseOfTExpression(response);
-                    _writer.MethodBodyStatement(MethodBodyLines.Assign.ResponseValueId(responseExpression, InvokeCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, responseExpression)));
+                    var responseExpression = new ResponseExpression<ArmResourceExpression>(response);
+                    _writer.WriteMethodBodyStatement(Assign(responseExpression.Value.Id, InvokeCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, responseExpression)));
                 }
 
                 // the case that we did not need to wrap the result

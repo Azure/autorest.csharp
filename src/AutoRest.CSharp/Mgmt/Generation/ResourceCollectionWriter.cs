@@ -2,23 +2,17 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
-using static AutoRest.CSharp.Output.Models.MethodBodyLines;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -106,8 +100,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             if (This.Resource.ResourceData.ShouldSetResourceIdentifier)
             {
-                var responseExpression = new ResponseOfTExpression(response);
-                writer.WriteLine(Assign.ResponseValueId(responseExpression, InvokeCreateResourceIdentifier(This.Resource, operation.RequestPath, parameterMappings, responseExpression)));
+                var responseExpression = new ResponseExpression<ArmResourceExpression>(response);
+                writer.WriteMethodBodyStatement(Assign(responseExpression.Value.Id, InvokeCreateResourceIdentifier(This.Resource, operation.RequestPath, parameterMappings, responseExpression)));
             }
 
             writer.Line($"return {typeof(Response)}.FromValue(new {operation.MgmtReturnType}({ArmClientReference}, {response}.Value), {response}.GetRawResponse());");

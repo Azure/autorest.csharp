@@ -147,16 +147,16 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var resourceData = _opSource.Resource!.ResourceData;
                 Debug.Assert(resourceData.IncludeDeserializer);
 
-                _writer.MethodBodyStatement(Snippets.UsingVar("document", JsonDocumentExpression.Parse(responseVariable, async), out var document));
+                _writer.WriteMethodBodyStatement(Snippets.UsingVar("document", JsonDocumentExpression.Parse(responseVariable, async), out var document));
 
                 var dataVariable = new CodeWriterDeclaration("data");
-                var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.RootElement, null);
+                var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.Get_RootElement(), null);
                 if (_operationIdMappings is not null)
                 {
                     deserializeExpression = ValueExpressions.Call.Instance(null, "ScrubId", deserializeExpression);
                 }
 
-                _writer.MethodBodyStatement(new DeclareVariable(null, dataVariable, deserializeExpression));
+                _writer.WriteMethodBodyStatement(new DeclareVariable(null, dataVariable, deserializeExpression));
                 if (resourceData.ShouldSetResourceIdentifier)
                 {
                     _writer.Line($"{dataVariable}.Id = {_opSource.ArmClientField.Name}.Id;");

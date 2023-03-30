@@ -1,34 +1,21 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using Azure;
 using Azure.Core;
-using static AutoRest.CSharp.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal static class MethodBodyLines
     {
         public static MethodBodyStatement AsStatement(this IEnumerable<MethodBodyStatement> statements) => new MethodBodyStatements(statements.ToArray());
-
-        public static class Assign
-        {
-            public static DeclarationStatement Value(CodeWriterDeclaration to, ValueExpression from) => new AssignValue(to, from);
-            public static DeclarationStatement ResponseValueId(ResponseOfTExpression response, ResourceIdentifierExpression from)
-            {
-                return new AssignValue(new MemberReference(new MemberReference(response, nameof(Response<object>.Value)), "Id"), from);
-            }
-        }
 
         public static class LineCall
         {
