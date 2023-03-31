@@ -26,6 +26,9 @@ namespace MgmtOptionalConstant.Models
 
         /// <summary> default. </summary>
         public static StringConstant Default { get; } = new StringConstant(DefaultValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="StringConstant"/> values are the same. </summary>
         public static bool operator ==(StringConstant left, StringConstant right) => left.Equals(right);
         /// <summary> Determines if two <see cref="StringConstant"/> values are not the same. </summary>

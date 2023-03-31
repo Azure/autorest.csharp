@@ -44,6 +44,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: DiskCreateOptionTypes.Attach
         /// </summary>
         public static DiskCreateOptionType Attach { get; } = new DiskCreateOptionType(AttachValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="DiskCreateOptionType"/> values are the same. </summary>
         public static bool operator ==(DiskCreateOptionType left, DiskCreateOptionType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DiskCreateOptionType"/> values are not the same. </summary>

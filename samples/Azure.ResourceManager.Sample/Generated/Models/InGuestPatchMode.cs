@@ -44,6 +44,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: InGuestPatchMode.AutomaticByPlatform
         /// </summary>
         public static InGuestPatchMode AutomaticByPlatform { get; } = new InGuestPatchMode(AutomaticByPlatformValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="InGuestPatchMode"/> values are the same. </summary>
         public static bool operator ==(InGuestPatchMode left, InGuestPatchMode right) => left.Equals(right);
         /// <summary> Determines if two <see cref="InGuestPatchMode"/> values are not the same. </summary>

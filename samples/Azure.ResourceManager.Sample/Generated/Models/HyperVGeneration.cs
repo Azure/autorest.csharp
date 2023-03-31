@@ -38,6 +38,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: HyperVGenerationTypes.V2
         /// </summary>
         public static HyperVGeneration V2 { get; } = new HyperVGeneration(V2Value);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="HyperVGeneration"/> values are the same. </summary>
         public static bool operator ==(HyperVGeneration left, HyperVGeneration right) => left.Equals(right);
         /// <summary> Determines if two <see cref="HyperVGeneration"/> values are not the same. </summary>

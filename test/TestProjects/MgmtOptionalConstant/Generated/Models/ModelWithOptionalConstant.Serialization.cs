@@ -18,12 +18,17 @@ namespace MgmtOptionalConstant.Models
             if (Optional.IsDefined(OptionalStringConstant))
             {
                 writer.WritePropertyName("optionalStringConstant"u8);
-                writer.WriteStringValue(OptionalStringConstant.Value.ToString());
+                writer.WriteStringValue(OptionalStringConstant.Value.ToSerialString());
             }
             if (Optional.IsDefined(OptionalIntConstant))
             {
                 writer.WritePropertyName("optionalIntConstant"u8);
-                writer.WriteStringValue(OptionalIntConstant.Value.ToString());
+                writer.WriteNumberValue(OptionalIntConstant.Value.ToSerialInt32());
+            }
+            if (Optional.IsDefined(OptionalFloatConstant))
+            {
+                writer.WritePropertyName("optionalFloatConstant"u8);
+                writer.WriteNumberValue(OptionalFloatConstant.Value.ToSerialSingle());
             }
             if (Optional.IsDefined(SettingName))
             {
@@ -41,6 +46,7 @@ namespace MgmtOptionalConstant.Models
             }
             Optional<StringConstant> optionalStringConstant = default;
             Optional<IntConstant> optionalIntConstant = default;
+            Optional<FloatConstant> optionalFloatConstant = default;
             Optional<SettingName> settingName = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -64,6 +70,16 @@ namespace MgmtOptionalConstant.Models
                     optionalIntConstant = new IntConstant(property.Value.GetInt32());
                     continue;
                 }
+                if (property.NameEquals("optionalFloatConstant"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    optionalFloatConstant = new FloatConstant(property.Value.GetSingle());
+                    continue;
+                }
                 if (property.NameEquals("settingName"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -75,7 +91,7 @@ namespace MgmtOptionalConstant.Models
                     continue;
                 }
             }
-            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(settingName));
+            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(optionalFloatConstant), Optional.ToNullable(settingName));
         }
     }
 }

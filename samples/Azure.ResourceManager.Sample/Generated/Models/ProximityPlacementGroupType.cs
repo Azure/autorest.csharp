@@ -38,6 +38,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: ProximityPlacementGroupType.Ultra
         /// </summary>
         public static ProximityPlacementGroupType Ultra { get; } = new ProximityPlacementGroupType(UltraValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ProximityPlacementGroupType"/> values are the same. </summary>
         public static bool operator ==(ProximityPlacementGroupType left, ProximityPlacementGroupType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ProximityPlacementGroupType"/> values are not the same. </summary>

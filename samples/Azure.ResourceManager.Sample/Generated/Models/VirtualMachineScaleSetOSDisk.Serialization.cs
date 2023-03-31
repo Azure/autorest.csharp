@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WriteBooleanValue(WriteAcceleratorEnabled.Value);
             }
             writer.WritePropertyName("createOption"u8);
-            writer.WriteStringValue(CreateOption.ToString());
+            writer.WriteStringValue(CreateOption.ToSerialString());
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);

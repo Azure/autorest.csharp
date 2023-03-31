@@ -44,6 +44,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: VirtualMachineScaleSetScaleInRules.NewestVM
         /// </summary>
         public static VirtualMachineScaleSetScaleInRule NewestVM { get; } = new VirtualMachineScaleSetScaleInRule(NewestVMValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="VirtualMachineScaleSetScaleInRule"/> values are the same. </summary>
         public static bool operator ==(VirtualMachineScaleSetScaleInRule left, VirtualMachineScaleSetScaleInRule right) => left.Equals(right);
         /// <summary> Determines if two <see cref="VirtualMachineScaleSetScaleInRule"/> values are not the same. </summary>

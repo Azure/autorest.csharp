@@ -18,7 +18,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(VmSize))
             {
                 writer.WritePropertyName("vmSize"u8);
-                writer.WriteStringValue(VmSize.Value.ToString());
+                writer.WriteStringValue(VmSize.Value.ToSerialString());
             }
             writer.WriteEndObject();
         }

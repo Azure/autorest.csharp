@@ -62,6 +62,9 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: PatchAssessmentState.Available
         /// </summary>
         public static PatchAssessmentState Available { get; } = new PatchAssessmentState(AvailableValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="PatchAssessmentState"/> values are the same. </summary>
         public static bool operator ==(PatchAssessmentState left, PatchAssessmentState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="PatchAssessmentState"/> values are not the same. </summary>
