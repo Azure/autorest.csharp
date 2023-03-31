@@ -165,6 +165,9 @@ public static global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageVal
 public static global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues Mandarin{ get; } = new global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues(MandarinValue);
 /// <summary> Undocumented. </summary>
 public static global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues Undocumented{ get; } = new global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues(UndocumentedValue);
+
+internal string ToSerialString() => _value;
+
 /// <summary> Determines if two <see cref=""TranslationLanguageValues""/> values are the same. </summary>
 public static bool operator ==(global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues left, global::Cadl.TestServer.EnumPropertiesBasic.TranslationLanguageValues right) => left.Equals(right);
 /// <summary> Determines if two <see cref=""TranslationLanguageValues""/> values are not the same. </summary>
@@ -208,8 +211,7 @@ public override string ToString() => _value;
 namespace Cadl.TestServer.EnumPropertiesBasic
 {
 /// <summary> Represents the days of the week using a standard, non-string enum. </summary>
-public enum DayOfTheWeek
-{
+public enum DayOfTheWeek{
 /// <summary> Monday. </summary>
 Monday,
 /// <summary> Tuesday. </summary>
