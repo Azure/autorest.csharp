@@ -5,21 +5,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Mgmt.AutoRest;
 
-namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
+namespace AutoRest.CSharp.Common.Decorator
 {
     internal static class ConstantSchemaTransformer
     {
-        public static void TransformToChoice()
+        public static void TransformToChoice(CodeModel codeModel)
         {
-            var constantSchemas = new HashSet<ConstantSchema>(MgmtContext.CodeModel.Schemas.Constants);
+            var constantSchemas = new HashSet<ConstantSchema>(codeModel.Schemas.Constants);
             if (!constantSchemas.Any())
                 return;
 
             Dictionary<ConstantSchema, ChoiceSchema> convertedChoiceSchemas = new();
 
-            foreach (var operation in MgmtContext.CodeModel.OperationGroups.SelectMany(og => og.Operations))
+            foreach (var operation in codeModel.OperationGroups.SelectMany(og => og.Operations))
             {
                 // change the schema on operations (only for optional)
                 foreach (var parameter in operation.Parameters)
@@ -46,7 +45,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
                 }
 
                 // change the schema on models (optional and required)
-                foreach (var obj in MgmtContext.CodeModel.Schemas.Objects)
+                foreach (var obj in codeModel.Schemas.Objects)
                 {
                     foreach (var property in obj.Properties)
                     {
@@ -67,7 +66,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator.Transformer
             }
 
             foreach (var choiceSchema in convertedChoiceSchemas.Values)
-                MgmtContext.CodeModel.Schemas.Choices.Add(choiceSchema);
+                codeModel.Schemas.Choices.Add(choiceSchema);
         }
 
         private static bool CheckPropertyExtension(Property property)

@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             OmitOperationGroups.RemoveOperationGroups();
             PartialResourceResolver.Update();
             SubscriptionIdUpdater.Update();
-            ConstantSchemaTransformer.TransformToChoice();
+            ConstantSchemaTransformer.TransformToChoice(MgmtContext.CodeModel);
             SchemaNameAndFormatUpdater.ApplyRenameMapping();
             SchemaNameAndFormatUpdater.UpdateAcronyms();
             UrlToUri.UpdateSuffix();
