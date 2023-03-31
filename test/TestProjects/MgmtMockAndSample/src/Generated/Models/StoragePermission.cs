@@ -68,6 +68,9 @@ namespace MgmtMockAndSample.Models
         public static StoragePermission Getsas { get; } = new StoragePermission(GetsasValue);
         /// <summary> deletesas. </summary>
         public static StoragePermission Deletesas { get; } = new StoragePermission(DeletesasValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="StoragePermission"/> values are the same. </summary>
         public static bool operator ==(StoragePermission left, StoragePermission right) => left.Equals(right);
         /// <summary> Determines if two <see cref="StoragePermission"/> values are not the same. </summary>

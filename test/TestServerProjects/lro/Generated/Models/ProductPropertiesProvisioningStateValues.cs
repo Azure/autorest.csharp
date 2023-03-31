@@ -56,6 +56,9 @@ namespace lro.Models
         public static ProductPropertiesProvisioningStateValues Deleted { get; } = new ProductPropertiesProvisioningStateValues(DeletedValue);
         /// <summary> OK. </summary>
         public static ProductPropertiesProvisioningStateValues OK { get; } = new ProductPropertiesProvisioningStateValues(OKValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ProductPropertiesProvisioningStateValues"/> values are the same. </summary>
         public static bool operator ==(ProductPropertiesProvisioningStateValues left, ProductPropertiesProvisioningStateValues right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ProductPropertiesProvisioningStateValues"/> values are not the same. </summary>

@@ -26,6 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> All. </summary>
         public static CacheType All { get; } = new CacheType(AllValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="CacheType"/> values are the same. </summary>
         public static bool operator ==(CacheType left, CacheType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CacheType"/> values are not the same. </summary>

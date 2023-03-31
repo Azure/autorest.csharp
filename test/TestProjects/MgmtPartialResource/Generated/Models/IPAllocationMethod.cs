@@ -29,6 +29,9 @@ namespace MgmtPartialResource.Models
         public static IPAllocationMethod Static { get; } = new IPAllocationMethod(StaticValue);
         /// <summary> Dynamic. </summary>
         public static IPAllocationMethod Dynamic { get; } = new IPAllocationMethod(DynamicValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="IPAllocationMethod"/> values are the same. </summary>
         public static bool operator ==(IPAllocationMethod left, IPAllocationMethod right) => left.Equals(right);
         /// <summary> Determines if two <see cref="IPAllocationMethod"/> values are not the same. </summary>

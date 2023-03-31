@@ -358,7 +358,7 @@ Examples:
                 AddClassAttributes(writer, enumType);
 
                 writer.Append($"{enumType.Declaration.Accessibility} enum {enumType.Declaration.Name}")
-                    .AppendIf($" : {enumType.ValueType}", enumType.IsIntValueType);
+                    .AppendIf($" : {enumType.ValueType}", enumType.IsIntValueType && !enumType.ValueType.Equals(typeof(int)));
                 using (writer.Scope())
                 {
                     foreach (EnumTypeValue value in enumType.Values)

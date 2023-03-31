@@ -47,6 +47,9 @@ namespace AppConfiguration.Models
         public static Get7ItemsItem Locked { get; } = new Get7ItemsItem(LockedValue);
         /// <summary> etag. </summary>
         public static Get7ItemsItem Etag { get; } = new Get7ItemsItem(EtagValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Get7ItemsItem"/> values are the same. </summary>
         public static bool operator ==(Get7ItemsItem left, Get7ItemsItem right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Get7ItemsItem"/> values are not the same. </summary>

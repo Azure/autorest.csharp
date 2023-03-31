@@ -19,7 +19,7 @@ namespace Azure.Management.Storage.Models
             writer.WritePropertyName("enabled"u8);
             writer.WriteBooleanValue(Enabled);
             writer.WritePropertyName("type"u8);
-            writer.WriteStringValue(InventoryRuleType.ToString());
+            writer.WriteStringValue(InventoryRuleType.ToSerialString());
             writer.WritePropertyName("rules"u8);
             writer.WriteStartArray();
             foreach (var item in Rules)

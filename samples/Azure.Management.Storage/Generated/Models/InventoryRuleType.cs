@@ -26,6 +26,9 @@ namespace Azure.Management.Storage.Models
 
         /// <summary> Inventory. </summary>
         public static InventoryRuleType Inventory { get; } = new InventoryRuleType(InventoryValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="InventoryRuleType"/> values are the same. </summary>
         public static bool operator ==(InventoryRuleType left, InventoryRuleType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="InventoryRuleType"/> values are not the same. </summary>

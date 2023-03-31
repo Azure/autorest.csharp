@@ -319,7 +319,7 @@ namespace MgmtScopeResource
             uri.AppendPath("/providers/Microsoft.Resources/links", false);
             if (filter != null)
             {
-                uri.AppendQuery("$filter", filter.Value.ToString(), true);
+                uri.AppendQuery("$filter", filter.Value.ToSerialString(), true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

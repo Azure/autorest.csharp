@@ -53,6 +53,9 @@ namespace xml_service.Models
         public static AccessTier Cool { get; } = new AccessTier(CoolValue);
         /// <summary> Archive. </summary>
         public static AccessTier Archive { get; } = new AccessTier(ArchiveValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="AccessTier"/> values are the same. </summary>
         public static bool operator ==(AccessTier left, AccessTier right) => left.Equals(right);
         /// <summary> Determines if two <see cref="AccessTier"/> values are not the same. </summary>

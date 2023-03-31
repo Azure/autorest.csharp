@@ -26,6 +26,9 @@ namespace AppConfiguration.Models
 
         /// <summary> name. </summary>
         public static Head5ItemsItem Name { get; } = new Head5ItemsItem(NameValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Head5ItemsItem"/> values are the same. </summary>
         public static bool operator ==(Head5ItemsItem left, Head5ItemsItem right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Head5ItemsItem"/> values are not the same. </summary>

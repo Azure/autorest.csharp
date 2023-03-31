@@ -17,11 +17,11 @@ namespace MgmtDiscriminator.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
-            writer.WriteStringValue(TypeName.ToString());
+            writer.WriteStringValue(TypeName.ToSerialString());
             writer.WritePropertyName("cacheBehavior"u8);
-            writer.WriteStringValue(CacheBehavior.ToString());
+            writer.WriteStringValue(CacheBehavior.ToSerialString());
             writer.WritePropertyName("cacheType"u8);
-            writer.WriteStringValue(CacheType.ToString());
+            writer.WriteStringValue(CacheType.ToSerialString());
             if (Optional.IsDefined(CacheDuration))
             {
                 if (CacheDuration != null)

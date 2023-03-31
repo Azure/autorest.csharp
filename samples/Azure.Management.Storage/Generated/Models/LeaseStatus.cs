@@ -29,6 +29,9 @@ namespace Azure.Management.Storage.Models
         public static LeaseStatus Locked { get; } = new LeaseStatus(LockedValue);
         /// <summary> Unlocked. </summary>
         public static LeaseStatus Unlocked { get; } = new LeaseStatus(UnlockedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="LeaseStatus"/> values are the same. </summary>
         public static bool operator ==(LeaseStatus left, LeaseStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="LeaseStatus"/> values are not the same. </summary>

@@ -16,9 +16,9 @@ namespace MgmtDiscriminator.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
-            writer.WriteStringValue(TypeName.ToString());
+            writer.WriteStringValue(TypeName.ToSerialString());
             writer.WritePropertyName("queryStringBehavior"u8);
-            writer.WriteStringValue(QueryStringBehavior.ToString());
+            writer.WriteStringValue(QueryStringBehavior.ToSerialString());
             if (Optional.IsDefined(QueryParameters))
             {
                 if (QueryParameters != null)

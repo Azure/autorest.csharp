@@ -18,7 +18,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(PatchMode))
             {
                 writer.WritePropertyName("patchMode"u8);
-                writer.WriteStringValue(PatchMode.Value.ToString());
+                writer.WriteStringValue(PatchMode.Value.ToSerialString());
             }
             writer.WriteEndObject();
         }

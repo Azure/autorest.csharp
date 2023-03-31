@@ -32,7 +32,7 @@ namespace MgmtRenameRules.Models
                 writer.WriteBooleanValue(WriteAcceleratorEnabled.Value);
             }
             writer.WritePropertyName("createOption"u8);
-            writer.WriteStringValue(CreateOption.ToString());
+            writer.WriteStringValue(CreateOption.ToSerialString());
             if (Optional.IsDefined(DiffDiskSettings))
             {
                 writer.WritePropertyName("diffDiskSettings"u8);
@@ -71,7 +71,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(SecurityType))
             {
                 writer.WritePropertyName("securityType"u8);
-                writer.WriteStringValue(SecurityType.Value.ToString());
+                writer.WriteStringValue(SecurityType.Value.ToSerialString());
             }
             writer.WriteEndObject();
         }

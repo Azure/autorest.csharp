@@ -19,7 +19,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(DefaultLanguageCode))
             {
                 writer.WritePropertyName("defaultLanguageCode"u8);
-                writer.WriteStringValue(DefaultLanguageCode.Value.ToString());
+                writer.WriteStringValue(DefaultLanguageCode.Value.ToSerialString());
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);

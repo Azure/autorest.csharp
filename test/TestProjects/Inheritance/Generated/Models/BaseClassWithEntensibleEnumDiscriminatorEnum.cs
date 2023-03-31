@@ -29,6 +29,9 @@ namespace Inheritance.Models
         public static BaseClassWithEntensibleEnumDiscriminatorEnum Derived { get; } = new BaseClassWithEntensibleEnumDiscriminatorEnum(DerivedValue);
         /// <summary> other. </summary>
         public static BaseClassWithEntensibleEnumDiscriminatorEnum Other { get; } = new BaseClassWithEntensibleEnumDiscriminatorEnum(OtherValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="BaseClassWithEntensibleEnumDiscriminatorEnum"/> values are the same. </summary>
         public static bool operator ==(BaseClassWithEntensibleEnumDiscriminatorEnum left, BaseClassWithEntensibleEnumDiscriminatorEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="BaseClassWithEntensibleEnumDiscriminatorEnum"/> values are not the same. </summary>

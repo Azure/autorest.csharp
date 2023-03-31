@@ -87,7 +87,7 @@ namespace AnomalyDetector.Models
                 if (ImputeMode != null)
                 {
                     writer.WritePropertyName("imputeMode"u8);
-                    writer.WriteStringValue(ImputeMode.Value.ToString());
+                    writer.WriteStringValue(ImputeMode.Value.ToSerialString());
                 }
                 else
                 {

@@ -29,6 +29,9 @@ namespace Azure.Management.Storage.Models
         public static Format Csv { get; } = new Format(CsvValue);
         /// <summary> Parquet. </summary>
         public static Format Parquet { get; } = new Format(ParquetValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Format"/> values are the same. </summary>
         public static bool operator ==(Format left, Format right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Format"/> values are not the same. </summary>

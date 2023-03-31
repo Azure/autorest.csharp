@@ -32,6 +32,9 @@ namespace CustomizationsInCadl.Models
         public static EnumToBeMadeExtensible ExTwo { get; } = new EnumToBeMadeExtensible(ExTwoValue);
         /// <summary> 3. </summary>
         public static EnumToBeMadeExtensible ExThree { get; } = new EnumToBeMadeExtensible(ExThreeValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="EnumToBeMadeExtensible"/> values are the same. </summary>
         public static bool operator ==(EnumToBeMadeExtensible left, EnumToBeMadeExtensible right) => left.Equals(right);
         /// <summary> Determines if two <see cref="EnumToBeMadeExtensible"/> values are not the same. </summary>

@@ -33,6 +33,9 @@ namespace ModelsInCadl.Models
         public static ExtensibleEnum Two { get; } = new ExtensibleEnum(TwoValue);
         /// <summary> 4. </summary>
         public static ExtensibleEnum Four { get; } = new ExtensibleEnum(FourValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ExtensibleEnum"/> values are the same. </summary>
         public static bool operator ==(ExtensibleEnum left, ExtensibleEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ExtensibleEnum"/> values are not the same. </summary>

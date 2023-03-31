@@ -35,6 +35,9 @@ namespace body_complex.Models
         public static CMYKColors Yellow { get; } = new CMYKColors(YellowValue);
         /// <summary> blacK. </summary>
         public static CMYKColors BlacK { get; } = new CMYKColors(BlacKValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="CMYKColors"/> values are the same. </summary>
         public static bool operator ==(CMYKColors left, CMYKColors right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CMYKColors"/> values are not the same. </summary>

@@ -35,7 +35,7 @@ namespace body_complex.Models
             if (Optional.IsDefined(Color))
             {
                 writer.WritePropertyName("color"u8);
-                writer.WriteStringValue(Color.Value.ToString());
+                writer.WriteStringValue(Color.Value.ToSerialString());
             }
             writer.WriteEndObject();
         }

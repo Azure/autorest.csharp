@@ -26,6 +26,9 @@ namespace Azure.Management.Storage.Models
 
         /// <summary> Lifecycle. </summary>
         public static RuleType Lifecycle { get; } = new RuleType(LifecycleValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="RuleType"/> values are the same. </summary>
         public static bool operator ==(RuleType left, RuleType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RuleType"/> values are not the same. </summary>

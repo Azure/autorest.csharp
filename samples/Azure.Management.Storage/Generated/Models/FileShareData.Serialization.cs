@@ -41,17 +41,17 @@ namespace Azure.Management.Storage
             if (Optional.IsDefined(EnabledProtocols))
             {
                 writer.WritePropertyName("enabledProtocols"u8);
-                writer.WriteStringValue(EnabledProtocols.Value.ToString());
+                writer.WriteStringValue(EnabledProtocols.Value.ToSerialString());
             }
             if (Optional.IsDefined(RootSquash))
             {
                 writer.WritePropertyName("rootSquash"u8);
-                writer.WriteStringValue(RootSquash.Value.ToString());
+                writer.WriteStringValue(RootSquash.Value.ToSerialString());
             }
             if (Optional.IsDefined(AccessTier))
             {
                 writer.WritePropertyName("accessTier"u8);
-                writer.WriteStringValue(AccessTier.Value.ToString());
+                writer.WriteStringValue(AccessTier.Value.ToSerialString());
             }
             if (Optional.IsCollectionDefined(SignedIdentifiers))
             {

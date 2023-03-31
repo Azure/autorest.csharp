@@ -38,6 +38,9 @@ namespace CognitiveSearch.Models
         public static ImageAnalysisSkillLanguage Pt { get; } = new ImageAnalysisSkillLanguage(PtValue);
         /// <summary> Chinese. </summary>
         public static ImageAnalysisSkillLanguage Zh { get; } = new ImageAnalysisSkillLanguage(ZhValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ImageAnalysisSkillLanguage"/> values are the same. </summary>
         public static bool operator ==(ImageAnalysisSkillLanguage left, ImageAnalysisSkillLanguage right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ImageAnalysisSkillLanguage"/> values are not the same. </summary>

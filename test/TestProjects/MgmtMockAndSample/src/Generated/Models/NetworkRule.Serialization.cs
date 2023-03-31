@@ -22,7 +22,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStartArray();
                 foreach (var item in IpProtocols)
                 {
-                    writer.WriteStringValue(item.ToString());
+                    writer.WriteStringValue(item.ToSerialString());
                 }
                 writer.WriteEndArray();
             }
@@ -97,7 +97,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStringValue(Description);
             }
             writer.WritePropertyName("ruleType"u8);
-            writer.WriteStringValue(RuleType.ToString());
+            writer.WriteStringValue(RuleType.ToSerialString());
             writer.WriteEndObject();
         }
 

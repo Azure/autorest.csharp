@@ -44,6 +44,9 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: OrchestrationServiceState.Suspended
         /// </summary>
         public static OrchestrationServiceState Suspended { get; } = new OrchestrationServiceState(SuspendedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="OrchestrationServiceState"/> values are the same. </summary>
         public static bool operator ==(OrchestrationServiceState left, OrchestrationServiceState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="OrchestrationServiceState"/> values are not the same. </summary>

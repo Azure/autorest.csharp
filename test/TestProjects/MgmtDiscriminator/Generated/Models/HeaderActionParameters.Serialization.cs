@@ -16,9 +16,9 @@ namespace MgmtDiscriminator.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
-            writer.WriteStringValue(TypeName.ToString());
+            writer.WriteStringValue(TypeName.ToSerialString());
             writer.WritePropertyName("headerAction"u8);
-            writer.WriteStringValue(HeaderAction.ToString());
+            writer.WriteStringValue(HeaderAction.ToSerialString());
             writer.WritePropertyName("headerName"u8);
             writer.WriteStringValue(HeaderName);
             if (Optional.IsDefined(Value))

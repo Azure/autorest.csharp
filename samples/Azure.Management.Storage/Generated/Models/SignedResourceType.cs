@@ -32,6 +32,9 @@ namespace Azure.Management.Storage.Models
         public static SignedResourceType C { get; } = new SignedResourceType(CValue);
         /// <summary> o. </summary>
         public static SignedResourceType O { get; } = new SignedResourceType(OValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="SignedResourceType"/> values are the same. </summary>
         public static bool operator ==(SignedResourceType left, SignedResourceType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SignedResourceType"/> values are not the same. </summary>

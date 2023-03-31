@@ -25,6 +25,9 @@ namespace MgmtMockAndSample.Models
         private const string Tls1_0Value = "TLS1_0";
         private const string Tls1_1Value = "TLS1_1";
         private const string Tls1_2Value = "TLS1_2";
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="MinimumTlsVersion"/> values are the same. </summary>
         public static bool operator ==(MinimumTlsVersion left, MinimumTlsVersion right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MinimumTlsVersion"/> values are not the same. </summary>

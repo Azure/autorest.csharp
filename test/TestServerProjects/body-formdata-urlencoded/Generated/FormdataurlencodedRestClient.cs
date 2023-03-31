@@ -48,7 +48,7 @@ namespace body_formdata_urlencoded
             request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             var content = new FormUrlEncodedContent();
             content.Add("pet_type", petType.ToSerialString());
-            content.Add("pet_food", petFood.ToString());
+            content.Add("pet_food", petFood.ToSerialString());
             content.Add("pet_age", petAge.ToString());
             if (name != null)
             {
@@ -117,7 +117,7 @@ namespace body_formdata_urlencoded
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
             var content = new FormUrlEncodedContent();
-            content.Add("grant_type", grantType.ToString());
+            content.Add("grant_type", grantType.ToSerialString());
             content.Add("service", service);
             content.Add("access_token", accessToken);
             request.Content = content;

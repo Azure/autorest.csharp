@@ -26,6 +26,9 @@ namespace constants.Models
 
         /// <summary> value1. </summary>
         public static ModelAsStringNoRequiredOneValueDefaultOpEnum Value1 { get; } = new ModelAsStringNoRequiredOneValueDefaultOpEnum(Value1Value);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ModelAsStringNoRequiredOneValueDefaultOpEnum"/> values are the same. </summary>
         public static bool operator ==(ModelAsStringNoRequiredOneValueDefaultOpEnum left, ModelAsStringNoRequiredOneValueDefaultOpEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ModelAsStringNoRequiredOneValueDefaultOpEnum"/> values are not the same. </summary>

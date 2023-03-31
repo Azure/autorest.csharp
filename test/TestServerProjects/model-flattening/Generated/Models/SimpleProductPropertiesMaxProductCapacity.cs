@@ -26,6 +26,9 @@ namespace model_flattening.Models
 
         /// <summary> Large. </summary>
         public static SimpleProductPropertiesMaxProductCapacity Large { get; } = new SimpleProductPropertiesMaxProductCapacity(LargeValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="SimpleProductPropertiesMaxProductCapacity"/> values are the same. </summary>
         public static bool operator ==(SimpleProductPropertiesMaxProductCapacity left, SimpleProductPropertiesMaxProductCapacity right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SimpleProductPropertiesMaxProductCapacity"/> values are not the same. </summary>

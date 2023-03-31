@@ -38,6 +38,9 @@ namespace Azure.Management.Storage.Models
         public static State Failed { get; } = new State(FailedValue);
         /// <summary> NetworkSourceDeleted. </summary>
         public static State NetworkSourceDeleted { get; } = new State(NetworkSourceDeletedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="State"/> values are the same. </summary>
         public static bool operator ==(State left, State right) => left.Equals(right);
         /// <summary> Determines if two <see cref="State"/> values are not the same. </summary>

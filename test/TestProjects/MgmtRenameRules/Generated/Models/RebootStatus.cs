@@ -56,6 +56,9 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: RebootStatus.Completed
         /// </summary>
         public static RebootStatus Completed { get; } = new RebootStatus(CompletedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="RebootStatus"/> values are the same. </summary>
         public static bool operator ==(RebootStatus left, RebootStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RebootStatus"/> values are not the same. </summary>

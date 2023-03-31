@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Fake.Models
             if (Optional.IsDefined(Reason))
             {
                 writer.WritePropertyName("reason"u8);
-                writer.WriteStringValue(Reason.Value.ToString());
+                writer.WriteStringValue(Reason.Value.ToSerialString());
             }
             if (Optional.IsDefined(Message))
             {

@@ -38,6 +38,9 @@ namespace body_complex.Models
         public static GoblinSharkColor UpperRed { get; } = new GoblinSharkColor(UpperRedValue);
         /// <summary> Lowercase RED. </summary>
         public static GoblinSharkColor LowerRed { get; } = new GoblinSharkColor(LowerRedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="GoblinSharkColor"/> values are the same. </summary>
         public static bool operator ==(GoblinSharkColor left, GoblinSharkColor right) => left.Equals(right);
         /// <summary> Determines if two <see cref="GoblinSharkColor"/> values are not the same. </summary>

@@ -62,6 +62,9 @@ namespace CognitiveSearch.Models
         public static TokenizerName UaxUrlEmail { get; } = new TokenizerName(UaxUrlEmailValue);
         /// <summary> Divides text at whitespace. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/WhitespaceTokenizer.html. </summary>
         public static TokenizerName Whitespace { get; } = new TokenizerName(WhitespaceValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="TokenizerName"/> values are the same. </summary>
         public static bool operator ==(TokenizerName left, TokenizerName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="TokenizerName"/> values are not the same. </summary>

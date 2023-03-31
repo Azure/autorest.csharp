@@ -26,6 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> SHA256. </summary>
         public static Algorithm SHA256 { get; } = new Algorithm(SHA256Value);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Algorithm"/> values are the same. </summary>
         public static bool operator ==(Algorithm left, Algorithm right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Algorithm"/> values are not the same. </summary>

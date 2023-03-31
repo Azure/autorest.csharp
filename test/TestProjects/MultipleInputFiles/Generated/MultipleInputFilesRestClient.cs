@@ -42,7 +42,7 @@ namespace MultipleInputFiles
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
-            uri.AppendRaw(_source.Value.ToString(), true);
+            uri.AppendRaw(_source.Value.ToSerialString(), true);
             uri.AppendRaw(".fakeendpoint.azure.com", false);
             uri.AppendPath("/operation1", false);
             request.Uri = uri;
@@ -102,7 +102,7 @@ namespace MultipleInputFiles
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw("https://", false);
-            uri.AppendRaw(_source.Value.ToString(), true);
+            uri.AppendRaw(_source.Value.ToSerialString(), true);
             uri.AppendRaw(".fakeendpoint.azure.com", false);
             uri.AppendPath("/operation2", false);
             request.Uri = uri;

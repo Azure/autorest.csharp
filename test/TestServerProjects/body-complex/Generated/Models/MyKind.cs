@@ -26,6 +26,9 @@ namespace body_complex.Models
 
         /// <summary> Kind1. </summary>
         public static MyKind Kind1 { get; } = new MyKind(Kind1Value);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="MyKind"/> values are the same. </summary>
         public static bool operator ==(MyKind left, MyKind right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MyKind"/> values are not the same. </summary>

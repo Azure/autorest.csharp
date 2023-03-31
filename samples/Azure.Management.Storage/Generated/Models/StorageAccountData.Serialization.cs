@@ -64,7 +64,7 @@ namespace Azure.Management.Storage
             if (Optional.IsDefined(LargeFileSharesState))
             {
                 writer.WritePropertyName("largeFileSharesState"u8);
-                writer.WriteStringValue(LargeFileSharesState.Value.ToString());
+                writer.WriteStringValue(LargeFileSharesState.Value.ToSerialString());
             }
             if (Optional.IsDefined(RoutingPreference))
             {
@@ -79,7 +79,7 @@ namespace Azure.Management.Storage
             if (Optional.IsDefined(MinimumTlsVersion))
             {
                 writer.WritePropertyName("minimumTlsVersion"u8);
-                writer.WriteStringValue(MinimumTlsVersion.Value.ToString());
+                writer.WriteStringValue(MinimumTlsVersion.Value.ToSerialString());
             }
             if (Optional.IsDefined(AllowSharedKeyAccess))
             {
@@ -104,7 +104,7 @@ namespace Azure.Management.Storage
             if (Optional.IsDefined(PublicNetworkAccess))
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
-                writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
+                writer.WriteStringValue(PublicNetworkAccess.Value.ToSerialString());
             }
             if (Optional.IsDefined(ImmutableStorageWithVersioning))
             {

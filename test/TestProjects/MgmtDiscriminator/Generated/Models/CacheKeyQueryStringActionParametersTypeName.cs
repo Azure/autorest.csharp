@@ -26,6 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> DeliveryRuleCacheKeyQueryStringBehaviorActionParameters. </summary>
         public static CacheKeyQueryStringActionParametersTypeName DeliveryRuleCacheKeyQueryStringBehaviorActionParameters { get; } = new CacheKeyQueryStringActionParametersTypeName(DeliveryRuleCacheKeyQueryStringBehaviorActionParametersValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="CacheKeyQueryStringActionParametersTypeName"/> values are the same. </summary>
         public static bool operator ==(CacheKeyQueryStringActionParametersTypeName left, CacheKeyQueryStringActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CacheKeyQueryStringActionParametersTypeName"/> values are not the same. </summary>

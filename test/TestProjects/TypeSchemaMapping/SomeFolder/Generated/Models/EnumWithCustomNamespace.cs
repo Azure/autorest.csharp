@@ -32,6 +32,9 @@ namespace Very.Custom.Namespace.From.Swagger
         public static EnumWithCustomNamespace B { get; } = new EnumWithCustomNamespace(BValue);
         /// <summary> C. </summary>
         public static EnumWithCustomNamespace C { get; } = new EnumWithCustomNamespace(CValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="EnumWithCustomNamespace"/> values are the same. </summary>
         public static bool operator ==(EnumWithCustomNamespace left, EnumWithCustomNamespace right) => left.Equals(right);
         /// <summary> Determines if two <see cref="EnumWithCustomNamespace"/> values are not the same. </summary>

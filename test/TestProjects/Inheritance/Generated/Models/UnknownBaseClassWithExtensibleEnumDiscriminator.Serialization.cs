@@ -16,7 +16,7 @@ namespace Inheritance.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
-            writer.WriteStringValue(DiscriminatorProperty.ToString());
+            writer.WriteStringValue(DiscriminatorProperty.ToSerialString());
             writer.WriteEndObject();
         }
 

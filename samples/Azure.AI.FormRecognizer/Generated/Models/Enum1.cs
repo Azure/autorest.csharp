@@ -26,6 +26,9 @@ namespace Azure.AI.FormRecognizer.Models
 
         /// <summary> full. </summary>
         public static Enum1 Full { get; } = new Enum1(FullValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Enum1"/> values are the same. </summary>
         public static bool operator ==(Enum1 left, Enum1 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Enum1"/> values are not the same. </summary>

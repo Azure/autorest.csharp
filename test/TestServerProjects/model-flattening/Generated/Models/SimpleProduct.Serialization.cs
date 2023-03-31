@@ -32,7 +32,7 @@ namespace model_flattening.Models
             if (Optional.IsDefined(Capacity))
             {
                 writer.WritePropertyName("max_product_capacity"u8);
-                writer.WriteStringValue(Capacity.Value.ToString());
+                writer.WriteStringValue(Capacity.Value.ToSerialString());
             }
             writer.WritePropertyName("max_product_image"u8);
             writer.WriteStartObject();

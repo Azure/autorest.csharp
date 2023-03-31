@@ -29,6 +29,9 @@ namespace MgmtNonStringPathVariable.Models
         public static FakeNameAsEnum Name1 { get; } = new FakeNameAsEnum(Name1Value);
         /// <summary> name2. </summary>
         public static FakeNameAsEnum Name2 { get; } = new FakeNameAsEnum(Name2Value);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="FakeNameAsEnum"/> values are the same. </summary>
         public static bool operator ==(FakeNameAsEnum left, FakeNameAsEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FakeNameAsEnum"/> values are not the same. </summary>

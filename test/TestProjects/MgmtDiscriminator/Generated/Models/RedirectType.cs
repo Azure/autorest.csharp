@@ -35,6 +35,9 @@ namespace MgmtDiscriminator.Models
         public static RedirectType TemporaryRedirect { get; } = new RedirectType(TemporaryRedirectValue);
         /// <summary> PermanentRedirect. </summary>
         public static RedirectType PermanentRedirect { get; } = new RedirectType(PermanentRedirectValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="RedirectType"/> values are the same. </summary>
         public static bool operator ==(RedirectType left, RedirectType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RedirectType"/> values are not the same. </summary>

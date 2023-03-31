@@ -302,6 +302,9 @@ namespace CognitiveSearch.Models
         public static AnalyzerName Stop { get; } = new AnalyzerName(StopValue);
         /// <summary> An analyzer that uses the whitespace tokenizer. See http://lucene.apache.org/core/4_10_3/analyzers-common/org/apache/lucene/analysis/core/WhitespaceAnalyzer.html. </summary>
         public static AnalyzerName Whitespace { get; } = new AnalyzerName(WhitespaceValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="AnalyzerName"/> values are the same. </summary>
         public static bool operator ==(AnalyzerName left, AnalyzerName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="AnalyzerName"/> values are not the same. </summary>

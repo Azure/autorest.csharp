@@ -36,7 +36,7 @@ namespace TypeSchemaMapping.Models
             if (Optional.IsDefined(DaysOfWeek))
             {
                 writer.WritePropertyName("DaysOfWeek"u8);
-                writer.WriteStringValue(DaysOfWeek.Value.ToString());
+                writer.WriteStringValue(DaysOfWeek.Value.ToSerialString());
             }
             writer.WriteEndObject();
         }

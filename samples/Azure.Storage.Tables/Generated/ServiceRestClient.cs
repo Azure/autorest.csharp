@@ -46,14 +46,14 @@ namespace Azure.Storage.Tables
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(_url, false);
             uri.AppendPath("/", false);
-            uri.AppendQuery("restype", restype.ToString(), true);
-            uri.AppendQuery("comp", comp.ToString(), true);
+            uri.AppendQuery("restype", restype.ToSerialString(), true);
+            uri.AppendQuery("comp", comp.ToSerialString(), true);
             if (timeout != null)
             {
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-version", _version.ToSerialString());
             request.Headers.Add("Accept", "application/xml");
             request.Headers.Add("Content-Type", "application/xml");
             var content = new XmlWriterContent();
@@ -122,14 +122,14 @@ namespace Azure.Storage.Tables
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(_url, false);
             uri.AppendPath("/", false);
-            uri.AppendQuery("restype", restype.ToString(), true);
-            uri.AppendQuery("comp", comp.ToString(), true);
+            uri.AppendQuery("restype", restype.ToSerialString(), true);
+            uri.AppendQuery("comp", comp.ToSerialString(), true);
             if (timeout != null)
             {
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-version", _version.ToSerialString());
             request.Headers.Add("Accept", "application/xml");
             return message;
         }
@@ -196,14 +196,14 @@ namespace Azure.Storage.Tables
             var uri = new RawRequestUriBuilder();
             uri.AppendRaw(_url, false);
             uri.AppendPath("/", false);
-            uri.AppendQuery("restype", restype.ToString(), true);
-            uri.AppendQuery("comp", comp.ToString(), true);
+            uri.AppendQuery("restype", restype.ToSerialString(), true);
+            uri.AppendQuery("comp", comp.ToSerialString(), true);
             if (timeout != null)
             {
                 uri.AppendQuery("timeout", timeout.Value, true);
             }
             request.Uri = uri;
-            request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-version", _version.ToSerialString());
             request.Headers.Add("Accept", "application/xml");
             return message;
         }

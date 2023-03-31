@@ -29,6 +29,9 @@ namespace MultipleInputFiles.Models
         public static SourceEnum Value1 { get; } = new SourceEnum(Value1Value);
         /// <summary> value2. </summary>
         public static SourceEnum Value2 { get; } = new SourceEnum(Value2Value);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="SourceEnum"/> values are the same. </summary>
         public static bool operator ==(SourceEnum left, SourceEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SourceEnum"/> values are not the same. </summary>

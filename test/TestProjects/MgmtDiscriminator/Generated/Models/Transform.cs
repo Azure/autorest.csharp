@@ -41,6 +41,9 @@ namespace MgmtDiscriminator.Models
         public static Transform UrlEncode { get; } = new Transform(UrlEncodeValue);
         /// <summary> RemoveNulls. </summary>
         public static Transform RemoveNulls { get; } = new Transform(RemoveNullsValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Transform"/> values are the same. </summary>
         public static bool operator ==(Transform left, Transform right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Transform"/> values are not the same. </summary>

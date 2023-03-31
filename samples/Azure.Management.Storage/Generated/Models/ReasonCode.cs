@@ -29,6 +29,9 @@ namespace Azure.Management.Storage.Models
         public static ReasonCode QuotaId { get; } = new ReasonCode(QuotaIdValue);
         /// <summary> NotAvailableForSubscription. </summary>
         public static ReasonCode NotAvailableForSubscription { get; } = new ReasonCode(NotAvailableForSubscriptionValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ReasonCode"/> values are the same. </summary>
         public static bool operator ==(ReasonCode left, ReasonCode right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ReasonCode"/> values are not the same. </summary>

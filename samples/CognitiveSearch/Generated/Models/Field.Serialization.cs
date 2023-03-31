@@ -19,7 +19,7 @@ namespace CognitiveSearch.Models
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WritePropertyName("type"u8);
-            writer.WriteStringValue(Type.ToString());
+            writer.WriteStringValue(Type.ToSerialString());
             if (Optional.IsDefined(Key))
             {
                 writer.WritePropertyName("key"u8);
@@ -53,17 +53,17 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(Analyzer))
             {
                 writer.WritePropertyName("analyzer"u8);
-                writer.WriteStringValue(Analyzer.Value.ToString());
+                writer.WriteStringValue(Analyzer.Value.ToSerialString());
             }
             if (Optional.IsDefined(SearchAnalyzer))
             {
                 writer.WritePropertyName("searchAnalyzer"u8);
-                writer.WriteStringValue(SearchAnalyzer.Value.ToString());
+                writer.WriteStringValue(SearchAnalyzer.Value.ToSerialString());
             }
             if (Optional.IsDefined(IndexAnalyzer))
             {
                 writer.WritePropertyName("indexAnalyzer"u8);
-                writer.WriteStringValue(IndexAnalyzer.Value.ToString());
+                writer.WriteStringValue(IndexAnalyzer.Value.ToSerialString());
             }
             if (Optional.IsCollectionDefined(SynonymMaps))
             {

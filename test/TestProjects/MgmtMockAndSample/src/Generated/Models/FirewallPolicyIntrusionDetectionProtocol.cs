@@ -35,6 +35,9 @@ namespace MgmtMockAndSample.Models
         public static FirewallPolicyIntrusionDetectionProtocol Icmp { get; } = new FirewallPolicyIntrusionDetectionProtocol(IcmpValue);
         /// <summary> ANY. </summary>
         public static FirewallPolicyIntrusionDetectionProtocol ANY { get; } = new FirewallPolicyIntrusionDetectionProtocol(ANYValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="FirewallPolicyIntrusionDetectionProtocol"/> values are the same. </summary>
         public static bool operator ==(FirewallPolicyIntrusionDetectionProtocol left, FirewallPolicyIntrusionDetectionProtocol right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FirewallPolicyIntrusionDetectionProtocol"/> values are not the same. </summary>

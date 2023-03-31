@@ -972,7 +972,7 @@ namespace Azure.AI.FormRecognizer
             uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models", false);
-            uri.AppendQuery("op", op.ToString(), true);
+            uri.AppendQuery("op", op.ToSerialString(), true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1031,7 +1031,7 @@ namespace Azure.AI.FormRecognizer
             uri.AppendRaw(_endpoint, false);
             uri.AppendRaw("/formrecognizer/v2.0-preview", false);
             uri.AppendPath("/custom/models", false);
-            uri.AppendQuery("op", op.ToString(), true);
+            uri.AppendQuery("op", op.ToSerialString(), true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

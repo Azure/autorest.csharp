@@ -51,7 +51,7 @@ namespace MgmtParamOrdering
             uri.AppendPath("/providers/Microsoft.Compute/hostGroups", false);
             if (expand != null)
             {
-                uri.AppendQuery("$expand", expand.Value.ToString(), true);
+                uri.AppendQuery("$expand", expand.Value.ToSerialString(), true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -374,7 +374,7 @@ namespace MgmtParamOrdering
             uri.AppendPath(hostGroupName, true);
             if (expand != null)
             {
-                uri.AppendQuery("$expand", expand.Value.ToString(), true);
+                uri.AppendQuery("$expand", expand.Value.ToSerialString(), true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

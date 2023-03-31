@@ -32,6 +32,9 @@ namespace NamespaceForEnums
         public static NonExtensibleEnumTurnedExtensible B { get; } = new NonExtensibleEnumTurnedExtensible(BValue);
         /// <summary> C. </summary>
         public static NonExtensibleEnumTurnedExtensible C { get; } = new NonExtensibleEnumTurnedExtensible(CValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="NonExtensibleEnumTurnedExtensible"/> values are the same. </summary>
         public static bool operator ==(NonExtensibleEnumTurnedExtensible left, NonExtensibleEnumTurnedExtensible right) => left.Equals(right);
         /// <summary> Determines if two <see cref="NonExtensibleEnumTurnedExtensible"/> values are not the same. </summary>

@@ -32,6 +32,9 @@ namespace NameConflicts.Models
         public static ItemValue Item { get; } = new ItemValue(ItemValue3);
         /// <summary> ItemValue2. </summary>
         public static ItemValue ItemValue2 { get; } = new ItemValue(ItemValue2Value);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ItemValue"/> values are the same. </summary>
         public static bool operator ==(ItemValue left, ItemValue right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ItemValue"/> values are not the same. </summary>

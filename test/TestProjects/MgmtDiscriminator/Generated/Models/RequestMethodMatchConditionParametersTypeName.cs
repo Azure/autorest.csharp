@@ -26,6 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> DeliveryRuleRequestMethodConditionParameters. </summary>
         public static RequestMethodMatchConditionParametersTypeName DeliveryRuleRequestMethodConditionParameters { get; } = new RequestMethodMatchConditionParametersTypeName(DeliveryRuleRequestMethodConditionParametersValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="RequestMethodMatchConditionParametersTypeName"/> values are the same. </summary>
         public static bool operator ==(RequestMethodMatchConditionParametersTypeName left, RequestMethodMatchConditionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RequestMethodMatchConditionParametersTypeName"/> values are not the same. </summary>

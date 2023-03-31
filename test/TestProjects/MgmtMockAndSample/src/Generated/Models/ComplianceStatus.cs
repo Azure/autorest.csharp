@@ -32,6 +32,9 @@ namespace MgmtMockAndSample.Models
         public static ComplianceStatus NonCompliant { get; } = new ComplianceStatus(NonCompliantValue);
         /// <summary> Pending. </summary>
         public static ComplianceStatus Pending { get; } = new ComplianceStatus(PendingValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ComplianceStatus"/> values are the same. </summary>
         public static bool operator ==(ComplianceStatus left, ComplianceStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ComplianceStatus"/> values are not the same. </summary>

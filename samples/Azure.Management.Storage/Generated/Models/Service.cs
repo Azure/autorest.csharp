@@ -35,6 +35,9 @@ namespace Azure.Management.Storage.Models
         public static Service T { get; } = new Service(TValue);
         /// <summary> f. </summary>
         public static Service F { get; } = new Service(FValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Service"/> values are the same. </summary>
         public static bool operator ==(Service left, Service right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Service"/> values are not the same. </summary>

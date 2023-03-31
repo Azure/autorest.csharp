@@ -44,12 +44,12 @@ namespace ExactMatchInheritance
             if (Optional.IsDefined(Type1))
             {
                 writer.WritePropertyName("type1"u8);
-                writer.WriteStringValue(Type1.Value.ToString());
+                writer.WriteStringValue(Type1.Value.ToSerialString());
             }
             if (Optional.IsDefined(Type2))
             {
                 writer.WritePropertyName("type2"u8);
-                writer.WriteStringValue(Type2.Value.ToString());
+                writer.WriteStringValue(Type2.Value.ToSerialString());
             }
             if (Optional.IsDefined(Type3))
             {

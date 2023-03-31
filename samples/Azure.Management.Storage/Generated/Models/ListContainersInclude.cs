@@ -26,6 +26,9 @@ namespace Azure.Management.Storage.Models
 
         /// <summary> deleted. </summary>
         public static ListContainersInclude Deleted { get; } = new ListContainersInclude(DeletedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ListContainersInclude"/> values are the same. </summary>
         public static bool operator ==(ListContainersInclude left, ListContainersInclude right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ListContainersInclude"/> values are not the same. </summary>

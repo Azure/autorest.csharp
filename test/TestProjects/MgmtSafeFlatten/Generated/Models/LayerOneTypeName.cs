@@ -29,6 +29,9 @@ namespace MgmtSafeFlatten.Models
         public static LayerOneTypeName LayerOneFoo { get; } = new LayerOneTypeName(LayerOneFooValue);
         /// <summary> LayerOneBar. </summary>
         public static LayerOneTypeName LayerOneBar { get; } = new LayerOneTypeName(LayerOneBarValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="LayerOneTypeName"/> values are the same. </summary>
         public static bool operator ==(LayerOneTypeName left, LayerOneTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="LayerOneTypeName"/> values are not the same. </summary>

@@ -74,6 +74,9 @@ namespace MgmtMockAndSample.Models
         public static CertificatePermission Backup { get; } = new CertificatePermission(BackupValue);
         /// <summary> restore. </summary>
         public static CertificatePermission Restore { get; } = new CertificatePermission(RestoreValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="CertificatePermission"/> values are the same. </summary>
         public static bool operator ==(CertificatePermission left, CertificatePermission right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CertificatePermission"/> values are not the same. </summary>

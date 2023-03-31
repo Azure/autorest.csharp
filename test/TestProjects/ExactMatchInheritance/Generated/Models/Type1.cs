@@ -26,6 +26,9 @@ namespace ExactMatchInheritance.Models
 
         /// <summary> Microsoft.Foo/bar. </summary>
         public static Type1 MicrosoftFooBar { get; } = new Type1(MicrosoftFooBarValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Type1"/> values are the same. </summary>
         public static bool operator ==(Type1 left, Type1 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Type1"/> values are not the same. </summary>

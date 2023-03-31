@@ -29,7 +29,7 @@ namespace CustomNamespace
             writer.WritePropertyName("Fruit"u8);
             writer.WriteStringValue(CustomizedFancyField.ToSerialString());
             writer.WritePropertyName("DaysOfWeek"u8);
-            writer.WriteStringValue(DaysOfWeek.ToString());
+            writer.WriteStringValue(DaysOfWeek.ToSerialString());
             writer.WriteEndObject();
         }
     }

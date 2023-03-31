@@ -29,6 +29,9 @@ namespace MgmtScopeResource.Models
         public static EnforcementMode Default { get; } = new EnforcementMode(DefaultValue);
         /// <summary> The policy effect is not enforced during resource creation or update. </summary>
         public static EnforcementMode DoNotEnforce { get; } = new EnforcementMode(DoNotEnforceValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="EnforcementMode"/> values are the same. </summary>
         public static bool operator ==(EnforcementMode left, EnforcementMode right) => left.Equals(right);
         /// <summary> Determines if two <see cref="EnforcementMode"/> values are not the same. </summary>

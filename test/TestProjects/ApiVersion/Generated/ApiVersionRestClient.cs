@@ -48,7 +48,7 @@ namespace ApiVersion
             uri.AppendPath("/op", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             uri.AppendQuery("not-api-version-constant", "2.0", true);
-            uri.AppendQuery("not-api-version-enum", notApiVersionEnum.ToString(), true);
+            uri.AppendQuery("not-api-version-enum", notApiVersionEnum.ToSerialString(), true);
             request.Uri = uri;
             return message;
         }

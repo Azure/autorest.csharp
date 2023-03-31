@@ -35,6 +35,9 @@ namespace MgmtMockAndSample.Models
         public static MgmtMockAndSamplePrivateEndpointServiceConnectionStatus Rejected { get; } = new MgmtMockAndSamplePrivateEndpointServiceConnectionStatus(RejectedValue);
         /// <summary> Disconnected. </summary>
         public static MgmtMockAndSamplePrivateEndpointServiceConnectionStatus Disconnected { get; } = new MgmtMockAndSamplePrivateEndpointServiceConnectionStatus(DisconnectedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="MgmtMockAndSamplePrivateEndpointServiceConnectionStatus"/> values are the same. </summary>
         public static bool operator ==(MgmtMockAndSamplePrivateEndpointServiceConnectionStatus left, MgmtMockAndSamplePrivateEndpointServiceConnectionStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MgmtMockAndSamplePrivateEndpointServiceConnectionStatus"/> values are not the same. </summary>

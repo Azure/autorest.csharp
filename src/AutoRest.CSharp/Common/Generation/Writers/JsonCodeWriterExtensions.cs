@@ -209,19 +209,24 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"{writerName}.WriteObjectValue({name:I});");
                             return;
 
+                        case EnumType clientEnum when clientEnum is { IsExtensible: false, IsIntValueType: true }:
+                            writer.Append($"{writerName}.WriteNumberValue(({clientEnum.ValueType}){name:I}")
+                                .AppendNullableValue(valueSerialization.Type)
+                                .LineRaw(");");
+                            return;
                         case EnumType clientEnum when clientEnum is { IsStringValueType: false }:
                             writer
                                 .Append($"{writerName}.WriteNumberValue({name:I}")
                                 .AppendNullableValue(valueSerialization.Type)
                                 .AppendEnumToString(clientEnum)
-                                .Line($");");
+                                .LineRaw(");");
                             return;
                         case EnumType clientEnum:
                             writer
                                 .Append($"{writerName}.WriteStringValue({name:I}")
                                 .AppendNullableValue(valueSerialization.Type)
                                 .AppendEnumToString(clientEnum)
-                                .Line($");");
+                                .LineRaw(");");
                             return;
                     }
 

@@ -26,6 +26,9 @@ namespace CognitiveSearch.Models
 
         /// <summary> return=representation. </summary>
         public static Enum0 ReturnRepresentation { get; } = new Enum0(ReturnRepresentationValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Enum0"/> values are the same. </summary>
         public static bool operator ==(Enum0 left, Enum0 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Enum0"/> values are not the same. </summary>

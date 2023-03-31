@@ -18,7 +18,7 @@ namespace Azure.Management.Storage.Models
             writer.WritePropertyName("sasExpirationPeriod"u8);
             writer.WriteStringValue(SasExpirationPeriod);
             writer.WritePropertyName("expirationAction"u8);
-            writer.WriteStringValue(ExpirationAction.ToString());
+            writer.WriteStringValue(ExpirationAction.ToSerialString());
             writer.WriteEndObject();
         }
 

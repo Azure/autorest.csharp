@@ -35,6 +35,9 @@ namespace Azure.Network.Management.Interface.Models
         public static ProvisioningState Deleting { get; } = new ProvisioningState(DeletingValue);
         /// <summary> Failed. </summary>
         public static ProvisioningState Failed { get; } = new ProvisioningState(FailedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ProvisioningState"/> values are the same. </summary>
         public static bool operator ==(ProvisioningState left, ProvisioningState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ProvisioningState"/> values are not the same. </summary>

@@ -35,6 +35,9 @@ namespace Azure.ResourceManager.Fake.Models
         public static ReferenceTypesPrivateEndpointConnectionProvisioningState Deleting { get; } = new ReferenceTypesPrivateEndpointConnectionProvisioningState(DeletingValue);
         /// <summary> Failed. </summary>
         public static ReferenceTypesPrivateEndpointConnectionProvisioningState Failed { get; } = new ReferenceTypesPrivateEndpointConnectionProvisioningState(FailedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ReferenceTypesPrivateEndpointConnectionProvisioningState"/> values are the same. </summary>
         public static bool operator ==(ReferenceTypesPrivateEndpointConnectionProvisioningState left, ReferenceTypesPrivateEndpointConnectionProvisioningState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ReferenceTypesPrivateEndpointConnectionProvisioningState"/> values are not the same. </summary>

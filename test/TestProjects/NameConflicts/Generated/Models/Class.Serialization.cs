@@ -538,7 +538,7 @@ namespace NameConflicts.Models
             if (Optional.IsDefined(System))
             {
                 writer.WritePropertyName("System"u8);
-                writer.WriteStringValue(System.Value.ToString());
+                writer.WriteStringValue(System.Value.ToSerialString());
             }
             if (Optional.IsDefined(ToStringValue))
             {

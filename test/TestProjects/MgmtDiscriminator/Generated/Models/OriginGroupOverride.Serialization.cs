@@ -24,7 +24,7 @@ namespace MgmtDiscriminator.Models
             if (Optional.IsDefined(ForwardingProtocol))
             {
                 writer.WritePropertyName("forwardingProtocol"u8);
-                writer.WriteStringValue(ForwardingProtocol.Value.ToString());
+                writer.WriteStringValue(ForwardingProtocol.Value.ToSerialString());
             }
             writer.WriteEndObject();
         }

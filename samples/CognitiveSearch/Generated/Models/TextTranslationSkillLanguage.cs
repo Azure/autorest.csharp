@@ -212,6 +212,9 @@ namespace CognitiveSearch.Models
         public static TextTranslationSkillLanguage Cy { get; } = new TextTranslationSkillLanguage(CyValue);
         /// <summary> Yucatec Maya. </summary>
         public static TextTranslationSkillLanguage Yua { get; } = new TextTranslationSkillLanguage(YuaValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="TextTranslationSkillLanguage"/> values are the same. </summary>
         public static bool operator ==(TextTranslationSkillLanguage left, TextTranslationSkillLanguage right) => left.Equals(right);
         /// <summary> Determines if two <see cref="TextTranslationSkillLanguage"/> values are not the same. </summary>

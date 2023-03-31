@@ -38,6 +38,9 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: VmDiskTypes.Unmanaged
         /// </summary>
         public static VmDiskType Unmanaged { get; } = new VmDiskType(UnmanagedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="VmDiskType"/> values are the same. </summary>
         public static bool operator ==(VmDiskType left, VmDiskType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="VmDiskType"/> values are not the same. </summary>

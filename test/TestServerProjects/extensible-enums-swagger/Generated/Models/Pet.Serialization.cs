@@ -23,10 +23,10 @@ namespace extensible_enums_swagger.Models
             if (Optional.IsDefined(DaysOfWeek))
             {
                 writer.WritePropertyName("DaysOfWeek"u8);
-                writer.WriteStringValue(DaysOfWeek.Value.ToString());
+                writer.WriteStringValue(DaysOfWeek.Value.ToSerialString());
             }
             writer.WritePropertyName("IntEnum"u8);
-            writer.WriteStringValue(IntEnum.ToString());
+            writer.WriteStringValue(IntEnum.ToSerialString());
             writer.WriteEndObject();
         }
 

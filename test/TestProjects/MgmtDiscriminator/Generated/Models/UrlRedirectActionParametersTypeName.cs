@@ -26,6 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> DeliveryRuleUrlRedirectActionParameters. </summary>
         public static UrlRedirectActionParametersTypeName DeliveryRuleUrlRedirectActionParameters { get; } = new UrlRedirectActionParametersTypeName(DeliveryRuleUrlRedirectActionParametersValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="UrlRedirectActionParametersTypeName"/> values are the same. </summary>
         public static bool operator ==(UrlRedirectActionParametersTypeName left, UrlRedirectActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="UrlRedirectActionParametersTypeName"/> values are not the same. </summary>

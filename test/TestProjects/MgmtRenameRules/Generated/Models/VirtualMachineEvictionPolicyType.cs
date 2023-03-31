@@ -38,6 +38,9 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: VirtualMachineEvictionPolicyTypes.Delete
         /// </summary>
         public static VirtualMachineEvictionPolicyType Delete { get; } = new VirtualMachineEvictionPolicyType(DeleteValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="VirtualMachineEvictionPolicyType"/> values are the same. </summary>
         public static bool operator ==(VirtualMachineEvictionPolicyType left, VirtualMachineEvictionPolicyType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="VirtualMachineEvictionPolicyType"/> values are not the same. </summary>

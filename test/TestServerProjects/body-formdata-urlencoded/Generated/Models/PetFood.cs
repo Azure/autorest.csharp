@@ -32,6 +32,9 @@ namespace body_formdata_urlencoded.Models
         public static PetFood Fish { get; } = new PetFood(FishValue);
         /// <summary> plant. </summary>
         public static PetFood Plant { get; } = new PetFood(PlantValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="PetFood"/> values are the same. </summary>
         public static bool operator ==(PetFood left, PetFood right) => left.Equals(right);
         /// <summary> Determines if two <see cref="PetFood"/> values are not the same. </summary>

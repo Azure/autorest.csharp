@@ -47,6 +47,9 @@ namespace CognitiveSearch.Models
         public static DataType EdmGeographyPoint { get; } = new DataType(EdmGeographyPointValue);
         /// <summary> Edm.ComplexType. </summary>
         public static DataType EdmComplexType { get; } = new DataType(EdmComplexTypeValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="DataType"/> values are the same. </summary>
         public static bool operator ==(DataType left, DataType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DataType"/> values are not the same. </summary>

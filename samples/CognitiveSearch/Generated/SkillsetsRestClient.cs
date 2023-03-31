@@ -59,7 +59,7 @@ namespace CognitiveSearch
             {
                 request.Headers.Add("If-None-Match", accessCondition.IfNoneMatch);
             }
-            request.Headers.Add("Prefer", prefer.ToString());
+            request.Headers.Add("Prefer", prefer.ToSerialString());
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();

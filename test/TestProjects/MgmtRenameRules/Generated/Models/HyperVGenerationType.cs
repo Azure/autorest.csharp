@@ -38,6 +38,9 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: HyperVGenerationType.V2
         /// </summary>
         public static HyperVGenerationType V2 { get; } = new HyperVGenerationType(V2Value);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="HyperVGenerationType"/> values are the same. </summary>
         public static bool operator ==(HyperVGenerationType left, HyperVGenerationType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="HyperVGenerationType"/> values are not the same. </summary>

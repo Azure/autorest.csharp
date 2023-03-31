@@ -17,7 +17,7 @@ namespace MgmtDiscriminator.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
-            writer.WriteStringValue(TypeName.ToString());
+            writer.WriteStringValue(TypeName.ToSerialString());
             writer.WritePropertyName("originGroup"u8);
             JsonSerializer.Serialize(writer, OriginGroup); writer.WriteEndObject();
         }

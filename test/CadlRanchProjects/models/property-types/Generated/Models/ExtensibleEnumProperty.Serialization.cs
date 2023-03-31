@@ -17,7 +17,7 @@ namespace Models.Property.Types.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
-            writer.WriteStringValue(Property.ToString());
+            writer.WriteStringValue(Property.ToSerialString());
             writer.WriteEndObject();
         }
 

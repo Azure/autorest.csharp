@@ -26,6 +26,9 @@ namespace ExactMatchInheritance.Models
 
         /// <summary> foo. </summary>
         public static Type2 Foo { get; } = new Type2(FooValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Type2"/> values are the same. </summary>
         public static bool operator ==(Type2 left, Type2 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Type2"/> values are not the same. </summary>

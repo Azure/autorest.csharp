@@ -38,6 +38,9 @@ namespace CognitiveSearch.Models
         public static DataSourceType AzureTable { get; } = new DataSourceType(AzureTableValue);
         /// <summary> mysql. </summary>
         public static DataSourceType MySql { get; } = new DataSourceType(MySqlValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="DataSourceType"/> values are the same. </summary>
         public static bool operator ==(DataSourceType left, DataSourceType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DataSourceType"/> values are not the same. </summary>

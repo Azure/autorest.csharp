@@ -38,6 +38,9 @@ namespace Azure.Management.Storage.Models
         public static LeaseContainerRequestAction Release { get; } = new LeaseContainerRequestAction(ReleaseValue);
         /// <summary> Break. </summary>
         public static LeaseContainerRequestAction Break { get; } = new LeaseContainerRequestAction(BreakValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="LeaseContainerRequestAction"/> values are the same. </summary>
         public static bool operator ==(LeaseContainerRequestAction left, LeaseContainerRequestAction right) => left.Equals(right);
         /// <summary> Determines if two <see cref="LeaseContainerRequestAction"/> values are not the same. </summary>

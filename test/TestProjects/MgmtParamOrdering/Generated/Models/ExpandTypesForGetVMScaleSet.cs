@@ -26,6 +26,9 @@ namespace MgmtParamOrdering.Models
 
         /// <summary> userData. </summary>
         public static ExpandTypesForGetVMScaleSet UserData { get; } = new ExpandTypesForGetVMScaleSet(UserDataValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="ExpandTypesForGetVMScaleSet"/> values are the same. </summary>
         public static bool operator ==(ExpandTypesForGetVMScaleSet left, ExpandTypesForGetVMScaleSet right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ExpandTypesForGetVMScaleSet"/> values are not the same. </summary>

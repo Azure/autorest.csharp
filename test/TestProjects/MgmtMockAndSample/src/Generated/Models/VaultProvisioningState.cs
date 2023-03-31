@@ -29,6 +29,9 @@ namespace MgmtMockAndSample.Models
         public static VaultProvisioningState Succeeded { get; } = new VaultProvisioningState(SucceededValue);
         /// <summary> RegisteringDns. </summary>
         public static VaultProvisioningState RegisteringDns { get; } = new VaultProvisioningState(RegisteringDnsValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="VaultProvisioningState"/> values are the same. </summary>
         public static bool operator ==(VaultProvisioningState left, VaultProvisioningState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="VaultProvisioningState"/> values are not the same. </summary>

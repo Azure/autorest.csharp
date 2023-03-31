@@ -26,6 +26,9 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> A. </summary>
         public static MgmtMockAndSampleSkuFamily A { get; } = new MgmtMockAndSampleSkuFamily(AValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="MgmtMockAndSampleSkuFamily"/> values are the same. </summary>
         public static bool operator ==(MgmtMockAndSampleSkuFamily left, MgmtMockAndSampleSkuFamily right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MgmtMockAndSampleSkuFamily"/> values are not the same. </summary>

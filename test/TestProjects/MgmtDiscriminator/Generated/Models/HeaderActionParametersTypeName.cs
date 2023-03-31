@@ -26,6 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> DeliveryRuleHeaderActionParameters. </summary>
         public static HeaderActionParametersTypeName DeliveryRuleHeaderActionParameters { get; } = new HeaderActionParametersTypeName(DeliveryRuleHeaderActionParametersValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="HeaderActionParametersTypeName"/> values are the same. </summary>
         public static bool operator ==(HeaderActionParametersTypeName left, HeaderActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="HeaderActionParametersTypeName"/> values are not the same. </summary>

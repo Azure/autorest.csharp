@@ -29,6 +29,9 @@ namespace Azure.Management.Storage.Models
         public static LeaseDuration Infinite { get; } = new LeaseDuration(InfiniteValue);
         /// <summary> Fixed. </summary>
         public static LeaseDuration Fixed { get; } = new LeaseDuration(FixedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="LeaseDuration"/> values are the same. </summary>
         public static bool operator ==(LeaseDuration left, LeaseDuration right) => left.Equals(right);
         /// <summary> Determines if two <see cref="LeaseDuration"/> values are not the same. </summary>

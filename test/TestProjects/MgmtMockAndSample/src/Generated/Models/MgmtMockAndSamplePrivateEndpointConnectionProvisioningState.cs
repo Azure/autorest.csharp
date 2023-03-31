@@ -41,6 +41,9 @@ namespace MgmtMockAndSample.Models
         public static MgmtMockAndSamplePrivateEndpointConnectionProvisioningState Failed { get; } = new MgmtMockAndSamplePrivateEndpointConnectionProvisioningState(FailedValue);
         /// <summary> Disconnected. </summary>
         public static MgmtMockAndSamplePrivateEndpointConnectionProvisioningState Disconnected { get; } = new MgmtMockAndSamplePrivateEndpointConnectionProvisioningState(DisconnectedValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="MgmtMockAndSamplePrivateEndpointConnectionProvisioningState"/> values are the same. </summary>
         public static bool operator ==(MgmtMockAndSamplePrivateEndpointConnectionProvisioningState left, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MgmtMockAndSamplePrivateEndpointConnectionProvisioningState"/> values are not the same. </summary>

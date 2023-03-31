@@ -26,6 +26,9 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> DeliveryRuleRemoteAddressConditionParameters. </summary>
         public static RemoteAddressMatchConditionParametersTypeName DeliveryRuleRemoteAddressConditionParameters { get; } = new RemoteAddressMatchConditionParametersTypeName(DeliveryRuleRemoteAddressConditionParametersValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="RemoteAddressMatchConditionParametersTypeName"/> values are the same. </summary>
         public static bool operator ==(RemoteAddressMatchConditionParametersTypeName left, RemoteAddressMatchConditionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RemoteAddressMatchConditionParametersTypeName"/> values are not the same. </summary>

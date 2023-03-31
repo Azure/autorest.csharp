@@ -26,6 +26,9 @@ namespace Azure.Storage.Tables.Models
 
         /// <summary> acl. </summary>
         public static Enum3 Acl { get; } = new Enum3(AclValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Enum3"/> values are the same. </summary>
         public static bool operator ==(Enum3 left, Enum3 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Enum3"/> values are not the same. </summary>

@@ -26,6 +26,9 @@ namespace Azure.Storage.Tables.Models
 
         /// <summary> properties. </summary>
         public static Enum5 Properties { get; } = new Enum5(PropertiesValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="Enum5"/> values are the same. </summary>
         public static bool operator ==(Enum5 left, Enum5 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Enum5"/> values are not the same. </summary>

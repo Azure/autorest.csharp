@@ -101,6 +101,9 @@ namespace CognitiveSearch.Models
         public static OcrSkillLanguage SrLatn { get; } = new OcrSkillLanguage(SrLatnValue);
         /// <summary> Slovak. </summary>
         public static OcrSkillLanguage Sk { get; } = new OcrSkillLanguage(SkValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="OcrSkillLanguage"/> values are the same. </summary>
         public static bool operator ==(OcrSkillLanguage left, OcrSkillLanguage right) => left.Equals(right);
         /// <summary> Determines if two <see cref="OcrSkillLanguage"/> values are not the same. </summary>

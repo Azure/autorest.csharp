@@ -413,7 +413,7 @@ namespace constants
             uri.AppendPath("/constants/putModelAsStringNoRequiredTwoValueNoDefault", false);
             if (input != null)
             {
-                uri.AppendQuery("input", input.Value.ToString(), true);
+                uri.AppendQuery("input", input.Value.ToSerialString(), true);
             }
             request.Uri = uri;
             return message;
@@ -461,7 +461,7 @@ namespace constants
             uri.AppendPath("/constants/putModelAsStringNoRequiredTwoValueDefault", false);
             if (input != null)
             {
-                uri.AppendQuery("input", input.Value.ToString(), true);
+                uri.AppendQuery("input", input.Value.ToSerialString(), true);
             }
             request.Uri = uri;
             return message;
@@ -513,7 +513,7 @@ namespace constants
             uri.AppendPath("/constants/putModelAsStringNoRequiredOneValueNoDefault", false);
             if (input != null)
             {
-                uri.AppendQuery("input", input.Value.ToString(), true);
+                uri.AppendQuery("input", input.Value.ToSerialString(), true);
             }
             request.Uri = uri;
             return message;
@@ -561,7 +561,7 @@ namespace constants
             uri.AppendPath("/constants/putModelAsStringNoRequiredOneValueDefault", false);
             if (input != null)
             {
-                uri.AppendQuery("input", input.Value.ToString(), true);
+                uri.AppendQuery("input", input.Value.ToSerialString(), true);
             }
             request.Uri = uri;
             return message;
@@ -611,7 +611,7 @@ namespace constants
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredTwoValueNoDefault", false);
-            uri.AppendQuery("input", input.ToString(), true);
+            uri.AppendQuery("input", input.ToSerialString(), true);
             request.Uri = uri;
             return message;
         }
@@ -658,7 +658,7 @@ namespace constants
             uri.AppendPath("/constants/putModelAsStringRequiredTwoValueDefault", false);
             if (input != null)
             {
-                uri.AppendQuery("input", input.Value.ToString(), true);
+                uri.AppendQuery("input", input.Value.ToSerialString(), true);
             }
             request.Uri = uri;
             return message;
@@ -708,7 +708,7 @@ namespace constants
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putModelAsStringRequiredOneValueNoDefault", false);
-            uri.AppendQuery("input", input.ToString(), true);
+            uri.AppendQuery("input", input.ToSerialString(), true);
             request.Uri = uri;
             return message;
         }
@@ -755,7 +755,7 @@ namespace constants
             uri.AppendPath("/constants/putModelAsStringRequiredOneValueDefault", false);
             if (input != null)
             {
-                uri.AppendQuery("input", input.Value.ToString(), true);
+                uri.AppendQuery("input", input.Value.ToSerialString(), true);
             }
             request.Uri = uri;
             return message;

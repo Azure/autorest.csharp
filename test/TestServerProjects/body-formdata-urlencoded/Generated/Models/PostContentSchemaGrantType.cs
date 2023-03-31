@@ -26,6 +26,9 @@ namespace body_formdata_urlencoded.Models
 
         /// <summary> access_token. </summary>
         public static PostContentSchemaGrantType AccessToken { get; } = new PostContentSchemaGrantType(AccessTokenValue);
+
+        internal string ToSerialString() => _value;
+
         /// <summary> Determines if two <see cref="PostContentSchemaGrantType"/> values are the same. </summary>
         public static bool operator ==(PostContentSchemaGrantType left, PostContentSchemaGrantType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="PostContentSchemaGrantType"/> values are not the same. </summary>
