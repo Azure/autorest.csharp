@@ -41,13 +41,13 @@ namespace validation.Models
             writer.WritePropertyName("constChild"u8);
             writer.WriteObjectValue(ConstChild);
             writer.WritePropertyName("constInt"u8);
-            writer.WriteNumberValue(ConstInt);
+            writer.WriteStringValue(ConstInt.ToString());
             writer.WritePropertyName("constString"u8);
-            writer.WriteStringValue(ConstString);
+            writer.WriteStringValue(ConstString.ToString());
             if (Optional.IsDefined(ConstStringAsEnum))
             {
                 writer.WritePropertyName("constStringAsEnum"u8);
-                writer.WriteStringValue(ConstStringAsEnum);
+                writer.WriteStringValue(ConstStringAsEnum.Value.ToString());
             }
             writer.WriteEndObject();
         }
@@ -63,9 +63,9 @@ namespace validation.Models
             Optional<string> image = default;
             ChildProduct child = default;
             ConstantProduct constChild = default;
-            int constInt = default;
-            string constString = default;
-            Optional<string> constStringAsEnum = default;
+            ProductConstInt constInt = default;
+            ProductConstString constString = default;
+            Optional<EnumConst> constStringAsEnum = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("display_names"u8))
@@ -110,21 +110,26 @@ namespace validation.Models
                 }
                 if (property.NameEquals("constInt"u8))
                 {
-                    constInt = property.Value.GetInt32();
+                    constInt = new ProductConstInt(property.Value.GetInt32());
                     continue;
                 }
                 if (property.NameEquals("constString"u8))
                 {
-                    constString = property.Value.GetString();
+                    constString = new ProductConstString(property.Value.GetString());
                     continue;
                 }
                 if (property.NameEquals("constStringAsEnum"u8))
                 {
-                    constStringAsEnum = property.Value.GetString();
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    constStringAsEnum = new EnumConst(property.Value.GetString());
                     continue;
                 }
             }
-            return new Product(Optional.ToList(displayNames), Optional.ToNullable(capacity), image.Value, child, constChild, constInt, constString, constStringAsEnum.Value);
+            return new Product(Optional.ToList(displayNames), Optional.ToNullable(capacity), image.Value, child, constChild, constInt, constString, Optional.ToNullable(constStringAsEnum));
         }
     }
 }

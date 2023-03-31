@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
@@ -34,7 +35,7 @@ namespace azure_special_properties
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal HttpMessage CreateCustomNamedRequestIdRequest(string fooClientRequestId)
+        internal HttpMessage CreateCustomNamedRequestIdRequest(string fooClientRequestId, BodyContent body, Constant6? optionalConstantIntQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -42,30 +43,49 @@ namespace azure_special_properties
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/azurespecials/customNamedRequestId", false);
+            if (optionalConstantIntQuery != null)
+            {
+                uri.AppendQuery("optionalConstantIntQuery", optionalConstantIntQuery.Value.ToString(), true);
+            }
             request.Uri = uri;
             request.Headers.Add("foo-client-request-id", fooClientRequestId);
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(body);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
+        /// <param name="body"> for test. </param>
+        /// <param name="optionalConstantIntQuery"> The Constant6 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> is null. </exception>
-        public async Task<ResponseWithHeaders<HeaderCustomNamedRequestIdHeaders>> CustomNamedRequestIdAsync(string fooClientRequestId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> or <paramref name="body"/> is null. </exception>
+        public async Task<ResponseWithHeaders<BodyContent, HeaderCustomNamedRequestIdHeaders>> CustomNamedRequestIdAsync(string fooClientRequestId, BodyContent body, Constant6? optionalConstantIntQuery = null, CancellationToken cancellationToken = default)
         {
             if (fooClientRequestId == null)
             {
                 throw new ArgumentNullException(nameof(fooClientRequestId));
             }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
-            using var message = CreateCustomNamedRequestIdRequest(fooClientRequestId);
+            using var message = CreateCustomNamedRequestIdRequest(fooClientRequestId, body, optionalConstantIntQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HeaderCustomNamedRequestIdHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    {
+                        BodyContent value = default;
+                        using var document = await JsonDocument.ParseAsync(message.Response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+                        value = BodyContent.DeserializeBodyContent(document.RootElement);
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
                 default:
                     throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
             }
@@ -73,22 +93,33 @@ namespace azure_special_properties
 
         /// <summary> Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
+        /// <param name="body"> for test. </param>
+        /// <param name="optionalConstantIntQuery"> The Constant6 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> is null. </exception>
-        public ResponseWithHeaders<HeaderCustomNamedRequestIdHeaders> CustomNamedRequestId(string fooClientRequestId, CancellationToken cancellationToken = default)
+        /// <exception cref="ArgumentNullException"> <paramref name="fooClientRequestId"/> or <paramref name="body"/> is null. </exception>
+        public ResponseWithHeaders<BodyContent, HeaderCustomNamedRequestIdHeaders> CustomNamedRequestId(string fooClientRequestId, BodyContent body, Constant6? optionalConstantIntQuery = null, CancellationToken cancellationToken = default)
         {
             if (fooClientRequestId == null)
             {
                 throw new ArgumentNullException(nameof(fooClientRequestId));
             }
+            if (body == null)
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
-            using var message = CreateCustomNamedRequestIdRequest(fooClientRequestId);
+            using var message = CreateCustomNamedRequestIdRequest(fooClientRequestId, body, optionalConstantIntQuery);
             _pipeline.Send(message, cancellationToken);
             var headers = new HeaderCustomNamedRequestIdHeaders(message.Response);
             switch (message.Response.Status)
             {
                 case 200:
-                    return ResponseWithHeaders.FromValue(headers, message.Response);
+                    {
+                        BodyContent value = default;
+                        using var document = JsonDocument.Parse(message.Response.ContentStream);
+                        value = BodyContent.DeserializeBodyContent(document.RootElement);
+                        return ResponseWithHeaders.FromValue(value, headers, message.Response);
+                    }
                 default:
                     throw ClientDiagnostics.CreateRequestFailedException(message.Response);
             }

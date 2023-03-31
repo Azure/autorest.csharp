@@ -10,6 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using httpInfrastructure.Models;
 
 namespace httpInfrastructure
 {
@@ -140,14 +141,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put boolean value true returning 200 success. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put200Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put200Async(Constant7? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
             scope.Start();
             try
             {
-                return await RestClient.Put200Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Put200Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -157,14 +159,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put boolean value true returning 200 success. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put200(CancellationToken cancellationToken = default)
+        public virtual Response Put200(Constant7? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put200");
             scope.Start();
             try
             {
-                return RestClient.Put200(cancellationToken);
+                return RestClient.Put200(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -174,14 +177,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returning 200. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch200Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch200Async(Constant8? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
             scope.Start();
             try
             {
-                return await RestClient.Patch200Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Patch200Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -191,14 +195,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returning 200. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Patch200(CancellationToken cancellationToken = default)
+        public virtual Response Patch200(Constant8? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
             scope.Start();
             try
             {
-                return RestClient.Patch200(cancellationToken);
+                return RestClient.Patch200(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -208,14 +213,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post bollean value true in request that returns a 200. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post200Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post200Async(Constant9? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
             scope.Start();
             try
             {
-                return await RestClient.Post200Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Post200Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -225,14 +231,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post bollean value true in request that returns a 200. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Post200(CancellationToken cancellationToken = default)
+        public virtual Response Post200(Constant9? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post200");
             scope.Start();
             try
             {
-                return RestClient.Post200(cancellationToken);
+                return RestClient.Post200(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -242,14 +249,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete simple boolean value true returns 200. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete200Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Delete200Async(Constant10? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
             scope.Start();
             try
             {
-                return await RestClient.Delete200Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Delete200Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -259,14 +267,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete simple boolean value true returns 200. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete200(CancellationToken cancellationToken = default)
+        public virtual Response Delete200(Constant10? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
             scope.Start();
             try
             {
-                return RestClient.Delete200(cancellationToken);
+                return RestClient.Delete200(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -276,14 +285,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 201. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put201Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put201Async(Constant11? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
             scope.Start();
             try
             {
-                return await RestClient.Put201Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Put201Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -293,14 +303,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 201. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put201(CancellationToken cancellationToken = default)
+        public virtual Response Put201(Constant11? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put201");
             scope.Start();
             try
             {
-                return RestClient.Put201(cancellationToken);
+                return RestClient.Put201(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -310,14 +321,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post201Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post201Async(Constant12? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
             scope.Start();
             try
             {
-                return await RestClient.Post201Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Post201Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -327,14 +339,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Post201(CancellationToken cancellationToken = default)
+        public virtual Response Post201(Constant12? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post201");
             scope.Start();
             try
             {
-                return RestClient.Post201(cancellationToken);
+                return RestClient.Post201(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -344,14 +357,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put202Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put202Async(Constant13? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
             scope.Start();
             try
             {
-                return await RestClient.Put202Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Put202Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -361,14 +375,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put202(CancellationToken cancellationToken = default)
+        public virtual Response Put202(Constant13? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put202");
             scope.Start();
             try
             {
-                return RestClient.Put202(cancellationToken);
+                return RestClient.Put202(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -378,14 +393,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returns 202. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch202Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch202Async(Constant14? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
             scope.Start();
             try
             {
-                return await RestClient.Patch202Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Patch202Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -395,14 +411,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returns 202. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Patch202(CancellationToken cancellationToken = default)
+        public virtual Response Patch202(Constant14? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
             scope.Start();
             try
             {
-                return RestClient.Patch202(cancellationToken);
+                return RestClient.Patch202(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -412,14 +429,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post202Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post202Async(Constant15? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
             scope.Start();
             try
             {
-                return await RestClient.Post202Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Post202Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -429,14 +447,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Post202(CancellationToken cancellationToken = default)
+        public virtual Response Post202(Constant15? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post202");
             scope.Start();
             try
             {
-                return RestClient.Post202(cancellationToken);
+                return RestClient.Post202(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -446,14 +465,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete202Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Delete202Async(Constant16? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
             scope.Start();
             try
             {
-                return await RestClient.Delete202Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Delete202Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -463,14 +483,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete202(CancellationToken cancellationToken = default)
+        public virtual Response Delete202(Constant16? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
             scope.Start();
             try
             {
-                return RestClient.Delete202(cancellationToken);
+                return RestClient.Delete202(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -514,14 +535,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put204Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put204Async(Constant17? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
             scope.Start();
             try
             {
-                return await RestClient.Put204Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Put204Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -531,14 +553,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put204(CancellationToken cancellationToken = default)
+        public virtual Response Put204(Constant17? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Put204");
             scope.Start();
             try
             {
-                return RestClient.Put204(cancellationToken);
+                return RestClient.Put204(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -548,14 +571,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch204Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch204Async(Constant18? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
             scope.Start();
             try
             {
-                return await RestClient.Patch204Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Patch204Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -565,14 +589,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Patch204(CancellationToken cancellationToken = default)
+        public virtual Response Patch204(Constant18? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
             scope.Start();
             try
             {
-                return RestClient.Patch204(cancellationToken);
+                return RestClient.Patch204(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -582,14 +607,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post204Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post204Async(Constant19? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
             scope.Start();
             try
             {
-                return await RestClient.Post204Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Post204Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -599,14 +625,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Post204(CancellationToken cancellationToken = default)
+        public virtual Response Post204(Constant19? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Post204");
             scope.Start();
             try
             {
-                return RestClient.Post204(cancellationToken);
+                return RestClient.Post204(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -616,14 +643,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete204Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Delete204Async(Constant20? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
             scope.Start();
             try
             {
-                return await RestClient.Delete204Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Delete204Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -633,14 +661,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete204(CancellationToken cancellationToken = default)
+        public virtual Response Delete204(Constant20? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
             scope.Start();
             try
             {
-                return RestClient.Delete204(cancellationToken);
+                return RestClient.Delete204(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {

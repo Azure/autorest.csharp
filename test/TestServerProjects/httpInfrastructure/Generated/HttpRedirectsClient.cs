@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core.Pipeline;
+using httpInfrastructure.Models;
 
 namespace httpInfrastructure
 {
@@ -175,14 +176,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put301Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put301Async(Constant25? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
             scope.Start();
             try
             {
-                return (await RestClient.Put301Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.Put301Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -192,14 +194,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put301(CancellationToken cancellationToken = default)
+        public virtual Response Put301(Constant25? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put301");
             scope.Start();
             try
             {
-                return RestClient.Put301(cancellationToken).GetRawResponse();
+                return RestClient.Put301(booleanValue, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -277,14 +280,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch302Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch302Async(Constant29? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
             scope.Start();
             try
             {
-                return (await RestClient.Patch302Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.Patch302Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -294,14 +298,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Patch302(CancellationToken cancellationToken = default)
+        public virtual Response Patch302(Constant29? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch302");
             scope.Start();
             try
             {
-                return RestClient.Patch302(cancellationToken).GetRawResponse();
+                return RestClient.Patch302(booleanValue, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -311,14 +316,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post303Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post303Async(Constant31? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
             scope.Start();
             try
             {
-                return (await RestClient.Post303Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.Post303Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -328,14 +334,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Post303(CancellationToken cancellationToken = default)
+        public virtual Response Post303(Constant31? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post303");
             scope.Start();
             try
             {
-                return RestClient.Post303(cancellationToken).GetRawResponse();
+                return RestClient.Post303(booleanValue, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -447,14 +454,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put307Async(Constant36? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
             scope.Start();
             try
             {
-                return (await RestClient.Put307Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.Put307Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -464,14 +472,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put307(CancellationToken cancellationToken = default)
+        public virtual Response Put307(Constant36? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Put307");
             scope.Start();
             try
             {
-                return RestClient.Put307(cancellationToken).GetRawResponse();
+                return RestClient.Put307(booleanValue, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -481,14 +490,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch307Async(Constant38? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
             scope.Start();
             try
             {
-                return (await RestClient.Patch307Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.Patch307Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -498,14 +508,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Patch307(CancellationToken cancellationToken = default)
+        public virtual Response Patch307(Constant38? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Patch307");
             scope.Start();
             try
             {
-                return RestClient.Patch307(cancellationToken).GetRawResponse();
+                return RestClient.Patch307(booleanValue, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -515,14 +526,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post307Async(Constant40? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
             scope.Start();
             try
             {
-                return (await RestClient.Post307Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.Post307Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -532,14 +544,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Post307(CancellationToken cancellationToken = default)
+        public virtual Response Post307(Constant40? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Post307");
             scope.Start();
             try
             {
-                return RestClient.Post307(cancellationToken).GetRawResponse();
+                return RestClient.Post307(booleanValue, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -549,14 +562,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete307Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Delete307Async(Constant42? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
             scope.Start();
             try
             {
-                return (await RestClient.Delete307Async(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return (await RestClient.Delete307Async(booleanValue, cancellationToken).ConfigureAwait(false)).GetRawResponse();
             }
             catch (Exception e)
             {
@@ -566,14 +580,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete307(CancellationToken cancellationToken = default)
+        public virtual Response Delete307(Constant42? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRedirectsClient.Delete307");
             scope.Start();
             try
             {
-                return RestClient.Delete307(cancellationToken).GetRawResponse();
+                return RestClient.Delete307(booleanValue, cancellationToken).GetRawResponse();
             }
             catch (Exception e)
             {

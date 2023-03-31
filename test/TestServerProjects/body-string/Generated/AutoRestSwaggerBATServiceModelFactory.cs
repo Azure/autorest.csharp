@@ -14,7 +14,7 @@ namespace body_string.Models
         /// <param name="colorConstant"> Referenced Color Constant Description. </param>
         /// <param name="field1"> Sample string. </param>
         /// <returns> A new <see cref="Models.RefColorConstant"/> instance for mocking. </returns>
-        public static RefColorConstant RefColorConstant(string colorConstant = null, string field1 = null)
+        public static RefColorConstant RefColorConstant(ColorConstant colorConstant = default, string field1 = null)
         {
             return new RefColorConstant(colorConstant, field1);
         }

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using httpInfrastructure.Models;
 
 namespace httpInfrastructure
 {
@@ -112,7 +113,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePost505Request()
+        internal HttpMessage CreatePost505Request(Constant57? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -122,18 +123,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/server/505", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post505Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Post505Async(Constant57? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost505Request();
+            using var message = CreatePost505Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -143,10 +148,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post505(CancellationToken cancellationToken = default)
+        public Response Post505(Constant57? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost505Request();
+            using var message = CreatePost505Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -155,7 +161,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreateDelete505Request()
+        internal HttpMessage CreateDelete505Request(Constant58? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -165,18 +171,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/failure/server/505", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Delete505Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete505Async(Constant58? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete505Request();
+            using var message = CreateDelete505Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -186,10 +196,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete505(CancellationToken cancellationToken = default)
+        public Response Delete505(Constant58? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete505Request();
+            using var message = CreateDelete505Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

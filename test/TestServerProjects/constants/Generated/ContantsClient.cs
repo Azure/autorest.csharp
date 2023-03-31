@@ -115,14 +115,15 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
+        /// <param name="input"> The NoModelAsStringNoRequiredOneValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutNoModelAsStringNoRequiredOneValueNoDefaultAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutNoModelAsStringNoRequiredOneValueNoDefaultAsync(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredOneValueNoDefault");
             scope.Start();
             try
             {
-                return await RestClient.PutNoModelAsStringNoRequiredOneValueNoDefaultAsync(cancellationToken).ConfigureAwait(false);
+                return await RestClient.PutNoModelAsStringNoRequiredOneValueNoDefaultAsync(input, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -132,14 +133,15 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
+        /// <param name="input"> The NoModelAsStringNoRequiredOneValueNoDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutNoModelAsStringNoRequiredOneValueNoDefault(CancellationToken cancellationToken = default)
+        public virtual Response PutNoModelAsStringNoRequiredOneValueNoDefault(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredOneValueNoDefault");
             scope.Start();
             try
             {
-                return RestClient.PutNoModelAsStringNoRequiredOneValueNoDefault(cancellationToken);
+                return RestClient.PutNoModelAsStringNoRequiredOneValueNoDefault(input, cancellationToken);
             }
             catch (Exception e)
             {
@@ -149,14 +151,15 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
+        /// <param name="input"> The NoModelAsStringNoRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> PutNoModelAsStringNoRequiredOneValueDefaultAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> PutNoModelAsStringNoRequiredOneValueDefaultAsync(NoModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredOneValueDefault");
             scope.Start();
             try
             {
-                return await RestClient.PutNoModelAsStringNoRequiredOneValueDefaultAsync(cancellationToken).ConfigureAwait(false);
+                return await RestClient.PutNoModelAsStringNoRequiredOneValueDefaultAsync(input, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -166,14 +169,15 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
+        /// <param name="input"> The NoModelAsStringNoRequiredOneValueDefaultOpEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response PutNoModelAsStringNoRequiredOneValueDefault(CancellationToken cancellationToken = default)
+        public virtual Response PutNoModelAsStringNoRequiredOneValueDefault(NoModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ContantsClient.PutNoModelAsStringNoRequiredOneValueDefault");
             scope.Start();
             try
             {
-                return RestClient.PutNoModelAsStringNoRequiredOneValueDefault(cancellationToken);
+                return RestClient.PutNoModelAsStringNoRequiredOneValueDefault(input, cancellationToken);
             }
             catch (Exception e)
             {

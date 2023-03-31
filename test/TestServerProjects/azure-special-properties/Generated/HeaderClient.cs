@@ -40,14 +40,16 @@ namespace azure_special_properties
 
         /// <summary> Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
+        /// <param name="body"> for test. </param>
+        /// <param name="optionalConstantIntQuery"> The Constant6 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> CustomNamedRequestIdAsync(string fooClientRequestId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BodyContent>> CustomNamedRequestIdAsync(string fooClientRequestId, BodyContent body, Constant6? optionalConstantIntQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomNamedRequestId");
             scope.Start();
             try
             {
-                return (await RestClient.CustomNamedRequestIdAsync(fooClientRequestId, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CustomNamedRequestIdAsync(fooClientRequestId, body, optionalConstantIntQuery, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -58,14 +60,16 @@ namespace azure_special_properties
 
         /// <summary> Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request. </summary>
         /// <param name="fooClientRequestId"> The fooRequestId. </param>
+        /// <param name="body"> for test. </param>
+        /// <param name="optionalConstantIntQuery"> The Constant6 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response CustomNamedRequestId(string fooClientRequestId, CancellationToken cancellationToken = default)
+        public virtual Response<BodyContent> CustomNamedRequestId(string fooClientRequestId, BodyContent body, Constant6? optionalConstantIntQuery = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HeaderClient.CustomNamedRequestId");
             scope.Start();
             try
             {
-                return RestClient.CustomNamedRequestId(fooClientRequestId, cancellationToken).GetRawResponse();
+                return RestClient.CustomNamedRequestId(fooClientRequestId, body, optionalConstantIntQuery, cancellationToken);
             }
             catch (Exception e)
             {

@@ -26,9 +26,8 @@ namespace validation.Models
             DisplayNames = new ChangeTrackingList<string>();
             Child = child;
             ConstChild = constChild;
-            ConstInt = 0;
-            ConstString = "constant";
-            ConstStringAsEnum = "constant_string_as_enum";
+            ConstInt = ProductConstInt._0;
+            ConstString = ProductConstString.Constant;
         }
 
         /// <summary> Initializes a new instance of Product. </summary>
@@ -40,7 +39,7 @@ namespace validation.Models
         /// <param name="constInt"> Constant int. </param>
         /// <param name="constString"> Constant string. </param>
         /// <param name="constStringAsEnum"> Constant string as Enum. </param>
-        internal Product(IList<string> displayNames, int? capacity, string image, ChildProduct child, ConstantProduct constChild, int constInt, string constString, string constStringAsEnum)
+        internal Product(IList<string> displayNames, int? capacity, string image, ChildProduct child, ConstantProduct constChild, ProductConstInt constInt, ProductConstString constString, EnumConst? constStringAsEnum)
         {
             DisplayNames = displayNames;
             Capacity = capacity;
@@ -63,10 +62,10 @@ namespace validation.Models
         /// <summary> The product documentation. </summary>
         public ConstantProduct ConstChild { get; set; }
         /// <summary> Constant int. </summary>
-        public int ConstInt { get; }
+        public ProductConstInt ConstInt { get; }
         /// <summary> Constant string. </summary>
-        public string ConstString { get; }
+        public ProductConstString ConstString { get; }
         /// <summary> Constant string as Enum. </summary>
-        public string ConstStringAsEnum { get; set; }
+        public EnumConst? ConstStringAsEnum { get; set; }
     }
 }

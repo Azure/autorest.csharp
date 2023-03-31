@@ -23,7 +23,7 @@ namespace validation.Models
         /// <param name="constString"> Constant string. </param>
         /// <param name="constStringAsEnum"> Constant string as Enum. </param>
         /// <returns> A new <see cref="Models.Product"/> instance for mocking. </returns>
-        public static Product Product(IEnumerable<string> displayNames = null, int? capacity = null, string image = null, ChildProduct child = null, ConstantProduct constChild = null, int constInt = default, string constString = null, string constStringAsEnum = null)
+        public static Product Product(IEnumerable<string> displayNames = null, int? capacity = null, string image = null, ChildProduct child = null, ConstantProduct constChild = null, ProductConstInt constInt = default, ProductConstString constString = default, EnumConst? constStringAsEnum = null)
         {
             displayNames ??= new List<string>();
 
@@ -34,7 +34,7 @@ namespace validation.Models
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="count"> Count. </param>
         /// <returns> A new <see cref="Models.ChildProduct"/> instance for mocking. </returns>
-        public static ChildProduct ChildProduct(string constProperty = null, int? count = null)
+        public static ChildProduct ChildProduct(ChildProductConstProperty constProperty = default, int? count = null)
         {
             return new ChildProduct(constProperty, count);
         }
@@ -43,7 +43,7 @@ namespace validation.Models
         /// <param name="constProperty"> Constant string. </param>
         /// <param name="constProperty2"> Constant string2. </param>
         /// <returns> A new <see cref="Models.ConstantProduct"/> instance for mocking. </returns>
-        public static ConstantProduct ConstantProduct(string constProperty = null, string constProperty2 = null)
+        public static ConstantProduct ConstantProduct(ConstantProductConstProperty constProperty = default, ConstantProductConstProperty2 constProperty2 = default)
         {
             return new ConstantProduct(constProperty, constProperty2);
         }

@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using httpInfrastructure.Models;
 
 namespace httpInfrastructure
 {
@@ -245,7 +246,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut301Request()
+        internal HttpMessage CreatePut301Request(Constant25? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -255,18 +256,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/redirect/301", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<HttpRedirectsPut301Headers>> Put301Async(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<HttpRedirectsPut301Headers>> Put301Async(Constant25? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut301Request();
+            using var message = CreatePut301Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPut301Headers(message.Response);
             switch (message.Response.Status)
@@ -279,10 +284,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<HttpRedirectsPut301Headers> Put301(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HttpRedirectsPut301Headers> Put301(Constant25? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut301Request();
+            using var message = CreatePut301Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPut301Headers(message.Response);
             switch (message.Response.Status)
@@ -388,7 +394,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePatch302Request()
+        internal HttpMessage CreatePatch302Request(Constant29? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -398,18 +404,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/redirect/302", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<HttpRedirectsPatch302Headers>> Patch302Async(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<HttpRedirectsPatch302Headers>> Patch302Async(Constant29? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch302Request();
+            using var message = CreatePatch302Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPatch302Headers(message.Response);
             switch (message.Response.Status)
@@ -422,10 +432,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<HttpRedirectsPatch302Headers> Patch302(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HttpRedirectsPatch302Headers> Patch302(Constant29? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch302Request();
+            using var message = CreatePatch302Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPatch302Headers(message.Response);
             switch (message.Response.Status)
@@ -437,7 +448,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePost303Request()
+        internal HttpMessage CreatePost303Request(Constant31? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -447,18 +458,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/redirect/303", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<HttpRedirectsPost303Headers>> Post303Async(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<HttpRedirectsPost303Headers>> Post303Async(Constant31? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost303Request();
+            using var message = CreatePost303Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPost303Headers(message.Response);
             switch (message.Response.Status)
@@ -472,10 +487,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<HttpRedirectsPost303Headers> Post303(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HttpRedirectsPost303Headers> Post303(Constant31? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost303Request();
+            using var message = CreatePost303Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPost303Headers(message.Response);
             switch (message.Response.Status)
@@ -629,7 +645,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut307Request()
+        internal HttpMessage CreatePut307Request(Constant36? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -639,18 +655,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/redirect/307", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Put redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<HttpRedirectsPut307Headers>> Put307Async(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<HttpRedirectsPut307Headers>> Put307Async(Constant36? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut307Request();
+            using var message = CreatePut307Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPut307Headers(message.Response);
             switch (message.Response.Status)
@@ -664,10 +684,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<HttpRedirectsPut307Headers> Put307(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HttpRedirectsPut307Headers> Put307(Constant36? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut307Request();
+            using var message = CreatePut307Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPut307Headers(message.Response);
             switch (message.Response.Status)
@@ -680,7 +701,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePatch307Request()
+        internal HttpMessage CreatePatch307Request(Constant38? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -690,18 +711,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/redirect/307", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Patch redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<HttpRedirectsPatch307Headers>> Patch307Async(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<HttpRedirectsPatch307Headers>> Patch307Async(Constant38? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch307Request();
+            using var message = CreatePatch307Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPatch307Headers(message.Response);
             switch (message.Response.Status)
@@ -715,10 +740,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<HttpRedirectsPatch307Headers> Patch307(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HttpRedirectsPatch307Headers> Patch307(Constant38? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch307Request();
+            using var message = CreatePatch307Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPatch307Headers(message.Response);
             switch (message.Response.Status)
@@ -731,7 +757,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePost307Request()
+        internal HttpMessage CreatePost307Request(Constant40? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -741,18 +767,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/redirect/307", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Post redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<HttpRedirectsPost307Headers>> Post307Async(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<HttpRedirectsPost307Headers>> Post307Async(Constant40? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost307Request();
+            using var message = CreatePost307Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPost307Headers(message.Response);
             switch (message.Response.Status)
@@ -766,10 +796,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<HttpRedirectsPost307Headers> Post307(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HttpRedirectsPost307Headers> Post307(Constant40? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost307Request();
+            using var message = CreatePost307Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPost307Headers(message.Response);
             switch (message.Response.Status)
@@ -782,7 +813,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreateDelete307Request()
+        internal HttpMessage CreateDelete307Request(Constant42? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -792,18 +823,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/redirect/307", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Delete redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<ResponseWithHeaders<HttpRedirectsDelete307Headers>> Delete307Async(CancellationToken cancellationToken = default)
+        public async Task<ResponseWithHeaders<HttpRedirectsDelete307Headers>> Delete307Async(Constant42? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete307Request();
+            using var message = CreateDelete307Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsDelete307Headers(message.Response);
             switch (message.Response.Status)
@@ -817,10 +852,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete redirected with 307, resulting in a 200 after redirect. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public ResponseWithHeaders<HttpRedirectsDelete307Headers> Delete307(CancellationToken cancellationToken = default)
+        public ResponseWithHeaders<HttpRedirectsDelete307Headers> Delete307(Constant42? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete307Request();
+            using var message = CreateDelete307Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsDelete307Headers(message.Response);
             switch (message.Response.Status)
