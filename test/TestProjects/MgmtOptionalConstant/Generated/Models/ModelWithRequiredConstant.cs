@@ -15,24 +15,25 @@ namespace MgmtOptionalConstant.Models
         {
             RequiredStringConstant = StringConstant.Default;
             RequiredIntConstant = IntConstant._0;
+            RequiredBooleanConstant = true;
         }
 
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
         /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>
         /// <param name="requiredIntConstant"> A constant based on integer. </param>
-        /// <param name="protocol"> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </param>
-        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, ProtocolType? protocol)
+        /// <param name="requiredBooleanConstant"> A constant based on boolean. </param>
+        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, bool requiredBooleanConstant)
         {
             RequiredStringConstant = requiredStringConstant;
             RequiredIntConstant = requiredIntConstant;
-            Protocol = protocol;
+            RequiredBooleanConstant = requiredBooleanConstant;
         }
 
         /// <summary> A constant based on string, the only allowable value is default. </summary>
         public StringConstant RequiredStringConstant { get; }
         /// <summary> A constant based on integer. </summary>
         public IntConstant RequiredIntConstant { get; }
-        /// <summary> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </summary>
-        public ProtocolType? Protocol { get; set; }
+        /// <summary> A constant based on boolean. </summary>
+        public bool RequiredBooleanConstant { get; }
     }
 }

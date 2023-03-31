@@ -66,6 +66,17 @@
                         "description": "Parameters supplied to the Create Virtual Machine operation."
                     },
                     {
+                        "name": "forceReplace",
+                        "in": "query",
+                        "required": true,
+                        "type": "boolean",
+                        "enum": [true],
+                        "x-ms-enum": {
+                            "name": "ForceReplace",
+                            "modelAsString": false
+                        }
+                    },
+                    {
                         "$ref": "#/parameters/ApiVersionParameter"
                     },
                     {
@@ -117,6 +128,17 @@
                             "$ref": "#/definitions/OptionalMachineUpdate"
                         },
                         "description": "Parameters supplied to the Update Virtual Machine operation."
+                    },
+                    {
+                        "name": "forcePatch",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean",
+                        "enum": [false],
+                        "x-ms-enum": {
+                            "name": "ForcePatch",
+                            "modelAsString": false
+                        }
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -335,6 +357,17 @@
                 "modelAsString": false
             }
         },
+        "BooleanConstantSchema": {
+            "type": "boolean",
+            "description": "A constant based on boolean",
+            "enum": [
+                true
+            ],
+            "x-ms-enum": {
+                "name": "BooleanConstant",
+                "modelAsString": false
+            }
+        },
         "ModelWithOptionalConstant": {
             "properties": {
                 "optionalStringConstant": {
@@ -343,17 +376,8 @@
                 "optionalIntConstant": {
                     "$ref": "#/definitions/IntConstantSchema"
                 },
-                "settingName": {
-                    "type": "string",
-                    "description": "Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon.",
-                    "enum": [
-                        "AutoLogon",
-                        "FirstLogonCommands"
-                    ],
-                    "x-ms-enum": {
-                        "name": "SettingNames",
-                        "modelAsString": false
-                    }
+                "optionalBooleanConstant": {
+                    "$ref": "#/definitions/BooleanConstantSchema"
                 }
             },
             "description": "Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied."
@@ -366,22 +390,13 @@
                 "requiredIntConstant": {
                     "$ref": "#/definitions/IntConstantSchema"
                 },
-                "protocol": {
-                    "type": "string",
-                    "description": "Specifies the protocol of WinRM listener. <br><br> Possible values are: <br>**http** <br><br> **https**",
-                    "enum": [
-                        "Http",
-                        "Https"
-                    ],
-                    "x-ms-enum": {
-                        "name": "ProtocolTypes",
-                        "modelAsString": false
-                    }
+                "requiredBooleanConstant": {
+                    "$ref": "#/definitions/BooleanConstantSchema"
                 }
             },
             "description": "Describes Protocol and thumbprint of Windows Remote Management listener",
             "required": [
-                "requiredStringConstant", "requiredIntConstant"
+                "requiredStringConstant", "requiredIntConstant", "requiredBooleanConstant"
             ]
         },
         "OptionalMachineProperties": {

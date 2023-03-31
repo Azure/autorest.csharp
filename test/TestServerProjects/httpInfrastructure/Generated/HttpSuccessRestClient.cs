@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using httpInfrastructure.Models;
 
 namespace httpInfrastructure
 {
@@ -185,7 +184,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut200Request(Constant7? booleanValue)
+        internal HttpMessage CreatePut200Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -195,22 +194,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Put boolean value true returning 200 success. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Put200Async(Constant7? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put200Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut200Request(booleanValue);
+            using var message = CreatePut200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -222,11 +217,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put boolean value true returning 200 success. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put200(Constant7? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Put200(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut200Request(booleanValue);
+            using var message = CreatePut200Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -237,7 +231,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePatch200Request(Constant8? booleanValue)
+        internal HttpMessage CreatePatch200Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -247,22 +241,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Patch true Boolean value in request returning 200. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Patch200Async(Constant8? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Patch200Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch200Request(booleanValue);
+            using var message = CreatePatch200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -274,11 +264,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returning 200. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Patch200(Constant8? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Patch200(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch200Request(booleanValue);
+            using var message = CreatePatch200Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -289,7 +278,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePost200Request(Constant9? booleanValue)
+        internal HttpMessage CreatePost200Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -299,22 +288,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Post bollean value true in request that returns a 200. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post200Async(Constant9? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Post200Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost200Request(booleanValue);
+            using var message = CreatePost200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -326,11 +311,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post bollean value true in request that returns a 200. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post200(Constant9? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Post200(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost200Request(booleanValue);
+            using var message = CreatePost200Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -341,7 +325,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreateDelete200Request(Constant10? booleanValue)
+        internal HttpMessage CreateDelete200Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -351,22 +335,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/200", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Delete simple boolean value true returns 200. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Delete200Async(Constant10? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Delete200Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete200Request(booleanValue);
+            using var message = CreateDelete200Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -378,11 +358,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete simple boolean value true returns 200. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete200(Constant10? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Delete200(CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete200Request(booleanValue);
+            using var message = CreateDelete200Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -393,7 +372,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut201Request(Constant11? booleanValue)
+        internal HttpMessage CreatePut201Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -403,22 +382,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/201", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Put true Boolean value in request returns 201. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Put201Async(Constant11? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put201Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut201Request(booleanValue);
+            using var message = CreatePut201Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -430,11 +405,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 201. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put201(Constant11? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Put201(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut201Request(booleanValue);
+            using var message = CreatePut201Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -445,7 +419,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePost201Request(Constant12? booleanValue)
+        internal HttpMessage CreatePost201Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -455,22 +429,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/201", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post201Async(Constant12? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Post201Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost201Request(booleanValue);
+            using var message = CreatePost201Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -482,11 +452,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post201(Constant12? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Post201(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost201Request(booleanValue);
+            using var message = CreatePost201Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -497,7 +466,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut202Request(Constant13? booleanValue)
+        internal HttpMessage CreatePut202Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -507,22 +476,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Put202Async(Constant13? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put202Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut202Request(booleanValue);
+            using var message = CreatePut202Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -534,11 +499,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put202(Constant13? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Put202(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut202Request(booleanValue);
+            using var message = CreatePut202Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -549,7 +513,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePatch202Request(Constant14? booleanValue)
+        internal HttpMessage CreatePatch202Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -559,22 +523,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Patch true Boolean value in request returns 202. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Patch202Async(Constant14? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Patch202Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch202Request(booleanValue);
+            using var message = CreatePatch202Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -586,11 +546,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returns 202. </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Patch202(Constant14? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Patch202(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch202Request(booleanValue);
+            using var message = CreatePatch202Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -601,7 +560,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePost202Request(Constant15? booleanValue)
+        internal HttpMessage CreatePost202Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -611,22 +570,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post202Async(Constant15? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Post202Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost202Request(booleanValue);
+            using var message = CreatePost202Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -638,11 +593,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post202(Constant15? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Post202(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost202Request(booleanValue);
+            using var message = CreatePost202Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -653,7 +607,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreateDelete202Request(Constant16? booleanValue)
+        internal HttpMessage CreateDelete202Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -663,22 +617,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/202", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Delete202Async(Constant16? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Delete202Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete202Request(booleanValue);
+            using var message = CreateDelete202Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -690,11 +640,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete202(Constant16? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Delete202(CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete202Request(booleanValue);
+            using var message = CreateDelete202Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -748,7 +697,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut204Request(Constant17? booleanValue)
+        internal HttpMessage CreatePut204Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -758,22 +707,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Put204Async(Constant17? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Put204Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut204Request(booleanValue);
+            using var message = CreatePut204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -785,11 +730,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put204(Constant17? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Put204(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut204Request(booleanValue);
+            using var message = CreatePut204Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -800,7 +744,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePatch204Request(Constant18? booleanValue)
+        internal HttpMessage CreatePatch204Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -810,22 +754,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Patch204Async(Constant18? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Patch204Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch204Request(booleanValue);
+            using var message = CreatePatch204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -837,11 +777,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Patch204(Constant18? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Patch204(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch204Request(booleanValue);
+            using var message = CreatePatch204Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -852,7 +791,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePost204Request(Constant19? booleanValue)
+        internal HttpMessage CreatePost204Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -862,22 +801,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post204Async(Constant19? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Post204Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost204Request(booleanValue);
+            using var message = CreatePost204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -889,11 +824,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post204(Constant19? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Post204(CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost204Request(booleanValue);
+            using var message = CreatePost204Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -904,7 +838,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreateDelete204Request(Constant20? booleanValue)
+        internal HttpMessage CreateDelete204Request()
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -914,22 +848,18 @@ namespace httpInfrastructure
             uri.AppendPath("/http/success/204", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (booleanValue != null)
-            {
-                request.Headers.Add("Content-Type", "application/json");
-                var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(booleanValue.Value.ToString());
-                request.Content = content;
-            }
+            request.Headers.Add("Content-Type", "application/json");
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteBooleanValue(true);
+            request.Content = content;
             return message;
         }
 
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Delete204Async(Constant20? booleanValue = null, CancellationToken cancellationToken = default)
+        public async Task<Response> Delete204Async(CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete204Request(booleanValue);
+            using var message = CreateDelete204Request();
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -941,11 +871,10 @@ namespace httpInfrastructure
         }
 
         /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
-        /// <param name="booleanValue"> Simple boolean value true. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete204(Constant20? booleanValue = null, CancellationToken cancellationToken = default)
+        public Response Delete204(CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete204Request(booleanValue);
+            using var message = CreateDelete204Request();
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

@@ -35,11 +35,11 @@ namespace MgmtOptionalConstant.Models
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
         /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>
         /// <param name="requiredIntConstant"> A constant based on integer. </param>
-        /// <param name="protocol"> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </param>
+        /// <param name="requiredBooleanConstant"> A constant based on boolean. </param>
         /// <returns> A new <see cref="Models.ModelWithRequiredConstant"/> instance for mocking. </returns>
-        public static ModelWithRequiredConstant ModelWithRequiredConstant(StringConstant requiredStringConstant = default, IntConstant requiredIntConstant = default, ProtocolType? protocol = null)
+        public static ModelWithRequiredConstant ModelWithRequiredConstant(StringConstant requiredStringConstant = default, IntConstant requiredIntConstant = default, bool requiredBooleanConstant = default)
         {
-            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, protocol);
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant);
         }
     }
 }

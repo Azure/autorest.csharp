@@ -597,7 +597,9 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         protected static bool IsMethodParameter(RequestParameter requestParameter)
-            => requestParameter.Implementation == ImplementationLocation.Method && requestParameter.Schema is not ConstantSchema && !requestParameter.IsFlattened && requestParameter.GroupedBy == null;
+            => requestParameter.Implementation == ImplementationLocation.Method &&
+                (requestParameter.Schema is not ConstantSchema || !requestParameter.IsRequired) && // we should put the parameter in signature when it is not Constant or "it is Constant, but it is optional"
+                !requestParameter.IsFlattened && requestParameter.GroupedBy == null;
 
         public static bool IsEndpointParameter(RequestParameter requestParameter)
             => requestParameter.Origin == "modelerfour:synthesized/host";

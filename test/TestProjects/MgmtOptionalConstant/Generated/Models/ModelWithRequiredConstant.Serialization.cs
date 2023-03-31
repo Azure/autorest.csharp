@@ -19,11 +19,8 @@ namespace MgmtOptionalConstant.Models
             writer.WriteStringValue(RequiredStringConstant.ToString());
             writer.WritePropertyName("requiredIntConstant"u8);
             writer.WriteStringValue(RequiredIntConstant.ToString());
-            if (Optional.IsDefined(Protocol))
-            {
-                writer.WritePropertyName("protocol"u8);
-                writer.WriteStringValue(Protocol.Value.ToSerialString());
-            }
+            writer.WritePropertyName("requiredBooleanConstant"u8);
+            writer.WriteBooleanValue(RequiredBooleanConstant);
             writer.WriteEndObject();
         }
 
@@ -35,7 +32,7 @@ namespace MgmtOptionalConstant.Models
             }
             StringConstant requiredStringConstant = default;
             IntConstant requiredIntConstant = default;
-            Optional<ProtocolType> protocol = default;
+            bool requiredBooleanConstant = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredStringConstant"u8))
@@ -48,18 +45,13 @@ namespace MgmtOptionalConstant.Models
                     requiredIntConstant = new IntConstant(property.Value.GetInt32());
                     continue;
                 }
-                if (property.NameEquals("protocol"u8))
+                if (property.NameEquals("requiredBooleanConstant"u8))
                 {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        property.ThrowNonNullablePropertyIsNull();
-                        continue;
-                    }
-                    protocol = property.Value.GetString().ToProtocolType();
+                    requiredBooleanConstant = property.Value.GetBoolean();
                     continue;
                 }
             }
-            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, Optional.ToNullable(protocol));
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant);
         }
     }
 }

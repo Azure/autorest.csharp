@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Common.Decorator
                 // change the schema on operations (only for optional)
                 foreach (var parameter in operation.Parameters)
                 {
-                    if (parameter.IsRequired || parameter.Schema is not ConstantSchema constantSchema)
+                    if (parameter.IsRequired || parameter.Schema is not ConstantSchema constantSchema || !ShouldReplaceSchema(constantSchema))
                         continue;
 
                     var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Common.Decorator
                 {
                     foreach (var parameter in request.Parameters)
                     {
-                        if (parameter.IsRequired || parameter.Schema is not ConstantSchema constantSchema)
+                        if (parameter.IsRequired || parameter.Schema is not ConstantSchema constantSchema || !ShouldReplaceSchema(constantSchema))
                             continue;
 
                         var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Common.Decorator
                 {
                     foreach (var property in obj.Properties)
                     {
-                        if (property.Schema is not ConstantSchema constantSchema || CheckPropertyExtension(property))
+                        if (property.Schema is not ConstantSchema constantSchema || !ShouldReplaceSchema(constantSchema) || CheckPropertyExtension(property))
                             continue;
 
                         var choiceSchema = ComputeIfAbsent(convertedChoiceSchemas, constantSchema, ConvertToChoiceSchema);
@@ -68,6 +68,10 @@ namespace AutoRest.CSharp.Common.Decorator
             foreach (var choiceSchema in convertedChoiceSchemas.Values)
                 codeModel.Schemas.Choices.Add(choiceSchema);
         }
+
+        // we skip this process when the underlying type of the constant is boolean
+        private static bool ShouldReplaceSchema(ConstantSchema constantSchema)
+            => constantSchema.ValueType is not BooleanSchema;
 
         private static bool CheckPropertyExtension(Property property)
         {

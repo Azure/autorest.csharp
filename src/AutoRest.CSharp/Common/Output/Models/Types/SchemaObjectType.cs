@@ -220,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Constant? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
-                if (property.SchemaProperty?.Schema is ConstantSchema constantSchema)
+                if (property.SchemaProperty?.Schema is ConstantSchema constantSchema && property.IsRequired)
                 {
                     // Turn constants into initializers
                     initializationValue = constantSchema.Value.Value != null ?

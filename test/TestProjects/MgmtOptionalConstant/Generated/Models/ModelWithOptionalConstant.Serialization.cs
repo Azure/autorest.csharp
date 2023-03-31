@@ -25,10 +25,10 @@ namespace MgmtOptionalConstant.Models
                 writer.WritePropertyName("optionalIntConstant"u8);
                 writer.WriteStringValue(OptionalIntConstant.Value.ToString());
             }
-            if (Optional.IsDefined(SettingName))
+            if (Optional.IsDefined(OptionalBooleanConstant))
             {
-                writer.WritePropertyName("settingName"u8);
-                writer.WriteStringValue(SettingName.Value.ToSerialString());
+                writer.WritePropertyName("optionalBooleanConstant"u8);
+                writer.WriteBooleanValue(OptionalBooleanConstant.Value);
             }
             writer.WriteEndObject();
         }
@@ -41,7 +41,7 @@ namespace MgmtOptionalConstant.Models
             }
             Optional<StringConstant> optionalStringConstant = default;
             Optional<IntConstant> optionalIntConstant = default;
-            Optional<SettingName> settingName = default;
+            Optional<bool> optionalBooleanConstant = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("optionalStringConstant"u8))
@@ -64,18 +64,18 @@ namespace MgmtOptionalConstant.Models
                     optionalIntConstant = new IntConstant(property.Value.GetInt32());
                     continue;
                 }
-                if (property.NameEquals("settingName"u8))
+                if (property.NameEquals("optionalBooleanConstant"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
                         property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    settingName = property.Value.GetString().ToSettingName();
+                    optionalBooleanConstant = property.Value.GetBoolean();
                     continue;
                 }
             }
-            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(settingName));
+            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(optionalBooleanConstant));
         }
     }
 }
