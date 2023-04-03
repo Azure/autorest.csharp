@@ -113,28 +113,22 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
             // here we have to capsulate the MgmtClientOperation again to remove the extra "extension parameter" we added when constructing them in MgmtExtension.EnsureClientOperations
-            // and here we need to regroup the MgmtRestOperation in these MgmtClientOperation in case there are method name collisions
-            var operationDict = new Dictionary<string, List<MgmtRestOperation>>();
+            // and here we need to regroup these MgmtClientOperations when they cannot be overloard of each other
+            var operationDict = new Dictionary<MgmtClientOperationKey, List<MgmtClientOperation>>();
             foreach (var operation in _operations)
             {
-                foreach (var restOperation in operation)
-                    operationDict.AddInList(operation.Name, restOperation);
+                operationDict.AddInList(new(operation.MethodSignature), operation);
             }
 
             foreach (var (_, operations) in operationDict)
             {
-                yield return MgmtClientOperation.FromOperations(operations)!;
+                yield return MgmtClientOperation.FromOperations(operations.SelectMany(clientOperation => clientOperation).ToList())!;
             }
         }
 
         public override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
             return branch.GetResourceType();
-        }
-
-        protected override string CalculateOperationName(Operation operation, string clientResourceName)
-        {
-            return base.CalculateOperationName(operation, clientResourceName);
         }
 
         public CSharpType ExtendedResourceType { get; }
@@ -153,6 +147,20 @@ namespace AutoRest.CSharp.Mgmt.Output
         public override FormattableString Description => _description ??= $"A class to add extension methods to {ResourceName}.";
 
         protected override string DefaultAccessibility => "public";
+
+        private record struct MgmtClientOperationKey
+        {
+            public string OperationName { get; }
+
+            public IEnumerable<CSharpType> ParameterTypes { get; }
+
+            public MgmtClientOperationKey(MethodSignature methodSignature)
+            {
+                OperationName = methodSignature.Name;
+                // all methods here should be extension methods, therefore we skip the first parameter which is the extension method parameter "this" and in this context, it is actually myself
+                ParameterTypes = methodSignature.Parameters.Skip(1).Select(parameter => parameter.Type);
+            }
+        }
     }
 
     internal record MgmtExtensionClientFactoryMethod(MethodSignature Signature, Action<CodeWriter> MethodBodyImplementation);
