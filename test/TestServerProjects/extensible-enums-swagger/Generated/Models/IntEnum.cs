@@ -32,9 +32,6 @@ namespace extensible_enums_swagger.Models
         public static IntEnum Two { get; } = new IntEnum(TwoValue);
         /// <summary> three. </summary>
         public static IntEnum Three { get; } = new IntEnum(ThreeValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="IntEnum"/> values are the same. </summary>
         public static bool operator ==(IntEnum left, IntEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="IntEnum"/> values are not the same. </summary>

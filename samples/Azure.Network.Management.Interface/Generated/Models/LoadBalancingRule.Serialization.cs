@@ -45,12 +45,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(Protocol))
             {
                 writer.WritePropertyName("protocol"u8);
-                writer.WriteStringValue(Protocol.Value.ToSerialString());
+                writer.WriteStringValue(Protocol.Value.ToString());
             }
             if (Optional.IsDefined(LoadDistribution))
             {
                 writer.WritePropertyName("loadDistribution"u8);
-                writer.WriteStringValue(LoadDistribution.Value.ToSerialString());
+                writer.WriteStringValue(LoadDistribution.Value.ToString());
             }
             if (Optional.IsDefined(FrontendPort))
             {

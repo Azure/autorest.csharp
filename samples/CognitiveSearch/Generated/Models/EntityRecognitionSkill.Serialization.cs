@@ -29,7 +29,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(DefaultLanguageCode))
             {
                 writer.WritePropertyName("defaultLanguageCode"u8);
-                writer.WriteStringValue(DefaultLanguageCode.Value.ToSerialString());
+                writer.WriteStringValue(DefaultLanguageCode.Value.ToString());
             }
             if (Optional.IsDefined(IncludeTypelessEntities))
             {

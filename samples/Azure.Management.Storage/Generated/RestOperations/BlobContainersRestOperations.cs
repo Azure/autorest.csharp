@@ -62,7 +62,7 @@ namespace Azure.Management.Storage
             }
             if (include != null)
             {
-                uri.AppendQuery("$include", include.Value.ToSerialString(), true);
+                uri.AppendQuery("$include", include.Value.ToString(), true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

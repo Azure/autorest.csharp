@@ -32,9 +32,6 @@ namespace body_array.Models
         public static Enum0 Foo2 { get; } = new Enum0(Foo2Value);
         /// <summary> foo3. </summary>
         public static Enum0 Foo3 { get; } = new Enum0(Foo3Value);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Enum0"/> values are the same. </summary>
         public static bool operator ==(Enum0 left, Enum0 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Enum0"/> values are not the same. </summary>

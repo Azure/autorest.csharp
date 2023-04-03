@@ -29,9 +29,6 @@ namespace MgmtPartialResource.Models
         public static DeleteOption Delete { get; } = new DeleteOption(DeleteValue);
         /// <summary> Detach. </summary>
         public static DeleteOption Detach { get; } = new DeleteOption(DetachValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="DeleteOption"/> values are the same. </summary>
         public static bool operator ==(DeleteOption left, DeleteOption right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DeleteOption"/> values are not the same. </summary>

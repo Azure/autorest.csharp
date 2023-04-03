@@ -26,9 +26,6 @@ namespace MgmtScopeResource.Models
 
         /// <summary> atScope(). </summary>
         public static Filter AtScope { get; } = new Filter(AtScopeValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Filter"/> values are the same. </summary>
         public static bool operator ==(Filter left, Filter right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Filter"/> values are not the same. </summary>

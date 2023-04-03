@@ -19,12 +19,12 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Bypass))
             {
                 writer.WritePropertyName("bypass"u8);
-                writer.WriteStringValue(Bypass.Value.ToSerialString());
+                writer.WriteStringValue(Bypass.Value.ToString());
             }
             if (Optional.IsDefined(DefaultAction))
             {
                 writer.WritePropertyName("defaultAction"u8);
-                writer.WriteStringValue(DefaultAction.Value.ToSerialString());
+                writer.WriteStringValue(DefaultAction.Value.ToString());
             }
             if (Optional.IsCollectionDefined(IpRules))
             {

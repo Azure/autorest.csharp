@@ -21,7 +21,7 @@ namespace Azure.Management.Storage.Models
                 writer.WriteObjectValue(Services);
             }
             writer.WritePropertyName("keySource"u8);
-            writer.WriteStringValue(KeySource.ToSerialString());
+            writer.WriteStringValue(KeySource.ToString());
             if (Optional.IsDefined(RequireInfrastructureEncryption))
             {
                 writer.WritePropertyName("requireInfrastructureEncryption"u8);

@@ -29,9 +29,6 @@ namespace Azure.Management.Storage.Models
         public static KeyType Service { get; } = new KeyType(ServiceValue);
         /// <summary> Account. </summary>
         public static KeyType Account { get; } = new KeyType(AccountValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="KeyType"/> values are the same. </summary>
         public static bool operator ==(KeyType left, KeyType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="KeyType"/> values are not the same. </summary>

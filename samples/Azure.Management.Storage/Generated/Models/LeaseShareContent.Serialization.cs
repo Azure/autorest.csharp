@@ -16,7 +16,7 @@ namespace Azure.Management.Storage.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("action"u8);
-            writer.WriteStringValue(Action.ToSerialString());
+            writer.WriteStringValue(Action.ToString());
             if (Optional.IsDefined(LeaseId))
             {
                 writer.WritePropertyName("leaseId"u8);

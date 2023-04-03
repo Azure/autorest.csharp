@@ -47,9 +47,6 @@ namespace AppConfiguration.Models
         public static Head6ItemsItem Locked { get; } = new Head6ItemsItem(LockedValue);
         /// <summary> etag. </summary>
         public static Head6ItemsItem Etag { get; } = new Head6ItemsItem(EtagValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Head6ItemsItem"/> values are the same. </summary>
         public static bool operator ==(Head6ItemsItem left, Head6ItemsItem right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Head6ItemsItem"/> values are not the same. </summary>

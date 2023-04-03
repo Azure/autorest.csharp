@@ -35,7 +35,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PrivateIPAllocationMethod))
             {
                 writer.WritePropertyName("privateIPAllocationMethod"u8);
-                writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToSerialString());
+                writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
             }
             if (Optional.IsDefined(Subnet))
             {

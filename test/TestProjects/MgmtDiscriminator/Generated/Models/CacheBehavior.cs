@@ -32,9 +32,6 @@ namespace MgmtDiscriminator.Models
         public static CacheBehavior Override { get; } = new CacheBehavior(OverrideValue);
         /// <summary> SetIfMissing. </summary>
         public static CacheBehavior SetIfMissing { get; } = new CacheBehavior(SetIfMissingValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="CacheBehavior"/> values are the same. </summary>
         public static bool operator ==(CacheBehavior left, CacheBehavior right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CacheBehavior"/> values are not the same. </summary>

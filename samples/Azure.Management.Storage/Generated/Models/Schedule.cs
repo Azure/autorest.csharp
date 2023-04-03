@@ -29,9 +29,6 @@ namespace Azure.Management.Storage.Models
         public static Schedule Daily { get; } = new Schedule(DailyValue);
         /// <summary> Weekly. </summary>
         public static Schedule Weekly { get; } = new Schedule(WeeklyValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Schedule"/> values are the same. </summary>
         public static bool operator ==(Schedule left, Schedule right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Schedule"/> values are not the same. </summary>

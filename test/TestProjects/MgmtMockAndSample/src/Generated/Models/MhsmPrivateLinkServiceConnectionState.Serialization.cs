@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Status))
             {
                 writer.WritePropertyName("status"u8);
-                writer.WriteStringValue(Status.Value.ToSerialString());
+                writer.WriteStringValue(Status.Value.ToString());
             }
             if (Optional.IsDefined(Description))
             {
@@ -28,7 +28,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ActionsRequired))
             {
                 writer.WritePropertyName("actionsRequired"u8);
-                writer.WriteStringValue(ActionsRequired.Value.ToSerialString());
+                writer.WriteStringValue(ActionsRequired.Value.ToString());
             }
             writer.WriteEndObject();
         }

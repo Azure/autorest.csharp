@@ -31,7 +31,7 @@ namespace CadlFirstTest.Models
             foreach (var item in RequiredDictionary)
             {
                 writer.WritePropertyName(item.Key);
-                writer.WriteStringValue(item.Value.ToSerialString());
+                writer.WriteStringValue(item.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);

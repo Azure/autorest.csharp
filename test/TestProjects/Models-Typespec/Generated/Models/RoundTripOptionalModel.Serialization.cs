@@ -87,7 +87,7 @@ namespace ModelsInCadl.Models
                 if (OptionalExtensibleEnum != null)
                 {
                     writer.WritePropertyName("optionalExtensibleEnum"u8);
-                    writer.WriteStringValue(OptionalExtensibleEnum.Value.ToSerialString());
+                    writer.WriteStringValue(OptionalExtensibleEnum.Value.ToString());
                 }
                 else
                 {

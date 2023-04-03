@@ -26,9 +26,6 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> DeliveryRuleUrlSigningActionParameters. </summary>
         public static UrlSigningActionParametersTypeName DeliveryRuleUrlSigningActionParameters { get; } = new UrlSigningActionParametersTypeName(DeliveryRuleUrlSigningActionParametersValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="UrlSigningActionParametersTypeName"/> values are the same. </summary>
         public static bool operator ==(UrlSigningActionParametersTypeName left, UrlSigningActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="UrlSigningActionParametersTypeName"/> values are not the same. </summary>

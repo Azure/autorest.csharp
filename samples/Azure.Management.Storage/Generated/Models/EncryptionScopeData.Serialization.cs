@@ -23,12 +23,12 @@ namespace Azure.Management.Storage
             if (Optional.IsDefined(Source))
             {
                 writer.WritePropertyName("source"u8);
-                writer.WriteStringValue(Source.Value.ToSerialString());
+                writer.WriteStringValue(Source.Value.ToString());
             }
             if (Optional.IsDefined(State))
             {
                 writer.WritePropertyName("state"u8);
-                writer.WriteStringValue(State.Value.ToSerialString());
+                writer.WriteStringValue(State.Value.ToString());
             }
             if (Optional.IsDefined(KeyVaultProperties))
             {

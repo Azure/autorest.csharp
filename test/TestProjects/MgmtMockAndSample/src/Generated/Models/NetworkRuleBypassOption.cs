@@ -29,9 +29,6 @@ namespace MgmtMockAndSample.Models
         public static NetworkRuleBypassOption AzureServices { get; } = new NetworkRuleBypassOption(AzureServicesValue);
         /// <summary> None. </summary>
         public static NetworkRuleBypassOption None { get; } = new NetworkRuleBypassOption(NoneValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="NetworkRuleBypassOption"/> values are the same. </summary>
         public static bool operator ==(NetworkRuleBypassOption left, NetworkRuleBypassOption right) => left.Equals(right);
         /// <summary> Determines if two <see cref="NetworkRuleBypassOption"/> values are not the same. </summary>

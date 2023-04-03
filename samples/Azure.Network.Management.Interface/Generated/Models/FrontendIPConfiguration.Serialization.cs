@@ -46,12 +46,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PrivateIPAllocationMethod))
             {
                 writer.WritePropertyName("privateIPAllocationMethod"u8);
-                writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToSerialString());
+                writer.WriteStringValue(PrivateIPAllocationMethod.Value.ToString());
             }
             if (Optional.IsDefined(PrivateIPAddressVersion))
             {
                 writer.WritePropertyName("privateIPAddressVersion"u8);
-                writer.WriteStringValue(PrivateIPAddressVersion.Value.ToSerialString());
+                writer.WriteStringValue(PrivateIPAddressVersion.Value.ToString());
             }
             if (Optional.IsDefined(Subnet))
             {

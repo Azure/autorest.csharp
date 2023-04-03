@@ -21,7 +21,7 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name.Value.ToSerialString());
+                writer.WriteStringValue(Name.Value.ToString());
             }
             if (Optional.IsDefined(TrackingGranularityInDays))
             {

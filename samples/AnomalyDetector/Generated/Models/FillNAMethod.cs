@@ -38,9 +38,6 @@ namespace AnomalyDetector.Models
         public static FillNAMethod Zero { get; } = new FillNAMethod(ZeroValue);
         /// <summary> Fixed. </summary>
         public static FillNAMethod Fixed { get; } = new FillNAMethod(FixedValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="FillNAMethod"/> values are the same. </summary>
         public static bool operator ==(FillNAMethod left, FillNAMethod right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FillNAMethod"/> values are not the same. </summary>

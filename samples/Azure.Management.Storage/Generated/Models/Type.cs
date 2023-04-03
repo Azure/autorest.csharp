@@ -26,9 +26,6 @@ namespace Azure.Management.Storage.Models
 
         /// <summary> Microsoft.Storage/storageAccounts. </summary>
         public static Type MicrosoftStorageStorageAccounts { get; } = new Type(MicrosoftStorageStorageAccountsValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Type"/> values are the same. </summary>
         public static bool operator ==(Type left, Type right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Type"/> values are not the same. </summary>

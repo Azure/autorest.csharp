@@ -26,9 +26,6 @@ namespace Azure.Storage.Tables.Models
 
         /// <summary> stats. </summary>
         public static Enum6 Stats { get; } = new Enum6(StatsValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Enum6"/> values are the same. </summary>
         public static bool operator ==(Enum6 left, Enum6 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Enum6"/> values are not the same. </summary>

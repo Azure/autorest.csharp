@@ -50,9 +50,6 @@ namespace MgmtMockAndSample.Models
         public static SecretPermission Recover { get; } = new SecretPermission(RecoverValue);
         /// <summary> purge. </summary>
         public static SecretPermission Purge { get; } = new SecretPermission(PurgeValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="SecretPermission"/> values are the same. </summary>
         public static bool operator ==(SecretPermission left, SecretPermission right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SecretPermission"/> values are not the same. </summary>

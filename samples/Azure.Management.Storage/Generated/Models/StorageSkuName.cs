@@ -47,9 +47,6 @@ namespace Azure.Management.Storage.Models
         public static StorageSkuName StandardGzrs { get; } = new StorageSkuName(StandardGzrsValue);
         /// <summary> Standard_RAGZRS. </summary>
         public static StorageSkuName StandardRagzrs { get; } = new StorageSkuName(StandardRagzrsValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="StorageSkuName"/> values are the same. </summary>
         public static bool operator ==(StorageSkuName left, StorageSkuName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="StorageSkuName"/> values are not the same. </summary>

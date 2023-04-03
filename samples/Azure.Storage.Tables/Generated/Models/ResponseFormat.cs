@@ -32,9 +32,6 @@ namespace Azure.Storage.Tables
         public static ResponseFormat ApplicationJsonOdataMinimalmetadata { get; } = new ResponseFormat(ApplicationJsonOdataMinimalmetadataValue);
         /// <summary> application/json;odata=fullmetadata. </summary>
         public static ResponseFormat ApplicationJsonOdataFullmetadata { get; } = new ResponseFormat(ApplicationJsonOdataFullmetadataValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="ResponseFormat"/> values are the same. </summary>
         public static bool operator ==(ResponseFormat left, ResponseFormat right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ResponseFormat"/> values are not the same. </summary>

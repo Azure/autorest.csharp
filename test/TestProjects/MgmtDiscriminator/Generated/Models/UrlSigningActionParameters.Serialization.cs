@@ -17,11 +17,11 @@ namespace MgmtDiscriminator.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
-            writer.WriteStringValue(TypeName.ToSerialString());
+            writer.WriteStringValue(TypeName.ToString());
             if (Optional.IsDefined(Algorithm))
             {
                 writer.WritePropertyName("algorithm"u8);
-                writer.WriteStringValue(Algorithm.Value.ToSerialString());
+                writer.WriteStringValue(Algorithm.Value.ToString());
             }
             if (Optional.IsCollectionDefined(ParameterNameOverride))
             {

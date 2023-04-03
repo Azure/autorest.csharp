@@ -49,7 +49,7 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(PublicIPAddressVersion))
             {
                 writer.WritePropertyName("publicIPAddressVersion"u8);
-                writer.WriteStringValue(PublicIPAddressVersion.Value.ToSerialString());
+                writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

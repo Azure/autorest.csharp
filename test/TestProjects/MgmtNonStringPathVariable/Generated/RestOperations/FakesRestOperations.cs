@@ -49,7 +49,7 @@ namespace MgmtNonStringPathVariable
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
-            uri.AppendPath(fakeName.ToSerialString(), true);
+            uri.AppendPath(fakeName.ToString(), true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -125,7 +125,7 @@ namespace MgmtNonStringPathVariable
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
-            uri.AppendPath(fakeName.ToSerialString(), true);
+            uri.AppendPath(fakeName.ToString(), true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -201,7 +201,7 @@ namespace MgmtNonStringPathVariable
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
-            uri.AppendPath(fakeName.ToSerialString(), true);
+            uri.AppendPath(fakeName.ToString(), true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             _userAgent.Apply(message);
@@ -270,7 +270,7 @@ namespace MgmtNonStringPathVariable
             uri.AppendPath("/resourceGroups/", false);
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Fake/fakes/", false);
-            uri.AppendPath(fakeName.ToSerialString(), true);
+            uri.AppendPath(fakeName.ToString(), true);
             if (expand != null)
             {
                 uri.AppendQuery("$expand", expand, true);

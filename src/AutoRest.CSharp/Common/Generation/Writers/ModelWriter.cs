@@ -427,10 +427,13 @@ Examples:
                         writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({fieldName});").Line();
                     }
 
-                    // write ToSerial method
-                    writer.Line();
-                    writer.Line($"internal {enumType.ValueType} {enumType.SerializationMethodName}() => _value;");
-                    writer.Line();
+                    // write ToSerial method, only write when the underlying type is not a string
+                    if (!enumType.IsStringValueType)
+                    {
+                        writer.Line();
+                        writer.Line($"internal {enumType.ValueType} {enumType.SerializationMethodName}() => _value;");
+                        writer.Line();
+                    }
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");
                     writer.Line($"public static bool operator ==({cs} left, {cs} right) => left.Equals(right);");

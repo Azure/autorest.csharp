@@ -19,7 +19,7 @@ namespace Azure.Management.Storage.Models
             writer.WritePropertyName("sku"u8);
             writer.WriteObjectValue(Sku);
             writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind.ToSerialString());
+            writer.WriteStringValue(Kind.ToString());
             writer.WritePropertyName("location"u8);
             writer.WriteStringValue(Location);
             if (Optional.IsDefined(ExtendedLocation))
@@ -49,7 +49,7 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(PublicNetworkAccess))
             {
                 writer.WritePropertyName("publicNetworkAccess"u8);
-                writer.WriteStringValue(PublicNetworkAccess.Value.ToSerialString());
+                writer.WriteStringValue(PublicNetworkAccess.Value.ToString());
             }
             if (Optional.IsDefined(SasPolicy))
             {
@@ -99,7 +99,7 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(LargeFileSharesState))
             {
                 writer.WritePropertyName("largeFileSharesState"u8);
-                writer.WriteStringValue(LargeFileSharesState.Value.ToSerialString());
+                writer.WriteStringValue(LargeFileSharesState.Value.ToString());
             }
             if (Optional.IsDefined(RoutingPreference))
             {
@@ -114,7 +114,7 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(MinimumTlsVersion))
             {
                 writer.WritePropertyName("minimumTlsVersion"u8);
-                writer.WriteStringValue(MinimumTlsVersion.Value.ToSerialString());
+                writer.WriteStringValue(MinimumTlsVersion.Value.ToString());
             }
             if (Optional.IsDefined(AllowSharedKeyAccess))
             {

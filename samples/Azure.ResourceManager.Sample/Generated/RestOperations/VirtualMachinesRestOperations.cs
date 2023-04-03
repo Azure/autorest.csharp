@@ -435,7 +435,7 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(vmName, true);
             if (expand != null)
             {
-                uri.AppendQuery("$expand", expand.Value.ToSerialString(), true);
+                uri.AppendQuery("$expand", expand.Value.ToString(), true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

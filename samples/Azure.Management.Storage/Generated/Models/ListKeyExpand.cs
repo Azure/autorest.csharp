@@ -26,9 +26,6 @@ namespace Azure.Management.Storage.Models
 
         /// <summary> kerb. </summary>
         public static ListKeyExpand Kerb { get; } = new ListKeyExpand(KerbValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="ListKeyExpand"/> values are the same. </summary>
         public static bool operator ==(ListKeyExpand left, ListKeyExpand right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ListKeyExpand"/> values are not the same. </summary>

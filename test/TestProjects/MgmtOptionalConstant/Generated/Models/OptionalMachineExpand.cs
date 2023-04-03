@@ -26,9 +26,6 @@ namespace MgmtOptionalConstant.Models
 
         /// <summary> instanceView. </summary>
         public static OptionalMachineExpand InstanceView { get; } = new OptionalMachineExpand(InstanceViewValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="OptionalMachineExpand"/> values are the same. </summary>
         public static bool operator ==(OptionalMachineExpand left, OptionalMachineExpand right) => left.Equals(right);
         /// <summary> Determines if two <see cref="OptionalMachineExpand"/> values are not the same. </summary>

@@ -28,7 +28,7 @@ namespace ModelsInCadl.Models
             writer.WritePropertyName("requiredFixedIntEnum"u8);
             writer.WriteNumberValue((int)RequiredFixedIntEnum);
             writer.WritePropertyName("requiredExtensibleEnum"u8);
-            writer.WriteStringValue(RequiredExtensibleEnum.ToSerialString());
+            writer.WriteStringValue(RequiredExtensibleEnum.ToString());
             writer.WritePropertyName("requiredCollection"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredCollection)

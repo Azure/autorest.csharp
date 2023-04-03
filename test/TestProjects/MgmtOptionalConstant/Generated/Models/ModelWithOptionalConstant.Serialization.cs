@@ -18,7 +18,7 @@ namespace MgmtOptionalConstant.Models
             if (Optional.IsDefined(OptionalStringConstant))
             {
                 writer.WritePropertyName("optionalStringConstant"u8);
-                writer.WriteStringValue(OptionalStringConstant.Value.ToSerialString());
+                writer.WriteStringValue(OptionalStringConstant.Value.ToString());
             }
             if (Optional.IsDefined(OptionalIntConstant))
             {

@@ -36,7 +36,7 @@ namespace CustomNamespace
             if (Optional.IsDefined(DaysOfWeek))
             {
                 writer.WritePropertyName("DaysOfWeek"u8);
-                writer.WriteStringValue(DaysOfWeek.Value.ToSerialString());
+                writer.WriteStringValue(DaysOfWeek.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

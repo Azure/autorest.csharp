@@ -29,9 +29,6 @@ namespace Azure.Management.Storage.Models
         public static ObjectType Blob { get; } = new ObjectType(BlobValue);
         /// <summary> Container. </summary>
         public static ObjectType Container { get; } = new ObjectType(ContainerValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="ObjectType"/> values are the same. </summary>
         public static bool operator ==(ObjectType left, ObjectType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ObjectType"/> values are not the same. </summary>

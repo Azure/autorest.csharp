@@ -29,9 +29,6 @@ namespace NameConflicts.Models
         public static SystemEnum System { get; } = new SystemEnum(SystemValue);
         /// <summary> System.Text.Json. </summary>
         public static SystemEnum SystemTextJson { get; } = new SystemEnum(SystemTextJsonValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="SystemEnum"/> values are the same. </summary>
         public static bool operator ==(SystemEnum left, SystemEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SystemEnum"/> values are not the same. </summary>

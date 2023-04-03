@@ -35,7 +35,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(NextHopType))
             {
                 writer.WritePropertyName("nextHopType"u8);
-                writer.WriteStringValue(NextHopType.Value.ToSerialString());
+                writer.WriteStringValue(NextHopType.Value.ToString());
             }
             if (Optional.IsDefined(NextHopIpAddress))
             {

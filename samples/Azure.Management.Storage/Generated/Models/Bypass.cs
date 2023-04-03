@@ -35,9 +35,6 @@ namespace Azure.Management.Storage.Models
         public static Bypass Metrics { get; } = new Bypass(MetricsValue);
         /// <summary> AzureServices. </summary>
         public static Bypass AzureServices { get; } = new Bypass(AzureServicesValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Bypass"/> values are the same. </summary>
         public static bool operator ==(Bypass left, Bypass right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Bypass"/> values are not the same. </summary>

@@ -20,7 +20,7 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(Action))
             {
                 writer.WritePropertyName("action"u8);
-                writer.WriteStringValue(Action.Value.ToSerialString());
+                writer.WriteStringValue(Action.Value.ToString());
             }
             writer.WriteEndObject();
         }

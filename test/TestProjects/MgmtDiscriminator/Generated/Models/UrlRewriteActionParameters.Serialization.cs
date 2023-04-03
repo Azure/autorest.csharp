@@ -16,7 +16,7 @@ namespace MgmtDiscriminator.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
-            writer.WriteStringValue(TypeName.ToSerialString());
+            writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("sourcePattern"u8);
             writer.WriteStringValue(SourcePattern);
             writer.WritePropertyName("destination"u8);

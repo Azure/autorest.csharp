@@ -40,9 +40,6 @@ namespace AnomalyDetector.Models
         public static ImputeMode Zero { get; } = new ImputeMode(ZeroValue);
         /// <summary> notFill. </summary>
         public static ImputeMode NotFill { get; } = new ImputeMode(NotFillValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="ImputeMode"/> values are the same. </summary>
         public static bool operator ==(ImputeMode left, ImputeMode right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ImputeMode"/> values are not the same. </summary>

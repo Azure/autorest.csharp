@@ -74,9 +74,6 @@ namespace MgmtMockAndSample.Models
         public static KeyPermission Recover { get; } = new KeyPermission(RecoverValue);
         /// <summary> purge. </summary>
         public static KeyPermission Purge { get; } = new KeyPermission(PurgeValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="KeyPermission"/> values are the same. </summary>
         public static bool operator ==(KeyPermission left, KeyPermission right) => left.Equals(right);
         /// <summary> Determines if two <see cref="KeyPermission"/> values are not the same. </summary>

@@ -23,7 +23,7 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(State))
             {
                 writer.WritePropertyName("state"u8);
-                writer.WriteStringValue(State.Value.ToSerialString());
+                writer.WriteStringValue(State.Value.ToString());
             }
             if (Optional.IsDefined(AllowProtectedAppendWrites))
             {

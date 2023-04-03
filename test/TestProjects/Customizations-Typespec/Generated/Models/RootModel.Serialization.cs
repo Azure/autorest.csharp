@@ -65,7 +65,7 @@ namespace CustomizationsInCadl.Models
                 if (PropertyEnumToBeMadeExtensible != null)
                 {
                     writer.WritePropertyName("propertyEnumToBeMadeExtensible"u8);
-                    writer.WriteStringValue(PropertyEnumToBeMadeExtensible.Value.ToSerialString());
+                    writer.WriteStringValue(PropertyEnumToBeMadeExtensible.Value.ToString());
                 }
                 else
                 {

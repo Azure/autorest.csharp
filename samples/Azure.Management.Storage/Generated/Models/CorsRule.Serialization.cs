@@ -27,7 +27,7 @@ namespace Azure.Management.Storage.Models
             writer.WriteStartArray();
             foreach (var item in AllowedMethods)
             {
-                writer.WriteStringValue(item.ToSerialString());
+                writer.WriteStringValue(item.ToString());
             }
             writer.WriteEndArray();
             writer.WritePropertyName("maxAgeInSeconds"u8);

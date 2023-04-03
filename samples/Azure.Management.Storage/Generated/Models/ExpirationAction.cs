@@ -26,9 +26,6 @@ namespace Azure.Management.Storage.Models
 
         /// <summary> Log. </summary>
         public static ExpirationAction Log { get; } = new ExpirationAction(LogValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="ExpirationAction"/> values are the same. </summary>
         public static bool operator ==(ExpirationAction left, ExpirationAction right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ExpirationAction"/> values are not the same. </summary>

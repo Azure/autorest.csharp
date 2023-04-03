@@ -38,9 +38,6 @@ namespace Azure.Management.Storage.Models
         public static LeaseState Breaking { get; } = new LeaseState(BreakingValue);
         /// <summary> Broken. </summary>
         public static LeaseState Broken { get; } = new LeaseState(BrokenValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="LeaseState"/> values are the same. </summary>
         public static bool operator ==(LeaseState left, LeaseState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="LeaseState"/> values are not the same. </summary>

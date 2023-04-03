@@ -23,7 +23,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStringValue(Description);
             }
             writer.WritePropertyName("type"u8);
-            writer.WriteStringValue(Type.ToSerialString());
+            writer.WriteStringValue(Type.ToString());
             writer.WritePropertyName("credentials"u8);
             writer.WriteObjectValue(Credentials);
             writer.WritePropertyName("container"u8);

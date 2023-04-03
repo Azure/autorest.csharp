@@ -33,7 +33,7 @@ namespace MgmtListMethods.Models
             if (Optional.IsDefined(Unit))
             {
                 writer.WritePropertyName("unit"u8);
-                writer.WriteStringValue(Unit.Value.ToSerialString());
+                writer.WriteStringValue(Unit.Value.ToString());
             }
             writer.WriteEndObject();
         }

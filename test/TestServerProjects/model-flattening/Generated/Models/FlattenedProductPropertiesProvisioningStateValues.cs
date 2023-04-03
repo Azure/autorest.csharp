@@ -56,9 +56,6 @@ namespace model_flattening.Models
         public static FlattenedProductPropertiesProvisioningStateValues Deleted { get; } = new FlattenedProductPropertiesProvisioningStateValues(DeletedValue);
         /// <summary> OK. </summary>
         public static FlattenedProductPropertiesProvisioningStateValues OK { get; } = new FlattenedProductPropertiesProvisioningStateValues(OKValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="FlattenedProductPropertiesProvisioningStateValues"/> values are the same. </summary>
         public static bool operator ==(FlattenedProductPropertiesProvisioningStateValues left, FlattenedProductPropertiesProvisioningStateValues right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FlattenedProductPropertiesProvisioningStateValues"/> values are not the same. </summary>

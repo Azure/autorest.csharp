@@ -24,7 +24,7 @@ namespace MgmtExtensionResource
             if (Optional.IsDefined(PolicyType))
             {
                 writer.WritePropertyName("policyType"u8);
-                writer.WriteStringValue(PolicyType.Value.ToSerialString());
+                writer.WriteStringValue(PolicyType.Value.ToString());
             }
             if (Optional.IsDefined(Mode))
             {

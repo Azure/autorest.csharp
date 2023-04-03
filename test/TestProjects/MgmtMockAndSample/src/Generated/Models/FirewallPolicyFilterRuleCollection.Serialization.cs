@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteEndArray();
             }
             writer.WritePropertyName("ruleCollectionType"u8);
-            writer.WriteStringValue(RuleCollectionType.ToSerialString());
+            writer.WriteStringValue(RuleCollectionType.ToString());
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);

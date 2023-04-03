@@ -32,9 +32,6 @@ namespace Azure.ResourceManager.Fake.Models
         public static ReferenceTypesPrivateEndpointServiceConnectionStatus Approved { get; } = new ReferenceTypesPrivateEndpointServiceConnectionStatus(ApprovedValue);
         /// <summary> Rejected. </summary>
         public static ReferenceTypesPrivateEndpointServiceConnectionStatus Rejected { get; } = new ReferenceTypesPrivateEndpointServiceConnectionStatus(RejectedValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="ReferenceTypesPrivateEndpointServiceConnectionStatus"/> values are the same. </summary>
         public static bool operator ==(ReferenceTypesPrivateEndpointServiceConnectionStatus left, ReferenceTypesPrivateEndpointServiceConnectionStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ReferenceTypesPrivateEndpointServiceConnectionStatus"/> values are not the same. </summary>

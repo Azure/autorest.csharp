@@ -44,9 +44,6 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: SoftwareUpdateRebootBehavior.CanRequestReboot
         /// </summary>
         public static SoftwareUpdateRebootBehavior CanRequestReboot { get; } = new SoftwareUpdateRebootBehavior(CanRequestRebootValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="SoftwareUpdateRebootBehavior"/> values are the same. </summary>
         public static bool operator ==(SoftwareUpdateRebootBehavior left, SoftwareUpdateRebootBehavior right) => left.Equals(right);
         /// <summary> Determines if two <see cref="SoftwareUpdateRebootBehavior"/> values are not the same. </summary>

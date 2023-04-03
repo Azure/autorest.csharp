@@ -29,9 +29,6 @@ namespace MgmtMockAndSample.Models
         public static FirewallPolicySkuTier Standard { get; } = new FirewallPolicySkuTier(StandardValue);
         /// <summary> Premium. </summary>
         public static FirewallPolicySkuTier Premium { get; } = new FirewallPolicySkuTier(PremiumValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="FirewallPolicySkuTier"/> values are the same. </summary>
         public static bool operator ==(FirewallPolicySkuTier left, FirewallPolicySkuTier right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FirewallPolicySkuTier"/> values are not the same. </summary>

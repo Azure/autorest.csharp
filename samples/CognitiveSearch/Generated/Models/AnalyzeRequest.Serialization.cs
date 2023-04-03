@@ -20,12 +20,12 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(Analyzer))
             {
                 writer.WritePropertyName("analyzer"u8);
-                writer.WriteStringValue(Analyzer.Value.ToSerialString());
+                writer.WriteStringValue(Analyzer.Value.ToString());
             }
             if (Optional.IsDefined(Tokenizer))
             {
                 writer.WritePropertyName("tokenizer"u8);
-                writer.WriteStringValue(Tokenizer.Value.ToSerialString());
+                writer.WriteStringValue(Tokenizer.Value.ToString());
             }
             if (Optional.IsCollectionDefined(TokenFilters))
             {
@@ -33,7 +33,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in TokenFilters)
                 {
-                    writer.WriteStringValue(item.ToSerialString());
+                    writer.WriteStringValue(item.ToString());
                 }
                 writer.WriteEndArray();
             }
@@ -43,7 +43,7 @@ namespace CognitiveSearch.Models
                 writer.WriteStartArray();
                 foreach (var item in CharFilters)
                 {
-                    writer.WriteStringValue(item.ToSerialString());
+                    writer.WriteStringValue(item.ToString());
                 }
                 writer.WriteEndArray();
             }

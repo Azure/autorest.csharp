@@ -16,7 +16,7 @@ namespace MgmtDiscriminator.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("paramIndicator"u8);
-            writer.WriteStringValue(ParamIndicator.ToSerialString());
+            writer.WriteStringValue(ParamIndicator.ToString());
             writer.WritePropertyName("paramName"u8);
             writer.WriteStringValue(ParamName);
             writer.WriteEndObject();

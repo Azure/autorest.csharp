@@ -29,7 +29,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Protocol))
             {
                 writer.WritePropertyName("protocol"u8);
-                writer.WriteStringValue(Protocol.Value.ToSerialString());
+                writer.WriteStringValue(Protocol.Value.ToString());
             }
             if (Optional.IsCollectionDefined(SourceAddresses))
             {

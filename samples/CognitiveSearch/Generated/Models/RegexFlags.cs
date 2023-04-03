@@ -47,9 +47,6 @@ namespace CognitiveSearch.Models
         public static RegexFlags UnicodeCase { get; } = new RegexFlags(UnicodeCaseValue);
         /// <summary> UNIX_LINES. </summary>
         public static RegexFlags UnixLines { get; } = new RegexFlags(UnixLinesValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="RegexFlags"/> values are the same. </summary>
         public static bool operator ==(RegexFlags left, RegexFlags right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RegexFlags"/> values are not the same. </summary>

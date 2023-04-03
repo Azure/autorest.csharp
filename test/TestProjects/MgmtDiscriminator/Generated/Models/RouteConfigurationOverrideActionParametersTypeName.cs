@@ -26,9 +26,6 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> DeliveryRuleRouteConfigurationOverrideActionParameters. </summary>
         public static RouteConfigurationOverrideActionParametersTypeName DeliveryRuleRouteConfigurationOverrideActionParameters { get; } = new RouteConfigurationOverrideActionParametersTypeName(DeliveryRuleRouteConfigurationOverrideActionParametersValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="RouteConfigurationOverrideActionParametersTypeName"/> values are the same. </summary>
         public static bool operator ==(RouteConfigurationOverrideActionParametersTypeName left, RouteConfigurationOverrideActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RouteConfigurationOverrideActionParametersTypeName"/> values are not the same. </summary>

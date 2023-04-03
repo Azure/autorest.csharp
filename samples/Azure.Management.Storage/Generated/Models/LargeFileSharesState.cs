@@ -29,9 +29,6 @@ namespace Azure.Management.Storage.Models
         public static LargeFileSharesState Disabled { get; } = new LargeFileSharesState(DisabledValue);
         /// <summary> Enabled. </summary>
         public static LargeFileSharesState Enabled { get; } = new LargeFileSharesState(EnabledValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="LargeFileSharesState"/> values are the same. </summary>
         public static bool operator ==(LargeFileSharesState left, LargeFileSharesState right) => left.Equals(right);
         /// <summary> Determines if two <see cref="LargeFileSharesState"/> values are not the same. </summary>

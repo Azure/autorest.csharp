@@ -29,9 +29,6 @@ namespace Azure.Management.Storage.Models
         public static KeySource MicrosoftStorage { get; } = new KeySource(MicrosoftStorageValue);
         /// <summary> Microsoft.Keyvault. </summary>
         public static KeySource MicrosoftKeyvault { get; } = new KeySource(MicrosoftKeyvaultValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="KeySource"/> values are the same. </summary>
         public static bool operator ==(KeySource left, KeySource right) => left.Equals(right);
         /// <summary> Determines if two <see cref="KeySource"/> values are not the same. </summary>

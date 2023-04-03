@@ -112,7 +112,7 @@ namespace MgmtMockAndSample.Models
                 writer.WriteStringValue(Description);
             }
             writer.WritePropertyName("ruleType"u8);
-            writer.WriteStringValue(RuleType.ToSerialString());
+            writer.WriteStringValue(RuleType.ToString());
             writer.WriteEndObject();
         }
 

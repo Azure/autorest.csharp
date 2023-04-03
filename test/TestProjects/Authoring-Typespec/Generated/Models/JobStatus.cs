@@ -44,9 +44,6 @@ namespace Azure.Language.Authoring.Models
         public static JobStatus Cancelling { get; } = new JobStatus(CancellingValue);
         /// <summary> partiallyCompleted. </summary>
         public static JobStatus PartiallyCompleted { get; } = new JobStatus(PartiallyCompletedValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="JobStatus"/> values are the same. </summary>
         public static bool operator ==(JobStatus left, JobStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="JobStatus"/> values are not the same. </summary>

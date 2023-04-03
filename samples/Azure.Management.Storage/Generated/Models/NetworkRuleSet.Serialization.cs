@@ -19,7 +19,7 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(Bypass))
             {
                 writer.WritePropertyName("bypass"u8);
-                writer.WriteStringValue(Bypass.Value.ToSerialString());
+                writer.WriteStringValue(Bypass.Value.ToString());
             }
             if (Optional.IsCollectionDefined(ResourceAccessRules))
             {

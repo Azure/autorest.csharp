@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ProtocolType))
             {
                 writer.WritePropertyName("protocolType"u8);
-                writer.WriteStringValue(ProtocolType.Value.ToSerialString());
+                writer.WriteStringValue(ProtocolType.Value.ToString());
             }
             if (Optional.IsDefined(Port))
             {

@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(ActionType))
             {
                 writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ActionType.Value.ToSerialString());
+                writer.WriteStringValue(ActionType.Value.ToString());
             }
             writer.WriteEndObject();
         }

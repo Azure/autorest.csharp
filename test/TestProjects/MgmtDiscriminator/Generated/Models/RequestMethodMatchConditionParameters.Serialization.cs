@@ -17,9 +17,9 @@ namespace MgmtDiscriminator.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
-            writer.WriteStringValue(TypeName.ToSerialString());
+            writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("operator"u8);
-            writer.WriteStringValue(Operator.ToSerialString());
+            writer.WriteStringValue(Operator.ToString());
             if (Optional.IsDefined(NegateCondition))
             {
                 writer.WritePropertyName("negateCondition"u8);
@@ -31,7 +31,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in Transforms)
                 {
-                    writer.WriteStringValue(item.ToSerialString());
+                    writer.WriteStringValue(item.ToString());
                 }
                 writer.WriteEndArray();
             }
@@ -41,7 +41,7 @@ namespace MgmtDiscriminator.Models
                 writer.WriteStartArray();
                 foreach (var item in MatchValues)
                 {
-                    writer.WriteStringValue(item.ToSerialString());
+                    writer.WriteStringValue(item.ToString());
                 }
                 writer.WriteEndArray();
             }

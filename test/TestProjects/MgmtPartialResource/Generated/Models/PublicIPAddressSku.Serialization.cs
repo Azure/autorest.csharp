@@ -18,12 +18,12 @@ namespace MgmtPartialResource.Models
             if (Optional.IsDefined(Name))
             {
                 writer.WritePropertyName("name"u8);
-                writer.WriteStringValue(Name.Value.ToSerialString());
+                writer.WriteStringValue(Name.Value.ToString());
             }
             if (Optional.IsDefined(Tier))
             {
                 writer.WritePropertyName("tier"u8);
-                writer.WriteStringValue(Tier.Value.ToSerialString());
+                writer.WriteStringValue(Tier.Value.ToString());
             }
             writer.WriteEndObject();
         }

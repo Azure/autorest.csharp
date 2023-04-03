@@ -26,9 +26,6 @@ namespace Azure.Storage.Tables.Models
 
         /// <summary> service. </summary>
         public static Enum4 Service { get; } = new Enum4(ServiceValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Enum4"/> values are the same. </summary>
         public static bool operator ==(Enum4 left, Enum4 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Enum4"/> values are not the same. </summary>

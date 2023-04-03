@@ -26,9 +26,6 @@ namespace Azure.Storage.Tables.Models
 
         /// <summary> 3.0. </summary>
         public static Enum1 Three0 { get; } = new Enum1(Three0Value);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Enum1"/> values are the same. </summary>
         public static bool operator ==(Enum1 left, Enum1 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Enum1"/> values are not the same. </summary>

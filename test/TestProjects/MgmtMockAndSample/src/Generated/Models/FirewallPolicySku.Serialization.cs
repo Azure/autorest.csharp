@@ -18,7 +18,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(Tier))
             {
                 writer.WritePropertyName("tier"u8);
-                writer.WriteStringValue(Tier.Value.ToSerialString());
+                writer.WriteStringValue(Tier.Value.ToString());
             }
             writer.WriteEndObject();
         }

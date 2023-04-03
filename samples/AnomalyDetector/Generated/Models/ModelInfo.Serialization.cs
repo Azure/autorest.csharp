@@ -25,7 +25,7 @@ namespace AnomalyDetector.Models
                 if (DataSchema != null)
                 {
                     writer.WritePropertyName("dataSchema"u8);
-                    writer.WriteStringValue(DataSchema.Value.ToSerialString());
+                    writer.WriteStringValue(DataSchema.Value.ToString());
                 }
                 else
                 {

@@ -16,7 +16,7 @@ namespace MgmtMockAndSample.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("family"u8);
-            writer.WriteStringValue(Family.ToSerialString());
+            writer.WriteStringValue(Family.ToString());
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToSerialString());
             writer.WriteEndObject();

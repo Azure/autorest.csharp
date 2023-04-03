@@ -59,9 +59,6 @@ namespace MgmtCollectionParent.Models
         public static StageName ReturnCompleted { get; } = new StageName(ReturnCompletedValue);
         /// <summary> Order has been cancelled. </summary>
         public static StageName Cancelled { get; } = new StageName(CancelledValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="StageName"/> values are the same. </summary>
         public static bool operator ==(StageName left, StageName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="StageName"/> values are not the same. </summary>

@@ -16,13 +16,13 @@ namespace MgmtDiscriminator.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
-            writer.WriteStringValue(TypeName.ToSerialString());
+            writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("redirectType"u8);
-            writer.WriteStringValue(RedirectType.ToSerialString());
+            writer.WriteStringValue(RedirectType.ToString());
             if (Optional.IsDefined(DestinationProtocol))
             {
                 writer.WritePropertyName("destinationProtocol"u8);
-                writer.WriteStringValue(DestinationProtocol.Value.ToSerialString());
+                writer.WriteStringValue(DestinationProtocol.Value.ToString());
             }
             if (Optional.IsDefined(CustomPath))
             {

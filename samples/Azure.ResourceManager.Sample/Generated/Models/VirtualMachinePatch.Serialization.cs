@@ -101,12 +101,12 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(Priority))
             {
                 writer.WritePropertyName("priority"u8);
-                writer.WriteStringValue(Priority.Value.ToSerialString());
+                writer.WriteStringValue(Priority.Value.ToString());
             }
             if (Optional.IsDefined(EvictionPolicy))
             {
                 writer.WritePropertyName("evictionPolicy"u8);
-                writer.WriteStringValue(EvictionPolicy.Value.ToSerialString());
+                writer.WriteStringValue(EvictionPolicy.Value.ToString());
             }
             if (Optional.IsDefined(BillingProfile))
             {

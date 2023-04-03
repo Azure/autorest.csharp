@@ -38,9 +38,6 @@ namespace Azure.ResourceManager.Sample.Models
         /// Serialized Name: AvailabilitySetSkuTypes.Aligned
         /// </summary>
         public static AvailabilitySetSkuType Aligned { get; } = new AvailabilitySetSkuType(AlignedValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="AvailabilitySetSkuType"/> values are the same. </summary>
         public static bool operator ==(AvailabilitySetSkuType left, AvailabilitySetSkuType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="AvailabilitySetSkuType"/> values are not the same. </summary>

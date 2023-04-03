@@ -32,9 +32,6 @@ namespace Azure.Network.Management.Interface.Models
         public static LoadDistribution SourceIP { get; } = new LoadDistribution(SourceIPValue);
         /// <summary> SourceIPProtocol. </summary>
         public static LoadDistribution SourceIPProtocol { get; } = new LoadDistribution(SourceIPProtocolValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="LoadDistribution"/> values are the same. </summary>
         public static bool operator ==(LoadDistribution left, LoadDistribution right) => left.Equals(right);
         /// <summary> Determines if two <see cref="LoadDistribution"/> values are not the same. </summary>

@@ -29,9 +29,6 @@ namespace MultipleInputFiles.Models
         public static Source Us { get; } = new Source(UsValue);
         /// <summary> eu. </summary>
         public static Source Eu { get; } = new Source(EuValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Source"/> values are the same. </summary>
         public static bool operator ==(Source left, Source right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Source"/> values are not the same. </summary>

@@ -29,9 +29,6 @@ namespace MgmtMockAndSample.Models
         public static FirewallPolicyFilterRuleCollectionActionType Allow { get; } = new FirewallPolicyFilterRuleCollectionActionType(AllowValue);
         /// <summary> Deny. </summary>
         public static FirewallPolicyFilterRuleCollectionActionType Deny { get; } = new FirewallPolicyFilterRuleCollectionActionType(DenyValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="FirewallPolicyFilterRuleCollectionActionType"/> values are the same. </summary>
         public static bool operator ==(FirewallPolicyFilterRuleCollectionActionType left, FirewallPolicyFilterRuleCollectionActionType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FirewallPolicyFilterRuleCollectionActionType"/> values are not the same. </summary>

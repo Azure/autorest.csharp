@@ -56,7 +56,7 @@ namespace MgmtRenameRules.Models
                 writer.WriteObjectValue(DiffDiskSettings);
             }
             writer.WritePropertyName("createOption"u8);
-            writer.WriteStringValue(CreateOption.ToSerialString());
+            writer.WriteStringValue(CreateOption.ToString());
             if (Optional.IsDefined(DiskSizeGB))
             {
                 writer.WritePropertyName("diskSizeGB"u8);

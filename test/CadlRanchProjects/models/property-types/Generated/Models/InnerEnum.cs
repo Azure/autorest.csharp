@@ -29,9 +29,6 @@ namespace Models.Property.Types.Models
         public static InnerEnum ValueOne { get; } = new InnerEnum(ValueOneValue);
         /// <summary> Second value. </summary>
         public static InnerEnum ValueTwo { get; } = new InnerEnum(ValueTwoValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="InnerEnum"/> values are the same. </summary>
         public static bool operator ==(InnerEnum left, InnerEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="InnerEnum"/> values are not the same. </summary>

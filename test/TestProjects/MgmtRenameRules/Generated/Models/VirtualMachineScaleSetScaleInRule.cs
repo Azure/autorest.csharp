@@ -44,9 +44,6 @@ namespace MgmtRenameRules.Models
         /// Serialized Name: VirtualMachineScaleSetScaleInRules.NewestVM
         /// </summary>
         public static VirtualMachineScaleSetScaleInRule NewestVm { get; } = new VirtualMachineScaleSetScaleInRule(NewestVmValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="VirtualMachineScaleSetScaleInRule"/> values are the same. </summary>
         public static bool operator ==(VirtualMachineScaleSetScaleInRule left, VirtualMachineScaleSetScaleInRule right) => left.Equals(right);
         /// <summary> Determines if two <see cref="VirtualMachineScaleSetScaleInRule"/> values are not the same. </summary>

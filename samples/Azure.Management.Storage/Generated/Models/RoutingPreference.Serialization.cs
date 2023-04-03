@@ -18,7 +18,7 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(RoutingChoice))
             {
                 writer.WritePropertyName("routingChoice"u8);
-                writer.WriteStringValue(RoutingChoice.Value.ToSerialString());
+                writer.WriteStringValue(RoutingChoice.Value.ToString());
             }
             if (Optional.IsDefined(PublishMicrosoftEndpoints))
             {

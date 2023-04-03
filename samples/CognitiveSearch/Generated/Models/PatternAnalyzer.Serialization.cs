@@ -29,7 +29,7 @@ namespace CognitiveSearch.Models
             if (Optional.IsDefined(Flags))
             {
                 writer.WritePropertyName("flags"u8);
-                writer.WriteStringValue(Flags.Value.ToSerialString());
+                writer.WriteStringValue(Flags.Value.ToString());
             }
             if (Optional.IsCollectionDefined(Stopwords))
             {

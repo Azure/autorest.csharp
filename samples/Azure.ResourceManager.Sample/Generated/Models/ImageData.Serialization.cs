@@ -47,7 +47,7 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(HyperVGeneration))
             {
                 writer.WritePropertyName("hyperVGeneration"u8);
-                writer.WriteStringValue(HyperVGeneration.Value.ToSerialString());
+                writer.WriteStringValue(HyperVGeneration.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

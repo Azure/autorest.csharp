@@ -18,7 +18,7 @@ namespace MgmtSafeFlatten.Models
             writer.WritePropertyName("parameters"u8);
             writer.WriteStringValue(Parameters);
             writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name.ToSerialString());
+            writer.WriteStringValue(Name.ToString());
             writer.WriteEndObject();
         }
 

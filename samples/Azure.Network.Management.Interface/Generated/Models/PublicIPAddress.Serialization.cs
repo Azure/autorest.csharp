@@ -57,12 +57,12 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(PublicIPAllocationMethod))
             {
                 writer.WritePropertyName("publicIPAllocationMethod"u8);
-                writer.WriteStringValue(PublicIPAllocationMethod.Value.ToSerialString());
+                writer.WriteStringValue(PublicIPAllocationMethod.Value.ToString());
             }
             if (Optional.IsDefined(PublicIPAddressVersion))
             {
                 writer.WritePropertyName("publicIPAddressVersion"u8);
-                writer.WriteStringValue(PublicIPAddressVersion.Value.ToSerialString());
+                writer.WriteStringValue(PublicIPAddressVersion.Value.ToString());
             }
             if (Optional.IsDefined(DnsSettings))
             {

@@ -1903,7 +1903,7 @@ namespace body_array
             content.JsonWriter.WriteStartArray();
             foreach (var item in arrayBody)
             {
-                content.JsonWriter.WriteStringValue(item.ToSerialString());
+                content.JsonWriter.WriteStringValue(item.ToString());
             }
             content.JsonWriter.WriteEndArray();
             request.Content = content;

@@ -17,16 +17,16 @@ namespace CognitiveSearch.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("defaultToLanguageCode"u8);
-            writer.WriteStringValue(DefaultToLanguageCode.ToSerialString());
+            writer.WriteStringValue(DefaultToLanguageCode.ToString());
             if (Optional.IsDefined(DefaultFromLanguageCode))
             {
                 writer.WritePropertyName("defaultFromLanguageCode"u8);
-                writer.WriteStringValue(DefaultFromLanguageCode.Value.ToSerialString());
+                writer.WriteStringValue(DefaultFromLanguageCode.Value.ToString());
             }
             if (Optional.IsDefined(SuggestedFrom))
             {
                 writer.WritePropertyName("suggestedFrom"u8);
-                writer.WriteStringValue(SuggestedFrom.Value.ToSerialString());
+                writer.WriteStringValue(SuggestedFrom.Value.ToString());
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);

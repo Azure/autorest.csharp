@@ -47,9 +47,6 @@ namespace MgmtListMethods.Models
         public static Status OperationNotSupportedForSku { get; } = new Status(OperationNotSupportedForSkuValue);
         /// <summary> OperationNotEnabledForRegion. </summary>
         public static Status OperationNotEnabledForRegion { get; } = new Status(OperationNotEnabledForRegionValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Status"/> values are the same. </summary>
         public static bool operator ==(Status left, Status right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Status"/> values are not the same. </summary>

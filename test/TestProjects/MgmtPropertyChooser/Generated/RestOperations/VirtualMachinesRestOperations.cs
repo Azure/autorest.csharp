@@ -51,7 +51,7 @@ namespace MgmtPropertyChooser
             uri.AppendPath("/providers/Microsoft.Compute/virtualMachines", false);
             if (expand != null)
             {
-                uri.AppendQuery("$expand", expand.Value.ToSerialString(), true);
+                uri.AppendQuery("$expand", expand.Value.ToString(), true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -364,7 +364,7 @@ namespace MgmtPropertyChooser
             uri.AppendPath(vmName, true);
             if (expand != null)
             {
-                uri.AppendQuery("$expand", expand.Value.ToSerialString(), true);
+                uri.AppendQuery("$expand", expand.Value.ToString(), true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

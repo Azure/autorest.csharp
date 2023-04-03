@@ -51,7 +51,7 @@ namespace MgmtSingletonResource
             uri.AppendPath("/providers/Microsoft.Compute/cars/", false);
             uri.AppendPath(carName, true);
             uri.AppendPath("/brakes/", false);
-            uri.AppendPath(@default.ToSerialString(), true);
+            uri.AppendPath(@default.ToString(), true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

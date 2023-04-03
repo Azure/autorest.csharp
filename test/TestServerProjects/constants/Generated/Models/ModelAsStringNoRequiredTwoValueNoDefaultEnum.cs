@@ -29,9 +29,6 @@ namespace constants.Models
         public static ModelAsStringNoRequiredTwoValueNoDefaultEnum Value1 { get; } = new ModelAsStringNoRequiredTwoValueNoDefaultEnum(Value1Value);
         /// <summary> value2. </summary>
         public static ModelAsStringNoRequiredTwoValueNoDefaultEnum Value2 { get; } = new ModelAsStringNoRequiredTwoValueNoDefaultEnum(Value2Value);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="ModelAsStringNoRequiredTwoValueNoDefaultEnum"/> values are the same. </summary>
         public static bool operator ==(ModelAsStringNoRequiredTwoValueNoDefaultEnum left, ModelAsStringNoRequiredTwoValueNoDefaultEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ModelAsStringNoRequiredTwoValueNoDefaultEnum"/> values are not the same. </summary>

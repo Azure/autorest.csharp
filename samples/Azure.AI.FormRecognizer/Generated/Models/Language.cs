@@ -29,9 +29,6 @@ namespace Azure.AI.FormRecognizer.Models
         public static Language En { get; } = new Language(EnValue);
         /// <summary> es. </summary>
         public static Language Es { get; } = new Language(EsValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Language"/> values are the same. </summary>
         public static bool operator ==(Language left, Language right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Language"/> values are not the same. </summary>

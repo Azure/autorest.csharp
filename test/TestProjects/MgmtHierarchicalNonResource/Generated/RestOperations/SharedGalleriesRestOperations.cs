@@ -52,7 +52,7 @@ namespace MgmtHierarchicalNonResource
             uri.AppendQuery("api-version", _apiVersion, true);
             if (sharedTo != null)
             {
-                uri.AppendQuery("sharedTo", sharedTo.Value.ToSerialString(), true);
+                uri.AppendQuery("sharedTo", sharedTo.Value.ToString(), true);
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

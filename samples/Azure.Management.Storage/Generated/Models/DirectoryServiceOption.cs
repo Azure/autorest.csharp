@@ -32,9 +32,6 @@ namespace Azure.Management.Storage.Models
         public static DirectoryServiceOption Aadds { get; } = new DirectoryServiceOption(AaddsValue);
         /// <summary> AD. </summary>
         public static DirectoryServiceOption AD { get; } = new DirectoryServiceOption(ADValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="DirectoryServiceOption"/> values are the same. </summary>
         public static bool operator ==(DirectoryServiceOption left, DirectoryServiceOption right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DirectoryServiceOption"/> values are not the same. </summary>

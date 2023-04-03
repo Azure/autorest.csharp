@@ -30,7 +30,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(EncryptionType))
             {
                 writer.WritePropertyName("encryptionType"u8);
-                writer.WriteStringValue(EncryptionType.Value.ToSerialString());
+                writer.WriteStringValue(EncryptionType.Value.ToString());
             }
             if (Optional.IsDefined(ActiveKey))
             {
@@ -50,7 +50,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(MinimumTlsVersion))
             {
                 writer.WritePropertyName("minimumTlsVersion"u8);
-                writer.WriteStringValue(MinimumTlsVersion.Value.ToSerialString());
+                writer.WriteStringValue(MinimumTlsVersion.Value.ToString());
             }
             writer.WriteEndObject();
             writer.WriteEndObject();

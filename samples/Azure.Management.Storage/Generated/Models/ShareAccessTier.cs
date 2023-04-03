@@ -35,9 +35,6 @@ namespace Azure.Management.Storage.Models
         public static ShareAccessTier Cool { get; } = new ShareAccessTier(CoolValue);
         /// <summary> Premium. </summary>
         public static ShareAccessTier Premium { get; } = new ShareAccessTier(PremiumValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="ShareAccessTier"/> values are the same. </summary>
         public static bool operator ==(ShareAccessTier left, ShareAccessTier right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ShareAccessTier"/> values are not the same. </summary>

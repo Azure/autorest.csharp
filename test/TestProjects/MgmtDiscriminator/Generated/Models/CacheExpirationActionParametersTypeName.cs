@@ -26,9 +26,6 @@ namespace MgmtDiscriminator.Models
 
         /// <summary> DeliveryRuleCacheExpirationActionParameters. </summary>
         public static CacheExpirationActionParametersTypeName DeliveryRuleCacheExpirationActionParameters { get; } = new CacheExpirationActionParametersTypeName(DeliveryRuleCacheExpirationActionParametersValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="CacheExpirationActionParametersTypeName"/> values are the same. </summary>
         public static bool operator ==(CacheExpirationActionParametersTypeName left, CacheExpirationActionParametersTypeName right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CacheExpirationActionParametersTypeName"/> values are not the same. </summary>

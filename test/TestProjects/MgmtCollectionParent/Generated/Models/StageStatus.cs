@@ -41,9 +41,6 @@ namespace MgmtCollectionParent.Models
         public static StageStatus Cancelled { get; } = new StageStatus(CancelledValue);
         /// <summary> Stage is cancelling. </summary>
         public static StageStatus Cancelling { get; } = new StageStatus(CancellingValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="StageStatus"/> values are the same. </summary>
         public static bool operator ==(StageStatus left, StageStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="StageStatus"/> values are not the same. </summary>

@@ -20,12 +20,12 @@ namespace Azure.Management.Storage.Models
             if (Optional.IsDefined(Action))
             {
                 writer.WritePropertyName("action"u8);
-                writer.WriteStringValue(Action.Value.ToSerialString());
+                writer.WriteStringValue(Action.Value.ToString());
             }
             if (Optional.IsDefined(State))
             {
                 writer.WritePropertyName("state"u8);
-                writer.WriteStringValue(State.Value.ToSerialString());
+                writer.WriteStringValue(State.Value.ToString());
             }
             writer.WriteEndObject();
         }

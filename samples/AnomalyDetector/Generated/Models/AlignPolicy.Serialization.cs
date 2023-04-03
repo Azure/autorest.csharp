@@ -33,7 +33,7 @@ namespace AnomalyDetector.Models
                 if (FillNAMethod != null)
                 {
                     writer.WritePropertyName("fillNAMethod"u8);
-                    writer.WriteStringValue(FillNAMethod.Value.ToSerialString());
+                    writer.WriteStringValue(FillNAMethod.Value.ToString());
                 }
                 else
                 {

@@ -32,9 +32,6 @@ namespace Azure.Management.Storage.Models
         public static MinimumTlsVersion TLS11 { get; } = new MinimumTlsVersion(TLS11Value);
         /// <summary> TLS1_2. </summary>
         public static MinimumTlsVersion TLS12 { get; } = new MinimumTlsVersion(TLS12Value);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="MinimumTlsVersion"/> values are the same. </summary>
         public static bool operator ==(MinimumTlsVersion left, MinimumTlsVersion right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MinimumTlsVersion"/> values are not the same. </summary>

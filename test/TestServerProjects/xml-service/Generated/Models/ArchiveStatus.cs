@@ -29,9 +29,6 @@ namespace xml_service.Models
         public static ArchiveStatus RehydratePendingToHot { get; } = new ArchiveStatus(RehydratePendingToHotValue);
         /// <summary> rehydrate-pending-to-cool. </summary>
         public static ArchiveStatus RehydratePendingToCool { get; } = new ArchiveStatus(RehydratePendingToCoolValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="ArchiveStatus"/> values are the same. </summary>
         public static bool operator ==(ArchiveStatus left, ArchiveStatus right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ArchiveStatus"/> values are not the same. </summary>

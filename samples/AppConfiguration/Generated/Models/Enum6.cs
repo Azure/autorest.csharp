@@ -47,9 +47,6 @@ namespace AppConfiguration.Models
         public static Enum6 Locked { get; } = new Enum6(LockedValue);
         /// <summary> etag. </summary>
         public static Enum6 Etag { get; } = new Enum6(EtagValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Enum6"/> values are the same. </summary>
         public static bool operator ==(Enum6 left, Enum6 right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Enum6"/> values are not the same. </summary>

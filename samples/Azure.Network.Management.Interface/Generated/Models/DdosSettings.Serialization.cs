@@ -23,7 +23,7 @@ namespace Azure.Network.Management.Interface.Models
             if (Optional.IsDefined(ProtectionCoverage))
             {
                 writer.WritePropertyName("protectionCoverage"u8);
-                writer.WriteStringValue(ProtectionCoverage.Value.ToSerialString());
+                writer.WriteStringValue(ProtectionCoverage.Value.ToString());
             }
             if (Optional.IsDefined(ProtectedIP))
             {

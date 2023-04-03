@@ -66,7 +66,7 @@ namespace Azure.ResourceManager.Sample.Models
             if (Optional.IsDefined(HyperVGeneration))
             {
                 writer.WritePropertyName("hyperVGeneration"u8);
-                writer.WriteStringValue(HyperVGeneration.Value.ToSerialString());
+                writer.WriteStringValue(HyperVGeneration.Value.ToString());
             }
             if (Optional.IsDefined(Disallowed))
             {

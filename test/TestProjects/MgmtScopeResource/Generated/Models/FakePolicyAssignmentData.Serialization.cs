@@ -79,7 +79,7 @@ namespace MgmtScopeResource
             if (Optional.IsDefined(EnforcementMode))
             {
                 writer.WritePropertyName("enforcementMode"u8);
-                writer.WriteStringValue(EnforcementMode.Value.ToSerialString());
+                writer.WriteStringValue(EnforcementMode.Value.ToString());
             }
             if (Optional.IsCollectionDefined(NonComplianceMessages))
             {

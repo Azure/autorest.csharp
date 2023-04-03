@@ -38,7 +38,7 @@ namespace MgmtMockAndSample.Models
             if (Optional.IsDefined(EncryptionType))
             {
                 writer.WritePropertyName("encryptionType"u8);
-                writer.WriteStringValue(EncryptionType.Value.ToSerialString());
+                writer.WriteStringValue(EncryptionType.Value.ToString());
             }
             if (Optional.IsDefined(ActiveKey))
             {

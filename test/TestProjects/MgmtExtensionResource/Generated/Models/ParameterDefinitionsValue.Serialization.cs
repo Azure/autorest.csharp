@@ -20,7 +20,7 @@ namespace MgmtExtensionResource.Models
             if (Optional.IsDefined(ParameterType))
             {
                 writer.WritePropertyName("type"u8);
-                writer.WriteStringValue(ParameterType.Value.ToSerialString());
+                writer.WriteStringValue(ParameterType.Value.ToString());
             }
             if (Optional.IsCollectionDefined(AllowedValues))
             {

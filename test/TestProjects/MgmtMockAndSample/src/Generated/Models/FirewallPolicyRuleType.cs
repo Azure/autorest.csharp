@@ -32,9 +32,6 @@ namespace MgmtMockAndSample.Models
         public static FirewallPolicyRuleType NetworkRule { get; } = new FirewallPolicyRuleType(NetworkRuleValue);
         /// <summary> NatRule. </summary>
         public static FirewallPolicyRuleType NatRule { get; } = new FirewallPolicyRuleType(NatRuleValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="FirewallPolicyRuleType"/> values are the same. </summary>
         public static bool operator ==(FirewallPolicyRuleType left, FirewallPolicyRuleType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FirewallPolicyRuleType"/> values are not the same. </summary>

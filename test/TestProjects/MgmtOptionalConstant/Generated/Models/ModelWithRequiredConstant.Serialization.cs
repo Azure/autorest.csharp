@@ -16,7 +16,7 @@ namespace MgmtOptionalConstant.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredStringConstant"u8);
-            writer.WriteStringValue(RequiredStringConstant.ToSerialString());
+            writer.WriteStringValue(RequiredStringConstant.ToString());
             writer.WritePropertyName("requiredIntConstant"u8);
             writer.WriteNumberValue(RequiredIntConstant.ToSerialInt32());
             writer.WritePropertyName("requiredFloatConstant"u8);

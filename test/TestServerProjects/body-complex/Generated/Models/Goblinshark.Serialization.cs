@@ -25,7 +25,7 @@ namespace body_complex.Models
             if (Optional.IsDefined(Color))
             {
                 writer.WritePropertyName("color"u8);
-                writer.WriteStringValue(Color.Value.ToSerialString());
+                writer.WriteStringValue(Color.Value.ToString());
             }
             if (Optional.IsDefined(Age))
             {

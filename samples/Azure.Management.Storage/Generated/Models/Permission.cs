@@ -47,9 +47,6 @@ namespace Azure.Management.Storage.Models
         public static Permission U { get; } = new Permission(UValue);
         /// <summary> p. </summary>
         public static Permission P { get; } = new Permission(PValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Permission"/> values are the same. </summary>
         public static bool operator ==(Permission left, Permission right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Permission"/> values are not the same. </summary>

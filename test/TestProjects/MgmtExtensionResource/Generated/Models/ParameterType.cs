@@ -44,9 +44,6 @@ namespace MgmtExtensionResource.Models
         public static ParameterType Float { get; } = new ParameterType(FloatValue);
         /// <summary> DateTime. </summary>
         public static ParameterType DateTime { get; } = new ParameterType(DateTimeValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="ParameterType"/> values are the same. </summary>
         public static bool operator ==(ParameterType left, ParameterType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ParameterType"/> values are not the same. </summary>

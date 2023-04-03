@@ -32,9 +32,6 @@ namespace MgmtDiscriminator.Models
         public static MatchVariable RequestMethod { get; } = new MatchVariable(RequestMethodValue);
         /// <summary> QueryString. </summary>
         public static MatchVariable QueryString { get; } = new MatchVariable(QueryStringValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="MatchVariable"/> values are the same. </summary>
         public static bool operator ==(MatchVariable left, MatchVariable right) => left.Equals(right);
         /// <summary> Determines if two <see cref="MatchVariable"/> values are not the same. </summary>

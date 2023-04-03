@@ -26,7 +26,7 @@ namespace Azure.ResourceManager.Fake.Models
             if (Optional.IsDefined(CreatedByType))
             {
                 writer.WritePropertyName("createdByType"u8);
-                writer.WriteStringValue(CreatedByType.Value.ToSerialString());
+                writer.WriteStringValue(CreatedByType.Value.ToString());
             }
             if (Optional.IsDefined(CreatedOn))
             {
@@ -41,7 +41,7 @@ namespace Azure.ResourceManager.Fake.Models
             if (Optional.IsDefined(LastModifiedByType))
             {
                 writer.WritePropertyName("lastModifiedByType"u8);
-                writer.WriteStringValue(LastModifiedByType.Value.ToSerialString());
+                writer.WriteStringValue(LastModifiedByType.Value.ToString());
             }
             if (Optional.IsDefined(LastModifiedOn))
             {

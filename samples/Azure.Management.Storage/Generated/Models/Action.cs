@@ -26,9 +26,6 @@ namespace Azure.Management.Storage.Models
 
         /// <summary> Allow. </summary>
         public static Action Allow { get; } = new Action(AllowValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="Action"/> values are the same. </summary>
         public static bool operator ==(Action left, Action right) => left.Equals(right);
         /// <summary> Determines if two <see cref="Action"/> values are not the same. </summary>

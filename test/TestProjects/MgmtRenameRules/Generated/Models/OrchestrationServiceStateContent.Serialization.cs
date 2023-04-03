@@ -16,9 +16,9 @@ namespace MgmtRenameRules.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("serviceName"u8);
-            writer.WriteStringValue(ServiceName.ToSerialString());
+            writer.WriteStringValue(ServiceName.ToString());
             writer.WritePropertyName("action"u8);
-            writer.WriteStringValue(Action.ToSerialString());
+            writer.WriteStringValue(Action.ToString());
             writer.WriteEndObject();
         }
     }

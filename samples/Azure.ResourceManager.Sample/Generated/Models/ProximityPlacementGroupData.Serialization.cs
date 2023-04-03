@@ -42,7 +42,7 @@ namespace Azure.ResourceManager.Sample
             if (Optional.IsDefined(ProximityPlacementGroupType))
             {
                 writer.WritePropertyName("proximityPlacementGroupType"u8);
-                writer.WriteStringValue(ProximityPlacementGroupType.Value.ToSerialString());
+                writer.WriteStringValue(ProximityPlacementGroupType.Value.ToString());
             }
             if (Optional.IsDefined(ColocationStatus))
             {

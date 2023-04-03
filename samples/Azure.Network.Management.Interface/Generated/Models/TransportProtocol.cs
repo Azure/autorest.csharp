@@ -32,9 +32,6 @@ namespace Azure.Network.Management.Interface.Models
         public static TransportProtocol Tcp { get; } = new TransportProtocol(TcpValue);
         /// <summary> All. </summary>
         public static TransportProtocol All { get; } = new TransportProtocol(AllValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="TransportProtocol"/> values are the same. </summary>
         public static bool operator ==(TransportProtocol left, TransportProtocol right) => left.Equals(right);
         /// <summary> Determines if two <see cref="TransportProtocol"/> values are not the same. </summary>

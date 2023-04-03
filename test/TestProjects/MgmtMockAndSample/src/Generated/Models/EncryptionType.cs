@@ -26,9 +26,6 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> Microsoft.KeyVault/vaults. </summary>
         public static EncryptionType MicrosoftKeyVaultVaults { get; } = new EncryptionType(MicrosoftKeyVaultVaultsValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="EncryptionType"/> values are the same. </summary>
         public static bool operator ==(EncryptionType left, EncryptionType right) => left.Equals(right);
         /// <summary> Determines if two <see cref="EncryptionType"/> values are not the same. </summary>

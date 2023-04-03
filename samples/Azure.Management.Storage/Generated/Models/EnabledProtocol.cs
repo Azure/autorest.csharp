@@ -29,9 +29,6 @@ namespace Azure.Management.Storage.Models
         public static EnabledProtocol SMB { get; } = new EnabledProtocol(SMBValue);
         /// <summary> NFS. </summary>
         public static EnabledProtocol NFS { get; } = new EnabledProtocol(NFSValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="EnabledProtocol"/> values are the same. </summary>
         public static bool operator ==(EnabledProtocol left, EnabledProtocol right) => left.Equals(right);
         /// <summary> Determines if two <see cref="EnabledProtocol"/> values are not the same. </summary>

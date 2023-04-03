@@ -39,9 +39,6 @@ namespace NamespaceForEnums
         public static CustomDaysOfWeek Saturday { get; } = new CustomDaysOfWeek(SaturdayValue);
         /// <summary> Sunday. </summary>
         public static CustomDaysOfWeek Sunday { get; } = new CustomDaysOfWeek(SundayValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="CustomDaysOfWeek"/> values are the same. </summary>
         public static bool operator ==(CustomDaysOfWeek left, CustomDaysOfWeek right) => left.Equals(right);
         /// <summary> Determines if two <see cref="CustomDaysOfWeek"/> values are not the same. </summary>

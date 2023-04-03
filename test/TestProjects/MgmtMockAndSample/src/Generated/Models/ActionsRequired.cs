@@ -26,9 +26,6 @@ namespace MgmtMockAndSample.Models
 
         /// <summary> None. </summary>
         public static ActionsRequired None { get; } = new ActionsRequired(NoneValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="ActionsRequired"/> values are the same. </summary>
         public static bool operator ==(ActionsRequired left, ActionsRequired right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ActionsRequired"/> values are not the same. </summary>

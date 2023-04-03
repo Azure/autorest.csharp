@@ -16,7 +16,7 @@ namespace MgmtDiscriminator.Models
         {
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
-            writer.WriteStringValue(TypeName.ToSerialString());
+            writer.WriteStringValue(TypeName.ToString());
             if (Optional.IsDefined(OriginGroupOverride))
             {
                 writer.WritePropertyName("originGroupOverride"u8);

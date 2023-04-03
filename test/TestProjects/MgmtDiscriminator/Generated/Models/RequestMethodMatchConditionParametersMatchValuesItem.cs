@@ -44,9 +44,6 @@ namespace MgmtDiscriminator.Models
         public static RequestMethodMatchConditionParametersMatchValuesItem Options { get; } = new RequestMethodMatchConditionParametersMatchValuesItem(OptionsValue);
         /// <summary> TRACE. </summary>
         public static RequestMethodMatchConditionParametersMatchValuesItem Trace { get; } = new RequestMethodMatchConditionParametersMatchValuesItem(TraceValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="RequestMethodMatchConditionParametersMatchValuesItem"/> values are the same. </summary>
         public static bool operator ==(RequestMethodMatchConditionParametersMatchValuesItem left, RequestMethodMatchConditionParametersMatchValuesItem right) => left.Equals(right);
         /// <summary> Determines if two <see cref="RequestMethodMatchConditionParametersMatchValuesItem"/> values are not the same. </summary>

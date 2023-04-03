@@ -18,12 +18,12 @@ namespace MgmtRenameRules.Models
             if (Optional.IsDefined(PassName))
             {
                 writer.WritePropertyName("passName"u8);
-                writer.WriteStringValue(PassName.Value.ToSerialString());
+                writer.WriteStringValue(PassName.Value.ToString());
             }
             if (Optional.IsDefined(ComponentName))
             {
                 writer.WritePropertyName("componentName"u8);
-                writer.WriteStringValue(ComponentName.Value.ToSerialString());
+                writer.WriteStringValue(ComponentName.Value.ToString());
             }
             if (Optional.IsDefined(SettingName))
             {

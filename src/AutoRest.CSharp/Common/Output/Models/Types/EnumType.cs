@@ -68,7 +68,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public bool IsIntValueType { get; }
 
         private string? _serializationMethodName;
-        public string SerializationMethodName => _serializationMethodName ??= $"ToSerial{ValueType.Name.FirstCharToUpperCase()}";
+        public string SerializationMethodName => _serializationMethodName ??= IsStringValueType && IsExtensible ? "ToString" : $"ToSerial{ValueType.Name.FirstCharToUpperCase()}";
 
         public string? Description { get; }
         protected override string DefaultName { get; }

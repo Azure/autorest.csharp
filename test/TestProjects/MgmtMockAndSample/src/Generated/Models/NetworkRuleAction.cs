@@ -29,9 +29,6 @@ namespace MgmtMockAndSample.Models
         public static NetworkRuleAction Allow { get; } = new NetworkRuleAction(AllowValue);
         /// <summary> Deny. </summary>
         public static NetworkRuleAction Deny { get; } = new NetworkRuleAction(DenyValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="NetworkRuleAction"/> values are the same. </summary>
         public static bool operator ==(NetworkRuleAction left, NetworkRuleAction right) => left.Equals(right);
         /// <summary> Determines if two <see cref="NetworkRuleAction"/> values are not the same. </summary>

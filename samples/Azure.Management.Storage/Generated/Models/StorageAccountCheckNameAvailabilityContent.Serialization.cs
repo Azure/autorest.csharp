@@ -18,7 +18,7 @@ namespace Azure.Management.Storage.Models
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WritePropertyName("type"u8);
-            writer.WriteStringValue(ResourceType.ToSerialString());
+            writer.WriteStringValue(ResourceType.ToString());
             writer.WriteEndObject();
         }
     }

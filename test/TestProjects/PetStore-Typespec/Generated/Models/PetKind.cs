@@ -29,9 +29,6 @@ namespace PetStore.Models
         public static PetKind Dog { get; } = new PetKind(DogValue);
         /// <summary> cat. </summary>
         public static PetKind Cat { get; } = new PetKind(CatValue);
-
-        internal string ToSerialString() => _value;
-
         /// <summary> Determines if two <see cref="PetKind"/> values are the same. </summary>
         public static bool operator ==(PetKind left, PetKind right) => left.Equals(right);
         /// <summary> Determines if two <see cref="PetKind"/> values are not the same. </summary>
