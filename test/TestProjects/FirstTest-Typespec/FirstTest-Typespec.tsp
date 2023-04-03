@@ -141,14 +141,26 @@ model RoundTripModel {
     @doc("this is an int based extensible enum")
     intExtensibleEnum?: IntExtensibleEnum;
 
+    @doc("this is a collection of int based extensible enum")
+    intExtensibleEnumCollection?: IntExtensibleEnum[];
+
     @doc("this is a float based extensible enum")
     floatExtensibleEnum?: FloatExtensibleEnum;
+
+    @doc("this is a collection of float based extensible enum")
+    floatExtensibleEnumCollection?: FloatExtensibleEnum[];
 
     @doc("this is a float based fixed enum")
     floatFixedEnum?: FloatFixedEnum;
 
+    @doc("this is a collection of float based fixed enum")
+    floatFixedEnumCollection?: FloatFixedEnum[];
+
     @doc("this is a int based fixed enum")
     intFixedEnum?: IntFixedEnum;
+
+    @doc("this is a collection of int based fixed enum")
+    intFixedEnumCollection?: IntFixedEnum[];
 
     @doc("this is a string based fixed enum")
     stringFixedEnum?: StringFixedEnum;

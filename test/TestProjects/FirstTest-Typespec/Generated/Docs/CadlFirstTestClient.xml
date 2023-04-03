@@ -931,9 +931,21 @@ var data = new {
         requiredBadDescription = "<requiredBadDescription>",
     },
     intExtensibleEnum = "1",
+    intExtensibleEnumCollection = new[] {
+        "1"
+    },
     floatExtensibleEnum = "1",
+    floatExtensibleEnumCollection = new[] {
+        "1"
+    },
     floatFixedEnum = "1",
+    floatFixedEnumCollection = new[] {
+        "1"
+    },
     intFixedEnum = "1",
+    intFixedEnumCollection = new[] {
+        "1"
+    },
     stringFixedEnum = "1",
 };
 
@@ -978,9 +990,13 @@ Schema for <c>RoundTripModel</c>:
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
   intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
+  intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
   floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
+  floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
   floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
+  floatFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based fixed enum
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
+  intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
 }
 </code>
@@ -1073,9 +1089,21 @@ var data = new {
         requiredBadDescription = "<requiredBadDescription>",
     },
     intExtensibleEnum = "1",
+    intExtensibleEnumCollection = new[] {
+        "1"
+    },
     floatExtensibleEnum = "1",
+    floatExtensibleEnumCollection = new[] {
+        "1"
+    },
     floatFixedEnum = "1",
+    floatFixedEnumCollection = new[] {
+        "1"
+    },
     intFixedEnum = "1",
+    intFixedEnumCollection = new[] {
+        "1"
+    },
     stringFixedEnum = "1",
 };
 
@@ -1120,9 +1148,13 @@ Schema for <c>RoundTripModel</c>:
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
   intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
+  intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
   floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
+  floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
   floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
+  floatFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based fixed enum
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
+  intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
 }
 </code>
@@ -1215,9 +1247,21 @@ var data = new {
         requiredBadDescription = "<requiredBadDescription>",
     },
     intExtensibleEnum = "1",
+    intExtensibleEnumCollection = new[] {
+        "1"
+    },
     floatExtensibleEnum = "1",
+    floatExtensibleEnumCollection = new[] {
+        "1"
+    },
     floatFixedEnum = "1",
+    floatFixedEnumCollection = new[] {
+        "1"
+    },
     intFixedEnum = "1",
+    intFixedEnumCollection = new[] {
+        "1"
+    },
     stringFixedEnum = "1",
 };
 
@@ -1262,9 +1306,13 @@ Schema for <c>RoundTripModel</c>:
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
   intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
+  intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
   floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
+  floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
   floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
+  floatFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based fixed enum
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
+  intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
 }
 </code>
@@ -1357,9 +1405,21 @@ var data = new {
         requiredBadDescription = "<requiredBadDescription>",
     },
     intExtensibleEnum = "1",
+    intExtensibleEnumCollection = new[] {
+        "1"
+    },
     floatExtensibleEnum = "1",
+    floatExtensibleEnumCollection = new[] {
+        "1"
+    },
     floatFixedEnum = "1",
+    floatFixedEnumCollection = new[] {
+        "1"
+    },
     intFixedEnum = "1",
+    intFixedEnumCollection = new[] {
+        "1"
+    },
     stringFixedEnum = "1",
 };
 
@@ -1404,9 +1464,13 @@ Schema for <c>RoundTripModel</c>:
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
   intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
+  intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
   floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
+  floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
   floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
+  floatFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based fixed enum
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
+  intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
 }
 </code>

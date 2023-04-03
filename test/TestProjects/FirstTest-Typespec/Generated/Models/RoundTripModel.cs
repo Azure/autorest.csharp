@@ -34,6 +34,10 @@ namespace CadlFirstTest.Models
             RequiredCollection = requiredCollection.ToList();
             RequiredDictionary = requiredDictionary;
             RequiredModel = requiredModel;
+            IntExtensibleEnumCollection = new ChangeTrackingList<IntExtensibleEnum>();
+            FloatExtensibleEnumCollection = new ChangeTrackingList<FloatExtensibleEnum>();
+            FloatFixedEnumCollection = new ChangeTrackingList<FloatFixedEnum>();
+            IntFixedEnumCollection = new ChangeTrackingList<IntFixedEnum>();
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>
@@ -48,12 +52,20 @@ namespace CadlFirstTest.Models
         public Thing RequiredModel { get; }
         /// <summary> this is an int based extensible enum. </summary>
         public IntExtensibleEnum? IntExtensibleEnum { get; set; }
+        /// <summary> this is a collection of int based extensible enum. </summary>
+        public IList<IntExtensibleEnum> IntExtensibleEnumCollection { get; }
         /// <summary> this is a float based extensible enum. </summary>
         public FloatExtensibleEnum? FloatExtensibleEnum { get; set; }
+        /// <summary> this is a collection of float based extensible enum. </summary>
+        public IList<FloatExtensibleEnum> FloatExtensibleEnumCollection { get; }
         /// <summary> this is a float based fixed enum. </summary>
         public FloatFixedEnum? FloatFixedEnum { get; set; }
+        /// <summary> this is a collection of float based fixed enum. </summary>
+        public IList<FloatFixedEnum> FloatFixedEnumCollection { get; }
         /// <summary> this is a int based fixed enum. </summary>
         public IntFixedEnum? IntFixedEnum { get; set; }
+        /// <summary> this is a collection of int based fixed enum. </summary>
+        public IList<IntFixedEnum> IntFixedEnumCollection { get; }
         /// <summary> this is a string based fixed enum. </summary>
         public StringFixedEnum? StringFixedEnum { get; set; }
     }

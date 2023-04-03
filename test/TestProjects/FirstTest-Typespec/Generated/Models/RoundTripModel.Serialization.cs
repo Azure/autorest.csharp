@@ -48,6 +48,16 @@ namespace CadlFirstTest.Models
                     writer.WriteNull("intExtensibleEnum");
                 }
             }
+            if (Optional.IsCollectionDefined(IntExtensibleEnumCollection))
+            {
+                writer.WritePropertyName("intExtensibleEnumCollection"u8);
+                writer.WriteStartArray();
+                foreach (var item in IntExtensibleEnumCollection)
+                {
+                    writer.WriteNumberValue(item.ToSerialInt32());
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsDefined(FloatExtensibleEnum))
             {
                 if (FloatExtensibleEnum != null)
@@ -59,6 +69,16 @@ namespace CadlFirstTest.Models
                 {
                     writer.WriteNull("floatExtensibleEnum");
                 }
+            }
+            if (Optional.IsCollectionDefined(FloatExtensibleEnumCollection))
+            {
+                writer.WritePropertyName("floatExtensibleEnumCollection"u8);
+                writer.WriteStartArray();
+                foreach (var item in FloatExtensibleEnumCollection)
+                {
+                    writer.WriteNumberValue(item.ToSerialInt32());
+                }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(FloatFixedEnum))
             {
@@ -72,6 +92,16 @@ namespace CadlFirstTest.Models
                     writer.WriteNull("floatFixedEnum");
                 }
             }
+            if (Optional.IsCollectionDefined(FloatFixedEnumCollection))
+            {
+                writer.WritePropertyName("floatFixedEnumCollection"u8);
+                writer.WriteStartArray();
+                foreach (var item in FloatFixedEnumCollection)
+                {
+                    writer.WriteNumberValue((int)item);
+                }
+                writer.WriteEndArray();
+            }
             if (Optional.IsDefined(IntFixedEnum))
             {
                 if (IntFixedEnum != null)
@@ -83,6 +113,16 @@ namespace CadlFirstTest.Models
                 {
                     writer.WriteNull("intFixedEnum");
                 }
+            }
+            if (Optional.IsCollectionDefined(IntFixedEnumCollection))
+            {
+                writer.WritePropertyName("intFixedEnumCollection"u8);
+                writer.WriteStartArray();
+                foreach (var item in IntFixedEnumCollection)
+                {
+                    writer.WriteNumberValue((int)item);
+                }
+                writer.WriteEndArray();
             }
             if (Optional.IsDefined(StringFixedEnum))
             {
