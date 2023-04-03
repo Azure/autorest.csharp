@@ -306,7 +306,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void DeserializeIntoObjectProperties(this CodeWriter writer, IEnumerable<JsonPropertySerialization> propertySerializations, FormattableString itemVariable, Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables)
+        private static void DeserializeIntoObjectProperties(this CodeWriter writer, IEnumerable<JsonPropertySerialization> propertySerializations, FormattableString itemVariable, Dictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, bool shouldTreatEmptyStringAsNull)
         {
             foreach (JsonPropertySerialization property in propertySerializations.Where(p => !p.ShouldSkipDeserialization))
             {
@@ -315,7 +315,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (property.ValueType?.IsNullable == true)
                     {
-                        using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                        var emptyStringCheck = GetEmptyStringCheckClause(property, itemVariable, shouldTreatEmptyStringAsNull);
+                        using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
                         {
                             writer.Line($"{propertyVariables[property].Declaration} = null;");
                             writer.Append($"continue;");
@@ -326,9 +327,10 @@ namespace AutoRest.CSharp.Generation.Writers
                              property.ValueType?.Equals(typeof(string)) !=
                              true) //https://github.com/Azure/autorest.csharp/issues/922
                     {
+                        var emptyStringCheck = GetEmptyStringCheckClause(property, itemVariable, shouldTreatEmptyStringAsNull);
                         if (Configuration.AzureArm && property.ValueType?.Equals(typeof(Uri)) == true)
                         {
-                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
                             {
                                 writer.Line($"{propertyVariables[property].Declaration} = null;");
                                 writer.Append($"continue;");
@@ -336,7 +338,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else
                         {
-                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
                             {
                                 writer.UseNamespace(typeof(JsonElementExtensions).Namespace!);
                                 writer.Line($"{itemVariable}.{nameof(JsonElementExtensions.ThrowNonNullablePropertyIsNull)}();");
@@ -357,7 +359,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var nestedItemVariable = new CodeWriterDeclaration("property");
                         using (writer.Scope($"foreach (var {nestedItemVariable:D} in {itemVariable:I}.Value.EnumerateObject())"))
                         {
-                            writer.DeserializeIntoObjectProperties(property.PropertySerializations, $"{nestedItemVariable:I}", propertyVariables);
+                            writer.DeserializeIntoObjectProperties(property.PropertySerializations, $"{nestedItemVariable:I}", propertyVariables, shouldTreatEmptyStringAsNull);
                         }
                     }
                     else
@@ -368,6 +370,22 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.Line($"continue;");
                 }
             }
+        }
+
+        private static FormattableString GetEmptyStringCheckClause(JsonPropertySerialization property, FormattableString itemVariable, bool shouldTreatEmptyStringAsNull)
+        {
+            FormattableString result = $"";
+            if (!shouldTreatEmptyStringAsNull)
+                return result;
+            if (property.ValueSerialization is JsonValueSerialization valueSerialization
+                && valueSerialization.Type.IsFrameworkType)
+            {
+                if (Configuration.IntrinsicTypesToTreatEmptyStringAsNull.Contains(valueSerialization.Type.FrameworkType.Name))
+                {
+                    result = $" || {itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.{nameof(JsonValueKind.String)} && {itemVariable}.Value.GetString().Length == 0";
+                }
+            }
+            return result;
         }
 
         private static FormattableString GetOptionalFormattable(JsonPropertySerialization target, ObjectPropertyVariable variable)
@@ -559,7 +577,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var itemVariable = new CodeWriterDeclaration("property");
             using (writer.Scope($"foreach (var {itemVariable:D} in element.EnumerateObject())"))
             {
-                writer.DeserializeIntoObjectProperties(serialization.Properties, $"{itemVariable:I}", propertyVariables);
+                writer.DeserializeIntoObjectProperties(serialization.Properties, $"{itemVariable:I}", propertyVariables, Configuration.ModelsToTreatEmptyStringAsNull.Contains(serialization.Type.Name));
 
                 if (objAdditionalProperties?.ValueSerialization != null)
                 {
