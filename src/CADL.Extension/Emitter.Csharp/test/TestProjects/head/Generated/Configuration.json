@@ -1,7 +1,7 @@
 {
   "OutputFolder": ".",
   "Namespace": "TypeSpec.HeadClient",
-  "LibraryName": null,
+  "LibraryName": "TypeSpec.HeadClient",
   "SharedSourceFolders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
