@@ -284,13 +284,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     _writer.Line($"return {responseVariable:I};");
                 }
-                else if (responseType.IsFrameworkType)
-                {
-                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content.ToObjectFromJson<{responseType}>(), {responseVariable:I});");
-                }
                 else if (TypeFactory.IsReadOnlyList(responseType))
                 {
                     ResponseWriterHelpers.WriteRawResponseToGeneric(_writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, $"{responseVariable.ActualName}");
+                }
+                else if (responseType.IsFrameworkType)
+                {
+                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content.ToObjectFromJson<{responseType}>(), {responseVariable:I});");
                 }
                 else
                 {
