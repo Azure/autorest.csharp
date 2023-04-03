@@ -36,6 +36,66 @@ namespace CadlFirstTest.Models
             writer.WriteEndObject();
             writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
+            if (Optional.IsDefined(IntExtensibleEnum))
+            {
+                if (IntExtensibleEnum != null)
+                {
+                    writer.WritePropertyName("intExtensibleEnum"u8);
+                    writer.WriteNumberValue(IntExtensibleEnum.Value.ToSerialInt32());
+                }
+                else
+                {
+                    writer.WriteNull("intExtensibleEnum");
+                }
+            }
+            if (Optional.IsDefined(FloatExtensibleEnum))
+            {
+                if (FloatExtensibleEnum != null)
+                {
+                    writer.WritePropertyName("floatExtensibleEnum"u8);
+                    writer.WriteNumberValue(FloatExtensibleEnum.Value.ToSerialInt32());
+                }
+                else
+                {
+                    writer.WriteNull("floatExtensibleEnum");
+                }
+            }
+            if (Optional.IsDefined(FloatFixedEnum))
+            {
+                if (FloatFixedEnum != null)
+                {
+                    writer.WritePropertyName("floatFixedEnum"u8);
+                    writer.WriteNumberValue((int)FloatFixedEnum.Value);
+                }
+                else
+                {
+                    writer.WriteNull("floatFixedEnum");
+                }
+            }
+            if (Optional.IsDefined(IntFixedEnum))
+            {
+                if (IntFixedEnum != null)
+                {
+                    writer.WritePropertyName("intFixedEnum"u8);
+                    writer.WriteNumberValue((int)IntFixedEnum.Value);
+                }
+                else
+                {
+                    writer.WriteNull("intFixedEnum");
+                }
+            }
+            if (Optional.IsDefined(StringFixedEnum))
+            {
+                if (StringFixedEnum != null)
+                {
+                    writer.WritePropertyName("stringFixedEnum"u8);
+                    writer.WriteStringValue(StringFixedEnum.Value.ToSerialString());
+                }
+                else
+                {
+                    writer.WriteNull("stringFixedEnum");
+                }
+            }
             writer.WriteEndObject();
         }
 

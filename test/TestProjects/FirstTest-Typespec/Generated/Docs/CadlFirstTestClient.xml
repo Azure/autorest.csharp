@@ -930,6 +930,11 @@ var data = new {
         optionalLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
     },
+    intExtensibleEnum = "1",
+    floatExtensibleEnum = "1",
+    floatFixedEnum = "1",
+    intFixedEnum = "1",
+    stringFixedEnum = "1",
 };
 
 Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
@@ -972,6 +977,11 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralBool: Literal, # Optional. optional literal bool
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
+  intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
+  floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
+  floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
+  intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
+  stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
 }
 </code>
 
@@ -1062,6 +1072,11 @@ var data = new {
         optionalLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
     },
+    intExtensibleEnum = "1",
+    floatExtensibleEnum = "1",
+    floatFixedEnum = "1",
+    intFixedEnum = "1",
+    stringFixedEnum = "1",
 };
 
 Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
@@ -1104,6 +1119,11 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralBool: Literal, # Optional. optional literal bool
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
+  intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
+  floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
+  floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
+  intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
+  stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
 }
 </code>
 
@@ -1194,6 +1214,11 @@ var data = new {
         optionalLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
     },
+    intExtensibleEnum = "1",
+    floatExtensibleEnum = "1",
+    floatFixedEnum = "1",
+    intFixedEnum = "1",
+    stringFixedEnum = "1",
 };
 
 Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
@@ -1236,6 +1261,11 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralBool: Literal, # Optional. optional literal bool
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
+  intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
+  floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
+  floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
+  intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
+  stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
 }
 </code>
 
@@ -1326,6 +1356,11 @@ var data = new {
         optionalLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
     },
+    intExtensibleEnum = "1",
+    floatExtensibleEnum = "1",
+    floatFixedEnum = "1",
+    intFixedEnum = "1",
+    stringFixedEnum = "1",
 };
 
 Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
@@ -1368,6 +1403,11 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralBool: Literal, # Optional. optional literal bool
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
   }, # Required. Required model
+  intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
+  floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
+  floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
+  intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
+  stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
 }
 </code>
 

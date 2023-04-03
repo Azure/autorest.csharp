@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace CadlFirstTest.Models
 {
-    /// <summary> The RoundTripModel. </summary>
+    /// <summary> this is a roundtrip model. </summary>
     public partial class RoundTripModel
     {
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
@@ -22,7 +22,7 @@ namespace CadlFirstTest.Models
         /// <param name="requiredDictionary"> Required dictionary of enums. </param>
         /// <param name="requiredModel"> Required model. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredCollection"/>, <paramref name="requiredDictionary"/> or <paramref name="requiredModel"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, IEnumerable<SimpleEnum> requiredCollection, IDictionary<string, ExtensibleEnum> requiredDictionary, Thing requiredModel)
+        public RoundTripModel(string requiredString, int requiredInt, IEnumerable<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
@@ -41,10 +41,20 @@ namespace CadlFirstTest.Models
         /// <summary> Required int, illustrating a value type property. </summary>
         public int RequiredInt { get; }
         /// <summary> Required collection of enums. </summary>
-        public IList<SimpleEnum> RequiredCollection { get; }
+        public IList<StringFixedEnum> RequiredCollection { get; }
         /// <summary> Required dictionary of enums. </summary>
-        public IDictionary<string, ExtensibleEnum> RequiredDictionary { get; }
+        public IDictionary<string, StringExtensibleEnum> RequiredDictionary { get; }
         /// <summary> Required model. </summary>
         public Thing RequiredModel { get; }
+        /// <summary> this is an int based extensible enum. </summary>
+        public IntExtensibleEnum? IntExtensibleEnum { get; set; }
+        /// <summary> this is a float based extensible enum. </summary>
+        public FloatExtensibleEnum? FloatExtensibleEnum { get; set; }
+        /// <summary> this is a float based fixed enum. </summary>
+        public FloatFixedEnum? FloatFixedEnum { get; set; }
+        /// <summary> this is a int based fixed enum. </summary>
+        public IntFixedEnum? IntFixedEnum { get; set; }
+        /// <summary> this is a string based fixed enum. </summary>
+        public StringFixedEnum? StringFixedEnum { get; set; }
     }
 }
