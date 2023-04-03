@@ -51,8 +51,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 updateRequiredCopy: default,
                 patchInitializerCustomization: default);
             Configuration.Initialize(outputFolder: ".",
-                ns: null,
-                name: null,
+                ns: "",
+                libraryName: "",
                 sharedSourceFolders: Array.Empty<string>(),
                 saveInputs: true,
                 azureArm: true,

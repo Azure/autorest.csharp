@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             Configuration.Initialize(
                 outputFolder: "Generated",
                 ns: "",
-                name: "",
+                libraryName: "",
                 sharedSourceFolders: Array.Empty<string>(),
                 saveInputs: false,
                 azureArm: false,
