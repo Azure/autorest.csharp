@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             // schema usage transformer must run first
             SchemaUsageTransformer.Transform(codeModel);
             DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
-            ConstantSchemaTransformer.TransformToChoice(codeModel);
+            ConstantSchemaTransformer.Transform(codeModel);
             _input = new CodeModelConverter().CreateNamespace(codeModel, _context.SchemaUsageProvider);
 
             _defaultNamespace = Configuration.Namespace ?? _input.Name;
