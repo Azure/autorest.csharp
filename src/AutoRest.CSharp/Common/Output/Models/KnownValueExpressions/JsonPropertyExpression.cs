@@ -13,7 +13,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public StringExpression Name { get; } = new(new MemberReference(Untyped, nameof(JsonProperty.Name)));
         public JsonElementExpression Value { get; } = new(new MemberReference(Untyped, nameof(JsonProperty.Value)));
 
-        public ValueExpression NameEquals(string value) => new InvokeInstanceMethodExpression(Untyped, nameof(JsonProperty.NameEquals), new[]{LiteralU8(value)}, false);
+        public ValueExpression NameEquals(string value) => new InvokeInstanceMethodExpression(Untyped, nameof(JsonProperty.NameEquals), LiteralU8(value));
 
         public MethodBodyStatement ThrowNonNullablePropertyIsNull()
             => new InvokeStaticMethodStatement(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.ThrowNonNullablePropertyIsNull), new[]{Untyped}, CallAsExtension: true);

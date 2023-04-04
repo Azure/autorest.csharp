@@ -204,7 +204,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (type.Implementation is EnumType enumType && !enumType.IsExtensible)
                 {
-                    return new InvokeInstanceMethodExpression(valueExpression, $"To{enumType.Declaration.Name}", Array.Empty<ValueExpression>(), false);
+                    return new InvokeInstanceMethodExpression(valueExpression, $"To{enumType.Declaration.Name}");
                 }
                 throw new InvalidOperationException($"Type {type} is not supported to construct parameter mapping");
             }

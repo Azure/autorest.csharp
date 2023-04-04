@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
             => new(serializableObjectType, new InvokeStaticMethodExpression(serializableObjectType.Type, $"Deserialize{serializableObjectType.Declaration.Name}", new[]{element}));
 
         public RequestContentExpression ToRequestContent()
-            => new(new InvokeInstanceMethodExpression(Untyped, "ToRequestContent", Array.Empty<ValueExpression>(), false));
+            => new(new InvokeInstanceMethodExpression(Untyped, "ToRequestContent"));
 
     }
 }

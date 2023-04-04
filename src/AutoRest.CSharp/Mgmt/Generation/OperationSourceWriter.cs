@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.RootElement, null);
                 if (_operationIdMappings is not null)
                 {
-                    deserializeExpression = new InvokeInstanceMethodExpression(null, "ScrubId", new[]{deserializeExpression}, false);
+                    deserializeExpression = new InvokeInstanceMethodExpression(null, "ScrubId", deserializeExpression);
                 }
 
                 yield return new DeclareVariableStatement(null, dataVariable, deserializeExpression);

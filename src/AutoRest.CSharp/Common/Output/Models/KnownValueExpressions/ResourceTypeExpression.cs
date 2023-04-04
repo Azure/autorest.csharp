@@ -11,6 +11,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     {
         public StringExpression Namespace => new(new MemberReference(Untyped, nameof(ResourceType.Namespace)));
 
-        public StringExpression GetLastType() => new(new InvokeInstanceMethodExpression(Untyped, nameof(ResourceType.GetLastType), Array.Empty<ValueExpression>(), false));
+        public StringExpression GetLastType() => new(new InvokeInstanceMethodExpression(Untyped, nameof(ResourceType.GetLastType)));
     }
 }

@@ -357,6 +357,10 @@ namespace AutoRest.CSharp.Output.Models
             {
                 yield return Return(ResponseExpression.FromValue(m => new SerializableObjectTypeExpression(serializableObjectType, m), SerializableObjectTypeExpression.FromResponse(serializableObjectType, response), response));
             }
+            else if (_responseType is { IsFrameworkType: true })
+            {
+                yield return Return(ResponseExpression.FromValue(m => new FrameworkTypeExpression(_responseType, m), response.Content.ToObjectFromJson(_responseType), response));
+            }
             else
             {
                 var firstResponseBodyType = Operation.Responses.Where(r => r is { IsErrorResponse: false, BodyType: {} }).Select(r => r.BodyType).Distinct().First();
@@ -511,10 +515,10 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private static HttpMessageExpression InvokeCreateRequestMethod(string methodName, IEnumerable<Parameter> parameters)
-            => new(new InvokeInstanceMethodExpression(null, methodName, parameters.Select(p => new ParameterReference(p)).ToList(), false));
+            => new(new InvokeInstanceMethodExpression(null, methodName, parameters.Select(p => new ParameterReference(p)).ToList(), null, false));
 
         private ResponseExpression InvokeProtocolMethod(IReadOnlyList<ValueExpression> arguments, bool async)
-            => new(new InvokeInstanceMethodExpression(null, async ? $"{_protocolMethodName}Async" : _protocolMethodName, arguments, async));
+            => new(new InvokeInstanceMethodExpression(null, async ? $"{_protocolMethodName}Async" : _protocolMethodName, arguments, null, async));
 
         private ValueExpression InvokeProtocolOperationHelpersConvertMethod(SerializableObjectType responseType, ResponseExpression response, string scopeName)
         {

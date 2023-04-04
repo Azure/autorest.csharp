@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Generation.Writers
             switch (bodyStatement)
             {
                 case InvokeInstanceMethodStatement(var instance, var methodName, var arguments, var callAsAsync):
-                    writer.WriteValueExpression(new InvokeInstanceMethodExpression(instance, methodName, arguments, callAsAsync));
+                    writer.WriteValueExpression(new InvokeInstanceMethodExpression(instance, methodName, arguments, null, callAsAsync));
                     writer.LineRaw(";");
                     break;
                 case InvokeStaticMethodStatement(var methodType, var methodName, var arguments, var typeArguments, var callAsExtension, var callAsAsync):
@@ -236,6 +236,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     writer.AppendRaw(methodCall.MethodName);
+                    WriteTypeArguments(writer, methodCall.TypeArguments);
                     WriteArguments(writer, methodCall.Arguments);
                     writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync);
                     break;

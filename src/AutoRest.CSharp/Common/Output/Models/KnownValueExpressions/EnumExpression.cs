@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     {
         public ValueExpression InvokeToString()
             => EnumType.IsExtensible
-                ? new InvokeInstanceMethodExpression(Untyped, nameof(object.ToString), Array.Empty<ValueExpression>(), false)
+                ? new InvokeInstanceMethodExpression(Untyped, nameof(object.ToString))
                 : new InvokeStaticMethodExpression(EnumType.Type, $"ToSerial{EnumType.ValueType.Name.FirstCharToUpperCase()}", new[]{Untyped}, null, true);
     }
 }
