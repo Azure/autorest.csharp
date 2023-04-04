@@ -15,13 +15,18 @@ namespace SpecialWords.Models
     public abstract partial class BaseModel
     {
         /// <summary> Initializes a new instance of BaseModel. </summary>
+        protected BaseModel()
+        {
+        }
+
+        /// <summary> Initializes a new instance of BaseModel. </summary>
         /// <param name="modelKind"> Discriminator. </param>
-        protected BaseModel(string modelKind)
+        internal BaseModel(string modelKind)
         {
             ModelKind = modelKind;
         }
 
         /// <summary> Discriminator. </summary>
-        public string ModelKind { get; }
+        public string ModelKind { get; internal protected set; }
     }
 }
