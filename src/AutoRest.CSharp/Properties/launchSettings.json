@@ -636,6 +636,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\projection\\Generated"
     },
+    "typespec-special-words": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-words\\Generated"
+    },
     "url": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\url\\Generated"
