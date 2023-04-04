@@ -26,6 +26,9 @@ namespace azure_special_properties.Models
 
         /// <summary> 1. </summary>
         public static ErrorConstantId _1 { get; } = new ErrorConstantId(_1Value);
+
+        internal int ToSerialInt32() => _value;
+
         /// <summary> Determines if two <see cref="ErrorConstantId"/> values are the same. </summary>
         public static bool operator ==(ErrorConstantId left, ErrorConstantId right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ErrorConstantId"/> values are not the same. </summary>

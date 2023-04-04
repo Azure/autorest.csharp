@@ -26,6 +26,9 @@ namespace validation.Models
 
         /// <summary> 0. </summary>
         public static ProductConstInt _0 { get; } = new ProductConstInt(_0Value);
+
+        internal int ToSerialInt32() => _value;
+
         /// <summary> Determines if two <see cref="ProductConstInt"/> values are the same. </summary>
         public static bool operator ==(ProductConstInt left, ProductConstInt right) => left.Equals(right);
         /// <summary> Determines if two <see cref="ProductConstInt"/> values are not the same. </summary>

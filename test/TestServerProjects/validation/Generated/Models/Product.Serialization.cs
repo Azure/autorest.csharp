@@ -41,7 +41,7 @@ namespace validation.Models
             writer.WritePropertyName("constChild"u8);
             writer.WriteObjectValue(ConstChild);
             writer.WritePropertyName("constInt"u8);
-            writer.WriteStringValue(ConstInt.ToString());
+            writer.WriteNumberValue(ConstInt.ToSerialInt32());
             writer.WritePropertyName("constString"u8);
             writer.WriteStringValue(ConstString.ToString());
             if (Optional.IsDefined(ConstStringAsEnum))
