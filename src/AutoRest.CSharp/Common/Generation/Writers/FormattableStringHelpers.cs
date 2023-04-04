@@ -107,9 +107,9 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string? GetConversionMethod(CSharpType fromType, CSharpType toType)
             => fromType switch
             {
-                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } }  when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
+                { IsFrameworkType: false, Implementation: EnumType { IsExtensible: true } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToString()",
                 { IsFrameworkType: false, Implementation: EnumType { IsExtensible: false } } when toType.EqualsIgnoreNullable(typeof(string)) => ".ToSerialString()",
-                { IsFrameworkType: false, Implementation: ModelTypeProvider }                when toType.EqualsIgnoreNullable(typeof(RequestContent)) => ".ToRequestContent()",
+                { IsFrameworkType: false, Implementation: ModelTypeProvider } when toType.EqualsIgnoreNullable(typeof(RequestContent)) => ".ToRequestContent()",
                 _ => null
             };
 
@@ -129,14 +129,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"new {constant.Type}()";
             }
 
-            if (!constant.Type.IsFrameworkType && constant.Value is EnumTypeValue enumTypeValue)
+            if (constant is { Type: { IsFrameworkType: false }, Value: EnumTypeValue enumTypeValue })
             {
                 return $"{constant.Type}.{enumTypeValue.Declaration.Name}";
             }
 
-            if (!constant.Type.IsFrameworkType && constant.Value is string enumValue)
+            // we cannot check `constant.Value is string` because it is always string - this is an issue in yaml serialization)
+            if (constant.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
             {
-                return $"new {constant.Type}({enumValue:L})";
+                if (enumType.IsStringValueType)
+                    return $"new {constant.Type}({constant.Value:L})";
+                else
+                    return $"new {constant.Type}(({enumType.ValueType}){constant.Value})";
             }
 
             Type frameworkType = constant.Type.FrameworkType;

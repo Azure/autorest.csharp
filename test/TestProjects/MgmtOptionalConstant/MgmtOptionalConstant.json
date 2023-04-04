@@ -368,6 +368,17 @@
                 "modelAsString": false
             }
         },
+        "FloatConstantSchema": {
+            "type": "number",
+            "description": "A constant based on float",
+            "enum": [
+                3.14
+            ],
+            "x-ms-enum": {
+                "name": "FloatConstant",
+                "modelAsString": false
+            }
+        },
         "ModelWithOptionalConstant": {
             "properties": {
                 "optionalStringConstant": {
@@ -378,6 +389,9 @@
                 },
                 "optionalBooleanConstant": {
                     "$ref": "#/definitions/BooleanConstantSchema"
+                },
+                "optionalFloatConstant": {
+                    "$ref": "#/definitions/FloatConstantSchema"
                 }
             },
             "description": "Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied."
@@ -392,11 +406,14 @@
                 },
                 "requiredBooleanConstant": {
                     "$ref": "#/definitions/BooleanConstantSchema"
+                },
+                "requiredFloatConstant": {
+                    "$ref": "#/definitions/FloatConstantSchema"
                 }
             },
             "description": "Describes Protocol and thumbprint of Windows Remote Management listener",
             "required": [
-                "requiredStringConstant", "requiredIntConstant", "requiredBooleanConstant"
+                "requiredStringConstant", "requiredIntConstant", "requiredBooleanConstant", "requiredFloatConstant"
             ]
         },
         "OptionalMachineProperties": {

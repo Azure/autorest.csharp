@@ -18,9 +18,11 @@ namespace MgmtOptionalConstant.Models
             writer.WritePropertyName("requiredStringConstant"u8);
             writer.WriteStringValue(RequiredStringConstant.ToString());
             writer.WritePropertyName("requiredIntConstant"u8);
-            writer.WriteStringValue(RequiredIntConstant.ToString());
+            writer.WriteNumberValue(RequiredIntConstant.ToSerialInt32());
             writer.WritePropertyName("requiredBooleanConstant"u8);
             writer.WriteBooleanValue(RequiredBooleanConstant);
+            writer.WritePropertyName("requiredFloatConstant"u8);
+            writer.WriteNumberValue(RequiredFloatConstant.ToSerialSingle());
             writer.WriteEndObject();
         }
 
@@ -33,6 +35,7 @@ namespace MgmtOptionalConstant.Models
             StringConstant requiredStringConstant = default;
             IntConstant requiredIntConstant = default;
             bool requiredBooleanConstant = default;
+            FloatConstant requiredFloatConstant = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredStringConstant"u8))
@@ -50,8 +53,13 @@ namespace MgmtOptionalConstant.Models
                     requiredBooleanConstant = property.Value.GetBoolean();
                     continue;
                 }
+                if (property.NameEquals("requiredFloatConstant"u8))
+                {
+                    requiredFloatConstant = new FloatConstant(property.Value.GetSingle());
+                    continue;
+                }
             }
-            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant);
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant);
         }
     }
 }

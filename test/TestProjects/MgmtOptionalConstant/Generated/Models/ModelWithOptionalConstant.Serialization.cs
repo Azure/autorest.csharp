@@ -23,12 +23,17 @@ namespace MgmtOptionalConstant.Models
             if (Optional.IsDefined(OptionalIntConstant))
             {
                 writer.WritePropertyName("optionalIntConstant"u8);
-                writer.WriteStringValue(OptionalIntConstant.Value.ToString());
+                writer.WriteNumberValue(OptionalIntConstant.Value.ToSerialInt32());
             }
             if (Optional.IsDefined(OptionalBooleanConstant))
             {
                 writer.WritePropertyName("optionalBooleanConstant"u8);
                 writer.WriteBooleanValue(OptionalBooleanConstant.Value);
+            }
+            if (Optional.IsDefined(OptionalFloatConstant))
+            {
+                writer.WritePropertyName("optionalFloatConstant"u8);
+                writer.WriteNumberValue(OptionalFloatConstant.Value.ToSerialSingle());
             }
             writer.WriteEndObject();
         }
@@ -42,6 +47,7 @@ namespace MgmtOptionalConstant.Models
             Optional<StringConstant> optionalStringConstant = default;
             Optional<IntConstant> optionalIntConstant = default;
             Optional<bool> optionalBooleanConstant = default;
+            Optional<FloatConstant> optionalFloatConstant = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("optionalStringConstant"u8))
@@ -74,8 +80,18 @@ namespace MgmtOptionalConstant.Models
                     optionalBooleanConstant = property.Value.GetBoolean();
                     continue;
                 }
+                if (property.NameEquals("optionalFloatConstant"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    optionalFloatConstant = new FloatConstant(property.Value.GetSingle());
+                    continue;
+                }
             }
-            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(optionalBooleanConstant));
+            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(optionalBooleanConstant), Optional.ToNullable(optionalFloatConstant));
         }
     }
 }

@@ -19,11 +19,13 @@ namespace MgmtOptionalConstant.Models
         /// <param name="optionalStringConstant"> A constant based on string, the only allowable value is default. </param>
         /// <param name="optionalIntConstant"> A constant based on integer. </param>
         /// <param name="optionalBooleanConstant"> A constant based on boolean. </param>
-        internal ModelWithOptionalConstant(StringConstant? optionalStringConstant, IntConstant? optionalIntConstant, bool? optionalBooleanConstant)
+        /// <param name="optionalFloatConstant"> A constant based on float. </param>
+        internal ModelWithOptionalConstant(StringConstant? optionalStringConstant, IntConstant? optionalIntConstant, bool? optionalBooleanConstant, FloatConstant? optionalFloatConstant)
         {
             OptionalStringConstant = optionalStringConstant;
             OptionalIntConstant = optionalIntConstant;
             OptionalBooleanConstant = optionalBooleanConstant;
+            OptionalFloatConstant = optionalFloatConstant;
         }
 
         /// <summary> A constant based on string, the only allowable value is default. </summary>
@@ -32,5 +34,7 @@ namespace MgmtOptionalConstant.Models
         public IntConstant? OptionalIntConstant { get; set; }
         /// <summary> A constant based on boolean. </summary>
         public bool? OptionalBooleanConstant { get; set; }
+        /// <summary> A constant based on float. </summary>
+        public FloatConstant? OptionalFloatConstant { get; set; }
     }
 }
