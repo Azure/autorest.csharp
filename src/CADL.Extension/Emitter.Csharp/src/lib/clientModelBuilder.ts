@@ -376,4 +376,3 @@ function createContentTypeOrAcceptParameter(
                 : undefined
     } as InputParameter;
 }
-

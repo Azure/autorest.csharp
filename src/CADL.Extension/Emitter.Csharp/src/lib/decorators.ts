@@ -29,4 +29,3 @@ export function hasDecorator(type: DecoratedType, name: string): boolean {
         type.decorators.find((it) => it.decorator.name === name) !== undefined
     );
 }
-

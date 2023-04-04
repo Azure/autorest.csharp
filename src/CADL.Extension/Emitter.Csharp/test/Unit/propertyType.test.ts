@@ -7,9 +7,7 @@ import {
     createEmitterContext,
     createEmitterTestHost
 } from "./utils/TestUtil.js";
-import {
-    InputEnumType,
-} from "../../src/type/inputType.js";
+import { InputEnumType } from "../../src/type/inputType.js";
 import isEqual from "lodash.isequal";
 
 describe("Test GetInputType for array", () => {
@@ -226,4 +224,3 @@ describe("Test GetInputType for enum", () => {
         deepStrictEqual((type as InputEnumType).IsExtensible, true);
     });
 });
-

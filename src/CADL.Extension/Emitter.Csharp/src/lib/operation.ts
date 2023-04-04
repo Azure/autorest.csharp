@@ -437,7 +437,8 @@ function getOperationGroupName(
     let namespace = operation.namespace;
     if (!namespace) {
         namespace =
-            context.program.checker.getGlobalNamespaceType() ?? serviceNamespaceType;
+            context.program.checker.getGlobalNamespaceType() ??
+            serviceNamespaceType;
     }
 
     if (namespace) return namespace.name;
