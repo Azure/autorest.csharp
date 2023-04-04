@@ -54,21 +54,20 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _typeMapping = sourceInputModel?.CreateForModel(ExistingType);
             }
 
+            IsExtensible = isExtensible;
             ValueType = typeFactory.CreateType(input.EnumValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
             IsIntValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long));
+            SerializationMethodName = IsStringValueType && IsExtensible ? "ToString" : $"ToSerial{ValueType.Name.FirstCharToUpperCase()}";
 
             Description = input.Description;
-            IsExtensible = isExtensible;
         }
 
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }
         public bool IsStringValueType { get; }
         public bool IsIntValueType { get; }
-
-        private string? _serializationMethodName;
-        public string SerializationMethodName => _serializationMethodName ??= IsStringValueType && IsExtensible ? "ToString" : $"ToSerial{ValueType.Name.FirstCharToUpperCase()}";
+        public string SerializationMethodName { get; }
 
         public string? Description { get; }
         protected override string DefaultName { get; }
