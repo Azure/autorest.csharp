@@ -357,7 +357,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var value = GetFieldReference(fields, queryParameter.Value);
             var parameter = parameters != null && queryParameter.Name == "api-version" ? parameters.FirstOrDefault(p => p.Name == "apiVersion") : null;
-            using (parameter != null && parameter.IsOptionalInSignature ? null : WriteValueNullCheck(writer, value))
+            using (parameter != null && parameter.IsOptionalInSignature ? null : WriteValueNullCheck(writer, value, checkUndefinedCollection: true))
             {
                 if (explode)
                 {
@@ -387,13 +387,13 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ReferenceOrConstant value)
+        private static CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ReferenceOrConstant value, bool checkUndefinedCollection = false)
         {
             if (value.IsConstant)
                 return default;
 
             var type = value.Type;
-            if (TypeFactory.IsCollectionType(type))
+            if (checkUndefinedCollection && TypeFactory.IsCollectionType(type))
             {
                 writer.Append($"if (");
 

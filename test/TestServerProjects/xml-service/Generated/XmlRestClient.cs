@@ -876,18 +876,15 @@ namespace xml_service
             uri.Reset(_endpoint);
             uri.AppendPath("/xml/root-list", false);
             request.Uri = uri;
-            if (bananas != null && Optional.IsCollectionDefined(bananas))
+            request.Headers.Add("Content-Type", "application/xml");
+            var content = new XmlWriterContent();
+            content.XmlWriter.WriteStartElement("bananas");
+            foreach (var item in bananas)
             {
-                request.Headers.Add("Content-Type", "application/xml");
-                var content = new XmlWriterContent();
-                content.XmlWriter.WriteStartElement("bananas");
-                foreach (var item in bananas)
-                {
-                    content.XmlWriter.WriteObjectValue(item, "banana");
-                }
-                content.XmlWriter.WriteEndElement();
-                request.Content = content;
+                content.XmlWriter.WriteObjectValue(item, "banana");
             }
+            content.XmlWriter.WriteEndElement();
+            request.Content = content;
             return message;
         }
 
@@ -1013,18 +1010,15 @@ namespace xml_service
             uri.Reset(_endpoint);
             uri.AppendPath("/xml/root-list-single-item", false);
             request.Uri = uri;
-            if (bananas != null && Optional.IsCollectionDefined(bananas))
+            request.Headers.Add("Content-Type", "application/xml");
+            var content = new XmlWriterContent();
+            content.XmlWriter.WriteStartElement("bananas");
+            foreach (var item in bananas)
             {
-                request.Headers.Add("Content-Type", "application/xml");
-                var content = new XmlWriterContent();
-                content.XmlWriter.WriteStartElement("bananas");
-                foreach (var item in bananas)
-                {
-                    content.XmlWriter.WriteObjectValue(item, "banana");
-                }
-                content.XmlWriter.WriteEndElement();
-                request.Content = content;
+                content.XmlWriter.WriteObjectValue(item, "banana");
             }
+            content.XmlWriter.WriteEndElement();
+            request.Content = content;
             return message;
         }
 
@@ -1150,18 +1144,15 @@ namespace xml_service
             uri.Reset(_endpoint);
             uri.AppendPath("/xml/empty-root-list", false);
             request.Uri = uri;
-            if (bananas != null && Optional.IsCollectionDefined(bananas))
+            request.Headers.Add("Content-Type", "application/xml");
+            var content = new XmlWriterContent();
+            content.XmlWriter.WriteStartElement("bananas");
+            foreach (var item in bananas)
             {
-                request.Headers.Add("Content-Type", "application/xml");
-                var content = new XmlWriterContent();
-                content.XmlWriter.WriteStartElement("bananas");
-                foreach (var item in bananas)
-                {
-                    content.XmlWriter.WriteObjectValue(item, "banana");
-                }
-                content.XmlWriter.WriteEndElement();
-                request.Content = content;
+                content.XmlWriter.WriteObjectValue(item, "banana");
             }
+            content.XmlWriter.WriteEndElement();
+            request.Content = content;
             return message;
         }
 
@@ -1593,18 +1584,15 @@ namespace xml_service
             uri.AppendQuery("comp", "acl", true);
             uri.AppendQuery("restype", "container", true);
             request.Uri = uri;
-            if (properties != null && Optional.IsCollectionDefined(properties))
+            request.Headers.Add("Content-Type", "application/xml");
+            var content = new XmlWriterContent();
+            content.XmlWriter.WriteStartElement("SignedIdentifiers");
+            foreach (var item in properties)
             {
-                request.Headers.Add("Content-Type", "application/xml");
-                var content = new XmlWriterContent();
-                content.XmlWriter.WriteStartElement("SignedIdentifiers");
-                foreach (var item in properties)
-                {
-                    content.XmlWriter.WriteObjectValue(item, "SignedIdentifier");
-                }
-                content.XmlWriter.WriteEndElement();
-                request.Content = content;
+                content.XmlWriter.WriteObjectValue(item, "SignedIdentifier");
             }
+            content.XmlWriter.WriteEndElement();
+            request.Content = content;
             return message;
         }
 

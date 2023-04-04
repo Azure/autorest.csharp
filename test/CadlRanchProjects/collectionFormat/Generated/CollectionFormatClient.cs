@@ -467,10 +467,7 @@ namespace CollectionFormat
             uri.AppendPath("/collectionFormat/csvHeader", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (colors != null && Optional.IsCollectionDefined(colors))
-            {
-                request.Headers.AddDelimited("colors", colors, ",");
-            }
+            request.Headers.AddDelimited("colors", colors, ",");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
@@ -485,10 +482,7 @@ namespace CollectionFormat
             uri.AppendPath("/collectionFormat/defaultHeader", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            if (colors != null && Optional.IsCollectionDefined(colors))
-            {
-                request.Headers.AddDelimited("colors", colors, ",");
-            }
+            request.Headers.AddDelimited("colors", colors, ",");
             request.Headers.Add("Accept", "application/json");
             return message;
         }
