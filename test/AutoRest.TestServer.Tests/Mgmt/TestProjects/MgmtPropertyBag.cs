@@ -63,6 +63,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             };
             if (items is not null)
             {
+                options.Items.Clear();
                 foreach (var item in items)
                     options.Items.Add(item);
             }

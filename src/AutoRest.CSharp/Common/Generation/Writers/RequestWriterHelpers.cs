@@ -393,30 +393,44 @@ namespace AutoRest.CSharp.Generation.Writers
                 return default;
 
             var type = value.Type;
-            if (type.IsNullable)
+            if (TypeFactory.IsCollectionType(type))
             {
-                // turn "object.Property" into "object?.Property"
-                var parts = value.Reference.Name.Split(".");
-
                 writer.Append($"if (");
-                bool first = true;
-                foreach (var part in parts)
-                {
-                    if (first)
-                    {
-                        first = false;
-                    }
-                    else
-                    {
-                        writer.AppendRaw("?.");
-                    }
-                    writer.Identifier(part);
-                }
+
+                WriteValueExpression(writer, value);
+
+                writer.Append($" != null && {typeof(Optional)}.{nameof(Optional.IsCollectionDefined)}(");
+
+                WriteValueExpression(writer, value);
+
+                return writer.LineRaw("))").Scope();
+            }
+            else if (type.IsNullable)
+            {
+                writer.Append($"if (");
+
+                WriteValueExpression(writer, value);
 
                 return writer.Line($" != null)").Scope();
             }
 
             return default;
+        }
+
+        private static void WriteValueExpression(CodeWriter writer, ReferenceOrConstant value)
+        {
+            // turn "object.Property" into "object?.Property"
+            var parts = value.Reference.Name.Split(".");
+            bool first = true;
+            foreach (var part in parts)
+            {
+                if (first)
+                    first = false;
+                else
+                    writer.AppendRaw("?.");
+
+                writer.Identifier(part);
+            }
         }
     }
 }

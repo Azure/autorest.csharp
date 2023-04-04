@@ -261,7 +261,7 @@ namespace MgmtPropertyBag
             {
                 uri.AppendQuery("$skip", skip.Value, true);
             }
-            if (items != null)
+            if (items != null && Optional.IsCollectionDefined(items))
             {
                 uri.AppendQueryDelimited("items", items, ",", true);
             }
