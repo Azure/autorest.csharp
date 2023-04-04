@@ -182,7 +182,7 @@
     },
     "constants": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Constants\\Generated"
     },
     "custom-baseUrl": {
       "commandName": "Project",
