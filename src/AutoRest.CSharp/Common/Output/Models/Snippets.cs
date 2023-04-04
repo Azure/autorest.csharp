@@ -7,9 +7,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Output.Models.Shared;
-using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
@@ -37,25 +34,12 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static KeywordStatement Continue => new("continue", null);
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
+        public static ValueExpression InvokeToEnum(CSharpType enumType, ValueExpression stringValue) => new InvokeStaticMethodExpression(enumType, $"To{enumType.Implementation.Declaration.Name}", new[]{stringValue}, null, true);
 
         public static MethodBodyStatement Assign<T>(T variable, T expression) where T : ValueExpression
             => new AssignValueStatement(variable, expression);
 
         public static MethodBodyStatement AssignOrReturn<T>(T? variable, T expression) where T : ValueExpression
             => variable != null ? new AssignValueStatement(variable, expression) : Return(expression);
-
-        public static DeclarationStatement DeclareFirstPageRequestLocalFunction(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
-        {
-            var requestMethodCall = new InvokeInstanceMethodExpression(restClient, methodName, arguments.ToList(), false);
-            localFunctionName = new CodeWriterDeclaration("FirstPageRequest");
-            return new DeclareLocalFunctionStatement(localFunctionName, new[]{KnownParameters.PageSizeHint}, typeof(HttpMessage), requestMethodCall);
-        }
-
-        public static DeclarationStatement DeclareNextPageRequestLocalFunction(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
-        {
-            var requestMethodCall = new InvokeInstanceMethodExpression(restClient, methodName, arguments.ToList(), false);
-            localFunctionName = new CodeWriterDeclaration("NextPageRequest");
-            return new DeclareLocalFunctionStatement(localFunctionName, new[]{KnownParameters.PageSizeHint, KnownParameters.NextLink}, typeof(HttpMessage), requestMethodCall);
-        }
     }
 }

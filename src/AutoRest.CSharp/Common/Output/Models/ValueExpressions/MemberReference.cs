@@ -3,5 +3,5 @@
 
 namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
 {
-    internal record MemberReference(ValueExpression Inner, string MemberName) : ValueExpression;
+    internal record MemberReference(ValueExpression? Inner, string MemberName) : ValueExpression;
 }

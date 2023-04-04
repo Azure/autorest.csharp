@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
@@ -157,7 +158,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.RootElement, null);
                 if (_operationIdMappings is not null)
                 {
-                    deserializeExpression = ValueExpressions.Call.Instance(null, "ScrubId", deserializeExpression);
+                    deserializeExpression = new InvokeInstanceMethodExpression(null, "ScrubId", new[]{deserializeExpression}, false);
                 }
 
                 yield return new DeclareVariableStatement(null, dataVariable, deserializeExpression);

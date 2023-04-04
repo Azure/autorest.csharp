@@ -4,9 +4,7 @@
 using System.Text.Json;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
-using AutoRest.CSharp.Output.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using static AutoRest.CSharp.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
@@ -15,7 +13,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public StringExpression Name { get; } = new(new MemberReference(Untyped, nameof(JsonProperty.Name)));
         public JsonElementExpression Value { get; } = new(new MemberReference(Untyped, nameof(JsonProperty.Value)));
 
-        public ValueExpression NameEquals(string value) => Call.Instance(Untyped, nameof(JsonProperty.NameEquals), LiteralU8(value));
+        public ValueExpression NameEquals(string value) => new InvokeInstanceMethodExpression(Untyped, nameof(JsonProperty.NameEquals), new[]{LiteralU8(value)}, false);
 
         public MethodBodyStatement ThrowNonNullablePropertyIsNull()
             => new InvokeStaticMethodStatement(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.ThrowNonNullablePropertyIsNull), new[]{Untyped}, CallAsExtension: true);

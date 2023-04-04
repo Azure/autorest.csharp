@@ -19,6 +19,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using System.Text.Json;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 

@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -20,11 +22,7 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using static AutoRest.CSharp.Output.Models.ValueExpressions;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using Configuration = AutoRest.CSharp.Input.Configuration;
-using Response = Azure.Response;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -76,7 +74,7 @@ namespace AutoRest.CSharp.Output.Models
             _requestParts = requestParts;
             _summary = operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null;
             _description = BuilderHelpers.EscapeXmlDescription(operation.Description);
-            _headAsBoolean = operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean;
+            _headAsBoolean = operation.HttpMethod == RequestMethod.Head && Input.Configuration.HeadAsBoolean;
             _isLongRunning = operation.LongRunning is not null;
             _isPageable = operation.Paging is not null;
 
@@ -194,7 +192,7 @@ namespace AutoRest.CSharp.Output.Models
                 { Paging: not null, LongRunning: null }           => typeof(Pageable<BinaryData>),
                 { LongRunning: not null, responseType: not null } => typeof(Operation<BinaryData>),
                 { LongRunning: not null, responseType: null }     => typeof(Operation),
-                _                                                 => typeof(Response)
+                _                                                 => typeof(Azure.Response)
             };
 
         private static CSharpType GetConvenienceMethodReturnType(InputOperation operation, CSharpType responseType)
@@ -313,7 +311,7 @@ namespace AutoRest.CSharp.Output.Models
                 yield return DeclareNextPageRequestLocalFunction(null, _createNextPageMessageMethodName, nextPageArguments, out createNextPageRequest);
             }
 
-            yield return Return(Call.PageableHelpers.CreatePageable(createFirstPageRequest, createNextPageRequest, clientDiagnostics, pipeline, typeof(BinaryData), scopeName, itemPropertyName, nextLinkName, requestContext, async));
+            yield return Return(CreatePageable(createFirstPageRequest, createNextPageRequest, clientDiagnostics, pipeline, typeof(BinaryData), scopeName, itemPropertyName, nextLinkName, requestContext, async));
         }
 
         private IEnumerable<MethodBodyStatement> CreatePagingLroProtocolMethodLogic(OperationPaging paging, OperationLongRunning longRunning, bool async)
@@ -333,7 +331,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             yield return Declare("message", InvokeCreateRequestMethod(_createMessageMethodName, _createMessageMethodParameters), out var message);
-            yield return Return(Call.PageableHelpers.CreatePageable(message, createNextPageRequest, clientDiagnostics, pipeline, typeof(BinaryData), longRunning.FinalStateVia, scopeName, itemPropertyName, nextLinkName, requestContext, async));
+            yield return Return(CreatePageable(message, createNextPageRequest, clientDiagnostics, pipeline, typeof(BinaryData), longRunning.FinalStateVia, scopeName, itemPropertyName, nextLinkName, requestContext, async));
         }
 
         private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(string methodName, bool async)
@@ -389,7 +387,7 @@ namespace AutoRest.CSharp.Output.Models
         private IReadOnlyList<MethodBodyStatement> CreatePagingConvenienceMethodLines(string methodName, OperationPaging paging, bool async)
         {
             ValueExpression clientDiagnostics = _restClient != null
-                ? new MemberReference(new ValueExpression(), $"_{KnownParameters.ClientDiagnostics.Name}")
+                ? new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}")
                 : _fields.ClientDiagnosticsProperty;
 
             var pipeline = _fields.PipelineField.Declaration;
@@ -409,7 +407,7 @@ namespace AutoRest.CSharp.Output.Models
                 nextPageRequestLine = DeclareNextPageRequestLocalFunction(_restClient, _createNextPageMessageMethodName, arguments, out createNextPageRequest);
             }
 
-            var returnLine = Return(Call.PageableHelpers.CreatePageable(createFirstPageRequest, createNextPageRequest, clientDiagnostics, pipeline, _responseType, scopeName, itemPropertyName, nextLinkName, requestContextVariable, async));
+            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, clientDiagnostics, pipeline, _responseType, scopeName, itemPropertyName, nextLinkName, requestContextVariable, async));
 
             return nextPageRequestLine is not null
                 ? new[]{parameterConversions, firstPageRequestLine, nextPageRequestLine, returnLine}

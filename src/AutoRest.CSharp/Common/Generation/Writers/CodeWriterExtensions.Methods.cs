@@ -193,9 +193,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.RemoveTrailingComma();
                     writer.AppendRaw(" }");
                     break;
-                case MemberReference memberReference:
-                    writer.WriteValueExpression(memberReference.Inner);
-                    writer.Append($".{memberReference.MemberName}");
+                case MemberReference(var inner, var memberName):
+                    if (inner is not null)
+                    {
+                        writer.WriteValueExpression(inner);
+                        writer.AppendRaw(".");
+                    }
+                    writer.AppendRaw(memberName);
                     break;
                 case InvokeStaticMethodExpression { CallAsExtension: true } methodCall:
                     writer.AppendRawIf("await ", methodCall.CallAsAsync);

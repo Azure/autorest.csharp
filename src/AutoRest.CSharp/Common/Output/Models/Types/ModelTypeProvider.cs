@@ -7,6 +7,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
@@ -407,7 +408,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (IncludeDeserializer)
             {
                 yield return JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization);
-                yield return JsonSerializationMethodsBuilder.BuildFromResponse(Type, GetFromResponseModifiers());
+                yield return JsonSerializationMethodsBuilder.BuildFromResponse(this, GetFromResponseModifiers());
             }
 
             if (IncludeSerializer)

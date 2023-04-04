@@ -7,8 +7,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -28,9 +28,7 @@ using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using static AutoRest.CSharp.Output.Models.ValueExpressions;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -612,7 +610,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var scopeName = diagnostic.ScopeName;
             var itemName = pagingMethod.ItemName;
             var nextLinkName = pagingMethod.NextLinkName;
-            _writer.WriteMethodBodyStatement(Return(Call.PageableHelpers.CreatePageable(firstPageRequest, nextPageRequest, clientDiagnostics, pipeline, itemType, scopeName, itemName, nextLinkName, KnownParameters.CancellationTokenParameter, async)));
+            _writer.WriteMethodBodyStatement(Return(CreatePageable(firstPageRequest, nextPageRequest, clientDiagnostics, pipeline, itemType, scopeName, itemName, nextLinkName, KnownParameters.CancellationTokenParameter, async)));
         }
 
         protected ResourceIdentifierExpression InvokeCreateResourceIdentifier(Resource resource, RequestPath requestPath, IEnumerable<ParameterMapping> parameterMappings, ResponseExpression<ArmResourceExpression> response)

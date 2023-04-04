@@ -2,19 +2,19 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
-using AutoRest.CSharp.Output.Models;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
     internal static partial class Snippets
     {
-        public static class Optional
+        public static class InvokeOptional
         {
-            public static ValueExpression IsCollectionDefined(ValueExpression collection) => new InvokeStaticMethodExpression(typeof(Azure.Core.Optional), nameof(Azure.Core.Optional.IsCollectionDefined), new[]{collection});
-            public static ValueExpression IsDefined(ValueExpression value) => new InvokeStaticMethodExpression(typeof(Azure.Core.Optional), nameof(Azure.Core.Optional.IsDefined), new[]{value});
-            public static ValueExpression ToDictionary(ValueExpression dictionary) => new InvokeStaticMethodExpression(typeof(Azure.Core.Optional), nameof(Azure.Core.Optional.ToDictionary), new[]{dictionary});
-            public static ValueExpression ToList(ValueExpression collection) => new InvokeStaticMethodExpression(typeof(Azure.Core.Optional), nameof(Azure.Core.Optional.ToList), new[]{collection});
-            public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(typeof(Azure.Core.Optional), nameof(Azure.Core.Optional.ToNullable), new[]{optional});
+            public static ValueExpression IsCollectionDefined(ValueExpression collection) => new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.IsCollectionDefined), new[]{collection});
+            public static ValueExpression IsDefined(ValueExpression value) => new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.IsDefined), new[]{value});
+            public static ValueExpression ToDictionary(ValueExpression dictionary) => new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.ToDictionary), new[]{dictionary});
+            public static ValueExpression ToList(ValueExpression collection) => new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.ToList), new[]{collection});
+            public static ValueExpression ToNullable(ValueExpression optional) => new InvokeStaticMethodExpression(typeof(Optional), nameof(Optional.ToNullable), new[]{optional});
         }
     }
 }

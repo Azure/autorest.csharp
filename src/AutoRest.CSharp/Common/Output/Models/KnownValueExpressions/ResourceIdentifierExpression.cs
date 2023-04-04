@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record ResourceIdentifierExpression(ValueExpression Untyped) : TypedValueExpression(typeof(ResourceIdentifier), Untyped)
     {
-        public static ResourceIdentifierExpression ReferenceField(string fieldName) => new(new MemberReference(new ValueExpression(), fieldName));
+        public static ResourceIdentifierExpression ReferenceField(string fieldName) => new(new MemberReference(null, fieldName));
 
         public StringExpression Name => new(new MemberReference(Untyped, nameof(ResourceIdentifier.Name)));
         public ResourceIdentifierExpression Parent => new(new MemberReference(Untyped, nameof(ResourceIdentifier.Parent)));

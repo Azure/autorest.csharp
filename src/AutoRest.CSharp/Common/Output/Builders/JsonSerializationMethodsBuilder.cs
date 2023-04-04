@@ -18,6 +18,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -27,9 +28,8 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
-using static AutoRest.CSharp.Output.Models.ValueExpressions;
 
-namespace AutoRest.CSharp.Output.Models
+namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class JsonSerializationMethodsBuilder
     {
@@ -110,8 +110,8 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             return TypeFactory.IsCollectionType(property.PropertyType)
-                ? new IfElseStatement(Snippets.Optional.IsCollectionDefined(propertyNameReference), writePropertyWithNullCheck, null)
-                : new IfElseStatement(Snippets.Optional.IsDefined(propertyNameReference), writePropertyWithNullCheck, null);
+                ? new IfElseStatement(Snippets.InvokeOptional.IsCollectionDefined(propertyNameReference), writePropertyWithNullCheck, null)
+                : new IfElseStatement(Snippets.InvokeOptional.IsDefined(propertyNameReference), writePropertyWithNullCheck, null);
         }
 
         private static MethodBodyStatement SerializeAdditionalProperties(Utf8JsonWriterExpression utf8JsonWriter, JsonAdditionalPropertiesSerialization? additionalProperties)
@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (valueType == typeof(ETag) || valueType == typeof(ContentType) || valueType == typeof(IPAddress))
             {
-                return utf8JsonWriter.WriteStringValue(Call.ToString(value));
+                return utf8JsonWriter.WriteStringValue(new InvokeInstanceMethodExpression(value , nameof(ToString)));
             }
 
             if (valueType == typeof(Uri))
@@ -273,7 +273,7 @@ namespace AutoRest.CSharp.Output.Models
                 (
                     "NET6_0_OR_GREATER",
                     utf8JsonWriter.WriteRawValue(value),
-                    InvokeJsonSerializerSerializeMethod(utf8JsonWriter, JsonDocumentExpression.Parse(Call.ToString(value)).RootElement)
+                    InvokeJsonSerializerSerializeMethod(utf8JsonWriter, JsonDocumentExpression.Parse(new InvokeInstanceMethodExpression(value, nameof(ToString))).RootElement)
                 );
             }
 
@@ -304,16 +304,16 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        public static Method BuildFromResponse(CSharpType returnType, MethodSignatureModifiers modifiers)
+        public static Method BuildFromResponse(SerializableObjectType type, MethodSignatureModifiers modifiers)
         {
             var fromResponse = new Parameter("response", "The response to deserialize the model from.", new CSharpType(typeof(Response)), null, Validation.None, null);
             return new Method
             (
-                new MethodSignature("FromResponse", null, "Deserializes the model from a raw response.", modifiers, returnType, null, new[]{fromResponse}),
+                new MethodSignature("FromResponse", null, "Deserializes the model from a raw response.", modifiers, type.Type, null, new[]{fromResponse}),
                 new MethodBodyStatement[]
                 {
                     UsingVar("document", JsonDocumentExpression.Parse(new ResponseExpression(fromResponse).Content), out var document),
-                    Return(Call.Static(null, $"Deserialize{returnType.Name}", document.RootElement))
+                    Return(SerializableObjectTypeExpression.Deserialize(type, document.RootElement))
                 }
             );
         }
@@ -684,11 +684,11 @@ namespace AutoRest.CSharp.Output.Models
                     return InvokeJsonSerializerDeserializeMethod(element, implementation.Type);
 
                 case SerializableObjectType { IncludeDeserializer: true } type:
-                    return Call.Static(type.Type, $"Deserialize{type.Declaration.Name}", element);
+                    return SerializableObjectTypeExpression.Deserialize(type, element);
 
                 case EnumType clientEnum:
                     var value = GetFrameworkTypeValueExpression(clientEnum.ValueType.FrameworkType, element, SerializationFormat.Default, null);
-                    return clientEnum.IsExtensible ? New(clientEnum.Type, value) : Call.ToEnum(clientEnum.Type, value);
+                    return clientEnum.IsExtensible ? New(clientEnum.Type, value) : InvokeToEnum(clientEnum.Type, value);
 
                 default:
                     throw new NotSupportedException($"No deserialization logic exists for {implementation.Declaration.Name}");
@@ -706,17 +706,17 @@ namespace AutoRest.CSharp.Output.Models
 
             if (TypeFactory.IsList(targetType))
             {
-                return Snippets.Optional.ToList(variable.Declaration);
+                return Snippets.InvokeOptional.ToList(variable.Declaration);
             }
 
             if (TypeFactory.IsDictionary(targetType))
             {
-                return Snippets.Optional.ToDictionary(variable.Declaration);
+                return Snippets.InvokeOptional.ToDictionary(variable.Declaration);
             }
 
             if (targetType is { IsValueType: true, IsNullable: true })
             {
-                return Snippets.Optional.ToNullable(variable.Declaration);
+                return Snippets.InvokeOptional.ToNullable(variable.Declaration);
             }
 
             if (targetType.IsNullable)
@@ -742,7 +742,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (frameworkType == typeof(IPAddress))
             {
-                return Call.Static(typeof(IPAddress), nameof(IPAddress.Parse), element.GetString());
+                return new InvokeStaticMethodExpression(typeof(IPAddress), nameof(IPAddress.Parse), new[]{ element.GetString() });
             }
 
             if (frameworkType == typeof(BinaryData))

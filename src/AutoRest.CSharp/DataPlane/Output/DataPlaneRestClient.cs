@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models
                 operationParameters[inputOperation] = builder;
             }
 
-            var restClient = new MemberReference(new ValueExpression(), "RestClient");
+            var restClient = new MemberReference(null, "RestClient");
             var methods = new List<HlcMethods>();
             foreach (var (operation, builder) in operationParameters)
             {
