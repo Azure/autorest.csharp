@@ -1,5 +1,5 @@
 import { TestHost } from "@typespec/compiler/testing";
-import assert, { AssertionError, deepStrictEqual } from "assert";
+import assert, { deepStrictEqual } from "assert";
 import { createModel } from "../../src/lib/clientModelBuilder.js";
 import { CodeModel } from "../../src/type/codeModel.js";
 import {
@@ -8,25 +8,9 @@ import {
     createEmitterTestHost
 } from "./utils/TestUtil.js";
 import {
-    InputDictionaryType,
     InputEnumType,
-    InputListType,
-    InputLiteralType,
-    InputModelType,
-    InputPrimitiveType,
-    InputType,
-    InputUnionType
 } from "../../src/type/inputType.js";
 import isEqual from "lodash.isequal";
-import {
-    EmitContext,
-    isGlobalNamespace,
-    Namespace,
-    navigateTypesInNamespace,
-    Program,
-    Type
-} from "@typespec/compiler";
-import { getInputType } from "../../src/lib/model.js";
 
 describe("Test GetInputType for array", () => {
     let runner: TestHost;
@@ -243,31 +227,3 @@ describe("Test GetInputType for enum", () => {
     });
 });
 
-function emitUnreferencedModels(program: Program, namespace: Namespace) {
-    // if (options.omitUnreachableTypes) {
-    //     return;
-    // }
-    const modelMap = new Map<string, InputModelType>();
-    const enumMap = new Map<string, InputEnumType>();
-    const computeModel = (x: Type) =>
-        getInputType(program, x, modelMap, enumMap);
-    const skipSubNamespaces = isGlobalNamespace(program, namespace);
-    navigateTypesInNamespace(
-        namespace,
-        {
-            model: (x) => {
-                x.name !== "" && x.kind === "Model" && computeModel(x);
-            },
-            scalar: (x) => {
-                computeModel(x);
-            },
-            enum: (x) => {
-                computeModel(x);
-            },
-            union: (x) => {
-                x.name !== undefined && computeModel(x);
-            }
-        },
-        { skipSubNamespaces }
-    );
-}
