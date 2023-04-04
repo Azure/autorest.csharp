@@ -7,7 +7,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal interface ObjectTypeFields<T> : IReadOnlyCollection<FieldDeclaration> // TODO: we could remove this generic parameter once we unified the two kinds of input models: InputModel types and Schema types
+    internal interface IObjectTypeFields<T> : IReadOnlyCollection<FieldDeclaration> // TODO: we could remove this generic parameter once we unified the two kinds of input models: InputModel types and Schema types
     {
         IReadOnlyList<Parameter> PublicConstructorParameters { get; }
         IReadOnlyList<Parameter> SerializationParameters { get; }
