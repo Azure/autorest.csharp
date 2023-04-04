@@ -1024,15 +1024,18 @@ namespace required_optional
             uri.AppendPath("/reqopt/requied/array/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in bodyParameter)
+            if (bodyParameter != null && Optional.IsCollectionDefined(bodyParameter))
             {
-                content.JsonWriter.WriteStringValue(item);
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in bodyParameter)
+                {
+                    content.JsonWriter.WriteStringValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -1090,7 +1093,7 @@ namespace required_optional
             uri.AppendPath("/reqopt/optional/array/parameter", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (bodyParameter != null)
+            if (bodyParameter != null && Optional.IsCollectionDefined(bodyParameter))
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
@@ -1259,7 +1262,10 @@ namespace required_optional
             uri.Reset(_endpoint);
             uri.AppendPath("/reqopt/requied/array/header", false);
             request.Uri = uri;
-            request.Headers.AddDelimited("headerParameter", headerParameter, ",");
+            if (headerParameter != null && Optional.IsCollectionDefined(headerParameter))
+            {
+                request.Headers.AddDelimited("headerParameter", headerParameter, ",");
+            }
             request.Headers.Add("Accept", "application/json");
             return message;
         }
@@ -1317,7 +1323,7 @@ namespace required_optional
             uri.Reset(_endpoint);
             uri.AppendPath("/reqopt/optional/array/header", false);
             request.Uri = uri;
-            if (headerParameter != null)
+            if (headerParameter != null && Optional.IsCollectionDefined(headerParameter))
             {
                 request.Headers.AddDelimited("headerParameter", headerParameter, ",");
             }

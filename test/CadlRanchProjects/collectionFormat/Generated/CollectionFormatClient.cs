@@ -426,9 +426,12 @@ namespace CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collectionFormat/multi", false);
-            foreach (var param in colors)
+            if (colors != null && Optional.IsCollectionDefined(colors))
             {
-                uri.AppendQuery("colors", param, true);
+                foreach (var param in colors)
+                {
+                    uri.AppendQuery("colors", param, true);
+                }
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -444,7 +447,10 @@ namespace CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collectionFormat/csv", false);
-            uri.AppendQueryDelimited("colors", colors, ",", true);
+            if (colors != null && Optional.IsCollectionDefined(colors))
+            {
+                uri.AppendQueryDelimited("colors", colors, ",", true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -461,7 +467,10 @@ namespace CollectionFormat
             uri.AppendPath("/collectionFormat/csvHeader", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.AddDelimited("colors", colors, ",");
+            if (colors != null && Optional.IsCollectionDefined(colors))
+            {
+                request.Headers.AddDelimited("colors", colors, ",");
+            }
             request.Headers.Add("Accept", "application/json");
             return message;
         }
@@ -476,7 +485,10 @@ namespace CollectionFormat
             uri.AppendPath("/collectionFormat/defaultHeader", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
-            request.Headers.AddDelimited("colors", colors, ",");
+            if (colors != null && Optional.IsCollectionDefined(colors))
+            {
+                request.Headers.AddDelimited("colors", colors, ",");
+            }
             request.Headers.Add("Accept", "application/json");
             return message;
         }

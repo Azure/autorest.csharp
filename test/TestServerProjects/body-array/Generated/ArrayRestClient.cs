@@ -236,15 +236,18 @@ namespace body_array
             uri.AppendPath("/array/empty", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteStringValue(item);
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteStringValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -365,15 +368,18 @@ namespace body_array
             uri.AppendPath("/array/prim/boolean/tfft", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteBooleanValue(item);
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteBooleanValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -620,15 +626,18 @@ namespace body_array
             uri.AppendPath("/array/prim/integer/1.-1.3.300", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteNumberValue(item);
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteNumberValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -875,15 +884,18 @@ namespace body_array
             uri.AppendPath("/array/prim/long/1.-1.3.300", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteNumberValue(item);
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteNumberValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -1130,15 +1142,18 @@ namespace body_array
             uri.AppendPath("/array/prim/float/0--0.01-1.2e20", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteNumberValue(item);
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteNumberValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -1385,15 +1400,18 @@ namespace body_array
             uri.AppendPath("/array/prim/double/0--0.01-1.2e20", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteNumberValue(item);
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteNumberValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -1640,15 +1658,18 @@ namespace body_array
             uri.AppendPath("/array/prim/string/foo1.foo2.foo3", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteStringValue(item);
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteStringValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -1769,15 +1790,18 @@ namespace body_array
             uri.AppendPath("/array/prim/enum/foo1.foo2.foo3", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteStringValue(item.ToSerialString());
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteStringValue(item.ToSerialString());
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -1898,15 +1922,18 @@ namespace body_array
             uri.AppendPath("/array/prim/string-enum/foo1.foo2.foo3", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteStringValue(item.ToString());
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteStringValue(item.ToString());
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -2153,15 +2180,18 @@ namespace body_array
             uri.AppendPath("/array/prim/uuid/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteStringValue(item);
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteStringValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -2345,15 +2375,18 @@ namespace body_array
             uri.AppendPath("/array/prim/date/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteStringValue(item, "D");
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteStringValue(item, "D");
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -2600,15 +2633,18 @@ namespace body_array
             uri.AppendPath("/array/prim/date-time/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteStringValue(item, "O");
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteStringValue(item, "O");
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -2855,15 +2891,18 @@ namespace body_array
             uri.AppendPath("/array/prim/date-time-rfc1123/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteStringValue(item, "R");
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteStringValue(item, "R");
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -2984,15 +3023,18 @@ namespace body_array
             uri.AppendPath("/array/prim/duration/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteStringValue(item, "P");
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteStringValue(item, "P");
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -3113,15 +3155,18 @@ namespace body_array
             uri.AppendPath("/array/prim/byte/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteBase64StringValue(item, "D");
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteBase64StringValue(item, "D");
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -3620,15 +3665,18 @@ namespace body_array
             uri.AppendPath("/array/complex/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                content.JsonWriter.WriteObjectValue(item);
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
+                {
+                    content.JsonWriter.WriteObjectValue(item);
+                }
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -4121,25 +4169,28 @@ namespace body_array
             uri.AppendPath("/array/array/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                if (item == null)
-                {
-                    content.JsonWriter.WriteNullValue();
-                    continue;
-                }
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
                 content.JsonWriter.WriteStartArray();
-                foreach (var item0 in item)
+                foreach (var item in arrayBody)
                 {
-                    content.JsonWriter.WriteStringValue(item0);
+                    if (item == null)
+                    {
+                        content.JsonWriter.WriteNullValue();
+                        continue;
+                    }
+                    content.JsonWriter.WriteStartArray();
+                    foreach (var item0 in item)
+                    {
+                        content.JsonWriter.WriteStringValue(item0);
+                    }
+                    content.JsonWriter.WriteEndArray();
                 }
                 content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
@@ -4632,26 +4683,29 @@ namespace body_array
             uri.AppendPath("/array/dictionary/valid", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartArray();
-            foreach (var item in arrayBody)
+            if (arrayBody != null && Optional.IsCollectionDefined(arrayBody))
             {
-                if (item == null)
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteStartArray();
+                foreach (var item in arrayBody)
                 {
-                    content.JsonWriter.WriteNullValue();
-                    continue;
+                    if (item == null)
+                    {
+                        content.JsonWriter.WriteNullValue();
+                        continue;
+                    }
+                    content.JsonWriter.WriteStartObject();
+                    foreach (var item0 in item)
+                    {
+                        content.JsonWriter.WritePropertyName(item0.Key);
+                        content.JsonWriter.WriteStringValue(item0.Value);
+                    }
+                    content.JsonWriter.WriteEndObject();
                 }
-                content.JsonWriter.WriteStartObject();
-                foreach (var item0 in item)
-                {
-                    content.JsonWriter.WritePropertyName(item0.Key);
-                    content.JsonWriter.WriteStringValue(item0.Value);
-                }
-                content.JsonWriter.WriteEndObject();
+                content.JsonWriter.WriteEndArray();
+                request.Content = content;
             }
-            content.JsonWriter.WriteEndArray();
-            request.Content = content;
             return message;
         }
 
