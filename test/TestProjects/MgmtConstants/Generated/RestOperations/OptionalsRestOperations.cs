@@ -56,7 +56,10 @@ namespace MgmtConstants
             {
                 uri.AppendQuery("optional-string-query", optionalStringQuery.Value.ToString(), true);
             }
-            uri.AppendQuery("optional-boolean-query", true, true);
+            if (optionalBooleanQuery != null)
+            {
+                uri.AppendQuery("optional-boolean-query", optionalBooleanQuery.Value, true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

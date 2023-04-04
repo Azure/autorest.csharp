@@ -444,7 +444,7 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)_parameters[requestParameter.Language.Default.Name];
             }
 
-            if (requestParameter.Schema is ConstantSchema constant)
+            if (requestParameter.Schema is ConstantSchema constant && requestParameter.IsRequired)
             {
                 return ParseConstant(constant);
             }
@@ -459,7 +459,6 @@ namespace AutoRest.CSharp.Output.Models
             var property = groupModel.GetPropertyForGroupedParameter(requestParameter.Language.Default.Name);
 
             return new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
-
         }
 
         private static SerializationFormat GetSerializationFormat(RequestParameter requestParameter)
