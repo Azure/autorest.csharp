@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -12,9 +13,9 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static partial class CodeWriterExtensions
     {
-        public static CodeWriter WriteBody(this CodeWriter writer, MethodBody methodBody)
+        public static CodeWriter WriteMethodBodyStatements(this CodeWriter writer, IEnumerable<MethodBodyStatement> statements)
         {
-            foreach (var statement in methodBody.Statements)
+            foreach (var statement in statements)
             {
                 WriteMethodBodyStatement(writer, statement);
             }
@@ -26,12 +27,12 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (bodyStatement)
             {
-                case InstanceMethodCallLine(var instance, var methodName, var arguments, var callAsAsync):
-                    writer.WriteValueExpression(new InstanceMethodCallExpression(instance, methodName, arguments, callAsAsync));
+                case InvokeInstanceMethodStatement(var instance, var methodName, var arguments, var callAsAsync):
+                    writer.WriteValueExpression(new InvokeInstanceMethodExpression(instance, methodName, arguments, callAsAsync));
                     writer.LineRaw(";");
                     break;
-                case StaticMethodCallLine(var methodType, var methodName, var arguments, var typeArguments, var callAsExtension, var callAsAsync):
-                    writer.WriteValueExpression(new StaticMethodCallExpression(methodType, methodName, arguments, typeArguments, callAsExtension, callAsAsync));
+                case InvokeStaticMethodStatement(var methodType, var methodName, var arguments, var typeArguments, var callAsExtension, var callAsAsync):
+                    writer.WriteValueExpression(new InvokeStaticMethodExpression(methodType, methodName, arguments, typeArguments, callAsExtension, callAsAsync));
                     writer.LineRaw(";");
                     break;
                 case ParameterValidationBlock parameterValidation:
@@ -122,10 +123,10 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.LineRaw(";");
                     break;
 
-                case MethodBodyStatements(var blocks):
-                    foreach (var block in blocks)
+                case MethodBodyStatements(var statements):
+                    foreach (var statement in statements)
                     {
-                        writer.WriteMethodBodyStatement(block);
+                        writer.WriteMethodBodyStatement(statement);
                     }
 
                     break;
@@ -136,28 +137,28 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (declaration)
             {
-                case AssignValue setValue:
+                case AssignValueStatement setValue:
                     writer.WriteValueExpression(setValue.To);
                     writer.AppendRaw(" = ");
                     writer.WriteValueExpression(setValue.From);
                     break;
-                case DeclareVariable { Type: { } type } declareVariable:
+                case DeclareVariableStatement { Type: { } type } declareVariable:
                     writer.Append($"{type} {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
                     break;
-                case DeclareVariable declareVariable:
+                case DeclareVariableStatement declareVariable:
                     writer.Append($"var {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
                     break;
-                case UsingDeclareVariable { Type: { } type } declareVariable:
+                case UsingDeclareVariableStatement { Type: { } type } declareVariable:
                     writer.Append($"using {type} {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
                     break;
-                case UsingDeclareVariable declareVariable:
+                case UsingDeclareVariableStatement declareVariable:
                     writer.Append($"using var {declareVariable.Name:D} = ");
                     writer.WriteValueExpression(declareVariable.Value);
                     break;
-                case OneLineLocalFunction localFunction:
+                case DeclareLocalFunctionStatement localFunction:
                     writer.Append($"{localFunction.ReturnType} {localFunction.Name:D}(");
                     foreach (var parameter in localFunction.Parameters)
                     {
@@ -196,7 +197,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteValueExpression(memberReference.Inner);
                     writer.Append($".{memberReference.MemberName}");
                     break;
-                case StaticMethodCallExpression { CallAsExtension: true } methodCall:
+                case InvokeStaticMethodExpression { CallAsExtension: true } methodCall:
                     writer.AppendRawIf("await ", methodCall.CallAsAsync);
                     if (methodCall.MethodType != null)
                     {
@@ -210,7 +211,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteArguments(writer, methodCall.Arguments.Skip(1));
                     writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync);
                     break;
-                case StaticMethodCallExpression { CallAsExtension: false } methodCall:
+                case InvokeStaticMethodExpression { CallAsExtension: false } methodCall:
                     writer.AppendRawIf("await ", methodCall.CallAsAsync);
                     if (methodCall.MethodType != null)
                     {
@@ -222,7 +223,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteArguments(writer, methodCall.Arguments);
                     writer.AppendRawIf(".ConfigureAwait(false)", methodCall.CallAsAsync);
                     break;
-                case InstanceMethodCallExpression methodCall:
+                case InvokeInstanceMethodExpression methodCall:
                     writer.AppendRawIf("await ", methodCall.CallAsAsync);
                     if (methodCall.InstanceReference != null)
                     {
@@ -259,8 +260,27 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     break;
-                case NewInstanceExpression newInstance:
-                    WriteNewInstance(writer, newInstance);
+                case NewInstanceExpression(var type, var arguments, var properties):
+                    writer.Append($"new {type}");
+                    if (arguments.Count > 0 || properties is not { Count: > 0 })
+                    {
+                        WriteArguments(writer, arguments);
+                    }
+
+                    if (properties is { Count: > 0 })
+                    {
+                        writer.AppendRaw(" { ");
+                        foreach (var (name, value) in properties)
+                        {
+                            writer.Append($"{name} = ");
+                            writer.WriteValueExpression(value);
+                            writer.AppendRaw(", ");
+                        }
+
+                        writer.RemoveTrailingComma();
+                        writer.AppendRaw(" }");
+                    }
+
                     break;
                 case NullConditionalExpression nullConditional:
                     writer.WriteValueExpression(nullConditional.Inner);
@@ -302,29 +322,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 case LiteralExpression({} literal, false):
                     writer.Literal(literal);
                     break;
-            }
-
-            static void WriteNewInstance(CodeWriter writer, NewInstanceExpression newInstanceExpression)
-            {
-                writer.Append($"new {newInstanceExpression.Type}");
-                if (newInstanceExpression.Arguments.Count > 0 || newInstanceExpression.Properties.Count == 0)
-                {
-                    WriteArguments(writer, newInstanceExpression.Arguments);
-                }
-
-                if (newInstanceExpression.Properties.Count > 0)
-                {
-                    writer.AppendRaw(" { ");
-                    foreach (var (name, value) in newInstanceExpression.Properties)
-                    {
-                        writer.Append($"{name} = ");
-                        writer.WriteValueExpression(value);
-                        writer.AppendRaw(", ");
-                    }
-
-                    writer.RemoveTrailingComma();
-                    writer.AppendRaw(" }");
-                }
             }
 
             static void WriteArguments(CodeWriter writer, IEnumerable<ValueExpression> arguments)

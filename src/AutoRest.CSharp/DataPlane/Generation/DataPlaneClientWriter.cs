@@ -278,7 +278,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentation("remarks", $"{method.Signature.DescriptionText}");
             using (writer.WriteMethodDeclaration(method.Signature))
             {
-                writer.WriteBody(method.Body);
+                writer.WriteMethodBodyStatements(method.Body);
             }
             writer.Line();
         }

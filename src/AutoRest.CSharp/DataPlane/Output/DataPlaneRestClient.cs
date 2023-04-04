@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -62,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models
                 operationParameters[inputOperation] = builder;
             }
 
-            var restClient = new FormattableStringToExpression($"RestClient");
+            var restClient = new MemberReference(new ValueExpression(), "RestClient");
             var methods = new List<HlcMethods>();
             foreach (var (operation, builder) in operationParameters)
             {

@@ -155,7 +155,7 @@ namespace AutoRest.CSharp.Output.Builders
             };
         }
 
-        private static JsonSerialization BuildSerialization(Schema schema, CSharpType type, bool isCollectionElement)
+        public static JsonSerialization BuildSerialization(Schema schema, CSharpType type, bool isCollectionElement)
         {
             if (type.IsFrameworkType && type.FrameworkType == typeof(JsonElement))
             {

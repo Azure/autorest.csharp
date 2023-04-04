@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
-using AutoRest.CSharp.Output.Models;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
@@ -11,5 +10,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     {
         public static Utf8JsonRequestContentExpression New() => new(Snippets.New(typeof(Utf8JsonRequestContent)));
         public Utf8JsonWriterExpression JsonWriter { get; }  = new(new MemberReference(Untyped, nameof(Utf8JsonRequestContent.JsonWriter)));
+        public static implicit operator RequestContentExpression(Utf8JsonRequestContentExpression utf8JsonRequestContent) => new(utf8JsonRequestContent.Untyped);
     }
 }

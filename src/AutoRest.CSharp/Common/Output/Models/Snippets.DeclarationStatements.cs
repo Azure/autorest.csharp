@@ -7,7 +7,6 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 using Azure.Core;
@@ -38,14 +37,14 @@ namespace AutoRest.CSharp.Common.Output.Models
         {
             var declaration = new CodeWriterDeclaration(name);
             variable = factory(declaration);
-            return new UsingDeclareVariable(type, declaration, value);
+            return new UsingDeclareVariableStatement(type, declaration, value);
         }
 
         private static DeclarationStatement Var<T>(CSharpType? type, string name, T value, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression
         {
             var declaration = new CodeWriterDeclaration(name);
             variable = factory(declaration);
-            return new DeclareVariable(type, declaration, value);
+            return new DeclareVariableStatement(type, declaration, value);
         }
     }
 }

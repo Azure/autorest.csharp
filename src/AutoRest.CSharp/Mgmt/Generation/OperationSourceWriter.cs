@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -9,15 +10,18 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
@@ -127,7 +131,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var responseVariable = new CodeWriterDeclaration("response");
             using (_writer.Scope($"{_opSource.ReturnType} {_opSource.Interface}.CreateResult({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                WriteCreateResultBody(responseVariable, false);
+                _writer.WriteMethodBodyStatements(BuildCreateResultBody(new ResponseExpression(responseVariable), false));
             }
         }
 
@@ -136,36 +140,36 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var responseVariable = new CodeWriterDeclaration("response");
             using (_writer.Scope($"async {new CSharpType(typeof(ValueTask<>), _opSource.ReturnType)} {_opSource.Interface}.CreateResultAsync({typeof(Response)} {responseVariable:D}, {typeof(CancellationToken)} cancellationToken)"))
             {
-                WriteCreateResultBody(responseVariable, true);
+                _writer.WriteMethodBodyStatements(BuildCreateResultBody(new ResponseExpression(responseVariable), true));
             }
         }
 
-        private void WriteCreateResultBody(CodeWriterDeclaration responseVariable, bool async)
+        private IEnumerable<MethodBodyStatement> BuildCreateResultBody(ResponseExpression response, bool async)
         {
             if (_opSource.IsReturningResource)
             {
                 var resourceData = _opSource.Resource!.ResourceData;
                 Debug.Assert(resourceData.IncludeDeserializer);
 
-                _writer.WriteMethodBodyStatement(Snippets.UsingVar("document", JsonDocumentExpression.Parse(responseVariable, async), out var document));
+                yield return UsingVar("document", JsonDocumentExpression.Parse(response, async), out var document);
 
                 var dataVariable = new CodeWriterDeclaration("data");
-                var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.Get_RootElement(), null);
+                var deserializeExpression = JsonSerializationMethodsBuilder.GetDeserializeImplementation(resourceData, document.RootElement, null);
                 if (_operationIdMappings is not null)
                 {
                     deserializeExpression = ValueExpressions.Call.Instance(null, "ScrubId", deserializeExpression);
                 }
 
-                _writer.WriteMethodBodyStatement(new DeclareVariable(null, dataVariable, deserializeExpression));
+                yield return new DeclareVariableStatement(null, dataVariable, deserializeExpression);
                 if (resourceData.ShouldSetResourceIdentifier)
                 {
-                    _writer.Line($"{dataVariable}.Id = {_opSource.ArmClientField.Name}.Id;");
+                    yield return Assign(new MemberReference(dataVariable, "Id"), new MemberReference(_opSource.ArmClientField, "Id"));
                 }
-                _writer.Line($"return new {_opSource.Resource.Type}({_opSource.ArmClientField.Name}, {dataVariable});");
+                yield return Return(New(_opSource.Resource.Type, _opSource.ArmClientField, dataVariable));
             }
             else
             {
-                _writer.WriteDeserializationForMethods(_opSource.ResponseSerialization, async, null, $"{responseVariable}", _opSource.ReturnType);
+                yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(_opSource.ResponseSerialization, async, null, response, _opSource.ReturnType.Equals(typeof(BinaryData)));
             }
         }
     }

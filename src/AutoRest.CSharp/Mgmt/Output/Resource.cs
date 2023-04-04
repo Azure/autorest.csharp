@@ -4,6 +4,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -115,7 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Parameters: new[] { ArmClientParameter, ResourceDataParameter },
                 Initializer: new(
                     IsBase: false,
-                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
+                    Arguments: new[] { ArmClientParameter, ResourceDataIdExpression(ResourceDataParameter) }));
         }
 
         public override CSharpType? BaseType => typeof(ArmResource);
@@ -382,7 +384,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         /// <summary>
-        /// This method returns the contextual path from one resource <see cref="Models.OperationSet"/>
+        /// This method returns the contextual path from one resource <see cref="Mgmt.Models.OperationSet"/>
         /// In the <see cref="Resource"/> class, we just use the RequestPath of the OperationSet as its contextual path
         /// Also we need to replace the parameterized scope if there is any with the actual scope value.
         /// </summary>
@@ -459,17 +461,17 @@ namespace AutoRest.CSharp.Mgmt.Output
             ReturnDescription: null,
             Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
 
-        public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
+        public ValueExpression ResourceDataIdExpression(Parameter resourceDataParameter)
         {
             var typeOfId = ResourceData.TypeOfId;
             if (typeOfId != null && typeOfId.Equals(typeof(string)))
             {
-                return $"new {typeof(ResourceIdentifier)}({dataExpression}.Id)";
+                return Snippets.New(typeof(ResourceIdentifier), new MemberReference(resourceDataParameter, "Id"));
             }
             else
             {
                 // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
-                return $"{dataExpression}.Id";
+                return new MemberReference(resourceDataParameter, "Id");
             }
         }
 

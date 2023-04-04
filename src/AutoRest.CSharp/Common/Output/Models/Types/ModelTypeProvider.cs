@@ -7,7 +7,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -185,7 +187,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             IEnumerable<Parameter> parametersToPassToBase;
             GetConstructorParameters(serializationParameters, out fullParameterList, out parametersToPassToBase, false, CreateSerializationConstructorParameter);
 
-            FormattableString[] baseInitializers = GetInitializersFromParameters(parametersToPassToBase);
+            var baseInitializers = GetBaseConstructorArgumentsFromParameters(parametersToPassToBase);
 
             return new ConstructorSignature(
                 name,
@@ -211,7 +213,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (_inputModel.DiscriminatorPropertyName is not null)
                 accessibility = MethodSignatureModifiers.Protected;
 
-            FormattableString[] baseInitializers = GetInitializersFromParameters(parametersToPassToBase);
+            var baseInitializers = GetBaseConstructorArgumentsFromParameters(parametersToPassToBase);
 
             return new ConstructorSignature(
                 name,
@@ -236,20 +238,21 @@ namespace AutoRest.CSharp.Output.Models.Types
             fullParameterList.AddRange(parameters.Select(creator));
         }
 
-        private FormattableString[] GetInitializersFromParameters(IEnumerable<Parameter> parametersToPassToBase)
+        private IReadOnlyList<ValueExpression> GetBaseConstructorArgumentsFromParameters(IEnumerable<Parameter> parametersToPassToBase)
         {
-            var baseInitializers = ConstructorInitializer.ParametersToFormattableString(parametersToPassToBase).ToArray();
-            if (Discriminator?.Value is not null && !_inputModel.IsDefaultDiscriminator)
+            var arguments = new List<ValueExpression>();
+            foreach (var parameter in parametersToPassToBase)
             {
-                FormattableString discriminatorInitializer = Discriminator.Value.Value.Type.Equals(typeof(string)) ? (FormattableString)$"\"{Discriminator.Value.Value.Value}\"" : (FormattableString)$"{Discriminator.Value.Value.Value}";
-                for (int i = 0; i < baseInitializers.Length; i++)
+                if (Discriminator?.SerializedName == parameter.Name && Discriminator?.Value is {} value && !_inputModel.IsDefaultDiscriminator)
                 {
-                    if (baseInitializers[i].ToString() == Discriminator.SerializedName)
-                        baseInitializers[i] = discriminatorInitializer;
+                    arguments.Add(new FormattableStringToExpression(value.GetConstantFormattable()));
+                }
+                else
+                {
+                    arguments.Add(parameter);
                 }
             }
-
-            return baseInitializers;
+            return arguments;
         }
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)

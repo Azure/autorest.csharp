@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.Models;
@@ -31,12 +32,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static IEnumerable<ContextualParameterMapping> BuildContextualParameters(this RequestPath requestPath, string idVariableName)
         {
             var stack = new Stack<ContextualParameterMapping>();
-            var idVariable = new FormattableStringToExpression($"{idVariableName}");
+            var idVariable = ResourceIdentifierExpression.ReferenceField(idVariableName);
             BuildContextualParameterMappingHierarchy(requestPath, stack, idVariable, idVariable);
             return stack;
         }
 
-        private static void BuildContextualParameterMappingHierarchy(RequestPath current, Stack<ContextualParameterMapping> parameterMappingStack, ValueExpression idVariable, ValueExpression invocation)
+        private static void BuildContextualParameterMappingHierarchy(RequestPath current, Stack<ContextualParameterMapping> parameterMappingStack, ResourceIdentifierExpression idVariable, ResourceIdentifierExpression invocation)
         {
             // Check if the current path is a scope parameter
             if (current.IsRawParameterizedScope())
@@ -53,18 +54,18 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (current == RequestPath.Subscription)
             {
                 // using the reference name of the last segment as the parameter name, aka, subscriptionId
-                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), new MemberReference(idVariable, "SubscriptionId")));
+                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), idVariable.SubscriptionId));
             }
             else if (current == RequestPath.ManagementGroup)
             {
                 // using the reference name of the last segment as the parameter name, aka, groupId
-                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), new MemberReference(invocation, "Name")));
+                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), invocation.Name));
             }
             // ResourceGroup is not terminal state - Subscription is its parent
             else if (current == RequestPath.ResourceGroup)
             {
                 // using the reference name of the last segment as the parameter name, aka, resourceGroupName
-                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), new MemberReference(idVariable, "ResourceGroupName")));
+                parameterMappingStack.Push(new ContextualParameterMapping(current.SkipLast(1).Last().ConstantValue, current.Last(), idVariable.ResourceGroupName));
             }
             // this branch is for every other cases - all the request path that corresponds to a resource in this swagger
             else
@@ -92,17 +93,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             {
                                 if (current.Count <= 4) // path is /providers/{resourceProviderNamespace} or /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}
                                 {
-                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, new MemberReference(idVariable, "Provider")));
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, idVariable.Provider));
                                 }
                                 else
                                 {
-                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, new MemberReference(new MemberReference(idVariable, "ResourceType"), "Namespace")));
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, idVariable.ResourceType.Namespace));
                                 }
                                 // do not append a new .Parent to the id
                             }
                             else // for all other normal keys
                             {
-                                parameterMappingStack.Push(new ContextualParameterMapping(keySegment.IsConstant ? keySegment.ConstantValue : string.Empty, valueSegment, new MemberReference(invocation, "Name")));
+                                parameterMappingStack.Push(new ContextualParameterMapping(keySegment.IsConstant ? keySegment.ConstantValue : string.Empty, valueSegment, invocation.Name));
                                 appendParent = true;
                             }
                         }
@@ -116,8 +117,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         }
                         if (keySegment.IsReference)
                         {
-                            var callGetLastType = new InstanceMethodCallExpression(new MemberReference(invocation, "ResourceType"), nameof(Azure.Core.ResourceType.GetLastType), Array.Empty<ValueExpression>(), false);
-                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, callGetLastType, new[] { "System.Linq" }));
+                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, invocation.ResourceType.GetLastType(), new[] { "System.Linq" }));
                             appendParent = true;
                         }
                         else if (keySegment.IsExpandable)
@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         }
                         // add .Parent suffix
                         if (appendParent)
-                            invocation = new MemberReference(invocation, "Parent");
+                            invocation = invocation.Parent;
                     }
                     else
                     {
@@ -139,8 +139,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                             if (segmentPairs.Count - indexOfProvidersPair != 1)
                                 throw new NotImplementedException("We have a gap between the substring to get and the provider-namespace key pair. We need to update SubstringAfterProviderNamespace function to make sure it can accept an index to adopt this");
                             // if we only have one segment in this group, it should always be a reference
-                            var callSubstringAfterProviderNamespace = new StaticMethodCallExpression(typeof(Azure.ResourceManager.SharedExtensions), nameof(Azure.ResourceManager.SharedExtensions.SubstringAfterProviderNamespace), new[]{ invocation }, CallAsExtension: true);
-                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, pair[0],  callSubstringAfterProviderNamespace));
+                            parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, pair[0], invocation.SubstringAfterProviderNamespace()));
                         }
                     }
                 }
@@ -205,7 +204,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 if (type.Implementation is EnumType enumType && !enumType.IsExtensible)
                 {
-                    return new InstanceMethodCallExpression(valueExpression, $"To{enumType.Declaration.Name}", Array.Empty<ValueExpression>(), false);
+                    return new InvokeInstanceMethodExpression(valueExpression, $"To{enumType.Declaration.Name}", Array.Empty<ValueExpression>(), false);
                 }
                 throw new InvalidOperationException($"Type {type} is not supported to construct parameter mapping");
             }
@@ -222,7 +221,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 return New(type, valueExpression);
             }
 
-            return new StaticMethodCallExpression(type, "Parse", new[]{valueExpression});
+            return new InvokeStaticMethodExpression(type, "Parse", new[]{valueExpression});
         }
 
         /// <summary>

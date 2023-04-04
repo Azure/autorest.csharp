@@ -95,12 +95,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(writer, parameterMappings);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
+            var responseExpression = new ResponseExpression<ArmResourceExpression>(new ArmResourceExpression(response), response);
+
             writer.Line($"if ({response}.Value == null)");
             writer.Line($"return {typeof(Response)}.FromValue<{operation.MgmtReturnType}>(null, {response}.GetRawResponse());");
 
             if (This.Resource.ResourceData.ShouldSetResourceIdentifier)
             {
-                var responseExpression = new ResponseExpression<ArmResourceExpression>(response);
                 writer.WriteMethodBodyStatement(Assign(responseExpression.Value.Id, InvokeCreateResourceIdentifier(This.Resource, operation.RequestPath, parameterMappings, responseExpression)));
             }
 

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -111,7 +112,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                     // this reference is not in the resource type, therefore this parameter goes to the constructor
                     _extraConstructorParameters.Add(parameter, $"_{segment.ReferenceName}");
                     // there is a key for this parameter, get the key and add this one to contextual parameter mapping
-                    var key = ParameterMappingBuilder.FindKeyOfParameter(parameter, opRequestPath);
+                    var key = FindKeyOfParameter(parameter, opRequestPath);
                     result.Add(new ContextualParameterMapping(key, segment, new FormattableStringToExpression(GetFieldName(parameter))));
                 }
                 else

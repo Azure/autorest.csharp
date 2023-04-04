@@ -293,9 +293,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(_writer, parameterMappings, true);
             _writer.Line($"cancellationToken){GetConfigureAwait(isAsync)};");
 
+            var responseExpression = new ResponseExpression<ArmResourceExpression>(new ArmResourceExpression(originalResponse), originalResponse);
+
             if (This.ResourceData.ShouldSetResourceIdentifier)
             {
-                var responseExpression = new ResponseExpression<ArmResourceExpression>(originalResponse);
                 _writer.WriteMethodBodyStatement(Assign(responseExpression.Value.Id, InvokeCreateResourceIdentifier(This, getOperation.RequestPath, parameterMappings, responseExpression)));
             }
 

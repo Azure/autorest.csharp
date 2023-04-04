@@ -432,13 +432,9 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             switch (serialization)
             {
-                case JsonSerialization when type is not null && type.Equals(typeof(BinaryData)):
-                    var callFromStream = ValueExpressions.Call.BinaryData.FromStream(new FormattableStringToExpression(responseVariable), async);
-                    var variableExpression = variable is not null ? new VariableReference(variable) : null;
-                    writer.WriteMethodBodyStatement(Snippets.AssignOrReturn(variableExpression, callFromStream));
-                    break;
                 case JsonSerialization jsonSerialization:
-                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable is not null ? new VariableReference(variable) : null, new FormattableStringToExpression(responseVariable)));
+                    ResponseExpression response = new(new FormattableStringToExpression(responseVariable));
+                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable is not null ? (ValueExpression)variable : null, response, type is not null && type.Equals(typeof(BinaryData))));
                     break;
                 case XmlElementSerialization xmlSerialization:
                     writer.WriteDeserializationForMethods(xmlSerialization, variable, responseVariable);
@@ -635,7 +631,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (writer.WriteMethodDeclaration(method.Signature))
             {
-                writer.WriteBody(method.Body);
+                writer.WriteMethodBodyStatements(method.Body);
             }
             writer.Line();
         }

@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Responses;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input.Source;
@@ -157,7 +158,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var optionalParametersArguments = optionalParameters
-                .Select(p => p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!)
+                .Select(p => (ValueExpression)new FormattableStringToExpression(p.Initializer ?? p.Type.GetParameterInitializer(p.DefaultValue!.Value)!))
                 .ToArray();
 
             if (Fields.CredentialFields.Count == 0)
@@ -176,10 +177,10 @@ namespace AutoRest.CSharp.Output.Models
         private ConstructorSignature CreatePrimaryConstructor(IReadOnlyList<Parameter> parameters)
             => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters);
 
-        private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, FormattableString[] optionalParametersArguments)
+        private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, ValueExpression[] optionalParametersArguments)
         {
             var arguments = parameters
-                .Select<Parameter, FormattableString>(p => $"{p.Name}")
+                .Select<Parameter, ValueExpression>(p => p)
                 .Concat(optionalParametersArguments)
                 .ToArray();
             return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));

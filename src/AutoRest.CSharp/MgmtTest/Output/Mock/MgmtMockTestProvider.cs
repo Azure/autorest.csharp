@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Output;
@@ -43,9 +44,7 @@ namespace AutoRest.CSharp.MgmtTest.Output.Mock
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class for mocking.",
                 Modifiers: MethodSignatureModifiers.Public,
                 Parameters: new[] { IsAsyncParameter },
-                Initializer: new ConstructorInitializer(
-                    true,
-                    new FormattableString[] { $"{IsAsyncParameter.Name:I}", $"{typeof(RecordedTestMode)}.Record" }));
+                Initializer: new ConstructorInitializer(true, new ValueExpression[]{ IsAsyncParameter, new MemberReference(new TypeReference(typeof(RecordedTestMode)), nameof(RecordedTestMode.Record))}));
         }
     }
 }

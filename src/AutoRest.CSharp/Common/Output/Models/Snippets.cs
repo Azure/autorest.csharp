@@ -3,18 +3,25 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Output.Models.Shared;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Output.Models
 {
     internal static partial class Snippets
     {
+        public static MethodBodyStatement AsStatement(this IEnumerable<MethodBodyStatement> statements) => statements.ToArray();
+
         public static ValueExpression Default { get; } = new KeywordExpression("default");
         public static ValueExpression Null { get; } = new KeywordExpression("null");
         public static ValueExpression This { get; } = new KeywordExpression("this");
+
+        public static ValueExpression FrameworkEnumValue<TEnum>(TEnum value) where TEnum : struct, Enum => new MemberReference(new TypeReference(typeof(TEnum)), Enum.GetName(value)!);
 
         public static ValueExpression New(CSharpType type, params ValueExpression[] arguments) => new NewInstanceExpression(type, arguments);
         public static ValueExpression New(CSharpType type, IReadOnlyDictionary<string, ValueExpression> properties) => new NewInstanceExpression(type, Array.Empty<ValueExpression>()) { Properties = properties };
@@ -22,7 +29,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression Literal(string? value) => value is null ? Null : new LiteralExpression(value, false);
         public static ValueExpression LiteralU8(string value) => new LiteralExpression(value, true);
 
-        public static ValueExpression StringLengthEqualsZero(ValueExpression str) => new BinaryOperatorExpression("==", new MemberReference(str, nameof(string.Length)), new FormattableStringToExpression($"0"));
+        public static ValueExpression Equal(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("==", left, right);
         public static ValueExpression IsNull(ValueExpression value) => new BinaryOperatorExpression("==", value, Null);
         public static ValueExpression IsNotNull(ValueExpression value) => new BinaryOperatorExpression("!=", value, Null);
         public static ValueExpression Or(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("||", left, right);
@@ -32,9 +39,23 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
 
         public static MethodBodyStatement Assign<T>(T variable, T expression) where T : ValueExpression
-            => new AssignValue(variable, expression);
+            => new AssignValueStatement(variable, expression);
 
         public static MethodBodyStatement AssignOrReturn<T>(T? variable, T expression) where T : ValueExpression
-            => variable != null ? new AssignValue(variable, expression) : Return(expression);
+            => variable != null ? new AssignValueStatement(variable, expression) : Return(expression);
+
+        public static DeclarationStatement DeclareFirstPageRequestLocalFunction(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
+        {
+            var requestMethodCall = new InvokeInstanceMethodExpression(restClient, methodName, arguments.ToList(), false);
+            localFunctionName = new CodeWriterDeclaration("FirstPageRequest");
+            return new DeclareLocalFunctionStatement(localFunctionName, new[]{KnownParameters.PageSizeHint}, typeof(HttpMessage), requestMethodCall);
+        }
+
+        public static DeclarationStatement DeclareNextPageRequestLocalFunction(ValueExpression? restClient, string methodName, IEnumerable<ValueExpression> arguments, out CodeWriterDeclaration localFunctionName)
+        {
+            var requestMethodCall = new InvokeInstanceMethodExpression(restClient, methodName, arguments.ToList(), false);
+            localFunctionName = new CodeWriterDeclaration("NextPageRequest");
+            return new DeclareLocalFunctionStatement(localFunctionName, new[]{KnownParameters.PageSizeHint, KnownParameters.NextLink}, typeof(HttpMessage), requestMethodCall);
+        }
     }
 }

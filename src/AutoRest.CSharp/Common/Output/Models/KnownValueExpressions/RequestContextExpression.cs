@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
 
@@ -15,6 +14,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
             => new(Snippets.New(typeof(RequestContext), new Dictionary<string, ValueExpression>{ [nameof(RequestContext.CancellationToken)] = cancellationToken }));
 
         public static RequestContextExpression FromCancellationToken()
-            => new(new StaticMethodCallExpression(null, "FromCancellationToken", new ValueExpression[]{KnownParameters.CancellationTokenParameter}));
+            => new(new InvokeStaticMethodExpression(null, "FromCancellationToken", new ValueExpression[]{KnownParameters.CancellationTokenParameter}));
     }
 }

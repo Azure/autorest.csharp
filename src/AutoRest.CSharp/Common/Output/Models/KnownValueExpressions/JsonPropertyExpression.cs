@@ -2,6 +2,7 @@
 // Licensed under the MIT License.
 
 using System.Text.Json;
+using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Output.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -17,6 +18,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public ValueExpression NameEquals(string value) => Call.Instance(Untyped, nameof(JsonProperty.NameEquals), LiteralU8(value));
 
         public MethodBodyStatement ThrowNonNullablePropertyIsNull()
-            => new StaticMethodCallLine(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.ThrowNonNullablePropertyIsNull), new[]{Untyped}, CallAsExtension: true);
+            => new InvokeStaticMethodStatement(typeof(Azure.Core.JsonElementExtensions), nameof(Azure.Core.JsonElementExtensions.ThrowNonNullablePropertyIsNull), new[]{Untyped}, CallAsExtension: true);
     }
 }

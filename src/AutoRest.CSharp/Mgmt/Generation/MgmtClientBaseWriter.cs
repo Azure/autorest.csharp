@@ -599,12 +599,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var firstPageRequestArguments = GetArguments(_writer, parameterMappings);
             var restClient = new FormattableStringToExpression($"{GetRestClientName(operation)}");
 
-            _writer.WriteMethodBodyStatement(MethodBodyLines.Declare.FirstPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(pagingMethod.Method), firstPageRequestArguments, out var firstPageRequest));
+            _writer.WriteMethodBodyStatement(DeclareFirstPageRequestLocalFunction(restClient, RequestWriterHelpers.CreateRequestMethodName(pagingMethod.Method), firstPageRequestArguments, out var firstPageRequest));
             CodeWriterDeclaration? nextPageRequest = null;
             if (pagingMethod.NextPageMethod is {} nextPageMethod)
             {
                 var nextPageRequestArguments = firstPageRequestArguments.Prepend(KnownParameters.NextLink);
-                _writer.WriteMethodBodyStatement(MethodBodyLines.Declare.NextPageRequest(restClient, RequestWriterHelpers.CreateRequestMethodName(nextPageMethod), nextPageRequestArguments, out nextPageRequest));
+                _writer.WriteMethodBodyStatement(DeclareNextPageRequestLocalFunction(restClient, RequestWriterHelpers.CreateRequestMethodName(nextPageMethod), nextPageRequestArguments, out nextPageRequest));
             }
 
             var clientDiagnostics = new FormattableStringToExpression($"{clientDiagnosticsReference.Name}");
@@ -640,7 +640,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 }
             }
 
-            return new ResourceIdentifierExpression(new StaticMethodCallExpression(resource.Type, "CreateResourceIdentifier", parameterInvocations));
+            return new ResourceIdentifierExpression(new InvokeStaticMethodExpression(resource.Type, "CreateResourceIdentifier", parameterInvocations));
         }
         #endregion
 
@@ -672,6 +672,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteArguments(_writer, parameterMappings);
                 _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
+                var responseExpression = new ResponseExpression<ArmResourceExpression>(new ArmResourceExpression(response), response);
+
                 if (operation.ThrowIfNull)
                 {
                     _writer
@@ -681,7 +683,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 var realReturnType = operation.MgmtReturnType;
                 if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
                 {
-                    var responseExpression = new ResponseExpression<ArmResourceExpression>(response);
                     _writer.WriteMethodBodyStatement(Assign(responseExpression.Value.Id, InvokeCreateResourceIdentifier(resource, operation.RequestPath, parameterMappings, responseExpression)));
                 }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -241,7 +242,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.WriteMethodBodyStatement(Snippets.Var("content", Utf8JsonRequestContentExpression.New(), out var content));
                         writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.SerializeExpression(content.JsonWriter, jsonSerialization, new FormattableStringToExpression(value)));
-                        writer.WriteMethodBodyStatement(new AssignValue(new MemberReference(request, nameof(Azure.Core.Request.Content)), content));
+                        writer.WriteMethodBodyStatement(Snippets.Assign(new RequestExpression(request).Content, content));
                         break;
                     }
                 case XmlElementSerialization xmlSerialization:
@@ -316,9 +317,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             writer.Append(GetConstantOrParameter(constantOrReference, ignoreNullability));
 
-            if (enumAsString &&
-                !constantOrReference.Type.IsFrameworkType &&
-                constantOrReference.Type.Implementation is EnumType enumType)
+            if (enumAsString && constantOrReference.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
             {
                 writer.AppendEnumToString(enumType);
             }
