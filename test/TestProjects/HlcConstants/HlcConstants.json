@@ -1,8 +1,8 @@
 ﻿{
     "swagger": "2.0",
     "info": {
-        "title": "Constants",
-        "description": "Constants",
+        "title": "HlcConstants",
+        "description": "I have to name this HlcConstants instead of just Constants because we have a test server project called Constants.",
         "version": "1.0.0"
     },
     "host": "localhost:3000",

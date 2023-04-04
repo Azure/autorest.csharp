@@ -5,10 +5,10 @@
 
 #nullable disable
 
-namespace Constants.Models
+namespace HlcConstants.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class ConstantsModelFactory
+    public static partial class HlcConstantsModelFactory
     {
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
         /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>

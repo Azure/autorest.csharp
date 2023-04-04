@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Constants.Models
+namespace HlcConstants.Models
 {
     /// <summary> A constant based on string, the only allowable value is default. </summary>
     public readonly partial struct StringConstant : IEquatable<StringConstant>

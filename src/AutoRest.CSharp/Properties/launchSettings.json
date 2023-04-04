@@ -182,7 +182,7 @@
     },
     "constants": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Constants\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
     },
     "custom-baseUrl": {
       "commandName": "Project",
@@ -275,6 +275,10 @@
     "HeaderCollectionPrefix": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HeaderCollectionPrefix\\Generated"
+    },
+    "HlcConstants": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\HlcConstants\\Generated"
     },
     "httpInfrastructure": {
       "commandName": "Project",

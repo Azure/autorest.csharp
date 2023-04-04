@@ -9,7 +9,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace Constants.Models
+namespace HlcConstants.Models
 {
     /// <summary> A constant based on float. </summary>
     public readonly partial struct FloatConstant : IEquatable<FloatConstant>

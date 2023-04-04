@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Constants.Models
+namespace HlcConstants.Models
 {
     /// <summary> The RoundTripModel. </summary>
     public partial class RoundTripModel

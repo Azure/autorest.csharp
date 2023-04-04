@@ -8,10 +8,10 @@
 using System;
 using Azure.Core;
 
-namespace Constants
+namespace HlcConstants
 {
-    /// <summary> Client options for ConstantsClient. </summary>
-    public partial class ConstantsClientOptions : ClientOptions
+    /// <summary> Client options for HlcConstantsClient. </summary>
+    public partial class HlcConstantsClientOptions : ClientOptions
     {
         private const ServiceVersion LatestVersion = ServiceVersion.V1_0_0;
 
@@ -24,8 +24,8 @@ namespace Constants
 
         internal string Version { get; }
 
-        /// <summary> Initializes new instance of ConstantsClientOptions. </summary>
-        public ConstantsClientOptions(ServiceVersion version = LatestVersion)
+        /// <summary> Initializes new instance of HlcConstantsClientOptions. </summary>
+        public HlcConstantsClientOptions(ServiceVersion version = LatestVersion)
         {
             Version = version switch
             {

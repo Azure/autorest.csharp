@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace Constants.Models
+namespace HlcConstants.Models
 {
     public partial class RoundTripModel : IUtf8JsonSerializable
     {

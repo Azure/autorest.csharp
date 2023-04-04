@@ -1,7 +1,7 @@
 !CodeModel 
 info: !Info 
-  description: Constants
-  title: Constants
+  description: I have to name this HlcConstants instead of just Constants because we have a test server project called Constants.
+  title: HlcConstants
 schemas: !Schemas 
   booleans:
     - !BooleanSchema &ref_1
@@ -602,7 +602,7 @@ security: !Security
   schemes: []
 language: !Languages 
   default:
-    name: Constants
+    name: HlcConstants
     description: ''
 protocol: !Protocols 
   http: !HttpModel {}

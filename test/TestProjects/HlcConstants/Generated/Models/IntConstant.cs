@@ -9,7 +9,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace Constants.Models
+namespace HlcConstants.Models
 {
     /// <summary> A constant based on integer. </summary>
     public readonly partial struct IntConstant : IEquatable<IntConstant>

@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Constants.Models
+namespace HlcConstants.Models
 {
     /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>
     public partial class ModelWithRequiredConstant
