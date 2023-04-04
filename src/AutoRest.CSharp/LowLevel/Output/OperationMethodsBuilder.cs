@@ -355,20 +355,20 @@ namespace AutoRest.CSharp.Output.Models
             }
             else if (_responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } serializableObjectType})
             {
-                yield return Return(ResponseExpression.FromValue(m => new SerializableObjectTypeExpression(serializableObjectType, m), SerializableObjectTypeExpression.FromResponse(serializableObjectType, response), response));
+                yield return Return(ResponseExpression.FromValue(SerializableObjectTypeExpression.FromResponse(serializableObjectType, response), response));
             }
-            else if (_responseType is { IsFrameworkType: true })
-            {
-                yield return Return(ResponseExpression.FromValue(m => new FrameworkTypeExpression(_responseType, m), response.Content.ToObjectFromJson(_responseType), response));
-            }
-            else
+            else if (TypeFactory.IsReadOnlyList(_responseType))
             {
                 var firstResponseBodyType = Operation.Responses.Where(r => r is { IsErrorResponse: false, BodyType: {} }).Select(r => r.BodyType).Distinct().First();
                 var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType!, _responseType, false);
 
-                yield return Declare(_responseType, "value", new ResponseExpression(Default), out var value);
+                yield return Declare(_responseType, "value", new FrameworkTypeExpression(_responseType, Default), out var value);
                 yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, response, false);
-                yield return Return(ResponseExpression.FromValue(m => new ResponseExpression(m), value, response));
+                yield return Return(ResponseExpression.FromValue(value, response));
+            }
+            else if (_responseType is { IsFrameworkType: true })
+            {
+                yield return Return(ResponseExpression.FromValue(response.Content.ToObjectFromJson(_responseType), response));
             }
         }
 

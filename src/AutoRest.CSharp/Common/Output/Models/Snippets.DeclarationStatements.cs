@@ -15,6 +15,9 @@ namespace AutoRest.CSharp.Common.Output.Models
 {
     internal static partial class Snippets
     {
+        public static DeclarationStatement Declare(CSharpType responseType, string name, FrameworkTypeExpression value, out FrameworkTypeExpression variable)
+            => Var(responseType, name, value, d => new FrameworkTypeExpression(responseType, d), out variable);
+
         public static DeclarationStatement Declare(CSharpType responseType, string name, ResponseExpression value, out ResponseExpression variable)
             => Var(responseType, name, value, d => new ResponseExpression(d), out variable);
 

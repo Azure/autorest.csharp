@@ -13,6 +13,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     {
         public T Value => ValueFactory(new MemberReference(Untyped, nameof(Azure.Response<T>.Value)));
 
-        private static CSharpType GetValueType(Func<MemberReference, T> valueFactory) => valueFactory(new MemberReference(null, nameof(Azure.Response<T>.Value))).Type;
+        private static CSharpType GetValueType(Func<MemberReference, T> valueFactory) => valueFactory(new MemberReference(null, nameof(Azure.Response<T>.Value))).ReturnType;
     }
 }

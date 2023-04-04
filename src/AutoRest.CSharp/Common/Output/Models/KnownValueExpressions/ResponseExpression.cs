@@ -3,6 +3,7 @@
 
 using System;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using Azure;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
@@ -12,7 +13,13 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public BinaryDataExpression Content => new(new MemberReference(Untyped, nameof(Response.Content)));
         public StringExpression ContentStream => new(new MemberReference(Untyped, nameof(Response.ContentStream)));
 
-        public static ResponseExpression<T> FromValue<T>(Func<MemberReference, T> valueExpressionFactory, T value, ResponseExpression response) where T : TypedValueExpression
+        public static ResponseExpression<SerializableObjectTypeExpression> FromValue(SerializableObjectTypeExpression value, ResponseExpression response)
+            => FromValue(m => new SerializableObjectTypeExpression(value.ObjectType, m), value, response);
+
+        public static ResponseExpression<FrameworkTypeExpression> FromValue(FrameworkTypeExpression value, ResponseExpression response)
+            => FromValue(m => new FrameworkTypeExpression(value.ReturnType, m), value, response);
+
+        private static ResponseExpression<T> FromValue<T>(Func<MemberReference, T> valueExpressionFactory, T value, ResponseExpression response) where T : TypedValueExpression
             => new(valueExpressionFactory, new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new ValueExpression[]{ value, response }));
     }
 }

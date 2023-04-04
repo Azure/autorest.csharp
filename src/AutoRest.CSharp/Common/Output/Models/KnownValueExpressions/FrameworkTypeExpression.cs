@@ -6,5 +6,10 @@ using AutoRest.CSharp.Generation.Types;
 
 namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
+    /// <summary>
+    /// Represents expression which has a return value of a framework type
+    /// </summary>
+    /// <param name="Type">Framework type</param>
+    /// <param name="Untyped"></param>
     internal sealed record FrameworkTypeExpression(CSharpType Type, ValueExpression Untyped) : TypedValueExpression(Type, Untyped);
 }
