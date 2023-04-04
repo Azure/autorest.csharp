@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteObjectSchema(writer, objectSchema);
                     break;
                 case EnumType e when e.IsExtensible:
-                    WriteExtendableEnum(writer, e);
+                    WriteExtensibleEnum(writer, e);
                     break;
                 case EnumType e when !e.IsExtensible:
                     WriteEnum(writer, e);
@@ -366,24 +366,26 @@ Examples:
             }
         }
 
-        public void WriteEnum(CodeWriter writer, EnumType schema)
+        public void WriteEnum(CodeWriter writer, EnumType enumType)
         {
-            if (schema.Declaration.IsUserDefined)
+            if (enumType.Declaration.IsUserDefined)
             {
                 return;
             }
 
-            using (writer.Namespace(schema.Declaration.Namespace))
+            using (writer.Namespace(enumType.Declaration.Namespace))
             {
-                writer.WriteXmlDocumentationSummary($"{schema.Description}");
-                AddClassAttributes(writer, schema);
+                writer.WriteXmlDocumentationSummary($"{enumType.Description}");
+                AddClassAttributes(writer, enumType);
 
-                using (writer.Scope($"{schema.Declaration.Accessibility} enum {schema.Declaration.Name}{(schema.IsLongValueType ? " : long" : "")}"))
+                writer.Append($"{enumType.Declaration.Accessibility} enum {enumType.Declaration.Name}")
+                    .AppendIf($" : {enumType.ValueType}", enumType.IsIntValueType && !enumType.ValueType.Equals(typeof(int)));
+                using (writer.Scope())
                 {
-                    foreach (EnumTypeValue value in schema.Values)
+                    foreach (EnumTypeValue value in enumType.Values)
                     {
                         writer.WriteXmlDocumentationSummary($"{value.Description}");
-                        if (schema.IsIntValueType)
+                        if (enumType.IsIntValueType)
                         {
                             writer.Line($"{value.Declaration.Name} = {value.Value.Value:L},");
                         }
@@ -397,7 +399,7 @@ Examples:
             }
         }
 
-        public void WriteExtendableEnum(CodeWriter writer, EnumType enumType)
+        public void WriteExtensibleEnum(CodeWriter writer, EnumType enumType)
         {
             var cs = enumType.Type;
             string name = enumType.Declaration.Name;
@@ -444,6 +446,14 @@ Examples:
                         writer.WriteXmlDocumentationSummary($"{choice.Description}");
                         var fieldName = GetValueFieldName(name, choice.Declaration.Name, enumType.Values);
                         writer.Append($"public static {cs} {choice.Declaration.Name}").AppendRaw("{ get; }").Append($" = new {cs}({fieldName});").Line();
+                    }
+
+                    // write ToSerial method, only write when the underlying type is not a string
+                    if (!enumType.IsStringValueType)
+                    {
+                        writer.Line();
+                        writer.Line($"internal {enumType.ValueType} {enumType.SerializationMethodName}() => _value;");
+                        writer.Line();
                     }
 
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are the same.");

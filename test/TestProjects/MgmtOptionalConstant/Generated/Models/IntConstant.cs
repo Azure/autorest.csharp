@@ -26,6 +26,9 @@ namespace MgmtOptionalConstant.Models
 
         /// <summary> 0. </summary>
         public static IntConstant _0 { get; } = new IntConstant(_0Value);
+
+        internal int ToSerialInt32() => _value;
+
         /// <summary> Determines if two <see cref="IntConstant"/> values are the same. </summary>
         public static bool operator ==(IntConstant left, IntConstant right) => left.Equals(right);
         /// <summary> Determines if two <see cref="IntConstant"/> values are not the same. </summary>
