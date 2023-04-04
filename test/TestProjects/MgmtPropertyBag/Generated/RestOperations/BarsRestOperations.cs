@@ -236,7 +236,7 @@ namespace MgmtPropertyBag
             }
         }
 
-        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string barName, string ifMatch, string filter, int? top, string maxpagesize, int? skip)
+        internal HttpMessage CreateGetRequest(string subscriptionId, string resourceGroupName, string barName, string ifMatch, string filter, int? top, int? skip, IEnumerable<string> items)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -257,13 +257,13 @@ namespace MgmtPropertyBag
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            if (maxpagesize != null)
-            {
-                uri.AppendQuery("$maxpagesize", maxpagesize, true);
-            }
             if (skip != null)
             {
                 uri.AppendQuery("$skip", skip.Value, true);
+            }
+            if (items != null)
+            {
+                uri.AppendQueryDelimited("items", items, ",", true);
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -283,18 +283,18 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
-        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
+        /// <param name="items"> The items to query on the bar resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="barName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<BarData>> GetAsync(string subscriptionId, string resourceGroupName, string barName, string ifMatch = null, string filter = null, int? top = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
+        public async Task<Response<BarData>> GetAsync(string subscriptionId, string resourceGroupName, string barName, string ifMatch = null, string filter = null, int? top = null, int? skip = null, IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, barName, ifMatch, filter, top, maxpagesize, skip);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, barName, ifMatch, filter, top, skip, items);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -319,18 +319,18 @@ namespace MgmtPropertyBag
         /// <param name="ifMatch"> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
         /// <param name="top"> The Integer to use. </param>
-        /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
+        /// <param name="items"> The items to query on the bar resource. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="barName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<BarData> Get(string subscriptionId, string resourceGroupName, string barName, string ifMatch = null, string filter = null, int? top = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
+        public Response<BarData> Get(string subscriptionId, string resourceGroupName, string barName, string ifMatch = null, string filter = null, int? top = null, int? skip = null, IEnumerable<string> items = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(barName, nameof(barName));
 
-            using var message = CreateGetRequest(subscriptionId, resourceGroupName, barName, ifMatch, filter, top, maxpagesize, skip);
+            using var message = CreateGetRequest(subscriptionId, resourceGroupName, barName, ifMatch, filter, top, skip, items);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

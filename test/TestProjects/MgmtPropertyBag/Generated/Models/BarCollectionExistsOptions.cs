@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtPropertyBag.Models
@@ -21,6 +22,7 @@ namespace MgmtPropertyBag.Models
             Argument.AssertNotNull(barName, nameof(barName));
 
             BarName = barName;
+            Items = new ChangeTrackingList<string>();
         }
 
         /// <summary> The bar name. </summary>
@@ -34,10 +36,10 @@ namespace MgmtPropertyBag.Models
         /// <summary> The Integer to use. </summary>
         public int? Top { get; set; } = null;
 
-        /// <summary> Optional. Specified maximum number of containers that can be included in the list. </summary>
-        public string Maxpagesize { get; set; } = null;
-
         /// <summary> Optional. Number of records to skip. </summary>
         public int? Skip { get; set; } = null;
+
+        /// <summary> The items to query on the bar resource. </summary>
+        public IList<string> Items { get; } = null;
     }
 }
