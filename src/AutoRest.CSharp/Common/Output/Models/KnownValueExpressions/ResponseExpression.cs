@@ -12,6 +12,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public StringExpression ContentStream => new(new MemberReference(Untyped, nameof(Response.ContentStream)));
 
         public static ResponseExpression<T> FromValue<T>(T valueExpression, ResponseExpression responseExpression) where T : TypedValueExpression
-            => new(valueExpression, new InvokeStaticMethodExpression(valueExpression.Type, nameof(Response.FromValue), new ValueExpression[]{ valueExpression, responseExpression }));
+            => new(valueExpression, new InvokeStaticMethodExpression(typeof(Response), nameof(Response.FromValue), new ValueExpression[]{ valueExpression, responseExpression }));
     }
 }

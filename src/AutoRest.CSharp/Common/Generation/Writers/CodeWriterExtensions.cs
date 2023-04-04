@@ -242,10 +242,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.AppendRaw(isBase ? ": base(" : ": this(");
                     foreach (var argument in arguments)
                     {
-                        writer.Append($"{argument}, ");
+                        writer.WriteValueExpression(argument);
+                        writer.AppendRaw(", ");
                     }
                     writer.RemoveTrailingComma();
-                    writer.Append($")");
+                    writer.AppendRaw(")");
                 }
             }
 
