@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteValueExpression(ternary.Alternative);
                     break;
                 case ParameterReference parameterReference:
-                    writer.Append($"{parameterReference.Parameter.Name}");
+                    writer.Append($"{parameterReference.Parameter.Name:I}");
                     break;
                 case FormattableStringToExpression formattableString:
                     writer.Append(formattableString.Value);

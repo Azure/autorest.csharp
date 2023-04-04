@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(writer, parameterMappings);
             writer.Line($"cancellationToken: cancellationToken){GetConfigureAwait(async)};");
 
-            var responseExpression = new ResponseExpression<ArmResourceExpression>(new ArmResourceExpression(response), response);
+            var responseExpression = new ResponseExpression<ArmResourceExpression>(m => new ArmResourceExpression(m), response);
 
             writer.Line($"if ({response}.Value == null)");
             writer.Line($"return {typeof(Response)}.FromValue<{operation.MgmtReturnType}>(null, {response}.GetRawResponse());");

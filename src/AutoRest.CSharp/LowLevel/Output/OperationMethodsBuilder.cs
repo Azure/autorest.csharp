@@ -355,7 +355,7 @@ namespace AutoRest.CSharp.Output.Models
             }
             else if (_responseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } serializableObjectType})
             {
-                yield return Return(ResponseExpression.FromValue(SerializableObjectTypeExpression.FromResponse(serializableObjectType, response), response));
+                yield return Return(ResponseExpression.FromValue(m => new SerializableObjectTypeExpression(serializableObjectType, m), SerializableObjectTypeExpression.FromResponse(serializableObjectType, response), response));
             }
             else
             {
@@ -364,7 +364,7 @@ namespace AutoRest.CSharp.Output.Models
 
                 yield return Declare(_responseType, "value", new ResponseExpression(Default), out var value);
                 yield return JsonSerializationMethodsBuilder.BuildDeserializationForMethods(serialization, async, value, response, false);
-                yield return Return(ResponseExpression.FromValue(value, response));
+                yield return Return(ResponseExpression.FromValue(m => new ResponseExpression(m), value, response));
             }
         }
 

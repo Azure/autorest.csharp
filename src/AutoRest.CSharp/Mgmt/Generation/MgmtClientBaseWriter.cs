@@ -670,7 +670,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 WriteArguments(_writer, parameterMappings);
                 _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
-                var responseExpression = new ResponseExpression<ArmResourceExpression>(new ArmResourceExpression(response), response);
+                var responseExpression = new ResponseExpression<ArmResourceExpression>(m => new ArmResourceExpression(m), response);
 
                 if (operation.ThrowIfNull)
                 {
