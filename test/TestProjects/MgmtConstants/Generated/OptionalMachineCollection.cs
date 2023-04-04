@@ -70,10 +70,12 @@ namespace MgmtConstants
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="data"> Parameters supplied to the Create Virtual Machine operation. </param>
+        /// <param name="optionalStringQuery"> The StringConstant to use. </param>
+        /// <param name="optionalBooleanQuery"> The BooleanConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
-        public virtual async Task<ArmOperation<OptionalMachineResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, OptionalMachineData data, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<OptionalMachineResource>> CreateOrUpdateAsync(WaitUntil waitUntil, string name, OptionalMachineData data, StringConstant? optionalStringQuery = null, bool? optionalBooleanQuery = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(data, nameof(data));
@@ -82,8 +84,8 @@ namespace MgmtConstants
             scope.Start();
             try
             {
-                var response = await _optionalMachineOptionalsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtConstantsArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, data).Request, response, OperationFinalStateVia.Location);
+                var response = await _optionalMachineOptionalsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, name, data, optionalStringQuery, optionalBooleanQuery, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtConstantsArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, data, optionalStringQuery, optionalBooleanQuery).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -111,10 +113,12 @@ namespace MgmtConstants
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="data"> Parameters supplied to the Create Virtual Machine operation. </param>
+        /// <param name="optionalStringQuery"> The StringConstant to use. </param>
+        /// <param name="optionalBooleanQuery"> The BooleanConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="data"/> is null. </exception>
-        public virtual ArmOperation<OptionalMachineResource> CreateOrUpdate(WaitUntil waitUntil, string name, OptionalMachineData data, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<OptionalMachineResource> CreateOrUpdate(WaitUntil waitUntil, string name, OptionalMachineData data, StringConstant? optionalStringQuery = null, bool? optionalBooleanQuery = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(data, nameof(data));
@@ -123,8 +127,8 @@ namespace MgmtConstants
             scope.Start();
             try
             {
-                var response = _optionalMachineOptionalsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, name, data, cancellationToken);
-                var operation = new MgmtConstantsArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, data).Request, response, OperationFinalStateVia.Location);
+                var response = _optionalMachineOptionalsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, name, data, optionalStringQuery, optionalBooleanQuery, cancellationToken);
+                var operation = new MgmtConstantsArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateCreateOrUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, name, data, optionalStringQuery, optionalBooleanQuery).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

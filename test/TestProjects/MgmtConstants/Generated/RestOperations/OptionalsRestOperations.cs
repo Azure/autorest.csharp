@@ -37,7 +37,7 @@ namespace MgmtConstants
             _userAgent = new TelemetryDetails(GetType().Assembly, applicationId);
         }
 
-        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string name, OptionalMachineData data)
+        internal HttpMessage CreateCreateOrUpdateRequest(string subscriptionId, string resourceGroupName, string name, OptionalMachineData data, StringConstant? optionalStringQuery, bool? optionalBooleanQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -50,7 +50,13 @@ namespace MgmtConstants
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Constant/optionalMachines/", false);
             uri.AppendPath(name, true);
-            uri.AppendQuery("forceReplace", true, true);
+            uri.AppendQuery("required-string-query", "default", true);
+            uri.AppendQuery("required-boolean-query", true, true);
+            if (optionalStringQuery != null)
+            {
+                uri.AppendQuery("optional-string-query", optionalStringQuery.Value.ToString(), true);
+            }
+            uri.AppendQuery("optional-boolean-query", true, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -67,17 +73,19 @@ namespace MgmtConstants
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="data"> Parameters supplied to the Create Virtual Machine operation. </param>
+        /// <param name="optionalStringQuery"> The StringConstant to use. </param>
+        /// <param name="optionalBooleanQuery"> The BooleanConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string name, OptionalMachineData data, CancellationToken cancellationToken = default)
+        public async Task<Response> CreateOrUpdateAsync(string subscriptionId, string resourceGroupName, string name, OptionalMachineData data, StringConstant? optionalStringQuery = null, bool? optionalBooleanQuery = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, name, data);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, name, data, optionalStringQuery, optionalBooleanQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -94,17 +102,19 @@ namespace MgmtConstants
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="data"> Parameters supplied to the Create Virtual Machine operation. </param>
+        /// <param name="optionalStringQuery"> The StringConstant to use. </param>
+        /// <param name="optionalBooleanQuery"> The BooleanConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string name, OptionalMachineData data, CancellationToken cancellationToken = default)
+        public Response CreateOrUpdate(string subscriptionId, string resourceGroupName, string name, OptionalMachineData data, StringConstant? optionalStringQuery = null, bool? optionalBooleanQuery = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(data, nameof(data));
 
-            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, name, data);
+            using var message = CreateCreateOrUpdateRequest(subscriptionId, resourceGroupName, name, data, optionalStringQuery, optionalBooleanQuery);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -116,7 +126,7 @@ namespace MgmtConstants
             }
         }
 
-        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string name, OptionalMachinePatch patch, bool? forcePatch)
+        internal HttpMessage CreateUpdateRequest(string subscriptionId, string resourceGroupName, string name, OptionalMachinePatch patch, IntConstant? optionalIntQuery, FloatConstant? optionalFloatQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -129,7 +139,16 @@ namespace MgmtConstants
             uri.AppendPath(resourceGroupName, true);
             uri.AppendPath("/providers/Microsoft.Constant/optionalMachines/", false);
             uri.AppendPath(name, true);
-            uri.AppendQuery("forcePatch", false, true);
+            uri.AppendQuery("required-int-query", 0, true);
+            uri.AppendQuery("required-float-query", 3.14F, true);
+            if (optionalIntQuery != null)
+            {
+                uri.AppendQuery("optional-int-query", optionalIntQuery.Value.ToSerialInt32(), true);
+            }
+            if (optionalFloatQuery != null)
+            {
+                uri.AppendQuery("optional-float-query", optionalFloatQuery.Value.ToSerialSingle(), true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -146,18 +165,19 @@ namespace MgmtConstants
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="patch"> Parameters supplied to the Update Virtual Machine operation. </param>
-        /// <param name="forcePatch"> The ForcePatch to use. </param>
+        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
+        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="patch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string name, OptionalMachinePatch patch, bool? forcePatch = null, CancellationToken cancellationToken = default)
+        public async Task<Response> UpdateAsync(string subscriptionId, string resourceGroupName, string name, OptionalMachinePatch patch, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(patch, nameof(patch));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, name, patch, forcePatch);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, name, patch, optionalIntQuery, optionalFloatQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -174,18 +194,19 @@ namespace MgmtConstants
         /// <param name="resourceGroupName"> The name of the resource group. </param>
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="patch"> Parameters supplied to the Update Virtual Machine operation. </param>
-        /// <param name="forcePatch"> The ForcePatch to use. </param>
+        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
+        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="name"/> or <paramref name="patch"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response Update(string subscriptionId, string resourceGroupName, string name, OptionalMachinePatch patch, bool? forcePatch = null, CancellationToken cancellationToken = default)
+        public Response Update(string subscriptionId, string resourceGroupName, string name, OptionalMachinePatch patch, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
             Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(patch, nameof(patch));
 
-            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, name, patch, forcePatch);
+            using var message = CreateUpdateRequest(subscriptionId, resourceGroupName, name, patch, optionalIntQuery, optionalFloatQuery);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

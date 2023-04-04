@@ -240,10 +240,11 @@ namespace MgmtConstants
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="patch"> Parameters supplied to the Update Virtual Machine operation. </param>
-        /// <param name="forcePatch"> The ForcePatch to use. </param>
+        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
+        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
-        public virtual async Task<ArmOperation<OptionalMachineResource>> UpdateAsync(WaitUntil waitUntil, OptionalMachinePatch patch, bool? forcePatch = null, CancellationToken cancellationToken = default)
+        public virtual async Task<ArmOperation<OptionalMachineResource>> UpdateAsync(WaitUntil waitUntil, OptionalMachinePatch patch, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(patch, nameof(patch));
 
@@ -251,8 +252,8 @@ namespace MgmtConstants
             scope.Start();
             try
             {
-                var response = await _optionalMachineOptionalsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, forcePatch, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtConstantsArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, forcePatch).Request, response, OperationFinalStateVia.Location);
+                var response = await _optionalMachineOptionalsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, optionalIntQuery, optionalFloatQuery, cancellationToken).ConfigureAwait(false);
+                var operation = new MgmtConstantsArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, optionalIntQuery, optionalFloatQuery).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -279,10 +280,11 @@ namespace MgmtConstants
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="patch"> Parameters supplied to the Update Virtual Machine operation. </param>
-        /// <param name="forcePatch"> The ForcePatch to use. </param>
+        /// <param name="optionalIntQuery"> The IntConstant to use. </param>
+        /// <param name="optionalFloatQuery"> The FloatConstant to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="patch"/> is null. </exception>
-        public virtual ArmOperation<OptionalMachineResource> Update(WaitUntil waitUntil, OptionalMachinePatch patch, bool? forcePatch = null, CancellationToken cancellationToken = default)
+        public virtual ArmOperation<OptionalMachineResource> Update(WaitUntil waitUntil, OptionalMachinePatch patch, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(patch, nameof(patch));
 
@@ -290,8 +292,8 @@ namespace MgmtConstants
             scope.Start();
             try
             {
-                var response = _optionalMachineOptionalsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, forcePatch, cancellationToken);
-                var operation = new MgmtConstantsArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, forcePatch).Request, response, OperationFinalStateVia.Location);
+                var response = _optionalMachineOptionalsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, optionalIntQuery, optionalFloatQuery, cancellationToken);
+                var operation = new MgmtConstantsArmOperation<OptionalMachineResource>(new OptionalMachineOperationSource(Client), _optionalMachineOptionalsClientDiagnostics, Pipeline, _optionalMachineOptionalsRestClient.CreateUpdateRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, optionalIntQuery, optionalFloatQuery).Request, response, OperationFinalStateVia.Location);
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

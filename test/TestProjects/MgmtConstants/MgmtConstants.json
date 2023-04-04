@@ -66,13 +66,54 @@
                         "description": "Parameters supplied to the Create Virtual Machine operation."
                     },
                     {
-                        "name": "forceReplace",
+                        "name": "required-string-query",
+                        "in": "query",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "default"
+                        ],
+                        "x-ms-enum": {
+                            "name": "StringConstant",
+                            "modelAsString": false
+                        }
+                    },
+                    {
+                        "name": "required-boolean-query",
                         "in": "query",
                         "required": true,
                         "type": "boolean",
-                        "enum": [true],
+                        "enum": [
+                            true
+                        ],
                         "x-ms-enum": {
-                            "name": "ForceReplace",
+                            "name": "BooleanConstant",
+                            "modelAsString": false
+                        }
+                    },
+                    {
+                        "name": "optional-string-query",
+                        "in": "query",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "default"
+                        ],
+                        "x-ms-enum": {
+                            "name": "StringConstant",
+                            "modelAsString": false
+                        }
+                    },
+                    {
+                        "name": "optional-boolean-query",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean",
+                        "enum": [
+                            true
+                        ],
+                        "x-ms-enum": {
+                            "name": "BooleanConstant",
                             "modelAsString": false
                         }
                     },
@@ -130,13 +171,54 @@
                         "description": "Parameters supplied to the Update Virtual Machine operation."
                     },
                     {
-                        "name": "forcePatch",
+                        "name": "required-int-query",
+                        "in": "query",
+                        "required": true,
+                        "type": "integer",
+                        "enum": [
+                            0
+                        ],
+                        "x-ms-enum": {
+                            "name": "IntConstant",
+                            "modelAsString": false
+                        }
+                    },
+                    {
+                        "name": "required-float-query",
+                        "in": "query",
+                        "required": true,
+                        "type": "number",
+                        "enum": [
+                            3.14
+                        ],
+                        "x-ms-enum": {
+                            "name": "FloatConstant",
+                            "modelAsString": false
+                        }
+                    },
+                    {
+                        "name": "optional-int-query",
                         "in": "query",
                         "required": false,
-                        "type": "boolean",
-                        "enum": [false],
+                        "type": "integer",
+                        "enum": [
+                            0
+                        ],
                         "x-ms-enum": {
-                            "name": "ForcePatch",
+                            "name": "IntConstant",
+                            "modelAsString": false
+                        }
+                    },
+                    {
+                        "name": "optional-float-query",
+                        "in": "query",
+                        "required": false,
+                        "type": "number",
+                        "enum": [
+                            3.14
+                        ],
+                        "x-ms-enum": {
+                            "name": "FloatConstant",
                             "modelAsString": false
                         }
                     },
