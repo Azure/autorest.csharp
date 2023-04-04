@@ -119,7 +119,7 @@ namespace AutoRest.CSharp.Output.Models
 
                     if (pageItemType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } type })
                     {
-                        return SerializableObjectTypeExpression.FromResponseDelegate(type);
+                        return SerializableObjectTypeExpression.DeserializeDelegate(type);
                     }
 
                     var variable = new CodeWriterDeclaration("e");
