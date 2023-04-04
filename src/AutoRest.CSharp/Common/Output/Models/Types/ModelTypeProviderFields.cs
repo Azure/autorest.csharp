@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             string? discriminator = inputModel.DiscriminatorPropertyName;
             if (discriminator is not null)
             {
-                var originalFieldName = discriminator.FirstCharToUpperCase();
+                var originalFieldName = discriminator.ToCleanName();
                 var inputModelProperty = new InputModelProperty(discriminator, discriminator, "Discriminator", InputPrimitiveType.String, true, false, true);
                 var field = CreateField(originalFieldName, typeof(string), inputModel, inputModelProperty);
                 fields.Add(field);
