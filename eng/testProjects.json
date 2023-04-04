@@ -8,6 +8,7 @@
         "models/property-types",
         "models/usage",
         "projection",
+        "special-words",
         "enums/extensible",
         "hello",
         "collectionFormat"
