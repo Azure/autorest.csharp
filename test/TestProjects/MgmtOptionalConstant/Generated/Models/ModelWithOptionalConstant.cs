@@ -18,11 +18,13 @@ namespace MgmtOptionalConstant.Models
         /// <summary> Initializes a new instance of ModelWithOptionalConstant. </summary>
         /// <param name="optionalStringConstant"> A constant based on string, the only allowable value is default. </param>
         /// <param name="optionalIntConstant"> A constant based on integer. </param>
+        /// <param name="optionalFloatConstant"> A constant based on float. </param>
         /// <param name="settingName"> Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon. </param>
-        internal ModelWithOptionalConstant(StringConstant? optionalStringConstant, IntConstant? optionalIntConstant, SettingName? settingName)
+        internal ModelWithOptionalConstant(StringConstant? optionalStringConstant, IntConstant? optionalIntConstant, FloatConstant? optionalFloatConstant, SettingName? settingName)
         {
             OptionalStringConstant = optionalStringConstant;
             OptionalIntConstant = optionalIntConstant;
+            OptionalFloatConstant = optionalFloatConstant;
             SettingName = settingName;
         }
 
@@ -30,6 +32,8 @@ namespace MgmtOptionalConstant.Models
         public StringConstant? OptionalStringConstant { get; set; }
         /// <summary> A constant based on integer. </summary>
         public IntConstant? OptionalIntConstant { get; set; }
+        /// <summary> A constant based on float. </summary>
+        public FloatConstant? OptionalFloatConstant { get; set; }
         /// <summary> Specifies the name of the setting to which the content applies. Possible values are: FirstLogonCommands and AutoLogon. </summary>
         public SettingName? SettingName { get; set; }
     }
