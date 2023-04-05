@@ -265,6 +265,28 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
 
                     break;
+
+                case SwitchExpression(var matchExpression, var cases):
+                    writer.WriteValueExpression(matchExpression);
+                    writer.AppendRaw(" switch ");
+
+                    using (writer.AmbientScope())
+                    {
+                        writer.WriteValueExpression(matchExpression);
+                        writer.Append($"switch");
+                        writer.LineRaw("{");
+                        foreach (var switchCase in cases)
+                        {
+                            writer.WriteValueExpression(switchCase.Case);
+                            writer.AppendRaw(" => ");
+                            writer.WriteValueExpression(switchCase.Expression);
+                            writer.LineRaw(";");
+                        }
+                        writer.LineRaw("}");
+                    }
+
+                    break;
+
                 case NewInstanceExpression(var type, var arguments, var properties):
                     writer.Append($"new {type}");
                     if (arguments.Count > 0 || properties is not { Count: > 0 })
@@ -318,8 +340,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 case TypedValueExpression typed:
                     writer.WriteValueExpression(typed.Untyped);
                     break;
-                case KeywordExpression(var keyword):
+                case KeywordExpression(var keyword, var inner):
                     writer.AppendRaw(keyword);
+                    if (inner is not null)
+                    {
+                        writer.AppendRaw(" ").WriteValueExpression(inner);
+                    }
                     break;
                 case LiteralExpression({} literal, true):
                     writer.Literal(literal).AppendRaw("u8");

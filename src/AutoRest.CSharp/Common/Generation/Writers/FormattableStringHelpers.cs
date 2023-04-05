@@ -124,14 +124,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"new {constant.Type}()";
             }
 
-            if (!constant.Type.IsFrameworkType && constant.Value is EnumTypeValue enumTypeValue)
+            if (constant is { Type: { IsFrameworkType: false }, Value: EnumTypeValue enumTypeValue })
             {
                 return $"{constant.Type}.{enumTypeValue.Declaration.Name}";
             }
 
-            if (!constant.Type.IsFrameworkType && constant.Value is string enumValue)
+            // we cannot check `constant.Value is string` because it is always string - this is an issue in yaml serialization)
+            if (constant.Type is { IsFrameworkType: false, Implementation: EnumType enumType })
             {
-                return $"new {constant.Type}({enumValue:L})";
+                return enumType.IsStringValueType
+                    ? (FormattableString)$"new {constant.Type}({constant.Value:L})"
+                    : $"new {constant.Type}(({enumType.ValueType}){constant.Value})";
             }
 
             Type frameworkType = constant.Type.FrameworkType;

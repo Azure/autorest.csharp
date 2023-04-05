@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
@@ -278,7 +279,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentation("remarks", $"{method.Signature.DescriptionText}");
             using (writer.WriteMethodDeclaration(method.Signature))
             {
-                writer.WriteMethodBodyStatements(method.Body);
+                writer.WriteMethodBodyStatements(method.Body!);
             }
             writer.Line();
         }

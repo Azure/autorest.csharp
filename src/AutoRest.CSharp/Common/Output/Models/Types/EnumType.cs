@@ -3,13 +3,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -49,16 +56,20 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _typeMapping = sourceInputModel?.CreateForModel(ExistingType);
             }
 
-            ValueType = typeFactory.CreateType(input.EnumValueType);
             Description = input.Description;
             IsExtensible = isExtensible;
+            ValueType = typeFactory.CreateType(input.EnumValueType);
+            IsStringValueType = ValueType.Equals(typeof(string));
+            IsIntValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long));
+
+            SerializationMethod = IsStringValueType ? null : IsExtensible ? CreateExtensibleSerializationMethod(this) : CreateSerializationMethod(this);
         }
 
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }
-        public bool IsStringValueType => ValueType.Equals(typeof(string));
-        public bool IsIntValueType => ValueType.Equals(typeof(Int32)) || IsLongValueType;
-        public bool IsLongValueType => ValueType.Equals(typeof(Int64));
+        public bool IsStringValueType { get; }
+        public bool IsIntValueType { get; }
+        public Method? SerializationMethod { get; }
         public string? Description { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -81,6 +92,38 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             return values;
         }
+
+        private static Method CreateExtensibleSerializationMethod(EnumType enumType)
+        {
+            var signature = new MethodSignature(GetSerializationMethodName(enumType), null, null, Internal, enumType.ValueType, null, Array.Empty<Parameter>());
+            return new Method(signature, new MemberReference(null, "_value"));
+        }
+
+        private static Method CreateSerializationMethod(EnumType enumType)
+        {
+            var valueParameter = new Parameter("value", null, enumType.Type, null, Validation.None, null);
+            var signature = new MethodSignature(GetSerializationMethodName(enumType), null, null, Public | Static | Extension, enumType.ValueType, null, new[]{valueParameter});
+
+            var bodyExpression = new SwitchExpression(valueParameter, CreateSwitchCases(enumType, valueParameter).ToArray());
+
+            return new Method(signature, bodyExpression);
+
+            static IEnumerable<SwitchCaseExpression> CreateSwitchCases(EnumType enumType, Parameter valueParameter)
+            {
+                foreach (var enumTypeValue in enumType.Values)
+                {
+                    yield return new SwitchCaseExpression
+                    (
+                        EnumValue(enumType, enumTypeValue),
+                        new FormattableStringToExpression(enumTypeValue.Value.GetConstantFormattable())
+                    );
+                }
+
+                yield return new SwitchCaseExpression(Dash, ThrowNewArgumentOutOfRangeException(valueParameter.Name, valueParameter, $"Unknown {enumType.Declaration.Name} value."));
+            }
+        }
+
+        private static string GetSerializationMethodName(EnumType enumType) => $"ToSerial{enumType.ValueType.Name.FirstCharToUpperCase()}";
 
         private static string CreateDescription(InputEnumTypeValue value)
         {

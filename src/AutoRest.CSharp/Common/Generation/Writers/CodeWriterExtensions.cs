@@ -136,6 +136,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
+            var outerScope = writer.WriteMethodDeclarationNoScope(methodBase, disabledWarnings);
+            var innerScope = writer.Scope();
+            return Disposable.Create(() =>
+            {
+                innerScope.Dispose();
+                outerScope.Dispose();
+            });
+        }
+
+        private static IDisposable WriteMethodDeclarationNoScope(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
+        {
             if (methodBase.Attributes is {} attributes)
             {
                 foreach (var attribute in attributes)
@@ -257,12 +268,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line($"#pragma warning restore {disabledWarning}");
             }
 
-            var innerScope = writer.Scope();
-            return Disposable.Create(() =>
-            {
-                innerScope.Dispose();
-                outerScope.Dispose();
-            });
+            return outerScope;
         }
 
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
@@ -448,11 +454,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter AppendEnumToString(this CodeWriter writer, EnumType enumType)
         {
-            if (!enumType.IsExtensible)
-            {
-                writer.UseNamespace(enumType.Type.Namespace);
-            }
-            return writer.AppendRaw(enumType.IsExtensible ? ".ToString()" : $".ToSerial{enumType.ValueType.Name.FirstCharToUpperCase()}()");
+            writer.WriteValueExpression(new EnumExpression(enumType, new ValueExpression()).InvokeToString());
+            return writer;
         }
 
         public static CodeWriter AppendEnumFromString(this CodeWriter writer, EnumType enumType, FormattableString value)
@@ -631,10 +634,22 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteMethod(this CodeWriter writer, Method method)
         {
-            using (writer.WriteMethodDeclaration(method.Signature))
+            if (method.Body is {} body)
             {
-                writer.WriteMethodBodyStatements(method.Body);
+                using (writer.WriteMethodDeclaration(method.Signature))
+                {
+                    writer.WriteMethodBodyStatements(body);
+                }
             }
+            else if (method.BodyExpression is {} expression)
+            {
+                using (writer.WriteMethodDeclarationNoScope(method.Signature))
+                {
+                    writer.AppendRaw(" => ");
+                    writer.WriteValueExpression(expression);
+                }
+            }
+
             writer.Line();
         }
     }

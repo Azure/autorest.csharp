@@ -3,5 +3,5 @@
 
 namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
 {
-    internal record KeywordExpression(string Keyword, ValueExpression? Expression) : ValueExpression;
+    internal record SwitchExpression(ValueExpression MatchExpression, params SwitchCaseExpression[] Cases) : ValueExpression;
 }

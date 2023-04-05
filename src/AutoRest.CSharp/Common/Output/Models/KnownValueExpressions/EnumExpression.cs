@@ -11,8 +11,10 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     internal sealed record EnumExpression(EnumType EnumType, ValueExpression Untyped) : TypedValueExpression(EnumType.Type, Untyped)
     {
         public ValueExpression InvokeToString()
-            => EnumType.IsExtensible
-                ? new InvokeInstanceMethodExpression(Untyped, nameof(object.ToString))
-                : new InvokeStaticMethodExpression(EnumType.Type, $"ToSerial{EnumType.ValueType.Name.FirstCharToUpperCase()}", new[]{Untyped}, null, true);
+            => EnumType.SerializationMethod is {} serializationMethod
+                ? EnumType.IsExtensible
+                    ? new InvokeInstanceMethodExpression(Untyped, serializationMethod.Signature.Name)
+                    : new InvokeStaticMethodExpression(EnumType.Type, serializationMethod.Signature.Name, new[]{Untyped}, null, true)
+                : new InvokeInstanceMethodExpression(Untyped, nameof(object.ToString));
     }
 }

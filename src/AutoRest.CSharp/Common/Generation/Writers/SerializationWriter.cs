@@ -162,38 +162,24 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WriteEnumSerialization(CodeWriter writer, EnumType schema)
+        public static void WriteEnumSerialization(CodeWriter writer, EnumType enumType)
         {
-            using (writer.Namespace(schema.Declaration.Namespace))
+            using (writer.Namespace(enumType.Declaration.Namespace))
             {
-                string declaredTypeName = schema.Declaration.Name;
+                string declaredTypeName = enumType.Declaration.Name;
 
-                var isString = schema.ValueType.FrameworkType == typeof(string);
+                var isString = enumType.ValueType.FrameworkType == typeof(string);
 
                 using (writer.Scope($"internal static partial class {declaredTypeName}Extensions"))
                 {
-                    if (!schema.IsIntValueType)
+                    if (enumType.SerializationMethod is { } serializationMethod)
                     {
-                        WriteEnumSerializationMethod(writer, schema, declaredTypeName);
+                        writer.WriteMethod(serializationMethod);
                     }
 
-                    WriteEnumDeserializationMethod(writer, schema, declaredTypeName, isString);
+                    WriteEnumDeserializationMethod(writer, enumType, declaredTypeName, isString);
                 }
             }
-        }
-
-        private static void WriteEnumSerializationMethod(CodeWriter writer, EnumType schema, string declaredTypeName)
-        {
-            using (writer.Scope($"public static {schema.ValueType} ToSerial{schema.ValueType.Name.FirstCharToUpperCase()}(this {declaredTypeName} value) => value switch", end: "};"))
-            {
-                foreach (EnumTypeValue value in schema.Values)
-                {
-                    writer.Line($"{declaredTypeName}.{value.Declaration.Name} => {value.Value.Value:L},");
-                }
-
-                writer.Line($"_ => throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\")");
-            }
-            writer.Line();
         }
 
         private static void WriteEnumDeserializationMethod(CodeWriter writer, EnumType schema, string declaredTypeName, bool isString)
