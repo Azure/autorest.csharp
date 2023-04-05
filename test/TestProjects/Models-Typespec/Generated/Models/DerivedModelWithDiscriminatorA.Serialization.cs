@@ -49,7 +49,7 @@ namespace ModelsInCadl.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static DerivedModelWithDiscriminatorA FromResponse(Response response)
+        internal static new DerivedModelWithDiscriminatorA FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDerivedModelWithDiscriminatorA(document.RootElement);
