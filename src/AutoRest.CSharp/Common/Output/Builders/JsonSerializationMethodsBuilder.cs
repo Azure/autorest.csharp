@@ -196,10 +196,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case ObjectType:
                     return utf8JsonWriter.WriteObjectValue(value);
 
-                case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
+                case EnumType { IsNumericValueType: true, IsExtensible: false } enumType:
                     return utf8JsonWriter.WriteNumberValue(new CastExpression(NullableValue(value, valueSerialization.Type), enumType.ValueType));
 
-                case EnumType { IsIntValueType: true } enumType:
+                case EnumType { IsNumericValueType: true } enumType:
                     return utf8JsonWriter.WriteNumberValue(new EnumExpression(enumType, NullableValue(value, valueSerialization.Type)).ToSerial());
 
                 case EnumType enumType:

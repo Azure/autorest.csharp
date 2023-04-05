@@ -62,17 +62,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsExtensible = isExtensible;
             ValueType = typeFactory.CreateType(input.EnumValueType);
             IsStringValueType = ValueType.Equals(typeof(string));
-            IsIntValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long));
+            IsNumericValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long)) || ValueType.Equals(typeof(float));
 
             if (IsExtensible)
             {
-                SerializationMethod = IsIntValueType ? CreateExtensibleSerializationMethod(this) : null;
+                SerializationMethod = IsNumericValueType ? CreateExtensibleSerializationMethod(this) : null;
                 DeserializationMethod = CreateExtensibleDeserializationMethod(this);
                 EqualsMethod = CreateEqualsMethod(this);
             }
             else
             {
-                SerializationMethod = CreateSerializationMethod(this);
+                SerializationMethod = IsStringValueType ? CreateSerializationMethod(this) : null;
                 DeserializationMethod = CreateDeserializationMethod(this);
                 EqualsMethod = null;
             }
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }
         public bool IsStringValueType { get; }
-        public bool IsIntValueType { get; }
+        public bool IsNumericValueType { get; }
         public Method? EqualsMethod { get; }
         public Method? SerializationMethod { get; }
         public Method DeserializationMethod { get; }
@@ -149,7 +149,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private static Method CreateExtensibleDeserializationMethod(EnumType enumType)
         {
             var valueParameter = new Parameter("value", null, enumType.ValueType, null, Validation.None, null);
-            var signature = new OperatorSignature(false, $"Converts a string to a <see cref=\"{enumType.Declaration.Name}\"/>.", null, valueParameter, enumType.Type);
+            var signature = new OperatorSignature(false, $"Converts a string to a <see cref=\"{enumType.Type.Name}\"/>.", null, valueParameter, enumType.Type);
             var bodyExpression = New(enumType.Type, valueParameter);
             return new Method(signature, bodyExpression);
         }
