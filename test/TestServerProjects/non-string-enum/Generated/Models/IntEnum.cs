@@ -38,6 +38,9 @@ namespace non_string_enum.Models
         public static IntEnum FourHundredSix { get; } = new IntEnum(FourHundredSixValue);
         /// <summary> 429. </summary>
         public static IntEnum FourHundredTwentyNine { get; } = new IntEnum(FourHundredTwentyNineValue);
+
+        internal int ToSerialInt32() => _value;
+
         /// <summary> Determines if two <see cref="IntEnum"/> values are the same. </summary>
         public static bool operator ==(IntEnum left, IntEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="IntEnum"/> values are not the same. </summary>
