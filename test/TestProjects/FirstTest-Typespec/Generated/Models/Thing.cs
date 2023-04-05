@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace CadlFirstTest.Models
 {
-    /// <summary> The Thing. </summary>
+    /// <summary> A model with a few properties of literal types. </summary>
     public partial class Thing
     {
         /// <summary> Initializes a new instance of Thing. </summary>

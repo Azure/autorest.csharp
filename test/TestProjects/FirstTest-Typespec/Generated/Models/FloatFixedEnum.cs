@@ -7,14 +7,14 @@
 
 namespace CadlFirstTest.Models
 {
-    /// <summary> Simple enum. </summary>
-    public enum SimpleEnum
+    /// <summary> float fixed enum. </summary>
+    public enum FloatFixedEnum
     {
         /// <summary> 1. </summary>
-        One,
+        One = 1,
         /// <summary> 2. </summary>
-        Two,
+        Two = 2,
         /// <summary> 4. </summary>
-        Four
+        Four = 4
     }
 }
