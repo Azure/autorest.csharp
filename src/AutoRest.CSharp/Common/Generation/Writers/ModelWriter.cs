@@ -439,25 +439,15 @@ Examples:
                     writer.WriteXmlDocumentationSummary($"Determines if two <see cref=\"{name}\"/> values are not the same.");
                     writer.Line($"public static bool operator !=({cs} left, {cs} right) => !left.Equals(right);");
 
-                    writer.WriteXmlDocumentationSummary($"Converts a string to a <see cref=\"{name}\"/>.");
-                    writer.Line($"public static implicit operator {cs}({enumType.ValueType} value) => new {cs}(value);");
-                    writer.Line();
+                    writer.WriteMethodDocumentation(enumType.DeserializationMethod.Signature);
+                    writer.WriteMethod(enumType.DeserializationMethod);
 
                     writer.WriteXmlDocumentationInheritDoc();
                     WriteEditorBrowsableFalse(writer);
                     writer.Line($"public override bool Equals({typeof(object)} obj) => obj is {cs} other && Equals(other);");
 
                     writer.WriteXmlDocumentationInheritDoc();
-                    writer.Append($"public bool Equals({cs} other) => ");
-                    if (isString)
-                    {
-                        writer.Line($"{enumType.ValueType}.Equals(_value, other._value, {typeof(StringComparison)}.InvariantCultureIgnoreCase);");
-                    }
-                    else
-                    {
-                        writer.Line($"{enumType.ValueType}.Equals(_value, other._value);");
-                    }
-                    writer.Line();
+                    writer.WriteMethod(enumType.EqualsMethod!);
 
                     writer.WriteXmlDocumentationInheritDoc();
                     WriteEditorBrowsableFalse(writer);

@@ -20,6 +20,9 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression Null { get; } = new KeywordExpression("null", null);
         public static ValueExpression This { get; } = new KeywordExpression("this", null);
 
+        public static ValueExpression Nameof(ValueExpression expression) => new InvokeInstanceMethodExpression(null, "nameof", expression);
+        public static ValueExpression ThrowExpression(ValueExpression expression) => new KeywordExpression("throw", expression);
+
         public static ValueExpression EnumValue(EnumType type, EnumTypeValue value) => new MemberReference(new TypeReference(type.Type), value.Declaration.Name);
         public static ValueExpression FrameworkEnumValue<TEnum>(TEnum value) where TEnum : struct, Enum => new MemberReference(new TypeReference(typeof(TEnum)), Enum.GetName(value)!);
 
@@ -37,7 +40,7 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static KeywordStatement Continue => new("continue", null);
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
-        public static KeywordExpression Throw(ValueExpression expression) => new("throw", expression);
+        public static KeywordStatement Throw(ValueExpression expression) => new("throw", expression);
         public static ValueExpression InvokeToEnum(CSharpType enumType, ValueExpression stringValue) => new InvokeStaticMethodExpression(enumType, $"To{enumType.Implementation.Declaration.Name}", new[]{stringValue}, null, true);
 
         public static MethodBodyStatement Assign<T>(T variable, T expression) where T : ValueExpression
@@ -45,8 +48,5 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static MethodBodyStatement AssignOrReturn<T>(T? variable, T expression) where T : ValueExpression
             => variable != null ? new AssignValueStatement(variable, expression) : Return(expression);
-
-        public static ValueExpression ThrowNewArgumentOutOfRangeException(string parameterName, ValueExpression actualValue, string message)
-            => Throw(New(typeof(ArgumentOutOfRangeException), Literal(parameterName), actualValue, Literal(message)));
     }
 }

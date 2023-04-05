@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -62,14 +64,27 @@ namespace AutoRest.CSharp.Output.Models.Types
             IsStringValueType = ValueType.Equals(typeof(string));
             IsIntValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long));
 
-            SerializationMethod = IsStringValueType ? null : IsExtensible ? CreateExtensibleSerializationMethod(this) : CreateSerializationMethod(this);
+            if (IsExtensible)
+            {
+                SerializationMethod = IsIntValueType ? CreateExtensibleSerializationMethod(this) : null;
+                DeserializationMethod = CreateExtensibleDeserializationMethod(this);
+                EqualsMethod = CreateEqualsMethod(this);
+            }
+            else
+            {
+                SerializationMethod = CreateSerializationMethod(this);
+                DeserializationMethod = CreateDeserializationMethod(this);
+                EqualsMethod = null;
+            }
         }
 
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }
         public bool IsStringValueType { get; }
         public bool IsIntValueType { get; }
+        public Method? EqualsMethod { get; }
         public Method? SerializationMethod { get; }
+        public Method DeserializationMethod { get; }
         public string? Description { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -93,6 +108,20 @@ namespace AutoRest.CSharp.Output.Models.Types
             return values;
         }
 
+        private Method CreateEqualsMethod(EnumType enumType)
+        {
+            var otherParameter = new Parameter("other", null, enumType.Type, null, Validation.None, null);
+            var signature = new MethodSignature(nameof(Equals), null, null, Public, typeof(bool), null, new[]{otherParameter});
+
+            var value = new MemberReference(null, "_value");
+            var otherValue = new MemberReference(otherParameter, "_value");
+            var bodyExpression = enumType.IsStringValueType
+                ? StringExpression.Equals(new StringExpression(value), new StringExpression(otherValue), StringComparison.InvariantCultureIgnoreCase)
+                : new InvokeStaticMethodExpression(enumType.ValueType, nameof(object.Equals), new[]{ value, otherValue });
+
+            return new Method(signature, bodyExpression);
+        }
+
         private static Method CreateExtensibleSerializationMethod(EnumType enumType)
         {
             var signature = new MethodSignature(GetSerializationMethodName(enumType), null, null, Internal, enumType.ValueType, null, Array.Empty<Parameter>());
@@ -104,26 +133,62 @@ namespace AutoRest.CSharp.Output.Models.Types
             var valueParameter = new Parameter("value", null, enumType.Type, null, Validation.None, null);
             var signature = new MethodSignature(GetSerializationMethodName(enumType), null, null, Public | Static | Extension, enumType.ValueType, null, new[]{valueParameter});
 
-            var bodyExpression = new SwitchExpression(valueParameter, CreateSwitchCases(enumType, valueParameter).ToArray());
+            var switchCases = enumType.Values
+                .Select(v => new SwitchCaseExpression(EnumValue(enumType, v), new ConstantExpression(v.Value)))
+                .Append(new SwitchCaseExpression(Dash, ThrowExpression(NewArgumentOutOfRangeException(enumType, valueParameter))))
+                .ToArray();
 
-            return new Method(signature, bodyExpression);
-
-            static IEnumerable<SwitchCaseExpression> CreateSwitchCases(EnumType enumType, Parameter valueParameter)
-            {
-                foreach (var enumTypeValue in enumType.Values)
-                {
-                    yield return new SwitchCaseExpression
-                    (
-                        EnumValue(enumType, enumTypeValue),
-                        new FormattableStringToExpression(enumTypeValue.Value.GetConstantFormattable())
-                    );
-                }
-
-                yield return new SwitchCaseExpression(Dash, ThrowNewArgumentOutOfRangeException(valueParameter.Name, valueParameter, $"Unknown {enumType.Declaration.Name} value."));
-            }
+            return new Method(signature, new SwitchExpression(valueParameter, switchCases));
         }
 
         private static string GetSerializationMethodName(EnumType enumType) => $"ToSerial{enumType.ValueType.Name.FirstCharToUpperCase()}";
+
+        private static ValueExpression NewArgumentOutOfRangeException(EnumType enumType, Parameter valueParameter)
+            => New(typeof(ArgumentOutOfRangeException), Nameof(valueParameter), valueParameter, Literal($"Unknown {enumType.Declaration.Name} value."));
+
+        private static Method CreateExtensibleDeserializationMethod(EnumType enumType)
+        {
+            var valueParameter = new Parameter("value", null, enumType.ValueType, null, Validation.None, null);
+            var signature = new OperatorSignature(false, $"Converts a string to a <see cref=\"{enumType.Declaration.Name}\"/>.", null, valueParameter, enumType.Type);
+            var bodyExpression = New(enumType.Type, valueParameter);
+            return new Method(signature, bodyExpression);
+        }
+
+        private static Method CreateDeserializationMethod(EnumType enumType)
+        {
+            var valueParameter = new Parameter("value", null, enumType.ValueType, null, Validation.None, null);
+            var signature = new MethodSignature($"To{enumType.Type.Name}", null, null, Public | Static | Extension, enumType.Type, null, new[]{valueParameter});
+
+            var bodyLines = new List<MethodBodyStatement>();
+            foreach (EnumTypeValue enumTypeValue in enumType.Values)
+            {
+                var enumValue = new ConstantExpression(enumTypeValue.Value);
+                ValueExpression condition;
+                if (enumType.IsStringValueType)
+                {
+                    var stringParameter = new StringExpression(valueParameter);
+                    var stringEnumValue = new StringExpression(enumValue);
+                    if (enumTypeValue.Value.Value is string strValue && strValue.All(char.IsAscii))
+                    {
+                        condition = StringComparerExpression.OrdinalIgnoreCase.Equals(stringParameter, stringEnumValue);
+                    }
+                    else
+                    {
+                        condition = StringExpression.Equals(stringParameter, stringEnumValue, StringComparison.InvariantCultureIgnoreCase);
+                    }
+                }
+                else
+                {
+                    condition = Equal(valueParameter, enumValue);
+                }
+
+                bodyLines.Add(new IfElseStatement(condition, Return(EnumValue(enumType, enumTypeValue)), null, true));
+            }
+
+            bodyLines.Add(Throw(NewArgumentOutOfRangeException(enumType, valueParameter)));
+
+            return new Method(signature, bodyLines);
+        }
 
         private static string CreateDescription(InputEnumTypeValue value)
         {

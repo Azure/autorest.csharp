@@ -177,22 +177,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("public ", methodBase.Modifiers.HasFlag(Public))
                 .AppendRawIf("internal ", methodBase.Modifiers.HasFlag(Internal))
                 .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(Protected))
-                .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private));
-
-            writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
+                .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private))
+                .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static));
 
             var method = methodBase as MethodSignature;
             if (method != null)
             {
-                if (method.ExplicitInterface is null)
-                {
-                    writer
-                        .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
-                        .AppendRawIf("override ", methodBase.Modifiers.HasFlag(Override))
-                        .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static));
-                }
-
-                writer.AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
+                writer
+                    .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
+                    .AppendRawIf("override ", methodBase.Modifiers.HasFlag(Override))
+                    .AppendRawIf("new ", methodBase.Modifiers.HasFlag(New))
+                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
 
                 if (method.ReturnType != null)
                 {
@@ -207,6 +202,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Append($"{method.ExplicitInterface}.");
                 }
+            }
+            else if (methodBase is OperatorSignature operatorSignature)
+            {
+                writer
+                    .AppendRaw(operatorSignature.IsExplicit ? "explicit " : "implicit ")
+                    .AppendRaw("operator ");
             }
 
             writer.Append($"{methodBase.Name}");
@@ -262,10 +263,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            writer.Line();
             foreach (var disabledWarning in disabledWarnings)
             {
-                writer.Line($"#pragma warning restore {disabledWarning}");
+                writer.Line();
+                writer.Append($"#pragma warning restore {disabledWarning}");
             }
 
             return outerScope;
@@ -283,7 +284,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodDocumentationSignature(this CodeWriter writer, MethodSignatureBase methodBase)
         {
-            writer.WriteXmlDocumentationParameters(methodBase.Modifiers.HasFlag(Public) ? methodBase.Parameters : methodBase.Parameters.Where(p => p.FormattableDescription is not null));
+            writer.WriteXmlDocumentationParameters(methodBase.Modifiers.HasFlag(Public) && methodBase is not OperatorSignature ? methodBase.Parameters : methodBase.Parameters.Where(p => p.FormattableDescription is not null));
 
             writer.WriteXmlDocumentationRequiredParametersException(methodBase.Parameters);
             writer.WriteXmlDocumentationNonEmptyParametersException(methodBase.Parameters);
@@ -454,7 +455,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter AppendEnumToString(this CodeWriter writer, EnumType enumType)
         {
-            writer.WriteValueExpression(new EnumExpression(enumType, new ValueExpression()).InvokeToString());
+            writer.WriteValueExpression(new EnumExpression(enumType, new ValueExpression()).ToSerial());
             return writer;
         }
 
@@ -647,6 +648,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.AppendRaw(" => ");
                     writer.WriteValueExpression(expression);
+                    writer.LineRaw(";");
                 }
             }
 

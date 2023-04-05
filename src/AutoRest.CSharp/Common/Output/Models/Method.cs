@@ -10,17 +10,17 @@ namespace AutoRest.CSharp.Common.Output.Models
 {
     internal class Method
     {
-        public MethodSignature Signature { get; }
+        public MethodSignatureBase Signature { get; }
         public IReadOnlyList<MethodBodyStatement>? Body { get; }
         public ValueExpression? BodyExpression { get; }
 
-        public Method(MethodSignature signature, IReadOnlyList<MethodBodyStatement> body)
+        public Method(MethodSignatureBase signature, IReadOnlyList<MethodBodyStatement> body)
         {
             Signature = signature;
             Body = body;
         }
 
-        public Method(MethodSignature signature, ValueExpression bodyExpression)
+        public Method(MethodSignatureBase signature, ValueExpression bodyExpression)
         {
             Signature = signature;
             BodyExpression = bodyExpression;

@@ -110,8 +110,8 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
 
             return TypeFactory.IsCollectionType(property.PropertyType)
-                ? new IfElseStatement(Snippets.InvokeOptional.IsCollectionDefined(propertyNameReference), writePropertyWithNullCheck, null)
-                : new IfElseStatement(Snippets.InvokeOptional.IsDefined(propertyNameReference), writePropertyWithNullCheck, null);
+                ? new IfElseStatement(InvokeOptional.IsCollectionDefined(propertyNameReference), writePropertyWithNullCheck, null)
+                : new IfElseStatement(InvokeOptional.IsDefined(propertyNameReference), writePropertyWithNullCheck, null);
         }
 
         private static MethodBodyStatement SerializeAdditionalProperties(Utf8JsonWriterExpression utf8JsonWriter, JsonAdditionalPropertiesSerialization? additionalProperties)
@@ -199,11 +199,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 case EnumType { IsIntValueType: true, IsExtensible: false } enumType:
                     return utf8JsonWriter.WriteNumberValue(new CastExpression(NullableValue(value, valueSerialization.Type), enumType.ValueType));
 
-                case EnumType { IsStringValueType: false } enumType:
-                    return utf8JsonWriter.WriteNumberValue(new EnumExpression(enumType, NullableValue(value, valueSerialization.Type)).InvokeToString());
+                case EnumType { IsIntValueType: true } enumType:
+                    return utf8JsonWriter.WriteNumberValue(new EnumExpression(enumType, NullableValue(value, valueSerialization.Type)).ToSerial());
 
                 case EnumType enumType:
-                    return utf8JsonWriter.WriteStringValue(new EnumExpression(enumType, NullableValue(value, valueSerialization.Type)).InvokeToString());
+                    return utf8JsonWriter.WriteStringValue(new EnumExpression(enumType, NullableValue(value, valueSerialization.Type)).ToSerial());
             }
 
             throw new NotSupportedException();
@@ -443,7 +443,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             if (jsonPropertySerialization.ValueType?.IsNullable == true)
             {
-                yield return new IfElseStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull), new MethodBodyStatement[]
+                yield return new IfElseStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull), new[]
                 {
                     Assign(propertyVariables[jsonPropertySerialization].Declaration, Null),
                     Continue
@@ -455,7 +455,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             {
                 if (Configuration.AzureArm && jsonPropertySerialization.ValueType?.Equals(typeof(Uri)) == true)
                 {
-                    yield return new IfElseStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull), new MethodBodyStatement[]
+                    yield return new IfElseStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull), new[]
                     {
                         Assign(propertyVariables[jsonPropertySerialization].Declaration, Null),
                         Continue
@@ -709,17 +709,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (TypeFactory.IsList(targetType))
             {
-                return Snippets.InvokeOptional.ToList(variable.Declaration);
+                return InvokeOptional.ToList(variable.Declaration);
             }
 
             if (TypeFactory.IsDictionary(targetType))
             {
-                return Snippets.InvokeOptional.ToDictionary(variable.Declaration);
+                return InvokeOptional.ToDictionary(variable.Declaration);
             }
 
             if (targetType is { IsValueType: true, IsNullable: true })
             {
-                return Snippets.InvokeOptional.ToNullable(variable.Declaration);
+                return InvokeOptional.ToNullable(variable.Declaration);
             }
 
             if (targetType.IsNullable)

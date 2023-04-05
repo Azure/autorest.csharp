@@ -167,52 +167,15 @@ namespace AutoRest.CSharp.Generation.Writers
             using (writer.Namespace(enumType.Declaration.Namespace))
             {
                 string declaredTypeName = enumType.Declaration.Name;
-
-                var isString = enumType.ValueType.FrameworkType == typeof(string);
-
                 using (writer.Scope($"internal static partial class {declaredTypeName}Extensions"))
                 {
                     if (enumType.SerializationMethod is { } serializationMethod)
                     {
                         writer.WriteMethod(serializationMethod);
                     }
-
-                    WriteEnumDeserializationMethod(writer, enumType, declaredTypeName, isString);
+                    writer.WriteMethod(enumType.DeserializationMethod);
                 }
             }
-        }
-
-        private static void WriteEnumDeserializationMethod(CodeWriter writer, EnumType schema, string declaredTypeName, bool isString)
-        {
-            using (writer.Scope($"public static {declaredTypeName} To{declaredTypeName}(this {schema.ValueType} value)"))
-            {
-                if (isString)
-                {
-                    foreach (EnumTypeValue value in schema.Values)
-                    {
-                        if (value.Value.Value is string strValue && strValue.All(char.IsAscii))
-                        {
-                            writer.Append($"if ({typeof(StringComparer)}.{nameof(StringComparer.OrdinalIgnoreCase)}.{nameof(StringComparer.Equals)}(value, {strValue:L}))");
-                        }
-                        else
-                        {
-                            writer.Append($"if ({schema.ValueType}.Equals(value, {value.Value.Value:L}");
-                            writer.Append($", {typeof(StringComparison)}.InvariantCultureIgnoreCase))");
-                        }
-                        writer.Line($" return {declaredTypeName}.{value.Declaration.Name};");
-                    }
-                }
-                else// int, and float
-                {
-                    foreach (EnumTypeValue value in schema.Values)
-                    {
-                        writer.Line($"if (value == {value.Value.Value:L}) return {declaredTypeName}.{value.Declaration.Name};");
-                    }
-                }
-
-                writer.Line($"throw new {typeof(ArgumentOutOfRangeException)}(nameof(value), value, \"Unknown {declaredTypeName} value.\");");
-            }
-            writer.Line();
         }
     }
 }

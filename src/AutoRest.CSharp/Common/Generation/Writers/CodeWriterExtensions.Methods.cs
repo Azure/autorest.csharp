@@ -8,6 +8,7 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
+using SwitchExpression = AutoRest.CSharp.Common.Output.Models.ValueExpressions.SwitchExpression;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -44,20 +45,43 @@ namespace AutoRest.CSharp.Generation.Writers
                         WriteMethodBodyStatement(writer, diagnosticScope.InnerStatement);
                     }
                     break;
-                case IfElseStatement(var condition, var ifBlock, var elseBlock):
+                case IfElseStatement(var condition, var ifBlock, var elseBlock, var inline):
                     writer.AppendRaw("if(");
                     writer.WriteValueExpression(condition);
-                    writer.LineRaw(")");
-                    using (writer.Scope())
+
+                    if (inline)
                     {
-                        WriteMethodBodyStatement(writer, ifBlock);
+                        writer.AppendRaw(") ");
+                        using (writer.AmbientScope())
+                        {
+                            WriteMethodBodyStatement(writer, ifBlock);
+                        }
+                    }
+                    else
+                    {
+                        writer.LineRaw(")");
+                        using (writer.Scope())
+                        {
+                            WriteMethodBodyStatement(writer, ifBlock);
+                        }
                     }
 
                     if (elseBlock is not null)
                     {
-                        using (writer.Scope($"else"))
+                        if (inline)
                         {
-                            WriteMethodBodyStatement(writer, elseBlock);
+                            using (writer.AmbientScope())
+                            {
+                                writer.AppendRaw("else ");
+                                WriteMethodBodyStatement(writer, elseBlock);
+                            }
+                        }
+                        else
+                        {
+                            using (writer.Scope($"else"))
+                            {
+                                WriteMethodBodyStatement(writer, elseBlock);
+                            }
                         }
                     }
 
@@ -267,22 +291,20 @@ namespace AutoRest.CSharp.Generation.Writers
                     break;
 
                 case SwitchExpression(var matchExpression, var cases):
-                    writer.WriteValueExpression(matchExpression);
-                    writer.AppendRaw(" switch ");
-
                     using (writer.AmbientScope())
                     {
                         writer.WriteValueExpression(matchExpression);
-                        writer.Append($"switch");
+                        writer.LineRaw(" switch ");
                         writer.LineRaw("{");
                         foreach (var switchCase in cases)
                         {
                             writer.WriteValueExpression(switchCase.Case);
                             writer.AppendRaw(" => ");
                             writer.WriteValueExpression(switchCase.Expression);
-                            writer.LineRaw(";");
+                            writer.LineRaw(",");
                         }
-                        writer.LineRaw("}");
+                        writer.RemoveTrailingComma();
+                        writer.AppendRaw("}");
                     }
 
                     break;
@@ -347,10 +369,13 @@ namespace AutoRest.CSharp.Generation.Writers
                         writer.AppendRaw(" ").WriteValueExpression(inner);
                     }
                     break;
-                case LiteralExpression({} literal, true):
+                case ConstantExpression(var constant):
+                    writer.WriteConstant(constant);
+                    break;
+                case LiteralExpression(var literal, true):
                     writer.Literal(literal).AppendRaw("u8");
                     break;
-                case LiteralExpression({} literal, false):
+                case LiteralExpression(var literal, false):
                     writer.Literal(literal);
                     break;
             }

@@ -63,9 +63,9 @@ namespace AutoRest.CSharp.Generation.Writers
                             _writer.WriteMethod(method);
                         }
 
-                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, clientMethod.ProtocolMethods[0].Signature, true);
+                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.ProtocolMethods[0].Signature, true);
                         _writer.WriteMethod(clientMethod.ProtocolMethods[0]);
-                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, clientMethod.ProtocolMethods[1].Signature, false);
+                        WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.ProtocolMethods[1].Signature, false);
                         _writer.WriteMethod(clientMethod.ProtocolMethods[1]);
                     }
 
@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             foreach (var protocolMethod in clientMethod.ProtocolMethods)
             {
-                WriteProtocolMethodDocumentation(writer, clientMethod, protocolMethod.Signature);
+                WriteProtocolMethodDocumentation(writer, clientMethod, (MethodSignature)protocolMethod.Signature);
                 writer.WriteMethod(protocolMethod);
             }
         }
@@ -345,7 +345,7 @@ namespace AutoRest.CSharp.Generation.Writers
             WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
         }
 
-        private static void WriteConvenienceMethodDocumentation(CodeWriter writer, MethodSignature convenienceMethod)
+        private static void WriteConvenienceMethodDocumentation(CodeWriter writer, MethodSignatureBase convenienceMethod)
         {
             writer.WriteMethodDocumentation(convenienceMethod);
             writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");

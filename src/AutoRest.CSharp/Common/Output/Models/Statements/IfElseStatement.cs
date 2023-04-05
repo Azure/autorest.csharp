@@ -5,5 +5,5 @@ using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 
 namespace AutoRest.CSharp.Common.Output.Models.Statements
 {
-    internal record IfElseStatement(ValueExpression Condition, MethodBodyStatement If, MethodBodyStatement? Else) : MethodBodyStatement;
+    internal record IfElseStatement(ValueExpression Condition, MethodBodyStatement If, MethodBodyStatement? Else, bool Inline = false) : MethodBodyStatement;
 }

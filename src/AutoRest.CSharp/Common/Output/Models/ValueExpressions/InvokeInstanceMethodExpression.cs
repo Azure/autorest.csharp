@@ -11,5 +11,6 @@ namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
     {
         public InvokeInstanceMethodExpression(ValueExpression? instance, string methodName) : this(instance, methodName, Array.Empty<ValueExpression>(), null, false) {}
         public InvokeInstanceMethodExpression(ValueExpression? instance, string methodName, ValueExpression arg) : this(instance, methodName, new[]{arg}, null, false) {}
+        public InvokeInstanceMethodExpression(ValueExpression? instance, string methodName, ValueExpression arg1, ValueExpression arg2) : this(instance, methodName, new[]{arg1, arg2}, null, false) {}
     }
 }
