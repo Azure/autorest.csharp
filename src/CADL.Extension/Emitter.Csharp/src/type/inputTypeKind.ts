@@ -8,7 +8,7 @@ export enum InputTypeKind {
     Date = "date",
     DateTime = "datetime",
     Dictionary = "Dictionary",
-    Duration = "DurationISO8601",
+    Duration = "duration",
     Enum = "Enum",
     ETag = "Etag",
     ExtensibleEnum = "ExtensibleEnum",
