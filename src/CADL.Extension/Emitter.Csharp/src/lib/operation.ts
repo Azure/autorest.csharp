@@ -3,7 +3,7 @@
 
 import { getOperationLink } from "@azure-tools/typespec-azure-core";
 import {
-    createDpgContext,
+    createSdkContext,
     isApiVersion,
     shouldGenerateConvenient,
     shouldGenerateProtocol
@@ -73,7 +73,7 @@ export function loadOperation(
     enums: Map<string, InputEnumType>
 ): InputOperation {
     const program = context.program;
-    const dpgContext = createDpgContext(context);
+    const sdkContext = createSdkContext(context);
     const {
         path: fullPath,
         operation: op,
@@ -159,10 +159,10 @@ export function loadOperation(
         }
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const generateProtocol: boolean = shouldGenerateProtocol(dpgContext, op);
+    const generateProtocol: boolean = shouldGenerateProtocol(sdkContext, op);
     const generateConvenience: boolean =
         requestMethod !== RequestMethod.PATCH &&
-        shouldGenerateConvenient(dpgContext, op);
+        shouldGenerateConvenient(sdkContext, op);
 
     /* handle lro */
     /* handle paging. */
@@ -238,7 +238,7 @@ export function loadOperation(
             } as InputConstant;
         }
         const requestLocation = requestLocationMap[location];
-        const isApiVer: boolean = isApiVersion(dpgContext, parameter);
+        const isApiVer: boolean = isApiVersion(sdkContext, parameter);
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";

@@ -2,12 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
-    Client,
-    createDpgContext,
+    SdkClient,
+    createSdkContext,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
-    OperationGroup
+    SdkOperationGroup,
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -138,7 +138,7 @@ export function createModelForService(
     let url: string = "";
     const convenienceOperations: HttpOperation[] = [];
     let lroMonitorOperations: Set<Operation>;
-    const dpgContext = createDpgContext(context);
+    const sdkContext = createSdkContext(context);
 
     //create endpoint parameter from servers
     if (servers !== undefined) {
@@ -158,10 +158,10 @@ export function createModelForService(
 
     lroMonitorOperations = getAllLroMonitorOperations(routes, program);
     const clients: InputClient[] = [];
-    const dpgClients = listClients(dpgContext);
+    const dpgClients = listClients(sdkContext);
     for (const client of dpgClients) {
         clients.push(emitClient(client));
-        const dpgOperationGroups = listOperationGroups(dpgContext, client);
+        const dpgOperationGroups = listOperationGroups(sdkContext, client);
         for (const dpgGroup of dpgOperationGroups) {
             clients.push(emitClient(dpgGroup, client));
         }
@@ -217,10 +217,10 @@ export function createModelForService(
     return clientModel;
 
     function emitClient(
-        client: Client | OperationGroup,
-        parent?: Client
+        client: SdkClient | SdkOperationGroup,
+        parent?: SdkClient
     ): InputClient {
-        const operations = listOperationsInOperationGroup(dpgContext, client);
+        const operations = listOperationsInOperationGroup(sdkContext, client);
         let clientDesc = "";
         if (operations.length > 0) {
             const container = ignoreDiagnostics(
@@ -231,13 +231,13 @@ export function createModelForService(
 
         const inputClient = {
             Name:
-                client.kind === ClientKind.DpgClient
+                client.kind === ClientKind.SdkClient
                     ? client.name
                     : client.type.name,
             Description: clientDesc,
             Operations: [],
             Protocol: {},
-            Creatable: client.kind === ClientKind.DpgClient,
+            Creatable: client.kind === ClientKind.SdkClient,
             Parent: parent?.name
         } as InputClient;
         for (const op of operations) {
