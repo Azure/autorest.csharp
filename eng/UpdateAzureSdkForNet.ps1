@@ -18,7 +18,7 @@ Invoke-Expression "$PSScriptRoot\UpdateGeneratorMetadata.ps1 -AutorestCSharpVers
 
 Write-Host "Installing emitter version $CadlEmitterVersion at $SdkRepoRoot"
 Push-Location $SdkRepoRoot
-npm install "@azure-tools/typespec-csharp@$CadlEmitterVersion" --no-lock-file
+npm install "@azure-tools/typespec-csharp@$CadlEmitterVersion --registry=https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/" --no-lock-file
 Pop-Location
 
 Invoke-Expression "$PSScriptRoot\UpdateAzureSdkCodes.ps1 -SdkRepoRoot $SdkRepoRoot -ServiceDirectoryFilters $($ServiceDirectoryFilters -Join ',') $(if ($ShowSummary) {'-ShowSummary'})"
