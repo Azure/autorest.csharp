@@ -6,7 +6,6 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Utilities;
@@ -279,7 +278,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return this;
         }
 
-        private string GetTemporaryVariable(string s)
+        protected string GetTemporaryVariable(string s)
         {
             if (IsAvailable(s))
             {
@@ -519,7 +518,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return AppendRaw(identifier);
         }
 
-        private CodeWriter Declaration(string declaration)
+        protected CodeWriter Declaration(string declaration)
         {
             foreach (var scope in _scopes)
             {
@@ -531,7 +530,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return Identifier(declaration);
         }
 
-        public CodeWriter Declaration(CodeWriterDeclaration declaration)
+        public virtual CodeWriter Declaration(CodeWriterDeclaration declaration)
         {
             declaration.SetActualName(GetTemporaryVariable(declaration.RequestedName));
             return Declaration(declaration.ActualName);
