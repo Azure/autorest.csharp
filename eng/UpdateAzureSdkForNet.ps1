@@ -16,8 +16,11 @@ $ErrorActionPreference = 'Stop'
 
 Invoke-Expression "$PSScriptRoot\UpdateGeneratorMetadata.ps1 -AutorestCSharpVersion $AutorestCSharpVersion -CadlEmitterVersion $CadlEmitterVersion -SdkRepoRoot $SdkRepoRoot"
 
-Write-Host "Installing emitter version $CadlEmitterVersion at $SdkRepoRoot"
 Push-Location $SdkRepoRoot
+Write-Host "Installing emitter version $CadlEmitterVersion at"(Get-Location)
+if (Test-Path ".npmrc") {
+    Write-Host "Registry file exists."
+}
 npm install "@azure-tools/typespec-csharp@$CadlEmitterVersion --registry=https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-js-test-autorest/npm/registry/" --no-lock-file
 Pop-Location
 
