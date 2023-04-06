@@ -16,7 +16,7 @@ $ErrorActionPreference = 'Stop'
 
 Invoke-Expression "$PSScriptRoot\UpdateGeneratorMetadata.ps1 -AutorestCSharpVersion $AutorestCSharpVersion -CadlEmitterVersion $CadlEmitterVersion -SdkRepoRoot $SdkRepoRoot"
 
-Write-Host "Install emitter version: $CadlEmitterVersion"
+Write-Host "Installing emitter version $CadlEmitterVersion at $SdkRepoRoot"
 Push-Location $SdkRepoRoot
 npm install "@azure-tools/typespec-csharp@$CadlEmitterVersion" --no-lock-file
 Pop-Location
