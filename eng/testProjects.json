@@ -8,8 +8,10 @@
         "models/property-types",
         "models/usage",
         "projection",
+        "special-words",
         "enums/extensible",
-        "hello"
+        "hello",
+        "collectionFormat"
     ],
     "TestServerProjects": [
         "additionalProperties",

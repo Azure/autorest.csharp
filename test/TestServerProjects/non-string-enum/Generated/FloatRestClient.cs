@@ -50,7 +50,7 @@ namespace non_string_enum
             {
                 request.Headers.Add("Content-Type", "application/json");
                 var content = new Utf8JsonRequestContent();
-                content.JsonWriter.WriteStringValue(input.Value.ToString());
+                content.JsonWriter.WriteNumberValue(input.Value.ToSerialSingle());
                 request.Content = content;
             }
             return message;
