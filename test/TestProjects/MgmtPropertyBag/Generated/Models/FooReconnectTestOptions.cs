@@ -22,21 +22,16 @@ namespace MgmtPropertyBag.Models
         }
 
         /// <summary> The parameters supplied to the Reconnect operation. </summary>
-        public FooData Data { get; set; } = null;
-
+        public FooData Data { get; set; }
         /// <summary> The filter to apply on the operation. </summary>
-        public string Filter { get; set; } = null;
-
+        public string Filter { get; set; }
         /// <summary> The Integer to use. </summary>
-        public int? Top { get; set; } = null;
-
+        public int? Top { get; set; }
         /// <summary> The String to use. </summary>
-        public string Orderby { get; set; } = null;
-
+        public string Orderby { get; set; }
         /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>
-        public ETag? IfMatch { get; set; } = null;
-
+        public ETag? IfMatch { get; set; }
         /// <summary> The ArrayOfPost5ItemsItem to use. </summary>
-        public IList<string> CountryOrRegions { get; } = null;
+        public IList<string> CountryOrRegions { get; } = new ChangeTrackingList<string>();
     }
 }
