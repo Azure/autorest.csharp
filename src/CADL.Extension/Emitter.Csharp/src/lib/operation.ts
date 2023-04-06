@@ -444,4 +444,3 @@ function getOperationGroupName(
     if (namespace) return namespace.name;
     else return "";
 }
-

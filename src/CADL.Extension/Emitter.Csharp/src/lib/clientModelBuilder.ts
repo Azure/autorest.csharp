@@ -17,7 +17,7 @@ import {
     getDoc,
     getNamespaceFullName,
     Operation,
-    ignoreDiagnostics,
+    ignoreDiagnostics
 } from "@typespec/compiler";
 import {
     getAuthentication,
@@ -375,4 +375,3 @@ function createContentTypeOrAcceptParameter(
                 : undefined
     } as InputParameter;
 }
-
