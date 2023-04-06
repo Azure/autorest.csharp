@@ -95,25 +95,24 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "model-namespace": options["model-namespace"],
                 "models-to-treat-empty-string-as-null":
                     options["models-to-treat-empty-string-as-null"],
-                "additional-intrinsic-types-to-treat-empty-string-as-null": options[
-                    "models-to-treat-empty-string-as-null"
-                ]
-                    ? options[
-                          "additional-intrinsic-types-to-treat-empty-string-as-null"
-                      ].concat(
-                          [
-                              "Uri",
-                              "Guid",
-                              "ResourceIdentifier",
-                              "DateTimeOffset"
-                          ].filter(
-                              (item) =>
-                                  options[
-                                      "additional-intrinsic-types-to-treat-empty-string-as-null"
-                                  ].indexOf(item) < 0
+                "additional-intrinsic-types-to-treat-empty-string-as-null":
+                    options["models-to-treat-empty-string-as-null"]
+                        ? options[
+                              "additional-intrinsic-types-to-treat-empty-string-as-null"
+                          ].concat(
+                              [
+                                  "Uri",
+                                  "Guid",
+                                  "ResourceIdentifier",
+                                  "DateTimeOffset"
+                              ].filter(
+                                  (item) =>
+                                      options[
+                                          "additional-intrinsic-types-to-treat-empty-string-as-null"
+                                      ].indexOf(item) < 0
+                              )
                           )
-                      )
-                    : undefined
+                        : undefined
             } as Configuration;
 
             await program.host.writeFile(

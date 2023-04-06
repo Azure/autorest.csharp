@@ -29,5 +29,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 declaration.SetDebuggerName(null);
             }
         }
+
+        public override string ToString() => ToString(false);
     }
 }
