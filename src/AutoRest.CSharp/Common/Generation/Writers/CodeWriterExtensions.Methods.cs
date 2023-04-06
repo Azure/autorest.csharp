@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     break;
                 case IfElseStatement(var condition, var ifBlock, var elseBlock, var inline):
-                    writer.AppendRaw("if(");
+                    writer.AppendRaw("if (");
                     writer.WriteValueExpression(condition);
 
                     if (inline)
@@ -294,7 +294,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     using (writer.AmbientScope())
                     {
                         writer.WriteValueExpression(matchExpression);
-                        writer.LineRaw(" switch ");
+                        writer.LineRaw(" switch");
                         writer.LineRaw("{");
                         foreach (var switchCase in cases)
                         {
@@ -304,6 +304,7 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.LineRaw(",");
                         }
                         writer.RemoveTrailingComma();
+                        writer.Line();
                         writer.AppendRaw("}");
                     }
 

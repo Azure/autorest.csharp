@@ -238,27 +238,27 @@ namespace Cadl.TestServer.EnumPropertiesBasic
 {
 internal static partial class DayOfTheWeekExtensions
 {
-public static string ToSerialString(this DayOfTheWeek value) => value switch
+public static string ToSerialString(this global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek value) => value switch
 {
-DayOfTheWeek.Monday => ""Monday"",
-DayOfTheWeek.Tuesday => ""Tuesday"",
-DayOfTheWeek.Wednesday => ""Wednesday"",
-DayOfTheWeek.Thursday => ""Thursday"",
-DayOfTheWeek.Friday => ""Friday"",
-DayOfTheWeek.Saturday => ""Saturday"",
-DayOfTheWeek.Sunday => ""Sunday"",
+global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Monday => ""Monday"",
+global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Tuesday => ""Tuesday"",
+global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Wednesday => ""Wednesday"",
+global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Thursday => ""Thursday"",
+global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Friday => ""Friday"",
+global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Saturday => ""Saturday"",
+global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Sunday => ""Sunday"",
 _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, ""Unknown DayOfTheWeek value."")
 };
 
-public static DayOfTheWeek ToDayOfTheWeek(this string value)
+public static global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek ToDayOfTheWeek(this string value)
 {
-if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Monday"")) return DayOfTheWeek.Monday;
-if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Tuesday"")) return DayOfTheWeek.Tuesday;
-if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Wednesday"")) return DayOfTheWeek.Wednesday;
-if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Thursday"")) return DayOfTheWeek.Thursday;
-if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Friday"")) return DayOfTheWeek.Friday;
-if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Saturday"")) return DayOfTheWeek.Saturday;
-if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Sunday"")) return DayOfTheWeek.Sunday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Monday"")) return global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Monday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Tuesday"")) return global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Tuesday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Wednesday"")) return global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Wednesday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Thursday"")) return global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Thursday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Friday"")) return global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Friday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Saturday"")) return global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Saturday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Sunday"")) return global::Cadl.TestServer.EnumPropertiesBasic.DayOfTheWeek.Sunday;
 throw new global::System.ArgumentOutOfRangeException(nameof(value), value, ""Unknown DayOfTheWeek value."");
 }
 }

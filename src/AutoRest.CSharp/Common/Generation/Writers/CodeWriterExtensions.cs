@@ -137,6 +137,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
             var outerScope = writer.WriteMethodDeclarationNoScope(methodBase, disabledWarnings);
+            writer.Line();
             var innerScope = writer.Scope();
             return Disposable.Create(() =>
             {
@@ -180,8 +181,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private))
                 .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static));
 
-            var method = methodBase as MethodSignature;
-            if (method != null)
+            if (methodBase is MethodSignature method)
             {
                 writer
                     .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
@@ -202,25 +202,30 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Append($"{method.ExplicitInterface}.");
                 }
+
+                writer.Append($"{methodBase.Name}");
+
+                if (method?.GenericArguments != null)
+                {
+                    writer.AppendRaw("<");
+                    foreach (var argument in method.GenericArguments)
+                    {
+                        writer.Append($"{argument:D},");
+                    }
+                    writer.RemoveTrailingComma();
+                    writer.AppendRaw(">");
+                }
             }
             else if (methodBase is OperatorSignature operatorSignature)
             {
                 writer
                     .AppendRaw(operatorSignature.IsExplicit ? "explicit " : "implicit ")
-                    .AppendRaw("operator ");
+                    .AppendRaw("operator ")
+                    .Append($"{operatorSignature.ToType}");
             }
-
-            writer.Append($"{methodBase.Name}");
-
-            if (method?.GenericArguments != null)
+            else
             {
-                writer.AppendRaw("<");
-                foreach (var argument in method.GenericArguments)
-                {
-                    writer.Append($"{argument:D},");
-                }
-                writer.RemoveTrailingComma();
-                writer.AppendRaw(">");
+                writer.Append($"{methodBase.Name}");
             }
 
             writer
@@ -237,10 +242,10 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.RemoveTrailingComma();
             writer.Append($")");
 
-            if (method?.GenericParameterConstraints != null)
+            if (methodBase is MethodSignature { GenericParameterConstraints: { } constraints})
             {
                 writer.Line();
-                foreach (var (argument, constraint) in method.GenericParameterConstraints)
+                foreach (var (argument, constraint) in constraints)
                 {
                     writer.Append($"where {argument:I}: {constraint}");
                 }
