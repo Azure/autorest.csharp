@@ -15,8 +15,12 @@ namespace MgmtOptionalConstant.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("passName"u8);
-            writer.WriteStringValue(PassName.ToString());
+            writer.WritePropertyName("requiredStringConstant"u8);
+            writer.WriteStringValue(RequiredStringConstant.ToString());
+            writer.WritePropertyName("requiredIntConstant"u8);
+            writer.WriteNumberValue(RequiredIntConstant.ToSerialInt32());
+            writer.WritePropertyName("requiredFloatConstant"u8);
+            writer.WriteNumberValue(RequiredFloatConstant.ToSerialSingle());
             if (Optional.IsDefined(Protocol))
             {
                 writer.WritePropertyName("protocol"u8);
@@ -31,13 +35,25 @@ namespace MgmtOptionalConstant.Models
             {
                 return null;
             }
-            PassName passName = default;
+            StringConstant requiredStringConstant = default;
+            IntConstant requiredIntConstant = default;
+            FloatConstant requiredFloatConstant = default;
             Optional<ProtocolType> protocol = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("passName"u8))
+                if (property.NameEquals("requiredStringConstant"u8))
                 {
-                    passName = new PassName(property.Value.GetString());
+                    requiredStringConstant = new StringConstant(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("requiredIntConstant"u8))
+                {
+                    requiredIntConstant = new IntConstant(property.Value.GetInt32());
+                    continue;
+                }
+                if (property.NameEquals("requiredFloatConstant"u8))
+                {
+                    requiredFloatConstant = new FloatConstant(property.Value.GetSingle());
                     continue;
                 }
                 if (property.NameEquals("protocol"u8))
@@ -51,7 +67,7 @@ namespace MgmtOptionalConstant.Models
                     continue;
                 }
             }
-            return new ModelWithRequiredConstant(passName, Optional.ToNullable(protocol));
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredFloatConstant, Optional.ToNullable(protocol));
         }
     }
 }

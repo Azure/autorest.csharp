@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace CadlFirstTest.Models
 {
-    /// <summary> The Friend. </summary>
+    /// <summary> this is not a friendly model but with a friendly name. </summary>
     public partial class Friend
     {
         /// <summary> Initializes a new instance of Friend. </summary>
