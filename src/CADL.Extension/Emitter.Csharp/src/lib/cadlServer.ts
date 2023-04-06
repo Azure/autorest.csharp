@@ -15,6 +15,7 @@ import {
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { RequestLocation } from "../type/requestLocation.js";
 import { getInputType } from "./model.js";
+import { SdkContext } from "@azure-tools/typespec-client-generator-core/dist/src/interfaces.js";
 
 export interface CadlServer {
     url: string;
@@ -38,7 +39,7 @@ function getDefaultValue(type: Type): any {
 }
 
 export function resolveServers(
-    program: Program,
+    context: SdkContext,
     servers: HttpServer[],
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
@@ -51,9 +52,6 @@ export function resolveServers(
             .replace("https://", "")
             .split("/")[0];
         for (const [name, prop] of server.parameters) {
-            // if (!validateValidServerVariable(program, prop)) {
-            //   continue;
-            // }
             const isEndpoint: boolean = endpoint === `{${name}}`;
             let defaultValue = undefined;
             const value = prop.default ? getDefaultValue(prop.default) : "";
@@ -63,7 +61,7 @@ export function resolveServers(
                       Kind: InputTypeKind.Uri,
                       IsNullable: false
                   } as InputPrimitiveType)
-                : getInputType(program, prop.type, models, enums);
+                : getInputType(context, prop.type, models, enums);
 
             if (value) {
                 defaultValue = {
@@ -74,7 +72,7 @@ export function resolveServers(
             const variable: InputParameter = {
                 Name: name,
                 NameInRequest: name,
-                Description: getDoc(program, prop),
+                Description: getDoc(context.program, prop),
                 Type: inputType,
                 Location: RequestLocation.Uri,
                 IsApiVersion:

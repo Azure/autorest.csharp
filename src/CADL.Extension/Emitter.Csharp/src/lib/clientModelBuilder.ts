@@ -8,6 +8,7 @@ import {
     listOperationGroups,
     listOperationsInOperationGroup,
     SdkOperationGroup,
+    SdkContext
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -17,7 +18,6 @@ import {
     getNamespaceFullName,
     Operation,
     ignoreDiagnostics,
-    Program
 } from "@typespec/compiler";
 import {
     getAuthentication,
@@ -76,6 +76,7 @@ export function createModelForService(
     service: Service
 ): CodeModel {
     const program = context.program;
+    const sdkContext = createSdkContext(context);
     const title = service.title;
     const serviceNamespaceType = service.type;
     const apiVersions: Set<string> = new Set<string>();
@@ -95,7 +96,7 @@ export function createModelForService(
         throw "No Api-Version Provided";
     }
     const description = getDoc(program, serviceNamespaceType);
-    const externalDocs = getExternalDocs(program, serviceNamespaceType);
+    const externalDocs = getExternalDocs(sdkContext, serviceNamespaceType);
 
     const servers = getServers(program, serviceNamespaceType);
     const apiVersionParam: InputParameter = {
@@ -138,11 +139,15 @@ export function createModelForService(
     let url: string = "";
     const convenienceOperations: HttpOperation[] = [];
     let lroMonitorOperations: Set<Operation>;
-    const sdkContext = createSdkContext(context);
 
     //create endpoint parameter from servers
     if (servers !== undefined) {
-        const cadlServers = resolveServers(program, servers, modelMap, enumMap);
+        const cadlServers = resolveServers(
+            sdkContext,
+            servers,
+            modelMap,
+            enumMap
+        );
         if (cadlServers.length > 0) {
             /* choose the first server as endpoint. */
             url = cadlServers[0].url;
@@ -156,7 +161,7 @@ export function createModelForService(
     }
     logger.info("routes:" + routes.length);
 
-    lroMonitorOperations = getAllLroMonitorOperations(routes, program);
+    lroMonitorOperations = getAllLroMonitorOperations(routes, sdkContext);
     const clients: InputClient[] = [];
     const dpgClients = listClients(sdkContext);
     for (const client of dpgClients) {
@@ -201,7 +206,7 @@ export function createModelForService(
         }
     }
 
-    const usages = getUsages(program, convenienceOperations);
+    const usages = getUsages(sdkContext, convenienceOperations);
     setUsage(usages, modelMap);
     setUsage(usages, enumMap);
 
@@ -265,12 +270,12 @@ export function createModelForService(
 
     function getAllLroMonitorOperations(
         routes: HttpOperation[],
-        program: Program
+        context: SdkContext
     ): Set<Operation> {
         const lroMonitorOperations = new Set<Operation>();
         for (const operation of routes) {
             const operationLink = getOperationLink(
-                program,
+                context.program,
                 operation.operation,
                 "polling"
             );
@@ -370,3 +375,4 @@ function createContentTypeOrAcceptParameter(
                 : undefined
     } as InputParameter;
 }
+

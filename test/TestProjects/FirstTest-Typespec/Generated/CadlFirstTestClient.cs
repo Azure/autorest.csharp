@@ -283,7 +283,7 @@ namespace CadlFirstTest
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="thing"> The Thing to use. </param>
+        /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
         public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
@@ -296,7 +296,7 @@ namespace CadlFirstTest
         }
 
         /// <summary> body parameter without body decorator. </summary>
-        /// <param name="thing"> The Thing to use. </param>
+        /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
         public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
@@ -359,7 +359,7 @@ namespace CadlFirstTest
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> The Friend to use. </param>
+        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
         public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend notFriend, CancellationToken cancellationToken = default)
@@ -372,7 +372,7 @@ namespace CadlFirstTest
         }
 
         /// <summary> Model can have its friendly name. </summary>
-        /// <param name="notFriend"> The Friend to use. </param>
+        /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
         public virtual Response<Friend> FriendlyModel(Friend notFriend, CancellationToken cancellationToken = default)
