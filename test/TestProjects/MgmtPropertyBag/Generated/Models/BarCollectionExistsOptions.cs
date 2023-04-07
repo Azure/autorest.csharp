@@ -28,18 +28,14 @@ namespace MgmtPropertyBag.Models
         /// <summary> The bar name. </summary>
         public string BarName { get; }
         /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>
-        public string IfMatch { get; set; } = null;
-
+        public string IfMatch { get; set; }
         /// <summary> The filter to apply on the operation. </summary>
-        public string Filter { get; set; } = null;
-
+        public string Filter { get; set; }
         /// <summary> The Integer to use. </summary>
-        public int? Top { get; set; } = null;
-
+        public int? Top { get; set; }
         /// <summary> Optional. Number of records to skip. </summary>
-        public int? Skip { get; set; } = null;
-
+        public int? Skip { get; set; }
         /// <summary> The items to query on the bar resource. </summary>
-        public IList<string> Items { get; } = null;
+        public IList<string> Items { get; }
     }
 }

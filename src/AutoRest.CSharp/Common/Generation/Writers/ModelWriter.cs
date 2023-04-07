@@ -96,9 +96,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
             writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
             writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
-            if (property.DefaultValue != null)
+            if (property.InitializationValue != null)
             {
-                writer.AppendRaw(" = ").Append(property.DefaultValue).Line($";");
+                writer.AppendRaw(" = ").Append(property.InitializationValue).Line($";");
             }
 
             writer.Line();
