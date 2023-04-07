@@ -31,7 +31,7 @@ namespace Models.Inheritance.Models
         }
 
         /// <summary> Discriminator. </summary>
-        public string Kind { get; internal protected set; }
+        internal string Kind { get; set; }
         /// <summary> Gets or sets the age. </summary>
         public int Age { get; set; }
     }

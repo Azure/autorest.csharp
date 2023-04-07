@@ -27,6 +27,6 @@ namespace SpecialWords.Models
         }
 
         /// <summary> Discriminator. </summary>
-        public string ModelKind { get; internal protected set; }
+        internal string ModelKind { get; set; }
     }
 }

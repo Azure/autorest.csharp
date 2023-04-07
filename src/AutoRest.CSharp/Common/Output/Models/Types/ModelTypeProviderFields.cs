@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (inputModelProperty.IsDiscriminator)
             {
                 fieldModifiers = Configuration.PublicDiscriminatorProperty ? Public : Internal;
-                setterModifiers = Configuration.PublicDiscriminatorProperty ? Internal | Protected : Protected;
+                setterModifiers = Configuration.PublicDiscriminatorProperty ? Internal | Protected : null;
             }
             else
             {
