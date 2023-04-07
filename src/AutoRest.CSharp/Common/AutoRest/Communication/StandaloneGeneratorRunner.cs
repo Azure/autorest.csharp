@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
         private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, bool value)
         {
-            var defaultValue = Configuration.GetDefaultBoolOptionValue(option, Configuration.AzureArm);
+            var defaultValue = Configuration.GetDefaultBoolOptionValue(option);
             if (!defaultValue.HasValue || defaultValue.Value != value)
             {
                 writer.WriteBoolean(option, value);
@@ -203,7 +203,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             return Path.GetRelativePath(Configuration.OutputFolder, sharedSourceFolder);
         }
 
-        private static bool ReadOption(JsonElement root, string option, bool isAzureArm)
+        private static bool ReadOption(JsonElement root, string option)
         {
             if (root.TryGetProperty(option, out JsonElement value))
             {
@@ -211,7 +211,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             }
             else
             {
-                return Configuration.GetDefaultBoolOptionValue(option, isAzureArm)!.Value;
+                return Configuration.GetDefaultBoolOptionValue(option)!.Value;
             }
         }
 
@@ -251,24 +251,23 @@ namespace AutoRest.CSharp.AutoRest.Communication
             root.TryGetProperty(nameof(Configuration.Options.ModelFactoryForHlc), out var oldModelFactoryEntriesElement);
             var oldModelFactoryEntries = Configuration.DeserializeArray(oldModelFactoryEntriesElement);
 
-            var isAzureArm = ReadOption(root, Configuration.Options.AzureArm, default);
             Configuration.Initialize(
                 Path.Combine(outputPath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
                 root.GetProperty(nameof(Configuration.Namespace)).GetString(),
                 root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
                 sharedSourceFolders.ToArray(),
                 saveInputs: false,
-                isAzureArm,
-                ReadOption(root, Configuration.Options.PublicClients, isAzureArm),
-                ReadOption(root, Configuration.Options.ModelNamespace, isAzureArm),
-                ReadOption(root, Configuration.Options.HeadAsBoolean, isAzureArm),
-                ReadOption(root, Configuration.Options.SkipCSProjPackageReference, isAzureArm),
-                ReadOption(root, Configuration.Options.Generation1ConvenienceClient, isAzureArm),
-                ReadOption(root, Configuration.Options.SingleTopLevelClient, isAzureArm),
-                ReadOption(root, Configuration.Options.SkipSerializationFormatXml, isAzureArm),
-                ReadOption(root, Configuration.Options.DisablePaginationTopRenaming, isAzureArm),
-                ReadOption(root, Configuration.Options.GenerateModelFactory, isAzureArm),
-                ReadOption(root, Configuration.Options.PublicDiscriminatorProperty, isAzureArm),
+                ReadOption(root, Configuration.Options.AzureArm),
+                ReadOption(root, Configuration.Options.PublicClients),
+                ReadOption(root, Configuration.Options.ModelNamespace),
+                ReadOption(root, Configuration.Options.HeadAsBoolean),
+                ReadOption(root, Configuration.Options.SkipCSProjPackageReference),
+                ReadOption(root, Configuration.Options.Generation1ConvenienceClient),
+                ReadOption(root, Configuration.Options.SingleTopLevelClient),
+                ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
+                ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
+                ReadOption(root, Configuration.Options.GenerateModelFactory),
+                ReadOption(root, Configuration.Options.PublicDiscriminatorProperty),
                 oldModelFactoryEntries,
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
