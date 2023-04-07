@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -29,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _operations = operations;
             _extensionForChildResources = extensionForChildResources;
             ExtendedResourceType = resourceType;
-            DefaultName = $"{resourceType.Name}Extension";
+            DefaultName = $"{resourceType.Name}Extension"; // TODO -- prepend RP name when the type is ArmCore type
         }
 
         public override bool IsInitializedByProperties => true;
@@ -114,10 +115,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             // here we have to capsulate the MgmtClientOperation again to remove the extra "extension parameter" we added when constructing them in MgmtExtension.EnsureClientOperations
             // and here we need to regroup these MgmtClientOperations when they cannot be overloard of each other
-            var operationDict = new Dictionary<MgmtClientOperationKey, List<MgmtClientOperation>>();
+            var operationDict = new Dictionary<string, List<MgmtClientOperation>>();
             foreach (var operation in _operations)
             {
-                operationDict.AddInList(new(operation.MethodSignature), operation);
+                operationDict.AddInList(GetMgmtClientOperationKey(operation.MethodSignature), operation);
             }
 
             foreach (var (_, operations) in operationDict)
@@ -148,18 +149,21 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultAccessibility => "public";
 
-        private record struct MgmtClientOperationKey
+        /// <summary>
+        /// Construct a key for overload of this method signature.
+        /// The format of this key is like "MethodName(TypeOfParamter1,TypeOfParamter2,...,TypeOfLastParameter)"
+        /// </summary>
+        /// <param name="methodSignature"></param>
+        /// <returns></returns>
+        private static string GetMgmtClientOperationKey(MethodSignature methodSignature)
         {
-            public string OperationName { get; }
+            var builder = new StringBuilder();
+            builder.Append(methodSignature.Name).Append("(");
+            // all methods here should be extension methods, therefore we skip the first parameter which is the extension method parameter "this" and in this context, it is actually myself
+            builder.AppendJoin(',', methodSignature.Parameters.Skip(1).Select(p => p.Type.ToString()));
+            builder.Append(")");
 
-            public IEnumerable<CSharpType> ParameterTypes { get; }
-
-            public MgmtClientOperationKey(MethodSignature methodSignature)
-            {
-                OperationName = methodSignature.Name;
-                // all methods here should be extension methods, therefore we skip the first parameter which is the extension method parameter "this" and in this context, it is actually myself
-                ParameterTypes = methodSignature.Parameters.Skip(1).Select(parameter => parameter.Type);
-            }
+            return builder.ToString();
         }
     }
 
