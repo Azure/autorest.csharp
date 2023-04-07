@@ -335,6 +335,17 @@
                 "modelAsString": false
             }
         },
+        "FloatConstantSchema": {
+            "type": "number",
+            "description": "A constant based on float",
+            "enum": [
+                3.14
+            ],
+            "x-ms-enum": {
+                "name": "FloatConstant",
+                "modelAsString": false
+            }
+        },
         "ModelWithOptionalConstant": {
             "properties": {
                 "optionalStringConstant": {
@@ -342,6 +353,9 @@
                 },
                 "optionalIntConstant": {
                     "$ref": "#/definitions/IntConstantSchema"
+                },
+                "optionalFloatConstant": {
+                    "$ref": "#/definitions/FloatConstantSchema"
                 },
                 "settingName": {
                     "type": "string",
@@ -366,6 +380,9 @@
                 "requiredIntConstant": {
                     "$ref": "#/definitions/IntConstantSchema"
                 },
+                "requiredFloatConstant": {
+                    "$ref": "#/definitions/FloatConstantSchema"
+                },
                 "protocol": {
                     "type": "string",
                     "description": "Specifies the protocol of WinRM listener. <br><br> Possible values are: <br>**http** <br><br> **https**",
@@ -381,7 +398,7 @@
             },
             "description": "Describes Protocol and thumbprint of Windows Remote Management listener",
             "required": [
-                "requiredStringConstant", "requiredIntConstant"
+                "requiredStringConstant", "requiredIntConstant", "requiredFloatConstant"
             ]
         },
         "OptionalMachineProperties": {

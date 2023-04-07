@@ -208,8 +208,7 @@ public override string ToString() => _value;
 namespace Cadl.TestServer.EnumPropertiesBasic
 {
 /// <summary> Represents the days of the week using a standard, non-string enum. </summary>
-public enum DayOfTheWeek
-{
+public enum DayOfTheWeek{
 /// <summary> Monday. </summary>
 Monday,
 /// <summary> Tuesday. </summary>
