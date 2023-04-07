@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Input.Source
         private List<IMethodSymbol>? _methodSet;
         private List<IMethodSymbol> MethodSet => _methodSet ??= EnsureMethodSet();
 
-        public static async Task<CompilationInput?> TryCreate(string? existingProjectFolder)
+        public static async Task<CompilationInput?> TryCreate()
         {
             return Configuration.ExistingProjectFolder != null ?
                 new ProtocolCompilationInput(await GeneratedCodeWorkspace.CreateExistingCodeProject(Configuration.ExistingProjectFolder).GetCompilationAsync()) : null;

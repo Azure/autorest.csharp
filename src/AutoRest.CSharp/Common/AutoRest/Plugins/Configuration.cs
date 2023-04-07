@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
 using Azure.Core;
+using Microsoft.CodeAnalysis.Text;
 
 namespace AutoRest.CSharp.Input
 {
@@ -136,9 +137,52 @@ namespace AutoRest.CSharp.Input
             _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
         }
 
+        private static string? DownloadLatestContract(string projectFolder)
+        {
+            if (AzureArm || Generation1ConvenienceClient)
+            {
+                return null;
+            }
+
+            // projectFolder = "D:\\GIT\\azure-sdk-for-net\\sdk\\analysisservices\\Azure.ResourceManager.Analysis\\src";
+            int sdkFolderIndex = projectFolder.LastIndexOf("sdk", StringComparison.InvariantCultureIgnoreCase);
+            if (sdkFolderIndex == -1)
+            {
+                return null;
+            }
+
+            string rootFolder = projectFolder.Substring(0, sdkFolderIndex);
+            var scriptPath = Path.Join(rootFolder, "eng", "common", "scripts", "Download-Latest-Contract.ps1");
+            // var scriptPath = "D:\\GIT\\sdk-for-pr\\eng\\common\\scripts\\Download-Latest-Contract.ps1";
+            if (File.Exists(scriptPath))
+            {
+                string projectDirectory = projectFolder.EndsWith("src") ? Path.GetFullPath(Path.Join(projectFolder, "..")) : projectFolder;
+                // projectDirectory = "D:\\GIT\\sdk-for-pr\\sdk\\analysisservices\\Azure.ResourceManager.Analysis";
+                var scriptStartInfo = new ProcessStartInfo("pwsh", $"-ExecutionPolicy ByPass {scriptPath} {projectDirectory}")
+                {
+                    RedirectStandardOutput = false,
+                    RedirectStandardError = false,
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    WorkingDirectory = rootFolder
+                };
+                var scriptProcess = Process.Start(scriptStartInfo);
+                if (scriptProcess != null)
+                {
+                    scriptProcess.WaitForExit();
+
+                    string projectName = new DirectoryInfo(projectDirectory).Name;
+                    string relativeProject = projectFolder.Substring(sdkFolderIndex);
+                    return Path.GetFullPath(Path.Join(rootFolder, "..", "sparse-spec", "sdk", projectName, relativeProject));
+                }
+            }
+
+            return null;
+        }
+
         private static string? _outputFolder;
         public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
-        public static string? ExistingProjectFolder { get; private set; }
+        public static string? ExistingProjectFolder { get; internal set; }
         public static string? Namespace { get; private set; }
         public static string? LibraryName { get; private set; }
 
@@ -209,61 +253,6 @@ namespace AutoRest.CSharp.Input
                 mgmtConfiguration: MgmtConfiguration.GetConfiguration(autoRest),
                 mgmtTestConfiguration: MgmtTestConfiguration.GetConfiguration(autoRest)
             );
-        }
-
-        private static string DownloadLatestContract(string projectFolder)
-        {
-            var gitStartInfo = new ProcessStartInfo("git", "rev-parse --show-toplevel")
-            {
-                RedirectStandardOutput = true,
-                RedirectStandardError = true
-            };
-            var gitProcess = Process.Start(gitStartInfo);
-            string rootFolder = string.Empty;
-            if (gitProcess != null)
-            {
-                rootFolder = gitProcess.StandardOutput.ReadToEnd();
-                gitProcess.WaitForExit();
-            }
-
-            if (rootFolder != string.Empty)
-            {
-                rootFolder = rootFolder.TrimEnd(Environment.NewLine.ToCharArray());
-                var scriptPath = Path.Join(rootFolder, "eng", "common", "scripts", "Download-Latest-Contract.ps1");
-                // var scriptPath = "D:\\GIT\\sdk-for-pr\\eng\\common\\scripts\\Download-Latest-Contract.ps1";
-                if (File.Exists(scriptPath))
-                {
-                    if (projectFolder.EndsWith("src"))
-                    {
-                        projectFolder = Path.Join(projectFolder, "..");
-                    }
-                    projectFolder = "D:\\GIT\\sdk-for-pr\\sdk\\analysisservices\\Azure.ResourceManager.Analysis";
-                    var scriptStartInfo = new ProcessStartInfo("pwsh", $"-ExecutionPolicy ByPass {scriptPath} {projectFolder}")
-                    {
-                        RedirectStandardOutput = true,
-                        RedirectStandardError = true
-                    };
-                    var scriptProcess = Process.Start(scriptStartInfo);
-                    if (scriptProcess != null)
-                    {
-                        var scriptOutput = scriptProcess.StandardOutput.ReadToEnd();
-                        scriptProcess.WaitForExit();
-
-                        if (scriptOutput != null)
-                        {
-                            string anchor = "Latest contract found: ";
-                            var indexOfPath = scriptOutput.IndexOf(anchor);
-                            if (indexOfPath > 0)
-                            {
-                                string latestPath = scriptOutput.Substring(indexOfPath + anchor.Length);
-                                return latestPath;
-                            }
-                        }
-                    }
-                }
-            }
-
-            return string.Empty;
         }
 
         private static T GetOptionEnumValue<T>(IPluginCommunication autoRest, string option) where T : struct, Enum
