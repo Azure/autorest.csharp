@@ -180,10 +180,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CollapseRequestCondition-LowLevel\\Generated"
     },
-    "CollectionFormat-Typespec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CollectionFormat-Typespec\\Generated"
-    },
     "constants": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
@@ -616,6 +612,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\authentication\\union\\Generated"
     },
+    "typespec-collectionFormat": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\collectionFormat\\Generated"
+    },
     "typespec-enums/extensible": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\enums\\extensible\\Generated"
@@ -639,6 +639,10 @@
     "typespec-projection": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\projection\\Generated"
+    },
+    "typespec-special-words": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-words\\Generated"
     },
     "url": {
       "commandName": "Project",
