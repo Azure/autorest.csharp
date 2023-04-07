@@ -19,11 +19,13 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal class MethodParametersBuilder
     {
-        internal sealed record ParameterLink(IReadOnlyList<Parameter> ConvenienceParameters, IReadOnlyList<Parameter> ProtocolParameters, IReadOnlyList<JsonPropertySerialization>? IntermediateSerialization)
+        internal sealed record ParameterLink(IReadOnlyList<Parameter> ConvenienceParameters, IReadOnlyList<Parameter> ProtocolParameters, IReadOnlyList<JsonSpreadParameterSerialization>? IntermediateSerialization)
         {
             public ParameterLink(Parameter parameter) : this(new[]{parameter}, new[]{parameter}, null){}
             public ParameterLink(Parameter convenienceParameters, Parameter protocolParameters) : this(new[]{convenienceParameters}, new[]{protocolParameters}, null){}
         }
+
+        internal sealed record JsonSpreadParameterSerialization(Parameter Parameter, string SerializedName, JsonSerialization ValueSerialization, bool IsRequired);
 
         private static readonly Dictionary<string, RequestConditionHeaders> ConditionRequestHeader = new(StringComparer.OrdinalIgnoreCase)
         {
@@ -294,7 +296,7 @@ namespace AutoRest.CSharp.Output.Models
             var model = inputParameter.Type as InputModelType;
             var requiredConvenienceMethodParameters = new List<Parameter>();
             var optionalConvenienceMethodParameters = new List<Parameter>();
-            var intermediateSerialization = new List<JsonPropertySerialization>();
+            var intermediateSerialization = new List<JsonSpreadParameterSerialization>();
             while (model is not null)
             {
                 foreach (var property in model.Properties)
@@ -310,9 +312,8 @@ namespace AutoRest.CSharp.Output.Models
                     var parameter = new Parameter(property.Name, property.Description, convenienceMethodParameterType, defaultValue, validation, initializer);
 
                     var serializedName = property.SerializedName ?? property.Name;
-                    var optionalViaNullability = parameter is { IsOptionalInSignature: true, Type.IsNullable: false } && !TypeFactory.IsCollectionType(parameter.Type);
                     var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, parameter.Type, false);
-                    var propertySerialization = new JsonPropertySerialization(string.Empty, parameter.Name, serializedName, parameter.Type, parameter.Type, valueSerialization, !parameter.IsOptionalInSignature, false, false, optionalViaNullability);
+                    var serialization = new JsonSpreadParameterSerialization(parameter, serializedName, valueSerialization, property.IsRequired);
 
                     if (parameter.IsOptionalInSignature)
                     {
@@ -322,7 +323,7 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         requiredConvenienceMethodParameters.Add(parameter);
                     }
-                    intermediateSerialization.Add(propertySerialization);
+                    intermediateSerialization.Add(serialization);
                 }
 
                 model = model.BaseModel;

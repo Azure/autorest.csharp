@@ -100,27 +100,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 : SerializeExpression(utf8JsonWriter, property.ValueSerialization, propertyNameReference);
 
             MethodBodyStatement writeProperty = new[]{writePropertyNameLine, writePropertyValueBlock};
-
-            if (TypeFactory.IsCollectionType(property.PropertyType))
-            {
-                if (property.ValueType is not { IsNullable: true })
-                {
-                    return property.IsRequired
-                        ? writeProperty
-                        : new IfElseStatement(InvokeOptional.IsCollectionDefined(propertyNameReference), writeProperty, null);
-                }
-
-                return property.IsRequired
-                    ? new IfElseStatement(IsNotNull(propertyNameReference), writeProperty, utf8JsonWriter.WriteNull(property.SerializedName))
-                    : new IfElseStatement(And(IsNotNull(propertyNameReference), InvokeOptional.IsCollectionDefined(propertyNameReference)), writeProperty, null);
-            }
-
             MethodBodyStatement writePropertyWithNullCheck = property.ValueType is { IsNullable: true }
                 ? new IfElseStatement(IsNotNull(propertyNameReference), writeProperty, utf8JsonWriter.WriteNull(property.SerializedName))
                 : writeProperty;
 
-            return property.IsRequired
-                ? writePropertyWithNullCheck
+            if (property.IsRequired)
+            {
+                return writePropertyWithNullCheck;
+            }
+
+            return TypeFactory.IsCollectionType(property.PropertyType)
+                ? new IfElseStatement(InvokeOptional.IsCollectionDefined(propertyNameReference), writePropertyWithNullCheck, null)
                 : new IfElseStatement(InvokeOptional.IsDefined(propertyNameReference), writePropertyWithNullCheck, null);
         }
 

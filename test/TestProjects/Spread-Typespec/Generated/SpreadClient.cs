@@ -565,27 +565,13 @@ namespace Spread
             writer.WriteStringValue(name);
             if (Optional.IsDefined(color))
             {
-                if (color != null)
-                {
-                    writer.WritePropertyName("color"u8);
-                    writer.WriteStringValue(color);
-                }
-                else
-                {
-                    writer.WriteNull("color");
-                }
+                writer.WritePropertyName("color"u8);
+                writer.WriteStringValue(color);
             }
             if (Optional.IsDefined(age))
             {
-                if (age != null)
-                {
-                    writer.WritePropertyName("age"u8);
-                    writer.WriteNumberValue(age.Value);
-                }
-                else
-                {
-                    writer.WriteNull("age");
-                }
+                writer.WritePropertyName("age"u8);
+                writer.WriteNumberValue(age.Value);
             }
             writer.WritePropertyName("items"u8);
             writer.WriteStartArray();
@@ -634,27 +620,13 @@ namespace Spread
             writer.WriteStringValue(name);
             if (Optional.IsDefined(color))
             {
-                if (color != null)
-                {
-                    writer.WritePropertyName("color"u8);
-                    writer.WriteStringValue(color);
-                }
-                else
-                {
-                    writer.WriteNull("color");
-                }
+                writer.WritePropertyName("color"u8);
+                writer.WriteStringValue(color);
             }
             if (Optional.IsDefined(age))
             {
-                if (age != null)
-                {
-                    writer.WritePropertyName("age"u8);
-                    writer.WriteNumberValue(age.Value);
-                }
-                else
-                {
-                    writer.WriteNull("age");
-                }
+                writer.WritePropertyName("age"u8);
+                writer.WriteNumberValue(age.Value);
             }
             writer.WritePropertyName("items"u8);
             writer.WriteStartArray();

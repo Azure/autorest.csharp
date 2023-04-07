@@ -17,6 +17,7 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -460,9 +461,7 @@ namespace AutoRest.CSharp.Output.Models
                     case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateSerialization: {} serializations }:
                         statements.Add(Var(protocolParameter.Name, Utf8JsonRequestContentExpression.New(), out var requestContent));
                         statements.Add(Var("writer", requestContent.JsonWriter, out var utf8JsonWriter));
-                        statements.Add(utf8JsonWriter.WriteStartObject());
-                        statements.Add(JsonSerializationMethodsBuilder.WriteProperties(utf8JsonWriter, serializations).ToArray());
-                        statements.Add(utf8JsonWriter.WriteEndObject());
+                        statements.Add(CreateSpreadConversion(utf8JsonWriter, serializations).AsStatement());
 
                         createRequestArguments.Add(requestContent);
                         break;
@@ -502,9 +501,7 @@ namespace AutoRest.CSharp.Output.Models
                     case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateSerialization: {} serializations }:
                         yield return Var(protocolParameter.Name, Utf8JsonRequestContentExpression.New(), out var requestContent);
                         yield return Var("writer", requestContent.JsonWriter, out var utf8JsonWriter);
-                        yield return utf8JsonWriter.WriteStartObject();
-                        yield return JsonSerializationMethodsBuilder.WriteProperties(utf8JsonWriter, serializations).ToArray();
-                        yield return utf8JsonWriter.WriteEndObject();
+                        yield return CreateSpreadConversion(utf8JsonWriter, serializations).AsStatement();
 
                         protocolMethodArguments.Add(requestContent);
                         break;
@@ -513,6 +510,40 @@ namespace AutoRest.CSharp.Output.Models
                         break;
                 }
             }
+        }
+
+        private static IEnumerable<MethodBodyStatement> CreateSpreadConversion(Utf8JsonWriterExpression utf8JsonWriter, IReadOnlyList<MethodParametersBuilder.JsonSpreadParameterSerialization> serializations)
+        {
+            yield return utf8JsonWriter.WriteStartObject();
+            foreach (var (parameter, serializedName, valueSerialization, isRequired) in serializations)
+            {
+                yield return CreateSpreadWriteProperty(utf8JsonWriter, parameter, serializedName, valueSerialization, isRequired);
+            }
+            yield return utf8JsonWriter.WriteEndObject();
+        }
+
+        private static MethodBodyStatement CreateSpreadWriteProperty(Utf8JsonWriterExpression utf8JsonWriter, Parameter parameter, string serializedName, JsonSerialization valueSerialization, bool isRequired)
+        {
+            var writeProperty = new[]
+            {
+                utf8JsonWriter.WritePropertyName(serializedName),
+                JsonSerializationMethodsBuilder.SerializeExpression(utf8JsonWriter, valueSerialization, parameter)
+            };
+
+            if (isRequired)
+            {
+                return parameter.Type.IsNullable
+                    ? new IfElseStatement(IsNotNull(parameter), writeProperty, utf8JsonWriter.WriteNull(serializedName))
+                    : writeProperty;
+            }
+
+            var condition = TypeFactory.IsCollectionType(parameter.Type)
+                ? parameter.Type.IsNullable
+                    ? And(IsNotNull(parameter), InvokeOptional.IsCollectionDefined(parameter))
+                    : InvokeOptional.IsCollectionDefined(parameter)
+                : InvokeOptional.IsDefined(parameter);
+
+            return new IfElseStatement(condition, writeProperty, null);
         }
 
         private static HttpMessageExpression InvokeCreateRequestMethod(string methodName, IEnumerable<Parameter> parameters)
