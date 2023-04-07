@@ -61,16 +61,24 @@ namespace AutoRest.TestServer.Tests
         public void PutNoModelAsStringNoRequiredOneValueNoDefault_HasNoRequiredDefaultParam()
         {
             var method = TypeAsserts.HasPublicInstanceMethod(typeof(ContantsClient), "PutNoModelAsStringNoRequiredOneValueNoDefaultAsync");
-            Assert.AreEqual(1, method.GetParameters().Length);
+            Assert.AreEqual(2, method.GetParameters().Length);
+
             TypeAsserts.HasParameter(method, "cancellationToken");
+            var paramInfo = TypeAsserts.HasParameter(method, "input");
+            Assert.AreEqual(typeof(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum?), paramInfo.ParameterType);
+            Assert.True(paramInfo.HasDefaultValue);
         }
 
         [Test]
         public void PutNoModelAsStringNoRequiredOneValueDefault_HasNoRequiredDefaultParam()
         {
             var method = TypeAsserts.HasPublicInstanceMethod(typeof(ContantsClient), "PutNoModelAsStringNoRequiredOneValueDefaultAsync");
-            Assert.AreEqual(1, method.GetParameters().Length);
+            Assert.AreEqual(2, method.GetParameters().Length);
+
             TypeAsserts.HasParameter(method, "cancellationToken");
+            var paramInfo = TypeAsserts.HasParameter(method, "input");
+            Assert.AreEqual(typeof(NoModelAsStringNoRequiredOneValueDefaultOpEnum?), paramInfo.ParameterType);
+            Assert.True(paramInfo.HasDefaultValue);
         }
 
         [Test]
