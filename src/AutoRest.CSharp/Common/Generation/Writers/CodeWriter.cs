@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         Declaration(declaration);
                         break;
                     case CodeWriterDeclaration declaration:
-                        Identifier(declaration.ActualName);
+                        Append(declaration);
                         break;
                     case var _ when isLiteralFormat:
                         Literal(argument);
@@ -673,7 +673,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return codeWriterScope;
         }
 
-        public void Append(CodeWriterDeclaration declaration)
+        public virtual void Append(CodeWriterDeclaration declaration)
         {
             Identifier(declaration.ActualName);
         }

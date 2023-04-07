@@ -30,6 +30,18 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        public override void Append(CodeWriterDeclaration declaration)
+        {
+            try
+            {
+                Identifier(declaration.ActualName);
+            }
+            catch (InvalidOperationException)
+            {
+                Identifier(declaration.RequestedName);
+            }
+        }
+
         public override string ToString() => ToString(false);
     }
 }

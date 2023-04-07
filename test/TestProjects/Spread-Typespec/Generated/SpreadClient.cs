@@ -594,22 +594,15 @@ namespace Spread
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(elements))
+            if (elements != null && Optional.IsCollectionDefined(elements))
             {
-                if (elements != null)
+                writer.WritePropertyName("elements"u8);
+                writer.WriteStartArray();
+                foreach (var item in elements)
                 {
-                    writer.WritePropertyName("elements"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in elements)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
-                else
-                {
-                    writer.WriteNull("elements");
-                }
+                writer.WriteEndArray();
             }
             writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -670,22 +663,15 @@ namespace Spread
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            if (Optional.IsCollectionDefined(elements))
+            if (elements != null && Optional.IsCollectionDefined(elements))
             {
-                if (elements != null)
+                writer.WritePropertyName("elements"u8);
+                writer.WriteStartArray();
+                foreach (var item in elements)
                 {
-                    writer.WritePropertyName("elements"u8);
-                    writer.WriteStartArray();
-                    foreach (var item in elements)
-                    {
-                        writer.WriteStringValue(item);
-                    }
-                    writer.WriteEndArray();
+                    writer.WriteStringValue(item);
                 }
-                else
-                {
-                    writer.WriteNull("elements");
-                }
+                writer.WriteEndArray();
             }
             writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
