@@ -583,7 +583,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     using (_writer.Scope($"else"))
                     {
-                        _writer.Line($"throw new InvalidOperationException($\"{{{This.BranchIdVariableName}.ResourceType}} is not supported here\");");
+                        _writer.Line($"throw new {typeof(InvalidOperationException)}($\"{{{This.BranchIdVariableName}.ResourceType}} is not supported here\");");
                     }
                 }
                 else if (escapeBranches.Count == 1)
