@@ -1,19 +1,18 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi";
-import "@azure-tools/cadl-dpg";
+import "@typespec/rest";
+import "@azure-tools/typespec-client-generator-core";
 
 @service(
     {
-        title: "Convenience methods in CADL",
+        title: "Convenience methods in Typespec",
         version: "0.1.0"
     }
 )
-@doc("CADL project to test various types of convenience methods.")
+@doc("Typespec project to test various types of convenience methods.")
 namespace ConvenienceInCadl;
 
-using Cadl.Http;
-using Cadl.Rest;
-using Azure.DPG;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 
 @doc("A model.")
 model Model {

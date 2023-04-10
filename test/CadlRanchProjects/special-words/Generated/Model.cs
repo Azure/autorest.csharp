@@ -48,47 +48,30 @@ namespace SpecialWords
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<BaseModel>> GetModelValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BaseModel>> GetModelAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Model.GetModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetModelAsync(context).ConfigureAwait(false);
-                return Response.FromValue(BaseModel.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetModelAsync(context).ConfigureAwait(false);
+            return Response.FromValue(BaseModel.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<BaseModel> GetModelValue(CancellationToken cancellationToken = default)
+        public virtual Response<BaseModel> GetModel(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Model.GetModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetModel(context);
-                return Response.FromValue(BaseModel.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetModel(context);
+            return Response.FromValue(BaseModel.FromResponse(response), response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='GetModelAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetModelAsync(RequestContext context = null)
+        public virtual async Task<Response> GetModelAsync(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("Model.GetModel");
             scope.Start();
             try
@@ -104,11 +87,14 @@ namespace SpecialWords
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Model.xml" path="doc/members/member[@name='GetModel(RequestContext)']/*" />
-        public virtual Response GetModel(RequestContext context = null)
+        public virtual Response GetModel(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("Model.GetModel");
             scope.Start();
             try

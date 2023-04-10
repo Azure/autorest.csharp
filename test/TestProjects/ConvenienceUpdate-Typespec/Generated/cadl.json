@@ -1,7 +1,7 @@
 {
  "$id": "1",
  "Name": "ConvenienceInCadl",
- "Description": "CADL project to test various types of convenience methods.",
+ "Description": "Typespec project to test various types of convenience methods.",
  "ApiVersions": [
   "0.1.0"
  ],
@@ -37,7 +37,7 @@
   {
    "$id": "5",
    "Name": "ConvenienceInCadlClient",
-   "Description": "CADL project to test various types of convenience methods.",
+   "Description": "Typespec project to test various types of convenience methods.",
    "Operations": [
     {
      "$id": "6",
@@ -253,7 +253,7 @@
      "$id": "26",
      "Name": "protocol",
      "ResourceName": "ConvenienceInCadl",
-     "Description": "Operation only has protocol method.",
+     "Description": "Initial operation only has protocol method. In the updated version, we add the convenience method.",
      "Parameters": [
       {
        "$id": "27",
@@ -486,7 +486,7 @@
      "$id": "46",
      "Name": "protocolShouldNotGenerateConvenience",
      "ResourceName": "ConvenienceInCadl",
-     "Description": "Operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.",
+     "Description": "Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.",
      "Parameters": [
       {
        "$id": "47",
@@ -542,7 +542,7 @@
      "$id": "51",
      "Name": "protocolOptionalQuery",
      "ResourceName": "ConvenienceInCadl",
-     "Description": "Operation only has protocol method with optional query parameter.",
+     "Description": "Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.",
      "Parameters": [
       {
        "$id": "52",
@@ -621,7 +621,7 @@
      "$id": "58",
      "Name": "protocolRequiredQuery",
      "ResourceName": "ConvenienceInCadl",
-     "Description": "Operation only has protocol method with required query parameter.",
+     "Description": "Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.",
      "Parameters": [
       {
        "$id": "59",
@@ -700,7 +700,7 @@
      "$id": "65",
      "Name": "protocolOptionalModel",
      "ResourceName": "ConvenienceInCadl",
-     "Description": "Operation only has protocol method with optional body parameter.",
+     "Description": "Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.",
      "Parameters": [
       {
        "$id": "66",
@@ -803,7 +803,7 @@
      "$id": "74",
      "Name": "protocolRequiredModel",
      "ResourceName": "ConvenienceInCadl",
-     "Description": "Operation only has protocol method with required body parameter.",
+     "Description": "Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.",
      "Parameters": [
       {
        "$id": "75",
@@ -1634,7 +1634,7 @@
      "$id": "147",
      "Name": "protocolOptionalBeforeRequired",
      "ResourceName": "ConvenienceInCadl",
-     "Description": "Operation has protocol method with optioanl parameter before required parameter and convenience method.",
+     "Description": "Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.",
      "Parameters": [
       {
        "$id": "148",

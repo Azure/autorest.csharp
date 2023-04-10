@@ -3,7 +3,7 @@
   <members>
     <member name="WorldAsync(RequestContext)">
 <example>
-This sample shows how to call WorldAsync and parse the result.
+This sample shows how to call WorldAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new HelloClient();
 
@@ -16,7 +16,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="World(RequestContext)">
 <example>
-This sample shows how to call World and parse the result.
+This sample shows how to call World with required parameters and parse the result.
 <code><![CDATA[
 var client = new HelloClient();
 

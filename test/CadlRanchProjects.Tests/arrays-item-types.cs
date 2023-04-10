@@ -21,7 +21,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Arrays_ItemTypes_Int32Value_get() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetInt32ValueClient().GetInt32ValueValueAsync();
+            var response = await new ItemTypesClient(host, null).GetInt32ValueClient().GetInt32ValueAsync();
             Assert.AreEqual(1, response.Value.First());
             Assert.AreEqual(2, response.Value.Last());
         });
@@ -36,7 +36,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Arrays_ItemTypes_Int64Value_get() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetInt64ValueClient().GetInt64ValueValueAsync();
+            var response = await new ItemTypesClient(host, null).GetInt64ValueClient().GetInt64ValueAsync();
             Assert.AreEqual(9007199254740991, response.Value.First());
             Assert.AreEqual(-9007199254740991, response.Value.Last());
         });
@@ -51,7 +51,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Arrays_ItemTypes_BooleanValue_get() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetBooleanValueClient().GetBooleanValueValueAsync();
+            var response = await new ItemTypesClient(host, null).GetBooleanValueClient().GetBooleanValueAsync();
             Assert.AreEqual(true, response.Value.First());
             Assert.AreEqual(false, response.Value.Last());
         });
@@ -66,7 +66,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Arrays_ItemTypes_StringValue_get() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetStringValueClient().GetStringValueValueAsync();
+            var response = await new ItemTypesClient(host, null).GetStringValueClient().GetStringValueAsync();
             Assert.AreEqual("hello", response.Value.First());
             Assert.AreEqual("", response.Value.Last());
         });
@@ -81,7 +81,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Arrays_ItemTypes_Float32Value_get() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetFloat32ValueClient().GetFloat32ValueValueAsync();
+            var response = await new ItemTypesClient(host, null).GetFloat32ValueClient().GetFloat32ValueAsync();
             Assert.AreEqual(42.42f, response.Value.First());
         });
 
@@ -95,7 +95,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Arrays_ItemTypes_DatetimeValue_get() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetDatetimeValueClient().GetDatetimeValueValueAsync();
+            var response = await new ItemTypesClient(host, null).GetDatetimeValueClient().GetDatetimeValueAsync();
             Assert.AreEqual(DateTimeOffset.Parse("2022-08-26T18:38:00Z"), response.Value.First());
         });
 
@@ -110,7 +110,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Arrays_ItemTypes_DurationValue_get() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetDurationValueClient().GetDurationValueValueAsync();
+            var response = await new ItemTypesClient(host, null).GetDurationValueClient().GetDurationValueAsync();
             Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), response.Value.First());
         });
 
@@ -125,7 +125,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Arrays_ItemTypes_UnknownValue_get() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetUnknownValueClient().GetUnknownValueValueAsync();
+            var response = await new ItemTypesClient(host, null).GetUnknownValueClient().GetUnknownValueAsync();
             CollectionAssert.AreEqual(new List<object>() { 1, "hello", null }, response.Value);
         });
 
@@ -139,7 +139,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Arrays_ItemTypes_ModelValue_get() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetModelValueClient().GetModelValueValueAsync();
+            var response = await new ItemTypesClient(host, null).GetModelValueClient().GetModelValueAsync();
             Assert.AreEqual("hello", response.Value.First().Property);
             Assert.AreEqual("world", response.Value.Last().Property);
         });

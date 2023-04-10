@@ -1,10 +1,10 @@
-import "../ConvenienceInitial-Cadl/main.cadl";
+import "../ConvenienceInitial-Typespec/main.tsp";
 
 namespace ConvenienceInCadl;
 
-using Cadl.Http;
-using Cadl.Rest;
-using Azure.DPG;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 
 @@convenientAPI(protocol, true)
 @@doc(protocol, "Initial operation only has protocol method. In the updated version, we add the convenience method.")

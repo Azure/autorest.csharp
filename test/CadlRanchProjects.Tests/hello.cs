@@ -13,7 +13,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Hello_world() => Test(async (host) =>
         {
-            string response = await new HelloClient(host, null).WorldValueAsync();
+            string response = await new HelloClient(host, null).WorldAsync();
             Assert.AreEqual("Hello World!", response);
         });
     }

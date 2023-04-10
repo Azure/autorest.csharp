@@ -30,7 +30,7 @@
   <ItemGroup>
     <None Include="../swaggers/*.json" LinkBase="swaggers" />
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
-    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-Cadl/**/*.cs" LinkBase="TestProjects" />
+    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-Typespec/**/*.cs" LinkBase="TestProjects" />
     <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
     <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs">
       <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs</Link>

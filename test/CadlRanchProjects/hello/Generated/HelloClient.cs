@@ -49,47 +49,30 @@ namespace Hello
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<string>> WorldValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<string>> WorldAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("HelloClient.WorldValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await WorldAsync(context).ConfigureAwait(false);
-                return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await WorldAsync(context).ConfigureAwait(false);
+            return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<string> WorldValue(CancellationToken cancellationToken = default)
+        public virtual Response<string> World(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("HelloClient.WorldValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = World(context);
-                return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = World(context);
+            return Response.FromValue(response.Content.ToObjectFromJson<string>(), response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HelloClient.xml" path="doc/members/member[@name='WorldAsync(RequestContext)']/*" />
-        public virtual async Task<Response> WorldAsync(RequestContext context = null)
+        public virtual async Task<Response> WorldAsync(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("HelloClient.World");
             scope.Start();
             try
@@ -105,11 +88,14 @@ namespace Hello
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HelloClient.xml" path="doc/members/member[@name='World(RequestContext)']/*" />
-        public virtual Response World(RequestContext context = null)
+        public virtual Response World(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("HelloClient.World");
             scope.Start();
             try

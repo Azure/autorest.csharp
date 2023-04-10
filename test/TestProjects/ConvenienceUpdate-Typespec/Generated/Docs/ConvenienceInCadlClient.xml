@@ -129,7 +129,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ProtocolAsync(RequestContext)">
 <example>
-This sample shows how to call ProtocolAsync and parse the result.
+This sample shows how to call ProtocolAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -154,7 +154,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="Protocol(RequestContext)">
 <example>
-This sample shows how to call Protocol and parse the result.
+This sample shows how to call Protocol with required parameters and parse the result.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -179,7 +179,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ConvenienceWithOptionalAsync(RequestContext)">
 <example>
-This sample shows how to call ConvenienceWithOptionalAsync and parse the result.
+This sample shows how to call ConvenienceWithOptionalAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -204,7 +204,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ConvenienceWithOptional(RequestContext)">
 <example>
-This sample shows how to call ConvenienceWithOptional and parse the result.
+This sample shows how to call ConvenienceWithOptional with required parameters and parse the result.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -323,16 +323,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="ProtocolOptionalQueryAsync(Int32,RequestContext)">
 <example>
-This sample shows how to call ProtocolOptionalQueryAsync and parse the result.
-<code><![CDATA[
-var client = new ConvenienceInCadlClient();
-
-Response response = await client.ProtocolOptionalQueryAsync();
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call ProtocolOptionalQueryAsync with all parameters, and how to parse the result.
+This sample shows how to call ProtocolOptionalQueryAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -357,16 +348,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ProtocolOptionalQuery(Int32,RequestContext)">
 <example>
-This sample shows how to call ProtocolOptionalQuery and parse the result.
-<code><![CDATA[
-var client = new ConvenienceInCadlClient();
-
-Response response = client.ProtocolOptionalQuery();
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call ProtocolOptionalQuery with all parameters, and how to parse the result.
+This sample shows how to call ProtocolOptionalQuery with required parameters and parse the result.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -441,7 +423,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ProtocolOptionalModelAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ProtocolOptionalModelAsync with required request content.
+This sample shows how to call ProtocolOptionalModelAsync with required parameters and request content.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -468,7 +450,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ProtocolOptionalModel(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ProtocolOptionalModel with required request content.
+This sample shows how to call ProtocolOptionalModel with required parameters and request content.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -549,16 +531,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ConvenienceOptionalQueryWithOptionalAsync(Int32,RequestContext)">
 <example>
-This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync and parse the result.
-<code><![CDATA[
-var client = new ConvenienceInCadlClient();
-
-Response response = await client.ConvenienceOptionalQueryWithOptionalAsync();
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync with all parameters, and how to parse the result.
+This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -583,16 +556,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ConvenienceOptionalQueryWithOptional(Int32,RequestContext)">
 <example>
-This sample shows how to call ConvenienceOptionalQueryWithOptional and parse the result.
-<code><![CDATA[
-var client = new ConvenienceInCadlClient();
-
-Response response = client.ConvenienceOptionalQueryWithOptional();
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call ConvenienceOptionalQueryWithOptional with all parameters, and how to parse the result.
+This sample shows how to call ConvenienceOptionalQueryWithOptional with required parameters and parse the result.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -767,7 +731,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ConvenienceOptionalModelWithOptionalAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with required request content.
+This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with required parameters and request content.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -794,7 +758,7 @@ Schema for <c>Model</c>:
     </member>
     <member name="ConvenienceOptionalModelWithOptional(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ConvenienceOptionalModelWithOptional with required request content.
+This sample shows how to call ConvenienceOptionalModelWithOptional with required parameters and request content.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
