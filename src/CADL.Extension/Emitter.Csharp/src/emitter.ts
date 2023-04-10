@@ -126,8 +126,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                     ? "--new-project"
                     : "";
                 const existingProjectOption = options["existing-project-folder"]
-                ? `--existing-project-folder ${options["existing-project-folder"]}`
-                : "";
+                    ? `--existing-project-folder ${options["existing-project-folder"]}`
+                    : "";
                 const debugFlag = options.debug ?? false ? " --debug" : "";
 
                 const command = `dotnet --roll-forward Major ${resolvePath(
