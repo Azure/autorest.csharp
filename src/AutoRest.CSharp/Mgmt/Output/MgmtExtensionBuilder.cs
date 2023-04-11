@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private readonly IReadOnlyDictionary<Type, IEnumerable<Operation>> _extensionOperations;
 
-        public MgmtExtensionBuilder(Dictionary<Type, IEnumerable<Operation>> extensionOperations, bool shouldSplit = true)
+        public MgmtExtensionBuilder(Dictionary<Type, IEnumerable<Operation>> extensionOperations)
         {
             _extensionOperations = extensionOperations;
         }
