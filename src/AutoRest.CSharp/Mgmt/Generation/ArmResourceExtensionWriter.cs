@@ -30,12 +30,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
     /// </summary>
     internal sealed class ArmResourceExtensionWriter : MgmtExtensionWriter
     {
-        private MgmtExtension This { get; }
+        private ArmResourceExtension This { get; }
 
         private readonly Parameter _armClientParameter;
         private readonly Parameter _scopeParameter;
 
-        public ArmResourceExtensionWriter(CodeWriter writer, MgmtExtension extension)
+        public ArmResourceExtensionWriter(CodeWriter writer, ArmResourceExtension extension)
             : base(writer, extension)
         {
             // we never use this class in ArmCore, see the description on this class for details

@@ -157,6 +157,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return null;
         }
+
         public MgmtExtensionClient GetExtensionClient(CSharpType? resourceType)
         {
             if (resourceType != null && Cache.TryGetValue(resourceType, out var extensionClient))
