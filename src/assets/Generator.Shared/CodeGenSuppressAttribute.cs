@@ -11,6 +11,12 @@ namespace Azure.Core
         public string Member { get; }
         public Type[] Parameters { get; }
 
+        public CodeGenSuppressAttribute(string member)
+        {
+            Member = member;
+            Parameters = Array.Empty<Type>();
+        }
+
         public CodeGenSuppressAttribute(string member, params Type[] parameters)
         {
             Member = member;

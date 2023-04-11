@@ -4,6 +4,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Update="Microsoft.CodeAnalysis.CSharp" Version ="3.9.0" PrivateAssets="all" />
+    <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="7.0.1" PrivateAssets="All" />
     <AdditionalFiles Include="$(RepoEngPath)\stylecop.json">
       <Visible>false</Visible>
     </AdditionalFiles>

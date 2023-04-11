@@ -42,7 +42,7 @@ namespace AutoRest.TestServer.Tests.Infrastructure
 
         private async Task Test(string scenario, Func<Uri, Task> test, bool ignoreScenario = false)
         {
-            var scenarioParameter = ignoreScenario ? new string[0] : new[] {scenario};
+            var scenarioParameter = ignoreScenario ? Array.Empty<string>() : new[] {scenario};
             var server = TestServerSession.Start(scenario, false, scenarioParameter);
 
             try

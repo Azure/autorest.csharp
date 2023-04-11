@@ -21,7 +21,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task InputToRoundTripPrimitive() => Test(async (host) =>
         {
-            InputModel input = new("test", 1, new BaseModel(), new int[] { }, new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false});
+            InputModel input = new("test", 1, new BaseModel(), Array.Empty<int>(), new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false});
             RoundTripPrimitiveModel result = await new ModelsInCadlClient(host).InputToRoundTripPrimitiveAsync(input);
 
             Assert.AreEqual("test", result.RequiredString);
@@ -55,7 +55,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task InputToRoundTripReadOnly() => Test(async (host) =>
         {
-            InputModel input = new("test", 2, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), new float?[] {}, new bool?[] { });
+            InputModel input = new("test", 2, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), Array.Empty<float?>(), Array.Empty<bool?>());
             RoundTripReadOnlyModel result = await new ModelsInCadlClient(host).InputToRoundTripReadOnlyAsync(input);
 
             Assert.AreEqual("test", result.RequiredReadonlyString);

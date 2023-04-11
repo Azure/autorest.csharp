@@ -214,4 +214,7 @@
         <Rule Id="SA1650"  Action="None" />          <!-- Element documentation should be spelled correctly -->
         <Rule Id="SA1651"  Action="None" />          <!-- Do not use placeholder elements -->
     </Rules>
+    <Rules AnalyzerId="Microsoft.CodeAnalysis.CSharp.NetAnalyzers" RuleNamespace="Microsoft.CodeAnalysis.CSharp.NetAnalyzers">
+        <Rule Id="CA1825" Action="Error" />          <!-- Avoid unnecessary zero-length array allocations -->
+    </Rules>
 </RuleSet>
