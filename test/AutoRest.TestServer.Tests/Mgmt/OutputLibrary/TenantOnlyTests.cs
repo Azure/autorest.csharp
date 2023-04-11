@@ -2,9 +2,10 @@
 // Licensed under the MIT License
 
 using System.Linq;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Output;
+using Azure.ResourceManager.Resources;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
@@ -18,7 +19,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         {
             var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
             Assert.IsNotNull(resource);
-            Assert.IsTrue(resource.GetParents().Contains(MgmtContext.Library.TenantExtensions));
+            Assert.IsTrue(resource.GetParents().Any(parent => parent is MgmtExtension extension && extension.ArmCoreType == typeof(TenantResource)));
         }
     }
 }
