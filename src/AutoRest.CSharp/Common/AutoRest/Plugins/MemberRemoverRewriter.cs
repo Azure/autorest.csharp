@@ -114,14 +114,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 if (arguments.Length == 0)
                 {
                     var fullName = typeSymbol.ToDisplayString(_fullyQualifiedNameFormat);
-                    ErrorHelpers.ThrowError($"CodeGenSuppress attribute on {fullName} must specify a method name as its first argument.");
+                    ErrorHelpers.ThrowError($"CodeGenSuppress attribute on {fullName} must specify a member name as its first argument.");
                 }
 
-                if (arguments.Length == 1 || arguments[0].Kind != TypedConstantKind.Primitive || arguments[0].Value is not string)
+                if (arguments.Length == 1 && arguments[0].Kind != TypedConstantKind.Primitive && arguments[0].Value is not string)
                 {
                     var attribute = attributeData.ApplicationSyntaxReference.GetText();
                     var fullName = typeSymbol.ToDisplayString(_fullyQualifiedNameFormat);
-                    ErrorHelpers.ThrowError($"{attribute} attribute on {fullName} must specify a method name as its first argument.");
+                    ErrorHelpers.ThrowError($"{attribute} attribute on {fullName} must specify a member name as its first argument.");
                 }
 
                 if (arguments.Length == 2 && arguments[1].Kind == TypedConstantKind.Array)
