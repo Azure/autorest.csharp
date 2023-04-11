@@ -13,6 +13,9 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using Azure.ResourceManager;
+using Azure.ResourceManager.ManagementGroups;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.Mgmt.Models;
 
@@ -71,6 +74,21 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         // We use strict = false because we usually see the name of management group is different in different RPs. Some of them are groupId, some of them are groupName, etc
         new Segment(new Reference("managementGroupId", typeof(string)), true, false)
     });
+
+    private static Dictionary<Type, RequestPath>? _extensionChoices;
+    public static Dictionary<Type, RequestPath> ExtensionChoices => _extensionChoices ??= new()
+    {
+        [typeof(TenantResource)] = RequestPath.Tenant,
+        [typeof(ManagementGroupResource)] = RequestPath.ManagementGroup,
+        [typeof(SubscriptionResource)] = RequestPath.Subscription,
+        [typeof(ResourceGroupResource)] = RequestPath.ResourceGroup,
+        [typeof(ArmResource)] = RequestPath.Any
+    };
+
+    public static RequestPath GetContextualPath(Type armCoreType)
+    {
+        return ExtensionChoices[armCoreType];
+    }
 
     private readonly IReadOnlyList<Segment> _segments;
 

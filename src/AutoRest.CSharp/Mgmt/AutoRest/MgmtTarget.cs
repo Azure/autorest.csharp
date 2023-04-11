@@ -106,19 +106,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             // write extension class
-            if (!isArmCore && !MgmtContext.Library.ExtensionWrapper.IsEmpty)
-                WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(MgmtContext.Library.ExtensionWrapper));
-
-            WriteExtensionClient(project, MgmtContext.Library.ResourceGroupExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.SubscriptionExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.ManagementGroupExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.TenantExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.ArmResourceExtensions.ExtensionClient);
-
-            if (isArmCore && !MgmtContext.Library.ArmClientExtensions.IsEmpty)
-            {
-                WriteExtensionPiece(project, new ArmClientExtensionsWriter(MgmtContext.Library.ArmClientExtensions));
-            }
+            WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.ExtensionClients);
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
             lroWriter.Write();
@@ -162,15 +150,33 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
         }
 
-        private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
+        private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients)
         {
-            if (Configuration.MgmtConfiguration.IsArmCore && !extensionClient.Extension.IsEmpty)
-                WriteExtensionPiece(project, new MgmtExtensionWriter(extensionClient.Extension));
-            if (!Configuration.MgmtConfiguration.IsArmCore && !extensionClient.IsEmpty)
-                WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
+            if (isArmCore)
+            {
+                // for Azure.ResourceManager (ArmCore), we write the individual extension type providers into their individual files
+                foreach (var extension in extensions)
+                {
+                    if (!extension.IsEmpty)
+                        WriteExtensionFile(project, MgmtExtensionWriter.GetWriter(extension));
+                }
+            }
+            else
+            {
+                // for other packages (not ArmCore), we write extension wrapper (a big class that contains all the extension methods) and do not write the individual extension classes
+                if (!extensionWrapper.IsEmpty)
+                    WriteExtensionFile(project, new MgmtExtensionWrapperWriter(extensionWrapper));
+
+                // and we write ExtensionClients
+                foreach (var extensionClient in extensionClients)
+                {
+                    if (!extensionClient.IsEmpty)
+                        WriteExtensionFile(project, new MgmtExtensionClientWriter(extensionClient));
+                }
+            }
         }
 
-        private static void WriteExtensionPiece(GeneratedCodeWorkspace project, MgmtClientBaseWriter extensionWriter)
+        private static void WriteExtensionFile(GeneratedCodeWorkspace project, MgmtClientBaseWriter extensionWriter)
         {
             extensionWriter.Write();
             AddGeneratedFile(project, $"Extensions/{extensionWriter.FileName}.cs", extensionWriter.ToString());

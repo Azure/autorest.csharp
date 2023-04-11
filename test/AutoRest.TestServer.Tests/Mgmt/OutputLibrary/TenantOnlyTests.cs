@@ -18,7 +18,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         {
             var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
             Assert.IsNotNull(resource);
-            Assert.IsTrue(resource.Parent().Contains(MgmtContext.Library.TenantExtensions));
+            Assert.IsTrue(resource.GetParents().Contains(MgmtContext.Library.TenantExtensions));
         }
     }
 }

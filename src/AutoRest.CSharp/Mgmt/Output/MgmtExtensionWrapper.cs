@@ -14,20 +14,26 @@ using AutoRest.CSharp.Output.Models.Types;
 namespace AutoRest.CSharp.Mgmt.Output
 {
     /// <summary>
-    /// MgmtExtensionsWrapper is a wrapper of all the <see cref="MgmtExtensions"/>, despite the <see cref="MgmtExtensions"/> is inheriting from <see cref="MgmtTypeProvider"/>, currently it will not produce a class in the generated code.
-    /// Instead, this class will take all the things that are used to be produces into the individual extension classes, producing a big extension class
+    /// MgmtExtensionsWrapper is a wrapper of all the <see cref="MgmtExtension"/>, despite the <see cref="MgmtExtension"/> is inheriting from <see cref="MgmtTypeProvider"/>, currently it will not produce a class in the generated code.
+    /// In ArmCore, we will not use this class because Azure.ResourceManager does not need to generate extension classes, we just need to generate partial classes to extend them because those "to be extended" types are defined in Azure.ResourceManager.
+    /// In other packages, we need this TypeProvider to generate one big extension class that contains all the extension methods.
     /// </summary>
-    internal class MgmtExtensionsWrapper : MgmtTypeProvider
+    internal class MgmtExtensionWrapper : MgmtTypeProvider
     {
-        public IEnumerable<MgmtExtensions> Extensions { get; }
+        public IEnumerable<MgmtExtension> Extensions { get; }
+
+        public IEnumerable<MgmtExtensionClient> ExtensionClients { get; }
+
+        public override bool IsStatic => true;
 
         public bool IsEmpty => Extensions.All(extension => extension.IsEmpty);
 
-        public MgmtExtensionsWrapper(IEnumerable<MgmtExtensions> extensions) : base(MgmtContext.RPName)
+        public MgmtExtensionWrapper(IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients) : base(MgmtContext.RPName)
         {
             DefaultName = $"{ResourceName}Extensions";
             Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {MgmtContext.Context.DefaultNamespace}.";
             Extensions = extensions;
+            ExtensionClients = extensionClients;
         }
 
         public override CSharpType? BaseType => null;
