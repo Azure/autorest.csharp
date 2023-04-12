@@ -16,9 +16,10 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal class MgmtExtensionWrapperWriter : MgmtClientBaseWriter
     {
         private MgmtExtensionWrapper This { get; }
-        public MgmtExtensionWrapperWriter(MgmtExtensionWrapper extensionsWrapper) : base(new CodeWriter(), extensionsWrapper)
+
+        public MgmtExtensionWrapperWriter(MgmtExtensionWrapper extensionWrapper) : base(new CodeWriter(), extensionWrapper)
         {
-            This = extensionsWrapper;
+            This = extensionWrapper;
         }
 
         protected override void WritePrivateHelpers()

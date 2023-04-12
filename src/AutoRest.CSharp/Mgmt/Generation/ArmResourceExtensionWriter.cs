@@ -205,7 +205,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             => new[] {
                     _armClientParameter,
                     GetScopeParameter(types)
-                };
+               };
 
         private Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection, ICollection<FormattableString>? types)
             => resourceCollection.ExtraConstructorParameters.Prepend(GetScopeParameter(types)).Prepend(_armClientParameter).ToArray();

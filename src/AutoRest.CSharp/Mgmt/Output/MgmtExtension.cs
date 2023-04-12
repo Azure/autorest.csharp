@@ -21,7 +21,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private readonly IEnumerable<Operation> _allRawOperations;
 
-        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtExtensionClient> extensionClients, Type armCoreType, RequestPath? contextualPath = null) : base(armCoreType.Name)
+        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtExtensionClient> extensionClients, Type armCoreType, RequestPath? contextualPath = null)
+            : base(armCoreType.Name)
         {
             _allRawOperations = allRawOperations;
             _extensionClients = extensionClients; // this property is populated later

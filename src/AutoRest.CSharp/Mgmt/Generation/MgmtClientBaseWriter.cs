@@ -259,7 +259,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteResourceCollectionGetMethod(resource);
 
-                    if (This.HasChildResourceGetMethods) // we don't need to generate `Get{Resource}` methods in ExtensionClient
+                    if (This.HasChildResourceGetMethods)
                     {
                         WriteChildResourceGetMethod(resource.ResourceCollection, true);
                         WriteChildResourceGetMethod(resource.ResourceCollection, false);
@@ -313,7 +313,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Modifiers = GetMethodModifiers(),
                 // There could be parameters to get resource collection
                 Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).Distinct().ToArray(),
-                Attributes = new[]{new CSharpAttribute(typeof(ForwardsClientCallsAttribute))}
+                Attributes = new[] { new CSharpAttribute(typeof(ForwardsClientCallsAttribute)) }
             };
 
             _writer.Line();

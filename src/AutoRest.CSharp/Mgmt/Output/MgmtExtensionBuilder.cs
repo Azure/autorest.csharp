@@ -3,9 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
@@ -28,7 +25,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private readonly IReadOnlyDictionary<Type, IEnumerable<Operation>> _extensionOperations;
 
-        public MgmtExtensionBuilder(Dictionary<Type, IEnumerable<Operation>> extensionOperations, bool shouldSplit = true)
+        public MgmtExtensionBuilder(Dictionary<Type, IEnumerable<Operation>> extensionOperations)
         {
             _extensionOperations = extensionOperations;
         }
