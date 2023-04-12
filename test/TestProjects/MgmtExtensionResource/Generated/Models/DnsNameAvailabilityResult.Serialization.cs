@@ -25,7 +25,6 @@ namespace MgmtExtensionResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     available = property.Value.GetBoolean();

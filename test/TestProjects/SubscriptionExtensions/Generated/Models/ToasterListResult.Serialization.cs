@@ -28,7 +28,6 @@ namespace SubscriptionExtensions.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ToasterData> array = new List<ToasterData>();

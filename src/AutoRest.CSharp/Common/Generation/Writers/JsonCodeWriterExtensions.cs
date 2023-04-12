@@ -20,9 +20,8 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
-using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 using Configuration = AutoRest.CSharp.Input.Configuration;
-using System.Linq.Expressions;
+using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -333,11 +332,10 @@ namespace AutoRest.CSharp.Generation.Writers
                              true) //https://github.com/Azure/autorest.csharp/issues/922
                     {
                         var emptyStringCheck = GetEmptyStringCheckClause(property, itemVariable, shouldTreatEmptyStringAsNull);
-                        if (Configuration.AzureArm && property.ValueType?.Equals(typeof(Uri)) == true)
+                        if (property.PropertySerializations is null)
                         {
                             using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
                             {
-                                writer.Line($"{propertyVariables[property].Declaration} = null;");
                                 writer.Append($"continue;");
                             }
                         }
