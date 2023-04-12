@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -14,20 +15,32 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class ArmResourceExtensionsWriter : MgmtExtensionWriter
+    /// <summary>
+    /// The <see cref="ArmResourceExtensionWriter"/> is writing the extension methods differently from <see cref="MgmtExtensionWriter"/>
+    /// The extension methods in ArmResourceExtension will have two versions:
+    /// public static Response<XXX> Foo(this ArmClient client, ResourceIdentifier scope)
+    /// and
+    /// public static Response<XXX> Foo(this ArmResource armResource)
+    /// The extending <see cref="ArmResource"/> version is depending if we have the configuration <see cref="MgmtConfiguration.GenerateArmResourceExtensions"/> set.
+    /// Since the generated methods are different from regular extension classes, we have this writer to handle those methods.
+    /// Because in Azure.ResourceManager (ArmCore) we will never generate extension method, instead we just generate instance method in partial classes, this class should be never used when IsArmCore is true
+    /// </summary>
+    internal sealed class ArmResourceExtensionWriter : MgmtExtensionWriter
     {
-        private MgmtExtensions This { get; }
+        private MgmtExtension This { get; }
 
         private readonly Parameter _armClientParameter;
         private readonly Parameter _scopeParameter;
 
-        public ArmResourceExtensionsWriter(CodeWriter writer, MgmtExtensions extension)
+        public ArmResourceExtensionWriter(CodeWriter writer, MgmtExtension extension)
             : base(writer, extension)
         {
+            // we never use this class in ArmCore, see the description on this class for details
+            Debug.Assert(!Configuration.MgmtConfiguration.IsArmCore);
+
             This = extension;
             _armClientParameter = This.ExtensionParameter with
             {
@@ -42,32 +55,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 DefaultValue: null,
                 Validation: ValidationType.None,
                 Initializer: null);
-        }
-
-        protected override void WritePrivateHelpers()
-        {
-            if (IsArmCore)
-                return;
-
-            _writer.Line();
-            var armClientSignature = new MethodSignature(
-                "GetExtensionClient",
-                null,
-                null,
-                Private | Static,
-                This.ExtensionClient.Type,
-                null,
-                new[] { _armClientParameter, _scopeParameter });
-            using (_writer.WriteMethodDeclaration(armClientSignature))
-            {
-                using (_writer.Scope($"return {_armClientParameter.Name}.GetResourceClient(() =>"))
-                {
-                    _writer.Line($"return new {This.ExtensionClient.Type}({_armClientParameter.Name}, {_scopeParameter.Name});");
-                }
-                _writer.Line($");");
-            }
-
-            base.WritePrivateHelpers();
         }
 
         protected override void WriteSingletonResourceGetMethod(Resource resource)
@@ -147,44 +134,39 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteResourceEntry(ResourceCollection resourceCollection, bool isAsync, ICollection<FormattableString>? types)
         {
-            if (IsArmCore)
-            {
-                base.WriteResourceEntry(resourceCollection, isAsync);
-            }
-            else
-            {
-                WriteScopeResourceTypesValidation(_scopeParameter.Name, types);
-                var operation = resourceCollection.GetOperation;
-                string configureAwait = isAsync & !operation.IsPagingOperation ? ".ConfigureAwait(false)" : string.Empty;
+            WriteScopeResourceTypesValidation(_scopeParameter.Name, types);
+            var operation = resourceCollection.GetOperation;
+            string configureAwait = isAsync & !operation.IsPagingOperation ? ".ConfigureAwait(false)" : string.Empty;
 
-                _writer.AppendRaw("return ")
-                    .AppendRawIf("await ", isAsync && !operation.IsPagingOperation)
-                    .Append($"{GetResourceCollectionMethodName(resourceCollection)}(");
-                foreach (var parameter in GetParametersForCollectionEntry(resourceCollection, types))
-                {
-                    _writer.Append($"{parameter.Name:I},");
-                }
-                _writer.RemoveTrailingComma();
-                _writer.Append($").{operation.MethodSignature.WithAsync(isAsync).Name}(");
-                foreach (var parameter in operation.MethodSignature.Parameters)
-                {
-                    _writer.Append($"{parameter.Name},");
-                }
-
-                _writer.RemoveTrailingComma();
-                _writer.AppendRaw(")")
-                    .AppendRawIf(".ConfigureAwait(false)", isAsync && !operation.IsPagingOperation)
-                    .LineRaw(";");
+            _writer.AppendRaw("return ")
+                .AppendRawIf("await ", isAsync && !operation.IsPagingOperation)
+                .Append($"{GetResourceCollectionMethodName(resourceCollection)}(");
+            foreach (var parameter in GetParametersForCollectionEntry(resourceCollection, types))
+            {
+                _writer.Append($"{parameter.Name:I},");
             }
+            _writer.RemoveTrailingComma();
+            _writer.Append($").{operation.MethodSignature.WithAsync(isAsync).Name}(");
+            foreach (var parameter in operation.MethodSignature.Parameters)
+            {
+                _writer.Append($"{parameter.Name},");
+            }
+
+            _writer.RemoveTrailingComma();
+            _writer.AppendRaw(")")
+                .AppendRawIf(".ConfigureAwait(false)", isAsync && !operation.IsPagingOperation)
+                .LineRaw(";");
         }
 
         private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging, ICollection<FormattableString>? scopeTypes)
         {
             WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
 
+            var extensionClient = This.GetExtensionClient(null);
+
             _writer.AppendRaw("return ")
                 .AppendRawIf("await ", isAsync && !isPaging)
-                .Append($"GetExtensionClient({_armClientParameter.Name}, {_scopeParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
+                .Append($"{extensionClient.FactoryMethodName}({_armClientParameter.Name}, {_scopeParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
 
             foreach (var parameter in signature.Parameters.Skip(2))
             {
@@ -219,17 +201,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
 
         private Parameter[] GetParametersForSingletonEntry(ICollection<FormattableString>? types)
-            => IsArmCore
-                ? base.GetParametersForSingletonEntry()
-                : new[] {
+            => new[] {
                     _armClientParameter,
                     GetScopeParameter(types)
-                };
+               };
 
         private Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection, ICollection<FormattableString>? types)
-            => IsArmCore
-                ? base.GetParametersForCollectionEntry(resourceCollection)
-                : resourceCollection.ExtraConstructorParameters.Prepend(GetScopeParameter(types)).Prepend(_armClientParameter).ToArray();
+            => resourceCollection.ExtraConstructorParameters.Prepend(GetScopeParameter(types)).Prepend(_armClientParameter).ToArray();
 
         private Parameter GetScopeParameter(ICollection<FormattableString>? types)
         {

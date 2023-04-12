@@ -10,10 +10,10 @@ using AutoRest.CSharp.MgmtTest.Output.Mock;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
-    internal class ExtensionWrapMockTestWriter : MgmtMockTestBaseWriter<MgmtExtensionsWrapper>
+    internal class ExtensionWrapMockTestWriter : MgmtMockTestBaseWriter<MgmtExtensionWrapper>
     {
-        private IEnumerable<MgmtMockTestProvider<MgmtExtensions>> _extensionTests;
-        public ExtensionWrapMockTestWriter(MgmtMockTestProvider<MgmtExtensionsWrapper> testWrapper, IEnumerable<MgmtMockTestProvider<MgmtExtensions>> extensionTests) : base(testWrapper)
+        private IEnumerable<MgmtMockTestProvider<MgmtExtension>> _extensionTests;
+        public ExtensionWrapMockTestWriter(MgmtMockTestProvider<MgmtExtensionWrapper> testWrapper, IEnumerable<MgmtMockTestProvider<MgmtExtension>> extensionTests) : base(testWrapper)
         {
             _extensionTests = extensionTests;
         }
