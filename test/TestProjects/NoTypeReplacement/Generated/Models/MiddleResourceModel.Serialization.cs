@@ -36,7 +36,6 @@ namespace NoTypeReplacement.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     foo = NoSubResourceModel2.DeserializeNoSubResourceModel2(property.Value);

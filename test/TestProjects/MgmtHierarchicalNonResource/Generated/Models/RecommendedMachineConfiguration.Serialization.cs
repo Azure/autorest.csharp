@@ -26,7 +26,6 @@ namespace MgmtHierarchicalNonResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     vCpus = ResourceRange.DeserializeResourceRange(property.Value);
@@ -36,7 +35,6 @@ namespace MgmtHierarchicalNonResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     memory = ResourceRange.DeserializeResourceRange(property.Value);

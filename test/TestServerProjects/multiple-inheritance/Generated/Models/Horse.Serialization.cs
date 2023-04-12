@@ -39,7 +39,6 @@ namespace multiple_inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     isAShowHorse = property.Value.GetBoolean();

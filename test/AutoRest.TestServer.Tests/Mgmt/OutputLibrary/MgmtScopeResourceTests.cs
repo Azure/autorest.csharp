@@ -23,7 +23,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
         {
             var resource = MgmtContext.Library.ArmResources.FirstOrDefault(r => r.Type.Name == resourceName);
             Assert.NotNull(resource);
-            var parents = resource.Parent();
+            var parents = resource.GetParents();
             Assert.IsTrue(parents.Any(p => p.Type.Name == parentName));
         }
     }
