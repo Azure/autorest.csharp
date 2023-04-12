@@ -7,23 +7,22 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal class ArmClientExtensionsWriter : MgmtExtensionWriter
+    internal sealed class ArmClientExtensionWriter : MgmtExtensionWriter
     {
-        private MgmtExtensions This { get; }
+        private MgmtExtension This { get; }
 
-        public ArmClientExtensionsWriter(ArmClientExtensions extensions) : this(new CodeWriter(), extensions)
+        public ArmClientExtensionWriter(ArmClientExtension extension) : this(new CodeWriter(), extension)
         {
         }
 
-        public ArmClientExtensionsWriter(CodeWriter writer, ArmClientExtensions extensions) : base(writer, extensions)
+        public ArmClientExtensionWriter(CodeWriter writer, ArmClientExtension extension) : base(writer, extension)
         {
-            This = extensions;
+            This = extension;
         }
 
         protected internal override void WriteImplementations()
@@ -37,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected void WriteGetResourceFromIdMethod(Resource resource)
+        private void WriteGetResourceFromIdMethod(Resource resource)
         {
             List<FormattableString> lines = new List<FormattableString>();
             string an = resource.Type.Name.StartsWithVowel() ? "an" : "a";
