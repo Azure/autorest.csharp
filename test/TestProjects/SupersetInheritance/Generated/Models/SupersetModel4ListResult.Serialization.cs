@@ -28,7 +28,6 @@ namespace SupersetInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<SupersetModel4Data> array = new List<SupersetModel4Data>();

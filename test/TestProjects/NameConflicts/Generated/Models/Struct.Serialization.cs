@@ -1209,7 +1209,6 @@ namespace NameConflicts.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     system = new SystemEnum(property.Value.GetString());

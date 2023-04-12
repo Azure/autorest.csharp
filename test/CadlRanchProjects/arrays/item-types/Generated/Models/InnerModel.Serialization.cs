@@ -51,7 +51,6 @@ namespace Arrays.ItemTypes.Models
                 {
                     if (property0.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property0.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<InnerModel> array = new List<InnerModel>();

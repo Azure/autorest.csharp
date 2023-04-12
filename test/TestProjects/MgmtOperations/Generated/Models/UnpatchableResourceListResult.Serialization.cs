@@ -27,7 +27,6 @@ namespace MgmtOperations.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<UnpatchableResourceData> array = new List<UnpatchableResourceData>();

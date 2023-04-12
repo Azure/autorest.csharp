@@ -60,7 +60,6 @@ namespace model_flattening.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value);
@@ -70,7 +69,6 @@ namespace model_flattening.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<FlattenedProduct> array = new List<FlattenedProduct>();
@@ -85,7 +83,6 @@ namespace model_flattening.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();

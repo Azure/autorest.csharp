@@ -107,7 +107,6 @@ namespace MgmtPartialResource
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     sku = PublicIPAddressSku.DeserializePublicIPAddressSku(property.Value);
@@ -122,7 +121,6 @@ namespace MgmtPartialResource
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<string> array = new List<string>();
@@ -152,7 +150,6 @@ namespace MgmtPartialResource
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -171,7 +168,6 @@ namespace MgmtPartialResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             publicIPAllocationMethod = new IPAllocationMethod(property0.Value.GetString());
@@ -181,7 +177,6 @@ namespace MgmtPartialResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             publicIPAddressVersion = new IPVersion(property0.Value.GetString());
@@ -196,7 +191,6 @@ namespace MgmtPartialResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             idleTimeoutInMinutes = property0.Value.GetInt32();
@@ -211,7 +205,6 @@ namespace MgmtPartialResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             servicePublicIPAddress = DeserializePublicIPAddressData(property0.Value);
@@ -221,7 +214,6 @@ namespace MgmtPartialResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             migrationPhase = new PublicIPAddressMigrationPhase(property0.Value.GetString());
@@ -231,7 +223,6 @@ namespace MgmtPartialResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             linkedPublicIPAddress = DeserializePublicIPAddressData(property0.Value);
@@ -241,7 +232,6 @@ namespace MgmtPartialResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             deleteOption = new DeleteOption(property0.Value.GetString());

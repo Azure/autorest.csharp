@@ -58,7 +58,6 @@ namespace _Specs_.Azure.Core.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<UserOrder> array = new List<UserOrder>();
