@@ -26,9 +26,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             ValidateFields(typeof(TypeTwoCollection), "typeone");
         }
 
-        private static void ValidateFields(Type typeOne, string name)
+        private static void ValidateFields(Type type, string name)
         {
-            var fields = typeOne.GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
+            var fields = type.GetFields(BindingFlags.Instance | BindingFlags.NonPublic);
             foreach (var field in fields)
             {
                 Assert.IsFalse(field.Name.Contains(name, StringComparison.OrdinalIgnoreCase));
