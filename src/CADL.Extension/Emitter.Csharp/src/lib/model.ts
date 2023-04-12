@@ -597,18 +597,20 @@ export function getUsages(
     for (const type of usages.types) {
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
+        let effectiveType = type;
         if (type.kind === "Model") {
-            const effectiveType = getEffectiveSchemaType(
-                context,
-                type
-            ) as Model;
+            effectiveType = getEffectiveSchemaType(context, type) as Model;
             typeName =
                 getFriendlyName(program, effectiveType) ?? effectiveType.name;
         }
         const affectTypes: string[] = [];
         if (typeName !== "") affectTypes.push(typeName);
-        if (type.kind === "Model" && type.templateArguments) {
-            for (const arg of type.templateArguments) {
+        if (
+            typeName !== "" &&
+            effectiveType.kind === "Model" &&
+            effectiveType.templateMapper?.args
+        ) {
+            for (const arg of effectiveType.templateMapper.args) {
                 if (arg.kind === "Model" && "name" in arg && arg.name !== "") {
                     affectTypes.push(getFriendlyName(program, arg) ?? arg.name);
                 }
