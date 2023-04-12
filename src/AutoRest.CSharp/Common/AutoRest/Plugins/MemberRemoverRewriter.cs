@@ -97,8 +97,11 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
                     suppressions ??= new List<Supression>();
                     var name = attributeData.ConstructorArguments[0].Value as string;
-                    var parameterTypes = attributeData.ConstructorArguments[1].Values.Select(v => (ISymbol?)v.Value).ToArray();
-                    suppressions.Add(new Supression(name, parameterTypes));
+                    if (attributeData.ConstructorArguments.Length > 1)
+                    {
+                        var parameterTypes = attributeData.ConstructorArguments[1].Values.Select(v => (ISymbol?)v.Value).ToArray();
+                        suppressions.Add(new Supression(name, parameterTypes));
+                    }
                 }
             }
 
