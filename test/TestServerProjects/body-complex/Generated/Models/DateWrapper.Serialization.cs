@@ -43,7 +43,6 @@ namespace body_complex.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     field = property.Value.GetDateTimeOffset("D");
@@ -53,7 +52,6 @@ namespace body_complex.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     leap = property.Value.GetDateTimeOffset("D");
