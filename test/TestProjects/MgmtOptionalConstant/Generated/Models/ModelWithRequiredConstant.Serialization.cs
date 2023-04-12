@@ -18,7 +18,9 @@ namespace MgmtOptionalConstant.Models
             writer.WritePropertyName("requiredStringConstant"u8);
             writer.WriteStringValue(RequiredStringConstant.ToString());
             writer.WritePropertyName("requiredIntConstant"u8);
-            writer.WriteStringValue(RequiredIntConstant.ToString());
+            writer.WriteNumberValue(RequiredIntConstant.ToSerialInt32());
+            writer.WritePropertyName("requiredFloatConstant"u8);
+            writer.WriteNumberValue(RequiredFloatConstant.ToSerialSingle());
             if (Optional.IsDefined(Protocol))
             {
                 writer.WritePropertyName("protocol"u8);
@@ -35,6 +37,7 @@ namespace MgmtOptionalConstant.Models
             }
             StringConstant requiredStringConstant = default;
             IntConstant requiredIntConstant = default;
+            FloatConstant requiredFloatConstant = default;
             Optional<ProtocolType> protocol = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -48,6 +51,11 @@ namespace MgmtOptionalConstant.Models
                     requiredIntConstant = new IntConstant(property.Value.GetInt32());
                     continue;
                 }
+                if (property.NameEquals("requiredFloatConstant"u8))
+                {
+                    requiredFloatConstant = new FloatConstant(property.Value.GetSingle());
+                    continue;
+                }
                 if (property.NameEquals("protocol"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
@@ -58,7 +66,7 @@ namespace MgmtOptionalConstant.Models
                     continue;
                 }
             }
-            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, Optional.ToNullable(protocol));
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredFloatConstant, Optional.ToNullable(protocol));
         }
     }
 }

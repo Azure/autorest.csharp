@@ -53,7 +53,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(DesiredStatusCode))
             {
                 writer.WritePropertyName("desiredStatusCode"u8);
-                writer.WriteStringValue(DesiredStatusCode.Value.ToString());
+                writer.WriteNumberValue(DesiredStatusCode.Value.ToSerialInt32());
             }
             if (Optional.IsDefined(BasePolicy))
             {

@@ -62,6 +62,7 @@ import {
     getInputType
 } from "./model.js";
 import { capitalize } from "./utils.js";
+import { DpgContext } from "@azure-tools/typespec-client-generator-core";
 
 export function loadOperation(
     context: EmitContext<NetEmitterOptions>,
@@ -84,7 +85,7 @@ export function loadOperation(
     const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
     const summary = getSummary(program, op);
-    const externalDocs = getExternalDocs(program, op);
+    const externalDocs = getExternalDocs(dpgContext, op);
 
     const parameters: InputParameter[] = [];
     if (urlParameters) {
@@ -93,32 +94,32 @@ export function loadOperation(
         }
     }
     for (const p of cadlParameters.parameters) {
-        parameters.push(loadOperationParameter(program, p));
+        parameters.push(loadOperationParameter(dpgContext, p));
     }
 
     if (cadlParameters.bodyParameter) {
         parameters.push(
-            loadBodyParameter(program, cadlParameters.bodyParameter)
+            loadBodyParameter(dpgContext, cadlParameters.bodyParameter)
         );
     } else if (cadlParameters.bodyType) {
         if (resourceOperation) {
             parameters.push(
-                loadBodyParameter(program, resourceOperation.resourceType)
+                loadBodyParameter(dpgContext, resourceOperation.resourceType)
             );
         } else {
             const effectiveBodyType = getEffectiveSchemaType(
-                program,
+                dpgContext,
                 cadlParameters.bodyType
             );
             if (effectiveBodyType.kind === "Model") {
                 if (effectiveBodyType.name !== "") {
                     parameters.push(
-                        loadBodyParameter(program, effectiveBodyType)
+                        loadBodyParameter(dpgContext, effectiveBodyType)
                     );
                 } else {
                     effectiveBodyType.name = `${capitalize(op.name)}Request`;
                     let bodyParameter = loadBodyParameter(
-                        program,
+                        dpgContext,
                         effectiveBodyType
                     );
                     bodyParameter.Kind = InputOperationParameterKind.Spread;
@@ -131,7 +132,7 @@ export function loadOperation(
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
         const operationResponse = loadOperationResponse(
-            program,
+            dpgContext,
             res,
             resourceOperation
         );
@@ -193,7 +194,7 @@ export function loadOperation(
         Name: op.name,
         ResourceName:
             resourceOperation?.resourceType.name ??
-            getOperationGroupName(program, op, serviceNamespaceType),
+            getOperationGroupName(dpgContext, op, serviceNamespaceType),
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
@@ -207,7 +208,7 @@ export function loadOperation(
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
         LongRunning: loadLongRunningOperation(
-            program,
+            dpgContext,
             operation,
             resourceOperation
         ),
@@ -217,14 +218,14 @@ export function loadOperation(
     } as InputOperation;
 
     function loadOperationParameter(
-        program: Program,
+        context: DpgContext,
         parameter: HttpOperationParameter
     ): InputParameter {
         const { type: location, name, param } = parameter;
         const format = parameter.type === "path" ? undefined : parameter.format;
         const cadlType = param.type;
         const inputType: InputType = getInputType(
-            program,
+            context,
             cadlType,
             models,
             enums
@@ -275,11 +276,11 @@ export function loadOperation(
     }
 
     function loadBodyParameter(
-        program: Program,
+        context: DpgContext,
         body: ModelProperty | Model
     ): InputParameter {
         const type = body.kind === "Model" ? body : body.type;
-        const inputType: InputType = getInputType(program, type, models, enums);
+        const inputType: InputType = getInputType(context, type, models, enums);
         const requestLocation = RequestLocation.Body;
         const kind: InputOperationParameterKind =
             InputOperationParameterKind.Method;
@@ -301,7 +302,7 @@ export function loadOperation(
     }
 
     function loadOperationResponse(
-        program: Program,
+        context: DpgContext,
         response: HttpOperationResponse,
         resourceOperation?: ResourceOperation
     ): OperationResponse | undefined {
@@ -317,15 +318,15 @@ export function loadOperation(
         if (body?.type) {
             if (resourceOperation && resourceOperation.operation !== "list") {
                 type = getInputType(
-                    program,
+                    context,
                     resourceOperation.resourceType,
                     models,
                     enums
                 );
             } else {
-                const cadlType = getEffectiveSchemaType(program, body.type);
+                const cadlType = getEffectiveSchemaType(context, body.type);
                 const inputType: InputType = getInputType(
-                    program,
+                    context,
                     cadlType,
                     models,
                     enums
@@ -343,7 +344,7 @@ export function loadOperation(
                     NameInResponse: headers[key].name,
                     Description: getDoc(program, headers[key]) ?? "",
                     Type: getInputType(
-                        program,
+                        context,
                         headers[key].type,
                         models,
                         enums
@@ -362,14 +363,14 @@ export function loadOperation(
     }
 
     function loadLongRunningOperation(
-        program: Program,
+        context: DpgContext,
         op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationLongRunning | undefined {
-        if (!isLongRunningOperation(program, op.operation)) return undefined;
+        if (!isLongRunningOperation(context, op.operation)) return undefined;
 
         const finalResponse = loadLongRunningFinalResponse(
-            program,
+            context,
             op,
             resourceOperation
         );
@@ -382,7 +383,7 @@ export function loadOperation(
     }
 
     function loadLongRunningFinalResponse(
-        program: Program,
+        context: DpgContext,
         op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationResponse | undefined {
@@ -399,30 +400,30 @@ export function loadOperation(
 
         if (finalResponse !== undefined) {
             return loadOperationResponse(
-                program,
+                context,
                 finalResponse,
                 resourceOperation
             );
         }
 
         return loadOperationResponse(
-            program,
+            context,
             op.responses[0],
             resourceOperation
         );
     }
 
-    function isLongRunningOperation(program: Program, op: Operation) {
-        return getOperationLink(program, op, "polling") !== undefined;
+    function isLongRunningOperation(context: DpgContext, op: Operation) {
+        return getOperationLink(context.program, op, "polling") !== undefined;
     }
 }
 
 function getOperationGroupName(
-    program: Program,
+    context: DpgContext,
     operation: Operation,
     serviceNamespaceType: Namespace
 ): string {
-    const explicitOperationId = getOperationId(program, operation);
+    const explicitOperationId = getOperationId(context, operation);
     if (explicitOperationId) {
         const ids: string[] = explicitOperationId.split("_");
         if (ids.length > 1) {
@@ -436,7 +437,8 @@ function getOperationGroupName(
     let namespace = operation.namespace;
     if (!namespace) {
         namespace =
-            program.checker.getGlobalNamespaceType() ?? serviceNamespaceType;
+            context.program.checker.getGlobalNamespaceType() ??
+            serviceNamespaceType;
     }
 
     if (namespace) return namespace.name;

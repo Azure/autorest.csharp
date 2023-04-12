@@ -1,6 +1,7 @@
 {
     "CadlRanchProjects": [
         "arrays/item-types",
+        "azure/core",
         "authentication/api-key",
         "authentication/oauth2",
         "authentication/union",
@@ -8,6 +9,7 @@
         "models/property-types",
         "models/usage",
         "projection",
+        "special-words",
         "enums/extensible",
         "hello",
         "collectionFormat"

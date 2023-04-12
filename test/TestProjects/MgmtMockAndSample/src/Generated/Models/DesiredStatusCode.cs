@@ -38,6 +38,9 @@ namespace MgmtMockAndSample.Models
         public static DesiredStatusCode FourHundred { get; } = new DesiredStatusCode(FourHundredValue);
         /// <summary> 404. </summary>
         public static DesiredStatusCode FourHundredFour { get; } = new DesiredStatusCode(FourHundredFourValue);
+
+        internal int ToSerialInt32() => _value;
+
         /// <summary> Determines if two <see cref="DesiredStatusCode"/> values are the same. </summary>
         public static bool operator ==(DesiredStatusCode left, DesiredStatusCode right) => left.Equals(right);
         /// <summary> Determines if two <see cref="DesiredStatusCode"/> values are not the same. </summary>
