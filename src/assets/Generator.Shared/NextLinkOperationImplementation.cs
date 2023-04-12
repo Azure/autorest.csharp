@@ -118,6 +118,35 @@ namespace Azure.Core
             _apiVersion = apiVersion;
         }
 
+        internal static string GetOperationId(
+            RequestMethod requestMethod,
+            Uri startRequestUri,
+            string nextRequestUri,
+            HeaderSource headerSource,
+            bool originalResponseHasLocation,
+            string? lastKnownLocation,
+            OperationFinalStateVia finalStateVia)
+        {
+            var lroDetails = new Dictionary<string, string?>()
+            {
+                ["HeaderSource"] = headerSource.ToString(),
+                ["NextRequestUri"] = nextRequestUri,
+                ["InitialUri"] = startRequestUri.AbsoluteUri,
+                ["RequestMethod"] = requestMethod.ToString(),
+                ["OriginalResponseHasLocation"] = originalResponseHasLocation.ToString(),
+                ["LastKnownLocation"] = lastKnownLocation,
+                ["FinalStateVia"] = finalStateVia.ToString()
+            };
+            var lroData = BinaryData.FromObjectAsJson(lroDetails);
+            return Convert.ToBase64String(lroData.ToArray());
+        }
+
+        internal static RequestMethod GetHttpMethodFromOperationId(string operationId)
+        {
+            var lroDetails = BinaryData.FromBytes(Convert.FromBase64String(operationId)).ToObjectFromJson<Dictionary<string, string>>();
+            return new RequestMethod(lroDetails["RequestMethod"]);
+        }
+
         public string GetOperationId()
         {
             var lroDetails = new Dictionary<string, string?>()
@@ -434,7 +463,7 @@ namespace Azure.Core
             return HeaderSource.None;
         }
 
-        private enum HeaderSource
+        internal enum HeaderSource
         {
             None,
             OperationLocation,
