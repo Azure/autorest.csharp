@@ -1,6 +1,7 @@
 {
     "CadlRanchProjects": [
         "arrays/item-types",
+        "azure/core",
         "authentication/api-key",
         "authentication/oauth2",
         "authentication/union",

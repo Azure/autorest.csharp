@@ -11,17 +11,15 @@ using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ArmClientExtensions : MgmtExtensions
+    internal class ArmClientExtension : MgmtExtension
     {
-        public ArmClientExtensions(IEnumerable<Operation> allOperations)
-            : base(allOperations, typeof(ArmClient), RequestPath.Tenant)
+        public ArmClientExtension(IEnumerable<Operation> allOperations)
+            : base(allOperations, Enumerable.Empty<MgmtExtensionClient>(), typeof(ArmClient), RequestPath.Tenant)
         {
         }
 
         public override bool IsEmpty => !MgmtContext.Library.ArmResources.Any();
 
         protected override string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : "client";
-
-        public override MgmtExtensionClient ExtensionClient => throw new InvalidOperationException("ArmClientExtension does not have an extension client");
     }
 }
