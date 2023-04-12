@@ -604,15 +604,22 @@ export function getUsages(
                 getFriendlyName(program, effectiveType) ?? effectiveType.name;
         }
         const affectTypes: string[] = [];
-        if (typeName !== "") affectTypes.push(typeName);
-        if (
-            typeName !== "" &&
-            effectiveType.kind === "Model" &&
-            effectiveType.templateMapper?.args
-        ) {
-            for (const arg of effectiveType.templateMapper.args) {
-                if (arg.kind === "Model" && "name" in arg && arg.name !== "") {
-                    affectTypes.push(getFriendlyName(program, arg) ?? arg.name);
+        if (typeName !== "") {
+            affectTypes.push(typeName);
+            if (
+                effectiveType.kind === "Model" &&
+                effectiveType.templateMapper?.args
+            ) {
+                for (const arg of effectiveType.templateMapper.args) {
+                    if (
+                        arg.kind === "Model" &&
+                        "name" in arg &&
+                        arg.name !== ""
+                    ) {
+                        affectTypes.push(
+                            getFriendlyName(program, arg) ?? arg.name
+                        );
+                    }
                 }
             }
         }
