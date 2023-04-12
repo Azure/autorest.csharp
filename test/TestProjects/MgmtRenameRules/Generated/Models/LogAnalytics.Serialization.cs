@@ -30,7 +30,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     properties = Models.LogAnalyticsOutput.DeserializeLogAnalyticsOutput(property.Value);
@@ -40,7 +39,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     contentType = new ContentType(property.Value.GetString());
@@ -50,7 +48,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     content = BinaryData.FromString(property.Value.GetRawText());
@@ -60,7 +57,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     method = new RequestMethod(property.Value.GetString());
@@ -70,7 +66,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        basePath = null;
                         continue;
                     }
                     basePath = new Uri(property.Value.GetString());

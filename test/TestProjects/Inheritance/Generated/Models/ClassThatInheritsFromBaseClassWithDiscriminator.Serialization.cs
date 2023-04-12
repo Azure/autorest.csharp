@@ -118,7 +118,6 @@ namespace Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     dfeString = JsonSerializer.Deserialize<DataFactoryExpression<string>>(property.Value.GetRawText());
@@ -128,7 +127,6 @@ namespace Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     dfeDouble = JsonSerializer.Deserialize<DataFactoryExpression<double>>(property.Value.GetRawText());
@@ -138,7 +136,6 @@ namespace Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     dfeBool = JsonSerializer.Deserialize<DataFactoryExpression<bool>>(property.Value.GetRawText());
@@ -148,7 +145,6 @@ namespace Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     dfeInt = JsonSerializer.Deserialize<DataFactoryExpression<int>>(property.Value.GetRawText());
@@ -158,7 +154,6 @@ namespace Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     dfeObject = JsonSerializer.Deserialize<DataFactoryExpression<BinaryData>>(property.Value.GetRawText());
@@ -168,7 +163,6 @@ namespace Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     dfeListOfT = JsonSerializer.Deserialize<DataFactoryExpression<IList<SeparateClass>>>(property.Value.GetRawText());
@@ -178,7 +172,6 @@ namespace Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     dfeListOfString = JsonSerializer.Deserialize<DataFactoryExpression<IList<string>>>(property.Value.GetRawText());
@@ -188,7 +181,6 @@ namespace Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     dfeKeyValuePairs = JsonSerializer.Deserialize<DataFactoryExpression<IDictionary<string, string>>>(property.Value.GetRawText());
@@ -198,7 +190,6 @@ namespace Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     dfeDateTime = JsonSerializer.Deserialize<DataFactoryExpression<DateTimeOffset>>(property.Value.GetRawText());
@@ -208,7 +199,6 @@ namespace Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     dfeDuration = JsonSerializer.Deserialize<DataFactoryExpression<TimeSpan>>(property.Value.GetRawText());
@@ -218,7 +208,6 @@ namespace Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     dfeUri = JsonSerializer.Deserialize<DataFactoryExpression<Uri>>(property.Value.GetRawText());

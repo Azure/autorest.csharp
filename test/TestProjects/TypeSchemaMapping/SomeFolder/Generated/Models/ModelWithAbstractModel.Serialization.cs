@@ -25,7 +25,6 @@ namespace TypeSchemaMapping.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     abstractModelProperty = AbstractModel.DeserializeAbstractModel(property.Value);

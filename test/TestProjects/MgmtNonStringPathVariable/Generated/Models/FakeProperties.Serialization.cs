@@ -42,7 +42,6 @@ namespace MgmtNonStringPathVariable.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     platformUpdateDomainCount = property.Value.GetInt32();
@@ -52,7 +51,6 @@ namespace MgmtNonStringPathVariable.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     platformFaultDomainCount = property.Value.GetInt32();

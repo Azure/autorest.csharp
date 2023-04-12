@@ -50,7 +50,6 @@ namespace MgmtResourceName.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     properties = BinaryData.FromString(property.Value.GetRawText());
