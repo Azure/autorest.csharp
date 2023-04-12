@@ -119,18 +119,21 @@ internal class PostProcessor
 
         var symbolsToInternalize = definitions.DeclaredSymbols.Except(publicSymbols);
 
-        var nodesToInternalize = new List<BaseTypeDeclarationSyntax>();
+        var nodesToInternalize = new Dictionary<BaseTypeDeclarationSyntax, DocumentId>();
         foreach (var symbol in symbolsToInternalize)
         {
-            nodesToInternalize.AddRange(definitions.DeclaredNodesCache[symbol]);
+            foreach (var node in definitions.DeclaredNodesCache[symbol])
+            {
+                nodesToInternalize[node] = project.GetDocumentId(node.SyntaxTree)!;
+            }
         }
 
-        foreach (var model in nodesToInternalize)
+        foreach (var (model, documentId) in nodesToInternalize)
         {
-            project = MarkInternal(project, model);
+            project = MarkInternal(project, model, documentId);
         }
 
-        var modelNamesToRemove = nodesToInternalize.Select(item => item.Identifier.Text).Concat(suppressedTypeNames);
+        var modelNamesToRemove = nodesToInternalize.Keys.Select(item => item.Identifier.Text).Concat(suppressedTypeNames);
         project = await RemoveMethodsFromModelFactoryAsync(project, definitions, modelNamesToRemove.ToHashSet());
 
         return project;
@@ -253,11 +256,11 @@ internal class PostProcessor
         return Enumerable.Empty<T>();
     }
 
-    private Project MarkInternal(Project project, BaseTypeDeclarationSyntax declarationNode)
+    private Project MarkInternal(Project project, BaseTypeDeclarationSyntax declarationNode, DocumentId documentId)
     {
         var newNode = ChangeModifier(declarationNode, SyntaxKind.PublicKeyword, SyntaxKind.InternalKeyword);
         var tree = declarationNode.SyntaxTree;
-        var document = project.GetDocument(tree)!;
+        var document = project.GetDocument(documentId)!;
         var newRoot = tree.GetRoot().ReplaceNode(declarationNode, newNode).WithAdditionalAnnotations(Simplifier.Annotation);
         document = document.WithSyntaxRoot(newRoot);
         return document.Project;
