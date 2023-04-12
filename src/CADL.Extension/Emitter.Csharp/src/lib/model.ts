@@ -634,39 +634,60 @@ export function getUsages(
             usagesMap.set(name, value);
         }
     }
-    /* handle resource operation. */
+
     for (const op of ops) {
         const resourceOperation = getResourceOperation(program, op.operation);
-        if (resourceOperation) {
-            if (!op.parameters.bodyParameter && op.parameters.bodyType) {
-                const resourceName = resourceOperation.resourceType.name;
-                let value = usagesMap.get(resourceName);
-                if (!value) value = UsageFlags.Input;
-                else value = value | UsageFlags.Input;
-                usagesMap.set(resourceName, value);
-            }
-        }
-
-        /* handle spread. */
         if (!op.parameters.bodyParameter && op.parameters.bodyType) {
-            const effectiveBodyType = getEffectiveSchemaType(
-                context,
-                op.parameters.bodyType
-            );
-            if (
-                effectiveBodyType.kind === "Model" &&
-                effectiveBodyType.name !== ""
-            ) {
-                const modelName =
-                    getFriendlyName(program, effectiveBodyType) ??
-                    effectiveBodyType.name;
-                let value = usagesMap.get(modelName);
-                if (!value) value = UsageFlags.Input;
-                else value = value | UsageFlags.Input;
-                usagesMap.set(modelName, value);
+            let bodyTypeName = "";
+            if (resourceOperation) {
+                /* handle resource operation. */
+                bodyTypeName = resourceOperation.resourceType.name;
+            } else {
+                /* handle spread. */
+                const effectiveBodyType = getEffectiveSchemaType(
+                    context,
+                    op.parameters.bodyType
+                );
+                if (
+                    effectiveBodyType.kind === "Model" &&
+                    effectiveBodyType.name !== ""
+                ) {
+                    bodyTypeName =
+                        getFriendlyName(program, effectiveBodyType) ??
+                        effectiveBodyType.name;
+                }
+            }
+            appendUsage(bodyTypeName, UsageFlags.Input);
+        }
+        /* handle response type usage. */
+        for (const res of op.responses) {
+            const resBody = res.responses[0]?.body;
+            if (resBody?.type) {
+                let returnType = "";
+                if (
+                    resourceOperation &&
+                    resourceOperation.operation !== "list"
+                ) {
+                    returnType = resourceOperation.resourceType.name;
+                } else {
+                    const effectiveReturnType = getEffectiveSchemaType(
+                        context,
+                        resBody.type
+                    );
+                    if (
+                        effectiveReturnType.kind === "Model" &&
+                        effectiveReturnType.name !== ""
+                    ) {
+                        returnType =
+                            getFriendlyName(program, effectiveReturnType) ??
+                            effectiveReturnType.name;
+                    }
+                }
+                appendUsage(returnType, UsageFlags.Output);
             }
         }
     }
+
     for (const [key, value] of usagesMap) {
         if (value === (UsageFlags.Input | UsageFlags.Output)) {
             result.roundTrips.push(key);
@@ -677,4 +698,11 @@ export function getUsages(
         }
     }
     return result;
+
+    function appendUsage(name: string, flag: UsageFlags) {
+        let value = usagesMap.get(name);
+        if (!value) value = flag;
+        else value = value | flag;
+        usagesMap.set(name, value);
+    }
 }
