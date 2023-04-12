@@ -24,7 +24,6 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         private readonly IReadOnlyDictionary<Type, IEnumerable<Operation>> _extensionOperations;
-
         private readonly IReadOnlyDictionary<RequestPath, IEnumerable<Operation>> _armResourceExtensionOperations;
 
         public MgmtExtensionBuilder(Dictionary<Type, IEnumerable<Operation>> extensionOperations, Dictionary<RequestPath, IEnumerable<Operation>> armResourceExtensionOperations)
