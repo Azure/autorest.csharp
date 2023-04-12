@@ -12,25 +12,44 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtExtensionWrapperWriter : MgmtClientBaseWriter
     {
-        private MgmtExtensionsWrapper _wrapper;
-        public MgmtExtensionWrapperWriter(MgmtExtensionsWrapper extensionsWrapper) : base(new CodeWriter(), extensionsWrapper)
+        private MgmtExtensionWrapper This { get; }
+
+        public MgmtExtensionWrapperWriter(MgmtExtensionWrapper extensionWrapper) : base(new CodeWriter(), extensionWrapper)
         {
-            _wrapper = extensionsWrapper;
+            This = extensionWrapper;
+        }
+
+        protected override void WritePrivateHelpers()
+        {
+            foreach (var extensionClient in This.ExtensionClients)
+            {
+                if (extensionClient.IsEmpty)
+                    continue;
+
+                foreach (var method in extensionClient.FactoryMethods)
+                {
+                    _writer.Line();
+
+                    using (_writer.WriteMethodDeclaration(method.Signature))
+                    {
+                        method.MethodBodyImplementation(_writer);
+                    }
+                }
+            }
+
+            base.WritePrivateHelpers();
         }
 
         protected internal override void WriteImplementations()
         {
-            foreach (var extension in _wrapper.Extensions)
+            WritePrivateHelpers();
+
+            foreach (var extension in This.Extensions)
             {
                 if (extension.IsEmpty)
                     continue;
-                var extensionWriter = extension switch
-                {
-                    ArmClientExtensions armClientExtensions => new ArmClientExtensionsWriter(_writer, armClientExtensions),
-                    _ when extension.ArmCoreType == typeof(ArmResource) => new ArmResourceExtensionsWriter(_writer, extension),
-                    _ => new MgmtExtensionWriter(_writer, extension)
-                };
-                extensionWriter.WriteImplementations();
+
+                MgmtExtensionWriter.GetWriter(_writer, extension).WriteImplementations();
                 _writer.Line();
             }
         }

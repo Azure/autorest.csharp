@@ -11,9 +11,9 @@ using AutoRest.CSharp.MgmtTest.Output.Mock;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Mock
 {
-    internal class ExtensionMockTestWriter : MgmtMockTestBaseWriter<MgmtExtensions>
+    internal class ExtensionMockTestWriter : MgmtMockTestBaseWriter<MgmtExtension>
     {
-        public ExtensionMockTestWriter(CodeWriter writer, MgmtMockTestProvider<MgmtExtensions> extensionTest) : base(writer, extensionTest)
+        public ExtensionMockTestWriter(CodeWriter writer, MgmtMockTestProvider<MgmtExtension> extensionTest) : base(writer, extensionTest)
         {
         }
 
