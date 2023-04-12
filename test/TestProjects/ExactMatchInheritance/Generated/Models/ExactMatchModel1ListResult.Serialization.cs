@@ -28,7 +28,6 @@ namespace ExactMatchInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ExactMatchModel1Data> array = new List<ExactMatchModel1Data>();

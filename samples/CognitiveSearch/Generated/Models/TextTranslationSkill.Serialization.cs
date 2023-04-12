@@ -88,7 +88,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     defaultFromLanguageCode = new TextTranslationSkillLanguage(property.Value.GetString());
@@ -98,7 +97,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     suggestedFrom = new TextTranslationSkillLanguage(property.Value.GetString());

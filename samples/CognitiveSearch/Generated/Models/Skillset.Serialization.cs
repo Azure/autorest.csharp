@@ -77,7 +77,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     cognitiveServices = CognitiveServicesAccount.DeserializeCognitiveServicesAccount(property.Value);

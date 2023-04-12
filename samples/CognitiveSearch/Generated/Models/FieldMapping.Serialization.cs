@@ -55,7 +55,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     mappingFunction = FieldMappingFunction.DeserializeFieldMappingFunction(property.Value);

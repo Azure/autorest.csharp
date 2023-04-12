@@ -73,7 +73,6 @@ namespace CustomNamespace
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             fruit = property0.Value.GetString().ToCustomFruitEnum();
@@ -83,7 +82,6 @@ namespace CustomNamespace
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             daysOfWeek = new CustomDaysOfWeek(property0.Value.GetString());
