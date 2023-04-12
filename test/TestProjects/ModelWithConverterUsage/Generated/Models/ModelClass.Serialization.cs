@@ -58,7 +58,6 @@ namespace ModelWithConverterUsage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     objProperty = Product.DeserializeProduct(property.Value);

@@ -28,7 +28,6 @@ namespace MgmtExtensionResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<PolicyDefinitionData> array = new List<PolicyDefinitionData>();
