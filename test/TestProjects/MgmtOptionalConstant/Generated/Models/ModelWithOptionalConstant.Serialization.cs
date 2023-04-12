@@ -63,7 +63,6 @@ namespace MgmtOptionalConstant.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     optionalIntConstant = new IntConstant(property.Value.GetInt32());
@@ -73,7 +72,6 @@ namespace MgmtOptionalConstant.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     optionalFloatConstant = new FloatConstant(property.Value.GetSingle());
