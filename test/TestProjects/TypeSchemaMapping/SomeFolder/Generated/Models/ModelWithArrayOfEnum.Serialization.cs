@@ -58,7 +58,6 @@ namespace TypeSchemaMapping.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<EnumForModelWithArrayOfEnum> array = new List<EnumForModelWithArrayOfEnum>();
@@ -73,7 +72,6 @@ namespace TypeSchemaMapping.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<EnumForModelWithArrayOfEnum?> array = new List<EnumForModelWithArrayOfEnum?>();

@@ -92,7 +92,6 @@ namespace MgmtMultipleParentResource
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -127,7 +126,6 @@ namespace MgmtMultipleParentResource
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -146,7 +144,6 @@ namespace MgmtMultipleParentResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             asyncExecution = property0.Value.GetBoolean();
@@ -166,7 +163,6 @@ namespace MgmtMultipleParentResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             timeoutInSeconds = property0.Value.GetInt32();
@@ -176,7 +172,6 @@ namespace MgmtMultipleParentResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                outputBlobUri = null;
                                 continue;
                             }
                             outputBlobUri = new Uri(property0.Value.GetString());
@@ -186,7 +181,6 @@ namespace MgmtMultipleParentResource
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                errorBlobUri = null;
                                 continue;
                             }
                             errorBlobUri = new Uri(property0.Value.GetString());
