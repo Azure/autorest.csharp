@@ -74,6 +74,24 @@ namespace AutoRest.CSharp.Common.Input
             }
 
             valueType ??= InputPrimitiveType.Int32;
+            var currentType = InputPrimitiveType.Int32;
+            foreach (var value in allowedValues)
+            {
+                switch (value.Value)
+                {
+                    case Int32 i:
+                        if (currentType != InputPrimitiveType.Float32) currentType = InputPrimitiveType.Int32;
+                        break;
+                    case float f:
+                        currentType = InputPrimitiveType.Float32;
+                        break;
+                    case string:
+                        currentType = InputPrimitiveType.String;
+                        break;
+                }
+            }
+            valueType = currentType;
+
             var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, normalizeValues(allowedValues, valueType), isExtendable);
             if (id != null)
             {
