@@ -604,7 +604,7 @@ namespace _Specs_.Azure.Core
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            if (orderby != null)
+            if (orderby != null && Optional.IsCollectionDefined(orderby))
             {
                 foreach (var param in orderby)
                 {
@@ -615,14 +615,14 @@ namespace _Specs_.Azure.Core
             {
                 uri.AppendQuery("filter", filter, true);
             }
-            if (select != null)
+            if (select != null && Optional.IsCollectionDefined(select))
             {
                 foreach (var param in select)
                 {
                     uri.AppendQuery("select", param, true);
                 }
             }
-            if (expand != null)
+            if (expand != null && Optional.IsCollectionDefined(expand))
             {
                 foreach (var param in expand)
                 {
