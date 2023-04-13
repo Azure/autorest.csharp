@@ -32,7 +32,5 @@ namespace AutoRest.CSharp.Mgmt.Output
                     yield return operation;
             }
         }
-
-        public override bool IsEmpty => _extensions.All(extension => extension.IsEmpty);
     }
 }
