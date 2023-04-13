@@ -54,7 +54,6 @@ namespace MgmtConstants.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     optionalStringConstant = new StringConstant(property.Value.GetString());
@@ -64,7 +63,6 @@ namespace MgmtConstants.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     optionalIntConstant = new IntConstant(property.Value.GetInt32());
@@ -74,7 +72,6 @@ namespace MgmtConstants.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     optionalBooleanConstant = property.Value.GetBoolean();
@@ -84,7 +81,6 @@ namespace MgmtConstants.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     optionalFloatConstant = new FloatConstant(property.Value.GetSingle());

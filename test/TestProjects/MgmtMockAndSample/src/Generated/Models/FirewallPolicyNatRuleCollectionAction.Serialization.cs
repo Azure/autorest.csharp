@@ -36,7 +36,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     type = new FirewallPolicyNatRuleCollectionActionType(property.Value.GetString());

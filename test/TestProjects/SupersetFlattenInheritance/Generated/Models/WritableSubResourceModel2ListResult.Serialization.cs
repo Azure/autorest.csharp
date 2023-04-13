@@ -27,7 +27,6 @@ namespace SupersetFlattenInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<WritableSubResourceModel2> array = new List<WritableSubResourceModel2>();

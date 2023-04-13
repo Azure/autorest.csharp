@@ -436,21 +436,13 @@ namespace AutoRest.TestServer.Tests
             Assert.Null(typeof(ReadonlyModel).GetMethod("DeserializeParametersModel", BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-#if DEBUG
-        [Test]
-        public void OptionalPropertyWithNullFailsInDebug()
-        {
-            Assert.Throws<JsonException>(() => MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredReadonlyInt\":1, \"NonRequiredReadonlyInt\": 2,\"NonRequiredInt\": null}").RootElement));
-        }
-#else
 
         [Test]
-        public void OptionalPropertyWithNullWorksInRelease()
+        public void OptionalPropertyWithNullIsAccepted()
         {
             var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredReadonlyInt\":1, \"NonRequiredReadonlyInt\": 2,\"NonRequiredInt\": null}").RootElement);
             Assert.Null(model.NonRequiredInt);
         }
-#endif
 
         [Test]
         public void ModelWithCustomizedNullableJsonElementPropertyDeserializesNull()
