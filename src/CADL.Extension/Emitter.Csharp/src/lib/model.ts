@@ -61,6 +61,7 @@ import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import { DpgContext } from "@azure-tools/typespec-client-generator-core";
+import { capitalize } from "./utils.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -648,13 +649,16 @@ export function getUsages(
                     context,
                     op.parameters.bodyType
                 );
-                if (
-                    effectiveBodyType.kind === "Model" &&
-                    effectiveBodyType.name !== ""
-                ) {
-                    bodyTypeName =
-                        getFriendlyName(program, effectiveBodyType) ??
-                        effectiveBodyType.name;
+                if (effectiveBodyType.kind === "Model") {
+                    if (effectiveBodyType.name !== "") {
+                        bodyTypeName =
+                            getFriendlyName(program, effectiveBodyType) ??
+                            effectiveBodyType.name;
+                    } else {
+                        bodyTypeName = `${capitalize(
+                            op.operation.name
+                        )}Request`;
+                    }
                 }
             }
             appendUsage(bodyTypeName, UsageFlags.Input);

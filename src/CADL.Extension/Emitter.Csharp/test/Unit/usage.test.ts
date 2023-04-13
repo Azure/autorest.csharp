@@ -15,6 +15,7 @@ import { getUsages } from "../../src/lib/model.js";
 import { createDpgContext } from "@azure-tools/typespec-client-generator-core";
 import { createModel } from "../../src/lib/clientModelBuilder.js";
 import { CodeModel } from "../../src/type/codeModel.js";
+import { Usage } from "../../src/type/usage.js";
 
 describe("Test getUsages", () => {
     let runner: TestHost;
@@ -109,7 +110,7 @@ describe("Test getUsages", () => {
                 name: string;
                 prop: T;
             }
-            @doc("this is a model.")
+            @doc("This is a model.")
             model Foo {
                 @doc("name of the Foo")
                 name: string;
@@ -134,7 +135,7 @@ describe("Test getUsages", () => {
                 @doc("name of the model.")
                 base: string;
             }
-            @doc("this is a model.")
+            @doc("This is a model.")
             model Foo extends BaseModel{
                 @doc("name of the Foo")
                 name: string;
@@ -151,6 +152,105 @@ describe("Test getUsages", () => {
         // verify that the baseModel will not apply the usage of derived model.
         assert(usages.outputs.includes("BaseModel"));
         // verify that the derived model will inherit the usage of base model
+        assert(usages.roundTrips.includes("Foo"));
+    });
+
+    it("Test the usage of models spread alias", async () => {
+        const program = await typeSpecCompile(
+            `
+            alias FooAlias = {
+                @path id: string;
+                @doc("name of the Foo")
+                name: string;
+            };
+            op test(...FooAlias): void;
+      `,
+            runner
+        );
+        const context = createEmitterContext(program);
+        const dpgContext = createDpgContext(context);
+        const [services] = getAllHttpServices(program);
+        const usages = getUsages(dpgContext, services[0].operations);
+        assert(usages.inputs.includes("TestRequest"));
+    });
+
+    it("Test the usage of body parameter of azure core operation.", async () => {
+        const program = await typeSpecCompile(
+            `
+            @doc("This is a model.")
+            @resource("items")
+            model Foo {
+                @doc("id of Foo")
+                @key
+                @visibility("read","create","query")
+                id: string;
+                @doc("name of Foo")
+                name: string;
+            }
+
+            @doc("The item information.")
+            model FooInfo {
+                @doc("name of Foo")
+                name: string;
+            }
+
+            @doc("this is a response model.")
+            model BatchCreateFooListItemsRequest {
+                @doc("The items to create")
+                fooInfos: FooInfo[];
+            }
+
+            @doc("this is a response model.")
+            model BatchCreateTextListItemsResponse {
+                @doc("The item list.")
+                fooList: Foo[];
+            }
+            interface TextLists{
+                @doc("create items")
+                addItems is ResourceAction<Foo, BatchCreateFooListItemsRequest, BatchCreateTextListItemsResponse>;
+            }
+      `,
+            runner,
+            true,
+            true
+        );
+        const context = createEmitterContext(program);
+        const dpgContext = createDpgContext(context);
+        const [services] = getAllHttpServices(program);
+        const usages = getUsages(dpgContext, services[0].operations);
+        assert(usages.inputs.includes("BatchCreateFooListItemsRequest"));
+        assert(usages.inputs.includes("FooInfo"));
+        assert(usages.outputs.includes("BatchCreateTextListItemsResponse"));
+    });
+
+    it("Test the usage of body parameter and return type of azure core resource operation.", async () => {
+        const program = await typeSpecCompile(
+            `
+            @doc("This is a model.")
+            @resource("items")
+            model Foo {
+                @doc("id of Foo")
+                @key
+                @visibility("read","create","query")
+                id: string;
+                @doc("name of Foo")
+                name: string;
+            }
+
+            interface FooClient{
+                @doc("create Foo")
+                createFoo is ResourceCreateOrUpdate<Foo>;
+            }
+      `,
+            runner,
+            true,
+            true
+        );
+
+        const context = createEmitterContext(program);
+        const dpgContext = createDpgContext(context);
+        const [services] = getAllHttpServices(program);
+        const usages = getUsages(dpgContext, services[0].operations);
         assert(usages.roundTrips.includes("Foo"));
     });
 });
