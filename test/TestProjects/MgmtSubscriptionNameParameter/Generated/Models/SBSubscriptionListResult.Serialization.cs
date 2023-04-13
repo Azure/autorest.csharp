@@ -28,7 +28,6 @@ namespace MgmtSubscriptionNameParameter.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<SBSubscriptionData> array = new List<SBSubscriptionData>();

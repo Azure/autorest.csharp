@@ -67,7 +67,6 @@ namespace Models.Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Fish> array = new List<Fish>();
@@ -82,7 +81,6 @@ namespace Models.Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, Fish> dictionary = new Dictionary<string, Fish>();
@@ -97,7 +95,6 @@ namespace Models.Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     partner = DeserializeFish(property.Value);
