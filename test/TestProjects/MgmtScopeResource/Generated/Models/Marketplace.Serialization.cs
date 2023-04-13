@@ -64,7 +64,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -94,7 +93,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -118,7 +116,6 @@ namespace MgmtScopeResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             usageStart = property0.Value.GetDateTimeOffset("O");
@@ -128,7 +125,6 @@ namespace MgmtScopeResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             usageEnd = property0.Value.GetDateTimeOffset("O");
@@ -138,7 +134,6 @@ namespace MgmtScopeResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             resourceRate = property0.Value.GetDecimal();
@@ -183,7 +178,6 @@ namespace MgmtScopeResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             consumedQuantity = property0.Value.GetDecimal();
@@ -198,7 +192,6 @@ namespace MgmtScopeResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             pretaxCost = property0.Value.GetDecimal();
@@ -208,7 +201,6 @@ namespace MgmtScopeResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             isEstimated = property0.Value.GetBoolean();
@@ -218,7 +210,6 @@ namespace MgmtScopeResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             meterId = property0.Value.GetGuid();
@@ -228,7 +219,6 @@ namespace MgmtScopeResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             subscriptionGuid = property0.Value.GetGuid();
@@ -278,7 +268,6 @@ namespace MgmtScopeResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             isRecurringCharge = property0.Value.GetBoolean();

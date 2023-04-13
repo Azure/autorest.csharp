@@ -57,9 +57,43 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Initializer: null);
         }
 
+        private static bool ShouldGenerateArmResourceExtensionMethod(IEnumerable<RequestPath> requestPaths)
+            => requestPaths.Any(ShouldGenerateArmResourceExtensionMethod);
+
+        private static bool ShouldGenerateArmResourceExtensionMethod(RequestPath requestPath)
+            => Configuration.MgmtConfiguration.GenerateArmResourceExtensions.Contains(requestPath);
+
+        protected override void WriteMethod(MgmtClientOperation clientOperation, bool isAsync)
+        {
+            var requestPaths = clientOperation.Select(restOperation => restOperation.RequestPath);
+            if (ShouldGenerateArmResourceExtensionMethod(requestPaths))
+            {
+                base.WriteMethod(clientOperation, isAsync);
+                _writer.Line();
+            }
+
+            var scopeResourceTypes = requestPaths.Select(requestPath => requestPath.GetParameterizedScopeResourceTypes() ?? Enumerable.Empty<ResourceTypeSegment>()).SelectMany(types => types).Distinct();
+            var scopeTypes = GetScopeTypeStrings(scopeResourceTypes);
+            var originalSignature = clientOperation.MethodSignature;
+            var signature = new MethodSignature(
+                originalSignature.Name,
+                originalSignature.Summary,
+                originalSignature.Description,
+                originalSignature.Modifiers,
+                originalSignature.ReturnType,
+                originalSignature.ReturnDescription,
+                GetScopeVersionMethodParameters(originalSignature.Parameters.Skip(1), scopeTypes),
+                originalSignature.Attributes);
+            using (_writer.WriteCommonMethod(signature, null, isAsync, This.Accessibility == "public"))
+            {
+                WriteMethodBodyWrapper(signature, isAsync, clientOperation.IsPagingOperation, scopeTypes);
+            }
+            _writer.Line();
+        }
+
         protected override void WriteSingletonResourceGetMethod(Resource resource)
         {
-            if (Configuration.MgmtConfiguration.GenerateArmResourceExtensions.Contains(resource.RequestPath))
+            if (ShouldGenerateArmResourceExtensionMethod(resource.RequestPath))
             {
                 base.WriteSingletonResourceGetMethod(resource);
                 _writer.Line();
@@ -82,7 +116,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteResourceCollectionGetMethod(Resource resource)
         {
-            if (Configuration.MgmtConfiguration.GenerateArmResourceExtensions.Contains(resource.RequestPath))
+            if (ShouldGenerateArmResourceExtensionMethod(resource.RequestPath))
             {
                 base.WriteResourceCollectionGetMethod(resource);
                 _writer.Line();
@@ -106,7 +140,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
         {
-            if (Configuration.MgmtConfiguration.GenerateArmResourceExtensions.Contains(resourceCollection.Resource.RequestPath))
+            if (ShouldGenerateArmResourceExtensionMethod(resourceCollection.Resource.RequestPath))
             {
                 base.WriteChildResourceGetMethod(resourceCollection, isAsync);
                 _writer.Line();
@@ -200,14 +234,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        private Parameter[] GetParametersForSingletonEntry(ICollection<FormattableString>? types)
-            => new[] {
-                    _armClientParameter,
-                    GetScopeParameter(types)
-               };
+        /// <summary>
+        /// Returns the parameters by the specific scope
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        private Parameter[] GetScopeVersionMethodParameters(IEnumerable<Parameter> parameters, ICollection<FormattableString>? types)
+        {
+            var scopeParameter = GetScopeParameter(types);
+            return parameters.Prepend(scopeParameter).Prepend(_armClientParameter).ToArray();
+        }
 
-        private Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection, ICollection<FormattableString>? types)
-            => resourceCollection.ExtraConstructorParameters.Prepend(GetScopeParameter(types)).Prepend(_armClientParameter).ToArray();
+        private Parameter[] GetParametersForSingletonEntry(ICollection<FormattableString>? types) => GetScopeVersionMethodParameters(Enumerable.Empty<Parameter>(), types);
+
+        private Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection, ICollection<FormattableString>? types) => GetScopeVersionMethodParameters(resourceCollection.ExtraConstructorParameters, types);
 
         private Parameter GetScopeParameter(ICollection<FormattableString>? types)
         {
