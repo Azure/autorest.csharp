@@ -32,7 +32,6 @@ namespace Azure.Storage.Tables.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<TableResponseProperties> array = new List<TableResponseProperties>();

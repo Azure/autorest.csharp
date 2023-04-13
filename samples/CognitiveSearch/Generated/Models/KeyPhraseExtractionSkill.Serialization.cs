@@ -87,7 +87,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     defaultLanguageCode = new KeyPhraseExtractionSkillLanguage(property.Value.GetString());

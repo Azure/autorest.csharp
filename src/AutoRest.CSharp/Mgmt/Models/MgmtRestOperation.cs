@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (matchType == ResourceMatchType.CheckName)
                 return null;
 
-            var parent = first.Parent().First();
+            var parent = first.GetParents().First();
             if (parent is not null && AllMatchesSameParent(matchTypeMatches, parent, out bool areAllSingleton) && areAllSingleton)
                 return parent as Resource;
 
@@ -329,7 +329,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             foreach (var resource in matches)
             {
                 areAllSingleton &= resource.IsSingleton;
-                var current = resource.Parent().FirstOrDefault();
+                var current = resource.GetParents().FirstOrDefault();
                 if (current is null)
                     return false;
                 if (!current.Equals(parent))
@@ -449,7 +449,7 @@ namespace AutoRest.CSharp.Mgmt.Models
         internal Parameter GetPropertyBagParameter(IEnumerable<Parameter> parameters)
         {
             // considering this method might be invoked several times in the future
-            // we use _propertyBagParameter to cache the last reault
+            // we use _propertyBagParameter to cache the last result
             // and return it directly if the input parameter is the same as the previous one
             if (_propertyBagSelectedParams != null && _propertyBagSelectedParams.SequenceEqual(parameters))
             {
@@ -479,7 +479,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             var existingModels = MgmtContext.Library.PropertyBagModels.Where(m => m.Type.Name == schemaObject.Type.Name);
             if (existingModels != null)
             {
-                // sometimes we might have two or more property bag models with same name but different porperties
+                // sometimes we might have two or more property bag models with same name but different properties
                 // we will throw exception in this case to prompt the user to rename the property bag model
                 if (IsDuplicatedPropertyBag(existingModels, (ModelTypeProvider)schemaObject))
                 {

@@ -28,7 +28,6 @@ namespace MgmtResourceName.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<MemoryData> array = new List<MemoryData>();

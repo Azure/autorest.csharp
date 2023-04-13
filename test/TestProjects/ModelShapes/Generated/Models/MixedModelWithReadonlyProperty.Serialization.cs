@@ -33,7 +33,6 @@ namespace ModelShapes.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     readonlyProperty = ReadonlyModel.DeserializeReadonlyModel(property.Value);
@@ -43,7 +42,6 @@ namespace ModelShapes.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ReadonlyModel> array = new List<ReadonlyModel>();
