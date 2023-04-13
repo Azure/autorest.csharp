@@ -152,11 +152,23 @@ namespace AutoRest.CSharp.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
+
+        /// <summary>
+        /// Whether we will generate model factory for this library.
+        /// If true (default), the model factory will be generated. If false, the model factory will not be generated.
+        /// </summary>
         public static bool GenerateModelFactory { get; private set; }
 
+        /// <summary>
+        /// Whether we will generate the discriminator property as public or internal.
+        /// If true, the discriminator property will be public. If false (default), the discriminator property will be internal.
+        /// </summary>
         public static bool PublicDiscriminatorProperty { get; private set; }
 
         private static IReadOnlyList<string>? _oldModelFactoryEntries;
+        /// <summary>
+        /// This is a shim flag that keeps the old behavior of model factory generation. This configuration should be only used on HLC packages.
+        /// </summary>
         public static IReadOnlyList<string> ModelFactoryForHlc => _oldModelFactoryEntries ?? throw new InvalidOperationException("Configuration has not been initialized");
         public static UnreferencedTypesHandlingOption UnreferencedTypesHandling { get; private set; }
         private static IReadOnlyList<string>? _suppressAbstractBaseClasses;
