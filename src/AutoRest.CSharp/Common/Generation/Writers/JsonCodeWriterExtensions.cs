@@ -305,7 +305,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         if (Configuration.AzureArm && property.ValueType?.Equals(typeof(Uri)) == true)
                         {
-                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null)"))
+                            using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null || string.IsNullOrEmpty({itemVariable}.Value.GetString()))"))
                             {
                                 writer.Line($"{propertyVariables[property].Declaration} = null;");
                                 writer.Append($"continue;");
