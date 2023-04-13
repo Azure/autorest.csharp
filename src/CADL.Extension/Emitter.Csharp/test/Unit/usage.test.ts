@@ -1,7 +1,15 @@
 import { TestHost } from "@typespec/compiler/testing";
 import assert, { deepStrictEqual } from "assert";
-import { createEmitterContext, createEmitterTestHost, typeSpecCompile } from "./utils/TestUtil.js";
-import { HttpOperation, getAllHttpServices, getHttpService } from "@typespec/http";
+import {
+    createEmitterContext,
+    createEmitterTestHost,
+    typeSpecCompile
+} from "./utils/TestUtil.js";
+import {
+    HttpOperation,
+    getAllHttpServices,
+    getHttpService
+} from "@typespec/http";
 import { ignoreDiagnostics } from "@typespec/compiler";
 import { getUsages } from "../../src/lib/model.js";
 import { createDpgContext } from "@azure-tools/typespec-client-generator-core";
@@ -14,7 +22,7 @@ describe("Test getUsages", () => {
     beforeEach(async () => {
         runner = await createEmitterTestHost();
     });
-    
+
     it("Get usage for body parameter type", async () => {
         const program = await typeSpecCompile(
             `
