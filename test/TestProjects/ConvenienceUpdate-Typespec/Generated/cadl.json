@@ -1529,119 +1529,16 @@
     },
     {
      "$id": "138",
-     "Name": "convenienceRequiredModelWithRequired",
-     "ResourceName": "ConvenienceInCadl",
-     "Description": "Operation has protocol method with required body parameter and required RequestContext and convenience method.",
-     "Parameters": [
-      {
-       "$id": "139",
-       "Name": "required",
-       "NameInRequest": "required",
-       "Type": {
-        "$ref": "2"
-       },
-       "Location": "Body",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method"
-      },
-      {
-       "$id": "140",
-       "Name": "contentType",
-       "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "141",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "142",
-        "Type": {
-         "$ref": "141"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "143",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "144",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "145",
-        "Type": {
-         "$ref": "144"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "10"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "146",
-       "StatusCodes": [
-        200
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "POST",
-     "RequestBodyMediaType": "Json",
-     "Uri": "",
-     "Path": "/convenienceRequiredModelWithRequired",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "147",
      "Name": "protocolOptionalBeforeRequired",
      "ResourceName": "ConvenienceInCadl",
      "Description": "Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.",
      "Parameters": [
       {
-       "$id": "148",
+       "$id": "139",
        "Name": "optional",
        "NameInRequest": "optional",
        "Type": {
-        "$id": "149",
+        "$id": "140",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1657,7 +1554,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "150",
+       "$id": "141",
        "Name": "required",
        "NameInRequest": "required",
        "Type": {
@@ -1674,11 +1571,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "151",
+       "$id": "142",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "152",
+        "$id": "143",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1693,19 +1590,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "153",
+        "$id": "144",
         "Type": {
-         "$ref": "152"
+         "$ref": "143"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "154",
+       "$id": "145",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "155",
+        "$id": "146",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1720,9 +1617,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "156",
+        "$id": "147",
         "Type": {
-         "$ref": "155"
+         "$ref": "146"
         },
         "Value": "application/json"
        }
@@ -1733,7 +1630,7 @@
      ],
      "Responses": [
       {
-       "$id": "157",
+       "$id": "148",
        "StatusCodes": [
         200
        ],
@@ -1755,7 +1652,7 @@
     }
    ],
    "Protocol": {
-    "$id": "158"
+    "$id": "149"
    },
    "Creatable": true
   }

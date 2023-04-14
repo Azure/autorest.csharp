@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Input
                 _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
             }
 
-            ExistingProjectFolder = existingProjectFolder == null ? DownloadLatestContract(_absoluteProjectFolder) : Path.GetFullPath(Path.Combine(projectFolder, existingProjectFolder));
+            ExistingProjectFolder = existingProjectFolder == null ? DownloadLatestContract(_absoluteProjectFolder) : Path.GetFullPath(Path.Combine(_absoluteProjectFolder, existingProjectFolder));
             if (publicClients && generation1ConvenienceClient)
             {
                 var binaryLocation = typeof(Configuration).Assembly.Location;

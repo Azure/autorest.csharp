@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models
                 : Array.Empty<CSharpAttribute>();
 
             var shouldRequestContextOptional = ShouldRequestContextOptional();
-            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
+            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p != KnownParameters.RequestContentNullable && !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
             var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : MethodSignatureModifiers.Internal) | Virtual;
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
             var convenienceMethod = ShouldGenerateConvenienceMethod() ? BuildConvenienceMethod(shouldRequestContextOptional) : null;

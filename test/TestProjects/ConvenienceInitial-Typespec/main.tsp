@@ -109,12 +109,6 @@ op convenienceRequiredModelWithOptional(@body required: Model): Response<200>;
 @convenientAPI(true)
 op convenienceOptionalModelWithRequired(@body optional?: Model): Response<200>;
 
-@route("/convenienceRequiredModelWithRequired")
-@doc("Operation has protocol method with required body parameter and required RequestContext and convenience method.")
-@post
-@convenientAPI(true)
-op convenienceRequiredModelWithRequired(@body required: Model): Response<200>;
-
 @route("/protocolOptionalBeforeRequired")
 @doc("Operation has protocol method with optioanl parameter before required parameter and convenience method.")
 @post

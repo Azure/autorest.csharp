@@ -1,6 +1,6 @@
 emit: [
-  "@azure-tools/cadl-csharp",
+  "@azure-tools/typespec-csharp",
 ]
 options:
-  "@azure-tools/cadl-csharp":
-    existing-project-folder: ../ConvenienceInitial-Cadl/Generated
+  "@azure-tools/typespec-csharp":
+    existing-project-folder: ../ConvenienceInitial-Typespec/Generated
