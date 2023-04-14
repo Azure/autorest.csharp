@@ -43,7 +43,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        certificateUrl = null;
                         continue;
                     }
                     certificateUrl = new Uri(property.Value.GetString());

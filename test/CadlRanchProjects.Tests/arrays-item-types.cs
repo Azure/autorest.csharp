@@ -115,10 +115,9 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3104")]
         public Task Arrays_ItemTypes_DurationValue_put() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetDurationValueClient().PutAsync(RequestContent.Create(new[] { XmlConvert.ToTimeSpan("P123DT22H14M12.011S") }));
+            var response = await new ItemTypesClient(host, null).GetDurationValueClient().PutAsync(RequestContent.Create(new[] { XmlConvert.ToString( XmlConvert.ToTimeSpan("P123DT22H14M12.011S") )}));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -145,10 +144,17 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3108")]
         public Task Arrays_ItemTypes_ModelValue_put() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetModelValueClient().PutAsync(RequestContent.Create(new List<InnerModel>() { new InnerModel("hello"), new InnerModel("world") }));
+            var value1 = new
+            {
+                property = "hello"
+            };
+            var value2 = new
+            {
+                property = "world"
+            };
+            var response = await new ItemTypesClient(host, null).GetModelValueClient().PutAsync(RequestContent.Create(new[] { value1, value2 }));
             Assert.AreEqual(204, response.Status);
         });
     }

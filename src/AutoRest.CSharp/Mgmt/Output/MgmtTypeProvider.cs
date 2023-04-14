@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     /// <summary>
     /// MgmtTypeProvider represents the information that corresponds to the generated class in the SDK that contains operations in it.
-    /// This includes <see cref="Resource"/>, <see cref="ResourceCollection"/>, <see cref="ArmClientExtensions"/>, <see cref="MgmtExtensions"/> and <see cref="MgmtExtensionsWrapper"/>
+    /// This includes <see cref="Resource"/>, <see cref="ResourceCollection"/>, <see cref="ArmClientExtension"/>, <see cref="MgmtExtension"/>, <see cref="MgmtExtensionClient"/> and <see cref="MgmtExtensionWrapper"/>
     /// </summary>
     internal abstract class MgmtTypeProvider : TypeProvider
     {
@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             ResourceName = resourceName;
             IsArmCore = Configuration.MgmtConfiguration.IsArmCore;
-            IsStatic = !IsArmCore && BaseType is null && (this is MgmtExtensions extension || this is MgmtExtensionsWrapper);
+            IsStatic = !IsArmCore && BaseType is null;
         }
 
         protected virtual string IdParamDescription => $"The identifier of the resource that is the target of operations.";
@@ -45,10 +45,20 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public virtual bool CanValidateResourceType => true;
 
+        /// <summary>
+        /// If this is false, all the RestOperation instances will be initialized in the constructor
+        /// If this is true, all the RestOperation instances will be initialized when the property is invoked for the first time
+        /// </summary>
+        public virtual bool IsInitializedByProperties => false;
+
+        public virtual bool HasChildResourceGetMethods => true;
+
         public virtual string BranchIdVariableName => "Id";
 
         public string Namespace => DefaultNamespace;
         public abstract CSharpType? BaseType { get; }
+
+        protected internal virtual CSharpType TypeAsResource => Type;
 
         private IReadOnlyList<CSharpType>? _enumerableInterfaces;
         public IEnumerable<CSharpType> EnumerableInterfaces => _enumerableInterfaces ??= EnsureGetInterfaces();
@@ -67,7 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 yield return type;
             }
         }
-        public bool IsStatic { get; }
+        public virtual bool IsStatic { get; }
 
         public abstract FormattableString Description { get; }
 
@@ -192,14 +202,14 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public virtual ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
-            throw new InvalidOperationException($"Tried to get a branch resource type from a type provider that doesn't support it {GetType().Name}.");
+            throw new InvalidOperationException($"Tried to get a branch resource type from a type provider that doesn't support in {GetType().Name}.");
         }
 
         private IEnumerable<Resource>? _childResources;
         /// <summary>
         /// The collection of <see cref="Resource"/> that is a child of this generated class.
         /// </summary>
-        public virtual IEnumerable<Resource> ChildResources => _childResources ??= MgmtContext.Library.ArmResources.Where(resource => resource.Parent().Contains(this));
+        public virtual IEnumerable<Resource> ChildResources => _childResources ??= MgmtContext.Library.ArmResources.Where(resource => resource.GetParents().Contains(this));
 
         protected string GetOperationName(Operation operation, string clientResourceName)
         {

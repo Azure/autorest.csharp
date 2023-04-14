@@ -37,7 +37,6 @@ namespace MgmtLRO.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     buzz = property.Value.GetGuid();

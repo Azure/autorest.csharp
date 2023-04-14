@@ -33,7 +33,6 @@ namespace SupersetInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     createdAt = property.Value.GetDateTimeOffset("O");

@@ -27,7 +27,6 @@ namespace custom_baseUrl_paging.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Product> array = new List<Product>();

@@ -49,7 +49,6 @@ namespace CognitiveServices.TextAnalytics.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     statistics = RequestStatistics.DeserializeRequestStatistics(property.Value);
