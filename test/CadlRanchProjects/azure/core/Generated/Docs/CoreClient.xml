@@ -527,19 +527,7 @@ Schema for <c>User</c>:
     </member>
     <member name="GetUsersAsync(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)">
 <example>
-This sample shows how to call GetUsersAsync and parse the result.
-<code><![CDATA[
-var client = new CoreClient();
-
-await foreach (var data in client.GetUsersAsync())
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code>
-This sample shows how to call GetUsersAsync with all parameters, and how to parse the result.
+This sample shows how to call GetUsersAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new CoreClient();
 
@@ -575,19 +563,7 @@ Schema for <c>Array</c>:
     </member>
     <member name="GetUsers(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)">
 <example>
-This sample shows how to call GetUsers and parse the result.
-<code><![CDATA[
-var client = new CoreClient();
-
-foreach (var data in client.GetUsers())
-{
-    JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
-    Console.WriteLine(result.GetProperty("etag").ToString());
-}
-]]></code>
-This sample shows how to call GetUsers with all parameters, and how to parse the result.
+This sample shows how to call GetUsers with required parameters and parse the result.
 <code><![CDATA[
 var client = new CoreClient();
 
@@ -623,7 +599,7 @@ Schema for <c>Array</c>:
     </member>
     <member name="GetWithPageAsync(RequestContext)">
 <example>
-This sample shows how to call GetWithPageAsync and parse the result.
+This sample shows how to call GetWithPageAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new CoreClient();
 
@@ -657,7 +633,7 @@ Schema for <c>Array</c>:
     </member>
     <member name="GetWithPage(RequestContext)">
 <example>
-This sample shows how to call GetWithPage and parse the result.
+This sample shows how to call GetWithPage with required parameters and parse the result.
 <code><![CDATA[
 var client = new CoreClient();
 
