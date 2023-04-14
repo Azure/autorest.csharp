@@ -301,7 +301,7 @@
          "Description": "Optional argument, timestamp of a data point (ISO8601 format).",
          "Type": {
           "$id": "48",
-          "Name": "zonedDateTime",
+          "Name": "utcDateTime",
           "Kind": "DateTime",
           "IsNullable": false
          },
@@ -1080,7 +1080,7 @@
             "Description": "First valid timestamp with value of input data.",
             "Type": {
              "$id": "150",
-             "Name": "zonedDateTime",
+             "Name": "utcDateTime",
              "Kind": "DateTime",
              "IsNullable": false
             },
@@ -1095,7 +1095,7 @@
             "Description": "Last valid timestamp with value of input data.",
             "Type": {
              "$id": "152",
-             "Name": "zonedDateTime",
+             "Name": "utcDateTime",
              "Kind": "DateTime",
              "IsNullable": false
             },
@@ -1161,7 +1161,7 @@
            "Description": "A required field, indicating the start time of data for detection, which should\nbe date-time of ISO 8601 format.",
            "Type": {
             "$id": "160",
-            "Name": "zonedDateTime",
+            "Name": "utcDateTime",
             "Kind": "DateTime",
             "IsNullable": false
            },
@@ -1176,7 +1176,7 @@
            "Description": "A required field, indicating the end time of data for detection, which should\nbe date-time of ISO 8601 format.",
            "Type": {
             "$id": "162",
-            "Name": "zonedDateTime",
+            "Name": "utcDateTime",
             "Kind": "DateTime",
             "IsNullable": false
            },
@@ -1219,7 +1219,7 @@
          "Description": "The timestamp for this anomaly.",
          "Type": {
           "$id": "167",
-          "Name": "zonedDateTime",
+          "Name": "utcDateTime",
           "Kind": "DateTime",
           "IsNullable": false
          },
@@ -1477,7 +1477,7 @@
      "Description": "A required field, indicating the start time of training data, which should be\ndate-time of ISO 8601 format.",
      "Type": {
       "$id": "195",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -1492,7 +1492,7 @@
      "Description": "A required field, indicating the end time of training data, which should be\ndate-time of ISO 8601 format.",
      "Type": {
       "$id": "197",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -1793,7 +1793,7 @@
      "Description": "Date and time (UTC) when the model was created.",
      "Type": {
       "$id": "233",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -1808,7 +1808,7 @@
      "Description": "Date and time (UTC) when the model was last updated.",
      "Type": {
       "$id": "235",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
