@@ -38,6 +38,9 @@ namespace non_string_enum.Models
         public static FloatEnum FourHundredSix2 { get; } = new FloatEnum(FourHundredSix2Value);
         /// <summary> 429.1. </summary>
         public static FloatEnum FourHundredTwentyNine1 { get; } = new FloatEnum(FourHundredTwentyNine1Value);
+
+        internal float ToSerialSingle() => _value;
+
         /// <summary> Determines if two <see cref="FloatEnum"/> values are the same. </summary>
         public static bool operator ==(FloatEnum left, FloatEnum right) => left.Equals(right);
         /// <summary> Determines if two <see cref="FloatEnum"/> values are not the same. </summary>

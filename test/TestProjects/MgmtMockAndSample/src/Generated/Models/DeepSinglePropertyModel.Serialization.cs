@@ -36,7 +36,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     deep = SinglePropertyModel.DeserializeSinglePropertyModel(property.Value);

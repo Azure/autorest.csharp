@@ -98,7 +98,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     windowsConfiguration = WindowsConfiguration.DeserializeWindowsConfiguration(property.Value);
@@ -108,7 +107,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     linuxConfiguration = LinuxConfiguration.DeserializeLinuxConfiguration(property.Value);
@@ -118,7 +116,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<VaultSecretGroup> array = new List<VaultSecretGroup>();

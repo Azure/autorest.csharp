@@ -20,9 +20,8 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
-using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 using Configuration = AutoRest.CSharp.Input.Configuration;
-using System.Linq.Expressions;
+using JsonElementExtensions = Azure.Core.JsonElementExtensions;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -209,19 +208,24 @@ namespace AutoRest.CSharp.Generation.Writers
                             writer.Line($"{writerName}.WriteObjectValue({name:I});");
                             return;
 
-                        case EnumType clientEnum when clientEnum is { IsIntValueType: true, IsExtensible: false }:
-                            writer
-                                .Append($"{writerName}.WriteNumberValue(({clientEnum.ValueType}){name:I}")
+                        case EnumType clientEnum when clientEnum is { IsExtensible: false, IsIntValueType: true }:
+                            writer.Append($"{writerName}.WriteNumberValue(({clientEnum.ValueType}){name:I}")
                                 .AppendNullableValue(valueSerialization.Type)
-                                .Line($");");
+                                .LineRaw(");");
+                            return;
+                        case EnumType clientEnum when clientEnum is { IsStringValueType: false }:
+                            writer
+                                .Append($"{writerName}.WriteNumberValue({name:I}")
+                                .AppendNullableValue(valueSerialization.Type)
+                                .AppendEnumToString(clientEnum)
+                                .LineRaw(");");
                             return;
                         case EnumType clientEnum:
                             writer
-                                .Append($"{writerName}.WriteStringValue({name:I}");
-                            writer
+                                .Append($"{writerName}.WriteStringValue({name:I}")
                                 .AppendNullableValue(valueSerialization.Type)
                                 .AppendEnumToString(clientEnum)
-                                .Line($");");
+                                .LineRaw(");");
                             return;
                     }
 
@@ -328,11 +332,10 @@ namespace AutoRest.CSharp.Generation.Writers
                              true) //https://github.com/Azure/autorest.csharp/issues/922
                     {
                         var emptyStringCheck = GetEmptyStringCheckClause(property, itemVariable, shouldTreatEmptyStringAsNull);
-                        if (Configuration.AzureArm && property.ValueType?.Equals(typeof(Uri)) == true)
+                        if (property.PropertySerializations is null)
                         {
                             using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
                             {
-                                writer.Line($"{propertyVariables[property].Declaration} = null;");
                                 writer.Append($"continue;");
                             }
                         }

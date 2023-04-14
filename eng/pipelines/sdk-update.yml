@@ -166,7 +166,7 @@ stages:
                 -PROwner "azure-sdk"
                 -PRBranch "auto-update-autorest-$(AutorestCSharpVersion)"
                 -AuthToken "$(azuresdk-github-pat)"
-                -PRTitle "Autorest Regen Preview to $(AutorestCSharpVersion)"
+                -PRTitle "Autorest Regen Preview to $(AutorestCSharpVersion) by $(Build.QueuedBy) from $(Build.SourceBranch)"
                 -PRBody "Triggered from $(PRUrl.PRUrl)"
                 -OpenAsDraft $true
                 -PRLabels "Do Not Merge"

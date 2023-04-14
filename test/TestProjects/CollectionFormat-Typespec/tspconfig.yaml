@@ -1,3 +1,0 @@
-options:
-  "@azure-tools/typespec-csharp":
-    generate-convenience-methods: false

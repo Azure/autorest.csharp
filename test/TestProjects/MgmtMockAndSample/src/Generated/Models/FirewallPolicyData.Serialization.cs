@@ -53,7 +53,7 @@ namespace MgmtMockAndSample
             if (Optional.IsDefined(DesiredStatusCode))
             {
                 writer.WritePropertyName("desiredStatusCode"u8);
-                writer.WriteStringValue(DesiredStatusCode.Value.ToString());
+                writer.WriteNumberValue(DesiredStatusCode.Value.ToSerialInt32());
             }
             if (Optional.IsDefined(BasePolicy))
             {
@@ -139,7 +139,6 @@ namespace MgmtMockAndSample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     var serializeOptions = new JsonSerializerOptions { Converters = { new ManagedServiceIdentityTypeV3Converter() } };
@@ -150,7 +149,6 @@ namespace MgmtMockAndSample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -185,7 +183,6 @@ namespace MgmtMockAndSample
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -204,7 +201,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             startupProbe = Probe.DeserializeProbe(property0.Value);
@@ -214,7 +210,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             readinessProbe = Probe.DeserializeProbe(property0.Value);
@@ -224,7 +219,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             desiredStatusCode = new DesiredStatusCode(property0.Value.GetInt32());
@@ -234,7 +228,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<WritableSubResource> array = new List<WritableSubResource>();
@@ -249,7 +242,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             provisioningState = new ProvisioningState(property0.Value.GetString());
@@ -259,7 +251,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             basePolicy = JsonSerializer.Deserialize<WritableSubResource>(property0.Value.GetRawText());
@@ -269,7 +260,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<WritableSubResource> array = new List<WritableSubResource>();
@@ -284,7 +274,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<WritableSubResource> array = new List<WritableSubResource>();
@@ -299,7 +288,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             threatIntelWhitelist = FirewallPolicyThreatIntelWhitelist.DeserializeFirewallPolicyThreatIntelWhitelist(property0.Value);
@@ -309,7 +297,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             insights = FirewallPolicyInsights.DeserializeFirewallPolicyInsights(property0.Value);
@@ -319,7 +306,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             snat = FirewallPolicySnat.DeserializeFirewallPolicySnat(property0.Value);
@@ -329,7 +315,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             dnsSettings = DnsSettings.DeserializeDnsSettings(property0.Value);
@@ -339,7 +324,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             intrusionDetection = FirewallPolicyIntrusionDetection.DeserializeFirewallPolicyIntrusionDetection(property0.Value);
@@ -349,7 +333,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             transportSecurity = FirewallPolicyTransportSecurity.DeserializeFirewallPolicyTransportSecurity(property0.Value);
@@ -359,7 +342,6 @@ namespace MgmtMockAndSample
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             sku = FirewallPolicySku.DeserializeFirewallPolicySku(property0.Value);

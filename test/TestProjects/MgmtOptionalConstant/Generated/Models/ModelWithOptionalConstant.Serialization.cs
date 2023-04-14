@@ -15,10 +15,20 @@ namespace MgmtOptionalConstant.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            if (Optional.IsDefined(PassName))
+            if (Optional.IsDefined(OptionalStringConstant))
             {
-                writer.WritePropertyName("passName"u8);
-                writer.WriteStringValue(PassName.Value.ToString());
+                writer.WritePropertyName("optionalStringConstant"u8);
+                writer.WriteStringValue(OptionalStringConstant.Value.ToString());
+            }
+            if (Optional.IsDefined(OptionalIntConstant))
+            {
+                writer.WritePropertyName("optionalIntConstant"u8);
+                writer.WriteNumberValue(OptionalIntConstant.Value.ToSerialInt32());
+            }
+            if (Optional.IsDefined(OptionalFloatConstant))
+            {
+                writer.WritePropertyName("optionalFloatConstant"u8);
+                writer.WriteNumberValue(OptionalFloatConstant.Value.ToSerialSingle());
             }
             if (Optional.IsDefined(SettingName))
             {
@@ -34,32 +44,50 @@ namespace MgmtOptionalConstant.Models
             {
                 return null;
             }
-            Optional<PassName> passName = default;
+            Optional<StringConstant> optionalStringConstant = default;
+            Optional<IntConstant> optionalIntConstant = default;
+            Optional<FloatConstant> optionalFloatConstant = default;
             Optional<SettingName> settingName = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("passName"u8))
+                if (property.NameEquals("optionalStringConstant"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
-                    passName = new PassName(property.Value.GetString());
+                    optionalStringConstant = new StringConstant(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("optionalIntConstant"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalIntConstant = new IntConstant(property.Value.GetInt32());
+                    continue;
+                }
+                if (property.NameEquals("optionalFloatConstant"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalFloatConstant = new FloatConstant(property.Value.GetSingle());
                     continue;
                 }
                 if (property.NameEquals("settingName"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     settingName = property.Value.GetString().ToSettingName();
                     continue;
                 }
             }
-            return new ModelWithOptionalConstant(Optional.ToNullable(passName), Optional.ToNullable(settingName));
+            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(optionalFloatConstant), Optional.ToNullable(settingName));
         }
     }
 }
