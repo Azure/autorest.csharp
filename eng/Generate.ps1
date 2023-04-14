@@ -56,7 +56,7 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
 
 function Add-CadlRanch-Typespec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
-    $cadlMain = Join-Path $cadlRanchFilePath $testName "main.cadl"
+    $cadlMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
     Add-Typespec "$projectPrefix$testName" $projectDirectory $cadlMain
 }
 
