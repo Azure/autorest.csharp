@@ -23,7 +23,6 @@ namespace AutoRest.LowLevel.Tests
         [TestCase(typeof(ParametersCadlClient), "Operation2", new Type[] { typeof(int), typeof(int), typeof(RequestContext) }, new string[] { "end", "start", "context" }, new bool[] { false, false, false })]
         public void OptionalParameterAtEnd(Type type, string methodName, Type[] types, string[] parameterNames, bool[] isOptional)
         {
-            var method = type.GetMethod(methodName);
             var method = type.GetMethod(methodName, types);
             Assert.AreEqual(parameterNames, method.GetParameters().Select(p => p.Name).ToArray());
             Assert.AreEqual(isOptional, method.GetParameters().Select(p => p.HasDefaultValue).ToArray());
