@@ -11,7 +11,7 @@ namespace ModelsInCadl.Models
     public partial class BaseModelWithProperties
     {
         /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
-        public BaseModelWithProperties()
+        internal BaseModelWithProperties()
         {
         }
 

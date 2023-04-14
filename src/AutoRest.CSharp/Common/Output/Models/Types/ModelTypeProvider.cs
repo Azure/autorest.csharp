@@ -216,9 +216,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             GetConstructorParameters(parameters, out fullParameterList, out parametersToPassToBase, true, CreatePublicConstructorParameter);
 
             var summary = $"Initializes a new instance of {name}";
-            var accessibility = usage == InputModelTypeUsage.Output
-                ? MethodSignatureModifiers.Internal
-                : MethodSignatureModifiers.Public;
+            var accessibility = usage.HasFlag(InputModelTypeUsage.Input)
+                ? MethodSignatureModifiers.Public
+                : MethodSignatureModifiers.Internal;
 
             if (_inputModel.DiscriminatorPropertyName is not null)
                 accessibility = MethodSignatureModifiers.Protected;
@@ -243,26 +243,13 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 var ctor = isInitializer ? parent.InitializationConstructor : parent.SerializationConstructor;
                 parametersToPassToBase = ctor.Signature.Parameters;
-                fullParameterList.AddRange(_inputModel.IsUnknownDiscriminatorModel ? parametersToPassToBase : parametersToPassToBase.Where(p => p.Name != Discriminator?.SerializedName));
+                fullParameterList.AddRange(parametersToPassToBase);
             }
             fullParameterList.AddRange(parameters.Select(creator));
         }
 
         private FormattableString[] GetInitializersFromParameters(IEnumerable<Parameter> parametersToPassToBase)
-        {
-            var baseInitializers = ConstructorInitializer.ParametersToFormattableString(parametersToPassToBase).ToArray();
-            if (Discriminator is not null && Discriminator.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
-            {
-                FormattableString discriminatorInitializer = discriminatorValue.GetConstantFormattable();
-                for (int i = 0; i < baseInitializers.Length; i++)
-                {
-                    if (baseInitializers[i].ToString() == Discriminator.SerializedName)
-                        baseInitializers[i] = discriminatorInitializer;
-                }
-            }
-
-            return baseInitializers;
-        }
+            => ConstructorInitializer.ParametersToFormattableString(parametersToPassToBase).ToArray();
 
         private static Parameter CreatePublicConstructorParameter(Parameter p)
             => p with { Type = TypeFactory.GetInputType(p.Type) };
