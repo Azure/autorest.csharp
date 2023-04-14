@@ -6,7 +6,7 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using NUnit.Framework;
 using Azure;
 using System.Collections.Generic;
-using CollectionFormat;
+using Parameters.CollectionFormat;
 
 namespace CadlRanchProjects.Tests
 {
@@ -16,7 +16,7 @@ namespace CadlRanchProjects.Tests
         public Task CollectionFormat_testMulti() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).TestMultiAsync(colors);
+            Response response = await new CollectionFormatClient(host, null).GetQueryClient().MultiAsync(colors);
             Assert.AreEqual(200, response.Status);
         });
 
@@ -24,7 +24,7 @@ namespace CadlRanchProjects.Tests
         public Task CollectionFormat_testCsv() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).TestCsvAsync(colors);
+            Response response = await new CollectionFormatClient(host, null).GetQueryClient().CsvAsync(colors);
             Assert.AreEqual(200, response.Status);
         });
 
@@ -32,15 +32,7 @@ namespace CadlRanchProjects.Tests
         public Task CollectionFormat_testCsvHeader() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).TestCsvHeaderAsync(colors);
-            Assert.AreEqual(200, response.Status);
-        });
-
-        [Test]
-        public Task CollectionFormat_testDefaultHeader() => Test(async (host) =>
-        {
-            List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).TestDefaultHeaderAsync(colors);
+            Response response = await new CollectionFormatClient(host, null).GetHeaderClient().CsvAsync(colors);
             Assert.AreEqual(200, response.Status);
         });
     }
