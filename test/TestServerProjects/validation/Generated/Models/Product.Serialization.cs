@@ -120,7 +120,6 @@ namespace validation.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     constStringAsEnum = new EnumConst(property.Value.GetString());
