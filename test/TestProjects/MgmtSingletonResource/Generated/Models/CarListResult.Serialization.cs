@@ -28,7 +28,6 @@ namespace MgmtSingletonResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<CarData> array = new List<CarData>();

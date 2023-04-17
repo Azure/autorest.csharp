@@ -25,7 +25,6 @@ namespace paging.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     properties = ProductProperties.DeserializeProductProperties(property.Value);

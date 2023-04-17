@@ -18,21 +18,65 @@ namespace TenantOnly
     /// <summary> A class to add extension methods to TenantOnly. </summary>
     public static partial class TenantOnlyExtensions
     {
-        private static TenantResourceExtensionClient GetExtensionClient(TenantResource tenantResource)
+        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmResource resource)
         {
-            return tenantResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new TenantResourceExtensionClient(client, tenantResource.Id);
+                return new TenantResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new TenantResourceExtensionClient(client, scope);
+            });
+        }
+        #region BillingAccountResource
+        /// <summary>
+        /// Gets an object representing a <see cref="BillingAccountResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="BillingAccountResource.CreateResourceIdentifier" /> to create a <see cref="BillingAccountResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="BillingAccountResource" /> object. </returns>
+        public static BillingAccountResource GetBillingAccountResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                BillingAccountResource.ValidateResourceId(id);
+                return new BillingAccountResource(client, id);
             }
             );
         }
+        #endregion
+
+        #region AgreementResource
+        /// <summary>
+        /// Gets an object representing an <see cref="AgreementResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="AgreementResource.CreateResourceIdentifier" /> to create an <see cref="AgreementResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="AgreementResource" /> object. </returns>
+        public static AgreementResource GetAgreementResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                AgreementResource.ValidateResourceId(id);
+                return new AgreementResource(client, id);
+            }
+            );
+        }
+        #endregion
 
         /// <summary> Gets a collection of BillingAccountResources in the TenantResource. </summary>
         /// <param name="tenantResource"> The <see cref="TenantResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of BillingAccountResources and their operations over a BillingAccountResource. </returns>
         public static BillingAccountCollection GetBillingAccounts(this TenantResource tenantResource)
         {
-            return GetExtensionClient(tenantResource).GetBillingAccounts();
+            return GetTenantResourceExtensionClient(tenantResource).GetBillingAccounts();
         }
 
         /// <summary>
@@ -84,43 +128,5 @@ namespace TenantOnly
         {
             return tenantResource.GetBillingAccounts().Get(billingAccountName, expand, cancellationToken);
         }
-
-        #region BillingAccountResource
-        /// <summary>
-        /// Gets an object representing a <see cref="BillingAccountResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="BillingAccountResource.CreateResourceIdentifier" /> to create a <see cref="BillingAccountResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BillingAccountResource" /> object. </returns>
-        public static BillingAccountResource GetBillingAccountResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                BillingAccountResource.ValidateResourceId(id);
-                return new BillingAccountResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region AgreementResource
-        /// <summary>
-        /// Gets an object representing an <see cref="AgreementResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="AgreementResource.CreateResourceIdentifier" /> to create an <see cref="AgreementResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="AgreementResource" /> object. </returns>
-        public static AgreementResource GetAgreementResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                AgreementResource.ValidateResourceId(id);
-                return new AgreementResource(client, id);
-            }
-            );
-        }
-        #endregion
     }
 }

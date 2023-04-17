@@ -60,7 +60,11 @@ import {
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
-import { SdkContext, getSdkSimpleType } from "@azure-tools/typespec-client-generator-core";
+import {
+    SdkContext,
+    getSdkSimpleType
+} from "@azure-tools/typespec-client-generator-core";
+import { capitalize } from "./utils.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -547,20 +551,29 @@ export function getUsages(
     for (const type of usages.types) {
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
+        let effectiveType = type;
         if (type.kind === "Model") {
-            const effectiveType = getEffectiveSchemaType(
-                context,
-                type
-            ) as Model;
+            effectiveType = getEffectiveSchemaType(context, type) as Model;
             typeName =
                 getFriendlyName(program, effectiveType) ?? effectiveType.name;
         }
         const affectTypes: string[] = [];
-        if (typeName !== "") affectTypes.push(typeName);
-        if (type.kind === "Model" && type.templateArguments) {
-            for (const arg of type.templateArguments) {
-                if (arg.kind === "Model" && "name" in arg && arg.name !== "") {
-                    affectTypes.push(getFriendlyName(program, arg) ?? arg.name);
+        if (typeName !== "") {
+            affectTypes.push(typeName);
+            if (
+                effectiveType.kind === "Model" &&
+                effectiveType.templateMapper?.args
+            ) {
+                for (const arg of effectiveType.templateMapper.args) {
+                    if (
+                        arg.kind === "Model" &&
+                        "name" in arg &&
+                        arg.name !== ""
+                    ) {
+                        affectTypes.push(
+                            getFriendlyName(program, arg) ?? arg.name
+                        );
+                    }
                 }
             }
         }
@@ -575,39 +588,63 @@ export function getUsages(
             usagesMap.set(name, value);
         }
     }
-    /* handle resource operation. */
+
     for (const op of ops) {
         const resourceOperation = getResourceOperation(program, op.operation);
-        if (resourceOperation) {
-            if (!op.parameters.bodyParameter && op.parameters.bodyType) {
-                const resourceName = resourceOperation.resourceType.name;
-                let value = usagesMap.get(resourceName);
-                if (!value) value = UsageFlags.Input;
-                else value = value | UsageFlags.Input;
-                usagesMap.set(resourceName, value);
-            }
-        }
-
-        /* handle spread. */
         if (!op.parameters.bodyParameter && op.parameters.bodyType) {
-            const effectiveBodyType = getEffectiveSchemaType(
-                context,
-                op.parameters.bodyType
-            );
-            if (
-                effectiveBodyType.kind === "Model" &&
-                effectiveBodyType.name !== ""
-            ) {
-                const modelName =
-                    getFriendlyName(program, effectiveBodyType) ??
-                    effectiveBodyType.name;
-                let value = usagesMap.get(modelName);
-                if (!value) value = UsageFlags.Input;
-                else value = value | UsageFlags.Input;
-                usagesMap.set(modelName, value);
+            let bodyTypeName = "";
+            if (resourceOperation) {
+                /* handle resource operation. */
+                bodyTypeName = resourceOperation.resourceType.name;
+            } else {
+                /* handle spread. */
+                const effectiveBodyType = getEffectiveSchemaType(
+                    context,
+                    op.parameters.bodyType
+                );
+                if (effectiveBodyType.kind === "Model") {
+                    if (effectiveBodyType.name !== "") {
+                        bodyTypeName =
+                            getFriendlyName(program, effectiveBodyType) ??
+                            effectiveBodyType.name;
+                    } else {
+                        bodyTypeName = `${capitalize(
+                            op.operation.name
+                        )}Request`;
+                    }
+                }
+            }
+            appendUsage(bodyTypeName, UsageFlags.Input);
+        }
+        /* handle response type usage. */
+        for (const res of op.responses) {
+            const resBody = res.responses[0]?.body;
+            if (resBody?.type) {
+                let returnType = "";
+                if (
+                    resourceOperation &&
+                    resourceOperation.operation !== "list"
+                ) {
+                    returnType = resourceOperation.resourceType.name;
+                } else {
+                    const effectiveReturnType = getEffectiveSchemaType(
+                        context,
+                        resBody.type
+                    );
+                    if (
+                        effectiveReturnType.kind === "Model" &&
+                        effectiveReturnType.name !== ""
+                    ) {
+                        returnType =
+                            getFriendlyName(program, effectiveReturnType) ??
+                            effectiveReturnType.name;
+                    }
+                }
+                appendUsage(returnType, UsageFlags.Output);
             }
         }
     }
+
     for (const [key, value] of usagesMap) {
         if (value === (UsageFlags.Input | UsageFlags.Output)) {
             result.roundTrips.push(key);
@@ -618,4 +655,12 @@ export function getUsages(
         }
     }
     return result;
+
+    function appendUsage(name: string, flag: UsageFlags) {
+        let value = usagesMap.get(name);
+        if (!value) value = flag;
+        else value = value | flag;
+        usagesMap.set(name, value);
+    }
 }
+
