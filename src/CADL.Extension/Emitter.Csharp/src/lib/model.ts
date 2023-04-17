@@ -525,7 +525,7 @@ export function getInputType(
                 return {
                     Name: "Intrinsic",
                     Kind: "unknown",
-                    IsNullable: false,
+                    IsNullable: false
                 } as InputUnknownType;
             case "null":
                 return {
