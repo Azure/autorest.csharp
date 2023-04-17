@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
@@ -14,20 +15,26 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly INamedTypeSymbol? _existingType;
         private readonly Dictionary<string, ISymbol> _propertyMappings;
+        private readonly Dictionary<ISymbol, string> _serializationMappings;
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
 
-        public ModelTypeMapping(INamedTypeSymbol modelAttribute, INamedTypeSymbol memberAttribute, INamedTypeSymbol? existingType)
+        public ModelTypeMapping(INamedTypeSymbol modelAttribute, INamedTypeSymbol memberAttribute, INamedTypeSymbol serializationAttribute, INamedTypeSymbol? existingType)
         {
             _existingType = existingType;
             _propertyMappings = new Dictionary<string, ISymbol>();
+            _serializationMappings = new Dictionary<ISymbol, string>(SymbolEqualityComparer.Default);
 
             foreach (ISymbol member in GetMembers(existingType))
             {
-                if (SourceInputModel.TryGetName(member, memberAttribute, out var schemaMemberName))
+                if (TryGetAttributeCtorParameterValue(member, memberAttribute, out var schemaMemberName))
                 {
                     _propertyMappings.Add(schemaMemberName, member);
+                }
+                if (TryGetAttributeCtorParameterValue(member, serializationAttribute, out var serializationPath))
+                {
+                    _serializationMappings.Add(member, serializationPath);
                 }
             }
 
@@ -54,6 +61,20 @@ namespace AutoRest.CSharp.Input.Source
             }
         }
 
+        internal static bool TryGetAttributeCtorParameterValue(ISymbol symbol, INamedTypeSymbol attributeType, [NotNullWhen(true)] out string? name)
+        {
+            name = null;
+
+            var attribute = symbol.GetAttributes().SingleOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, attributeType));
+
+            if (attribute?.ConstructorArguments.Length > 0)
+            {
+                name = attribute.ConstructorArguments[0].Value as string;
+            }
+
+            return name != null;
+        }
+
         private string[]? ToStringArray(ImmutableArray<TypedConstant> values)
         {
             if (values.IsDefaultOrEmpty)
@@ -62,7 +83,7 @@ namespace AutoRest.CSharp.Input.Source
             }
 
             return values
-                .Select(v => (string?) v.Value)
+                .Select(v => (string?)v.Value)
                 .OfType<string>()
                 .ToArray();
         }
@@ -77,6 +98,16 @@ namespace AutoRest.CSharp.Input.Source
             if (memberSymbol != null)
             {
                 return new SourceMemberMapping(name, memberSymbol);
+            }
+
+            return null;
+        }
+
+        public SourcePropertySerailizationMapping? GetSerializationForMember(ISymbol symbol)
+        {
+            if (_serializationMappings.TryGetValue(symbol, out var serializationPath))
+            {
+                return new SourcePropertySerailizationMapping(symbol, serializationPath);
             }
 
             return null;
