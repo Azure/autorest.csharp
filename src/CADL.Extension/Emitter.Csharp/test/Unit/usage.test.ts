@@ -254,4 +254,3 @@ describe("Test getUsages", () => {
         assert(usages.roundTrips.includes("Foo"));
     });
 });
-
