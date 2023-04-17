@@ -25,8 +25,5 @@ namespace MgmtCustomizations.Models
             Meow = meow;
             Kind = kind;
         }
-
-        /// <summary> A cat can meow. </summary>
-        public string Meow { get; }
     }
 }
