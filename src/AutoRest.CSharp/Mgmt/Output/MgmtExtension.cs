@@ -15,19 +15,22 @@ using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class MgmtExtensions : MgmtTypeProvider
+    internal class MgmtExtension : MgmtTypeProvider
     {
-        public IEnumerable<Operation> AllRawOperations { get; }
+        public override bool IsStatic => IsArmCore ? false : true; // explicitly expand this for readability
 
-        public MgmtExtensions(IEnumerable<Operation> allRawOperations, Type armCoreType, RequestPath contextualPath)
+        private readonly IEnumerable<Operation> _allRawOperations;
+
+        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtExtensionClient> extensionClients, Type armCoreType, RequestPath? contextualPath = null)
             : base(armCoreType.Name)
         {
-            AllRawOperations = allRawOperations;
+            _allRawOperations = allRawOperations;
+            _extensionClients = extensionClients; // this property is populated later
             ArmCoreType = armCoreType;
             DefaultName = Configuration.MgmtConfiguration.IsArmCore ? ResourceName : $"{ResourceName}Extensions";
             DefaultNamespace = Configuration.MgmtConfiguration.IsArmCore ? ArmCoreType.Namespace! : base.DefaultNamespace;
             Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {ResourceName}.";
-            ContextualPath = contextualPath;
+            ContextualPath = contextualPath ?? RequestPath.GetContextualPath(armCoreType);
             ArmCoreNamespace = ArmCoreType.Namespace!;
             ChildResources = !Configuration.MgmtConfiguration.IsArmCore || ArmCoreType.Namespace != MgmtContext.Context.DefaultNamespace ? base.ChildResources : Enumerable.Empty<Resource>();
         }
@@ -66,11 +69,13 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultNamespace { get; }
 
-        public virtual RequestPath ContextualPath { get; }
+        public RequestPath ContextualPath { get; }
 
         public override IEnumerable<Resource> ChildResources { get; }
 
         public virtual bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
+
+        protected internal override CSharpType TypeAsResource => ArmCoreType;
 
         protected override IEnumerable<FieldDeclaration> EnsureFieldDeclaration()
         {
@@ -80,7 +85,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
         {
             var extensionParamToUse = Configuration.MgmtConfiguration.IsArmCore ? null : ExtensionParameter;
-            return AllRawOperations.Select(operation =>
+            return _allRawOperations.Select(operation =>
             {
                 var operationName = GetOperationName(operation, ResourceName);
                 // TODO -- these logic needs a thorough refactor -- the values MgmtRestOperation consumes here are actually coupled together
@@ -101,7 +106,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CalculateOperationName(Operation operation, string clientResourceName)
         {
-            var opertionName = base.CalculateOperationName(operation, clientResourceName);
+            var operationName = base.CalculateOperationName(operation, clientResourceName);
 
             if (MgmtContext.Library.GetRestClientMethod(operation).IsListMethod(out var itemType) && itemType.TryCastResourceData(out var data))
             {
@@ -118,7 +123,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
 
-            return opertionName;
+            return operationName;
         }
 
         private IEnumerable<Segment> GetExtraLayers(RequestPath requestPath, Resource resource)
@@ -152,8 +157,19 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return null;
         }
+        public MgmtExtensionClient GetExtensionClient(CSharpType? resourceType)
+        {
+            if (resourceType != null && Cache.TryGetValue(resourceType, out var extensionClient))
+                return extensionClient;
 
-        private MgmtExtensionClient? _extensionClient;
-        public virtual MgmtExtensionClient ExtensionClient => _extensionClient ??= new MgmtExtensionClient(this);
+            return Cache[ArmCoreType];
+        }
+
+        private readonly IEnumerable<MgmtExtensionClient> _extensionClients;
+
+        private Dictionary<CSharpType, MgmtExtensionClient>? _cache;
+        private Dictionary<CSharpType, MgmtExtensionClient> Cache => _cache ??= _extensionClients.ToDictionary(
+            extensionClient => extensionClient.ExtendedResourceType,
+            extensionClient => extensionClient);
     }
 }

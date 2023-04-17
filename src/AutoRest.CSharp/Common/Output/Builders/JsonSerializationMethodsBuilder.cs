@@ -453,13 +453,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
                      jsonPropertySerialization.ValueType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
                      jsonPropertySerialization.ValueType?.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
             {
-                if (Configuration.AzureArm && jsonPropertySerialization.ValueType?.Equals(typeof(Uri)) == true)
+                if (jsonPropertySerialization.PropertySerializations is null)
                 {
-                    yield return new IfElseStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull), new[]
-                    {
-                        Assign(propertyVariables[jsonPropertySerialization].Declaration, Null),
-                        Continue
-                    }, null);
+                    yield return new IfElseStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull), Continue, null);
                 }
                 else
                 {

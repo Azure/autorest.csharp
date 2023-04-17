@@ -18,21 +18,65 @@ namespace MgmtNonStringPathVariable
     /// <summary> A class to add extension methods to MgmtNonStringPathVariable. </summary>
     public static partial class MgmtNonStringPathVariableExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetExtensionClient(ResourceGroupResource resourceGroupResource)
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
         {
-            return resourceGroupResource.GetCachedClient((client) =>
+            return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resourceGroupResource.Id);
+                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+            });
+        }
+
+        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceGroupResourceExtensionClient(client, scope);
+            });
+        }
+        #region FakeResource
+        /// <summary>
+        /// Gets an object representing a <see cref="FakeResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="FakeResource.CreateResourceIdentifier" /> to create a <see cref="FakeResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
+        public static FakeResource GetFakeResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                FakeResource.ValidateResourceId(id);
+                return new FakeResource(client, id);
             }
             );
         }
+        #endregion
+
+        #region BarResource
+        /// <summary>
+        /// Gets an object representing a <see cref="BarResource" /> along with the instance operations that can be performed on it but with no data.
+        /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource" /> <see cref="ResourceIdentifier" /> from its components.
+        /// </summary>
+        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
+        /// <param name="id"> The resource ID of the resource to get. </param>
+        /// <returns> Returns a <see cref="BarResource" /> object. </returns>
+        public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
+        {
+            return client.GetResourceClient(() =>
+            {
+                BarResource.ValidateResourceId(id);
+                return new BarResource(client, id);
+            }
+            );
+        }
+        #endregion
 
         /// <summary> Gets a collection of FakeResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetFakes();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetFakes();
         }
 
         /// <summary>
@@ -86,7 +130,7 @@ namespace MgmtNonStringPathVariable
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetExtensionClient(resourceGroupResource).GetBars();
+            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetBars();
         }
 
         /// <summary>
@@ -132,43 +176,5 @@ namespace MgmtNonStringPathVariable
         {
             return resourceGroupResource.GetBars().Get(barName, cancellationToken);
         }
-
-        #region FakeResource
-        /// <summary>
-        /// Gets an object representing a <see cref="FakeResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="FakeResource.CreateResourceIdentifier" /> to create a <see cref="FakeResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
-        public static FakeResource GetFakeResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                FakeResource.ValidateResourceId(id);
-                return new FakeResource(client, id);
-            }
-            );
-        }
-        #endregion
-
-        #region BarResource
-        /// <summary>
-        /// Gets an object representing a <see cref="BarResource" /> along with the instance operations that can be performed on it but with no data.
-        /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource" /> <see cref="ResourceIdentifier" /> from its components.
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="id"> The resource ID of the resource to get. </param>
-        /// <returns> Returns a <see cref="BarResource" /> object. </returns>
-        public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
-        {
-            return client.GetResourceClient(() =>
-            {
-                BarResource.ValidateResourceId(id);
-                return new BarResource(client, id);
-            }
-            );
-        }
-        #endregion
     }
 }

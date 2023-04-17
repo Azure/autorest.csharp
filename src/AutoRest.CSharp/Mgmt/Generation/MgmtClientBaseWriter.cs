@@ -152,20 +152,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.WriteMethodDocumentation(This.ArmClientCtor);
                 using (_writer.WriteMethodDeclaration(This.ArmClientCtor))
                 {
-                    if (This is MgmtExtensionClient)
-                        return;
-
-                    foreach (var param in This.ExtraConstructorParameters)
+                    if (!This.IsInitializedByProperties)
                     {
-                        _writer.Line($"_{param.Name} = {param.Name};");
-                    }
+                        foreach (var param in This.ExtraConstructorParameters)
+                        {
+                            _writer.Line($"_{param.Name} = {param.Name};");
+                        }
 
-                    foreach (var set in This.UniqueSets)
-                    {
-                        WriteRestClientConstructorPair(set.RestClient, set.Resource);
+                        foreach (var set in This.UniqueSets)
+                        {
+                            WriteRestClientConstructorPair(set.RestClient, set.Resource);
+                        }
+                        if (This.CanValidateResourceType)
+                            WriteDebugValidate();
                     }
-                    if (This.CanValidateResourceType)
-                        WriteDebugValidate();
                 }
             }
             _writer.Line();
@@ -231,14 +231,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
             var ctorString = ConstructClientDiagnostic(_writer, $"{GetProviderNamespaceFromReturnType(resourceTypeExpression)}", DiagnosticsProperty);
             var diagFieldName = GetDiagnosticFieldName(restClient, resource);
             _writer.Line($"{diagFieldName} = {ctorString};");
-            string apiVersionText = string.Empty;
+            FormattableString? apiVersionExpression = null;
             if (resourceTypeExpression is not null)
             {
                 string apiVersionVariable = GetApiVersionVariableName(restClient, resource);
                 _writer.Line($"TryGetApiVersion({resourceTypeExpression}, out string {apiVersionVariable});");
-                apiVersionText = $", {apiVersionVariable}";
+                apiVersionExpression = $"{apiVersionVariable}";
             }
-            _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, apiVersionText)};");
+            _writer.Line($"{GetRestFieldName(restClient, resource)} = {GetRestConstructorString(restClient, apiVersionExpression)};");
         }
 
         protected FormattableString? ConstructResourceTypeExpression(Resource? resource)
@@ -261,7 +261,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     WriteResourceCollectionGetMethod(resource);
 
-                    if (!(This is MgmtExtensionClient)) // we don't need to generate `Get{Resource}` methods in ExtensionClient
+                    if (This.HasChildResourceGetMethods)
                     {
                         WriteChildResourceGetMethod(resource.ResourceCollection, true);
                         WriteChildResourceGetMethod(resource.ResourceCollection, false);
@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 Modifiers = GetMethodModifiers(),
                 // There could be parameters to get resource collection
                 Parameters = GetParametersForCollectionEntry(resourceCollection).Concat(GetParametersForResourceEntry(resourceCollection)).Distinct().ToArray(),
-                Attributes = new[]{new CSharpAttribute(typeof(ForwardsClientCallsAttribute))}
+                Attributes = new[] { new CSharpAttribute(typeof(ForwardsClientCallsAttribute)) }
             };
 
             _writer.Line();
@@ -424,12 +424,24 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
-        protected string GetRestConstructorString(MgmtRestClient restClient, string apiVersionVariable)
+        protected FormattableString GetRestConstructorString(MgmtRestClient restClient, FormattableString? apiVersionExpression)
         {
-            string subIdVariable = ", Id.SubscriptionId";
-            if (!restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")))
-                subIdVariable = string.Empty;
-            return $"new {restClient.Type.Name}({PipelineProperty}, {DiagnosticsProperty}.ApplicationId{subIdVariable}, {EndpointProperty}{apiVersionVariable})";
+            var paramList = new List<FormattableString>()
+            {
+                $"{PipelineProperty}",
+                $"{DiagnosticsProperty}.ApplicationId"
+            };
+
+            if (restClient.Parameters.Any(p => p.Name.Equals("subscriptionId")))
+            {
+                paramList.Add($"Id.SubscriptionId");
+            }
+            paramList.Add($"{EndpointProperty}");
+            if (apiVersionExpression != null)
+            {
+                paramList.Add(apiVersionExpression);
+            }
+            return $"new {restClient.Type}({paramList.Join(", ")})";
         }
 
         protected string GetRestClientName(MgmtRestOperation operation) => GetRestClientName(operation.RestClient, operation.Resource);
@@ -573,7 +585,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     using (_writer.Scope($"else"))
                     {
-                        _writer.Line($"throw new InvalidOperationException($\"{{{This.BranchIdVariableName}.ResourceType}} is not supported here\");");
+                        _writer.Line($"throw new {typeof(InvalidOperationException)}($\"{{{This.BranchIdVariableName}.ResourceType}} is not supported here\");");
                     }
                 }
                 else if (escapeBranches.Count == 1)
