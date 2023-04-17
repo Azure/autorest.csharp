@@ -17,7 +17,7 @@ namespace CadlRanchProjects.Tests
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
             Response response = await new CollectionFormatClient(host, null).GetQueryClient().MultiAsync(colors);
-            Assert.AreEqual(200, response.Status);
+            Assert.AreEqual(204, response.Status);
         });
 
         [Test]
@@ -25,7 +25,7 @@ namespace CadlRanchProjects.Tests
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
             Response response = await new CollectionFormatClient(host, null).GetQueryClient().CsvAsync(colors);
-            Assert.AreEqual(200, response.Status);
+            Assert.AreEqual(204, response.Status);
         });
 
         [Test]
@@ -33,7 +33,7 @@ namespace CadlRanchProjects.Tests
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
             Response response = await new CollectionFormatClient(host, null).GetHeaderClient().CsvAsync(colors);
-            Assert.AreEqual(200, response.Status);
+            Assert.AreEqual(204, response.Status);
         });
     }
 }
