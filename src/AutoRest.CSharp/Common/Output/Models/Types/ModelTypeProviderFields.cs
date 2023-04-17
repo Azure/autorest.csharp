@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -51,6 +52,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 publicParameters.Add(parameter);
             }
 
+            var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
+
             foreach (var inputModelProperty in inputModel.Properties)
             {
                 var originalFieldName = inputModelProperty.Name.ToCleanName();
@@ -60,6 +63,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var field = existingMember is not null
                     ? CreateFieldFromExisting(existingMember, originalFieldType, inputModelProperty, typeFactory)
                     : CreateField(originalFieldName, originalFieldType, inputModel, inputModelProperty);
+
+                if (existingMember is not null)
+                {
+                    visitedMembers.Add(existingMember);
+                }
 
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
@@ -74,6 +82,24 @@ namespace AutoRest.CSharp.Output.Models.Types
                 if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly)
                 {
                     publicParameters.Add(parameter);
+                }
+            }
+
+            // adding the leftover members from the source type
+            if (sourceTypeMapping is not null)
+            {
+                foreach (var serializationMapping in sourceTypeMapping.GetSerializationMembers())
+                {
+                    if (visitedMembers.Contains(serializationMapping.ExistingMember))
+                    {
+                        continue;
+                    }
+                    var inputModelProperty = new InputModelProperty(serializationMapping.ExistingMember.Name, serializationMapping.SerializationPath.Last(), "to be removed by post process", new InputPrimitiveType(InputTypeKind.String), false, false, false);
+                    // we put the original type typeof(string) here as place holder. It always meets the condition of replacing the type with the type of existing member
+                    var field = CreateFieldFromExisting(serializationMapping.ExistingMember, typeof(string), inputModelProperty, typeFactory);
+                    fields.Add(field);
+                    fieldsToInputs[field] = inputModelProperty;
+                    serializationParameters.Add(Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type));
                 }
             }
 

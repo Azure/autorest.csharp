@@ -10,9 +10,9 @@ namespace Azure.Core
     [AttributeUsage(AttributeTargets.Property)]
     internal class CodeGenMemberSerializationAttribute : Attribute
     {
-        public string SerializationPath { get; }
+        public string[] SerializationPath { get; }
 
-        public CodeGenMemberSerializationAttribute(string serializationPath)
+        public CodeGenMemberSerializationAttribute(params string[] serializationPath)
         {
             SerializationPath = serializationPath;
         }

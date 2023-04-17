@@ -72,6 +72,11 @@ namespace CustomizationsInCadl.Models
                     writer.WriteNull("propertyEnumToBeMadeExtensible");
                 }
             }
+            if (Optional.IsDefined(PropertyModelToAddAdditionalSerializableProperty))
+            {
+                writer.WritePropertyName("propertyModelToAddAdditionalSerializableProperty"u8);
+                writer.WriteObjectValue(PropertyModelToAddAdditionalSerializableProperty);
+            }
             writer.WriteEndObject();
         }
 
@@ -88,6 +93,7 @@ namespace CustomizationsInCadl.Models
             Optional<RenamedEnum?> propertyEnumToRename = default;
             Optional<EnumWithValueToRename?> propertyEnumWithValueToRename = default;
             Optional<EnumToBeMadeExtensible?> propertyEnumToBeMadeExtensible = default;
+            Optional<ModelToAddAdditionalSerializableProperty> propertyModelToAddAdditionalSerializableProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("propertyModelToMakeInternal"u8))
@@ -156,8 +162,17 @@ namespace CustomizationsInCadl.Models
                     propertyEnumToBeMadeExtensible = new EnumToBeMadeExtensible(property.Value.GetString());
                     continue;
                 }
+                if (property.NameEquals("propertyModelToAddAdditionalSerializableProperty"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    propertyModelToAddAdditionalSerializableProperty = ModelToAddAdditionalSerializableProperty.DeserializeModelToAddAdditionalSerializableProperty(property.Value);
+                    continue;
+                }
             }
-            return new RootModel(propertyModelToMakeInternal, propertyModelToRename, propertyModelToChangeNamespace, propertyModelWithCustomizedProperties, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible));
+            return new RootModel(propertyModelToMakeInternal, propertyModelToRename, propertyModelToChangeNamespace, propertyModelWithCustomizedProperties, Optional.ToNullable(propertyEnumToRename), Optional.ToNullable(propertyEnumWithValueToRename), Optional.ToNullable(propertyEnumToBeMadeExtensible), propertyModelToAddAdditionalSerializableProperty);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

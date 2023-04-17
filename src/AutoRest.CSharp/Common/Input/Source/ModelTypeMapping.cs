@@ -15,7 +15,7 @@ namespace AutoRest.CSharp.Input.Source
     {
         private readonly INamedTypeSymbol? _existingType;
         private readonly Dictionary<string, ISymbol> _propertyMappings;
-        private readonly Dictionary<ISymbol, string> _serializationMappings;
+        private readonly Dictionary<ISymbol, string[]> _serializationMappings;
 
         public string[]? Usage { get; }
         public string[]? Formats { get; }
@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Input.Source
         {
             _existingType = existingType;
             _propertyMappings = new Dictionary<string, ISymbol>();
-            _serializationMappings = new Dictionary<ISymbol, string>(SymbolEqualityComparer.Default);
+            _serializationMappings = new Dictionary<ISymbol, string[]>(SymbolEqualityComparer.Default);
 
             foreach (ISymbol member in GetMembers(existingType))
             {
@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Input.Source
                 {
                     _propertyMappings.Add(schemaMemberName, member);
                 }
-                if (TryGetAttributeCtorParameterValue(member, serializationAttribute, out var serializationPath))
+                if (TryGetAttributeCtorParameterValues(member, serializationAttribute, out var serializationPath))
                 {
                     _serializationMappings.Add(member, serializationPath);
                 }
@@ -61,7 +61,7 @@ namespace AutoRest.CSharp.Input.Source
             }
         }
 
-        internal static bool TryGetAttributeCtorParameterValue(ISymbol symbol, INamedTypeSymbol attributeType, [NotNullWhen(true)] out string? name)
+        internal static bool TryGetAttributeCtorParameterValue(ISymbol symbol, INamedTypeSymbol attributeType, [MaybeNullWhen(false)] out string name)
         {
             name = null;
 
@@ -75,7 +75,20 @@ namespace AutoRest.CSharp.Input.Source
             return name != null;
         }
 
-        private string[]? ToStringArray(ImmutableArray<TypedConstant> values)
+        internal static bool TryGetAttributeCtorParameterValues(ISymbol symbol, INamedTypeSymbol attributeType, [MaybeNullWhen(false)] out string[] parameters)
+        {
+            parameters = null;
+
+            var attributes = symbol.GetAttributes().SingleOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, attributeType));
+            if (attributes?.ConstructorArguments.Length > 0)
+            {
+                parameters = ToStringArray(attributes.ConstructorArguments[0].Values);
+            }
+
+            return parameters != null;
+        }
+
+        private static string[]? ToStringArray(ImmutableArray<TypedConstant> values)
         {
             if (values.IsDefaultOrEmpty)
             {
@@ -103,14 +116,12 @@ namespace AutoRest.CSharp.Input.Source
             return null;
         }
 
-        public SourcePropertySerailizationMapping? GetSerializationForMember(ISymbol symbol)
+        public IEnumerable<SourcePropertySerailizationMapping> GetSerializationMembers()
         {
-            if (_serializationMappings.TryGetValue(symbol, out var serializationPath))
+            foreach (var (symbol, serializations) in _serializationMappings)
             {
-                return new SourcePropertySerailizationMapping(symbol, serializationPath);
+                yield return new SourcePropertySerailizationMapping(symbol, serializations);
             }
-
-            return null;
         }
 
         private static IEnumerable<ISymbol> GetMembers(INamedTypeSymbol? typeSymbol)

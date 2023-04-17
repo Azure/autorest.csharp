@@ -8,13 +8,13 @@ namespace AutoRest.CSharp.Input.Source
 {
     public class SourcePropertySerailizationMapping
     {
-        public SourcePropertySerailizationMapping(ISymbol existingMember, string serializationPath)
+        public SourcePropertySerailizationMapping(ISymbol existingMember, string[] serializationPath)
         {
             ExistingMember = existingMember;
             SerializationPath = serializationPath;
         }
 
         public ISymbol ExistingMember { get; }
-        public string SerializationPath { get; }
+        public string[] SerializationPath { get; }
     }
 }
