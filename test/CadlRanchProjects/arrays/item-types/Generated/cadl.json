@@ -1337,7 +1337,7 @@
         "ElementType": {
          "$id": "144",
          "Name": "duration",
-         "Kind": "DurationISO8601",
+         "Kind": "Duration",
          "IsNullable": false
         },
         "IsNullable": false
@@ -1373,7 +1373,7 @@
         "ElementType": {
          "$id": "148",
          "Name": "duration",
-         "Kind": "DurationISO8601",
+         "Kind": "Duration",
          "IsNullable": false
         },
         "IsNullable": false

@@ -222,7 +222,7 @@
      "Type": {
       "$id": "28",
       "Name": "duration",
-      "Kind": "DurationISO8601",
+      "Kind": "Duration",
       "IsNullable": false
      },
      "IsRequired": true,

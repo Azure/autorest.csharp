@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.DateTimeISO8601 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypeKind.DateTimeRFC1123 => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
                 InputTypeKind.DateTimeUnix => new CSharpType(typeof(DateTimeOffset), inputType.IsNullable),
-                InputTypeKind.DurationISO8601 => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
+                InputTypeKind.Duration => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
                 InputTypeKind.DurationConstant => new CSharpType(typeof(TimeSpan), inputType.IsNullable),
                 InputTypeKind.ETag => new CSharpType(typeof(ETag), inputType.IsNullable),
                 InputTypeKind.Float32 => new CSharpType(typeof(float), inputType.IsNullable),
