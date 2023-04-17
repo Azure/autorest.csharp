@@ -13,7 +13,7 @@ namespace CadlRanchProjects.Tests
     public class CollectionFormatTests : CadlRanchTestBase
     {
         [Test]
-        public Task CollectionFormat_testMulti() => Test(async (host) =>
+        public Task Parameters_CollectionFormat_Query_multi() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
             Response response = await new CollectionFormatClient(host, null).GetQueryClient().MultiAsync(colors);
@@ -21,7 +21,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task CollectionFormat_testCsv() => Test(async (host) =>
+        public Task Parameters_CollectionFormat_Query_csv() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
             Response response = await new CollectionFormatClient(host, null).GetQueryClient().CsvAsync(colors);
@@ -29,7 +29,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task CollectionFormat_testCsvHeader() => Test(async (host) =>
+        public Task Parameters_CollectionFormat_Header_csv() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
             Response response = await new CollectionFormatClient(host, null).GetHeaderClient().CsvAsync(colors);
