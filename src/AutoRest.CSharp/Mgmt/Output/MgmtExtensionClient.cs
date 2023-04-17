@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             $"The resource parameters to use in these operations.",
             typeof(ArmResource),
             null,
-            ValidationType.None,
+            Validation.None,
             null);
 
         private Parameter _scopeParameter = new Parameter(
@@ -107,7 +107,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             $"The scope to use in these operations",
             typeof(ResourceIdentifier),
             null,
-            ValidationType.None,
+            Validation.None,
             null);
 
         protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
