@@ -40,7 +40,7 @@ jobs:
     displayName: Download job matrix props files
     inputs:
       artifact: matrix-props
-      targetPath: $(Build.SourcesDirectory)/azure-sdk-for-net/matrix-props
+      targetPath: $(Build.SourcesDirectory)/azure-sdk-for-net/artifacts/matrix-props
 
   - ${{ if eq(parameters.IsInternalFeed, true) }}:
     - pwsh: ./eng/GenerateInternalNpmrc.ps1 -ContainingFolder $(Build.SourcesDirectory)/azure-sdk-for-net
@@ -59,7 +59,7 @@ jobs:
         -AutorestCSharpVersion ${{ parameters.AutorestCSharpVersion }}
         -CadlEmitterVersion ${{ parameters.CadlEmitterVersion }}
         -SdkRepoRoot $(Build.SourcesDirectory)/azure-sdk-for-net
-        -ProjectListOverrideFile matrix-props/$(ProjectListOverrideFile)
+        -ProjectListOverrideFile artifacts/matrix-props/$(ProjectListOverrideFile)
         -ShowSummary
         -UseInternalFeed $${{parameters.IsInternalFeed}}
       failOnStderr: false
