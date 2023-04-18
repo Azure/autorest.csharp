@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -73,58 +71,6 @@ namespace CadlFirstTest.Models
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
-            writer.WritePropertyName("requiredUnknown"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(RequiredUnknown);
-#else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredUnknown.ToString()).RootElement);
-#endif
-            if (Optional.IsDefined(OptionalUnknown))
-            {
-                writer.WritePropertyName("optionalUnknown"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(OptionalUnknown);
-#else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(OptionalUnknown.ToString()).RootElement);
-#endif
-            }
-            writer.WritePropertyName("requiredRecordUnknown"u8);
-            writer.WriteStartObject();
-            foreach (var item in RequiredRecordUnknown)
-            {
-                writer.WritePropertyName(item.Key);
-                if (item.Value == null)
-                {
-                    writer.WriteNullValue();
-                    continue;
-                }
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
-#endif
-            }
-            writer.WriteEndObject();
-            if (Optional.IsCollectionDefined(OptionalRecordUnknown))
-            {
-                writer.WritePropertyName("optionalRecordUnknown"u8);
-                writer.WriteStartObject();
-                foreach (var item in OptionalRecordUnknown)
-                {
-                    writer.WritePropertyName(item.Key);
-                    if (item.Value == null)
-                    {
-                        writer.WriteNullValue();
-                        continue;
-                    }
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(item.Value);
-#else
-                    JsonSerializer.Serialize(writer, JsonDocument.Parse(item.Value.ToString()).RootElement);
-#endif
-                }
-                writer.WriteEndObject();
-            }
             writer.WriteEndObject();
         }
 
@@ -137,12 +83,6 @@ namespace CadlFirstTest.Models
             string name = default;
             string requiredUnion = default;
             string requiredBadDescription = default;
-            BinaryData requiredUnknown = default;
-            Optional<BinaryData> optionalUnknown = default;
-            IDictionary<string, BinaryData> requiredRecordUnknown = default;
-            Optional<IDictionary<string, BinaryData>> optionalRecordUnknown = default;
-            IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = default;
-            Optional<IReadOnlyDictionary<string, BinaryData>> readOnlyOptionalRecordUnknown = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -160,98 +100,8 @@ namespace CadlFirstTest.Models
                     requiredBadDescription = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredUnknown"u8))
-                {
-                    requiredUnknown = BinaryData.FromString(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("optionalUnknown"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    optionalUnknown = BinaryData.FromString(property.Value.GetRawText());
-                    continue;
-                }
-                if (property.NameEquals("requiredRecordUnknown"u8))
-                {
-                    Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
-                        }
-                    }
-                    requiredRecordUnknown = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("optionalRecordUnknown"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
-                        }
-                    }
-                    optionalRecordUnknown = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("readOnlyRequiredRecordUnknown"u8))
-                {
-                    Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
-                        }
-                    }
-                    readOnlyRequiredRecordUnknown = dictionary;
-                    continue;
-                }
-                if (property.NameEquals("readOnlyOptionalRecordUnknown"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    Dictionary<string, BinaryData> dictionary = new Dictionary<string, BinaryData>();
-                    foreach (var property0 in property.Value.EnumerateObject())
-                    {
-                        if (property0.Value.ValueKind == JsonValueKind.Null)
-                        {
-                            dictionary.Add(property0.Name, null);
-                        }
-                        else
-                        {
-                            dictionary.Add(property0.Name, BinaryData.FromString(property0.Value.GetRawText()));
-                        }
-                    }
-                    readOnlyOptionalRecordUnknown = dictionary;
-                    continue;
-                }
             }
-            return new Thing(name, requiredUnion, requiredBadDescription, requiredUnknown, optionalUnknown, requiredRecordUnknown, Optional.ToDictionary(optionalRecordUnknown), readOnlyRequiredRecordUnknown, Optional.ToDictionary(readOnlyOptionalRecordUnknown));
+            return new Thing(name, requiredUnion, requiredBadDescription);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

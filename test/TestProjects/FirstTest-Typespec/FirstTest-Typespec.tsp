@@ -112,26 +112,6 @@ model Thing {
 
     @doc("description with xml <|endoftext|>")
     requiredBadDescription: string;
-
-    @doc("required unknown")
-    requiredUnknown: unknown;
-
-    @doc("optional unknown")
-    optionalUnknown?: unknown;
-
-    @doc("required record of unknown")
-    requiredRecordUnknown: Record<unknown>;
-
-    @doc("optional record of unknown")
-    optionalRecordUnknown?: Record<unknown>;
-
-    @doc("required readonly record of unknown")
-    @visibility("read")
-    readOnlyRequiredRecordUnknown: Record<unknown>;
-
-    @doc("optional readonly record of unknown")
-    @visibility("read")
-    readOnlyOptionalRecordUnknown?: Record<unknown>;
 }
 
 @doc("this is not a friendly model but with a friendly name")
@@ -184,6 +164,26 @@ model RoundTripModel {
 
     @doc("this is a string based fixed enum")
     stringFixedEnum?: StringFixedEnum;
+
+    @doc("required unknown")
+    requiredUnknown: unknown;
+
+    @doc("optional unknown")
+    optionalUnknown?: unknown;
+
+    @doc("required record of unknown")
+    requiredRecordUnknown: Record<unknown>;
+
+    @doc("optional record of unknown")
+    optionalRecordUnknown?: Record<unknown>;
+
+    @doc("required readonly record of unknown")
+    @visibility("read")
+    readOnlyRequiredRecordUnknown: Record<unknown>;
+
+    @doc("optional readonly record of unknown")
+    @visibility("read")
+    readOnlyOptionalRecordUnknown?: Record<unknown>;
 }
 
 enum DaysOfWeekExtensibleEnum {

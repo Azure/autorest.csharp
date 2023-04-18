@@ -23,12 +23,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -49,12 +43,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -82,12 +70,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -108,12 +90,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -141,12 +117,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -167,12 +137,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -200,12 +164,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -226,12 +184,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -253,10 +205,6 @@ var data = new {
     requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = await client.PatchActionAsync(RequestContent.Create(data));
@@ -269,9 +217,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call PatchActionAsync with all request content, and how to parse the result.
 <code><![CDATA[
@@ -291,14 +236,6 @@ var data = new {
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
-    optionalRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = await client.PatchActionAsync(RequestContent.Create(data));
@@ -315,12 +252,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -341,12 +272,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -365,12 +290,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -392,10 +311,6 @@ var data = new {
     requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = client.PatchAction(RequestContent.Create(data));
@@ -408,9 +323,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call PatchAction with all request content, and how to parse the result.
 <code><![CDATA[
@@ -430,14 +342,6 @@ var data = new {
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
-    optionalRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = client.PatchAction(RequestContent.Create(data));
@@ -454,12 +358,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -480,12 +378,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -504,12 +396,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -531,10 +417,6 @@ var data = new {
     requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
@@ -547,9 +429,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all request content, and how to parse the result.
 <code><![CDATA[
@@ -569,14 +448,6 @@ var data = new {
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
-    optionalRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
@@ -593,12 +464,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -619,12 +484,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -643,12 +502,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -670,10 +523,6 @@ var data = new {
     requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = client.AnonymousBody(RequestContent.Create(data));
@@ -686,9 +535,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call AnonymousBody with all request content, and how to parse the result.
 <code><![CDATA[
@@ -708,14 +554,6 @@ var data = new {
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
-    optionalRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = client.AnonymousBody(RequestContent.Create(data));
@@ -732,12 +570,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -758,12 +590,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -782,12 +608,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -933,9 +753,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
 <code><![CDATA[
@@ -957,12 +774,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -983,12 +794,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1012,9 +817,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call SayHi with all parameters, and how to parse the result.
 <code><![CDATA[
@@ -1036,12 +838,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1062,12 +858,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1098,10 +888,10 @@ var data = new {
         requiredLiteralDouble = new {},
         requiredLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
-        requiredUnknown = new {},
-        requiredRecordUnknown = new {
-            key = new {},
-        },
+    },
+    requiredUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
     },
 };
 
@@ -1115,9 +905,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call HelloAgainAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1146,14 +933,6 @@ var data = new {
         optionalLiteralDouble = new {},
         optionalLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
-        requiredUnknown = new {},
-        optionalUnknown = new {},
-        requiredRecordUnknown = new {
-            key = new {},
-        },
-        optionalRecordUnknown = new {
-            key = new {},
-        },
     },
     intExtensibleEnum = "1",
     intExtensibleEnumCollection = new[] {
@@ -1172,6 +951,14 @@ var data = new {
         "1"
     },
     stringFixedEnum = "1",
+    requiredUnknown = new {},
+    optionalUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
+    },
+    optionalRecordUnknown = new {
+        key = new {},
+    },
 };
 
 Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
@@ -1188,12 +975,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1219,12 +1000,6 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralDouble: Literal, # Optional. optional literal double
     optionalLiteralBool: Literal, # Optional. optional literal bool
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-    requiredUnknown: Intrinsic, # Required. required unknown
-    optionalUnknown: Intrinsic, # Optional. optional unknown
-    requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-    optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-    readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-    readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
   }, # Required. Required model
   intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
   intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
@@ -1235,6 +1010,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
+  requiredUnknown: Intrinsic, # Required. required unknown
+  optionalUnknown: Intrinsic, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1253,12 +1034,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1289,10 +1064,10 @@ var data = new {
         requiredLiteralDouble = new {},
         requiredLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
-        requiredUnknown = new {},
-        requiredRecordUnknown = new {
-            key = new {},
-        },
+    },
+    requiredUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
     },
 };
 
@@ -1306,9 +1081,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call HelloAgain with all parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1337,14 +1109,6 @@ var data = new {
         optionalLiteralDouble = new {},
         optionalLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
-        requiredUnknown = new {},
-        optionalUnknown = new {},
-        requiredRecordUnknown = new {
-            key = new {},
-        },
-        optionalRecordUnknown = new {
-            key = new {},
-        },
     },
     intExtensibleEnum = "1",
     intExtensibleEnumCollection = new[] {
@@ -1363,6 +1127,14 @@ var data = new {
         "1"
     },
     stringFixedEnum = "1",
+    requiredUnknown = new {},
+    optionalUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
+    },
+    optionalRecordUnknown = new {
+        key = new {},
+    },
 };
 
 Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
@@ -1379,12 +1151,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1410,12 +1176,6 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralDouble: Literal, # Optional. optional literal double
     optionalLiteralBool: Literal, # Optional. optional literal bool
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-    requiredUnknown: Intrinsic, # Required. required unknown
-    optionalUnknown: Intrinsic, # Optional. optional unknown
-    requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-    optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-    readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-    readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
   }, # Required. Required model
   intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
   intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
@@ -1426,6 +1186,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
+  requiredUnknown: Intrinsic, # Required. required unknown
+  optionalUnknown: Intrinsic, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1444,12 +1210,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1480,10 +1240,10 @@ var data = new {
         requiredLiteralDouble = new {},
         requiredLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
-        requiredUnknown = new {},
-        requiredRecordUnknown = new {
-            key = new {},
-        },
+    },
+    requiredUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
     },
 };
 
@@ -1497,9 +1257,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call NoContentTypeAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1528,14 +1285,6 @@ var data = new {
         optionalLiteralDouble = new {},
         optionalLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
-        requiredUnknown = new {},
-        optionalUnknown = new {},
-        requiredRecordUnknown = new {
-            key = new {},
-        },
-        optionalRecordUnknown = new {
-            key = new {},
-        },
     },
     intExtensibleEnum = "1",
     intExtensibleEnumCollection = new[] {
@@ -1554,6 +1303,14 @@ var data = new {
         "1"
     },
     stringFixedEnum = "1",
+    requiredUnknown = new {},
+    optionalUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
+    },
+    optionalRecordUnknown = new {
+        key = new {},
+    },
 };
 
 Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
@@ -1570,12 +1327,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1601,12 +1352,6 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralDouble: Literal, # Optional. optional literal double
     optionalLiteralBool: Literal, # Optional. optional literal bool
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-    requiredUnknown: Intrinsic, # Required. required unknown
-    optionalUnknown: Intrinsic, # Optional. optional unknown
-    requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-    optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-    readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-    readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
   }, # Required. Required model
   intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
   intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
@@ -1617,6 +1362,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
+  requiredUnknown: Intrinsic, # Required. required unknown
+  optionalUnknown: Intrinsic, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1635,12 +1386,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1671,10 +1416,10 @@ var data = new {
         requiredLiteralDouble = new {},
         requiredLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
-        requiredUnknown = new {},
-        requiredRecordUnknown = new {
-            key = new {},
-        },
+    },
+    requiredUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
     },
 };
 
@@ -1688,9 +1433,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call NoContentType with all parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1719,14 +1461,6 @@ var data = new {
         optionalLiteralDouble = new {},
         optionalLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
-        requiredUnknown = new {},
-        optionalUnknown = new {},
-        requiredRecordUnknown = new {
-            key = new {},
-        },
-        optionalRecordUnknown = new {
-            key = new {},
-        },
     },
     intExtensibleEnum = "1",
     intExtensibleEnumCollection = new[] {
@@ -1745,6 +1479,14 @@ var data = new {
         "1"
     },
     stringFixedEnum = "1",
+    requiredUnknown = new {},
+    optionalUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
+    },
+    optionalRecordUnknown = new {
+        key = new {},
+    },
 };
 
 Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
@@ -1761,12 +1503,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1792,12 +1528,6 @@ Schema for <c>RoundTripModel</c>:
     optionalLiteralDouble: Literal, # Optional. optional literal double
     optionalLiteralBool: Literal, # Optional. optional literal bool
     requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-    requiredUnknown: Intrinsic, # Required. required unknown
-    optionalUnknown: Intrinsic, # Optional. optional unknown
-    requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-    optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-    readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-    readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
   }, # Required. Required model
   intExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is an int based extensible enum
   intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
@@ -1808,6 +1538,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
+  requiredUnknown: Intrinsic, # Required. required unknown
+  optionalUnknown: Intrinsic, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1826,12 +1562,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1859,12 +1589,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1885,12 +1609,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1918,12 +1636,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -1944,12 +1656,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1971,10 +1677,6 @@ var data = new {
     requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
@@ -1987,9 +1689,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call CreateLiteralAsync with all request content, and how to parse the result.
 <code><![CDATA[
@@ -2009,14 +1708,6 @@ var data = new {
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
-    optionalRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
@@ -2033,12 +1724,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -2059,12 +1744,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -2083,12 +1762,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -2110,10 +1783,6 @@ var data = new {
     requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = client.CreateLiteral(RequestContent.Create(data));
@@ -2126,9 +1795,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call CreateLiteral with all request content, and how to parse the result.
 <code><![CDATA[
@@ -2148,14 +1814,6 @@ var data = new {
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
-    optionalRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = client.CreateLiteral(RequestContent.Create(data));
@@ -2172,12 +1830,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -2198,12 +1850,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -2222,12 +1868,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -2255,12 +1895,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -2281,12 +1915,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -2314,12 +1942,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -2340,12 +1962,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -2397,10 +2013,6 @@ var data = new {
     requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = await client.InternalProtocolAsync(RequestContent.Create(data));
@@ -2413,9 +2025,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call InternalProtocolAsync with all request content, and how to parse the result.
 <code><![CDATA[
@@ -2435,14 +2044,6 @@ var data = new {
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
-    optionalRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = await client.InternalProtocolAsync(RequestContent.Create(data));
@@ -2459,12 +2060,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -2485,12 +2080,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -2509,12 +2098,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -2536,10 +2119,6 @@ var data = new {
     requiredLiteralDouble = new {},
     requiredLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = client.InternalProtocol(RequestContent.Create(data));
@@ -2552,9 +2131,6 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 This sample shows how to call InternalProtocol with all request content, and how to parse the result.
 <code><![CDATA[
@@ -2574,14 +2150,6 @@ var data = new {
     optionalLiteralDouble = new {},
     optionalLiteralBool = new {},
     requiredBadDescription = "<requiredBadDescription>",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
-    requiredRecordUnknown = new {
-        key = new {},
-    },
-    optionalRecordUnknown = new {
-        key = new {},
-    },
 };
 
 Response response = client.InternalProtocol(RequestContent.Create(data));
@@ -2598,12 +2166,6 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralDouble").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
-Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
 ]]></code>
 </example>
 <remarks>
@@ -2624,12 +2186,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -2648,12 +2204,6 @@ Schema for <c>Thing</c>:
   optionalLiteralDouble: Literal, # Optional. optional literal double
   optionalLiteralBool: Literal, # Optional. optional literal bool
   requiredBadDescription: string, # Required. description with xml &amp;lt;|endoftext|&amp;gt;
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 

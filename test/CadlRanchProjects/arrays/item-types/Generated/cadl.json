@@ -1530,10 +1530,9 @@
         "Name": "Array",
         "ElementType": {
          "$id": "164",
-         "Name": "unknown",
-         "IsNullable": false,
-         "Usage": "None",
-         "Properties": []
+         "Name": "Intrinsic",
+         "Kind": "unknown",
+         "IsNullable": false
         },
         "IsNullable": false
        },
@@ -1567,10 +1566,9 @@
         "Name": "Array",
         "ElementType": {
          "$id": "168",
-         "Name": "unknown",
-         "IsNullable": false,
-         "Usage": "None",
-         "Properties": []
+         "Name": "Intrinsic",
+         "Kind": "unknown",
+         "IsNullable": false
         },
         "IsNullable": false
        },
