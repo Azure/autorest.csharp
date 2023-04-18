@@ -93,4 +93,3 @@ $projectGroups = Split-Items -Items $projects
 $propsFiles = New-PropsFiles -ProjectGroups $projectGroups -PropsFilePrefix 'projects_'
 $matrix = New-Matrix -PropsFiles $propsFiles
 Write-JsonVariable "matrix" $matrix
-Write-JsonVariable "matrix-dependsOn" $matrix.Keys
