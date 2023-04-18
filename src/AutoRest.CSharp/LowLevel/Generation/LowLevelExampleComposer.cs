@@ -623,7 +623,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputTypeKind.Int32            => "1234",
                 InputTypeKind.Int64            => "1234L",
                 InputTypeKind.String           => string.IsNullOrWhiteSpace(propertyDescription) ? "\"<String>\"" : $"\"<{propertyDescription}>\"",
-                InputTypeKind.Duration  => "PT1H23M45S",
+                InputTypeKind.DurationISO8601  => "PT1H23M45S",
                 InputTypeKind.DurationConstant => "01:23:45",
                 InputTypeKind.Time             => "01:23:45",
                 _ => "new {}"

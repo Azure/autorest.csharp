@@ -295,7 +295,7 @@
         "Type": {
          "$id": "40",
          "Name": "duration",
-         "Kind": "Duration",
+         "Kind": "DurationISO8601",
          "IsNullable": false
         },
         "IsRequired": true,

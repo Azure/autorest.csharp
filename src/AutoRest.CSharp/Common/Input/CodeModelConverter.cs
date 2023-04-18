@@ -342,7 +342,7 @@ namespace AutoRest.CSharp.Common.Input
 
             TimeSchema => InputPrimitiveType.Time,
             DurationSchema when format == XMsFormat.DurationConstant => InputPrimitiveType.DurationConstant,
-            DurationSchema => InputPrimitiveType.Duration,
+            DurationSchema => InputPrimitiveType.DurationISO8601,
 
             NumberSchema { Type: AllSchemaTypes.Number, Precision: 32 } => InputPrimitiveType.Float32,
             NumberSchema { Type: AllSchemaTypes.Number, Precision: 128 } => InputPrimitiveType.Float128,

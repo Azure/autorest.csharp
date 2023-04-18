@@ -900,7 +900,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputPrimitiveType { Kind: InputTypeKind.DateTimeISO8601 } => "string (ISO 8601 Format)",
                 InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC1123 } => "string (RFC1123 Format)",
                 InputPrimitiveType { Kind: InputTypeKind.DateTimeUnix } => "string (Unix Format)",
-                InputPrimitiveType { Kind: InputTypeKind.Duration } => "string (duration ISO 8601 Format)",
+                InputPrimitiveType { Kind: InputTypeKind.DurationISO8601 } => "string (duration ISO 8601 Format)",
                 InputPrimitiveType { Kind: InputTypeKind.DurationConstant } => "string (duration)",
                 InputPrimitiveType { Kind: InputTypeKind.Time } => "string (time)",
                 InputEnumType enumType => string.Join(" | ", enumType.AllowedValues.Select(c => $"\"{c.Value}\"")),

@@ -167,7 +167,7 @@ namespace AutoRest.CSharp.Common.Input
         public static InputPrimitiveType DateTimeISO8601 { get; }    = new(InputTypeKind.DateTimeISO8601);
         public static InputPrimitiveType DateTimeRFC1123 { get; }    = new(InputTypeKind.DateTimeRFC1123);
         public static InputPrimitiveType DateTimeUnix { get; }       = new(InputTypeKind.DateTimeUnix);
-        public static InputPrimitiveType Duration { get; }    = new(InputTypeKind.Duration);
+        public static InputPrimitiveType DurationISO8601 { get; }    = new(InputTypeKind.DurationISO8601);
         public static InputPrimitiveType DurationConstant { get; }   = new(InputTypeKind.DurationConstant);
         public static InputPrimitiveType ETag { get; }               = new(InputTypeKind.ETag);
         public static InputPrimitiveType Float32 { get; }            = new(InputTypeKind.Float32);
@@ -258,7 +258,7 @@ namespace AutoRest.CSharp.Common.Input
         DateTimeISO8601,
         DateTimeRFC1123,
         DateTimeUnix,
-        Duration,
+        DurationISO8601,
         DurationConstant,
         ETag,
         Float32,

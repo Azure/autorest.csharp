@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Output.Builders
                 InputTypeKind.DateTimeISO8601 => SerializationFormat.DateTime_ISO8601,
                 InputTypeKind.DateTimeRFC1123 => SerializationFormat.DateTime_RFC1123,
                 InputTypeKind.DateTimeUnix => SerializationFormat.DateTime_Unix,
-                InputTypeKind.Duration => SerializationFormat.Duration_ISO8601,
+                InputTypeKind.DurationISO8601 => SerializationFormat.Duration_ISO8601,
                 InputTypeKind.DurationConstant => SerializationFormat.Duration_Constant,
                 InputTypeKind.Time => SerializationFormat.Time_ISO8601,
                 _ => SerializationFormat.Default

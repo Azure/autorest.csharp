@@ -76,7 +76,7 @@ export function mapCadlTypeToCSharpInputTypeKind(
     const kind = cadlType.kind;
     switch (kind) {
         case "Model":
-            return InputTypeKind.Model;
+            return getCSharpInputTypeKindByIntrinsicModelName(cadlType.name);
         case "ModelProperty":
             return InputTypeKind.Object;
         case "Enum":
@@ -95,6 +95,55 @@ export function mapCadlTypeToCSharpInputTypeKind(
             return InputTypeKind.String;
         default:
             return InputTypeKind.UnKnownKind;
+    }
+}
+
+function getCSharpInputTypeKindByIntrinsicModelName(
+    name: string
+): InputTypeKind {
+    switch (name) {
+        case "bytes":
+            return InputTypeKind.BinaryData;
+        case "int8":
+            return InputTypeKind.Int32;
+        case "int16":
+            return InputTypeKind.Int32;
+        case "int32":
+            return InputTypeKind.Int32;
+        case "int64":
+            return InputTypeKind.Int64;
+        case "safeint":
+            return InputTypeKind.Int64;
+        case "uint8":
+            return InputTypeKind.Int32;
+        case "uint16":
+            return InputTypeKind.Int32;
+        case "uint32":
+            return InputTypeKind.Int32;
+        case "uint64":
+            return InputTypeKind.Int64;
+        case "float32":
+            return InputTypeKind.Float32;
+        case "float64":
+            return InputTypeKind.Float64;
+        case "string":
+            return InputTypeKind.String;
+        case "uri":
+            return InputTypeKind.String;
+        case "url":
+            return InputTypeKind.String;
+        case "boolean":
+            return InputTypeKind.Boolean;
+        case "plainDate":
+            return InputTypeKind.Date;
+        case "zonedDateTime":
+            return InputTypeKind.DateTime;
+        case "plainTime":
+            return InputTypeKind.Time;
+        case "duration":
+            return InputTypeKind.Duration;
+        default:
+            return InputTypeKind.Model;
     }
 }
 
@@ -217,7 +266,9 @@ export function getInputType(
                 const sdkType = getSdkSimpleType(context, type);
                 return {
                     Name: type.name,
-                    Kind: sdkType.kind,
+                    Kind: getCSharpInputTypeKindByIntrinsicModelName(
+                        intrinsicName
+                    ),
                     IsNullable: false
                 } as InputPrimitiveType;
         }
