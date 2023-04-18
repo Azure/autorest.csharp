@@ -39,8 +39,6 @@ function New-PropsFiles($ProjectGroups, $PropsFilePrefix) {
     Throw "There should be some project files in the group. Please check the given project list."
   }
 
-  Push-Location $SdkForNetPath
-
   $numOfGroups = $ProjectGroups.Count
 
   for ($i = 0; $i -lt $numOfGroups; $i++) {
@@ -60,10 +58,7 @@ function New-PropsFiles($ProjectGroups, $PropsFilePrefix) {
     }
 
     $document.Save($filePath) | Out-Null
-    Write-Output $propsFilePath
   }
-
-  Pop-Location
 }
 
 function Get-ProjectsWithAutorest() {
