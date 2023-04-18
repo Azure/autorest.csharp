@@ -19,7 +19,9 @@ $files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs'
     'Multipart/MultipartContent.cs', 'AzureKeyCredentialPolicy.cs', 'AppContextSwitchHelper.cs',
     'FixedDelayWithNoJitterStrategy.cs', 'OperationPoller.cs', 'SequentialDelayStrategy.cs',
     'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs')
-$baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/core/Azure.Core/src/Shared/'
+#temp update
+$baseUrl = 'https://github.com/JoshLove-msft/azure-sdk-for-net/tree/core-delay-strategy/sdk/core/Azure.Core/src/Shared/'
+#end temp update
 DownloadAll $files $baseUrl $downloadPath
 
 #Download management Shared
