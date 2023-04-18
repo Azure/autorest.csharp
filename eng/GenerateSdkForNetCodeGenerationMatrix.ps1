@@ -44,7 +44,6 @@ function New-PropsFiles($ProjectGroups, $PropsFilePrefix) {
   for ($i = 0; $i -lt $numOfGroups; $i++) {
     $propsFilePath = "$PropsFilePrefix$i.props"
     $filePath = Join-Path $OutputFolder $propsFilePath
-    # Retain the structure without ProjectReference.
     $document=[xml]'<Project></Project>'
     $projectNode = $document.SelectNodes("/Project")
     $itemGroupNode = $projectNode.AppendChild($document.CreateElement("ItemGroup"))
@@ -58,18 +57,17 @@ function New-PropsFiles($ProjectGroups, $PropsFilePrefix) {
     }
 
     $document.Save($filePath) | Out-Null
+    Write-Output $propsFilePath
   }
 }
 
 function Get-ProjectsWithAutorest() {
-  Push-Location $SdkForNetPath
   $sdkProjects = Get-Item "$SdkForNetPath/sdk/*/*/src/*.csproj"
 
   [array]$projects = $sdkProjects
   | Where-Object { (Join-Path $_.DirectoryName 'autorest.md'| Test-Path -PathType Leaf) -or (Join-Path $_.DirectoryName '../tsp-location.yaml'| Test-Path -PathType Leaf)  }
   | Select-Object -ExpandProperty FullName
 
-  Pop-Location
   return ,$projects
 }
 
@@ -93,3 +91,6 @@ $projectGroups = Split-Items -Items $projects
 $propsFiles = New-PropsFiles -ProjectGroups $projectGroups -PropsFilePrefix 'projects_'
 $matrix = New-Matrix -PropsFiles $propsFiles
 Write-JsonVariable "matrix" $matrix
+
+Write-Output "Matrix:"
+Write-Output (ConvertTo-Json $matrix -Depth 100)
