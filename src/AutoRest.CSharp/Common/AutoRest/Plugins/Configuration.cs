@@ -37,6 +37,7 @@ namespace AutoRest.CSharp.Input
             public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
             public const string UnreferencedTypesHandling = "unreferenced-types-handling";
             public const string ModelFactoryForHlc = "model-factory-for-hlc";
+            public const string DynamicJsonInSamples = "dynamic-json-in-samples";
             public const string GenerateModelFactory = "generate-model-factory";
             public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
             public const string AdditionalIntrinsicTypesToTreatEmptyStringAsNull = "additional-intrinsic-types-to-treat-empty-string-as-null";
@@ -64,6 +65,7 @@ namespace AutoRest.CSharp.Input
             bool singleTopLevelClient,
             bool skipSerializationFormatXml,
             bool disablePaginationTopRenaming,
+            bool dynamicJsonInSamples,
             bool generateModelFactory,
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
@@ -87,6 +89,7 @@ namespace AutoRest.CSharp.Input
             SkipCSProjPackageReference = skipCSProjPackageReference;
             Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
+            DynamicJsonInSamples = dynamicJsonInSamples;
             GenerateModelFactory = generateModelFactory;
             UnreferencedTypesHandling = unreferencedTypesHandling;
             projectFolder ??= ProjectFolderDefault;
@@ -149,6 +152,7 @@ namespace AutoRest.CSharp.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
+        public static bool DynamicJsonInSamples { get; private set; }
         public static bool GenerateModelFactory { get; private set; }
         private static IReadOnlyList<string>? _oldModelFactoryEntries;
         public static IReadOnlyList<string> ModelFactoryForHlc => _oldModelFactoryEntries ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -192,6 +196,7 @@ namespace AutoRest.CSharp.Input
                 singleTopLevelClient: GetOptionBoolValue(autoRest, Options.SingleTopLevelClient),
                 skipSerializationFormatXml: GetOptionBoolValue(autoRest, Options.SkipSerializationFormatXml),
                 disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
+                dynamicJsonInSamples: GetOptionBoolValue(autoRest, Options.DynamicJsonInSamples),
                 generateModelFactory: GetOptionBoolValue(autoRest, Options.GenerateModelFactory),
                 modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
@@ -255,6 +260,8 @@ namespace AutoRest.CSharp.Input
                 case Options.SkipSerializationFormatXml:
                     return false;
                 case Options.DisablePaginationTopRenaming:
+                    return false;
+                case Options.DynamicJsonInSamples:
                     return false;
                 case Options.GenerateModelFactory:
                     return true;

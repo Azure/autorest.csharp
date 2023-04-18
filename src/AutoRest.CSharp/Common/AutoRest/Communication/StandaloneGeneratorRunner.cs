@@ -172,6 +172,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
                     WriteIfNotDefault(writer, Configuration.Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
                     WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
+                    WriteIfNotDefault(writer, Configuration.Options.DynamicJsonInSamples, Configuration.DynamicJsonInSamples);
                     WriteIfNotDefault(writer, Configuration.Options.GenerateModelFactory, Configuration.GenerateModelFactory);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ModelFactoryForHlc, Configuration.ModelFactoryForHlc);
                     WriteIfNotDefault(writer, Configuration.Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
@@ -266,6 +267,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SingleTopLevelClient),
                 ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
+                ReadOption(root, Configuration.Options.DynamicJsonInSamples),
                 ReadOption(root, Configuration.Options.GenerateModelFactory),
                 oldModelFactoryEntries,
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),

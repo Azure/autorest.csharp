@@ -11,8 +11,10 @@ using Azure;
 using Azure.Core;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -276,19 +278,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, inputType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType>());
-
+            var apiInvocationChainList = ComposeResponseParsingCode(allProperties, inputType, new HashSet<InputType>());
             if (apiInvocationChainList.Count == 0)
             {
-                builder.AppendLine($"Console.WriteLine(data.ToString());");
+                builder.AppendLine("Console.WriteLine(data.ToString());");
             }
             else
             {
-                builder.AppendLine($"JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
+                builder.AppendLine("JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
                 foreach (var apiInvocationChain in apiInvocationChainList)
                 {
-                    builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
+                    builder.AppendLine(apiInvocationChain);
                 }
             }
         }
@@ -322,23 +322,21 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (property.SerializedName == pagingItemName && property.Type is InputListType listType)
                 {
-                    var apiInvocationChainList = new List<IReadOnlyList<string>>();
-                    ComposeResponseParsingCode(allProperties, listType.ElementType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType> { responseModelType });
-                    var parsingCodes = new List<string>(apiInvocationChainList.Count + 1);
+                    var apiInvocationChainList = ComposeResponseParsingCode(allProperties, listType.ElementType, new HashSet<InputType> { responseModelType });
 
                     if (apiInvocationChainList.Count == 0)
                     {
                         builder.Append(' ', 4);
-                        builder.AppendLine($"Console.WriteLine(data.ToString());");
+                        builder.AppendLine("Console.WriteLine(data.ToString());");
                     }
                     else
                     {
                         builder.Append(' ', 4);
-                        builder.AppendLine($"JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
+                        builder.AppendLine("JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
                         foreach (var apiInvocationChain in apiInvocationChainList)
                         {
                             builder.Append(' ', 4);
-                            builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
+                            builder.AppendLine(apiInvocationChain);
                         }
                     }
                     break;
@@ -373,26 +371,31 @@ namespace AutoRest.CSharp.Generation.Writers
                 return;
             }
 
-            var apiInvocationChainList = new List<IReadOnlyList<string>>();
-            ComposeResponseParsingCode(allProperties, responseBodyType, apiInvocationChainList, new Stack<string>(new[] { "result" }), new HashSet<InputType>());
-
             builder.AppendLine();
 
+            var apiInvocationChainList = ComposeResponseParsingCode(allProperties, responseBodyType, new HashSet<InputType>());
             if (apiInvocationChainList.Count == 0)
             {
-                builder.AppendLine($"Console.WriteLine(response.ToString());");
+                builder.AppendLine("Console.WriteLine(response.ToString());");
             }
             else
             {
-                builder.AppendLine($"JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;");
+                builder.AppendLine("JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;");
                 foreach (var apiInvocationChain in apiInvocationChainList)
                 {
-                    builder.AppendLine($"Console.WriteLine({string.Join(".", apiInvocationChain)}.ToString());");
+                    builder.AppendLine(apiInvocationChain);
                 }
             }
         }
 
-        private void ComposeResponseParsingCode(bool allProperties, InputType type, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes)
+        private IReadOnlyList<string> ComposeResponseParsingCode(bool allProperties, InputType type, HashSet<InputType> visitedTypes)
+        {
+            var apiInvocationChainList = new List<string>();
+            ComposeResponseParsingCode(allProperties, apiInvocationChainList, new Stack<string>(), visitedTypes, type);
+            return apiInvocationChainList;
+        }
+
+        private void ComposeResponseParsingCode(bool allProperties, List<string> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes, InputType type)
         {
             switch (type)
             {
@@ -401,23 +404,65 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         return;
                     }
-                    // {parentOp}[0]
-                    var parentOp = currentApiInvocationChain.Pop();
-                    currentApiInvocationChain.Push($"{parentOp}[0]");
-                    ComposeResponseParsingCode(allProperties, listType.ElementType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                    currentApiInvocationChain.Push("[0]");
+                    ComposeResponseParsingCode(allProperties, apiInvocationChainList, currentApiInvocationChain, visitedTypes, listType.ElementType);
+                    currentApiInvocationChain.Pop();
                     return;
+
                 case InputDictionaryType dictionaryType :
                     if (visitedTypes.Contains(dictionaryType.ValueType))
                     {
                         return;
                     }
-                    // .GetProperty("<test>")
-                    currentApiInvocationChain.Push("GetProperty(\"<test>\")");
-                    ComposeResponseParsingCode(allProperties, dictionaryType.ValueType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+
+                    var propertyName = Configuration.DynamicJsonInSamples
+                        ? "[\"<test>\"]"
+                        : ".GetProperty(\"<test>\")";
+                    currentApiInvocationChain.Push(propertyName);
+                    ComposeResponseParsingCode(allProperties, apiInvocationChainList, currentApiInvocationChain, visitedTypes, dictionaryType.ValueType);
                     currentApiInvocationChain.Pop();
                     return;
+
                 case InputModelType modelType:
-                    ComposeResponseParsingCode(allProperties, modelType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                    foreach (var modelOrBase in modelType.GetSelfAndBaseModels())
+                    {
+                        if (!modelOrBase.Properties.Any())
+                        {
+                            continue;
+                        }
+
+                        var propertiesToExplore = modelOrBase.Properties;
+                        if (!allProperties)
+                        {
+                            propertiesToExplore = modelOrBase.Properties.Where(p => p.IsRequired).ToArray();
+                        }
+
+                        if (propertiesToExplore.Count == 0) // if you have a required property, but its child properties are all optional
+                        {
+                            // return the object
+                            AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
+                            break;
+                        }
+
+                        foreach (var property in propertiesToExplore)
+                        {
+                            if (visitedTypes.Contains(property.Type) || property.SerializedName is null)
+                            {
+                                continue;
+                            }
+
+                            visitedTypes.Add(property.Type);
+                            propertyName = Configuration.DynamicJsonInSamples
+                                ? $".{property.SerializedName.FirstCharToUpperCase()}"
+                                : $".GetProperty(\"{property.SerializedName}\")";
+
+                            currentApiInvocationChain.Push(propertyName);
+                            ComposeResponseParsingCode(allProperties, apiInvocationChainList, currentApiInvocationChain, visitedTypes, property.Type);
+                            currentApiInvocationChain.Pop();
+                            visitedTypes.Remove(property.Type);
+                        }
+                    }
+
                     return;
             }
 
@@ -425,48 +470,29 @@ namespace AutoRest.CSharp.Generation.Writers
             AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
         }
 
-        private void ComposeResponseParsingCode(bool allProperties, InputModelType model, List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain, HashSet<InputType> visitedTypes)
+        private void AddApiInvocationChainResult(List<string> apiInvocationChainList, Stack<string> currentApiInvocationChain)
         {
-            foreach (var modelOrBase in model.GetSelfAndBaseModels())
+            if (Configuration.DynamicJsonInSamples)
             {
-                if (!modelOrBase.Properties.Any())
+                if (currentApiInvocationChain.Count == 0)
                 {
-                    continue;
+                    apiInvocationChainList.Add("Console.WriteLine($\"result: {result}\");");
                 }
-
-                var propertiesToExplore = modelOrBase.Properties;
-                if (!allProperties)
+                else
                 {
-                    propertiesToExplore = modelOrBase.Properties.Where(p => p.IsRequired).ToArray();
-                }
+                    var finalChain = currentApiInvocationChain.ToList();
+                    finalChain.Reverse();
+                    var invocationChain = string.Concat(finalChain);
 
-                if (propertiesToExplore.Count == 0) // if you have a required property, but its child properties are all optional
-                {
-                    // return the object
-                    AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
-                    return;
-                }
-
-                foreach (var property in propertiesToExplore)
-                {
-                    if (!visitedTypes.Contains(property.Type))
-                    {
-                        // .GetProperty("{property_name}")
-                        visitedTypes.Add(property.Type);
-                        currentApiInvocationChain.Push($"GetProperty(\"{property.SerializedName}\")");
-                        ComposeResponseParsingCode(allProperties, property.Type, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                        currentApiInvocationChain.Pop();
-                        visitedTypes.Remove(property.Type);
-                    }
+                    apiInvocationChainList.Add($"Console.WriteLine($\"{invocationChain.Replace("\"", "\\\"")}: {{result{invocationChain}}}\");");
                 }
             }
-        }
-
-        private void AddApiInvocationChainResult(List<IReadOnlyList<string>> apiInvocationChainList, Stack<string> currentApiInvocationChain)
-        {
-            var finalChain = currentApiInvocationChain.ToList();
-            finalChain.Reverse();
-            apiInvocationChainList.Add(finalChain);
+            else
+            {
+                var finalChain = currentApiInvocationChain.ToList();
+                finalChain.Reverse();
+                apiInvocationChainList.Add($"Console.WriteLine(result{string.Concat(finalChain)}.ToString());");
+            }
         }
 
         private string MockParameterValues(IReadOnlyList<Parameter> parameters, bool allParameters)
