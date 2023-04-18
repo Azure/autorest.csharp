@@ -758,8 +758,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteLROMethodBranch(MgmtRestOperation operation, IEnumerable<ParameterMapping> parameterMapping, bool async)
         {
-            _writer.Append($"var response = {GetAwait(async)} ");
-            _writer.Append($"{GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
+            _writer.Append($"var response = {GetAwait(async)} {GetRestClientName(operation)}.{CreateMethodName(operation.Method.Name, async)}(");
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
@@ -805,8 +804,14 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.{RequestWriterHelpers.CreateRequestMethodName(operation.Method.Name)}(");
                 WriteArguments(_writer, parameterMapping);
                 _writer.RemoveTrailingComma();
-                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
+                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!},");
+
+                if (Configuration.MgmtConfiguration.OperationsToSkipLroApiVersionOverride.Contains(operation.OperationId))
+                {
+                    _writer.AppendRaw("false");
+                }
             }
+            _writer.RemoveTrailingComma();
             _writer.Line($");");
             var waitForCompletionMethod = operation.MgmtReturnType is null ?
                     "WaitForCompletionResponse" :

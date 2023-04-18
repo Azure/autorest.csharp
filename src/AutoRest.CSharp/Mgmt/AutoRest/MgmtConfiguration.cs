@@ -98,6 +98,7 @@ namespace AutoRest.CSharp.Input
             IReadOnlyList<string> schemasToPrependRPPrefix,
             IReadOnlyList<string> generateArmResourceExtensions,
             IReadOnlyList<string> parameterizedScopes,
+            IReadOnlyList<string> operationsToSkipLroApiVersionOverride,
             MgmtDebugConfiguration mgmtDebug,
             JsonElement? requestPathToParent = default,
             JsonElement? requestPathToResourceName = default,
@@ -169,6 +170,7 @@ namespace AutoRest.CSharp.Input
             PrependRPPrefix = schemasToPrependRPPrefix;
             GenerateArmResourceExtensions = generateArmResourceExtensions;
             RawParameterizedScopes = parameterizedScopes;
+            OperationsToSkipLroApiVersionOverride = operationsToSkipLroApiVersionOverride;
             IsArmCore = Configuration.DeserializeBoolean(armCore, false);
             DoesResourceModelRequireType = Configuration.DeserializeBoolean(resourceModelRequiresType, true);
             DoesResourceModelRequireName = Configuration.DeserializeBoolean(resourceModelRequiresName, true);
@@ -225,6 +227,7 @@ namespace AutoRest.CSharp.Input
         public IReadOnlyList<string> KeepPluralEnums { get; }
         public IReadOnlyList<string> KeepPluralResourceData { get; }
         public IReadOnlyList<string> PrependRPPrefix { get; }
+        public IReadOnlyList<string> OperationsToSkipLroApiVersionOverride { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> OperationIdMappings { get; }
         public IReadOnlyDictionary<string, string> UpdateRequiredCopy { get; }
         public IReadOnlyDictionary<string, IReadOnlyDictionary<string, string>> PatchInitializerCustomization { get; }
@@ -249,6 +252,7 @@ namespace AutoRest.CSharp.Input
                 schemasToPrependRPPrefix: autoRest.GetValue<string[]?>("prepend-rp-prefix").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 generateArmResourceExtensions: autoRest.GetValue<string[]?>("generate-arm-resource-extensions").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 parameterizedScopes: autoRest.GetValue<string[]?>("parameterized-scopes").GetAwaiter().GetResult() ?? Array.Empty<string>(),
+                operationsToSkipLroApiVersionOverride: autoRest.GetValue<string[]?>("operations-to-skip-lro-api-version-override").GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 mgmtDebug: MgmtDebugConfiguration.GetConfiguration(autoRest),
                 requestPathToParent: autoRest.GetValue<JsonElement?>("request-path-to-parent").GetAwaiter().GetResult(),
                 requestPathToResourceName: autoRest.GetValue<JsonElement?>("request-path-to-resource-name").GetAwaiter().GetResult(),
@@ -347,6 +351,7 @@ namespace AutoRest.CSharp.Input
             root.TryGetProperty(nameof(PromptedEnumValues), out var promptedEnumValuesElement);
             root.TryGetProperty(nameof(PartialResources), out var virtualResources);
             root.TryGetProperty(nameof(RawParameterizedScopes), out var parameterizedScopesElement);
+            root.TryGetProperty(nameof(OperationsToSkipLroApiVersionOverride), out var operationsToSkipLroApiVersionOverrideElement);
 
             var operationGroupToOmit = Configuration.DeserializeArray(operationGroupsToOmitElement);
             var requestPathIsNonResource = Configuration.DeserializeArray(requestPathIsNonResourceElement);
@@ -360,6 +365,7 @@ namespace AutoRest.CSharp.Input
             var prependRPPrefix = Configuration.DeserializeArray(prependRPPrefixElement);
             var generateArmResourceExtensions = Configuration.DeserializeArray(generateArmResourceExtensionsElement);
             var parameterizedScopes = Configuration.DeserializeArray(parameterizedScopesElement);
+            var operationsToSkipLroApiVersionOverride = Configuration.DeserializeArray(operationsToSkipLroApiVersionOverrideElement);
 
             root.TryGetProperty("ArmCore", out var isArmCore);
             root.TryGetProperty(nameof(MgmtDebug), out var mgmtDebugRoot);
@@ -383,6 +389,7 @@ namespace AutoRest.CSharp.Input
                 schemasToPrependRPPrefix: prependRPPrefix,
                 generateArmResourceExtensions: generateArmResourceExtensions,
                 parameterizedScopes: parameterizedScopes,
+                operationsToSkipLroApiVersionOverride: operationsToSkipLroApiVersionOverride,
                 mgmtDebug: MgmtDebugConfiguration.LoadConfiguration(mgmtDebugRoot),
                 requestPathToParent: requestPathToParent,
                 requestPathToResourceName: requestPathToResourceName,
