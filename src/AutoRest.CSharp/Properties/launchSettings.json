@@ -182,7 +182,7 @@
     },
     "constants": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\\\test\\\\CadlRanchProjects\\\\arrays\\\\item-types\\\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
     },
     "custom-baseUrl": {
       "commandName": "Project",
