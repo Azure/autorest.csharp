@@ -31,9 +31,9 @@ namespace MgmtOptionalConstant
             _operation = OperationInternal.Succeeded(response);
         }
 
-        internal MgmtOptionalConstantArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal MgmtOptionalConstantArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false)
         {
-            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
+            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride);
             _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "MgmtOptionalConstantArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 

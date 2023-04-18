@@ -31,9 +31,9 @@ namespace Azure.ResourceManager.Sample
             _operation = OperationInternal.Succeeded(response);
         }
 
-        internal SampleArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
+        internal SampleArmOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia, bool skipApiVersionOverride = false)
         {
-            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
+            var nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia, skipApiVersionOverride);
             _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "SampleArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
         }
 
