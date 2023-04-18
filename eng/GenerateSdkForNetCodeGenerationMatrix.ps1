@@ -44,19 +44,19 @@ function New-PropsFiles($ProjectGroups, $PropsFilePrefix) {
   for ($i = 0; $i -lt $numOfGroups; $i++) {
     $propsFilePath = "$PropsFilePrefix$i.props"
     $filePath = Join-Path $OutputFolder $propsFilePath
-    $document=[xml]'<Project></Project>'
-    $projectNode = $document.SelectNodes("/Project")
-    $itemGroupNode = $projectNode.AppendChild($document.CreateElement("ItemGroup"))
+    $projectNode=[Xml.Linq.XElement]'<Project />'
+    $itemGroupNode = [Xml.Linq.XElement]'<ItemGroup />'
+    $projectNode.Add($itemGroupNode)
     foreach($projectPath in $ProjectGroups[$i]) {
       $rootedPath = $projectPath.Replace($SdkForNetPath, '$(RepoRoot)', 'OrdinalIgnoreCase')
-      $newElem = $document.CreateElement("ProjectReference")
-      $newElemAttr = $document.CreateAttribute("Include")
-      $newElemAttr.InnerText = $rootedPath
-      $newElem.Attributes.Append($newElemAttr) | Out-Null
-      $itemGroupNode.AppendChild($newElem) | Out-Null
+      $newElemAttr = [Xml.Linq.XAttribute]::new('Include', $rootedPath)
+      $newElem = [Xml.Linq.XElement]::new('ProjectReference', $newElemAttr)
+      $itemGroupNode.Add($newElem)
     }
 
-    $document.Save($filePath) | Out-Null
+    $projectNode.Save($filePath) | Out-Null
+
+    Write-Host "$propsFilePath`:`n$($projectNode.ToString())`n"
     Write-Output $propsFilePath
   }
 }
@@ -92,5 +92,4 @@ $propsFiles = New-PropsFiles -ProjectGroups $projectGroups -PropsFilePrefix 'pro
 $matrix = New-Matrix -PropsFiles $propsFiles
 Write-JsonVariable "matrix" $matrix
 
-Write-Output "Matrix:"
-Write-Output (ConvertTo-Json $matrix -Depth 100)
+Write-Host "Matrix:`n$(ConvertTo-Json $matrix -Depth 100)"
