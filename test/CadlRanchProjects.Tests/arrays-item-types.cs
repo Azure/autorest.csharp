@@ -100,7 +100,6 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("Need cadl-ranch fix")]
         public Task Arrays_ItemTypes_DatetimeValue_put() => Test(async (host) =>
         {
             var response = await new ItemTypesClient(host, null).GetDatetimeValueClient().PutAsync(RequestContent.Create(new[] { DateTimeOffset.Parse("2022-08-26T18:38:00Z") }));

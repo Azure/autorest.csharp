@@ -19,16 +19,16 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal record ConvenienceMethod(MethodSignature Signature, IReadOnlyList<ProtocolToConvenienceParameterConverter> ProtocolToConvenienceParameterConverters, CSharpType? ResponseType, Diagnostic? Diagnostic)
     {
-        public (IReadOnlyList<FormattableString> ParameterValues, Action<CodeWriter> Converter) GetParameterValues(CodeWriterDeclaration contextVariable)
+        public (IReadOnlyList<FormattableString> ParameterValues, Action<CodeWriter> Converter) GetParameterValues(CodeWriterDeclaration contextVariable, CodeWriterDeclaration? bodyOverrideVariable = null)
         {
-            var (parameterValues, spreadVariable) = PrepareConvenienceMethodParameters(contextVariable);
+            var (parameterValues, spreadVariable) = PrepareConvenienceMethodParameters(contextVariable, bodyOverrideVariable);
 
             var converter = EnsureConvenienceBodyConverter(spreadVariable, contextVariable);
 
             return (parameterValues, converter);
         }
 
-        private (IReadOnlyList<FormattableString> ParameterValues, CodeWriterDeclaration? SpreadVariable) PrepareConvenienceMethodParameters(CodeWriterDeclaration contextVariable)
+        private (IReadOnlyList<FormattableString> ParameterValues, CodeWriterDeclaration? SpreadVariable) PrepareConvenienceMethodParameters(CodeWriterDeclaration contextVariable, CodeWriterDeclaration? bodyOverrideVariable = null)
         {
             CodeWriterDeclaration? spreadVariable = null;
             var parameters = new List<FormattableString>();
@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models
                 else if (convenienceParameter != null)
                 {
                     if (converter.ConvenienceSpread == null)
-                        parameters.Add(convenienceParameter.GetConversionFormattable(protocolParameter.Type));
+                        parameters.Add(convenienceParameter.GetConversionFormattable(protocolParameter.Type, bodyOverrideVariable));
                     else
                     {
                         // we put a declaration here to avoid possible local variable naming collisions

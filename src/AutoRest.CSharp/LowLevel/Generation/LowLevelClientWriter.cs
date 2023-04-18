@@ -266,10 +266,21 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             using (WriteConvenienceMethodDeclaration(_writer, convenienceMethod, fields, async))
             {
+                var requestBody = clientMethod.RequestMethod.Request.Body;
+                CodeWriterDeclaration? bodyOverrideVariable = null;
+                if (requestBody is RequestContentRequestBody body)
+                {
+                    var bodyInputParamter = clientMethod.RequestMethod.Operation.Parameters.First(p => p.Location == Common.Input.RequestLocation.Body);
+                    var bodyConvenienceParameter = convenienceMethod.ProtocolToConvenienceParameterConverters.First(c => c.Protocol.Name == KnownParameters.RequestContent.Name).Convenience;
+                    if (TypeFactory.IsDictionary(bodyConvenienceParameter.Type))
+                    {
+                        var serialization = SerializationBuilder.Build(clientMethod.RequestMethod.Operation.RequestBodyMediaType, bodyInputParamter.Type, bodyConvenienceParameter.Type);
+                        bodyOverrideVariable = RequestWriterHelpers.WriteSerializeContent(_writer, null, serialization, $"{bodyConvenienceParameter.Name}");
+                    }
+                }
+
                 var contextVariable = new CodeWriterDeclaration(KnownParameters.RequestContext.Name);
-
-                var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable);
-
+                var (parameterValues, converter) = convenienceMethod.GetParameterValues(contextVariable, bodyOverrideVariable);
                 // write whatever we need to convert the parameters
                 converter(_writer);
 
@@ -284,7 +295,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     _writer.Line($"return {responseVariable:I};");
                 }
-                else if (TypeFactory.IsReadOnlyList(responseType))
+                else if (TypeFactory.IsReadOnlyList(responseType) || TypeFactory.IsReadOnlyDictionary(responseType))
                 {
                     ResponseWriterHelpers.WriteRawResponseToGeneric(_writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, $"{responseVariable.ActualName}");
                 }

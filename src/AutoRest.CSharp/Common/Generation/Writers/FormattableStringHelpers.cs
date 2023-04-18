@@ -83,8 +83,13 @@ namespace AutoRest.CSharp.Generation.Writers
             return conversion == null ? constantFormattable : $"{constantFormattable}{conversion}";
         }
 
-        public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType)
+        public static FormattableString GetConversionFormattable(this Parameter parameter, CSharpType toType, CodeWriterDeclaration? bodyOverrideVariable = null)
         {
+            if (bodyOverrideVariable != null)
+            {
+                return $"{bodyOverrideVariable}";
+            }
+
             if (TypeFactory.IsList(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
             {
                 return $"{typeof(RequestContent)}.{nameof(RequestContent.Create)}({parameter.Name})";

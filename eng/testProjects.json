@@ -5,6 +5,7 @@
         "authentication/api-key",
         "authentication/oauth2",
         "authentication/union",
+        "dictionary",
         "models/property-optional",
         "models/property-types",
         "models/usage",

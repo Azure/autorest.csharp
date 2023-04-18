@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetStringValueAsync(RequestContext)">
+<example>
+This sample shows how to call GetStringValueAsync and parse the result.
+<code><![CDATA[
+var client = new DictionaryClient().GetStringValueClient(<1.0.0>);
+
+Response response = await client.GetStringValueAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<test>").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetStringValue(RequestContext)">
+<example>
+This sample shows how to call GetStringValue and parse the result.
+<code><![CDATA[
+var client = new DictionaryClient().GetStringValueClient(<1.0.0>);
+
+Response response = client.GetStringValue();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<test>").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new DictionaryClient().GetStringValueClient(<1.0.0>);
+
+var data = new {
+    key = "<String>",
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new DictionaryClient().GetStringValueClient(<1.0.0>);
+
+var data = new {
+    key = "<String>",
+};
+
+Response response = client.Put(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>
