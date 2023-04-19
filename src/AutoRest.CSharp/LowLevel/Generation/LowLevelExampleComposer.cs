@@ -285,7 +285,11 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                builder.AppendLine("JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
+                var result = Configuration.DynamicJsonInSamples
+                    ? "dynamic result = data.ToDynamicFromJson();"
+                    : "JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;";
+                builder.AppendLine(result);
+
                 foreach (var apiInvocationChain in apiInvocationChainList)
                 {
                     builder.AppendLine(apiInvocationChain);
@@ -331,8 +335,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                     else
                     {
+                        var result = Configuration.DynamicJsonInSamples
+                            ? "dynamic result = data.ToDynamicFromJson();"
+                            : "JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;";
+
                         builder.Append(' ', 4);
-                        builder.AppendLine("JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;");
+                        builder.AppendLine(result);
+
                         foreach (var apiInvocationChain in apiInvocationChainList)
                         {
                             builder.Append(' ', 4);
@@ -380,7 +389,10 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                builder.AppendLine("JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;");
+                var result = Configuration.DynamicJsonInSamples
+                    ? "dynamic result = response.Content.ToDynamicFromJson();"
+                    : "JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;";
+                builder.AppendLine(result);
                 foreach (var apiInvocationChain in apiInvocationChainList)
                 {
                     builder.AppendLine(apiInvocationChain);
@@ -472,27 +484,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void AddApiInvocationChainResult(List<string> apiInvocationChainList, Stack<string> currentApiInvocationChain)
         {
-            if (Configuration.DynamicJsonInSamples)
-            {
-                if (currentApiInvocationChain.Count == 0)
-                {
-                    apiInvocationChainList.Add("Console.WriteLine($\"result: {result}\");");
-                }
-                else
-                {
-                    var finalChain = currentApiInvocationChain.ToList();
-                    finalChain.Reverse();
-                    var invocationChain = string.Concat(finalChain);
+            var finalChain = currentApiInvocationChain.ToList();
+            finalChain.Reverse();
+            var invocationChain = string.Concat(finalChain);
 
-                    apiInvocationChainList.Add($"Console.WriteLine($\"{invocationChain.Replace("\"", "\\\"")}: {{result{invocationChain}}}\");");
-                }
-            }
-            else
-            {
-                var finalChain = currentApiInvocationChain.ToList();
-                finalChain.Reverse();
-                apiInvocationChainList.Add($"Console.WriteLine(result{string.Concat(finalChain)}.ToString());");
-            }
+            var consoleWriteLine = Configuration.DynamicJsonInSamples
+                ? $"Console.WriteLine($\"result{invocationChain.Replace("\"", "\\\"")}: {{result{invocationChain}}}\");"
+                : $"Console.WriteLine(result{invocationChain}.ToString());";
+
+            apiInvocationChainList.Add(consoleWriteLine);
         }
 
         private string MockParameterValues(IReadOnlyList<Parameter> parameters, bool allParameters)
