@@ -1,0 +1,9 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+  - "@azure-tools/cadl-apiview"
+options:
+  "@azure-tools/typespec-csharp":
+     namespace: "Azure.AI.OpenAI"
+     clear-output-folder: true
+     model-namespace: false
+     dynamic-json-in-samples: true

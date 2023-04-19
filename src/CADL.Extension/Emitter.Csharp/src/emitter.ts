@@ -93,6 +93,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
                 "model-namespace": options["model-namespace"],
+                "dynamic-json-in-samples": options["dynamic-json-in-samples"],
                 ModelsToTreatEmptyStringAsNull:
                     options["models-to-treat-empty-string-as-null"],
                 IntrinsicTypesToTreatEmptyStringAsNull: options[

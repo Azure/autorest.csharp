@@ -1,0 +1,11 @@
+{
+  "OutputFolder": ".",
+  "Namespace": "Azure.AI.OpenAI",
+  "LibraryName": null,
+  "SharedSourceFolders": [
+    "../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
+    "../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
+  ],
+  "model-namespace": false,
+  "dynamic-json-in-samples": true
+}

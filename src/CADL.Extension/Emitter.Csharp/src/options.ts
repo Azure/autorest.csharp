@@ -19,6 +19,7 @@ export type NetEmitterOptions = {
     "clear-output-folder"?: boolean;
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
+    "dynamic-json-in-samples"?: boolean;
     debug?: boolean;
     "models-to-treat-empty-string-as-null"?: string[];
     "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
@@ -49,6 +50,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "clear-output-folder": { type: "boolean", nullable: true },
         "save-inputs": { type: "boolean", nullable: true },
         "model-namespace": { type: "boolean", nullable: true },
+        "dynamic-json-in-samples": { type: "boolean", nullable: true },
         "generate-protocol-methods": { type: "boolean", nullable: true },
         "generate-convenience-methods": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },

@@ -1,0 +1,1226 @@
+{
+ "$id": "1",
+ "Name": "Azure.OpenAI",
+ "Description": "Azure OpenAI APIs for completions and search",
+ "ApiVersions": [
+  "2022-12-01"
+ ],
+ "Enums": [],
+ "Models": [
+  {
+   "$id": "2",
+   "Name": "EmbeddingsOptions",
+   "Namespace": "Azure.OpenAI.Embeddings",
+   "Description": "Schema to create a prompt completion from a deployment",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "3",
+     "Name": "user",
+     "SerializedName": "user",
+     "Description": "The ID of the end-user, for use in tracking and rate-limiting.",
+     "Type": {
+      "$id": "4",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "5",
+     "Name": "input_type",
+     "SerializedName": "input_type",
+     "Description": "input type of embedding search to use",
+     "Type": {
+      "$id": "6",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "7",
+     "Name": "model",
+     "SerializedName": "model",
+     "Description": "ID of the model to use",
+     "Type": {
+      "$id": "8",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "9",
+     "Name": "input",
+     "SerializedName": "input",
+     "Description": "Input text to get embeddings for, encoded as a string.\nTo get embeddings for multiple inputs in a single request, pass an array of strings.\nEach input must not exceed 2048 tokens in length.\n\nUnless you are embedding code, we suggest replacing newlines (\\n) in your input with a single space,\nas we have observed inferior results when newlines are present.",
+     "Type": {
+      "$id": "10",
+      "Name": "Union",
+      "UnionItemTypes": [
+       {
+        "$id": "11",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       {
+        "$id": "12",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "13",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       }
+      ],
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "14",
+   "Name": "Embeddings",
+   "Namespace": "Azure.OpenAI.Embeddings",
+   "Description": "Expected response schema to embeddings request",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "15",
+     "Name": "object",
+     "SerializedName": "object",
+     "Description": "Type of the data field",
+     "Type": {
+      "$id": "16",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$id": "17",
+       "Name": "String",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "Value": "list",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "18",
+     "Name": "data",
+     "SerializedName": "data",
+     "Description": "Embedding values for the prompts submitted in the request",
+     "Type": {
+      "$id": "19",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "20",
+       "Name": "EmbeddingItem",
+       "Namespace": "Azure.OpenAI.Embeddings",
+       "Description": "Expected response schema to embeddings object list item request",
+       "IsNullable": false,
+       "Usage": "Output",
+       "Properties": [
+        {
+         "$id": "21",
+         "Name": "object",
+         "SerializedName": "object",
+         "Description": "Name of the field in which the embedding is contained",
+         "Type": {
+          "$id": "22",
+          "Name": "Literal",
+          "LiteralValueType": {
+           "$id": "23",
+           "Name": "String",
+           "Kind": "String",
+           "IsNullable": false
+          },
+          "Value": "embedding",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        },
+        {
+         "$id": "24",
+         "Name": "embedding",
+         "SerializedName": "embedding",
+         "Description": "List of embeddings value for the input prompt. These represents a measurement of releated of text strings",
+         "Type": {
+          "$id": "25",
+          "Name": "Array",
+          "ElementType": {
+           "$id": "26",
+           "Name": "float32",
+           "Kind": "Float32",
+           "IsNullable": false
+          },
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        },
+        {
+         "$id": "27",
+         "Name": "index",
+         "SerializedName": "index",
+         "Description": "Index of the prompt to which the EmbeddingItem corresponds",
+         "Type": {
+          "$id": "28",
+          "Name": "int32",
+          "Kind": "Int32",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        }
+       ]
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "29",
+     "Name": "model",
+     "SerializedName": "model",
+     "Description": "ID of the model to use",
+     "Type": {
+      "$id": "30",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "31",
+     "Name": "usage",
+     "SerializedName": "usage",
+     "Description": "Usage counts for tokens input using the embeddings API",
+     "Type": {
+      "$id": "32",
+      "Name": "EmbeddingsUsage",
+      "Namespace": "Azure.OpenAI.Embeddings",
+      "Description": "Measurment of the amount of tokens used in this request and response",
+      "IsNullable": false,
+      "Usage": "Output",
+      "Properties": [
+       {
+        "$id": "33",
+        "Name": "prompt_tokens",
+        "SerializedName": "prompt_tokens",
+        "Description": "Number of tokens sent in the original request",
+        "Type": {
+         "$id": "34",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       },
+       {
+        "$id": "35",
+        "Name": "total_tokens",
+        "SerializedName": "total_tokens",
+        "Description": "Total number of tokens transacted in this request/response",
+        "Type": {
+         "$id": "36",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       }
+      ]
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$ref": "20"
+  },
+  {
+   "$ref": "32"
+  },
+  {
+   "$id": "37",
+   "Name": "CompletionsOptions",
+   "Namespace": "Azure.OpenAI.Completions",
+   "Description": "Post body schema to create a prompt completion from a deployment",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "38",
+     "Name": "prompt",
+     "SerializedName": "prompt",
+     "Description": "An optional prompt to complete from, encoded as a string, a list of strings, or\na list of token lists. Defaults to <|endoftext|>. The prompt to complete from.\nIf you would like to provide multiple prompts, use the POST variant of this\nmethod. Note that <|endoftext|> is the document separator that the model sees\nduring training, so if a prompt is not specified the model will generate as if\nfrom the beginning of a new document. Maximum allowed size of string list is\n2048.",
+     "Type": {
+      "$id": "39",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "40",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "41",
+     "Name": "max_tokens",
+     "SerializedName": "max_tokens",
+     "Description": "The maximum number of tokens to generate. Has minimum of 0.",
+     "Type": {
+      "$id": "42",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "43",
+     "Name": "temperature",
+     "SerializedName": "temperature",
+     "Description": "What sampling temperature to use. Higher values means the model will take more\nrisks. Try 0.9 for more creative applications, and 0 (argmax sampling) for ones\nwith a well-defined answer.\nWe generally recommend using this or `top_p` but\nnot both.\nMinimum of 0 and maximum of 2 allowed.\n",
+     "Type": {
+      "$id": "44",
+      "Name": "float32",
+      "Kind": "Float32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "45",
+     "Name": "top_p",
+     "SerializedName": "top_p",
+     "Description": "An alternative to sampling with temperature, called nucleus sampling, where the\nmodel considers the results of the tokens with top_p probability mass. So 0.1\nmeans only the tokens comprising the top 10% probability mass are\nconsidered.\nWe generally recommend using this or `temperature` but not\nboth.\nMinimum of 0 and maximum of 1 allowed.\n",
+     "Type": {
+      "$id": "46",
+      "Name": "float32",
+      "Kind": "Float32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "47",
+     "Name": "logit_bias",
+     "SerializedName": "logit_bias",
+     "Description": "Defaults to null. Modify the likelihood of specified tokens appearing in the\ncompletion. Accepts a json object that maps tokens (specified by their token ID\nin the GPT tokenizer) to an associated bias value from -100 to 100. You can use\nthis tokenizer tool (which works for both GPT-2 and GPT-3) to convert text to\ntoken IDs. Mathematically, the bias is added to the logits generated by the\nmodel prior to sampling. The exact effect will vary per model, but values\nbetween -1 and 1 should decrease or increase likelihood of selection; values\nlike -100 or 100 should result in a ban or exclusive selection of the relevant\ntoken. As an example, you can pass {\"50256\" &#58; -100} to prevent the\n<|endoftext|> token from being generated.",
+     "Type": {
+      "$id": "48",
+      "Name": "Dictionary",
+      "KeyType": {
+       "$id": "49",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "ValueType": {
+       "$id": "50",
+       "Name": "int32",
+       "Kind": "Int32",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "51",
+     "Name": "user",
+     "SerializedName": "user",
+     "Description": "The ID of the end-user, for use in tracking and rate-limiting.",
+     "Type": {
+      "$id": "52",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "53",
+     "Name": "n",
+     "SerializedName": "n",
+     "Description": "How many snippets to generate for each prompt. Minimum of 1 and maximum of 128\nallowed.",
+     "Type": {
+      "$id": "54",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "55",
+     "Name": "logprobs",
+     "SerializedName": "logprobs",
+     "Description": "Include the log probabilities on the `logprobs` most likely tokens, as well the\nchosen tokens. So for example, if `logprobs` is 10, the API will return a list\nof the 10 most likely tokens. If `logprobs` is 0, only the chosen tokens will\nhave logprobs returned. Minimum of 0 and maximum of 100 allowed.",
+     "Type": {
+      "$id": "56",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "57",
+     "Name": "model",
+     "SerializedName": "model",
+     "Description": "The name of the model to use",
+     "Type": {
+      "$id": "58",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "59",
+     "Name": "echo",
+     "SerializedName": "echo",
+     "Description": "Echo back the prompt in addition to the completion",
+     "Type": {
+      "$id": "60",
+      "Name": "boolean",
+      "Kind": "Boolean",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "61",
+     "Name": "stop",
+     "SerializedName": "stop",
+     "Description": "A sequence which indicates the end of the current document.",
+     "Type": {
+      "$id": "62",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "63",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "64",
+     "Name": "completion_config",
+     "SerializedName": "completion_config",
+     "Description": "Completion configuration",
+     "Type": {
+      "$id": "65",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "66",
+     "Name": "cache_level",
+     "SerializedName": "cache_level",
+     "Description": "can be used to disable any server-side caching, 0=no cache, 1=prompt prefix\nenabled, 2=full cache",
+     "Type": {
+      "$id": "67",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "68",
+     "Name": "presence_penalty",
+     "SerializedName": "presence_penalty",
+     "Description": "How much to penalize new tokens based on their existing frequency in the text\nso far. Decreases the model's likelihood to repeat the same line verbatim. Has\nminimum of -2 and maximum of 2.",
+     "Type": {
+      "$id": "69",
+      "Name": "float32",
+      "Kind": "Float32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "70",
+     "Name": "frequency_penalty",
+     "SerializedName": "frequency_penalty",
+     "Description": "How much to penalize new tokens based on whether they appear in the text so\nfar. Increases the model's likelihood to talk about new topics.",
+     "Type": {
+      "$id": "71",
+      "Name": "float32",
+      "Kind": "Float32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "72",
+     "Name": "best_of",
+     "SerializedName": "best_of",
+     "Description": "How many generations to create server side, and display only the best. Will not\nstream intermediate progress if best_of > 1. Has maximum value of 128.",
+     "Type": {
+      "$id": "73",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$id": "74",
+   "Name": "Completions",
+   "Namespace": "Azure.OpenAI.Completions",
+   "Description": "Expected response schema to completion request",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "75",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "Id for completion response",
+     "Type": {
+      "$id": "76",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "77",
+     "Name": "object",
+     "SerializedName": "object",
+     "Description": "Object for completion response",
+     "Type": {
+      "$id": "78",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$id": "79",
+       "Name": "String",
+       "Kind": "String",
+       "IsNullable": false
+      },
+      "Value": "text_completion",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "80",
+     "Name": "created",
+     "SerializedName": "created",
+     "Description": "Created time for completion response",
+     "Type": {
+      "$id": "81",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "82",
+     "Name": "model",
+     "SerializedName": "model",
+     "Description": "Model used for completion response",
+     "Type": {
+      "$id": "83",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "84",
+     "Name": "choices",
+     "SerializedName": "choices",
+     "Description": "Array of choices returned containing text completions to prompts sent",
+     "Type": {
+      "$id": "85",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "86",
+       "Name": "Choice",
+       "Namespace": "Azure.OpenAI.Completions",
+       "Description": "Choice model within completion response",
+       "IsNullable": false,
+       "Usage": "Output",
+       "Properties": [
+        {
+         "$id": "87",
+         "Name": "text",
+         "SerializedName": "text",
+         "Description": "Generated text for given completion prompt",
+         "Type": {
+          "$id": "88",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsRequired": false,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        },
+        {
+         "$id": "89",
+         "Name": "index",
+         "SerializedName": "index",
+         "Description": "Index",
+         "Type": {
+          "$id": "90",
+          "Name": "int32",
+          "Kind": "Int32",
+          "IsNullable": false
+         },
+         "IsRequired": false,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        },
+        {
+         "$id": "91",
+         "Name": "logprobs",
+         "SerializedName": "logprobs",
+         "Description": "Log Prob Model",
+         "Type": {
+          "$id": "92",
+          "Name": "CompletionsLogProbs",
+          "Namespace": "Azure.OpenAI.Completions",
+          "Description": "LogProbs model within completion choice",
+          "IsNullable": false,
+          "Usage": "Output",
+          "Properties": [
+           {
+            "$id": "93",
+            "Name": "tokens",
+            "SerializedName": "tokens",
+            "Description": "Tokens",
+            "Type": {
+             "$id": "94",
+             "Name": "Array",
+             "ElementType": {
+              "$id": "95",
+              "Name": "string",
+              "Kind": "String",
+              "IsNullable": false
+             },
+             "IsNullable": false
+            },
+            "IsRequired": false,
+            "IsReadOnly": false,
+            "IsDiscriminator": false
+           },
+           {
+            "$id": "96",
+            "Name": "token_logprobs",
+            "SerializedName": "token_logprobs",
+            "Description": "LogProbs of Tokens",
+            "Type": {
+             "$id": "97",
+             "Name": "Array",
+             "ElementType": {
+              "$id": "98",
+              "Name": "float32",
+              "Kind": "Float32",
+              "IsNullable": false
+             },
+             "IsNullable": false
+            },
+            "IsRequired": false,
+            "IsReadOnly": false,
+            "IsDiscriminator": false
+           },
+           {
+            "$id": "99",
+            "Name": "top_logprobs",
+            "SerializedName": "top_logprobs",
+            "Description": "Top LogProbs",
+            "Type": {
+             "$id": "100",
+             "Name": "Array",
+             "ElementType": {
+              "$id": "101",
+              "Name": "Dictionary",
+              "KeyType": {
+               "$id": "102",
+               "Name": "string",
+               "Kind": "String",
+               "IsNullable": false
+              },
+              "ValueType": {
+               "$id": "103",
+               "Name": "float32",
+               "Kind": "Float32",
+               "IsNullable": false
+              },
+              "IsNullable": false
+             },
+             "IsNullable": false
+            },
+            "IsRequired": false,
+            "IsReadOnly": false,
+            "IsDiscriminator": false
+           },
+           {
+            "$id": "104",
+            "Name": "text_offset",
+            "SerializedName": "text_offset",
+            "Description": "Text offset",
+            "Type": {
+             "$id": "105",
+             "Name": "Array",
+             "ElementType": {
+              "$id": "106",
+              "Name": "int32",
+              "Kind": "Int32",
+              "IsNullable": false
+             },
+             "IsNullable": false
+            },
+            "IsRequired": false,
+            "IsReadOnly": false,
+            "IsDiscriminator": false
+           }
+          ]
+         },
+         "IsRequired": false,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        },
+        {
+         "$id": "107",
+         "Name": "finish_reason",
+         "SerializedName": "finish_reason",
+         "Description": "Reason for finishing",
+         "Type": {
+          "$id": "108",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsRequired": false,
+         "IsReadOnly": false,
+         "IsDiscriminator": false
+        }
+       ]
+      },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    },
+    {
+     "$id": "109",
+     "Name": "usage",
+     "SerializedName": "usage",
+     "Description": "Usage counts for tokens input using the completions API",
+     "Type": {
+      "$id": "110",
+      "Name": "CompletionsUsage",
+      "Namespace": "Azure.OpenAI.Completions",
+      "Description": "Representation of the token counts processed for a completions request.\nCounts consider all tokens across prompts, choices, choice alternates, best_of generations, and other consumers.",
+      "IsNullable": false,
+      "Usage": "Output",
+      "Properties": [
+       {
+        "$id": "111",
+        "Name": "completion_tokens",
+        "SerializedName": "completion_tokens",
+        "Description": "Number of tokens received in the completion",
+        "Type": {
+         "$id": "112",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       },
+       {
+        "$id": "113",
+        "Name": "prompt_tokens",
+        "SerializedName": "prompt_tokens",
+        "Description": "Number of tokens sent in the original request",
+        "Type": {
+         "$id": "114",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       },
+       {
+        "$id": "115",
+        "Name": "total_tokens",
+        "SerializedName": "total_tokens",
+        "Description": "Total number of tokens transacted in this request/response",
+        "Type": {
+         "$id": "116",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsRequired": true,
+        "IsReadOnly": false,
+        "IsDiscriminator": false
+       }
+      ]
+     },
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsDiscriminator": false
+    }
+   ]
+  },
+  {
+   "$ref": "86"
+  },
+  {
+   "$ref": "92"
+  },
+  {
+   "$ref": "110"
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "117",
+   "Name": "OpenAIClient",
+   "Description": "Azure OpenAI APIs for completions and search",
+   "Operations": [
+    {
+     "$id": "118",
+     "Name": "getEmbeddings",
+     "ResourceName": "OpenAI",
+     "Description": "Return the embeddings for a given prompt.",
+     "Parameters": [
+      {
+       "$id": "119",
+       "Name": "endpoint",
+       "NameInRequest": "endpoint",
+       "Description": "Supported Cognitive Services endpoints (protocol and hostname, for example:\nhttps://westus.api.cognitive.microsoft.com).",
+       "Type": {
+        "$id": "120",
+        "Name": "Uri",
+        "Kind": "Uri",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "121",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "122",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "123",
+        "Type": {
+         "$id": "124",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "2022-12-01"
+       }
+      },
+      {
+       "$id": "125",
+       "Name": "deploymentId",
+       "NameInRequest": "deploymentId",
+       "Description": "deployment id of the deployed model",
+       "Type": {
+        "$id": "126",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "127",
+       "Name": "EmbeddingsOptions",
+       "NameInRequest": "EmbeddingsOptions",
+       "Description": "Schema to create a prompt completion from a deployment",
+       "Type": {
+        "$ref": "2"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "128",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "129",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "130",
+        "Type": {
+         "$ref": "129"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "131",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "132",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "133",
+        "Type": {
+         "$ref": "132"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "134",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "14"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{endpoint}/openai",
+     "Path": "/deployments/{deploymentId}/embeddings",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "135",
+     "Name": "getCompletions",
+     "ResourceName": "OpenAI",
+     "Description": "Return the completions for a given prompt.",
+     "Parameters": [
+      {
+       "$ref": "119"
+      },
+      {
+       "$ref": "121"
+      },
+      {
+       "$id": "136",
+       "Name": "deploymentId",
+       "NameInRequest": "deploymentId",
+       "Description": "deployment id of the deployed model",
+       "Type": {
+        "$id": "137",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Path",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "138",
+       "Name": "CompletionsOptions",
+       "NameInRequest": "CompletionsOptions",
+       "Description": "Post body schema to create a prompt completion from a deployment",
+       "Type": {
+        "$ref": "37"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "139",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "140",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "141",
+        "Type": {
+         "$ref": "140"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "142",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "143",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "144",
+        "Type": {
+         "$ref": "143"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "145",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "74"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [
+        {
+         "$id": "146",
+         "Name": "apim-request-id",
+         "NameInResponse": "apim-request-id",
+         "Description": "Request ID for troubleshooting purposes",
+         "Type": {
+          "$id": "147",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         }
+        }
+       ],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{endpoint}/openai",
+     "Path": "/deployments/{deploymentId}/completions",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "148"
+   },
+   "Creatable": true
+  }
+ ],
+ "Auth": {
+  "$id": "149",
+  "ApiKey": {
+   "$id": "150",
+   "Name": "api-key"
+  },
+  "OAuth2": {
+   "$id": "151",
+   "Scopes": [
+    "https://cognitiveservices.azure.com/.default"
+   ]
+  }
+ }
+}
