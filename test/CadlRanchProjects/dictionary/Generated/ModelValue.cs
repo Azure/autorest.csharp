@@ -148,16 +148,8 @@ namespace Dictionary
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartObject();
-            foreach (var item in body)
-            {
-                content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteObjectValue(item.Value);
-            }
-            content.JsonWriter.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutAsync(content, context).ConfigureAwait(false);
+            Response response = await PutAsync(RequestContentHelper.FromDictionary(body), context).ConfigureAwait(false);
             return response;
         }
 
@@ -168,16 +160,8 @@ namespace Dictionary
         {
             Argument.AssertNotNull(body, nameof(body));
 
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteStartObject();
-            foreach (var item in body)
-            {
-                content.JsonWriter.WritePropertyName(item.Key);
-                content.JsonWriter.WriteObjectValue(item.Value);
-            }
-            content.JsonWriter.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Put(content, context);
+            Response response = Put(RequestContentHelper.FromDictionary(body), context);
             return response;
         }
 
