@@ -4,11 +4,9 @@
 #nullable enable
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure.Core.Pipeline;
-using Azure.Core.Shared;
 
 namespace Azure.Core
 {
@@ -17,52 +15,51 @@ namespace Azure.Core
     /// </summary>
     internal sealed class OperationPoller
     {
-        private readonly DelayStrategy _delayStrategy;
+        private readonly DelayStrategyInternal _delayStrategy;
 
-        public OperationPoller(DelayStrategy? strategy = null)
+        public OperationPoller(DelayStrategyInternal? fallbackStrategy = null)
         {
-            _delayStrategy = strategy ?? new FixedDelayWithNoJitterStrategy();
+            _delayStrategy = new RetryAfterDelayStrategy(fallbackStrategy);
         }
 
-        public ValueTask<Response> WaitForCompletionResponseAsync(Operation operation, TimeSpan? delayHint, CancellationToken cancellationToken)
-            => WaitForCompletionAsync(true, operation, delayHint, cancellationToken);
+        public ValueTask<Response> WaitForCompletionResponseAsync(Operation operation, TimeSpan? suggestedInterval, CancellationToken cancellationToken)
+            => WaitForCompletionAsync(true, operation, suggestedInterval, cancellationToken);
 
-        public Response WaitForCompletionResponse(Operation operation, TimeSpan? delayHint, CancellationToken cancellationToken)
-            => WaitForCompletionAsync(false, operation, delayHint, cancellationToken).EnsureCompleted();
+        public Response WaitForCompletionResponse(Operation operation, TimeSpan? suggestedInterval, CancellationToken cancellationToken)
+            => WaitForCompletionAsync(false, operation, suggestedInterval, cancellationToken).EnsureCompleted();
 
-        public ValueTask<Response> WaitForCompletionResponseAsync(OperationInternalBase operation, TimeSpan? delayHint, CancellationToken cancellationToken)
-            => WaitForCompletionAsync(true, operation, delayHint, cancellationToken);
+        public ValueTask<Response> WaitForCompletionResponseAsync(OperationInternalBase operation, TimeSpan? suggestedInterval, CancellationToken cancellationToken)
+            => WaitForCompletionAsync(true, operation, suggestedInterval, cancellationToken);
 
-        public Response WaitForCompletionResponse(OperationInternalBase operation, TimeSpan? delayHint, CancellationToken cancellationToken)
-            => WaitForCompletionAsync(false, operation, delayHint, cancellationToken).EnsureCompleted();
+        public Response WaitForCompletionResponse(OperationInternalBase operation, TimeSpan? suggestedInterval, CancellationToken cancellationToken)
+            => WaitForCompletionAsync(false, operation, suggestedInterval, cancellationToken).EnsureCompleted();
 
-        public async ValueTask<Response<T>> WaitForCompletionAsync<T>(Operation<T> operation, TimeSpan? delayHint, CancellationToken cancellationToken) where T : notnull
+        public async ValueTask<Response<T>> WaitForCompletionAsync<T>(Operation<T> operation, TimeSpan? suggestedInterval, CancellationToken cancellationToken) where T : notnull
         {
-            Response response = await WaitForCompletionAsync(true, operation, delayHint, cancellationToken).ConfigureAwait(false);
+            Response response = await WaitForCompletionAsync(true, operation, suggestedInterval, cancellationToken).ConfigureAwait(false);
             return Response.FromValue(operation.Value, response);
         }
 
-        public Response<T> WaitForCompletion<T>(Operation<T> operation, TimeSpan? delayHint, CancellationToken cancellationToken) where T : notnull
+        public Response<T> WaitForCompletion<T>(Operation<T> operation, TimeSpan? suggestedInterval, CancellationToken cancellationToken) where T : notnull
         {
-            Response response = WaitForCompletionAsync(false, operation, delayHint, cancellationToken).EnsureCompleted();
+            Response response = WaitForCompletionAsync(false, operation, suggestedInterval, cancellationToken).EnsureCompleted();
             return Response.FromValue(operation.Value, response);
         }
 
-        public async ValueTask<Response<T>> WaitForCompletionAsync<T>(OperationInternal<T> operation, TimeSpan? delayHint, CancellationToken cancellationToken) where T : notnull
+        public async ValueTask<Response<T>> WaitForCompletionAsync<T>(OperationInternal<T> operation, TimeSpan? suggestedInterval, CancellationToken cancellationToken) where T : notnull
         {
-            Response response = await WaitForCompletionAsync(true, operation, delayHint, cancellationToken).ConfigureAwait(false);
+            Response response = await WaitForCompletionAsync(true, operation, suggestedInterval, cancellationToken).ConfigureAwait(false);
             return Response.FromValue(operation.Value, response);
         }
 
-        public Response<T> WaitForCompletion<T>(OperationInternal<T> operation, TimeSpan? delayHint, CancellationToken cancellationToken) where T : notnull
+        public Response<T> WaitForCompletion<T>(OperationInternal<T> operation, TimeSpan? suggestedInterval, CancellationToken cancellationToken) where T : notnull
         {
-            Response response = WaitForCompletionAsync(false, operation, delayHint, cancellationToken).EnsureCompleted();
+            Response response = WaitForCompletionAsync(false, operation, suggestedInterval, cancellationToken).EnsureCompleted();
             return Response.FromValue(operation.Value, response);
         }
 
-        private async ValueTask<Response> WaitForCompletionAsync(bool async, Operation operation, TimeSpan? delayHint, CancellationToken cancellationToken)
+        private async ValueTask<Response> WaitForCompletionAsync(bool async, Operation operation, TimeSpan? suggestedInterval, CancellationToken cancellationToken)
         {
-            int retryNumber = 0;
             while (true)
             {
                 Response response = async ? await operation.UpdateStatusAsync(cancellationToken).ConfigureAwait(false) : operation.UpdateStatus(cancellationToken);
@@ -71,15 +68,12 @@ namespace Azure.Core
                     return operation.GetRawResponse();
                 }
 
-                var strategy = delayHint.HasValue ? new FixedDelayWithNoJitterStrategy(delayHint.Value) : _delayStrategy;
-
-                await Delay(async, strategy.GetNextDelay(response, ++retryNumber), cancellationToken).ConfigureAwait(false);
+                await Delay(async, _delayStrategy.GetNextDelay(response, suggestedInterval), cancellationToken).ConfigureAwait(false);
             }
         }
 
-        private async ValueTask<Response> WaitForCompletionAsync(bool async, OperationInternalBase operation, TimeSpan? delayHint, CancellationToken cancellationToken)
+        private async ValueTask<Response> WaitForCompletionAsync(bool async, OperationInternalBase operation, TimeSpan? suggestedInterval, CancellationToken cancellationToken)
         {
-            int retryNumber = 0;
             while (true)
             {
                 Response response = async ? await operation.UpdateStatusAsync(cancellationToken).ConfigureAwait(false) : operation.UpdateStatus(cancellationToken);
@@ -88,9 +82,7 @@ namespace Azure.Core
                     return operation.RawResponse;
                 }
 
-                var strategy = delayHint.HasValue ? new FixedDelayWithNoJitterStrategy(delayHint.Value) : _delayStrategy;
-
-                await Delay(async, strategy.GetNextDelay(response, ++retryNumber), cancellationToken).ConfigureAwait(false);
+                await Delay(async, _delayStrategy.GetNextDelay(response, suggestedInterval), cancellationToken).ConfigureAwait(false);
             }
         }
 
