@@ -90,6 +90,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{typeof(RequestContent)}.{nameof(RequestContent.Create)}({parameter.Name})";
             }
 
+            if (parameter.Type.IsEnum && toType.EqualsIgnoreNullable(typeof(RequestContent)) && parameter.Type.Implementation is EnumType enumType)
+            {
+                if (enumType.IsExtensible)
+                {
+                    return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({parameter.Name}.{enumType.SerializationMethodName}())";
+                }
+                else
+                {
+                    return $"{typeof(BinaryData)}.{nameof(BinaryData.FromObjectAsJson)}({(enumType.IsIntValueType ? $"({enumType.ValueType}){parameter.Name}" : $"{parameter.Name}.{enumType.SerializationMethodName}()")})";
+                }
+            }
+
             var conversionMethod = GetConversionMethod(parameter.Type, toType);
             if (conversionMethod == null)
             {

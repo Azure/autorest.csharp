@@ -11,6 +11,7 @@
         "projection",
         "special-words",
         "enums/extensible",
+        "enums/fixed",
         "hello",
         "collectionFormat"
     ],

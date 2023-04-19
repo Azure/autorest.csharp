@@ -17,6 +17,7 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -287,6 +288,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 else if (TypeFactory.IsReadOnlyList(responseType))
                 {
                     ResponseWriterHelpers.WriteRawResponseToGeneric(_writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, $"{responseVariable.ActualName}");
+                }
+                else if (responseType.IsEnum && responseType.Implementation is EnumType enumType)
+                {
+                    string declaredTypeName = enumType.Declaration.Name;
+                    if (enumType.IsExtensible)
+                    {
+                        _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}(new {declaredTypeName}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>()), {responseVariable:I});");
+                    }
+                    else
+                    {
+                        _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content.ToObjectFromJson<{enumType.ValueType}>().To{declaredTypeName}(), {responseVariable:I});");
+                    }
                 }
                 else if (responseType.IsFrameworkType)
                 {
