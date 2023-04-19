@@ -136,7 +136,7 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
 
                 // if this is an extension method, we add it to the reference map of the type it is extending to pretend that this class is a part of that type
                 // handle the first method above
-                if (methodSymbol.Parameters[0].Type is INamedTypeSymbol typeSymbol)
+                if (methodSymbol.Parameters.FirstOrDefault()?.Type is INamedTypeSymbol typeSymbol)
                     referenceMap.AddInList(typeSymbol, extensionClassSymbol);
 
                 // we also add the return type into the reference map of the extension class to cover both cases
