@@ -164,7 +164,7 @@ namespace MgmtLRO
                 var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FakeResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -202,7 +202,7 @@ namespace MgmtLRO
                 var response = _fakeRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, fakeName, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FakeResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace MgmtLRO
         public virtual AsyncPageable<FakeResource> GetAllAsync(string optionalParam = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, optionalParam);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = FakeData.DeserializeFakeData(e); return new FakeResource(Client, data, data.Id); }, _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -252,7 +252,7 @@ namespace MgmtLRO
         public virtual Pageable<FakeResource> GetAll(string optionalParam = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, optionalParam);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = FakeData.DeserializeFakeData(e); return new FakeResource(Client, data, data.Id); }, _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

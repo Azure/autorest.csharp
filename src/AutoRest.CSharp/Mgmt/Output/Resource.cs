@@ -112,10 +112,10 @@ namespace AutoRest.CSharp.Mgmt.Output
                 null,
                 Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
                 Modifiers: Internal,
-                Parameters: new[] { ArmClientParameter, ResourceDataParameter },
+                Parameters: new[] { ArmClientParameter, ResourceDataParameter, ResourceIdParameter },
                 Initializer: new(
                     IsBase: false,
-                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", ResourceDataIdExpression($"{ResourceDataParameter.Name:I}") }));
+                    Arguments: new FormattableString[] { $"{ArmClientParameter.Name:I}", $"{ResourceIdParameter.Name:I}" }));
         }
 
         public override CSharpType? BaseType => typeof(ArmResource);
@@ -459,21 +459,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             ReturnDescription: null,
             Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());
 
-        public FormattableString ResourceDataIdExpression(FormattableString dataExpression)
-        {
-            var typeOfId = ResourceData.TypeOfId;
-            if (typeOfId != null && typeOfId.Equals(typeof(string)))
-            {
-                return $"new {typeof(ResourceIdentifier)}({dataExpression}.Id)";
-            }
-            else
-            {
-                // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
-                return $"{dataExpression}.Id";
-            }
-        }
-
         public Parameter ResourceParameter => new(Name: "resource", Description: $"The client parameters to use in these operations.", Type: typeof(ArmResource), DefaultValue: null, ValidationType.None, null);
         public Parameter ResourceDataParameter => new(Name: "data", Description: $"The resource that is the target of operations.", Type: ResourceData.Type, DefaultValue: null, ValidationType.None, null);
+
+        private static readonly Parameter ResourceIdParameter = new(Name: "id", Description: $"The resource identifier of the resource", Type: typeof(ResourceIdentifier), DefaultValue: null, ValidationType.None, null);
     }
 }

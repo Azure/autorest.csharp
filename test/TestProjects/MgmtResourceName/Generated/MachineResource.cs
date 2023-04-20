@@ -44,7 +44,8 @@ namespace MgmtResourceName
         /// <summary> Initializes a new instance of the <see cref = "MachineResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal MachineResource(ArmClient client, MachineData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal MachineResource(ArmClient client, MachineData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -109,7 +110,7 @@ namespace MgmtResourceName
                 var response = await _machineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -140,7 +141,7 @@ namespace MgmtResourceName
                 var response = _machineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -174,7 +175,7 @@ namespace MgmtResourceName
             try
             {
                 var response = await _machineRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtResourceNameArmOperation<MachineResource>(Response.FromValue(new MachineResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtResourceNameArmOperation<MachineResource>(Response.FromValue(new MachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -211,7 +212,7 @@ namespace MgmtResourceName
             try
             {
                 var response = _machineRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, cancellationToken);
-                var operation = new MgmtResourceNameArmOperation<MachineResource>(Response.FromValue(new MachineResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtResourceNameArmOperation<MachineResource>(Response.FromValue(new MachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

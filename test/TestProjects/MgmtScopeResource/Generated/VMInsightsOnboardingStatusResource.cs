@@ -43,7 +43,8 @@ namespace MgmtScopeResource
         /// <summary> Initializes a new instance of the <see cref = "VMInsightsOnboardingStatusResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal VMInsightsOnboardingStatusResource(ArmClient client, VMInsightsOnboardingStatusData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal VMInsightsOnboardingStatusResource(ArmClient client, VMInsightsOnboardingStatusData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -109,7 +110,7 @@ namespace MgmtScopeResource
                 var response = await _vmInsightsOnboardingStatusVMInsightsRestClient.GetOnboardingStatusAsync(Id.Parent, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VMInsightsOnboardingStatusResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VMInsightsOnboardingStatusResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -141,7 +142,7 @@ namespace MgmtScopeResource
                 var response = _vmInsightsOnboardingStatusVMInsightsRestClient.GetOnboardingStatus(Id.Parent, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VMInsightsOnboardingStatusResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VMInsightsOnboardingStatusResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {

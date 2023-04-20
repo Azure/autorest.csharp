@@ -81,7 +81,7 @@ namespace MgmtSingletonResource
             try
             {
                 var response = await _parentResourceRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtSingletonResourceArmOperation<ParentResource>(Response.FromValue(new ParentResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtSingletonResourceArmOperation<ParentResource>(Response.FromValue(new ParentResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace MgmtSingletonResource
             try
             {
                 var response = _parentResourceRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, parentName, data, cancellationToken);
-                var operation = new MgmtSingletonResourceArmOperation<ParentResource>(Response.FromValue(new ParentResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtSingletonResourceArmOperation<ParentResource>(Response.FromValue(new ParentResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -161,7 +161,7 @@ namespace MgmtSingletonResource
                 var response = await _parentResourceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ParentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ParentResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -198,7 +198,7 @@ namespace MgmtSingletonResource
                 var response = _parentResourceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, parentName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ParentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ParentResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -225,7 +225,7 @@ namespace MgmtSingletonResource
         public virtual AsyncPageable<ParentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _parentResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = ParentResourceData.DeserializeParentResourceData(e); return new ParentResource(Client, data, data.Id); }, _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace MgmtSingletonResource
         public virtual Pageable<ParentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _parentResourceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ParentResource(Client, ParentResourceData.DeserializeParentResourceData(e)), _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = ParentResourceData.DeserializeParentResourceData(e); return new ParentResource(Client, data, data.Id); }, _parentResourceClientDiagnostics, Pipeline, "ParentResourceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

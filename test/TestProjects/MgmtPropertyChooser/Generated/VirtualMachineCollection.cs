@@ -165,7 +165,7 @@ namespace MgmtPropertyChooser
                 var response = await _virtualMachineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, vmName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -203,7 +203,7 @@ namespace MgmtPropertyChooser
                 var response = _virtualMachineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, vmName, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace MgmtPropertyChooser
         public virtual AsyncPageable<VirtualMachineResource> GetAllAsync(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new VirtualMachineResource(Client, VirtualMachineData.DeserializeVirtualMachineData(e)), _virtualMachineClientDiagnostics, Pipeline, "VirtualMachineCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = VirtualMachineData.DeserializeVirtualMachineData(e); return new VirtualMachineResource(Client, data, data.Id); }, _virtualMachineClientDiagnostics, Pipeline, "VirtualMachineCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace MgmtPropertyChooser
         public virtual Pageable<VirtualMachineResource> GetAll(InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new VirtualMachineResource(Client, VirtualMachineData.DeserializeVirtualMachineData(e)), _virtualMachineClientDiagnostics, Pipeline, "VirtualMachineCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = VirtualMachineData.DeserializeVirtualMachineData(e); return new VirtualMachineResource(Client, data, data.Id); }, _virtualMachineClientDiagnostics, Pipeline, "VirtualMachineCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

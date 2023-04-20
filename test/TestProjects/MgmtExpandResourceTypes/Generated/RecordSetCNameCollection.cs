@@ -83,7 +83,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _recordSetCNameRecordSetsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), relativeRecordSetName, data, ifMatch, ifNoneMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtExpandResourceTypesArmOperation<RecordSetCNameResource>(Response.FromValue(new RecordSetCNameResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtExpandResourceTypesArmOperation<RecordSetCNameResource>(Response.FromValue(new RecordSetCNameResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -125,7 +125,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _recordSetCNameRecordSetsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), relativeRecordSetName, data, ifMatch, ifNoneMatch, cancellationToken);
-                var operation = new MgmtExpandResourceTypesArmOperation<RecordSetCNameResource>(Response.FromValue(new RecordSetCNameResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtExpandResourceTypesArmOperation<RecordSetCNameResource>(Response.FromValue(new RecordSetCNameResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -164,7 +164,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetCNameRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), relativeRecordSetName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetCNameResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetCNameResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,7 +200,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetCNameRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), relativeRecordSetName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetCNameResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetCNameResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetCNameRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetCNameRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new RecordSetCNameResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCNameRecordSetsClientDiagnostics, Pipeline, "RecordSetCNameCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = RecordSetData.DeserializeRecordSetData(e); return new RecordSetCNameResource(Client, data, data.Id); }, _recordSetCNameRecordSetsClientDiagnostics, Pipeline, "RecordSetCNameCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace MgmtExpandResourceTypes
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _recordSetCNameRecordSetsRestClient.CreateListByTypeRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _recordSetCNameRecordSetsRestClient.CreateListByTypeNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name, "CNAME".ToRecordType(), top, recordsetnamesuffix);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new RecordSetCNameResource(Client, RecordSetData.DeserializeRecordSetData(e)), _recordSetCNameRecordSetsClientDiagnostics, Pipeline, "RecordSetCNameCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = RecordSetData.DeserializeRecordSetData(e); return new RecordSetCNameResource(Client, data, data.Id); }, _recordSetCNameRecordSetsClientDiagnostics, Pipeline, "RecordSetCNameCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

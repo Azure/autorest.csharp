@@ -242,13 +242,11 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (InterimOperation != null)
                 return null;
 
-            var isRestReturnTypeResourceData = restReturnType.TryCastResourceData(out _);
-
             // second check: if the method is returning a Resource and the rest operation is returning a ResourceData
-            if (isRestReturnTypeResourceData && mgmtReturnType.TryCastResource(out var returnResource))
+            if (restReturnType.TryCastResourceData(out var resourceData) && mgmtReturnType.TryCastResource(out var returnResource) && resourceData == returnResource.ResourceData)
             {
                 // in this case we should call the constructor of the resource to wrap it into a resource
-                return GetValueConverter(returnResource, clientVariable, valueVariable);
+                return GetValueConverter(returnResource, resourceData, clientVariable, valueVariable);
             }
 
             // otherwise we return null
@@ -257,7 +255,8 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         public FormattableString? GetValueConverter(FormattableString clientVariable, FormattableString valueVariable) => GetValueConverter(clientVariable, valueVariable, MgmtReturnType);
 
-        private FormattableString GetValueConverter(Resource resource, FormattableString clientVariable, FormattableString valueVariable) => $"new {resource.Type}({clientVariable}, {valueVariable})";
+        // TODO -- here is where the magic happens
+        private FormattableString GetValueConverter(Resource resource, ResourceData resourceData, FormattableString clientVariable, FormattableString valueVariable) => $"new {resource.Type}({clientVariable}, {valueVariable}, {resourceData.GetIdExpression(valueVariable)})";
 
         internal enum ResourceMatchType
         {

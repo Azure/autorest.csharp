@@ -82,7 +82,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeRestClient.CreateOrUpdateAsync(Id.SubscriptionId, fakeName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtListMethodsArmOperation<FakeResource>(Response.FromValue(new FakeResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<FakeResource>(Response.FromValue(new FakeResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -123,7 +123,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeRestClient.CreateOrUpdate(Id.SubscriptionId, fakeName, data, cancellationToken);
-                var operation = new MgmtListMethodsArmOperation<FakeResource>(Response.FromValue(new FakeResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<FakeResource>(Response.FromValue(new FakeResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -164,7 +164,7 @@ namespace MgmtListMethods
                 var response = await _fakeRestClient.GetAsync(Id.SubscriptionId, fakeName, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FakeResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -202,7 +202,7 @@ namespace MgmtListMethods
                 var response = _fakeRestClient.Get(Id.SubscriptionId, fakeName, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FakeResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FakeResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, optionalParam);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, optionalParam);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = FakeData.DeserializeFakeData(e); return new FakeResource(Client, data, data.Id); }, _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeRestClient.CreateListRequest(Id.SubscriptionId, optionalParam);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _fakeRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, optionalParam);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new FakeResource(Client, FakeData.DeserializeFakeData(e)), _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = FakeData.DeserializeFakeData(e); return new FakeResource(Client, data, data.Id); }, _fakeClientDiagnostics, Pipeline, "FakeCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

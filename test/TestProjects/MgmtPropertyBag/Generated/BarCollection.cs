@@ -86,7 +86,7 @@ namespace MgmtPropertyBag
             try
             {
                 var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, barName, data, filter, top, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -130,7 +130,7 @@ namespace MgmtPropertyBag
             try
             {
                 var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, barName, data, filter, top, ifMatch, cancellationToken);
-                var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -169,7 +169,7 @@ namespace MgmtPropertyBag
                 var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, options.Maxpagesize, options.Skip, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -205,7 +205,7 @@ namespace MgmtPropertyBag
                 var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.BarName, options.IfMatch, options.Filter, options.Top, options.Maxpagesize, options.Skip, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -235,7 +235,7 @@ namespace MgmtPropertyBag
             options ??= new BarCollectionGetAllOptions();
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, options.IfNoneMatch, options.Maxpagesize, options.Skip);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = BarData.DeserializeBarData(e); return new BarResource(Client, data, data.Id); }, _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace MgmtPropertyBag
             options ??= new BarCollectionGetAllOptions();
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _barRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.IfMatch, options.Filter, options.Top, options.IfNoneMatch, options.Maxpagesize, options.Skip);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new BarResource(Client, BarData.DeserializeBarData(e)), _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = BarData.DeserializeBarData(e); return new BarResource(Client, data, data.Id); }, _barClientDiagnostics, Pipeline, "BarCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>

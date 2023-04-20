@@ -82,7 +82,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = await _sbSubscriptionSubscriptionsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscriptionResource>(Response.FromValue(new SBSubscriptionResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscriptionResource>(Response.FromValue(new SBSubscriptionResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -123,7 +123,7 @@ namespace MgmtSubscriptionNameParameter
             try
             {
                 var response = _sbSubscriptionSubscriptionsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, data, cancellationToken);
-                var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscriptionResource>(Response.FromValue(new SBSubscriptionResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtSubscriptionNameParameterArmOperation<SBSubscriptionResource>(Response.FromValue(new SBSubscriptionResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -163,7 +163,7 @@ namespace MgmtSubscriptionNameParameter
                 var response = await _sbSubscriptionSubscriptionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SBSubscriptionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SBSubscriptionResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,7 +200,7 @@ namespace MgmtSubscriptionNameParameter
                 var response = _sbSubscriptionSubscriptionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, subscriptionName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SBSubscriptionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SBSubscriptionResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -230,7 +230,7 @@ namespace MgmtSubscriptionNameParameter
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sbSubscriptionSubscriptionsRestClient.CreateListByTopicRequest(Id.SubscriptionId, Id.ResourceGroupName, skip, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sbSubscriptionSubscriptionsRestClient.CreateListByTopicNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skip, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SBSubscriptionResource(Client, SBSubscriptionData.DeserializeSBSubscriptionData(e)), _sbSubscriptionSubscriptionsClientDiagnostics, Pipeline, "SBSubscriptionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = SBSubscriptionData.DeserializeSBSubscriptionData(e); return new SBSubscriptionResource(Client, data, data.Id); }, _sbSubscriptionSubscriptionsClientDiagnostics, Pipeline, "SBSubscriptionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace MgmtSubscriptionNameParameter
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _sbSubscriptionSubscriptionsRestClient.CreateListByTopicRequest(Id.SubscriptionId, Id.ResourceGroupName, skip, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _sbSubscriptionSubscriptionsRestClient.CreateListByTopicNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skip, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SBSubscriptionResource(Client, SBSubscriptionData.DeserializeSBSubscriptionData(e)), _sbSubscriptionSubscriptionsClientDiagnostics, Pipeline, "SBSubscriptionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = SBSubscriptionData.DeserializeSBSubscriptionData(e); return new SBSubscriptionResource(Client, data, data.Id); }, _sbSubscriptionSubscriptionsClientDiagnostics, Pipeline, "SBSubscriptionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

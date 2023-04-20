@@ -82,7 +82,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _subParentWithLocRestClient.CreateOrUpdateAsync(Id.SubscriptionId, subParentWithLocName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtListMethodsArmOperation<SubParentWithLocResource>(Response.FromValue(new SubParentWithLocResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<SubParentWithLocResource>(Response.FromValue(new SubParentWithLocResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -123,7 +123,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _subParentWithLocRestClient.CreateOrUpdate(Id.SubscriptionId, subParentWithLocName, data, cancellationToken);
-                var operation = new MgmtListMethodsArmOperation<SubParentWithLocResource>(Response.FromValue(new SubParentWithLocResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<SubParentWithLocResource>(Response.FromValue(new SubParentWithLocResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -163,7 +163,7 @@ namespace MgmtListMethods
                 var response = await _subParentWithLocRestClient.GetAsync(Id.SubscriptionId, subParentWithLocName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubParentWithLocResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParentWithLocResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,7 +200,7 @@ namespace MgmtListMethods
                 var response = _subParentWithLocRestClient.Get(Id.SubscriptionId, subParentWithLocName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubParentWithLocResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParentWithLocResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -228,7 +228,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithLocRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new SubParentWithLocResource(Client, SubParentWithLocData.DeserializeSubParentWithLocData(e)), _subParentWithLocClientDiagnostics, Pipeline, "SubParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = SubParentWithLocData.DeserializeSubParentWithLocData(e); return new SubParentWithLocResource(Client, data, data.Id); }, _subParentWithLocClientDiagnostics, Pipeline, "SubParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _subParentWithLocRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _subParentWithLocRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new SubParentWithLocResource(Client, SubParentWithLocData.DeserializeSubParentWithLocData(e)), _subParentWithLocClientDiagnostics, Pipeline, "SubParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = SubParentWithLocData.DeserializeSubParentWithLocData(e); return new SubParentWithLocResource(Client, data, data.Id); }, _subParentWithLocClientDiagnostics, Pipeline, "SubParentWithLocCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

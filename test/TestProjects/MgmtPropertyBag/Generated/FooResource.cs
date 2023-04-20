@@ -45,7 +45,8 @@ namespace MgmtPropertyBag
         /// <summary> Initializes a new instance of the <see cref = "FooResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal FooResource(ArmClient client, FooData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal FooResource(ArmClient client, FooData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -116,7 +117,7 @@ namespace MgmtPropertyBag
                 var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, top, orderby, ifMatch, skip, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FooResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -153,7 +154,7 @@ namespace MgmtPropertyBag
                 var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, filter, top, orderby, ifMatch, skip, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FooResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -187,7 +188,7 @@ namespace MgmtPropertyBag
             try
             {
                 var response = await _fooRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FooResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -221,7 +222,7 @@ namespace MgmtPropertyBag
             try
             {
                 var response = _fooRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, patch, cancellationToken);
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FooResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -254,7 +255,7 @@ namespace MgmtPropertyBag
             try
             {
                 var response = await _fooRestClient.ReconnectAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, options.IfMatch, options.CountryOrRegions, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FooResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -287,7 +288,7 @@ namespace MgmtPropertyBag
             try
             {
                 var response = _fooRestClient.Reconnect(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, options.Data, options.Filter, options.Top, options.Orderby, options.IfMatch, options.CountryOrRegions, cancellationToken);
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FooResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {

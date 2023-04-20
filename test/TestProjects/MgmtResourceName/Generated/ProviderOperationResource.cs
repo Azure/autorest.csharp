@@ -44,7 +44,8 @@ namespace MgmtResourceName
         /// <summary> Initializes a new instance of the <see cref = "ProviderOperationResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal ProviderOperationResource(ArmClient client, ProviderOperationData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal ProviderOperationResource(ArmClient client, ProviderOperationData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -111,7 +112,7 @@ namespace MgmtResourceName
                 var response = await _providerOperationRestClient.GetAsync(Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ProviderOperationResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ProviderOperationResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -144,7 +145,7 @@ namespace MgmtResourceName
                 var response = _providerOperationRestClient.Get(Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ProviderOperationResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ProviderOperationResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {

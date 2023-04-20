@@ -117,7 +117,7 @@ namespace Azure.Management.Storage
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => StorageAccountRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => StorageAccountRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new StorageAccountResource(Client, StorageAccountData.DeserializeStorageAccountData(e)), StorageAccountClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetStorageAccounts", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = StorageAccountData.DeserializeStorageAccountData(e); return new StorageAccountResource(Client, data, data.Id); }, StorageAccountClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetStorageAccounts", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Azure.Management.Storage
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => StorageAccountRestClient.CreateListRequest(Id.SubscriptionId);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => StorageAccountRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new StorageAccountResource(Client, StorageAccountData.DeserializeStorageAccountData(e)), StorageAccountClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetStorageAccounts", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = StorageAccountData.DeserializeStorageAccountData(e); return new StorageAccountResource(Client, data, data.Id); }, StorageAccountClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetStorageAccounts", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

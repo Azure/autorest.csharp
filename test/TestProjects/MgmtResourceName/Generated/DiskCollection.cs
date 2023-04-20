@@ -81,7 +81,7 @@ namespace MgmtResourceName
             try
             {
                 var response = await _diskRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, diskResourceName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtResourceNameArmOperation<Disk>(Response.FromValue(new Disk(Client, response), response.GetRawResponse()));
+                var operation = new MgmtResourceNameArmOperation<Disk>(Response.FromValue(new Disk(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace MgmtResourceName
             try
             {
                 var response = _diskRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, diskResourceName, data, cancellationToken);
-                var operation = new MgmtResourceNameArmOperation<Disk>(Response.FromValue(new Disk(Client, response), response.GetRawResponse()));
+                var operation = new MgmtResourceNameArmOperation<Disk>(Response.FromValue(new Disk(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace MgmtResourceName
                 var response = await _diskRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, diskResourceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Disk(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Disk(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace MgmtResourceName
                 var response = _diskRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, diskResourceName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Disk(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Disk(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace MgmtResourceName
         public virtual AsyncPageable<Disk> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _diskRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new Disk(Client, DiskData.DeserializeDiskData(e)), _diskClientDiagnostics, Pipeline, "DiskCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = DiskData.DeserializeDiskData(e); return new Disk(Client, data, data.Id); }, _diskClientDiagnostics, Pipeline, "DiskCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace MgmtResourceName
         public virtual Pageable<Disk> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _diskRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new Disk(Client, DiskData.DeserializeDiskData(e)), _diskClientDiagnostics, Pipeline, "DiskCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = DiskData.DeserializeDiskData(e); return new Disk(Client, data, data.Id); }, _diskClientDiagnostics, Pipeline, "DiskCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

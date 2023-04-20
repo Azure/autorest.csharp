@@ -27,14 +27,14 @@ namespace MgmtLRO
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = BarData.DeserializeBarData(document.RootElement);
-            return new BarResource(_client, data);
+            return new BarResource(_client, data, data.Id);
         }
 
         async ValueTask<BarResource> IOperationSource<BarResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = BarData.DeserializeBarData(document.RootElement);
-            return new BarResource(_client, data);
+            return new BarResource(_client, data, data.Id);
         }
     }
 }

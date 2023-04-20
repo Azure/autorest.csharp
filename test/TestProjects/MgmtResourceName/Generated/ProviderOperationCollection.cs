@@ -82,7 +82,7 @@ namespace MgmtResourceName
                 var response = await _providerOperationRestClient.GetAsync(resourceProviderNamespace, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ProviderOperationResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ProviderOperationResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -120,7 +120,7 @@ namespace MgmtResourceName
                 var response = _providerOperationRestClient.Get(resourceProviderNamespace, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ProviderOperationResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ProviderOperationResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -149,7 +149,7 @@ namespace MgmtResourceName
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _providerOperationRestClient.CreateListRequest(expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _providerOperationRestClient.CreateListNextPageRequest(nextLink, expand);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = ProviderOperationData.DeserializeProviderOperationData(e); return new ProviderOperationResource(Client, data, data.Id); }, _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace MgmtResourceName
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _providerOperationRestClient.CreateListRequest(expand);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _providerOperationRestClient.CreateListNextPageRequest(nextLink, expand);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ProviderOperationResource(Client, ProviderOperationData.DeserializeProviderOperationData(e)), _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = ProviderOperationData.DeserializeProviderOperationData(e); return new ProviderOperationResource(Client, data, data.Id); }, _providerOperationClientDiagnostics, Pipeline, "ProviderOperationCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

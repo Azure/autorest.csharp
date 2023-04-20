@@ -27,14 +27,14 @@ namespace MgmtLRO
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = FakeData.DeserializeFakeData(document.RootElement);
-            return new FakeResource(_client, data);
+            return new FakeResource(_client, data, data.Id);
         }
 
         async ValueTask<FakeResource> IOperationSource<FakeResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = FakeData.DeserializeFakeData(document.RootElement);
-            return new FakeResource(_client, data);
+            return new FakeResource(_client, data, data.Id);
         }
     }
 }

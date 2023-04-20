@@ -44,7 +44,8 @@ namespace MgmtExtensionResource
         /// <summary> Initializes a new instance of the <see cref = "SubSingletonResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubSingletonResource(ArmClient client, SubSingletonData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal SubSingletonResource(ArmClient client, SubSingletonData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -110,7 +111,7 @@ namespace MgmtExtensionResource
                 var response = await _subSingletonRestClient.GetAsync(Id.SubscriptionId, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubSingletonResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubSingletonResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -142,7 +143,7 @@ namespace MgmtExtensionResource
                 var response = _subSingletonRestClient.Get(Id.SubscriptionId, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubSingletonResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubSingletonResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {

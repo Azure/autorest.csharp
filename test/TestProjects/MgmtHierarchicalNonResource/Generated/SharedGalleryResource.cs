@@ -49,7 +49,8 @@ namespace MgmtHierarchicalNonResource
         /// <summary> Initializes a new instance of the <see cref = "SharedGalleryResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SharedGalleryResource(ArmClient client, SharedGalleryData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal SharedGalleryResource(ArmClient client, SharedGalleryData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -120,7 +121,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
-                return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGalleryResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -153,7 +154,7 @@ namespace MgmtHierarchicalNonResource
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
                 response.Value.Id = CreateResourceIdentifier(Id.SubscriptionId, Id.Parent.Name, Id.Name);
-                return Response.FromValue(new SharedGalleryResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SharedGalleryResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {

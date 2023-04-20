@@ -27,14 +27,14 @@ namespace MgmtScopeResource
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
-            return new DeploymentExtendedResource(_client, data);
+            return new DeploymentExtendedResource(_client, data, data.Id);
         }
 
         async ValueTask<DeploymentExtendedResource> IOperationSource<DeploymentExtendedResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(document.RootElement);
-            return new DeploymentExtendedResource(_client, data);
+            return new DeploymentExtendedResource(_client, data, data.Id);
         }
     }
 }

@@ -81,7 +81,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _fakeConfigurationConfigurationsRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, configurationName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtListMethodsArmOperation<FakeConfigurationResource>(Response.FromValue(new FakeConfigurationResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<FakeConfigurationResource>(Response.FromValue(new FakeConfigurationResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -122,7 +122,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _fakeConfigurationConfigurationsRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, configurationName, data, cancellationToken);
-                var operation = new MgmtListMethodsArmOperation<FakeConfigurationResource>(Response.FromValue(new FakeConfigurationResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<FakeConfigurationResource>(Response.FromValue(new FakeConfigurationResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -162,7 +162,7 @@ namespace MgmtListMethods
                 var response = await _fakeConfigurationConfigurationsRestClient.GetAsync(Id.SubscriptionId, Id.Name, configurationName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FakeConfigurationResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FakeConfigurationResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,7 +199,7 @@ namespace MgmtListMethods
                 var response = _fakeConfigurationConfigurationsRestClient.Get(Id.SubscriptionId, Id.Name, configurationName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FakeConfigurationResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FakeConfigurationResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -226,7 +226,7 @@ namespace MgmtListMethods
         public virtual AsyncPageable<FakeConfigurationResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeConfigurationConfigurationsRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = FakeConfigurationData.DeserializeFakeConfigurationData(e); return new FakeConfigurationResource(Client, data, data.Id); }, _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace MgmtListMethods
         public virtual Pageable<FakeConfigurationResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fakeConfigurationConfigurationsRestClient.CreateListRequest(Id.SubscriptionId, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FakeConfigurationResource(Client, FakeConfigurationData.DeserializeFakeConfigurationData(e)), _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = FakeConfigurationData.DeserializeFakeConfigurationData(e); return new FakeConfigurationResource(Client, data, data.Id); }, _fakeConfigurationConfigurationsClientDiagnostics, Pipeline, "FakeConfigurationCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

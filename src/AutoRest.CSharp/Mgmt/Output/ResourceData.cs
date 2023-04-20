@@ -7,6 +7,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Builders;
+using Azure.Core;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -66,5 +67,18 @@ namespace AutoRest.CSharp.Mgmt.Output
         }
 
         internal virtual bool ShouldSetResourceIdentifier => TypeOfId == null;
+
+        public FormattableString GetIdExpression(FormattableString dataExpression)
+        {
+            if (TypeOfId != null && TypeOfId.Equals(typeof(string)))
+            {
+                return $"new {typeof(ResourceIdentifier)}({dataExpression}.Id)";
+            }
+            else
+            {
+                // we have ensured other cases we would have an Id of Azure.Core.ResourceIdentifier type
+                return $"{dataExpression}.Id";
+            }
+        }
     }
 }

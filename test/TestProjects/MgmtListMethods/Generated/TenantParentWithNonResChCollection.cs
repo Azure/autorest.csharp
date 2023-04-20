@@ -81,7 +81,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _tenantParentWithNonResChRestClient.CreateOrUpdateAsync(Id.Name, tenantParentWithNonResChName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtListMethodsArmOperation<TenantParentWithNonResChResource>(Response.FromValue(new TenantParentWithNonResChResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<TenantParentWithNonResChResource>(Response.FromValue(new TenantParentWithNonResChResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -122,7 +122,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _tenantParentWithNonResChRestClient.CreateOrUpdate(Id.Name, tenantParentWithNonResChName, data, cancellationToken);
-                var operation = new MgmtListMethodsArmOperation<TenantParentWithNonResChResource>(Response.FromValue(new TenantParentWithNonResChResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<TenantParentWithNonResChResource>(Response.FromValue(new TenantParentWithNonResChResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -162,7 +162,7 @@ namespace MgmtListMethods
                 var response = await _tenantParentWithNonResChRestClient.GetAsync(Id.Name, tenantParentWithNonResChName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResChResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,7 +199,7 @@ namespace MgmtListMethods
                 var response = _tenantParentWithNonResChRestClient.Get(Id.Name, tenantParentWithNonResChName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TenantParentWithNonResChResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TenantParentWithNonResChResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,7 +227,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithNonResChRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new TenantParentWithNonResChResource(Client, TenantParentWithNonResChData.DeserializeTenantParentWithNonResChData(e)), _tenantParentWithNonResChClientDiagnostics, Pipeline, "TenantParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = TenantParentWithNonResChData.DeserializeTenantParentWithNonResChData(e); return new TenantParentWithNonResChResource(Client, data, data.Id); }, _tenantParentWithNonResChClientDiagnostics, Pipeline, "TenantParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace MgmtListMethods
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _tenantParentWithNonResChRestClient.CreateListRequest(Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _tenantParentWithNonResChRestClient.CreateListNextPageRequest(nextLink, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new TenantParentWithNonResChResource(Client, TenantParentWithNonResChData.DeserializeTenantParentWithNonResChData(e)), _tenantParentWithNonResChClientDiagnostics, Pipeline, "TenantParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = TenantParentWithNonResChData.DeserializeTenantParentWithNonResChData(e); return new TenantParentWithNonResChResource(Client, data, data.Id); }, _tenantParentWithNonResChClientDiagnostics, Pipeline, "TenantParentWithNonResChCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

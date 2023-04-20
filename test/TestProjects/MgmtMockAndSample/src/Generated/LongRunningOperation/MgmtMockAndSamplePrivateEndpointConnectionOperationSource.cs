@@ -27,14 +27,14 @@ namespace MgmtMockAndSample
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement);
-            return new MgmtMockAndSamplePrivateEndpointConnectionResource(_client, data);
+            return new MgmtMockAndSamplePrivateEndpointConnectionResource(_client, data, data.Id);
         }
 
         async ValueTask<MgmtMockAndSamplePrivateEndpointConnectionResource> IOperationSource<MgmtMockAndSamplePrivateEndpointConnectionResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(document.RootElement);
-            return new MgmtMockAndSamplePrivateEndpointConnectionResource(_client, data);
+            return new MgmtMockAndSamplePrivateEndpointConnectionResource(_client, data, data.Id);
         }
     }
 }

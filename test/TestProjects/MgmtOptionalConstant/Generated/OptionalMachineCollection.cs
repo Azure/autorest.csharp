@@ -165,7 +165,7 @@ namespace MgmtOptionalConstant
                 var response = await _optionalMachineOptionalsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new OptionalMachineResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OptionalMachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -203,7 +203,7 @@ namespace MgmtOptionalConstant
                 var response = _optionalMachineOptionalsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new OptionalMachineResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OptionalMachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -231,7 +231,7 @@ namespace MgmtOptionalConstant
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _optionalMachineOptionalsRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _optionalMachineOptionalsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = OptionalMachineData.DeserializeOptionalMachineData(e); return new OptionalMachineResource(Client, data, data.Id); }, _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace MgmtOptionalConstant
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _optionalMachineOptionalsRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _optionalMachineOptionalsRestClient.CreateListNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OptionalMachineResource(Client, OptionalMachineData.DeserializeOptionalMachineData(e)), _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = OptionalMachineData.DeserializeOptionalMachineData(e); return new OptionalMachineResource(Client, data, data.Id); }, _optionalMachineOptionalsClientDiagnostics, Pipeline, "OptionalMachineCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

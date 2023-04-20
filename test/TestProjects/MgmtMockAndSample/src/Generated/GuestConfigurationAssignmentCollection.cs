@@ -81,7 +81,7 @@ namespace MgmtMockAndSample
             try
             {
                 var response = await _guestConfigurationAssignmentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, guestConfigurationAssignmentName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMockAndSampleArmOperation<GuestConfigurationAssignmentResource>(Response.FromValue(new GuestConfigurationAssignmentResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtMockAndSampleArmOperation<GuestConfigurationAssignmentResource>(Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -122,7 +122,7 @@ namespace MgmtMockAndSample
             try
             {
                 var response = _guestConfigurationAssignmentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, guestConfigurationAssignmentName, data, cancellationToken);
-                var operation = new MgmtMockAndSampleArmOperation<GuestConfigurationAssignmentResource>(Response.FromValue(new GuestConfigurationAssignmentResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtMockAndSampleArmOperation<GuestConfigurationAssignmentResource>(Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -162,7 +162,7 @@ namespace MgmtMockAndSample
                 var response = await _guestConfigurationAssignmentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,7 +199,7 @@ namespace MgmtMockAndSample
                 var response = _guestConfigurationAssignmentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, guestConfigurationAssignmentName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -226,7 +226,7 @@ namespace MgmtMockAndSample
         public virtual AsyncPageable<GuestConfigurationAssignmentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _guestConfigurationAssignmentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new GuestConfigurationAssignmentResource(Client, GuestConfigurationAssignmentData.DeserializeGuestConfigurationAssignmentData(e)), _guestConfigurationAssignmentClientDiagnostics, Pipeline, "GuestConfigurationAssignmentCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = GuestConfigurationAssignmentData.DeserializeGuestConfigurationAssignmentData(e); return new GuestConfigurationAssignmentResource(Client, data, new ResourceIdentifier(data.Id)); }, _guestConfigurationAssignmentClientDiagnostics, Pipeline, "GuestConfigurationAssignmentCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace MgmtMockAndSample
         public virtual Pageable<GuestConfigurationAssignmentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _guestConfigurationAssignmentRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new GuestConfigurationAssignmentResource(Client, GuestConfigurationAssignmentData.DeserializeGuestConfigurationAssignmentData(e)), _guestConfigurationAssignmentClientDiagnostics, Pipeline, "GuestConfigurationAssignmentCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = GuestConfigurationAssignmentData.DeserializeGuestConfigurationAssignmentData(e); return new GuestConfigurationAssignmentResource(Client, data, new ResourceIdentifier(data.Id)); }, _guestConfigurationAssignmentClientDiagnostics, Pipeline, "GuestConfigurationAssignmentCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

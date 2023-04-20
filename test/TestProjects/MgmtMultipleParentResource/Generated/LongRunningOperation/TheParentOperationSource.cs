@@ -27,14 +27,14 @@ namespace MgmtMultipleParentResource
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = TheParentData.DeserializeTheParentData(document.RootElement);
-            return new TheParentResource(_client, data);
+            return new TheParentResource(_client, data, data.Id);
         }
 
         async ValueTask<TheParentResource> IOperationSource<TheParentResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = TheParentData.DeserializeTheParentData(document.RootElement);
-            return new TheParentResource(_client, data);
+            return new TheParentResource(_client, data, data.Id);
         }
     }
 }

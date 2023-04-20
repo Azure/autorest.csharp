@@ -81,7 +81,7 @@ namespace MgmtSingletonResource
             try
             {
                 var response = await _carRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtSingletonResourceArmOperation<CarResource>(Response.FromValue(new CarResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtSingletonResourceArmOperation<CarResource>(Response.FromValue(new CarResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace MgmtSingletonResource
             try
             {
                 var response = _carRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, carName, data, cancellationToken);
-                var operation = new MgmtSingletonResourceArmOperation<CarResource>(Response.FromValue(new CarResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtSingletonResourceArmOperation<CarResource>(Response.FromValue(new CarResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace MgmtSingletonResource
                 var response = await _carRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CarResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CarResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace MgmtSingletonResource
                 var response = _carRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, carName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new CarResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new CarResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace MgmtSingletonResource
         public virtual AsyncPageable<CarResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _carRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new CarResource(Client, CarData.DeserializeCarData(e)), _carClientDiagnostics, Pipeline, "CarCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = CarData.DeserializeCarData(e); return new CarResource(Client, data, data.Id); }, _carClientDiagnostics, Pipeline, "CarCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace MgmtSingletonResource
         public virtual Pageable<CarResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _carRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new CarResource(Client, CarData.DeserializeCarData(e)), _carClientDiagnostics, Pipeline, "CarCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = CarData.DeserializeCarData(e); return new CarResource(Client, data, data.Id); }, _carClientDiagnostics, Pipeline, "CarCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

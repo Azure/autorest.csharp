@@ -155,7 +155,7 @@ namespace MgmtScopeResource
                 var response = await _deploymentExtendedDeploymentsRestClient.GetAtScopeAsync(Id, deploymentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeploymentExtendedResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeploymentExtendedResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -192,7 +192,7 @@ namespace MgmtScopeResource
                 var response = _deploymentExtendedDeploymentsRestClient.GetAtScope(Id, deploymentName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new DeploymentExtendedResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new DeploymentExtendedResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeRequest(Id, filter, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id, filter, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(e); return new DeploymentExtendedResource(Client, data, data.Id); }, _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeRequest(Id, filter, top);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _deploymentExtendedDeploymentsRestClient.CreateListAtScopeNextPageRequest(nextLink, Id, filter, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new DeploymentExtendedResource(Client, DeploymentExtendedData.DeserializeDeploymentExtendedData(e)), _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = DeploymentExtendedData.DeserializeDeploymentExtendedData(e); return new DeploymentExtendedResource(Client, data, data.Id); }, _deploymentExtendedDeploymentsClientDiagnostics, Pipeline, "DeploymentExtendedCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

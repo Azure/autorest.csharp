@@ -27,14 +27,14 @@ namespace MgmtMockAndSample
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = VaultData.DeserializeVaultData(document.RootElement);
-            return new VaultResource(_client, data);
+            return new VaultResource(_client, data, data.Id);
         }
 
         async ValueTask<VaultResource> IOperationSource<VaultResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = VaultData.DeserializeVaultData(document.RootElement);
-            return new VaultResource(_client, data);
+            return new VaultResource(_client, data, data.Id);
         }
     }
 }

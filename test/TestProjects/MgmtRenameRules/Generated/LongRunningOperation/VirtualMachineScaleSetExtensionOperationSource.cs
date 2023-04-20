@@ -27,14 +27,14 @@ namespace MgmtRenameRules
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = VirtualMachineScaleSetExtensionData.DeserializeVirtualMachineScaleSetExtensionData(document.RootElement);
-            return new VirtualMachineScaleSetExtensionResource(_client, data);
+            return new VirtualMachineScaleSetExtensionResource(_client, data, new ResourceIdentifier(data.Id));
         }
 
         async ValueTask<VirtualMachineScaleSetExtensionResource> IOperationSource<VirtualMachineScaleSetExtensionResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = VirtualMachineScaleSetExtensionData.DeserializeVirtualMachineScaleSetExtensionData(document.RootElement);
-            return new VirtualMachineScaleSetExtensionResource(_client, data);
+            return new VirtualMachineScaleSetExtensionResource(_client, data, new ResourceIdentifier(data.Id));
         }
     }
 }

@@ -82,7 +82,7 @@ namespace MgmtExtensionCommonRestOperation
             try
             {
                 var response = await _typeOneCommonRestClient.CreateOrUpdateTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtExtensionCommonRestOperationArmOperation<TypeOneResource>(Response.FromValue(new TypeOneResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtExtensionCommonRestOperationArmOperation<TypeOneResource>(Response.FromValue(new TypeOneResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -123,7 +123,7 @@ namespace MgmtExtensionCommonRestOperation
             try
             {
                 var response = _typeOneCommonRestClient.CreateOrUpdateTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, data, cancellationToken);
-                var operation = new MgmtExtensionCommonRestOperationArmOperation<TypeOneResource>(Response.FromValue(new TypeOneResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtExtensionCommonRestOperationArmOperation<TypeOneResource>(Response.FromValue(new TypeOneResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -163,7 +163,7 @@ namespace MgmtExtensionCommonRestOperation
                 var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeOneResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,7 +200,7 @@ namespace MgmtExtensionCommonRestOperation
                 var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TypeOneResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,7 +227,7 @@ namespace MgmtExtensionCommonRestOperation
         public virtual AsyncPageable<TypeOneResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeOneCommonRestClient.CreateListTypeOnesRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = TypeOneData.DeserializeTypeOneData(e); return new TypeOneResource(Client, data, data.Id); }, _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace MgmtExtensionCommonRestOperation
         public virtual Pageable<TypeOneResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _typeOneCommonRestClient.CreateListTypeOnesRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new TypeOneResource(Client, TypeOneData.DeserializeTypeOneData(e)), _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = TypeOneData.DeserializeTypeOneData(e); return new TypeOneResource(Client, data, data.Id); }, _typeOneCommonClientDiagnostics, Pipeline, "TypeOneCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

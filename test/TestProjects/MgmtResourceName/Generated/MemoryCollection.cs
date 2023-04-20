@@ -81,7 +81,7 @@ namespace MgmtResourceName
             try
             {
                 var response = await _memoryMemoryResourcesRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtResourceNameArmOperation<Memory>(Response.FromValue(new Memory(Client, response), response.GetRawResponse()));
+                var operation = new MgmtResourceNameArmOperation<Memory>(Response.FromValue(new Memory(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace MgmtResourceName
             try
             {
                 var response = _memoryMemoryResourcesRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, data, cancellationToken);
-                var operation = new MgmtResourceNameArmOperation<Memory>(Response.FromValue(new Memory(Client, response), response.GetRawResponse()));
+                var operation = new MgmtResourceNameArmOperation<Memory>(Response.FromValue(new Memory(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace MgmtResourceName
                 var response = await _memoryMemoryResourcesRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Memory(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Memory(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace MgmtResourceName
                 var response = _memoryMemoryResourcesRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, memoryResourceName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new Memory(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new Memory(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace MgmtResourceName
         public virtual AsyncPageable<Memory> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _memoryMemoryResourcesRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new Memory(Client, MemoryData.DeserializeMemoryData(e)), _memoryMemoryResourcesClientDiagnostics, Pipeline, "MemoryCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = MemoryData.DeserializeMemoryData(e); return new Memory(Client, data, data.Id); }, _memoryMemoryResourcesClientDiagnostics, Pipeline, "MemoryCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace MgmtResourceName
         public virtual Pageable<Memory> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _memoryMemoryResourcesRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new Memory(Client, MemoryData.DeserializeMemoryData(e)), _memoryMemoryResourcesClientDiagnostics, Pipeline, "MemoryCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = MemoryData.DeserializeMemoryData(e); return new Memory(Client, data, data.Id); }, _memoryMemoryResourcesClientDiagnostics, Pipeline, "MemoryCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -163,7 +164,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Line($"{dataVariable}.Id = {_opSource.ArmClientField.Name}.Id;");
                 }
-                _writer.Line($"return new {_opSource.Resource.Type}({_opSource.ArmClientField.Name}, {dataVariable});");
+                _writer.Line($"return new {_opSource.Resource.Type}({_opSource.ArmClientField.Name}, {dataVariable}, {resourceData.GetIdExpression($"{dataVariable}")});");
             }
             else
             {

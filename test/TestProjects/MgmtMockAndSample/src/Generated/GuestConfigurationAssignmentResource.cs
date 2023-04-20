@@ -43,7 +43,8 @@ namespace MgmtMockAndSample
         /// <summary> Initializes a new instance of the <see cref = "GuestConfigurationAssignmentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal GuestConfigurationAssignmentResource(ArmClient client, GuestConfigurationAssignmentData data) : this(client, new ResourceIdentifier(data.Id))
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal GuestConfigurationAssignmentResource(ArmClient client, GuestConfigurationAssignmentData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -109,7 +110,7 @@ namespace MgmtMockAndSample
                 var response = await _guestConfigurationAssignmentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -141,7 +142,7 @@ namespace MgmtMockAndSample
                 var response = _guestConfigurationAssignmentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -244,7 +245,7 @@ namespace MgmtMockAndSample
             try
             {
                 var response = await _guestConfigurationAssignmentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMockAndSampleArmOperation<GuestConfigurationAssignmentResource>(Response.FromValue(new GuestConfigurationAssignmentResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtMockAndSampleArmOperation<GuestConfigurationAssignmentResource>(Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -282,7 +283,7 @@ namespace MgmtMockAndSample
             try
             {
                 var response = _guestConfigurationAssignmentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken);
-                var operation = new MgmtMockAndSampleArmOperation<GuestConfigurationAssignmentResource>(Response.FromValue(new GuestConfigurationAssignmentResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtMockAndSampleArmOperation<GuestConfigurationAssignmentResource>(Response.FromValue(new GuestConfigurationAssignmentResource(Client, response.Value, new ResourceIdentifier(response.Value.Id)), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

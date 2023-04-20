@@ -81,7 +81,7 @@ namespace MgmtExtensionResource
                 var response = await _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltInAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BuiltInPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinitionResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -118,7 +118,7 @@ namespace MgmtExtensionResource
                 var response = _builtInPolicyDefinitionPolicyDefinitionsRestClient.GetBuiltIn(policyDefinitionName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BuiltInPolicyDefinitionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BuiltInPolicyDefinitionResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -148,7 +148,7 @@ namespace MgmtExtensionResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInRequest(filter, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInNextPageRequest(nextLink, filter, top);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new BuiltInPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "BuiltInPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = PolicyDefinitionData.DeserializePolicyDefinitionData(e); return new BuiltInPolicyDefinitionResource(Client, data, data.Id); }, _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "BuiltInPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace MgmtExtensionResource
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInRequest(filter, top);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _builtInPolicyDefinitionPolicyDefinitionsRestClient.CreateListBuiltInNextPageRequest(nextLink, filter, top);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new BuiltInPolicyDefinitionResource(Client, PolicyDefinitionData.DeserializePolicyDefinitionData(e)), _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "BuiltInPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = PolicyDefinitionData.DeserializePolicyDefinitionData(e); return new BuiltInPolicyDefinitionResource(Client, data, data.Id); }, _builtInPolicyDefinitionPolicyDefinitionsClientDiagnostics, Pipeline, "BuiltInPolicyDefinitionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

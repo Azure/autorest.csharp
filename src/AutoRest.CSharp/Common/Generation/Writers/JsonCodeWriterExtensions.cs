@@ -22,6 +22,7 @@ using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
 using Configuration = AutoRest.CSharp.Input.Configuration;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
+using ResourceData = AutoRest.CSharp.Mgmt.Output.ResourceData;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -722,8 +723,15 @@ namespace AutoRest.CSharp.Generation.Writers
                     var optionalSerializeOptions = options == JsonSerializationOptions.UseManagedServiceIdentityV3 ? ", serializeOptions" : string.Empty;
                     return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{implementation.Type}>({element}.GetRawText(){optionalSerializeOptions})";
 
-                case Resource { ResourceData: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } resourceDataType } resource:
-                    return $"new {resource.Type}(Client, {resourceDataType.Type}.Deserialize{resourceDataType.Declaration.Name}({element}))";
+                case Resource { ResourceData: ResourceData { JsonSerialization: { }, IncludeDeserializer: true } resourceData } resource:
+                    var lines = new List<FormattableString>();
+                    lines.Add($"{{");
+                    var dataVariable = new CodeWriterDeclaration("data");
+                    lines.Add($"var {dataVariable:D} = {resourceData.Type}.Deserialize{resourceData.Declaration.Name}({element});");
+                    lines.Add($"return new {resource.Type}(Client, {dataVariable:I}, {resourceData.GetIdExpression($"{dataVariable}")});");
+                    lines.Add($"}}");
+
+                    return $"{lines}";
 
                 case MgmtObjectType mgmtObjectType when TypeReferenceTypeChooser.HasMatch(mgmtObjectType.ObjectSchema):
                     return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{implementation.Type}>({element}.GetRawText())";

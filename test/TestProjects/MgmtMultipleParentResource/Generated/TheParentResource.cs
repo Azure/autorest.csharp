@@ -46,7 +46,8 @@ namespace MgmtMultipleParentResource
         /// <summary> Initializes a new instance of the <see cref = "TheParentResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal TheParentResource(ArmClient client, TheParentData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal TheParentResource(ArmClient client, TheParentData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -168,7 +169,7 @@ namespace MgmtMultipleParentResource
                 var response = await _theParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TheParentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TheParentResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -201,7 +202,7 @@ namespace MgmtMultipleParentResource
                 var response = _theParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new TheParentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new TheParentResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -386,7 +387,7 @@ namespace MgmtMultipleParentResource
                     originalTags.Value.Data.TagValues[key] = value;
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _theParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -440,7 +441,7 @@ namespace MgmtMultipleParentResource
                     originalTags.Value.Data.TagValues[key] = value;
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _theParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -493,7 +494,7 @@ namespace MgmtMultipleParentResource
                     originalTags.Value.Data.TagValues.ReplaceWith(tags);
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _theParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -542,7 +543,7 @@ namespace MgmtMultipleParentResource
                     originalTags.Value.Data.TagValues.ReplaceWith(tags);
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _theParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -590,7 +591,7 @@ namespace MgmtMultipleParentResource
                     originalTags.Value.Data.TagValues.Remove(key);
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _theParentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -642,7 +643,7 @@ namespace MgmtMultipleParentResource
                     originalTags.Value.Data.TagValues.Remove(key);
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _theParentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, null, cancellationToken);
-                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new TheParentResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {

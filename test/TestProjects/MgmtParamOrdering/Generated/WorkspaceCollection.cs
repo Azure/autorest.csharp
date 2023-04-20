@@ -163,7 +163,7 @@ namespace MgmtParamOrdering
                 var response = await _workspaceRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new WorkspaceResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new WorkspaceResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -200,7 +200,7 @@ namespace MgmtParamOrdering
                 var response = _workspaceRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, workspaceName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new WorkspaceResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new WorkspaceResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,7 +227,7 @@ namespace MgmtParamOrdering
         public virtual AsyncPageable<WorkspaceResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _workspaceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new WorkspaceResource(Client, WorkspaceData.DeserializeWorkspaceData(e)), _workspaceClientDiagnostics, Pipeline, "WorkspaceCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = WorkspaceData.DeserializeWorkspaceData(e); return new WorkspaceResource(Client, data, data.Id); }, _workspaceClientDiagnostics, Pipeline, "WorkspaceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace MgmtParamOrdering
         public virtual Pageable<WorkspaceResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _workspaceRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new WorkspaceResource(Client, WorkspaceData.DeserializeWorkspaceData(e)), _workspaceClientDiagnostics, Pipeline, "WorkspaceCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = WorkspaceData.DeserializeWorkspaceData(e); return new WorkspaceResource(Client, data, data.Id); }, _workspaceClientDiagnostics, Pipeline, "WorkspaceCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

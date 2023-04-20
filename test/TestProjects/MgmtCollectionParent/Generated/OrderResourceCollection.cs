@@ -83,7 +83,7 @@ namespace MgmtCollectionParent
                 var response = await _orderResourceRestClient.GetOrderByNameAsync(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new OrderResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -122,7 +122,7 @@ namespace MgmtCollectionParent
                 var response = _orderResourceRestClient.GetOrderByName(Id.SubscriptionId, Id.ResourceGroupName, location, orderName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new OrderResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new OrderResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -151,7 +151,7 @@ namespace MgmtCollectionParent
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _orderResourceRestClient.CreateListOrderAtResourceGroupLevelRequest(Id.SubscriptionId, Id.ResourceGroupName, skipToken);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _orderResourceRestClient.CreateListOrderAtResourceGroupLevelNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skipToken);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), _orderResourceClientDiagnostics, Pipeline, "OrderResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = OrderResourceData.DeserializeOrderResourceData(e); return new OrderResource(Client, data, data.Id); }, _orderResourceClientDiagnostics, Pipeline, "OrderResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace MgmtCollectionParent
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _orderResourceRestClient.CreateListOrderAtResourceGroupLevelRequest(Id.SubscriptionId, Id.ResourceGroupName, skipToken);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _orderResourceRestClient.CreateListOrderAtResourceGroupLevelNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, skipToken);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new OrderResource(Client, OrderResourceData.DeserializeOrderResourceData(e)), _orderResourceClientDiagnostics, Pipeline, "OrderResourceCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = OrderResourceData.DeserializeOrderResourceData(e); return new OrderResource(Client, data, data.Id); }, _orderResourceClientDiagnostics, Pipeline, "OrderResourceCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

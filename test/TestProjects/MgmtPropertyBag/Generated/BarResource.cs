@@ -44,7 +44,8 @@ namespace MgmtPropertyBag
         /// <summary> Initializes a new instance of the <see cref = "BarResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal BarResource(ArmClient client, BarData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal BarResource(ArmClient client, BarData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -115,7 +116,7 @@ namespace MgmtPropertyBag
                 var response = await _barRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, filter, top, maxpagesize, skip, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -152,7 +153,7 @@ namespace MgmtPropertyBag
                 var response = _barRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, ifMatch, filter, top, maxpagesize, skip, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BarResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BarResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -190,7 +191,7 @@ namespace MgmtPropertyBag
             try
             {
                 var response = await _barRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, filter, top, ifMatch, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -231,7 +232,7 @@ namespace MgmtPropertyBag
             try
             {
                 var response = _barRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, data, filter, top, ifMatch, cancellationToken);
-                var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtPropertyBagArmOperation<BarResource>(Response.FromValue(new BarResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

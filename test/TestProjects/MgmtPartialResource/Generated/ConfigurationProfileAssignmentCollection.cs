@@ -81,7 +81,7 @@ namespace MgmtPartialResource
             try
             {
                 var response = await _configurationProfileAssignmentRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtPartialResourceArmOperation<ConfigurationProfileAssignmentResource>(Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtPartialResourceArmOperation<ConfigurationProfileAssignmentResource>(Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -122,7 +122,7 @@ namespace MgmtPartialResource
             try
             {
                 var response = _configurationProfileAssignmentRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, data, cancellationToken);
-                var operation = new MgmtPartialResourceArmOperation<ConfigurationProfileAssignmentResource>(Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtPartialResourceArmOperation<ConfigurationProfileAssignmentResource>(Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -162,7 +162,7 @@ namespace MgmtPartialResource
                 var response = await _configurationProfileAssignmentRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,7 +199,7 @@ namespace MgmtPartialResource
                 var response = _configurationProfileAssignmentRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, configurationProfileAssignmentName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ConfigurationProfileAssignmentResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -226,7 +226,7 @@ namespace MgmtPartialResource
         public virtual AsyncPageable<ConfigurationProfileAssignmentResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _configurationProfileAssignmentRestClient.CreateListByVirtualMachinesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new ConfigurationProfileAssignmentResource(Client, ConfigurationProfileAssignmentData.DeserializeConfigurationProfileAssignmentData(e)), _configurationProfileAssignmentClientDiagnostics, Pipeline, "ConfigurationProfileAssignmentCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = ConfigurationProfileAssignmentData.DeserializeConfigurationProfileAssignmentData(e); return new ConfigurationProfileAssignmentResource(Client, data, data.Id); }, _configurationProfileAssignmentClientDiagnostics, Pipeline, "ConfigurationProfileAssignmentCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace MgmtPartialResource
         public virtual Pageable<ConfigurationProfileAssignmentResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _configurationProfileAssignmentRestClient.CreateListByVirtualMachinesRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new ConfigurationProfileAssignmentResource(Client, ConfigurationProfileAssignmentData.DeserializeConfigurationProfileAssignmentData(e)), _configurationProfileAssignmentClientDiagnostics, Pipeline, "ConfigurationProfileAssignmentCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = ConfigurationProfileAssignmentData.DeserializeConfigurationProfileAssignmentData(e); return new ConfigurationProfileAssignmentResource(Client, data, data.Id); }, _configurationProfileAssignmentClientDiagnostics, Pipeline, "ConfigurationProfileAssignmentCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

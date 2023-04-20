@@ -43,7 +43,8 @@ namespace MgmtMockAndSample
         /// <summary> Initializes a new instance of the <see cref = "MgmtMockAndSamplePrivateEndpointConnectionResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal MgmtMockAndSamplePrivateEndpointConnectionResource(ArmClient client, MgmtMockAndSamplePrivateEndpointConnectionData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal MgmtMockAndSamplePrivateEndpointConnectionResource(ArmClient client, MgmtMockAndSamplePrivateEndpointConnectionData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -109,7 +110,7 @@ namespace MgmtMockAndSample
                 var response = await _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -141,7 +142,7 @@ namespace MgmtMockAndSample
                 var response = _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -244,7 +245,7 @@ namespace MgmtMockAndSample
             try
             {
                 var response = await _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -282,7 +283,7 @@ namespace MgmtMockAndSample
             try
             {
                 var response = _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, data, cancellationToken);
-                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;

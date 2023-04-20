@@ -27,14 +27,14 @@ namespace MgmtDiscriminator
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = DeliveryRuleData.DeserializeDeliveryRuleData(document.RootElement);
-            return new DeliveryRuleResource(_client, data);
+            return new DeliveryRuleResource(_client, data, data.Id);
         }
 
         async ValueTask<DeliveryRuleResource> IOperationSource<DeliveryRuleResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = DeliveryRuleData.DeserializeDeliveryRuleData(document.RootElement);
-            return new DeliveryRuleResource(_client, data);
+            return new DeliveryRuleResource(_client, data, data.Id);
         }
     }
 }

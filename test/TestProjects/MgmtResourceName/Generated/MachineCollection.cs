@@ -81,7 +81,7 @@ namespace MgmtResourceName
             try
             {
                 var response = await _machineRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, machineName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtResourceNameArmOperation<MachineResource>(Response.FromValue(new MachineResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtResourceNameArmOperation<MachineResource>(Response.FromValue(new MachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -121,7 +121,7 @@ namespace MgmtResourceName
             try
             {
                 var response = _machineRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, machineName, data, cancellationToken);
-                var operation = new MgmtResourceNameArmOperation<MachineResource>(Response.FromValue(new MachineResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtResourceNameArmOperation<MachineResource>(Response.FromValue(new MachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -160,7 +160,7 @@ namespace MgmtResourceName
                 var response = await _machineRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -196,7 +196,7 @@ namespace MgmtResourceName
                 var response = _machineRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, machineName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MachineResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MachineResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -222,7 +222,7 @@ namespace MgmtResourceName
         public virtual AsyncPageable<MachineResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _machineRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new MachineResource(Client, MachineData.DeserializeMachineData(e)), _machineClientDiagnostics, Pipeline, "MachineCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = MachineData.DeserializeMachineData(e); return new MachineResource(Client, data, data.Id); }, _machineClientDiagnostics, Pipeline, "MachineCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace MgmtResourceName
         public virtual Pageable<MachineResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _machineRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new MachineResource(Client, MachineData.DeserializeMachineData(e)), _machineClientDiagnostics, Pipeline, "MachineCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = MachineData.DeserializeMachineData(e); return new MachineResource(Client, data, data.Id); }, _machineClientDiagnostics, Pipeline, "MachineCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

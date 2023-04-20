@@ -44,7 +44,8 @@ namespace MgmtExpandResourceTypes
         /// <summary> Initializes a new instance of the <see cref = "RecordSetPtrResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal RecordSetPtrResource(ArmClient client, RecordSetData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal RecordSetPtrResource(ArmClient client, RecordSetData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -110,7 +111,7 @@ namespace MgmtExpandResourceTypes
                 var response = await _recordSetPtrRecordSetsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "PTR".ToRecordType(), Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtrResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -142,7 +143,7 @@ namespace MgmtExpandResourceTypes
                 var response = _recordSetPtrRecordSetsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "PTR".ToRecordType(), Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtrResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -247,7 +248,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = await _recordSetPtrRecordSetsRestClient.UpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "PTR".ToRecordType(), Id.Name, data, ifMatch, cancellationToken).ConfigureAwait(false);
-                return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtrResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -282,7 +283,7 @@ namespace MgmtExpandResourceTypes
             try
             {
                 var response = _recordSetPtrRecordSetsRestClient.Update(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, "PTR".ToRecordType(), Id.Name, data, ifMatch, cancellationToken);
-                return Response.FromValue(new RecordSetPtrResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new RecordSetPtrResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {

@@ -45,7 +45,8 @@ namespace MgmtListMethods
         /// <summary> Initializes a new instance of the <see cref = "SubParentWithLocResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal SubParentWithLocResource(ArmClient client, SubParentWithLocData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal SubParentWithLocResource(ArmClient client, SubParentWithLocData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -111,7 +112,7 @@ namespace MgmtListMethods
                 var response = await _subParentWithLocRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubParentWithLocResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParentWithLocResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -143,7 +144,7 @@ namespace MgmtListMethods
                 var response = _subParentWithLocRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new SubParentWithLocResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new SubParentWithLocResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -178,7 +179,7 @@ namespace MgmtListMethods
             try
             {
                 var response = await _subParentWithLocRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.Name, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtListMethodsArmOperation<SubParentWithLocResource>(Response.FromValue(new SubParentWithLocResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<SubParentWithLocResource>(Response.FromValue(new SubParentWithLocResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -216,7 +217,7 @@ namespace MgmtListMethods
             try
             {
                 var response = _subParentWithLocRestClient.CreateOrUpdate(Id.SubscriptionId, Id.Name, data, cancellationToken);
-                var operation = new MgmtListMethodsArmOperation<SubParentWithLocResource>(Response.FromValue(new SubParentWithLocResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtListMethodsArmOperation<SubParentWithLocResource>(Response.FromValue(new SubParentWithLocResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -260,7 +261,7 @@ namespace MgmtListMethods
                     originalTags.Value.Data.TagValues[key] = value;
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _subParentWithLocRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -309,7 +310,7 @@ namespace MgmtListMethods
                     originalTags.Value.Data.TagValues[key] = value;
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _subParentWithLocRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
-                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -357,7 +358,7 @@ namespace MgmtListMethods
                     originalTags.Value.Data.TagValues.ReplaceWith(tags);
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _subParentWithLocRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -405,7 +406,7 @@ namespace MgmtListMethods
                     originalTags.Value.Data.TagValues.ReplaceWith(tags);
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _subParentWithLocRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
-                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -452,7 +453,7 @@ namespace MgmtListMethods
                     originalTags.Value.Data.TagValues.Remove(key);
                     await GetTagResource().CreateOrUpdateAsync(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken).ConfigureAwait(false);
                     var originalResponse = await _subParentWithLocRestClient.GetAsync(Id.SubscriptionId, Id.Name, cancellationToken).ConfigureAwait(false);
-                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {
@@ -499,7 +500,7 @@ namespace MgmtListMethods
                     originalTags.Value.Data.TagValues.Remove(key);
                     GetTagResource().CreateOrUpdate(WaitUntil.Completed, originalTags.Value.Data, cancellationToken: cancellationToken);
                     var originalResponse = _subParentWithLocRestClient.Get(Id.SubscriptionId, Id.Name, cancellationToken);
-                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value), originalResponse.GetRawResponse());
+                    return Response.FromValue(new SubParentWithLocResource(Client, originalResponse.Value, originalResponse.Value.Id), originalResponse.GetRawResponse());
                 }
                 else
                 {

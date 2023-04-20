@@ -91,7 +91,7 @@ namespace MgmtParent
                 var response = await _virtualMachineExtensionImageRestClient.GetAsync(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -130,7 +130,7 @@ namespace MgmtParent
                 var response = _virtualMachineExtensionImageRestClient.Get(Id.SubscriptionId, _location, _publisherName, type, version, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new VirtualMachineExtensionImageResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -157,7 +157,7 @@ namespace MgmtParent
         public virtual AsyncPageable<VirtualMachineExtensionImageResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineExtensionImageRestClient.CreateListTypesRequest(Id.SubscriptionId, _location, _publisherName);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new VirtualMachineExtensionImageResource(Client, VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e)), _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e); return new VirtualMachineExtensionImageResource(Client, data, data.Id); }, _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace MgmtParent
         public virtual Pageable<VirtualMachineExtensionImageResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineExtensionImageRestClient.CreateListTypesRequest(Id.SubscriptionId, _location, _publisherName);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new VirtualMachineExtensionImageResource(Client, VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e)), _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e); return new VirtualMachineExtensionImageResource(Client, data, data.Id); }, _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace MgmtParent
             Argument.AssertNotNullOrEmpty(type, nameof(type));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineExtensionImageRestClient.CreateListVersionsRequest(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new VirtualMachineExtensionImageResource(Client, VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e)), _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e); return new VirtualMachineExtensionImageResource(Client, data, data.Id); }, _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace MgmtParent
             Argument.AssertNotNullOrEmpty(type, nameof(type));
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _virtualMachineExtensionImageRestClient.CreateListVersionsRequest(Id.SubscriptionId, _location, _publisherName, type, filter, top, orderby);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new VirtualMachineExtensionImageResource(Client, VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e)), _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = VirtualMachineExtensionImageData.DeserializeVirtualMachineExtensionImageData(e); return new VirtualMachineExtensionImageResource(Client, data, data.Id); }, _virtualMachineExtensionImageClientDiagnostics, Pipeline, "VirtualMachineExtensionImageCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>

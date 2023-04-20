@@ -81,7 +81,7 @@ namespace MgmtOperations
             try
             {
                 var response = await _availabilitySetGrandChildavailabilitySetGrandChildRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtOperationsArmOperation<AvailabilitySetGrandChildResource>(Response.FromValue(new AvailabilitySetGrandChildResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtOperationsArmOperation<AvailabilitySetGrandChildResource>(Response.FromValue(new AvailabilitySetGrandChildResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -122,7 +122,7 @@ namespace MgmtOperations
             try
             {
                 var response = _availabilitySetGrandChildavailabilitySetGrandChildRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, data, cancellationToken);
-                var operation = new MgmtOperationsArmOperation<AvailabilitySetGrandChildResource>(Response.FromValue(new AvailabilitySetGrandChildResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtOperationsArmOperation<AvailabilitySetGrandChildResource>(Response.FromValue(new AvailabilitySetGrandChildResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -162,7 +162,7 @@ namespace MgmtOperations
                 var response = await _availabilitySetGrandChildavailabilitySetGrandChildRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AvailabilitySetGrandChildResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetGrandChildResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,7 +199,7 @@ namespace MgmtOperations
                 var response = _availabilitySetGrandChildavailabilitySetGrandChildRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name, availabilitySetGrandChildName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new AvailabilitySetGrandChildResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new AvailabilitySetGrandChildResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -226,7 +226,7 @@ namespace MgmtOperations
         public virtual AsyncPageable<AvailabilitySetGrandChildResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetGrandChildavailabilitySetGrandChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new AvailabilitySetGrandChildResource(Client, AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e)), _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e); return new AvailabilitySetGrandChildResource(Client, data, data.Id); }, _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace MgmtOperations
         public virtual Pageable<AvailabilitySetGrandChildResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _availabilitySetGrandChildavailabilitySetGrandChildRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Parent.Name, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new AvailabilitySetGrandChildResource(Client, AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e)), _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = AvailabilitySetGrandChildData.DeserializeAvailabilitySetGrandChildData(e); return new AvailabilitySetGrandChildResource(Client, data, data.Id); }, _availabilitySetGrandChildavailabilitySetGrandChildClientDiagnostics, Pipeline, "AvailabilitySetGrandChildCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

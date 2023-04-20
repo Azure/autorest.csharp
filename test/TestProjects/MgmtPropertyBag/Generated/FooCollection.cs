@@ -86,7 +86,7 @@ namespace MgmtPropertyBag
             try
             {
                 var response = await _fooRestClient.CreateAsync(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, filter, top, orderby, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -130,7 +130,7 @@ namespace MgmtPropertyBag
             try
             {
                 var response = _fooRestClient.Create(Id.SubscriptionId, Id.ResourceGroupName, fooName, data, filter, top, orderby, cancellationToken);
-                var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtPropertyBagArmOperation<FooResource>(Response.FromValue(new FooResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -169,7 +169,7 @@ namespace MgmtPropertyBag
                 var response = await _fooRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, options.FooName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Skip, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FooResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -205,7 +205,7 @@ namespace MgmtPropertyBag
                 var response = _fooRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, options.FooName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Skip, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new FooResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new FooResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -235,7 +235,7 @@ namespace MgmtPropertyBag
             options ??= new FooCollectionGetAllOptions();
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fooRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Maxpagesize, options.Skip);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = FooData.DeserializeFooData(e); return new FooResource(Client, data, data.Id); }, _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace MgmtPropertyBag
             options ??= new FooCollectionGetAllOptions();
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => _fooRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, options.Filter, options.Top, options.Orderby, options.IfMatch, options.Maxpagesize, options.Skip);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = FooData.DeserializeFooData(e); return new FooResource(Client, data, data.Id); }, _fooClientDiagnostics, Pipeline, "FooCollection.GetAll", "", null, cancellationToken);
         }
 
         /// <summary>

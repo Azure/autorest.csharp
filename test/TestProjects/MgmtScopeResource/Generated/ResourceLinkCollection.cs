@@ -82,7 +82,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = await _resourceLinkRestClient.CreateOrUpdateAsync(_scope, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtScopeResourceArmOperation<ResourceLinkResource>(Response.FromValue(new ResourceLinkResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtScopeResourceArmOperation<ResourceLinkResource>(Response.FromValue(new ResourceLinkResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -120,7 +120,7 @@ namespace MgmtScopeResource
             try
             {
                 var response = _resourceLinkRestClient.CreateOrUpdate(_scope, data, cancellationToken);
-                var operation = new MgmtScopeResourceArmOperation<ResourceLinkResource>(Response.FromValue(new ResourceLinkResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtScopeResourceArmOperation<ResourceLinkResource>(Response.FromValue(new ResourceLinkResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -155,7 +155,7 @@ namespace MgmtScopeResource
                 var response = await _resourceLinkRestClient.GetAsync(_scope, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceLinkResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLinkResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -187,7 +187,7 @@ namespace MgmtScopeResource
                 var response = _resourceLinkRestClient.Get(_scope, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new ResourceLinkResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new ResourceLinkResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -216,7 +216,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceLinkRestClient.CreateListAtSourceScopeRequest(_scope, filter);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _resourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, _scope, filter);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = ResourceLinkData.DeserializeResourceLinkData(e); return new ResourceLinkResource(Client, data, data.Id); }, _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -239,7 +239,7 @@ namespace MgmtScopeResource
         {
             Azure.Core.HttpMessage FirstPageRequest(int? pageSizeHint) => _resourceLinkRestClient.CreateListAtSourceScopeRequest(_scope, filter);
             Azure.Core.HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _resourceLinkRestClient.CreateListAtSourceScopeNextPageRequest(nextLink, _scope, filter);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new ResourceLinkResource(Client, ResourceLinkData.DeserializeResourceLinkData(e)), _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = ResourceLinkData.DeserializeResourceLinkData(e); return new ResourceLinkResource(Client, data, data.Id); }, _resourceLinkClientDiagnostics, Pipeline, "ResourceLinkCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>

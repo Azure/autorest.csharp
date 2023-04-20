@@ -681,7 +681,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         .Line($"throw new {typeof(RequestFailedException)}({response}.GetRawResponse());");
                 }
                 var realReturnType = operation.MgmtReturnType;
-                if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier)
+                if (realReturnType != null && realReturnType.TryCastResource(out var resource) && resource.ResourceData.ShouldSetResourceIdentifier) // TODO -- here we need to go over
                 {
                     _writer.Line($"{response}.Value.Id = {CreateResourceIdentifierExpression(resource, operation.RequestPath, parameterMappings, $"{response}.Value")};");
                 }
@@ -783,7 +783,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Append($"(");
             if (operation.IsFakeLongRunningOperation)
             {
-                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"response");
+                var valueConverter = operation.GetValueConverter($"{ArmClientReference}", $"response.Value");
                 if (valueConverter != null)
                 {
                     _writer.Append($"{typeof(Response)}.FromValue({valueConverter}, response.GetRawResponse())");

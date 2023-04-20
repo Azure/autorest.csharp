@@ -44,7 +44,8 @@ namespace MgmtPartialResource
         /// <summary> Initializes a new instance of the <see cref = "PublicIPAddressResource"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="data"> The resource that is the target of operations. </param>
-        internal PublicIPAddressResource(ArmClient client, PublicIPAddressData data) : this(client, data.Id)
+        /// <param name="id"> The resource identifier of the resource. </param>
+        internal PublicIPAddressResource(ArmClient client, PublicIPAddressData data, ResourceIdentifier id) : this(client, id)
         {
             HasData = true;
             _data = data;
@@ -111,7 +112,7 @@ namespace MgmtPartialResource
                 var response = await _publicIPAddressRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PublicIPAddressResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PublicIPAddressResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -144,7 +145,7 @@ namespace MgmtPartialResource
                 var response = _publicIPAddressRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, expand, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new PublicIPAddressResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new PublicIPAddressResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {

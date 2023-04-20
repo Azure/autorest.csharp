@@ -27,14 +27,14 @@ namespace MgmtListMethods
         {
             using var document = JsonDocument.Parse(response.ContentStream);
             var data = TenantTestData.DeserializeTenantTestData(document.RootElement);
-            return new TenantTestResource(_client, data);
+            return new TenantTestResource(_client, data, data.Id);
         }
 
         async ValueTask<TenantTestResource> IOperationSource<TenantTestResource>.CreateResultAsync(Response response, CancellationToken cancellationToken)
         {
             using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
             var data = TenantTestData.DeserializeTenantTestData(document.RootElement);
-            return new TenantTestResource(_client, data);
+            return new TenantTestResource(_client, data, data.Id);
         }
     }
 }

@@ -80,7 +80,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = await _blobInventoryPolicyRestClient.CreateOrUpdateAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new StorageArmOperation<BlobInventoryPolicyResource>(Response.FromValue(new BlobInventoryPolicyResource(Client, response), response.GetRawResponse()));
+                var operation = new StorageArmOperation<BlobInventoryPolicyResource>(Response.FromValue(new BlobInventoryPolicyResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -119,7 +119,7 @@ namespace Azure.Management.Storage
             try
             {
                 var response = _blobInventoryPolicyRestClient.CreateOrUpdate(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, data, cancellationToken);
-                var operation = new StorageArmOperation<BlobInventoryPolicyResource>(Response.FromValue(new BlobInventoryPolicyResource(Client, response), response.GetRawResponse()));
+                var operation = new StorageArmOperation<BlobInventoryPolicyResource>(Response.FromValue(new BlobInventoryPolicyResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -155,7 +155,7 @@ namespace Azure.Management.Storage
                 var response = await _blobInventoryPolicyRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BlobInventoryPolicyResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobInventoryPolicyResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -188,7 +188,7 @@ namespace Azure.Management.Storage
                 var response = _blobInventoryPolicyRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, blobInventoryPolicyName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new BlobInventoryPolicyResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new BlobInventoryPolicyResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -215,7 +215,7 @@ namespace Azure.Management.Storage
         public virtual AsyncPageable<BlobInventoryPolicyResource> GetAllAsync(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _blobInventoryPolicyRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new BlobInventoryPolicyResource(Client, BlobInventoryPolicyData.DeserializeBlobInventoryPolicyData(e)), _blobInventoryPolicyClientDiagnostics, Pipeline, "BlobInventoryPolicyCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => { var data = BlobInventoryPolicyData.DeserializeBlobInventoryPolicyData(e); return new BlobInventoryPolicyResource(Client, data, data.Id); }, _blobInventoryPolicyClientDiagnostics, Pipeline, "BlobInventoryPolicyCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace Azure.Management.Storage
         public virtual Pageable<BlobInventoryPolicyResource> GetAll(CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _blobInventoryPolicyRestClient.CreateListRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new BlobInventoryPolicyResource(Client, BlobInventoryPolicyData.DeserializeBlobInventoryPolicyData(e)), _blobInventoryPolicyClientDiagnostics, Pipeline, "BlobInventoryPolicyCollection.GetAll", "value", null, cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, null, e => { var data = BlobInventoryPolicyData.DeserializeBlobInventoryPolicyData(e); return new BlobInventoryPolicyResource(Client, data, data.Id); }, _blobInventoryPolicyClientDiagnostics, Pipeline, "BlobInventoryPolicyCollection.GetAll", "value", null, cancellationToken);
         }
 
         /// <summary>

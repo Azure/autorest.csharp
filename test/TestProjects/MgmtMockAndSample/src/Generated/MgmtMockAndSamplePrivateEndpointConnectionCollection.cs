@@ -81,7 +81,7 @@ namespace MgmtMockAndSample
             try
             {
                 var response = await _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.PutAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, data, cancellationToken).ConfigureAwait(false);
-                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     await operation.WaitForCompletionAsync(cancellationToken).ConfigureAwait(false);
                 return operation;
@@ -122,7 +122,7 @@ namespace MgmtMockAndSample
             try
             {
                 var response = _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Put(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, data, cancellationToken);
-                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response), response.GetRawResponse()));
+                var operation = new MgmtMockAndSampleArmOperation<MgmtMockAndSamplePrivateEndpointConnectionResource>(Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value, response.Value.Id), response.GetRawResponse()));
                 if (waitUntil == WaitUntil.Completed)
                     operation.WaitForCompletion(cancellationToken);
                 return operation;
@@ -162,7 +162,7 @@ namespace MgmtMockAndSample
                 var response = await _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.GetAsync(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken).ConfigureAwait(false);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -199,7 +199,7 @@ namespace MgmtMockAndSample
                 var response = _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.Get(Id.SubscriptionId, Id.ResourceGroupName, Id.Name, privateEndpointConnectionName, cancellationToken);
                 if (response.Value == null)
                     throw new RequestFailedException(response.GetRawResponse());
-                return Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value), response.GetRawResponse());
+                return Response.FromValue(new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, response.Value, response.Value.Id), response.GetRawResponse());
             }
             catch (Exception e)
             {
@@ -227,7 +227,7 @@ namespace MgmtMockAndSample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateListByResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateListByResourceNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(e)), _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, "MgmtMockAndSamplePrivateEndpointConnectionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => { var data = MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(e); return new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, data, data.Id); }, _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, "MgmtMockAndSamplePrivateEndpointConnectionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace MgmtMockAndSample
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateListByResourceRequest(Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsRestClient.CreateListByResourceNextPageRequest(nextLink, Id.SubscriptionId, Id.ResourceGroupName, Id.Name);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(e)), _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, "MgmtMockAndSamplePrivateEndpointConnectionCollection.GetAll", "value", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => { var data = MgmtMockAndSamplePrivateEndpointConnectionData.DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(e); return new MgmtMockAndSamplePrivateEndpointConnectionResource(Client, data, data.Id); }, _mgmtMockAndSamplePrivateEndpointConnectionPrivateEndpointConnectionsClientDiagnostics, Pipeline, "MgmtMockAndSamplePrivateEndpointConnectionCollection.GetAll", "value", "nextLink", cancellationToken);
         }
 
         /// <summary>
