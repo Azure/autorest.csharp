@@ -160,7 +160,7 @@ model RoundTripPrimitiveModel extends BaseModel {
   requiredBoolean: boolean;
 
   @doc("Required date time offset, illustrating a reference type property.")
-  requiredDateTimeOffset: zonedDateTime;
+  requiredDateTimeOffset: utcDateTime;
 
   @doc("Required time span, illustrating a value type property.")
   requiredTimeSpan: duration;

@@ -23,7 +23,7 @@ using Azure.ClientGenerator.Core;
         version: "2022-05-13"
     }
 )
-@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @server(
   "{pagnationUri}",
   "Pagination Service",
