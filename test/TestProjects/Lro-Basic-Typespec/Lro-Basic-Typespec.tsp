@@ -16,7 +16,7 @@ using TypeSpec.Versioning;
         version: "2022-05-15-preview"
     }
 )
-@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @server(
     "{lroBasicUrl}",
     "Endpoint Service",
