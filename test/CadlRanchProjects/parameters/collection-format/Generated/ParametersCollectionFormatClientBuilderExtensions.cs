@@ -7,12 +7,12 @@
 
 using System;
 using Azure.Core.Extensions;
-using CollectionFormat;
+using Parameters.CollectionFormat;
 
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="CollectionFormatClient"/> to client builder. </summary>
-    public static partial class CollectionFormatClientBuilderExtensions
+    public static partial class ParametersCollectionFormatClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="CollectionFormatClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
