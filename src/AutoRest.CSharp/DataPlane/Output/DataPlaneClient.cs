@@ -26,9 +26,9 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override string DefaultName { get; }
         public string Description { get; }
-        public DataPlaneRestClient RestClient { get; }
+        public RestClient RestClient { get; }
 
-        public DataPlaneClient(InputClient inputClient, DataPlaneRestClient restClient, DataPlaneOutputLibrary library, string defaultName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        public DataPlaneClient(InputClient inputClient, RestClient restClient, DataPlaneOutputLibrary library, string defaultName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
         {
             _inputClient = inputClient;
             _library = library;
@@ -64,11 +64,6 @@ namespace AutoRest.CSharp.Output.Models
                     new Diagnostic($"{Declaration.Name}.Start{name}")
                 );
             }
-        }
-
-        public IReadOnlyCollection<Parameter> GetClientConstructorParameters(CSharpType credentialType)
-        {
-            return RestClientBuilder.GetConstructorParameters(RestClient.ClientBuilder.GetOrderedParametersByRequired(), credentialType, false);
         }
     }
 }

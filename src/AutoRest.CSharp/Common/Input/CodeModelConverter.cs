@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Input;
@@ -44,6 +45,9 @@ namespace AutoRest.CSharp.Common.Input
                 ApiVersions: GetApiVersions(codeModel),
                 Auth: GetAuth(codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
+
+        public IReadOnlyDictionary<InputOperation, Operation> GetCurrentInputOperationToOperationMap()
+            => new Dictionary<InputOperation, Operation>(_inputOperationToOperationMap);
 
         public IReadOnlyList<InputClient> CreateClients(IEnumerable<OperationGroup> operationGroups)
             => operationGroups.Select(CreateClient).ToList();

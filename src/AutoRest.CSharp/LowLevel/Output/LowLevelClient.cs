@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models
         public bool IsSubClient { get; }
         public bool IsResourceClient { get; }
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IReadOnlyList<Parameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             DefaultName = name;
@@ -56,7 +56,7 @@ namespace AutoRest.CSharp.Output.Models
 
             ClientOptions = clientOptions;
 
-            Parameters = new RestClientBuilder(clientParameters, typeFactory).GetOrderedParametersByRequired();
+            Parameters = clientParameters;
             IsResourceClient = Parameters.Any(p => p.IsResourceIdentifier);
             Fields = ClientFields.CreateForClient(Parameters, authorization);
 

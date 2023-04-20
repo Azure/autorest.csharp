@@ -20,6 +20,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         private static readonly CSharpType RequestContentNullableType = new(typeof(RequestContent), true);
         private static readonly CSharpType RequestContextNullableType = new(typeof(RequestContext), true);
 
+        public static readonly Parameter ApplicationId = new("applicationId", "The application id to use for user agent", new CSharpType(typeof(string)), null, Validation.None, null);
         public static readonly Parameter ClientDiagnostics = new("clientDiagnostics", "The handler for diagnostic messaging in the client.", new CSharpType(typeof(ClientDiagnostics)), null, Validation.AssertNotNull, null);
         public static readonly Parameter Pipeline = new("pipeline", "The HTTP pipeline for sending and receiving REST requests and responses", new CSharpType(typeof(HttpPipeline)), null, Validation.AssertNotNull, null);
         public static readonly Parameter KeyAuth = new("keyCredential", "The key credential to copy", new CSharpType(typeof(AzureKeyCredential)), null, Validation.None, null);

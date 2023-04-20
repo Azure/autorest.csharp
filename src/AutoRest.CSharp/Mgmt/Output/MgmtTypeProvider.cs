@@ -147,7 +147,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             var client = set.RestClient;
             string? resourceName = resource is not null ? resource.ResourceName : client.Resources.Contains(DefaultResource) ? DefaultResource?.ResourceName : null;
 
-            string uniqueName = GetUniqueName(resourceName, client.OperationGroup.Key);
+            string uniqueName = GetUniqueName(resourceName, client.Key);
 
             string uniqueVariable = uniqueName.ToVariableName();
             var result = new NameSet(
@@ -233,8 +233,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             if (operation.TryGetConfigOperationName(out var name))
                 return name;
 
-            var operationGroup = MgmtContext.Library.GetRestClient(operation).OperationGroup;
-            var ogKey = operationGroup.Key;
+            var ogKey = MgmtContext.Library.GetRestClient(operation).Key;
             var singularOGKey = ogKey.LastWordToSingular();
             if (ogKey == clientResourceName || singularOGKey == clientResourceName)
             {

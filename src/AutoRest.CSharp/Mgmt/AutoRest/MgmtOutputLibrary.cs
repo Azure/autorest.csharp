@@ -7,8 +7,10 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
@@ -16,6 +18,8 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
+using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
@@ -82,7 +86,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private CachedDictionary<string, HashSet<Operation>> ChildOperations { get; }
 
-        private Dictionary<string, string> _mergedOperations;
+        private readonly InputNamespace _input;
+
+        private readonly IReadOnlyDictionary<InputOperation, Operation> _inputOperationToOperation;
 
         private readonly LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels = new(schema => schema.Name);
 
@@ -96,7 +102,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         public HashSet<TypeProvider> PropertyBagModels { get; }
 
-        public MgmtOutputLibrary()
+        public MgmtOutputLibrary(CodeModel codeModel, SchemaUsageProvider schemaUsages)
         {
             ApplyGlobalConfigurations();
             CodeModelTransformer.Transform();
@@ -104,6 +110,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups();
             ResourceDataSchemaNameToOperationSets = DecorateOperationSets();
+
+            var codeModelConverter = new CodeModelConverter();
+            _input = codeModelConverter.CreateNamespace(codeModel, schemaUsages);
+            _inputOperationToOperation = codeModelConverter.GetCurrentInputOperationToOperationMap();
 
             // others are populated later
             OperationsToOperationGroups = new CachedDictionary<Operation, OperationGroup>(PopulateOperationsToOperationGroups);
@@ -122,11 +132,6 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // initialize the property bag collection
             // TODO -- considering provide a customized comparer
             PropertyBagModels = new HashSet<TypeProvider>();
-
-            // TODO -- remove this since this is never used
-            _mergedOperations = Configuration.MgmtConfiguration.MergeOperations
-                .SelectMany(kv => kv.Value.Select(v => (FullOperationName: v, MethodName: kv.Key)))
-                .ToDictionary(kv => kv.FullOperationName, kv => kv.MethodName);
         }
 
         private static void ApplyGlobalConfigurations()
@@ -345,13 +350,30 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<RestClientMethod, PagingMethod> EnsurePagingMethods()
         {
             var pagingMethods = new Dictionary<RestClientMethod, PagingMethod>();
-            var placeholder = new TypeDeclarationOptions("Placeholder", "Placeholder", "public", false, true);
             foreach (var restClient in RestClients)
             {
-                var methods = ClientBuilder.BuildPagingMethods(restClient.OperationGroup, restClient, placeholder);
-                foreach (var method in methods)
+                foreach (var (operation, createMessageMethods, _) in restClient.Methods)
                 {
-                    pagingMethods.Add(method.Method, method);
+                    if (createMessageMethods.Count != 2 || operation.Paging is not { } paging)
+                    {
+                        continue;
+                    }
+
+                    var method = createMessageMethods[0];
+                    var nextPageMethod = createMessageMethods[1];
+                    if (method.Responses.SingleOrDefault(r => r.ResponseBody != null)?.ResponseBody is not ObjectResponseBody objectResponseBody)
+                    {
+                        throw new InvalidOperationException($"Method {method.Name} has to have a return value");
+                    }
+
+                    var pagingMethod = new PagingMethod(
+                        method,
+                        nextPageMethod,
+                        method.Name,
+                        new Diagnostic($"Placeholder.{method.Name}"),
+                        new PagingResponseInfo(paging.NextLinkName, paging.ItemName, objectResponseBody.Type));
+
+                    pagingMethods.Add(method, pagingMethod);
                 }
             }
 
@@ -363,10 +385,15 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             var restClientMethods = new Dictionary<Operation, RestClientMethod>();
             foreach (var restClient in RestClients)
             {
-                foreach (var (operation, restClientMethod) in restClient.Methods)
+                foreach (var (inputOperation, createMessageMethods, _) in restClient.Methods)
                 {
+                    var restClientMethod = createMessageMethods[0];
                     if (restClientMethod.Accessibility != MethodSignatureModifiers.Public)
+                    {
                         continue;
+                    }
+
+                    var operation = _inputOperationToOperation[inputOperation];
                     if (!restClientMethods.TryAdd(operation, restClientMethod))
                     {
                         throw new Exception($"An rest method '{operation.OperationId}' has already been added");
@@ -521,7 +548,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             if (TryGetRestClients(requestPath, out var restClients))
             {
                 // return the first client that contains this operation
-                return restClients.Single(client => client.OperationGroup.Operations.Contains(operation));
+                return restClients.Single(client => client.Methods.Select(m => _inputOperationToOperation[m.Operation]).Contains(operation));
             }
 
             throw new InvalidOperationException($"Cannot find MgmtRestClient corresponding to {requestPath} with method {operation.GetHttpMethod()}");
@@ -535,15 +562,34 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         private Dictionary<string, HashSet<MgmtRestClient>> EnsureRestClients()
         {
             var rawRequestPathToRestClient = new Dictionary<string, HashSet<MgmtRestClient>>();
-            foreach (var operationGroup in MgmtContext.CodeModel.OperationGroups)
+
+            foreach (InputClient inputClient in _input.Clients)
             {
-                var restClient = new MgmtRestClient(operationGroup, new MgmtRestClientBuilder(operationGroup));
-                foreach (var requestPath in _operationGroupToRequestPaths[operationGroup])
+                var ctorParameters = (IReadOnlyList<Parameter>)MgmtRestClientBuilder.GetMgmtParametersFromOperations(inputClient.Operations)
+                    .Select(p => RestClientBuilder.BuildConstructorParameter(p, MgmtContext.Context.TypeFactory))
+                    .Select(p => p.IsApiVersionParameter ? p with { DefaultValue = Constant.Default(p.Type.WithNullable(true)), Initializer = p.DefaultValue?.GetConstantFormattable() } : p)
+                    .OrderBy(p => p.IsOptionalInSignature)
+                    .ToList();
+
+                var clientParameters = new[] { KnownParameters.Pipeline }.Union(ctorParameters).ToList();
+                var restClientParameters = new[] { KnownParameters.Pipeline, KnownParameters.ApplicationId }.Union(ctorParameters).ToList();
+                var operations = inputClient.Operations.Select(o => _inputOperationToOperation[o]).ToList();
+                var restClient = new MgmtRestClient(inputClient, clientParameters, restClientParameters, operations);
+                foreach (var operation in inputClient.Operations)
                 {
+                    // Do not trim the tenant resource path '/'.
+                    var requestPath = operation.Path.Length == 1
+                        ? operation.Path
+                        : operation.Path.TrimEnd('/');
+
                     if (rawRequestPathToRestClient.TryGetValue(requestPath, out var set))
+                    {
                         set.Add(restClient);
+                    }
                     else
+                    {
                         rawRequestPathToRestClient.Add(requestPath, new HashSet<MgmtRestClient> { restClient });
+                    }
                 }
             }
 

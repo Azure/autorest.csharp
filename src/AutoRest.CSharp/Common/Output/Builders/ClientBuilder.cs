@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         /// <param name="restClient">The corresponding RestClient to the operation group</param>
         /// <param name="declaration">The type declaration options</param>
         /// <returns>An enumerable of <see cref="ClientMethod"/></returns>
-        public static IEnumerable<ClientMethod> BuildMethods(InputClient inputClient, DataPlaneRestClient restClient, TypeDeclarationOptions declaration)
+        public static IEnumerable<ClientMethod> BuildMethods(InputClient inputClient, RestClient restClient, TypeDeclarationOptions declaration)
         {
             foreach (var operation in inputClient.Operations)
             {

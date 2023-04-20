@@ -187,19 +187,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return operation.Responses.FirstOrDefault(r => r.HttpResponse.StatusCodes.Contains(code));
         }
 
-        public static bool IsGetResourceOperation(this Input.Operation operation, string? responseBodyType, ResourceData resourceData)
-        {
-            // first we need to be a GET operation
-            var request = operation.GetHttpRequest();
-            if (request == null || request.Method != HttpMethod.Get)
-                return false;
-            // then we get the corresponding OperationSet and see if this OperationSet corresponds to a resource
-            var operationSet = MgmtContext.Library.GetOperationSet(operation.GetHttpPath());
-            if (!operationSet.IsResource())
-                return false;
-            return responseBodyType == resourceData.Type.Name;
-        }
-
         internal static IEnumerable<Resource> GetResourceFromResourceType(this Operation operation)
         {
             if (_operationToResourceCache.TryGetValue(operation, out var cacheResult))

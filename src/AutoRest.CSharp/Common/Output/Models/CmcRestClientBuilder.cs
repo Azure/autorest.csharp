@@ -36,34 +36,13 @@ namespace AutoRest.CSharp.Output.Models
             "traceparent"
         };
 
-        private static readonly Dictionary<string, RequestConditionHeaders> ConditionRequestHeader = new(StringComparer.OrdinalIgnoreCase)
-        {
-            ["If-Match"] = RequestConditionHeaders.IfMatch,
-            ["If-None-Match"] = RequestConditionHeaders.IfNoneMatch,
-            ["If-Modified-Since"] = RequestConditionHeaders.IfModifiedSince,
-            ["If-Unmodified-Since"] = RequestConditionHeaders.IfUnmodifiedSince
-        };
-
-        private readonly SerializationBuilder _serializationBuilder;
-        protected readonly BuildContext _context;
-        private readonly OutputLibrary _library;
+        private readonly TypeFactory _typeFactory;
         private readonly Dictionary<string, Parameter> _parameters;
 
-        public CmcRestClientBuilder(IEnumerable<RequestParameter> clientParameters, BuildContext context)
+        public CmcRestClientBuilder(IEnumerable<RequestParameter> clientParameters, TypeFactory typeFactory)
         {
-            _serializationBuilder = new SerializationBuilder();
-            _context = context;
-            _library = context.BaseLibrary!;
+            _typeFactory = typeFactory;
             _parameters = clientParameters.ToDictionary(p => p.Language.Default.Name, BuildConstructorParameter);
-        }
-
-        /// <summary>
-        /// Get sorted parameters, required parameters are at the beginning.
-        /// </summary>
-        /// <returns></returns>
-        public Parameter[] GetOrderedParametersByRequired()
-        {
-            return OrderParametersByRequired(_parameters.Values);
         }
 
         private static string GetRequestParameterName(RequestParameter requestParameter)
@@ -304,7 +283,7 @@ namespace AutoRest.CSharp.Output.Models
                     }
                     else
                     {
-                        var serialization = _serializationBuilder.Build(
+                        var serialization = SerializationBuilder.Build(
                             mediaType,
                             bodyRequestParameter.Schema,
                             bodyParameterValue.Type);
@@ -312,7 +291,7 @@ namespace AutoRest.CSharp.Output.Models
                         // This method has a flattened body
                         if (bodyRequestParameter.Flattened == true)
                         {
-                            var objectType = (SchemaObjectType)_library.FindTypeForSchema(bodyRequestParameter.Schema).Implementation;
+                            var objectType = (SchemaObjectType)_typeFactory.CreateType(bodyRequestParameter.Schema, false).Implementation;
 
                             var initializationMap = new List<ObjectPropertyInitializer>();
                             foreach (var (parameter, _) in allParameters.Values)
@@ -358,7 +337,7 @@ namespace AutoRest.CSharp.Output.Models
                 return parameter;
             }
 
-            var groupModel = (SchemaObjectType)_context.TypeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
+            var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
             var property = groupModel.GetPropertyForGroupedParameter(requestParameter.Language.Default.Name);
 
             return new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
@@ -377,9 +356,9 @@ namespace AutoRest.CSharp.Output.Models
             else if (response is SchemaResponse schemaResponse)
             {
                 Schema schema = schemaResponse.Schema is ConstantSchema constantSchema ? constantSchema.ValueType : schemaResponse.Schema;
-                CSharpType responseType = TypeFactory.GetOutputType(_context.TypeFactory.CreateType(schema, isNullable: schemaResponse.IsNullable));
+                CSharpType responseType = TypeFactory.GetOutputType(_typeFactory.CreateType(schema, isNullable: schemaResponse.IsNullable));
 
-                ObjectSerialization serialization = _serializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, responseType);
+                ObjectSerialization serialization = SerializationBuilder.Build(response.HttpResponse.KnownMediaType, schema, responseType);
 
                 return new ObjectResponseBody(responseType, serialization);
             }
@@ -502,112 +481,21 @@ namespace AutoRest.CSharp.Output.Models
         protected static bool IsMethodParameter(RequestParameter requestParameter)
             => requestParameter.Implementation == ImplementationLocation.Method && requestParameter.Schema is not ConstantSchema && !requestParameter.IsFlattened && requestParameter.GroupedBy == null;
 
-        public static bool IsEndpointParameter(RequestParameter requestParameter)
+        private static bool IsEndpointParameter(RequestParameter requestParameter)
             => requestParameter.Origin == "modelerfour:synthesized/host";
-
-        public static bool IsContentTypeParameter(RequestParameter requestParameter)
-            => requestParameter.Origin == "modelerfour:synthesized/content-type";
 
         public static bool IsIgnoredHeaderParameter(RequestParameter requestParameter)
             => requestParameter.In == HttpParameterIn.Header && IgnoredRequestHeader.Contains(GetRequestParameterName(requestParameter));
 
-        private static bool IsRequestConditionHeader(RequestParameter requestParameter, out RequestConditionHeaders header)
-        {
-            header = RequestConditionHeaders.None;
-            return requestParameter.In == HttpParameterIn.Header && ConditionRequestHeader.TryGetValue(GetRequestParameterName(requestParameter), out header);
-        }
-
-        private Parameter BuildParameter(in RequestParameter requestParameter, Type? typeOverride = null)
+        private Parameter BuildParameter(in RequestParameter requestParameter)
         {
             var isNullable = requestParameter.IsNullable || !requestParameter.IsRequired;
-            CSharpType type = typeOverride != null
-                ? new CSharpType(typeOverride, isNullable)
-                : _context.TypeFactory.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, isNullable);
-            return Parameter.FromRequestParameter(requestParameter, type, _context.TypeFactory);
+            CSharpType type = _typeFactory.CreateType(requestParameter.Schema, requestParameter.Extensions?.Format, isNullable);
+            return Parameter.FromRequestParameter(requestParameter, type, _typeFactory);
         }
 
         private Constant ParseConstant(ConstantSchema constant) =>
-            BuilderHelpers.ParseConstant(constant.Value.Value, _context.TypeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
-
-        public static RestClientMethod BuildNextPageMethod(Operation operation, RestClientMethod method)
-        {
-            var nextPageUrlParameter = new Parameter(
-                "nextLink",
-                "The URL to the next page of results.",
-                typeof(string),
-                DefaultValue: null,
-                Validation.AssertNotNull,
-                null);
-
-            PathSegment[] pathSegments = method.Request.PathSegments
-                .Where(ps => ps.IsRaw)
-                .Append(new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default, isRaw: true))
-                .ToArray();
-
-            var request = new Request(
-                RequestMethod.Get,
-                pathSegments,
-                Array.Empty<QueryParameter>(),
-                method.Request.Headers,
-                null);
-
-            Parameter[] parameters = method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name)
-                .Prepend(nextPageUrlParameter)
-                .ToArray();
-
-            var responses = method.Responses;
-
-            // We hardcode 200 as expected response code for paged LRO results
-            if (operation.IsLongRunning)
-            {
-                responses = new[]
-                {
-                    new Response(null, new[] { new StatusCodes(200, null) })
-                };
-            }
-
-            return new RestClientMethod(
-                $"{method.Name}NextPage",
-                method.Summary,
-                method.Description,
-                method.ReturnType,
-                request,
-                parameters,
-                responses,
-                method.HeaderModel,
-                bufferResponse: true,
-                accessibility: "internal",
-                method.Operation);
-        }
-
-        public static IEnumerable<Parameter> GetRequiredParameters(IEnumerable<Parameter> parameters)
-            => parameters.Where(parameter => !parameter.IsOptionalInSignature).ToList();
-
-        public static IEnumerable<Parameter> GetOptionalParameters(IEnumerable<Parameter> parameters, bool includeAPIVersion = false)
-            => parameters.Where(parameter => parameter.IsOptionalInSignature && (includeAPIVersion || !parameter.IsApiVersionParameter)).ToList();
-
-        public static IReadOnlyCollection<Parameter> GetConstructorParameters(IReadOnlyList<Parameter> parameters, CSharpType? credentialType, bool includeAPIVersion = false)
-        {
-            var constructorParameters = new List<Parameter>();
-
-            constructorParameters.AddRange(GetRequiredParameters(parameters));
-
-            if (credentialType != null)
-            {
-                var credentialParam = new Parameter(
-                    "credential",
-                    "A credential used to authenticate to an Azure Service.",
-                    credentialType,
-                    null,
-                    Validation.AssertNotNull,
-                    null);
-                constructorParameters.Add(credentialParam);
-            }
-
-            constructorParameters.AddRange(GetOptionalParameters(parameters, includeAPIVersion));
-
-            return constructorParameters;
-        }
+            BuilderHelpers.ParseConstant(constant.Value.Value, _typeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
 
         private record RequestMethodBuildContext(IReadOnlyList<Parameter> OrderedParameters, IReadOnlyDictionary<string, ParameterInfo> References, Parameter? BodyParameter = null, SerializationFormat ConditionalRequestSerializationFormat = SerializationFormat.Default, RequestConditionHeaders RequestConditionFlag = RequestConditionHeaders.None);
 

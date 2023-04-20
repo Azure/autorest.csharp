@@ -20,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 {
     internal class MgmtRestClientBuilder : CmcRestClientBuilder
     {
-        private class ParameterCompareer : IEqualityComparer<RequestParameter>
+        private class ParameterComparer : IEqualityComparer<RequestParameter>, IEqualityComparer<InputParameter>
         {
             public bool Equals([AllowNull] RequestParameter x, [AllowNull] RequestParameter y)
             {
@@ -37,10 +37,23 @@ namespace AutoRest.CSharp.Mgmt.Models
             {
                 return obj.Language.Default.Name.GetHashCode() ^ obj.Implementation.GetHashCode();
             }
+
+            public bool Equals(InputParameter? x, InputParameter? y)
+            {
+                if (x is null)
+                    return y is null;
+
+                if (y is null)
+                    return false;
+
+                return x.Name == y.Name;
+            }
+
+            public int GetHashCode(InputParameter obj) => obj.Name.GetHashCode();
         }
 
         public MgmtRestClientBuilder(OperationGroup operationGroup)
-            : base(GetMgmtParametersFromOperations(operationGroup.Operations), MgmtContext.Context)
+            : base(GetMgmtParametersFromOperations(operationGroup.Operations), MgmtContext.Context.TypeFactory)
         {
         }
 
@@ -48,7 +61,13 @@ namespace AutoRest.CSharp.Mgmt.Models
             operations
                 .SelectMany(op => op.Parameters.Concat(op.Requests.SelectMany(r => r.Parameters)))
                 .Where(p => p.Implementation == ImplementationLocation.Client)
-                .Distinct(new ParameterCompareer());
+                .Distinct(new ParameterComparer());
+
+        public static IEnumerable<InputParameter> GetMgmtParametersFromOperations(IEnumerable<InputOperation> operations)
+            => operations
+                .SelectMany(op => op.Parameters)
+                .Where(p => p.Kind == InputOperationParameterKind.Client)
+                .Distinct(new ParameterComparer());
 
         public override Parameter BuildConstructorParameter(RequestParameter requestParameter)
         {

@@ -13,6 +13,7 @@ using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
@@ -218,7 +219,7 @@ namespace AutoRest.CSharp.Output.Models
             var clientNamespace = Configuration.Namespace ?? rootNamespaceName;
             var clientDescription = ns.Description;
             var operations = ns.Operations;
-            var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
+            var clientParameters = RestClientBuilder.GetParametersFromOperations(operations);
             var resourceParameters = clientParameters.Where(cp => cp.IsResourceParameter).ToHashSet();
             var isSubClient = Configuration.SingleTopLevelClient && !string.IsNullOrEmpty(ns.Name) || resourceParameters.Any() || !string.IsNullOrEmpty(ns.Parent);
             var clientName = isSubClient ? clientNamePrefix : clientNamePrefix + ClientBuilder.GetClientSuffix();
@@ -377,6 +378,10 @@ namespace AutoRest.CSharp.Output.Models
                     : BuilderHelpers.EscapeXmlDescription(clientInfo.Description);
 
                 var subClients = new List<LowLevelClient>();
+                var clientParameters = clientInfo.ClientParameters
+                    .Select(p => RestClientBuilder.BuildConstructorParameter(p, typeFactory))
+                    .OrderBy(p => p.IsOptionalInSignature)
+                    .ToList();
 
                 var client = new LowLevelClient(
                     clientInfo.Name,
@@ -385,7 +390,7 @@ namespace AutoRest.CSharp.Output.Models
                     _libraryName,
                     parentClient,
                     clientInfo.Requests,
-                    clientInfo.ClientParameters,
+                    clientParameters,
                     _rootNamespace.Auth,
                     _sourceInputModel,
                     clientOptions,
@@ -417,7 +422,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (_initClientParameters.Count == 0)
                 {
-                    var endpointParameter = this.Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
+                    var endpointParameter = Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
                     return endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
                 }
                 return _initClientParameters;

@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            var createRequestMethods = CreateRequestMethods(null).ToArray();
+            var createRequestMethods = CreateRequestMethods(null, null).ToArray();
             var protocolMethods = new[]{ BuildProtocolMethod(true), BuildProtocolMethod(false) };
 
             var convenienceMethods = ShouldConvenienceMethodGenerated(out var needNameChange)
@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public HlcMethods BuildHlc(DataPlaneResponseHeaderGroupType? headerModel)
         {
-            var createRequestMethods = CreateRequestMethods(headerModel).ToArray();
+            var createRequestMethods = CreateRequestMethods(headerModel, null).ToArray();
             var convenienceMethods = _isPageable && !_isLongRunning
                 ? new[]{ BuildConvenienceMethod(false, true), BuildConvenienceMethod(false, false) }
                 : Array.Empty<Method>();
@@ -122,9 +122,20 @@ namespace AutoRest.CSharp.Output.Models
             return new HlcMethods(Operation, createRequestMethods, convenienceMethods);
         }
 
-        private IEnumerable<RestClientMethod> CreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel)
+
+        public HlcMethods BuildMpg(CSharpType? resourceDataType)
         {
-            var createMessageMethod = RestClientBuilder.BuildRequestMethod(Operation, _createMessageMethodParameters, _requestParts, headerModel, _fields, _typeFactory);
+            var createRequestMethods = CreateRequestMethods(null, resourceDataType).ToArray();
+            var convenienceMethods = _isPageable && !_isLongRunning
+                ? new[]{ BuildConvenienceMethod(false, true), BuildConvenienceMethod(false, false) }
+                : Array.Empty<Method>();
+
+            return new HlcMethods(Operation, createRequestMethods, convenienceMethods);
+        }
+
+        private IEnumerable<RestClientMethod> CreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
+        {
+            var createMessageMethod = RestClientBuilder.BuildRequestMethod(Operation, _createMessageMethodParameters, _requestParts, headerModel, resourceDataType, _fields, _typeFactory);
             yield return createMessageMethod;
             if (_createNextPageMessageMethodName is not null && Operation.Paging is { NextLinkOperation: null })
             {

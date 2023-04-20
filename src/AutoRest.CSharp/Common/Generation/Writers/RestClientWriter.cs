@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal class RestClientWriter
     {
-        public void WriteClient(CodeWriter writer, DataPlaneRestClient restClient)
+        public void WriteClient(CodeWriter writer, RestClient restClient)
         {
             using (writer.Namespace(restClient.Type.Namespace))
             {
@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteClientCtor(CodeWriter writer, DataPlaneRestClient restClient)
+        private static void WriteClientCtor(CodeWriter writer, RestClient restClient)
         {
             var constructor = restClient.Constructor;
             writer.WriteMethodDocumentation(constructor);

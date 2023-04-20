@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Common.Generation.Writers
 
         protected static string CreateMethodName(string name, bool async) => async ? $"{name}Async" : name;
 
-        protected void WriteClientFields(CodeWriter writer, DataPlaneRestClient client, bool writePipelineField)
+        protected void WriteClientFields(CodeWriter writer, RestClient client, bool writePipelineField)
         {
             writer.Line($"private readonly {typeof(ClientDiagnostics)} {ClientDiagnosticsField.GetReferenceFormattable()};");
             if (writePipelineField)

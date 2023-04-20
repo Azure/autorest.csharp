@@ -144,7 +144,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (library.Authentication.ApiKey != null)
             {
-                var ctorParams = client.GetClientConstructorParameters(typeof(AzureKeyCredential));
+                CSharpType credentialType = typeof(AzureKeyCredential);
+                var ctorParams = RestClientBuilder.GetConstructorParameters(client.RestClient.ClientParameters, credentialType);
                 writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
                 foreach (Parameter parameter in ctorParams)
                 {
@@ -195,7 +196,8 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (library.Authentication.OAuth2 != null)
             {
-                var ctorParams = client.GetClientConstructorParameters(typeof(TokenCredential));
+                CSharpType credentialType = typeof(TokenCredential);
+                var ctorParams = RestClientBuilder.GetConstructorParameters(client.RestClient.ClientParameters, credentialType);
                 writer.WriteXmlDocumentationSummary($"Initializes a new instance of {client.Type.Name}");
                 foreach (Parameter parameter in ctorParams)
                 {

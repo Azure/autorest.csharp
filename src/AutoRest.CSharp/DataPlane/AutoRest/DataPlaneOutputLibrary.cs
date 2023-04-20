@@ -14,13 +14,14 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class DataPlaneOutputLibrary : OutputLibrary
     {
-        private CachedDictionary<InputClient, DataPlaneRestClient> _restClients;
+        private CachedDictionary<InputClient, RestClient> _restClients;
         private CachedDictionary<InputClient, DataPlaneClient> _clients;
         private CachedDictionary<InputOperation, LongRunningOperation> _operations;
         private CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType> _headerModels;
@@ -51,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _defaultNamespace = Configuration.Namespace ?? _input.Name;
             _libraryName = Configuration.LibraryName ?? _input.Name;
 
-            _restClients = new CachedDictionary<InputClient, DataPlaneRestClient>(EnsureRestClients);
+            _restClients = new CachedDictionary<InputClient, RestClient>(EnsureRestClients);
             _clients = new CachedDictionary<InputClient, DataPlaneClient>(EnsureClients);
             _operations = new CachedDictionary<InputOperation, LongRunningOperation>(EnsureLongRunningOperations);
             _headerModels = new CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
@@ -155,12 +156,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return model;
         }
 
-        public IEnumerable<DataPlaneRestClient> RestClients => _restClients.Values;
-
-        public DataPlaneRestClient FindRestClient(InputClient client)
-        {
-            return _restClients[client];
-        }
+        public IEnumerable<RestClient> RestClients => _restClients.Values;
 
         private Dictionary<InputOperation, DataPlaneResponseHeaderGroupType> EnsureHeaderModels()
         {
@@ -218,22 +214,26 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var inputClient in _input.Clients)
                 {
-                    clients.Add(inputClient, new DataPlaneClient(inputClient, FindRestClient(inputClient), this, _defaultName, _defaultNamespace, _sourceInputModel));
+                    clients.Add(inputClient, new DataPlaneClient(inputClient, _restClients[inputClient], this, _defaultName, _defaultNamespace, _sourceInputModel));
                 }
             }
 
             return clients;
         }
 
-        private Dictionary<InputClient, DataPlaneRestClient> EnsureRestClients()
+        private Dictionary<InputClient, RestClient> EnsureRestClients()
         {
-            var restClients = new Dictionary<InputClient, DataPlaneRestClient>();
+            var restClients = new Dictionary<InputClient, RestClient>();
             foreach (var inputClient in _input.Clients)
             {
-                var clientParameters = RestClientBuilder.GetParametersFromOperations(inputClient.Operations).ToList();
-                var restClient = new RestClientBuilder(clientParameters, _typeFactory);
+                var clientParameters = RestClientBuilder.GetParametersFromOperations(inputClient.Operations)
+                    .Select(p => RestClientBuilder.BuildConstructorParameter(p, _typeFactory))
+                    .OrderBy(p => p.IsOptionalInSignature)
+                    .ToList();
+
+                var restClientParameters = new[]{ KnownParameters.ClientDiagnostics, KnownParameters.Pipeline }.Union(clientParameters).ToList();
                 var clientName = GetClientName(inputClient);
-                restClients.Add(inputClient, new DataPlaneRestClient(inputClient, restClient, _typeFactory, this, clientName, _defaultNamespace, _sourceInputModel));
+                restClients.Add(inputClient, new RestClient(inputClient, clientParameters, restClientParameters, _typeFactory, this, clientName, _defaultNamespace, _sourceInputModel));
             }
 
             return restClients;

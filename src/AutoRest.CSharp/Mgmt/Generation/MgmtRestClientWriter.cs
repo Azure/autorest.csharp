@@ -28,11 +28,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteClientFields(writer, restClient);
                     WriteClientCtor(writer, restClient);
 
-                    foreach (var method in restClient.Methods.Select(m => m.Method))
+                    var methods = restClient.Methods
+                        .SelectMany(m => m.CreateMessageMethods.Select((cm, i) => (cm, i)))
+                        .OrderBy(arg => arg.i);
+
+                    foreach (var (createMessageMethod, _) in methods)
                     {
-                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", restClient.Fields, null, true, restClient.Parameters);
-                        WriteOperation(writer, restClient, method, true);
-                        WriteOperation(writer, restClient, method, false);
+                        RequestWriterHelpers.WriteRequestCreation(writer, createMessageMethod, "internal", restClient.Fields, null, true, restClient.Parameters);
+                        WriteOperation(writer, restClient, createMessageMethod, true);
+                        WriteOperation(writer, restClient, createMessageMethod, false);
                     }
                 }
             }
@@ -60,7 +64,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                         writer.WriteVariableAssignmentWithNullCheck($"{field.Name}", clientParameter);
                     }
                 }
-                writer.Line($"{UserAgentField} = new {typeof(TelemetryDetails)}(GetType().Assembly, {MgmtRestClient.ApplicationIdParameter.Name});");
+                writer.Line($"{UserAgentField} = new {typeof(TelemetryDetails)}(GetType().Assembly, {KnownParameters.ApplicationId.Name});");
             }
             writer.Line();
         }

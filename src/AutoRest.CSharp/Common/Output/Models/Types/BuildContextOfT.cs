@@ -29,7 +29,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             if (Configuration.AzureArm)
             {
-                library = (T)(object)new MgmtOutputLibrary();
+                library = (T)(object)new MgmtOutputLibrary(CodeModel, SchemaUsageProvider);
             }
             else
             {

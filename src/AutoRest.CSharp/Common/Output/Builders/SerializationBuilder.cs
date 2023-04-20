@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Output.Builders
             };
         }
 
-        public ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type) => mediaType switch
+        public static ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type) => mediaType switch
         {
             KnownMediaType.Json => BuildSerialization(schema, type, false),
             KnownMediaType.Xml => BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true),

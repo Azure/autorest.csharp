@@ -213,7 +213,7 @@ namespace AutoRest.CSharp.Mgmt.Models
             }
             catch (Exception ex)
             {
-                throw new InvalidOperationException($"Final response for {RestClient.OperationGroup.Key}.{Method.Name} was not found it was of type {finalSchema.Name}", ex);
+                throw new InvalidOperationException($"Final response for {RestClient.Key}.{Method.Name} was not found it was of type {finalSchema.Name}", ex);
             }
         }
 

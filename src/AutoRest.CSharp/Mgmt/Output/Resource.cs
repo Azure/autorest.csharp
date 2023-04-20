@@ -356,7 +356,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 var contextualPath = GetContextualPath(OperationSet, requestPath);
                 var methodName = IsListOperation(operation, OperationSet) ?
                     "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
-                    GetOperationName(operation, resourceRestClient?.OperationGroup.Key ?? string.Empty);
+                    GetOperationName(operation, resourceRestClient?.Key ?? string.Empty);
                 // get the MgmtRestOperation with a proper name
                 var restOperation = new MgmtRestOperation(
                     operation,

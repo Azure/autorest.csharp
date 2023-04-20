@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Output.Models
                     else if (paging.NextLinkName != null)
                     {
                         var method = GetOperationMethod(serviceRequest);
-                        nextMethod = CmcRestClientBuilder.BuildNextPageMethod(operation, method);
+                        nextMethod = RestClientBuilder.BuildNextPageMethod(method);
                     }
 
                     if (nextMethod != null)

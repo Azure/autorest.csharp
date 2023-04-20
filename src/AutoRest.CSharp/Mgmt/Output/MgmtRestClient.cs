@@ -5,85 +5,46 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core;
+using YamlDotNet.Core.Tokens;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class MgmtRestClient : CmcRestClient
+    internal class MgmtRestClient : RestClient
     {
-        public static readonly Parameter ApplicationIdParameter = new("applicationId", "The application id to use for user agent", new CSharpType(typeof(string)), null, Validation.None, null);
-
-        private readonly MgmtRestClientBuilder _clientBuilder;
+        private readonly IReadOnlyList<Operation> _operations;
         private IReadOnlyList<Resource>? _resources;
 
-        public ClientFields Fields { get; }
+        public string Key { get; }
 
-        public MgmtRestClient(OperationGroup operationGroup, MgmtRestClientBuilder clientBuilder)
-            : base(operationGroup, MgmtContext.Context, operationGroup.Language.Default.Name, GetOrderedParameters(clientBuilder))
+        public MgmtRestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, List<Operation> operations)
+            : base(inputClient, clientParameters, restClientParameters, MgmtContext.Context.TypeFactory, MgmtContext.Context.Library, inputClient.Name, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.SourceInputModel)
         {
-            _clientBuilder = clientBuilder;
-            Fields = ClientFields.CreateForRestClient(new[] { KnownParameters.Pipeline }.Union(clientBuilder.GetOrderedParametersByRequired()));
+            Key = inputClient.Key;
+            _operations = operations;
         }
 
-        protected override Dictionary<ServiceRequest, RestClientMethod> EnsureNormalMethods()
+        protected override HlcMethods BuildMethods(OutputLibrary library, OperationMethodsBuilder methodBuilder, InputOperation operation)
         {
-            var requestMethods = new Dictionary<ServiceRequest, RestClientMethod>();
-            var converter = new CodeModelConverter();
-            var inputOperations = converter.CreateOperations(OperationGroup.Operations);
-
-            foreach (var operation in OperationGroup.Operations)
+            if (operation.HttpMethod == RequestMethod.Get)
             {
-                foreach (var serviceRequest in operation.Requests)
+                var operationSet = MgmtContext.Library.GetOperationSet(operation.Path);
+                if (operationSet.IsResource() && MgmtContext.Library.TryGetResourceData(operation.Path, out var resourceData))
                 {
-                    // See also LowLevelRestClient::EnsureNormalMethods if changing
-                    if (serviceRequest.Protocol.Http is not HttpRequest httpRequest)
-                    {
-                        continue;
-                    }
-                    requestMethods.Add(serviceRequest, _clientBuilder.BuildMethod(operation, inputOperations[serviceRequest], httpRequest, serviceRequest.Parameters, null, "public", ShouldReturnNullOn404(operation)));
+                    return methodBuilder.BuildMpg(resourceData.Type);
                 }
             }
 
-            return requestMethods;
+            return methodBuilder.BuildMpg(null);
         }
 
-        private static Func<string?, bool> ShouldReturnNullOn404(Operation operation)
-        {
-            Func<string?, bool> f = delegate (string? responseBodyType)
-            {
-                if (!MgmtContext.Library.TryGetResourceData(operation.GetHttpPath(), out var resourceData))
-                    return false;
-                if (!operation.IsGetResourceOperation(responseBodyType, resourceData))
-                    return false;
-
-                return operation.Responses.Any(r => r.ResponseSchema == resourceData.ObjectSchema);
-            };
-            return f;
-        }
-
-        public IReadOnlyList<Resource> Resources => _resources ??= GetResources();
-
-        private IReadOnlyList<Resource> GetResources()
-        {
-            HashSet<Resource> candidates = new HashSet<Resource>();
-            foreach (var operation in OperationGroup.Operations)
-            {
-                foreach (var resource in operation.GetResourceFromResourceType())
-                {
-                    candidates.Add(resource);
-                }
-            }
-            return candidates.ToList();
-        }
-
-        private static IReadOnlyList<Parameter> GetOrderedParameters(CmcRestClientBuilder clientBuilder)
-            => new[] {KnownParameters.Pipeline, ApplicationIdParameter}.Union(clientBuilder.GetOrderedParametersByRequired()).ToArray();
+        public IReadOnlyList<Resource> Resources => _resources ??= _operations.SelectMany(operation => operation.GetResourceFromResourceType()).Distinct().ToList();
     }
 }

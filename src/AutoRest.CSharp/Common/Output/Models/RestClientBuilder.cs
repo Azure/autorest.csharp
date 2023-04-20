@@ -33,42 +33,37 @@ namespace AutoRest.CSharp.Output.Models
             "traceparent"
         };
 
-        private readonly TypeFactory _typeFactory;
-        private readonly Dictionary<string, Parameter> _parameters;
-
-
-        public RestClientBuilder(IEnumerable<InputParameter> clientParameters, TypeFactory typeFactory)
-        {
-            _typeFactory = typeFactory;
-            _parameters = clientParameters.ToDictionary(p => p.Name, BuildConstructorParameter);
-        }
-
-        /// <summary>
-        /// Get sorted parameters, required parameters are at the beginning.
-        /// </summary>
-        /// <returns></returns>
-        public Parameter[] GetOrderedParametersByRequired()
-        {
-            return OrderParametersByRequired(_parameters.Values);
-        }
-
-        public static IEnumerable<InputParameter> GetParametersFromOperations(IEnumerable<InputOperation> operations) =>
+        public static IReadOnlyList<InputParameter> GetParametersFromOperations(IEnumerable<InputOperation> operations) =>
             operations
                 .SelectMany(op => op.Parameters)
                 .Where(p => p.Kind == InputOperationParameterKind.Client)
                 .Distinct()
                 .ToList();
 
-        private static string GetRequestParameterName(RequestParameter requestParameter)
+        public static Parameter BuildConstructorParameter(InputParameter inputParameter, TypeFactory typeFactory)
         {
-            var language = requestParameter.Language.Default;
-            return language.SerializedName ?? language.Name;
+            var parameter = Parameter.FromInputParameter(inputParameter, typeFactory.CreateType(inputParameter.Type), typeFactory);
+            if (!inputParameter.IsEndpoint)
+            {
+                return parameter;
+            }
+
+            var defaultValue = parameter.DefaultValue;
+            var description = parameter.Description;
+            var location = parameter.RequestLocation;
+
+            return defaultValue != null
+                ? KnownParameters.Endpoint with { Description = description, RequestLocation = location, DefaultValue = Constant.Default(new CSharpType(typeof(Uri), true)), Initializer = $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})"}
+                : KnownParameters.Endpoint with { Description = description, RequestLocation = location, Validation = parameter.Validation };
         }
 
-        public static RestClientMethod BuildRequestMethod(InputOperation operation, IReadOnlyList<Parameter> parameters, IReadOnlyCollection<RequestPartSource> requestParts, DataPlaneResponseHeaderGroupType? responseHeaderModel, ClientFields fields, TypeFactory typeFactory)
+        public static bool IsIgnoredHeaderParameter(InputParameter operationParameter)
+            => operationParameter.Location == RequestLocation.Header && IgnoredRequestHeader.Contains(operationParameter.NameInRequest);
+
+        public static RestClientMethod BuildRequestMethod(InputOperation operation, IReadOnlyList<Parameter> parameters, IReadOnlyCollection<RequestPartSource> requestParts, DataPlaneResponseHeaderGroupType? responseHeaderModel, CSharpType? resourceDataType, ClientFields fields, TypeFactory typeFactory)
         {
             Request request = BuildRequest(operation, requestParts, fields, typeFactory);
-            Response[] responses = BuildResponses(operation, typeFactory, out var responseType);
+            Response[] responses = BuildResponses(operation, resourceDataType, typeFactory, out var responseType);
 
             return new RestClientMethod(
                 operation.Name.ToCleanName(),
@@ -85,7 +80,7 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        public static Response[] BuildResponses(InputOperation operation, TypeFactory typeFactory, out CSharpType? responseType)
+        public static Response[] BuildResponses(InputOperation operation, CSharpType? resourceDataType, TypeFactory typeFactory, out CSharpType? responseType)
         {
             if (operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
             {
@@ -101,10 +96,10 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            List<Response> clientResponse = new List<Response>();
+            var clientResponse = new List<Response>();
             foreach (var response in operation.Responses.Where(r => !r.IsErrorResponse))
             {
-                List<StatusCodes> statusCodes = new List<StatusCodes>();
+                var statusCodes = new List<StatusCodes>();
                 foreach (var statusCode in response.StatusCodes)
                 {
                     statusCodes.Add(new StatusCodes(statusCode, null));
@@ -112,6 +107,15 @@ namespace AutoRest.CSharp.Output.Models
 
                 var responseBody = operation.LongRunning != null ? null : BuildResponseBody(response, typeFactory);
                 clientResponse.Add(new Response(responseBody, statusCodes.ToArray()));
+            }
+
+            if (Configuration.AzureArm && resourceDataType is not null && clientResponse.Any())
+            {
+                var responseBodyTypeName = clientResponse[0].ResponseBody?.Type.Name;
+                if (responseBodyTypeName == resourceDataType.Name && operation.Responses.Any(r => r.BodyType is {} type && resourceDataType.EqualsIgnoreNullable(typeFactory.CreateType(type))))
+                {
+                    clientResponse.Add(new Response(null, new[] { new StatusCodes(404, null) }));
+                }
             }
 
             responseType = ReduceResponses(clientResponse);
@@ -363,12 +367,11 @@ namespace AutoRest.CSharp.Output.Models
             return segments;
         }
 
-        /// <summary>
-        /// Sort the parameters, move required parameters at the beginning, in order.
-        /// </summary>
-        /// <param name="parameters">Parameters to sort</param>
-        /// <returns></returns>
-        private static Parameter[] OrderParametersByRequired(IEnumerable<Parameter> parameters) => parameters.OrderBy(p => p.IsOptionalInSignature).ToArray();
+        private static string GetRequestParameterName(RequestParameter requestParameter)
+        {
+            var language = requestParameter.Language.Default;
+            return language.SerializedName ?? language.Name;
+        }
 
         // Merges operations without response types types together
         private static CSharpType? ReduceResponses(List<Response> responses)
@@ -397,26 +400,6 @@ namespace AutoRest.CSharp.Output.Models
                 _ => typeof(object)
             };
         }
-
-        public virtual Parameter BuildConstructorParameter(InputParameter operationParameter)
-        {
-            var parameter = Parameter.FromInputParameter(operationParameter, _typeFactory.CreateType(operationParameter.Type), _typeFactory);
-            if (!operationParameter.IsEndpoint)
-            {
-                return parameter;
-            }
-
-            var defaultValue = parameter.DefaultValue;
-            var description = parameter.Description;
-            var location = parameter.RequestLocation;
-
-            return defaultValue != null
-                ? KnownParameters.Endpoint with { Description = description, RequestLocation = location, DefaultValue = Constant.Default(new CSharpType(typeof(Uri), true)), Initializer = $"new {typeof(Uri)}({defaultValue.Value.GetConstantFormattable()})"}
-                : KnownParameters.Endpoint with { Description = description, RequestLocation = location, Validation = parameter.Validation };
-        }
-
-        public static bool IsIgnoredHeaderParameter(InputParameter operationParameter)
-            => operationParameter.Location == RequestLocation.Header && IgnoredRequestHeader.Contains(operationParameter.NameInRequest);
 
         public static RestClientMethod BuildNextPageMethod(RestClientMethod method)
         {
