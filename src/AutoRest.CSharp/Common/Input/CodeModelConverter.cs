@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.Common.Input
         public InputParameter CreateOperationParameter(RequestParameter input) => new(
             Name: input.Language.Default.Name,
             NameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
-            Description: input.Language.Default.Description,
+            Description: string.IsNullOrWhiteSpace(input.Language.Default.Description) ? $"The {input.Schema.Name} to use." : input.Language.Default.Description,
             Type: CreateType(input),
             Location: GetRequestLocation(input),
             DefaultValue: GetDefaultValue(input),
