@@ -1010,12 +1010,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
+  requiredUnknown: any, # Required. required unknown
+  optionalUnknown: any, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1186,12 +1186,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
+  requiredUnknown: any, # Required. required unknown
+  optionalUnknown: any, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1362,12 +1362,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
+  requiredUnknown: any, # Required. required unknown
+  optionalUnknown: any, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1538,12 +1538,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
-  requiredUnknown: Intrinsic, # Required. required unknown
-  optionalUnknown: Intrinsic, # Optional. optional unknown
-  requiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required record of unknown
-  optionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional record of unknown
-  readOnlyRequiredRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Required. required readonly record of unknown
-  readOnlyOptionalRecordUnknown: Dictionary&lt;string, Intrinsic&gt;, # Optional. optional readonly record of unknown
+  requiredUnknown: any, # Required. required unknown
+  optionalUnknown: any, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
