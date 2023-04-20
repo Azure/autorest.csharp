@@ -73,7 +73,6 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("Enum must have at least one value");
             }
 
-            valueType ??= InputPrimitiveType.Int32;
             var currentType = InputPrimitiveType.Int32;
             foreach (var value in allowedValues)
             {
