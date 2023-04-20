@@ -111,10 +111,10 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
 
             // static class can have direct references, like ClassName.Method, but the extension methods might not have direct reference to the class itself
             // therefore here we find the references of all its members and add them to the reference map
-            await ProcessExtensionSymbol(symbol, referenceMap, documentCache);
+            ProcessExtensionSymbol(symbol, referenceMap, documentCache);
         }
 
-        private async Task ProcessExtensionSymbol(INamedTypeSymbol extensionClassSymbol, ReferenceMap referenceMap, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> documentCache)
+        private void ProcessExtensionSymbol(INamedTypeSymbol extensionClassSymbol, ReferenceMap referenceMap, IReadOnlyDictionary<Document, ImmutableHashSet<INamedTypeSymbol>> documentCache)
         {
             if (!extensionClassSymbol.IsStatic)
                 return;
@@ -127,11 +127,22 @@ namespace AutoRest.CSharp.Common.Output.PostProcessing
                 if (!methodSymbol.IsExtensionMethod)
                     continue;
 
-                // find which document is using this extension method, and add it to the map
-                foreach (var reference in await SymbolFinder.FindReferencesAsync(methodSymbol, _project.Solution))
-                {
-                    await AddReferenceToReferenceMapAsync(extensionClassSymbol, reference, referenceMap, documentCache);
-                }
+                // this is to hook the extension class like this:
+                // internal static class FooExtensions
+                // {
+                //     public static string ToSerialString(this Foo foo) => foo.ToString();
+                //     public static Foo ToFoo(this string foo) => // omit body
+                // }
+
+                // if this is an extension method, we add it to the reference map of the type it is extending to pretend that this class is a part of that type
+                // handle the first method above
+                if (methodSymbol.Parameters.FirstOrDefault()?.Type is INamedTypeSymbol typeSymbol)
+                    referenceMap.AddInList(typeSymbol, extensionClassSymbol);
+
+                // we also add the return type into the reference map of the extension class to cover both cases
+                // handle the second method above
+                if (methodSymbol.ReturnType is INamedTypeSymbol returnTypeSymbol)
+                    referenceMap.AddInList(returnTypeSymbol, extensionClassSymbol);
             }
         }
 
