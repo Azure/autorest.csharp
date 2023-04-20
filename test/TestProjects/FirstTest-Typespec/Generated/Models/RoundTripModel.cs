@@ -64,7 +64,13 @@ namespace CadlFirstTest.Models
         /// <param name="intFixedEnum"> this is a int based fixed enum. </param>
         /// <param name="intFixedEnumCollection"> this is a collection of int based fixed enum. </param>
         /// <param name="stringFixedEnum"> this is a string based fixed enum. </param>
-        internal RoundTripModel(string requiredString, int requiredInt, IList<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum)
+        /// <param name="requiredUnknown"> required unknown. </param>
+        /// <param name="optionalUnknown"> optional unknown. </param>
+        /// <param name="requiredRecordUnknown"> required record of unknown. </param>
+        /// <param name="optionalRecordUnknown"> optional record of unknown. </param>
+        /// <param name="readOnlyRequiredRecordUnknown"> required readonly record of unknown. </param>
+        /// <param name="readOnlyOptionalRecordUnknown"> optional readonly record of unknown. </param>
+        internal RoundTripModel(string requiredString, int requiredInt, IList<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum, BinaryData requiredUnknown, BinaryData optionalUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, IDictionary<string, BinaryData> optionalRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -80,6 +86,12 @@ namespace CadlFirstTest.Models
             IntFixedEnum = intFixedEnum;
             IntFixedEnumCollection = intFixedEnumCollection;
             StringFixedEnum = stringFixedEnum;
+            RequiredUnknown = requiredUnknown;
+            OptionalUnknown = optionalUnknown;
+            RequiredRecordUnknown = requiredRecordUnknown;
+            OptionalRecordUnknown = optionalRecordUnknown;
+            ReadOnlyRequiredRecordUnknown = readOnlyRequiredRecordUnknown;
+            ReadOnlyOptionalRecordUnknown = readOnlyOptionalRecordUnknown;
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>
