@@ -2,13 +2,13 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
-    Client,
-    createDpgContext,
+    createSdkContext,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
-    OperationGroup,
-    DpgContext
+    SdkOperationGroup,
+    SdkClient,
+    SdkContext
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -77,7 +77,7 @@ export function createModelForService(
     service: Service
 ): CodeModel {
     const program = context.program;
-    const dpgContext = createDpgContext(context);
+    const dpgContext = createSdkContext(context);
     const title = service.title;
     const serviceNamespaceType = service.type;
     const apiVersions: Set<string> = new Set<string>();
@@ -223,8 +223,8 @@ export function createModelForService(
     return clientModel;
 
     function emitClient(
-        client: Client | OperationGroup,
-        parent?: Client
+        client: SdkClient | SdkOperationGroup,
+        parent?: SdkClient
     ): InputClient {
         const operations = listOperationsInOperationGroup(dpgContext, client);
         let clientDesc = "";
@@ -237,13 +237,13 @@ export function createModelForService(
 
         const inputClient = {
             Name:
-                client.kind === ClientKind.DpgClient
+                client.kind === ClientKind.SdkClient
                     ? client.name
                     : client.type.name,
             Description: clientDesc,
             Operations: [],
             Protocol: {},
-            Creatable: client.kind === ClientKind.DpgClient,
+            Creatable: client.kind === ClientKind.SdkClient,
             Parent: parent?.name
         } as InputClient;
         for (const op of operations) {
@@ -271,7 +271,7 @@ export function createModelForService(
 
     function getAllLroMonitorOperations(
         routes: HttpOperation[],
-        context: DpgContext
+        context: SdkContext
     ): Set<Operation> {
         const lroMonitorOperations = new Set<Operation>();
         for (const operation of routes) {
