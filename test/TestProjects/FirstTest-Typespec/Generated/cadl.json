@@ -65,7 +65,7 @@
    "Name": "IntExtensibleEnum",
    "Namespace": "CadlFirstTest",
    "Description": "Int based extensible enum",
-   "EnumValueType": "Float64",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "11",
@@ -92,7 +92,7 @@
    "Name": "FloatExtensibleEnum",
    "Namespace": "CadlFirstTest",
    "Description": "Float based extensible enum",
-   "EnumValueType": "Float64",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "15",
@@ -119,7 +119,7 @@
    "Name": "FloatFixedEnum",
    "Namespace": "CadlFirstTest",
    "Description": "float fixed enum",
-   "EnumValueType": "Float64",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "19",
@@ -146,7 +146,7 @@
    "Name": "IntFixedEnum",
    "Namespace": "CadlFirstTest",
    "Description": "int fixed enum",
-   "EnumValueType": "Float64",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "23",
