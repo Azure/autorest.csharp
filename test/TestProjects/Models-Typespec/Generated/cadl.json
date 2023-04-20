@@ -752,7 +752,7 @@
      "Description": "Required date time offset, illustrating a reference type property.",
      "Type": {
       "$id": "95",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },

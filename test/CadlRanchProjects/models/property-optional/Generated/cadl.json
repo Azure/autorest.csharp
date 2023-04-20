@@ -72,7 +72,7 @@
      "Description": "Property",
      "Type": {
       "$id": "10",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },

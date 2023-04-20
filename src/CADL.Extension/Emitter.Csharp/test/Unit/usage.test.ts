@@ -12,7 +12,7 @@ import {
 } from "@typespec/http";
 import { ignoreDiagnostics } from "@typespec/compiler";
 import { getUsages } from "../../src/lib/model.js";
-import { createDpgContext } from "@azure-tools/typespec-client-generator-core";
+import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
 import { createModel } from "../../src/lib/clientModelBuilder.js";
 import { CodeModel } from "../../src/type/codeModel.js";
 import { Usage } from "../../src/type/usage.js";
@@ -37,7 +37,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const dpgContext = createDpgContext(context);
+        const dpgContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(dpgContext, services[0].operations);
         assert(usages.inputs.includes("Foo"));
@@ -56,7 +56,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const dpgContext = createDpgContext(context);
+        const dpgContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(dpgContext, services[0].operations);
         assert(usages.outputs.includes("Foo"));
@@ -75,7 +75,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const dpgContext = createDpgContext(context);
+        const dpgContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(dpgContext, services[0].operations);
         assert(usages.roundTrips.includes("Foo"));
@@ -95,7 +95,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const dpgContext = createDpgContext(context);
+        const dpgContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(dpgContext, services[0].operations);
         assert(usages.roundTrips.includes("Foo"));
@@ -120,7 +120,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const dpgContext = createDpgContext(context);
+        const dpgContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(dpgContext, services[0].operations);
         assert(usages.inputs.includes("TemplateModel"));
@@ -146,7 +146,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const dpgContext = createDpgContext(context);
+        const dpgContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(dpgContext, services[0].operations);
         // verify that the baseModel will not apply the usage of derived model.
@@ -168,7 +168,7 @@ describe("Test getUsages", () => {
             runner
         );
         const context = createEmitterContext(program);
-        const dpgContext = createDpgContext(context);
+        const dpgContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(dpgContext, services[0].operations);
         assert(usages.inputs.includes("TestRequest"));
@@ -215,7 +215,7 @@ describe("Test getUsages", () => {
             true
         );
         const context = createEmitterContext(program);
-        const dpgContext = createDpgContext(context);
+        const dpgContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(dpgContext, services[0].operations);
         assert(usages.inputs.includes("BatchCreateFooListItemsRequest"));
@@ -248,7 +248,7 @@ describe("Test getUsages", () => {
         );
 
         const context = createEmitterContext(program);
-        const dpgContext = createDpgContext(context);
+        const dpgContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(dpgContext, services[0].operations);
         assert(usages.roundTrips.includes("Foo"));
