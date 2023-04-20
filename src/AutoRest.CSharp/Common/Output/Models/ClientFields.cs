@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public static ClientFields CreateForClient(IEnumerable<Parameter> parameters, InputAuth authorization) => new(parameters, authorization);
 
-        public static ClientFields CreateForRestClient(IEnumerable<Parameter> parameters) => new(parameters, null);
+        public static ClientFields CreateForRestClient(IEnumerable<Parameter> parameters) => new(parameters.Where(p => p != KnownParameters.ApplicationId), null);
 
         private ClientFields(IEnumerable<Parameter> parameters, InputAuth? authorization)
         {
@@ -83,9 +83,7 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (Parameter parameter in parameters)
             {
-                var field = parameter == KnownParameters.ClientDiagnostics ? ClientDiagnosticsProperty : parameter == KnownParameters.Pipeline ? PipelineField : parameter.IsResourceIdentifier
-                        ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), writeAsProperty: true)
-                        : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
+                var field = CreateFieldFromParameter(parameter);
 
                 if (field.WriteAsProperty)
                 {
@@ -113,6 +111,23 @@ namespace AutoRest.CSharp.Output.Models
             _parameterNamesToFields = parameterNamesToFields;
             CredentialFields = credentialFields;
             ScopeDeclarations = new CodeWriterScopeDeclarations(fields.Select(f => f.Declaration));
+        }
+
+        private FieldDeclaration CreateFieldFromParameter(Parameter parameter)
+        {
+            if (parameter == KnownParameters.ClientDiagnostics)
+            {
+                return ClientDiagnosticsProperty;
+            }
+
+            if (parameter == KnownParameters.Pipeline)
+            {
+                return PipelineField;
+            }
+
+            return parameter.IsResourceIdentifier
+                ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), writeAsProperty: true)
+                : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
         }
 
         public FieldDeclaration? GetFieldByParameter(string parameterName, CSharpType parameterType)
