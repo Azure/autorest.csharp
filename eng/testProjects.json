@@ -12,7 +12,7 @@
         "special-words",
         "enums/extensible",
         "hello",
-        "collectionFormat"
+        "parameters/collection-format"
     ],
     "TestServerProjects": [
         "additionalProperties",

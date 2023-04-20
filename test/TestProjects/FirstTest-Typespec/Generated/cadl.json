@@ -1382,7 +1382,7 @@
        "NameInRequest": "Repeatability-First-Sent",
        "Type": {
         "$id": "164",
-        "Name": "zonedDateTime",
+        "Name": "utcDateTime",
         "Kind": "DateTime",
         "IsNullable": false
        },

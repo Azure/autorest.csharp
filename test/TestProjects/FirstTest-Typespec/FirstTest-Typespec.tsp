@@ -280,7 +280,7 @@ op anonymousBody(...Thing): Thing;
 op friendlyModel(...NotFriend): NotFriend;
 
 op addTimeHeader(
-    @header("Repeatability-First-Sent") repeatabilityFirstSent?: zonedDateTime
+    @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
 
 namespace EnumTest {

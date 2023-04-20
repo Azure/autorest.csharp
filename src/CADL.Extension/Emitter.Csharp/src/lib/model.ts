@@ -61,13 +61,13 @@ import {
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
-import { DpgContext } from "@azure-tools/typespec-client-generator-core";
+import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 import { capitalize } from "./utils.js";
 /**
  * Map calType to csharp InputTypeKind
  */
 export function mapCadlTypeToCSharpInputTypeKind(
-    context: DpgContext,
+    context: SdkContext,
     cadlType: Type
 ): InputTypeKind {
     const format = getFormat(context.program, cadlType);
@@ -134,7 +134,9 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Boolean;
         case "plainDate":
             return InputTypeKind.Date;
-        case "zonedDateTime":
+        case "utcDateTime":
+            return InputTypeKind.DateTime;
+        case "offsetDateTime":
             return InputTypeKind.DateTime;
         case "plainTime":
             return InputTypeKind.Time;
@@ -149,7 +151,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
  * If type is an anonymous model, tries to find a named model that has the same
  * set of properties when non-schema properties are excluded.
  */
-export function getEffectiveSchemaType(context: DpgContext, type: Type): Type {
+export function getEffectiveSchemaType(context: SdkContext, type: Type): Type {
     let target = type;
     if (type.kind === "Model" && !type.name) {
         const effective = getEffectiveModelType(
@@ -175,7 +177,7 @@ export function getEffectiveSchemaType(context: DpgContext, type: Type): Type {
  * Headers, parameters, status codes are not schema properties even they are
  * represented as properties in Cadl.
  */
-function isSchemaProperty(context: DpgContext, property: ModelProperty) {
+function isSchemaProperty(context: SdkContext, property: ModelProperty) {
     const program = context.program;
     const headerInfo = getHeaderFieldName(program, property);
     const queryInfo = getQueryParamName(program, property);
@@ -203,7 +205,7 @@ export function isNeverType(type: Type): type is NeverType {
 }
 
 export function getInputType(
-    context: DpgContext,
+    context: SdkContext,
     type: Type,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
@@ -578,7 +580,7 @@ export function getInputType(
 }
 
 export function getUsages(
-    context: DpgContext,
+    context: SdkContext,
     ops?: HttpOperation[]
 ): { inputs: string[]; outputs: string[]; roundTrips: string[] } {
     const program = context.program;
