@@ -121,7 +121,17 @@ namespace AutoRest.CSharp.Common.Input
                 case InputTypeKind.Float32:
                     foreach (var value in allowedValues)
                     {
-                        concreteValues.Add(new InputEnumTypeFloatValue(value.Name, (float)value.Value, value.Description));
+                        switch (value.Value)
+                        {
+                            case Int32 i:
+                                concreteValues.Add(new InputEnumTypeFloatValue(value.Name, (float)(Int32)i, value.Description));
+                                break;
+                            case Single single:
+                                concreteValues.Add(new InputEnumTypeFloatValue(value.Name, (float)single, value.Description));
+                                break;
+                            default:
+                                throw new JsonException($"Enum value type is not correct.");
+                        }
                     }
                     break;
                 default:
