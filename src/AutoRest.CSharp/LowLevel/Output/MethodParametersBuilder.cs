@@ -164,7 +164,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private IEnumerable<InputParameter> GetLegacySortedParameters()
-            => _inputParameters.OrderBy(p => p is { IsRequired: true, DefaultValue: null });
+            => _inputParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null });
 
         private void BuildParametersLegacy(IEnumerable<InputParameter> ip)
         {

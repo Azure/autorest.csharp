@@ -111,7 +111,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             if (httpRequest is null)
                 continue;
 
-            var references = new MgmtRestClientBuilder(operationGroup, typeFactory).GetReferencesToOperationParameters(operation, request.Parameters);
+            var references = MgmtRestClientBuilder.GetReferencesToOperationParameters(operation, request.Parameters, typeFactory);
             var segments = new List<Segment>();
             var segmentIndex = 0;
             CreateSegments(httpRequest.Uri, references, segments, ref segmentIndex);
