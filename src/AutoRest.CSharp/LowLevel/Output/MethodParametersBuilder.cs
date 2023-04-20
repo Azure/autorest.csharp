@@ -166,9 +166,10 @@ namespace AutoRest.CSharp.Output.Models
         private IEnumerable<InputParameter> GetLegacySortedParameters()
             => _inputParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null });
 
-        private void BuildParametersLegacy(IEnumerable<InputParameter> ip)
+        private void BuildParametersLegacy(IEnumerable<InputParameter> inputParameters)
         {
-            foreach (var inputParameter in ip)
+            var parameters = new Dictionary<InputParameter, Parameter>();
+            foreach (var inputParameter in inputParameters)
             {
                 var parameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _typeFactory);
                 // Grouped and flattened parameters shouldn't be added to methods
@@ -177,12 +178,18 @@ namespace AutoRest.CSharp.Output.Models
                     _createMessageParameters.Add(parameter);
                 }
 
-                var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
-                _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameter, serializationFormat));
+                parameters.Add(inputParameter, parameter);
             }
 
             _parameterLinks.AddRange(_createMessageParameters.Select(p => new ParameterLink(p)));
             _parameterLinks.Add(new ParameterLink(new[]{KnownParameters.CancellationTokenParameter}, Array.Empty<Parameter>(), null));
+
+            // for legacy logic, adding request parts unsorted
+            foreach (var inputParameter in _inputParameters)
+            {
+                var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
+                _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameters[inputParameter], serializationFormat));
+            }
         }
 
         private void AddWaitForCompletion()

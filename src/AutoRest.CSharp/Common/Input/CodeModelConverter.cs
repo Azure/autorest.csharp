@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.Common.Input
         public InputParameter CreateOperationParameter(RequestParameter input) => new(
             Name: input.Language.Default.Name,
             NameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
-            Description: string.IsNullOrWhiteSpace(input.Language.Default.Description) ? $"The {input.Schema.Name} to use." : input.Language.Default.Description,
+            Description: input.Language.Default.Description,//string.IsNullOrWhiteSpace(input.Language.Default.Description) ? CreateOperationParameterDescription(input) : input.Language.Default.Description,
             Type: CreateType(input),
             Location: GetRequestLocation(input),
             DefaultValue: GetDefaultValue(input),
@@ -143,6 +143,9 @@ namespace AutoRest.CSharp.Common.Input
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
             VirtualParameter: input is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null
         );
+
+        private static string? CreateOperationParameterDescription(RequestParameter input)
+            => input.Schema is PrimitiveSchema schema ? $"The {schema.Name} to use." : null;
 
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(
             StatusCodes: response.HttpResponse.IntStatusCodes.ToList(),

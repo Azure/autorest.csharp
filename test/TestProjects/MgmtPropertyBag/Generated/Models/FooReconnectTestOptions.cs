@@ -25,7 +25,7 @@ namespace MgmtPropertyBag.Models
         public FooData Data { get; set; }
         /// <summary> The filter to apply on the operation. </summary>
         public string Filter { get; set; }
-        /// <summary> The Integer to use. </summary>
+        /// <summary> The Int32 to use. </summary>
         public int? Top { get; set; }
         /// <summary> The String to use. </summary>
         public string Orderby { get; set; }
