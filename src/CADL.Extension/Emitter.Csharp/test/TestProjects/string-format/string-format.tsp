@@ -11,12 +11,12 @@ namespace stringFormat;
 
 using TypeSpec.Http;
 
-@route("/zonedDateTime")
-@doc("Path parameter is string with zonedDateTime format")
+@route("/utcDateTime")
+@doc("Path parameter is string with utcDateTime format")
 @get
-op getZonedDateTime(
+op getUtcDateTime(
     @path
-    time: zonedDateTime): void;
+    time: utcDateTime): void;
 model Uri {
     @path
     @pattern("^[a-zA-Z0-9-]{3,24}$")
