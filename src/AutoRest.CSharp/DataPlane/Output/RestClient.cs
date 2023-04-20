@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -57,7 +58,14 @@ namespace AutoRest.CSharp.Output.Models
             foreach (var inputOperation in inputClient.Operations)
             {
                 var builder = new MethodParametersBuilder(typeFactory, inputOperation);
-                builder.BuildHlc();
+                if (Configuration.AzureArm)
+                {
+                    builder.BuildMpg();
+                }
+                else
+                {
+                    builder.BuildHlc();
+                }
                 operationParameters[inputOperation] = builder;
             }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -37,6 +38,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly TypeFactory _typeFactory;
         private readonly InputOperation _operation;
+        private readonly IEnumerable<InputParameter> _inputParameters;
         private readonly List<RequestPartSource> _requestParts;
         private readonly List<Parameter> _createMessageParameters;
         private readonly List<ParameterLink> _parameterLinks;
@@ -45,6 +47,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _typeFactory = typeFactory;
             _operation = operation;
+            _inputParameters = operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
 
             _requestParts = new List<RequestPartSource>();
             _createMessageParameters = new List<Parameter>();
@@ -57,63 +60,73 @@ namespace AutoRest.CSharp.Output.Models
 
         public void BuildHlc()
         {
-            var parameters = new List<Parameter>();
-            foreach (var inputParameter in _operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp)))
-            {
-                var parameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _typeFactory);
-                // Grouped and flattened parameters shouldn't be added to methods
-                if (inputParameter.Kind == InputOperationParameterKind.Method)
-                {
-                    parameters.Add(parameter);
-                }
+            var sortedParameters = GetLegacySortedParameters();
+            BuildParametersLegacy(sortedParameters);
+        }
 
-                var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
-                _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameter, serializationFormat));
-            }
-
-            _createMessageParameters.AddRange(parameters.OrderBy(p => p.IsOptionalInSignature));
-            _parameterLinks.AddRange(_createMessageParameters.Select(p => new ParameterLink(p)));
-            _parameterLinks.Add(new ParameterLink(new[]{KnownParameters.CancellationTokenParameter}, Array.Empty<Parameter>(), null));
+        public void BuildMpg()
+        {
+            var sortedParameters = GetSortedParameters();
+            BuildParametersLegacy(sortedParameters);
         }
 
         public void BuildDpg()
         {
-            var operationParameters = _operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
+            var sortedParameters = GetSortedParameters();
 
+            var requestConditionHeaders = RequestConditionHeaders.None;
+            var requestConditionSerializationFormat = SerializationFormat.Default;
+            InputParameter? requestConditionRequestParameter = null;
+
+            AddWaitForCompletion();
+            foreach (var inputParameter in sortedParameters)
+            {
+                switch (inputParameter)
+                {
+                    case { Location: RequestLocation.Header } when ConditionRequestHeader.TryGetValue(inputParameter.NameInRequest, out var header):
+                        if (inputParameter.IsRequired)
+                        {
+                            throw new NotSupportedException("Required conditional request headers are not supported.");
+                        }
+
+                        requestConditionHeaders |= header;
+                        requestConditionRequestParameter ??= inputParameter;
+                        requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
+                                ? SerializationBuilder.GetSerializationFormat(inputParameter.Type)
+                                : requestConditionSerializationFormat;
+                        break;
+                    case { Location: RequestLocation.Header, IsContentType: true }:
+                        AddContentTypeRequestParameter(inputParameter);
+                        break;
+                    default:
+                        AddReferenceAndParameter(inputParameter.NameInRequest, inputParameter);
+                        break;
+                }
+            }
+
+            AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
+            AddRequestContext();
+        }
+
+        private IEnumerable<InputParameter> GetSortedParameters()
+        {
             var requiredPathParameters = new Dictionary<string, InputParameter>();
             var optionalPathParameters = new Dictionary<string, InputParameter>();
             var requiredRequestParameters = new List<InputParameter>();
             var optionalRequestParameters = new List<InputParameter>();
 
-            var requestConditionHeaders = RequestConditionHeaders.None;
-            var requestConditionSerializationFormat = SerializationFormat.Default;
             InputParameter? bodyParameter = null;
             InputParameter? contentTypeRequestParameter = null;
-            InputParameter? requestConditionRequestParameter = null;
 
-            foreach (var operationParameter in operationParameters)
+            foreach (var operationParameter in _inputParameters)
             {
                 switch (operationParameter)
                 {
                     case { Location: RequestLocation.Body }:
                         bodyParameter = operationParameter;
                         break;
-                    case { Location: RequestLocation.Header, IsContentType: true }
-                        when contentTypeRequestParameter == null:
+                    case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
                         contentTypeRequestParameter = operationParameter;
-                        break;
-                    case { Location: RequestLocation.Header }
-                        when ConditionRequestHeader.TryGetValue(operationParameter.NameInRequest, out var header):
-                        if (operationParameter.IsRequired)
-                        {
-                            throw new NotSupportedException("Required conditional request headers are not supported.");
-                        }
-
-                        requestConditionHeaders |= header;
-                        requestConditionRequestParameter ??= operationParameter;
-                        requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
-                                ? SerializationBuilder.GetSerializationFormat(operationParameter.Type)
-                                : requestConditionSerializationFormat;
                         break;
                     case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: null }:
                         requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
@@ -130,16 +143,46 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            AddWaitForCompletion();
-            AddUriOrPathParameters(_operation.Uri, requiredPathParameters);
-            AddUriOrPathParameters(_operation.Path, requiredPathParameters);
-            AddQueryOrHeaderParameters(requiredRequestParameters);
-            AddBody(bodyParameter, contentTypeRequestParameter, _operation.RequestMediaTypes);
-            AddUriOrPathParameters(_operation.Uri, optionalPathParameters);
-            AddUriOrPathParameters(_operation.Path, optionalPathParameters);
-            AddQueryOrHeaderParameters(optionalRequestParameters);
-            AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
-            AddRequestContext();
+            var orderedParameters = new List<InputParameter>();
+
+            SortUriOrPathParameters(_operation.Uri, requiredPathParameters, orderedParameters);
+            SortUriOrPathParameters(_operation.Path, requiredPathParameters, orderedParameters);
+            orderedParameters.AddRange(requiredRequestParameters);
+            if (bodyParameter is not null)
+            {
+                orderedParameters.Add(bodyParameter);
+                if (contentTypeRequestParameter is not null)
+                {
+                    orderedParameters.Add(contentTypeRequestParameter);
+                }
+            }
+            SortUriOrPathParameters(_operation.Uri, optionalPathParameters, orderedParameters);
+            SortUriOrPathParameters(_operation.Path, optionalPathParameters, orderedParameters);
+            orderedParameters.AddRange(optionalRequestParameters);
+
+            return orderedParameters;
+        }
+
+        private IEnumerable<InputParameter> GetLegacySortedParameters()
+            => _inputParameters.OrderBy(p => p is { IsRequired: true, DefaultValue: null });
+
+        private void BuildParametersLegacy(IEnumerable<InputParameter> ip)
+        {
+            foreach (var inputParameter in ip)
+            {
+                var parameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _typeFactory);
+                // Grouped and flattened parameters shouldn't be added to methods
+                if (inputParameter.Kind == InputOperationParameterKind.Method)
+                {
+                    _createMessageParameters.Add(parameter);
+                }
+
+                var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
+                _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameter, serializationFormat));
+            }
+
+            _parameterLinks.AddRange(_createMessageParameters.Select(p => new ParameterLink(p)));
+            _parameterLinks.Add(new ParameterLink(new[]{KnownParameters.CancellationTokenParameter}, Array.Empty<Parameter>(), null));
         }
 
         private void AddWaitForCompletion()
@@ -150,7 +193,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private void AddUriOrPathParameters(string uriPart, IReadOnlyDictionary<string, InputParameter> requestParameters)
+        private static void SortUriOrPathParameters(string uriPart, IReadOnlyDictionary<string, InputParameter> requestParameters, ICollection<InputParameter> orderedParameters)
         {
             foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(uriPart))
             {
@@ -162,40 +205,8 @@ namespace AutoRest.CSharp.Output.Models
                 var text = span.ToString();
                 if (requestParameters.TryGetValue(text, out var requestParameter))
                 {
-                    AddReferenceAndParameter(text, requestParameter);
+                    orderedParameters.Add(requestParameter);
                 }
-            }
-        }
-
-        private void AddQueryOrHeaderParameters(List<InputParameter> inputParameters)
-        {
-            foreach (var inputParameter in inputParameters)
-            {
-                AddReferenceAndParameter(inputParameter.NameInRequest, inputParameter);
-            }
-        }
-
-        private void AddBody(InputParameter? inputBodyParameter, InputParameter? contentTypeRequestParameter, IReadOnlyList<string>? requestMediaTypes)
-        {
-            if (inputBodyParameter == null)
-            {
-                return;
-            }
-
-            AddReferenceAndParameter(inputBodyParameter.NameInRequest, inputBodyParameter);
-
-            if (contentTypeRequestParameter == null)
-            {
-                return;
-            }
-
-            if (requestMediaTypes?.Count > 1)
-            {
-                AddContentTypeRequestParameter(contentTypeRequestParameter, requestMediaTypes);
-            }
-            else
-            {
-                AddReferenceAndParameter(contentTypeRequestParameter, typeof(ContentType));
             }
         }
 
@@ -333,7 +344,19 @@ namespace AutoRest.CSharp.Output.Models
             return new ParameterLink(convenienceMethodParameters, new[] { protocolMethodParameter }, intermediateSerialization);
         }
 
-        private void AddContentTypeRequestParameter(InputParameter inputParameter, IReadOnlyList<string> requestMediaTypes)
+        private void AddContentTypeRequestParameter(InputParameter inputParameter)
+        {
+            if (_operation.RequestMediaTypes?.Count > 1)
+            {
+                AddContentTypeRequestParameter(inputParameter, _operation.RequestMediaTypes);
+            }
+            else
+            {
+                AddReferenceAndParameter(inputParameter, typeof(ContentType));
+            }
+        }
+
+        private void AddContentTypeRequestParameter(InputParameter inputParameter, IEnumerable<string> requestMediaTypes)
         {
             var name = inputParameter.Name.ToVariableName();
             var description = Parameter.CreateDescription(inputParameter, typeof(ContentType), requestMediaTypes);
