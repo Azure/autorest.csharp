@@ -30,16 +30,19 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override HlcMethods BuildMethods(OutputLibrary library, OperationMethodsBuilder methodBuilder, InputOperation operation)
         {
-            if (operation.HttpMethod == RequestMethod.Get)
+            if (operation.HttpMethod != RequestMethod.Get)
             {
-                var operationSet = MgmtContext.Library.GetOperationSet(operation.Path);
-                if (operationSet.IsResource() && MgmtContext.Library.TryGetResourceData(operation.Path, out var resourceData))
-                {
-                    return methodBuilder.BuildMpg(resourceData.Type);
-                }
+                return methodBuilder.BuildMpg(null);
             }
 
-            return methodBuilder.BuildMpg(null);
+            var mpgLibrary = (MgmtOutputLibrary)library;
+            if (!mpgLibrary.TryGetResourceData(operation.Path, out var resourceData))
+            {
+                return methodBuilder.BuildMpg(null);
+            }
+
+            var operationSet = mpgLibrary.GetOperationSet(operation.Path);
+            return methodBuilder.BuildMpg(operationSet.IsResource() ? resourceData.Type : null);
         }
 
         public IReadOnlyList<Resource> Resources => _resources ??= _operations.SelectMany(operation => operation.GetResourceFromResourceType()).Distinct().ToList();
