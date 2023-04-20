@@ -96,14 +96,14 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
     {
         var rawSegments = rawPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
 
-        var segments = rawSegments.Select(raw => GetSegmentFromString(raw));
+        var segments = rawSegments.Select(GetSegmentFromString);
 
         return new RequestPath(segments);
     }
 
     public static RequestPath FromSegments(IEnumerable<Segment> segments) => new RequestPath(segments);
 
-    public static RequestPath FromOperation(Operation operation, OperationGroup operationGroup)
+    public static RequestPath FromOperation(Operation operation, OperationGroup operationGroup, TypeFactory typeFactory)
     {
         foreach (var request in operation.Requests)
         {
@@ -111,7 +111,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             if (httpRequest is null)
                 continue;
 
-            var references = new MgmtRestClientBuilder(operationGroup).GetReferencesToOperationParameters(operation, request.Parameters);
+            var references = new MgmtRestClientBuilder(operationGroup, typeFactory).GetReferencesToOperationParameters(operation, request.Parameters);
             var segments = new List<Segment>();
             var segmentIndex = 0;
             CreateSegments(httpRequest.Uri, references, segments, ref segmentIndex);

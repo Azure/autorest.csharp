@@ -1,7 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 
@@ -23,6 +22,5 @@ namespace AutoRest.CSharp.Output.Models.Types
         public string DefaultName => CodeModel.Language.Default.Name;
         public string DefaultNamespace => Configuration.Namespace ?? DefaultName;
         public SourceInputModel? SourceInputModel { get; }
-        public virtual TypeFactory TypeFactory { get; } = null!;
     }
 }

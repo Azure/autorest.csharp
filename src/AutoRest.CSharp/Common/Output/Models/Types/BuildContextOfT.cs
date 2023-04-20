@@ -14,8 +14,6 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class BuildContext<T> : BuildContext where T : OutputLibrary
 #pragma warning restore SA1649 // File name should match first type name
     {
-        private TypeFactory? _typeFactory;
-
         private T? _library;
         public T Library => _library ??= EnsureLibrary();
 
@@ -43,7 +41,5 @@ namespace AutoRest.CSharp.Output.Models.Types
             : base(codeModel, sourceInputModel)
         {
         }
-
-        public override TypeFactory TypeFactory => _typeFactory ??= new TypeFactory(Library);
     }
 }

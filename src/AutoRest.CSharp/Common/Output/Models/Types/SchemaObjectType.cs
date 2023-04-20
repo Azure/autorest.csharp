@@ -38,8 +38,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ObjectTypeProperty? _additionalPropertiesProperty;
         private CSharpType? _implementsDictionaryType;
 
-        protected SchemaObjectType(ObjectSchema objectSchema, BuildContext context)
-            : this(objectSchema, null, context.TypeFactory, context.SchemaUsageProvider, context.DefaultNamespace, context.SourceInputModel)
+        protected SchemaObjectType(ObjectSchema objectSchema, TypeFactory typeFactory, BuildContext context)
+            : this(objectSchema, null, typeFactory, context.SchemaUsageProvider, context.DefaultNamespace, context.SourceInputModel)
         {
             _context = context;
         }

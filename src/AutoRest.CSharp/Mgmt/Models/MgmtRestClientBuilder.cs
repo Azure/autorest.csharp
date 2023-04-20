@@ -52,8 +52,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             public int GetHashCode(InputParameter obj) => obj.Name.GetHashCode();
         }
 
-        public MgmtRestClientBuilder(OperationGroup operationGroup)
-            : base(GetMgmtParametersFromOperations(operationGroup.Operations), MgmtContext.Context.TypeFactory)
+        public MgmtRestClientBuilder(OperationGroup operationGroup, TypeFactory typeFactory)
+            : base(GetMgmtParametersFromOperations(operationGroup.Operations), typeFactory)
         {
         }
 

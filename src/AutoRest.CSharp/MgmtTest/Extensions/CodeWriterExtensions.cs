@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
         {
             // get the type of this schema in the type factory if the type is not specified
             // get the type from TypeFactory cannot get the replaced types, therefore we need to put an argument in the signature as a hint in case this might happen in the replaced type case
-            type ??= MgmtContext.Context.TypeFactory.CreateType(exampleValue.Schema, false);
+            type ??= MgmtContext.Context.Library.TypeFactory.CreateType(exampleValue.Schema, false);
 
             return type.IsFrameworkType ?
                 writer.AppendFrameworkTypeValue(type, exampleValue, includeCollectionInitialization) :

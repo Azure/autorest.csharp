@@ -19,19 +19,16 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         private ObjectTypeProperty[]? _myProperties;
 
-        public MgmtObjectType(ObjectSchema objectSchema)
-            : this(objectSchema, default, default)
+        public MgmtObjectType(ObjectSchema objectSchema, TypeFactory typeFactory, string? name = default, string? nameSpace = default)
+            : base(objectSchema, typeFactory, MgmtContext.Context)
         {
-        }
-
-        public MgmtObjectType(ObjectSchema objectSchema, string? name = default, string? nameSpace = default)
-            : base(objectSchema, MgmtContext.Context)
-        {
+            _typeFactory = typeFactory;
             _defaultName = name;
             _defaultNamespace = nameSpace;
         }
 
         protected virtual bool IsResourceType => false;
+        private readonly TypeFactory _typeFactory;
         private string? _defaultName;
         protected override string DefaultName => _defaultName ??= GetDefaultName(ObjectSchema, IsResourceType);
         private string? _defaultNamespace;
@@ -188,7 +185,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 // if this type is defined with a base class, we have to use the same base class here
                 // otherwise the compiler will throw an error
-                if (MgmtContext.Context.TypeFactory.TryCreateType(ExistingType.BaseType, ShouldIncludeArmCoreType, out var existingBaseType))
+                if (_typeFactory.TryCreateType(ExistingType.BaseType, ShouldIncludeArmCoreType, out var existingBaseType))
                 {
                     // if we could find a type and it is not a framework type meaning that it is a TypeProvider, return that
                     if (!existingBaseType.IsFrameworkType)

@@ -28,8 +28,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly ModelTypeMapping? _typeMapping;
         private readonly TypeFactory _typeFactory;
         private IList<EnumTypeValue>? _values;
-        public EnumType(InputEnumType enumType, Schema schema, BuildContext context)
-            : this(enumType, GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context.SchemaUsageProvider), context.TypeFactory, context.SourceInputModel)
+        public EnumType(InputEnumType enumType, Schema schema, TypeFactory typeFactory, BuildContext context)
+            : this(enumType, GetDefaultNamespace(schema.Extensions?.Namespace, context), GetAccessibility(schema, context.SchemaUsageProvider), typeFactory, context.SourceInputModel)
         {
         }
 
