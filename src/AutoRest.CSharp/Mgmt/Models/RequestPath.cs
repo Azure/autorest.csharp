@@ -111,11 +111,15 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             if (httpRequest is null)
                 continue;
 
-            var references = MgmtRestClientBuilder.GetReferencesToOperationParameters(operation, request.Parameters, typeFactory);
+            var inputParameters = operation.Parameters
+                .Concat(request.Parameters)
+                .Where(rp => rp.In is HttpParameterIn.Path or HttpParameterIn.Uri)
+                .ToDictionary(GetRequestParameterName);
+
             var segments = new List<Segment>();
             var segmentIndex = 0;
-            CreateSegments(httpRequest.Uri, references, segments, ref segmentIndex);
-            CreateSegments(httpRequest.Path, references, segments, ref segmentIndex);
+            CreateSegments(httpRequest.Uri, inputParameters, segments, typeFactory, ref segmentIndex);
+            CreateSegments(httpRequest.Path, inputParameters, segments, typeFactory, ref segmentIndex);
 
             return new RequestPath(CheckByIdPath(segments), operation.GetHttpPath());
         }
@@ -159,7 +163,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             return segments;
 
         // this is a ById request path
-        return new List<Segment> { new Segment(first.Reference, first.Escape, true) };
+        return new List<Segment> { new(first.Reference, first.Escape, true) };
     }
 
     public bool IsById => Count == 1 && this.First().SkipUrlEncoding;
@@ -384,7 +388,7 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
         return requestScopeTypes.IsSubsetOf(resourceScopeTypes);
     }
 
-    private static void CreateSegments(string path, IReadOnlyDictionary<string, (ReferenceOrConstant ReferenceOrConstant, bool SkipUrlEncoding)> references, ICollection<Segment> segments, ref int segmentIndex)
+    private static void CreateSegments(string path, IReadOnlyDictionary<string, RequestParameter> requestParameters, ICollection<Segment> segments, TypeFactory typeFactory, ref int segmentIndex)
     {
         foreach ((ReadOnlySpan<char> span, bool isLiteral) in Utilities.StringExtensions.GetPathParts(path))
         {
@@ -415,23 +419,27 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
             }
             else
             {
-                if (references.TryGetValue(span.ToString(), out var parameterReference))
+                if (requestParameters.TryGetValue(span.ToString(), out var inputParameter))
                 {
                     segmentIndex++;
-                    var (referenceOrConstant, skipUriEncoding) = parameterReference;
-                    var valueType = referenceOrConstant.Type;
 
-                    // we explicitly skip the `uri` variable in the path (which should be `endpoint`)
-                    if (valueType.Equals(typeof(Uri)))
+                    // we explicitly skip the `endpoint` variable in the path
+                    if (IsEndpointParameter(inputParameter))
                     {
                         continue;
                     }
 
-                    //for now we only assume expand variables are in the key slot which will be an odd slot
-                    CSharpType? expandableType = segmentIndex % 2 == 0 && !valueType.IsFrameworkType && valueType.Implementation is EnumType ? valueType : null;
+                    var isNullable = inputParameter.IsNullable || !inputParameter.IsRequired;
+                    var type = typeFactory.CreateType(inputParameter.Schema, inputParameter.Extensions?.Format, isNullable);
 
+                    var reference = CreateReference(inputParameter, type, typeFactory);
+                    var valueType = reference.Type;
+
+                    //for now we only assume expand variables are in the key slot which will be an odd slot
+                    CSharpType? expandableType = segmentIndex % 2 == 0 && valueType is { IsFrameworkType: false, Implementation: EnumType } ? valueType : null;
                     // this is either a constant but not string type, or it is not a constant, we just keep the information in this path segment
-                    segments.Add(new Segment(referenceOrConstant, !skipUriEncoding, expandableType: expandableType));
+                    var skipUriEncoding = inputParameter.Extensions?.SkipEncoding ?? false;
+                    segments.Add(new Segment(reference, !skipUriEncoding, expandableType: expandableType));
                 }
                 else
                 {
@@ -439,6 +447,39 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
                 }
             }
         }
+    }
+
+    private static ReferenceOrConstant CreateReference(RequestParameter requestParameter, CSharpType type, TypeFactory typeFactory)
+    {
+        if (requestParameter.Implementation != ImplementationLocation.Method)
+        {
+            return new Reference(requestParameter.CSharpName(), type);
+        }
+
+        if (requestParameter.Schema is ConstantSchema constant)
+        {
+            return BuilderHelpers.ParseConstant(constant.Value.Value, typeFactory.CreateType(constant.ValueType, constant.Value.Value == null));
+        }
+
+        var groupedByParameter = requestParameter.GroupedBy;
+        if (groupedByParameter == null)
+        {
+            return new Reference(requestParameter.CSharpName(), type);
+        }
+
+        var groupModel = (SchemaObjectType)typeFactory.CreateType(groupedByParameter.Schema, false).Implementation;
+        var property = groupModel.GetPropertyForGroupedParameter(requestParameter.Language.Default.Name);
+
+        return new Reference($"{groupedByParameter.CSharpName()}.{property.Declaration.Name}", property.Declaration.Type);
+    }
+
+    private static bool IsEndpointParameter(RequestParameter requestParameter)
+        => requestParameter.Origin == "modelerfour:synthesized/host";
+
+    private static string GetRequestParameterName(RequestParameter requestParameter)
+    {
+        var language = requestParameter.Language.Default;
+        return language.SerializedName ?? language.Name;
     }
 
     public int Count => _segments.Count;

@@ -112,20 +112,9 @@ namespace AutoRest.CSharp.Output.Models
             return new LowLevelClientMethod(convenienceMethods, protocolMethods, createRequestMethods, requestBodyType, responseBodyType, _isPageable, _isLongRunning, Operation.Paging?.ItemName ?? "value");
         }
 
-        public HlcMethods BuildHlc(DataPlaneResponseHeaderGroupType? headerModel)
+        public HlcMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
         {
-            var createRequestMethods = CreateRequestMethods(headerModel, null).ToArray();
-            var convenienceMethods = _isPageable && !_isLongRunning
-                ? new[]{ BuildConvenienceMethod(false, true), BuildConvenienceMethod(false, false) }
-                : Array.Empty<Method>();
-
-            return new HlcMethods(Operation, createRequestMethods, convenienceMethods);
-        }
-
-
-        public HlcMethods BuildMpg(CSharpType? resourceDataType)
-        {
-            var createRequestMethods = CreateRequestMethods(null, resourceDataType).ToArray();
+            var createRequestMethods = CreateRequestMethods(headerModel, resourceDataType).ToArray();
             var convenienceMethods = _isPageable && !_isLongRunning
                 ? new[]{ BuildConvenienceMethod(false, true), BuildConvenienceMethod(false, false) }
                 : Array.Empty<Method>();

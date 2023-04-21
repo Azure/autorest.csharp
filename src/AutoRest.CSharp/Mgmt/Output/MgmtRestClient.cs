@@ -32,17 +32,17 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             if (methodBuilder.Operation.HttpMethod != RequestMethod.Get)
             {
-                return methodBuilder.BuildMpg(null);
+                return methodBuilder.BuildLegacy(null, null);
             }
 
             var mpgLibrary = (MgmtOutputLibrary)library;
             if (!mpgLibrary.TryGetResourceData(methodBuilder.Operation.Path, out var resourceData))
             {
-                return methodBuilder.BuildMpg(null);
+                return methodBuilder.BuildLegacy(null, null);
             }
 
             var operationSet = mpgLibrary.GetOperationSet(methodBuilder.Operation.Path);
-            return methodBuilder.BuildMpg(operationSet.IsResource() ? resourceData.Type : null);
+            return methodBuilder.BuildLegacy(null, operationSet.IsResource() ? resourceData.Type : null);
         }
 
         public IReadOnlyList<Resource> Resources => _resources ??= _operations.SelectMany(operation => operation.GetResourceFromResourceType()).Distinct().ToList();

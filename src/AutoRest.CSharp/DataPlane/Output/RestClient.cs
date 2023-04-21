@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected virtual HlcMethods BuildMethods(OutputLibrary library, OperationMethodsBuilder methodBuilder)
         {
-            return methodBuilder.BuildHlc(library is DataPlaneOutputLibrary dpl ? dpl.FindHeaderModel(methodBuilder.Operation) : null);
+            return methodBuilder.BuildLegacy(library is DataPlaneOutputLibrary dpl ? dpl.FindHeaderModel(methodBuilder.Operation) : null, null);
         }
 
         private IEnumerable<LowLevelClientMethod> GetProtocolMethods(IEnumerable<RestClientMethod> methods, ClientFields fields, InputClient inputClient, TypeFactory typeFactory, OutputLibrary library)

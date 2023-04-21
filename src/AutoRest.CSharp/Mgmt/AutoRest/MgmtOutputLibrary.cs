@@ -559,8 +559,11 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
             foreach (InputClient inputClient in _input.Clients)
             {
-                var ctorParameters = (IReadOnlyList<Parameter>)MgmtRestClientBuilder.GetMgmtParametersFromOperations(inputClient.Operations)
-                    .Select(p => RestClientBuilder.BuildConstructorParameter(p, TypeFactory))
+                var ctorParameters = inputClient.Operations
+                    .SelectMany(op => op.Parameters)
+                    .Where(p => p.Kind == InputOperationParameterKind.Client)
+                    .GroupBy(p => p.Name)
+                    .Select(g => RestClientBuilder.BuildConstructorParameter(g.First(), TypeFactory))
                     .Select(p => p.IsApiVersionParameter ? p with { DefaultValue = Constant.Default(p.Type.WithNullable(true)), Initializer = p.DefaultValue?.GetConstantFormattable() } : p)
                     .OrderBy(p => p.IsOptionalInSignature)
                     .ToList();
@@ -570,6 +573,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 var operations = inputClient.Operations.Select(o => _inputOperationToOperation[o]).ToList();
                 var clientName = string.IsNullOrEmpty(inputClient.Name) ? _input.Name : inputClient.Name;
                 var restClient = new MgmtRestClient(inputClient, clientParameters, restClientParameters, operations, clientName, this);
+
                 foreach (var operation in inputClient.Operations)
                 {
                     // Do not trim the tenant resource path '/'.
