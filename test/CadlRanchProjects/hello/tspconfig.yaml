@@ -1,3 +1,4 @@
 options:
   "@azure-tools/typespec-csharp":
     unreferenced-types-handling: keepAll
+    ambiguity-handling: appendValue

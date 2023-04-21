@@ -20,6 +20,7 @@ export type NetEmitterOptions = {
     "save-inputs"?: boolean;
     "model-namespace"?: boolean;
     "existing-project-folder"?: string;
+    "ambiguity-handling"?: "useOverload" | "appendValue";
     debug?: boolean;
     "models-to-treat-empty-string-as-null"?: string[];
     "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
@@ -54,6 +55,11 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "generate-convenience-methods": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },
         "existing-project-folder": { type: "string", nullable: true },
+        "ambiguity-handling": {
+            type: "string",
+            enum: ["useOverload", "appendValue"],
+            nullable: true
+        },
         debug: { type: "boolean", nullable: true },
         "models-to-treat-empty-string-as-null": {
             type: "array",

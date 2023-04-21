@@ -131,7 +131,12 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return !HasAmbiguityBetweenProtocolAndConvenience();
+            if (HasAmbiguityBetweenProtocolAndConvenience() && Configuration.AmbiguityHandling == Configuration.AmbiguityHandlingOption.UseOverload)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private bool IsParameterTypeSame(Parameter? first, Parameter? second)

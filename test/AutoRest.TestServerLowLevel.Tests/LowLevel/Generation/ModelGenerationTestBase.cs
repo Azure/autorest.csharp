@@ -52,6 +52,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 generateModelFactory: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
+                ambiguityHandling: Configuration.AmbiguityHandlingOption.UseOverload,
                 projectFolder: ".",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),

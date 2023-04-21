@@ -67,6 +67,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 generateModelFactory: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
+                ambiguityHandling: Configuration.AmbiguityHandlingOption.UseOverload,
                 projectFolder: "/..",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),

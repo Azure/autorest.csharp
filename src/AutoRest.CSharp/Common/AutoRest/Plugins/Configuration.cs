@@ -9,7 +9,6 @@ using System.Linq;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
 using Azure.Core;
-using Microsoft.CodeAnalysis.Text;
 
 namespace AutoRest.CSharp.Input
 {
@@ -39,6 +38,7 @@ namespace AutoRest.CSharp.Input
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
             public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
             public const string UnreferencedTypesHandling = "unreferenced-types-handling";
+            public const string AmbiguityHandling = "ambiguity-handling";
             public const string ModelFactoryForHlc = "model-factory-for-hlc";
             public const string GenerateModelFactory = "generate-model-factory";
             public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
@@ -50,6 +50,12 @@ namespace AutoRest.CSharp.Input
             RemoveOrInternalize = 0,
             Internalize = 1,
             KeepAll = 2
+        }
+
+        public enum AmbiguityHandlingOption
+        {
+            UseOverload = 0,
+            AppendValue = 1
         }
 
         public static void Initialize(
@@ -70,6 +76,7 @@ namespace AutoRest.CSharp.Input
             bool generateModelFactory,
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
+            AmbiguityHandlingOption ambiguityHandling,
             string? projectFolder,
             string? existingProjectFolder,
             IReadOnlyList<string> protocolMethodList,
@@ -93,6 +100,7 @@ namespace AutoRest.CSharp.Input
             SingleTopLevelClient = singleTopLevelClient;
             GenerateModelFactory = generateModelFactory;
             UnreferencedTypesHandling = unreferencedTypesHandling;
+            AmbiguityHandling = ambiguityHandling;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
             {
@@ -202,6 +210,7 @@ namespace AutoRest.CSharp.Input
         private static IReadOnlyList<string>? _oldModelFactoryEntries;
         public static IReadOnlyList<string> ModelFactoryForHlc => _oldModelFactoryEntries ?? throw new InvalidOperationException("Configuration has not been initialized");
         public static UnreferencedTypesHandlingOption UnreferencedTypesHandling { get; private set; }
+        public static AmbiguityHandlingOption AmbiguityHandling { get; private set; }
         private static IReadOnlyList<string>? _suppressAbstractBaseClasses;
         public static IReadOnlyList<string> SuppressAbstractBaseClasses => _suppressAbstractBaseClasses ?? throw new InvalidOperationException("Configuration has not been initialized");
 
@@ -244,6 +253,7 @@ namespace AutoRest.CSharp.Input
                 generateModelFactory: GetOptionBoolValue(autoRest, Options.GenerateModelFactory),
                 modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
+                ambiguityHandling: GetOptionEnumValue<AmbiguityHandlingOption>(autoRest, Options.AmbiguityHandling),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 existingProjectFolder: autoRest.GetValue<string?>(Options.ExistingProjectfolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -274,6 +284,7 @@ namespace AutoRest.CSharp.Input
         public static Enum? GetDefaultEnumOptionValue(string option) => option switch
         {
             Options.UnreferencedTypesHandling => UnreferencedTypesHandlingOption.RemoveOrInternalize,
+            Options.AmbiguityHandling => AmbiguityHandlingOption.UseOverload,
             _ => null
         };
 

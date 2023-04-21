@@ -16,7 +16,7 @@ namespace CadlRanchProjects.Tests
         public Task Parameters_CollectionFormat_Query_multi() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).GetQueryClient().MultiAsync(colors, new RequestContext();
+            Response response = await new CollectionFormatClient(host, null).GetQueryClient().MultiAsync(colors, new RequestContext());
             Assert.AreEqual(204, response.Status);
         });
 

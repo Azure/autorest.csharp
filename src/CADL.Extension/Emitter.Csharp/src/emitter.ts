@@ -92,6 +92,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 SingleTopLevelClient: options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
+                "ambiguity-handling": options["ambiguity-handling"],
                 "model-namespace": options["model-namespace"],
                 ModelsToTreatEmptyStringAsNull:
                     options["models-to-treat-empty-string-as-null"],
