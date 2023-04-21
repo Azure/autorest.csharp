@@ -35,7 +35,7 @@ namespace OmitOperationGroups.Mock
         {
         }
 
-        private ClientDiagnostics Model5sClientDiagnostics => _model5sClientDiagnostics ??= new ClientDiagnostics("OmitOperationGroups.Mock", ProviderConstants.DefaultProviderNamespace, Diagnostics);
+        private ClientDiagnostics Model5sClientDiagnostics => _model5sClientDiagnostics ??= new ClientDiagnostics("OmitOperationGroups", ProviderConstants.DefaultProviderNamespace, Diagnostics);
         private Model5SRestOperations Model5sRestClient => _model5sRestClient ??= new Model5SRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint);
 
         private string GetApiVersionOrNull(ResourceType resourceType)

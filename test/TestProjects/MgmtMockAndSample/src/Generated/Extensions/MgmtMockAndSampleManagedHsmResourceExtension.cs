@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Mock
         {
         }
 
-        private ClientDiagnostics ManagedHsmClientDiagnostics => _managedHsmClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample.Mock", ManagedHsmResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics ManagedHsmClientDiagnostics => _managedHsmClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample", ManagedHsmResource.ResourceType.Namespace, Diagnostics);
         private ManagedHsmsRestOperations ManagedHsmRestClient => _managedHsmRestClient ??= new ManagedHsmsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(ManagedHsmResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

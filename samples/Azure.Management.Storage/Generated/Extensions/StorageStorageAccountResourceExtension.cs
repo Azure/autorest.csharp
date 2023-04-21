@@ -32,7 +32,7 @@ namespace Azure.Management.Storage.Mock
         {
         }
 
-        private ClientDiagnostics StorageAccountClientDiagnostics => _storageAccountClientDiagnostics ??= new ClientDiagnostics("Azure.Management.Storage.Mock", StorageAccountResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics StorageAccountClientDiagnostics => _storageAccountClientDiagnostics ??= new ClientDiagnostics("Azure.Management.Storage", StorageAccountResource.ResourceType.Namespace, Diagnostics);
         private StorageAccountsRestOperations StorageAccountRestClient => _storageAccountRestClient ??= new StorageAccountsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(StorageAccountResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

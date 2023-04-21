@@ -32,7 +32,7 @@ namespace MgmtListMethods.Mock
         {
         }
 
-        private ClientDiagnostics FakeParentWithAncestorClientDiagnostics => _fakeParentWithAncestorClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods.Mock", FakeParentWithAncestorResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics FakeParentWithAncestorClientDiagnostics => _fakeParentWithAncestorClientDiagnostics ??= new ClientDiagnostics("MgmtListMethods", FakeParentWithAncestorResource.ResourceType.Namespace, Diagnostics);
         private FakeParentWithAncestorsRestOperations FakeParentWithAncestorRestClient => _fakeParentWithAncestorRestClient ??= new FakeParentWithAncestorsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(FakeParentWithAncestorResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

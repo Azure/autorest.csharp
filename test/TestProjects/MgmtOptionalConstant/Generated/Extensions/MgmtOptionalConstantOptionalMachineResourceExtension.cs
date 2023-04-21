@@ -32,7 +32,7 @@ namespace MgmtOptionalConstant.Mock
         {
         }
 
-        private ClientDiagnostics OptionalMachineOptionalsClientDiagnostics => _optionalMachineOptionalsClientDiagnostics ??= new ClientDiagnostics("MgmtOptionalConstant.Mock", OptionalMachineResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics OptionalMachineOptionalsClientDiagnostics => _optionalMachineOptionalsClientDiagnostics ??= new ClientDiagnostics("MgmtOptionalConstant", OptionalMachineResource.ResourceType.Namespace, Diagnostics);
         private OptionalsRestOperations OptionalMachineOptionalsRestClient => _optionalMachineOptionalsRestClient ??= new OptionalsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(OptionalMachineResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

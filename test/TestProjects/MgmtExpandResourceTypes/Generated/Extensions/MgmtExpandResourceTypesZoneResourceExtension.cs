@@ -32,7 +32,7 @@ namespace MgmtExpandResourceTypes.Mock
         {
         }
 
-        private ClientDiagnostics ZoneClientDiagnostics => _zoneClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes.Mock", ZoneResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics ZoneClientDiagnostics => _zoneClientDiagnostics ??= new ClientDiagnostics("MgmtExpandResourceTypes", ZoneResource.ResourceType.Namespace, Diagnostics);
         private ZonesRestOperations ZoneRestClient => _zoneRestClient ??= new ZonesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(ZoneResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

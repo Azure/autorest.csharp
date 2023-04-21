@@ -32,7 +32,7 @@ namespace MgmtPropertyBag.Mock
         {
         }
 
-        private ClientDiagnostics FooClientDiagnostics => _fooClientDiagnostics ??= new ClientDiagnostics("MgmtPropertyBag.Mock", FooResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics FooClientDiagnostics => _fooClientDiagnostics ??= new ClientDiagnostics("MgmtPropertyBag", FooResource.ResourceType.Namespace, Diagnostics);
         private FoosRestOperations FooRestClient => _fooRestClient ??= new FoosRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(FooResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

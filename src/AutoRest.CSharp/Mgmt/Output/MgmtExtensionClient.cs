@@ -140,6 +140,8 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string DefaultNamespace => $"{base.DefaultNamespace}.Mock";
 
+        public override string DiagnosticNamespace => base.DefaultNamespace;
+
         public bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 
         public override IEnumerable<Resource> ChildResources => _extensionForChildResources?.ChildResources ?? Enumerable.Empty<Resource>();

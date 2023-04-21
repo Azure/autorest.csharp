@@ -35,7 +35,7 @@ namespace MgmtMockAndSample.Mock
         {
         }
 
-        private ClientDiagnostics VaultClientDiagnostics => _vaultClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample.Mock", VaultResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics VaultClientDiagnostics => _vaultClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample", VaultResource.ResourceType.Namespace, Diagnostics);
         private VaultsRestOperations VaultRestClient => _vaultRestClient ??= new VaultsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(VaultResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

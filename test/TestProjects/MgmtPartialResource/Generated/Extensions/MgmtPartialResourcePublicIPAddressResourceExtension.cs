@@ -32,7 +32,7 @@ namespace MgmtPartialResource.Mock
         {
         }
 
-        private ClientDiagnostics PublicIPAddressClientDiagnostics => _publicIPAddressClientDiagnostics ??= new ClientDiagnostics("MgmtPartialResource.Mock", PublicIPAddressResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics PublicIPAddressClientDiagnostics => _publicIPAddressClientDiagnostics ??= new ClientDiagnostics("MgmtPartialResource", PublicIPAddressResource.ResourceType.Namespace, Diagnostics);
         private PublicIPAddressesRestOperations PublicIPAddressRestClient => _publicIPAddressRestClient ??= new PublicIPAddressesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(PublicIPAddressResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

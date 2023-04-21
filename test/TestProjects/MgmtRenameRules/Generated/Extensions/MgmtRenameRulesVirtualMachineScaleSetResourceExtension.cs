@@ -32,7 +32,7 @@ namespace MgmtRenameRules.Mock
         {
         }
 
-        private ClientDiagnostics VirtualMachineScaleSetClientDiagnostics => _virtualMachineScaleSetClientDiagnostics ??= new ClientDiagnostics("MgmtRenameRules.Mock", VirtualMachineScaleSetResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics VirtualMachineScaleSetClientDiagnostics => _virtualMachineScaleSetClientDiagnostics ??= new ClientDiagnostics("MgmtRenameRules", VirtualMachineScaleSetResource.ResourceType.Namespace, Diagnostics);
         private VirtualMachineScaleSetsRestOperations VirtualMachineScaleSetRestClient => _virtualMachineScaleSetRestClient ??= new VirtualMachineScaleSetsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(VirtualMachineScaleSetResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

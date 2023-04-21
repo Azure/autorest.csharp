@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Mock
         {
         }
 
-        private ClientDiagnostics ImageClientDiagnostics => _imageClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", ImageResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics ImageClientDiagnostics => _imageClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ImageResource.ResourceType.Namespace, Diagnostics);
         private ImagesRestOperations ImageRestClient => _imageRestClient ??= new ImagesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(ImageResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

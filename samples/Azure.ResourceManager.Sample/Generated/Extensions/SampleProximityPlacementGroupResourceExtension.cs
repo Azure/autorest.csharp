@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Mock
         {
         }
 
-        private ClientDiagnostics ProximityPlacementGroupClientDiagnostics => _proximityPlacementGroupClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", ProximityPlacementGroupResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics ProximityPlacementGroupClientDiagnostics => _proximityPlacementGroupClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", ProximityPlacementGroupResource.ResourceType.Namespace, Diagnostics);
         private ProximityPlacementGroupsRestOperations ProximityPlacementGroupRestClient => _proximityPlacementGroupRestClient ??= new ProximityPlacementGroupsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(ProximityPlacementGroupResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

@@ -32,7 +32,7 @@ namespace MgmtSafeFlatten.Mock
         {
         }
 
-        private ClientDiagnostics TypeOneCommonClientDiagnostics => _typeOneCommonClientDiagnostics ??= new ClientDiagnostics("MgmtSafeFlatten.Mock", TypeOneResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics TypeOneCommonClientDiagnostics => _typeOneCommonClientDiagnostics ??= new ClientDiagnostics("MgmtSafeFlatten", TypeOneResource.ResourceType.Namespace, Diagnostics);
         private CommonRestOperations TypeOneCommonRestClient => _typeOneCommonRestClient ??= new CommonRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(TypeOneResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

@@ -32,7 +32,7 @@ namespace Azure.ResourceManager.Sample.Mock
         {
         }
 
-        private ClientDiagnostics VirtualMachineClientDiagnostics => _virtualMachineClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample.Mock", VirtualMachineResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics VirtualMachineClientDiagnostics => _virtualMachineClientDiagnostics ??= new ClientDiagnostics("Azure.ResourceManager.Sample", VirtualMachineResource.ResourceType.Namespace, Diagnostics);
         private VirtualMachinesRestOperations VirtualMachineRestClient => _virtualMachineRestClient ??= new VirtualMachinesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(VirtualMachineResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

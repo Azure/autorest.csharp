@@ -32,7 +32,7 @@ namespace MgmtRenameRules.Mock
         {
         }
 
-        private ClientDiagnostics ImageClientDiagnostics => _imageClientDiagnostics ??= new ClientDiagnostics("MgmtRenameRules.Mock", ImageResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics ImageClientDiagnostics => _imageClientDiagnostics ??= new ClientDiagnostics("MgmtRenameRules", ImageResource.ResourceType.Namespace, Diagnostics);
         private ImagesRestOperations ImageRestClient => _imageRestClient ??= new ImagesRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(ImageResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)

@@ -32,7 +32,7 @@ namespace MgmtMockAndSample.Mock
         {
         }
 
-        private ClientDiagnostics DiskEncryptionSetClientDiagnostics => _diskEncryptionSetClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample.Mock", DiskEncryptionSetResource.ResourceType.Namespace, Diagnostics);
+        private ClientDiagnostics DiskEncryptionSetClientDiagnostics => _diskEncryptionSetClientDiagnostics ??= new ClientDiagnostics("MgmtMockAndSample", DiskEncryptionSetResource.ResourceType.Namespace, Diagnostics);
         private DiskEncryptionSetsRestOperations DiskEncryptionSetRestClient => _diskEncryptionSetRestClient ??= new DiskEncryptionSetsRestOperations(Pipeline, Diagnostics.ApplicationId, Endpoint, GetApiVersionOrNull(DiskEncryptionSetResource.ResourceType));
 
         private string GetApiVersionOrNull(ResourceType resourceType)
