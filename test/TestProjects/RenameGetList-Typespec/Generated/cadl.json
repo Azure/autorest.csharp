@@ -164,7 +164,7 @@
      "Description": "Represents the project creation datetime.",
      "Type": {
       "$id": "23",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -179,7 +179,7 @@
      "Description": "Represents the project last modification datetime.",
      "Type": {
       "$id": "25",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -194,7 +194,7 @@
      "Description": "Represents the project last training datetime.",
      "Type": {
       "$id": "27",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -209,7 +209,7 @@
      "Description": "Represents the project last deployment datetime.",
      "Type": {
       "$id": "29",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },

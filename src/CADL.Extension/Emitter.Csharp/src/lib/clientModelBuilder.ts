@@ -2,13 +2,13 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 import {
-    SdkClient,
-    createSdkContext,
+    Client,
+    createDpgContext,
     listClients,
     listOperationGroups,
     listOperationsInOperationGroup,
-    SdkOperationGroup,
-    SdkContext
+    OperationGroup,
+    DpgContext
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -76,7 +76,7 @@ export function createModelForService(
     service: Service
 ): CodeModel {
     const program = context.program;
-    const sdkContext = createSdkContext(context);
+    const dpgContext = createSdkContext(context);
     const title = service.title;
     const serviceNamespaceType = service.type;
     const apiVersions: Set<string> = new Set<string>();

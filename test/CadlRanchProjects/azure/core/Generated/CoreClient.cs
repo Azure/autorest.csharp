@@ -102,12 +102,12 @@ namespace _Specs_.Azure.Core
             }
         }
 
-        /// <summary> Adds a user or repalces a user&apos;s fields. </summary>
+        /// <summary> Adds a user or replaces a user&apos;s fields. </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
-        /// <remarks> Creates or repalces a User. </remarks>
+        /// <remarks> Creates or replaces a User. </remarks>
         public virtual async Task<Response<User>> CreateOrReplaceAsync(int id, User resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resource, nameof(resource));
@@ -117,12 +117,12 @@ namespace _Specs_.Azure.Core
             return Response.FromValue(User.FromResponse(response), response);
         }
 
-        /// <summary> Adds a user or repalces a user&apos;s fields. </summary>
+        /// <summary> Adds a user or replaces a user&apos;s fields. </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resource"/> is null. </exception>
-        /// <remarks> Creates or repalces a User. </remarks>
+        /// <remarks> Creates or replaces a User. </remarks>
         public virtual Response<User> CreateOrReplace(int id, User resource, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(resource, nameof(resource));
@@ -132,7 +132,7 @@ namespace _Specs_.Azure.Core
             return Response.FromValue(User.FromResponse(response), response);
         }
 
-        /// <summary> Adds a user or repalces a user&apos;s fields. </summary>
+        /// <summary> Adds a user or replaces a user&apos;s fields. </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -158,7 +158,7 @@ namespace _Specs_.Azure.Core
             }
         }
 
-        /// <summary> Adds a user or repalces a user&apos;s fields. </summary>
+        /// <summary> Adds a user or replaces a user&apos;s fields. </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>

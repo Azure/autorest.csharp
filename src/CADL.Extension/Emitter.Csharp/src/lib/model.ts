@@ -55,7 +55,8 @@ import {
     InputType,
     InputUnionType,
     InputNullType,
-    InputIntrinsicType
+    InputIntrinsicType,
+    InputUnknownType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
@@ -136,7 +137,9 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Boolean;
         case "plainDate":
             return InputTypeKind.Date;
-        case "zonedDateTime":
+        case "utcDateTime":
+            return InputTypeKind.DateTime;
+        case "offsetDateTime":
             return InputTypeKind.DateTime;
         case "plainTime":
             return InputTypeKind.Time;
@@ -526,12 +529,10 @@ export function getInputType(
         switch (type.name) {
             case "unknown":
                 return {
-                    Name: "unknown",
-                    Description: getDoc(program, type),
-                    IsNullable: false,
-                    Usage: Usage.None,
-                    Properties: []
-                } as InputModelType;
+                    Name: "Intrinsic",
+                    Kind: "unknown",
+                    IsNullable: false
+                } as InputUnknownType;
             case "null":
                 return {
                     Name: "Intrinsic",

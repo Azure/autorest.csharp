@@ -34,7 +34,7 @@ namespace MgmtExtensionResource
         internal MgmtExtensionResourceArmOperation(IOperationSource<T> source, ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, OperationFinalStateVia finalStateVia)
         {
             var nextLinkOperation = NextLinkOperationImplementation.Create(source, pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
-            _operation = new OperationInternal<T>(clientDiagnostics, nextLinkOperation, response, "MgmtExtensionResourceArmOperation", fallbackStrategy: new ExponentialDelayStrategy());
+            _operation = new OperationInternal<T>(nextLinkOperation, clientDiagnostics, response, "MgmtExtensionResourceArmOperation", fallbackStrategy: new SequentialDelayStrategy());
         }
 
         /// <inheritdoc />
