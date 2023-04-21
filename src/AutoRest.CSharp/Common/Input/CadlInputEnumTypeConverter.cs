@@ -92,9 +92,11 @@ namespace AutoRest.CSharp.Common.Input
                         if (currentType == InputPrimitiveType.Int32 || currentType == InputPrimitiveType.Float32) throw new JsonException($"Enum value types are not consistent.");
                         currentType = InputPrimitiveType.String;
                         break;
+                    default:
+                        throw new JsonException($"Unsupported enum value type, expect string, int or float.");
                 }
             }
-            valueType = currentType ?? InputPrimitiveType.Float32;
+            valueType = currentType ?? throw new JsonException("Enum value type must be set.");
 
             var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, NormalizeValues(allowedValues, valueType), isExtendable);
             if (id != null)
