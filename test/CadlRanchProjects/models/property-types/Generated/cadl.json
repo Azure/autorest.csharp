@@ -196,7 +196,7 @@
      "Description": "Property",
      "Type": {
       "$id": "25",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
