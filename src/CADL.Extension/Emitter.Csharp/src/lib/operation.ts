@@ -3,7 +3,7 @@
 
 import { getOperationLink } from "@azure-tools/typespec-azure-core";
 import {
-    createDpgContext,
+    createSdkContext,
     isApiVersion,
     shouldGenerateConvenient,
     shouldGenerateProtocol
@@ -62,7 +62,7 @@ import {
     getInputType
 } from "./model.js";
 import { capitalize } from "./utils.js";
-import { DpgContext } from "@azure-tools/typespec-client-generator-core";
+import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 
 export function loadOperation(
     context: EmitContext<NetEmitterOptions>,
@@ -74,7 +74,7 @@ export function loadOperation(
     enums: Map<string, InputEnumType>
 ): InputOperation {
     const program = context.program;
-    const dpgContext = createDpgContext(context);
+    const dpgContext = createSdkContext(context);
     const {
         path: fullPath,
         operation: op,
@@ -218,7 +218,7 @@ export function loadOperation(
     } as InputOperation;
 
     function loadOperationParameter(
-        context: DpgContext,
+        context: SdkContext,
         parameter: HttpOperationParameter
     ): InputParameter {
         const { type: location, name, param } = parameter;
@@ -276,7 +276,7 @@ export function loadOperation(
     }
 
     function loadBodyParameter(
-        context: DpgContext,
+        context: SdkContext,
         body: ModelProperty | Model
     ): InputParameter {
         const type = body.kind === "Model" ? body : body.type;
@@ -302,7 +302,7 @@ export function loadOperation(
     }
 
     function loadOperationResponse(
-        context: DpgContext,
+        context: SdkContext,
         response: HttpOperationResponse,
         resourceOperation?: ResourceOperation
     ): OperationResponse | undefined {
@@ -363,7 +363,7 @@ export function loadOperation(
     }
 
     function loadLongRunningOperation(
-        context: DpgContext,
+        context: SdkContext,
         op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationLongRunning | undefined {
@@ -383,7 +383,7 @@ export function loadOperation(
     }
 
     function loadLongRunningFinalResponse(
-        context: DpgContext,
+        context: SdkContext,
         op: HttpOperation,
         resourceOperation?: ResourceOperation
     ): OperationResponse | undefined {
@@ -413,13 +413,13 @@ export function loadOperation(
         );
     }
 
-    function isLongRunningOperation(context: DpgContext, op: Operation) {
+    function isLongRunningOperation(context: SdkContext, op: Operation) {
         return getOperationLink(context.program, op, "polling") !== undefined;
     }
 }
 
 function getOperationGroupName(
-    context: DpgContext,
+    context: SdkContext,
     operation: Operation,
     serviceNamespaceType: Namespace
 ): string {

@@ -211,7 +211,7 @@
      "Description": "Represents the project creation datetime.",
      "Type": {
       "$id": "31",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -226,7 +226,7 @@
      "Description": "Represents the project last modification datetime.",
      "Type": {
       "$id": "33",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -241,7 +241,7 @@
      "Description": "Represents the project last training datetime.",
      "Type": {
       "$id": "35",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -256,7 +256,7 @@
      "Description": "Represents the project last deployment datetime.",
      "Type": {
       "$id": "37",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -425,7 +425,7 @@
      "Description": "The creation date time of the job.",
      "Type": {
       "$id": "58",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -440,7 +440,7 @@
      "Description": "The the last date time the job was updated.",
      "Type": {
       "$id": "60",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -455,7 +455,7 @@
      "Description": "The expiration date time of the job.",
      "Type": {
       "$id": "62",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -711,7 +711,7 @@
      "Description": "The creation date time of the job.",
      "Type": {
       "$id": "92",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -726,7 +726,7 @@
      "Description": "The the last date time the job was updated.",
      "Type": {
       "$id": "94",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },
@@ -741,7 +741,7 @@
      "Description": "The expiration date time of the job.",
      "Type": {
       "$id": "96",
-      "Name": "zonedDateTime",
+      "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
      },

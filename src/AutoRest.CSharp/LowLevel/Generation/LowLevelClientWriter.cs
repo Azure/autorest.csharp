@@ -919,6 +919,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputEnumType enumType => string.Join(" | ", enumType.AllowedValues.Select(c => $"\"{c.Value}\"")),
                 InputDictionaryType dictionaryType => $"Dictionary<string, {StringifyTypeForTable(dictionaryType.ValueType)}>",
                 InputListType listType => $"{StringifyTypeForTable(listType.ElementType)}[]",
+                InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => "any",
                 _ => RemovePrefix(type.Name, "Json")
             };
         }

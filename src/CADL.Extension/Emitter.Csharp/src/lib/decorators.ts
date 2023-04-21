@@ -3,11 +3,11 @@
 
 import { DecoratedType, Operation, Program, Type } from "@typespec/compiler";
 import { ExternalDocs } from "../type/externalDocs.js";
-import { DpgContext } from "@azure-tools/typespec-client-generator-core";
+import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 
 const externalDocsKey = Symbol("externalDocs");
 export function getExternalDocs(
-    context: DpgContext,
+    context: SdkContext,
     entity: Type
 ): ExternalDocs | undefined {
     return context.program.stateMap(externalDocsKey).get(entity);
@@ -18,7 +18,7 @@ const operationIdsKey = Symbol("operationIds");
  * @returns operationId set via the @operationId decorator or `undefined`
  */
 export function getOperationId(
-    context: DpgContext,
+    context: SdkContext,
     entity: Operation
 ): string | undefined {
     return context.program.stateMap(operationIdsKey).get(entity);

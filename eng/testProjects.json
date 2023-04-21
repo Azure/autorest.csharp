@@ -13,7 +13,7 @@
         "enums/extensible",
         "enums/fixed",
         "hello",
-        "collectionFormat"
+        "parameters/collection-format"
     ],
     "TestServerProjects": [
         "additionalProperties",

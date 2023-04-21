@@ -14,9 +14,9 @@
    "Operations": [
     {
      "$id": "3",
-     "Name": "getZonedDateTime",
+     "Name": "getUtcDateTime",
      "ResourceName": "stringFormat",
-     "Description": "Path parameter is string with zonedDateTime format",
+     "Description": "Path parameter is string with utcDateTime format",
      "Parameters": [
       {
        "$id": "4",
@@ -24,7 +24,7 @@
        "NameInRequest": "time",
        "Type": {
         "$id": "5",
-        "Name": "zonedDateTime",
+        "Name": "utcDateTime",
         "Kind": "DateTime",
         "IsNullable": false
        },
@@ -111,7 +111,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "",
-     "Path": "/zonedDateTime/{time}",
+     "Path": "/utcDateTime/{time}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
