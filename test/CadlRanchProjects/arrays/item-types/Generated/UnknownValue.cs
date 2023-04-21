@@ -49,7 +49,7 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<object>>> GetUnknownValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<BinaryData>>> GetUnknownValueValueAsync(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("UnknownValue.GetUnknownValueValue");
             scope.Start();
@@ -57,9 +57,9 @@ namespace Arrays.ItemTypes
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = await GetUnknownValueAsync(context).ConfigureAwait(false);
-                IReadOnlyList<object> value = default;
+                IReadOnlyList<BinaryData> value = default;
                 using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                List<object> array = new List<object>();
+                List<BinaryData> array = new List<BinaryData>();
                 foreach (var item in document.RootElement.EnumerateArray())
                 {
                     if (item.ValueKind == JsonValueKind.Null)
@@ -68,7 +68,7 @@ namespace Arrays.ItemTypes
                     }
                     else
                     {
-                        array.Add(item.GetObject());
+                        array.Add(BinaryData.FromString(item.GetRawText()));
                     }
                 }
                 value = array;
@@ -82,7 +82,7 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<object>> GetUnknownValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<BinaryData>> GetUnknownValueValue(CancellationToken cancellationToken = default)
         {
             using var scope = ClientDiagnostics.CreateScope("UnknownValue.GetUnknownValueValue");
             scope.Start();
@@ -90,9 +90,9 @@ namespace Arrays.ItemTypes
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = GetUnknownValue(context);
-                IReadOnlyList<object> value = default;
+                IReadOnlyList<BinaryData> value = default;
                 using var document = JsonDocument.Parse(response.ContentStream);
-                List<object> array = new List<object>();
+                List<BinaryData> array = new List<BinaryData>();
                 foreach (var item in document.RootElement.EnumerateArray())
                 {
                     if (item.ValueKind == JsonValueKind.Null)
@@ -101,7 +101,7 @@ namespace Arrays.ItemTypes
                     }
                     else
                     {
-                        array.Add(item.GetObject());
+                        array.Add(BinaryData.FromString(item.GetRawText()));
                     }
                 }
                 value = array;
@@ -116,7 +116,7 @@ namespace Arrays.ItemTypes
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetUnknownValueAsync(RequestContext context = null)
         {
@@ -136,7 +136,7 @@ namespace Arrays.ItemTypes
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
-        /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
+        /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
         public virtual Response GetUnknownValue(RequestContext context = null)
         {
