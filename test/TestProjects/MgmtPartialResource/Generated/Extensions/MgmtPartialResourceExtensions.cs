@@ -19,35 +19,35 @@ namespace MgmtPartialResource
     /// <summary> A class to add extension methods to MgmtPartialResource. </summary>
     public static partial class MgmtPartialResourceExtensions
     {
-        private static PublicIPAddressResourceExtension GetPublicIPAddressResourceExtension(ArmResource resource)
+        private static MgmtPartialResourcePublicIPAddressResourceExtension GetMgmtPartialResourcePublicIPAddressResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new PublicIPAddressResourceExtension(client, resource.Id);
+                return new MgmtPartialResourcePublicIPAddressResourceExtension(client, resource.Id);
             });
         }
 
-        private static PublicIPAddressResourceExtension GetPublicIPAddressResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtPartialResourcePublicIPAddressResourceExtension GetMgmtPartialResourcePublicIPAddressResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new PublicIPAddressResourceExtension(client, scope);
+                return new MgmtPartialResourcePublicIPAddressResourceExtension(client, scope);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtPartialResourceResourceGroupResourceExtension GetMgmtPartialResourceResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtPartialResourceResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtPartialResourceResourceGroupResourceExtension GetMgmtPartialResourceResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtPartialResourceResourceGroupResourceExtension(client, scope);
             });
         }
         #region PublicIPAddressResource
@@ -131,7 +131,7 @@ namespace MgmtPartialResource
         /// <returns> An object representing collection of PublicIPAddressResources and their operations over a PublicIPAddressResource. </returns>
         public static PublicIPAddressCollection GetPublicIPAddresses(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetPublicIPAddresses();
+            return GetMgmtPartialResourceResourceGroupResourceExtension(resourceGroupResource).GetPublicIPAddresses();
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace MgmtPartialResource
         /// <returns> An async collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<PublicIPAddressResource> GetPublicIPAddressesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetPublicIPAddressResourceExtension(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
+            return GetMgmtPartialResourcePublicIPAddressResourceExtension(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace MgmtPartialResource
         /// <returns> A collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<PublicIPAddressResource> GetPublicIPAddresses(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetPublicIPAddressResourceExtension(subscriptionResource).GetPublicIPAddresses(cancellationToken);
+            return GetMgmtPartialResourcePublicIPAddressResourceExtension(subscriptionResource).GetPublicIPAddresses(cancellationToken);
         }
     }
 }

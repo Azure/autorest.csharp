@@ -19,19 +19,19 @@ namespace MgmtNonStringPathVariable
     /// <summary> A class to add extension methods to MgmtNonStringPathVariable. </summary>
     public static partial class MgmtNonStringPathVariableExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtNonStringPathVariableResourceGroupResourceExtension GetMgmtNonStringPathVariableResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtNonStringPathVariableResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtNonStringPathVariableResourceGroupResourceExtension GetMgmtNonStringPathVariableResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtNonStringPathVariableResourceGroupResourceExtension(client, scope);
             });
         }
         #region FakeResource
@@ -77,7 +77,7 @@ namespace MgmtNonStringPathVariable
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetFakes();
+            return GetMgmtNonStringPathVariableResourceGroupResourceExtension(resourceGroupResource).GetFakes();
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace MgmtNonStringPathVariable
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetBars();
+            return GetMgmtNonStringPathVariableResourceGroupResourceExtension(resourceGroupResource).GetBars();
         }
 
         /// <summary>

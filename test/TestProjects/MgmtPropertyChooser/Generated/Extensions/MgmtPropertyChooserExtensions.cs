@@ -20,19 +20,19 @@ namespace MgmtPropertyChooser
     /// <summary> A class to add extension methods to MgmtPropertyChooser. </summary>
     public static partial class MgmtPropertyChooserExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtPropertyChooserResourceGroupResourceExtension GetMgmtPropertyChooserResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtPropertyChooserResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtPropertyChooserResourceGroupResourceExtension GetMgmtPropertyChooserResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtPropertyChooserResourceGroupResourceExtension(client, scope);
             });
         }
         #region VirtualMachineResource
@@ -59,7 +59,7 @@ namespace MgmtPropertyChooser
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetVirtualMachines();
+            return GetMgmtPropertyChooserResourceGroupResourceExtension(resourceGroupResource).GetVirtualMachines();
         }
 
         /// <summary>

@@ -19,35 +19,35 @@ namespace MgmtResourceName
     /// <summary> A class to add extension methods to MgmtResourceName. </summary>
     public static partial class MgmtResourceNameExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtResourceNameResourceGroupResourceExtension GetMgmtResourceNameResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtResourceNameResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtResourceNameResourceGroupResourceExtension GetMgmtResourceNameResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtResourceNameResourceGroupResourceExtension(client, scope);
             });
         }
 
-        private static TenantResourceExtension GetTenantResourceExtension(ArmResource resource)
+        private static MgmtResourceNameTenantResourceExtension GetMgmtResourceNameTenantResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new TenantResourceExtension(client, resource.Id);
+                return new MgmtResourceNameTenantResourceExtension(client, resource.Id);
             });
         }
 
-        private static TenantResourceExtension GetTenantResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtResourceNameTenantResourceExtension GetMgmtResourceNameTenantResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new TenantResourceExtension(client, scope);
+                return new MgmtResourceNameTenantResourceExtension(client, scope);
             });
         }
         #region MachineResource
@@ -169,7 +169,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of MachineResources and their operations over a MachineResource. </returns>
         public static MachineCollection GetMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetMachines();
+            return GetMgmtResourceNameResourceGroupResourceExtension(resourceGroupResource).GetMachines();
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of Disks and their operations over a Disk. </returns>
         public static DiskCollection GetDisks(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetDisks();
+            return GetMgmtResourceNameResourceGroupResourceExtension(resourceGroupResource).GetDisks();
         }
 
         /// <summary>
@@ -277,7 +277,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of Memories and their operations over a Memory. </returns>
         public static MemoryCollection GetMemories(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetMemories();
+            return GetMgmtResourceNameResourceGroupResourceExtension(resourceGroupResource).GetMemories();
         }
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of NetworkResources and their operations over a NetworkResource. </returns>
         public static NetworkCollection GetNetworks(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetNetworks();
+            return GetMgmtResourceNameResourceGroupResourceExtension(resourceGroupResource).GetNetworks();
         }
 
         /// <summary>
@@ -385,7 +385,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of DisplayResources and their operations over a DisplayResource. </returns>
         public static DisplayResourceCollection GetDisplayResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetDisplayResources();
+            return GetMgmtResourceNameResourceGroupResourceExtension(resourceGroupResource).GetDisplayResources();
         }
 
         /// <summary>
@@ -439,7 +439,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of ProviderOperationResources and their operations over a ProviderOperationResource. </returns>
         public static ProviderOperationCollection GetProviderOperations(this TenantResource tenantResource)
         {
-            return GetTenantResourceExtension(tenantResource).GetProviderOperations();
+            return GetMgmtResourceNameTenantResourceExtension(tenantResource).GetProviderOperations();
         }
 
         /// <summary>

@@ -19,19 +19,19 @@ namespace MgmtLRO
     /// <summary> A class to add extension methods to MgmtLRO. </summary>
     public static partial class MgmtLROExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtLROResourceGroupResourceExtension GetMgmtLROResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtLROResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtLROResourceGroupResourceExtension GetMgmtLROResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtLROResourceGroupResourceExtension(client, scope);
             });
         }
         #region FakeResource
@@ -77,7 +77,7 @@ namespace MgmtLRO
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetFakes();
+            return GetMgmtLROResourceGroupResourceExtension(resourceGroupResource).GetFakes();
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace MgmtLRO
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetBars();
+            return GetMgmtLROResourceGroupResourceExtension(resourceGroupResource).GetBars();
         }
 
         /// <summary>

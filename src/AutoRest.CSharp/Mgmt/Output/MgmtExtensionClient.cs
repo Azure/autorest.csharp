@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
@@ -29,7 +30,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _operations = operations;
             _extensionForChildResources = extensionForChildResources;
             ExtendedResourceType = resourceType;
-            DefaultName = $"{resourceType.Name}Extension"; // TODO -- prepend RP name when the type is ArmCore type
+            DefaultName = $"{MgmtContext.RPName}{resourceType.Name}Extension";
         }
 
         public override bool IsInitializedByProperties => true;

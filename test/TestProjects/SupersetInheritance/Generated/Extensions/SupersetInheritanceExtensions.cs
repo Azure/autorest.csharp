@@ -20,19 +20,19 @@ namespace SupersetInheritance
     /// <summary> A class to add extension methods to SupersetInheritance. </summary>
     public static partial class SupersetInheritanceExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static SupersetInheritanceResourceGroupResourceExtension GetSupersetInheritanceResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new SupersetInheritanceResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static SupersetInheritanceResourceGroupResourceExtension GetSupersetInheritanceResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new SupersetInheritanceResourceGroupResourceExtension(client, scope);
             });
         }
         #region SupersetModel1Resource
@@ -116,7 +116,7 @@ namespace SupersetInheritance
         /// <returns> An object representing collection of SupersetModel1Resources and their operations over a SupersetModel1Resource. </returns>
         public static SupersetModel1Collection GetSupersetModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel1s();
+            return GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel1s();
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace SupersetInheritance
         /// <returns> An object representing collection of SupersetModel4Resources and their operations over a SupersetModel4Resource. </returns>
         public static SupersetModel4Collection GetSupersetModel4s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel4s();
+            return GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel4s();
         }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace SupersetInheritance
         /// <returns> An object representing collection of SupersetModel6Resources and their operations over a SupersetModel6Resource. </returns>
         public static SupersetModel6Collection GetSupersetModel6s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel6s();
+            return GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel6s();
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace SupersetInheritance
         /// <returns> An object representing collection of SupersetModel7Resources and their operations over a SupersetModel7Resource. </returns>
         public static SupersetModel7Collection GetSupersetModel7s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel7s();
+            return GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel7s();
         }
 
         /// <summary>
@@ -350,7 +350,7 @@ namespace SupersetInheritance
             Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
             Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
 
-            return await GetResourceGroupResourceExtension(resourceGroupResource).PutSupersetModel2Async(supersetModel2SName, supersetModel2, cancellationToken).ConfigureAwait(false);
+            return await GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).PutSupersetModel2Async(supersetModel2SName, supersetModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -376,7 +376,7 @@ namespace SupersetInheritance
             Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
             Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
 
-            return GetResourceGroupResourceExtension(resourceGroupResource).PutSupersetModel2(supersetModel2SName, supersetModel2, cancellationToken);
+            return GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).PutSupersetModel2(supersetModel2SName, supersetModel2, cancellationToken);
         }
 
         /// <summary>
@@ -400,7 +400,7 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
 
-            return await GetResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel2Async(supersetModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel2Async(supersetModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
 
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel2(supersetModel2SName, cancellationToken);
+            return GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel2(supersetModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -450,7 +450,7 @@ namespace SupersetInheritance
             Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
             Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
 
-            return await GetResourceGroupResourceExtension(resourceGroupResource).PutSupersetModel3Async(supersetModel3SName, supersetModel3, cancellationToken).ConfigureAwait(false);
+            return await GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).PutSupersetModel3Async(supersetModel3SName, supersetModel3, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -476,7 +476,7 @@ namespace SupersetInheritance
             Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
             Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
 
-            return GetResourceGroupResourceExtension(resourceGroupResource).PutSupersetModel3(supersetModel3SName, supersetModel3, cancellationToken);
+            return GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).PutSupersetModel3(supersetModel3SName, supersetModel3, cancellationToken);
         }
 
         /// <summary>
@@ -500,7 +500,7 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
 
-            return await GetResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel3Async(supersetModel3SName, cancellationToken).ConfigureAwait(false);
+            return await GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel3Async(supersetModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -524,7 +524,7 @@ namespace SupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
 
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel3(supersetModel3SName, cancellationToken);
+            return GetSupersetInheritanceResourceGroupResourceExtension(resourceGroupResource).GetSupersetModel3(supersetModel3SName, cancellationToken);
         }
     }
 }

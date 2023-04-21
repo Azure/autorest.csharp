@@ -20,51 +20,51 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to MgmtExpandResourceTypes. </summary>
     public static partial class MgmtExpandResourceTypesExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtExpandResourceTypesResourceGroupResourceExtension GetMgmtExpandResourceTypesResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtExpandResourceTypesResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtExpandResourceTypesResourceGroupResourceExtension GetMgmtExpandResourceTypesResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtExpandResourceTypesResourceGroupResourceExtension(client, scope);
             });
         }
 
-        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmResource resource)
+        private static MgmtExpandResourceTypesSubscriptionResourceExtension GetMgmtExpandResourceTypesSubscriptionResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtension(client, resource.Id);
+                return new MgmtExpandResourceTypesSubscriptionResourceExtension(client, resource.Id);
             });
         }
 
-        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtExpandResourceTypesSubscriptionResourceExtension GetMgmtExpandResourceTypesSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new SubscriptionResourceExtension(client, scope);
+                return new MgmtExpandResourceTypesSubscriptionResourceExtension(client, scope);
             });
         }
 
-        private static ZoneResourceExtension GetZoneResourceExtension(ArmResource resource)
+        private static MgmtExpandResourceTypesZoneResourceExtension GetMgmtExpandResourceTypesZoneResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ZoneResourceExtension(client, resource.Id);
+                return new MgmtExpandResourceTypesZoneResourceExtension(client, resource.Id);
             });
         }
 
-        private static ZoneResourceExtension GetZoneResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtExpandResourceTypesZoneResourceExtension GetMgmtExpandResourceTypesZoneResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ZoneResourceExtension(client, scope);
+                return new MgmtExpandResourceTypesZoneResourceExtension(client, scope);
             });
         }
         #region RecordSetAResource
@@ -281,7 +281,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of ZoneResources and their operations over a ZoneResource. </returns>
         public static ZoneCollection GetZones(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetZones();
+            return GetMgmtExpandResourceTypesResourceGroupResourceExtension(resourceGroupResource).GetZones();
         }
 
         /// <summary>
@@ -351,7 +351,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ZoneResource> GetZonesByDnszoneAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetZoneResourceExtension(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
+            return GetMgmtExpandResourceTypesZoneResourceExtension(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -373,7 +373,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ZoneResource> GetZonesByDnszone(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetZoneResourceExtension(subscriptionResource).GetZonesByDnszone(top, cancellationToken);
+            return GetMgmtExpandResourceTypesZoneResourceExtension(subscriptionResource).GetZonesByDnszone(top, cancellationToken);
         }
 
         /// <summary>
@@ -397,7 +397,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return await GetSubscriptionResourceExtension(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(content, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExpandResourceTypesSubscriptionResourceExtension(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -421,7 +421,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetSubscriptionResourceExtension(subscriptionResource).GetByTargetResourcesDnsResourceReference(content, cancellationToken);
+            return GetMgmtExpandResourceTypesSubscriptionResourceExtension(subscriptionResource).GetByTargetResourcesDnsResourceReference(content, cancellationToken);
         }
     }
 }

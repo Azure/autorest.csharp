@@ -19,19 +19,19 @@ namespace MgmtMultipleParentResource
     /// <summary> A class to add extension methods to MgmtMultipleParentResource. </summary>
     public static partial class MgmtMultipleParentResourceExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtMultipleParentResourceResourceGroupResourceExtension GetMgmtMultipleParentResourceResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtMultipleParentResourceResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtMultipleParentResourceResourceGroupResourceExtension GetMgmtMultipleParentResourceResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtMultipleParentResourceResourceGroupResourceExtension(client, scope);
             });
         }
         #region AnotherParentResource
@@ -134,7 +134,7 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of AnotherParentResources and their operations over a AnotherParentResource. </returns>
         public static AnotherParentCollection GetAnotherParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetAnotherParents();
+            return GetMgmtMultipleParentResourceResourceGroupResourceExtension(resourceGroupResource).GetAnotherParents();
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of TheParentResources and their operations over a TheParentResource. </returns>
         public static TheParentCollection GetTheParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetTheParents();
+            return GetMgmtMultipleParentResourceResourceGroupResourceExtension(resourceGroupResource).GetTheParents();
         }
 
         /// <summary>

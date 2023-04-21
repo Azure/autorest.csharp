@@ -21,195 +21,195 @@ namespace MgmtListMethods
     /// <summary> A class to add extension methods to MgmtListMethods. </summary>
     public static partial class MgmtListMethodsExtensions
     {
-        private static FakeParentWithAncestorResourceExtension GetFakeParentWithAncestorResourceExtension(ArmResource resource)
+        private static MgmtListMethodsFakeParentWithAncestorResourceExtension GetMgmtListMethodsFakeParentWithAncestorResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new FakeParentWithAncestorResourceExtension(client, resource.Id);
+                return new MgmtListMethodsFakeParentWithAncestorResourceExtension(client, resource.Id);
             });
         }
 
-        private static FakeParentWithAncestorResourceExtension GetFakeParentWithAncestorResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsFakeParentWithAncestorResourceExtension GetMgmtListMethodsFakeParentWithAncestorResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new FakeParentWithAncestorResourceExtension(client, scope);
+                return new MgmtListMethodsFakeParentWithAncestorResourceExtension(client, scope);
             });
         }
 
-        private static FakeParentWithAncestorWithLocResourceExtension GetFakeParentWithAncestorWithLocResourceExtension(ArmResource resource)
+        private static MgmtListMethodsFakeParentWithAncestorWithLocResourceExtension GetMgmtListMethodsFakeParentWithAncestorWithLocResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new FakeParentWithAncestorWithLocResourceExtension(client, resource.Id);
+                return new MgmtListMethodsFakeParentWithAncestorWithLocResourceExtension(client, resource.Id);
             });
         }
 
-        private static FakeParentWithAncestorWithLocResourceExtension GetFakeParentWithAncestorWithLocResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsFakeParentWithAncestorWithLocResourceExtension GetMgmtListMethodsFakeParentWithAncestorWithLocResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new FakeParentWithAncestorWithLocResourceExtension(client, scope);
+                return new MgmtListMethodsFakeParentWithAncestorWithLocResourceExtension(client, scope);
             });
         }
 
-        private static FakeParentWithAncestorWithNonResChResourceExtension GetFakeParentWithAncestorWithNonResChResourceExtension(ArmResource resource)
+        private static MgmtListMethodsFakeParentWithAncestorWithNonResChResourceExtension GetMgmtListMethodsFakeParentWithAncestorWithNonResChResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new FakeParentWithAncestorWithNonResChResourceExtension(client, resource.Id);
+                return new MgmtListMethodsFakeParentWithAncestorWithNonResChResourceExtension(client, resource.Id);
             });
         }
 
-        private static FakeParentWithAncestorWithNonResChResourceExtension GetFakeParentWithAncestorWithNonResChResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsFakeParentWithAncestorWithNonResChResourceExtension GetMgmtListMethodsFakeParentWithAncestorWithNonResChResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new FakeParentWithAncestorWithNonResChResourceExtension(client, scope);
+                return new MgmtListMethodsFakeParentWithAncestorWithNonResChResourceExtension(client, scope);
             });
         }
 
-        private static FakeParentWithAncestorWithNonResChWithLocResourceExtension GetFakeParentWithAncestorWithNonResChWithLocResourceExtension(ArmResource resource)
+        private static MgmtListMethodsFakeParentWithAncestorWithNonResChWithLocResourceExtension GetMgmtListMethodsFakeParentWithAncestorWithNonResChWithLocResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new FakeParentWithAncestorWithNonResChWithLocResourceExtension(client, resource.Id);
+                return new MgmtListMethodsFakeParentWithAncestorWithNonResChWithLocResourceExtension(client, resource.Id);
             });
         }
 
-        private static FakeParentWithAncestorWithNonResChWithLocResourceExtension GetFakeParentWithAncestorWithNonResChWithLocResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsFakeParentWithAncestorWithNonResChWithLocResourceExtension GetMgmtListMethodsFakeParentWithAncestorWithNonResChWithLocResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new FakeParentWithAncestorWithNonResChWithLocResourceExtension(client, scope);
+                return new MgmtListMethodsFakeParentWithAncestorWithNonResChWithLocResourceExtension(client, scope);
             });
         }
 
-        private static ManagementGroupResourceExtension GetManagementGroupResourceExtension(ArmResource resource)
+        private static MgmtListMethodsManagementGroupResourceExtension GetMgmtListMethodsManagementGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ManagementGroupResourceExtension(client, resource.Id);
+                return new MgmtListMethodsManagementGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ManagementGroupResourceExtension GetManagementGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsManagementGroupResourceExtension GetMgmtListMethodsManagementGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ManagementGroupResourceExtension(client, scope);
+                return new MgmtListMethodsManagementGroupResourceExtension(client, scope);
             });
         }
 
-        private static ResGrpParentWithAncestorResourceExtension GetResGrpParentWithAncestorResourceExtension(ArmResource resource)
+        private static MgmtListMethodsResGrpParentWithAncestorResourceExtension GetMgmtListMethodsResGrpParentWithAncestorResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResGrpParentWithAncestorResourceExtension(client, resource.Id);
+                return new MgmtListMethodsResGrpParentWithAncestorResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResGrpParentWithAncestorResourceExtension GetResGrpParentWithAncestorResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsResGrpParentWithAncestorResourceExtension GetMgmtListMethodsResGrpParentWithAncestorResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResGrpParentWithAncestorResourceExtension(client, scope);
+                return new MgmtListMethodsResGrpParentWithAncestorResourceExtension(client, scope);
             });
         }
 
-        private static ResGrpParentWithAncestorWithLocResourceExtension GetResGrpParentWithAncestorWithLocResourceExtension(ArmResource resource)
+        private static MgmtListMethodsResGrpParentWithAncestorWithLocResourceExtension GetMgmtListMethodsResGrpParentWithAncestorWithLocResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResGrpParentWithAncestorWithLocResourceExtension(client, resource.Id);
+                return new MgmtListMethodsResGrpParentWithAncestorWithLocResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResGrpParentWithAncestorWithLocResourceExtension GetResGrpParentWithAncestorWithLocResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsResGrpParentWithAncestorWithLocResourceExtension GetMgmtListMethodsResGrpParentWithAncestorWithLocResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResGrpParentWithAncestorWithLocResourceExtension(client, scope);
+                return new MgmtListMethodsResGrpParentWithAncestorWithLocResourceExtension(client, scope);
             });
         }
 
-        private static ResGrpParentWithAncestorWithNonResChResourceExtension GetResGrpParentWithAncestorWithNonResChResourceExtension(ArmResource resource)
+        private static MgmtListMethodsResGrpParentWithAncestorWithNonResChResourceExtension GetMgmtListMethodsResGrpParentWithAncestorWithNonResChResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResGrpParentWithAncestorWithNonResChResourceExtension(client, resource.Id);
+                return new MgmtListMethodsResGrpParentWithAncestorWithNonResChResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResGrpParentWithAncestorWithNonResChResourceExtension GetResGrpParentWithAncestorWithNonResChResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsResGrpParentWithAncestorWithNonResChResourceExtension GetMgmtListMethodsResGrpParentWithAncestorWithNonResChResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResGrpParentWithAncestorWithNonResChResourceExtension(client, scope);
+                return new MgmtListMethodsResGrpParentWithAncestorWithNonResChResourceExtension(client, scope);
             });
         }
 
-        private static ResGrpParentWithAncestorWithNonResChWithLocResourceExtension GetResGrpParentWithAncestorWithNonResChWithLocResourceExtension(ArmResource resource)
+        private static MgmtListMethodsResGrpParentWithAncestorWithNonResChWithLocResourceExtension GetMgmtListMethodsResGrpParentWithAncestorWithNonResChWithLocResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResGrpParentWithAncestorWithNonResChWithLocResourceExtension(client, resource.Id);
+                return new MgmtListMethodsResGrpParentWithAncestorWithNonResChWithLocResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResGrpParentWithAncestorWithNonResChWithLocResourceExtension GetResGrpParentWithAncestorWithNonResChWithLocResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsResGrpParentWithAncestorWithNonResChWithLocResourceExtension GetMgmtListMethodsResGrpParentWithAncestorWithNonResChWithLocResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResGrpParentWithAncestorWithNonResChWithLocResourceExtension(client, scope);
+                return new MgmtListMethodsResGrpParentWithAncestorWithNonResChWithLocResourceExtension(client, scope);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtListMethodsResourceGroupResourceExtension GetMgmtListMethodsResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtListMethodsResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsResourceGroupResourceExtension GetMgmtListMethodsResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtListMethodsResourceGroupResourceExtension(client, scope);
             });
         }
 
-        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmResource resource)
+        private static MgmtListMethodsSubscriptionResourceExtension GetMgmtListMethodsSubscriptionResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtension(client, resource.Id);
+                return new MgmtListMethodsSubscriptionResourceExtension(client, resource.Id);
             });
         }
 
-        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsSubscriptionResourceExtension GetMgmtListMethodsSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new SubscriptionResourceExtension(client, scope);
+                return new MgmtListMethodsSubscriptionResourceExtension(client, scope);
             });
         }
 
-        private static TenantResourceExtension GetTenantResourceExtension(ArmResource resource)
+        private static MgmtListMethodsTenantResourceExtension GetMgmtListMethodsTenantResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new TenantResourceExtension(client, resource.Id);
+                return new MgmtListMethodsTenantResourceExtension(client, resource.Id);
             });
         }
 
-        private static TenantResourceExtension GetTenantResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtListMethodsTenantResourceExtension GetMgmtListMethodsTenantResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new TenantResourceExtension(client, scope);
+                return new MgmtListMethodsTenantResourceExtension(client, scope);
             });
         }
         #region FakeResource
@@ -730,7 +730,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocResources and their operations over a MgmtGrpParentWithNonResChWithLocResource. </returns>
         public static MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs(this ManagementGroupResource managementGroupResource)
         {
-            return GetManagementGroupResourceExtension(managementGroupResource).GetMgmtGrpParentWithNonResChWithLocs();
+            return GetMgmtListMethodsManagementGroupResourceExtension(managementGroupResource).GetMgmtGrpParentWithNonResChWithLocs();
         }
 
         /// <summary>
@@ -786,7 +786,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChResources and their operations over a MgmtGrpParentWithNonResChResource. </returns>
         public static MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes(this ManagementGroupResource managementGroupResource)
         {
-            return GetManagementGroupResourceExtension(managementGroupResource).GetMgmtGrpParentWithNonResChes();
+            return GetMgmtListMethodsManagementGroupResourceExtension(managementGroupResource).GetMgmtGrpParentWithNonResChes();
         }
 
         /// <summary>
@@ -842,7 +842,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of MgmtGrpParentWithLocResources and their operations over a MgmtGrpParentWithLocResource. </returns>
         public static MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs(this ManagementGroupResource managementGroupResource)
         {
-            return GetManagementGroupResourceExtension(managementGroupResource).GetMgmtGrpParentWithLocs();
+            return GetMgmtListMethodsManagementGroupResourceExtension(managementGroupResource).GetMgmtGrpParentWithLocs();
         }
 
         /// <summary>
@@ -898,7 +898,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of MgmtGroupParentResources and their operations over a MgmtGroupParentResource. </returns>
         public static MgmtGroupParentCollection GetMgmtGroupParents(this ManagementGroupResource managementGroupResource)
         {
-            return GetManagementGroupResourceExtension(managementGroupResource).GetMgmtGroupParents();
+            return GetMgmtListMethodsManagementGroupResourceExtension(managementGroupResource).GetMgmtGroupParents();
         }
 
         /// <summary>
@@ -954,7 +954,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocResources and their operations over a ResGrpParentWithAncestorWithNonResChWithLocResource. </returns>
         public static ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChWithLocs();
+            return GetMgmtListMethodsResourceGroupResourceExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChWithLocs();
         }
 
         /// <summary>
@@ -1010,7 +1010,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChResources and their operations over a ResGrpParentWithAncestorWithNonResChResource. </returns>
         public static ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChes();
+            return GetMgmtListMethodsResourceGroupResourceExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChes();
         }
 
         /// <summary>
@@ -1066,7 +1066,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocResources and their operations over a ResGrpParentWithAncestorWithLocResource. </returns>
         public static ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetResGrpParentWithAncestorWithLocs();
+            return GetMgmtListMethodsResourceGroupResourceExtension(resourceGroupResource).GetResGrpParentWithAncestorWithLocs();
         }
 
         /// <summary>
@@ -1122,7 +1122,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentWithAncestorResources and their operations over a ResGrpParentWithAncestorResource. </returns>
         public static ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetResGrpParentWithAncestors();
+            return GetMgmtListMethodsResourceGroupResourceExtension(resourceGroupResource).GetResGrpParentWithAncestors();
         }
 
         /// <summary>
@@ -1178,7 +1178,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentWithNonResChResources and their operations over a ResGrpParentWithNonResChResource. </returns>
         public static ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetResGrpParentWithNonResChes();
+            return GetMgmtListMethodsResourceGroupResourceExtension(resourceGroupResource).GetResGrpParentWithNonResChes();
         }
 
         /// <summary>
@@ -1234,7 +1234,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentResources and their operations over a ResGrpParentResource. </returns>
         public static ResGrpParentCollection GetResGrpParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetResGrpParents();
+            return GetMgmtListMethodsResourceGroupResourceExtension(resourceGroupResource).GetResGrpParents();
         }
 
         /// <summary>
@@ -1290,7 +1290,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtension(subscriptionResource).GetFakes();
+            return GetMgmtListMethodsSubscriptionResourceExtension(subscriptionResource).GetFakes();
         }
 
         /// <summary>
@@ -1348,7 +1348,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of SubParentWithNonResChWithLocResources and their operations over a SubParentWithNonResChWithLocResource. </returns>
         public static SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtension(subscriptionResource).GetSubParentWithNonResChWithLocs();
+            return GetMgmtListMethodsSubscriptionResourceExtension(subscriptionResource).GetSubParentWithNonResChWithLocs();
         }
 
         /// <summary>
@@ -1404,7 +1404,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of SubParentWithNonResChResources and their operations over a SubParentWithNonResChResource. </returns>
         public static SubParentWithNonResChCollection GetSubParentWithNonResChes(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtension(subscriptionResource).GetSubParentWithNonResChes();
+            return GetMgmtListMethodsSubscriptionResourceExtension(subscriptionResource).GetSubParentWithNonResChes();
         }
 
         /// <summary>
@@ -1460,7 +1460,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of SubParentWithLocResources and their operations over a SubParentWithLocResource. </returns>
         public static SubParentWithLocCollection GetSubParentWithLocs(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtension(subscriptionResource).GetSubParentWithLocs();
+            return GetMgmtListMethodsSubscriptionResourceExtension(subscriptionResource).GetSubParentWithLocs();
         }
 
         /// <summary>
@@ -1516,7 +1516,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of SubParentResources and their operations over a SubParentResource. </returns>
         public static SubParentCollection GetSubParents(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtension(subscriptionResource).GetSubParents();
+            return GetMgmtListMethodsSubscriptionResourceExtension(subscriptionResource).GetSubParents();
         }
 
         /// <summary>
@@ -1585,7 +1585,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLocAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLocAsync(cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLocAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1606,7 +1606,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLoc(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLoc(cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLoc(cancellationToken);
         }
 
         /// <summary>
@@ -1632,7 +1632,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetFakeParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(location, cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -1658,7 +1658,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetFakeParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(location, cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(location, cancellationToken);
         }
 
         /// <summary>
@@ -1679,7 +1679,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorWithNonResChResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResChesAsync(cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorWithNonResChResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResChesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1700,7 +1700,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorWithNonResChResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResChes(cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorWithNonResChResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResChes(cancellationToken);
         }
 
         /// <summary>
@@ -1721,7 +1721,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithLocsAsync(cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithLocsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1742,7 +1742,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocs(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithLocs(cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithLocs(cancellationToken);
         }
 
         /// <summary>
@@ -1768,7 +1768,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetFakeParentWithAncestorWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocationAsync(location, cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocationAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -1794,7 +1794,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetFakeParentWithAncestorWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocation(location, cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorWithLocResourceExtension(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocation(location, cancellationToken);
         }
 
         /// <summary>
@@ -1815,7 +1815,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorResource> GetFakeParentWithAncestorsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorResourceExtension(subscriptionResource).GetFakeParentWithAncestorsAsync(cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorResourceExtension(subscriptionResource).GetFakeParentWithAncestorsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1836,7 +1836,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorResource> GetFakeParentWithAncestors(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetFakeParentWithAncestorResourceExtension(subscriptionResource).GetFakeParentWithAncestors(cancellationToken);
+            return GetMgmtListMethodsFakeParentWithAncestorResourceExtension(subscriptionResource).GetFakeParentWithAncestors(cancellationToken);
         }
 
         /// <summary>
@@ -1858,7 +1858,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetResGrpParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsAsync(expand, cancellationToken);
+            return GetMgmtListMethodsResGrpParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -1880,7 +1880,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocs(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetResGrpParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocs(expand, cancellationToken);
+            return GetMgmtListMethodsResGrpParentWithAncestorWithNonResChWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocs(expand, cancellationToken);
         }
 
         /// <summary>
@@ -1902,7 +1902,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChesAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetResGrpParentWithAncestorWithNonResChResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChesAsync(expand, cancellationToken);
+            return GetMgmtListMethodsResGrpParentWithAncestorWithNonResChResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChesAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -1924,7 +1924,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChes(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetResGrpParentWithAncestorWithNonResChResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChes(expand, cancellationToken);
+            return GetMgmtListMethodsResGrpParentWithAncestorWithNonResChResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChes(expand, cancellationToken);
         }
 
         /// <summary>
@@ -1945,7 +1945,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetResGrpParentWithAncestorWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithLocsAsync(cancellationToken);
+            return GetMgmtListMethodsResGrpParentWithAncestorWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithLocsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1966,7 +1966,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocs(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetResGrpParentWithAncestorWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithLocs(cancellationToken);
+            return GetMgmtListMethodsResGrpParentWithAncestorWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithLocs(cancellationToken);
         }
 
         /// <summary>
@@ -1992,7 +1992,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetResGrpParentWithAncestorWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(location, cancellationToken);
+            return GetMgmtListMethodsResGrpParentWithAncestorWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -2018,7 +2018,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetResGrpParentWithAncestorWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(location, cancellationToken);
+            return GetMgmtListMethodsResGrpParentWithAncestorWithLocResourceExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(location, cancellationToken);
         }
 
         /// <summary>
@@ -2039,7 +2039,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestorsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetResGrpParentWithAncestorResourceExtension(subscriptionResource).GetResGrpParentWithAncestorsAsync(cancellationToken);
+            return GetMgmtListMethodsResGrpParentWithAncestorResourceExtension(subscriptionResource).GetResGrpParentWithAncestorsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -2060,7 +2060,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestors(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetResGrpParentWithAncestorResourceExtension(subscriptionResource).GetResGrpParentWithAncestors(cancellationToken);
+            return GetMgmtListMethodsResGrpParentWithAncestorResourceExtension(subscriptionResource).GetResGrpParentWithAncestors(cancellationToken);
         }
 
         /// <summary>
@@ -2088,7 +2088,7 @@ namespace MgmtListMethods
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetSubscriptionResourceExtension(subscriptionResource).UpdateAllQuotaAsync(location, content, cancellationToken);
+            return GetMgmtListMethodsSubscriptionResourceExtension(subscriptionResource).UpdateAllQuotaAsync(location, content, cancellationToken);
         }
 
         /// <summary>
@@ -2116,7 +2116,7 @@ namespace MgmtListMethods
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetSubscriptionResourceExtension(subscriptionResource).UpdateAllQuota(location, content, cancellationToken);
+            return GetMgmtListMethodsSubscriptionResourceExtension(subscriptionResource).UpdateAllQuota(location, content, cancellationToken);
         }
 
         /// <summary> Gets a collection of TenantTestResources in the TenantResource. </summary>
@@ -2124,7 +2124,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantTestResources and their operations over a TenantTestResource. </returns>
         public static TenantTestCollection GetTenantTests(this TenantResource tenantResource)
         {
-            return GetTenantResourceExtension(tenantResource).GetTenantTests();
+            return GetMgmtListMethodsTenantResourceExtension(tenantResource).GetTenantTests();
         }
 
         /// <summary>

@@ -19,19 +19,19 @@ namespace ResourceRename
     /// <summary> A class to add extension methods to ResourceRename. </summary>
     public static partial class ResourceRenameExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static ResourceRenameResourceGroupResourceExtension GetResourceRenameResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new ResourceRenameResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static ResourceRenameResourceGroupResourceExtension GetResourceRenameResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new ResourceRenameResourceGroupResourceExtension(client, scope);
             });
         }
         #region SshPublicKeyInfoResource
@@ -58,7 +58,7 @@ namespace ResourceRename
         /// <returns> An object representing collection of SshPublicKeyInfoResources and their operations over a SshPublicKeyInfoResource. </returns>
         public static SshPublicKeyInfoCollection GetSshPublicKeyInfos(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetSshPublicKeyInfos();
+            return GetResourceRenameResourceGroupResourceExtension(resourceGroupResource).GetSshPublicKeyInfos();
         }
 
         /// <summary>

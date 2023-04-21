@@ -19,19 +19,19 @@ namespace MgmtHierarchicalNonResource
     /// <summary> A class to add extension methods to MgmtHierarchicalNonResource. </summary>
     public static partial class MgmtHierarchicalNonResourceExtensions
     {
-        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmResource resource)
+        private static MgmtHierarchicalNonResourceSubscriptionResourceExtension GetMgmtHierarchicalNonResourceSubscriptionResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtension(client, resource.Id);
+                return new MgmtHierarchicalNonResourceSubscriptionResourceExtension(client, resource.Id);
             });
         }
 
-        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtHierarchicalNonResourceSubscriptionResourceExtension GetMgmtHierarchicalNonResourceSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new SubscriptionResourceExtension(client, scope);
+                return new MgmtHierarchicalNonResourceSubscriptionResourceExtension(client, scope);
             });
         }
         #region SharedGalleryResource
@@ -63,7 +63,7 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetSubscriptionResourceExtension(subscriptionResource).GetSharedGalleries(location);
+            return GetMgmtHierarchicalNonResourceSubscriptionResourceExtension(subscriptionResource).GetSharedGalleries(location);
         }
 
         /// <summary>

@@ -19,35 +19,35 @@ namespace MgmtCollectionParent
     /// <summary> A class to add extension methods to MgmtCollectionParent. </summary>
     public static partial class MgmtCollectionParentExtensions
     {
-        private static OrderResourceExtension GetOrderResourceExtension(ArmResource resource)
+        private static MgmtCollectionParentOrderResourceExtension GetMgmtCollectionParentOrderResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new OrderResourceExtension(client, resource.Id);
+                return new MgmtCollectionParentOrderResourceExtension(client, resource.Id);
             });
         }
 
-        private static OrderResourceExtension GetOrderResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtCollectionParentOrderResourceExtension GetMgmtCollectionParentOrderResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new OrderResourceExtension(client, scope);
+                return new MgmtCollectionParentOrderResourceExtension(client, scope);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtCollectionParentResourceGroupResourceExtension GetMgmtCollectionParentResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtCollectionParentResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtCollectionParentResourceGroupResourceExtension GetMgmtCollectionParentResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtCollectionParentResourceGroupResourceExtension(client, scope);
             });
         }
         #region OrderResource
@@ -74,7 +74,7 @@ namespace MgmtCollectionParent
         /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
         public static OrderResourceCollection GetOrderResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetOrderResources();
+            return GetMgmtCollectionParentResourceGroupResourceExtension(resourceGroupResource).GetOrderResources();
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace MgmtCollectionParent
         /// <returns> An async collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OrderResource> GetOrderResourcesAsync(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetOrderResourceExtension(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
+            return GetMgmtCollectionParentOrderResourceExtension(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace MgmtCollectionParent
         /// <returns> A collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OrderResource> GetOrderResources(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetOrderResourceExtension(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
+            return GetMgmtCollectionParentOrderResourceExtension(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
         }
     }
 }

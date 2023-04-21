@@ -19,35 +19,35 @@ namespace SubscriptionExtensions
     /// <summary> A class to add extension methods to SubscriptionExtensions. </summary>
     public static partial class SubscriptionExtensionsExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static SubscriptionExtensionsResourceGroupResourceExtension GetSubscriptionExtensionsResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new SubscriptionExtensionsResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static SubscriptionExtensionsResourceGroupResourceExtension GetSubscriptionExtensionsResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new SubscriptionExtensionsResourceGroupResourceExtension(client, scope);
             });
         }
 
-        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmResource resource)
+        private static SubscriptionExtensionsSubscriptionResourceExtension GetSubscriptionExtensionsSubscriptionResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtension(client, resource.Id);
+                return new SubscriptionExtensionsSubscriptionResourceExtension(client, resource.Id);
             });
         }
 
-        private static SubscriptionResourceExtension GetSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static SubscriptionExtensionsSubscriptionResourceExtension GetSubscriptionExtensionsSubscriptionResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new SubscriptionResourceExtension(client, scope);
+                return new SubscriptionExtensionsSubscriptionResourceExtension(client, scope);
             });
         }
         #region ToasterResource
@@ -93,7 +93,7 @@ namespace SubscriptionExtensions
         /// <returns> An object representing collection of OvenResources and their operations over a OvenResource. </returns>
         public static OvenCollection GetOvens(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetOvens();
+            return GetSubscriptionExtensionsResourceGroupResourceExtension(resourceGroupResource).GetOvens();
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace SubscriptionExtensions
         /// <returns> An object representing collection of ToasterResources and their operations over a ToasterResource. </returns>
         public static ToasterCollection GetToasters(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtension(subscriptionResource).GetToasters();
+            return GetSubscriptionExtensionsSubscriptionResourceExtension(subscriptionResource).GetToasters();
         }
 
         /// <summary>

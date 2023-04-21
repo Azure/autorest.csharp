@@ -19,19 +19,19 @@ namespace MgmtSingletonResource
     /// <summary> A class to add extension methods to MgmtSingletonResource. </summary>
     public static partial class MgmtSingletonResourceExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtSingletonResourceResourceGroupResourceExtension GetMgmtSingletonResourceResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtSingletonResourceResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtSingletonResourceResourceGroupResourceExtension GetMgmtSingletonResourceResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtSingletonResourceResourceGroupResourceExtension(client, scope);
             });
         }
         #region CarResource
@@ -134,7 +134,7 @@ namespace MgmtSingletonResource
         /// <returns> An object representing collection of CarResources and their operations over a CarResource. </returns>
         public static CarCollection GetCars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetCars();
+            return GetMgmtSingletonResourceResourceGroupResourceExtension(resourceGroupResource).GetCars();
         }
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace MgmtSingletonResource
         /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
         public static ParentResourceCollection GetParentResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetParentResources();
+            return GetMgmtSingletonResourceResourceGroupResourceExtension(resourceGroupResource).GetParentResources();
         }
 
         /// <summary>

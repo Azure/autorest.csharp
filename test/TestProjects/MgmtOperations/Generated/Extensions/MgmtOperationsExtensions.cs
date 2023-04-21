@@ -20,35 +20,35 @@ namespace MgmtOperations
     /// <summary> A class to add extension methods to MgmtOperations. </summary>
     public static partial class MgmtOperationsExtensions
     {
-        private static AvailabilitySetResourceExtension GetAvailabilitySetResourceExtension(ArmResource resource)
+        private static MgmtOperationsAvailabilitySetResourceExtension GetMgmtOperationsAvailabilitySetResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new AvailabilitySetResourceExtension(client, resource.Id);
+                return new MgmtOperationsAvailabilitySetResourceExtension(client, resource.Id);
             });
         }
 
-        private static AvailabilitySetResourceExtension GetAvailabilitySetResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtOperationsAvailabilitySetResourceExtension GetMgmtOperationsAvailabilitySetResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new AvailabilitySetResourceExtension(client, scope);
+                return new MgmtOperationsAvailabilitySetResourceExtension(client, scope);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtOperationsResourceGroupResourceExtension GetMgmtOperationsResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtOperationsResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtOperationsResourceGroupResourceExtension GetMgmtOperationsResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtOperationsResourceGroupResourceExtension(client, scope);
             });
         }
         #region AvailabilitySetResource
@@ -132,7 +132,7 @@ namespace MgmtOperations
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetAvailabilitySets();
+            return GetMgmtOperationsResourceGroupResourceExtension(resourceGroupResource).GetAvailabilitySets();
         }
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace MgmtOperations
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
         public static UnpatchableResourceCollection GetUnpatchableResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetUnpatchableResources();
+            return GetMgmtOperationsResourceGroupResourceExtension(resourceGroupResource).GetUnpatchableResources();
         }
 
         /// <summary>
@@ -265,7 +265,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
 
-            return await GetAvailabilitySetResourceExtension(resourceGroupResource).TestLROMethodAvailabilitySetAsync(waitUntil, availabilitySetUpdate, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtOperationsAvailabilitySetResourceExtension(resourceGroupResource).TestLROMethodAvailabilitySetAsync(waitUntil, availabilitySetUpdate, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -290,7 +290,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
 
-            return GetAvailabilitySetResourceExtension(resourceGroupResource).TestLROMethodAvailabilitySet(waitUntil, availabilitySetUpdate, cancellationToken);
+            return GetMgmtOperationsAvailabilitySetResourceExtension(resourceGroupResource).TestLROMethodAvailabilitySet(waitUntil, availabilitySetUpdate, cancellationToken);
         }
     }
 }

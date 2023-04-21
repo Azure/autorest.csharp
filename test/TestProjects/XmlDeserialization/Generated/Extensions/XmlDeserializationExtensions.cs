@@ -19,19 +19,19 @@ namespace XmlDeserialization
     /// <summary> A class to add extension methods to XmlDeserialization. </summary>
     public static partial class XmlDeserializationExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static XmlDeserializationResourceGroupResourceExtension GetXmlDeserializationResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new XmlDeserializationResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static XmlDeserializationResourceGroupResourceExtension GetXmlDeserializationResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new XmlDeserializationResourceGroupResourceExtension(client, scope);
             });
         }
         #region XmlInstanceResource
@@ -58,7 +58,7 @@ namespace XmlDeserialization
         /// <returns> An object representing collection of XmlInstanceResources and their operations over a XmlInstanceResource. </returns>
         public static XmlInstanceCollection GetXmlInstances(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetXmlInstances();
+            return GetXmlDeserializationResourceGroupResourceExtension(resourceGroupResource).GetXmlInstances();
         }
 
         /// <summary>

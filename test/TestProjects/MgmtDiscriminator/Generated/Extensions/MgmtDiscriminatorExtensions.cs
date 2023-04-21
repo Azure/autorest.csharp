@@ -19,19 +19,19 @@ namespace MgmtDiscriminator
     /// <summary> A class to add extension methods to MgmtDiscriminator. </summary>
     public static partial class MgmtDiscriminatorExtensions
     {
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmResource resource)
+        private static MgmtDiscriminatorResourceGroupResourceExtension GetMgmtDiscriminatorResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtension(client, resource.Id);
+                return new MgmtDiscriminatorResourceGroupResourceExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtension GetResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static MgmtDiscriminatorResourceGroupResourceExtension GetMgmtDiscriminatorResourceGroupResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new ResourceGroupResourceExtension(client, scope);
+                return new MgmtDiscriminatorResourceGroupResourceExtension(client, scope);
             });
         }
         #region DeliveryRuleResource
@@ -58,7 +58,7 @@ namespace MgmtDiscriminator
         /// <returns> An object representing collection of DeliveryRuleResources and their operations over a DeliveryRuleResource. </returns>
         public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtension(resourceGroupResource).GetDeliveryRules();
+            return GetMgmtDiscriminatorResourceGroupResourceExtension(resourceGroupResource).GetDeliveryRules();
         }
 
         /// <summary>

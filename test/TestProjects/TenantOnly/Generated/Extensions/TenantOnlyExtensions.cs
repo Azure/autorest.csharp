@@ -19,19 +19,19 @@ namespace TenantOnly
     /// <summary> A class to add extension methods to TenantOnly. </summary>
     public static partial class TenantOnlyExtensions
     {
-        private static TenantResourceExtension GetTenantResourceExtension(ArmResource resource)
+        private static TenantOnlyTenantResourceExtension GetTenantOnlyTenantResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new TenantResourceExtension(client, resource.Id);
+                return new TenantOnlyTenantResourceExtension(client, resource.Id);
             });
         }
 
-        private static TenantResourceExtension GetTenantResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static TenantOnlyTenantResourceExtension GetTenantOnlyTenantResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new TenantResourceExtension(client, scope);
+                return new TenantOnlyTenantResourceExtension(client, scope);
             });
         }
         #region BillingAccountResource
@@ -77,7 +77,7 @@ namespace TenantOnly
         /// <returns> An object representing collection of BillingAccountResources and their operations over a BillingAccountResource. </returns>
         public static BillingAccountCollection GetBillingAccounts(this TenantResource tenantResource)
         {
-            return GetTenantResourceExtension(tenantResource).GetBillingAccounts();
+            return GetTenantOnlyTenantResourceExtension(tenantResource).GetBillingAccounts();
         }
 
         /// <summary>
