@@ -767,18 +767,20 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 // - create request
                 _writer.Append($"var request = ");
-                _writer.Append($"{GetRestClientName(operation)}.{operation.Method.Name}Request(");
-                WriteArguments(_writer, parameterMapping);
-                _writer.Append($").Request;");
+                _writer.Append($"{GetRestClientName(operation)}.Create{operation.Method.Name}Request(");
+                WriteArguments(_writer, parameterMapping, trimLastComma: true);
+                _writer.Line($").Request;");
 
                 // - construct operationId
-                _writer.Line($"var operation Id = {typeof(NextLinkOperationImplementation)}.GetOperationId(");
-                _writer.Append($"{typeof(RequestMethod)}.{operation.Method.Request.HttpMethod}, ");
-                _writer.Append($"request.{typeof(Uri)}.ToUri(), ");
-                _writer.Append($"request.{typeof(Uri)}.ToString(), ");
-                _writer.Append($"{typeof(NextLinkOperationImplementation.HeaderSource)}.None, ");
+                _writer.Append($"var operationId = {typeof(NextLinkOperationImplementation)}.GetOperationId(");
+                // TODO: find a way to get title case of capital enum
+                TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+                _writer.Append($"{typeof(RequestMethod)}.{textInfo.ToTitleCase(operation.Method.Request.HttpMethod.ToString().ToLower())}, ");
+                _writer.Append($"request.Uri.ToUri(), ");
+                _writer.Append($"request.Uri.ToString(), ");
+                _writer.Append($"{typeof(NextLinkOperationImplementation)}.HeaderSource.None, ");
                 _writer.Append($"false, null, ");
-                _writer.Append($"{typeof(OperationFinalStateVia)}.OriginalUri");
+                _writer.Line($"{typeof(OperationFinalStateVia)}.OriginalUri);");
             }
             WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, async);
         }
@@ -835,12 +837,19 @@ namespace AutoRest.CSharp.Mgmt.Generation
         }
         #endregion
 
-        protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false)
+        protected void WriteArguments(CodeWriter writer, IEnumerable<ParameterMapping> mapping, bool passNullForOptionalParameters = false, bool trimLastComma = false)
         {
             var arguments = GetArguments(writer, mapping, passNullForOptionalParameters);
             if (!arguments.IsEmpty())
             {
-                writer.Append(arguments).AppendRaw(", ");
+                if (trimLastComma)
+                {
+                    writer.Append(arguments);
+                }
+                else
+                {
+                    writer.Append(arguments).AppendRaw(", ");
+                }
             }
         }
 
