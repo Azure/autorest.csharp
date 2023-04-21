@@ -141,12 +141,6 @@ namespace Azure.Core
             return Convert.ToBase64String(lroData.ToArray());
         }
 
-        internal static RequestMethod GetHttpMethodFromOperationId(string operationId)
-        {
-            var lroDetails = BinaryData.FromBytes(Convert.FromBase64String(operationId)).ToObjectFromJson<Dictionary<string, string>>();
-            return new RequestMethod(lroDetails["RequestMethod"]);
-        }
-
         public string GetOperationId()
         {
             var lroDetails = new Dictionary<string, string?>()
