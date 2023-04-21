@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Output.Models
                 clientResponse.Add(new Response(responseBody, statusCodes.ToArray()));
             }
 
-            if (Configuration.AzureArm && resourceDataType is not null && clientResponse.Any())
+            if (resourceDataType is not null && clientResponse.Any())
             {
                 var responseBodyTypeName = clientResponse[0].ResponseBody?.Type.Name;
                 if (responseBodyTypeName == resourceDataType.Name && operation.Responses.Any(r => r.BodyType is {} type && resourceDataType.EqualsIgnoreNullable(typeFactory.CreateType(type))))

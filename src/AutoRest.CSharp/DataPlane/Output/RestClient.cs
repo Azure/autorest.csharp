@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility => "internal";
 
-        public RestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, TypeFactory typeFactory, OutputLibrary library, string clientName, string defaultNamespace, SourceInputModel? sourceInputModel)
+        public RestClient(InputClient inputClient, ClientMethodsBuilder clientMethodsBuilder, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, TypeFactory typeFactory, OutputLibrary library, string clientName, string defaultNamespace, SourceInputModel? sourceInputModel)
             : base(defaultNamespace, sourceInputModel)
         {
             _clientName = clientName;
@@ -45,50 +45,27 @@ namespace AutoRest.CSharp.Output.Models
             Fields = ClientFields.CreateForRestClient(restClientParameters);
             Constructor = new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
 
-            var methods = CreateMethods(inputClient, Fields, clientPrefix + GetClientSuffix(), typeFactory, library);
+            var methods = CreateMethods(clientMethodsBuilder, clientPrefix + GetClientSuffix(), library);
             Methods = methods;
             _requestMethods = methods.ToDictionary(m => m.Operation, m => m.CreateMessageMethods[0]);
             ProtocolMethods = GetProtocolMethods(_requestMethods.Values, Fields, inputClient, typeFactory, library).ToList();
         }
 
-        private IReadOnlyList<HlcMethods> CreateMethods(InputClient inputClient, ClientFields fields, string clientName, TypeFactory typeFactory, OutputLibrary library)
+        private IReadOnlyList<HlcMethods> CreateMethods(ClientMethodsBuilder clientMethodsBuilder, string clientName, OutputLibrary library)
         {
-            var operationParameters = new Dictionary<InputOperation, MethodParametersBuilder>();
-
-            foreach (var inputOperation in inputClient.Operations)
-            {
-                var builder = new MethodParametersBuilder(typeFactory, inputOperation);
-                if (Configuration.AzureArm)
-                {
-                    builder.BuildMpg();
-                }
-                else
-                {
-                    builder.BuildHlc();
-                }
-                operationParameters[inputOperation] = builder;
-            }
-
             var restClient = new MemberReference(null, "RestClient");
             var methods = new List<HlcMethods>();
-            foreach (var (operation, builder) in operationParameters)
+            foreach (var operationMethodsBuilder in clientMethodsBuilder.Build(restClient, Fields, clientName))
             {
-                var createNextPageMessageMethodParameters = operation.Paging is { NextLinkOperation: { } nextLinkOperation }
-                    ? operationParameters[nextLinkOperation].CreateMessageParameters
-                    : operation.Paging is { NextLinkName: {} }
-                        ? builder.CreateMessageParameters.Prepend(KnownParameters.NextLink).ToArray()
-                        : Array.Empty<Parameter>();
-
-                var methodBuilder = new OperationMethodsBuilder(operation, restClient, fields, clientName, typeFactory, builder.RequestParts, builder.CreateMessageParameters, createNextPageMessageMethodParameters, builder.ParameterLinks);
-                methods.Add(BuildMethods(library, methodBuilder, operation));
+                methods.Add(BuildMethods(library, operationMethodsBuilder));
             }
 
             return methods;
         }
 
-        protected virtual HlcMethods BuildMethods(OutputLibrary library, OperationMethodsBuilder methodBuilder, InputOperation operation)
+        protected virtual HlcMethods BuildMethods(OutputLibrary library, OperationMethodsBuilder methodBuilder)
         {
-            return methodBuilder.BuildHlc(library is DataPlaneOutputLibrary dpl ? dpl.FindHeaderModel(operation) : null);
+            return methodBuilder.BuildHlc(library is DataPlaneOutputLibrary dpl ? dpl.FindHeaderModel(methodBuilder.Operation) : null);
         }
 
         private IEnumerable<LowLevelClientMethod> GetProtocolMethods(IEnumerable<RestClientMethod> methods, ClientFields fields, InputClient inputClient, TypeFactory typeFactory, OutputLibrary library)
@@ -101,7 +78,9 @@ namespace AutoRest.CSharp.Output.Models
 
             // Filter protocol method requests for this operationGroup based on the config
             var operations = methods.Select(m => m.Operation).Where(operation => IsProtocolMethodExists(operation, inputClient, library));
-            return LowLevelClient.BuildMethods(typeFactory, operations, fields, _clientName);
+            return new ClientMethodsBuilder(operations, typeFactory, false, false)
+                .Build(null, fields, _clientName)
+                .Select(b => b.BuildDpg());
         }
 
         public RestClientMethod GetOperationMethod(InputOperation request)

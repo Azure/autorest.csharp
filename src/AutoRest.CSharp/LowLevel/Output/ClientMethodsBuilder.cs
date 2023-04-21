@@ -1,0 +1,141 @@
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License. See License.txt in the project root for license information.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Utilities;
+
+namespace AutoRest.CSharp.Output.Models
+{
+    internal class ClientMethodsBuilder
+    {
+        private readonly IEnumerable<InputOperation> _operations;
+        private readonly TypeFactory _typeFactory;
+        private readonly bool _legacyParameterSorting;
+        private readonly bool _legacyParameterBuilding;
+
+        public ClientMethodsBuilder(IEnumerable<InputOperation> operations, TypeFactory typeFactory, bool legacyParameterSorting, bool legacyParameterBuilding)
+        {
+            _operations = operations;
+            _typeFactory = typeFactory;
+            _legacyParameterSorting = legacyParameterSorting;
+            _legacyParameterBuilding = legacyParameterBuilding;
+        }
+
+        public IEnumerable<OperationMethodsBuilder> Build(ValueExpression? restClientReference, ClientFields fields, string clientName)
+        {
+            var operationParameters = new Dictionary<InputOperation, MethodParametersBuilder>();
+
+            foreach (var inputOperation in _operations)
+            {
+                var unsortedParameters = inputOperation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp)).ToArray();
+                var sortedParameters = _legacyParameterSorting
+                    ? GetLegacySortedParameters(unsortedParameters)
+                    : GetSortedParameters(inputOperation, unsortedParameters);
+
+                var builder = new MethodParametersBuilder(inputOperation, _typeFactory);
+                if (_legacyParameterBuilding)
+                {
+                    builder.BuildParametersLegacy(unsortedParameters, sortedParameters);
+                }
+                else
+                {
+                    builder.BuildParameters(sortedParameters);
+                }
+
+                operationParameters[inputOperation] = builder;
+            }
+
+            foreach (var (operation, builder) in operationParameters)
+            {
+                var createNextPageMessageMethodParameters = operation.Paging is { NextLinkOperation: { } nextLinkOperation }
+                    ? operationParameters[nextLinkOperation].CreateMessageParameters
+                    : operation.Paging is { NextLinkName: {} }
+                        ? builder.CreateMessageParameters.Prepend(KnownParameters.NextLink).ToArray()
+                        : Array.Empty<Parameter>();
+
+                yield return new OperationMethodsBuilder(operation, restClientReference, fields, clientName, _typeFactory, builder.RequestParts, builder.CreateMessageParameters, createNextPageMessageMethodParameters, builder.ParameterLinks);
+            }
+        }
+
+        private static IEnumerable<InputParameter> GetSortedParameters(InputOperation operation, IEnumerable<InputParameter> inputParameters)
+        {
+            var requiredPathParameters = new Dictionary<string, InputParameter>();
+            var optionalPathParameters = new Dictionary<string, InputParameter>();
+            var requiredRequestParameters = new List<InputParameter>();
+            var optionalRequestParameters = new List<InputParameter>();
+
+            InputParameter? bodyParameter = null;
+            InputParameter? contentTypeRequestParameter = null;
+
+            foreach (var operationParameter in inputParameters)
+            {
+                switch (operationParameter)
+                {
+                    case { Location: RequestLocation.Body }:
+                        bodyParameter = operationParameter;
+                        break;
+                    case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
+                        contentTypeRequestParameter = operationParameter;
+                        break;
+                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: null }:
+                        requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
+                        break;
+                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: not null }:
+                        optionalPathParameters.Add(operationParameter.NameInRequest, operationParameter);
+                        break;
+                    case { IsRequired: true, DefaultValue: null }:
+                        requiredRequestParameters.Add(operationParameter);
+                        break;
+                    default:
+                        optionalRequestParameters.Add(operationParameter);
+                        break;
+                }
+            }
+
+            var orderedParameters = new List<InputParameter>();
+
+            SortUriOrPathParameters(operation.Uri, requiredPathParameters, orderedParameters);
+            SortUriOrPathParameters(operation.Path, requiredPathParameters, orderedParameters);
+            orderedParameters.AddRange(requiredRequestParameters);
+            if (bodyParameter is not null)
+            {
+                orderedParameters.Add(bodyParameter);
+                if (contentTypeRequestParameter is not null)
+                {
+                    orderedParameters.Add(contentTypeRequestParameter);
+                }
+            }
+            SortUriOrPathParameters(operation.Uri, optionalPathParameters, orderedParameters);
+            SortUriOrPathParameters(operation.Path, optionalPathParameters, orderedParameters);
+            orderedParameters.AddRange(optionalRequestParameters);
+
+            return orderedParameters;
+        }
+
+        private static void SortUriOrPathParameters(string uriPart, IReadOnlyDictionary<string, InputParameter> requestParameters, ICollection<InputParameter> orderedParameters)
+        {
+            foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(uriPart))
+            {
+                if (isLiteral)
+                {
+                    continue;
+                }
+
+                var text = span.ToString();
+                if (requestParameters.TryGetValue(text, out var requestParameter))
+                {
+                    orderedParameters.Add(requestParameter);
+                }
+            }
+        }
+
+        private static IEnumerable<InputParameter> GetLegacySortedParameters(IEnumerable<InputParameter> inputParameters)
+            => inputParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null });
+    }
+}

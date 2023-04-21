@@ -7,7 +7,6 @@ using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -36,19 +35,16 @@ namespace AutoRest.CSharp.Output.Models
             ["If-Unmodified-Since"] = RequestConditionHeaders.IfUnmodifiedSince
         };
 
-        private readonly TypeFactory _typeFactory;
         private readonly InputOperation _operation;
-        private readonly IEnumerable<InputParameter> _inputParameters;
+        private readonly TypeFactory _typeFactory;
         private readonly List<RequestPartSource> _requestParts;
         private readonly List<Parameter> _createMessageParameters;
         private readonly List<ParameterLink> _parameterLinks;
 
-        public MethodParametersBuilder(TypeFactory typeFactory, InputOperation operation)
+        public MethodParametersBuilder(InputOperation operation, TypeFactory typeFactory)
         {
-            _typeFactory = typeFactory;
             _operation = operation;
-            _inputParameters = operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
-
+            _typeFactory = typeFactory;
             _requestParts = new List<RequestPartSource>();
             _createMessageParameters = new List<Parameter>();
             _parameterLinks = new List<ParameterLink>();
@@ -58,22 +54,8 @@ namespace AutoRest.CSharp.Output.Models
         public IReadOnlyList<Parameter> CreateMessageParameters => _createMessageParameters;
         public IReadOnlyList<ParameterLink> ParameterLinks => _parameterLinks;
 
-        public void BuildHlc()
+        public void BuildParameters(IEnumerable<InputParameter> sortedParameters)
         {
-            var sortedParameters = GetLegacySortedParameters();
-            BuildParametersLegacy(sortedParameters);
-        }
-
-        public void BuildMpg()
-        {
-            var sortedParameters = GetSortedParameters();
-            BuildParametersLegacy(sortedParameters);
-        }
-
-        public void BuildDpg()
-        {
-            var sortedParameters = GetSortedParameters();
-
             var requestConditionHeaders = RequestConditionHeaders.None;
             var requestConditionSerializationFormat = SerializationFormat.Default;
             InputParameter? requestConditionRequestParameter = null;
@@ -108,68 +90,10 @@ namespace AutoRest.CSharp.Output.Models
             AddRequestContext();
         }
 
-        private IEnumerable<InputParameter> GetSortedParameters()
-        {
-            var requiredPathParameters = new Dictionary<string, InputParameter>();
-            var optionalPathParameters = new Dictionary<string, InputParameter>();
-            var requiredRequestParameters = new List<InputParameter>();
-            var optionalRequestParameters = new List<InputParameter>();
-
-            InputParameter? bodyParameter = null;
-            InputParameter? contentTypeRequestParameter = null;
-
-            foreach (var operationParameter in _inputParameters)
-            {
-                switch (operationParameter)
-                {
-                    case { Location: RequestLocation.Body }:
-                        bodyParameter = operationParameter;
-                        break;
-                    case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
-                        contentTypeRequestParameter = operationParameter;
-                        break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: null }:
-                        requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
-                        break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: not null }:
-                        optionalPathParameters.Add(operationParameter.NameInRequest, operationParameter);
-                        break;
-                    case { IsRequired: true, DefaultValue: null }:
-                        requiredRequestParameters.Add(operationParameter);
-                        break;
-                    default:
-                        optionalRequestParameters.Add(operationParameter);
-                        break;
-                }
-            }
-
-            var orderedParameters = new List<InputParameter>();
-
-            SortUriOrPathParameters(_operation.Uri, requiredPathParameters, orderedParameters);
-            SortUriOrPathParameters(_operation.Path, requiredPathParameters, orderedParameters);
-            orderedParameters.AddRange(requiredRequestParameters);
-            if (bodyParameter is not null)
-            {
-                orderedParameters.Add(bodyParameter);
-                if (contentTypeRequestParameter is not null)
-                {
-                    orderedParameters.Add(contentTypeRequestParameter);
-                }
-            }
-            SortUriOrPathParameters(_operation.Uri, optionalPathParameters, orderedParameters);
-            SortUriOrPathParameters(_operation.Path, optionalPathParameters, orderedParameters);
-            orderedParameters.AddRange(optionalRequestParameters);
-
-            return orderedParameters;
-        }
-
-        private IEnumerable<InputParameter> GetLegacySortedParameters()
-            => _inputParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null });
-
-        private void BuildParametersLegacy(IEnumerable<InputParameter> inputParameters)
+        public void BuildParametersLegacy(IEnumerable<InputParameter> unsortedParameters, IEnumerable<InputParameter> sortedParameters)
         {
             var parameters = new Dictionary<InputParameter, Parameter>();
-            foreach (var inputParameter in inputParameters)
+            foreach (var inputParameter in sortedParameters)
             {
                 var parameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _typeFactory);
                 // Grouped and flattened parameters shouldn't be added to methods
@@ -185,7 +109,7 @@ namespace AutoRest.CSharp.Output.Models
             _parameterLinks.Add(new ParameterLink(new[]{KnownParameters.CancellationTokenParameter}, Array.Empty<Parameter>(), null));
 
             // for legacy logic, adding request parts unsorted
-            foreach (var inputParameter in _inputParameters)
+            foreach (var inputParameter in unsortedParameters)
             {
                 var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
                 _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameters[inputParameter], serializationFormat));
@@ -197,23 +121,6 @@ namespace AutoRest.CSharp.Output.Models
             if (_operation.LongRunning != null)
             {
                 _parameterLinks.Add(new ParameterLink(KnownParameters.WaitForCompletion));
-            }
-        }
-
-        private static void SortUriOrPathParameters(string uriPart, IReadOnlyDictionary<string, InputParameter> requestParameters, ICollection<InputParameter> orderedParameters)
-        {
-            foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(uriPart))
-            {
-                if (isLiteral)
-                {
-                    continue;
-                }
-
-                var text = span.ToString();
-                if (requestParameters.TryGetValue(text, out var requestParameter))
-                {
-                    orderedParameters.Add(requestParameter);
-                }
             }
         }
 

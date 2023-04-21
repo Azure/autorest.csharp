@@ -233,7 +233,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 var restClientParameters = new[]{ KnownParameters.ClientDiagnostics, KnownParameters.Pipeline }.Union(clientParameters).ToList();
                 var clientName = GetClientName(inputClient);
-                restClients.Add(inputClient, new RestClient(inputClient, clientParameters, restClientParameters, _typeFactory, this, clientName, _defaultNamespace, _sourceInputModel));
+                var clientMethodsBuilder = new ClientMethodsBuilder(inputClient.Operations, _typeFactory, true, true);
+                restClients.Add(inputClient, new RestClient(inputClient, clientMethodsBuilder, clientParameters, restClientParameters, _typeFactory, this, clientName, _defaultNamespace, _sourceInputModel));
             }
 
             return restClients;

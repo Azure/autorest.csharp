@@ -62,7 +62,7 @@ namespace AutoRest.CSharp.Output.Models
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var methods = BuildMethods(typeFactory, operations, Fields, Declaration.Name);
+            var methods = new ClientMethodsBuilder(operations, typeFactory, false, false).Build(null, Fields, Declaration.Name).Select(b => b.BuildDpg()).ToList();
 
             // Temporary sorting to minimize amount of changes.
             ClientMethods = methods
@@ -82,30 +82,10 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         public static IReadOnlyList<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName)
-        {
-            var operationParameters = new Dictionary<InputOperation, MethodParametersBuilder>();
-            foreach (var inputOperation in operations)
-            {
-                var builder = new MethodParametersBuilder(typeFactory, inputOperation);
-                builder.BuildDpg();
-                operationParameters[inputOperation] = builder;
-            }
-
-            var methods = new List<LowLevelClientMethod>();
-            foreach (var (operation, parametersBuilder) in operationParameters)
-            {
-                var createNextPageMessageMethodParameters = operation.Paging is { NextLinkOperation: { } nextLinkOperation }
-                    ? operationParameters[nextLinkOperation].CreateMessageParameters
-                    : operation.Paging is { NextLinkName: {} }
-                        ? parametersBuilder.CreateMessageParameters.Prepend(KnownParameters.NextLink).ToArray()
-                        : Array.Empty<Parameter>();
-
-                var methodBuilder = new OperationMethodsBuilder(operation, null, fields, clientName, typeFactory, parametersBuilder.RequestParts, parametersBuilder.CreateMessageParameters, createNextPageMessageMethodParameters, parametersBuilder.ParameterLinks);
-                methods.Add(methodBuilder.BuildDpg());
-            }
-
-            return methods;
-        }
+            => new ClientMethodsBuilder(operations, typeFactory, false, false)
+                .Build(null, fields, clientName)
+                .Select(methodBuilder => methodBuilder.BuildDpg())
+                .ToList();
 
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
         {

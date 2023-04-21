@@ -22,26 +22,26 @@ namespace AutoRest.CSharp.Mgmt.Output
         public string Key { get; }
 
         public MgmtRestClient(InputClient inputClient, IReadOnlyList<Parameter> clientParameters, IReadOnlyList<Parameter> restClientParameters, List<Operation> operations, string clientName, MgmtOutputLibrary library)
-            : base(inputClient, clientParameters, restClientParameters, library.TypeFactory, library, clientName, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.SourceInputModel)
+            : base(inputClient, new ClientMethodsBuilder(inputClient.Operations, library.TypeFactory, false, true), clientParameters, restClientParameters, library.TypeFactory, library, clientName, MgmtContext.Context.DefaultNamespace, MgmtContext.Context.SourceInputModel)
         {
             Key = inputClient.Key;
             _operations = operations;
         }
 
-        protected override HlcMethods BuildMethods(OutputLibrary library, OperationMethodsBuilder methodBuilder, InputOperation operation)
+        protected override HlcMethods BuildMethods(OutputLibrary library, OperationMethodsBuilder methodBuilder)
         {
-            if (operation.HttpMethod != RequestMethod.Get)
+            if (methodBuilder.Operation.HttpMethod != RequestMethod.Get)
             {
                 return methodBuilder.BuildMpg(null);
             }
 
             var mpgLibrary = (MgmtOutputLibrary)library;
-            if (!mpgLibrary.TryGetResourceData(operation.Path, out var resourceData))
+            if (!mpgLibrary.TryGetResourceData(methodBuilder.Operation.Path, out var resourceData))
             {
                 return methodBuilder.BuildMpg(null);
             }
 
-            var operationSet = mpgLibrary.GetOperationSet(operation.Path);
+            var operationSet = mpgLibrary.GetOperationSet(methodBuilder.Operation.Path);
             return methodBuilder.BuildMpg(operationSet.IsResource() ? resourceData.Type : null);
         }
 
