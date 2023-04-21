@@ -210,7 +210,7 @@ Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
 <remarks>
-Creates or repalces a User
+Creates or replaces a User
 
 Below is the JSON schema for the request and response payloads.
 
@@ -293,7 +293,7 @@ Console.WriteLine(result.GetProperty("etag").ToString());
 ]]></code>
 </example>
 <remarks>
-Creates or repalces a User
+Creates or replaces a User
 
 Below is the JSON schema for the request and response payloads.
 

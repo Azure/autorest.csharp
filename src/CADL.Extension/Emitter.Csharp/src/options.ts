@@ -1,4 +1,4 @@
-import { DpgEmitterOptions } from "@azure-tools/typespec-client-generator-core";
+import { SdkEmitterOptions } from "@azure-tools/typespec-client-generator-core";
 import { EmitContext, JSONSchemaType, resolvePath } from "@typespec/compiler";
 import { dllFilePath } from "@autorest/csharp";
 import { LoggerLevel } from "./lib/logger.js";
@@ -24,7 +24,7 @@ export type NetEmitterOptions = {
     "models-to-treat-empty-string-as-null"?: string[];
     "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
     logLevel?: string;
-} & DpgEmitterOptions;
+} & SdkEmitterOptions;
 
 export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     type: "object",
