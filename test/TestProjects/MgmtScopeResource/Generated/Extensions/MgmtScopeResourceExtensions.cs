@@ -21,6 +21,22 @@ namespace MgmtScopeResource
     /// <summary> A class to add extension methods to MgmtScopeResource. </summary>
     public static partial class MgmtScopeResourceExtensions
     {
+        private static DeploymentExtendedResourceExtension GetDeploymentExtendedResourceExtension(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new DeploymentExtendedResourceExtension(client, resource.Id);
+            });
+        }
+
+        private static DeploymentExtendedResourceExtension GetDeploymentExtendedResourceExtension(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new DeploymentExtendedResourceExtension(client, scope);
+            });
+        }
+
         private static MgmtScopeResourceArmResourceExtension GetMgmtScopeResourceArmResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -34,22 +50,6 @@ namespace MgmtScopeResource
             return client.GetResourceClient(() =>
             {
                 return new MgmtScopeResourceArmResourceExtension(client, scope);
-            });
-        }
-
-        private static MgmtScopeResourceDeploymentExtendedResourceExtension GetMgmtScopeResourceDeploymentExtendedResourceExtension(ArmResource resource)
-        {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtScopeResourceDeploymentExtendedResourceExtension(client, resource.Id);
-            });
-        }
-
-        private static MgmtScopeResourceDeploymentExtendedResourceExtension GetMgmtScopeResourceDeploymentExtendedResourceExtension(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new MgmtScopeResourceDeploymentExtendedResourceExtension(client, scope);
             });
         }
 
@@ -85,22 +85,6 @@ namespace MgmtScopeResource
             });
         }
 
-        private static MgmtScopeResourceResourceLinkResourceExtension GetMgmtScopeResourceResourceLinkResourceExtension(ArmResource resource)
-        {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtScopeResourceResourceLinkResourceExtension(client, resource.Id);
-            });
-        }
-
-        private static MgmtScopeResourceResourceLinkResourceExtension GetMgmtScopeResourceResourceLinkResourceExtension(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new MgmtScopeResourceResourceLinkResourceExtension(client, scope);
-            });
-        }
-
         private static MgmtScopeResourceSubscriptionResourceExtension GetMgmtScopeResourceSubscriptionResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -130,6 +114,22 @@ namespace MgmtScopeResource
             return client.GetResourceClient(() =>
             {
                 return new MgmtScopeResourceTenantResourceExtension(client, scope);
+            });
+        }
+
+        private static ResourceLinkResourceExtension GetResourceLinkResourceExtension(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new ResourceLinkResourceExtension(client, resource.Id);
+            });
+        }
+
+        private static ResourceLinkResourceExtension GetResourceLinkResourceExtension(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new ResourceLinkResourceExtension(client, scope);
             });
         }
         #region FakePolicyAssignmentResource
@@ -673,7 +673,7 @@ namespace MgmtScopeResource
         /// <returns> An async collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceLinkResource> GetResourceLinksAsync(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceResourceLinkResourceExtension(subscriptionResource).GetResourceLinksAsync(filter, cancellationToken);
+            return GetResourceLinkResourceExtension(subscriptionResource).GetResourceLinksAsync(filter, cancellationToken);
         }
 
         /// <summary>
@@ -695,7 +695,7 @@ namespace MgmtScopeResource
         /// <returns> A collection of <see cref="ResourceLinkResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceLinkResource> GetResourceLinks(this SubscriptionResource subscriptionResource, string filter = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceResourceLinkResourceExtension(subscriptionResource).GetResourceLinks(filter, cancellationToken);
+            return GetResourceLinkResourceExtension(subscriptionResource).GetResourceLinks(filter, cancellationToken);
         }
 
         /// <summary> Gets a collection of DeploymentExtendedResources in the TenantResource. </summary>
@@ -833,7 +833,7 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNull(template, nameof(template));
 
-            return await GetMgmtScopeResourceDeploymentExtendedResourceExtension(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
+            return await GetDeploymentExtendedResourceExtension(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -857,7 +857,7 @@ namespace MgmtScopeResource
         {
             Argument.AssertNotNull(template, nameof(template));
 
-            return GetMgmtScopeResourceDeploymentExtendedResourceExtension(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
+            return GetDeploymentExtendedResourceExtension(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
         }
     }
 }

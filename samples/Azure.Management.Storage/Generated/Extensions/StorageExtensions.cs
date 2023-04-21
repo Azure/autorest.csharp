@@ -20,6 +20,22 @@ namespace Azure.Management.Storage
     /// <summary> A class to add extension methods to Azure.Management.Storage. </summary>
     public static partial class StorageExtensions
     {
+        private static StorageAccountResourceExtension GetStorageAccountResourceExtension(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new StorageAccountResourceExtension(client, resource.Id);
+            });
+        }
+
+        private static StorageAccountResourceExtension GetStorageAccountResourceExtension(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new StorageAccountResourceExtension(client, scope);
+            });
+        }
+
         private static StorageResourceGroupResourceExtension GetStorageResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -33,22 +49,6 @@ namespace Azure.Management.Storage
             return client.GetResourceClient(() =>
             {
                 return new StorageResourceGroupResourceExtension(client, scope);
-            });
-        }
-
-        private static StorageStorageAccountResourceExtension GetStorageStorageAccountResourceExtension(ArmResource resource)
-        {
-            return resource.GetCachedClient(client =>
-            {
-                return new StorageStorageAccountResourceExtension(client, resource.Id);
-            });
-        }
-
-        private static StorageStorageAccountResourceExtension GetStorageStorageAccountResourceExtension(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new StorageStorageAccountResourceExtension(client, scope);
             });
         }
 
@@ -471,7 +471,7 @@ namespace Azure.Management.Storage
         /// <returns> An async collection of <see cref="StorageAccountResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<StorageAccountResource> GetStorageAccountsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetStorageStorageAccountResourceExtension(subscriptionResource).GetStorageAccountsAsync(cancellationToken);
+            return GetStorageAccountResourceExtension(subscriptionResource).GetStorageAccountsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -492,7 +492,7 @@ namespace Azure.Management.Storage
         /// <returns> A collection of <see cref="StorageAccountResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<StorageAccountResource> GetStorageAccounts(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetStorageStorageAccountResourceExtension(subscriptionResource).GetStorageAccounts(cancellationToken);
+            return GetStorageAccountResourceExtension(subscriptionResource).GetStorageAccounts(cancellationToken);
         }
 
         /// <summary>

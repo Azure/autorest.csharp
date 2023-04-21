@@ -20,19 +20,19 @@ namespace MgmtParamOrdering
     /// <summary> A class to add extension methods to MgmtParamOrdering. </summary>
     public static partial class MgmtParamOrderingExtensions
     {
-        private static MgmtParamOrderingAvailabilitySetResourceExtension GetMgmtParamOrderingAvailabilitySetResourceExtension(ArmResource resource)
+        private static AvailabilitySetResourceExtension GetAvailabilitySetResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new MgmtParamOrderingAvailabilitySetResourceExtension(client, resource.Id);
+                return new AvailabilitySetResourceExtension(client, resource.Id);
             });
         }
 
-        private static MgmtParamOrderingAvailabilitySetResourceExtension GetMgmtParamOrderingAvailabilitySetResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static AvailabilitySetResourceExtension GetAvailabilitySetResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new MgmtParamOrderingAvailabilitySetResourceExtension(client, scope);
+                return new AvailabilitySetResourceExtension(client, scope);
             });
         }
 
@@ -515,7 +515,7 @@ namespace MgmtParamOrdering
         /// <returns> An async collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AvailabilitySetResource> GetAvailabilitySetsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtParamOrderingAvailabilitySetResourceExtension(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
+            return GetAvailabilitySetResourceExtension(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -537,7 +537,7 @@ namespace MgmtParamOrdering
         /// <returns> A collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AvailabilitySetResource> GetAvailabilitySets(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtParamOrderingAvailabilitySetResourceExtension(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);
+            return GetAvailabilitySetResourceExtension(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);
         }
     }
 }

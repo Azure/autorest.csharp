@@ -20,22 +20,6 @@ namespace MgmtOptionalConstant
     /// <summary> A class to add extension methods to MgmtOptionalConstant. </summary>
     public static partial class MgmtOptionalConstantExtensions
     {
-        private static MgmtOptionalConstantOptionalMachineResourceExtension GetMgmtOptionalConstantOptionalMachineResourceExtension(ArmResource resource)
-        {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtOptionalConstantOptionalMachineResourceExtension(client, resource.Id);
-            });
-        }
-
-        private static MgmtOptionalConstantOptionalMachineResourceExtension GetMgmtOptionalConstantOptionalMachineResourceExtension(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new MgmtOptionalConstantOptionalMachineResourceExtension(client, scope);
-            });
-        }
-
         private static MgmtOptionalConstantResourceGroupResourceExtension GetMgmtOptionalConstantResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -49,6 +33,22 @@ namespace MgmtOptionalConstant
             return client.GetResourceClient(() =>
             {
                 return new MgmtOptionalConstantResourceGroupResourceExtension(client, scope);
+            });
+        }
+
+        private static OptionalMachineResourceExtension GetOptionalMachineResourceExtension(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new OptionalMachineResourceExtension(client, resource.Id);
+            });
+        }
+
+        private static OptionalMachineResourceExtension GetOptionalMachineResourceExtension(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new OptionalMachineResourceExtension(client, scope);
             });
         }
         #region OptionalMachineResource
@@ -147,7 +147,7 @@ namespace MgmtOptionalConstant
         /// <returns> An async collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OptionalMachineResource> GetOptionalMachinesAsync(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtOptionalConstantOptionalMachineResourceExtension(subscriptionResource).GetOptionalMachinesAsync(statusOnly, cancellationToken);
+            return GetOptionalMachineResourceExtension(subscriptionResource).GetOptionalMachinesAsync(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace MgmtOptionalConstant
         /// <returns> A collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OptionalMachineResource> GetOptionalMachines(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtOptionalConstantOptionalMachineResourceExtension(subscriptionResource).GetOptionalMachines(statusOnly, cancellationToken);
+            return GetOptionalMachineResourceExtension(subscriptionResource).GetOptionalMachines(statusOnly, cancellationToken);
         }
     }
 }

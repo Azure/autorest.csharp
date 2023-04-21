@@ -20,19 +20,19 @@ namespace MgmtRenameRules
     /// <summary> A class to add extension methods to MgmtRenameRules. </summary>
     public static partial class MgmtRenameRulesExtensions
     {
-        private static MgmtRenameRulesImageResourceExtension GetMgmtRenameRulesImageResourceExtension(ArmResource resource)
+        private static ImageResourceExtension GetImageResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new MgmtRenameRulesImageResourceExtension(client, resource.Id);
+                return new ImageResourceExtension(client, resource.Id);
             });
         }
 
-        private static MgmtRenameRulesImageResourceExtension GetMgmtRenameRulesImageResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static ImageResourceExtension GetImageResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new MgmtRenameRulesImageResourceExtension(client, scope);
+                return new ImageResourceExtension(client, scope);
             });
         }
 
@@ -68,35 +68,35 @@ namespace MgmtRenameRules
             });
         }
 
-        private static MgmtRenameRulesVirtualMachineResourceExtension GetMgmtRenameRulesVirtualMachineResourceExtension(ArmResource resource)
+        private static VirtualMachineResourceExtension GetVirtualMachineResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new MgmtRenameRulesVirtualMachineResourceExtension(client, resource.Id);
+                return new VirtualMachineResourceExtension(client, resource.Id);
             });
         }
 
-        private static MgmtRenameRulesVirtualMachineResourceExtension GetMgmtRenameRulesVirtualMachineResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static VirtualMachineResourceExtension GetVirtualMachineResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new MgmtRenameRulesVirtualMachineResourceExtension(client, scope);
+                return new VirtualMachineResourceExtension(client, scope);
             });
         }
 
-        private static MgmtRenameRulesVirtualMachineScaleSetResourceExtension GetMgmtRenameRulesVirtualMachineScaleSetResourceExtension(ArmResource resource)
+        private static VirtualMachineScaleSetResourceExtension GetVirtualMachineScaleSetResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new MgmtRenameRulesVirtualMachineScaleSetResourceExtension(client, resource.Id);
+                return new VirtualMachineScaleSetResourceExtension(client, resource.Id);
             });
         }
 
-        private static MgmtRenameRulesVirtualMachineScaleSetResourceExtension GetMgmtRenameRulesVirtualMachineScaleSetResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static VirtualMachineScaleSetResourceExtension GetVirtualMachineScaleSetResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new MgmtRenameRulesVirtualMachineScaleSetResourceExtension(client, scope);
+                return new VirtualMachineScaleSetResourceExtension(client, scope);
             });
         }
         #region VirtualMachineResource
@@ -404,7 +404,7 @@ namespace MgmtRenameRules
         /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineResource> GetVirtualMachinesByLocationAsync(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetMgmtRenameRulesVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachinesByLocationAsync(location, cancellationToken);
+            return GetVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachinesByLocationAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -426,7 +426,7 @@ namespace MgmtRenameRules
         /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineResource> GetVirtualMachinesByLocation(this SubscriptionResource subscriptionResource, AzureLocation location, CancellationToken cancellationToken = default)
         {
-            return GetMgmtRenameRulesVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachinesByLocation(location, cancellationToken);
+            return GetVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachinesByLocation(location, cancellationToken);
         }
 
         /// <summary>
@@ -448,7 +448,7 @@ namespace MgmtRenameRules
         /// <returns> An async collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineResource> GetVirtualMachinesAsync(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtRenameRulesVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachinesAsync(statusOnly, cancellationToken);
+            return GetVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachinesAsync(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -470,7 +470,7 @@ namespace MgmtRenameRules
         /// <returns> A collection of <see cref="VirtualMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineResource> GetVirtualMachines(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtRenameRulesVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachines(statusOnly, cancellationToken);
+            return GetVirtualMachineResourceExtension(subscriptionResource).GetVirtualMachines(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -491,7 +491,7 @@ namespace MgmtRenameRules
         /// <returns> An async collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ImageResource> GetImagesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtRenameRulesImageResourceExtension(subscriptionResource).GetImagesAsync(cancellationToken);
+            return GetImageResourceExtension(subscriptionResource).GetImagesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -512,7 +512,7 @@ namespace MgmtRenameRules
         /// <returns> A collection of <see cref="ImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ImageResource> GetImages(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtRenameRulesImageResourceExtension(subscriptionResource).GetImages(cancellationToken);
+            return GetImageResourceExtension(subscriptionResource).GetImages(cancellationToken);
         }
 
         /// <summary>
@@ -533,7 +533,7 @@ namespace MgmtRenameRules
         /// <returns> An async collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSetsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtRenameRulesVirtualMachineScaleSetResourceExtension(subscriptionResource).GetVirtualMachineScaleSetsAsync(cancellationToken);
+            return GetVirtualMachineScaleSetResourceExtension(subscriptionResource).GetVirtualMachineScaleSetsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -554,7 +554,7 @@ namespace MgmtRenameRules
         /// <returns> A collection of <see cref="VirtualMachineScaleSetResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineScaleSetResource> GetVirtualMachineScaleSets(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtRenameRulesVirtualMachineScaleSetResourceExtension(subscriptionResource).GetVirtualMachineScaleSets(cancellationToken);
+            return GetVirtualMachineScaleSetResourceExtension(subscriptionResource).GetVirtualMachineScaleSets(cancellationToken);
         }
 
         /// <summary>

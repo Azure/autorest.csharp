@@ -19,22 +19,6 @@ namespace MgmtCollectionParent
     /// <summary> A class to add extension methods to MgmtCollectionParent. </summary>
     public static partial class MgmtCollectionParentExtensions
     {
-        private static MgmtCollectionParentOrderResourceExtension GetMgmtCollectionParentOrderResourceExtension(ArmResource resource)
-        {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtCollectionParentOrderResourceExtension(client, resource.Id);
-            });
-        }
-
-        private static MgmtCollectionParentOrderResourceExtension GetMgmtCollectionParentOrderResourceExtension(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new MgmtCollectionParentOrderResourceExtension(client, scope);
-            });
-        }
-
         private static MgmtCollectionParentResourceGroupResourceExtension GetMgmtCollectionParentResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -48,6 +32,22 @@ namespace MgmtCollectionParent
             return client.GetResourceClient(() =>
             {
                 return new MgmtCollectionParentResourceGroupResourceExtension(client, scope);
+            });
+        }
+
+        private static OrderResourceExtension GetOrderResourceExtension(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new OrderResourceExtension(client, resource.Id);
+            });
+        }
+
+        private static OrderResourceExtension GetOrderResourceExtension(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new OrderResourceExtension(client, scope);
             });
         }
         #region OrderResource
@@ -146,7 +146,7 @@ namespace MgmtCollectionParent
         /// <returns> An async collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OrderResource> GetOrderResourcesAsync(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtCollectionParentOrderResourceExtension(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
+            return GetOrderResourceExtension(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace MgmtCollectionParent
         /// <returns> A collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OrderResource> GetOrderResources(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtCollectionParentOrderResourceExtension(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
+            return GetOrderResourceExtension(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
         }
     }
 }

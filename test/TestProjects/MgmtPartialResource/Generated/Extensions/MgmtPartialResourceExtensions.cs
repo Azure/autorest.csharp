@@ -19,22 +19,6 @@ namespace MgmtPartialResource
     /// <summary> A class to add extension methods to MgmtPartialResource. </summary>
     public static partial class MgmtPartialResourceExtensions
     {
-        private static MgmtPartialResourcePublicIPAddressResourceExtension GetMgmtPartialResourcePublicIPAddressResourceExtension(ArmResource resource)
-        {
-            return resource.GetCachedClient(client =>
-            {
-                return new MgmtPartialResourcePublicIPAddressResourceExtension(client, resource.Id);
-            });
-        }
-
-        private static MgmtPartialResourcePublicIPAddressResourceExtension GetMgmtPartialResourcePublicIPAddressResourceExtension(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new MgmtPartialResourcePublicIPAddressResourceExtension(client, scope);
-            });
-        }
-
         private static MgmtPartialResourceResourceGroupResourceExtension GetMgmtPartialResourceResourceGroupResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -48,6 +32,22 @@ namespace MgmtPartialResource
             return client.GetResourceClient(() =>
             {
                 return new MgmtPartialResourceResourceGroupResourceExtension(client, scope);
+            });
+        }
+
+        private static PublicIPAddressResourceExtension GetPublicIPAddressResourceExtension(ArmResource resource)
+        {
+            return resource.GetCachedClient(client =>
+            {
+                return new PublicIPAddressResourceExtension(client, resource.Id);
+            });
+        }
+
+        private static PublicIPAddressResourceExtension GetPublicIPAddressResourceExtension(ArmClient client, ResourceIdentifier scope)
+        {
+            return client.GetResourceClient(() =>
+            {
+                return new PublicIPAddressResourceExtension(client, scope);
             });
         }
         #region PublicIPAddressResource
@@ -202,7 +202,7 @@ namespace MgmtPartialResource
         /// <returns> An async collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<PublicIPAddressResource> GetPublicIPAddressesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPartialResourcePublicIPAddressResourceExtension(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
+            return GetPublicIPAddressResourceExtension(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace MgmtPartialResource
         /// <returns> A collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<PublicIPAddressResource> GetPublicIPAddresses(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtPartialResourcePublicIPAddressResourceExtension(subscriptionResource).GetPublicIPAddresses(cancellationToken);
+            return GetPublicIPAddressResourceExtension(subscriptionResource).GetPublicIPAddresses(cancellationToken);
         }
     }
 }

@@ -52,19 +52,19 @@ namespace MgmtExpandResourceTypes
             });
         }
 
-        private static MgmtExpandResourceTypesZoneResourceExtension GetMgmtExpandResourceTypesZoneResourceExtension(ArmResource resource)
+        private static ZoneResourceExtension GetZoneResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new MgmtExpandResourceTypesZoneResourceExtension(client, resource.Id);
+                return new ZoneResourceExtension(client, resource.Id);
             });
         }
 
-        private static MgmtExpandResourceTypesZoneResourceExtension GetMgmtExpandResourceTypesZoneResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static ZoneResourceExtension GetZoneResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new MgmtExpandResourceTypesZoneResourceExtension(client, scope);
+                return new ZoneResourceExtension(client, scope);
             });
         }
         #region RecordSetAResource
@@ -351,7 +351,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ZoneResource> GetZonesByDnszoneAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExpandResourceTypesZoneResourceExtension(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
+            return GetZoneResourceExtension(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -373,7 +373,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ZoneResource> GetZonesByDnszone(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetMgmtExpandResourceTypesZoneResourceExtension(subscriptionResource).GetZonesByDnszone(top, cancellationToken);
+            return GetZoneResourceExtension(subscriptionResource).GetZonesByDnszone(top, cancellationToken);
         }
 
         /// <summary>

@@ -30,7 +30,14 @@ namespace AutoRest.CSharp.Mgmt.Output
             _operations = operations;
             _extensionForChildResources = extensionForChildResources;
             ExtendedResourceType = resourceType;
-            DefaultName = $"{MgmtContext.RPName}{resourceType.Name}Extension";
+            if (resourceType.IsFrameworkType) // meaning that this is a type from Azure.ResourceManager
+            {
+                DefaultName = $"{MgmtContext.RPName}{resourceType.Name}Extension";
+            }
+            else
+            {
+                DefaultName = $"{resourceType.Name}Extension";
+            }
         }
 
         public override bool IsInitializedByProperties => true;

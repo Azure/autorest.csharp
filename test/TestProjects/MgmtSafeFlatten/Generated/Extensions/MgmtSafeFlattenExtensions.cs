@@ -35,35 +35,35 @@ namespace MgmtSafeFlatten
             });
         }
 
-        private static MgmtSafeFlattenTypeOneResourceExtension GetMgmtSafeFlattenTypeOneResourceExtension(ArmResource resource)
+        private static TypeOneResourceExtension GetTypeOneResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new MgmtSafeFlattenTypeOneResourceExtension(client, resource.Id);
+                return new TypeOneResourceExtension(client, resource.Id);
             });
         }
 
-        private static MgmtSafeFlattenTypeOneResourceExtension GetMgmtSafeFlattenTypeOneResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static TypeOneResourceExtension GetTypeOneResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new MgmtSafeFlattenTypeOneResourceExtension(client, scope);
+                return new TypeOneResourceExtension(client, scope);
             });
         }
 
-        private static MgmtSafeFlattenTypeTwoResourceExtension GetMgmtSafeFlattenTypeTwoResourceExtension(ArmResource resource)
+        private static TypeTwoResourceExtension GetTypeTwoResourceExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new MgmtSafeFlattenTypeTwoResourceExtension(client, resource.Id);
+                return new TypeTwoResourceExtension(client, resource.Id);
             });
         }
 
-        private static MgmtSafeFlattenTypeTwoResourceExtension GetMgmtSafeFlattenTypeTwoResourceExtension(ArmClient client, ResourceIdentifier scope)
+        private static TypeTwoResourceExtension GetTypeTwoResourceExtension(ArmClient client, ResourceIdentifier scope)
         {
             return client.GetResourceClient(() =>
             {
-                return new MgmtSafeFlattenTypeTwoResourceExtension(client, scope);
+                return new TypeTwoResourceExtension(client, scope);
             });
         }
         #region TypeOneResource
@@ -234,7 +234,7 @@ namespace MgmtSafeFlatten
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeOneResource> GetTypeOnesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSafeFlattenTypeOneResourceExtension(subscriptionResource).GetTypeOnesAsync(cancellationToken);
+            return GetTypeOneResourceExtension(subscriptionResource).GetTypeOnesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace MgmtSafeFlatten
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeOneResource> GetTypeOnes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSafeFlattenTypeOneResourceExtension(subscriptionResource).GetTypeOnes(cancellationToken);
+            return GetTypeOneResourceExtension(subscriptionResource).GetTypeOnes(cancellationToken);
         }
 
         /// <summary>
@@ -276,7 +276,7 @@ namespace MgmtSafeFlatten
         /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeTwoResource> GetTypeTwosAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSafeFlattenTypeTwoResourceExtension(subscriptionResource).GetTypeTwosAsync(cancellationToken);
+            return GetTypeTwoResourceExtension(subscriptionResource).GetTypeTwosAsync(cancellationToken);
         }
 
         /// <summary>
@@ -297,7 +297,7 @@ namespace MgmtSafeFlatten
         /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeTwoResource> GetTypeTwos(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetMgmtSafeFlattenTypeTwoResourceExtension(subscriptionResource).GetTypeTwos(cancellationToken);
+            return GetTypeTwoResourceExtension(subscriptionResource).GetTypeTwos(cancellationToken);
         }
     }
 }
