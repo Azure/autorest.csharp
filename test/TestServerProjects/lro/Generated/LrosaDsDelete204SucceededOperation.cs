@@ -27,7 +27,7 @@ namespace lro
         internal LrosaDsDelete204SucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "LrosaDsDelete204SucceededOperation");
+            _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "LrosaDsDelete204SucceededOperation");
         }
 
         /// <inheritdoc />
