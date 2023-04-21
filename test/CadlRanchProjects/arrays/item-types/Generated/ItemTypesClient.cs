@@ -132,5 +132,15 @@ namespace Arrays.ItemTypes
 
             return new ModelValue(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
+
+        /// <summary> Initializes a new instance of NullableFloatValue. </summary>
+        /// <param name="apiVersion"> The String to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
+        public virtual NullableFloatValue GetNullableFloatValueClient(string apiVersion = "1.0.0")
+        {
+            Argument.AssertNotNull(apiVersion, nameof(apiVersion));
+
+            return new NullableFloatValue(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+        }
     }
 }
