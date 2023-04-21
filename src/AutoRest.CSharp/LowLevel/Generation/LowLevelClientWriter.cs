@@ -289,7 +289,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     ResponseWriterHelpers.WriteRawResponseToGeneric(_writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, $"{responseVariable.ActualName}");
                 }
-                else if (responseType.IsEnum && responseType.Implementation is EnumType enumType)
+                else if (responseType is { IsFrameworkType: false, Implementation: EnumType enumType })
                 {
                     string declaredTypeName = enumType.Declaration.Name;
                     if (enumType.IsExtensible)
