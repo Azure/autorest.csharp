@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{typeof(RequestContent)}.{nameof(RequestContent.Create)}({parameter.Name})";
             }
 
-            if (parameter.Type.IsEnum && toType.EqualsIgnoreNullable(typeof(RequestContent)) && parameter.Type.Implementation is EnumType enumType)
+            if (parameter.Type is { IsFrameworkType: false, Implementation: EnumType enumType } && toType.EqualsIgnoreNullable(typeof(RequestContent)))
             {
                 if (enumType.IsExtensible)
                 {
