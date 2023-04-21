@@ -29,7 +29,7 @@ namespace Azure.Network.Management.Interface
         internal NetworkInterfaceTapConfigurationsCreateOrUpdateOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<NetworkInterfaceTapConfiguration> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.AzureAsyncOperation);
-            _operation = new OperationInternal<NetworkInterfaceTapConfiguration>(clientDiagnostics, nextLinkOperation, response, "NetworkInterfaceTapConfigurationsCreateOrUpdateOperation");
+            _operation = new OperationInternal<NetworkInterfaceTapConfiguration>(nextLinkOperation, clientDiagnostics, response, "NetworkInterfaceTapConfigurationsCreateOrUpdateOperation");
         }
 
         /// <inheritdoc />

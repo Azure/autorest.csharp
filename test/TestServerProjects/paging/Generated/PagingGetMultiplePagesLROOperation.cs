@@ -31,7 +31,7 @@ namespace paging
         internal PagingGetMultiplePagesLROOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response, Func<int?, string, HttpMessage> nextPageFunc)
         {
             IOperation<AsyncPageable<Product>> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<AsyncPageable<Product>>(clientDiagnostics, nextLinkOperation, response, "PagingGetMultiplePagesLROOperation");
+            _operation = new OperationInternal<AsyncPageable<Product>>(nextLinkOperation, clientDiagnostics, response, "PagingGetMultiplePagesLROOperation");
             _nextPageFunc = nextPageFunc;
             _clientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
