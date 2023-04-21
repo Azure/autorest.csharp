@@ -889,6 +889,10 @@ var data = new {
         requiredLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
     },
+    requiredUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
+    },
 };
 
 Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
@@ -947,6 +951,14 @@ var data = new {
         "1"
     },
     stringFixedEnum = "1",
+    requiredUnknown = new {},
+    optionalUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
+    },
+    optionalRecordUnknown = new {
+        key = new {},
+    },
 };
 
 Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
@@ -998,6 +1010,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
+  requiredUnknown: any, # Required. required unknown
+  optionalUnknown: any, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1046,6 +1064,10 @@ var data = new {
         requiredLiteralDouble = new {},
         requiredLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
+    },
+    requiredUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
     },
 };
 
@@ -1105,6 +1127,14 @@ var data = new {
         "1"
     },
     stringFixedEnum = "1",
+    requiredUnknown = new {},
+    optionalUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
+    },
+    optionalRecordUnknown = new {
+        key = new {},
+    },
 };
 
 Response response = client.HelloAgain("<p2>", "<p1>", RequestContent.Create(data));
@@ -1156,6 +1186,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
+  requiredUnknown: any, # Required. required unknown
+  optionalUnknown: any, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1204,6 +1240,10 @@ var data = new {
         requiredLiteralDouble = new {},
         requiredLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
+    },
+    requiredUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
     },
 };
 
@@ -1263,6 +1303,14 @@ var data = new {
         "1"
     },
     stringFixedEnum = "1",
+    requiredUnknown = new {},
+    optionalUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
+    },
+    optionalRecordUnknown = new {
+        key = new {},
+    },
 };
 
 Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
@@ -1314,6 +1362,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
+  requiredUnknown: any, # Required. required unknown
+  optionalUnknown: any, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 
@@ -1362,6 +1416,10 @@ var data = new {
         requiredLiteralDouble = new {},
         requiredLiteralBool = new {},
         requiredBadDescription = "<requiredBadDescription>",
+    },
+    requiredUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
     },
 };
 
@@ -1421,6 +1479,14 @@ var data = new {
         "1"
     },
     stringFixedEnum = "1",
+    requiredUnknown = new {},
+    optionalUnknown = new {},
+    requiredRecordUnknown = new {
+        key = new {},
+    },
+    optionalRecordUnknown = new {
+        key = new {},
+    },
 };
 
 Response response = client.NoContentType("<p2>", "<p1>", RequestContent.Create(data));
@@ -1472,6 +1538,12 @@ Schema for <c>RoundTripModel</c>:
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
+  requiredUnknown: any, # Required. required unknown
+  optionalUnknown: any, # Optional. optional unknown
+  requiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required record of unknown
+  optionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional record of unknown
+  readOnlyRequiredRecordUnknown: Dictionary&lt;string, any&gt;, # Required. required readonly record of unknown
+  readOnlyOptionalRecordUnknown: Dictionary&lt;string, any&gt;, # Optional. optional readonly record of unknown
 }
 </code>
 

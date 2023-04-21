@@ -55,7 +55,8 @@ import {
     InputType,
     InputUnionType,
     InputNullType,
-    InputIntrinsicType
+    InputIntrinsicType,
+    InputUnknownType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
@@ -524,12 +525,10 @@ export function getInputType(
         switch (type.name) {
             case "unknown":
                 return {
-                    Name: "unknown",
-                    Description: getDoc(program, type),
-                    IsNullable: false,
-                    Usage: Usage.None,
-                    Properties: []
-                } as InputModelType;
+                    Name: "Intrinsic",
+                    Kind: "unknown",
+                    IsNullable: false
+                } as InputUnknownType;
             case "null":
                 return {
                     Name: "Intrinsic",
