@@ -33,6 +33,10 @@ namespace additionalProperties.Models
 
         internal static PetAPTrue DeserializePetAPTrue(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             int id = default;
             Optional<string> name = default;
             Optional<bool> status = default;
@@ -54,7 +58,6 @@ namespace additionalProperties.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     status = property.Value.GetBoolean();

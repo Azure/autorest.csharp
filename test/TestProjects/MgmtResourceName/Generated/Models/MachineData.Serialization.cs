@@ -26,6 +26,10 @@ namespace MgmtResourceName
 
         internal static MachineData DeserializeMachineData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @new = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -57,7 +61,6 @@ namespace MgmtResourceName
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

@@ -40,6 +40,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static RollingUpgradePolicy DeserializeRollingUpgradePolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> maxBatchInstancePercent = default;
             Optional<int> maxUnhealthyInstancePercent = default;
             Optional<int> maxUnhealthyUpgradedInstancePercent = default;
@@ -50,7 +54,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     maxBatchInstancePercent = property.Value.GetInt32();
@@ -60,7 +63,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     maxUnhealthyInstancePercent = property.Value.GetInt32();
@@ -70,7 +72,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     maxUnhealthyUpgradedInstancePercent = property.Value.GetInt32();

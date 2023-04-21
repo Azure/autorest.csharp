@@ -32,6 +32,10 @@ namespace MgmtMockAndSample.Models
 
         internal static AccessPolicyEntry DeserializeAccessPolicyEntry(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Guid tenantId = default;
             string objectId = default;
             Optional<Guid> applicationId = default;
@@ -52,7 +56,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     applicationId = property.Value.GetGuid();

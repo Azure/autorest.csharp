@@ -17,6 +17,10 @@ namespace MgmtResourceName
     {
         internal static ProviderOperationData DeserializeProviderOperationData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> displayName = default;
             Optional<IReadOnlyList<Models.ResourceType>> resourceTypes = default;
             Optional<IReadOnlyList<ResourceOperation>> operations = default;
@@ -35,7 +39,6 @@ namespace MgmtResourceName
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Models.ResourceType> array = new List<Models.ResourceType>();
@@ -50,7 +53,6 @@ namespace MgmtResourceName
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ResourceOperation> array = new List<ResourceOperation>();
@@ -80,7 +82,6 @@ namespace MgmtResourceName
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

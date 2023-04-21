@@ -31,6 +31,10 @@ namespace CognitiveSearch.Models
 
         internal static UnknownScoringFunction DeserializeUnknownScoringFunction(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string type = "Unknown";
             string fieldName = default;
             double boost = default;
@@ -56,7 +60,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     interpolation = property.Value.GetString().ToScoringFunctionInterpolation();

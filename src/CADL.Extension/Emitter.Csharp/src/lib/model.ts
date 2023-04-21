@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-import { isFixed } from "@azure-tools/cadl-azure-core";
+import { isFixed } from "@azure-tools/typespec-azure-core";
 import {
     Enum,
     EnumMember,
@@ -29,22 +29,22 @@ import {
     Scalar,
     Union,
     getProjectedNames
-} from "@cadl-lang/compiler";
-import { getResourceOperation } from "@cadl-lang/rest";
+} from "@typespec/compiler";
+import { getResourceOperation } from "@typespec/rest";
 import {
     getHeaderFieldName,
     getPathParamName,
     getQueryParamName,
     HttpOperation,
     isStatusCode
-} from "@cadl-lang/rest/http";
+} from "@typespec/http";
 import {
     projectedNameClientKey,
     projectedNameCSharpKey,
     projectedNameJsonKey
 } from "../constants.js";
-import { InputEnumTypeValue } from "../type/InputEnumTypeValue.js";
-import { InputModelProperty } from "../type/InputModelProperty.js";
+import { InputEnumTypeValue } from "../type/inputEnumTypeValue.js";
+import { InputModelProperty } from "../type/inputModelProperty.js";
 import {
     InputDictionaryType,
     InputEnumType,
@@ -55,18 +55,22 @@ import {
     InputType,
     InputUnionType,
     InputNullType,
-    InputIntrinsicType
-} from "../type/InputType.js";
-import { InputTypeKind } from "../type/InputTypeKind.js";
-import { Usage } from "../type/Usage.js";
+    InputIntrinsicType,
+    InputUnknownType
+} from "../type/inputType.js";
+import { InputTypeKind } from "../type/inputTypeKind.js";
+import { Usage } from "../type/usage.js";
+import { logger } from "./logger.js";
+import { SdkContext } from "@azure-tools/typespec-client-generator-core";
+import { capitalize } from "./utils.js";
 /**
  * Map calType to csharp InputTypeKind
  */
 export function mapCadlTypeToCSharpInputTypeKind(
-    program: Program,
+    context: SdkContext,
     cadlType: Type
 ): InputTypeKind {
-    const format = getFormat(program, cadlType);
+    const format = getFormat(context.program, cadlType);
     const kind = cadlType.kind;
     switch (kind) {
         case "Model":
@@ -130,7 +134,9 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Boolean;
         case "plainDate":
             return InputTypeKind.Date;
-        case "zonedDateTime":
+        case "utcDateTime":
+            return InputTypeKind.DateTime;
+        case "offsetDateTime":
             return InputTypeKind.DateTime;
         case "plainTime":
             return InputTypeKind.Time;
@@ -142,71 +148,14 @@ function getCSharpInputTypeKindByIntrinsicModelName(
 }
 
 /**
- * Map cadl intrinsic model to c# model name
- * @param cadlType
- */
-export function mapCadlIntrinsicModelToCsharpModel(
-    program: Program,
-    cadlType: Model
-): string | undefined {
-    if (!program.checker.isStdType(cadlType)) {
-        return undefined;
-    }
-    //const name = getIntrinsicModelName(program, cadlType);
-    const name = cadlType.name;
-    switch (name) {
-        case "bytes":
-            return "Bytes";
-        case "int8":
-            return "Byte";
-        case "int16":
-            return "Int16";
-        case "int32":
-            return "Int32";
-        case "int64":
-            return "Int64";
-        case "safeint":
-            return "Int64";
-        case "uint8":
-            return "Byte";
-        case "uint16":
-            return "UInt16";
-        case "uint32":
-            return "UInt32";
-        case "uint64":
-            return "UInt64";
-        case "float64":
-            return "double";
-        case "float32":
-            return "float";
-        case "string":
-            return "string";
-        case "boolean":
-            return "bool";
-        case "plainDate":
-            return "DateTime";
-        case "zonedDateTime":
-            return "DateTime";
-        case "plainTime":
-            return "TimeSpan";
-        case "duration":
-            return "TimeSpan";
-        case "Record":
-            // We assert on valType because Map types always have a type
-            return "Dictionary";
-        default:
-            return "UnKnownType";
-    }
-}
-/**
  * If type is an anonymous model, tries to find a named model that has the same
  * set of properties when non-schema properties are excluded.
  */
-export function getEffectiveSchemaType(program: Program, type: Type): Type {
+export function getEffectiveSchemaType(context: SdkContext, type: Type): Type {
     let target = type;
     if (type.kind === "Model" && !type.name) {
         const effective = getEffectiveModelType(
-            program,
+            context.program,
             type,
             isSchemaPropertyInternal
         );
@@ -218,7 +167,7 @@ export function getEffectiveSchemaType(program: Program, type: Type): Type {
     return target;
 
     function isSchemaPropertyInternal(property: ModelProperty) {
-        return isSchemaProperty(program, property);
+        return isSchemaProperty(context, property);
     }
 }
 
@@ -228,7 +177,8 @@ export function getEffectiveSchemaType(program: Program, type: Type): Type {
  * Headers, parameters, status codes are not schema properties even they are
  * represented as properties in Cadl.
  */
-function isSchemaProperty(program: Program, property: ModelProperty) {
+function isSchemaProperty(context: SdkContext, property: ModelProperty) {
+    const program = context.program;
     const headerInfo = getHeaderFieldName(program, property);
     const queryInfo = getQueryParamName(program, property);
     const pathInfo = getPathParamName(program, property);
@@ -255,11 +205,13 @@ export function isNeverType(type: Type): type is NeverType {
 }
 
 export function getInputType(
-    program: Program,
+    context: SdkContext,
     type: Type,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>
 ): InputType {
+    logger.debug(`getInputType for kind: ${type.kind}`);
+    const program = context.program;
     if (type.kind === "Model") {
         return getInputModelType(type);
     } else if (
@@ -269,7 +221,7 @@ export function getInputType(
     ) {
         // For literal types, we just want to emit them directly as well.
         const builtInKind: InputTypeKind = mapCadlTypeToCSharpInputTypeKind(
-            program,
+            context,
             type
         );
         const valueType = {
@@ -290,7 +242,7 @@ export function getInputType(
         return getInputTypeForEnum(type.enum);
     } else if (type.kind === "Intrinsic") {
         return getInputModelForIntrinsicType(type);
-    } else if (type.kind === "Scalar" /*&& program.checker.isStdType(type)*/) {
+    } else if (type.kind === "Scalar") {
         let effectiveType = type;
         while (!program.checker.isStdType(effectiveType)) {
             if (type.baseScalar) {
@@ -425,7 +377,7 @@ export function getInputType(
     function getInputTypeForArray(elementType: Type): InputListType {
         return {
             Name: "Array",
-            ElementType: getInputType(program, elementType, models, enums),
+            ElementType: getInputType(context, elementType, models, enums),
             IsNullable: false
         } as InputListType;
     }
@@ -433,14 +385,14 @@ export function getInputType(
     function getInputTypeForMap(key: Type, value: Type): InputDictionaryType {
         return {
             Name: "Dictionary",
-            KeyType: getInputType(program, key, models, enums),
-            ValueType: getInputType(program, value, models, enums),
+            KeyType: getInputType(context, key, models, enums),
+            ValueType: getInputType(context, value, models, enums),
             IsNullable: false
         } as InputDictionaryType;
     }
 
     function getInputModelForModel(m: Model): InputModelType {
-        m = getEffectiveSchemaType(program, m) as Model;
+        m = getEffectiveSchemaType(context, m) as Model;
         const name = getFriendlyName(program, m) ?? m.name;
         let model = models.get(name);
         if (!model) {
@@ -474,7 +426,7 @@ export function getInputType(
             // We should be able to remove it when https://github.com/Azure/cadl-azure/issues/1733 is closed
             if (model.DiscriminatorPropertyName && m.derivedModels) {
                 for (const dm of m.derivedModels) {
-                    getInputType(program, dm, models, enums);
+                    getInputType(context, dm, models, enums);
                 }
             }
         }
@@ -508,7 +460,7 @@ export function getInputType(
         inputProperties.forEach((value: ModelProperty, key: string) => {
             if (
                 value.name !== discriminatorPropertyName &&
-                isSchemaProperty(program, value)
+                isSchemaProperty(context, value)
             ) {
                 const vis = getVisibility(program, value);
                 let isReadOnly: boolean = false;
@@ -527,7 +479,7 @@ export function getInputType(
                     Name: name,
                     SerializedName: serializedName,
                     Description: getDoc(program, value) ?? "",
-                    Type: getInputType(program, value.type, models, enums),
+                    Type: getInputType(context, value.type, models, enums),
                     IsRequired: !value.optional,
                     IsReadOnly: isReadOnly,
                     IsDiscriminator: false
@@ -573,12 +525,10 @@ export function getInputType(
         switch (type.name) {
             case "unknown":
                 return {
-                    Name: "unknown",
-                    Description: getDoc(program, type),
-                    IsNullable: false,
-                    Usage: Usage.None,
-                    Properties: []
-                } as InputModelType;
+                    Name: "Intrinsic",
+                    Kind: "unknown",
+                    IsNullable: false
+                } as InputUnknownType;
             case "null":
                 return {
                     Name: "Intrinsic",
@@ -597,7 +547,7 @@ export function getInputType(
         let hasNullType = false;
         for (const variant of variants) {
             const inputType = getInputType(
-                program,
+                context,
                 variant.type,
                 models,
                 enums
@@ -630,9 +580,10 @@ export function getInputType(
 }
 
 export function getUsages(
-    program: Program,
+    context: SdkContext,
     ops?: HttpOperation[]
 ): { inputs: string[]; outputs: string[]; roundTrips: string[] } {
+    const program = context.program;
     const result: {
         inputs: string[];
         outputs: string[];
@@ -648,20 +599,29 @@ export function getUsages(
     for (const type of usages.types) {
         let typeName = "";
         if ("name" in type) typeName = type.name ?? "";
+        let effectiveType = type;
         if (type.kind === "Model") {
-            const effectiveType = getEffectiveSchemaType(
-                program,
-                type
-            ) as Model;
+            effectiveType = getEffectiveSchemaType(context, type) as Model;
             typeName =
                 getFriendlyName(program, effectiveType) ?? effectiveType.name;
         }
         const affectTypes: string[] = [];
-        if (typeName !== "") affectTypes.push(typeName);
-        if (type.kind === "Model" && type.templateArguments) {
-            for (const arg of type.templateArguments) {
-                if (arg.kind === "Model" && "name" in arg && arg.name !== "") {
-                    affectTypes.push(getFriendlyName(program, arg) ?? arg.name);
+        if (typeName !== "") {
+            affectTypes.push(typeName);
+            if (
+                effectiveType.kind === "Model" &&
+                effectiveType.templateMapper?.args
+            ) {
+                for (const arg of effectiveType.templateMapper.args) {
+                    if (
+                        arg.kind === "Model" &&
+                        "name" in arg &&
+                        arg.name !== ""
+                    ) {
+                        affectTypes.push(
+                            getFriendlyName(program, arg) ?? arg.name
+                        );
+                    }
                 }
             }
         }
@@ -676,39 +636,63 @@ export function getUsages(
             usagesMap.set(name, value);
         }
     }
-    /* handle resource operation. */
+
     for (const op of ops) {
         const resourceOperation = getResourceOperation(program, op.operation);
-        if (resourceOperation) {
-            if (!op.parameters.bodyParameter && op.parameters.bodyType) {
-                const resourceName = resourceOperation.resourceType.name;
-                let value = usagesMap.get(resourceName);
-                if (!value) value = UsageFlags.Input;
-                else value = value | UsageFlags.Input;
-                usagesMap.set(resourceName, value);
-            }
-        }
-
-        /* handle spread. */
         if (!op.parameters.bodyParameter && op.parameters.bodyType) {
-            const effectiveBodyType = getEffectiveSchemaType(
-                program,
-                op.parameters.bodyType
-            );
-            if (
-                effectiveBodyType.kind === "Model" &&
-                effectiveBodyType.name !== ""
-            ) {
-                const modelName =
-                    getFriendlyName(program, effectiveBodyType) ??
-                    effectiveBodyType.name;
-                let value = usagesMap.get(modelName);
-                if (!value) value = UsageFlags.Input;
-                else value = value | UsageFlags.Input;
-                usagesMap.set(modelName, value);
+            let bodyTypeName = "";
+            if (resourceOperation) {
+                /* handle resource operation. */
+                bodyTypeName = resourceOperation.resourceType.name;
+            } else {
+                /* handle spread. */
+                const effectiveBodyType = getEffectiveSchemaType(
+                    context,
+                    op.parameters.bodyType
+                );
+                if (effectiveBodyType.kind === "Model") {
+                    if (effectiveBodyType.name !== "") {
+                        bodyTypeName =
+                            getFriendlyName(program, effectiveBodyType) ??
+                            effectiveBodyType.name;
+                    } else {
+                        bodyTypeName = `${capitalize(
+                            op.operation.name
+                        )}Request`;
+                    }
+                }
+            }
+            appendUsage(bodyTypeName, UsageFlags.Input);
+        }
+        /* handle response type usage. */
+        for (const res of op.responses) {
+            const resBody = res.responses[0]?.body;
+            if (resBody?.type) {
+                let returnType = "";
+                if (
+                    resourceOperation &&
+                    resourceOperation.operation !== "list"
+                ) {
+                    returnType = resourceOperation.resourceType.name;
+                } else {
+                    const effectiveReturnType = getEffectiveSchemaType(
+                        context,
+                        resBody.type
+                    );
+                    if (
+                        effectiveReturnType.kind === "Model" &&
+                        effectiveReturnType.name !== ""
+                    ) {
+                        returnType =
+                            getFriendlyName(program, effectiveReturnType) ??
+                            effectiveReturnType.name;
+                    }
+                }
+                appendUsage(returnType, UsageFlags.Output);
             }
         }
     }
+
     for (const [key, value] of usagesMap) {
         if (value === (UsageFlags.Input | UsageFlags.Output)) {
             result.roundTrips.push(key);
@@ -719,4 +703,11 @@ export function getUsages(
         }
     }
     return result;
+
+    function appendUsage(name: string, flag: UsageFlags) {
+        let value = usagesMap.get(name);
+        if (!value) value = flag;
+        else value = value | flag;
+        usagesMap.set(name, value);
+    }
 }

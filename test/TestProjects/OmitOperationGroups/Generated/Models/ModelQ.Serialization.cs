@@ -26,6 +26,10 @@ namespace OmitOperationGroups.Models
 
         internal static ModelQ DeserializeModelQ(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> m = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -57,7 +61,6 @@ namespace OmitOperationGroups.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

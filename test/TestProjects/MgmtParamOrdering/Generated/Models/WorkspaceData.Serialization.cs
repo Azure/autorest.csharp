@@ -102,6 +102,10 @@ namespace MgmtParamOrdering
 
         internal static WorkspaceData DeserializeWorkspaceData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
             ResourceIdentifier id = default;
@@ -130,7 +134,6 @@ namespace MgmtParamOrdering
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -165,7 +168,6 @@ namespace MgmtParamOrdering
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -224,7 +226,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                discoveryUrl = null;
                                 continue;
                             }
                             discoveryUrl = new Uri(property0.Value.GetString());
@@ -234,7 +235,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             provisioningState = new ProvisioningState(property0.Value.GetString());
@@ -244,7 +244,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             hbiWorkspace = property0.Value.GetBoolean();
@@ -259,7 +258,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             privateLinkCount = property0.Value.GetInt32();
@@ -274,7 +272,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             allowPublicAccessWhenBehindVnet = property0.Value.GetBoolean();
@@ -289,7 +286,6 @@ namespace MgmtParamOrdering
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             tenantId = property0.Value.GetGuid();

@@ -30,6 +30,10 @@ namespace MgmtNonStringPathVariable.Models
 
         internal static FakeProperties DeserializeFakeProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> platformUpdateDomainCount = default;
             Optional<int> platformFaultDomainCount = default;
             foreach (var property in element.EnumerateObject())
@@ -38,7 +42,6 @@ namespace MgmtNonStringPathVariable.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     platformUpdateDomainCount = property.Value.GetInt32();
@@ -48,7 +51,6 @@ namespace MgmtNonStringPathVariable.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     platformFaultDomainCount = property.Value.GetInt32();

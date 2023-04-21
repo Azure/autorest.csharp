@@ -40,6 +40,10 @@ namespace MgmtListMethods
 
         internal static ResGrpParentWithNonResChData DeserializeResGrpParentWithNonResChData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> bar = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
@@ -58,7 +62,6 @@ namespace MgmtListMethods
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -93,7 +96,6 @@ namespace MgmtListMethods
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

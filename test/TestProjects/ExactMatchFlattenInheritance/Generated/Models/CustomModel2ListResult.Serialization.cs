@@ -16,6 +16,10 @@ namespace ExactMatchFlattenInheritance.Models
     {
         internal static CustomModel2ListResult DeserializeCustomModel2ListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<CustomModel2Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -24,7 +28,6 @@ namespace ExactMatchFlattenInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<CustomModel2Data> array = new List<CustomModel2Data>();

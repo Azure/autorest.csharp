@@ -14,6 +14,10 @@ namespace MgmtScopeResource.Models
     {
         internal static DeploymentOperation DeserializeDeploymentOperation(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> operationId = default;
             Optional<DeploymentOperationProperties> properties = default;
@@ -33,7 +37,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     properties = DeploymentOperationProperties.DeserializeDeploymentOperationProperties(property.Value);

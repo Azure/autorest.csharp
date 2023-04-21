@@ -35,6 +35,10 @@ namespace MgmtRenameRules.Models
 
         internal static MgmtRenameRulesSku DeserializeMgmtRenameRulesSku(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> tier = default;
             Optional<long> capacity = default;
@@ -54,7 +58,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     capacity = property.Value.GetInt64();

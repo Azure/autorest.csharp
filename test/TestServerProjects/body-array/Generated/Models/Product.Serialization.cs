@@ -30,6 +30,10 @@ namespace body_array.Models
 
         internal static Product DeserializeProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> integer = default;
             Optional<string> @string = default;
             foreach (var property in element.EnumerateObject())
@@ -38,7 +42,6 @@ namespace body_array.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     integer = property.Value.GetInt32();

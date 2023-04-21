@@ -15,6 +15,10 @@ namespace MgmtScopeResource.Models
     {
         internal static WhatIfChange DeserializeWhatIfChange(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string resourceId = default;
             ChangeType changeType = default;
             Optional<string> unsupportedReason = default;
@@ -41,7 +45,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     before = BinaryData.FromString(property.Value.GetRawText());
@@ -51,7 +54,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     after = BinaryData.FromString(property.Value.GetRawText());

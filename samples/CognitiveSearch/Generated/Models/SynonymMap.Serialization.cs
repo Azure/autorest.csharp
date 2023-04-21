@@ -36,6 +36,10 @@ namespace CognitiveSearch.Models
 
         internal static SynonymMap DeserializeSynonymMap(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             string format = default;
             string synonyms = default;
@@ -62,7 +66,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     encryptionKey = EncryptionKey.DeserializeEncryptionKey(property.Value);

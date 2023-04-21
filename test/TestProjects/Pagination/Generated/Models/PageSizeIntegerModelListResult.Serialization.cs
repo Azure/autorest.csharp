@@ -16,6 +16,10 @@ namespace Pagination.Models
     {
         internal static PageSizeIntegerModelListResult DeserializePageSizeIntegerModelListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<PageSizeIntegerModelData>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -24,7 +28,6 @@ namespace Pagination.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<PageSizeIntegerModelData> array = new List<PageSizeIntegerModelData>();

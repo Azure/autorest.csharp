@@ -35,6 +35,10 @@ namespace body_complex.Models
 
         internal static Dog DeserializeDog(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> food = default;
             Optional<int> id = default;
             Optional<string> name = default;
@@ -49,7 +53,6 @@ namespace body_complex.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     id = property.Value.GetInt32();

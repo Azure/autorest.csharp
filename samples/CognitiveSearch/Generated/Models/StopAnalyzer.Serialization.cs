@@ -35,6 +35,10 @@ namespace CognitiveSearch.Models
 
         internal static StopAnalyzer DeserializeStopAnalyzer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<string>> stopwords = default;
             string odataType = default;
             string name = default;
@@ -44,7 +48,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<string> array = new List<string>();

@@ -91,6 +91,10 @@ namespace CognitiveSearch.Models
 
         internal static EntityRecognitionSkill DeserializeEntityRecognitionSkill(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<EntityCategory>> categories = default;
             Optional<EntityRecognitionSkillLanguage> defaultLanguageCode = default;
             Optional<bool?> includeTypelessEntities = default;
@@ -107,7 +111,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<EntityCategory> array = new List<EntityCategory>();
@@ -122,7 +125,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     defaultLanguageCode = new EntityRecognitionSkillLanguage(property.Value.GetString());

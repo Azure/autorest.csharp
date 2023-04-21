@@ -34,6 +34,10 @@ namespace CognitiveSearch.Models
 
         internal static PhoneticTokenFilter DeserializePhoneticTokenFilter(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<PhoneticEncoder> encoder = default;
             Optional<bool> replace = default;
             string odataType = default;
@@ -44,7 +48,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     encoder = property.Value.GetString().ToPhoneticEncoder();
@@ -54,7 +57,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     replace = property.Value.GetBoolean();

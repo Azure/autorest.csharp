@@ -31,6 +31,10 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlRewriteActionParameters DeserializeUrlRewriteActionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             UrlRewriteActionParametersTypeName typeName = default;
             string sourcePattern = default;
             string destination = default;
@@ -56,7 +60,6 @@ namespace MgmtDiscriminator.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     preserveUnmatchedPath = property.Value.GetBoolean();

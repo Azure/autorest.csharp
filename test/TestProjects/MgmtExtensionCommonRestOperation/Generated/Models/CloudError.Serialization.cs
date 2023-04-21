@@ -14,6 +14,10 @@ namespace MgmtExtensionCommonRestOperation.Models
     {
         internal static CloudError DeserializeCloudError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ErrorResponse> error = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -21,7 +25,6 @@ namespace MgmtExtensionCommonRestOperation.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     error = Models.ErrorResponse.DeserializeErrorResponse(property.Value);

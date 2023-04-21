@@ -53,6 +53,10 @@ namespace model_flattening.Models
 
         internal static SimpleProduct DeserializeSimpleProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string baseProductId = default;
             Optional<string> baseProductDescription = default;
             Optional<string> maxProductDisplayName = default;
@@ -89,7 +93,6 @@ namespace model_flattening.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             maxProductCapacity = new SimpleProductPropertiesMaxProductCapacity(property0.Value.GetString());

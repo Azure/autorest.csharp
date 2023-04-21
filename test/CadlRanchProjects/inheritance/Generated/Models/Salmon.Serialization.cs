@@ -52,6 +52,10 @@ namespace Models.Inheritance.Models
 
         internal static Salmon DeserializeSalmon(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<Fish>> friends = default;
             Optional<IDictionary<string, Fish>> hate = default;
             Optional<Fish> partner = default;
@@ -63,7 +67,6 @@ namespace Models.Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Fish> array = new List<Fish>();
@@ -78,7 +81,6 @@ namespace Models.Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, Fish> dictionary = new Dictionary<string, Fish>();
@@ -93,7 +95,6 @@ namespace Models.Inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     partner = DeserializeFish(property.Value);

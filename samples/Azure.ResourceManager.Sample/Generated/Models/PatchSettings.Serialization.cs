@@ -25,6 +25,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static PatchSettings DeserializePatchSettings(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<InGuestPatchMode> patchMode = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -32,7 +36,6 @@ namespace Azure.ResourceManager.Sample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     patchMode = new InGuestPatchMode(property.Value.GetString());

@@ -15,6 +15,10 @@ namespace AnomalyDetector.Models
     {
         internal static AnomalyInterpretation DeserializeAnomalyInterpretation(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> variable = default;
             Optional<float?> contributionScore = default;
             Optional<CorrelationChanges> correlationChanges = default;
@@ -39,7 +43,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     correlationChanges = CorrelationChanges.DeserializeCorrelationChanges(property.Value);

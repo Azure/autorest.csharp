@@ -16,6 +16,10 @@ namespace MgmtListMethods.Models
     {
         internal static SubParentListResult DeserializeSubParentListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<SubParentData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

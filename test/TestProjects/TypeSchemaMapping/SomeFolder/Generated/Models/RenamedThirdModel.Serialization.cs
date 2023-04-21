@@ -32,6 +32,10 @@ namespace CustomNamespace
 
         internal static RenamedThirdModel DeserializeRenamedThirdModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ETag> eTag = default;
             Optional<DateTime> createdAt = default;
             foreach (var property in element.EnumerateObject())
@@ -40,7 +44,6 @@ namespace CustomNamespace
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     eTag = new ETag(property.Value.GetString());
@@ -50,7 +53,6 @@ namespace CustomNamespace
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     createdAt = property.Value.GetDateTime();

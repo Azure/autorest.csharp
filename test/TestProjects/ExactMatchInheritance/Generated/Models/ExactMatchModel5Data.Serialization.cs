@@ -43,6 +43,10 @@ namespace ExactMatchInheritance
 
         internal static ExactMatchModel5Data DeserializeExactMatchModel5Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @new = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
@@ -61,7 +65,6 @@ namespace ExactMatchInheritance
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -96,7 +99,6 @@ namespace ExactMatchInheritance
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

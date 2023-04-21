@@ -26,6 +26,10 @@ namespace SupersetInheritance
 
         internal static SupersetModel7Data DeserializeSupersetModel7Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> name = default;
             Optional<string> type = default;
@@ -57,7 +61,6 @@ namespace SupersetInheritance
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = SupersetModel7SystemData.DeserializeSupersetModel7SystemData(property.Value);

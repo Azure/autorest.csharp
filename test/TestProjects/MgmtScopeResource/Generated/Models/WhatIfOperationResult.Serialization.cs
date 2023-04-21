@@ -15,6 +15,10 @@ namespace MgmtScopeResource.Models
     {
         internal static WhatIfOperationResult DeserializeWhatIfOperationResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> status = default;
             Optional<ErrorResponse> errorResponse = default;
             Optional<IReadOnlyList<WhatIfChange>> changes = default;
@@ -29,7 +33,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);
@@ -48,7 +51,6 @@ namespace MgmtScopeResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<WhatIfChange> array = new List<WhatIfChange>();

@@ -38,6 +38,10 @@ namespace MgmtPropertyChooser.Models
 
         internal static IdentityWithDifferentPropertyType DeserializeIdentityWithDifferentPropertyType(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> principalId = default;
             Optional<int> tenantId = default;
             Optional<ResourceIdentityType> type = default;
@@ -53,7 +57,6 @@ namespace MgmtPropertyChooser.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     tenantId = property.Value.GetInt32();
@@ -63,7 +66,6 @@ namespace MgmtPropertyChooser.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     type = property.Value.GetString().ToResourceIdentityType();
@@ -73,7 +75,6 @@ namespace MgmtPropertyChooser.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, UserAssignedIdentity> dictionary = new Dictionary<string, UserAssignedIdentity>();

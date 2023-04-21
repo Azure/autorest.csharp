@@ -49,6 +49,10 @@ namespace MgmtDiscriminator.Models
 
         internal static UrlRedirectActionParameters DeserializeUrlRedirectActionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             UrlRedirectActionParametersTypeName typeName = default;
             RedirectType redirectType = default;
             Optional<DestinationProtocol> destinationProtocol = default;
@@ -72,7 +76,6 @@ namespace MgmtDiscriminator.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     destinationProtocol = new DestinationProtocol(property.Value.GetString());

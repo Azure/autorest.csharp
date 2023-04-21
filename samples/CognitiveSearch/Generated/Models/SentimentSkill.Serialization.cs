@@ -57,6 +57,10 @@ namespace CognitiveSearch.Models
 
         internal static SentimentSkill DeserializeSentimentSkill(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<SentimentSkillLanguage> defaultLanguageCode = default;
             string odataType = default;
             Optional<string> name = default;
@@ -70,7 +74,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     defaultLanguageCode = new SentimentSkillLanguage(property.Value.GetString());

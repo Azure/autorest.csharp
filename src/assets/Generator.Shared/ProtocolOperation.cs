@@ -20,7 +20,7 @@ namespace Azure.Core
         {
             _resultSelector = resultSelector;
             _nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, finalStateVia);
-            _operation = new OperationInternal<T>(clientDiagnostics, this, response, scopeName);
+            _operation = new OperationInternal<T>(this, clientDiagnostics, response, scopeName);
         }
 
         /// <inheritdoc />

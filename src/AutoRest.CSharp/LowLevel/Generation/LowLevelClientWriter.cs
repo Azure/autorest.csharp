@@ -288,6 +288,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     ResponseWriterHelpers.WriteRawResponseToGeneric(_writer, clientMethod.RequestMethod, clientMethod.RequestMethod.Responses[0], async, null, $"{responseVariable.ActualName}");
                 }
+                else if (responseType.IsFrameworkType)
+                {
+                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseVariable:I}.Content.ToObjectFromJson<{responseType}>(), {responseVariable:I});");
+                }
                 else
                 {
                     _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");
@@ -902,6 +906,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputEnumType enumType => string.Join(" | ", enumType.AllowedValues.Select(c => $"\"{c.Value}\"")),
                 InputDictionaryType dictionaryType => $"Dictionary<string, {StringifyTypeForTable(dictionaryType.ValueType)}>",
                 InputListType listType => $"{StringifyTypeForTable(listType.ElementType)}[]",
+                InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => "any",
                 _ => RemovePrefix(type.Name, "Json")
             };
         }

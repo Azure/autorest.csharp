@@ -27,6 +27,10 @@ namespace MgmtDiscriminator.Models
 
         internal static RouteConfigurationOverrideActionParameters DeserializeRouteConfigurationOverrideActionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             RouteConfigurationOverrideActionParametersTypeName typeName = default;
             Optional<OriginGroupOverride> originGroupOverride = default;
             foreach (var property in element.EnumerateObject())
@@ -40,7 +44,6 @@ namespace MgmtDiscriminator.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     originGroupOverride = OriginGroupOverride.DeserializeOriginGroupOverride(property.Value);

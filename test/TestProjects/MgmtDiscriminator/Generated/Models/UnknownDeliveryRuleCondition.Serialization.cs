@@ -22,6 +22,10 @@ namespace MgmtDiscriminator.Models
 
         internal static UnknownDeliveryRuleCondition DeserializeUnknownDeliveryRuleCondition(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             MatchVariable name = "Unknown";
             Optional<string> foo = default;
             foreach (var property in element.EnumerateObject())

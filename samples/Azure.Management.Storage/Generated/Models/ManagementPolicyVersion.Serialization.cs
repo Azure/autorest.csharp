@@ -35,6 +35,10 @@ namespace Azure.Management.Storage.Models
 
         internal static ManagementPolicyVersion DeserializeManagementPolicyVersion(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DateAfterCreation> tierToCool = default;
             Optional<DateAfterCreation> tierToArchive = default;
             Optional<DateAfterCreation> delete = default;
@@ -44,7 +48,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     tierToCool = DateAfterCreation.DeserializeDateAfterCreation(property.Value);
@@ -54,7 +57,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     tierToArchive = DateAfterCreation.DeserializeDateAfterCreation(property.Value);
@@ -64,7 +66,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     delete = DateAfterCreation.DeserializeDateAfterCreation(property.Value);

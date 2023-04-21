@@ -1,32 +1,14 @@
-import { TestHost } from "@cadl-lang/compiler/testing";
-import assert, { AssertionError, deepStrictEqual } from "assert";
-import { createModel } from "../../src/emitter.js";
-import { CodeModel } from "../../src/type/CodeModel.js";
+import { TestHost } from "@typespec/compiler/testing";
+import assert, { deepStrictEqual } from "assert";
+import { createModel } from "../../src/lib/clientModelBuilder.js";
+import { CodeModel } from "../../src/type/codeModel.js";
 import {
-    cadlCompile,
+    typeSpecCompile,
     createEmitterContext,
     createEmitterTestHost
 } from "./utils/TestUtil.js";
-import {
-    InputDictionaryType,
-    InputEnumType,
-    InputListType,
-    InputLiteralType,
-    InputModelType,
-    InputPrimitiveType,
-    InputType,
-    InputUnionType
-} from "../../src/type/InputType.js";
+import { InputEnumType } from "../../src/type/inputType.js";
 import isEqual from "lodash.isequal";
-import {
-    EmitContext,
-    isGlobalNamespace,
-    Namespace,
-    navigateTypesInNamespace,
-    Program,
-    Type
-} from "@cadl-lang/compiler";
-import { getInputType } from "../../src/lib/model.js";
 
 describe("Test GetInputType for array", () => {
     let runner: TestHost;
@@ -36,7 +18,7 @@ describe("Test GetInputType for array", () => {
     });
 
     it("array as request", async () => {
-        const program = await cadlCompile(
+        const program = await typeSpecCompile(
             `
         op test(@body input: string[]): string[];
       `,
@@ -66,7 +48,7 @@ describe("Test GetInputType for array", () => {
     });
 
     it("array as response", async () => {
-        const program = await cadlCompile(
+        const program = await typeSpecCompile(
             `
         op test(): string[];
       `,
@@ -103,9 +85,9 @@ describe("Test GetInputType for enum", () => {
     });
 
     it("Fixed string enum", async () => {
-        const program = await cadlCompile(
+        const program = await typeSpecCompile(
             `
-        #suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "Enums should be defined without the @fixed decorator."
+        #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the @fixed decorator."
         @doc("fixed string enum")
         @fixed
         enum SimpleEnum {
@@ -113,7 +95,7 @@ describe("Test GetInputType for enum", () => {
             Two: "2",
             Four: "4"
         }
-        #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Operation 'test' should be defined using a signature from the Azure.Core namespace."
+        #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'test' should be defined using a signature from the Azure.Core namespace."
         @doc("test fixed enum.")
         op test(@doc("fixed enum as input.")@body input: SimpleEnum): string[];
       `,
@@ -151,9 +133,9 @@ describe("Test GetInputType for enum", () => {
         deepStrictEqual(type.IsExtensible, false);
     });
     it("Fixed int enum", async () => {
-        const program = await cadlCompile(
+        const program = await typeSpecCompile(
             `
-      #suppress "@azure-tools/cadl-azure-core/use-extensible-enum" "Enums should be defined without the @fixed decorator."
+      #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "Enums should be defined without the @fixed decorator."
       @doc("Fixed int enum")
       @fixed
       enum FixedIntEnum {
@@ -161,7 +143,7 @@ describe("Test GetInputType for enum", () => {
           Two: 2,
           Four: 4
       }
-      #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "Operation 'test' should be defined using a signature from the Azure.Core namespace."
+      #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Operation 'test' should be defined using a signature from the Azure.Core namespace."
       @doc("test fixed enum.")
       op test(@doc("fixed enum as input.")@body input: FixedIntEnum): string[];
     `,
@@ -200,7 +182,7 @@ describe("Test GetInputType for enum", () => {
     });
 
     it("extensible enum", async () => {
-        const program = await cadlCompile(
+        const program = await typeSpecCompile(
             `
         @doc("Extensible enum")
         enum ExtensibleEnum {
@@ -242,32 +224,3 @@ describe("Test GetInputType for enum", () => {
         deepStrictEqual((type as InputEnumType).IsExtensible, true);
     });
 });
-
-function emitUnreferencedModels(program: Program, namespace: Namespace) {
-    // if (options.omitUnreachableTypes) {
-    //     return;
-    // }
-    const modelMap = new Map<string, InputModelType>();
-    const enumMap = new Map<string, InputEnumType>();
-    const computeModel = (x: Type) =>
-        getInputType(program, x, modelMap, enumMap);
-    const skipSubNamespaces = isGlobalNamespace(program, namespace);
-    navigateTypesInNamespace(
-        namespace,
-        {
-            model: (x) => {
-                x.name !== "" && x.kind === "Model" && computeModel(x);
-            },
-            scalar: (x) => {
-                computeModel(x);
-            },
-            enum: (x) => {
-                computeModel(x);
-            },
-            union: (x) => {
-                x.name !== undefined && computeModel(x);
-            }
-        },
-        { skipSubNamespaces }
-    );
-}

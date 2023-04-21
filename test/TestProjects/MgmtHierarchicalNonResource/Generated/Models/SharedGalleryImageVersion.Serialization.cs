@@ -15,6 +15,10 @@ namespace MgmtHierarchicalNonResource.Models
     {
         internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> location = default;
             Optional<DateTimeOffset> publishedDate = default;
@@ -45,7 +49,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             publishedDate = property0.Value.GetDateTimeOffset("O");
@@ -55,7 +58,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             endOfLifeDate = property0.Value.GetDateTimeOffset("O");

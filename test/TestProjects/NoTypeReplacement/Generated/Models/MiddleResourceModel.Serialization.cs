@@ -25,6 +25,10 @@ namespace NoTypeReplacement.Models
 
         internal static MiddleResourceModel DeserializeMiddleResourceModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<NoSubResourceModel2> foo = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -32,7 +36,6 @@ namespace NoTypeReplacement.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     foo = NoSubResourceModel2.DeserializeNoSubResourceModel2(property.Value);

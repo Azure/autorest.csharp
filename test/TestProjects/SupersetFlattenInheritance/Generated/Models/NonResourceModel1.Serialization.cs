@@ -38,6 +38,10 @@ namespace SupersetFlattenInheritance.Models
 
         internal static NonResourceModel1 DeserializeNonResourceModel1(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> bar = default;
             Optional<string> id = default;
             Optional<string> foo = default;

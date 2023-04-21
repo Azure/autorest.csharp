@@ -36,6 +36,10 @@ namespace OmitOperationGroups.Models
 
         internal static Model5 DeserializeModel5(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> id = default;
             Optional<string> k = default;
             Optional<IList<ModelQ>> modelqs = default;
@@ -55,7 +59,6 @@ namespace OmitOperationGroups.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ModelQ> array = new List<ModelQ>();

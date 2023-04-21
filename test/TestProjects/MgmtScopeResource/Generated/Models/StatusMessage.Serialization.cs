@@ -14,6 +14,10 @@ namespace MgmtScopeResource.Models
     {
         internal static StatusMessage DeserializeStatusMessage(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> status = default;
             Optional<ErrorResponse> errorResponse = default;
             foreach (var property in element.EnumerateObject())
@@ -27,7 +31,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     errorResponse = ErrorResponse.DeserializeErrorResponse(property.Value);

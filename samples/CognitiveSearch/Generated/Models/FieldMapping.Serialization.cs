@@ -32,6 +32,10 @@ namespace CognitiveSearch.Models
 
         internal static FieldMapping DeserializeFieldMapping(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string sourceFieldName = default;
             Optional<string> targetFieldName = default;
             Optional<FieldMappingFunction> mappingFunction = default;
@@ -51,7 +55,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     mappingFunction = FieldMappingFunction.DeserializeFieldMappingFunction(property.Value);

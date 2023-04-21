@@ -13,20 +13,30 @@ namespace MgmtOptionalConstant.Models
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
         public ModelWithRequiredConstant()
         {
-            PassName = PassName.OobeSystem;
+            RequiredStringConstant = StringConstant.Default;
+            RequiredIntConstant = IntConstant._0;
+            RequiredFloatConstant = FloatConstant._314;
         }
 
         /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
-        /// <param name="passName"> The pass name. Currently, the only allowable value is OobeSystem. </param>
+        /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>
+        /// <param name="requiredIntConstant"> A constant based on integer. </param>
+        /// <param name="requiredFloatConstant"> A constant based on float. </param>
         /// <param name="protocol"> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </param>
-        internal ModelWithRequiredConstant(PassName passName, ProtocolType? protocol)
+        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, FloatConstant requiredFloatConstant, ProtocolType? protocol)
         {
-            PassName = passName;
+            RequiredStringConstant = requiredStringConstant;
+            RequiredIntConstant = requiredIntConstant;
+            RequiredFloatConstant = requiredFloatConstant;
             Protocol = protocol;
         }
 
-        /// <summary> The pass name. Currently, the only allowable value is OobeSystem. </summary>
-        public PassName PassName { get; set; }
+        /// <summary> A constant based on string, the only allowable value is default. </summary>
+        public StringConstant RequiredStringConstant { get; set; }
+        /// <summary> A constant based on integer. </summary>
+        public IntConstant RequiredIntConstant { get; set; }
+        /// <summary> A constant based on float. </summary>
+        public FloatConstant RequiredFloatConstant { get; set; }
         /// <summary> Specifies the protocol of WinRM listener. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;**http** &lt;br&gt;&lt;br&gt; **https**. </summary>
         public ProtocolType? Protocol { get; set; }
     }

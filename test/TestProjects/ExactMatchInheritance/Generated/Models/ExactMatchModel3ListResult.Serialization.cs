@@ -15,6 +15,10 @@ namespace ExactMatchInheritance.Models
     {
         internal static ExactMatchModel3ListResult DeserializeExactMatchModel3ListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<ExactMatchModel3>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -23,7 +27,6 @@ namespace ExactMatchInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ExactMatchModel3> array = new List<ExactMatchModel3>();

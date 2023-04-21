@@ -15,6 +15,10 @@ namespace MgmtSingletonResource
     {
         internal static BrakeData DeserializeBrakeData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> hitBrake = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -26,7 +30,6 @@ namespace MgmtSingletonResource
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     hitBrake = property.Value.GetBoolean();
@@ -51,7 +54,6 @@ namespace MgmtSingletonResource
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

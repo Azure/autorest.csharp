@@ -58,6 +58,10 @@ namespace Azure.Management.Storage.Models
 
         internal static NetworkRuleSet DeserializeNetworkRuleSet(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<Bypass> bypass = default;
             Optional<IList<ResourceAccessRule>> resourceAccessRules = default;
             Optional<IList<VirtualNetworkRule>> virtualNetworkRules = default;
@@ -69,7 +73,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     bypass = new Bypass(property.Value.GetString());
@@ -79,7 +82,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ResourceAccessRule> array = new List<ResourceAccessRule>();
@@ -94,7 +96,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<VirtualNetworkRule> array = new List<VirtualNetworkRule>();
@@ -109,7 +110,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<IPRule> array = new List<IPRule>();

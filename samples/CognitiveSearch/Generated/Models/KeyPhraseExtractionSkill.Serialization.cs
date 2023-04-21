@@ -69,6 +69,10 @@ namespace CognitiveSearch.Models
 
         internal static KeyPhraseExtractionSkill DeserializeKeyPhraseExtractionSkill(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<KeyPhraseExtractionSkillLanguage> defaultLanguageCode = default;
             Optional<int?> maxKeyPhraseCount = default;
             string odataType = default;
@@ -83,7 +87,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     defaultLanguageCode = new KeyPhraseExtractionSkillLanguage(property.Value.GetString());

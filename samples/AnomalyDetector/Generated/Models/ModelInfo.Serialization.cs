@@ -80,6 +80,10 @@ namespace AnomalyDetector.Models
 
         internal static ModelInfo DeserializeModelInfo(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string dataSource = default;
             Optional<DataSchema?> dataSchema = default;
             DateTimeOffset startTime = default;
@@ -136,7 +140,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     alignPolicy = AlignPolicy.DeserializeAlignPolicy(property.Value);
@@ -156,7 +159,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ErrorResponse> array = new List<ErrorResponse>();
@@ -171,7 +173,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     diagnosticsInfo = DiagnosticsInfo.DeserializeDiagnosticsInfo(property.Value);

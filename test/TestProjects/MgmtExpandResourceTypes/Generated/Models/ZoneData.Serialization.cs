@@ -85,6 +85,10 @@ namespace MgmtExpandResourceTypes
 
         internal static ZoneData DeserializeZoneData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> etag = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
@@ -113,7 +117,6 @@ namespace MgmtExpandResourceTypes
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -148,7 +151,6 @@ namespace MgmtExpandResourceTypes
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
@@ -167,7 +169,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             maxNumberOfRecordSets = property0.Value.GetInt64();
@@ -177,7 +178,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             maxNumberOfRecordsPerRecordSet = property0.Value.GetInt64();
@@ -187,7 +187,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             numberOfRecordSets = property0.Value.GetInt64();
@@ -197,7 +196,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<string> array = new List<string>();
@@ -212,7 +210,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             zoneType = property0.Value.GetString().ToZoneType();
@@ -222,7 +219,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             machineType = property0.Value.GetInt32().ToMachineType();
@@ -232,7 +228,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             storageType = property0.Value.GetInt32().ToStorageType();
@@ -242,7 +237,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             memoryType = property0.Value.GetInt64().ToMemoryType();
@@ -252,7 +246,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<WritableSubResource> array = new List<WritableSubResource>();
@@ -267,7 +260,6 @@ namespace MgmtExpandResourceTypes
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<WritableSubResource> array = new List<WritableSubResource>();

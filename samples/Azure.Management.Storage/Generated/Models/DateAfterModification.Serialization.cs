@@ -30,6 +30,10 @@ namespace Azure.Management.Storage.Models
 
         internal static DateAfterModification DeserializeDateAfterModification(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<float> daysAfterModificationGreaterThan = default;
             Optional<float> daysAfterLastAccessTimeGreaterThan = default;
             foreach (var property in element.EnumerateObject())
@@ -38,7 +42,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     daysAfterModificationGreaterThan = property.Value.GetSingle();
@@ -48,7 +51,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     daysAfterLastAccessTimeGreaterThan = property.Value.GetSingle();

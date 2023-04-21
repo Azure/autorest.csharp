@@ -31,6 +31,10 @@ namespace MgmtRenameRules.Models
 
         internal static SshConfiguration DeserializeSshConfiguration(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<SshPublicKeyInfo>> publicKeys = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -38,7 +42,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<SshPublicKeyInfo> array = new List<SshPublicKeyInfo>();

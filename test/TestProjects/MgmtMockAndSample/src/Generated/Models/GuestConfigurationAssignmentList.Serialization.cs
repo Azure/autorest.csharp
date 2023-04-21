@@ -16,6 +16,10 @@ namespace MgmtMockAndSample.Models
     {
         internal static GuestConfigurationAssignmentList DeserializeGuestConfigurationAssignmentList(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<GuestConfigurationAssignmentData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -23,7 +27,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<GuestConfigurationAssignmentData> array = new List<GuestConfigurationAssignmentData>();

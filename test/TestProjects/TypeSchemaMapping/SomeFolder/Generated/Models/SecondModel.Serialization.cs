@@ -43,6 +43,10 @@ namespace TypeSchemaMapping.Models
 
         internal static SecondModel DeserializeSecondModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> stringProperty = default;
             Optional<IReadOnlyDictionary<string, string>> dictionaryProperty = default;
             Optional<CustomDaysOfWeek> daysOfWeek = default;
@@ -52,7 +56,6 @@ namespace TypeSchemaMapping.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     stringProperty = property.Value.GetInt32();
@@ -62,7 +65,6 @@ namespace TypeSchemaMapping.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -77,7 +79,6 @@ namespace TypeSchemaMapping.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());

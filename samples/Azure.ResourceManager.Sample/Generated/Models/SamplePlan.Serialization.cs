@@ -40,6 +40,10 @@ namespace Azure.ResourceManager.Sample.Models
 
         internal static SamplePlan DeserializeSamplePlan(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> publisher = default;
             Optional<string> product = default;

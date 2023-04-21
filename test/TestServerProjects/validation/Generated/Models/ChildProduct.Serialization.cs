@@ -27,6 +27,10 @@ namespace validation.Models
 
         internal static ChildProduct DeserializeChildProduct(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string constProperty = default;
             Optional<int> count = default;
             foreach (var property in element.EnumerateObject())
@@ -40,7 +44,6 @@ namespace validation.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     count = property.Value.GetInt32();

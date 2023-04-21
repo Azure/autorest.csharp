@@ -560,6 +560,10 @@ namespace NameConflicts.Models
 
         internal static Class DeserializeClass(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> @abstract = default;
             Optional<string> @add = default;
             Optional<string> @alias = default;
@@ -1194,7 +1198,6 @@ namespace NameConflicts.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     system = new SystemEnum(property.Value.GetString());

@@ -36,6 +36,10 @@ namespace Azure.Management.Storage.Models
 
         internal static KeyVaultProperties DeserializeKeyVaultProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> keyname = default;
             Optional<string> keyversion = default;
             Optional<Uri> keyvaulturi = default;
@@ -57,7 +61,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        keyvaulturi = null;
                         continue;
                     }
                     keyvaulturi = new Uri(property.Value.GetString());
@@ -72,7 +75,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     lastKeyRotationTimestamp = property.Value.GetDateTimeOffset("O");

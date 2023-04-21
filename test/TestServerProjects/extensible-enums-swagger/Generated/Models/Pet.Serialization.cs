@@ -32,6 +32,10 @@ namespace extensible_enums_swagger.Models
 
         internal static Pet DeserializePet(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<DaysOfWeekExtensibleEnum> daysOfWeek = default;
             IntEnum intEnum = default;
@@ -46,7 +50,6 @@ namespace extensible_enums_swagger.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     daysOfWeek = new DaysOfWeekExtensibleEnum(property.Value.GetString());

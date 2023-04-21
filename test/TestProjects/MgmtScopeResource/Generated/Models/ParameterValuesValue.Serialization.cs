@@ -30,6 +30,10 @@ namespace MgmtScopeResource.Models
 
         internal static ParameterValuesValue DeserializeParameterValuesValue(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<BinaryData> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -37,7 +41,6 @@ namespace MgmtScopeResource.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     value = BinaryData.FromString(property.Value.GetRawText());

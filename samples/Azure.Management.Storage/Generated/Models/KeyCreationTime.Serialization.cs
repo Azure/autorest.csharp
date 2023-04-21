@@ -15,6 +15,10 @@ namespace Azure.Management.Storage.Models
     {
         internal static KeyCreationTime DeserializeKeyCreationTime(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DateTimeOffset> key1 = default;
             Optional<DateTimeOffset> key2 = default;
             foreach (var property in element.EnumerateObject())
@@ -23,7 +27,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     key1 = property.Value.GetDateTimeOffset("O");
@@ -33,7 +36,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     key2 = property.Value.GetDateTimeOffset("O");

@@ -53,6 +53,10 @@ namespace body_complex.Models
 
         internal static Sawshark DeserializeSawshark(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<byte[]> picture = default;
             Optional<int> age = default;
             DateTimeOffset birthday = default;
@@ -66,7 +70,6 @@ namespace body_complex.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     picture = property.Value.GetBytesFromBase64("D");
@@ -76,7 +79,6 @@ namespace body_complex.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     age = property.Value.GetInt32();
@@ -106,7 +108,6 @@ namespace body_complex.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Fish> array = new List<Fish>();

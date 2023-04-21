@@ -43,6 +43,10 @@ namespace ExactMatchFlattenInheritance.Models
 
         internal static AzureResourceFlattenModel4 DeserializeAzureResourceFlattenModel4(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> foo = default;
             Optional<string> id = default;
             Optional<string> name = default;
@@ -53,7 +57,6 @@ namespace ExactMatchFlattenInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     foo = property.Value.GetInt32();

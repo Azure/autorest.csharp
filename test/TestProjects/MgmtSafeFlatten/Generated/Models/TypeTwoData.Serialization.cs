@@ -46,6 +46,10 @@ namespace MgmtSafeFlatten
 
         internal static TypeTwoData DeserializeTypeTwoData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> myType = default;
             Optional<LayerOneSingle> properties = default;
             Optional<IDictionary<string, string>> tags = default;
@@ -65,7 +69,6 @@ namespace MgmtSafeFlatten
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     properties = LayerOneSingle.DeserializeLayerOneSingle(property.Value);
@@ -75,7 +78,6 @@ namespace MgmtSafeFlatten
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -110,7 +112,6 @@ namespace MgmtSafeFlatten
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

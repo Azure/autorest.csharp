@@ -16,6 +16,10 @@ namespace MgmtHierarchicalNonResource.Models
     {
         internal static SharedGalleryImage DeserializeSharedGalleryImage(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> name = default;
             Optional<string> location = default;
             Optional<OperatingSystemType> osType = default;
@@ -53,7 +57,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             osType = property0.Value.GetString().ToOperatingSystemType();
@@ -63,7 +66,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             osState = property0.Value.GetString().ToOperatingSystemStateType();
@@ -73,7 +75,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             endOfLifeDate = property0.Value.GetDateTimeOffset("O");
@@ -83,7 +84,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             identifier = GalleryImageIdentifier.DeserializeGalleryImageIdentifier(property0.Value);
@@ -93,7 +93,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             recommended = RecommendedMachineConfiguration.DeserializeRecommendedMachineConfiguration(property0.Value);
@@ -103,7 +102,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             disallowed = Disallowed.DeserializeDisallowed(property0.Value);
@@ -113,7 +111,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             hyperVGeneration = new HyperVGeneration(property0.Value.GetString());
@@ -123,7 +120,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             List<GalleryImageFeature> array = new List<GalleryImageFeature>();
@@ -138,7 +134,6 @@ namespace MgmtHierarchicalNonResource.Models
                         {
                             if (property0.Value.ValueKind == JsonValueKind.Null)
                             {
-                                property0.ThrowNonNullablePropertyIsNull();
                                 continue;
                             }
                             purchasePlan = ImagePurchasePlan.DeserializeImagePurchasePlan(property0.Value);

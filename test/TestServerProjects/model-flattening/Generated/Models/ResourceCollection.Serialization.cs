@@ -47,6 +47,10 @@ namespace model_flattening.Models
 
         internal static ResourceCollection DeserializeResourceCollection(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<FlattenedProduct> productresource = default;
             Optional<IList<FlattenedProduct>> arrayofresources = default;
             Optional<IDictionary<string, FlattenedProduct>> dictionaryofresources = default;
@@ -56,7 +60,6 @@ namespace model_flattening.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     productresource = FlattenedProduct.DeserializeFlattenedProduct(property.Value);
@@ -66,7 +69,6 @@ namespace model_flattening.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<FlattenedProduct> array = new List<FlattenedProduct>();
@@ -81,7 +83,6 @@ namespace model_flattening.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, FlattenedProduct> dictionary = new Dictionary<string, FlattenedProduct>();

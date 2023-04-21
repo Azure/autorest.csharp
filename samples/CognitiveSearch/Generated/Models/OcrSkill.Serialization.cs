@@ -67,6 +67,10 @@ namespace CognitiveSearch.Models
 
         internal static OcrSkill DeserializeOcrSkill(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<TextExtractionAlgorithm> textExtractionAlgorithm = default;
             Optional<OcrSkillLanguage> defaultLanguageCode = default;
             Optional<bool> detectOrientation = default;
@@ -82,7 +86,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     textExtractionAlgorithm = property.Value.GetString().ToTextExtractionAlgorithm();
@@ -92,7 +95,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     defaultLanguageCode = new OcrSkillLanguage(property.Value.GetString());
@@ -102,7 +104,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     detectOrientation = property.Value.GetBoolean();

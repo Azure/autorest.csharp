@@ -32,6 +32,10 @@ namespace Models.Property.Optional.Models
 
         internal static CollectionsModelProperty DeserializeCollectionsModelProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<StringProperty>> property = default;
             foreach (var property0 in element.EnumerateObject())
             {
@@ -39,7 +43,6 @@ namespace Models.Property.Optional.Models
                 {
                     if (property0.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property0.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<StringProperty> array = new List<StringProperty>();

@@ -16,6 +16,10 @@ namespace MgmtListMethods.Models
     {
         internal static SubParentWithNonResChListResult DeserializeSubParentWithNonResChListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IReadOnlyList<SubParentWithNonResChData> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())

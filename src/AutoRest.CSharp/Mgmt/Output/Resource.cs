@@ -89,7 +89,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             _clientOperations = GetClientOperations(operationSet, operations);
 
             IsById = OperationSet.IsById;
-
             Position = position;
         }
 
@@ -125,7 +124,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override FieldModifiers FieldModifiers => base.FieldModifiers | FieldModifiers.ReadOnly;
 
-        protected override IEnumerable<FieldDeclaration>? GetAdditionalFields()
+        protected override IEnumerable<FieldDeclaration> GetAdditionalFields()
         {
             yield return new FieldDeclaration(FieldModifiers, ResourceData.Type, DataFieldName);
         }
@@ -342,24 +341,20 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             var result = new Dictionary<string, List<MgmtRestOperation>>();
             var resourceRequestPath = OperationSet.GetRequestPath();
-            var resourceRestClient = MgmtContext.Library.GetRestClient(OperationSet.First());
+            var resourceRestClient = OperationSet.Any() ? MgmtContext.Library.GetRestClient(OperationSet.First()) : null;
             // iterate over all the operations under this operationSet to get their diff between the corresponding contextual path
             foreach (var operation in _clientOperations)
             {
                 if (!ShouldIncludeOperation(operation))
                     continue; // meaning this operation will be included in the collection
                 var method = operation.GetHttpMethod();
-                // considering the case of parameterized scope, we might do not have direct parenting relationship between the two paths
-                // therefore we trim the scope off and then calculate the diff
+                // we use the "unique" part of this operation's request path comparing with its containing resource's path as the key to categorize the operations
                 var requestPath = operation.GetRequestPath(ResourceType);
-                var requestTrimmedPath = requestPath.TrimScope();
-                var resourceTrimmedPath = resourceRequestPath.TrimScope();
-                // the operations are grouped by the following key
-                var key = $"{method}{resourceTrimmedPath.Minus(requestTrimmedPath)}";
+                var key = $"{method}{resourceRequestPath.Minus(requestPath)}";
                 var contextualPath = GetContextualPath(OperationSet, requestPath);
                 var methodName = IsListOperation(operation, OperationSet) ?
                     "GetAll" :// hard-code the name of a resource collection operation to "GetAll"
-                    GetOperationName(operation, resourceRestClient.OperationGroup.Key);
+                    GetOperationName(operation, resourceRestClient?.OperationGroup.Key ?? string.Empty);
                 // get the MgmtRestOperation with a proper name
                 var restOperation = new MgmtRestOperation(
                     operation,
@@ -416,8 +411,8 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             var an = ResourceName.StartsWithVowel() ? "an" : "a";
             List<FormattableString> lines = new List<FormattableString>();
-            var parents = this.Parent();
-            var parentTypes = parents.Select(parent => parent is MgmtExtensions extensions ? extensions.ArmCoreType : parent.Type).ToList();
+            var parents = this.GetParents();
+            var parentTypes = parents.Select(parent => parent.TypeAsResource).ToList();
             var parentDescription = CreateParentDescription(parentTypes);
 
             lines.Add($"A Class representing {an} {ResourceName} along with the instance operations that can be performed on it.");
@@ -455,7 +450,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         /// Returns the different method signature for different base path of this resource
         /// </summary>
         /// <returns></returns>
-        public MethodSignature CreateResourceIdentifierMethodSignature => _createResourceIdentifierMethodSignature ??= new MethodSignature(
+        public virtual MethodSignature CreateResourceIdentifierMethodSignature => _createResourceIdentifierMethodSignature ??= new MethodSignature(
             Name: "CreateResourceIdentifier",
             null,
             Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",

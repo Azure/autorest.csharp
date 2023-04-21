@@ -37,6 +37,10 @@ namespace multiple_inheritance.Models
 
         internal static Cat DeserializeCat(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> likesMilk = default;
             Optional<bool> meows = default;
             Optional<bool> hisses = default;
@@ -47,7 +51,6 @@ namespace multiple_inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     likesMilk = property.Value.GetBoolean();
@@ -57,7 +60,6 @@ namespace multiple_inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     meows = property.Value.GetBoolean();
@@ -67,7 +69,6 @@ namespace multiple_inheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     hisses = property.Value.GetBoolean();

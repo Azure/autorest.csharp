@@ -16,6 +16,10 @@ namespace TenantOnly
     {
         internal static AgreementData DeserializeAgreementData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> foo = default;
             Optional<string> location = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
@@ -39,7 +43,6 @@ namespace TenantOnly
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -69,7 +72,6 @@ namespace TenantOnly
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

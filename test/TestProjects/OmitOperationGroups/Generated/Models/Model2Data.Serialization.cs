@@ -32,6 +32,10 @@ namespace OmitOperationGroups
 
         internal static Model2Data DeserializeModel2Data(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> b = default;
             Optional<ModelX> modelx = default;
             Optional<string> f = default;
@@ -51,7 +55,6 @@ namespace OmitOperationGroups
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     modelx = ModelX.DeserializeModelX(property.Value);
@@ -86,7 +89,6 @@ namespace OmitOperationGroups
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

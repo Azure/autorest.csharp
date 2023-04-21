@@ -24,6 +24,10 @@ namespace Models.Property.Types.Models
 
         internal static DurationProperty DeserializeDurationProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             TimeSpan property = default;
             foreach (var property0 in element.EnumerateObject())
             {

@@ -14,6 +14,10 @@ namespace body_complex.Models
     {
         internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             MyKind kind = "Unknown";
             Optional<string> propB1 = default;
             Optional<string> propBH1 = default;

@@ -15,6 +15,10 @@ namespace Azure.Network.Management.Interface.Models
     {
         internal static CloudErrorBody DeserializeCloudErrorBody(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> code = default;
             Optional<string> message = default;
             Optional<string> target = default;
@@ -40,7 +44,6 @@ namespace Azure.Network.Management.Interface.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<CloudErrorBody> array = new List<CloudErrorBody>();

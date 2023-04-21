@@ -40,6 +40,10 @@ namespace body_complex.Models
 
         internal static UnknownFish DeserializeUnknownFish(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string fishtype = "Unknown";
             Optional<string> species = default;
             float length = default;
@@ -65,7 +69,6 @@ namespace body_complex.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Fish> array = new List<Fish>();

@@ -38,6 +38,10 @@ namespace additionalProperties.Models
 
         internal static CatAPTrue DeserializeCatAPTrue(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> friendly = default;
             int id = default;
             Optional<string> name = default;
@@ -50,7 +54,6 @@ namespace additionalProperties.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     friendly = property.Value.GetBoolean();
@@ -70,7 +73,6 @@ namespace additionalProperties.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     status = property.Value.GetBoolean();

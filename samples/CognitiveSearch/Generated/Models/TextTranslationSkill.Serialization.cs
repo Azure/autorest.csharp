@@ -64,6 +64,10 @@ namespace CognitiveSearch.Models
 
         internal static TextTranslationSkill DeserializeTextTranslationSkill(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             TextTranslationSkillLanguage defaultToLanguageCode = default;
             Optional<TextTranslationSkillLanguage> defaultFromLanguageCode = default;
             Optional<TextTranslationSkillLanguage> suggestedFrom = default;
@@ -84,7 +88,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     defaultFromLanguageCode = new TextTranslationSkillLanguage(property.Value.GetString());
@@ -94,7 +97,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     suggestedFrom = new TextTranslationSkillLanguage(property.Value.GetString());

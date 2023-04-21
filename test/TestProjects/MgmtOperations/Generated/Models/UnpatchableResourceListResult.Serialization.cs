@@ -16,6 +16,10 @@ namespace MgmtOperations.Models
     {
         internal static UnpatchableResourceListResult DeserializeUnpatchableResourceListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<UnpatchableResourceData>> value = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -23,7 +27,6 @@ namespace MgmtOperations.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<UnpatchableResourceData> array = new List<UnpatchableResourceData>();

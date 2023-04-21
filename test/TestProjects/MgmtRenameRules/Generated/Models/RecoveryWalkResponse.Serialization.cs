@@ -14,6 +14,10 @@ namespace MgmtRenameRules.Models
     {
         internal static RecoveryWalkResponse DeserializeRecoveryWalkResponse(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> walkPerformed = default;
             Optional<int> nextPlatformUpdateDomain = default;
             foreach (var property in element.EnumerateObject())
@@ -22,7 +26,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     walkPerformed = property.Value.GetBoolean();
@@ -32,7 +35,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     nextPlatformUpdateDomain = property.Value.GetInt32();

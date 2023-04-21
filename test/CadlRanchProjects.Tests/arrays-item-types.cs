@@ -3,12 +3,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using Arrays.ItemTypes;
-using Arrays.ItemTypes.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
@@ -115,10 +114,9 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3104")]
         public Task Arrays_ItemTypes_DurationValue_put() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetDurationValueClient().PutAsync(RequestContent.Create(new[] { XmlConvert.ToTimeSpan("P123DT22H14M12.011S") }));
+            var response = await new ItemTypesClient(host, null).GetDurationValueClient().PutAsync(RequestContent.Create(new[] { XmlConvert.ToString(XmlConvert.ToTimeSpan("P123DT22H14M12.011S")) }));
             Assert.AreEqual(204, response.Status);
         });
 
@@ -126,7 +124,9 @@ namespace CadlRanchProjects.Tests
         public Task Arrays_ItemTypes_UnknownValue_get() => Test(async (host) =>
         {
             var response = await new ItemTypesClient(host, null).GetUnknownValueClient().GetUnknownValueValueAsync();
-            CollectionAssert.AreEqual(new List<object>() { 1, "hello", null }, response.Value);
+            var expected = new List<object?> { 1, "hello", null };
+            var actual = response.Value.Select(item => item?.ToObjectFromJson()).ToArray();
+            CollectionAssert.AreEqual(expected, actual);
         });
 
         [Test]
@@ -145,10 +145,17 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3108")]
         public Task Arrays_ItemTypes_ModelValue_put() => Test(async (host) =>
         {
-            var response = await new ItemTypesClient(host, null).GetModelValueClient().PutAsync(RequestContent.Create(new List<InnerModel>() { new InnerModel("hello"), new InnerModel("world") }));
+            var value1 = new
+            {
+                property = "hello"
+            };
+            var value2 = new
+            {
+                property = "world"
+            };
+            var response = await new ItemTypesClient(host, null).GetModelValueClient().PutAsync(RequestContent.Create(new[] { value1, value2 }));
             Assert.AreEqual(204, response.Status);
         });
     }

@@ -1142,7 +1142,7 @@
         "Name": "Array",
         "ElementType": {
          "$id": "124",
-         "Name": "zonedDateTime",
+         "Name": "utcDateTime",
          "Kind": "DateTime",
          "IsNullable": false
         },
@@ -1178,7 +1178,7 @@
         "Name": "Array",
         "ElementType": {
          "$id": "128",
-         "Name": "zonedDateTime",
+         "Name": "utcDateTime",
          "Kind": "DateTime",
          "IsNullable": false
         },
@@ -1530,10 +1530,9 @@
         "Name": "Array",
         "ElementType": {
          "$id": "164",
-         "Name": "unknown",
-         "IsNullable": false,
-         "Usage": "None",
-         "Properties": []
+         "Name": "Intrinsic",
+         "Kind": "unknown",
+         "IsNullable": false
         },
         "IsNullable": false
        },
@@ -1567,10 +1566,9 @@
         "Name": "Array",
         "ElementType": {
          "$id": "168",
-         "Name": "unknown",
-         "IsNullable": false,
-         "Usage": "None",
-         "Properties": []
+         "Name": "Intrinsic",
+         "Kind": "unknown",
+         "IsNullable": false
         },
         "IsNullable": false
        },
@@ -1855,6 +1853,200 @@
    ],
    "Protocol": {
     "$id": "194"
+   },
+   "Creatable": false,
+   "Parent": "ItemTypesClient"
+  },
+  {
+   "$id": "195",
+   "Name": "NullableFloatValue",
+   "Description": "Array of nullable float values",
+   "Operations": [
+    {
+     "$id": "196",
+     "Name": "get",
+     "ResourceName": "NullableFloatValue",
+     "Parameters": [
+      {
+       "$ref": "11"
+      },
+      {
+       "$id": "197",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "198",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "199",
+        "Type": {
+         "$ref": "198"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "18"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "200",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$id": "201",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "202",
+         "Name": "float32",
+         "Kind": "Float32",
+         "IsNullable": true
+        },
+        "IsNullable": false
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{host}",
+     "Path": "/arrays/item-types/nullable-float",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "203",
+     "Name": "put",
+     "ResourceName": "NullableFloatValue",
+     "Parameters": [
+      {
+       "$ref": "11"
+      },
+      {
+       "$id": "204",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$id": "205",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "206",
+         "Name": "float32",
+         "Kind": "Float32",
+         "IsNullable": true
+        },
+        "IsNullable": false
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "207",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "208",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "209",
+        "Type": {
+         "$ref": "208"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "210",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "211",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "212",
+        "Type": {
+         "$ref": "211"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "18"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "213",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/arrays/item-types/nullable-float",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "214"
    },
    "Creatable": false,
    "Parent": "ItemTypesClient"

@@ -30,6 +30,10 @@ namespace Models.Property.Types.Models
 
         internal static DictionaryStringProperty DeserializeDictionaryStringProperty(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             IDictionary<string, string> property = default;
             foreach (var property0 in element.EnumerateObject())
             {

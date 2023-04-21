@@ -37,6 +37,10 @@ namespace MgmtOperations.Models
 
         internal static ConnectionSharedKey DeserializeConnectionSharedKey(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string value = default;
             Optional<IDictionary<string, string>> tags = default;
             AzureLocation location = default;
@@ -55,7 +59,6 @@ namespace MgmtOperations.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -90,7 +93,6 @@ namespace MgmtOperations.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

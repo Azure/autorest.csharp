@@ -52,6 +52,10 @@ namespace CognitiveSearch.Models
 
         internal static LanguageDetectionSkill DeserializeLanguageDetectionSkill(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string odataType = default;
             Optional<string> name = default;
             Optional<string> description = default;

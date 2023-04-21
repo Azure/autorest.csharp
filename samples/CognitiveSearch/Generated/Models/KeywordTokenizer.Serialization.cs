@@ -29,6 +29,10 @@ namespace CognitiveSearch.Models
 
         internal static KeywordTokenizer DeserializeKeywordTokenizer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> bufferSize = default;
             string odataType = default;
             string name = default;
@@ -38,7 +42,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     bufferSize = property.Value.GetInt32();

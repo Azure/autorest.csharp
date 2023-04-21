@@ -24,6 +24,10 @@ namespace MgmtSafeFlatten.Models
 
         internal static LayerOneBarType DeserializeLayerOneBarType(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string parameters = default;
             LayerOneTypeName name = default;
             foreach (var property in element.EnumerateObject())

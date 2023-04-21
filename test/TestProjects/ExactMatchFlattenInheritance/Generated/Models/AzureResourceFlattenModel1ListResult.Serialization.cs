@@ -16,6 +16,10 @@ namespace ExactMatchFlattenInheritance.Models
     {
         internal static AzureResourceFlattenModel1ListResult DeserializeAzureResourceFlattenModel1ListResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<AzureResourceFlattenModel1Data>> value = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
@@ -24,7 +28,6 @@ namespace ExactMatchFlattenInheritance.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<AzureResourceFlattenModel1Data> array = new List<AzureResourceFlattenModel1Data>();

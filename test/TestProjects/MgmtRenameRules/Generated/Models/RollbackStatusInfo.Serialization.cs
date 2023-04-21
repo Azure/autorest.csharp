@@ -14,6 +14,10 @@ namespace MgmtRenameRules.Models
     {
         internal static RollbackStatusInfo DeserializeRollbackStatusInfo(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<int> successfullyRolledbackInstanceCount = default;
             Optional<int> failedRolledbackInstanceCount = default;
             Optional<ApiError> rollbackError = default;
@@ -23,7 +27,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     successfullyRolledbackInstanceCount = property.Value.GetInt32();
@@ -33,7 +36,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     failedRolledbackInstanceCount = property.Value.GetInt32();
@@ -43,7 +45,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     rollbackError = ApiError.DeserializeApiError(property.Value);

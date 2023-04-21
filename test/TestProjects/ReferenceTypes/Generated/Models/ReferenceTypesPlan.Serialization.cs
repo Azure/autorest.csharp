@@ -39,6 +39,10 @@ namespace Azure.ResourceManager.Fake.Models
 
         internal static ReferenceTypesPlan DeserializeReferenceTypesPlan(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string name = default;
             string publisher = default;
             string product = default;

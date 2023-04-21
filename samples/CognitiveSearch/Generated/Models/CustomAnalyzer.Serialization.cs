@@ -47,6 +47,10 @@ namespace CognitiveSearch.Models
 
         internal static CustomAnalyzer DeserializeCustomAnalyzer(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             TokenizerName tokenizer = default;
             Optional<IList<TokenFilterName>> tokenFilters = default;
             Optional<IList<CharFilterName>> charFilters = default;
@@ -63,7 +67,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<TokenFilterName> array = new List<TokenFilterName>();
@@ -78,7 +81,6 @@ namespace CognitiveSearch.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<CharFilterName> array = new List<CharFilterName>();

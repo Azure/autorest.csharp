@@ -30,6 +30,10 @@ namespace MgmtRenameRules.Models
 
         internal static AutomaticRepairsPolicy DeserializeAutomaticRepairsPolicy(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> enabled = default;
             Optional<string> gracePeriod = default;
             foreach (var property in element.EnumerateObject())
@@ -38,7 +42,6 @@ namespace MgmtRenameRules.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     enabled = property.Value.GetBoolean();

@@ -26,6 +26,10 @@ namespace MgmtMockAndSample.Models
 
         internal static GuestConfigurationAssignmentProperties DeserializeGuestConfigurationAssignmentProperties(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> targetResourceId = default;
             Optional<ComplianceStatus> complianceStatus = default;
             Optional<DateTimeOffset?> lastComplianceStatusChecked = default;
@@ -51,7 +55,6 @@ namespace MgmtMockAndSample.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     complianceStatus = new ComplianceStatus(property.Value.GetString());

@@ -42,6 +42,10 @@ namespace Azure.Management.Storage.Models
 
         internal static Encryption DeserializeEncryption(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<EncryptionServices> services = default;
             KeySource keySource = default;
             Optional<bool> requireInfrastructureEncryption = default;
@@ -53,7 +57,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     services = EncryptionServices.DeserializeEncryptionServices(property.Value);
@@ -68,7 +71,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     requireInfrastructureEncryption = property.Value.GetBoolean();
@@ -78,7 +80,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     keyvaultproperties = KeyVaultProperties.DeserializeKeyVaultProperties(property.Value);
@@ -88,7 +89,6 @@ namespace Azure.Management.Storage.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     identity = EncryptionIdentity.DeserializeEncryptionIdentity(property.Value);

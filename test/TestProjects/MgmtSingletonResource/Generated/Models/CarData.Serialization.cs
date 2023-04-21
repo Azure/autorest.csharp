@@ -26,6 +26,10 @@ namespace MgmtSingletonResource
 
         internal static CarData DeserializeCarData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> horsepower = default;
             ResourceIdentifier id = default;
             string name = default;
@@ -57,7 +61,6 @@ namespace MgmtSingletonResource
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
