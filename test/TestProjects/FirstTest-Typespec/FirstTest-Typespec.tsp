@@ -164,6 +164,26 @@ model RoundTripModel {
 
     @doc("this is a string based fixed enum")
     stringFixedEnum?: StringFixedEnum;
+
+    @doc("required unknown")
+    requiredUnknown: unknown;
+
+    @doc("optional unknown")
+    optionalUnknown?: unknown;
+
+    @doc("required record of unknown")
+    requiredRecordUnknown: Record<unknown>;
+
+    @doc("optional record of unknown")
+    optionalRecordUnknown?: Record<unknown>;
+
+    @doc("required readonly record of unknown")
+    @visibility("read")
+    readOnlyRequiredRecordUnknown: Record<unknown>;
+
+    @doc("optional readonly record of unknown")
+    @visibility("read")
+    readOnlyOptionalRecordUnknown?: Record<unknown>;
 }
 
 enum DaysOfWeekExtensibleEnum {
@@ -260,7 +280,7 @@ op anonymousBody(...Thing): Thing;
 op friendlyModel(...NotFriend): NotFriend;
 
 op addTimeHeader(
-    @header("Repeatability-First-Sent") repeatabilityFirstSent?: zonedDateTime
+    @header("Repeatability-First-Sent") repeatabilityFirstSent?: utcDateTime 
 ): void;
 
 namespace EnumTest {

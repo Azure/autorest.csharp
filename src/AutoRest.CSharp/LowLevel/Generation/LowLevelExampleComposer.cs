@@ -214,7 +214,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandleLongRunningPageableResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            if (clientMethod is not { ResponseBodyType: InputModelType {} responseModel})
+            if (clientMethod is not { ResponseBodyType: InputModelType { } responseModel })
             {
                 return;
             }
@@ -267,7 +267,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeParsingLongRunningResponseCodes(bool allProperties, InputType inputType, StringBuilder builder)
         {
-            if (inputType is InputPrimitiveType {Kind: InputTypeKind.Stream})
+            if (inputType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             {
                 using (Scope("using(Stream outFileStream = File.OpenWrite(\"<filePath>\")", 0, builder, true))
                 {
@@ -361,7 +361,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, StringBuilder builder)
         {
-            if (responseBodyType is InputPrimitiveType {Kind: InputTypeKind.Stream})
+            if (responseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
             {
                 using (Scope("if (response.ContentStream != null)", 0, builder, true))
                 {
@@ -406,7 +406,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     currentApiInvocationChain.Push($"{parentOp}[0]");
                     ComposeResponseParsingCode(allProperties, listType.ElementType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
                     return;
-                case InputDictionaryType dictionaryType :
+                case InputDictionaryType dictionaryType:
                     if (visitedTypes.Contains(dictionaryType.ValueType))
                     {
                         return;
@@ -604,31 +604,31 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string ComposeRequestContent(bool allProperties, InputType inputType, string? propertyDescription, int indent, HashSet<InputModelType> visitedModels) => inputType switch
         {
-            InputListType listType             => ComposeArrayRequestContent(allProperties, listType.ElementType, indent, visitedModels),
+            InputListType listType => ComposeArrayRequestContent(allProperties, listType.ElementType, indent, visitedModels),
             InputDictionaryType dictionaryType => ComposeDictionaryRequestContent(allProperties, dictionaryType.ValueType, indent, visitedModels),
-            InputEnumType enumType             => $"\"{enumType.AllowedValues.First().Value}\"",
-            InputPrimitiveType primitiveType   => primitiveType.Kind switch
+            InputEnumType enumType => $"\"{enumType.AllowedValues.First().Value}\"",
+            InputPrimitiveType primitiveType => primitiveType.Kind switch
             {
-                InputTypeKind.Stream           => "File.OpenRead(\"<filePath>\")",
-                InputTypeKind.Boolean          => "true",
-                InputTypeKind.Date             => "\"2022-05-10\"",
-                InputTypeKind.DateTime         => "\"2022-05-10T14:57:31.2311892-04:00\"",
-                InputTypeKind.DateTimeISO8601  => "\"2022-05-10T18:57:31.2311892Z\"",
-                InputTypeKind.DateTimeRFC1123  => "\"Tue, 10 May 2022 18:57:31 GMT\"",
-                InputTypeKind.DateTimeUnix     => "\"1652209051\"",
-                InputTypeKind.Float32          => "123.45f",
-                InputTypeKind.Float64          => "123.45d",
-                InputTypeKind.Float128         => "123.45m",
-                InputTypeKind.Guid             => "\"73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a\"",
-                InputTypeKind.Int32            => "1234",
-                InputTypeKind.Int64            => "1234L",
-                InputTypeKind.String           => string.IsNullOrWhiteSpace(propertyDescription) ? "\"<String>\"" : $"\"<{propertyDescription}>\"",
-                InputTypeKind.DurationISO8601  => "PT1H23M45S",
+                InputTypeKind.Stream => "File.OpenRead(\"<filePath>\")",
+                InputTypeKind.Boolean => "true",
+                InputTypeKind.Date => "\"2022-05-10\"",
+                InputTypeKind.DateTime => "\"2022-05-10T14:57:31.2311892-04:00\"",
+                InputTypeKind.DateTimeISO8601 => "\"2022-05-10T18:57:31.2311892Z\"",
+                InputTypeKind.DateTimeRFC1123 => "\"Tue, 10 May 2022 18:57:31 GMT\"",
+                InputTypeKind.DateTimeUnix => "\"1652209051\"",
+                InputTypeKind.Float32 => "123.45f",
+                InputTypeKind.Float64 => "123.45d",
+                InputTypeKind.Float128 => "123.45m",
+                InputTypeKind.Guid => "\"73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a\"",
+                InputTypeKind.Int32 => "1234",
+                InputTypeKind.Int64 => "1234L",
+                InputTypeKind.String => string.IsNullOrWhiteSpace(propertyDescription) ? "\"<String>\"" : $"\"<{propertyDescription}>\"",
+                InputTypeKind.DurationISO8601 => "PT1H23M45S",
                 InputTypeKind.DurationConstant => "01:23:45",
-                InputTypeKind.Time             => "01:23:45",
+                InputTypeKind.Time => "01:23:45",
                 _ => "new {}"
             },
-            InputModelType modelType          => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
+            InputModelType modelType => ComposeModelRequestContent(allProperties, modelType, indent, visitedModels),
             _ => "new {}"
         };
 
