@@ -763,6 +763,23 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteArguments(_writer, parameterMapping);
             _writer.Line($"cancellationToken){GetConfigureAwait(async)};");
 
+            if (operation.IsFakeLongRunningOperation)
+            {
+                // - create request
+                _writer.Append($"var request = ");
+                _writer.Append($"{GetRestClientName(operation)}.{operation.Method.Name}Request(");
+                WriteArguments(_writer, parameterMapping);
+                _writer.Append($").Request;");
+
+                // - construct operationId
+                _writer.Line($"var operation Id = {typeof(NextLinkOperationImplementation)}.GetOperationId(");
+                _writer.Append($"{typeof(RequestMethod)}.{operation.Method.Request.HttpMethod}, ");
+                _writer.Append($"request.{typeof(Uri)}.ToUri(), ");
+                _writer.Append($"request.{typeof(Uri)}.ToString(), ");
+                _writer.Append($"{typeof(NextLinkOperationImplementation.HeaderSource)}.None, ");
+                _writer.Append($"false, null, ");
+                _writer.Append($"{typeof(OperationFinalStateVia)}.OriginalUri");
+            }
             WriteLROResponse(GetDiagnosticReference(operation).Name, PipelineProperty, operation, parameterMapping, async);
         }
 
@@ -792,6 +809,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 {
                     _writer.Append($"response");
                 }
+                _writer.Append($", operationId");
             }
             else
             {
