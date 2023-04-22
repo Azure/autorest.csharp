@@ -52,7 +52,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                return (await RestClient.SetPropertiesAsync(restype, comp, storageServiceProperties, timeout, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.SetPropertiesAsync(restype, comp, storageServiceProperties, timeout, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -74,7 +74,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                return RestClient.SetProperties(restype, comp, storageServiceProperties, timeout, cancellationToken).GetRawResponse();
+                return RestClient.SetProperties(restype, comp, storageServiceProperties, timeout, cancellationToken);
             }
             catch (Exception e)
             {

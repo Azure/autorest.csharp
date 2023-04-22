@@ -91,15 +91,15 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<HttpMessage>> HttpMessageAsync(HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.HttpMessage");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.HttpMessage");
+            scope.Start();
             try
             {
                 return await RestClient.HttpMessageAsync(httpMessage, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -108,15 +108,15 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<HttpMessage> HttpMessage(HttpMessage httpMessage = null, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.HttpMessage");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.HttpMessage");
+            scope.Start();
             try
             {
                 return RestClient.HttpMessage(httpMessage, cancellationToken);
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -125,15 +125,15 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Request>> RequestAsync(Request request = null, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.Request");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.Request");
+            scope.Start();
             try
             {
                 return await RestClient.RequestAsync(request, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -142,15 +142,15 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Request> Request(Request request = null, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.Request");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.Request");
+            scope.Start();
             try
             {
                 return RestClient.Request(request, cancellationToken);
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -159,15 +159,15 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Models.Response>> ResponseAsync(Models.Response response = null, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.Response");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.Response");
+            scope.Start();
             try
             {
                 return await RestClient.ResponseAsync(response, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -176,15 +176,15 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Models.Response> Response(Models.Response response = null, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.Response");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.Response");
+            scope.Start();
             try
             {
                 return RestClient.Response(response, cancellationToken);
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -194,8 +194,8 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<AutoRestParameterFlatteningAnalyzeBodyOperation> StartAnalyzeBodyAsync(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
+            scope.Start();
             try
             {
                 var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
@@ -203,7 +203,7 @@ namespace NameConflicts
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -213,8 +213,8 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AutoRestParameterFlatteningAnalyzeBodyOperation StartAnalyzeBody(Stream stringBody = null, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
+            scope.Start();
             try
             {
                 var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
@@ -222,7 +222,7 @@ namespace NameConflicts
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -232,8 +232,8 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<AutoRestParameterFlatteningAnalyzeBodyOperation> StartAnalyzeBodyAsync(string stringBody = null, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
+            scope.Start();
             try
             {
                 var originalResponse = await RestClient.AnalyzeBodyAsync(stringBody, cancellationToken).ConfigureAwait(false);
@@ -241,7 +241,7 @@ namespace NameConflicts
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }
@@ -251,8 +251,8 @@ namespace NameConflicts
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AutoRestParameterFlatteningAnalyzeBodyOperation StartAnalyzeBody(string stringBody = null, CancellationToken cancellationToken = default)
         {
-            using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
-            scope0.Start();
+            using var scope = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.StartAnalyzeBody");
+            scope.Start();
             try
             {
                 var originalResponse = RestClient.AnalyzeBody(stringBody, cancellationToken);
@@ -260,7 +260,7 @@ namespace NameConflicts
             }
             catch (Exception e)
             {
-                scope0.Failed(e);
+                scope.Failed(e);
                 throw;
             }
         }

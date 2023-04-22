@@ -130,7 +130,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                return (await RestClient.DeleteAsync(table, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.DeleteAsync(table, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -149,7 +149,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                return RestClient.Delete(table, cancellationToken).GetRawResponse();
+                return RestClient.Delete(table, cancellationToken);
             }
             catch (Exception e)
             {
@@ -266,7 +266,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                return (await RestClient.UpdateEntityAsync(dataServiceVersion, table, partitionKey, rowKey, timeout, tableEntityProperties, queryOptions, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.UpdateEntityAsync(dataServiceVersion, table, partitionKey, rowKey, timeout, tableEntityProperties, queryOptions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -291,7 +291,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                return RestClient.UpdateEntity(dataServiceVersion, table, partitionKey, rowKey, timeout, tableEntityProperties, queryOptions, cancellationToken).GetRawResponse();
+                return RestClient.UpdateEntity(dataServiceVersion, table, partitionKey, rowKey, timeout, tableEntityProperties, queryOptions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -315,7 +315,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                return (await RestClient.DeleteEntityAsync(dataServiceVersion, table, partitionKey, rowKey, timeout, queryOptions, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.DeleteEntityAsync(dataServiceVersion, table, partitionKey, rowKey, timeout, queryOptions, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -339,7 +339,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                return RestClient.DeleteEntity(dataServiceVersion, table, partitionKey, rowKey, timeout, queryOptions, cancellationToken).GetRawResponse();
+                return RestClient.DeleteEntity(dataServiceVersion, table, partitionKey, rowKey, timeout, queryOptions, cancellationToken);
             }
             catch (Exception e)
             {
@@ -449,7 +449,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                return (await RestClient.SetAccessPolicyAsync(table, comp, timeout, tableAcl, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.SetAccessPolicyAsync(table, comp, timeout, tableAcl, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -471,7 +471,7 @@ namespace Azure.Storage.Tables
             scope.Start();
             try
             {
-                return RestClient.SetAccessPolicy(table, comp, timeout, tableAcl, cancellationToken).GetRawResponse();
+                return RestClient.SetAccessPolicy(table, comp, timeout, tableAcl, cancellationToken);
             }
             catch (Exception e)
             {

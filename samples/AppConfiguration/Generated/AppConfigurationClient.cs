@@ -53,7 +53,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return (await RestClient.CheckKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CheckKeysAsync(name, after, acceptDatetime, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -73,7 +73,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return RestClient.CheckKeys(name, after, acceptDatetime, cancellationToken).GetRawResponse();
+                return RestClient.CheckKeys(name, after, acceptDatetime, cancellationToken);
             }
             catch (Exception e)
             {
@@ -95,7 +95,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return (await RestClient.CheckKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CheckKeyValuesAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -117,7 +117,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return RestClient.CheckKeyValues(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+                return RestClient.CheckKeyValues(key, label, after, acceptDatetime, select, cancellationToken);
             }
             catch (Exception e)
             {
@@ -277,7 +277,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return (await RestClient.CheckKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CheckKeyValueAsync(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -301,7 +301,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return RestClient.CheckKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken).GetRawResponse();
+                return RestClient.CheckKeyValue(key, label, acceptDatetime, ifMatch, ifNoneMatch, select, cancellationToken);
             }
             catch (Exception e)
             {
@@ -322,7 +322,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return (await RestClient.CheckLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CheckLabelsAsync(name, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -343,7 +343,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return RestClient.CheckLabels(name, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+                return RestClient.CheckLabels(name, after, acceptDatetime, select, cancellationToken);
             }
             catch (Exception e)
             {
@@ -453,7 +453,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return (await RestClient.CheckRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.CheckRevisionsAsync(key, label, after, acceptDatetime, select, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -475,7 +475,7 @@ namespace AppConfiguration
             scope.Start();
             try
             {
-                return RestClient.CheckRevisions(key, label, after, acceptDatetime, select, cancellationToken).GetRawResponse();
+                return RestClient.CheckRevisions(key, label, after, acceptDatetime, select, cancellationToken);
             }
             catch (Exception e)
             {
