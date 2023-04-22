@@ -426,7 +426,21 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public IEnumerable<MgmtRestClient> RestClients => _restClients ??= RawRequestPathToRestClient.Values.SelectMany(v => v).Distinct();
 
         private IEnumerable<Resource>? _armResources;
-        public IEnumerable<Resource> ArmResources => _armResources ??= RequestPathToResources.Values.Select(bag => bag.Resource).Distinct();
+        public IEnumerable<Resource> ArmResources => _armResources ??= EnsureArmResources().Distinct();
+
+        private IEnumerable<Resource> EnsureArmResources()
+        {
+            foreach (var bag in RequestPathToResources.Values)
+            {
+                yield return bag.Resource;
+
+                //// also include the base resources since they are special resources
+                //if (bag.Resource.PolymorphicOption != null)
+                //{
+                //    yield return bag.Resource.PolymorphicOption.BaseResource;
+                //}
+            }
+        }
 
         private IEnumerable<ResourceCollection>? _resourceCollections;
         public IEnumerable<ResourceCollection> ResourceCollections => _resourceCollections ??= RequestPathToResources.Values.Select(bag => bag.ResourceCollection).WhereNotNull().Distinct();
