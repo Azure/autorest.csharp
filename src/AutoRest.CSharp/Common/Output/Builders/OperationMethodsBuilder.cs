@@ -40,11 +40,11 @@ namespace AutoRest.CSharp.Output.Models
             return new ClientMethodReturnTypes(responseType, protocol, convenience);
         }
 
-        protected override IEnumerable<MethodBodyStatement> CreateProtocolMethodBody(bool async)
+        protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
         {
             var pipeline = new HttpPipelineExpression(PipelineDeclaration);
 
-            yield return WrapInDiagnosticScope(ProtocolMethodName,
+            return WrapInDiagnosticScope(ProtocolMethodName,
                 Declare("message", InvokeCreateRequestMethod(), out var message),
                 _headAsBoolean
                     ? Return(pipeline.ProcessHeadAsBoolMessage(message, ClientDiagnosticsDeclaration, _requestContext, async))
@@ -52,9 +52,9 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        protected override IEnumerable<MethodBodyStatement> CreateConvenienceMethodBody(string methodName, bool async)
+        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async)
         {
-            yield return methodName != ProtocolMethodName
+            return methodName != ProtocolMethodName
                 ? WrapInDiagnosticScope(methodName, CreateConvenienceMethodLogic(async).AsStatement())
                 : CreateConvenienceMethodLogic(async).AsStatement();
         }

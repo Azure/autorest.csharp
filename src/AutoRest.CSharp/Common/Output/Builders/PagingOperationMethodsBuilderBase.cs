@@ -5,10 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -22,6 +25,8 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class PagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
+        private readonly IReadOnlyList<MethodParametersBuilder.ParameterLink> _parameterLinks;
+
         protected OperationPaging Paging { get; }
         protected CSharpType ResponseType { get; }
         protected RequestContextExpression? RequestContext { get; }
@@ -47,6 +52,8 @@ namespace AutoRest.CSharp.Output.Models
                 ? $"Create{nextLinkOperation.Name.ToCleanName()}Request"
                 : paging is { NextLinkName: { }} ? $"Create{ProtocolMethodName}NextPageRequest" : null;
             CreateNextPageMessageMethodParameters = clientMethodsParameters.CreateNextPageMessage;
+
+            _parameterLinks = clientMethodsParameters.ParameterLinks;
         }
 
         protected override IEnumerable<RestClientMethod> CreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
@@ -57,6 +64,60 @@ namespace AutoRest.CSharp.Output.Models
             {
                 yield return BuildNextPageMethod(createMessageMethod);
             }
+        }
+
+        protected IEnumerable<MethodBodyStatement> AddPageableMethodArguments(List<ValueExpression> createRequestArguments, out ValueExpression? requestContextVariable)
+        {
+            var statements = new List<MethodBodyStatement>();
+            requestContextVariable = null;
+            foreach (var parameterLink in _parameterLinks)
+            {
+                switch (parameterLink)
+                {
+                    case { ProtocolParameters.Count: 0, ConvenienceParameters: var convenienceParameters }:
+                        if (convenienceParameters.Count == 1 && convenienceParameters[0] == KnownParameters.CancellationTokenParameter)
+                        {
+                            requestContextVariable = KnownParameters.CancellationTokenParameter;
+                        }
+                        break;
+                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters: [var convenienceParameter], IntermediateSerialization: null }:
+                        if (protocolParameter == KnownParameters.RequestContext && convenienceParameter == KnownParameters.CancellationTokenParameter)
+                        {
+                            statements.Add(Declare(IfCancellationTokenCanBeCanceled(CancellationTokenExpression.KnownParameter), out var requestContext));
+                            requestContextVariable = requestContext;
+                            createRequestArguments.Add(requestContext);
+                        }
+                        else if (convenienceParameter != protocolParameter)
+                        {
+                            var conversion = CreateConversion(convenienceParameter, protocolParameter.Type);
+                            var argument = new CodeWriterDeclaration(protocolParameter.Name);
+                            statements.Add(new DeclareVariableStatement(protocolParameter.Type, argument, conversion));
+                            createRequestArguments.Add(argument);
+                        }
+                        else if (protocolParameter == KnownParameters.RequestContext)
+                        {
+                            requestContextVariable = new ParameterReference(protocolParameter);
+                            createRequestArguments.Add(requestContextVariable);
+                        }
+                        else
+                        {
+                            createRequestArguments.Add(new ParameterReference(protocolParameter));
+                        }
+                        break;
+                    case { ProtocolParameters: [var protocolParameter], ConvenienceParameters.Count: > 1, IntermediateSerialization: {} serializations }:
+                        statements.Add(Var(protocolParameter.Name, Utf8JsonRequestContentExpression.New(), out var requestContent));
+                        statements.Add(Var("writer", requestContent.JsonWriter, out var utf8JsonWriter));
+                        statements.Add(CreateSpreadConversion(utf8JsonWriter, serializations).AsStatement());
+
+                        createRequestArguments.Add(requestContent);
+                        break;
+                    case { ProtocolParameters.Count: > 1, ConvenienceParameters.Count: 1, IntermediateSerialization: {} serializations }:
+                        // Grouping is not supported yet
+                        break;
+                }
+            }
+
+            return statements;
         }
 
         protected static CSharpType GetResponseType(InputOperation operation, TypeFactory typeFactory, OperationPaging paging)
@@ -82,6 +143,9 @@ namespace AutoRest.CSharp.Output.Models
 
             return TypeFactory.GetElementType(property.ValueType);
         }
+
+        private static RequestContextExpression IfCancellationTokenCanBeCanceled(CancellationTokenExpression cancellationToken)
+            => new(new TernaryConditionalOperator(cancellationToken.CanBeCanceled, RequestContextExpression.New(cancellationToken), Null));
 
         private static RestClientMethod BuildNextPageMethod(RestClientMethod method)
         {

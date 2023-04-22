@@ -29,22 +29,29 @@ namespace AutoRest.CSharp.Output.Models
             return new(responseType, typeof(Pageable<BinaryData>), new(typeof(Pageable<>), responseType));
         }
 
-        protected override IEnumerable<MethodBodyStatement> CreateProtocolMethodBody(bool async)
+        protected override bool ShouldConvenienceMethodGenerated() => true;
+
+        protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
         {
             var createRequestArguments = CreateMessageMethodParameters.Select(p => new ParameterReference(p));
-            yield return DeclareFirstPageRequestLocalFunction(null, CreateMessageMethodName, createRequestArguments, out var createFirstPageRequest);
+            MethodBodyStatement firstPageRequestLine = DeclareFirstPageRequestLocalFunction(null, CreateMessageMethodName, createRequestArguments, out var createFirstPageRequest);
 
             CodeWriterDeclaration? createNextPageRequest = null;
+            MethodBodyStatement? nextPageRequestLine = null;
             if (CreateNextPageMessageMethodName is not null)
             {
                 var nextPageArguments = CreateNextPageMessageMethodParameters.Select(p => new ParameterReference(p));
-                yield return DeclareNextPageRequestLocalFunction(null, CreateNextPageMessageMethodName, nextPageArguments, out createNextPageRequest);
+                nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, CreateNextPageMessageMethodName, nextPageArguments, out createNextPageRequest);
             }
 
-            yield return Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsDeclaration, PipelineDeclaration, typeof(BinaryData), CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, RequestContext, async));
+            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsDeclaration, PipelineDeclaration, typeof(BinaryData), CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, RequestContext, async));
+
+            return nextPageRequestLine is not null
+                ? new[]{firstPageRequestLine, nextPageRequestLine, returnLine}
+                : new[]{firstPageRequestLine, returnLine};
         }
 
-        protected override IEnumerable<MethodBodyStatement> CreateConvenienceMethodBody(string methodName, bool async)
+        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async)
         {
             ValueExpression clientDiagnostics = RestClient != null
                 ? new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}")

@@ -42,6 +42,7 @@ namespace AutoRest.CSharp.Output.Models
                 var parameters = _legacyParameterBuilding
                     ? builder.BuildParametersLegacy(unsortedParameters, sortedParameters)
                     : builder.BuildParameters(sortedParameters);
+
                 operationParameters[inputOperation] = parameters;
             }
 
@@ -49,13 +50,16 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (operation.Paging is {} paging)
                 {
-                    var createNextPageMessageMethodParameters = paging is { NextLinkOperation: { } nextLinkOperation }
-                        ? operationParameters[nextLinkOperation].CreateMessage
-                        : paging is { NextLinkName: {} }
-                            ? parameters.CreateMessage.Prepend(KnownParameters.NextLink).ToArray()
-                            : Array.Empty<Parameter>();
+                    var createNextPageMessageMethodParameters = paging switch
+                    {
+                        { NextLinkOperation: {} nextLinkOperation } => operationParameters[nextLinkOperation].CreateMessage,
+                        { NextLinkName: {}} => parameters.CreateMessage.Prepend(KnownParameters.NextLink).ToArray(),
+                        _ => Array.Empty<Parameter>()
+                    };
 
-                    var pagingParameters = new ClientPagingMethodParameters(parameters.RequestParts, parameters.CreateMessage, createNextPageMessageMethodParameters, parameters.Protocol, parameters.Convenience, parameters.ParameterLinks);
+                    var (requestParts, createMessage, protocol, convenience, parameterLinks) = parameters;
+                    var pagingParameters = new ClientPagingMethodParameters(requestParts, createMessage, createNextPageMessageMethodParameters, protocol, convenience, parameterLinks);
+
                     yield return operation.LongRunning is { } longRunning
                         ? new LroPagingOperationMethodsBuilder(longRunning, paging, operation, restClientReference, fields, clientName, _typeFactory, pagingParameters)
                         : new PagingOperationMethodsBuilder(paging, operation, restClientReference, fields, clientName, _typeFactory, pagingParameters);

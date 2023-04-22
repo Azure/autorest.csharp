@@ -34,11 +34,11 @@ namespace AutoRest.CSharp.Output.Models
             return new ClientMethodReturnTypes(responseType, protocol, convenience);
         }
 
-        protected override IEnumerable<MethodBodyStatement> CreateProtocolMethodBody(bool async)
-        {
-            yield return Declare("message", InvokeCreateRequestMethod(), out var message);
-            yield return Return(InvokeProtocolOperationHelpersProcessMessageMethod(CreateScopeName(ProtocolMethodName), message, _longRunning.FinalStateVia, async));
-        }
+        protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
+            => WrapInDiagnosticScope(ProtocolMethodName,
+                Declare("message", InvokeCreateRequestMethod(), out var message),
+                Return(InvokeProtocolOperationHelpersProcessMessageMethod(CreateScopeName(ProtocolMethodName), message, _longRunning.FinalStateVia, async))
+            );
 
         private ValueExpression InvokeProtocolOperationHelpersProcessMessageMethod(string scope, ValueExpression message, OperationFinalStateVia finalStateVia, bool async)
         {
@@ -60,9 +60,9 @@ namespace AutoRest.CSharp.Output.Models
             return new InvokeStaticMethodExpression(typeof(ProtocolOperationHelpers), processMessageMethodName, arguments, null, false, async);
         }
 
-        protected override IEnumerable<MethodBodyStatement> CreateConvenienceMethodBody(string methodName, bool async)
+        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async)
         {
-            yield return methodName != ProtocolMethodName
+            return methodName != ProtocolMethodName
                 ? WrapInDiagnosticScope(methodName, CreateConvenienceMethodLogic(methodName, async).AsStatement())
                 : CreateConvenienceMethodLogic(methodName, async).AsStatement();
         }

@@ -32,20 +32,27 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override bool ShouldConvenienceMethodGenerated() => false;
 
-        protected override IEnumerable<MethodBodyStatement> CreateProtocolMethodBody(bool async)
+        protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
         {
             CodeWriterDeclaration? createNextPageRequest = null;
+            MethodBodyStatement? nextPageRequestLine = null;
             if (CreateNextPageMessageMethodName is not null)
             {
                 var nextPageArguments = CreateNextPageMessageMethodParameters.Select(p => new ParameterReference(p));
-                yield return DeclareNextPageRequestLocalFunction(null, CreateNextPageMessageMethodName, nextPageArguments, out createNextPageRequest);
+                nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, CreateNextPageMessageMethodName, nextPageArguments, out createNextPageRequest);
             }
 
-            yield return Declare("message", InvokeCreateRequestMethod(), out var message);
-            yield return Return(CreatePageable(message, createNextPageRequest, ClientDiagnosticsDeclaration, PipelineDeclaration, typeof(BinaryData), _longRunning.FinalStateVia, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, RequestContext, async));
+            MethodBodyStatement declareMessageLine = Declare("message", InvokeCreateRequestMethod(), out var message);
+            MethodBodyStatement returnLine = Return(CreatePageable(message, createNextPageRequest, ClientDiagnosticsDeclaration, PipelineDeclaration, typeof(BinaryData), _longRunning.FinalStateVia, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, RequestContext, async));
+
+            var body = nextPageRequestLine is not null
+                ? new[]{nextPageRequestLine, declareMessageLine, returnLine}
+                : new[]{declareMessageLine, returnLine};
+
+            return WrapInDiagnosticScope(ProtocolMethodName, body);
         }
 
-        protected override IEnumerable<MethodBodyStatement> CreateConvenienceMethodBody(string methodName, bool async)
+        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async)
             => throw new NotSupportedException("LRO Paging isn't supported yet!");
     }
 }

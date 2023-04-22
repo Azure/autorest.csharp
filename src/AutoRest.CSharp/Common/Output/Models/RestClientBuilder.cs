@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        public static Response[] BuildResponses(InputOperation operation, CSharpType? resourceDataType, TypeFactory typeFactory, out CSharpType? responseType)
+        private static Response[] BuildResponses(InputOperation operation, CSharpType? resourceDataType, TypeFactory typeFactory, out CSharpType? responseType)
         {
             if (operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
             {
