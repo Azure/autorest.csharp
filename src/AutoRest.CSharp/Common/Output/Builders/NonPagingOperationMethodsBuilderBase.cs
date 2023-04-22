@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
@@ -75,9 +76,20 @@ namespace AutoRest.CSharp.Output.Models
                 return null;
             }
 
-            var firstResponseBodyType = operation.Responses.Where(r => !r.IsErrorResponse).Select(r => r.BodyType).Distinct().FirstOrDefault();
-            var responseType = firstResponseBodyType is not null ? typeFactory.CreateType(firstResponseBodyType) : null;
-            return responseType is null ? null : TypeFactory.GetOutputType(responseType);
+            var responseTypes = operation.Responses
+                .Where(r => !r.IsErrorResponse)
+                .Select(r => r.BodyType)
+                .WhereNotNull()
+                .Distinct()
+                .Select(t => TypeFactory.GetOutputType(typeFactory.CreateType(t)))
+                .ToList();
+
+            return responseTypes.Count switch
+            {
+                0 => null,
+                1 => responseTypes[0],
+                _ => typeof(object)
+            };
         }
     }
 }
