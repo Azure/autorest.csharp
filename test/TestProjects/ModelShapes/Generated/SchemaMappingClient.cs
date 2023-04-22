@@ -40,6 +40,7 @@ namespace ModelShapes
 
         /// <param name="value"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual async Task<Response> InputAsync(InputModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SchemaMappingClient.Input");
@@ -57,6 +58,7 @@ namespace ModelShapes
 
         /// <param name="value"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual Response Input(InputModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SchemaMappingClient.Input");
@@ -74,6 +76,7 @@ namespace ModelShapes
 
         /// <param name="value"> The MixedModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<MixedModel>> MixedAsync(MixedModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SchemaMappingClient.Mixed");
@@ -91,6 +94,7 @@ namespace ModelShapes
 
         /// <param name="value"> The MixedModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual Response<MixedModel> Mixed(MixedModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SchemaMappingClient.Mixed");
@@ -140,6 +144,7 @@ namespace ModelShapes
 
         /// <param name="value"> The MixedModelWithReadonlyProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<MixedModelWithReadonlyProperty>> MixedreadonlyAsync(MixedModelWithReadonlyProperty value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SchemaMappingClient.Mixedreadonly");
@@ -157,6 +162,7 @@ namespace ModelShapes
 
         /// <param name="value"> The MixedModelWithReadonlyProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual Response<MixedModelWithReadonlyProperty> Mixedreadonly(MixedModelWithReadonlyProperty value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SchemaMappingClient.Mixedreadonly");

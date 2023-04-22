@@ -75,6 +75,7 @@ namespace body_complex
         /// <summary> Put complex types with dictionary property. </summary>
         /// <param name="complexBody"> Please put a dictionary with 5 key-value pairs: &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;, &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;, &quot;&quot;:null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual async Task<Response> PutValidAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutValid");
@@ -93,6 +94,7 @@ namespace body_complex
         /// <summary> Put complex types with dictionary property. </summary>
         /// <param name="complexBody"> Please put a dictionary with 5 key-value pairs: &quot;txt&quot;:&quot;notepad&quot;, &quot;bmp&quot;:&quot;mspaint&quot;, &quot;xls&quot;:&quot;excel&quot;, &quot;exe&quot;:&quot;&quot;, &quot;&quot;:null. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual Response PutValid(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutValid");
@@ -145,6 +147,7 @@ namespace body_complex
         /// <summary> Put complex types with dictionary property which is empty. </summary>
         /// <param name="complexBody"> Please put an empty dictionary. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual async Task<Response> PutEmptyAsync(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");
@@ -163,6 +166,7 @@ namespace body_complex
         /// <summary> Put complex types with dictionary property which is empty. </summary>
         /// <param name="complexBody"> Please put an empty dictionary. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual Response PutEmpty(DictionaryWrapper complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("DictionaryClient.PutEmpty");

@@ -47,6 +47,7 @@ namespace NameConflicts
         /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="request"/>, <paramref name="message"/>, <paramref name="scope"/>, <paramref name="uri"/>, <paramref name="pipeline"/>, <paramref name="clientDiagnostics"/> or <paramref name="class"/> is null. </exception>
         public virtual async Task<Response<Struct>> OperationAsync(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.Operation");
@@ -70,6 +71,7 @@ namespace NameConflicts
         /// <param name="clientDiagnostics"> The String to use. </param>
         /// <param name="class"> The Class to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="request"/>, <paramref name="message"/>, <paramref name="scope"/>, <paramref name="uri"/>, <paramref name="pipeline"/>, <paramref name="clientDiagnostics"/> or <paramref name="class"/> is null. </exception>
         public virtual Response<Struct> Operation(string request, string message, string scope, string uri, string pipeline, string clientDiagnostics, Class @class, CancellationToken cancellationToken = default)
         {
             using var scope0 = _clientDiagnostics.CreateScope("AutoRestParameterFlatteningClient.Operation");

@@ -74,6 +74,7 @@ namespace object_type
         /// <summary> Basic put that puts an object. Pass in {&apos;foo&apos;: &apos;bar&apos;} to get a 200 and anything else to get an object error. </summary>
         /// <param name="putObject"> Pass in {&apos;foo&apos;: &apos;bar&apos;} for a 200, anything else for an object error. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="putObject"/> is null. </exception>
         public virtual async Task<Response> PutAsync(object putObject, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectTypeClient.Put");
@@ -92,6 +93,7 @@ namespace object_type
         /// <summary> Basic put that puts an object. Pass in {&apos;foo&apos;: &apos;bar&apos;} to get a 200 and anything else to get an object error. </summary>
         /// <param name="putObject"> Pass in {&apos;foo&apos;: &apos;bar&apos;} for a 200, anything else for an object error. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="putObject"/> is null. </exception>
         public virtual Response Put(object putObject, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ObjectTypeClient.Put");

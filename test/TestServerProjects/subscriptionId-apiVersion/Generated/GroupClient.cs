@@ -44,6 +44,7 @@ namespace subscriptionId_apiVersion
         /// <summary> Provides a resouce group with name &apos;testgroup101&apos; and location &apos;West US&apos;. </summary>
         /// <param name="resourceGroupName"> Resource Group name &apos;testgroup101&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public virtual async Task<Response<SampleResourceGroup>> GetSampleResourceGroupAsync(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("GroupClient.GetSampleResourceGroup");
@@ -62,6 +63,7 @@ namespace subscriptionId_apiVersion
         /// <summary> Provides a resouce group with name &apos;testgroup101&apos; and location &apos;West US&apos;. </summary>
         /// <param name="resourceGroupName"> Resource Group name &apos;testgroup101&apos;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/> is null. </exception>
         public virtual Response<SampleResourceGroup> GetSampleResourceGroup(string resourceGroupName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("GroupClient.GetSampleResourceGroup");

@@ -227,6 +227,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual async Task<Response<string>> BinaryBodyWithTwoContentTypesAsync(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithTwoContentTypes");
@@ -246,6 +247,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual Response<string> BinaryBodyWithTwoContentTypes(ContentType1 contentType, Stream message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithTwoContentTypes");
@@ -265,6 +267,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual async Task<Response<string>> BinaryBodyWithThreeContentTypesAsync(ContentType2 contentType, Stream message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
@@ -284,6 +287,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual Response<string> BinaryBodyWithThreeContentTypes(ContentType2 contentType, Stream message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BinaryBodyWithThreeContentTypes");
@@ -303,6 +307,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual async Task<Response<string>> PutTextAndJsonBodyAsync(ContentType3 contentType, string message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.PutTextAndJsonBody");
@@ -322,6 +327,7 @@ namespace media_types
         /// <param name="contentType"> Upload file type. </param>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual Response<string> PutTextAndJsonBody(ContentType3 contentType, string message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.PutTextAndJsonBody");

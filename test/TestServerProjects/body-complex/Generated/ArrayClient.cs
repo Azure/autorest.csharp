@@ -75,6 +75,7 @@ namespace body_complex
         /// <summary> Put complex types with array property. </summary>
         /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual async Task<Response> PutValidAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutValid");
@@ -93,6 +94,7 @@ namespace body_complex
         /// <summary> Put complex types with array property. </summary>
         /// <param name="complexBody"> Please put an array with 4 items: &quot;1, 2, 3, 4&quot;, &quot;&quot;, null, &quot;&amp;S#$(*Y&quot;, &quot;The quick brown fox jumps over the lazy dog&quot;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual Response PutValid(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutValid");
@@ -145,6 +147,7 @@ namespace body_complex
         /// <summary> Put complex types with array property which is empty. </summary>
         /// <param name="complexBody"> Please put an empty array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual async Task<Response> PutEmptyAsync(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
@@ -163,6 +166,7 @@ namespace body_complex
         /// <summary> Put complex types with array property which is empty. </summary>
         /// <param name="complexBody"> Please put an empty array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual Response PutEmpty(ArrayWrapper complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");

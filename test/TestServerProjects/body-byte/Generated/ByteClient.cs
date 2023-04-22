@@ -142,6 +142,7 @@ namespace body_byte
         /// <summary> Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
         /// <param name="byteBody"> Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="byteBody"/> is null. </exception>
         public virtual async Task<Response> PutNonAsciiAsync(byte[] byteBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ByteClient.PutNonAscii");
@@ -160,6 +161,7 @@ namespace body_byte
         /// <summary> Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </summary>
         /// <param name="byteBody"> Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="byteBody"/> is null. </exception>
         public virtual Response PutNonAscii(byte[] byteBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ByteClient.PutNonAscii");

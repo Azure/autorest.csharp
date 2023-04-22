@@ -145,6 +145,7 @@ namespace FlattenedParameters
         /// <param name="required"> The String to use. </param>
         /// <param name="nonRequired"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         public virtual async Task<Response> OperationRequiredAsync(string required, string nonRequired = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.OperationRequired");
@@ -163,6 +164,7 @@ namespace FlattenedParameters
         /// <param name="required"> The String to use. </param>
         /// <param name="nonRequired"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="required"/> is null. </exception>
         public virtual Response OperationRequired(string required, string nonRequired = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("FlattenedParametersClient.OperationRequired");

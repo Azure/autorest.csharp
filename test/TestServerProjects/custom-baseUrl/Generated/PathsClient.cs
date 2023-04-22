@@ -40,6 +40,7 @@ namespace custom_baseUrl
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public virtual async Task<Response> GetEmptyAsync(string accountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");
@@ -58,6 +59,7 @@ namespace custom_baseUrl
         /// <summary> Get a 200 to test a valid base uri. </summary>
         /// <param name="accountName"> Account Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public virtual Response GetEmpty(string accountName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PathsClient.GetEmpty");

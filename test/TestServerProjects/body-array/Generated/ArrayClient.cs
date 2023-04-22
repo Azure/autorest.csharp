@@ -144,6 +144,7 @@ namespace body_array
         /// <summary> Set array value empty []. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutEmptyAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
@@ -162,6 +163,7 @@ namespace body_array
         /// <summary> Set array value empty []. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutEmpty(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEmpty");
@@ -214,6 +216,7 @@ namespace body_array
         /// <summary> Set array value empty [true, false, false, true]. </summary>
         /// <param name="arrayBody"> The ArrayOfBoolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutBooleanTfftAsync(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
@@ -232,6 +235,7 @@ namespace body_array
         /// <summary> Set array value empty [true, false, false, true]. </summary>
         /// <param name="arrayBody"> The ArrayOfBoolean to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutBooleanTfft(IEnumerable<bool> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutBooleanTfft");
@@ -352,6 +356,7 @@ namespace body_array
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutIntegerValidAsync(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
@@ -370,6 +375,7 @@ namespace body_array
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutIntegerValid(IEnumerable<int> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutIntegerValid");
@@ -490,6 +496,7 @@ namespace body_array
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutLongValidAsync(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
@@ -508,6 +515,7 @@ namespace body_array
         /// <summary> Set array value empty [1, -1, 3, 300]. </summary>
         /// <param name="arrayBody"> The ArrayOfInteger to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutLongValid(IEnumerable<long> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutLongValid");
@@ -628,6 +636,7 @@ namespace body_array
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutFloatValidAsync(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
@@ -646,6 +655,7 @@ namespace body_array
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutFloatValid(IEnumerable<float> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutFloatValid");
@@ -766,6 +776,7 @@ namespace body_array
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDoubleValidAsync(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
@@ -784,6 +795,7 @@ namespace body_array
         /// <summary> Set array value [0, -0.01, 1.2e20]. </summary>
         /// <param name="arrayBody"> The ArrayOfNumber to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDoubleValid(IEnumerable<double> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDoubleValid");
@@ -904,6 +916,7 @@ namespace body_array
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutStringValidAsync(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
@@ -922,6 +935,7 @@ namespace body_array
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutStringValid(IEnumerable<string> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringValid");
@@ -974,6 +988,7 @@ namespace body_array
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutEnumValidAsync(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
@@ -992,6 +1007,7 @@ namespace body_array
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfFooEnum to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutEnumValid(IEnumerable<FooEnum> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutEnumValid");
@@ -1044,6 +1060,7 @@ namespace body_array
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfpathsBqqpc7ArrayPrimStringEnumFoo1Foo2Foo3PutRequestbodyContentApplicationJsonSchemaItems to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutStringEnumValidAsync(IEnumerable<Enum1> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
@@ -1062,6 +1079,7 @@ namespace body_array
         /// <summary> Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfpathsBqqpc7ArrayPrimStringEnumFoo1Foo2Foo3PutRequestbodyContentApplicationJsonSchemaItems to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutStringEnumValid(IEnumerable<Enum1> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutStringEnumValid");
@@ -1182,6 +1200,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfUuid to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutUuidValidAsync(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
@@ -1200,6 +1219,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfUuid to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutUuidValid(IEnumerable<Guid> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutUuidValid");
@@ -1286,6 +1306,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDateValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
@@ -1304,6 +1325,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDate to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDateValid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateValid");
@@ -1424,6 +1446,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDateTimeValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
@@ -1442,6 +1465,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDateTimeValid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeValid");
@@ -1562,6 +1586,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDateTimeRfc1123ValidAsync(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
@@ -1580,6 +1605,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDateTime to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDateTimeRfc1123Valid(IEnumerable<DateTimeOffset> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDateTimeRfc1123Valid");
@@ -1632,6 +1658,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDuration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDurationValidAsync(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
@@ -1650,6 +1677,7 @@ namespace body_array
         /// <summary> Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]. </summary>
         /// <param name="arrayBody"> The ArrayOfDuration to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDurationValid(IEnumerable<TimeSpan> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDurationValid");
@@ -1702,6 +1730,7 @@ namespace body_array
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
         /// <param name="arrayBody"> The ArrayOfByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutByteValidAsync(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
@@ -1720,6 +1749,7 @@ namespace body_array
         /// <summary> Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64. </summary>
         /// <param name="arrayBody"> The ArrayOfByteArray to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutByteValid(IEnumerable<byte[]> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutByteValid");
@@ -1976,6 +2006,7 @@ namespace body_array
         /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutComplexValidAsync(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
@@ -1994,6 +2025,7 @@ namespace body_array
         /// <summary> Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]. </summary>
         /// <param name="arrayBody"> The ArrayOfProduct to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutComplexValid(IEnumerable<Product> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutComplexValid");
@@ -2182,6 +2214,7 @@ namespace body_array
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutArrayValidAsync(IEnumerable<IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
@@ -2200,6 +2233,7 @@ namespace body_array
         /// <summary> Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]. </summary>
         /// <param name="arrayBody"> The ArrayOfPutContentSchemaItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutArrayValid(IEnumerable<IList<string>> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutArrayValid");
@@ -2388,6 +2422,7 @@ namespace body_array
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="arrayBody"> The ArrayOfDictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual async Task<Response> PutDictionaryValidAsync(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");
@@ -2406,6 +2441,7 @@ namespace body_array
         /// <summary> Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]. </summary>
         /// <param name="arrayBody"> The ArrayOfDictionaryOfString to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="arrayBody"/> is null. </exception>
         public virtual Response PutDictionaryValid(IEnumerable<IDictionary<string, string>> arrayBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("ArrayClient.PutDictionaryValid");

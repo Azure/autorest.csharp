@@ -41,6 +41,7 @@ namespace xms_error_responses
         /// <summary> Gets pets by id. </summary>
         /// <param name="petId"> pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
         public virtual async Task<Response<Pet>> GetPetByIdAsync(string petId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PetClient.GetPetById");
@@ -59,6 +60,7 @@ namespace xms_error_responses
         /// <summary> Gets pets by id. </summary>
         /// <param name="petId"> pet id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="petId"/> is null. </exception>
         public virtual Response<Pet> GetPetById(string petId, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PetClient.GetPetById");
@@ -77,6 +79,7 @@ namespace xms_error_responses
         /// <summary> Asks pet to do something. </summary>
         /// <param name="whatAction"> what action the pet should do. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="whatAction"/> is null. </exception>
         public virtual async Task<Response<PetAction>> DoSomethingAsync(string whatAction, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PetClient.DoSomething");
@@ -95,6 +98,7 @@ namespace xms_error_responses
         /// <summary> Asks pet to do something. </summary>
         /// <param name="whatAction"> what action the pet should do. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="whatAction"/> is null. </exception>
         public virtual Response<PetAction> DoSomething(string whatAction, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PetClient.DoSomething");

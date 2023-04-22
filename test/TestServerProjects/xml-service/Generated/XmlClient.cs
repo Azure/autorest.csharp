@@ -76,6 +76,7 @@ namespace xml_service
         /// <summary> Puts a complex type that has a ref to a complex type with no XML node. </summary>
         /// <param name="model"> The RootWithRefAndNoMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         public virtual async Task<Response> PutComplexTypeRefNoMetaAsync(RootWithRefAndNoMeta model, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutComplexTypeRefNoMeta");
@@ -94,6 +95,7 @@ namespace xml_service
         /// <summary> Puts a complex type that has a ref to a complex type with no XML node. </summary>
         /// <param name="model"> The RootWithRefAndNoMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         public virtual Response PutComplexTypeRefNoMeta(RootWithRefAndNoMeta model, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutComplexTypeRefNoMeta");
@@ -146,6 +148,7 @@ namespace xml_service
         /// <summary> Puts a complex type that has a ref to a complex type with XML node. </summary>
         /// <param name="model"> The RootWithRefAndMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         public virtual async Task<Response> PutComplexTypeRefWithMetaAsync(RootWithRefAndMeta model, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutComplexTypeRefWithMeta");
@@ -164,6 +167,7 @@ namespace xml_service
         /// <summary> Puts a complex type that has a ref to a complex type with XML node. </summary>
         /// <param name="model"> The RootWithRefAndMeta to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         public virtual Response PutComplexTypeRefWithMeta(RootWithRefAndMeta model, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutComplexTypeRefWithMeta");
@@ -216,6 +220,7 @@ namespace xml_service
         /// <summary> Put a simple XML document. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="slideshow"/> is null. </exception>
         public virtual async Task<Response> PutSimpleAsync(Slideshow slideshow, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutSimple");
@@ -234,6 +239,7 @@ namespace xml_service
         /// <summary> Put a simple XML document. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="slideshow"/> is null. </exception>
         public virtual Response PutSimple(Slideshow slideshow, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutSimple");
@@ -286,6 +292,7 @@ namespace xml_service
         /// <summary> Put an XML document with multiple wrapped lists. </summary>
         /// <param name="wrappedLists"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="wrappedLists"/> is null. </exception>
         public virtual async Task<Response> PutWrappedListsAsync(AppleBarrel wrappedLists, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutWrappedLists");
@@ -304,6 +311,7 @@ namespace xml_service
         /// <summary> Put an XML document with multiple wrapped lists. </summary>
         /// <param name="wrappedLists"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="wrappedLists"/> is null. </exception>
         public virtual Response PutWrappedLists(AppleBarrel wrappedLists, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutWrappedLists");
@@ -327,7 +335,7 @@ namespace xml_service
             scope.Start();
             try
             {
-                return (await RestClient.GetHeadersAsync(cancellationToken).ConfigureAwait(false)).GetRawResponse();
+                return await RestClient.GetHeadersAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -344,7 +352,7 @@ namespace xml_service
             scope.Start();
             try
             {
-                return RestClient.GetHeaders(cancellationToken).GetRawResponse();
+                return RestClient.GetHeaders(cancellationToken);
             }
             catch (Exception e)
             {
@@ -390,6 +398,7 @@ namespace xml_service
         /// <summary> Puts an empty list. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="slideshow"/> is null. </exception>
         public virtual async Task<Response> PutEmptyListAsync(Slideshow slideshow, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyList");
@@ -408,6 +417,7 @@ namespace xml_service
         /// <summary> Puts an empty list. </summary>
         /// <param name="slideshow"> The Slideshow to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="slideshow"/> is null. </exception>
         public virtual Response PutEmptyList(Slideshow slideshow, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyList");
@@ -460,6 +470,7 @@ namespace xml_service
         /// <summary> Puts some empty wrapped lists. </summary>
         /// <param name="appleBarrel"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="appleBarrel"/> is null. </exception>
         public virtual async Task<Response> PutEmptyWrappedListsAsync(AppleBarrel appleBarrel, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyWrappedLists");
@@ -478,6 +489,7 @@ namespace xml_service
         /// <summary> Puts some empty wrapped lists. </summary>
         /// <param name="appleBarrel"> The AppleBarrel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="appleBarrel"/> is null. </exception>
         public virtual Response PutEmptyWrappedLists(AppleBarrel appleBarrel, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyWrappedLists");
@@ -530,6 +542,7 @@ namespace xml_service
         /// <summary> Puts a list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bananas"/> is null. </exception>
         public virtual async Task<Response> PutRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutRootList");
@@ -548,6 +561,7 @@ namespace xml_service
         /// <summary> Puts a list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bananas"/> is null. </exception>
         public virtual Response PutRootList(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutRootList");
@@ -600,6 +614,7 @@ namespace xml_service
         /// <summary> Puts a list with a single item. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bananas"/> is null. </exception>
         public virtual async Task<Response> PutRootListSingleItemAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutRootListSingleItem");
@@ -618,6 +633,7 @@ namespace xml_service
         /// <summary> Puts a list with a single item. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bananas"/> is null. </exception>
         public virtual Response PutRootListSingleItem(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutRootListSingleItem");
@@ -670,6 +686,7 @@ namespace xml_service
         /// <summary> Puts an empty list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bananas"/> is null. </exception>
         public virtual async Task<Response> PutEmptyRootListAsync(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyRootList");
@@ -688,6 +705,7 @@ namespace xml_service
         /// <summary> Puts an empty list as the root element. </summary>
         /// <param name="bananas"> The ArrayOfBanana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="bananas"/> is null. </exception>
         public virtual Response PutEmptyRootList(IEnumerable<Banana> bananas, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyRootList");
@@ -740,6 +758,7 @@ namespace xml_service
         /// <summary> Puts a value with an empty child element. </summary>
         /// <param name="banana"> The Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="banana"/> is null. </exception>
         public virtual async Task<Response> PutEmptyChildElementAsync(Banana banana, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyChildElement");
@@ -758,6 +777,7 @@ namespace xml_service
         /// <summary> Puts a value with an empty child element. </summary>
         /// <param name="banana"> The Banana to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="banana"/> is null. </exception>
         public virtual Response PutEmptyChildElement(Banana banana, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutEmptyChildElement");
@@ -844,6 +864,7 @@ namespace xml_service
         /// <summary> Puts storage service properties. </summary>
         /// <param name="properties"> The StorageServiceProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public virtual async Task<Response> PutServicePropertiesAsync(StorageServiceProperties properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutServiceProperties");
@@ -862,6 +883,7 @@ namespace xml_service
         /// <summary> Puts storage service properties. </summary>
         /// <param name="properties"> The StorageServiceProperties to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public virtual Response PutServiceProperties(StorageServiceProperties properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutServiceProperties");
@@ -914,6 +936,7 @@ namespace xml_service
         /// <summary> Puts storage ACLs for a container. </summary>
         /// <param name="properties"> The SignedIdentifiers to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public virtual async Task<Response> PutAclsAsync(IEnumerable<SignedIdentifier> properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutAcls");
@@ -932,6 +955,7 @@ namespace xml_service
         /// <summary> Puts storage ACLs for a container. </summary>
         /// <param name="properties"> The SignedIdentifiers to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public virtual Response PutAcls(IEnumerable<SignedIdentifier> properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutAcls");
@@ -984,6 +1008,7 @@ namespace xml_service
         /// <summary> A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42. </summary>
         /// <param name="properties"> The JsonInput to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public virtual async Task<Response> JsonInputAsync(JsonInput properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.JsonInput");
@@ -1002,6 +1027,7 @@ namespace xml_service
         /// <summary> A Swagger with XML that has one operation that takes JSON as input. You need to send the ID number 42. </summary>
         /// <param name="properties"> The JsonInput to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public virtual Response JsonInput(JsonInput properties, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.JsonInput");
@@ -1122,6 +1148,7 @@ namespace xml_service
         /// <summary> Put an XML document with binary property. </summary>
         /// <param name="slideshow"> The ModelWithByteProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="slideshow"/> is null. </exception>
         public virtual async Task<Response> PutBinaryAsync(ModelWithByteProperty slideshow, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutBinary");
@@ -1140,6 +1167,7 @@ namespace xml_service
         /// <summary> Put an XML document with binary property. </summary>
         /// <param name="slideshow"> The ModelWithByteProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="slideshow"/> is null. </exception>
         public virtual Response PutBinary(ModelWithByteProperty slideshow, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutBinary");
@@ -1192,6 +1220,7 @@ namespace xml_service
         /// <summary> Put an XML document with uri property. </summary>
         /// <param name="model"> The ModelWithUrlProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         public virtual async Task<Response> PutUriAsync(ModelWithUrlProperty model, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutUri");
@@ -1210,6 +1239,7 @@ namespace xml_service
         /// <summary> Put an XML document with uri property. </summary>
         /// <param name="model"> The ModelWithUrlProperty to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="model"/> is null. </exception>
         public virtual Response PutUri(ModelWithUrlProperty model, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("XmlClient.PutUri");

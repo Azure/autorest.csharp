@@ -109,6 +109,7 @@ namespace body_complex
         ///       };
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual async Task<Response> PutValidAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
@@ -161,6 +162,7 @@ namespace body_complex
         ///       };
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual Response PutValid(Fish complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValid");
@@ -315,6 +317,7 @@ namespace body_complex
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="complexBody"> The Salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual async Task<Response> PutComplicatedAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
@@ -333,6 +336,7 @@ namespace body_complex
         /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
         /// <param name="complexBody"> The Salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual Response PutComplicated(Salmon complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutComplicated");
@@ -351,6 +355,7 @@ namespace body_complex
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="complexBody"> The Salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual async Task<Response<Salmon>> PutMissingDiscriminatorAsync(Salmon complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
@@ -369,6 +374,7 @@ namespace body_complex
         /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
         /// <param name="complexBody"> The Salmon to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual Response<Salmon> PutMissingDiscriminator(Salmon complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutMissingDiscriminator");
@@ -414,6 +420,7 @@ namespace body_complex
         /// }
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual async Task<Response> PutValidMissingRequiredAsync(Fish complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
@@ -459,6 +466,7 @@ namespace body_complex
         /// }
         /// </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="complexBody"/> is null. </exception>
         public virtual Response PutValidMissingRequired(Fish complexBody, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("PolymorphismClient.PutValidMissingRequired");
