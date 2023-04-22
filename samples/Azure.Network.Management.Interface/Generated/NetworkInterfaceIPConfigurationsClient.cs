@@ -71,6 +71,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="ipConfigurationName"> The name of the ip configuration name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="networkInterfaceName"/> or <paramref name="ipConfigurationName"/> is null. </exception>
         public virtual async Task<Response<NetworkInterfaceIPConfiguration>> GetAsync(string resourceGroupName, string networkInterfaceName, string ipConfigurationName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceIPConfigurationsClient.Get");
@@ -91,6 +92,7 @@ namespace Azure.Network.Management.Interface
         /// <param name="networkInterfaceName"> The name of the network interface. </param>
         /// <param name="ipConfigurationName"> The name of the ip configuration name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="resourceGroupName"/>, <paramref name="networkInterfaceName"/> or <paramref name="ipConfigurationName"/> is null. </exception>
         public virtual Response<NetworkInterfaceIPConfiguration> Get(string resourceGroupName, string networkInterfaceName, string ipConfigurationName, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("NetworkInterfaceIPConfigurationsClient.Get");

@@ -46,6 +46,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> or <paramref name="skillset"/> is null. </exception>
         public virtual async Task<Response<Skillset>> CreateOrUpdateAsync(string skillsetName, Enum0 prefer, Skillset skillset, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.CreateOrUpdate");
@@ -68,6 +69,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> or <paramref name="skillset"/> is null. </exception>
         public virtual Response<Skillset> CreateOrUpdate(string skillsetName, Enum0 prefer, Skillset skillset, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.CreateOrUpdate");
@@ -88,6 +90,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> is null. </exception>
         public virtual async Task<Response> DeleteAsync(string skillsetName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Delete");
@@ -108,6 +111,7 @@ namespace CognitiveSearch
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="accessCondition"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> is null. </exception>
         public virtual Response Delete(string skillsetName, RequestOptions requestOptions = null, AccessCondition accessCondition = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Delete");
@@ -127,6 +131,7 @@ namespace CognitiveSearch
         /// <param name="skillsetName"> The name of the skillset to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> is null. </exception>
         public virtual async Task<Response<Skillset>> GetAsync(string skillsetName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Get");
@@ -146,6 +151,7 @@ namespace CognitiveSearch
         /// <param name="skillsetName"> The name of the skillset to retrieve. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="skillsetName"/> is null. </exception>
         public virtual Response<Skillset> Get(string skillsetName, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Get");
@@ -203,6 +209,7 @@ namespace CognitiveSearch
         /// <param name="skillset"> The skillset containing one or more skills to create in a search service. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="skillset"/> is null. </exception>
         public virtual async Task<Response<Skillset>> CreateAsync(Skillset skillset, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Create");
@@ -222,6 +229,7 @@ namespace CognitiveSearch
         /// <param name="skillset"> The skillset containing one or more skills to create in a search service. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="skillset"/> is null. </exception>
         public virtual Response<Skillset> Create(Skillset skillset, RequestOptions requestOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("SkillsetsClient.Create");

@@ -83,6 +83,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableProperties"> The Table properties. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tableProperties"/> is null. </exception>
         public virtual async Task<Response<TableResponse>> CreateAsync(Enum1 dataServiceVersion, TableProperties tableProperties, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Create");
@@ -103,6 +104,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableProperties"> The Table properties. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="tableProperties"/> is null. </exception>
         public virtual Response<TableResponse> Create(Enum1 dataServiceVersion, TableProperties tableProperties, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Create");
@@ -121,6 +123,7 @@ namespace Azure.Storage.Tables
         /// <summary> Operation permanently deletes the specified table. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
         public virtual async Task<Response> DeleteAsync(string table, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Delete");
@@ -139,6 +142,7 @@ namespace Azure.Storage.Tables
         /// <summary> Operation permanently deletes the specified table. </summary>
         /// <param name="table"> The name of the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
         public virtual Response Delete(string table, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.Delete");
@@ -160,6 +164,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
         public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesAsync(Enum1 dataServiceVersion, string table, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntities");
@@ -181,6 +186,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
         public virtual Response<TableEntityQueryResponse> QueryEntities(Enum1 dataServiceVersion, string table, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntities");
@@ -204,6 +210,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public virtual async Task<Response<TableEntityQueryResponse>> QueryEntitiesWithPartitionAndRowKeyAsync(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntitiesWithPartitionAndRowKey");
@@ -227,6 +234,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public virtual Response<TableEntityQueryResponse> QueryEntitiesWithPartitionAndRowKey(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.QueryEntitiesWithPartitionAndRowKey");
@@ -251,6 +259,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public virtual async Task<Response> UpdateEntityAsync(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.UpdateEntity");
@@ -275,6 +284,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public virtual Response UpdateEntity(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.UpdateEntity");
@@ -298,6 +308,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public virtual async Task<Response> DeleteEntityAsync(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.DeleteEntity");
@@ -321,6 +332,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/>, <paramref name="partitionKey"/> or <paramref name="rowKey"/> is null. </exception>
         public virtual Response DeleteEntity(Enum1 dataServiceVersion, string table, string partitionKey, string rowKey, int? timeout = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.DeleteEntity");
@@ -343,6 +355,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
         public virtual async Task<Response<IReadOnlyDictionary<string, object>>> InsertEntityAsync(Enum1 dataServiceVersion, string table, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.InsertEntity");
@@ -365,6 +378,7 @@ namespace Azure.Storage.Tables
         /// <param name="tableEntityProperties"> The properties for the table entity. </param>
         /// <param name="queryOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
         public virtual Response<IReadOnlyDictionary<string, object>> InsertEntity(Enum1 dataServiceVersion, string table, int? timeout = null, IDictionary<string, object> tableEntityProperties = null, QueryOptions queryOptions = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.InsertEntity");
@@ -385,6 +399,7 @@ namespace Azure.Storage.Tables
         /// <param name="comp"> Required query string to handle stored access policies for the table that may be used with Shared Access Signatures. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
         public virtual async Task<Response<IReadOnlyList<SignedIdentifier>>> GetAccessPolicyAsync(string table, Enum3 comp, int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.GetAccessPolicy");
@@ -405,6 +420,7 @@ namespace Azure.Storage.Tables
         /// <param name="comp"> Required query string to handle stored access policies for the table that may be used with Shared Access Signatures. </param>
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
         public virtual Response<IReadOnlyList<SignedIdentifier>> GetAccessPolicy(string table, Enum3 comp, int? timeout = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.GetAccessPolicy");
@@ -426,6 +442,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
         public virtual async Task<Response> SetAccessPolicyAsync(string table, Enum3 comp, int? timeout = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.SetAccessPolicy");
@@ -447,6 +464,7 @@ namespace Azure.Storage.Tables
         /// <param name="timeout"> The The timeout parameter is expressed in seconds. For more information, see &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/storageservices/setting-timeouts-for-queue-service-operations&gt;Setting Timeouts for Queue Service Operations.&lt;/a&gt;. </param>
         /// <param name="tableAcl"> the acls for the table. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="table"/> is null. </exception>
         public virtual Response SetAccessPolicy(string table, Enum3 comp, int? timeout = null, IEnumerable<SignedIdentifier> tableAcl = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("TableInternalClient.SetAccessPolicy");
