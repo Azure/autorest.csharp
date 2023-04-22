@@ -27,11 +27,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
 
-                    var methods = restClient.Methods
-                        .SelectMany(m => m.CreateMessageMethods.Select((cm, i) => (cm, i, m.Operation)))
-                        .OrderBy(arg => arg.i);
-
-                    foreach (var (createMessageMethod, _, operation) in methods)
+                    foreach (var (createMessageMethod, operation) in restClient.RequestMethods)
                     {
                         RequestWriterHelpers.WriteRequestCreation(writer, createMessageMethod, "internal", restClient.Fields, null, false, restClient.Parameters);
 

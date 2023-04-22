@@ -12,6 +12,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Builders.ClientBuilder;
 
 namespace AutoRest.CSharp.Output.Models
@@ -26,6 +27,7 @@ namespace AutoRest.CSharp.Output.Models
         public ClientFields Fields { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
         public IReadOnlyList<LegacyMethods> Methods { get; }
+        public IReadOnlyList<(RestClientMethod Method, InputOperation Operation)> RequestMethods { get; }
         public ConstructorSignature Constructor { get; }
 
         public string ClientPrefix { get; }
@@ -52,7 +54,13 @@ namespace AutoRest.CSharp.Output.Models
                 .ToList();
 
             Methods = methods.OrderBy(m => m.Order).Select(m => m.Methods).ToList();
-            _requestMethods = methods.ToDictionary(m => m.Methods.Operation, m => m.Methods.CreateMessageMethods[0]);
+            RequestMethods = methods
+                .SelectMany(m => m.Methods.CreateMessageMethods.Select((method, i) => (method, i, m.Methods.Operation)))
+                .OrderBy(arg => arg.i)
+                .Select(arg => (arg.method, arg.Operation))
+                .ToList();
+
+            _requestMethods = Methods.ToDictionary(m => m.Operation, m => m.CreateMessageMethods[0]);
             ProtocolMethods = GetProtocolMethods(_requestMethods.Values, Fields, inputClient, typeFactory, library).ToList();
         }
 

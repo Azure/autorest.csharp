@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Linq;
-using System.Threading;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
@@ -28,11 +27,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     WriteClientFields(writer, restClient);
                     WriteClientCtor(writer, restClient);
 
-                    var methods = restClient.Methods
-                        .SelectMany(m => m.CreateMessageMethods.Select((cm, i) => (cm, i)))
-                        .OrderBy(arg => arg.i);
-
-                    foreach (var (createMessageMethod, _) in methods)
+                    foreach (var (createMessageMethod, _) in restClient.RequestMethods)
                     {
                         RequestWriterHelpers.WriteRequestCreation(writer, createMessageMethod, "internal", restClient.Fields, null, true, restClient.Parameters);
                         WriteOperation(writer, restClient, createMessageMethod, true);
