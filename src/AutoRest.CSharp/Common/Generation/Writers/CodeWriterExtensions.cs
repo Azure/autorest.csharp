@@ -644,7 +644,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 using (writer.WriteMethodDeclaration(method.Signature))
                 {
-                    writer.WriteMethodBodyStatements(body);
+                    writer.WriteMethodBodyStatement(body);
                 }
             }
             else if (method.BodyExpression is {} expression)

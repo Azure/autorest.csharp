@@ -7,23 +7,12 @@ using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models;
 using SwitchExpression = AutoRest.CSharp.Common.Output.Models.ValueExpressions.SwitchExpression;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
     internal static partial class CodeWriterExtensions
     {
-        public static CodeWriter WriteMethodBodyStatements(this CodeWriter writer, IEnumerable<MethodBodyStatement> statements)
-        {
-            foreach (var statement in statements)
-            {
-                WriteMethodBodyStatement(writer, statement);
-            }
-
-            return writer;
-        }
-
         public static void WriteMethodBodyStatement(this CodeWriter writer, MethodBodyStatement bodyStatement)
         {
             switch (bodyStatement)

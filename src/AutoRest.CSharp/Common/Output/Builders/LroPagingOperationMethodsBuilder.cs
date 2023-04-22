@@ -54,5 +54,8 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async)
             => throw new NotSupportedException("LRO Paging isn't supported yet!");
+
+        protected override MethodBodyStatement CreateLegacyConvenienceMethodBody(bool async)
+            => throw new NotSupportedException("LRO Paging isn't supported yet!");
     }
 }

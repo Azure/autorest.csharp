@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Output.Models
         public IReadOnlyList<Parameter> ClientParameters { get; }
         public ClientFields Fields { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
-        public IReadOnlyList<HlcMethods> Methods { get; }
+        public IReadOnlyList<LegacyMethods> Methods { get; }
         public ConstructorSignature Constructor { get; }
 
         public string ClientPrefix { get; }
@@ -45,28 +45,19 @@ namespace AutoRest.CSharp.Output.Models
             Fields = ClientFields.CreateForRestClient(restClientParameters);
             Constructor = new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, Parameters.ToArray());
 
-            var methods = CreateMethods(clientMethodsBuilder, clientPrefix + GetClientSuffix(), library);
-            Methods = methods;
-            _requestMethods = methods.ToDictionary(m => m.Operation, m => m.CreateMessageMethods[0]);
+            var restClient = new MemberReference(null, "RestClient");
+            var methods = clientMethodsBuilder
+                .Build(restClient, Fields, clientPrefix + GetClientSuffix())
+                .Select(b => (Order: b is LroOperationMethodsBuilder ? 2 : b is PagingOperationMethodsBuilderBase ? 1 : 0, Methods: BuildMethods(library, b)))
+                .ToList();
+
+            Methods = methods.OrderBy(m => m.Order).Select(m => m.Methods).ToList();
+            _requestMethods = methods.ToDictionary(m => m.Methods.Operation, m => m.Methods.CreateMessageMethods[0]);
             ProtocolMethods = GetProtocolMethods(_requestMethods.Values, Fields, inputClient, typeFactory, library).ToList();
         }
 
-        private IReadOnlyList<HlcMethods> CreateMethods(ClientMethodsBuilder clientMethodsBuilder, string clientName, OutputLibrary library)
-        {
-            var restClient = new MemberReference(null, "RestClient");
-            var methods = new List<HlcMethods>();
-            foreach (var operationMethodsBuilder in clientMethodsBuilder.Build(restClient, Fields, clientName))
-            {
-                methods.Add(BuildMethods(library, operationMethodsBuilder));
-            }
-
-            return methods;
-        }
-
-        protected virtual HlcMethods BuildMethods(OutputLibrary library, OperationMethodsBuilderBase methodBuilder)
-        {
-            return methodBuilder.BuildLegacy(library is DataPlaneOutputLibrary dpl ? dpl.FindHeaderModel(methodBuilder.Operation) : null, null);
-        }
+        protected virtual LegacyMethods BuildMethods(OutputLibrary library, OperationMethodsBuilderBase methodBuilder)
+            => methodBuilder.BuildLegacy(library is DataPlaneOutputLibrary dpl ? dpl.FindHeaderModel(methodBuilder.Operation) : null, null);
 
         private IEnumerable<LowLevelClientMethod> GetProtocolMethods(IEnumerable<RestClientMethod> methods, ClientFields fields, InputClient inputClient, TypeFactory typeFactory, OutputLibrary library)
         {

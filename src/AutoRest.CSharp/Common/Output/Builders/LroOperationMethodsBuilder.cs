@@ -67,6 +67,11 @@ namespace AutoRest.CSharp.Output.Models
                 : CreateConvenienceMethodLogic(methodName, async).AsStatement();
         }
 
+        protected override MethodBodyStatement CreateLegacyConvenienceMethodBody(bool async)
+        {
+            throw new NotImplementedException();
+        }
+
         private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(string methodName, bool async)
         {
             var protocolMethodArguments = new List<ValueExpression>();
@@ -74,11 +79,11 @@ namespace AutoRest.CSharp.Output.Models
 
             if (ResponseType == null)
             {
-                yield return Return(InvokeProtocolMethod(protocolMethodArguments, async));
+                yield return Return(InvokeProtocolMethod(null, protocolMethodArguments, async));
             }
             else
             {
-                yield return Declare(ProtocolMethodReturnType, "response", InvokeProtocolMethod(protocolMethodArguments, async), out var response);
+                yield return Declare(ProtocolMethodReturnType, "response", InvokeProtocolMethod(null, protocolMethodArguments, async), out var response);
                 yield return Return(InvokeProtocolOperationHelpersConvertMethod((SerializableObjectType)ResponseType.Implementation, response, CreateScopeName(methodName)));
             }
         }

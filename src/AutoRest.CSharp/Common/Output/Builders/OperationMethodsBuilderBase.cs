@@ -100,14 +100,14 @@ namespace AutoRest.CSharp.Output.Models
             return new LowLevelClientMethod(convenienceMethods, protocolMethods, createRequestMethods, requestBodyType, responseBodyType, Operation.Paging is not null, Operation.LongRunning is not null, Operation.Paging?.ItemName ?? "value");
         }
 
-        public HlcMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
+        public LegacyMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
         {
             var createRequestMethods = CreateRequestMethods(headerModel, resourceDataType).ToArray();
-            var convenienceMethods = Operation.Paging is not null && Operation.LongRunning is null
-                ? new[]{ BuildConvenienceMethod(ProtocolMethodName, true), BuildConvenienceMethod(ProtocolMethodName, false) }
+            var convenienceMethods = Operation.LongRunning is null
+                ? new[]{ BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) }
                 : Array.Empty<Method>();
 
-            return new HlcMethods(Operation, createRequestMethods, convenienceMethods);
+            return new LegacyMethods(Operation, createRequestMethods, convenienceMethods);
         }
 
         protected virtual IEnumerable<RestClientMethod> CreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
@@ -145,6 +145,13 @@ namespace AutoRest.CSharp.Output.Models
             return new Method(signature.WithAsync(async), body);
         }
 
+        private Method BuildLegacyConvenienceMethod(bool async)
+        {
+            var signature = CreateMethodSignature(ProtocolMethodName, _convenienceAccessibility, ConvenienceMethodParameters, ConvenienceMethodReturnType);
+            var body = CreateLegacyConvenienceMethodBody(async);
+            return new Method(signature.WithAsync(async), body);
+        }
+
         private MethodSignature CreateMethodSignature(string name, MethodSignatureModifiers accessibility, IReadOnlyList<Parameter> parameters, CSharpType returnType)
         {
             var attributes = Operation.Deprecated is { } deprecated
@@ -158,8 +165,13 @@ namespace AutoRest.CSharp.Output.Models
 
         protected abstract MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async);
 
+        protected abstract MethodBodyStatement CreateLegacyConvenienceMethodBody(bool async);
+
         protected MethodBodyStatement WrapInDiagnosticScope(string methodName, params MethodBodyStatement[] statements)
             => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), _fields.ClientDiagnosticsProperty, statements);
+
+        protected MethodBodyStatement WrapInDiagnosticScopeLegacy(string methodName, params MethodBodyStatement[] statements)
+            => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), new Reference($"_{KnownParameters.ClientDiagnostics.Name}", KnownParameters.ClientDiagnostics.Type), statements);
 
         protected static IEnumerable<MethodBodyStatement> CreateSpreadConversion(Utf8JsonWriterExpression utf8JsonWriter, IReadOnlyList<MethodParametersBuilder.JsonSpreadParameterSerialization> serializations)
         {
@@ -198,8 +210,8 @@ namespace AutoRest.CSharp.Output.Models
         protected HttpMessageExpression InvokeCreateRequestMethod()
             => new(new InvokeInstanceMethodExpression(null, CreateMessageMethodName, CreateMessageMethodParameters.Select(p => new ParameterReference(p)).ToList(), null, false));
 
-        protected ResponseExpression InvokeProtocolMethod(IReadOnlyList<ValueExpression> arguments, bool async)
-            => new(new InvokeInstanceMethodExpression(null, async ? $"{ProtocolMethodName}Async" : ProtocolMethodName, arguments, null, async));
+        protected ResponseExpression InvokeProtocolMethod(ValueExpression? instance, IReadOnlyList<ValueExpression> arguments, bool async)
+            => new(new InvokeInstanceMethodExpression(instance, async ? $"{ProtocolMethodName}Async" : ProtocolMethodName, arguments, null, async));
 
         protected ValueExpression InvokeProtocolOperationHelpersConvertMethod(SerializableObjectType responseType, ResponseExpression response, string scopeName)
         {

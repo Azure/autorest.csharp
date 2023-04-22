@@ -81,12 +81,6 @@ namespace AutoRest.CSharp.Output.Models
             SubClients = Array.Empty<LowLevelClient>();
         }
 
-        public static IReadOnlyList<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName)
-            => new ClientMethodsBuilder(operations, typeFactory, false, false)
-                .Build(null, fields, clientName)
-                .Select(methodBuilder => methodBuilder.BuildDpg())
-                .ToList();
-
         private (ConstructorSignature[] PrimaryConstructors, ConstructorSignature[] SecondaryConstructors) BuildPublicConstructors(IReadOnlyList<Parameter> orderedParameters)
         {
             if (!IsSubClient)

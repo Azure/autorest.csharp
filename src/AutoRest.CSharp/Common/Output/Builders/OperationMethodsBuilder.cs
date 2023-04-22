@@ -59,12 +59,19 @@ namespace AutoRest.CSharp.Output.Models
                 : CreateConvenienceMethodLogic(async).AsStatement();
         }
 
+        protected override MethodBodyStatement CreateLegacyConvenienceMethodBody(bool async)
+        {
+            var arguments = ConvenienceMethodParameters.Select(p => new ParameterReference(p)).ToList();
+            var invokeRestClientMethod = InvokeProtocolMethod(RestClient, arguments, async);
+            return WrapInDiagnosticScopeLegacy(ProtocolMethodName, Return(invokeRestClientMethod));
+        }
+
         private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(bool async)
         {
             var protocolMethodArguments = new List<ValueExpression>();
 
             yield return AddProtocolMethodArguments(protocolMethodArguments).ToArray();
-            yield return Declare(ProtocolMethodReturnType, "response", InvokeProtocolMethod(protocolMethodArguments, async), out var response);
+            yield return Declare(ProtocolMethodReturnType, "response", InvokeProtocolMethod(null, protocolMethodArguments, async), out var response);
 
             if (ResponseType is null)
             {

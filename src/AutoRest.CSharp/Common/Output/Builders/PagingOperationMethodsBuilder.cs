@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -53,10 +54,6 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async)
         {
-            ValueExpression clientDiagnostics = RestClient != null
-                ? new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}")
-                : ClientDiagnosticsDeclaration;
-
             var createRequestArguments = new List<ValueExpression>();
             var parameterConversions = AddPageableMethodArguments(createRequestArguments, out var requestContextVariable).AsStatement();
             var firstPageRequestLine = DeclareFirstPageRequestLocalFunction(RestClient, CreateMessageMethodName, createRequestArguments, out var createFirstPageRequest);
@@ -65,15 +62,36 @@ namespace AutoRest.CSharp.Output.Models
             DeclarationStatement? nextPageRequestLine = null;
             if (CreateNextPageMessageMethodName is not null)
             {
-                var arguments = RestClient != null ? CreateNextPageMessageMethodParameters.Select(p => new ParameterReference(p)) : createRequestArguments.Prepend(KnownParameters.NextLink);
-                nextPageRequestLine = DeclareNextPageRequestLocalFunction(RestClient, CreateNextPageMessageMethodName, arguments, out createNextPageRequest);
+                nextPageRequestLine = DeclareNextPageRequestLocalFunction(RestClient, CreateNextPageMessageMethodName, createRequestArguments.Prepend(KnownParameters.NextLink), out createNextPageRequest);
             }
 
-            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, clientDiagnostics, PipelineDeclaration, ResponseType, CreateScopeName(methodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
+            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsDeclaration, PipelineDeclaration, ResponseType, CreateScopeName(methodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
 
             return nextPageRequestLine is not null
                 ? new[]{parameterConversions, firstPageRequestLine, nextPageRequestLine, returnLine}
                 : new[]{parameterConversions, firstPageRequestLine, returnLine};
+        }
+
+        protected override MethodBodyStatement CreateLegacyConvenienceMethodBody(bool async)
+        {
+            var createRequestArguments = new List<ValueExpression>();
+            var parameterValidations = new ParameterValidationBlock(ConvenienceMethodParameters);
+            var parameterConversions = AddPageableMethodArguments(createRequestArguments, out var requestContextVariable).AsStatement();
+            var firstPageRequestLine = DeclareFirstPageRequestLocalFunction(RestClient, CreateMessageMethodName, createRequestArguments, out var createFirstPageRequest);
+
+            CodeWriterDeclaration? createNextPageRequest = null;
+            DeclarationStatement? nextPageRequestLine = null;
+            if (CreateNextPageMessageMethodName is not null)
+            {
+                var arguments = CreateNextPageMessageMethodParameters.Select(p => new ParameterReference(p));
+                nextPageRequestLine = DeclareNextPageRequestLocalFunction(RestClient, CreateNextPageMessageMethodName, arguments, out createNextPageRequest);
+            }
+
+            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, new MemberReference(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineDeclaration, ResponseType, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
+
+            return nextPageRequestLine is not null
+                ? new[]{parameterValidations, parameterConversions, firstPageRequestLine, nextPageRequestLine, returnLine}
+                : new[]{parameterValidations, parameterConversions, firstPageRequestLine, returnLine};
         }
     }
 }

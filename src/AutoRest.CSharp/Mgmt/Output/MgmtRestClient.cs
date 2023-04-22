@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             _operations = operations;
         }
 
-        protected override HlcMethods BuildMethods(OutputLibrary library, OperationMethodsBuilderBase methodBuilder)
+        protected override LegacyMethods BuildMethods(OutputLibrary library, OperationMethodsBuilderBase methodBuilder)
         {
             if (methodBuilder.Operation.HttpMethod != RequestMethod.Get)
             {

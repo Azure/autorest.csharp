@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             );
         }
 
-        private static IReadOnlyList<MethodBodyStatement> WriteObject(Utf8JsonWriterExpression utf8JsonWriter, JsonObjectSerialization serialization)
+        private static MethodBodyStatement[] WriteObject(Utf8JsonWriterExpression utf8JsonWriter, JsonObjectSerialization serialization)
             => new[]
             {
                 utf8JsonWriter.WriteStartObject(),

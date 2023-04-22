@@ -39,11 +39,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields(writer, client.RestClient, true);
                     WriteClientCtors(writer, client, library);
 
-                    foreach (var clientMethod in client.Methods)
-                    {
-                        WriteClientMethod(writer, clientMethod, true);
-                        WriteClientMethod(writer, clientMethod, false);
-                    }
+                    //foreach (var clientMethod in client.Methods)
+                    //{
+                    //    WriteClientMethod(writer, clientMethod, true);
+                    //    WriteClientMethod(writer, clientMethod, false);
+                    //}
 
                     foreach (var pagingMethod in client.PagingMethods)
                     {
@@ -281,7 +281,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.WriteXmlDocumentation("remarks", $"{method.Signature.DescriptionText}");
             using (writer.WriteMethodDeclaration(method.Signature))
             {
-                writer.WriteMethodBodyStatements(method.Body!);
+                writer.WriteMethodBodyStatement(method.Body!);
             }
             writer.Line();
         }
