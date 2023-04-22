@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.Output.Models
             return methods;
         }
 
-        protected virtual HlcMethods BuildMethods(OutputLibrary library, OperationMethodsBuilder methodBuilder)
+        protected virtual HlcMethods BuildMethods(OutputLibrary library, OperationMethodsBuilderBase methodBuilder)
         {
             return methodBuilder.BuildLegacy(library is DataPlaneOutputLibrary dpl ? dpl.FindHeaderModel(methodBuilder.Operation) : null, null);
         }

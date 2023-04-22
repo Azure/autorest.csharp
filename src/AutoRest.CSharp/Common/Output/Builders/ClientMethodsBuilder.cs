@@ -27,9 +27,9 @@ namespace AutoRest.CSharp.Output.Models
             _legacyParameterBuilding = legacyParameterBuilding;
         }
 
-        public IEnumerable<OperationMethodsBuilder> Build(ValueExpression? restClientReference, ClientFields fields, string clientName)
+        public IEnumerable<OperationMethodsBuilderBase> Build(ValueExpression? restClientReference, ClientFields fields, string clientName)
         {
-            var operationParameters = new Dictionary<InputOperation, MethodParametersBuilder>();
+            var operationParameters = new Dictionary<InputOperation, ClientMethodParameters>();
 
             foreach (var inputOperation in _operations)
             {
@@ -39,27 +39,33 @@ namespace AutoRest.CSharp.Output.Models
                     : GetSortedParameters(inputOperation, unsortedParameters);
 
                 var builder = new MethodParametersBuilder(inputOperation, _typeFactory);
-                if (_legacyParameterBuilding)
+                var parameters = _legacyParameterBuilding
+                    ? builder.BuildParametersLegacy(unsortedParameters, sortedParameters)
+                    : builder.BuildParameters(sortedParameters);
+                operationParameters[inputOperation] = parameters;
+            }
+
+            foreach (var (operation, parameters) in operationParameters)
+            {
+                if (operation.Paging is {} paging)
                 {
-                    builder.BuildParametersLegacy(unsortedParameters, sortedParameters);
+                    var createNextPageMessageMethodParameters = paging is { NextLinkOperation: { } nextLinkOperation }
+                        ? operationParameters[nextLinkOperation].CreateMessage
+                        : paging is { NextLinkName: {} }
+                            ? parameters.CreateMessage.Prepend(KnownParameters.NextLink).ToArray()
+                            : Array.Empty<Parameter>();
+
+                    var pagingParameters = new ClientPagingMethodParameters(parameters.RequestParts, parameters.CreateMessage, createNextPageMessageMethodParameters, parameters.Protocol, parameters.Convenience, parameters.ParameterLinks);
+                    yield return operation.LongRunning is { } longRunning
+                        ? new LroPagingOperationMethodsBuilder(longRunning, paging, operation, restClientReference, fields, clientName, _typeFactory, pagingParameters)
+                        : new PagingOperationMethodsBuilder(paging, operation, restClientReference, fields, clientName, _typeFactory, pagingParameters);
                 }
                 else
                 {
-                    builder.BuildParameters(sortedParameters);
+                    yield return operation.LongRunning is { } longRunning
+                        ? new LroOperationMethodsBuilder(longRunning, operation, restClientReference, fields, clientName, _typeFactory, parameters)
+                        : new OperationMethodsBuilder(operation, restClientReference, fields, clientName, _typeFactory, parameters);
                 }
-
-                operationParameters[inputOperation] = builder;
-            }
-
-            foreach (var (operation, builder) in operationParameters)
-            {
-                var createNextPageMessageMethodParameters = operation.Paging is { NextLinkOperation: { } nextLinkOperation }
-                    ? operationParameters[nextLinkOperation].CreateMessageParameters
-                    : operation.Paging is { NextLinkName: {} }
-                        ? builder.CreateMessageParameters.Prepend(KnownParameters.NextLink).ToArray()
-                        : Array.Empty<Parameter>();
-
-                yield return new OperationMethodsBuilder(operation, restClientReference, fields, clientName, _typeFactory, builder.RequestParts, builder.CreateMessageParameters, createNextPageMessageMethodParameters, builder.ParameterLinks);
             }
         }
 

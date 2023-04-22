@@ -50,11 +50,7 @@ namespace AutoRest.CSharp.Output.Models
             _parameterLinks = new List<ParameterLink>();
         }
 
-        public IReadOnlyList<RequestPartSource> RequestParts => _requestParts;
-        public IReadOnlyList<Parameter> CreateMessageParameters => _createMessageParameters;
-        public IReadOnlyList<ParameterLink> ParameterLinks => _parameterLinks;
-
-        public void BuildParameters(IEnumerable<InputParameter> sortedParameters)
+        public ClientMethodParameters BuildParameters(IEnumerable<InputParameter> sortedParameters)
         {
             var requestConditionHeaders = RequestConditionHeaders.None;
             var requestConditionSerializationFormat = SerializationFormat.Default;
@@ -88,9 +84,18 @@ namespace AutoRest.CSharp.Output.Models
 
             AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
             AddRequestContext();
+
+            return new ClientMethodParameters
+            (
+                _requestParts,
+                _createMessageParameters,
+                _parameterLinks.SelectMany(p => p.ProtocolParameters).ToList(),
+                _parameterLinks.SelectMany(p => p.ConvenienceParameters).ToList(),
+                _parameterLinks
+            );
         }
 
-        public void BuildParametersLegacy(IEnumerable<InputParameter> unsortedParameters, IEnumerable<InputParameter> sortedParameters)
+        public ClientMethodParameters BuildParametersLegacy(IEnumerable<InputParameter> unsortedParameters, IEnumerable<InputParameter> sortedParameters)
         {
             var parameters = new Dictionary<InputParameter, Parameter>();
             foreach (var inputParameter in sortedParameters)
@@ -114,6 +119,15 @@ namespace AutoRest.CSharp.Output.Models
                 var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
                 _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameters[inputParameter], serializationFormat));
             }
+
+            return new ClientMethodParameters
+            (
+                _requestParts,
+                _createMessageParameters,
+                _parameterLinks.SelectMany(p => p.ProtocolParameters).ToList(),
+                _parameterLinks.SelectMany(p => p.ConvenienceParameters).ToList(),
+                _parameterLinks
+            );
         }
 
         private void AddWaitForCompletion()

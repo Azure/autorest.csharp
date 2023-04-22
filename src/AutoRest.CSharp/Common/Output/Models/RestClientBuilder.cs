@@ -401,57 +401,6 @@ namespace AutoRest.CSharp.Output.Models
             };
         }
 
-        public static RestClientMethod BuildNextPageMethod(RestClientMethod method)
-        {
-            var nextPageUrlParameter = new Parameter(
-                "nextLink",
-                "The URL to the next page of results.",
-                typeof(string),
-                DefaultValue: null,
-                Validation.AssertNotNull,
-                null);
-
-            PathSegment[] pathSegments = method.Request.PathSegments
-                .Where(ps => ps.IsRaw)
-                .Append(new PathSegment(nextPageUrlParameter, false, SerializationFormat.Default, isRaw: true))
-                .ToArray();
-
-            var request = new Request(
-                RequestMethod.Get,
-                pathSegments,
-                Array.Empty<QueryParameter>(),
-                method.Request.Headers,
-                null);
-
-            Parameter[] parameters = method.Parameters.Where(p => p.Name != nextPageUrlParameter.Name)
-                .Prepend(nextPageUrlParameter)
-                .ToArray();
-
-            var responses = method.Responses;
-
-            // We hardcode 200 as expected response code for paged LRO results
-            if (method.Operation.LongRunning != null)
-            {
-                responses = new[]
-                {
-                    new Response(null, new[] { new StatusCodes(200, null) })
-                };
-            }
-
-            return new RestClientMethod(
-                $"{method.Name}NextPage",
-                method.Summary,
-                method.Description,
-                method.ReturnType,
-                request,
-                parameters,
-                responses,
-                method.HeaderModel,
-                bufferResponse: true,
-                accessibility: "internal",
-                method.Operation);
-        }
-
         public static IEnumerable<Parameter> GetRequiredParameters(IEnumerable<Parameter> parameters)
             => parameters.Where(parameter => !parameter.IsOptionalInSignature).ToList();
 
