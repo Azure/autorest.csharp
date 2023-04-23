@@ -152,8 +152,7 @@ namespace AutoRest.CSharp.Input
                 return null;
             }
 
-            // projectFolder = "D:\\GIT\\azure-sdk-for-net\\sdk\\analysisservices\\Azure.ResourceManager.Analysis\\src";
-            int sdkFolderIndex = projectFolder.LastIndexOf("sdk", StringComparison.InvariantCultureIgnoreCase);
+            int sdkFolderIndex = projectFolder.LastIndexOf("\\sdk\\", StringComparison.InvariantCultureIgnoreCase);
             if (sdkFolderIndex == -1)
             {
                 return null;
@@ -161,11 +160,9 @@ namespace AutoRest.CSharp.Input
 
             string rootFolder = projectFolder.Substring(0, sdkFolderIndex);
             var scriptPath = Path.Join(rootFolder, "eng", "common", "scripts", "Download-Latest-Contract.ps1");
-            // var scriptPath = "D:\\GIT\\sdk-for-pr\\eng\\common\\scripts\\Download-Latest-Contract.ps1";
             if (File.Exists(scriptPath))
             {
                 string projectDirectory = projectFolder.EndsWith("src") ? Path.GetFullPath(Path.Join(projectFolder, "..")) : projectFolder;
-                // projectDirectory = "D:\\GIT\\sdk-for-pr\\sdk\\analysisservices\\Azure.ResourceManager.Analysis";
                 var scriptStartInfo = new ProcessStartInfo("pwsh", $"-ExecutionPolicy ByPass {scriptPath} {projectDirectory}")
                 {
                     RedirectStandardOutput = false,

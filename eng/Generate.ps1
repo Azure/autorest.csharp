@@ -75,7 +75,11 @@ function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
     }
 
     $projectNamePath = Join-Path $directory "$($directory.Name).tsp"
-    return $projectNamePath
+    if (Test-Path $projectNamePath) {
+        return $projectNamePath
+    }
+    
+    throw "There is no client.tsp or main.tsp or other tsp file named after project name" 
 }
 
 $testData = Get-Content $testProjectDataFile -Encoding utf8 -Raw | ConvertFrom-Json
