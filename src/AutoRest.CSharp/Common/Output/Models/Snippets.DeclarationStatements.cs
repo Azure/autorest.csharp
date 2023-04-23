@@ -33,8 +33,18 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static DeclarationStatement Var(string name, Utf8JsonRequestContentExpression value, out Utf8JsonRequestContentExpression variable)
             => Var(null, name, value, d => new Utf8JsonRequestContentExpression(d), out variable);
 
+        public static DeclarationStatement Var(string name, RawRequestUriBuilderExpression value, out RawRequestUriBuilderExpression variable)
+            => Var(null, name, value, d => new RawRequestUriBuilderExpression(d), out variable);
+
         public static DeclarationStatement Var(string name, Utf8JsonWriterExpression value, out Utf8JsonWriterExpression variable)
             => Var(null, name, value, d => new Utf8JsonWriterExpression(d), out variable);
+
+        public static DeclarationStatement Var(string name, RequestExpression value, out RequestExpression variable)
+            => Var(null, name, value, d => new RequestExpression(d), out variable);
+
+        public static DeclarationStatement Var(string name, HttpMessageExpression value, out HttpMessageExpression variable)
+            => Var(typeof(HttpMessage), name, value, d => new HttpMessageExpression(d), out variable);
+
 
         private static DeclarationStatement UsingVar<T>(CSharpType? type, string name, T value, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression
         {

@@ -56,9 +56,9 @@ namespace AutoRest.CSharp.Output.Models
             _parameterLinks = clientMethodsParameters.ParameterLinks;
         }
 
-        protected override IEnumerable<RestClientMethod> CreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
+        protected override IEnumerable<RestClientMethod> BuildCreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
         {
-            var createMessageMethod = base.CreateRequestMethods(headerModel, resourceDataType).Single();
+            var createMessageMethod = base.BuildCreateRequestMethods(headerModel, resourceDataType).Single();
             yield return createMessageMethod;
             if (CreateNextPageMessageMethodName is not null && Paging is { NextLinkOperation: null })
             {

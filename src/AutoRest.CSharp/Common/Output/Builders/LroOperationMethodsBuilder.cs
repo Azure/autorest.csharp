@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var arguments = new List<ValueExpression>
             {
-                PipelineDeclaration,
+                PipelineField,
                 message,
                 ClientDiagnosticsDeclaration,
                 Literal(scope),

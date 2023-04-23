@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -17,11 +18,13 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -40,7 +43,7 @@ namespace AutoRest.CSharp.Output.Models
         public InputOperation Operation { get; }
 
         protected CodeWriterDeclaration ClientDiagnosticsDeclaration { get; }
-        protected CodeWriterDeclaration PipelineDeclaration { get; }
+        protected HttpPipelineExpression PipelineField { get; }
         protected ValueExpression? RestClient { get; }
 
         protected string CreateMessageMethodName { get; }
@@ -57,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             Operation = operation;
             ClientDiagnosticsDeclaration = fields.ClientDiagnosticsProperty.Declaration;
-            PipelineDeclaration = fields.PipelineField.Declaration;
+            PipelineField = new HttpPipelineExpression(fields.PipelineField.Declaration);
             RestClient = restClient;
 
             ProtocolMethodName = operation.Name.ToCleanName();
@@ -82,7 +85,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public LowLevelClientMethod BuildDpg()
         {
-            var createRequestMethods = CreateRequestMethods(null, null).ToArray();
+            var createRequestMethods = BuildCreateRequestMethods(null, null).ToArray();
             var protocolMethods = new[]{ BuildProtocolMethod(true), BuildProtocolMethod(false) };
             var convenienceMethods = Array.Empty<Method>();
             if (Operation.GenerateConvenienceMethod && ShouldConvenienceMethodGenerated())
@@ -102,7 +105,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public LegacyMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
         {
-            var createRequestMethods = CreateRequestMethods(headerModel, resourceDataType).ToArray();
+            var createRequestMethods = BuildCreateRequestMethods(headerModel, resourceDataType).ToArray();
             var convenienceMethods = Operation.LongRunning is null
                 ? new[]{ BuildLegacyConvenienceMethod(true), BuildLegacyConvenienceMethod(false) }
                 : Array.Empty<Method>();
@@ -110,9 +113,151 @@ namespace AutoRest.CSharp.Output.Models
             return new LegacyMethods(Operation, createRequestMethods, convenienceMethods);
         }
 
-        protected virtual IEnumerable<RestClientMethod> CreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
+        protected virtual IEnumerable<RestClientMethod> BuildCreateRequestMethods(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
         {
             yield return RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, headerModel, resourceDataType, _fields, _typeFactory);
+        }
+
+        private Method BuildLegacyCreateRequestMethod()
+        {
+            var signature = CreateMethodSignature(CreateMessageMethodName, MethodSignatureModifiers.Internal, CreateMessageMethodParameters, typeof(HttpMessage));
+            return new Method(signature, BuildLegacyCreateRequestMethodBody().AsStatement());
+        }
+
+        private IEnumerable<MethodBodyStatement> BuildLegacyCreateRequestMethodBody()
+        {
+            var callPipelineCreateMessage = CreateMessageMethodParameters.Contains(KnownParameters.RequestContext)
+                ? PipelineField.CreateMessage(new RequestContextExpression(KnownParameters.RequestContext))
+                : PipelineField.CreateMessage();
+
+            yield return Var("message", callPipelineCreateMessage, out var message);
+            yield return Var("request", message.Request, out var request);
+            if (Operation.BufferResponse)
+            {
+                yield return Assign(message.BufferResponse, False);
+            }
+            yield return Assign(request.Method, new MemberReference(typeof(RequestMethod), Operation.HttpMethod.ToRequestMethodName()));
+            yield return Var("uri", RawRequestUriBuilderExpression.New(), out var uriBuilder);
+            yield return AddUri(uriBuilder, Operation.Uri);
+            yield return AddPath(uriBuilder, Operation.Path);
+            yield return AddQuery(uriBuilder).AsStatement();
+        }
+
+        private List<MethodBodyStatement> AddUri(RawRequestUriBuilderExpression uriBuilder, string uri)
+        {
+            var lines = new List<MethodBodyStatement>();
+            foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(uri))
+            {
+                if (isLiteral)
+                {
+                    lines.Add(uriBuilder.AppendRaw(span.ToString(), false));
+                }
+                else if (TryGetRequestPart(span, RequestLocation.Uri, out var inputParameter, out var reference, out _))
+                {
+                    lines.Add(uriBuilder.AppendRaw(reference, !inputParameter.SkipUrlEncoding));
+                }
+                else
+                {
+                    ErrorHelpers.ThrowError($"\n\nError while processing request '{uri}'\n\n  '{span.ToString()}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
+                }
+            }
+            return lines;
+        }
+
+        private List<MethodBodyStatement> AddPath(RawRequestUriBuilderExpression uriBuilder, string path)
+        {
+            var lines = new List<MethodBodyStatement>();
+            foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(path))
+            {
+                var text = span.ToString();
+                if (isLiteral)
+                {
+                    lines.Add(uriBuilder.AppendPath(span.ToString(), false));
+                }
+                else if (TryGetRequestPart(span, RequestLocation.Uri, out var inputParameter, out var reference, out var format))
+                {
+                    var formatSpecifier = format.ToFormatSpecifier();
+                    lines.Add(formatSpecifier is not null
+                        ? uriBuilder.AppendPath(reference, formatSpecifier, !inputParameter.SkipUrlEncoding)
+                        : uriBuilder.AppendPath(reference, !inputParameter.SkipUrlEncoding));
+                }
+                else
+                {
+                    ErrorHelpers.ThrowError($"\n\nError while processing request '{path}'\n\n  '{text}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
+                }
+            }
+            return lines;
+        }
+
+        private IEnumerable<MethodBodyStatement> AddQuery(RawRequestUriBuilderExpression uriBuilder)
+        {
+            foreach (var (nameInRequest, inputParameter, outputParameter, serializationFormat) in _requestParts)
+            {
+                if (inputParameter is not null && inputParameter.Location == RequestLocation.Query)
+                {
+                    // nameInRequest, reference, inputParameter.ArraySerializationDelimiter, escape, serializationFormat, inputParameter.Explode
+                }
+            }
+            yield break;
+        }
+
+        private bool TryGetRequestPart(in ReadOnlySpan<char> key, in RequestLocation location, [MaybeNullWhen(false)] out InputParameter inputParameter, [MaybeNullWhen(false)] out ValueExpression reference, out SerializationFormat serializationFormat)
+        {
+            foreach (var part in _requestParts)
+            {
+                if (part.InputParameter?.Location == location && part.NameInRequest.AsSpan().Equals(key, StringComparison.InvariantCulture))
+                {
+                    inputParameter = part.InputParameter;
+                    reference = part.SerializationFormat != SerializationFormat.Default && part.OutputParameter.Type.IsFrameworkType
+                        ? CreateConversion(CreateValueForRequestPart(part), part.OutputParameter.Type, part.OutputParameter.Type.WithNullable(false))
+                        : CreateConversion(CreateValueForRequestPart(part), part.OutputParameter.Type, typeof(string));
+                    serializationFormat = part.SerializationFormat;
+                    return true;
+                }
+            }
+
+            inputParameter = null;
+            reference = null;
+            serializationFormat = SerializationFormat.Default;
+            return false;
+        }
+
+        private ValueExpression CreateValueForRequestPart(RequestPartSource part)
+        {
+            var inputParameter = part.InputParameter;
+            var outputParameter = part.OutputParameter;
+
+            if (inputParameter is null)
+            {
+                return outputParameter;
+            }
+
+            if (inputParameter.Kind == InputOperationParameterKind.Client)
+            {
+                var field = inputParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByParameter(outputParameter);
+                if (field == null)
+                {
+                    throw new InvalidOperationException($"Parameter {outputParameter.Name} should have matching field");
+                }
+
+                return field.Declaration;
+            }
+
+            if (inputParameter.Kind == InputOperationParameterKind.Constant && outputParameter.DefaultValue is {} defaultValue)
+            {
+                return new ConstantExpression(defaultValue);
+            }
+
+            var groupedByParameter = inputParameter.GroupedBy;
+            if (groupedByParameter != null)
+            {
+                var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with { IsNullable = false }).Implementation;
+                var property = groupModel.GetPropertyForGroupedParameter(inputParameter.Name);
+
+                return new MemberReference(new FormattableStringToExpression($"{groupedByParameter.Name.ToVariableName()}"), property.Declaration.Name);
+            }
+
+            return outputParameter;
         }
 
         protected virtual bool ShouldConvenienceMethodGenerated()
@@ -221,13 +366,19 @@ namespace AutoRest.CSharp.Output.Models
 
         protected static ValueExpression CreateConversion(Parameter fromParameter, CSharpType toType)
         {
-            var nullCheckedParameter = fromParameter.Type.IsNullable
-                ? new NullConditionalExpression(fromParameter)
-                : (ValueExpression)fromParameter;
+            return CreateConversion(fromParameter, fromParameter.Type, toType);
+        }
 
-            return fromParameter.Type.IsFrameworkType
-                ? CreateConversion(nullCheckedParameter, fromParameter.Type.FrameworkType, toType)
-                : CreateConversion(nullCheckedParameter, fromParameter.Type.Implementation, toType);
+        private static ValueExpression CreateConversion(ValueExpression fromExpression, CSharpType fromType, CSharpType toType)
+        {
+            if (fromType.IsNullable)
+            {
+                fromExpression = new NullConditionalExpression(fromExpression);
+            }
+
+            return fromType.IsFrameworkType
+                ? CreateConversion(fromExpression, fromType.FrameworkType, toType)
+                : CreateConversion(fromExpression, fromType.Implementation, toType);
         }
 
         private static ValueExpression CreateConversion(ValueExpression fromExpression, Type fromFrameworkType, CSharpType toType)

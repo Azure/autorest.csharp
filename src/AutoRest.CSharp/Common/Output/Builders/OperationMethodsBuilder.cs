@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
         {
-            var pipeline = new HttpPipelineExpression(PipelineDeclaration);
+            var pipeline = new HttpPipelineExpression(PipelineField);
 
             return WrapInDiagnosticScope(ProtocolMethodName,
                 Declare("message", InvokeCreateRequestMethod(), out var message),

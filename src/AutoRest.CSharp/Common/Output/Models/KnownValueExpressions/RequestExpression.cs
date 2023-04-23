@@ -10,5 +10,6 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     internal sealed record RequestExpression(ValueExpression Untyped) : TypedValueExpression(typeof(Request), Untyped)
     {
         public RequestContentExpression Content => new(new MemberReference(Untyped, nameof(Request.Content)));
+        public ValueExpression Method => new MemberReference(Untyped, nameof(Request.Method));
     }
 }

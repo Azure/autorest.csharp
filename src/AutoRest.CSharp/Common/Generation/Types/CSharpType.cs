@@ -175,14 +175,6 @@ namespace AutoRest.CSharp.Generation.Types
                 FrameworkType == typeof(IReadOnlyDictionary<,>);
         }
 
-        public CSharpType GetNonNullable()
-        {
-            if (!IsNullable)
-                return this;
-
-            return new CSharpType(Implementation, Namespace, Name, IsValueType, IsEnum, false, Arguments);
-        }
-
         public bool TryCast<T>([MaybeNullWhen(false)] out T provider) where T : TypeProvider
         {
             provider = null;
