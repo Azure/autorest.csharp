@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientCtor(writer, restClient);
                     foreach (var method in restClient.Methods)
                     {
-                        RequestWriterHelpers.WriteRequestCreation(writer, method, "internal", restClient.Fields, null, false, restClient.Parameters);
+                        RequestWriterHelpers.WriteRequestAndUriCreation(writer, method, "internal", restClient.Fields, null, false, restClient.Parameters);
                         WriteOperation(writer, method, restClient.Fields.PipelineField.Name, true, WriteFuncBodyWithSend, null, MethodSignatureModifiers.Public, WriteStatusCodeSwitch, restClient.Fields.GetFieldByParameter(KnownParameters.ClientDiagnostics));
                         WriteOperation(writer, method, restClient.Fields.PipelineField.Name, false, WriteFuncBodyWithSend, null, MethodSignatureModifiers.Public, WriteStatusCodeSwitch, restClient.Fields.GetFieldByParameter(KnownParameters.ClientDiagnostics));
                         var protocolMethod = restClient.ProtocolMethods.FirstOrDefault(m => m.RequestMethod.Operation.Equals(method.Operation));

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -20,8 +21,9 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class RequestWriterHelpers
     {
-        public static void WriteRequestCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
+        public static void WriteRequestAndUriCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, string? responseClassifierType, bool writeSDKUserAgent, IReadOnlyList<Parameter>? clientParameters = null)
         {
+            WriteUriCreation(writer, clientMethod, methodAccessibility, fields, clientParameters);
             using var methodScope = writer.AmbientScope();
             var parameters = clientMethod.Parameters;
 
@@ -62,33 +64,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 writer.Line($"{request}.Method = {typeof(RequestMethod)}.{method.ToRequestMethodName()};");
 
-                writer.Line($"var {uri:D} = new RawRequestUriBuilder();");
-                foreach (var segment in clientMethod.Request.PathSegments)
-                {
-                    var value = GetFieldReference(fields, segment.Value);
-                    if (value.Type.IsFrameworkType && value.Type.FrameworkType == typeof(Uri))
-                    {
-                        writer.Append($"{uri}.Reset(");
-                        WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw);
-                        writer.Line($");");
-                    }
-                    else if (!value.IsConstant && value.Reference.Name == "nextLink")
-                    {
-                        WritePathSegment(writer, uri, segment, value, "AppendRawNextLink");
-                    }
-                    else
-                    {
-                        WritePathSegment(writer, uri, segment, value);
-                    }
-                }
 
-                //TODO: Duplicate code between query and header parameter processing logic
-                foreach (var queryParameter in clientMethod.Request.Query)
-                {
-                    WriteQueryParameter(writer, uri, queryParameter, fields, clientParameters);
-                }
-
-                writer.Line($"{request}.Uri = {uri};");
+                var uriMethod = FormattableStringFactory.Create(CreateRequestUriMethodName(clientMethod.Name));
+                var uriParameters = parameters.Select(x => FormattableStringFactory.Create(x.Name)).ToList().Join(",");
+                writer.Append($"{request}.Uri = ").WriteMethodCall(false, uriMethod, uriParameters);
 
                 WriteHeaders(writer, clientMethod, request, content: false, fields);
 
@@ -213,6 +192,50 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
+        private static void WriteUriCreation(CodeWriter writer, RestClientMethod clientMethod, string methodAccessibility, ClientFields? fields, IReadOnlyList<Parameter>? clientParameters = null)
+        {
+            using var methodScope = writer.AmbientScope();
+            var methodName = CreateRequestUriMethodName($"{clientMethod.Name}");
+            writer.Append($"{methodAccessibility} {typeof(RequestUriBuilder)} {methodName}(");
+            foreach (Parameter clientParameter in clientMethod.Parameters)
+            {
+                writer.Append($"{clientParameter.Type} {clientParameter.Name:D},");
+            }
+            writer.RemoveTrailingComma();
+            writer.Line($")");
+            using (writer.Scope())
+            {
+                var uri = new CodeWriterDeclaration("uri");
+                writer.Line($"var {uri:D} = new RawRequestUriBuilder();");
+                foreach (var segment in clientMethod.Request.PathSegments)
+                {
+                    var value = GetFieldReference(fields, segment.Value);
+                    if (value.Type.IsFrameworkType && value.Type.FrameworkType == typeof(Uri))
+                    {
+                        writer.Append($"{uri}.Reset(");
+                        WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw);
+                        writer.Line($");");
+                    }
+                    else if (!value.IsConstant && value.Reference.Name == "nextLink")
+                    {
+                        WritePathSegment(writer, uri, segment, value, "AppendRawNextLink");
+                    }
+                    else
+                    {
+                        WritePathSegment(writer, uri, segment, value);
+                    }
+                }
+
+                //TODO: Duplicate code between query and header parameter processing logic
+                foreach (var queryParameter in clientMethod.Request.Query)
+                {
+                    WriteQueryParameter(writer, uri, queryParameter, fields, clientParameters);
+                }
+                writer.Line($"return {uri};");
+            }
+            writer.Line();
+        }
+
         private static ReferenceOrConstant GetFieldReference(ClientFields? fields, ReferenceOrConstant value) =>
             fields != null && !value.IsConstant ? fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value : value;
 
@@ -229,6 +252,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static string CreateRequestMethodName(RestClientMethod method) => CreateRequestMethodName(method.Name);
         public static string CreateRequestMethodName(string name) => $"Create{name}Request";
+        public static string CreateRequestUriMethodName(string name) => $"Create{name}RequestUri";
 
         private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)
         {
@@ -270,7 +294,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (value.Type.Equals(typeof(MatchConditions)) || value.Type.Equals(typeof(RequestConditions)))
                 {
                     writer.Append($"{request}.Headers.{method}(");
-                } else
+                }
+                else
                 {
                     writer.Append($"{request}.Headers.{method}({header.Name:L}, ");
                 }
