@@ -29,7 +29,7 @@ namespace lro
         internal LROsDeleteProvisioning202Accepted200SucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<Product> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<Product>(clientDiagnostics, nextLinkOperation, response, "LROsDeleteProvisioning202Accepted200SucceededOperation");
+            _operation = new OperationInternal<Product>(nextLinkOperation, clientDiagnostics, response, "LROsDeleteProvisioning202Accepted200SucceededOperation");
         }
 
         /// <inheritdoc />
