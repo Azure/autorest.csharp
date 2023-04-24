@@ -67,14 +67,11 @@ namespace Models.Property.Types
 
         /// <summary> Get call. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ExtensibleEnum.xml" path="doc/members/member[@name='GetExtensibleEnumAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetExtensibleEnumAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ExtensibleEnum.GetExtensibleEnum");
             scope.Start();
             try
@@ -91,14 +88,11 @@ namespace Models.Property.Types
 
         /// <summary> Get call. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ExtensibleEnum.xml" path="doc/members/member[@name='GetExtensibleEnum(RequestContext)']/*" />
         public virtual Response GetExtensibleEnum(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ExtensibleEnum.GetExtensibleEnum");
             scope.Start();
             try

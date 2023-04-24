@@ -81,14 +81,11 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64ValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetInt64ValueAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("Int64Value.GetInt64Value");
             scope.Start();
             try
@@ -104,14 +101,11 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64Value(RequestContext)']/*" />
         public virtual Response GetInt64Value(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("Int64Value.GetInt64Value");
             scope.Start();
             try

@@ -138,14 +138,11 @@ namespace Models.Inheritance
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetValidAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValid");
             scope.Start();
             try
@@ -161,14 +158,11 @@ namespace Models.Inheritance
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
         public virtual Response GetValid(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValid");
             scope.Start();
             try
@@ -272,14 +266,11 @@ namespace Models.Inheritance
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModelAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetModelAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModel");
             scope.Start();
             try
@@ -295,14 +286,11 @@ namespace Models.Inheritance
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModel(RequestContext)']/*" />
         public virtual Response GetModel(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModel");
             scope.Start();
             try
@@ -406,14 +394,11 @@ namespace Models.Inheritance
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModelAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetRecursiveModelAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModel");
             scope.Start();
             try
@@ -429,14 +414,11 @@ namespace Models.Inheritance
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModel(RequestContext)']/*" />
         public virtual Response GetRecursiveModel(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModel");
             scope.Start();
             try
@@ -540,14 +522,11 @@ namespace Models.Inheritance
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminatorAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetMissingDiscriminatorAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminator");
             scope.Start();
             try
@@ -563,14 +542,11 @@ namespace Models.Inheritance
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminator(RequestContext)']/*" />
         public virtual Response GetMissingDiscriminator(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminator");
             scope.Start();
             try
@@ -602,14 +578,11 @@ namespace Models.Inheritance
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminatorAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetWrongDiscriminatorAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminator");
             scope.Start();
             try
@@ -625,14 +598,11 @@ namespace Models.Inheritance
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminator(RequestContext)']/*" />
         public virtual Response GetWrongDiscriminator(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminator");
             scope.Start();
             try

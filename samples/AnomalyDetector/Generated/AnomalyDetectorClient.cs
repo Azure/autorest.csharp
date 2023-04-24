@@ -357,7 +357,7 @@ namespace AnomalyDetector
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
         /// <param name="resultId"> ID of a batch detection result. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -365,7 +365,6 @@ namespace AnomalyDetector
         public virtual async Task<Response> GetMultivariateBatchDetectionResultAsync(string resultId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("AnomalyDetectorClient.GetMultivariateBatchDetectionResult");
             scope.Start();
@@ -384,7 +383,7 @@ namespace AnomalyDetector
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
         /// <param name="resultId"> ID of a batch detection result. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -392,7 +391,6 @@ namespace AnomalyDetector
         public virtual Response GetMultivariateBatchDetectionResult(string resultId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("AnomalyDetectorClient.GetMultivariateBatchDetectionResult");
             scope.Start();
@@ -593,7 +591,7 @@ namespace AnomalyDetector
         /// <summary> Get Multivariate Model. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -601,7 +599,6 @@ namespace AnomalyDetector
         public virtual async Task<Response> GetMultivariateModelAsync(string modelId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("AnomalyDetectorClient.GetMultivariateModel");
             scope.Start();
@@ -620,7 +617,7 @@ namespace AnomalyDetector
         /// <summary> Get Multivariate Model. </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="modelId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="modelId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -628,7 +625,6 @@ namespace AnomalyDetector
         public virtual Response GetMultivariateModel(string modelId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(modelId, nameof(modelId));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("AnomalyDetectorClient.GetMultivariateModel");
             scope.Start();
@@ -878,14 +874,11 @@ namespace AnomalyDetector
         /// <param name="skip"> Skip indicates how many models will be skipped. </param>
         /// <param name="maxCount"> Top indicates how many models will be fetched. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='GetMultivariateModelsAsync(Int32,Int32,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMultivariateModelsAsync(int? skip, int? maxCount, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultivariateModelsRequest(skip, maxCount, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultivariateModelsNextPageRequest(nextLink, skip, maxCount, context);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AnomalyDetectorClient.GetMultivariateModels", "models", "nextLink", context);
@@ -895,14 +888,11 @@ namespace AnomalyDetector
         /// <param name="skip"> Skip indicates how many models will be skipped. </param>
         /// <param name="maxCount"> Top indicates how many models will be fetched. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/AnomalyDetectorClient.xml" path="doc/members/member[@name='GetMultivariateModels(Int32,Int32,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMultivariateModels(int? skip, int? maxCount, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultivariateModelsRequest(skip, maxCount, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultivariateModelsNextPageRequest(nextLink, skip, maxCount, context);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AnomalyDetectorClient.GetMultivariateModels", "models", "nextLink", context);

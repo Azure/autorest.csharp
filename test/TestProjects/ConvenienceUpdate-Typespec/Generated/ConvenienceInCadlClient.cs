@@ -64,14 +64,11 @@ namespace ConvenienceInCadl
 
         /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenienceAsync(RequestContext)']/*" />
         public virtual async Task<Response> UpdateConvenienceAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.UpdateConvenience");
             scope.Start();
             try
@@ -88,14 +85,11 @@ namespace ConvenienceInCadl
 
         /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenience(RequestContext)']/*" />
         public virtual Response UpdateConvenience(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.UpdateConvenience");
             scope.Start();
             try
@@ -370,14 +364,11 @@ namespace ConvenienceInCadl
 
         /// <summary> Operation has protocol method with required RequestContext and convenience method. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequiredAsync(RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceWithRequiredAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithRequired");
             scope.Start();
             try
@@ -394,14 +385,11 @@ namespace ConvenienceInCadl
 
         /// <summary> Operation has protocol method with required RequestContext and convenience method. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequired(RequestContext)']/*" />
         public virtual Response ConvenienceWithRequired(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithRequired");
             scope.Start();
             try
@@ -1019,14 +1007,11 @@ namespace ConvenienceInCadl
         /// <summary> Operation has protocol method with optional query parameter and required RequestContext and convenience method. </summary>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequiredAsync(Int32,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalQueryWithRequiredAsync(int? optional, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalQueryWithRequired");
             scope.Start();
             try
@@ -1044,14 +1029,11 @@ namespace ConvenienceInCadl
         /// <summary> Operation has protocol method with optional query parameter and required RequestContext and convenience method. </summary>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequired(Int32,RequestContext)']/*" />
         public virtual Response ConvenienceOptionalQueryWithRequired(int? optional, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalQueryWithRequired");
             scope.Start();
             try
@@ -1089,14 +1071,11 @@ namespace ConvenienceInCadl
         /// <summary> Operation has protocol method with required query parameter and required RequestContext and convenience method. </summary>
         /// <param name="required"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequiredAsync(Int32,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceRequiredQueryWithRequiredAsync(int required, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredQueryWithRequired");
             scope.Start();
             try
@@ -1114,14 +1093,11 @@ namespace ConvenienceInCadl
         /// <summary> Operation has protocol method with required query parameter and required RequestContext and convenience method. </summary>
         /// <param name="required"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequired(Int32,RequestContext)']/*" />
         public virtual Response ConvenienceRequiredQueryWithRequired(int required, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredQueryWithRequired");
             scope.Start();
             try
@@ -1319,14 +1295,11 @@ namespace ConvenienceInCadl
         /// <summary> Operation has protocol method with optional body parameter and required RequestContext and convenience method. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequiredAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalModelWithRequiredAsync(RequestContent content, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithRequired");
             scope.Start();
             try
@@ -1344,14 +1317,11 @@ namespace ConvenienceInCadl
         /// <summary> Operation has protocol method with optional body parameter and required RequestContext and convenience method. </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequired(RequestContent,RequestContext)']/*" />
         public virtual Response ConvenienceOptionalModelWithRequired(RequestContent content, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithRequired");
             scope.Start();
             try

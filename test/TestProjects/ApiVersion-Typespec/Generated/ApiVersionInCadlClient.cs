@@ -107,7 +107,7 @@ namespace ApiVersionInCadl
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
         /// <param name="resultId"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -115,7 +115,6 @@ namespace ApiVersionInCadl
         public virtual async Task<Response> GetBatchDetectionResultAsync(string resultId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("ApiVersionInCadlClient.GetBatchDetectionResult");
             scope.Start();
@@ -134,7 +133,7 @@ namespace ApiVersionInCadl
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
         /// <param name="resultId"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="resultId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -142,7 +141,6 @@ namespace ApiVersionInCadl
         public virtual Response GetBatchDetectionResult(string resultId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("ApiVersionInCadlClient.GetBatchDetectionResult");
             scope.Start();

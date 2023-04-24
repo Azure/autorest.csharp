@@ -209,14 +209,11 @@ namespace _Specs_.Azure.Core
         /// <summary> Gets a user. </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetUserAsync(Int32,RequestContext)']/*" />
         public virtual async Task<Response> GetUserAsync(int id, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("CoreClient.GetUser");
             scope.Start();
             try
@@ -234,14 +231,11 @@ namespace _Specs_.Azure.Core
         /// <summary> Gets a user. </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetUser(Int32,RequestContext)']/*" />
         public virtual Response GetUser(int id, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("CoreClient.GetUser");
             scope.Start();
             try
@@ -334,14 +328,13 @@ namespace _Specs_.Azure.Core
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="format"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='ExportAsync(Int32,String,RequestContext)']/*" />
         public virtual async Task<Response> ExportAsync(int id, string format, RequestContext context)
         {
             Argument.AssertNotNull(format, nameof(format));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CoreClient.Export");
             scope.Start();
@@ -361,14 +354,13 @@ namespace _Specs_.Azure.Core
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="format"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='Export(Int32,String,RequestContext)']/*" />
         public virtual Response Export(int id, string format, RequestContext context)
         {
             Argument.AssertNotNull(format, nameof(format));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CoreClient.Export");
             scope.Start();
@@ -429,14 +421,11 @@ namespace _Specs_.Azure.Core
         /// <param name="select"> Select the specified fields to be included in the response. </param>
         /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetUsersAsync(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetUsersAsync(int? maxCount, int? skip, int? maxpagesize, IEnumerable<string> orderby, string filter, IEnumerable<string> select, IEnumerable<string> expand, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetUsersNextPageRequest(nextLink, maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "CoreClient.GetUsers", "value", "nextLink", context);
@@ -451,14 +440,11 @@ namespace _Specs_.Azure.Core
         /// <param name="select"> Select the specified fields to be included in the response. </param>
         /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetUsers(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetUsers(int? maxCount, int? skip, int? maxpagesize, IEnumerable<string> orderby, string filter, IEnumerable<string> select, IEnumerable<string> expand, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetUsersNextPageRequest(nextLink, maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "CoreClient.GetUsers", "value", "nextLink", context);
@@ -486,14 +472,11 @@ namespace _Specs_.Azure.Core
 
         /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetWithPageAsync(RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetWithPageAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithPageNextPageRequest(nextLink, context);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "CoreClient.GetWithPage", "value", "nextLink", context);
@@ -501,14 +484,11 @@ namespace _Specs_.Azure.Core
 
         /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetWithPage(RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetWithPage(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithPageNextPageRequest(nextLink, context);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "CoreClient.GetWithPage", "value", "nextLink", context);

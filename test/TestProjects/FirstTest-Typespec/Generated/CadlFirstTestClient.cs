@@ -121,7 +121,7 @@ namespace CadlFirstTest
         /// <summary> top level method. </summary>
         /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -129,7 +129,6 @@ namespace CadlFirstTest
         public virtual async Task<Response> TopActionAsync(string action, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
             scope.Start();
@@ -148,7 +147,7 @@ namespace CadlFirstTest
         /// <summary> top level method. </summary>
         /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="action"/> or <paramref name="context"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
@@ -156,7 +155,6 @@ namespace CadlFirstTest
         public virtual Response TopAction(string action, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
-            Argument.AssertNotNull(context, nameof(context));
 
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
             scope.Start();
@@ -690,14 +688,11 @@ namespace CadlFirstTest
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(RequestContext)']/*" />
         public virtual async Task<Response> HelloDemo2Async(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2");
             scope.Start();
             try
@@ -714,14 +709,11 @@ namespace CadlFirstTest
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(RequestContext)']/*" />
         public virtual Response HelloDemo2(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2");
             scope.Start();
             try
@@ -832,14 +824,11 @@ namespace CadlFirstTest
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
         public virtual async Task<Response> HelloLiteralAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteral");
             scope.Start();
             try
@@ -856,14 +845,11 @@ namespace CadlFirstTest
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
         public virtual Response HelloLiteral(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteral");
             scope.Start();
             try
@@ -1016,14 +1002,11 @@ namespace CadlFirstTest
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
         internal virtual async Task<Response> StillConvenientAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.StillConvenient");
             scope.Start();
             try
@@ -1040,14 +1023,11 @@ namespace CadlFirstTest
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
         internal virtual Response StillConvenient(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.StillConvenient");
             scope.Start();
             try

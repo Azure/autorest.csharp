@@ -123,14 +123,11 @@ namespace PetStore
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='ReadAsync(Int32,RequestContext)']/*" />
         public virtual async Task<Response> ReadAsync(int petId, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Read");
             scope.Start();
             try
@@ -148,14 +145,11 @@ namespace PetStore
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Read(Int32,RequestContext)']/*" />
         public virtual Response Read(int petId, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Read");
             scope.Start();
             try
@@ -330,14 +324,11 @@ namespace PetStore
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPetAsync(Int32,RequestContext)']/*" />
         public virtual async Task<Response> GetFirstPetAsync(int? start, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPet");
             scope.Start();
             try
@@ -354,14 +345,11 @@ namespace PetStore
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPet(Int32,RequestContext)']/*" />
         public virtual Response GetFirstPet(int? start, RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPet");
             scope.Start();
             try

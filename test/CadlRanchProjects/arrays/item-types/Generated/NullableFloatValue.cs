@@ -95,14 +95,11 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNullableFloatValueAsync(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("NullableFloatValue.GetNullableFloatValue");
             scope.Start();
             try
@@ -118,14 +115,11 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValue(RequestContext)']/*" />
         public virtual Response GetNullableFloatValue(RequestContext context)
         {
-            Argument.AssertNotNull(context, nameof(context));
-
             using var scope = ClientDiagnostics.CreateScope("NullableFloatValue.GetNullableFloatValue");
             scope.Start();
             try
