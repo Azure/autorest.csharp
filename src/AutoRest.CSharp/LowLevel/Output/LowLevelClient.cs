@@ -76,7 +76,7 @@ namespace AutoRest.CSharp.Output.Models
             // Temporary sorting to minimize amount of changes in generated code.
             RequestNextPageMethods = methods.Where(m => m.RequestMethods.Count == 2).Select(m => m.RequestMethods[1]).ToArray();
 
-            ResponseClassifierTypes = ClientMethods.SelectMany(m => m.RequestMethods).Select(rm => rm.ResponseClassifierType).Distinct().ToArray();
+            ResponseClassifierTypes = methods.SelectMany(m => m.RequestMethods).Select(rm => rm.ResponseClassifierType).Distinct().ToArray();
 
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 

@@ -163,11 +163,18 @@ namespace AutoRest.CSharp.Output.Models
                 }
                 else if (TryGetRequestPart(span, RequestLocation.Uri, out var inputParameter, out var outputParameter, out _))
                 {
-                    var value = GetValueForRequestPart(inputParameter, outputParameter);
+                    if (inputParameter.IsEndpoint)
+                    {
+                        lines.Add(uriBuilder.Reset(_fields.EndpointField ?? throw new InvalidOperationException("Endpoint field is missing!")));
+                    }
+                    else
+                    {
+                        var value = GetValueForRequestPart(inputParameter, outputParameter);
 
-                    lines.Add(inputParameter.IsEndpoint
-                        ? uriBuilder.Reset(value)
-                        : uriBuilder.AppendRaw(ConvertToRequestPartType(value, outputParameter.Type, true), !inputParameter.SkipUrlEncoding));
+                        lines.Add(outputParameter.Type.Equals(typeof(Uri))
+                            ? uriBuilder.Reset(value)
+                            : uriBuilder.AppendRaw(ConvertToRequestPartType(value, outputParameter.Type, true), !inputParameter.SkipUrlEncoding));
+                    }
                 }
                 else
                 {
@@ -243,7 +250,10 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (inputParameter is null)
                 {
-                    yield return AddRequestConditionsHeaders(request, outputParameter, format);
+                    if (!addContentHeaders)
+                    {
+                        yield return AddRequestConditionsHeaders(request, outputParameter, format);
+                    }
                 }
                 else if (inputParameter.Location == RequestLocation.Header && addContentHeaders == ContentHeaders.Contains(nameInRequest))
                 {
@@ -254,14 +264,14 @@ namespace AutoRest.CSharp.Output.Models
 
         private MethodBodyStatement AddRequestConditionsHeaders(RequestExpression request, Parameter outputParameter, SerializationFormat format)
         {
-            if (outputParameter == KnownParameters.MatchConditionsParameter)
+            if (outputParameter.Type.EqualsIgnoreNullable(KnownParameters.MatchConditionsParameter.Type) && outputParameter.Name == KnownParameters.MatchConditionsParameter.Name)
             {
-                return request.Headers.Add(outputParameter);
+                return NullCheckRequestPartValue(outputParameter, outputParameter.Type, request.Headers.Add(outputParameter));
             }
 
-            if (outputParameter == KnownParameters.RequestConditionsParameter)
+            if (outputParameter.Type.EqualsIgnoreNullable(KnownParameters.RequestConditionsParameter.Type) && outputParameter.Name == KnownParameters.RequestConditionsParameter.Name)
             {
-                return request.Headers.Add(outputParameter, format);
+                return NullCheckRequestPartValue(outputParameter, outputParameter.Type, request.Headers.Add(outputParameter, format));
             }
 
             throw new InvalidOperationException();
@@ -390,18 +400,12 @@ namespace AutoRest.CSharp.Output.Models
             return false;
         }
 
-        private ValueExpression GetValueForRequestPart(InputParameter? inputParameter, Parameter outputParameter)
+        private ValueExpression GetValueForRequestPart(InputParameter inputParameter, Parameter outputParameter)
         {
-            if (inputParameter is null)
-            {
-                return outputParameter;
-            }
-
             switch (inputParameter.Kind)
             {
                 case InputOperationParameterKind.Client:
-                    var field = inputParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByParameter(outputParameter);
-                    return field?.Declaration ?? throw new InvalidOperationException($"Parameter {outputParameter.Name} should have matching field");
+                    return _fields.GetFieldByParameter(outputParameter) ?? throw new InvalidOperationException($"Parameter {outputParameter.Name} should have matching field");
 
                 case InputOperationParameterKind.Constant when outputParameter.DefaultValue is {} defaultValue:
                     return new ConstantExpression(defaultValue);
