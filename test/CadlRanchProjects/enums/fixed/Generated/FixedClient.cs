@@ -51,49 +51,32 @@ namespace Enums.Fixed
 
         /// <summary> getKnownValue. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DaysOfWeekEnum>> GetKnownValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DaysOfWeekEnum>> GetKnownValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("FixedClient.GetKnownValueValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetKnownValueAsync(context).ConfigureAwait(false);
-                return Response.FromValue(response.Content.ToObjectFromJson<string>().ToDaysOfWeekEnum(), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetKnownValueAsync(context).ConfigureAwait(false);
+            return Response.FromValue(response.Content.ToObjectFromJson<string>().ToDaysOfWeekEnum(), response);
         }
 
         /// <summary> getKnownValue. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DaysOfWeekEnum> GetKnownValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<DaysOfWeekEnum> GetKnownValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("FixedClient.GetKnownValueValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetKnownValue(context);
-                return Response.FromValue(response.Content.ToObjectFromJson<string>().ToDaysOfWeekEnum(), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetKnownValue(context);
+            return Response.FromValue(response.Content.ToObjectFromJson<string>().ToDaysOfWeekEnum(), response);
         }
 
         /// <summary> getKnownValue. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FixedClient.xml" path="doc/members/member[@name='GetKnownValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetKnownValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetKnownValueAsync(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("FixedClient.GetKnownValue");
             scope.Start();
             try
@@ -110,11 +93,14 @@ namespace Enums.Fixed
 
         /// <summary> getKnownValue. </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="context"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FixedClient.xml" path="doc/members/member[@name='GetKnownValue(RequestContext)']/*" />
-        public virtual Response GetKnownValue(RequestContext context = null)
+        public virtual Response GetKnownValue(RequestContext context)
         {
+            Argument.AssertNotNull(context, nameof(context));
+
             using var scope = ClientDiagnostics.CreateScope("FixedClient.GetKnownValue");
             scope.Start();
             try
