@@ -1,14 +1,14 @@
 {
  "$id": "1",
- "Name": "Enums.Extensible",
+ "Name": "Enums.Fixed",
  "ApiVersions": [
   "1.0.0"
  ],
  "Enums": [
   {
    "$id": "2",
-   "Name": "DaysOfWeekExtensibleEnum",
-   "Namespace": "Enums.Extensible",
+   "Name": "DaysOfWeekEnum",
+   "Namespace": "Enums.Fixed",
    "Description": "",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -48,7 +48,7 @@
      "Value": "Sunday"
     }
    ],
-   "IsExtensible": true,
+   "IsExtensible": false,
    "IsNullable": false,
    "Usage": "RoundTrip"
   }
@@ -57,13 +57,14 @@
  "Clients": [
   {
    "$id": "10",
-   "Name": "ExtensibleClient",
+   "Name": "FixedClient",
    "Description": "",
    "Operations": [
     {
      "$id": "11",
      "Name": "getKnownValue",
      "ResourceName": "String",
+     "Description": "getKnownValue",
      "Parameters": [
       {
        "$id": "12",
@@ -172,84 +173,25 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/enums/extensible/string/known-value",
+     "Path": "/enums/fixed/string/known-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
     },
     {
      "$id": "24",
-     "Name": "getUnknownValue",
+     "Name": "putKnownValue",
      "ResourceName": "String",
+     "Description": "putKnownValue",
      "Parameters": [
       {
        "$ref": "12"
       },
       {
        "$id": "25",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "26",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "27",
-        "Type": {
-         "$ref": "26"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "19"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "28",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/enums/extensible/string/unknown-value",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "29",
-     "Name": "putKnownValue",
-     "ResourceName": "String",
-     "Parameters": [
-      {
-       "$ref": "12"
-      },
-      {
-       "$id": "30",
        "Name": "body",
        "NameInRequest": "body",
+       "Description": "_",
        "Type": {
         "$ref": "2"
        },
@@ -264,11 +206,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "31",
+       "$id": "26",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "32",
+        "$id": "27",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -283,19 +225,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "33",
+        "$id": "28",
         "Type": {
-         "$ref": "32"
+         "$ref": "27"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "34",
+       "$id": "29",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "35",
+        "$id": "30",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -310,9 +252,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "36",
+        "$id": "31",
         "Type": {
-         "$ref": "35"
+         "$ref": "30"
         },
         "Value": "application/json"
        }
@@ -323,7 +265,7 @@
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "32",
        "StatusCodes": [
         204
        ],
@@ -335,7 +277,7 @@
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/enums/extensible/string/known-value",
+     "Path": "/enums/fixed/string/known-value",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -344,17 +286,19 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "38",
+     "$id": "33",
      "Name": "putUnknownValue",
      "ResourceName": "String",
+     "Description": "putUnknownValue",
      "Parameters": [
       {
        "$ref": "12"
       },
       {
-       "$id": "39",
+       "$id": "34",
        "Name": "body",
        "NameInRequest": "body",
+       "Description": "_",
        "Type": {
         "$ref": "2"
        },
@@ -369,11 +313,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "40",
+       "$id": "35",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "41",
+        "$id": "36",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -388,19 +332,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "42",
+        "$id": "37",
         "Type": {
-         "$ref": "41"
+         "$ref": "36"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "43",
+       "$id": "38",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "39",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -415,9 +359,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "40",
         "Type": {
-         "$ref": "44"
+         "$ref": "39"
         },
         "Value": "application/json"
        }
@@ -428,7 +372,7 @@
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "41",
        "StatusCodes": [
         204
        ],
@@ -440,7 +384,7 @@
      "HttpMethod": "PUT",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/enums/extensible/string/unknown-value",
+     "Path": "/enums/fixed/string/unknown-value",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -450,7 +394,7 @@
     }
    ],
    "Protocol": {
-    "$id": "47"
+    "$id": "42"
    },
    "Creatable": true
   }
