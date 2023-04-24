@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models
             if ((first == null && second != null)
                 || (first != null && second == null))
             {
-                return true;
+                return false;
             }
 
             if (first == null && second == null)

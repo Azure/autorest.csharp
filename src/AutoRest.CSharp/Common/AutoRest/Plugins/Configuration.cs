@@ -187,7 +187,7 @@ namespace AutoRest.CSharp.Input
 
         private static string? _outputFolder;
         public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
-        public static string? ExistingProjectFolder { get; internal set; }
+        public static string? ExistingProjectFolder { get; private set; }
         public static string? Namespace { get; private set; }
         public static string? LibraryName { get; private set; }
 
