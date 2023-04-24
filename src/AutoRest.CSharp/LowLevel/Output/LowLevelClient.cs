@@ -66,17 +66,17 @@ namespace AutoRest.CSharp.Output.Models
 
             var methods = new ClientMethodsBuilder(operations, typeFactory, false, false).Build(null, Fields, Declaration.Name).Select(b => b.BuildDpg()).ToList();
 
-            // Temporary sorting to minimize amount of changes.
+            // Temporary sorting to minimize amount of changes in generated code.
             ClientMethods = methods
                 .OrderBy(b => b.IsLongRunning ? 2 : b.IsPaging ? 1 : 0)
                 .ToArray();
 
-            RequestMethods = ClientMethods.Select(m => m.RequestMethod).ToArray();
+            RequestMethods = methods.Select(m => m.RequestMethod).ToArray();
 
-            // Temporary sorting to minimize amount of changes.
-            RequestNextPageMethods = ClientMethods.Where(m => m.RequestMethods.Count == 2).Select(m => m.RequestMethods[1]).ToArray();
+            // Temporary sorting to minimize amount of changes in generated code.
+            RequestNextPageMethods = methods.Where(m => m.RequestMethods.Count == 2).Select(m => m.RequestMethods[1]).ToArray();
 
-            ResponseClassifierTypes = RequestNextPageMethods.Select(m => m.ResponseClassifierType).Distinct().ToArray();
+            ResponseClassifierTypes = ClientMethods.SelectMany(m => m.RequestMethods).Select(rm => rm.ResponseClassifierType).Distinct().ToArray();
 
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 

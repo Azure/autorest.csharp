@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
@@ -100,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            return new LowLevelClientMethod(convenienceMethods, protocolMethods, BuildCreateRequestMethod(), createRequestMethods, requestBodyType, responseBodyType, Operation.Paging is not null, Operation.LongRunning is not null, Operation.Paging?.ItemName ?? "value");
+            return new LowLevelClientMethod(convenienceMethods, protocolMethods, BuildCreateRequestMethod(createRequestMethods[0].ResponseClassifierType), createRequestMethods, requestBodyType, responseBodyType, Operation.Paging is not null, Operation.LongRunning is not null, Operation.Paging?.ItemName ?? "value");
         }
 
         public LegacyMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
@@ -118,16 +119,18 @@ namespace AutoRest.CSharp.Output.Models
             yield return RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, headerModel, resourceDataType, _fields, _typeFactory);
         }
 
-        private Method BuildCreateRequestMethod()
+        private Method BuildCreateRequestMethod(ResponseClassifierType responseClassifierType)
         {
-            var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateMessageMethodParameters);
-            return new Method(signature, BuildCreateRequestMethodBody().AsStatement());
+            var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateMessageMethodParameters.Select(p => p with {DefaultValue = null}).ToArray());
+            return new Method(signature, BuildCreateRequestMethodBody(responseClassifierType).AsStatement());
         }
 
-        private IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody()
+        private IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody(ResponseClassifierType? responseClassifierType)
         {
             var callPipelineCreateMessage = CreateMessageMethodParameters.Contains(KnownParameters.RequestContext)
-                ? PipelineField.CreateMessage(new RequestContextExpression(KnownParameters.RequestContext))
+                ? responseClassifierType is not null
+                    ? PipelineField.CreateMessage(new RequestContextExpression(KnownParameters.RequestContext), new FormattableStringToExpression($"{responseClassifierType.Name}"))
+                    : PipelineField.CreateMessage(new RequestContextExpression(KnownParameters.RequestContext))
                 : PipelineField.CreateMessage();
 
             yield return Var("message", callPipelineCreateMessage, out var message);
