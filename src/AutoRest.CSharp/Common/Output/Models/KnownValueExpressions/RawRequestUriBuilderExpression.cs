@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
                 ? AppendPath(value, formatSpecifier, escape)
                 : AppendPath(value, escape);
 
-        public MethodBodyStatement AppendRawNextLink(string nextLink, bool escape) => new InvokeInstanceMethodStatement(Untyped, nameof(RawRequestUriBuilder.AppendRawNextLink), Bool(escape));
+        public MethodBodyStatement AppendRawNextLink(ValueExpression nextLink, bool escape) => new InvokeInstanceMethodStatement(Untyped, nameof(RawRequestUriBuilder.AppendRawNextLink), nextLink, Bool(escape));
 
         public MethodBodyStatement AppendQuery(string name, ValueExpression value, bool escape)
             => new InvokeStaticMethodStatement(typeof(RequestUriBuilderExtensions), nameof(RequestUriBuilderExtensions.AppendQuery), new[]{Untyped, Literal(name), value, Bool(escape)}, CallAsExtension: true);

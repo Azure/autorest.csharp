@@ -196,7 +196,9 @@ namespace AutoRest.CSharp.Output.Models
                 else if (TryGetRequestPart(span, RequestLocation.Path, out var inputParameter, out var outputParameter, out var format))
                 {
                     var value = GetValueForRequestPart(inputParameter, outputParameter);
-                    lines.Add(uriBuilder.AppendPath(ConvertToRequestPartType(value, outputParameter.Type), format, !inputParameter.SkipUrlEncoding));
+                    lines.Add(value is not ConstantExpression && outputParameter.Name == "nextLink"
+                        ? uriBuilder.AppendRawNextLink(outputParameter, !inputParameter.SkipUrlEncoding)
+                        : uriBuilder.AppendPath(ConvertToRequestPartType(value, outputParameter.Type), format, !inputParameter.SkipUrlEncoding));
                 }
                 else
                 {
