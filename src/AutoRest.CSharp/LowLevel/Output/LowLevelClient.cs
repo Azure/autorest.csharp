@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -33,7 +34,8 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
         public IReadOnlyList<LowLevelClient> SubClients { get; init; }
-        public IReadOnlyList<RestClientMethod> RequestMethods { get; }
+        public IReadOnlyList<Method> RequestMethods { get; }
+        public IReadOnlyList<RestClientMethod> RequestNextPageMethods { get; }
         public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes { get; }
         public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
         public LowLevelClient? ParentClient;
@@ -69,12 +71,12 @@ namespace AutoRest.CSharp.Output.Models
                 .OrderBy(b => b.IsLongRunning ? 2 : b.IsPaging ? 1 : 0)
                 .ToArray();
 
-            // Temporary sorting to minimize amount of changes.
-            RequestMethods = methods.Select(m => m.RequestMethods[0])
-                .Concat(ClientMethods.Where(m => m.RequestMethods.Count == 2).Select(m => m.RequestMethods[1]))
-                .ToArray();
+            RequestMethods = ClientMethods.Select(m => m.RequestMethod).ToArray();
 
-            ResponseClassifierTypes = RequestMethods.Select(m => m.ResponseClassifierType).Distinct().ToArray();
+            // Temporary sorting to minimize amount of changes.
+            RequestNextPageMethods = ClientMethods.Where(m => m.RequestMethods.Count == 2).Select(m => m.RequestMethods[1]).ToArray();
+
+            ResponseClassifierTypes = RequestNextPageMethods.Select(m => m.ResponseClassifierType).Distinct().ToArray();
 
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 

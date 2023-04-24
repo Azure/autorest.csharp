@@ -73,6 +73,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     foreach (var method in _client.RequestMethods)
                     {
+                        _writer.WriteMethod(method);
+                    }
+
+                    foreach (var method in _client.RequestNextPageMethods)
+                    {
                         WriteRequestCreationMethod(_writer, method, _client.Fields);
                     }
 

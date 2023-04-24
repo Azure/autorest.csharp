@@ -19,6 +19,8 @@ namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
         public static implicit operator ValueExpression(CodeWriterDeclaration name) => new VariableReference(name);
         public static implicit operator ValueExpression(FieldDeclaration name) => new VariableReference(name.Declaration);
 
+        public ValueExpression NullConditional(CSharpType type) => type.IsNullable ? new NullConditionalExpression(this) : this;
+
         private string GetDebuggerDisplay()
         {
             using var writer = new DebuggerCodeWriter();

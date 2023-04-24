@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.Common.Output.Models
             => Var(null, name, value, d => new RequestExpression(d), out variable);
 
         public static DeclarationStatement Var(string name, HttpMessageExpression value, out HttpMessageExpression variable)
-            => Var(typeof(HttpMessage), name, value, d => new HttpMessageExpression(d), out variable);
+            => Var(null, name, value, d => new HttpMessageExpression(d), out variable);
 
 
         private static DeclarationStatement UsingVar<T>(CSharpType? type, string name, T value, Func<CodeWriterDeclaration, T> factory, out T variable) where T : TypedValueExpression

@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     if (value.Type.IsFrameworkType && value.Type.FrameworkType == typeof(Uri))
                     {
                         writer.Append($"{uri}.Reset(");
-                        WriteConstantOrParameter(writer, value, enumAsString: !segment.IsRaw);
+                        writer.Append(GetConstantOrParameter(value));
                         writer.Line($");");
                     }
                     else if (!value.IsConstant && value.Reference.Name == "nextLink")

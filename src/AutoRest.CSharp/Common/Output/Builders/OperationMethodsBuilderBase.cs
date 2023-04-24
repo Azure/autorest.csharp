@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            return new LowLevelClientMethod(convenienceMethods, protocolMethods, createRequestMethods, requestBodyType, responseBodyType, Operation.Paging is not null, Operation.LongRunning is not null, Operation.Paging?.ItemName ?? "value");
+            return new LowLevelClientMethod(convenienceMethods, protocolMethods, BuildCreateRequestMethod(), createRequestMethods, requestBodyType, responseBodyType, Operation.Paging is not null, Operation.LongRunning is not null, Operation.Paging?.ItemName ?? "value");
         }
 
         public LegacyMethods BuildLegacy(DataPlaneResponseHeaderGroupType? headerModel, CSharpType? resourceDataType)
@@ -118,13 +118,13 @@ namespace AutoRest.CSharp.Output.Models
             yield return RestClientBuilder.BuildRequestMethod(Operation, CreateMessageMethodParameters, _requestParts, headerModel, resourceDataType, _fields, _typeFactory);
         }
 
-        private Method BuildLegacyCreateRequestMethod()
+        private Method BuildCreateRequestMethod()
         {
-            var signature = CreateMethodSignature(CreateMessageMethodName, MethodSignatureModifiers.Internal, CreateMessageMethodParameters, typeof(HttpMessage));
-            return new Method(signature, BuildLegacyCreateRequestMethodBody().AsStatement());
+            var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateMessageMethodParameters);
+            return new Method(signature, BuildCreateRequestMethodBody().AsStatement());
         }
 
-        private IEnumerable<MethodBodyStatement> BuildLegacyCreateRequestMethodBody()
+        private IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody()
         {
             var callPipelineCreateMessage = CreateMessageMethodParameters.Contains(KnownParameters.RequestContext)
                 ? PipelineField.CreateMessage(new RequestContextExpression(KnownParameters.RequestContext))
@@ -132,7 +132,7 @@ namespace AutoRest.CSharp.Output.Models
 
             yield return Var("message", callPipelineCreateMessage, out var message);
             yield return Var("request", message.Request, out var request);
-            if (Operation.BufferResponse)
+            if (!Operation.BufferResponse)
             {
                 yield return Assign(message.BufferResponse, False);
             }
@@ -141,6 +141,12 @@ namespace AutoRest.CSharp.Output.Models
             yield return AddUri(uriBuilder, Operation.Uri);
             yield return AddPath(uriBuilder, Operation.Path);
             yield return AddQuery(uriBuilder).AsStatement();
+
+            yield return Assign(request.Uri, uriBuilder);
+
+            yield return AddHeaders(request, false).AsStatement();
+            yield return AddBody(request);
+            yield return Return(message);
         }
 
         private List<MethodBodyStatement> AddUri(RawRequestUriBuilderExpression uriBuilder, string uri)
@@ -152,9 +158,13 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     lines.Add(uriBuilder.AppendRaw(span.ToString(), false));
                 }
-                else if (TryGetRequestPart(span, RequestLocation.Uri, out var inputParameter, out var reference, out _))
+                else if (TryGetRequestPart(span, RequestLocation.Uri, out var inputParameter, out var outputParameter, out _))
                 {
-                    lines.Add(uriBuilder.AppendRaw(reference, !inputParameter.SkipUrlEncoding));
+                    var value = GetValueForRequestPart(inputParameter, outputParameter);
+
+                    lines.Add(inputParameter.IsEndpoint
+                        ? uriBuilder.Reset(value)
+                        : uriBuilder.AppendRaw(ConvertToRequestPartType(value, outputParameter.Type, true), !inputParameter.SkipUrlEncoding));
                 }
                 else
                 {
@@ -169,21 +179,18 @@ namespace AutoRest.CSharp.Output.Models
             var lines = new List<MethodBodyStatement>();
             foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(path))
             {
-                var text = span.ToString();
                 if (isLiteral)
                 {
                     lines.Add(uriBuilder.AppendPath(span.ToString(), false));
                 }
-                else if (TryGetRequestPart(span, RequestLocation.Uri, out var inputParameter, out var reference, out var format))
+                else if (TryGetRequestPart(span, RequestLocation.Path, out var inputParameter, out var outputParameter, out var format))
                 {
-                    var formatSpecifier = format.ToFormatSpecifier();
-                    lines.Add(formatSpecifier is not null
-                        ? uriBuilder.AppendPath(reference, formatSpecifier, !inputParameter.SkipUrlEncoding)
-                        : uriBuilder.AppendPath(reference, !inputParameter.SkipUrlEncoding));
+                    var value = GetValueForRequestPart(inputParameter, outputParameter);
+                    lines.Add(uriBuilder.AppendPath(ConvertToRequestPartType(value, outputParameter.Type), format, !inputParameter.SkipUrlEncoding));
                 }
                 else
                 {
-                    ErrorHelpers.ThrowError($"\n\nError while processing request '{path}'\n\n  '{text}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
+                    ErrorHelpers.ThrowError($"\n\nError while processing request '{path}'\n\n  '{span.ToString()}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
                 }
             }
             return lines;
@@ -191,73 +198,256 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<MethodBodyStatement> AddQuery(RawRequestUriBuilderExpression uriBuilder)
         {
-            foreach (var (nameInRequest, inputParameter, outputParameter, serializationFormat) in _requestParts)
+            foreach (var (nameInRequest, inputParameter, outputParameter, format) in _requestParts)
             {
                 if (inputParameter is not null && inputParameter.Location == RequestLocation.Query)
                 {
-                    // nameInRequest, reference, inputParameter.ArraySerializationDelimiter, escape, serializationFormat, inputParameter.Explode
+                    yield return AddToQuery(uriBuilder, inputParameter, outputParameter, nameInRequest, format);
                 }
             }
-            yield break;
         }
 
-        private bool TryGetRequestPart(in ReadOnlySpan<char> key, in RequestLocation location, [MaybeNullWhen(false)] out InputParameter inputParameter, [MaybeNullWhen(false)] out ValueExpression reference, out SerializationFormat serializationFormat)
+        private MethodBodyStatement AddToQuery(RawRequestUriBuilderExpression uriBuilder, InputParameter inputParameter, Parameter outputParameter, string nameInRequest, SerializationFormat format)
+        {
+            var value = GetValueForRequestPart(inputParameter, outputParameter);
+            var convertedValue = ConvertToRequestPartType(value, outputParameter.Type);
+            var escape = !inputParameter.SkipUrlEncoding;
+
+            MethodBodyStatement addToQuery;
+            if (inputParameter.Explode)
+            {
+                var paramVariable = new CodeWriterDeclaration("param");
+                addToQuery = new ForeachStatement(paramVariable, convertedValue, uriBuilder.AppendQuery(nameInRequest, paramVariable, format, escape));
+            }
+            else
+            {
+                addToQuery = inputParameter.ArraySerializationDelimiter is { } delimiter
+                    ? uriBuilder.AppendQueryDelimited(nameInRequest, convertedValue, delimiter, escape)
+                    : uriBuilder.AppendQuery(nameInRequest, convertedValue, format, escape);
+            }
+
+            if (outputParameter is { IsApiVersionParameter: true, IsOptionalInSignature: true, Initializer: { } })
+            {
+                return addToQuery;
+            }
+
+            return NullCheckRequestPartValue(value, outputParameter.Type, addToQuery);
+        }
+
+        private IEnumerable<MethodBodyStatement> AddHeaders(RequestExpression request, bool addContentHeaders)
+        {
+            foreach (var (nameInRequest, inputParameter, outputParameter, format) in _requestParts)
+            {
+                if (inputParameter is null)
+                {
+                    yield return AddRequestConditionsHeaders(request, outputParameter, format);
+                }
+                else if (inputParameter.Location == RequestLocation.Header && addContentHeaders == ContentHeaders.Contains(nameInRequest))
+                {
+                    yield return AddHeader(request, nameInRequest, inputParameter, outputParameter, format);
+                }
+            }
+        }
+
+        private MethodBodyStatement AddRequestConditionsHeaders(RequestExpression request, Parameter outputParameter, SerializationFormat format)
+        {
+            if (outputParameter == KnownParameters.MatchConditionsParameter)
+            {
+                return request.Headers.Add(outputParameter);
+            }
+
+            if (outputParameter == KnownParameters.RequestConditionsParameter)
+            {
+                return request.Headers.Add(outputParameter, format);
+            }
+
+            throw new InvalidOperationException();
+        }
+
+        private MethodBodyStatement AddHeader(RequestExpression request, string nameInRequest, InputParameter inputParameter, Parameter outputParameter, SerializationFormat format)
+        {
+            var headerName = inputParameter.HeaderCollectionPrefix ?? nameInRequest;
+            var value = GetValueForRequestPart(inputParameter, outputParameter);
+            var convertedValue = ConvertToRequestPartType(value, outputParameter.Type);
+
+            var addToHeader = inputParameter.ArraySerializationDelimiter is {} delimiter
+                ? request.Headers.AddDelimited(headerName, convertedValue, delimiter)
+                : request.Headers.Add(headerName, convertedValue, format);
+
+            return NullCheckRequestPartValue(value, outputParameter.Type, addToHeader);
+        }
+
+        private MethodBodyStatement AddBody(RequestExpression request)
+        {
+            var bodyParameters = new Dictionary<InputParameter, Parameter>();
+            foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
+            {
+                if (inputParameter is null || inputParameter.Location != RequestLocation.Body)
+                {
+                    continue;
+                }
+
+                if (outputParameter == KnownParameters.RequestContent || outputParameter == KnownParameters.RequestContentNullable)
+                {
+                    return new[]
+                    {
+                        AddHeaders(request, true).AsStatement(),
+                        Assign(request.Content, new RequestContentExpression(outputParameter))
+                    };
+                }
+
+                switch (Operation.RequestBodyMediaType)
+                {
+                    case BodyMediaType.Multipart or BodyMediaType.Form:
+                        bodyParameters.Add(inputParameter, outputParameter);
+                        break;
+
+                    case BodyMediaType.Binary:
+                        return NullCheckRequestPartValue(outputParameter, outputParameter.Type, new[]
+                        {
+                            AddHeaders(request, true).AsStatement(),
+                            Assign(request.Content, RequestContentExpression.Create(outputParameter))
+                        });
+
+                    case BodyMediaType.Text:
+                        return NullCheckRequestPartValue(outputParameter, outputParameter.Type, new[]
+                        {
+                            AddHeaders(request, true).AsStatement(),
+                            Assign(request.Content, New(typeof(StringRequestContent), outputParameter))
+                        });
+
+                    case var _ when inputParameter.Kind == InputOperationParameterKind.Flattened:
+                        return AddFlattenedBody(request);
+
+                    default:
+                        return NullCheckRequestPartValue(outputParameter, outputParameter.Type, new[]
+                        {
+                            AddHeaders(request, true).AsStatement(),
+                            SerializeContentIntoRequest(request, inputParameter.Type, outputParameter)
+                        });
+                }
+            }
+
+            if (bodyParameters.Any())
+            {
+                return Operation.RequestBodyMediaType == BodyMediaType.Multipart
+                    ? AddMultipartBody(request, bodyParameters)
+                    : AddFormBody(request, bodyParameters);
+            }
+
+            return new MethodBodyStatement();
+        }
+
+        private MethodBodyStatement AddMultipartBody(RequestExpression request, IReadOnlyDictionary<InputParameter, Parameter> bodyParameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        private MethodBodyStatement AddFormBody(RequestExpression request, IReadOnlyDictionary<InputParameter, Parameter> bodyParameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        private MethodBodyStatement AddFlattenedBody(RequestExpression request)
+        {
+            throw new NotImplementedException();
+        }
+
+        private MethodBodyStatement SerializeContentIntoRequest(RequestExpression request, InputType inputType, Parameter parameter)
+        {
+            var serialization = SerializationBuilder.Build(Operation.RequestBodyMediaType, inputType, parameter.Type);
+            return serialization switch
+            {
+                JsonSerialization jsonSerialization => new[]
+                {
+                    Var("content", Utf8JsonRequestContentExpression.New(), out var content),
+                    JsonSerializationMethodsBuilder.SerializeExpression(content.JsonWriter, jsonSerialization, parameter),
+                    Assign(request.Content, content)
+                },
+                _ => throw new NotImplementedException("Xml serialization not supported")
+            };
+        }
+
+        private bool TryGetRequestPart(in ReadOnlySpan<char> key, in RequestLocation location, [MaybeNullWhen(false)] out InputParameter inputParameter, [MaybeNullWhen(false)] out Parameter outputParameter, out SerializationFormat serializationFormat)
         {
             foreach (var part in _requestParts)
             {
                 if (part.InputParameter?.Location == location && part.NameInRequest.AsSpan().Equals(key, StringComparison.InvariantCulture))
                 {
                     inputParameter = part.InputParameter;
-                    reference = part.SerializationFormat != SerializationFormat.Default && part.OutputParameter.Type.IsFrameworkType
-                        ? CreateConversion(CreateValueForRequestPart(part), part.OutputParameter.Type, part.OutputParameter.Type.WithNullable(false))
-                        : CreateConversion(CreateValueForRequestPart(part), part.OutputParameter.Type, typeof(string));
+                    outputParameter = part.OutputParameter;
                     serializationFormat = part.SerializationFormat;
                     return true;
                 }
             }
 
             inputParameter = null;
-            reference = null;
+            outputParameter = null;
             serializationFormat = SerializationFormat.Default;
             return false;
         }
 
-        private ValueExpression CreateValueForRequestPart(RequestPartSource part)
+        private ValueExpression GetValueForRequestPart(InputParameter? inputParameter, Parameter outputParameter)
         {
-            var inputParameter = part.InputParameter;
-            var outputParameter = part.OutputParameter;
-
             if (inputParameter is null)
             {
                 return outputParameter;
             }
 
-            if (inputParameter.Kind == InputOperationParameterKind.Client)
+            switch (inputParameter.Kind)
             {
-                var field = inputParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByParameter(outputParameter);
-                if (field == null)
-                {
-                    throw new InvalidOperationException($"Parameter {outputParameter.Name} should have matching field");
-                }
+                case InputOperationParameterKind.Client:
+                    var field = inputParameter.IsEndpoint ? _fields.EndpointField : _fields.GetFieldByParameter(outputParameter);
+                    return field?.Declaration ?? throw new InvalidOperationException($"Parameter {outputParameter.Name} should have matching field");
 
-                return field.Declaration;
+                case InputOperationParameterKind.Constant when outputParameter.DefaultValue is {} defaultValue:
+                    return new ConstantExpression(defaultValue);
+
+                case var _ when inputParameter.GroupedBy is {} groupedByParameter:
+                    var groupedByParameterName = groupedByParameter.Name.ToVariableName();
+                    var groupParameter = CreateMessageMethodParameters.Single(p => p.Name == groupedByParameterName);
+                    var property = ((SchemaObjectType)groupParameter.Type.Implementation).GetPropertyForGroupedParameter(inputParameter.Name);
+
+                    return new MemberReference(NullConditional(groupParameter), property.Declaration.Name);
+
+                default:
+                    return outputParameter;
+            }
+        }
+
+        private static ValueExpression ConvertToRequestPartType(ValueExpression value, CSharpType fromType, bool convertOnlyExtendableEnumToString = false)
+        {
+            if (value is ConstantExpression)
+            {
+                return value;
             }
 
-            if (inputParameter.Kind == InputOperationParameterKind.Constant && outputParameter.DefaultValue is {} defaultValue)
+            if (fromType is { IsNullable: true, IsValueType: true })
             {
-                return new ConstantExpression(defaultValue);
+                value = new MemberReference(value, nameof(Nullable<int>.Value));
             }
 
-            var groupedByParameter = inputParameter.GroupedBy;
-            if (groupedByParameter != null)
+            if (fromType is { IsFrameworkType: false, Implementation: EnumType enumType } && (!convertOnlyExtendableEnumToString || enumType.IsExtensible))
             {
-                var groupModel = (SchemaObjectType)_typeFactory.CreateType(groupedByParameter.Type with { IsNullable = false }).Implementation;
-                var property = groupModel.GetPropertyForGroupedParameter(inputParameter.Name);
-
-                return new MemberReference(new FormattableStringToExpression($"{groupedByParameter.Name.ToVariableName()}"), property.Declaration.Name);
+                return new EnumExpression(enumType, value.NullConditional(fromType)).ToSerial();
             }
 
-            return outputParameter;
+            if (fromType.EqualsIgnoreNullable(typeof(ContentType)))
+            {
+                return new InvokeInstanceMethodExpression(value, nameof(ToString));
+            }
+
+            return value;
+        }
+
+        private static MethodBodyStatement NullCheckRequestPartValue(ValueExpression value, CSharpType type, MethodBodyStatement inner)
+        {
+            if (value is ConstantExpression || !type.IsNullable)
+            {
+                return inner;
+            }
+
+            return new IfElseStatement(IsNotNull(value), inner, null);
         }
 
         protected virtual bool ShouldConvenienceMethodGenerated()
@@ -366,19 +556,11 @@ namespace AutoRest.CSharp.Output.Models
 
         protected static ValueExpression CreateConversion(Parameter fromParameter, CSharpType toType)
         {
-            return CreateConversion(fromParameter, fromParameter.Type, toType);
-        }
+            ValueExpression fromExpression = NullConditional(fromParameter);
 
-        private static ValueExpression CreateConversion(ValueExpression fromExpression, CSharpType fromType, CSharpType toType)
-        {
-            if (fromType.IsNullable)
-            {
-                fromExpression = new NullConditionalExpression(fromExpression);
-            }
-
-            return fromType.IsFrameworkType
-                ? CreateConversion(fromExpression, fromType.FrameworkType, toType)
-                : CreateConversion(fromExpression, fromType.Implementation, toType);
+            return fromParameter.Type.IsFrameworkType
+                ? CreateConversion(fromExpression, fromParameter.Type.FrameworkType, toType)
+                : CreateConversion(fromExpression, fromParameter.Type.Implementation, toType);
         }
 
         private static ValueExpression CreateConversion(ValueExpression fromExpression, Type fromFrameworkType, CSharpType toType)
@@ -409,6 +591,21 @@ namespace AutoRest.CSharp.Output.Models
             "private" => MethodSignatureModifiers.Private,
             null => MethodSignatureModifiers.Public,
             _ => throw new NotSupportedException()
+        };
+
+        private static HashSet<string> ContentHeaders = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "Allow",
+            "Content-Disposition",
+            "Content-Encoding",
+            "Content-Language",
+            "Content-Length",
+            "Content-Location",
+            "Content-MD5",
+            "Content-Range",
+            "Content-Type",
+            "Expires",
+            "Last-Modified",
         };
     }
 }
