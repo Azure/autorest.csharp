@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Microsoft.CodeAnalysis;
 
@@ -75,7 +76,7 @@ namespace AutoRest.CSharp.Input.Source
                     int index = 0;
                     foreach (var parameter in parameters)
                     {
-                        if (SourceInputHelper.IsEqualType((INamedTypeSymbol)existingParameters[index].Type, parameter))
+                        if ((existingParameters[index].Type as INamedTypeSymbol)!.IsSameType(parameter))
                         {
                             break;
                         }

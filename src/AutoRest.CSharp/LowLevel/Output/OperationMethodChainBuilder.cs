@@ -141,18 +141,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private bool IsParameterTypeSame(Parameter? first, Parameter? second)
         {
-            if ((first == null && second != null)
-                || (first != null && second == null))
-            {
-                return false;
-            }
-
-            if (first == null && second == null)
-            {
-                return true;
-            }
-
-            return first!.Type.Equals(second!.Type);
+            return object.Equals(first?.Type, second?.Type);
         }
 
         private bool IsParameterTypeHasValueOverlap(Parameter? first, Parameter? second)
