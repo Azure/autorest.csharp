@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             Configuration.Initialize(
                 outputFolder: "Generated",
                 ns: "",
-                name: "",
+                libraryName: "",
                 sharedSourceFolders: Array.Empty<string>(),
                 saveInputs: false,
                 azureArm: false,
@@ -50,6 +50,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 skipSerializationFormatXml: false,
                 disablePaginationTopRenaming: false,
                 generateModelFactory: true,
+                publicDiscriminatorProperty: false,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 projectFolder: ".",

@@ -6,13 +6,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
-using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Types;
-using Humanizer;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -91,11 +88,35 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void WriteFieldModifiers(CodeWriter writer, FieldModifiers modifiers)
+        {
+            writer.AppendRawIf("public ", modifiers.HasFlag(FieldModifiers.Public))
+                .AppendRawIf("internal ", modifiers.HasFlag(FieldModifiers.Internal))
+                .AppendRawIf("protected ", modifiers.HasFlag(FieldModifiers.Protected))
+                .AppendRawIf("private ", modifiers.HasFlag(FieldModifiers.Private))
+                .AppendRawIf("static ", modifiers.HasFlag(FieldModifiers.Static))
+                .AppendRawIf("readonly ", modifiers.HasFlag(FieldModifiers.ReadOnly))
+                .AppendRawIf("const ", modifiers.HasFlag(FieldModifiers.Const));
+        }
+
         private void WriteProperty(CodeWriter writer, ObjectTypeProperty property)
         {
             writer.WriteXmlDocumentationSummary(CreatePropertyDescription(property));
             writer.Append($"{property.Declaration.Accessibility} {property.Declaration.Type} {property.Declaration.Name:D}");
-            writer.AppendRaw(property.IsReadOnly ? "{ get; }" : "{ get; set; }");
+
+            // write getter
+            writer.AppendRaw("{");
+            if (property.GetterModifiers is { } getterModifiers)
+                WriteFieldModifiers(writer, getterModifiers);
+            writer.AppendRaw("get;");
+            // writer setter
+            if (!property.IsReadOnly)
+            {
+                if (property.SetterModifiers is { } setterModifiers)
+                    WriteFieldModifiers(writer, setterModifiers);
+                writer.AppendRaw("set;");
+            }
+            writer.AppendRaw("}");
             if (property.DefaultValue != null)
             {
                 writer.AppendRaw(" = ").Append(property.DefaultValue).Line($";");

@@ -40,6 +40,7 @@ namespace AutoRest.CSharp.Input
             public const string GenerateModelFactory = "generate-model-factory";
             public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
             public const string AdditionalIntrinsicTypesToTreatEmptyStringAsNull = "additional-intrinsic-types-to-treat-empty-string-as-null";
+            public const string PublicDiscriminatorProperty = "public-discriminator-property";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -51,8 +52,8 @@ namespace AutoRest.CSharp.Input
 
         public static void Initialize(
             string outputFolder,
-            string? ns,
-            string? name,
+            string ns,
+            string libraryName,
             string[] sharedSourceFolders,
             bool saveInputs,
             bool azureArm,
@@ -65,6 +66,7 @@ namespace AutoRest.CSharp.Input
             bool skipSerializationFormatXml,
             bool disablePaginationTopRenaming,
             bool generateModelFactory,
+            bool publicDiscriminatorProperty,
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
             string? projectFolder,
@@ -76,8 +78,8 @@ namespace AutoRest.CSharp.Input
             MgmtTestConfiguration? mgmtTestConfiguration)
         {
             _outputFolder = outputFolder;
-            Namespace = ns;
-            LibraryName = name;
+            _namespace = ns;
+            _libraryName = libraryName;
             _sharedSourceFolders = sharedSourceFolders;
             SaveInputs = saveInputs;
             AzureArm = azureArm;
@@ -88,6 +90,7 @@ namespace AutoRest.CSharp.Input
             Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
             GenerateModelFactory = generateModelFactory;
+            PublicDiscriminatorProperty = publicDiscriminatorProperty;
             UnreferencedTypesHandling = unreferencedTypesHandling;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
@@ -100,7 +103,10 @@ namespace AutoRest.CSharp.Input
                 _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
             }
 
-            if (publicClients && generation1ConvenienceClient)
+            var isAzureProject = ns.StartsWith("Azure.") || ns.StartsWith("Microsoft.Azure");
+            // we only check the combination for Azure projects whose namespace starts with "Azure." or "Microsoft.Azure."
+            // issue: https://github.com/Azure/autorest.csharp/issues/3179
+            if (publicClients && generation1ConvenienceClient && isAzureProject)
             {
                 var binaryLocation = typeof(Configuration).Assembly.Location;
                 if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net6.0", "AutoRest.CSharp.dll")))
@@ -134,8 +140,12 @@ namespace AutoRest.CSharp.Input
 
         private static string? _outputFolder;
         public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
-        public static string? Namespace { get; private set; }
-        public static string? LibraryName { get; private set; }
+
+        private static string? _namespace;
+        public static string Namespace => _namespace ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        private static string? _libraryName;
+        public static string LibraryName => _libraryName ?? throw new InvalidOperationException("Configuration has not been initialized");
 
         private static string[]? _sharedSourceFolders;
         public static string[] SharedSourceFolders => _sharedSourceFolders ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -149,8 +159,23 @@ namespace AutoRest.CSharp.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
+
+        /// <summary>
+        /// Whether we will generate model factory for this library.
+        /// If true (default), the model factory will be generated. If false, the model factory will not be generated.
+        /// </summary>
         public static bool GenerateModelFactory { get; private set; }
+
+        /// <summary>
+        /// Whether we will generate the discriminator property as public or internal.
+        /// If true, the discriminator property will be public. If false (default), the discriminator property will be internal.
+        /// </summary>
+        public static bool PublicDiscriminatorProperty { get; private set; }
+
         private static IReadOnlyList<string>? _oldModelFactoryEntries;
+        /// <summary>
+        /// This is a shim flag that keeps the old behavior of model factory generation. This configuration should be only used on HLC packages.
+        /// </summary>
         public static IReadOnlyList<string> ModelFactoryForHlc => _oldModelFactoryEntries ?? throw new InvalidOperationException("Configuration has not been initialized");
         public static UnreferencedTypesHandlingOption UnreferencedTypesHandling { get; private set; }
         private static IReadOnlyList<string>? _suppressAbstractBaseClasses;
@@ -175,12 +200,12 @@ namespace AutoRest.CSharp.Input
         private static string? _absoluteProjectFolder;
         public static string AbsoluteProjectFolder => _absoluteProjectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
 
-        public static void Initialize(IPluginCommunication autoRest)
+        public static void Initialize(IPluginCommunication autoRest, string defaultNamespace, string defaultLibraryName)
         {
             Initialize(
                 outputFolder: TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder)),
-                ns: autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult(),
-                name: autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult(),
+                ns: autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult() ?? defaultNamespace,
+                libraryName: autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult() ?? defaultLibraryName,
                 sharedSourceFolders: GetRequiredOption<string[]>(autoRest, Options.SharedSourceFolders).Select(TrimFileSuffix).ToArray(),
                 saveInputs: GetOptionBoolValue(autoRest, Options.SaveInputs),
                 azureArm: GetOptionBoolValue(autoRest, Options.AzureArm),
@@ -193,6 +218,7 @@ namespace AutoRest.CSharp.Input
                 skipSerializationFormatXml: GetOptionBoolValue(autoRest, Options.SkipSerializationFormatXml),
                 disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
                 generateModelFactory: GetOptionBoolValue(autoRest, Options.GenerateModelFactory),
+                publicDiscriminatorProperty: GetOptionBoolValue(autoRest, Options.PublicDiscriminatorProperty),
                 modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
@@ -258,6 +284,8 @@ namespace AutoRest.CSharp.Input
                     return false;
                 case Options.GenerateModelFactory:
                     return true;
+                case Options.PublicDiscriminatorProperty:
+                    return false;
                 default:
                     return null;
             }

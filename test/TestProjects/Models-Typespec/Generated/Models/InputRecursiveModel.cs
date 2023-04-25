@@ -23,6 +23,15 @@ namespace ModelsInCadl.Models
             Message = message;
         }
 
+        /// <summary> Initializes a new instance of InputRecursiveModel. </summary>
+        /// <param name="message"> Message. </param>
+        /// <param name="inner"> Required Record. </param>
+        internal InputRecursiveModel(string message, InputRecursiveModel inner)
+        {
+            Message = message;
+            Inner = inner;
+        }
+
         /// <summary> Message. </summary>
         public string Message { get; }
         /// <summary> Required Record. </summary>

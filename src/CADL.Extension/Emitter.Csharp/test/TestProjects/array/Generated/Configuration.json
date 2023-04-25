@@ -1,7 +1,7 @@
 {
   "OutputFolder": ".",
   "Namespace": "TypeSpec.TestServer.ArrayBasic",
-  "LibraryName": null,
+  "LibraryName": "TypeSpec.TestServer.ArrayBasic",
   "SharedSourceFolders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"

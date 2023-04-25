@@ -15,6 +15,17 @@ namespace ProjectedName.Models
         {
         }
 
+        /// <summary> Initializes a new instance of Project. </summary>
+        /// <param name="producedBy"> Only valid value is 'DPG'. </param>
+        /// <param name="createdBy"> Only valid value is 'DPG'. </param>
+        /// <param name="madeForCS"> Only valid value is 'customers'. </param>
+        internal Project(string producedBy, string createdBy, string madeForCS)
+        {
+            ProducedBy = producedBy;
+            CreatedBy = createdBy;
+            MadeForCS = madeForCS;
+        }
+
         /// <summary> Only valid value is 'DPG'. </summary>
         public string ProducedBy { get; set; }
         /// <summary> Only valid value is 'DPG'. </summary>

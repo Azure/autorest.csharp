@@ -49,18 +49,17 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 if (options.IsNewProject)
                 {
                     // TODO - add support for DataFactoryExpression lookup
-                    new CSharpProj().Execute(Configuration.Namespace ?? rootNamespace.Name, outputPath, false);
+                    new CSharpProj().Execute(Configuration.Namespace, outputPath, false);
                 }
             }
             else if (File.Exists(codeModelInputPath))
             {
                 var yaml = await File.ReadAllTextAsync(codeModelInputPath);
-                var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(yaml));
-                workspace = await new CSharpGen().ExecuteAsync(codeModelTask);
+                var codeModel = CodeModelSerialization.DeserializeCodeModel(yaml);
+                workspace = await new CSharpGen().ExecuteAsync(codeModel);
                 if (options.IsNewProject)
                 {
-                    var codeModel = await codeModelTask;
-                    new CSharpProj().Execute(Configuration.Namespace ?? codeModel.Language.Default.Name, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)));
+                    new CSharpProj().Execute(Configuration.Namespace, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)));
                 }
             }
             else
@@ -253,8 +252,8 @@ namespace AutoRest.CSharp.AutoRest.Communication
 
             Configuration.Initialize(
                 Path.Combine(outputPath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
-                root.GetProperty(nameof(Configuration.Namespace)).GetString(),
-                root.GetProperty(nameof(Configuration.LibraryName)).GetString(),
+                root.GetProperty(nameof(Configuration.Namespace)).GetString()!,
+                root.GetProperty(nameof(Configuration.LibraryName)).GetString()!,
                 sharedSourceFolders.ToArray(),
                 saveInputs: false,
                 ReadOption(root, Configuration.Options.AzureArm),
@@ -267,6 +266,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
                 ReadOption(root, Configuration.Options.GenerateModelFactory),
+                ReadOption(root, Configuration.Options.PublicDiscriminatorProperty),
                 oldModelFactoryEntries,
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),

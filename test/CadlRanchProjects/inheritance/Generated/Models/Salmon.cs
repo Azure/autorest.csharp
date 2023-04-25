@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace Models.Inheritance.Models
@@ -16,20 +15,22 @@ namespace Models.Inheritance.Models
     {
         /// <summary> Initializes a new instance of Salmon. </summary>
         /// <param name="age"></param>
-        public Salmon(int age) : base("salmon", age)
+        public Salmon(int age) : base(age)
         {
+            Kind = "salmon";
             Friends = new ChangeTrackingList<Fish>();
             Hate = new ChangeTrackingDictionary<string, Fish>();
         }
 
         /// <summary> Initializes a new instance of Salmon. </summary>
+        /// <param name="kind"> Discriminator. </param>
         /// <param name="age"></param>
         /// <param name="friends"></param>
         /// <param name="hate"></param>
         /// <param name="partner"></param>
-        internal Salmon(int age, IList<Fish> friends, IDictionary<string, Fish> hate, Fish partner) : base("salmon", age)
+        internal Salmon(string kind, int age, IList<Fish> friends, IDictionary<string, Fish> hate, Fish partner) : base(kind, age)
         {
-            Friends = friends.ToList();
+            Friends = friends;
             Hate = hate;
             Partner = partner;
         }
