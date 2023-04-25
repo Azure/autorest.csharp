@@ -49,62 +49,42 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<TimeSpan>>> GetDurationValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<TimeSpan>>> GetDurationValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("DurationValue.GetDurationValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetDurationValueAsync(context).ConfigureAwait(false);
+            IReadOnlyList<TimeSpan> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            List<TimeSpan> array = new List<TimeSpan>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetDurationValueAsync(context).ConfigureAwait(false);
-                IReadOnlyList<TimeSpan> value = default;
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                List<TimeSpan> array = new List<TimeSpan>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetTimeSpan("P"));
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetTimeSpan("P"));
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<TimeSpan>> GetDurationValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<TimeSpan>> GetDurationValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("DurationValue.GetDurationValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetDurationValue(context);
+            IReadOnlyList<TimeSpan> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            List<TimeSpan> array = new List<TimeSpan>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetDurationValue(context);
-                IReadOnlyList<TimeSpan> value = default;
-                using var document = JsonDocument.Parse(response.ContentStream);
-                List<TimeSpan> array = new List<TimeSpan>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetTimeSpan("P"));
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetTimeSpan("P"));
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDurationValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDurationValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("DurationValue.GetDurationValue");
             scope.Start();
@@ -124,7 +104,7 @@ namespace Arrays.ItemTypes
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DurationValue.xml" path="doc/members/member[@name='GetDurationValue(RequestContext)']/*" />
-        public virtual Response GetDurationValue(RequestContext context = null)
+        public virtual Response GetDurationValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("DurationValue.GetDurationValue");
             scope.Start();

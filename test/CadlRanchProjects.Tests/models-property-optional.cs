@@ -17,14 +17,14 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Optional_String_getAll() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetStringClient().GetAllAsync();
+            Response response = await new OptionalClient(host, null).GetStringClient().GetAllAsync(new RequestContext());
             Assert.AreEqual("hello", StringProperty.FromResponse(response).Property);
         });
 
         [Test]
         public Task Models_Property_Optional_String_getDefault() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetStringClient().GetDefaultAsync();
+            Response response = await new OptionalClient(host, null).GetStringClient().GetDefaultAsync(new RequestContext());
             Assert.AreEqual(null, StringProperty.FromResponse(response).Property);
         });
 
@@ -49,14 +49,14 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Optional_Bytes_getAll() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetBytesClient().GetAllAsync();
+            Response response = await new OptionalClient(host, null).GetBytesClient().GetAllAsync(new RequestContext());
             Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), BytesProperty.FromResponse(response).Property.ToString());
         });
 
         [Test]
         public Task Models_Property_Optional_Bytes_getDefault() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetBytesClient().GetDefaultAsync();
+            Response response = await new OptionalClient(host, null).GetBytesClient().GetDefaultAsync(new RequestContext());
             Assert.AreEqual(null, BytesProperty.FromResponse(response).Property);
         });
 
@@ -81,14 +81,14 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Optional_Datetime_getAll() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetDatetimeClient().GetAllAsync();
+            Response response = await new OptionalClient(host, null).GetDatetimeClient().GetAllAsync(new RequestContext());
             Assert.AreEqual(DateTimeOffset.Parse("2022-08-26T18:38:00Z"), DatetimeProperty.FromResponse(response).Property);
         });
 
         [Test]
         public Task Models_Property_Optional_Datetime_getDefault() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetDatetimeClient().GetDefaultAsync();
+            Response response = await new OptionalClient(host, null).GetDatetimeClient().GetDefaultAsync(new RequestContext());
             Assert.AreEqual(null, DatetimeProperty.FromResponse(response).Property);
         });
 
@@ -113,14 +113,14 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Optional_Duration_getAll() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetDurationClient().GetAllAsync();
+            Response response = await new OptionalClient(host, null).GetDurationClient().GetAllAsync(new RequestContext());
             Assert.AreEqual(XmlConvert.ToTimeSpan("P123DT22H14M12.011S"), DurationProperty.FromResponse(response).Property);
         });
 
         [Test]
         public Task Models_Property_Optional_Duration_getDefault() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetDurationClient().GetDefaultAsync();
+            Response response = await new OptionalClient(host, null).GetDurationClient().GetDefaultAsync(new RequestContext());
             Assert.AreEqual(null, DurationProperty.FromResponse(response).Property);
         });
 
@@ -145,7 +145,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Optional_CollectionsByte_getAll() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetCollectionsByteClient().GetAllAsync();
+            Response response = await new OptionalClient(host, null).GetCollectionsByteClient().GetAllAsync(new RequestContext());
             Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), CollectionsByteProperty.FromResponse(response).Property[0].ToString());
             Assert.AreEqual(BinaryData.FromString("\"aGVsbG8sIHdvcmxkIQ==\"").ToString(), CollectionsByteProperty.FromResponse(response).Property[1].ToString());
         });
@@ -153,7 +153,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Optional_CollectionsByte_getDefault() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetCollectionsByteClient().GetDefaultAsync();
+            Response response = await new OptionalClient(host, null).GetCollectionsByteClient().GetDefaultAsync(new RequestContext());
             Assert.AreEqual(0, CollectionsByteProperty.FromResponse(response).Property.Count);
         });
 
@@ -179,7 +179,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Optional_CollectionsModel_getAll() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetCollectionsModelClient().GetAllAsync();
+            Response response = await new OptionalClient(host, null).GetCollectionsModelClient().GetAllAsync(new RequestContext());
             var result = CollectionsModelProperty.FromResponse(response);
             Assert.AreEqual("hello", result.Property[0].Property);
             Assert.AreEqual("world", result.Property[1].Property);
@@ -188,7 +188,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Optional_CollectionsModel_getDefault() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetCollectionsModelClient().GetDefaultAsync();
+            Response response = await new OptionalClient(host, null).GetCollectionsModelClient().GetDefaultAsync(new RequestContext());
             Assert.AreEqual(0, CollectionsModelProperty.FromResponse(response).Property.Count);
         });
 
@@ -213,7 +213,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Optional_RequiredAndOptional_getAll() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetRequiredAndOptionalClient().GetAllAsync();
+            Response response = await new OptionalClient(host, null).GetRequiredAndOptionalClient().GetAllAsync(new RequestContext());
             var result = RequiredAndOptionalProperty.FromResponse(response);
             Assert.AreEqual("hello", result.OptionalProperty);
             Assert.AreEqual(42, result.RequiredProperty);
@@ -222,7 +222,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Property_Optional_RequiredAndOptional_getRequiredOnly() => Test(async (host) =>
         {
-            Response response = await new OptionalClient(host, null).GetRequiredAndOptionalClient().GetRequiredOnlyAsync();
+            Response response = await new OptionalClient(host, null).GetRequiredAndOptionalClient().GetRequiredOnlyAsync(new RequestContext());
             var result = RequiredAndOptionalProperty.FromResponse(response);
             Assert.AreEqual(null, result.OptionalProperty);
             Assert.AreEqual(42, result.RequiredProperty);

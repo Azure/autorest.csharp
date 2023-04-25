@@ -77,23 +77,13 @@ namespace ApiVersionInCadl
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
-        public virtual async Task<Response<DetectionResult>> GetBatchDetectionResultValueAsync(string resultId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DetectionResult>> GetBatchDetectionResultAsync(string resultId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
 
-            using var scope = ClientDiagnostics.CreateScope("ApiVersionInCadlClient.GetBatchDetectionResultValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetBatchDetectionResultAsync(resultId, context).ConfigureAwait(false);
-                return Response.FromValue(DetectionResult.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetBatchDetectionResultAsync(resultId, context).ConfigureAwait(false);
+            return Response.FromValue(DetectionResult.FromResponse(response), response);
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
@@ -105,23 +95,13 @@ namespace ApiVersionInCadl
         /// For asynchronous inference, get multivariate anomaly detection result based on
         /// resultId returned by the BatchDetectAnomaly api.
         /// </remarks>
-        public virtual Response<DetectionResult> GetBatchDetectionResultValue(string resultId, CancellationToken cancellationToken = default)
+        public virtual Response<DetectionResult> GetBatchDetectionResult(string resultId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
 
-            using var scope = ClientDiagnostics.CreateScope("ApiVersionInCadlClient.GetBatchDetectionResultValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetBatchDetectionResult(resultId, context);
-                return Response.FromValue(DetectionResult.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetBatchDetectionResult(resultId, context);
+            return Response.FromValue(DetectionResult.FromResponse(response), response);
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
@@ -132,7 +112,7 @@ namespace ApiVersionInCadl
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(String,RequestContext)']/*" />
-        public virtual async Task<Response> GetBatchDetectionResultAsync(string resultId, RequestContext context = null)
+        public virtual async Task<Response> GetBatchDetectionResultAsync(string resultId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
 
@@ -158,7 +138,7 @@ namespace ApiVersionInCadl
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(String,RequestContext)']/*" />
-        public virtual Response GetBatchDetectionResult(string resultId, RequestContext context = null)
+        public virtual Response GetBatchDetectionResult(string resultId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
 

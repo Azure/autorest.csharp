@@ -22,7 +22,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_Usage_output() => Test(async (host) =>
         {
-            OutputRecord response = await new UsageClient(host, null).OutputValueAsync();
+            OutputRecord response = await new UsageClient(host, null).OutputAsync();
             Assert.AreEqual("example-value", response.RequiredProp);
         });
 

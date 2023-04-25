@@ -5,5 +5,6 @@
   "SharedSourceFolders": [
     "../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
-  ]
+  ],
+  "use-overloads-between-protocol-and-convenience": true
 }

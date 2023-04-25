@@ -3,7 +3,7 @@
   <members>
     <member name="GetDurationValueAsync(RequestContext)">
 <example>
-This sample shows how to call GetDurationValueAsync and parse the result.
+This sample shows how to call GetDurationValueAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetDurationValueClient(<1.0.0>);
 
@@ -16,7 +16,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDurationValue(RequestContext)">
 <example>
-This sample shows how to call GetDurationValue and parse the result.
+This sample shows how to call GetDurationValue with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetDurationValueClient(<1.0.0>);
 

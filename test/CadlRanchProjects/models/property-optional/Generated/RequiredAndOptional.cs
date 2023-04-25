@@ -49,40 +49,20 @@ namespace Models.Property.Optional
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<RequiredAndOptionalProperty>> GetAllValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RequiredAndOptionalProperty>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetAllValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetAllAsync(context).ConfigureAwait(false);
-                return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetAllAsync(context).ConfigureAwait(false);
+            return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<RequiredAndOptionalProperty> GetAllValue(CancellationToken cancellationToken = default)
+        public virtual Response<RequiredAndOptionalProperty> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetAllValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetAll(context);
-                return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetAll(context);
+            return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
@@ -90,7 +70,7 @@ namespace Models.Property.Optional
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetAllAsync(RequestContext context = null)
+        public virtual async Task<Response> GetAllAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetAll");
             scope.Start();
@@ -111,7 +91,7 @@ namespace Models.Property.Optional
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
-        public virtual Response GetAll(RequestContext context = null)
+        public virtual Response GetAll(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetAll");
             scope.Start();
@@ -129,40 +109,20 @@ namespace Models.Property.Optional
 
         /// <summary> Get models that will return only the required properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<RequiredAndOptionalProperty>> GetRequiredOnlyValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<RequiredAndOptionalProperty>> GetRequiredOnlyAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetRequiredOnlyValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetRequiredOnlyAsync(context).ConfigureAwait(false);
-                return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetRequiredOnlyAsync(context).ConfigureAwait(false);
+            return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return only the required properties. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<RequiredAndOptionalProperty> GetRequiredOnlyValue(CancellationToken cancellationToken = default)
+        public virtual Response<RequiredAndOptionalProperty> GetRequiredOnly(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetRequiredOnlyValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetRequiredOnly(context);
-                return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetRequiredOnly(context);
+            return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return only the required properties. </summary>
@@ -170,7 +130,7 @@ namespace Models.Property.Optional
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetRequiredOnlyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetRequiredOnlyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetRequiredOnlyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetRequiredOnly");
             scope.Start();
@@ -191,7 +151,7 @@ namespace Models.Property.Optional
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetRequiredOnly(RequestContext)']/*" />
-        public virtual Response GetRequiredOnly(RequestContext context = null)
+        public virtual Response GetRequiredOnly(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetRequiredOnly");
             scope.Start();
