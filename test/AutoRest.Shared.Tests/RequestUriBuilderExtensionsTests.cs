@@ -136,10 +136,12 @@ namespace Azure.Core.Tests
         [TestCase("fr-FR", "2021-11-18T10:11:12Z", "D", "http://localhost/datetime/2021-11-18")]
         [TestCase("fr-FR", "2022-12-19T11:12:12Z", "O", "http://localhost/datetime/2022-12-19T11%3A12%3A12.0000000Z")]
         [TestCase("fr-FR", "2022-12-19T11:12:12Z", "U", "http://localhost/datetime/1671448332")]
-        public void AppendPath_DateTimeOffsetValue(string? culture, DateTimeOffset value, string format, string expected)
+        public void AppendPath_DateTimeOffsetValue(string? culture, string dateTimeString, string format, string expected)
         {
             if (culture != null)
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+
+            var value = DateTimeOffset.Parse(dateTimeString);
 
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
@@ -153,10 +155,12 @@ namespace Azure.Core.Tests
         [TestCase(null, "00:01:18", "", "http://localhost/timespan/00%3A01%3A18")]
         [TestCase("fr-FR", "00:01:18", "P", "http://localhost/timespan/PT1M18S")]
         [TestCase("fr-FR", "00:01:18", "", "http://localhost/timespan/00%3A01%3A18")]
-        public void AppendPath_TimeSpanValue(string? culture, TimeSpan value, string format, string expected)
+        public void AppendPath_TimeSpanValue(string? culture, string timeSpanString, string format, string expected)
         {
             if (culture != null)
                 Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
+
+            var value = TimeSpan.Parse(timeSpanString);
 
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
