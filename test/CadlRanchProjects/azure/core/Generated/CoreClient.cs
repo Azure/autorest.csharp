@@ -188,42 +188,22 @@ namespace _Specs_.Azure.Core
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> Gets a User. </remarks>
-        public virtual async Task<Response<User>> GetUserValueAsync(int id, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<User>> GetUserAsync(int id, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CoreClient.GetUserValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetUserAsync(id, context).ConfigureAwait(false);
-                return Response.FromValue(User.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetUserAsync(id, context).ConfigureAwait(false);
+            return Response.FromValue(User.FromResponse(response), response);
         }
 
         /// <summary> Gets a user. </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> Gets a User. </remarks>
-        public virtual Response<User> GetUserValue(int id, CancellationToken cancellationToken = default)
+        public virtual Response<User> GetUser(int id, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CoreClient.GetUserValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetUser(id, context);
-                return Response.FromValue(User.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetUser(id, context);
+            return Response.FromValue(User.FromResponse(response), response);
         }
 
         /// <summary> Gets a user. </summary>
@@ -232,7 +212,7 @@ namespace _Specs_.Azure.Core
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetUserAsync(Int32,RequestContext)']/*" />
-        public virtual async Task<Response> GetUserAsync(int id, RequestContext context = null)
+        public virtual async Task<Response> GetUserAsync(int id, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("CoreClient.GetUser");
             scope.Start();
@@ -254,7 +234,7 @@ namespace _Specs_.Azure.Core
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetUser(Int32,RequestContext)']/*" />
-        public virtual Response GetUser(int id, RequestContext context = null)
+        public virtual Response GetUser(int id, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("CoreClient.GetUser");
             scope.Start();
@@ -320,23 +300,13 @@ namespace _Specs_.Azure.Core
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <remarks> Exports a User. </remarks>
-        public virtual async Task<Response<User>> ExportValueAsync(int id, string format, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<User>> ExportAsync(int id, string format, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(format, nameof(format));
 
-            using var scope = ClientDiagnostics.CreateScope("CoreClient.ExportValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await ExportAsync(id, format, context).ConfigureAwait(false);
-                return Response.FromValue(User.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ExportAsync(id, format, context).ConfigureAwait(false);
+            return Response.FromValue(User.FromResponse(response), response);
         }
 
         /// <summary> Exports a user. </summary>
@@ -345,23 +315,13 @@ namespace _Specs_.Azure.Core
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <remarks> Exports a User. </remarks>
-        public virtual Response<User> ExportValue(int id, string format, CancellationToken cancellationToken = default)
+        public virtual Response<User> Export(int id, string format, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(format, nameof(format));
 
-            using var scope = ClientDiagnostics.CreateScope("CoreClient.ExportValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = Export(id, format, context);
-                return Response.FromValue(User.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Export(id, format, context);
+            return Response.FromValue(User.FromResponse(response), response);
         }
 
         /// <summary> Exports a user. </summary>
@@ -372,7 +332,7 @@ namespace _Specs_.Azure.Core
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='ExportAsync(Int32,String,RequestContext)']/*" />
-        public virtual async Task<Response> ExportAsync(int id, string format, RequestContext context = null)
+        public virtual async Task<Response> ExportAsync(int id, string format, RequestContext context)
         {
             Argument.AssertNotNull(format, nameof(format));
 
@@ -398,7 +358,7 @@ namespace _Specs_.Azure.Core
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='Export(Int32,String,RequestContext)']/*" />
-        public virtual Response Export(int id, string format, RequestContext context = null)
+        public virtual Response Export(int id, string format, RequestContext context)
         {
             Argument.AssertNotNull(format, nameof(format));
 
@@ -426,7 +386,7 @@ namespace _Specs_.Azure.Core
         /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> Lists all Users. </remarks>
-        public virtual AsyncPageable<User> GetUserValuesAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<User> GetUsersAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
@@ -444,7 +404,7 @@ namespace _Specs_.Azure.Core
         /// <param name="expand"> Expand the indicated resources into the response. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <remarks> Lists all Users. </remarks>
-        public virtual Pageable<User> GetUserValues(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
+        public virtual Pageable<User> GetUsers(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
@@ -464,7 +424,7 @@ namespace _Specs_.Azure.Core
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetUsersAsync(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetUsersAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetUsersAsync(int? maxCount, int? skip, int? maxpagesize, IEnumerable<string> orderby, string filter, IEnumerable<string> select, IEnumerable<string> expand, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetUsersNextPageRequest(nextLink, maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
@@ -483,7 +443,7 @@ namespace _Specs_.Azure.Core
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetUsers(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetUsers(int? maxCount = null, int? skip = null, int? maxpagesize = null, IEnumerable<string> orderby = null, string filter = null, IEnumerable<string> select = null, IEnumerable<string> expand = null, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetUsers(int? maxCount, int? skip, int? maxpagesize, IEnumerable<string> orderby, string filter, IEnumerable<string> select, IEnumerable<string> expand, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetUsersNextPageRequest(nextLink, maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
@@ -492,7 +452,7 @@ namespace _Specs_.Azure.Core
 
         /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual AsyncPageable<User> GetWithPageValueAsync(CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<User> GetWithPageAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
@@ -502,7 +462,7 @@ namespace _Specs_.Azure.Core
 
         /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Pageable<User> GetWithPageValue(CancellationToken cancellationToken = default)
+        public virtual Pageable<User> GetWithPage(CancellationToken cancellationToken = default)
         {
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
@@ -515,7 +475,7 @@ namespace _Specs_.Azure.Core
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetWithPageAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetWithPageAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetWithPageAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithPageNextPageRequest(nextLink, context);
@@ -527,7 +487,7 @@ namespace _Specs_.Azure.Core
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/CoreClient.xml" path="doc/members/member[@name='GetWithPage(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetWithPage(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetWithPage(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetWithPageNextPageRequest(nextLink, context);

@@ -3,7 +3,7 @@
   <members>
     <member name="GetDatetimeAsync(RequestContext)">
 <example>
-This sample shows how to call GetDatetimeAsync and parse the result.
+This sample shows how to call GetDatetimeAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetDatetimeClient(<1.0.0>);
 
@@ -28,7 +28,7 @@ Schema for <c>DatetimeProperty</c>:
     </member>
     <member name="GetDatetime(RequestContext)">
 <example>
-This sample shows how to call GetDatetime and parse the result.
+This sample shows how to call GetDatetime with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetDatetimeClient(<1.0.0>);
 

@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace AnomalyDetector.Models
@@ -39,10 +38,10 @@ namespace AnomalyDetector.Models
         /// <param name="latenciesInSeconds"> Latency for each epoch. </param>
         internal ModelState(IList<int> epochIds, IList<float> trainLosses, IList<float> validationLosses, IList<float> latenciesInSeconds)
         {
-            EpochIds = epochIds.ToList();
-            TrainLosses = trainLosses.ToList();
-            ValidationLosses = validationLosses.ToList();
-            LatenciesInSeconds = latenciesInSeconds.ToList();
+            EpochIds = epochIds;
+            TrainLosses = trainLosses;
+            ValidationLosses = validationLosses;
+            LatenciesInSeconds = latenciesInSeconds;
         }
 
         /// <summary>

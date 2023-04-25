@@ -6,10 +6,12 @@
 #nullable disable
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
+using Enums.Extensible.Models;
 
 namespace Enums.Extensible
 {
@@ -47,11 +49,27 @@ namespace Enums.Extensible
             _apiVersion = options.Version;
         }
 
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<DaysOfWeekExtensibleEnum>> GetKnownValueAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetKnownValueAsync(context).ConfigureAwait(false);
+            return Response.FromValue(new DaysOfWeekExtensibleEnum(response.Content.ToObjectFromJson<string>()), response);
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<DaysOfWeekExtensibleEnum> GetKnownValue(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetKnownValue(context);
+            return Response.FromValue(new DaysOfWeekExtensibleEnum(response.Content.ToObjectFromJson<string>()), response);
+        }
+
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetKnownValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetKnownValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetKnownValue");
             scope.Start();
@@ -71,7 +89,7 @@ namespace Enums.Extensible
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValue(RequestContext)']/*" />
-        public virtual Response GetKnownValue(RequestContext context = null)
+        public virtual Response GetKnownValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetKnownValue");
             scope.Start();
@@ -87,11 +105,27 @@ namespace Enums.Extensible
             }
         }
 
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response<DaysOfWeekExtensibleEnum>> GetUnknownValueAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetUnknownValueAsync(context).ConfigureAwait(false);
+            return Response.FromValue(new DaysOfWeekExtensibleEnum(response.Content.ToObjectFromJson<string>()), response);
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response<DaysOfWeekExtensibleEnum> GetUnknownValue(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetUnknownValue(context);
+            return Response.FromValue(new DaysOfWeekExtensibleEnum(response.Content.ToObjectFromJson<string>()), response);
+        }
+
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetUnknownValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetUnknownValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetUnknownValue");
             scope.Start();
@@ -111,7 +145,7 @@ namespace Enums.Extensible
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
-        public virtual Response GetUnknownValue(RequestContext context = null)
+        public virtual Response GetUnknownValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetUnknownValue");
             scope.Start();
@@ -125,6 +159,24 @@ namespace Enums.Extensible
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> PutKnownValueAsync(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await PutKnownValueAsync(BinaryData.FromObjectAsJson(body.ToString()), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response PutKnownValue(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = PutKnownValue(BinaryData.FromObjectAsJson(body.ToString()), context);
+            return response;
         }
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -173,6 +225,24 @@ namespace Enums.Extensible
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual async Task<Response> PutUnknownValueAsync(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await PutUnknownValueAsync(BinaryData.FromObjectAsJson(body.ToString()), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <param name="body"> The DaysOfWeekExtensibleEnum to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        public virtual Response PutUnknownValue(DaysOfWeekExtensibleEnum body, CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = PutUnknownValue(BinaryData.FromObjectAsJson(body.ToString()), context);
+            return response;
         }
 
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -281,6 +351,17 @@ namespace Enums.Extensible
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
+        }
+
+        private static RequestContext DefaultRequestContext = new RequestContext();
+        internal static RequestContext FromCancellationToken(CancellationToken cancellationToken = default)
+        {
+            if (!cancellationToken.CanBeCanceled)
+            {
+                return DefaultRequestContext;
+            }
+
+            return new RequestContext() { CancellationToken = cancellationToken };
         }
 
         private static ResponseClassifier _responseClassifier200;

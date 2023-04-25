@@ -49,40 +49,20 @@ namespace Models.Property.Optional
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<BytesProperty>> GetAllValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BytesProperty>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Bytes.GetAllValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetAllAsync(context).ConfigureAwait(false);
-                return Response.FromValue(BytesProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetAllAsync(context).ConfigureAwait(false);
+            return Response.FromValue(BytesProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<BytesProperty> GetAllValue(CancellationToken cancellationToken = default)
+        public virtual Response<BytesProperty> GetAll(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Bytes.GetAllValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetAll(context);
-                return Response.FromValue(BytesProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetAll(context);
+            return Response.FromValue(BytesProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
@@ -90,7 +70,7 @@ namespace Models.Property.Optional
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetAllAsync(RequestContext context = null)
+        public virtual async Task<Response> GetAllAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Bytes.GetAll");
             scope.Start();
@@ -111,7 +91,7 @@ namespace Models.Property.Optional
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
-        public virtual Response GetAll(RequestContext context = null)
+        public virtual Response GetAll(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Bytes.GetAll");
             scope.Start();
@@ -129,40 +109,20 @@ namespace Models.Property.Optional
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<BytesProperty>> GetDefaultValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BytesProperty>> GetDefaultAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Bytes.GetDefaultValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetDefaultAsync(context).ConfigureAwait(false);
-                return Response.FromValue(BytesProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetDefaultAsync(context).ConfigureAwait(false);
+            return Response.FromValue(BytesProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return the default object. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<BytesProperty> GetDefaultValue(CancellationToken cancellationToken = default)
+        public virtual Response<BytesProperty> GetDefault(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Bytes.GetDefaultValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetDefault(context);
-                return Response.FromValue(BytesProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetDefault(context);
+            return Response.FromValue(BytesProperty.FromResponse(response), response);
         }
 
         /// <summary> Get models that will return the default object. </summary>
@@ -170,7 +130,7 @@ namespace Models.Property.Optional
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetDefaultAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDefaultAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDefaultAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Bytes.GetDefault");
             scope.Start();
@@ -191,7 +151,7 @@ namespace Models.Property.Optional
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetDefault(RequestContext)']/*" />
-        public virtual Response GetDefault(RequestContext context = null)
+        public virtual Response GetDefault(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Bytes.GetDefault");
             scope.Start();

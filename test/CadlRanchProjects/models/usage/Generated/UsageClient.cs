@@ -122,46 +122,26 @@ namespace Models.Usage
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<OutputRecord>> OutputValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<OutputRecord>> OutputAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("UsageClient.OutputValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await OutputAsync(context).ConfigureAwait(false);
-                return Response.FromValue(OutputRecord.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await OutputAsync(context).ConfigureAwait(false);
+            return Response.FromValue(OutputRecord.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<OutputRecord> OutputValue(CancellationToken cancellationToken = default)
+        public virtual Response<OutputRecord> Output(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("UsageClient.OutputValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = Output(context);
-                return Response.FromValue(OutputRecord.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Output(context);
+            return Response.FromValue(OutputRecord.FromResponse(response), response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputAsync(RequestContext)']/*" />
-        public virtual async Task<Response> OutputAsync(RequestContext context = null)
+        public virtual async Task<Response> OutputAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("UsageClient.Output");
             scope.Start();
@@ -181,7 +161,7 @@ namespace Models.Usage
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Output(RequestContext)']/*" />
-        public virtual Response Output(RequestContext context = null)
+        public virtual Response Output(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("UsageClient.Output");
             scope.Start();

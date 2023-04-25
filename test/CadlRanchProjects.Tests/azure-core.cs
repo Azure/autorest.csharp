@@ -36,14 +36,14 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_Core_Basic_get() => Test(async (host) =>
         {
-            User response = await new CoreClient(host, null).GetUserValueAsync(1);
+            User response = await new CoreClient(host, null).GetUserAsync(1);
             Assert.AreEqual("Madge", response.Name);
         });
 
         [Test]
         public Task Azure_Core_Basic_list() => Test(async (host) =>
         {
-            AsyncPageable<User> allPages = new CoreClient(host, null).GetUserValuesAsync(5, 10, null, new[] {"id"}, "id lt 10", new[] {"id", "orders", "etag"}, new[] {"orders"});
+            AsyncPageable<User> allPages = new CoreClient(host, null).GetUsersAsync(5, 10, null, new[] {"id"}, "id lt 10", new[] {"id", "orders", "etag"}, new[] {"orders"});
             await foreach (Page<User> page in allPages.AsPages())
             {
                 User firstUser = page.Values.First();
@@ -67,7 +67,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_Core_Basic_listWithPage() => Test(async (host) =>
         {
-            AsyncPageable<User> allPages = new CoreClient(host, null).GetWithPageValueAsync();
+            AsyncPageable<User> allPages = new CoreClient(host, null).GetWithPageAsync();
             await foreach (Page<User> page in allPages.AsPages())
             {
                 User firstUser = page.Values.First();
@@ -85,7 +85,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_Core_Basic_export() => Test(async (host) =>
         {
-            User response = await new CoreClient(host, null).ExportValueAsync(1, "json");
+            User response = await new CoreClient(host, null).ExportAsync(1, "json");
             Assert.AreEqual("Madge", response.Name);
         });
     }

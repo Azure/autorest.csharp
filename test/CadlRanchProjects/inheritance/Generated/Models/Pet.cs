@@ -16,7 +16,7 @@ namespace Models.Inheritance.Models
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Pet(string name)
+        internal Pet(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 

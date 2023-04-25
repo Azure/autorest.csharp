@@ -49,76 +49,56 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<float?>>> GetNullableFloatValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<float?>>> GetNullableFloatValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("NullableFloatValue.GetNullableFloatValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetNullableFloatValueAsync(context).ConfigureAwait(false);
+            IReadOnlyList<float?> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            List<float?> array = new List<float?>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetNullableFloatValueAsync(context).ConfigureAwait(false);
-                IReadOnlyList<float?> value = default;
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                List<float?> array = new List<float?>();
-                foreach (var item in document.RootElement.EnumerateArray())
+                if (item.ValueKind == JsonValueKind.Null)
                 {
-                    if (item.ValueKind == JsonValueKind.Null)
-                    {
-                        array.Add(null);
-                    }
-                    else
-                    {
-                        array.Add(item.GetSingle());
-                    }
+                    array.Add(null);
                 }
-                value = array;
-                return Response.FromValue(value, response);
+                else
+                {
+                    array.Add(item.GetSingle());
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<float?>> GetNullableFloatValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<float?>> GetNullableFloatValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("NullableFloatValue.GetNullableFloatValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetNullableFloatValue(context);
+            IReadOnlyList<float?> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            List<float?> array = new List<float?>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetNullableFloatValue(context);
-                IReadOnlyList<float?> value = default;
-                using var document = JsonDocument.Parse(response.ContentStream);
-                List<float?> array = new List<float?>();
-                foreach (var item in document.RootElement.EnumerateArray())
+                if (item.ValueKind == JsonValueKind.Null)
                 {
-                    if (item.ValueKind == JsonValueKind.Null)
-                    {
-                        array.Add(null);
-                    }
-                    else
-                    {
-                        array.Add(item.GetSingle());
-                    }
+                    array.Add(null);
                 }
-                value = array;
-                return Response.FromValue(value, response);
+                else
+                {
+                    array.Add(item.GetSingle());
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNullableFloatValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNullableFloatValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NullableFloatValue.GetNullableFloatValue");
             scope.Start();
@@ -138,7 +118,7 @@ namespace Arrays.ItemTypes
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='GetNullableFloatValue(RequestContext)']/*" />
-        public virtual Response GetNullableFloatValue(RequestContext context = null)
+        public virtual Response GetNullableFloatValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NullableFloatValue.GetNullableFloatValue");
             scope.Start();

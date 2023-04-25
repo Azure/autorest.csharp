@@ -3,7 +3,7 @@
   <members>
     <member name="GetCollectionsIntAsync(RequestContext)">
 <example>
-This sample shows how to call GetCollectionsIntAsync and parse the result.
+This sample shows how to call GetCollectionsIntAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetCollectionsIntClient(<1.0.0>);
 
@@ -28,7 +28,7 @@ Schema for <c>CollectionsIntProperty</c>:
     </member>
     <member name="GetCollectionsInt(RequestContext)">
 <example>
-This sample shows how to call GetCollectionsInt and parse the result.
+This sample shows how to call GetCollectionsInt with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetCollectionsIntClient(<1.0.0>);
 

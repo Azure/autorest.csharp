@@ -3,7 +3,7 @@
   <members>
     <member name="GetModelAsync(RequestContext)">
 <example>
-This sample shows how to call GetModelAsync and parse the result.
+This sample shows how to call GetModelAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
 
@@ -26,7 +26,7 @@ Schema for <c>BaseModel</c>:
     </member>
     <member name="GetModel(RequestContext)">
 <example>
-This sample shows how to call GetModel and parse the result.
+This sample shows how to call GetModel with required parameters and parse the result.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient(<1.0.0>);
 
