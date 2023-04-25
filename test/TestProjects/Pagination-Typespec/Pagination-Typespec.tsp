@@ -8,7 +8,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
-using OpenAPI;
 using Azure.ClientGenerator.Core;
 
 //
