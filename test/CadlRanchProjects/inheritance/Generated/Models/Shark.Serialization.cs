@@ -44,7 +44,7 @@ namespace Models.Inheritance.Models
                     continue;
                 }
             }
-            return new Shark(age);
+            return new Shark(kind, age);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

@@ -47,7 +47,7 @@ namespace ModelsInCadl.Models
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
-            RequiredCollection = requiredCollection.ToList();
+            RequiredCollection = requiredCollection;
             RequiredModelRecord = requiredModelRecord;
         }
 

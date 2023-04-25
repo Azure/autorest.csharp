@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace AnomalyDetector.Models
@@ -26,8 +25,8 @@ namespace AnomalyDetector.Models
         /// <param name="results"> Anomaly status and information. </param>
         internal MultivariateLastDetectionResult(IReadOnlyList<VariableState> variableStates, IReadOnlyList<AnomalyState> results)
         {
-            VariableStates = variableStates.ToList();
-            Results = results.ToList();
+            VariableStates = variableStates;
+            Results = results;
         }
 
         /// <summary> Variable Status. </summary>

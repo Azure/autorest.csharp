@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace AnomalyDetector.Models
@@ -35,8 +34,8 @@ namespace AnomalyDetector.Models
         internal UnivariateChangePointDetectionResult(int? period, IReadOnlyList<bool> isChangePoint, IReadOnlyList<float> confidenceScores)
         {
             Period = period;
-            IsChangePoint = isChangePoint.ToList();
-            ConfidenceScores = confidenceScores.ToList();
+            IsChangePoint = isChangePoint;
+            ConfidenceScores = confidenceScores;
         }
 
         /// <summary>
