@@ -248,11 +248,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     }
                 case XmlElementSerialization xmlSerialization:
                     {
-                        var content = new CodeWriterDeclaration("content");
-
-                        writer.Line($"var {content:D} = new {typeof(XmlWriterContent)}();");
-                        writer.ToSerializeCall(xmlSerialization, value, writerName: $"{content}.{nameof(XmlWriterContent.XmlWriter)}");
-                        writer.Line($"{request}.Content = {content};");
+                        writer.WriteMethodBodyStatement(Snippets.Var("content", XmlWriterContentExpression.New(), out var content));
+                        writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.SerializeExpression(content.XmlWriter, xmlSerialization, new FormattableStringToExpression(value)));
+                        writer.WriteMethodBodyStatement(Snippets.Assign(new RequestExpression(request).Content, content));
                         break;
                     }
                 default:

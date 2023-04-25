@@ -21,6 +21,7 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
+using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -228,8 +229,10 @@ namespace AutoRest.CSharp.Output.Models
             MethodBodyStatement addToQuery;
             if (inputParameter.Explode)
             {
-                var paramVariable = new CodeWriterDeclaration("param");
-                addToQuery = new ForeachStatement(paramVariable, convertedValue, uriBuilder.AppendQuery(nameInRequest, paramVariable, format, escape));
+                addToQuery = new ForeachStatement("param", convertedValue, out var paramVariable)
+                {
+                    uriBuilder.AppendQuery(nameInRequest, paramVariable, format, escape)
+                };
             }
             else
             {
@@ -379,7 +382,13 @@ namespace AutoRest.CSharp.Output.Models
                     JsonSerializationMethodsBuilder.SerializeExpression(content.JsonWriter, jsonSerialization, parameter),
                     Assign(request.Content, content)
                 },
-                _ => throw new NotImplementedException("Xml serialization not supported")
+                XmlElementSerialization xmlSerialization => new[]
+                {
+                    Var("content", XmlWriterContentExpression.New(), out var content),
+                    XmlSerializationMethodsBuilder.SerializeExpression(content.XmlWriter, xmlSerialization, parameter),
+                    Assign(request.Content, content)
+                },
+                _ => throw new NotImplementedException()
             };
         }
 
@@ -431,11 +440,6 @@ namespace AutoRest.CSharp.Output.Models
                 return value;
             }
 
-            if (fromType is { IsNullable: true, IsValueType: true })
-            {
-                value = new MemberReference(value, nameof(Nullable<int>.Value));
-            }
-
             if (fromType is { IsFrameworkType: false, Implementation: EnumType enumType } && (!convertOnlyExtendableEnumToString || enumType.IsExtensible))
             {
                 return new EnumExpression(enumType, value.NullConditional(fromType)).ToSerial();
@@ -443,10 +447,10 @@ namespace AutoRest.CSharp.Output.Models
 
             if (fromType.EqualsIgnoreNullable(typeof(ContentType)))
             {
-                return new InvokeInstanceMethodExpression(value, nameof(ToString));
+                return new InvokeInstanceMethodExpression(value.NullableStructValue(fromType), nameof(ToString));
             }
 
-            return value;
+            return value.NullableStructValue(fromType);
         }
 
         private static MethodBodyStatement NullCheckRequestPartValue(ValueExpression value, CSharpType type, MethodBodyStatement inner)
@@ -538,15 +542,15 @@ namespace AutoRest.CSharp.Output.Models
             if (isRequired)
             {
                 return parameter.Type.IsNullable
-                    ? new IfElseStatement(Snippets.IsNotNull(parameter), writeProperty, utf8JsonWriter.WriteNull(serializedName))
+                    ? new IfElseStatement(IsNotNull(parameter), writeProperty, utf8JsonWriter.WriteNull(serializedName))
                     : writeProperty;
             }
 
             var condition = TypeFactory.IsCollectionType(parameter.Type)
                 ? parameter.Type.IsNullable
-                    ? Snippets.And(Snippets.IsNotNull(parameter), Snippets.InvokeOptional.IsCollectionDefined(parameter))
-                    : Snippets.InvokeOptional.IsCollectionDefined(parameter)
-                : Snippets.InvokeOptional.IsDefined(parameter);
+                    ? And(IsNotNull(parameter), InvokeOptional.IsCollectionDefined(parameter))
+                    : InvokeOptional.IsCollectionDefined(parameter)
+                : InvokeOptional.IsDefined(parameter);
 
             return new IfElseStatement(condition, writeProperty, null);
         }

@@ -8,7 +8,11 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Xml;
 using System.Xml.Linq;
+using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -134,11 +138,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization)
         {
+            var xmlWriter = new CodeWriterDeclaration("writer");
             var nameHint = new CodeWriterDeclaration("nameHint");
-            writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} writer, {typeof(string)} {nameHint:D})");
+            writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} {xmlWriter:D}, {typeof(string)} {nameHint:D})");
             using (writer.Scope())
             {
-                writer.ToSerializeCall(serialization, nameHint);
+                writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.SerializeExpression(new XmlWriterExpression(xmlWriter), serialization, nameHint).AsStatement());
             }
             writer.Line();
         }

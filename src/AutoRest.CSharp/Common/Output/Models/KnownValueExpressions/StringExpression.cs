@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     {
         public ValueExpression Length => new MemberReference(Untyped, nameof(string.Length));
 
-        public static ValueExpression Equals(StringExpression left, StringExpression right, StringComparison comparisonType)
-            => new InvokeStaticMethodExpression(typeof(string), nameof(string.Equals), new[]{ left, right, FrameworkEnumValue(comparisonType) });
+        public static BoolExpression Equals(StringExpression left, StringExpression right, StringComparison comparisonType)
+            => new(new InvokeStaticMethodExpression(typeof(string), nameof(string.Equals), new[]{ left, right, FrameworkEnumValue(comparisonType) }));
     }
 }

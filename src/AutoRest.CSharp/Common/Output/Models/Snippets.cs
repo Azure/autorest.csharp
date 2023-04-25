@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -29,6 +30,7 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression ThrowExpression(ValueExpression expression) => new KeywordExpression("throw", expression);
 
         public static ValueExpression NullConditional(Parameter parameter) => new ParameterReference(parameter).NullConditional(parameter.Type);
+        public static ValueExpression NullCoalescing(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("??", left, right);
         public static ValueExpression EnumValue(EnumType type, EnumTypeValue value) => new MemberReference(new TypeReference(type.Type), value.Declaration.Name);
         public static ValueExpression FrameworkEnumValue<TEnum>(TEnum value) where TEnum : struct, Enum => new MemberReference(new TypeReference(typeof(TEnum)), Enum.GetName(value)!);
 
@@ -38,11 +40,11 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression Literal(string? value) => value is null ? Null : new LiteralExpression(value, false);
         public static ValueExpression LiteralU8(string value) => new LiteralExpression(value, true);
 
-        public static ValueExpression Equal(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("==", left, right);
-        public static ValueExpression IsNull(ValueExpression value) => new BinaryOperatorExpression("==", value, Null);
-        public static ValueExpression IsNotNull(ValueExpression value) => new BinaryOperatorExpression("!=", value, Null);
-        public static ValueExpression Or(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("||", left, right);
-        public static ValueExpression And(ValueExpression left, ValueExpression right) => new BinaryOperatorExpression("&&", left, right);
+        public static BoolExpression Equal(ValueExpression left, ValueExpression right) => new(new BinaryOperatorExpression("==", left, right));
+        public static BoolExpression IsNull(ValueExpression value) => new(new BinaryOperatorExpression("==", value, Null));
+        public static BoolExpression IsNotNull(ValueExpression value) => new(new BinaryOperatorExpression("!=", value, Null));
+        public static BoolExpression Or(BoolExpression left, BoolExpression right) => new(new BinaryOperatorExpression("||", left.Untyped, right.Untyped));
+        public static BoolExpression And(BoolExpression left, BoolExpression right) => new(new BinaryOperatorExpression("&&", left.Untyped, right.Untyped));
 
         public static KeywordStatement Continue => new("continue", null);
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);

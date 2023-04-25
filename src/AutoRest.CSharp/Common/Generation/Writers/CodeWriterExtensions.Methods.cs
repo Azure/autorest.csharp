@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
@@ -87,14 +88,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     writer.LineRaw("#endif");
                     break;
-                case ForeachStatement(var item, var enumerable, var body):
+                case ForeachStatement foreachStatement:
                     using (writer.AmbientScope())
                     {
-                        writer.Append($"foreach(var {item:D} in ");
-                        writer.WriteValueExpression(enumerable);
+                        writer.Append($"foreach(var {foreachStatement.Item:D} in ");
+                        writer.WriteValueExpression(foreachStatement.Enumerable);
                         writer.LineRaw(")");
                         writer.LineRaw("{");
-                        WriteMethodBodyStatement(writer, body);
+                        WriteMethodBodyStatement(writer, foreachStatement.Body.AsStatement());
                         writer.LineRaw("}");
                     }
 

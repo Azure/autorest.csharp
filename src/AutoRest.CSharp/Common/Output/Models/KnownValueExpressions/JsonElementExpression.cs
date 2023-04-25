@@ -12,9 +12,10 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 {
     internal sealed record JsonElementExpression(ValueExpression Untyped) : TypedValueExpression(typeof(JsonElement), Untyped)
     {
+        public EnumerableExpression EnumerateArray() => new(new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.EnumerateArray)));
+        public EnumerableExpression EnumerateObject() => new(new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.EnumerateObject)));
+
         public ValueExpression CallClone() => new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.Clone));
-        public ValueExpression EnumerateArray() => new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.EnumerateArray));
-        public ValueExpression EnumerateObject() => new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.EnumerateObject));
         public ValueExpression GetBoolean() => new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.GetBoolean));
         public ValueExpression GetBytesFromBase64(string? format) => InvokeStaticMethodExpression.Extension(typeof(JsonElementExtensions), nameof(JsonElementExtensions.GetBytesFromBase64), Untyped, Literal(format));
         public ValueExpression GetChar() => InvokeStaticMethodExpression.Extension(typeof(JsonElementExtensions), nameof(JsonElementExtensions.GetChar), Untyped);
@@ -32,19 +33,19 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public StringExpression GetString() => new(new InvokeInstanceMethodExpression(Untyped, nameof(JsonElement.GetString)));
         public ValueExpression GetTimeSpan(string? format) => InvokeStaticMethodExpression.Extension(typeof(JsonElementExtensions), nameof(JsonElementExtensions.GetTimeSpan), Untyped, Literal(format));
 
-        public ValueExpression ValueKindEqualsNull()
-            => new BinaryOperatorExpression("==", new MemberReference(Untyped, nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.Null));
+        public BoolExpression ValueKindEqualsNull()
+            => new(new BinaryOperatorExpression("==", new MemberReference(Untyped, nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.Null)));
 
-        public ValueExpression ValueKindEqualsString()
-            => new BinaryOperatorExpression("==", new MemberReference(Untyped, nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.String));
+        public BoolExpression ValueKindEqualsString()
+            => new(new BinaryOperatorExpression("==", new MemberReference(Untyped, nameof(JsonElement.ValueKind)), FrameworkEnumValue(JsonValueKind.String)));
 
         public MethodBodyStatement WriteTo(ValueExpression writer) => new InvokeInstanceMethodStatement(Untyped, nameof(JsonElement.WriteTo), new[]{writer}, false);
 
-        public ValueExpression TryGetProperty(string elementName, string propertyName, out JsonElementExpression discriminator)
+        public BoolExpression TryGetProperty(string elementName, string propertyName, out JsonElementExpression discriminator)
         {
             var discriminatorDeclaration = new CodeWriterDeclaration("discriminator");
             discriminator = new JsonElementExpression(discriminatorDeclaration);
-            return new FormattableStringToExpression($"{elementName}.{nameof(System.Text.Json.JsonElement.TryGetProperty)}({propertyName:L}, out {typeof(JsonElement)} {discriminatorDeclaration:D})");
+            return new BoolExpression(new FormattableStringToExpression($"{elementName}.{nameof(System.Text.Json.JsonElement.TryGetProperty)}({propertyName:L}, out {typeof(JsonElement)} {discriminatorDeclaration:D})"));
         }
     }
 }

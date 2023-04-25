@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var otherValue = new MemberReference(otherParameter, "_value");
             var bodyExpression = enumType.IsStringValueType
                 ? StringExpression.Equals(new StringExpression(value), new StringExpression(otherValue), StringComparison.InvariantCultureIgnoreCase)
-                : new InvokeStaticMethodExpression(enumType.ValueType, nameof(object.Equals), new[]{ value, otherValue });
+                : new(new InvokeStaticMethodExpression(enumType.ValueType, nameof(object.Equals), new[]{ value, otherValue }));
 
             return new Method(signature, bodyExpression);
         }
@@ -163,7 +163,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (EnumTypeValue enumTypeValue in enumType.Values)
             {
                 var enumValue = new ConstantExpression(enumTypeValue.Value);
-                ValueExpression condition;
+                BoolExpression condition;
                 if (enumType.IsStringValueType)
                 {
                     var stringParameter = new StringExpression(valueParameter);
