@@ -16,30 +16,28 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Enums_Extensible_String_getKnownValue() => Test(async (host) =>
         {
-            Response response = await new ExtensibleClient(host, null).GetKnownValueAsync();
-            JsonData result = JsonData.FromBytes(response.Content.ToMemory());
-            Assert.AreEqual(DaysOfWeekExtensibleEnum.Monday, new DaysOfWeekExtensibleEnum((string)result));
+            var response = await new ExtensibleClient(host, null).GetKnownValueValueAsync();
+            Assert.AreEqual(DaysOfWeekExtensibleEnum.Monday, (DaysOfWeekExtensibleEnum)response);
         });
 
         [Test]
         public Task Enums_Extensible_String_putKnownValue() => Test(async (host) =>
         {
-            Response response = await new ExtensibleClient(host, null).GetUnknownValueAsync();
-            JsonData result = JsonData.FromBytes(response.Content.ToMemory());
-            Assert.AreEqual(new DaysOfWeekExtensibleEnum("Weekend"), new DaysOfWeekExtensibleEnum((string)result));
+            var response = await new ExtensibleClient(host, null).GetUnknownValueValueAsync();
+            Assert.AreEqual(new DaysOfWeekExtensibleEnum("Weekend"), (DaysOfWeekExtensibleEnum)response);
         });
 
         [Test]
         public Task Enums_Extensible_String_getUnknownValue() => Test(async (host) =>
         {
-            Response response = await new ExtensibleClient(host, null).PutKnownValueAsync(RequestContent.Create(new JsonData(DaysOfWeekExtensibleEnum.Monday.ToString())));
+            Response response = await new ExtensibleClient(host, null).PutKnownValueAsync(DaysOfWeekExtensibleEnum.Monday);
             Assert.AreEqual(204, response.Status);
         });
 
         [Test]
         public Task Enums_Extensible_String_putUnknownValue() => Test(async (host) =>
         {
-            Response response = await new ExtensibleClient(host, null).PutUnknownValueAsync(RequestContent.Create(new JsonData(new DaysOfWeekExtensibleEnum("Weekend").ToString())));
+            Response response = await new ExtensibleClient(host, null).PutUnknownValueAsync(new DaysOfWeekExtensibleEnum("Weekend"));
             Assert.AreEqual(204, response.Status);
         });
     }

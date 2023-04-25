@@ -40,6 +40,7 @@ namespace AutoRest.CSharp.Input
             public const string GenerateModelFactory = "generate-model-factory";
             public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
             public const string AdditionalIntrinsicTypesToTreatEmptyStringAsNull = "additional-intrinsic-types-to-treat-empty-string-as-null";
+            public const string PublicDiscriminatorProperty = "public-discriminator-property";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -65,6 +66,7 @@ namespace AutoRest.CSharp.Input
             bool skipSerializationFormatXml,
             bool disablePaginationTopRenaming,
             bool generateModelFactory,
+            bool publicDiscriminatorProperty,
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
             string? projectFolder,
@@ -88,6 +90,7 @@ namespace AutoRest.CSharp.Input
             Generation1ConvenienceClient = generation1ConvenienceClient;
             SingleTopLevelClient = singleTopLevelClient;
             GenerateModelFactory = generateModelFactory;
+            PublicDiscriminatorProperty = publicDiscriminatorProperty;
             UnreferencedTypesHandling = unreferencedTypesHandling;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
@@ -156,8 +159,23 @@ namespace AutoRest.CSharp.Input
         public static bool SingleTopLevelClient { get; private set; }
         public static bool SkipSerializationFormatXml { get; private set; }
         public static bool DisablePaginationTopRenaming { get; private set; }
+
+        /// <summary>
+        /// Whether we will generate model factory for this library.
+        /// If true (default), the model factory will be generated. If false, the model factory will not be generated.
+        /// </summary>
         public static bool GenerateModelFactory { get; private set; }
+
+        /// <summary>
+        /// Whether we will generate the discriminator property as public or internal.
+        /// If true, the discriminator property will be public. If false (default), the discriminator property will be internal.
+        /// </summary>
+        public static bool PublicDiscriminatorProperty { get; private set; }
+
         private static IReadOnlyList<string>? _oldModelFactoryEntries;
+        /// <summary>
+        /// This is a shim flag that keeps the old behavior of model factory generation. This configuration should be only used on HLC packages.
+        /// </summary>
         public static IReadOnlyList<string> ModelFactoryForHlc => _oldModelFactoryEntries ?? throw new InvalidOperationException("Configuration has not been initialized");
         public static UnreferencedTypesHandlingOption UnreferencedTypesHandling { get; private set; }
         private static IReadOnlyList<string>? _suppressAbstractBaseClasses;
@@ -200,6 +218,7 @@ namespace AutoRest.CSharp.Input
                 skipSerializationFormatXml: GetOptionBoolValue(autoRest, Options.SkipSerializationFormatXml),
                 disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
                 generateModelFactory: GetOptionBoolValue(autoRest, Options.GenerateModelFactory),
+                publicDiscriminatorProperty: GetOptionBoolValue(autoRest, Options.PublicDiscriminatorProperty),
                 modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
@@ -265,6 +284,8 @@ namespace AutoRest.CSharp.Input
                     return false;
                 case Options.GenerateModelFactory:
                     return true;
+                case Options.PublicDiscriminatorProperty:
+                    return false;
                 default:
                     return null;
             }

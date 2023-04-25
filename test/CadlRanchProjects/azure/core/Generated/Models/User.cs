@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace _Specs_.Azure.Core.Models
@@ -35,7 +34,7 @@ namespace _Specs_.Azure.Core.Models
         {
             Id = id;
             Name = name;
-            Orders = orders.ToList();
+            Orders = orders;
             Etag = etag;
         }
 

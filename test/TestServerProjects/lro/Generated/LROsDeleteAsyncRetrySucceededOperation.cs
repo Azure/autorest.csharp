@@ -27,7 +27,7 @@ namespace lro
         internal LROsDeleteAsyncRetrySucceededOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "LROsDeleteAsyncRetrySucceededOperation");
+            _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "LROsDeleteAsyncRetrySucceededOperation");
         }
 
         /// <inheritdoc />

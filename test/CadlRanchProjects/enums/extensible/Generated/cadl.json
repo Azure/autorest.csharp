@@ -50,7 +50,7 @@
    ],
    "IsExtensible": true,
    "IsNullable": false,
-   "Usage": "None"
+   "Usage": "RoundTrip"
   }
  ],
  "Models": [],
@@ -175,7 +175,7 @@
      "Path": "/enums/extensible/string/known-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "24",
@@ -236,7 +236,7 @@
      "Path": "/enums/extensible/string/unknown-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "29",
@@ -341,7 +341,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "38",
@@ -446,7 +446,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
