@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -31,11 +32,13 @@ namespace AutoRest.CSharp.Input
             public const string SingleTopLevelClient = "single-top-level-client";
             public const string AttachDebuggerFormat = "{0}.attach";
             public const string ProjectFolder = "project-folder";
+            public const string ExistingProjectfolder = "existing-project-folder";
             public const string ProtocolMethodList = "protocol-method-list";
             public const string SkipSerializationFormatXml = "skip-serialization-format-xml";
             public const string DisablePaginationTopRenaming = "disable-pagination-top-renaming";
             public const string SuppressAbstractBaseClasses = "suppress-abstract-base-class";
             public const string UnreferencedTypesHandling = "unreferenced-types-handling";
+            public const string UseOverloadsBetweenProtocolAndConvenience = "use-overloads-between-protocol-and-convenience";
             public const string ModelFactoryForHlc = "model-factory-for-hlc";
             public const string GenerateModelFactory = "generate-model-factory";
             public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
@@ -69,7 +72,9 @@ namespace AutoRest.CSharp.Input
             bool publicDiscriminatorProperty,
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
+            bool useOverloadsBetweenProtocolAndConvenience,
             string? projectFolder,
+            string? existingProjectFolder,
             IReadOnlyList<string> protocolMethodList,
             IReadOnlyList<string> suppressAbstractBaseClasses,
             IReadOnlyList<string> modelsToTreatEmptyStringAsNull,
@@ -92,6 +97,7 @@ namespace AutoRest.CSharp.Input
             GenerateModelFactory = generateModelFactory;
             PublicDiscriminatorProperty = publicDiscriminatorProperty;
             UnreferencedTypesHandling = unreferencedTypesHandling;
+            UseOverloadsBetweenProtocolAndConvenience = useOverloadsBetweenProtocolAndConvenience;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
             {
@@ -103,6 +109,7 @@ namespace AutoRest.CSharp.Input
                 _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
             }
 
+            ExistingProjectFolder = existingProjectFolder == null ? DownloadLatestContract(_absoluteProjectFolder) : Path.GetFullPath(Path.Combine(_absoluteProjectFolder, existingProjectFolder));
             var isAzureProject = ns.StartsWith("Azure.") || ns.StartsWith("Microsoft.Azure");
             // we only check the combination for Azure projects whose namespace starts with "Azure." or "Microsoft.Azure."
             // issue: https://github.com/Azure/autorest.csharp/issues/3179
@@ -138,8 +145,49 @@ namespace AutoRest.CSharp.Input
             _intrinsicTypesToTreatEmptyStringAsNull.UnionWith(additionalIntrinsicTypesToTreatEmptyStringAsNull);
         }
 
+        private static string? DownloadLatestContract(string projectFolder)
+        {
+            if (AzureArm || Generation1ConvenienceClient)
+            {
+                return null;
+            }
+
+            int sdkFolderIndex = projectFolder.LastIndexOf("\\sdk\\", StringComparison.InvariantCultureIgnoreCase);
+            if (sdkFolderIndex == -1)
+            {
+                return null;
+            }
+
+            string rootFolder = projectFolder.Substring(0, sdkFolderIndex);
+            var scriptPath = Path.Join(rootFolder, "eng", "common", "scripts", "Download-Latest-Contract.ps1");
+            if (File.Exists(scriptPath))
+            {
+                string projectDirectory = projectFolder.EndsWith("src") ? Path.GetFullPath(Path.Join(projectFolder, "..")) : projectFolder;
+                var scriptStartInfo = new ProcessStartInfo("pwsh", $"-ExecutionPolicy ByPass {scriptPath} {projectDirectory}")
+                {
+                    RedirectStandardOutput = false,
+                    RedirectStandardError = false,
+                    CreateNoWindow = true,
+                    UseShellExecute = false,
+                    WorkingDirectory = rootFolder
+                };
+                var scriptProcess = Process.Start(scriptStartInfo);
+                if (scriptProcess != null)
+                {
+                    scriptProcess.WaitForExit();
+
+                    string projectName = new DirectoryInfo(projectDirectory).Name;
+                    string relativeProject = projectFolder.Substring(sdkFolderIndex);
+                    return Path.GetFullPath(Path.Join(rootFolder, "..", "sparse-spec", "sdk", projectName, relativeProject));
+                }
+            }
+
+            return null;
+        }
+
         private static string? _outputFolder;
         public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
+        public static string? ExistingProjectFolder { get; private set; }
 
         private static string? _namespace;
         public static string Namespace => _namespace ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -171,6 +219,7 @@ namespace AutoRest.CSharp.Input
         /// If true, the discriminator property will be public. If false (default), the discriminator property will be internal.
         /// </summary>
         public static bool PublicDiscriminatorProperty { get; private set; }
+        public static bool UseOverloadsBetweenProtocolAndConvenience { get; private set; }
 
         private static IReadOnlyList<string>? _oldModelFactoryEntries;
         /// <summary>
@@ -221,7 +270,9 @@ namespace AutoRest.CSharp.Input
                 publicDiscriminatorProperty: GetOptionBoolValue(autoRest, Options.PublicDiscriminatorProperty),
                 modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
+                useOverloadsBetweenProtocolAndConvenience: GetOptionBoolValue(autoRest, Options.UseOverloadsBetweenProtocolAndConvenience),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
+                existingProjectFolder: autoRest.GetValue<string?>(Options.ExistingProjectfolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 suppressAbstractBaseClasses: autoRest.GetValue<string[]?>(Options.SuppressAbstractBaseClasses).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 modelsToTreatEmptyStringAsNull: autoRest.GetValue<string[]?>(Options.ModelsToTreatEmptyStringAsNull).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -286,6 +337,8 @@ namespace AutoRest.CSharp.Input
                     return true;
                 case Options.PublicDiscriminatorProperty:
                     return false;
+                case Options.UseOverloadsBetweenProtocolAndConvenience:
+                    return true;
                 default:
                     return null;
             }

@@ -49,62 +49,42 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDatetimeValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<DateTimeOffset>>> GetDatetimeValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("DatetimeValue.GetDatetimeValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetDatetimeValueAsync(context).ConfigureAwait(false);
+            IReadOnlyList<DateTimeOffset> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            List<DateTimeOffset> array = new List<DateTimeOffset>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetDatetimeValueAsync(context).ConfigureAwait(false);
-                IReadOnlyList<DateTimeOffset> value = default;
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetDateTimeOffset("O"));
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetDateTimeOffset("O"));
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<DateTimeOffset>> GetDatetimeValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<DateTimeOffset>> GetDatetimeValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("DatetimeValue.GetDatetimeValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetDatetimeValue(context);
+            IReadOnlyList<DateTimeOffset> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            List<DateTimeOffset> array = new List<DateTimeOffset>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetDatetimeValue(context);
-                IReadOnlyList<DateTimeOffset> value = default;
-                using var document = JsonDocument.Parse(response.ContentStream);
-                List<DateTimeOffset> array = new List<DateTimeOffset>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetDateTimeOffset("O"));
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetDateTimeOffset("O"));
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DatetimeValue.xml" path="doc/members/member[@name='GetDatetimeValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDatetimeValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDatetimeValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("DatetimeValue.GetDatetimeValue");
             scope.Start();
@@ -124,7 +104,7 @@ namespace Arrays.ItemTypes
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DatetimeValue.xml" path="doc/members/member[@name='GetDatetimeValue(RequestContext)']/*" />
-        public virtual Response GetDatetimeValue(RequestContext context = null)
+        public virtual Response GetDatetimeValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("DatetimeValue.GetDatetimeValue");
             scope.Start();

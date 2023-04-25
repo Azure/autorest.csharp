@@ -49,62 +49,42 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<bool>>> GetBooleanValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<bool>>> GetBooleanValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("BooleanValue.GetBooleanValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetBooleanValueAsync(context).ConfigureAwait(false);
+            IReadOnlyList<bool> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            List<bool> array = new List<bool>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetBooleanValueAsync(context).ConfigureAwait(false);
-                IReadOnlyList<bool> value = default;
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                List<bool> array = new List<bool>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetBoolean());
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetBoolean());
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<bool>> GetBooleanValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<bool>> GetBooleanValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("BooleanValue.GetBooleanValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetBooleanValue(context);
+            IReadOnlyList<bool> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            List<bool> array = new List<bool>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetBooleanValue(context);
-                IReadOnlyList<bool> value = default;
-                using var document = JsonDocument.Parse(response.ContentStream);
-                List<bool> array = new List<bool>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetBoolean());
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetBoolean());
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetBooleanValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetBooleanValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BooleanValue.GetBooleanValue");
             scope.Start();
@@ -124,7 +104,7 @@ namespace Arrays.ItemTypes
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValue(RequestContext)']/*" />
-        public virtual Response GetBooleanValue(RequestContext context = null)
+        public virtual Response GetBooleanValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BooleanValue.GetBooleanValue");
             scope.Start();

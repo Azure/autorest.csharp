@@ -103,41 +103,21 @@ namespace PetStore
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Pet>> ReadValueAsync(int petId, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Pet>> ReadAsync(int petId, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("PetStoreClient.ReadValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await ReadAsync(petId, context).ConfigureAwait(false);
-                return Response.FromValue(Pet.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ReadAsync(petId, context).ConfigureAwait(false);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <summary> Returns a pet. Supports eTags. </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Pet> ReadValue(int petId, CancellationToken cancellationToken = default)
+        public virtual Response<Pet> Read(int petId, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("PetStoreClient.ReadValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = Read(petId, context);
-                return Response.FromValue(Pet.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = Read(petId, context);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <summary> Returns a pet. Supports eTags. </summary>
@@ -146,7 +126,7 @@ namespace PetStore
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='ReadAsync(Int32,RequestContext)']/*" />
-        public virtual async Task<Response> ReadAsync(int petId, RequestContext context = null)
+        public virtual async Task<Response> ReadAsync(int petId, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Read");
             scope.Start();
@@ -168,7 +148,7 @@ namespace PetStore
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='Read(Int32,RequestContext)']/*" />
-        public virtual Response Read(int petId, RequestContext context = null)
+        public virtual Response Read(int petId, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.Read");
             scope.Start();
@@ -326,40 +306,20 @@ namespace PetStore
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Pet>> GetFirstPetValueAsync(int? start = null, CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Pet>> GetFirstPetAsync(int? start = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPetValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetFirstPetAsync(start, context).ConfigureAwait(false);
-                return Response.FromValue(Pet.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetFirstPetAsync(start, context).ConfigureAwait(false);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <param name="start"> The Int32 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Pet> GetFirstPetValue(int? start = null, CancellationToken cancellationToken = default)
+        public virtual Response<Pet> GetFirstPet(int? start = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPetValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetFirstPet(start, context);
-                return Response.FromValue(Pet.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetFirstPet(start, context);
+            return Response.FromValue(Pet.FromResponse(response), response);
         }
 
         /// <param name="start"> The Int32 to use. </param>
@@ -367,7 +327,7 @@ namespace PetStore
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPetAsync(Int32,RequestContext)']/*" />
-        public virtual async Task<Response> GetFirstPetAsync(int? start = null, RequestContext context = null)
+        public virtual async Task<Response> GetFirstPetAsync(int? start, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPet");
             scope.Start();
@@ -388,7 +348,7 @@ namespace PetStore
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/PetStoreClient.xml" path="doc/members/member[@name='GetFirstPet(Int32,RequestContext)']/*" />
-        public virtual Response GetFirstPet(int? start = null, RequestContext context = null)
+        public virtual Response GetFirstPet(int? start, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PetStoreClient.GetFirstPet");
             scope.Start();

@@ -277,18 +277,7 @@ Schema for <c>Pet</c>:
     </member>
     <member name="GetFirstPetAsync(Int32,RequestContext)">
 <example>
-This sample shows how to call GetFirstPetAsync and parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
-
-Response response = await client.GetFirstPetAsync();
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-This sample shows how to call GetFirstPetAsync with all parameters, and how to parse the result.
+This sample shows how to call GetFirstPetAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);
@@ -318,18 +307,7 @@ Schema for <c>Pet</c>:
     </member>
     <member name="GetFirstPet(Int32,RequestContext)">
 <example>
-This sample shows how to call GetFirstPet and parse the result.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new PetStoreClient(endpoint);
-
-Response response = client.GetFirstPet();
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
-This sample shows how to call GetFirstPet with all parameters, and how to parse the result.
+This sample shows how to call GetFirstPet with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PetStoreClient(endpoint);

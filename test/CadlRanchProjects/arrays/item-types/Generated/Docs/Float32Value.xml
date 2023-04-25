@@ -3,7 +3,7 @@
   <members>
     <member name="GetFloat32ValueAsync(RequestContext)">
 <example>
-This sample shows how to call GetFloat32ValueAsync and parse the result.
+This sample shows how to call GetFloat32ValueAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetFloat32ValueClient(<1.0.0>);
 
@@ -16,7 +16,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetFloat32Value(RequestContext)">
 <example>
-This sample shows how to call GetFloat32Value and parse the result.
+This sample shows how to call GetFloat32Value with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetFloat32ValueClient(<1.0.0>);
 

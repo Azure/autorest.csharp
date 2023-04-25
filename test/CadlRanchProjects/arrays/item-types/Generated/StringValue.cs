@@ -49,62 +49,42 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<string>>> GetStringValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<string>>> GetStringValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringValue.GetStringValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetStringValueAsync(context).ConfigureAwait(false);
+            IReadOnlyList<string> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            List<string> array = new List<string>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetStringValueAsync(context).ConfigureAwait(false);
-                IReadOnlyList<string> value = default;
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                List<string> array = new List<string>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetString());
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetString());
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<string>> GetStringValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<string>> GetStringValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("StringValue.GetStringValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetStringValue(context);
+            IReadOnlyList<string> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            List<string> array = new List<string>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetStringValue(context);
-                IReadOnlyList<string> value = default;
-                using var document = JsonDocument.Parse(response.ContentStream);
-                List<string> array = new List<string>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetString());
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetString());
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetStringValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetStringValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringValue.GetStringValue");
             scope.Start();
@@ -124,7 +104,7 @@ namespace Arrays.ItemTypes
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValue(RequestContext)']/*" />
-        public virtual Response GetStringValue(RequestContext context = null)
+        public virtual Response GetStringValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringValue.GetStringValue");
             scope.Start();
