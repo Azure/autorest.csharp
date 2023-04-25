@@ -10,15 +10,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
 
-namespace ModelsInCadl.Models
+namespace MgmtDiscriminator.Models
 {
-    /// <summary> Derived model. </summary>
+    /// <summary> The DerivedModel. </summary>
     public partial class DerivedModel : BaseModel
     {
         /// <summary> Initializes a new instance of DerivedModel. </summary>
-        /// <param name="requiredCollection"> Required collection. </param>
+        /// <param name="requiredCollection"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredCollection"/> is null. </exception>
-        public DerivedModel(IEnumerable<CollectionItem> requiredCollection)
+        public DerivedModel(IEnumerable<string> requiredCollection)
         {
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
 
@@ -26,13 +26,14 @@ namespace ModelsInCadl.Models
         }
 
         /// <summary> Initializes a new instance of DerivedModel. </summary>
-        /// <param name="requiredCollection"> Required collection. </param>
-        internal DerivedModel(IList<CollectionItem> requiredCollection)
+        /// <param name="optionalString"></param>
+        /// <param name="requiredCollection"></param>
+        internal DerivedModel(string optionalString, IList<string> requiredCollection) : base(optionalString)
         {
             RequiredCollection = requiredCollection;
         }
 
-        /// <summary> Required collection. </summary>
-        public IList<CollectionItem> RequiredCollection { get; }
+        /// <summary> Gets the required collection. </summary>
+        public IList<string> RequiredCollection { get; }
     }
 }

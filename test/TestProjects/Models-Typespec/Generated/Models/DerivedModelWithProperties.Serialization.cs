@@ -5,51 +5,51 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 
 namespace ModelsInCadl.Models
 {
-    public partial class DerivedModelWithDiscriminatorA : IUtf8JsonSerializable
+    public partial class DerivedModelWithProperties : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredString"u8);
-            writer.WriteStringValue(RequiredString);
-            writer.WritePropertyName("discriminatorProperty"u8);
-            writer.WriteStringValue(DiscriminatorProperty);
+            writer.WritePropertyName("requiredCollection"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollection)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
             if (Optional.IsDefined(OptionalPropertyOnBase))
             {
                 writer.WritePropertyName("optionalPropertyOnBase"u8);
                 writer.WriteStringValue(OptionalPropertyOnBase);
             }
-            writer.WritePropertyName("requiredPropertyOnBase"u8);
-            writer.WriteNumberValue(RequiredPropertyOnBase);
             writer.WriteEndObject();
         }
 
-        internal static DerivedModelWithDiscriminatorA DeserializeDerivedModelWithDiscriminatorA(JsonElement element)
+        internal static DerivedModelWithProperties DeserializeDerivedModelWithProperties(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            string requiredString = default;
-            string discriminatorProperty = default;
+            IList<CollectionItem> requiredCollection = default;
             Optional<string> optionalPropertyOnBase = default;
-            int requiredPropertyOnBase = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredString"u8))
+                if (property.NameEquals("requiredCollection"u8))
                 {
-                    requiredString = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("discriminatorProperty"u8))
-                {
-                    discriminatorProperty = property.Value.GetString();
+                    List<CollectionItem> array = new List<CollectionItem>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(CollectionItem.DeserializeCollectionItem(item));
+                    }
+                    requiredCollection = array;
                     continue;
                 }
                 if (property.NameEquals("optionalPropertyOnBase"u8))
@@ -57,25 +57,20 @@ namespace ModelsInCadl.Models
                     optionalPropertyOnBase = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("requiredPropertyOnBase"u8))
-                {
-                    requiredPropertyOnBase = property.Value.GetInt32();
-                    continue;
-                }
             }
-            return new DerivedModelWithDiscriminatorA(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, requiredString);
+            return new DerivedModelWithProperties(optionalPropertyOnBase, requiredCollection);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static DerivedModelWithDiscriminatorA FromResponse(Response response)
+        internal static DerivedModelWithProperties FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeDerivedModelWithDiscriminatorA(document.RootElement);
+            return DeserializeDerivedModelWithProperties(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        internal virtual RequestContent ToRequestContent()
         {
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(this);

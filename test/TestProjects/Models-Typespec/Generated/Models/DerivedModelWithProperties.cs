@@ -12,22 +12,23 @@ using Azure.Core;
 
 namespace ModelsInCadl.Models
 {
-    /// <summary> Derived model. </summary>
-    public partial class DerivedModel : BaseModel
+    /// <summary> Derived model with properties. </summary>
+    public partial class DerivedModelWithProperties : BaseModelWithProperties
     {
-        /// <summary> Initializes a new instance of DerivedModel. </summary>
+        /// <summary> Initializes a new instance of DerivedModelWithProperties. </summary>
         /// <param name="requiredCollection"> Required collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredCollection"/> is null. </exception>
-        public DerivedModel(IEnumerable<CollectionItem> requiredCollection)
+        public DerivedModelWithProperties(IEnumerable<CollectionItem> requiredCollection)
         {
             Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
 
             RequiredCollection = requiredCollection.ToList();
         }
 
-        /// <summary> Initializes a new instance of DerivedModel. </summary>
+        /// <summary> Initializes a new instance of DerivedModelWithProperties. </summary>
+        /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
         /// <param name="requiredCollection"> Required collection. </param>
-        internal DerivedModel(IList<CollectionItem> requiredCollection)
+        internal DerivedModelWithProperties(string optionalPropertyOnBase, IList<CollectionItem> requiredCollection) : base(optionalPropertyOnBase)
         {
             RequiredCollection = requiredCollection;
         }

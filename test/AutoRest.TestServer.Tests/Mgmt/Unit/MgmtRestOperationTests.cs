@@ -65,6 +65,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 skipSerializationFormatXml: false,
                 disablePaginationTopRenaming: false,
                 generateModelFactory: true,
+                publicDiscriminatorProperty: false,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 ambiguityHandling: Configuration.AmbiguityHandlingOption.UseOverload,

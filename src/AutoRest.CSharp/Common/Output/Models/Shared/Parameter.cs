@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
@@ -196,6 +197,17 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
 
             return null;
+        }
+
+        public static readonly IEqualityComparer<Parameter> EqualityComparerByType = new ParameterByTypeEqualityComparer();
+        private struct ParameterByTypeEqualityComparer : IEqualityComparer<Parameter>
+        {
+            public bool Equals(Parameter? x, Parameter? y)
+            {
+                return Object.Equals(x?.Type, y?.Type);
+            }
+
+            public int GetHashCode([DisallowNull] Parameter obj) => obj.Type.GetHashCode();
         }
     }
 
