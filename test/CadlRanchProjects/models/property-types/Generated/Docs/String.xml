@@ -3,7 +3,7 @@
   <members>
     <member name="GetStringAsync(RequestContext)">
 <example>
-This sample shows how to call GetStringAsync and parse the result.
+This sample shows how to call GetStringAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetStringClient(<1.0.0>);
 
@@ -28,7 +28,7 @@ Schema for <c>StringProperty</c>:
     </member>
     <member name="GetString(RequestContext)">
 <example>
-This sample shows how to call GetString and parse the result.
+This sample shows how to call GetString with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetStringClient(<1.0.0>);
 

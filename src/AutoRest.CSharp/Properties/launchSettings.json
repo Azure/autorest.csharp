@@ -184,6 +184,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
     },
+    "ConvenienceUpdate-Typespec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ConvenienceUpdate-Typespec\\Generated --existing-project-folder $(SolutionDir)\\test\\TestProjects\\ConvenienceInitial-Typespec\\Generated"
+    },
     "custom-baseUrl": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\custom-baseUrl\\Generated"
@@ -615,6 +619,10 @@
     "typespec-enums/extensible": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\enums\\extensible\\Generated"
+    },
+    "typespec-enums/fixed": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\enums\\fixed\\Generated"
     },
     "typespec-hello": {
       "commandName": "Project",

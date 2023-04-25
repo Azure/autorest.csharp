@@ -3,7 +3,7 @@
   <members>
     <member name="GetEnumAsync(RequestContext)">
 <example>
-This sample shows how to call GetEnumAsync and parse the result.
+This sample shows how to call GetEnumAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetEnumClient(<1.0.0>);
 
@@ -28,7 +28,7 @@ Schema for <c>EnumProperty</c>:
     </member>
     <member name="GetEnum(RequestContext)">
 <example>
-This sample shows how to call GetEnum and parse the result.
+This sample shows how to call GetEnum with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetEnumClient(<1.0.0>);
 

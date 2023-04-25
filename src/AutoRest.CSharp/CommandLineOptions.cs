@@ -13,6 +13,9 @@ namespace AutoRest.CSharp
         [Option('p', "project-path", SetName = "basePath", Required = false, Default = null, HelpText = "Path to the project directory.  This is used instead of --standalone")]
         public string? ProjectPath { get; set; }
 
+        [Option(longName: "existing-project-folder", Required = false, Default = null, HelpText = "Existing project folder.")]
+        public string? ExistingProjectFolder { get; set; }
+
         [Option('s', "standalone", SetName = "basePath", Required = false, Default = null, HelpText = "Path to the generated directory.")]
         public string? Standalone { get; set; }
 

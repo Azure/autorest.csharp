@@ -57,7 +57,7 @@ Schema for <c>InputRecord</c>:
     </member>
     <member name="OutputAsync(RequestContext)">
 <example>
-This sample shows how to call OutputAsync and parse the result.
+This sample shows how to call OutputAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new UsageClient();
 
@@ -82,7 +82,7 @@ Schema for <c>OutputRecord</c>:
     </member>
     <member name="Output(RequestContext)">
 <example>
-This sample shows how to call Output and parse the result.
+This sample shows how to call Output with required parameters and parse the result.
 <code><![CDATA[
 var client = new UsageClient();
 

@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace ModelsInCadl.Models
@@ -35,6 +34,7 @@ namespace ModelsInCadl.Models
         /// <param name="optionalIntList"> Optional int collection. </param>
         /// <param name="optionalModelCollection"> Optional model collection. </param>
         /// <param name="optionalModel"> Optional model. </param>
+        /// <param name="optionalModelWithPropertiesOnBase"> Optional model with properties on base. </param>
         /// <param name="optionalFixedStringEnum"> Optional fixed string enum. </param>
         /// <param name="optionalExtensibleEnum"> Optional extensible enum. </param>
         /// <param name="optionalIntRecord"> Optional int record. </param>
@@ -43,14 +43,15 @@ namespace ModelsInCadl.Models
         /// <param name="optionalPlainDate"> Optional plainDate. </param>
         /// <param name="optionalPlainTime"> Optional plainTime. </param>
         /// <param name="optionalCollectionWithNullableIntElement"> Optional collection of which the element is a nullable int. </param>
-        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement)
+        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, DerivedModelWithProperties optionalModelWithPropertiesOnBase, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement)
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
-            OptionalStringList = optionalStringList.ToList();
-            OptionalIntList = optionalIntList.ToList();
-            OptionalModelCollection = optionalModelCollection.ToList();
+            OptionalStringList = optionalStringList;
+            OptionalIntList = optionalIntList;
+            OptionalModelCollection = optionalModelCollection;
             OptionalModel = optionalModel;
+            OptionalModelWithPropertiesOnBase = optionalModelWithPropertiesOnBase;
             OptionalFixedStringEnum = optionalFixedStringEnum;
             OptionalExtensibleEnum = optionalExtensibleEnum;
             OptionalIntRecord = optionalIntRecord;
@@ -58,7 +59,7 @@ namespace ModelsInCadl.Models
             OptionalModelRecord = optionalModelRecord;
             OptionalPlainDate = optionalPlainDate;
             OptionalPlainTime = optionalPlainTime;
-            OptionalCollectionWithNullableIntElement = optionalCollectionWithNullableIntElement.ToList();
+            OptionalCollectionWithNullableIntElement = optionalCollectionWithNullableIntElement;
         }
 
         /// <summary> Optional string, illustrating an optional reference type property. </summary>
@@ -73,6 +74,8 @@ namespace ModelsInCadl.Models
         public IList<CollectionItem> OptionalModelCollection { get; }
         /// <summary> Optional model. </summary>
         public DerivedModel OptionalModel { get; set; }
+        /// <summary> Optional model with properties on base. </summary>
+        public DerivedModelWithProperties OptionalModelWithPropertiesOnBase { get; set; }
         /// <summary> Optional fixed string enum. </summary>
         public FixedStringEnum? OptionalFixedStringEnum { get; set; }
         /// <summary> Optional extensible enum. </summary>

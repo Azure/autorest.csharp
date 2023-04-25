@@ -35,9 +35,9 @@ using Azure.Core;
 @doc("float fixed enum")
 @fixed
 enum FloatFixedEnum {
-    One: 1.0,
-    Two: 2.0,
-    Four: 4.0,
+    One: 1.1,
+    Two: 2.2,
+    Four: 4.4,
 }
 
 @doc("int fixed enum")

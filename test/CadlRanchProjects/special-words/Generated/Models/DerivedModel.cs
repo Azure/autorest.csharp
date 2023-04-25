@@ -14,15 +14,25 @@ namespace SpecialWords.Models
     public partial class DerivedModel : BaseModel
     {
         /// <summary> Initializes a new instance of DerivedModel. </summary>
-        /// <param name="modelKind"> Discriminator. </param>
         /// <param name="derivedName"></param>
         /// <param name="for"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="derivedName"/> or <paramref name="for"/> is null. </exception>
-        public DerivedModel(string modelKind, string derivedName, string @for) : base(modelKind)
+        public DerivedModel(string derivedName, string @for)
         {
             Argument.AssertNotNull(derivedName, nameof(derivedName));
             Argument.AssertNotNull(@for, nameof(@for));
 
+            ModelKind = "derived";
+            DerivedName = derivedName;
+            For = @for;
+        }
+
+        /// <summary> Initializes a new instance of DerivedModel. </summary>
+        /// <param name="modelKind"> Discriminator. </param>
+        /// <param name="derivedName"></param>
+        /// <param name="for"></param>
+        internal DerivedModel(string modelKind, string derivedName, string @for) : base(modelKind)
+        {
             DerivedName = derivedName;
             For = @for;
         }

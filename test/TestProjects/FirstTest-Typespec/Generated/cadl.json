@@ -65,7 +65,7 @@
    "Name": "IntExtensibleEnum",
    "Namespace": "TypeSpecFirstTest",
    "Description": "Int based extensible enum",
-   "EnumValueType": "Int32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "11",
@@ -92,7 +92,7 @@
    "Name": "FloatExtensibleEnum",
    "Namespace": "TypeSpecFirstTest",
    "Description": "Float based extensible enum",
-   "EnumValueType": "Int32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "15",
@@ -119,22 +119,22 @@
    "Name": "FloatFixedEnum",
    "Namespace": "TypeSpecFirstTest",
    "Description": "float fixed enum",
-   "EnumValueType": "Int32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "19",
      "Name": "One",
-     "Value": 1
+     "Value": 1.1
     },
     {
      "$id": "20",
      "Name": "Two",
-     "Value": 2
+     "Value": 2.2
     },
     {
      "$id": "21",
      "Name": "Four",
-     "Value": 4
+     "Value": 4.4
     }
    ],
    "IsExtensible": false,
@@ -146,7 +146,7 @@
    "Name": "IntFixedEnum",
    "Namespace": "TypeSpecFirstTest",
    "Description": "int fixed enum",
-   "EnumValueType": "Int32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "23",

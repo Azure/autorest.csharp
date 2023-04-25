@@ -3,7 +3,7 @@
   <members>
     <member name="GetCollectionsModelAsync(RequestContext)">
 <example>
-This sample shows how to call GetCollectionsModelAsync and parse the result.
+This sample shows how to call GetCollectionsModelAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetCollectionsModelClient(<1.0.0>);
 
@@ -32,7 +32,7 @@ Schema for <c>CollectionsModelProperty</c>:
     </member>
     <member name="GetCollectionsModel(RequestContext)">
 <example>
-This sample shows how to call GetCollectionsModel and parse the result.
+This sample shows how to call GetCollectionsModel with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetCollectionsModelClient(<1.0.0>);
 

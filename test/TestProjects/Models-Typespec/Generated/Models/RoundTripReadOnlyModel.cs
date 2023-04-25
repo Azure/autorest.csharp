@@ -79,20 +79,20 @@ namespace ModelsInCadl.Models
             RequiredReadonlyExtensibleEnum = requiredReadonlyExtensibleEnum;
             OptionalReadonlyFixedStringEnum = optionalReadonlyFixedStringEnum;
             OptionalReadonlyExtensibleEnum = optionalReadonlyExtensibleEnum;
-            RequiredReadonlyStringList = requiredReadonlyStringList.ToList();
-            RequiredReadonlyIntList = requiredReadonlyIntList.ToList();
-            RequiredReadOnlyModelCollection = requiredReadOnlyModelCollection.ToList();
+            RequiredReadonlyStringList = requiredReadonlyStringList;
+            RequiredReadonlyIntList = requiredReadonlyIntList;
+            RequiredReadOnlyModelCollection = requiredReadOnlyModelCollection;
             RequiredReadOnlyIntRecord = requiredReadOnlyIntRecord;
             RequiredStringRecord = requiredStringRecord;
             RequiredReadOnlyModelRecord = requiredReadOnlyModelRecord;
-            OptionalReadonlyStringList = optionalReadonlyStringList.ToList();
-            OptionalReadonlyIntList = optionalReadonlyIntList.ToList();
-            OptionalReadOnlyModelCollection = optionalReadOnlyModelCollection.ToList();
+            OptionalReadonlyStringList = optionalReadonlyStringList;
+            OptionalReadonlyIntList = optionalReadonlyIntList;
+            OptionalReadOnlyModelCollection = optionalReadOnlyModelCollection;
             OptionalReadOnlyIntRecord = optionalReadOnlyIntRecord;
             OptionalReadOnlyStringRecord = optionalReadOnlyStringRecord;
             OptionalModelRecord = optionalModelRecord;
-            RequiredCollectionWithNullableIntElement = requiredCollectionWithNullableIntElement.ToList();
-            OptionalCollectionWithNullableBooleanElement = optionalCollectionWithNullableBooleanElement.ToList();
+            RequiredCollectionWithNullableIntElement = requiredCollectionWithNullableIntElement;
+            OptionalCollectionWithNullableBooleanElement = optionalCollectionWithNullableBooleanElement;
         }
 
         /// <summary> Required string, illustrating a readonly reference type property. </summary>

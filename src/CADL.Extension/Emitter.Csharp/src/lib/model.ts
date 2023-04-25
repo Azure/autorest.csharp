@@ -372,7 +372,7 @@ export function getInputType(
 
         function enumMemberType(member: EnumMember): string {
             if (typeof member.value === "number") {
-                return "Int32";
+                return "Float32";
             }
             return "String";
         }

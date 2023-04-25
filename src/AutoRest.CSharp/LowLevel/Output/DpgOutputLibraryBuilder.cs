@@ -107,8 +107,8 @@ namespace AutoRest.CSharp.Output.Models
             //only want to create one instance of the default derived per polymorphic set
             ModelTypeProvider? defaultDerivedType = null;
             bool isBasePolyType = derivedTypesArray.Length > 0 && model.DiscriminatorPropertyName is not null;
-            bool isChildPolyTYpe = model.DiscriminatorValue is not null;
-            if (isBasePolyType || isChildPolyTYpe)
+            bool isChildPolyType = model.DiscriminatorValue is not null;
+            if (isBasePolyType || isChildPolyType)
             {
                 InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
 
@@ -131,8 +131,10 @@ namespace AutoRest.CSharp.Output.Models
                         actualBase,
                         Array.Empty<InputModelType>(),
                         "Unknown", //TODO: do we need to support extensible enum / int values?
-                        null,
-                        true);
+                        null)
+                    {
+                        IsUnknownDiscriminatorModel = true
+                    };
                     defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
                     defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
                     models.Add(unknownDerviedType, defaultDerivedType);
@@ -178,7 +180,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private static string UpdateOperationName(InputOperation operation, string clientName)
-            => operation.Name.ToCleanName().RenameGetMethod(clientName).RenameListToGet(clientName);
+            => operation.CleanName.RenameGetMethod(clientName).RenameListToGet(clientName);
 
         private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
         {

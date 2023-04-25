@@ -3,7 +3,7 @@
   <members>
     <member name="GetUnknownValueAsync(RequestContext)">
 <example>
-This sample shows how to call GetUnknownValueAsync and parse the result.
+This sample shows how to call GetUnknownValueAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetUnknownValueClient(<1.0.0>);
 
@@ -16,7 +16,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetUnknownValue(RequestContext)">
 <example>
-This sample shows how to call GetUnknownValue and parse the result.
+This sample shows how to call GetUnknownValue with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetUnknownValueClient(<1.0.0>);
 
