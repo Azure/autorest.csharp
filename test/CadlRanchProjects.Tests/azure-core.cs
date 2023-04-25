@@ -6,14 +6,13 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
 using NUnit.Framework;
-using YamlDotNet.Core.Tokens;
 
 namespace CadlRanchProjects.Tests
 {
-    public class AzureCoreTests : CadlRanchTestBase
+    public class AzureCoreBasicTests : CadlRanchTestBase
     {
         [Test]
-        public Task Azure_Core_createOrUpdate() => Test(async (host) =>
+        public Task Azure_Core_Basic_createOrUpdate() => Test(async (host) =>
         {
             var value = new
             {
@@ -28,21 +27,21 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Azure_Core_createOrReplace() => Test(async (host) =>
+        public Task Azure_Core_Basic_createOrReplace() => Test(async (host) =>
         {
             User response = await new CoreClient(host, null).CreateOrReplaceAsync(1, new User("Madge"));
             Assert.AreEqual("Madge", response.Name);
         });
 
         [Test]
-        public Task Azure_Core_get() => Test(async (host) =>
+        public Task Azure_Core_Basic_get() => Test(async (host) =>
         {
             User response = await new CoreClient(host, null).GetUserValueAsync(1);
             Assert.AreEqual("Madge", response.Name);
         });
 
         [Test]
-        public Task Azure_Core_list() => Test(async (host) =>
+        public Task Azure_Core_Basic_list() => Test(async (host) =>
         {
             AsyncPageable<User> allPages = new CoreClient(host, null).GetUserValuesAsync(5, 10, null, new[] {"id"}, "id lt 10", new[] {"id", "orders", "etag"}, new[] {"orders"});
             await foreach (Page<User> page in allPages.AsPages())
@@ -66,7 +65,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Azure_Core_listWithPage() => Test(async (host) =>
+        public Task Azure_Core_Basic_listWithPage() => Test(async (host) =>
         {
             AsyncPageable<User> allPages = new CoreClient(host, null).GetWithPageValueAsync();
             await foreach (Page<User> page in allPages.AsPages())
@@ -77,14 +76,14 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        public Task Azure_Core_delete() => Test(async (host) =>
+        public Task Azure_Core_Basic_delete() => Test(async (host) =>
         {
             var response = await new CoreClient(host, null).DeleteAsync(1);
             Assert.AreEqual(204, response.Status);
         });
 
         [Test]
-        public Task Azure_Core_export() => Test(async (host) =>
+        public Task Azure_Core_Basic_export() => Test(async (host) =>
         {
             User response = await new CoreClient(host, null).ExportValueAsync(1, "json");
             Assert.AreEqual("Madge", response.Name);
