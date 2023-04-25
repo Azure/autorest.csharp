@@ -78,7 +78,7 @@ namespace NamedTypeSymbolExtensionsTests
             Configuration.Initialize(
                 outputFolder: "Generated",
                 ns: "",
-                name: "",
+                libraryName: "",
                 sharedSourceFolders: Array.Empty<string>(),
                 saveInputs: false,
                 azureArm: false,
