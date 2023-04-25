@@ -49,40 +49,20 @@ namespace Models.Property.Types
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<StringProperty>> GetStringValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<StringProperty>> GetStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("String.GetStringValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetStringAsync(context).ConfigureAwait(false);
-                return Response.FromValue(StringProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetStringAsync(context).ConfigureAwait(false);
+            return Response.FromValue(StringProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<StringProperty> GetStringValue(CancellationToken cancellationToken = default)
+        public virtual Response<StringProperty> GetString(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("String.GetStringValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetString(context);
-                return Response.FromValue(StringProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetString(context);
+            return Response.FromValue(StringProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
@@ -90,7 +70,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetStringAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetStringAsync(RequestContext context = null)
+        public virtual async Task<Response> GetStringAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("String.GetString");
             scope.Start();
@@ -111,7 +91,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/String.xml" path="doc/members/member[@name='GetString(RequestContext)']/*" />
-        public virtual Response GetString(RequestContext context = null)
+        public virtual Response GetString(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("String.GetString");
             scope.Start();

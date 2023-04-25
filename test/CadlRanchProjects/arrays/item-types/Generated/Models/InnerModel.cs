@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace Arrays.ItemTypes.Models
@@ -32,7 +31,7 @@ namespace Arrays.ItemTypes.Models
         internal InnerModel(string property, IList<InnerModel> children)
         {
             Property = property;
-            Children = children.ToList();
+            Children = children;
         }
 
         /// <summary> Required string property. </summary>

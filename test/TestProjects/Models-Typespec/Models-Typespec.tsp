@@ -27,7 +27,12 @@ using Azure.Core;
 
 @doc("Base model")
 model BaseModel {
+}
 
+@doc("Base model with properties")
+model BaseModelWithProperties {
+  @doc("Optional properties on base")
+  optionalPropertyOnBase?: string;
 }
 
 @doc("Derived model")
@@ -36,9 +41,21 @@ model DerivedModel extends BaseModel {
   requiredCollection: CollectionItem[];
 }
 
+@doc("Derived model with properties")
+model DerivedModelWithProperties extends BaseModelWithProperties {
+  @doc("Required collection")
+  requiredCollection: CollectionItem[];
+}
+
 @discriminator("discriminatorProperty")
 @doc("Base model with discriminator property.")
-model BaseModelWithDiscriminator {}
+model BaseModelWithDiscriminator {
+  @doc("Optional property on base")
+  optionalPropertyOnBase?: string;
+
+  @doc("Required property on base")
+  requiredPropertyOnBase: int32;
+}
 
 @doc("Deriver model with discriminator property.")
 model DerivedModelWithDiscriminatorA extends BaseModelWithDiscriminator {
@@ -237,6 +254,9 @@ model RoundTripOptionalModel {
 
   @doc("Optional model.")
   optionalModel?: DerivedModel;
+
+  @doc("Optional model with properties on base")
+  optionalModelWithPropertiesOnBase?: DerivedModelWithProperties;
 
   @doc("Optional fixed string enum")
   optionalFixedStringEnum?: FixedStringEnum;

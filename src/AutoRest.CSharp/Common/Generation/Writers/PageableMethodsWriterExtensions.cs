@@ -189,7 +189,7 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private static bool ContainsRequestContext(IReadOnlyCollection<Parameter>? parameters) =>
-            parameters != null && parameters.Contains(KnownParameters.RequestContext);
+            parameters != null && (parameters.Contains(KnownParameters.RequestContext) || parameters.Contains(KnownParameters.RequestContextRequired));
 
         private static FormattableString? GetCreateRequestCall(Reference? restClientReference, RestClientMethod? createRequestMethod)
         {

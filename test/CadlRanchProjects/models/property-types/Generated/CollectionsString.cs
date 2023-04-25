@@ -49,40 +49,20 @@ namespace Models.Property.Types
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<CollectionsStringProperty>> GetCollectionsStringValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CollectionsStringProperty>> GetCollectionsStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CollectionsString.GetCollectionsStringValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetCollectionsStringAsync(context).ConfigureAwait(false);
-                return Response.FromValue(CollectionsStringProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetCollectionsStringAsync(context).ConfigureAwait(false);
+            return Response.FromValue(CollectionsStringProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<CollectionsStringProperty> GetCollectionsStringValue(CancellationToken cancellationToken = default)
+        public virtual Response<CollectionsStringProperty> GetCollectionsString(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CollectionsString.GetCollectionsStringValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetCollectionsString(context);
-                return Response.FromValue(CollectionsStringProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetCollectionsString(context);
+            return Response.FromValue(CollectionsStringProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
@@ -90,7 +70,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionsString.xml" path="doc/members/member[@name='GetCollectionsStringAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetCollectionsStringAsync(RequestContext context = null)
+        public virtual async Task<Response> GetCollectionsStringAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("CollectionsString.GetCollectionsString");
             scope.Start();
@@ -111,7 +91,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionsString.xml" path="doc/members/member[@name='GetCollectionsString(RequestContext)']/*" />
-        public virtual Response GetCollectionsString(RequestContext context = null)
+        public virtual Response GetCollectionsString(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("CollectionsString.GetCollectionsString");
             scope.Start();

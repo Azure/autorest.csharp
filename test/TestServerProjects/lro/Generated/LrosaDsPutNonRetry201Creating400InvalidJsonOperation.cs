@@ -29,7 +29,7 @@ namespace lro
         internal LrosaDsPutNonRetry201Creating400InvalidJsonOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<Product> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<Product>(clientDiagnostics, nextLinkOperation, response, "LrosaDsPutNonRetry201Creating400InvalidJsonOperation");
+            _operation = new OperationInternal<Product>(nextLinkOperation, clientDiagnostics, response, "LrosaDsPutNonRetry201Creating400InvalidJsonOperation");
         }
 
         /// <inheritdoc />

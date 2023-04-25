@@ -942,9 +942,9 @@ var data = new {
     floatExtensibleEnumCollection = new[] {
         "1"
     },
-    floatFixedEnum = "1",
+    floatFixedEnum = "1.1",
     floatFixedEnumCollection = new[] {
-        "1"
+        "1.1"
     },
     intFixedEnum = "1",
     intFixedEnumCollection = new[] {
@@ -1005,8 +1005,8 @@ Schema for <c>RoundTripModel</c>:
   intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
   floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
   floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
-  floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
-  floatFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based fixed enum
+  floatFixedEnum: &quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;, # Optional. this is a float based fixed enum
+  floatFixedEnumCollection: [&quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;], # Optional. this is a collection of float based fixed enum
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
@@ -1118,9 +1118,9 @@ var data = new {
     floatExtensibleEnumCollection = new[] {
         "1"
     },
-    floatFixedEnum = "1",
+    floatFixedEnum = "1.1",
     floatFixedEnumCollection = new[] {
-        "1"
+        "1.1"
     },
     intFixedEnum = "1",
     intFixedEnumCollection = new[] {
@@ -1181,8 +1181,8 @@ Schema for <c>RoundTripModel</c>:
   intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
   floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
   floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
-  floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
-  floatFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based fixed enum
+  floatFixedEnum: &quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;, # Optional. this is a float based fixed enum
+  floatFixedEnumCollection: [&quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;], # Optional. this is a collection of float based fixed enum
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
@@ -1294,9 +1294,9 @@ var data = new {
     floatExtensibleEnumCollection = new[] {
         "1"
     },
-    floatFixedEnum = "1",
+    floatFixedEnum = "1.1",
     floatFixedEnumCollection = new[] {
-        "1"
+        "1.1"
     },
     intFixedEnum = "1",
     intFixedEnumCollection = new[] {
@@ -1357,8 +1357,8 @@ Schema for <c>RoundTripModel</c>:
   intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
   floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
   floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
-  floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
-  floatFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based fixed enum
+  floatFixedEnum: &quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;, # Optional. this is a float based fixed enum
+  floatFixedEnumCollection: [&quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;], # Optional. this is a collection of float based fixed enum
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
@@ -1470,9 +1470,9 @@ var data = new {
     floatExtensibleEnumCollection = new[] {
         "1"
     },
-    floatFixedEnum = "1",
+    floatFixedEnum = "1.1",
     floatFixedEnumCollection = new[] {
-        "1"
+        "1.1"
     },
     intFixedEnum = "1",
     intFixedEnumCollection = new[] {
@@ -1533,8 +1533,8 @@ Schema for <c>RoundTripModel</c>:
   intExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based extensible enum
   floatExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based extensible enum
   floatExtensibleEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based extensible enum
-  floatFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a float based fixed enum
-  floatFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of float based fixed enum
+  floatFixedEnum: &quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;, # Optional. this is a float based fixed enum
+  floatFixedEnumCollection: [&quot;1.1&quot; | &quot;2.2&quot; | &quot;4.4&quot;], # Optional. this is a collection of float based fixed enum
   intFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a int based fixed enum
   intFixedEnumCollection: [&quot;1&quot; | &quot;2&quot; | &quot;4&quot;], # Optional. this is a collection of int based fixed enum
   stringFixedEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. this is a string based fixed enum
@@ -1569,7 +1569,7 @@ Schema for <c>Thing</c>:
     </member>
     <member name="HelloDemo2Async(RequestContext)">
 <example>
-This sample shows how to call HelloDemo2Async and parse the result.
+This sample shows how to call HelloDemo2Async with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1616,7 +1616,7 @@ Schema for <c>Thing</c>:
     </member>
     <member name="HelloDemo2(RequestContext)">
 <example>
-This sample shows how to call HelloDemo2 and parse the result.
+This sample shows how to call HelloDemo2 with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1875,7 +1875,7 @@ Schema for <c>Thing</c>:
     </member>
     <member name="HelloLiteralAsync(RequestContext)">
 <example>
-This sample shows how to call HelloLiteralAsync and parse the result.
+This sample shows how to call HelloLiteralAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1922,7 +1922,7 @@ Schema for <c>Thing</c>:
     </member>
     <member name="HelloLiteral(RequestContext)">
 <example>
-This sample shows how to call HelloLiteral and parse the result.
+This sample shows how to call HelloLiteral with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -2211,7 +2211,7 @@ Schema for <c>Thing</c>:
     </member>
     <member name="StillConvenientAsync(RequestContext)">
 <example>
-This sample shows how to call StillConvenientAsync.
+This sample shows how to call StillConvenientAsync with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -2224,7 +2224,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="StillConvenient(RequestContext)">
 <example>
-This sample shows how to call StillConvenient.
+This sample shows how to call StillConvenient with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");

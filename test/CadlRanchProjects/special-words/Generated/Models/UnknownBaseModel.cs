@@ -11,6 +11,11 @@ namespace SpecialWords.Models
     internal partial class UnknownBaseModel : BaseModel
     {
         /// <summary> Initializes a new instance of UnknownBaseModel. </summary>
+        internal UnknownBaseModel()
+        {
+        }
+
+        /// <summary> Initializes a new instance of UnknownBaseModel. </summary>
         /// <param name="modelKind"> Discriminator. </param>
         internal UnknownBaseModel(string modelKind) : base(modelKind)
         {
