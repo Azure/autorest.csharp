@@ -35,7 +35,7 @@ namespace ModelsInCadl.Models
         {
             Argument.AssertNotNull(baseModelProp, nameof(baseModelProp));
 
-            RequiredCollection = requiredCollection.ToList();
+            RequiredCollection = requiredCollection;
         }
 
         /// <summary> Required collection. </summary>

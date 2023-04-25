@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace Models.Property.Optional.Models
@@ -24,7 +23,7 @@ namespace Models.Property.Optional.Models
         /// <param name="property"> Property. </param>
         internal CollectionsModelProperty(IList<StringProperty> property)
         {
-            Property = property.ToList();
+            Property = property;
         }
 
         /// <summary> Property. </summary>

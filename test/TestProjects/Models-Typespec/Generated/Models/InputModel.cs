@@ -48,6 +48,29 @@ namespace ModelsInCadl.Models
             RequiredCollectionWithNullableBooleanElement = requiredCollectionWithNullableBooleanElement.ToList();
         }
 
+        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <param name="requiredString"> Required string. </param>
+        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="requiredModel"> Required model. </param>
+        /// <param name="requiredIntCollection"> Required primitive value type collection. </param>
+        /// <param name="requiredStringCollection"> Required primitive reference type collection. </param>
+        /// <param name="requiredModelCollection"> Required model collection. </param>
+        /// <param name="requiredModelRecord"> Required model record. </param>
+        /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
+        /// <param name="requiredCollectionWithNullableBooleanElement"> Required collection of which the element is a nullable boolean. </param>
+        internal InputModel(string requiredString, int requiredInt, BaseModel requiredModel, IList<int> requiredIntCollection, IList<string> requiredStringCollection, IList<CollectionItem> requiredModelCollection, IDictionary<string, RecordItem> requiredModelRecord, IList<float?> requiredCollectionWithNullableFloatElement, IList<bool?> requiredCollectionWithNullableBooleanElement)
+        {
+            RequiredString = requiredString;
+            RequiredInt = requiredInt;
+            RequiredModel = requiredModel;
+            RequiredIntCollection = requiredIntCollection;
+            RequiredStringCollection = requiredStringCollection;
+            RequiredModelCollection = requiredModelCollection;
+            RequiredModelRecord = requiredModelRecord;
+            RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement;
+            RequiredCollectionWithNullableBooleanElement = requiredCollectionWithNullableBooleanElement;
+        }
+
         /// <summary> Required string. </summary>
         public string RequiredString { get; }
         /// <summary> Required int. </summary>
