@@ -9,7 +9,7 @@ using System;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Type.Array
+namespace _Type._Array
 {
     // Data plane generated client.
     /// <summary> The Array service client. </summary>

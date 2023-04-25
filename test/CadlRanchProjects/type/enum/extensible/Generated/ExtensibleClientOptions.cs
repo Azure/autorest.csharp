@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Type.Enum.Extensible
+namespace _Type._Enum.Extensible
 {
     /// <summary> Client options for ExtensibleClient. </summary>
     public partial class ExtensibleClientOptions : ClientOptions

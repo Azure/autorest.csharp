@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Type.Property.ValueTypes.Models
+namespace _Type.Property.ValueTypes.Models
 {
     /// <summary> Model with a duration property. </summary>
     public partial class DurationProperty

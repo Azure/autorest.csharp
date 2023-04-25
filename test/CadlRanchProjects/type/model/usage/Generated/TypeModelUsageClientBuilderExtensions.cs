@@ -7,7 +7,7 @@
 
 using System;
 using Azure.Core.Extensions;
-using Type.Model.Usage;
+using _Type.Model.Usage;
 
 namespace Microsoft.Extensions.Azure
 {

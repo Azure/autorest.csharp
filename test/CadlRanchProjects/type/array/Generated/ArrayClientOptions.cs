@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Type.Array
+namespace _Type._Array
 {
     /// <summary> Client options for ArrayClient. </summary>
     public partial class ArrayClientOptions : ClientOptions

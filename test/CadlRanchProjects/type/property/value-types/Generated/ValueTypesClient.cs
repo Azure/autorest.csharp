@@ -9,7 +9,7 @@ using System;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Type.Property.ValueTypes
+namespace _Type.Property.ValueTypes
 {
     // Data plane generated client.
     /// <summary> The ValueTypes service client. </summary>

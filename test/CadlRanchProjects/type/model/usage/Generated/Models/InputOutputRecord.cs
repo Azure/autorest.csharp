@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Type.Model.Usage.Models
+namespace _Type.Model.Usage.Models
 {
     /// <summary> Record used both as operation parameter and return type. </summary>
     public partial class InputOutputRecord

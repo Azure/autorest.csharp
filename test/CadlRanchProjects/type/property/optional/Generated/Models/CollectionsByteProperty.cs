@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Type.Property.Optional.Models
+namespace _Type.Property.Optional.Models
 {
     /// <summary> Model with collection bytes properties. </summary>
     public partial class CollectionsByteProperty

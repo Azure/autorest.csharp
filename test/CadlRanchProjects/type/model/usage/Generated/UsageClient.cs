@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Type.Model.Usage.Models;
+using _Type.Model.Usage.Models;
 
-namespace Type.Model.Usage
+namespace _Type.Model.Usage
 {
     // Data plane generated client.
     /// <summary> Illustrates usage of Record in different places(Operation parameters, return type or both). </summary>

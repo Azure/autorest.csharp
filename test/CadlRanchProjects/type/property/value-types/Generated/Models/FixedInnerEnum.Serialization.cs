@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Type.Property.ValueTypes.Models
+namespace _Type.Property.ValueTypes.Models
 {
     internal static partial class FixedInnerEnumExtensions
     {

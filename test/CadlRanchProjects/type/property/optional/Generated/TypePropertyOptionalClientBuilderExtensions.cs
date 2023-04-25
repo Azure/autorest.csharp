@@ -7,7 +7,7 @@
 
 using System;
 using Azure.Core.Extensions;
-using Type.Property.Optional;
+using _Type.Property.Optional;
 
 namespace Microsoft.Extensions.Azure
 {

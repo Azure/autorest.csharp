@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Type.Enum.Extensible.Models;
+using _Type._Enum.Extensible.Models;
 
-namespace Type.Enum.Extensible
+namespace _Type._Enum.Extensible
 {
     // Data plane generated client.
     /// <summary> The Extensible service client. </summary>

@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Type.Property.ValueTypes
+namespace _Type.Property.ValueTypes
 {
     /// <summary> Client options for ValueTypesClient. </summary>
     public partial class ValueTypesClientOptions : ClientOptions

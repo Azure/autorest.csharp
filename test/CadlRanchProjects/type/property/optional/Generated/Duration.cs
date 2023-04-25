@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Type.Property.Optional.Models;
+using _Type.Property.Optional.Models;
 
-namespace Type.Property.Optional
+namespace _Type.Property.Optional
 {
     // Data plane generated sub-client.
     /// <summary> The Duration sub-client. </summary>

@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace Type.Model.Usage.Models
+namespace _Type.Model.Usage.Models
 {
     public partial class InputRecord : IUtf8JsonSerializable
     {

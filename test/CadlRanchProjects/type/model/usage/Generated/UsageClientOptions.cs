@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Type.Model.Usage
+namespace _Type.Model.Usage
 {
     /// <summary> Client options for UsageClient. </summary>
     public partial class UsageClientOptions : ClientOptions

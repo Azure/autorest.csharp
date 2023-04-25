@@ -10,7 +10,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Type.Array.Models
+namespace _Type._Array.Models
 {
     public partial class InnerModel : IUtf8JsonSerializable
     {

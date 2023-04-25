@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Type.Array.Models
+namespace _Type._Array.Models
 {
     /// <summary> Array inner model. </summary>
     public partial class InnerModel

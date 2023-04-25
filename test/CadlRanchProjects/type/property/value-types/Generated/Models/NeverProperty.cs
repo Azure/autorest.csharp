@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Type.Property.ValueTypes.Models
+namespace _Type.Property.ValueTypes.Models
 {
     /// <summary> Model with a property never. (This property should not be included). </summary>
     public partial class NeverProperty

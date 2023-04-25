@@ -7,7 +7,7 @@
 
 using System;
 using Azure.Core.Extensions;
-using Type.Array;
+using _Type._Array;
 
 namespace Microsoft.Extensions.Azure
 {

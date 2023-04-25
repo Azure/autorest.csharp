@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Type.Property.ValueTypes.Models
+namespace _Type.Property.ValueTypes.Models
 {
     /// <summary> Model with a bytes property. </summary>
     public partial class BytesProperty

@@ -13,9 +13,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Type.Array.Models;
+using _Type._Array.Models;
 
-namespace Type.Array
+namespace _Type._Array
 {
     // Data plane generated sub-client.
     /// <summary> Array of model values. </summary>

@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Type.Model.Usage.Models
+namespace _Type.Model.Usage.Models
 {
     /// <summary> Record used in operation parameters. </summary>
     public partial class InputRecord

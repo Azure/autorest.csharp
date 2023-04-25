@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Type.Property.Optional
+namespace _Type.Property.Optional
 {
     /// <summary> Client options for OptionalClient. </summary>
     public partial class OptionalClientOptions : ClientOptions

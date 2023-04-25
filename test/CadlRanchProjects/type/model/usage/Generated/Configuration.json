@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "Type.Model.Usage",
+  "Namespace": "_Type.Model.Usage",
   "LibraryName": "Type.Model.Usage",
   "SharedSourceFolders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",

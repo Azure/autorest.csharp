@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Type.Enum.Fixed.Models;
+using _Type._Enum.Fixed.Models;
 
-namespace Type.Enum.Fixed
+namespace _Type._Enum.Fixed
 {
     // Data plane generated client.
     /// <summary> The Fixed service client. </summary>

@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Type.Enum.Fixed.Models
+namespace _Type._Enum.Fixed.Models
 {
     internal static partial class DaysOfWeekEnumExtensions
     {

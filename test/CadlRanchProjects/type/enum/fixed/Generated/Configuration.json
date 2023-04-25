@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "Type.Enum.Fixed",
+  "Namespace": "_Type._Enum.Fixed",
   "LibraryName": "Type.Enum.Fixed",
   "SharedSourceFolders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",

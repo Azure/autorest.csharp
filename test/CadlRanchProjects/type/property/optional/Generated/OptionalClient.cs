@@ -9,7 +9,7 @@ using System;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Type.Property.Optional
+namespace _Type.Property.Optional
 {
     // Data plane generated client.
     /// <summary> The Optional service client. </summary>

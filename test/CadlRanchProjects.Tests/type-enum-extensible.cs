@@ -4,9 +4,9 @@
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using Enums.Extensible;
-using Enums.Extensible.Models;
 using NUnit.Framework;
+using _Type._Enum.Extensible;
+using _Type._Enum.Extensible.Models;
 
 namespace CadlRanchProjects.Tests
 {

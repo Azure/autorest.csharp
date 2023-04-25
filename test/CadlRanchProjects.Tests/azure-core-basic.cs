@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using _Specs_.Azure.Core;
-using _Specs_.Azure.Core.Models;
+using _Specs_.Azure.Core.Basic;
+using _Specs_.Azure.Core.Basic.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
@@ -18,7 +18,7 @@ namespace CadlRanchProjects.Tests
             {
                 name = "Madge"
             };
-            var response = await new CoreClient(host, null).CreateOrUpdateAsync(1, RequestContent.Create(value));
+            var response = await new BasicClient(host, null).CreateOrUpdateAsync(1, RequestContent.Create(value));
             Assert.AreEqual(200, response.Status);
             JsonData responseBody = JsonData.FromBytes(response.Content.ToMemory());
             Assert.AreEqual(1, (int)responseBody["id"]);
@@ -29,21 +29,21 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_Core_Basic_createOrReplace() => Test(async (host) =>
         {
-            User response = await new CoreClient(host, null).CreateOrReplaceAsync(1, new User("Madge"));
+            User response = await new BasicClient(host, null).CreateOrReplaceAsync(1, new User("Madge"));
             Assert.AreEqual("Madge", response.Name);
         });
 
         [Test]
         public Task Azure_Core_Basic_get() => Test(async (host) =>
         {
-            User response = await new CoreClient(host, null).GetUserAsync(1);
+            User response = await new BasicClient(host, null).GetUserAsync(1);
             Assert.AreEqual("Madge", response.Name);
         });
 
         [Test]
         public Task Azure_Core_Basic_list() => Test(async (host) =>
         {
-            AsyncPageable<User> allPages = new CoreClient(host, null).GetUsersAsync(5, 10, null, new[] {"id"}, "id lt 10", new[] {"id", "orders", "etag"}, new[] {"orders"});
+            AsyncPageable<User> allPages = new BasicClient(host, null).GetUsersAsync(5, 10, null, new[] {"id"}, "id lt 10", new[] {"id", "orders", "etag"}, new[] {"orders"});
             await foreach (Page<User> page in allPages.AsPages())
             {
                 User firstUser = page.Values.First();
@@ -67,7 +67,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_Core_Basic_listWithPage() => Test(async (host) =>
         {
-            AsyncPageable<User> allPages = new CoreClient(host, null).GetWithPageAsync();
+            AsyncPageable<User> allPages = new BasicClient(host, null).GetWithPageAsync();
             await foreach (Page<User> page in allPages.AsPages())
             {
                 User firstUser = page.Values.First();
@@ -78,14 +78,14 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_Core_Basic_delete() => Test(async (host) =>
         {
-            var response = await new CoreClient(host, null).DeleteAsync(1);
+            var response = await new BasicClient(host, null).DeleteAsync(1);
             Assert.AreEqual(204, response.Status);
         });
 
         [Test]
         public Task Azure_Core_Basic_export() => Test(async (host) =>
         {
-            User response = await new CoreClient(host, null).ExportAsync(1, "json");
+            User response = await new BasicClient(host, null).ExportAsync(1, "json");
             Assert.AreEqual("Madge", response.Name);
         });
     }

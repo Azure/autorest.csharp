@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using Enums.Fixed;
-using Enums.Fixed.Models;
 using NUnit.Framework;
+using _Type._Enum.Fixed;
+using _Type._Enum.Fixed.Models;
 
 namespace CadlRanchProjects.Tests
 {

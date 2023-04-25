@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Type.Property.Optional.Models
+namespace _Type.Property.Optional.Models
 {
     /// <summary> Model with required and optional properties. </summary>
     public partial class RequiredAndOptionalProperty

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
-using Models.Property.Optional;
-using Models.Property.Optional.Models;
 using NUnit.Framework;
+using _Type.Property.Optional;
+using _Type.Property.Optional.Models;
 
 namespace CadlRanchProjects.Tests
 {

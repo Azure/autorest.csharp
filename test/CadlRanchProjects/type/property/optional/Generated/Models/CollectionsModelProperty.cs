@@ -8,7 +8,7 @@
 using System.Collections.Generic;
 using Azure.Core;
 
-namespace Type.Property.Optional.Models
+namespace _Type.Property.Optional.Models
 {
     /// <summary> Model with collection models properties. </summary>
     public partial class CollectionsModelProperty

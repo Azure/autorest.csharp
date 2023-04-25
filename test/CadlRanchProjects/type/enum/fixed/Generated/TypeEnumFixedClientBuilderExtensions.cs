@@ -7,7 +7,7 @@
 
 using System;
 using Azure.Core.Extensions;
-using Type.Enum.Fixed;
+using _Type._Enum.Fixed;
 
 namespace Microsoft.Extensions.Azure
 {

@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Type.Property.ValueTypes.Models;
+using _Type.Property.ValueTypes.Models;
 
-namespace Type.Property.ValueTypes
+namespace _Type.Property.ValueTypes
 {
     // Data plane generated sub-client.
     /// <summary> The CollectionsString sub-client. </summary>

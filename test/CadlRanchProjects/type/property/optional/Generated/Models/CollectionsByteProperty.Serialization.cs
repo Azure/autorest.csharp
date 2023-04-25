@@ -11,7 +11,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Type.Property.Optional.Models
+namespace _Type.Property.Optional.Models
 {
     public partial class CollectionsByteProperty : IUtf8JsonSerializable
     {

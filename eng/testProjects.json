@@ -11,6 +11,8 @@
         "authentication/union",
         "azure/core/basic",
         "projection/projected-name",
+        "server/path/multiple",
+        "server/path/single",
         "special-words",
         "parameters/collection-format"
     ],

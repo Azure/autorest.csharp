@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Type.Model.Usage.Models
+namespace _Type.Model.Usage.Models
 {
     public partial class OutputRecord
     {

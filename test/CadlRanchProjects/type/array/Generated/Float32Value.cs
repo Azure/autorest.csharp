@@ -14,7 +14,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Type.Array
+namespace _Type._Array
 {
     // Data plane generated sub-client.
     /// <summary> Array of float values. </summary>

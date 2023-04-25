@@ -7,7 +7,7 @@
 
 using System;
 
-namespace Type.Property.Optional.Models
+namespace _Type.Property.Optional.Models
 {
     /// <summary> Model with a datetime property. </summary>
     public partial class DatetimeProperty

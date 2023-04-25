@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Type.Property.ValueTypes.Models
+namespace _Type.Property.ValueTypes.Models
 {
     /// <summary> Enum that will be used as a property for model EnumProperty. Non-extensible. </summary>
     public enum FixedInnerEnum
