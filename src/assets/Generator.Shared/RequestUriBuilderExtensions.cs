@@ -19,12 +19,12 @@ namespace Azure.Core
                 bool b => TypeFormatters.ToString(b),
                 int or float or double or long or decimal => ((IFormattable)value).ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture),
                 byte[] b when format != null => TypeFormatters.ToString(b, format),
-                IEnumerable<string> s => string.Join(",", value),
+                IEnumerable<string> s => string.Join(",", s),
                 DateTimeOffset dateTime when format != null => TypeFormatters.ToString(dateTime, format),
                 TimeSpan timeSpan when format != null => TypeFormatters.ToString(timeSpan, format),
                 TimeSpan timeSpan => XmlConvert.ToString(timeSpan),
                 Guid guid => guid.ToString(),
-                _ => throw new InvalidOperationException($"unhandled type {value.GetType()}")
+                _ => value.ToString()!
             };
 
         public static void AppendPath(this RequestUriBuilder builder, bool value, bool escape = false)
