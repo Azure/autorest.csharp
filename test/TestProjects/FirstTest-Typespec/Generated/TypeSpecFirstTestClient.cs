@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using CadlFirstTest.Models;
+using TypeSpecFirstTest.Models;
 
-namespace CadlFirstTest
+namespace TypeSpecFirstTest
 {
     // Data plane generated client.
-    /// <summary> This is a sample cadl project. </summary>
-    public partial class CadlFirstTestClient
+    /// <summary> This is a sample typespec project. </summary>
+    public partial class TypeSpecFirstTestClient
     {
         private const string AuthorizationHeader = "x-ms-api-key";
         private readonly AzureKeyCredential _keyCredential;
@@ -33,37 +33,37 @@ namespace CadlFirstTest
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of CadlFirstTestClient for mocking. </summary>
-        protected CadlFirstTestClient()
+        /// <summary> Initializes a new instance of TypeSpecFirstTestClient for mocking. </summary>
+        protected TypeSpecFirstTestClient()
         {
         }
 
-        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <summary> Initializes a new instance of TypeSpecFirstTestClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public CadlFirstTestClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new CadlFirstTestClientOptions())
+        public TypeSpecFirstTestClient(Uri endpoint, AzureKeyCredential credential) : this(endpoint, credential, new TypeSpecFirstTestClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <summary> Initializes a new instance of TypeSpecFirstTestClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public CadlFirstTestClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new CadlFirstTestClientOptions())
+        public TypeSpecFirstTestClient(Uri endpoint, TokenCredential credential) : this(endpoint, credential, new TypeSpecFirstTestClientOptions())
         {
         }
 
-        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <summary> Initializes a new instance of TypeSpecFirstTestClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public CadlFirstTestClient(Uri endpoint, AzureKeyCredential credential, CadlFirstTestClientOptions options)
+        public TypeSpecFirstTestClient(Uri endpoint, AzureKeyCredential credential, TypeSpecFirstTestClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new CadlFirstTestClientOptions();
+            options ??= new TypeSpecFirstTestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
@@ -72,16 +72,16 @@ namespace CadlFirstTest
             _apiVersion = options.Version;
         }
 
-        /// <summary> Initializes a new instance of CadlFirstTestClient. </summary>
+        /// <summary> Initializes a new instance of TypeSpecFirstTestClient. </summary>
         /// <param name="endpoint"> The Uri to use. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> or <paramref name="credential"/> is null. </exception>
-        public CadlFirstTestClient(Uri endpoint, TokenCredential credential, CadlFirstTestClientOptions options)
+        public TypeSpecFirstTestClient(Uri endpoint, TokenCredential credential, TypeSpecFirstTestClientOptions options)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
             Argument.AssertNotNull(credential, nameof(credential));
-            options ??= new CadlFirstTestClientOptions();
+            options ??= new TypeSpecFirstTestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;
@@ -99,7 +99,7 @@ namespace CadlFirstTest
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopActionValue");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopActionValue");
             scope.Start();
             try
             {
@@ -123,7 +123,7 @@ namespace CadlFirstTest
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopActionValue");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopActionValue");
             scope.Start();
             try
             {
@@ -145,12 +145,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(String,RequestContext)']/*" />
         public virtual async Task<Response> TopActionAsync(string action, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction");
             scope.Start();
             try
             {
@@ -171,12 +171,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='TopAction(String,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(String,RequestContext)']/*" />
         public virtual Response TopAction(string action, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction");
             scope.Start();
             try
             {
@@ -194,10 +194,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='TopAction2Async(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2Async(RequestContext)']/*" />
         public virtual async Task<Response> TopAction2Async(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction2");
             scope.Start();
             try
             {
@@ -215,10 +215,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='TopAction2(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2(RequestContext)']/*" />
         public virtual Response TopAction2(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.TopAction2");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction2");
             scope.Start();
             try
             {
@@ -238,12 +238,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PatchActionAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.PatchAction");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.PatchAction");
             scope.Start();
             try
             {
@@ -263,12 +263,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
         public virtual Response PatchAction(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.PatchAction");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.PatchAction");
             scope.Start();
             try
             {
@@ -314,12 +314,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> AnonymousBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.AnonymousBody");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AnonymousBody");
             scope.Start();
             try
             {
@@ -339,12 +339,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
         public virtual Response AnonymousBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.AnonymousBody");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AnonymousBody");
             scope.Start();
             try
             {
@@ -390,12 +390,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> FriendlyModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.FriendlyModel");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.FriendlyModel");
             scope.Start();
             try
             {
@@ -415,12 +415,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
         public virtual Response FriendlyModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.FriendlyModel");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.FriendlyModel");
             scope.Start();
             try
             {
@@ -438,10 +438,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> AddTimeHeaderAsync(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.AddTimeHeader");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AddTimeHeader");
             scope.Start();
             try
             {
@@ -459,10 +459,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeader(DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeader(DateTimeOffset,RequestContext)']/*" />
         public virtual Response AddTimeHeader(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.AddTimeHeader");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AddTimeHeader");
             scope.Start();
             try
             {
@@ -484,13 +484,13 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='SayHiAsync(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHiAsync(String,String,String,RequestContext)']/*" />
         public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.SayHi");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.SayHi");
             scope.Start();
             try
             {
@@ -512,13 +512,13 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='SayHi(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHi(String,String,String,RequestContext)']/*" />
         public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.SayHi");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.SayHi");
             scope.Start();
             try
             {
@@ -577,14 +577,14 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloAgainAsync(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgainAsync(String,String,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> HelloAgainAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloAgain");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloAgain");
             scope.Start();
             try
             {
@@ -607,14 +607,14 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloAgain(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgain(String,String,RequestContent,RequestContext)']/*" />
         public virtual Response HelloAgain(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloAgain");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloAgain");
             scope.Start();
             try
             {
@@ -637,14 +637,14 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='NoContentTypeAsync(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentTypeAsync(String,String,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> NoContentTypeAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.NoContentType");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.NoContentType");
             scope.Start();
             try
             {
@@ -667,14 +667,14 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='NoContentType(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentType(String,String,RequestContent,RequestContext)']/*" />
         public virtual Response NoContentType(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
             Argument.AssertNotNull(p1, nameof(p1));
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.NoContentType");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.NoContentType");
             scope.Start();
             try
             {
@@ -692,7 +692,7 @@ namespace CadlFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Thing>> HelloDemo2ValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2Value");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloDemo2Value");
             scope.Start();
             try
             {
@@ -711,7 +711,7 @@ namespace CadlFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Thing> HelloDemo2Value(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2Value");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloDemo2Value");
             scope.Start();
             try
             {
@@ -730,10 +730,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(RequestContext)']/*" />
         public virtual async Task<Response> HelloDemo2Async(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloDemo2");
             scope.Start();
             try
             {
@@ -751,10 +751,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(RequestContext)']/*" />
         public virtual Response HelloDemo2(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloDemo2");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloDemo2");
             scope.Start();
             try
             {
@@ -800,12 +800,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateLiteralAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.CreateLiteral");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.CreateLiteral");
             scope.Start();
             try
             {
@@ -825,12 +825,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
         public virtual Response CreateLiteral(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.CreateLiteral");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.CreateLiteral");
             scope.Start();
             try
             {
@@ -848,7 +848,7 @@ namespace CadlFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response<Thing>> HelloLiteralValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteralValue");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloLiteralValue");
             scope.Start();
             try
             {
@@ -867,7 +867,7 @@ namespace CadlFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response<Thing> HelloLiteralValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteralValue");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloLiteralValue");
             scope.Start();
             try
             {
@@ -886,10 +886,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
         public virtual async Task<Response> HelloLiteralAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteral");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloLiteral");
             scope.Start();
             try
             {
@@ -907,10 +907,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
         public virtual Response HelloLiteral(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.HelloLiteral");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloLiteral");
             scope.Start();
             try
             {
@@ -928,10 +928,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetUnknownValueAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.GetUnknownValue");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.GetUnknownValue");
             scope.Start();
             try
             {
@@ -949,10 +949,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
         public virtual Response GetUnknownValue(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.GetUnknownValue");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.GetUnknownValue");
             scope.Start();
             try
             {
@@ -998,12 +998,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='InternalProtocolAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocolAsync(RequestContent,RequestContext)']/*" />
         internal virtual async Task<Response> InternalProtocolAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.InternalProtocol");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.InternalProtocol");
             scope.Start();
             try
             {
@@ -1023,12 +1023,12 @@ namespace CadlFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='InternalProtocol(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocol(RequestContent,RequestContext)']/*" />
         internal virtual Response InternalProtocol(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.InternalProtocol");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.InternalProtocol");
             scope.Start();
             try
             {
@@ -1046,7 +1046,7 @@ namespace CadlFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> StillConvenientValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.StillConvenientValue");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StillConvenientValue");
             scope.Start();
             try
             {
@@ -1065,7 +1065,7 @@ namespace CadlFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response StillConvenientValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.StillConvenientValue");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StillConvenientValue");
             scope.Start();
             try
             {
@@ -1084,10 +1084,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
         internal virtual async Task<Response> StillConvenientAsync(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.StillConvenient");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StillConvenient");
             scope.Start();
             try
             {
@@ -1105,10 +1105,10 @@ namespace CadlFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/CadlFirstTestClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
         internal virtual Response StillConvenient(RequestContext context = null)
         {
-            using var scope = ClientDiagnostics.CreateScope("CadlFirstTestClient.StillConvenient");
+            using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StillConvenient");
             scope.Start();
             try
             {

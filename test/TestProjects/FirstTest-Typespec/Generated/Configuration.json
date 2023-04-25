@@ -1,6 +1,6 @@
 {
   "OutputFolder": ".",
-  "Namespace": "CadlFirstTest",
+  "Namespace": "TypeSpecFirstTest",
   "LibraryName": null,
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",

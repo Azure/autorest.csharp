@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace CadlFirstTest.Models
+namespace TypeSpecFirstTest.Models
 {
     public partial class RoundTripModel : IUtf8JsonSerializable
     {

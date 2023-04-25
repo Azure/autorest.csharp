@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace CadlFirstTest.Models
+namespace TypeSpecFirstTest.Models
 {
     /// <summary> float fixed enum. </summary>
     public enum FloatFixedEnum
