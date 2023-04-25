@@ -107,21 +107,9 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.BinaryData;
         case "int8":
             return InputTypeKind.Int32;
-        case "int16":
-            return InputTypeKind.Int32;
         case "int32":
             return InputTypeKind.Int32;
         case "int64":
-            return InputTypeKind.Int64;
-        case "safeint":
-            return InputTypeKind.Int64;
-        case "uint8":
-            return InputTypeKind.Int32;
-        case "uint16":
-            return InputTypeKind.Int32;
-        case "uint32":
-            return InputTypeKind.Int32;
-        case "uint64":
             return InputTypeKind.Int64;
         case "float32":
             return InputTypeKind.Float32;
@@ -129,19 +117,13 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Float64;
         case "string":
             return InputTypeKind.String;
-        case "uri":
-            return InputTypeKind.String;
-        case "url":
-            return InputTypeKind.String;
         case "boolean":
             return InputTypeKind.Boolean;
-        case "plainDate":
+        case "date":
             return InputTypeKind.Date;
-        case "utcDateTime":
+        case "datetime":
             return InputTypeKind.DateTime;
-        case "offsetDateTime":
-            return InputTypeKind.DateTime;
-        case "plainTime":
+        case "time":
             return InputTypeKind.Time;
         case "duration":
             return InputTypeKind.Duration;
@@ -270,7 +252,7 @@ export function getInputType(
                 return {
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
-                        intrinsicName
+                        sdkType.kind
                     ),
                     IsNullable: false
                 } as InputPrimitiveType;
