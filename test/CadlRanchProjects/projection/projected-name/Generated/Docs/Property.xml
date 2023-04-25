@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="JsonAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call JsonAsync with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    wireName = true,
+};
+
+Response response = await client.JsonAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>JsonProjectedNameModel</c>:
+<code>{
+  wireName: boolean, # Required. Pass in true
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Json(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Json with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    wireName = true,
+};
+
+Response response = client.Json(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>JsonProjectedNameModel</c>:
+<code>{
+  wireName: boolean, # Required. Pass in true
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="ClientAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ClientAsync with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    defaultName = true,
+};
+
+Response response = await client.ClientAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>ClientProjectedNameModel</c>:
+<code>{
+  defaultName: boolean, # Required. Pass in true
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Client(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Client with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    defaultName = true,
+};
+
+Response response = client.Client(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>ClientProjectedNameModel</c>:
+<code>{
+  defaultName: boolean, # Required. Pass in true
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="LanguageAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call LanguageAsync with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    defaultName = true,
+};
+
+Response response = await client.LanguageAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>LanguageProjectedNameModel</c>:
+<code>{
+  defaultName: boolean, # Required. Pass in true
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Language(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Language with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    defaultName = true,
+};
+
+Response response = client.Language(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>LanguageProjectedNameModel</c>:
+<code>{
+  defaultName: boolean, # Required. Pass in true
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="JsonAndClientAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call JsonAndClientAsync with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    wireName = true,
+};
+
+Response response = await client.JsonAndClientAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>JsonAndClientProjectedNameModel</c>:
+<code>{
+  wireName: boolean, # Required. Pass in true
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="JsonAndClient(RequestContent,RequestContext)">
+<example>
+This sample shows how to call JsonAndClient with required request content.
+<code><![CDATA[
+var client = new ProjectedNameClient().GetPropertyClient();
+
+var data = new {
+    wireName = true,
+};
+
+Response response = client.JsonAndClient(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>JsonAndClientProjectedNameModel</c>:
+<code>{
+  wireName: boolean, # Required. Pass in true
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>
