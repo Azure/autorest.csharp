@@ -3,7 +3,7 @@
   <members>
     <member name="GetBooleanAsync(RequestContext)">
 <example>
-This sample shows how to call GetBooleanAsync and parse the result.
+This sample shows how to call GetBooleanAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetBooleanClient(<1.0.0>);
 
@@ -28,7 +28,7 @@ Schema for <c>BooleanProperty</c>:
     </member>
     <member name="GetBoolean(RequestContext)">
 <example>
-This sample shows how to call GetBoolean and parse the result.
+This sample shows how to call GetBoolean with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetBooleanClient(<1.0.0>);
 

@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly IEnumerable<InputParameter> _clientParameters;
         private readonly InputAuth _authorization;
         private readonly IEnumerable<InputOperation> _operations;
+        private readonly SourceInputModel? _sourceInputModel;
 
         protected override string DefaultName { get; }
         protected override string DefaultNamespace { get; }
@@ -61,6 +62,7 @@ namespace AutoRest.CSharp.Output.Models
             _clientParameters = clientParameters;
             _authorization = authorization;
             _operations = operations;
+            _sourceInputModel = sourceInputModel;
 
             SubClients = Array.Empty<LowLevelClient>();
         }
@@ -77,7 +79,7 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature[] SecondaryConstructors => Constructors.SecondaryConstructors;
 
         private IReadOnlyList<LowLevelClientMethod>? _allClientMethods;
-        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(_typeFactory, _operations, Fields, Declaration.Name).ToArray();
+        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(_typeFactory, _operations, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel).ToArray();
 
         private IReadOnlyList<LowLevelClientMethod>? _clientMethods;
         public IReadOnlyList<LowLevelClientMethod> ClientMethods => _clientMethods ??= AllClientMethods
@@ -96,9 +98,9 @@ namespace AutoRest.CSharp.Output.Models
         private LowLevelSubClientFactoryMethod? _factoryMethod;
         public LowLevelSubClientFactoryMethod? FactoryMethod => _factoryMethod ??= ParentClient != null ? BuildFactoryMethod(ParentClient.Fields, _libraryName) : null;
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string clientName)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
         {
-            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, clientName, fields, typeFactory));
+            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, namespaceName, clientName, fields, typeFactory, sourceInputModel));
             foreach (var (_, builder) in builders)
             {
                 builder.BuildNextPageMethod(builders);

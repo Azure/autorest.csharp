@@ -13,7 +13,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Enums_Fixed_String_getKnownValue() => Test(async (host) =>
         {
-            var response = await new FixedClient(host, null).GetKnownValueValueAsync();
+            var response = await new FixedClient(host, null).GetKnownValueAsync();
             Assert.AreEqual(DaysOfWeekEnum.Monday, (DaysOfWeekEnum)response);
         });
 

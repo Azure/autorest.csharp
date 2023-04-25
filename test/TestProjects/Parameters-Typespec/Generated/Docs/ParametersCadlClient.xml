@@ -7,15 +7,6 @@ This sample shows how to call OperationAsync with required parameters and parse 
 <code><![CDATA[
 var client = new ParametersCadlClient();
 
-Response response = await client.OperationAsync(1234);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call OperationAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var client = new ParametersCadlClient();
-
 Response response = await client.OperationAsync(1234, 1234);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -38,15 +29,6 @@ Schema for <c>Result</c>:
     <member name="Operation(Int32,Int32,RequestContext)">
 <example>
 This sample shows how to call Operation with required parameters and parse the result.
-<code><![CDATA[
-var client = new ParametersCadlClient();
-
-Response response = client.Operation(1234);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call Operation with all parameters, and how to parse the result.
 <code><![CDATA[
 var client = new ParametersCadlClient();
 
@@ -75,15 +57,6 @@ This sample shows how to call Operation2Async with required parameters and parse
 <code><![CDATA[
 var client = new ParametersCadlClient();
 
-Response response = await client.Operation2Async(1234);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call Operation2Async with all parameters, and how to parse the result.
-<code><![CDATA[
-var client = new ParametersCadlClient();
-
 Response response = await client.Operation2Async(1234, 1234);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
@@ -106,15 +79,6 @@ Schema for <c>Result</c>:
     <member name="Operation2(Int32,Int32,RequestContext)">
 <example>
 This sample shows how to call Operation2 with required parameters and parse the result.
-<code><![CDATA[
-var client = new ParametersCadlClient();
-
-Response response = client.Operation2(1234);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-This sample shows how to call Operation2 with all parameters, and how to parse the result.
 <code><![CDATA[
 var client = new ParametersCadlClient();
 

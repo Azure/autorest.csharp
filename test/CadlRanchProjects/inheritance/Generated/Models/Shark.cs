@@ -12,7 +12,15 @@ namespace Models.Inheritance.Models
     {
         /// <summary> Initializes a new instance of Shark. </summary>
         /// <param name="age"></param>
-        public Shark(int age) : base("shark", age)
+        public Shark(int age) : base(age)
+        {
+            Kind = "shark";
+        }
+
+        /// <summary> Initializes a new instance of Shark. </summary>
+        /// <param name="kind"> Discriminator. </param>
+        /// <param name="age"></param>
+        internal Shark(string kind, int age) : base(kind, age)
         {
         }
     }

@@ -31,5 +31,29 @@ namespace AutoRest.CSharp.Utilities
                 ? new CSharpType(type, symbol.TypeArguments.Cast<INamedTypeSymbol>().Select(GetCSharpType).ToArray())
                 : type;
         }
+
+        public static bool IsSameType(this INamedTypeSymbol symbol, CSharpType type)
+        {
+            if (type.IsValueType && type.IsNullable) // for cases such as `int?`
+            {
+                if (symbol.ConstructedFrom.SpecialType != SpecialType.System_Nullable_T)
+                    return false;
+                return IsSameType((INamedTypeSymbol)symbol.TypeArguments.Single(), type.GetNonNullable());
+            }
+
+            if (symbol.ContainingNamespace.ToString() != type.Namespace || symbol.Name != type.Name || symbol.TypeArguments.Length != type.Arguments.Length)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < type.Arguments.Length; ++i)
+            {
+                if (!IsSameType((INamedTypeSymbol)symbol.TypeArguments[i], type.Arguments[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

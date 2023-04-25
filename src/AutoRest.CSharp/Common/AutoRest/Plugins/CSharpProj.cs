@@ -96,7 +96,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
             var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
-            Configuration.Initialize(autoRest);
+            Configuration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
 
             var context = new BuildContext(codeModel, null);
             Execute(context.DefaultNamespace, async (filename, text) =>

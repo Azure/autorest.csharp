@@ -3,7 +3,7 @@
   <members>
     <member name="GetInt64ValueAsync(RequestContext)">
 <example>
-This sample shows how to call GetInt64ValueAsync and parse the result.
+This sample shows how to call GetInt64ValueAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetInt64ValueClient(<1.0.0>);
 
@@ -16,7 +16,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetInt64Value(RequestContext)">
 <example>
-This sample shows how to call GetInt64Value and parse the result.
+This sample shows how to call GetInt64Value with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetInt64ValueClient(<1.0.0>);
 

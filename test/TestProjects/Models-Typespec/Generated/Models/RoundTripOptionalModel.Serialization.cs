@@ -70,6 +70,11 @@ namespace ModelsInCadl.Models
                 writer.WritePropertyName("optionalModel"u8);
                 writer.WriteObjectValue(OptionalModel);
             }
+            if (Optional.IsDefined(OptionalModelWithPropertiesOnBase))
+            {
+                writer.WritePropertyName("optionalModelWithPropertiesOnBase"u8);
+                writer.WriteObjectValue(OptionalModelWithPropertiesOnBase);
+            }
             if (Optional.IsDefined(OptionalFixedStringEnum))
             {
                 if (OptionalFixedStringEnum != null)
@@ -181,6 +186,7 @@ namespace ModelsInCadl.Models
             Optional<IList<int>> optionalIntList = default;
             Optional<IList<CollectionItem>> optionalModelCollection = default;
             Optional<DerivedModel> optionalModel = default;
+            Optional<DerivedModelWithProperties> optionalModelWithPropertiesOnBase = default;
             Optional<FixedStringEnum?> optionalFixedStringEnum = default;
             Optional<ExtensibleEnum?> optionalExtensibleEnum = default;
             Optional<IDictionary<string, int>> optionalIntRecord = default;
@@ -255,6 +261,15 @@ namespace ModelsInCadl.Models
                         continue;
                     }
                     optionalModel = DerivedModel.DeserializeDerivedModel(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("optionalModelWithPropertiesOnBase"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    optionalModelWithPropertiesOnBase = DerivedModelWithProperties.DeserializeDerivedModelWithProperties(property.Value);
                     continue;
                 }
                 if (property.NameEquals("optionalFixedStringEnum"u8))
@@ -361,7 +376,7 @@ namespace ModelsInCadl.Models
                     continue;
                 }
             }
-            return new RoundTripOptionalModel(optionalString, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelCollection), optionalModel, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), Optional.ToList(optionalCollectionWithNullableIntElement));
+            return new RoundTripOptionalModel(optionalString, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelCollection), optionalModel, optionalModelWithPropertiesOnBase, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), Optional.ToList(optionalCollectionWithNullableIntElement));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

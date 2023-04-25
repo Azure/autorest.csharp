@@ -3,7 +3,7 @@
   <members>
     <member name="GetNullableFloatValueAsync(RequestContext)">
 <example>
-This sample shows how to call GetNullableFloatValueAsync and parse the result.
+This sample shows how to call GetNullableFloatValueAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetNullableFloatValueClient(<1.0.0>);
 
@@ -16,7 +16,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetNullableFloatValue(RequestContext)">
 <example>
-This sample shows how to call GetNullableFloatValue and parse the result.
+This sample shows how to call GetNullableFloatValue with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetNullableFloatValueClient(<1.0.0>);
 
