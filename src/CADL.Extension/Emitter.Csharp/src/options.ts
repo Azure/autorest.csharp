@@ -55,7 +55,10 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
         "generate-convenience-methods": { type: "boolean", nullable: true },
         "package-name": { type: "string", nullable: true },
         "existing-project-folder": { type: "string", nullable: true },
-        "use-overloads-between-protocol-and-convenience": { type: "boolean", nullable: true },
+        "use-overloads-between-protocol-and-convenience": {
+            type: "boolean",
+            nullable: true
+        },
         debug: { type: "boolean", nullable: true },
         "models-to-treat-empty-string-as-null": {
             type: "array",
