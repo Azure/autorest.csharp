@@ -16,6 +16,7 @@ namespace Azure.Core
         private static string ConvertToString(object value, string? format = null)
             => value switch
             {
+                string s => s,
                 bool b => TypeFormatters.ToString(b),
                 int or float or double or long or decimal => ((IFormattable)value).ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture),
                 byte[] b when format != null => TypeFormatters.ToString(b, format),
