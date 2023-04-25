@@ -39,7 +39,7 @@
    "Namespace": "ModelsInCadl",
    "Deprecated": "deprecated for test",
    "Description": "Fixed int enum",
-   "EnumValueType": "Int32",
+   "EnumValueType": "Float32",
    "AllowedValues": [
     {
      "$id": "7",

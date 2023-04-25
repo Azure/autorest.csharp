@@ -355,7 +355,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 contextualParameterMappings.Remove(result);
             if (result is null && pathParameter.Type.IsEnum)
             {
-                var requestSegment = requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type));
+                var requestSegment = requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type) && s.IsConstant);
                 if (requestSegment.Any())
                 {
                     var keySegment = requestSegment.First();
