@@ -52,8 +52,8 @@ namespace AutoRest.CSharp.Input
 
         public static void Initialize(
             string outputFolder,
-            string? ns,
-            string? name,
+            string ns,
+            string libraryName,
             string[] sharedSourceFolders,
             bool saveInputs,
             bool azureArm,
@@ -78,8 +78,8 @@ namespace AutoRest.CSharp.Input
             MgmtTestConfiguration? mgmtTestConfiguration)
         {
             _outputFolder = outputFolder;
-            Namespace = ns;
-            LibraryName = name;
+            _namespace = ns;
+            _libraryName = libraryName;
             _sharedSourceFolders = sharedSourceFolders;
             SaveInputs = saveInputs;
             AzureArm = azureArm;
@@ -103,7 +103,10 @@ namespace AutoRest.CSharp.Input
                 _absoluteProjectFolder = Path.GetFullPath(Path.Combine(outputFolder, projectFolder));
             }
 
-            if (publicClients && generation1ConvenienceClient)
+            var isAzureProject = ns.StartsWith("Azure.") || ns.StartsWith("Microsoft.Azure");
+            // we only check the combination for Azure projects whose namespace starts with "Azure." or "Microsoft.Azure."
+            // issue: https://github.com/Azure/autorest.csharp/issues/3179
+            if (publicClients && generation1ConvenienceClient && isAzureProject)
             {
                 var binaryLocation = typeof(Configuration).Assembly.Location;
                 if (!binaryLocation.EndsWith(Path.Combine("artifacts", "bin", "AutoRest.CSharp", "Debug", "net6.0", "AutoRest.CSharp.dll")))
@@ -137,8 +140,12 @@ namespace AutoRest.CSharp.Input
 
         private static string? _outputFolder;
         public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
-        public static string? Namespace { get; private set; }
-        public static string? LibraryName { get; private set; }
+
+        private static string? _namespace;
+        public static string Namespace => _namespace ?? throw new InvalidOperationException("Configuration has not been initialized");
+
+        private static string? _libraryName;
+        public static string LibraryName => _libraryName ?? throw new InvalidOperationException("Configuration has not been initialized");
 
         private static string[]? _sharedSourceFolders;
         public static string[] SharedSourceFolders => _sharedSourceFolders ?? throw new InvalidOperationException("Configuration has not been initialized");
@@ -193,12 +200,12 @@ namespace AutoRest.CSharp.Input
         private static string? _absoluteProjectFolder;
         public static string AbsoluteProjectFolder => _absoluteProjectFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
 
-        public static void Initialize(IPluginCommunication autoRest)
+        public static void Initialize(IPluginCommunication autoRest, string defaultNamespace, string defaultLibraryName)
         {
             Initialize(
                 outputFolder: TrimFileSuffix(GetRequiredOption<string>(autoRest, Options.OutputFolder)),
-                ns: autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult(),
-                name: autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult(),
+                ns: autoRest.GetValue<string?>(Options.Namespace).GetAwaiter().GetResult() ?? defaultNamespace,
+                libraryName: autoRest.GetValue<string?>(Options.LibraryName).GetAwaiter().GetResult() ?? defaultLibraryName,
                 sharedSourceFolders: GetRequiredOption<string[]>(autoRest, Options.SharedSourceFolders).Select(TrimFileSuffix).ToArray(),
                 saveInputs: GetOptionBoolValue(autoRest, Options.SaveInputs),
                 azureArm: GetOptionBoolValue(autoRest, Options.AzureArm),

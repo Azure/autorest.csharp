@@ -1,7 +1,7 @@
 {
   "OutputFolder": ".",
   "Namespace": "endpoint",
-  "LibraryName": null,
+  "LibraryName": "endpoint",
   "SharedSourceFolders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"

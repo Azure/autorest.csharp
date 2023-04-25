@@ -1,7 +1,7 @@
 {
   "OutputFolder": ".",
   "Namespace": "azure_special_properties",
-  "LibraryName": null,
+  "LibraryName": "AutoRestAzureSpecialParametersTestClient",
   "SharedSourceFolders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"

@@ -1,7 +1,7 @@
 {
   "OutputFolder": ".",
   "Namespace": "CadlFirstTest",
-  "LibraryName": null,
+  "LibraryName": "CadlFirstTest",
   "SharedSourceFolders": [
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
