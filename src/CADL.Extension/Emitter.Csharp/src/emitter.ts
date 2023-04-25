@@ -87,7 +87,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             const configurations = {
                 OutputFolder: ".",
                 Namespace: options.namespace ?? namespace,
-                LibraryName: options["library-name"] ?? null,
+                LibraryName: options["library-name"] ?? namespace,
                 SharedSourceFolders: resolvedSharedFolders ?? [],
                 SingleTopLevelClient: options["single-top-level-client"],
                 "unreferenced-types-handling":

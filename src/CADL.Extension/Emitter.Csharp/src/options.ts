@@ -6,8 +6,8 @@ import { LoggerLevel } from "./lib/logger.js";
 export type NetEmitterOptions = {
     outputFile?: string;
     logFile?: string;
-    namespace?: string;
-    "library-name"?: string;
+    namespace: string;
+    "library-name": string;
     "single-top-level-client"?: boolean;
     skipSDKGeneration?: boolean;
     "unreferenced-types-handling"?:
@@ -33,8 +33,8 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
     properties: {
         outputFile: { type: "string", nullable: true },
         logFile: { type: "string", nullable: true },
-        namespace: { type: "string", nullable: true },
-        "library-name": { type: "string", nullable: true },
+        namespace: { type: "string" },
+        "library-name": { type: "string" },
         "single-top-level-client": { type: "boolean", nullable: true },
         skipSDKGeneration: { type: "boolean", default: false, nullable: true },
         "unreferenced-types-handling": {
