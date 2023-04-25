@@ -175,7 +175,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                     WriteIfNotDefault(writer, Configuration.Options.GenerateModelFactory, Configuration.GenerateModelFactory);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ModelFactoryForHlc, Configuration.ModelFactoryForHlc);
                     WriteIfNotDefault(writer, Configuration.Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
-                    WriteIfNotDefault(writer, Configuration.Options.AmbiguityHandling, Configuration.AmbiguityHandling);
+                    WriteIfNotDefault(writer, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience, Configuration.UseOverloadsBetweenProtocolAndConvenience);
                     WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.ProtocolMethodList), Configuration.ProtocolMethodList);
                     Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);
@@ -271,7 +271,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.PublicDiscriminatorProperty),
                 oldModelFactoryEntries,
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
-                ReadEnumOption<Configuration.AmbiguityHandlingOption>(root, Configuration.Options.AmbiguityHandling),
+                ReadOption(root, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience),
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
                 existingProjectFolder,
                 protocolMethods,

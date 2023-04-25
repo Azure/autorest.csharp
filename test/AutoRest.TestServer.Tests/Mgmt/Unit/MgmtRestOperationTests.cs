@@ -68,7 +68,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 publicDiscriminatorProperty: false,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
-                ambiguityHandling: Configuration.AmbiguityHandlingOption.UseOverload,
+                useOverloadsBetweenProtocolAndConvenience: true,
                 projectFolder: "/..",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),
