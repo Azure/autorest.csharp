@@ -49,6 +49,8 @@ Response response = await client.InputToRoundTripAsync(RequestContent.Create(dat
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
@@ -83,6 +85,8 @@ Schema for <c>RoundTripModel</c>:
   requiredString: string, # Required. Required string, illustrating a reference type property.
   requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
+    requiredPropertyOnBase: number, # Required. Required property on base
   }, # Required. Required model with discriminator
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
   requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
@@ -148,6 +152,8 @@ Response response = client.InputToRoundTrip(RequestContent.Create(data));
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
 Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
@@ -182,6 +188,8 @@ Schema for <c>RoundTripModel</c>:
   requiredString: string, # Required. Required string, illustrating a reference type property.
   requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
+    requiredPropertyOnBase: number, # Required. Required property on base
   }, # Required. Required model with discriminator
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
   requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
@@ -441,6 +449,18 @@ var data = new {
             }
         },
     },
+    optionalModelWithPropertiesOnBase = new {
+        requiredCollection = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {
+                        requiredCollection = new[] {},
+                    },
+                },
+            }
+        },
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+    },
     optionalFixedStringEnum = "1",
     optionalExtensibleEnum = "1",
     optionalIntRecord = new {
@@ -472,6 +492,7 @@ Console.WriteLine(result.GetProperty("optionalString").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
 Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
@@ -496,6 +517,10 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModel: {
     requiredCollection: [CollectionItem], # Required. Required collection
   }, # Optional. Optional model.
+  optionalModelWithPropertiesOnBase: {
+    requiredCollection: [CollectionItem], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional properties on base
+  }, # Optional. Optional model with properties on base
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
@@ -519,6 +544,10 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModel: {
     requiredCollection: [CollectionItem], # Required. Required collection
   }, # Optional. Optional model.
+  optionalModelWithPropertiesOnBase: {
+    requiredCollection: [CollectionItem], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional properties on base
+  }, # Optional. Optional model with properties on base
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
@@ -580,6 +609,18 @@ var data = new {
             }
         },
     },
+    optionalModelWithPropertiesOnBase = new {
+        requiredCollection = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {
+                        requiredCollection = new[] {},
+                    },
+                },
+            }
+        },
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+    },
     optionalFixedStringEnum = "1",
     optionalExtensibleEnum = "1",
     optionalIntRecord = new {
@@ -611,6 +652,7 @@ Console.WriteLine(result.GetProperty("optionalString").ToString());
 Console.WriteLine(result.GetProperty("optionalInt").ToString());
 Console.WriteLine(result.GetProperty("optionalStringList")[0].ToString());
 Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
+Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
@@ -635,6 +677,10 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModel: {
     requiredCollection: [CollectionItem], # Required. Required collection
   }, # Optional. Optional model.
+  optionalModelWithPropertiesOnBase: {
+    requiredCollection: [CollectionItem], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional properties on base
+  }, # Optional. Optional model with properties on base
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
@@ -658,6 +704,10 @@ Schema for <c>RoundTripOptionalModel</c>:
   optionalModel: {
     requiredCollection: [CollectionItem], # Required. Required collection
   }, # Optional. Optional model.
+  optionalModelWithPropertiesOnBase: {
+    requiredCollection: [CollectionItem], # Required. Required collection
+    optionalPropertyOnBase: string, # Optional. Optional properties on base
+  }, # Optional. Optional model with properties on base
   optionalFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional fixed string enum
   optionalExtensibleEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Optional. Optional extensible enum
   optionalIntRecord: Dictionary&lt;string, number&gt;, # Optional. Optional int record
@@ -915,7 +965,7 @@ Schema for <c>RoundTripReadOnlyModel</c>:
     </member>
     <member name="RoundTripToOutputAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call RoundTripToOutputAsync with required request content and parse the result.
+This sample shows how to call RoundTripToOutputAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -923,7 +973,56 @@ var client = new ModelsInCadlClient(endpoint);
 var data = new {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredModel = new {},
+    requiredModel = new {
+        requiredPropertyOnBase = 1234,
+    },
+    requiredFixedStringEnum = "1",
+    requiredFixedIntEnum = "1",
+    requiredExtensibleEnum = "1",
+    requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                },
+            },
+        }
+    },
+    requiredIntRecord = new {
+        key = 1234,
+    },
+    requiredStringRecord = new {
+        key = "<String>",
+    },
+    requiredModelRecord = new {
+        key = new {
+            requiredCollection = new[] {
+                new {
+                    requiredModelRecord = new {},
+                }
+            },
+        },
+    },
+};
+
+Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call RoundTripToOutputAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        requiredPropertyOnBase = 1234,
+    },
     requiredFixedStringEnum = "1",
     requiredFixedIntEnum = "1",
     requiredExtensibleEnum = "1",
@@ -970,6 +1069,8 @@ Schema for <c>RoundTripModel</c>:
   requiredString: string, # Required. Required string, illustrating a reference type property.
   requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
+    requiredPropertyOnBase: number, # Required. Required property on base
   }, # Required. Required model with discriminator
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
   requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
@@ -1007,7 +1108,7 @@ Schema for <c>OutputModel</c>:
     </member>
     <member name="RoundTripToOutput(RequestContent,RequestContext)">
 <example>
-This sample shows how to call RoundTripToOutput with required request content and parse the result.
+This sample shows how to call RoundTripToOutput with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -1015,7 +1116,56 @@ var client = new ModelsInCadlClient(endpoint);
 var data = new {
     requiredString = "<requiredString>",
     requiredInt = 1234,
-    requiredModel = new {},
+    requiredModel = new {
+        requiredPropertyOnBase = 1234,
+    },
+    requiredFixedStringEnum = "1",
+    requiredFixedIntEnum = "1",
+    requiredExtensibleEnum = "1",
+    requiredCollection = new[] {
+        new {
+            requiredModelRecord = new {
+                key = new {
+                    requiredCollection = new[] {},
+                },
+            },
+        }
+    },
+    requiredIntRecord = new {
+        key = 1234,
+    },
+    requiredStringRecord = new {
+        key = "<String>",
+    },
+    requiredModelRecord = new {
+        key = new {
+            requiredCollection = new[] {
+                new {
+                    requiredModelRecord = new {},
+                }
+            },
+        },
+    },
+};
+
+Response response = client.RoundTripToOutput(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+]]></code>
+This sample shows how to call RoundTripToOutput with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsInCadlClient(endpoint);
+
+var data = new {
+    requiredString = "<requiredString>",
+    requiredInt = 1234,
+    requiredModel = new {
+        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        requiredPropertyOnBase = 1234,
+    },
     requiredFixedStringEnum = "1",
     requiredFixedIntEnum = "1",
     requiredExtensibleEnum = "1",
@@ -1062,6 +1212,8 @@ Schema for <c>RoundTripModel</c>:
   requiredString: string, # Required. Required string, illustrating a reference type property.
   requiredInt: number, # Required. Required int, illustrating a value type property.
   requiredModel: {
+    optionalPropertyOnBase: string, # Optional. Optional property on base
+    requiredPropertyOnBase: number, # Required. Required property on base
   }, # Required. Required model with discriminator
   requiredFixedStringEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed string enum
   requiredFixedIntEnum: &quot;1&quot; | &quot;2&quot; | &quot;4&quot;, # Required. Required fixed int enum
@@ -1291,7 +1443,7 @@ Schema for <c>RoundTripRecursiveModel</c>:
     </member>
     <member name="SelfReferenceAsync(RequestContext)">
 <example>
-This sample shows how to call SelfReferenceAsync and parse the result.
+This sample shows how to call SelfReferenceAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);
@@ -1319,7 +1471,7 @@ Schema for <c>ErrorModel</c>:
     </member>
     <member name="SelfReference(RequestContext)">
 <example>
-This sample shows how to call SelfReference and parse the result.
+This sample shows how to call SelfReference with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsInCadlClient(endpoint);

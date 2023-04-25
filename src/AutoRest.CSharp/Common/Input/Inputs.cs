@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -86,6 +87,20 @@ namespace AutoRest.CSharp.Common.Input
             GenerateProtocolMethod: true,
             GenerateConvenienceMethod: false)
         { }
+
+        private string? _cleanName;
+        public string CleanName
+        {
+            get
+            {
+                if (_cleanName == null)
+                {
+                    _cleanName = Name.IsNullOrEmpty() ? string.Empty : Name.ToCleanName();
+                }
+
+                return _cleanName;
+            }
+        }
     }
 
     internal record InputParameter(

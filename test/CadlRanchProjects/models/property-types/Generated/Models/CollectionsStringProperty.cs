@@ -29,7 +29,7 @@ namespace Models.Property.Types.Models
         /// <param name="property"> Property. </param>
         internal CollectionsStringProperty(IList<string> property)
         {
-            Property = property.ToList();
+            Property = property;
         }
 
         /// <summary> Property. </summary>

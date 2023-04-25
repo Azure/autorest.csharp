@@ -49,40 +49,20 @@ namespace Models.Property.Types
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<CollectionsIntProperty>> GetCollectionsIntValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<CollectionsIntProperty>> GetCollectionsIntAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CollectionsInt.GetCollectionsIntValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetCollectionsIntAsync(context).ConfigureAwait(false);
-                return Response.FromValue(CollectionsIntProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetCollectionsIntAsync(context).ConfigureAwait(false);
+            return Response.FromValue(CollectionsIntProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<CollectionsIntProperty> GetCollectionsIntValue(CancellationToken cancellationToken = default)
+        public virtual Response<CollectionsIntProperty> GetCollectionsInt(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("CollectionsInt.GetCollectionsIntValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetCollectionsInt(context);
-                return Response.FromValue(CollectionsIntProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetCollectionsInt(context);
+            return Response.FromValue(CollectionsIntProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
@@ -90,7 +70,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionsInt.xml" path="doc/members/member[@name='GetCollectionsIntAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetCollectionsIntAsync(RequestContext context = null)
+        public virtual async Task<Response> GetCollectionsIntAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("CollectionsInt.GetCollectionsInt");
             scope.Start();
@@ -111,7 +91,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/CollectionsInt.xml" path="doc/members/member[@name='GetCollectionsInt(RequestContext)']/*" />
-        public virtual Response GetCollectionsInt(RequestContext context = null)
+        public virtual Response GetCollectionsInt(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("CollectionsInt.GetCollectionsInt");
             scope.Start();

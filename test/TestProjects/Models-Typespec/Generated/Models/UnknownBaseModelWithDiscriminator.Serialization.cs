@@ -20,6 +20,8 @@ namespace ModelsInCadl.Models
                 return null;
             }
             string discriminatorProperty = "Unknown";
+            Optional<string> optionalPropertyOnBase = default;
+            int requiredPropertyOnBase = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("discriminatorProperty"u8))
@@ -27,8 +29,18 @@ namespace ModelsInCadl.Models
                     discriminatorProperty = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("optionalPropertyOnBase"u8))
+                {
+                    optionalPropertyOnBase = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("requiredPropertyOnBase"u8))
+                {
+                    requiredPropertyOnBase = property.Value.GetInt32();
+                    continue;
+                }
             }
-            return new UnknownBaseModelWithDiscriminator(discriminatorProperty);
+            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

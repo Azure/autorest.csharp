@@ -66,7 +66,7 @@ namespace ModelsInCadl.Models
             RequiredBoolean = requiredBoolean;
             RequiredDateTimeOffset = requiredDateTimeOffset;
             RequiredTimeSpan = requiredTimeSpan;
-            RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement.ToList();
+            RequiredCollectionWithNullableFloatElement = requiredCollectionWithNullableFloatElement;
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>

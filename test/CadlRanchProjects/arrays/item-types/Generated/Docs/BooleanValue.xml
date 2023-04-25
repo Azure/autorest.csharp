@@ -3,7 +3,7 @@
   <members>
     <member name="GetBooleanValueAsync(RequestContext)">
 <example>
-This sample shows how to call GetBooleanValueAsync and parse the result.
+This sample shows how to call GetBooleanValueAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetBooleanValueClient(<1.0.0>);
 
@@ -16,7 +16,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetBooleanValue(RequestContext)">
 <example>
-This sample shows how to call GetBooleanValue and parse the result.
+This sample shows how to call GetBooleanValue with required parameters and parse the result.
 <code><![CDATA[
 var client = new ItemTypesClient().GetBooleanValueClient(<1.0.0>);
 

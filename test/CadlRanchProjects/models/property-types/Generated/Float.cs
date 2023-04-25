@@ -49,40 +49,20 @@ namespace Models.Property.Types
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<FloatProperty>> GetFloatValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<FloatProperty>> GetFloatAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Float.GetFloatValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetFloatAsync(context).ConfigureAwait(false);
-                return Response.FromValue(FloatProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetFloatAsync(context).ConfigureAwait(false);
+            return Response.FromValue(FloatProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<FloatProperty> GetFloatValue(CancellationToken cancellationToken = default)
+        public virtual Response<FloatProperty> GetFloat(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Float.GetFloatValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetFloat(context);
-                return Response.FromValue(FloatProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetFloat(context);
+            return Response.FromValue(FloatProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
@@ -90,7 +70,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Float.xml" path="doc/members/member[@name='GetFloatAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetFloatAsync(RequestContext context = null)
+        public virtual async Task<Response> GetFloatAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Float.GetFloat");
             scope.Start();
@@ -111,7 +91,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Float.xml" path="doc/members/member[@name='GetFloat(RequestContext)']/*" />
-        public virtual Response GetFloat(RequestContext context = null)
+        public virtual Response GetFloat(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Float.GetFloat");
             scope.Start();

@@ -49,40 +49,20 @@ namespace Models.Property.Types
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<BytesProperty>> GetByteValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<BytesProperty>> GetByteAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Bytes.GetByteValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetByteAsync(context).ConfigureAwait(false);
-                return Response.FromValue(BytesProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetByteAsync(context).ConfigureAwait(false);
+            return Response.FromValue(BytesProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<BytesProperty> GetByteValue(CancellationToken cancellationToken = default)
+        public virtual Response<BytesProperty> GetByte(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Bytes.GetByteValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetByte(context);
-                return Response.FromValue(BytesProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetByte(context);
+            return Response.FromValue(BytesProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
@@ -90,7 +70,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetByteAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetByteAsync(RequestContext context = null)
+        public virtual async Task<Response> GetByteAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Bytes.GetByte");
             scope.Start();
@@ -111,7 +91,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Bytes.xml" path="doc/members/member[@name='GetByte(RequestContext)']/*" />
-        public virtual Response GetByte(RequestContext context = null)
+        public virtual Response GetByte(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Bytes.GetByte");
             scope.Start();

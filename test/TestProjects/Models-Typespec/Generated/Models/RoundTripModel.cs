@@ -67,7 +67,7 @@ namespace ModelsInCadl.Models
             RequiredFixedStringEnum = requiredFixedStringEnum;
             RequiredFixedIntEnum = requiredFixedIntEnum;
             RequiredExtensibleEnum = requiredExtensibleEnum;
-            RequiredCollection = requiredCollection.ToList();
+            RequiredCollection = requiredCollection;
             RequiredIntRecord = requiredIntRecord;
             RequiredStringRecord = requiredStringRecord;
             RequiredModelRecord = requiredModelRecord;

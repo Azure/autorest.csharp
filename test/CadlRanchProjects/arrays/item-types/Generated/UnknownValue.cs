@@ -49,76 +49,56 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<BinaryData>>> GetUnknownValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<BinaryData>>> GetUnknownValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("UnknownValue.GetUnknownValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetUnknownValueAsync(context).ConfigureAwait(false);
+            IReadOnlyList<BinaryData> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            List<BinaryData> array = new List<BinaryData>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetUnknownValueAsync(context).ConfigureAwait(false);
-                IReadOnlyList<BinaryData> value = default;
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                List<BinaryData> array = new List<BinaryData>();
-                foreach (var item in document.RootElement.EnumerateArray())
+                if (item.ValueKind == JsonValueKind.Null)
                 {
-                    if (item.ValueKind == JsonValueKind.Null)
-                    {
-                        array.Add(null);
-                    }
-                    else
-                    {
-                        array.Add(BinaryData.FromString(item.GetRawText()));
-                    }
+                    array.Add(null);
                 }
-                value = array;
-                return Response.FromValue(value, response);
+                else
+                {
+                    array.Add(BinaryData.FromString(item.GetRawText()));
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<BinaryData>> GetUnknownValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<BinaryData>> GetUnknownValue(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("UnknownValue.GetUnknownValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetUnknownValue(context);
+            IReadOnlyList<BinaryData> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            List<BinaryData> array = new List<BinaryData>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetUnknownValue(context);
-                IReadOnlyList<BinaryData> value = default;
-                using var document = JsonDocument.Parse(response.ContentStream);
-                List<BinaryData> array = new List<BinaryData>();
-                foreach (var item in document.RootElement.EnumerateArray())
+                if (item.ValueKind == JsonValueKind.Null)
                 {
-                    if (item.ValueKind == JsonValueKind.Null)
-                    {
-                        array.Add(null);
-                    }
-                    else
-                    {
-                        array.Add(BinaryData.FromString(item.GetRawText()));
-                    }
+                    array.Add(null);
                 }
-                value = array;
-                return Response.FromValue(value, response);
+                else
+                {
+                    array.Add(BinaryData.FromString(item.GetRawText()));
+                }
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetUnknownValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetUnknownValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("UnknownValue.GetUnknownValue");
             scope.Start();
@@ -138,7 +118,7 @@ namespace Arrays.ItemTypes
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/UnknownValue.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
-        public virtual Response GetUnknownValue(RequestContext context = null)
+        public virtual Response GetUnknownValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("UnknownValue.GetUnknownValue");
             scope.Start();

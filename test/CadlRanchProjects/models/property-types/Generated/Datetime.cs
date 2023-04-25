@@ -49,40 +49,20 @@ namespace Models.Property.Types
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DatetimeProperty>> GetDatetimeValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DatetimeProperty>> GetDatetimeAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Datetime.GetDatetimeValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetDatetimeAsync(context).ConfigureAwait(false);
-                return Response.FromValue(DatetimeProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetDatetimeAsync(context).ConfigureAwait(false);
+            return Response.FromValue(DatetimeProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DatetimeProperty> GetDatetimeValue(CancellationToken cancellationToken = default)
+        public virtual Response<DatetimeProperty> GetDatetime(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Datetime.GetDatetimeValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetDatetime(context);
-                return Response.FromValue(DatetimeProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetDatetime(context);
+            return Response.FromValue(DatetimeProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
@@ -90,7 +70,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDatetimeAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDatetimeAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDatetimeAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Datetime.GetDatetime");
             scope.Start();
@@ -111,7 +91,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/Datetime.xml" path="doc/members/member[@name='GetDatetime(RequestContext)']/*" />
-        public virtual Response GetDatetime(RequestContext context = null)
+        public virtual Response GetDatetime(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Datetime.GetDatetime");
             scope.Start();

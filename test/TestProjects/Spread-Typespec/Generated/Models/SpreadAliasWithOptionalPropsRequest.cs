@@ -29,6 +29,21 @@ namespace Spread.Models
             Elements = new ChangeTrackingList<string>();
         }
 
+        /// <summary> Initializes a new instance of SpreadAliasWithOptionalPropsRequest. </summary>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="color"> optional property of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
+        /// <param name="items"> required array. </param>
+        /// <param name="elements"> optional array. </param>
+        internal SpreadAliasWithOptionalPropsRequest(string name, string color, int? age, IList<int> items, IList<string> elements)
+        {
+            Name = name;
+            Color = color;
+            Age = age;
+            Items = items;
+            Elements = elements;
+        }
+
         /// <summary> name of the Thing. </summary>
         public string Name { get; }
         /// <summary> optional property of the Thing. </summary>
