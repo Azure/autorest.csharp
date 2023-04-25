@@ -49,62 +49,42 @@ namespace Arrays.ItemTypes
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<IReadOnlyList<int>>> GetInt32ValueValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<IReadOnlyList<int>>> GetInt32ValueAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Int32Value.GetInt32ValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetInt32ValueAsync(context).ConfigureAwait(false);
+            IReadOnlyList<int> value = default;
+            using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
+            List<int> array = new List<int>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetInt32ValueAsync(context).ConfigureAwait(false);
-                IReadOnlyList<int> value = default;
-                using var document = await JsonDocument.ParseAsync(response.ContentStream, default, cancellationToken).ConfigureAwait(false);
-                List<int> array = new List<int>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetInt32());
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetInt32());
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<IReadOnlyList<int>> GetInt32ValueValue(CancellationToken cancellationToken = default)
+        public virtual Response<IReadOnlyList<int>> GetInt32Value(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("Int32Value.GetInt32ValueValue");
-            scope.Start();
-            try
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetInt32Value(context);
+            IReadOnlyList<int> value = default;
+            using var document = JsonDocument.Parse(response.ContentStream);
+            List<int> array = new List<int>();
+            foreach (var item in document.RootElement.EnumerateArray())
             {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetInt32Value(context);
-                IReadOnlyList<int> value = default;
-                using var document = JsonDocument.Parse(response.ContentStream);
-                List<int> array = new List<int>();
-                foreach (var item in document.RootElement.EnumerateArray())
-                {
-                    array.Add(item.GetInt32());
-                }
-                value = array;
-                return Response.FromValue(value, response);
+                array.Add(item.GetInt32());
             }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            value = array;
+            return Response.FromValue(value, response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Int32Value.xml" path="doc/members/member[@name='GetInt32ValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetInt32ValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetInt32ValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Int32Value.GetInt32Value");
             scope.Start();
@@ -124,7 +104,7 @@ namespace Arrays.ItemTypes
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Int32Value.xml" path="doc/members/member[@name='GetInt32Value(RequestContext)']/*" />
-        public virtual Response GetInt32Value(RequestContext context = null)
+        public virtual Response GetInt32Value(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Int32Value.GetInt32Value");
             scope.Start();

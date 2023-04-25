@@ -3,7 +3,7 @@
   <members>
     <member name="GetNeverAsync(RequestContext)">
 <example>
-This sample shows how to call GetNeverAsync and parse the result.
+This sample shows how to call GetNeverAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetNeverClient(<1.0.0>);
 
@@ -26,7 +26,7 @@ Schema for <c>NeverProperty</c>:
     </member>
     <member name="GetNever(RequestContext)">
 <example>
-This sample shows how to call GetNever and parse the result.
+This sample shows how to call GetNever with required parameters and parse the result.
 <code><![CDATA[
 var client = new TypesClient().GetNeverClient(<1.0.0>);
 

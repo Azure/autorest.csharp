@@ -16,7 +16,7 @@ namespace CadlRanchProjects.Tests
         public Task Parameters_CollectionFormat_Query_multi() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).GetQueryClient().MultiAsync(colors);
+            Response response = await new CollectionFormatClient(host, null).GetQueryClient().MultiAsync(colors, new RequestContext());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -24,7 +24,7 @@ namespace CadlRanchProjects.Tests
         public Task Parameters_CollectionFormat_Query_csv() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).GetQueryClient().CsvAsync(colors);
+            Response response = await new CollectionFormatClient(host, null).GetQueryClient().CsvAsync(colors, new RequestContext());
             Assert.AreEqual(204, response.Status);
         });
 
@@ -32,7 +32,7 @@ namespace CadlRanchProjects.Tests
         public Task Parameters_CollectionFormat_Header_csv() => Test(async (host) =>
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
-            Response response = await new CollectionFormatClient(host, null).GetHeaderClient().CsvAsync(colors);
+            Response response = await new CollectionFormatClient(host, null).GetHeaderClient().CsvAsync(colors, new RequestContext());
             Assert.AreEqual(204, response.Status);
         });
     }

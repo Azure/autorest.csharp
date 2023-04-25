@@ -49,40 +49,20 @@ namespace Models.Property.Types
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<DictionaryStringProperty>> GetDictionaryStringValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<DictionaryStringProperty>> GetDictionaryStringAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("DictionaryString.GetDictionaryStringValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetDictionaryStringAsync(context).ConfigureAwait(false);
-                return Response.FromValue(DictionaryStringProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetDictionaryStringAsync(context).ConfigureAwait(false);
+            return Response.FromValue(DictionaryStringProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<DictionaryStringProperty> GetDictionaryStringValue(CancellationToken cancellationToken = default)
+        public virtual Response<DictionaryStringProperty> GetDictionaryString(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("DictionaryString.GetDictionaryStringValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetDictionaryString(context);
-                return Response.FromValue(DictionaryStringProperty.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetDictionaryString(context);
+            return Response.FromValue(DictionaryStringProperty.FromResponse(response), response);
         }
 
         /// <summary> Get call. </summary>
@@ -90,7 +70,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/DictionaryString.xml" path="doc/members/member[@name='GetDictionaryStringAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDictionaryStringAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDictionaryStringAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("DictionaryString.GetDictionaryString");
             scope.Start();
@@ -111,7 +91,7 @@ namespace Models.Property.Types
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/DictionaryString.xml" path="doc/members/member[@name='GetDictionaryString(RequestContext)']/*" />
-        public virtual Response GetDictionaryString(RequestContext context = null)
+        public virtual Response GetDictionaryString(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("DictionaryString.GetDictionaryString");
             scope.Start();

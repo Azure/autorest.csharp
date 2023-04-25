@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             Configuration.Initialize(
                 outputFolder: "Generated",
                 ns: "",
-                name: "",
+                libraryName: "",
                 sharedSourceFolders: Array.Empty<string>(),
                 saveInputs: false,
                 azureArm: false,
@@ -53,7 +53,9 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 publicDiscriminatorProperty: false,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
+                useOverloadsBetweenProtocolAndConvenience: true,
                 projectFolder: ".",
+                existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),
                 suppressAbstractBaseClasses: Array.Empty<string>(),
                 modelsToTreatEmptyStringAsNull: Array.Empty<string>(),

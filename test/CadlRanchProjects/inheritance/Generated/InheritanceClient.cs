@@ -122,46 +122,26 @@ namespace Models.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Siamese>> GetValidValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Siamese>> GetValidAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValidValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetValidAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Siamese.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetValidAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Siamese.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Siamese> GetValidValue(CancellationToken cancellationToken = default)
+        public virtual Response<Siamese> GetValid(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValidValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetValid(context);
-                return Response.FromValue(Siamese.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetValid(context);
+            return Response.FromValue(Siamese.FromResponse(response), response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValid");
             scope.Start();
@@ -181,7 +161,7 @@ namespace Models.Inheritance
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
-        public virtual Response GetValid(RequestContext context = null)
+        public virtual Response GetValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValid");
             scope.Start();
@@ -270,46 +250,26 @@ namespace Models.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetModelValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fish>> GetModelAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetModelAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetModelAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetModelValue(CancellationToken cancellationToken = default)
+        public virtual Response<Fish> GetModel(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetModel(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetModel(context);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModelAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetModelAsync(RequestContext context = null)
+        public virtual async Task<Response> GetModelAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModel");
             scope.Start();
@@ -329,7 +289,7 @@ namespace Models.Inheritance
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModel(RequestContext)']/*" />
-        public virtual Response GetModel(RequestContext context = null)
+        public virtual Response GetModel(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModel");
             scope.Start();
@@ -418,46 +378,26 @@ namespace Models.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetRecursiveModelValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fish>> GetRecursiveModelAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetRecursiveModelAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetRecursiveModelAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetRecursiveModelValue(CancellationToken cancellationToken = default)
+        public virtual Response<Fish> GetRecursiveModel(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetRecursiveModel(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetRecursiveModel(context);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModelAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetRecursiveModelAsync(RequestContext context = null)
+        public virtual async Task<Response> GetRecursiveModelAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModel");
             scope.Start();
@@ -477,7 +417,7 @@ namespace Models.Inheritance
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModel(RequestContext)']/*" />
-        public virtual Response GetRecursiveModel(RequestContext context = null)
+        public virtual Response GetRecursiveModel(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModel");
             scope.Start();
@@ -566,46 +506,26 @@ namespace Models.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetMissingDiscriminatorValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fish>> GetMissingDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetMissingDiscriminatorAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetMissingDiscriminatorAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetMissingDiscriminatorValue(CancellationToken cancellationToken = default)
+        public virtual Response<Fish> GetMissingDiscriminator(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetMissingDiscriminator(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetMissingDiscriminator(context);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminatorAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetMissingDiscriminatorAsync(RequestContext context = null)
+        public virtual async Task<Response> GetMissingDiscriminatorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminator");
             scope.Start();
@@ -625,7 +545,7 @@ namespace Models.Inheritance
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminator(RequestContext)']/*" />
-        public virtual Response GetMissingDiscriminator(RequestContext context = null)
+        public virtual Response GetMissingDiscriminator(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminator");
             scope.Start();
@@ -642,46 +562,26 @@ namespace Models.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response<Fish>> GetWrongDiscriminatorValueAsync(CancellationToken cancellationToken = default)
+        public virtual async Task<Response<Fish>> GetWrongDiscriminatorAsync(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await GetWrongDiscriminatorAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetWrongDiscriminatorAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response<Fish> GetWrongDiscriminatorValue(CancellationToken cancellationToken = default)
+        public virtual Response<Fish> GetWrongDiscriminator(CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminatorValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = GetWrongDiscriminator(context);
-                return Response.FromValue(Fish.FromResponse(response), response);
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetWrongDiscriminator(context);
+            return Response.FromValue(Fish.FromResponse(response), response);
         }
 
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminatorAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetWrongDiscriminatorAsync(RequestContext context = null)
+        public virtual async Task<Response> GetWrongDiscriminatorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminator");
             scope.Start();
@@ -701,7 +601,7 @@ namespace Models.Inheritance
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminator(RequestContext)']/*" />
-        public virtual Response GetWrongDiscriminator(RequestContext context = null)
+        public virtual Response GetWrongDiscriminator(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminator");
             scope.Start();

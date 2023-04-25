@@ -180,7 +180,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private static string UpdateOperationName(InputOperation operation, string clientName)
-            => operation.Name.ToCleanName().RenameGetMethod(clientName).RenameListToGet(clientName);
+            => operation.CleanName.RenameGetMethod(clientName).RenameListToGet(clientName);
 
         private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
         {

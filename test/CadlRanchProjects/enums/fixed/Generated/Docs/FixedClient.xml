@@ -3,7 +3,7 @@
   <members>
     <member name="GetKnownValueAsync(RequestContext)">
 <example>
-This sample shows how to call GetKnownValueAsync and parse the result.
+This sample shows how to call GetKnownValueAsync with required parameters and parse the result.
 <code><![CDATA[
 var client = new FixedClient();
 
@@ -16,7 +16,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetKnownValue(RequestContext)">
 <example>
-This sample shows how to call GetKnownValue and parse the result.
+This sample shows how to call GetKnownValue with required parameters and parse the result.
 <code><![CDATA[
 var client = new FixedClient();
 
