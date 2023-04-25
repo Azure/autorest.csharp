@@ -12,3 +12,4 @@ The following software is required to build and test this repository:
   > ⚠️ **Warning:** using NPM 9 may prevent proper source generation, preventing a PR from building cleanly.
 
 - [PowerShell 7 or newer](https://learn.microsoft.com/powershell/scripting/install/installing-powershell)
+
