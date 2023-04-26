@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetDurationAsync(RequestContext)">
+<example>
+This sample shows how to call GetDurationAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+
+Response response = await client.GetDurationAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>DurationProperty</c>:
+<code>{
+  property: string (duration ISO 8601 Format), # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="GetDuration(RequestContext)">
+<example>
+This sample shows how to call GetDuration with required parameters and parse the result.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+
+Response response = client.GetDuration();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("property").ToString());
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the response payload.
+
+Response Body:
+
+Schema for <c>DurationProperty</c>:
+<code>{
+  property: string (duration ISO 8601 Format), # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+
+var data = new {
+    property = PT1H23M45S,
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>DurationProperty</c>:
+<code>{
+  property: string (duration ISO 8601 Format), # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new ValueTypesClient().GetDurationClient(<1.0.0>);
+
+var data = new {
+    property = PT1H23M45S,
+};
+
+Response response = client.Put(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+<remarks>
+Below is the JSON schema for the request payload.
+
+Request Body:
+
+Schema for <c>DurationProperty</c>:
+<code>{
+  property: string (duration ISO 8601 Format), # Required. Property
+}
+</code>
+
+</remarks>
+    </member>
+  </members>
+</doc>

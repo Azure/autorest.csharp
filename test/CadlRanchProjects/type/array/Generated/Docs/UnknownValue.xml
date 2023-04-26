@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetUnknownValueAsync(RequestContext)">
+<example>
+This sample shows how to call GetUnknownValueAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ArrayClient().GetUnknownValueClient(<1.0.0>);
+
+Response response = await client.GetUnknownValueAsync();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetUnknownValue(RequestContext)">
+<example>
+This sample shows how to call GetUnknownValue with required parameters and parse the result.
+<code><![CDATA[
+var client = new ArrayClient().GetUnknownValueClient(<1.0.0>);
+
+Response response = client.GetUnknownValue();
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new ArrayClient().GetUnknownValueClient(<1.0.0>);
+
+var data = new[] {
+    new {}
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new ArrayClient().GetUnknownValueClient(<1.0.0>);
+
+var data = new[] {
+    new {}
+};
+
+Response response = client.Put(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

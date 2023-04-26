@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Models.Inheritance.Models
+namespace _Type.Model.Inheritance.Models
 {
     /// <summary> The second level model in polymorphic multiple levels inheritance and it defines a new discriminator. </summary>
     public partial class Shark : Fish

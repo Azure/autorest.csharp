@@ -33,7 +33,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task SpecialWords_Model_get() => Test(async (host) =>
         {
-            var response = await new SpecialWordsClient(host, null).GetModelClient().GetModelAsync();
+            var response = await new SpecialWordsClient(host, null).GetModelClient().GetModelValueAsync();
             Assert.AreEqual("derived", (response.Value as DerivedModel).ModelKind);
             Assert.AreEqual("my.name", (response.Value as DerivedModel).DerivedName);
             Assert.AreEqual("value", (response.Value as DerivedModel).For);
