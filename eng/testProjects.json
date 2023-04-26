@@ -1,19 +1,22 @@
 {
     "CadlRanchProjects": [
-        "arrays/item-types",
-        "azure/core",
+        "type/array",
+        "type/enum/extensible",
+        "type/enum/fixed",
+        "type/model/usage",
+        "type/property/optional",
+        "type/property/value-types",
         "authentication/api-key",
         "authentication/oauth2",
         "authentication/union",
-        "models/property-optional",
-        "models/property-types",
-        "models/usage",
-        "projection",
+        "azure/core/basic",
+        "azure/core/traits",
+        "projection/projected-name",
+        "server/path/multiple",
+        "server/path/single",
         "special-words",
-        "enums/extensible",
-        "enums/fixed",
-        "hello",
-        "parameters/collection-format"
+        "parameters/collection-format",
+        "parameters/spread"
     ],
     "TestServerProjects": [
         "additionalProperties",

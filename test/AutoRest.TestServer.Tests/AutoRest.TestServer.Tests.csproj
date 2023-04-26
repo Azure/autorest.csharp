@@ -40,8 +40,4 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Common\Input\" />
-  </ItemGroup>
-
 </Project>
