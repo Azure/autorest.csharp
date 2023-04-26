@@ -1,7 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 

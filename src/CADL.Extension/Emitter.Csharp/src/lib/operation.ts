@@ -6,7 +6,8 @@ import {
     createSdkContext,
     isApiVersion,
     shouldGenerateConvenient,
-    shouldGenerateProtocol
+    shouldGenerateProtocol,
+    SdkContext
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -62,7 +63,6 @@ import {
     getInputType
 } from "./model.js";
 import { capitalize } from "./utils.js";
-import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 
 export function loadOperation(
     context: EmitContext<NetEmitterOptions>,
@@ -74,7 +74,7 @@ export function loadOperation(
     enums: Map<string, InputEnumType>
 ): InputOperation {
     const program = context.program;
-    const dpgContext = createSdkContext(context);
+    const sdkContext = createSdkContext(context);
     const {
         path: fullPath,
         operation: op,
@@ -85,7 +85,7 @@ export function loadOperation(
     const resourceOperation = getResourceOperation(program, op);
     const desc = getDoc(program, op);
     const summary = getSummary(program, op);
-    const externalDocs = getExternalDocs(dpgContext, op);
+    const externalDocs = getExternalDocs(sdkContext, op);
 
     const parameters: InputParameter[] = [];
     if (urlParameters) {
@@ -94,32 +94,32 @@ export function loadOperation(
         }
     }
     for (const p of cadlParameters.parameters) {
-        parameters.push(loadOperationParameter(dpgContext, p));
+        parameters.push(loadOperationParameter(sdkContext, p));
     }
 
     if (cadlParameters.bodyParameter) {
         parameters.push(
-            loadBodyParameter(dpgContext, cadlParameters.bodyParameter)
+            loadBodyParameter(sdkContext, cadlParameters.bodyParameter)
         );
     } else if (cadlParameters.bodyType) {
         if (resourceOperation) {
             parameters.push(
-                loadBodyParameter(dpgContext, resourceOperation.resourceType)
+                loadBodyParameter(sdkContext, resourceOperation.resourceType)
             );
         } else {
             const effectiveBodyType = getEffectiveSchemaType(
-                dpgContext,
+                sdkContext,
                 cadlParameters.bodyType
             );
             if (effectiveBodyType.kind === "Model") {
                 if (effectiveBodyType.name !== "") {
                     parameters.push(
-                        loadBodyParameter(dpgContext, effectiveBodyType)
+                        loadBodyParameter(sdkContext, effectiveBodyType)
                     );
                 } else {
                     effectiveBodyType.name = `${capitalize(op.name)}Request`;
                     let bodyParameter = loadBodyParameter(
-                        dpgContext,
+                        sdkContext,
                         effectiveBodyType
                     );
                     bodyParameter.Kind = InputOperationParameterKind.Spread;
@@ -132,7 +132,7 @@ export function loadOperation(
     const responses: OperationResponse[] = [];
     for (const res of operation.responses) {
         const operationResponse = loadOperationResponse(
-            dpgContext,
+            sdkContext,
             res,
             resourceOperation
         );
@@ -160,10 +160,10 @@ export function loadOperation(
         }
     }
     const requestMethod = parseHttpRequestMethod(verb);
-    const generateProtocol: boolean = shouldGenerateProtocol(dpgContext, op);
+    const generateProtocol: boolean = shouldGenerateProtocol(sdkContext, op);
     const generateConvenience: boolean =
         requestMethod !== RequestMethod.PATCH &&
-        shouldGenerateConvenient(dpgContext, op);
+        shouldGenerateConvenient(sdkContext, op);
 
     /* handle lro */
     /* handle paging. */
@@ -194,7 +194,7 @@ export function loadOperation(
         Name: op.name,
         ResourceName:
             resourceOperation?.resourceType.name ??
-            getOperationGroupName(dpgContext, op, serviceNamespaceType),
+            getOperationGroupName(sdkContext, op, serviceNamespaceType),
         Summary: summary,
         Deprecated: getDeprecated(program, op),
         Description: desc,
@@ -208,7 +208,7 @@ export function loadOperation(
         RequestMediaTypes: mediaTypes.length > 0 ? mediaTypes : undefined,
         BufferResponse: true,
         LongRunning: loadLongRunningOperation(
-            dpgContext,
+            sdkContext,
             operation,
             resourceOperation
         ),
@@ -239,7 +239,7 @@ export function loadOperation(
             } as InputConstant;
         }
         const requestLocation = requestLocationMap[location];
-        const isApiVer: boolean = isApiVersion(dpgContext, parameter);
+        const isApiVer: boolean = isApiVersion(sdkContext, parameter);
         const isContentType: boolean =
             requestLocation === RequestLocation.Header &&
             name.toLowerCase() === "content-type";
