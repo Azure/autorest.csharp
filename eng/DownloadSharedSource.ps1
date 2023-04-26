@@ -20,13 +20,14 @@ $files = @('AsyncLockWithValue.cs', 'ClientDiagnostics.cs', 'DiagnosticScope.cs'
     'ConstantDelayStrategy.cs', 'DelayStrategyInternal.cs', 'ExponentialDelayStrategy.cs', 'OperationPoller.cs', 'RetryAfterDelayStrategy.cs',
     'FixedDelayWithNoJitterStrategy.cs', 'SequentialDelayStrategy.cs',
     'ForwardsClientCallsAttribute.cs', 'AsyncLockWithValue.cs', 'VoidValue.cs')
-# TODO: temporary change to target at support_lro_rehydration branch
-$baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/support_lro_rehydration/sdk/core/Azure.Core/src/Shared/'
+# TODO: temporary change to target at working branch
+$baseUrl = 'https://raw.githubusercontent.com/live1206/azure-sdk-for-net/lro-constructor/sdk/core/Azure.Core/src/Shared/'
 DownloadAll $files $baseUrl $downloadPath
 
 #Download management Shared
-$files = 'SharedExtensions.cs', 'ManagedServiceIdentityTypeV3Converter.cs'
+$files = 'SharedExtensions.cs', 'ManagedServiceIdentityTypeV3Converter.cs', 'ISerializable.cs', 'IResource.cs'
 $downloadPath = Resolve-Path (Join-Path $PSScriptRoot '..' 'src' 'assets' 'Management.Shared')
 Get-ChildItem $downloadPath -Filter *.cs | Remove-Item;
-$baseUrl = 'https://raw.githubusercontent.com/Azure/azure-sdk-for-net/main/sdk/resourcemanager/Azure.ResourceManager/src/Shared/'
+# TODO: temporary change to target at working branch
+$baseUrl = 'https://raw.githubusercontent.com/live1206/azure-sdk-for-net/lro-constructor/sdk/resourcemanager/Azure.ResourceManager/src/Shared/'
 DownloadAll $files $baseUrl $downloadPath
