@@ -69,11 +69,11 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         /// <summary>
         /// </summary>
+        /// <param name="operationSet">The operation set that this resource is assiociated with</param>
         /// <param name="operations">The map that contains all possible operations in this resource and its corresponding resource collection class (if any)</param>
         /// <param name="resourceName">The name of the corresponding resource data model</param>
         /// <param name="resourceType">The type of this resource instance represents</param>
         /// <param name="resourceData">The corresponding resource data model</param>
-        /// <param name="context">The build context of this resource instance</param>
         /// <param name="position">The position of operations of this class. <see cref="Position"/> for more information</param>
         protected internal Resource(OperationSet operationSet, IEnumerable<Operation> operations, string resourceName, ResourceTypeSegment resourceType, ResourceData resourceData, string position)
             : base(resourceName)
@@ -234,6 +234,11 @@ namespace AutoRest.CSharp.Mgmt.Output
         public virtual MgmtClientOperation GetOperation => _getOperation ??= GetOperationWithVerb(HttpMethod.Get, "Get", throwIfNull: true)!;
         public virtual MgmtClientOperation? DeleteOperation => _deleteOperation ??= GetOperationWithVerb(HttpMethod.Delete, "Delete", true);
         public virtual MgmtClientOperation? UpdateOperation => _updateOperation ??= EnsureUpdateOperation();
+
+        /// <summary>
+        /// Finds the correspondng <see cref="PolymorphicOption"/> of this <see cref="Resource"/>
+        /// </summary>
+        public PolymorphicOption? PolymorphicOption { get; internal set; }
 
         private MgmtClientOperation? EnsureUpdateOperation()
         {
