@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var field = CreateField(originalFieldName, typeof(string), inputModel, inputModelProperty);
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
-                var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type);
+                var parameter = Parameter.FromModelProperty(inputModelProperty, field.Name.ToVariableName(), field.Type);
                 parametersToFields[parameter.Name] = field;
                 serializationParameters.Add(parameter);
             }
@@ -67,7 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     continue; // literal property does not show up in the constructor parameter list
                 }
-                var parameter = Parameter.FromModelProperty(inputModelProperty, existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.FirstCharToLowerCase(), field.Type);
+                var parameter = Parameter.FromModelProperty(inputModelProperty, existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.ToVariableName(), field.Type);
                 parametersToFields[parameter.Name] = field;
                 serializationParameters.Add(parameter);
                 if (inputModelProperty.IsRequired && !inputModelProperty.IsReadOnly)

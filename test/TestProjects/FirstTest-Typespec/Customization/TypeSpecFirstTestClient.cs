@@ -7,19 +7,19 @@ using System;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace CadlFirstTest
+namespace TypeSpecFirstTest
 {
 
-    public partial class CadlFirstTestClient
+    public partial class TypeSpecFirstTestClient
     {
         /// <summary>
         /// Constructor for testing purpose. Bearer token check policy is removed.
         /// </summary>
         /// <param name="endpoint"></param>
-        public CadlFirstTestClient(Uri endpoint)
+        public TypeSpecFirstTestClient(Uri endpoint)
         {
             Argument.AssertNotNull(endpoint, nameof(endpoint));
-            var options = new CadlFirstTestClientOptions();
+            var options = new TypeSpecFirstTestClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { }, new ResponseClassifier());
