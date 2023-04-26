@@ -13,7 +13,7 @@ namespace Azure.Core
 {
     internal static class RequestUriBuilderExtensions
     {
-        private static string ConvertToString(object? value, string? format = null)
+        internal static string ConvertToString(object? value, string? format = null)
             => value switch
             {
                 null => "null",
