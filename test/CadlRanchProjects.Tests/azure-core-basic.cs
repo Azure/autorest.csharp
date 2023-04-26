@@ -76,7 +76,7 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("No ideas. Fix later.")]
+        [Ignore("Need cadl-ranch fix")]
         public Task Azure_Core_Basic_listWithCustomPageModel() => Test(async (host) =>
         {
             AsyncPageable<User> allPages = new BasicClient(host, null).GetWithCustomPageModelAsync();

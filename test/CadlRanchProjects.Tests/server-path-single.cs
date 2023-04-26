@@ -8,10 +8,10 @@ namespace CadlRanchProjects.Tests
     public class ServerPathSingleTests : CadlRanchTestBase
     {
         [Test]
-        public Task Server_Path_Multiple_noOperationParams() => Test(async (host) =>
+        public Task Server_Path_Single_myOp() => Test(async (host) =>
         {
             var response = await new SingleClient(host, null).MyOpAsync();
-            Assert.AreEqual(204, response.Status);
+            Assert.AreEqual(200, response.Status);
         });
     }
 }
