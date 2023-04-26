@@ -612,6 +612,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\basic\\Generated"
     },
+    "typespec-azure/core/traits": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\Generated"
+    },
     "typespec-parameters/collection-format": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\collection-format\\Generated"

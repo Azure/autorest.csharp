@@ -76,6 +76,17 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        public Task Azure_Core_Basic_listWithCustomPageModel() => Test(async (host) =>
+        {
+            AsyncPageable<User> allPages = new BasicClient(host, null).GetWithCustomPageModelAsync();
+            await foreach (Page<User> page in allPages.AsPages())
+            {
+                User firstUser = page.Values.First();
+                Assert.AreEqual("Madge", firstUser.Name);
+            }
+        });
+
+        [Test]
         public Task Azure_Core_Basic_delete() => Test(async (host) =>
         {
             var response = await new BasicClient(host, null).DeleteAsync(1);

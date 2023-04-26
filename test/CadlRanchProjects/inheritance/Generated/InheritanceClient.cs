@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Models.Inheritance.Models;
+using _Type.Model.Inheritance.Models;
 
-namespace Models.Inheritance
+namespace _Type.Model.Inheritance
 {
     // Data plane generated client.
     /// <summary> Illustrates inheritance and polymorphic model. </summary>
@@ -624,7 +624,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/valid", false);
+            uri.AppendPath("/type/model/inheritance/valid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -640,7 +640,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/valid", false);
+            uri.AppendPath("/type/model/inheritance/valid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -654,7 +654,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/valid", false);
+            uri.AppendPath("/type/model/inheritance/valid", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -670,7 +670,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/model", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/model", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -684,7 +684,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/model", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/model", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -700,7 +700,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/recursivemodel", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/recursivemodel", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -714,7 +714,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Put;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/recursivemodel", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/recursivemodel", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -730,7 +730,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/missingdiscriminator", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/missingdiscriminator", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -744,7 +744,7 @@ namespace Models.Inheritance
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/models/inheritance/discriminated/wrongdiscriminator", false);
+            uri.AppendPath("/type/model/inheritance/discriminated/wrongdiscriminator", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

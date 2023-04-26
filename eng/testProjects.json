@@ -10,6 +10,7 @@
         "authentication/oauth2",
         "authentication/union",
         "azure/core/basic",
+        "azure/core/traits",
         "projection/projected-name",
         "server/path/multiple",
         "server/path/single",

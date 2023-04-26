@@ -9,40 +9,40 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace _Type.Model.Inheritance.Models
+namespace _Specs_.Azure.Core.Traits.Models
 {
-    internal partial class UnknownFish
+    public partial class User
     {
-        internal static UnknownFish DeserializeUnknownFish(JsonElement element)
+        internal static User DeserializeUser(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            string kind = "Unknown";
-            int age = default;
+            int id = default;
+            Optional<string> name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("kind"u8))
+                if (property.NameEquals("id"u8))
                 {
-                    kind = property.Value.GetString();
+                    id = property.Value.GetInt32();
                     continue;
                 }
-                if (property.NameEquals("age"u8))
+                if (property.NameEquals("name"u8))
                 {
-                    age = property.Value.GetInt32();
+                    name = property.Value.GetString();
                     continue;
                 }
             }
-            return new UnknownFish(kind, age);
+            return new User(id, name);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static UnknownFish FromResponse(Response response)
+        internal static User FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownFish(document.RootElement);
+            return DeserializeUser(document.RootElement);
         }
     }
 }
