@@ -7,7 +7,7 @@ This sample shows how to call TopActionAsync with required parameters and parse 
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = await client.TopActionAsync("<action>");
 
@@ -54,7 +54,7 @@ This sample shows how to call TopAction with required parameters and parse the r
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = client.TopAction("<action>");
 
@@ -101,7 +101,7 @@ This sample shows how to call TopAction2Async and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = await client.TopAction2Async();
 
@@ -148,7 +148,7 @@ This sample shows how to call TopAction2 and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = client.TopAction2();
 
@@ -195,7 +195,7 @@ This sample shows how to call PatchActionAsync with required request content, an
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -222,7 +222,7 @@ This sample shows how to call PatchActionAsync with all request content, and how
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -301,7 +301,7 @@ This sample shows how to call PatchAction with required request content, and how
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -328,7 +328,7 @@ This sample shows how to call PatchAction with all request content, and how to p
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -407,7 +407,7 @@ This sample shows how to call AnonymousBodyAsync with required request content, 
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -434,7 +434,7 @@ This sample shows how to call AnonymousBodyAsync with all request content, and h
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -513,7 +513,7 @@ This sample shows how to call AnonymousBody with required request content, and h
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -540,7 +540,7 @@ This sample shows how to call AnonymousBody with all request content, and how to
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -619,7 +619,7 @@ This sample shows how to call FriendlyModelAsync with required request content a
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -658,7 +658,7 @@ This sample shows how to call FriendlyModel with required request content and pa
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -697,7 +697,7 @@ This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = await client.AddTimeHeaderAsync();
 Console.WriteLine(response.Status);
@@ -706,7 +706,7 @@ This sample shows how to call AddTimeHeaderAsync with all parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
@@ -719,7 +719,7 @@ This sample shows how to call AddTimeHeader.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = client.AddTimeHeader();
 Console.WriteLine(response.Status);
@@ -728,7 +728,7 @@ This sample shows how to call AddTimeHeader with all parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = client.AddTimeHeader(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
@@ -741,7 +741,7 @@ This sample shows how to call SayHiAsync with required parameters and parse the 
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
 
@@ -758,7 +758,7 @@ This sample shows how to call SayHiAsync with all parameters, and how to parse t
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>");
 
@@ -805,7 +805,7 @@ This sample shows how to call SayHi with required parameters and parse the resul
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>");
 
@@ -822,7 +822,7 @@ This sample shows how to call SayHi with all parameters, and how to parse the re
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>");
 
@@ -869,7 +869,7 @@ This sample shows how to call HelloAgainAsync with required parameters and reque
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -910,7 +910,7 @@ This sample shows how to call HelloAgainAsync with all parameters and request co
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1045,7 +1045,7 @@ This sample shows how to call HelloAgain with required parameters and request co
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1086,7 +1086,7 @@ This sample shows how to call HelloAgain with all parameters and request content
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1221,7 +1221,7 @@ This sample shows how to call NoContentTypeAsync with required parameters and re
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1262,7 +1262,7 @@ This sample shows how to call NoContentTypeAsync with all parameters and request
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1397,7 +1397,7 @@ This sample shows how to call NoContentType with required parameters and request
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1438,7 +1438,7 @@ This sample shows how to call NoContentType with all parameters and request cont
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     requiredString = "<requiredString>",
@@ -1573,7 +1573,7 @@ This sample shows how to call HelloDemo2Async with required parameters and parse
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = await client.HelloDemo2Async();
 
@@ -1620,7 +1620,7 @@ This sample shows how to call HelloDemo2 with required parameters and parse the 
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = client.HelloDemo2();
 
@@ -1667,7 +1667,7 @@ This sample shows how to call CreateLiteralAsync with required request content, 
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -1694,7 +1694,7 @@ This sample shows how to call CreateLiteralAsync with all request content, and h
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -1773,7 +1773,7 @@ This sample shows how to call CreateLiteral with required request content, and h
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -1800,7 +1800,7 @@ This sample shows how to call CreateLiteral with all request content, and how to
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -1879,7 +1879,7 @@ This sample shows how to call HelloLiteralAsync with required parameters and par
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = await client.HelloLiteralAsync();
 
@@ -1926,7 +1926,7 @@ This sample shows how to call HelloLiteral with required parameters and parse th
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = client.HelloLiteral();
 
@@ -1973,7 +1973,7 @@ This sample shows how to call GetUnknownValueAsync and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = await client.GetUnknownValueAsync();
 
@@ -1988,7 +1988,7 @@ This sample shows how to call GetUnknownValue and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = client.GetUnknownValue();
 
@@ -2003,7 +2003,7 @@ This sample shows how to call InternalProtocolAsync with required request conten
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -2030,7 +2030,7 @@ This sample shows how to call InternalProtocolAsync with all request content, an
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -2109,7 +2109,7 @@ This sample shows how to call InternalProtocol with required request content, an
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -2136,7 +2136,7 @@ This sample shows how to call InternalProtocol with all request content, and how
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 var data = new {
     name = "<name>",
@@ -2215,7 +2215,7 @@ This sample shows how to call StillConvenientAsync with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = await client.StillConvenientAsync();
 Console.WriteLine(response.Status);
@@ -2228,7 +2228,7 @@ This sample shows how to call StillConvenient with required parameters.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new CadlFirstTestClient(endpoint, credential);
+var client = new TypeSpecFirstTestClient(endpoint, credential);
 
 Response response = client.StillConvenient();
 Console.WriteLine(response.Status);
