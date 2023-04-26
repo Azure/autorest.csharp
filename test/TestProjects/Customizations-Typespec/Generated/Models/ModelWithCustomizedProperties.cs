@@ -51,7 +51,6 @@ namespace CustomizationsInCadl.Models
             GoodDictionaryName = goodDictionaryName;
             GoodListOfListName = goodListOfListName.ToList();
             GoodListOfDictionaryName = goodListOfDictionaryName.ToList();
-            _propertyToField = propertyToField;
         }
 
         /// <summary> Initializes a new instance of ModelWithCustomizedProperties. </summary>
@@ -81,7 +80,6 @@ namespace CustomizationsInCadl.Models
             GoodDictionaryName = goodDictionaryName;
             GoodListOfListName = goodListOfListName;
             GoodListOfDictionaryName = goodListOfDictionaryName;
-            _propertyToField = propertyToField;
         }
     }
 }
