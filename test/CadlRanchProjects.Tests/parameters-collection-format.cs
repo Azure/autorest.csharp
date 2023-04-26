@@ -10,7 +10,7 @@ using Parameters.CollectionFormat;
 
 namespace CadlRanchProjects.Tests
 {
-    public class CollectionFormatTests : CadlRanchTestBase
+    public class ParametersCollectionFormatTests : CadlRanchTestBase
     {
         [Test]
         public Task Parameters_CollectionFormat_Query_multi() => Test(async (host) =>
@@ -25,6 +25,30 @@ namespace CadlRanchProjects.Tests
         {
             List<string> colors = new List<string>() { "blue", "red", "green" };
             Response response = await new CollectionFormatClient(host, null).GetQueryClient().CsvAsync(colors, new RequestContext());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Parameters_CollectionFormat_Query_ssv() => Test(async (host) =>
+        {
+            List<string> colors = new List<string>() { "blue", "red", "green" };
+            Response response = await new CollectionFormatClient(host, null).GetQueryClient().SsvAsync(colors, new RequestContext());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Parameters_CollectionFormat_Query_tsv() => Test(async (host) =>
+        {
+            List<string> colors = new List<string>() { "blue", "red", "green" };
+            Response response = await new CollectionFormatClient(host, null).GetQueryClient().TsvAsync(colors, new RequestContext());
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
+        public Task Parameters_CollectionFormat_Query_pipes() => Test(async (host) =>
+        {
+            List<string> colors = new List<string>() { "blue", "red", "green" };
+            Response response = await new CollectionFormatClient(host, null).GetQueryClient().PipesAsync(colors, new RequestContext());
             Assert.AreEqual(204, response.Status);
         });
 

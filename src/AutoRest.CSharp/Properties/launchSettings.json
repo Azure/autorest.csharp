@@ -620,6 +620,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\collection-format\\Generated"
     },
+    "typespec-parameters/spread": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\parameters\\spread\\Generated"
+    },
     "typespec-projection/projected-name": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\projection\\projected-name\\Generated"
