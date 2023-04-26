@@ -13,9 +13,10 @@ namespace Azure.Core
 {
     internal static class RequestUriBuilderExtensions
     {
-        private static string ConvertToString(object value, string? format = null)
+        private static string ConvertToString(object? value, string? format = null)
             => value switch
             {
+                null => "null",
                 string s => s,
                 bool b => TypeFormatters.ToString(b),
                 int or float or double or long or decimal => ((IFormattable)value).ToString(TypeFormatters.DefaultNumberFormat, CultureInfo.InvariantCulture),
@@ -133,7 +134,7 @@ namespace Azure.Core
             builder.AppendQuery(name, ConvertToString(value), escape);
         }
 
-        public static void AppendQueryDelimited<T>(this RequestUriBuilder builder, string name, IEnumerable<T> value, string delimiter, bool escape = true) where T : notnull
+        public static void AppendQueryDelimited<T>(this RequestUriBuilder builder, string name, IEnumerable<T> value, string delimiter, bool escape = true)
         {
             var stringValues = value.Select(v => ConvertToString(v));
             builder.AppendQuery(name, string.Join(delimiter, stringValues), escape);
