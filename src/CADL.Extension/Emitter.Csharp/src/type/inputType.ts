@@ -8,6 +8,7 @@ import { InputTypeKind } from "./inputTypeKind.js";
 export interface InputType {
     Name: string;
     IsNullable: boolean;
+    IsLowConfidence?: boolean;
 }
 
 export interface InputPrimitiveType extends InputType {

@@ -167,16 +167,16 @@ function isSchemaProperty(context: SdkContext, property: ModelProperty) {
     const headerInfo = getHeaderFieldName(program, property);
     const queryInfo = getQueryParamName(program, property);
     const pathInfo = getPathParamName(program, property);
-    const statusCodeinfo = isStatusCode(program, property);
-    return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
+    const statusCodeInfo = isStatusCode(program, property);
+    return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
 }
 
 export function getDefaultValue(type: Type): any {
-    switch (type.kind) {
+    switch (type.kind) { // TODO -- find a way to create an enum here or the place calling this function
         case "String":
             return type.value;
         case "Number":
-            return type.value;
+            return type.value; // this should be low confidence
         case "Boolean":
             return type.value;
         case "Tuple":
