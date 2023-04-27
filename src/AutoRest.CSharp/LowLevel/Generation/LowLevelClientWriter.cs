@@ -543,21 +543,23 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
             var docRef = GetMethodSignatureString(methodSignature);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
-            //using (_xmlDocWriter.CreateMember(docRef))
-            //{
-            //    _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(convenienceMethod, async));
-            //    WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, Array.Empty<FormattableString>(), false, false);
-            //}
+            using (_xmlDocWriter.CreateMember(docRef))
+            {
+                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(convenienceMethod, async));
+            }
         }
 
         private static string GetMethodSignatureString(MethodSignature signature)
         {
             var builder = new StringBuilder(signature.Name);
             builder.Append("(");
-            builder.Append(string.Join(",", signature.Parameters.Select(p => p.Type.Name)));
+            builder.Append(string.Join(",", signature.Parameters.Select(p => EscapeXmlCSharpType(p.Type))));
             builder.Append(")");
             return builder.ToString();
         }
+
+        private static string EscapeXmlCSharpType(CSharpType type)
+            => type.ToString().Trim().Replace('<', '{').Replace('>', '}');
 
         private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod)
         {

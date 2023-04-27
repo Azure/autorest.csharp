@@ -68,9 +68,22 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{builder.ToString()}";
         }
 
-        // `RequestContext = null` is excluded
+        public FormattableString Compose(ConvenienceMethod convenienceMethod, bool async)
+        {
+            var methodSignature = convenienceMethod.Signature.WithAsync(async);
+            var builder = new StringBuilder();
+
+            if (HasNoCustomInput(methodSignature.Parameters)) // client.GetAllItems(CancellationToken cancellationToken = default)
+            {
+                ComposeExampleWithoutParameter(convenienceMethod, methodSignature.Name, async, true, builder);
+            }
+
+            return $"{builder.ToString()}";
+        }
+
+        // `RequestContext = null` or `cancellationToken = default` is excluded
         private static bool HasNoCustomInput(IReadOnlyList<Parameter> parameters)
-            => parameters.Count == 0 || parameters.Count == 1 && parameters[0].Equals(KnownParameters.RequestContext);
+            => parameters.Count == 0 || (parameters.Count == 1 && (parameters[0].Equals(KnownParameters.RequestContext) || parameters[0].Equals(KnownParameters.CancellationTokenParameter)));
 
         // RequestContext is excluded
         private static bool HasNonBodyCustomParameter(IReadOnlyList<Parameter> parameters)
@@ -178,6 +191,12 @@ namespace AutoRest.CSharp.Generation.Writers
             ComposeCodeSnippet(clientMethod, methodName, async, allParameters, builder);
         }
 
+        private void ComposeExampleWithoutParameter(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
+            builder.AppendLine($"This sample shows how to call {methodName}.");
+            ComposeCodeSnippet(convenienceMethod, methodName, async, allParameters, builder);
+        }
+
         private void ComposeCodeSnippet(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
             builder.AppendLine("<code><![CDATA[");
@@ -207,6 +226,30 @@ namespace AutoRest.CSharp.Generation.Writers
             else
             {
                 ComposeHandleNormalResponseCode(clientMethod, methodName, async, allParameters, builder);
+            }
+
+            builder.Append("]]></code>");
+        }
+
+        private void ComposeCodeSnippet(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
+            builder.AppendLine("<code><![CDATA[");
+            ComposeGetClientCodes(builder);
+            builder.AppendLine();
+
+            // get input parameters
+
+            if (convenienceMethod.IsLongRunning)
+            {
+                // handle LRO
+            }
+            else if (convenienceMethod.IsPageable)
+            {
+                // handle pageable
+            }
+            else
+            {
+                // handle normal
             }
 
             builder.Append("]]></code>");
