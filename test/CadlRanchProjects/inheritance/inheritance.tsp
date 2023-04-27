@@ -1,20 +1,11 @@
-import "@typespec/rest";
 import "@typespec/http";
-import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/cadl-ranch-expect";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.ClientGenerator.Core;
 
 @doc("Illustrates inheritance and polymorphic model.")
-@service({
-    title: "Cadl ranch inheritance",
-    version: "2021-03-25"
-})
-@server("http://localhost:3000", "TestServer endpoint")
-@route("/models/inheritance")
-namespace Models.Inheritance;
+@scenarioService("/type/model/inheritance")
+namespace Type.Model.Inheritance;
 
 @doc("This is base model for non-discriminator normal multiple levels inheritance.")
 model Pet {
@@ -71,7 +62,6 @@ Expected input body:
 """)
 @route("/valid")
 @post
-@convenientAPI(true)
 op postValid(@body input: Siamese): OkResponse;
 
 @scenario
@@ -84,14 +74,12 @@ Expected response body:
 """)
 @route("/valid")
 @get
-@convenientAPI(true)
 op getValid(): Siamese;
 
 @scenario
 @scenarioDoc("Generate, send, and receive round-trip bottom model.")
 @route("/valid")
 @put
-@convenientAPI(true)
 op putValid(@body input: Siamese): Siamese;
 
 @route("/discriminated")
@@ -106,7 +94,6 @@ interface Discriminated {
   ```
   """)
   @get
-  @convenientAPI(true)
   getModel(): Fish;
 
   @scenario
@@ -119,7 +106,6 @@ interface Discriminated {
   ```
   """)
   @put
-  @convenientAPI(true)
   putModel(@body input: Fish): OkResponse;
 
   @scenario
@@ -188,7 +174,6 @@ interface Discriminated {
   ```
   """)
   @get
-  @convenientAPI(true)
   getRecursiveModel(): Fish;
 
   @scenario
@@ -257,7 +242,6 @@ interface Discriminated {
   ```
   """)
   @put
-  @convenientAPI(true)
   putRecursiveModel(@body input: Fish): OkResponse;
 
   @scenario
@@ -270,7 +254,6 @@ interface Discriminated {
   ```
   """)
   @get
-  @convenientAPI(true)
   getMissingDiscriminator(): Fish;
 
   @scenario
@@ -283,6 +266,5 @@ interface Discriminated {
   ```
   """)
   @get
-  @convenientAPI(true)
   getWrongDiscriminator(): Fish;
 }

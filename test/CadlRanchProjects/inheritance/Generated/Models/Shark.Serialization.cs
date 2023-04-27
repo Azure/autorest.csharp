@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace Models.Inheritance.Models
+namespace _Type.Model.Inheritance.Models
 {
     public partial class Shark : IUtf8JsonSerializable
     {

@@ -1,11 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-using System;
 using System.Threading.Tasks;
+using _Type.Model.Inheritance;
+using _Type.Model.Inheritance.Models;
 using AutoRest.TestServer.Tests.Infrastructure;
-using Models.Inheritance;
-using Models.Inheritance.Models;
 using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
