@@ -95,6 +95,7 @@ namespace TypeSpecFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(String,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> TopActionAsync(string action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
@@ -109,6 +110,7 @@ namespace TypeSpecFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(String,CancellationToken)']/*" />
         public virtual Response<Thing> TopAction(string action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
@@ -266,6 +268,7 @@ namespace TypeSpecFirstTest
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> AnonymousBodyAsync(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -279,6 +282,7 @@ namespace TypeSpecFirstTest
         /// <param name="thing"> A model with a few properties of literal types. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="thing"/> is null. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBody(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> AnonymousBody(Thing thing, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(thing, nameof(thing));
@@ -342,6 +346,7 @@ namespace TypeSpecFirstTest
         /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
         public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend notFriend, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(notFriend, nameof(notFriend));
@@ -355,6 +360,7 @@ namespace TypeSpecFirstTest
         /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
         public virtual Response<Friend> FriendlyModel(Friend notFriend, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(notFriend, nameof(notFriend));
@@ -519,6 +525,7 @@ namespace TypeSpecFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgainAsync(String,String,RoundTripModel,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> HelloAgainAsync(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -537,6 +544,7 @@ namespace TypeSpecFirstTest
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgain(String,String,RoundTripModel,CancellationToken)']/*" />
         public virtual Response<Thing> HelloAgain(string p2, string p1, RoundTripModel action, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -670,6 +678,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> HelloDemo2Async(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -679,6 +688,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> Return hi in demo2. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(CancellationToken)']/*" />
         public virtual Response<Thing> HelloDemo2(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -732,6 +742,7 @@ namespace TypeSpecFirstTest
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteralAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> CreateLiteralAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -745,6 +756,7 @@ namespace TypeSpecFirstTest
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteral(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> CreateLiteral(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -806,6 +818,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> HelloLiteralAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -815,6 +828,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> Send literal parameters. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(CancellationToken)']/*" />
         public virtual Response<Thing> HelloLiteral(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -910,6 +924,7 @@ namespace TypeSpecFirstTest
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocolAsync(Thing,CancellationToken)']/*" />
         public virtual async Task<Response<Thing>> InternalProtocolAsync(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -923,6 +938,7 @@ namespace TypeSpecFirstTest
         /// <param name="body"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocol(Thing,CancellationToken)']/*" />
         public virtual Response<Thing> InternalProtocol(Thing body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
@@ -984,6 +1000,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenientAsync(CancellationToken)']/*" />
         public virtual async Task<Response> StillConvenientAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
@@ -993,6 +1010,7 @@ namespace TypeSpecFirstTest
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenient(CancellationToken)']/*" />
         public virtual Response StillConvenient(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);

@@ -68,7 +68,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         if (clientMethod.ConvenienceMethod is { } convenienceMethod)
                         {
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, true);
                             WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, true);
+                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(convenienceMethod, false);
                             WriteConvenienceMethod(clientMethod, convenienceMethod, longRunning, pagingInfo, false);
                         }
 
@@ -351,7 +353,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteConveniencePageableMethod(LowLevelClientMethod clientMethod, ConvenienceMethod convenienceMethod, ProtocolMethodPaging pagingInfo, ClientFields fields, bool async)
         {
-            WriteConvenienceMethodDocumentation(_writer, convenienceMethod.Signature);
             _writer.WritePageable(convenienceMethod, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
         }
 
@@ -534,6 +535,21 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(ConvenienceMethod convenienceMethod, bool async)
+        {
+            var methodSignature = convenienceMethod.Signature.WithAsync(async);
+
+            _writer.WriteMethodDocumentation(methodSignature);
+            _writer.WriteXmlDocumentation("remarks", $"{methodSignature.DescriptionText}");
+            var docRef = GetMethodSignatureString(methodSignature);
+            _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
+            //using (_xmlDocWriter.CreateMember(docRef))
+            //{
+            //    _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(convenienceMethod, async));
+            //    WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, Array.Empty<FormattableString>(), false, false);
+            //}
+        }
+
         private static string GetMethodSignatureString(MethodSignature signature)
         {
             var builder = new StringBuilder(signature.Name);
@@ -553,8 +569,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static IDisposable WriteConvenienceMethodDeclaration(CodeWriter writer, ConvenienceMethod convenienceMethod, ClientFields fields, bool async)
         {
-            WriteConvenienceMethodDocumentation(writer, convenienceMethod.Signature);
-
             var methodSignature = convenienceMethod.Signature.WithAsync(async);
             var scope = writer.WriteMethodDeclaration(methodSignature);
             writer.WriteParametersValidation(methodSignature.Parameters);
