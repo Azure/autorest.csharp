@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         public static readonly string GeneratedFolder = "Generated";
 
         private static readonly IReadOnlyList<MetadataReference> AssemblyMetadataReferences;
-        
+
         static GeneratedCodeWorkspace()
         {
             var references = new List<MetadataReference>
