@@ -29,7 +29,7 @@ namespace lro
         internal LROsPutSubResourceOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation<SubProduct> nextLinkOperation = NextLinkOperationImplementation.Create(this, pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal<SubProduct>(clientDiagnostics, nextLinkOperation, response, "LROsPutSubResourceOperation");
+            _operation = new OperationInternal<SubProduct>(nextLinkOperation, clientDiagnostics, response, "LROsPutSubResourceOperation");
         }
 
         /// <inheritdoc />

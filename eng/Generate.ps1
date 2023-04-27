@@ -38,7 +38,10 @@ function Add-Swagger-Test ([string]$name, [string]$output, [string]$arguments) {
     }
 }
 
-function Add-Typespec([string]$name, [string]$output, [string]$mainFile = "", [string]$arguments = "") {
+function Add-Typespec([string]$name, [string]$output, [string]$mainFile="", [string]$arguments="") {
+    if ($mainFile -eq "") {
+        $mainFile = Get-TypeSpec-Entry $output
+    }
     $cadlDefinitions[$name] = @{
         'projectName' = $name;
         'output'      = $output;
@@ -56,8 +59,27 @@ function Add-TestServer-Swagger ([string]$testName, [string]$projectSuffix, [str
 
 function Add-CadlRanch-Typespec([string]$testName, [string]$projectPrefix, [string]$cadlRanchProjectsDirectory) {
     $projectDirectory = Join-Path $cadlRanchProjectsDirectory $testName
-    $cadlMain = Join-Path $cadlRanchFilePath $testName "main.cadl"
+    $cadlMain = Join-Path $cadlRanchFilePath $testName "main.tsp"
     Add-Typespec "$projectPrefix$testName" $projectDirectory $cadlMain
+}
+
+function Get-TypeSpec-Entry([System.IO.DirectoryInfo]$directory) {
+    $clientPath = Join-Path $directory "client.tsp"
+    if (Test-Path $clientPath) {
+        return $clientPath
+    }
+
+    $mainPath = Join-Path $directory "main.tsp"
+    if (Test-Path $mainPath) {
+        return $mainPath
+    }
+
+    $projectNamePath = Join-Path $directory "$($directory.Name).tsp"
+    if (Test-Path $projectNamePath) {
+        return $projectNamePath
+    }
+    
+    throw "There is no client.tsp or main.tsp or other tsp file named after project name" 
 }
 
 $testData = Get-Content $testProjectDataFile -Encoding utf8 -Raw | ConvertFrom-Json
@@ -115,6 +137,9 @@ if (!($Exclude -contains "TestProjects")) {
 
     foreach ($directory in Get-ChildItem $testProjectRoot -Directory) {
         $testName = $directory.Name
+        if ($testName -eq "ConvenienceInitial-Typespec") {
+            continue;
+        }
         $readmeConfigurationPath = Join-Path $directory "readme.md"
         $tspConfigConfigurationPath = Join-Path $directory "tspconfig.yaml"
         $possibleInputJsonFilePath = Join-Path $directory "$testName.json"
@@ -243,6 +268,10 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
     $outputPath = Join-Path $definition.output "Generated"
     if ($key -eq "TypeSchemaMapping") {
         $outputPath = Join-Path $definition.output "SomeFolder" "Generated"
+    }
+    elseif ($key -eq "ConvenienceUpdate-Typespec" -or $key -eq "ConvenienceInitial-Typespec")
+    {
+        $outputPath = "$outputPath --existing-project-folder $(Convert-Path $(Join-Path $definition.output ".." "ConvenienceInitial-Typespec" "Generated"))"
     }
     $outputPath = $outputPath.Replace($repoRoot, '$(SolutionDir)')
 

@@ -5,11 +5,17 @@
 
 #nullable disable
 
-namespace Models.Inheritance.Models
+namespace _Type.Model.Inheritance.Models
 {
     /// <summary> Unknown version of Fish. </summary>
     internal partial class UnknownFish : Fish
     {
+        /// <summary> Initializes a new instance of UnknownFish. </summary>
+        /// <param name="age"></param>
+        internal UnknownFish(int age) : base(age)
+        {
+        }
+
         /// <summary> Initializes a new instance of UnknownFish. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="age"></param>

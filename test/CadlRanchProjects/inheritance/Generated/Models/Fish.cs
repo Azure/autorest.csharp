@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace Models.Inheritance.Models
+namespace _Type.Model.Inheritance.Models
 {
     /// <summary>
     /// This is base model for polymorphic multiple levels inheritance with a discriminator.
@@ -15,16 +15,23 @@ namespace Models.Inheritance.Models
     public abstract partial class Fish
     {
         /// <summary> Initializes a new instance of Fish. </summary>
+        /// <param name="age"></param>
+        protected Fish(int age)
+        {
+            Age = age;
+        }
+
+        /// <summary> Initializes a new instance of Fish. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="age"></param>
-        protected Fish(string kind, int age)
+        internal Fish(string kind, int age)
         {
             Kind = kind;
             Age = age;
         }
 
         /// <summary> Discriminator. </summary>
-        public string Kind { get; }
+        internal string Kind { get; set; }
         /// <summary> Gets or sets the age. </summary>
         public int Age { get; set; }
     }

@@ -29,7 +29,7 @@ namespace ModelsInCadl.Models
         /// <param name="requiredCollection"> Required collection. </param>
         internal DerivedModel(IList<CollectionItem> requiredCollection)
         {
-            RequiredCollection = requiredCollection.ToList();
+            RequiredCollection = requiredCollection;
         }
 
         /// <summary> Required collection. </summary>

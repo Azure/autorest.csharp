@@ -27,7 +27,7 @@ namespace lro
         internal LrosaDsPost202NoLocationOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Request request, Response response)
         {
             IOperation nextLinkOperation = NextLinkOperationImplementation.Create(pipeline, request.Method, request.Uri.ToUri(), response, OperationFinalStateVia.Location);
-            _operation = new OperationInternal(clientDiagnostics, nextLinkOperation, response, "LrosaDsPost202NoLocationOperation");
+            _operation = new OperationInternal(nextLinkOperation, clientDiagnostics, response, "LrosaDsPost202NoLocationOperation");
         }
 
         /// <inheritdoc />

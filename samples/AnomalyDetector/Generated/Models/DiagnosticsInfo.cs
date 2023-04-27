@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Collections.Generic;
-using System.Linq;
 using Azure.Core;
 
 namespace AnomalyDetector.Models
@@ -26,7 +25,7 @@ namespace AnomalyDetector.Models
         internal DiagnosticsInfo(ModelState modelState, IList<VariableState> variableStates)
         {
             ModelState = modelState;
-            VariableStates = variableStates.ToList();
+            VariableStates = variableStates;
         }
 
         /// <summary> Model status. </summary>

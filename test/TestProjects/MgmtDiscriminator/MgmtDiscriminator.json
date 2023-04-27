@@ -212,6 +212,54 @@
                 },
                 "x-ms-long-running-operation": true
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/deliveryRules/{name}/post": {
+            "get": {
+                "tags": [
+                    "DeliveryRules"
+                ],
+                "description": "Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+                "operationId": "DeliveryRules_Post",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/resourceGroupNameParameter"
+                    },
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Name of the endpoint under the profile which is unique globally.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/subscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/apiVersionParameter"
+                    },
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/DerivedModel"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK. The request has succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/DerivedModel"
+                        }
+                    },
+                    "default": {
+                        "description": "CDN error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -797,6 +845,29 @@
                     "$ref": "#/definitions/OriginGroupOverrideActionParameters"
                 }
             }
+        },
+        "BaseModel": {
+            "properties": {
+                "optionalString": {
+                    "type": "string"
+                }
+            }
+        },
+        "DerivedModel": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/BaseModel"
+                }
+            ],
+            "properties": {
+                "requiredCollection": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": ["requiredCollection"]
         },
         "OriginGroupOverrideActionParameters": {
             "description": "Defines the parameters for the origin group override action.",

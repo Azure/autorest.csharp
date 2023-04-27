@@ -9,7 +9,7 @@ using System;
 using System.ComponentModel;
 using System.Globalization;
 
-namespace CadlFirstTest.Models
+namespace TypeSpecFirstTest.Models
 {
     /// <summary> Float based extensible enum. </summary>
     public readonly partial struct FloatExtensibleEnum : IEquatable<FloatExtensibleEnum>
