@@ -87,20 +87,20 @@ stages:
           IsInternalFeed: true
       - template: generate-sdk-job-matrix-files.yml
         parameters:
-          Name: GenerateJobMatrix
+          Name: Generate_Job_Matrix
           JobCount: 7
       - template: update-azure-sdk-for-net-codes.yml
         parameters:
-          Name: Update_Codes_
-          Matrix: $[dependencies.GenerateJobMatrix.outputs['generate_job_matrix.matrix']]
+          Name: Update_Code
+          Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
           AutorestCSharpVersion: $(AutorestCSharpVersion)
           CadlEmitterVersion: $(CadlEmitterVersion)
           IsInternalFeed: true
-          DependsOn: GenerateJobMatrix
+          DependsOn: Generate_Job_Matrix
       - job: Create_PR
         dependsOn: 
           - Update_Generator_Versions
-          - Update_Codes_
+          - Update_Code
         steps:
           - checkout: self
             fetchDepth: 1
