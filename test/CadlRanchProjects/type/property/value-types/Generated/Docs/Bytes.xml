@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetByteAsync(RequestContext)">
+    <member name="GetByteAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetByte(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetByteAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -26,7 +27,8 @@ Schema for <c>BytesProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetByte(RequestContext)">
+    <member name="GetByte(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetByte(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetByte with required parameters and parse the result.
 <code><![CDATA[
@@ -51,7 +53,8 @@ Schema for <c>BytesProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Put(global::_Type.Property.ValueTypes.Models.BytesProperty,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -78,7 +81,8 @@ Schema for <c>BytesProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Put(global::_Type.Property.ValueTypes.Models.BytesProperty,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

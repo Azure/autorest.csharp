@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="DeleteAsync(String,RequestContext)">
+    <member name="DeleteAsync(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call DeleteAsync with required parameters.
 <code><![CDATA[
@@ -16,7 +16,7 @@ Console.WriteLine(response.Status);
 Delete a pet.
 </remarks>
     </member>
-    <member name="Delete(String,RequestContext)">
+    <member name="Delete(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete with required parameters.
 <code><![CDATA[
@@ -31,7 +31,7 @@ Console.WriteLine(response.Status);
 Delete a pet.
 </remarks>
     </member>
-    <member name="ReadAsync(Int32,RequestContext)">
+    <member name="ReadAsync(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ReadAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -61,7 +61,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="Read(Int32,RequestContext)">
+    <member name="Read(int,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Read with required parameters and parse the result.
 <code><![CDATA[
@@ -91,7 +91,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="CreateAsync(RequestContent,RequestContext)">
+    <member name="CreateAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -151,7 +151,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="Create(RequestContent,RequestContext)">
+    <member name="Create(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Create with required request content, and how to parse the result.
 <code><![CDATA[
@@ -211,7 +211,7 @@ Schema for <c>Pet</c>:
 
 </remarks>
     </member>
-    <member name="GetPetsAsync(RequestContext)">
+    <member name="GetPetsAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetPetsAsync and parse the result.
 <code><![CDATA[
@@ -244,7 +244,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetPets(RequestContext)">
+    <member name="GetPets(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetPets and parse the result.
 <code><![CDATA[

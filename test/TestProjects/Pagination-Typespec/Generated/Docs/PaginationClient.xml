@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetPaginationLedgerEntriesAsync(RequestContent,RequestContext)">
+    <member name="GetPaginationLedgerEntriesAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetPaginationLedgerEntries(global::Pagination.Models.ListLedgerEntryInputBody,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetPaginationLedgerEntriesAsync with required request content and parse the result.
 <code><![CDATA[
@@ -49,7 +50,8 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetPaginationLedgerEntries(RequestContent,RequestContext)">
+    <member name="GetPaginationLedgerEntries(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetPaginationLedgerEntries(global::Pagination.Models.ListLedgerEntryInputBody,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetPaginationLedgerEntries with required request content and parse the result.
 <code><![CDATA[
@@ -97,7 +99,8 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetLedgerEntriesAsync(RequestContext)">
+    <member name="GetLedgerEntriesAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetLedgerEntries(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetLedgerEntriesAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -129,7 +132,8 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetLedgerEntries(RequestContext)">
+    <member name="GetLedgerEntries(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetLedgerEntries(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetLedgerEntries with required parameters and parse the result.
 <code><![CDATA[

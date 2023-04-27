@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="ValidAsync(RequestContext)">
+    <member name="ValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ValidAsync.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Valid(RequestContext)">
+    <member name="Valid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Valid.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="InvalidAsync(RequestContext)">
+    <member name="InvalidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call InvalidAsync.
 <code><![CDATA[
@@ -37,7 +37,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Invalid(RequestContext)">
+    <member name="Invalid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Invalid.
 <code><![CDATA[

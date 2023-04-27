@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="Head300Async(RequestContext)">
+    <member name="Head300Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head300Async.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head300(RequestContext)">
+    <member name="Head300(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head300.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get300Async(RequestContext)">
+    <member name="Get300Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get300Async.
 <code><![CDATA[
@@ -37,7 +37,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get300(RequestContext)">
+    <member name="Get300(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get300.
 <code><![CDATA[
@@ -49,7 +49,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head301Async(RequestContext)">
+    <member name="Head301Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head301Async.
 <code><![CDATA[
@@ -61,7 +61,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head301(RequestContext)">
+    <member name="Head301(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head301.
 <code><![CDATA[
@@ -73,7 +73,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get301Async(RequestContext)">
+    <member name="Get301Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get301Async.
 <code><![CDATA[
@@ -85,7 +85,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get301(RequestContext)">
+    <member name="Get301(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get301.
 <code><![CDATA[
@@ -97,7 +97,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put301Async(RequestContent,RequestContext)">
+    <member name="Put301Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put301Async with required request content.
 <code><![CDATA[
@@ -111,7 +111,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put301(RequestContent,RequestContext)">
+    <member name="Put301(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put301 with required request content.
 <code><![CDATA[
@@ -125,7 +125,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head302Async(RequestContext)">
+    <member name="Head302Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head302Async.
 <code><![CDATA[
@@ -137,7 +137,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head302(RequestContext)">
+    <member name="Head302(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head302.
 <code><![CDATA[
@@ -149,7 +149,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get302Async(RequestContext)">
+    <member name="Get302Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get302Async.
 <code><![CDATA[
@@ -161,7 +161,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get302(RequestContext)">
+    <member name="Get302(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get302.
 <code><![CDATA[
@@ -173,7 +173,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch302Async(RequestContent,RequestContext)">
+    <member name="Patch302Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch302Async with required request content.
 <code><![CDATA[
@@ -187,7 +187,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch302(RequestContent,RequestContext)">
+    <member name="Patch302(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch302 with required request content.
 <code><![CDATA[
@@ -201,7 +201,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post303Async(RequestContent,RequestContext)">
+    <member name="Post303Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post303Async with required request content.
 <code><![CDATA[
@@ -215,7 +215,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post303(RequestContent,RequestContext)">
+    <member name="Post303(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post303 with required request content.
 <code><![CDATA[
@@ -229,7 +229,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head307Async(RequestContext)">
+    <member name="Head307Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head307Async.
 <code><![CDATA[
@@ -241,7 +241,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head307(RequestContext)">
+    <member name="Head307(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head307.
 <code><![CDATA[
@@ -253,7 +253,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get307Async(RequestContext)">
+    <member name="Get307Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get307Async.
 <code><![CDATA[
@@ -265,7 +265,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get307(RequestContext)">
+    <member name="Get307(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get307.
 <code><![CDATA[
@@ -277,7 +277,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Options307Async(RequestContext)">
+    <member name="Options307Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options307Async.
 <code><![CDATA[
@@ -289,7 +289,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Options307(RequestContext)">
+    <member name="Options307(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options307.
 <code><![CDATA[
@@ -301,7 +301,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put307Async(RequestContent,RequestContext)">
+    <member name="Put307Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put307Async with required request content.
 <code><![CDATA[
@@ -315,7 +315,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put307(RequestContent,RequestContext)">
+    <member name="Put307(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put307 with required request content.
 <code><![CDATA[
@@ -329,7 +329,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch307Async(RequestContent,RequestContext)">
+    <member name="Patch307Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch307Async with required request content.
 <code><![CDATA[
@@ -343,7 +343,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch307(RequestContent,RequestContext)">
+    <member name="Patch307(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch307 with required request content.
 <code><![CDATA[
@@ -357,7 +357,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post307Async(RequestContent,RequestContext)">
+    <member name="Post307Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post307Async with required request content.
 <code><![CDATA[
@@ -371,7 +371,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post307(RequestContent,RequestContext)">
+    <member name="Post307(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post307 with required request content.
 <code><![CDATA[
@@ -385,7 +385,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete307Async(RequestContent,RequestContext)">
+    <member name="Delete307Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete307Async with required request content.
 <code><![CDATA[
@@ -399,7 +399,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete307(RequestContent,RequestContext)">
+    <member name="Delete307(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete307 with required request content.
 <code><![CDATA[

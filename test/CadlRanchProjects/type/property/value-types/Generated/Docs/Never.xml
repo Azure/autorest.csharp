@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetNeverAsync(RequestContext)">
+    <member name="GetNeverAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetNever(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetNeverAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -24,7 +25,8 @@ Schema for <c>NeverProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetNever(RequestContext)">
+    <member name="GetNever(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetNever(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetNever with required parameters and parse the result.
 <code><![CDATA[
@@ -47,7 +49,8 @@ Schema for <c>NeverProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Put(global::_Type.Property.ValueTypes.Models.NeverProperty,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -71,7 +74,8 @@ Schema for <c>NeverProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Put(global::_Type.Property.ValueTypes.Models.NeverProperty,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

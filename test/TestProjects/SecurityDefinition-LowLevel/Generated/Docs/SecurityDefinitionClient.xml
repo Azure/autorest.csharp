@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="OperationAsync(RequestContent,RequestContext)">
+    <member name="OperationAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call OperationAsync.
 <code><![CDATA[
@@ -43,7 +43,7 @@ Schema for <c>TestModel</c>:
 
 </remarks>
     </member>
-    <member name="Operation(RequestContent,RequestContext)">
+    <member name="Operation(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Operation.
 <code><![CDATA[

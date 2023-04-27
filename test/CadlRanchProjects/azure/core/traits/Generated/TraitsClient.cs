@@ -87,7 +87,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTestAsync(Int32,String,RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTestAsync(int,string,global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> SmokeTestAsync(int id, string foo, RequestConditions requestConditions, RequestContext context)
         {
             Argument.AssertNotNull(foo, nameof(foo));
@@ -114,7 +114,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTest(Int32,String,RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTest(int,string,global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual Response SmokeTest(int id, string foo, RequestConditions requestConditions, RequestContext context)
         {
             Argument.AssertNotNull(foo, nameof(foo));

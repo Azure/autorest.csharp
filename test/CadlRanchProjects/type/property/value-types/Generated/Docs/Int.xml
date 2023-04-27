@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetIntAsync(RequestContext)">
+    <member name="GetIntAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetInt(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetIntAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -26,7 +27,8 @@ Schema for <c>IntProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetInt(RequestContext)">
+    <member name="GetInt(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetInt(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetInt with required parameters and parse the result.
 <code><![CDATA[
@@ -51,7 +53,8 @@ Schema for <c>IntProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Put(global::_Type.Property.ValueTypes.Models.IntProperty,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -78,7 +81,8 @@ Schema for <c>IntProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Put(global::_Type.Property.ValueTypes.Models.IntProperty,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

@@ -57,7 +57,7 @@ namespace Server.Path.Single
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SingleClient.xml" path="doc/members/member[@name='MyOpAsync(RequestContext)']/*" />
+        /// <include file="Docs/SingleClient.xml" path="doc/members/member[@name='MyOpAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> MyOpAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("SingleClient.MyOp");
@@ -77,7 +77,7 @@ namespace Server.Path.Single
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SingleClient.xml" path="doc/members/member[@name='MyOp(RequestContext)']/*" />
+        /// <include file="Docs/SingleClient.xml" path="doc/members/member[@name='MyOp(global::Azure.RequestContext)']/*" />
         public virtual Response MyOp(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("SingleClient.MyOp");

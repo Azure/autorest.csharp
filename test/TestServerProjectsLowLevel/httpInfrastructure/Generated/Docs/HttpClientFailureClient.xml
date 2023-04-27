@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="Head400Async(RequestContext)">
+    <member name="Head400Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head400Async.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head400(RequestContext)">
+    <member name="Head400(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head400.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get400Async(RequestContext)">
+    <member name="Get400Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get400Async.
 <code><![CDATA[
@@ -37,7 +37,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get400(RequestContext)">
+    <member name="Get400(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get400.
 <code><![CDATA[
@@ -49,7 +49,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Options400Async(RequestContext)">
+    <member name="Options400Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options400Async.
 <code><![CDATA[
@@ -61,7 +61,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Options400(RequestContext)">
+    <member name="Options400(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options400.
 <code><![CDATA[
@@ -73,7 +73,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put400Async(RequestContent,RequestContext)">
+    <member name="Put400Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put400Async with required request content.
 <code><![CDATA[
@@ -87,7 +87,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put400(RequestContent,RequestContext)">
+    <member name="Put400(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put400 with required request content.
 <code><![CDATA[
@@ -101,7 +101,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch400Async(RequestContent,RequestContext)">
+    <member name="Patch400Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch400Async with required request content.
 <code><![CDATA[
@@ -115,7 +115,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch400(RequestContent,RequestContext)">
+    <member name="Patch400(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch400 with required request content.
 <code><![CDATA[
@@ -129,7 +129,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post400Async(RequestContent,RequestContext)">
+    <member name="Post400Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post400Async with required request content.
 <code><![CDATA[
@@ -143,7 +143,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post400(RequestContent,RequestContext)">
+    <member name="Post400(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post400 with required request content.
 <code><![CDATA[
@@ -157,7 +157,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete400Async(RequestContent,RequestContext)">
+    <member name="Delete400Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete400Async with required request content.
 <code><![CDATA[
@@ -171,7 +171,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete400(RequestContent,RequestContext)">
+    <member name="Delete400(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete400 with required request content.
 <code><![CDATA[
@@ -185,7 +185,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head401Async(RequestContext)">
+    <member name="Head401Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head401Async.
 <code><![CDATA[
@@ -197,7 +197,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head401(RequestContext)">
+    <member name="Head401(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head401.
 <code><![CDATA[
@@ -209,7 +209,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get402Async(RequestContext)">
+    <member name="Get402Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get402Async.
 <code><![CDATA[
@@ -221,7 +221,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get402(RequestContext)">
+    <member name="Get402(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get402.
 <code><![CDATA[
@@ -233,7 +233,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Options403Async(RequestContext)">
+    <member name="Options403Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options403Async.
 <code><![CDATA[
@@ -245,7 +245,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Options403(RequestContext)">
+    <member name="Options403(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options403.
 <code><![CDATA[
@@ -257,7 +257,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get403Async(RequestContext)">
+    <member name="Get403Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get403Async.
 <code><![CDATA[
@@ -269,7 +269,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get403(RequestContext)">
+    <member name="Get403(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get403.
 <code><![CDATA[
@@ -281,7 +281,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put404Async(RequestContent,RequestContext)">
+    <member name="Put404Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put404Async with required request content.
 <code><![CDATA[
@@ -295,7 +295,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put404(RequestContent,RequestContext)">
+    <member name="Put404(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put404 with required request content.
 <code><![CDATA[
@@ -309,7 +309,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch405Async(RequestContent,RequestContext)">
+    <member name="Patch405Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch405Async with required request content.
 <code><![CDATA[
@@ -323,7 +323,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch405(RequestContent,RequestContext)">
+    <member name="Patch405(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch405 with required request content.
 <code><![CDATA[
@@ -337,7 +337,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post406Async(RequestContent,RequestContext)">
+    <member name="Post406Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post406Async with required request content.
 <code><![CDATA[
@@ -351,7 +351,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post406(RequestContent,RequestContext)">
+    <member name="Post406(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post406 with required request content.
 <code><![CDATA[
@@ -365,7 +365,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete407Async(RequestContent,RequestContext)">
+    <member name="Delete407Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete407Async with required request content.
 <code><![CDATA[
@@ -379,7 +379,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete407(RequestContent,RequestContext)">
+    <member name="Delete407(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete407 with required request content.
 <code><![CDATA[
@@ -393,7 +393,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put409Async(RequestContent,RequestContext)">
+    <member name="Put409Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put409Async with required request content.
 <code><![CDATA[
@@ -407,7 +407,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put409(RequestContent,RequestContext)">
+    <member name="Put409(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put409 with required request content.
 <code><![CDATA[
@@ -421,7 +421,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head410Async(RequestContext)">
+    <member name="Head410Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head410Async.
 <code><![CDATA[
@@ -433,7 +433,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head410(RequestContext)">
+    <member name="Head410(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head410.
 <code><![CDATA[
@@ -445,7 +445,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get411Async(RequestContext)">
+    <member name="Get411Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get411Async.
 <code><![CDATA[
@@ -457,7 +457,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get411(RequestContext)">
+    <member name="Get411(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get411.
 <code><![CDATA[
@@ -469,7 +469,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Options412Async(RequestContext)">
+    <member name="Options412Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options412Async.
 <code><![CDATA[
@@ -481,7 +481,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Options412(RequestContext)">
+    <member name="Options412(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options412.
 <code><![CDATA[
@@ -493,7 +493,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get412Async(RequestContext)">
+    <member name="Get412Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get412Async.
 <code><![CDATA[
@@ -505,7 +505,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get412(RequestContext)">
+    <member name="Get412(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get412.
 <code><![CDATA[
@@ -517,7 +517,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put413Async(RequestContent,RequestContext)">
+    <member name="Put413Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put413Async with required request content.
 <code><![CDATA[
@@ -531,7 +531,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put413(RequestContent,RequestContext)">
+    <member name="Put413(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put413 with required request content.
 <code><![CDATA[
@@ -545,7 +545,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch414Async(RequestContent,RequestContext)">
+    <member name="Patch414Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch414Async with required request content.
 <code><![CDATA[
@@ -559,7 +559,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch414(RequestContent,RequestContext)">
+    <member name="Patch414(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch414 with required request content.
 <code><![CDATA[
@@ -573,7 +573,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post415Async(RequestContent,RequestContext)">
+    <member name="Post415Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post415Async with required request content.
 <code><![CDATA[
@@ -587,7 +587,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post415(RequestContent,RequestContext)">
+    <member name="Post415(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post415 with required request content.
 <code><![CDATA[
@@ -601,7 +601,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get416Async(RequestContext)">
+    <member name="Get416Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get416Async.
 <code><![CDATA[
@@ -613,7 +613,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get416(RequestContext)">
+    <member name="Get416(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get416.
 <code><![CDATA[
@@ -625,7 +625,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete417Async(RequestContent,RequestContext)">
+    <member name="Delete417Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete417Async with required request content.
 <code><![CDATA[
@@ -639,7 +639,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete417(RequestContent,RequestContext)">
+    <member name="Delete417(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete417 with required request content.
 <code><![CDATA[
@@ -653,7 +653,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head429Async(RequestContext)">
+    <member name="Head429Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head429Async.
 <code><![CDATA[
@@ -665,7 +665,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head429(RequestContext)">
+    <member name="Head429(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head429.
 <code><![CDATA[

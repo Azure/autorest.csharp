@@ -78,7 +78,7 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> SpreadAsRequestBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -102,7 +102,7 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestBody(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response SpreadAsRequestBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -165,7 +165,7 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestParameterAsync(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestParameterAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> SpreadAsRequestParameterAsync(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -194,7 +194,7 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestParameter(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadAsRequestParameter(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response SpreadAsRequestParameter(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -279,7 +279,7 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadWithMultipleParametersAsync(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadWithMultipleParametersAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> SpreadWithMultipleParametersAsync(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -308,7 +308,7 @@ namespace Parameters.Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadWithMultipleParameters(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Alias.xml" path="doc/members/member[@name='SpreadWithMultipleParameters(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response SpreadWithMultipleParameters(string id, string xMsTestHeader, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));

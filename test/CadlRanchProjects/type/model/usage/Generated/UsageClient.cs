@@ -78,7 +78,7 @@ namespace _Type.Model.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> InputAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -102,7 +102,7 @@ namespace _Type.Model.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Input(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Input(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Input(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -140,7 +140,7 @@ namespace _Type.Model.Usage
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputAsync(RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> OutputAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("UsageClient.Output");
@@ -160,7 +160,7 @@ namespace _Type.Model.Usage
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Output(RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='Output(global::Azure.RequestContext)']/*" />
         public virtual Response Output(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("UsageClient.Output");
@@ -206,7 +206,7 @@ namespace _Type.Model.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutputAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> InputAndOutputAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -230,7 +230,7 @@ namespace _Type.Model.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutput(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputAndOutput(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response InputAndOutput(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

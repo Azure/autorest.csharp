@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="CreateAsync(String,RequestContent,RequestContext)">
+    <member name="CreateAsync(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateAsync with required parameters and request content.
 <code><![CDATA[
@@ -18,7 +18,7 @@ Console.WriteLine(response.Status);
 Resets products.
 </remarks>
     </member>
-    <member name="Create(String,RequestContent,RequestContext)">
+    <member name="Create(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Create with required parameters and request content.
 <code><![CDATA[
@@ -35,7 +35,7 @@ Console.WriteLine(response.Status);
 Resets products.
 </remarks>
     </member>
-    <member name="CreateStreamAsync(String,RequestContent,ContentType,IEnumerable,RequestContext)">
+    <member name="CreateStreamAsync(string,global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateStreamAsync with required parameters and request content.
 <code><![CDATA[
@@ -62,7 +62,7 @@ Console.WriteLine(response.Status);
 Resets products.
 </remarks>
     </member>
-    <member name="CreateStream(String,RequestContent,ContentType,IEnumerable,RequestContext)">
+    <member name="CreateStream(string,global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateStream with required parameters and request content.
 <code><![CDATA[
@@ -89,7 +89,7 @@ Console.WriteLine(response.Status);
 Resets products.
 </remarks>
     </member>
-    <member name="CreateEnumAsync(String,String,RequestContent,RequestContext)">
+    <member name="CreateEnumAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateEnumAsync with required parameters and request content.
 <code><![CDATA[
@@ -106,7 +106,7 @@ Console.WriteLine(response.Status);
 Resets products.
 </remarks>
     </member>
-    <member name="CreateEnum(String,String,RequestContent,RequestContext)">
+    <member name="CreateEnum(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateEnum with required parameters and request content.
 <code><![CDATA[
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 Resets products.
 </remarks>
     </member>
-    <member name="GetBodyAndPathsAsync(RequestContext)">
+    <member name="GetBodyAndPathsAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBodyAndPathsAsync and parse the result.
 <code><![CDATA[
@@ -140,7 +140,7 @@ Console.WriteLine(result[0].ToString());
 List all.
 </remarks>
     </member>
-    <member name="GetBodyAndPaths(RequestContext)">
+    <member name="GetBodyAndPaths(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBodyAndPaths and parse the result.
 <code><![CDATA[
@@ -157,7 +157,7 @@ Console.WriteLine(result[0].ToString());
 List all.
 </remarks>
     </member>
-    <member name="GetItemsAsync(RequestContext)">
+    <member name="GetItemsAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetItemsAsync and parse the result.
 <code><![CDATA[
@@ -174,7 +174,7 @@ Console.WriteLine(result[0].ToString());
 List all products.
 </remarks>
     </member>
-    <member name="GetItems(RequestContext)">
+    <member name="GetItems(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetItems and parse the result.
 <code><![CDATA[
@@ -191,7 +191,7 @@ Console.WriteLine(result[0].ToString());
 List all products.
 </remarks>
     </member>
-    <member name="UpdateAsync(String,String,String,RequestContent,String,String,RequestContext)">
+    <member name="UpdateAsync(string,string,string,global::Azure.Core.RequestContent,string,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call UpdateAsync with required parameters and request content.
 <code><![CDATA[
@@ -215,7 +215,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Update(String,String,String,RequestContent,String,String,RequestContext)">
+    <member name="Update(string,string,string,global::Azure.Core.RequestContent,string,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Update with required parameters and request content.
 <code><![CDATA[

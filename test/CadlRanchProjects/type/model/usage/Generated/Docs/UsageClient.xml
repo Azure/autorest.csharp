@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="InputAsync(RequestContent,RequestContext)">
+    <member name="InputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Input(global::_Type.Model.Usage.Models.InputRecord,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call InputAsync with required request content.
 <code><![CDATA[
@@ -28,7 +29,8 @@ Schema for <c>InputRecord</c>:
 
 </remarks>
     </member>
-    <member name="Input(RequestContent,RequestContext)">
+    <member name="Input(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Input(global::_Type.Model.Usage.Models.InputRecord,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call Input with required request content.
 <code><![CDATA[
@@ -55,7 +57,8 @@ Schema for <c>InputRecord</c>:
 
 </remarks>
     </member>
-    <member name="OutputAsync(RequestContext)">
+    <member name="OutputAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Output(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call OutputAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -80,7 +83,8 @@ Schema for <c>OutputRecord</c>:
 
 </remarks>
     </member>
-    <member name="Output(RequestContext)">
+    <member name="Output(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Output(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call Output with required parameters and parse the result.
 <code><![CDATA[
@@ -105,7 +109,8 @@ Schema for <c>OutputRecord</c>:
 
 </remarks>
     </member>
-    <member name="InputAndOutputAsync(RequestContent,RequestContext)">
+    <member name="InputAndOutputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="InputAndOutput(global::_Type.Model.Usage.Models.InputOutputRecord,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call InputAndOutputAsync with required request content and parse the result.
 <code><![CDATA[
@@ -142,7 +147,8 @@ Schema for <c>InputOutputRecord</c>:
 
 </remarks>
     </member>
-    <member name="InputAndOutput(RequestContent,RequestContext)">
+    <member name="InputAndOutput(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="InputAndOutput(global::_Type.Model.Usage.Models.InputOutputRecord,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call InputAndOutput with required request content and parse the result.
 <code><![CDATA[

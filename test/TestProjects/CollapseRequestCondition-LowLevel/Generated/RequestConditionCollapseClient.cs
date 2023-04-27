@@ -62,7 +62,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePutAsync(RequestContent,RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePutAsync(global::Azure.Core.RequestContent,global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> CollapsePutAsync(RequestContent content, RequestConditions requestConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
@@ -84,7 +84,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePut(RequestContent,RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePut(global::Azure.Core.RequestContent,global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual Response CollapsePut(RequestContent content, RequestConditions requestConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
@@ -105,7 +105,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetAsync(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> CollapseGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapseGet");
@@ -126,7 +126,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGet(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='CollapseGet(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual Response CollapseGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapseGet");
@@ -147,7 +147,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfNoneMatchGetAsync(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfNoneMatchGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> MissIfNoneMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
@@ -170,7 +170,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfNoneMatchGet(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfNoneMatchGet(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual Response MissIfNoneMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfNoneMatch, nameof(requestConditions), "Service does not support the If-None-Match header for this operation.");
@@ -193,7 +193,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchGetAsync(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> MissIfMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -216,7 +216,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchGet(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchGet(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual Response MissIfMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -239,7 +239,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfModifiedSinceGetAsync(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfModifiedSinceGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> MissIfModifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
@@ -262,7 +262,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfModifiedSinceGet(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfModifiedSinceGet(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual Response MissIfModifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfModifiedSince, nameof(requestConditions), "Service does not support the If-Modified-Since header for this operation.");
@@ -285,7 +285,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfUnmodifiedSinceGetAsync(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfUnmodifiedSinceGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> MissIfUnmodifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
@@ -308,7 +308,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfUnmodifiedSinceGet(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfUnmodifiedSinceGet(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual Response MissIfUnmodifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfUnmodifiedSince, nameof(requestConditions), "Service does not support the If-Unmodified-Since header for this operation.");
@@ -331,7 +331,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchIfNoneMatchGetAsync(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchIfNoneMatchGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> MissIfMatchIfNoneMatchGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -355,7 +355,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchIfNoneMatchGet(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='MissIfMatchIfNoneMatchGet(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual Response MissIfMatchIfNoneMatchGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -379,7 +379,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfModifiedSinceGetAsync(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfModifiedSinceGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> IfModifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -404,7 +404,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfModifiedSinceGet(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfModifiedSinceGet(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual Response IfModifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -429,7 +429,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfUnmodifiedSinceGetAsync(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfUnmodifiedSinceGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> IfUnmodifiedSinceGetAsync(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");
@@ -454,7 +454,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfUnmodifiedSinceGet(RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='IfUnmodifiedSinceGet(global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual Response IfUnmodifiedSinceGet(RequestConditions requestConditions = null, RequestContext context = null)
         {
             Argument.AssertNull(requestConditions.IfMatch, nameof(requestConditions), "Service does not support the If-Match header for this operation.");

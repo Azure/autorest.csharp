@@ -63,7 +63,7 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyAsync(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
@@ -86,7 +86,7 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBody(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBody(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
@@ -109,7 +109,7 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyNoAcceptHeaderAsync(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyNoAcceptHeaderAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
@@ -132,7 +132,7 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyNoAcceptHeader(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyNoAcceptHeader(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
@@ -154,7 +154,7 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='ContentTypeWithEncodingAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='ContentTypeWithEncodingAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ContentTypeWithEncodingAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
@@ -176,7 +176,7 @@ namespace media_types_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='ContentTypeWithEncoding(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='ContentTypeWithEncoding(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response ContentTypeWithEncoding(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
@@ -200,7 +200,7 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithTwoContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithTwoContentTypesAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> BinaryBodyWithTwoContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -226,7 +226,7 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithTwoContentTypes(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithTwoContentTypes(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual Response BinaryBodyWithTwoContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -252,7 +252,7 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithThreeContentTypesAsync(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithThreeContentTypesAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> BinaryBodyWithThreeContentTypesAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -278,7 +278,7 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithThreeContentTypes(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='BinaryBodyWithThreeContentTypes(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual Response BinaryBodyWithThreeContentTypes(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -304,7 +304,7 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='PutTextAndJsonBodyAsync(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='PutTextAndJsonBodyAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutTextAndJsonBodyAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -330,7 +330,7 @@ namespace media_types_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='PutTextAndJsonBody(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='PutTextAndJsonBody(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual Response PutTextAndJsonBody(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

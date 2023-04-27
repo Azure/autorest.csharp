@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SpreadModelAsync(RequestContent,RequestContext)">
+    <member name="SpreadModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadModel(global::Spread.Models.Thing,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadModelAsync with required request content.
 <code><![CDATA[
@@ -31,7 +32,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SpreadModel(RequestContent,RequestContext)">
+    <member name="SpreadModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadModel(global::Spread.Models.Thing,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadModel with required request content.
 <code><![CDATA[
@@ -61,7 +63,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasAsync(RequestContent,RequestContext)">
+    <member name="SpreadAliasAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadAlias(string,int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadAliasAsync with required request content.
 <code><![CDATA[
@@ -91,7 +94,8 @@ Schema for <c>SpreadAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAlias(RequestContent,RequestContext)">
+    <member name="SpreadAlias(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadAlias(string,int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadAlias with required request content.
 <code><![CDATA[
@@ -121,7 +125,8 @@ Schema for <c>SpreadAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadMultiTargetAliasAsync(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadMultiTargetAliasAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadMultiTargetAlias(string,int,string,int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadMultiTargetAliasAsync with required parameters and request content.
 <code><![CDATA[
@@ -151,7 +156,8 @@ Schema for <c>SpreadMultiTargetAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadMultiTargetAlias(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadMultiTargetAlias(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadMultiTargetAlias(string,int,string,int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadMultiTargetAlias with required parameters and request content.
 <code><![CDATA[
@@ -181,7 +187,8 @@ Schema for <c>SpreadMultiTargetAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithModelAsync(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithModelAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadAliasWithModel(string,int,global::Spread.Models.Thing,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadAliasWithModelAsync with required parameters and request content.
 <code><![CDATA[
@@ -211,7 +218,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithModel(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithModel(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadAliasWithModel(string,int,global::Spread.Models.Thing,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadAliasWithModel with required parameters and request content.
 <code><![CDATA[
@@ -241,7 +249,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithSpreadAliasAsync(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithSpreadAliasAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadAliasWithSpreadAlias(string,int,string,int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadAliasWithSpreadAliasAsync with required parameters and request content.
 <code><![CDATA[
@@ -271,7 +280,8 @@ Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithSpreadAlias(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithSpreadAlias(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadAliasWithSpreadAlias(string,int,string,int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadAliasWithSpreadAlias with required parameters and request content.
 <code><![CDATA[
@@ -301,7 +311,8 @@ Schema for <c>SpreadAliasWithSpreadAliasRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithOptionalPropsAsync(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithOptionalPropsAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadAliasWithOptionalProps(string,int,string,global::System.Collections.Generic.IEnumerable{int},string,int?,global::System.Collections.Generic.IEnumerable{string},global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadAliasWithOptionalPropsAsync with required parameters and request content.
 <code><![CDATA[
@@ -356,7 +367,8 @@ Schema for <c>SpreadAliasWithOptionalPropsRequest</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAliasWithOptionalProps(String,Int32,RequestContent,RequestContext)">
+    <member name="SpreadAliasWithOptionalProps(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="SpreadAliasWithOptionalProps(string,int,string,global::System.Collections.Generic.IEnumerable{int},string,int?,global::System.Collections.Generic.IEnumerable{string},global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call SpreadAliasWithOptionalProps with required parameters and request content.
 <code><![CDATA[

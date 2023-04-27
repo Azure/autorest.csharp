@@ -83,7 +83,7 @@ namespace _Type._Array
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValueAsync(RequestContext)']/*" />
+        /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValueAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetBooleanValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BooleanValue.GetBooleanValue");
@@ -103,7 +103,7 @@ namespace _Type._Array
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValue(RequestContext)']/*" />
+        /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='GetBooleanValue(global::Azure.RequestContext)']/*" />
         public virtual Response GetBooleanValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BooleanValue.GetBooleanValue");
@@ -149,7 +149,7 @@ namespace _Type._Array
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -173,7 +173,7 @@ namespace _Type._Array
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

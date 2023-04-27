@@ -44,6 +44,21 @@ namespace AutoRest.CSharp.Generation.Writers
             CurrentWriter.Append($"\n</{tag}>\n");
         }
 
+        public void Write(FormattableString? text)
+        {
+            if (CurrentWriter == null)
+            {
+                throw new InvalidOperationException("Invoke 'CreateMember' first.");
+            }
+
+            if (text == null || string.IsNullOrEmpty(text.ToString()))
+            {
+                return;
+            }
+
+            CurrentWriter.Append(text.ToString(this));
+        }
+
 
         public object? GetFormat(Type? formatType)
         {

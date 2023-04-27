@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="TopActionAsync(String,RequestContext)">
+    <member name="TopActionAsync(string,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="TopAction(string,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call TopActionAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -48,7 +49,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="TopAction(String,RequestContext)">
+    <member name="TopAction(string,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="TopAction(string,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call TopAction with required parameters and parse the result.
 <code><![CDATA[
@@ -95,7 +97,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="TopAction2Async(RequestContext)">
+    <member name="TopAction2Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call TopAction2Async and parse the result.
 <code><![CDATA[
@@ -142,7 +144,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="TopAction2(RequestContext)">
+    <member name="TopAction2(global::Azure.RequestContext)">
 <example>
 This sample shows how to call TopAction2 and parse the result.
 <code><![CDATA[
@@ -189,7 +191,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="PatchActionAsync(RequestContent,RequestContext)">
+    <member name="PatchActionAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PatchActionAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -295,7 +297,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="PatchAction(RequestContent,RequestContext)">
+    <member name="PatchAction(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PatchAction with required request content, and how to parse the result.
 <code><![CDATA[
@@ -401,7 +403,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
+    <member name="AnonymousBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="AnonymousBody(global::TypeSpecFirstTest.Models.Thing,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call AnonymousBodyAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -507,7 +510,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="AnonymousBody(RequestContent,RequestContext)">
+    <member name="AnonymousBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="AnonymousBody(global::TypeSpecFirstTest.Models.Thing,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call AnonymousBody with required request content, and how to parse the result.
 <code><![CDATA[
@@ -613,7 +617,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="FriendlyModelAsync(RequestContent,RequestContext)">
+    <member name="FriendlyModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="FriendlyModel(global::TypeSpecFirstTest.Models.Friend,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call FriendlyModelAsync with required request content and parse the result.
 <code><![CDATA[
@@ -652,7 +657,8 @@ Schema for <c>Friend</c>:
 
 </remarks>
     </member>
-    <member name="FriendlyModel(RequestContent,RequestContext)">
+    <member name="FriendlyModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="FriendlyModel(global::TypeSpecFirstTest.Models.Friend,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call FriendlyModel with required request content and parse the result.
 <code><![CDATA[
@@ -691,7 +697,7 @@ Schema for <c>Friend</c>:
 
 </remarks>
     </member>
-    <member name="AddTimeHeaderAsync(DateTimeOffset,RequestContext)">
+    <member name="AddTimeHeaderAsync(global::System.DateTimeOffset?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
@@ -713,7 +719,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="AddTimeHeader(DateTimeOffset,RequestContext)">
+    <member name="AddTimeHeader(global::System.DateTimeOffset?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
@@ -735,7 +741,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="SayHiAsync(String,String,String,RequestContext)">
+    <member name="SayHiAsync(string,string,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call SayHiAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -799,7 +805,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SayHi(String,String,String,RequestContext)">
+    <member name="SayHi(string,string,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call SayHi with required parameters and parse the result.
 <code><![CDATA[
@@ -863,7 +869,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloAgainAsync(String,String,RequestContent,RequestContext)">
+    <member name="HelloAgainAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="HelloAgain(string,string,global::TypeSpecFirstTest.Models.RoundTripModel,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call HelloAgainAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1039,7 +1046,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloAgain(String,String,RequestContent,RequestContext)">
+    <member name="HelloAgain(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="HelloAgain(string,string,global::TypeSpecFirstTest.Models.RoundTripModel,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call HelloAgain with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1215,7 +1223,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="NoContentTypeAsync(String,String,RequestContent,RequestContext)">
+    <member name="NoContentTypeAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call NoContentTypeAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1391,7 +1399,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="NoContentType(String,String,RequestContent,RequestContext)">
+    <member name="NoContentType(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call NoContentType with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1567,7 +1575,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloDemo2Async(RequestContext)">
+    <member name="HelloDemo2Async(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="HelloDemo2(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call HelloDemo2Async with required parameters and parse the result.
 <code><![CDATA[
@@ -1614,7 +1623,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloDemo2(RequestContext)">
+    <member name="HelloDemo2(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="HelloDemo2(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call HelloDemo2 with required parameters and parse the result.
 <code><![CDATA[
@@ -1661,7 +1671,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="CreateLiteralAsync(RequestContent,RequestContext)">
+    <member name="CreateLiteralAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="CreateLiteral(global::TypeSpecFirstTest.Models.Thing,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call CreateLiteralAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -1767,7 +1778,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="CreateLiteral(RequestContent,RequestContext)">
+    <member name="CreateLiteral(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="CreateLiteral(global::TypeSpecFirstTest.Models.Thing,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call CreateLiteral with required request content, and how to parse the result.
 <code><![CDATA[
@@ -1873,7 +1885,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloLiteralAsync(RequestContext)">
+    <member name="HelloLiteralAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="HelloLiteral(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call HelloLiteralAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -1920,7 +1933,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloLiteral(RequestContext)">
+    <member name="HelloLiteral(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="HelloLiteral(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call HelloLiteral with required parameters and parse the result.
 <code><![CDATA[
@@ -1967,7 +1981,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="GetUnknownValueAsync(RequestContext)">
+    <member name="GetUnknownValueAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUnknownValueAsync and parse the result.
 <code><![CDATA[
@@ -1982,7 +1996,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetUnknownValue(RequestContext)">
+    <member name="GetUnknownValue(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetUnknownValue and parse the result.
 <code><![CDATA[
@@ -1997,7 +2011,8 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="InternalProtocolAsync(RequestContent,RequestContext)">
+    <member name="InternalProtocolAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="InternalProtocol(global::TypeSpecFirstTest.Models.Thing,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call InternalProtocolAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -2103,7 +2118,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="InternalProtocol(RequestContent,RequestContext)">
+    <member name="InternalProtocol(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="InternalProtocol(global::TypeSpecFirstTest.Models.Thing,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call InternalProtocol with required request content, and how to parse the result.
 <code><![CDATA[
@@ -2209,7 +2225,8 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="StillConvenientAsync(RequestContext)">
+    <member name="StillConvenientAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="StillConvenient(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call StillConvenientAsync with required parameters.
 <code><![CDATA[
@@ -2222,7 +2239,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StillConvenient(RequestContext)">
+    <member name="StillConvenient(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="StillConvenient(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call StillConvenient with required parameters.
 <code><![CDATA[

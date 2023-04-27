@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="JsonAsync(RequestContent,RequestContext)">
+    <member name="JsonAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Json(global::Projection.ProjectedName.Models.JsonProjectedNameModel,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call JsonAsync with required request content.
 <code><![CDATA[
@@ -28,7 +29,8 @@ Schema for <c>JsonProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="Json(RequestContent,RequestContext)">
+    <member name="Json(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Json(global::Projection.ProjectedName.Models.JsonProjectedNameModel,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call Json with required request content.
 <code><![CDATA[
@@ -55,7 +57,8 @@ Schema for <c>JsonProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="ClientAsync(RequestContent,RequestContext)">
+    <member name="ClientAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Client(global::Projection.ProjectedName.Models.ClientProjectedNameModel,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ClientAsync with required request content.
 <code><![CDATA[
@@ -82,7 +85,8 @@ Schema for <c>ClientProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="Client(RequestContent,RequestContext)">
+    <member name="Client(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Client(global::Projection.ProjectedName.Models.ClientProjectedNameModel,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call Client with required request content.
 <code><![CDATA[
@@ -109,7 +113,8 @@ Schema for <c>ClientProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="LanguageAsync(RequestContent,RequestContext)">
+    <member name="LanguageAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Language(global::Projection.ProjectedName.Models.LanguageProjectedNameModel,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call LanguageAsync with required request content.
 <code><![CDATA[
@@ -136,7 +141,8 @@ Schema for <c>LanguageProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="Language(RequestContent,RequestContext)">
+    <member name="Language(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Language(global::Projection.ProjectedName.Models.LanguageProjectedNameModel,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call Language with required request content.
 <code><![CDATA[
@@ -163,7 +169,8 @@ Schema for <c>LanguageProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="JsonAndClientAsync(RequestContent,RequestContext)">
+    <member name="JsonAndClientAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="JsonAndClient(global::Projection.ProjectedName.Models.JsonAndClientProjectedNameModel,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call JsonAndClientAsync with required request content.
 <code><![CDATA[
@@ -190,7 +197,8 @@ Schema for <c>JsonAndClientProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="JsonAndClient(RequestContent,RequestContext)">
+    <member name="JsonAndClient(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="JsonAndClient(global::Projection.ProjectedName.Models.JsonAndClientProjectedNameModel,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call JsonAndClient with required request content.
 <code><![CDATA[

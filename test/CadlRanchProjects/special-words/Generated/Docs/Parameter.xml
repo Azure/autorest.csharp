@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetWithIfAsync(String,RequestContext)">
+    <member name="GetWithIfAsync(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetWithIfAsync with required parameters.
 <code><![CDATA[
@@ -12,7 +12,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetWithIf(String,RequestContext)">
+    <member name="GetWithIf(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetWithIf with required parameters.
 <code><![CDATA[
@@ -23,7 +23,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetWithFilterAsync(String,RequestContext)">
+    <member name="GetWithFilterAsync(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetWithFilterAsync with required parameters.
 <code><![CDATA[
@@ -34,7 +34,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetWithFilter(String,RequestContext)">
+    <member name="GetWithFilter(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetWithFilter with required parameters.
 <code><![CDATA[

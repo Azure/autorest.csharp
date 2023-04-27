@@ -83,7 +83,7 @@ namespace _Type._Array
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64ValueAsync(RequestContext)']/*" />
+        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64ValueAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetInt64ValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Int64Value.GetInt64Value");
@@ -103,7 +103,7 @@ namespace _Type._Array
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64Value(RequestContext)']/*" />
+        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='GetInt64Value(global::Azure.RequestContext)']/*" />
         public virtual Response GetInt64Value(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Int64Value.GetInt64Value");
@@ -149,7 +149,7 @@ namespace _Type._Array
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -173,7 +173,7 @@ namespace _Type._Array
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Int64Value.xml" path="doc/members/member[@name='Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

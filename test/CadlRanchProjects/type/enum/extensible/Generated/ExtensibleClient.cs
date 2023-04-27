@@ -68,7 +68,7 @@ namespace _Type._Enum.Extensible
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValueAsync(RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValueAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetKnownValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetKnownValue");
@@ -88,7 +88,7 @@ namespace _Type._Enum.Extensible
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValue(RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetKnownValue(global::Azure.RequestContext)']/*" />
         public virtual Response GetKnownValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetKnownValue");
@@ -124,7 +124,7 @@ namespace _Type._Enum.Extensible
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetUnknownValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetUnknownValue");
@@ -144,7 +144,7 @@ namespace _Type._Enum.Extensible
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='GetUnknownValue(global::Azure.RequestContext)']/*" />
         public virtual Response GetUnknownValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ExtensibleClient.GetUnknownValue");
@@ -184,7 +184,7 @@ namespace _Type._Enum.Extensible
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValueAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValueAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutKnownValueAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -208,7 +208,7 @@ namespace _Type._Enum.Extensible
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValue(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutKnownValue(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutKnownValue(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -250,7 +250,7 @@ namespace _Type._Enum.Extensible
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValueAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValueAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutUnknownValueAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -274,7 +274,7 @@ namespace _Type._Enum.Extensible
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValue(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ExtensibleClient.xml" path="doc/members/member[@name='PutUnknownValue(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutUnknownValue(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

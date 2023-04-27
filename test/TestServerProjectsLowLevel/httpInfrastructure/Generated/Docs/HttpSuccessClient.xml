@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="Head200Async(RequestContext)">
+    <member name="Head200Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head200Async.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head200(RequestContext)">
+    <member name="Head200(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head200.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get200Async(RequestContext)">
+    <member name="Get200Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get200Async and parse the result.
 <code><![CDATA[
@@ -39,7 +39,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="Get200(RequestContext)">
+    <member name="Get200(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get200 and parse the result.
 <code><![CDATA[
@@ -53,7 +53,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="Options200Async(RequestContext)">
+    <member name="Options200Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options200Async and parse the result.
 <code><![CDATA[
@@ -67,7 +67,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="Options200(RequestContext)">
+    <member name="Options200(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options200 and parse the result.
 <code><![CDATA[
@@ -81,7 +81,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="Put200Async(RequestContent,RequestContext)">
+    <member name="Put200Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put200Async with required request content.
 <code><![CDATA[
@@ -95,7 +95,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put200(RequestContent,RequestContext)">
+    <member name="Put200(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put200 with required request content.
 <code><![CDATA[
@@ -109,7 +109,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch200Async(RequestContent,RequestContext)">
+    <member name="Patch200Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch200Async with required request content.
 <code><![CDATA[
@@ -123,7 +123,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch200(RequestContent,RequestContext)">
+    <member name="Patch200(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch200 with required request content.
 <code><![CDATA[
@@ -137,7 +137,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post200Async(RequestContent,RequestContext)">
+    <member name="Post200Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post200Async with required request content.
 <code><![CDATA[
@@ -151,7 +151,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post200(RequestContent,RequestContext)">
+    <member name="Post200(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post200 with required request content.
 <code><![CDATA[
@@ -165,7 +165,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete200Async(RequestContent,RequestContext)">
+    <member name="Delete200Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete200Async with required request content.
 <code><![CDATA[
@@ -179,7 +179,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete200(RequestContent,RequestContext)">
+    <member name="Delete200(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete200 with required request content.
 <code><![CDATA[
@@ -193,7 +193,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put201Async(RequestContent,RequestContext)">
+    <member name="Put201Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put201Async with required request content.
 <code><![CDATA[
@@ -207,7 +207,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put201(RequestContent,RequestContext)">
+    <member name="Put201(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put201 with required request content.
 <code><![CDATA[
@@ -221,7 +221,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post201Async(RequestContent,RequestContext)">
+    <member name="Post201Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post201Async with required request content.
 <code><![CDATA[
@@ -235,7 +235,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post201(RequestContent,RequestContext)">
+    <member name="Post201(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post201 with required request content.
 <code><![CDATA[
@@ -249,7 +249,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put202Async(RequestContent,RequestContext)">
+    <member name="Put202Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put202Async with required request content.
 <code><![CDATA[
@@ -263,7 +263,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put202(RequestContent,RequestContext)">
+    <member name="Put202(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put202 with required request content.
 <code><![CDATA[
@@ -277,7 +277,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch202Async(RequestContent,RequestContext)">
+    <member name="Patch202Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch202Async with required request content.
 <code><![CDATA[
@@ -291,7 +291,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch202(RequestContent,RequestContext)">
+    <member name="Patch202(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch202 with required request content.
 <code><![CDATA[
@@ -305,7 +305,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post202Async(RequestContent,RequestContext)">
+    <member name="Post202Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post202Async with required request content.
 <code><![CDATA[
@@ -319,7 +319,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post202(RequestContent,RequestContext)">
+    <member name="Post202(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post202 with required request content.
 <code><![CDATA[
@@ -333,7 +333,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete202Async(RequestContent,RequestContext)">
+    <member name="Delete202Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete202Async with required request content.
 <code><![CDATA[
@@ -347,7 +347,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete202(RequestContent,RequestContext)">
+    <member name="Delete202(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete202 with required request content.
 <code><![CDATA[
@@ -361,7 +361,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head204Async(RequestContext)">
+    <member name="Head204Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head204Async.
 <code><![CDATA[
@@ -373,7 +373,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head204(RequestContext)">
+    <member name="Head204(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head204.
 <code><![CDATA[
@@ -385,7 +385,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put204Async(RequestContent,RequestContext)">
+    <member name="Put204Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put204Async with required request content.
 <code><![CDATA[
@@ -399,7 +399,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put204(RequestContent,RequestContext)">
+    <member name="Put204(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put204 with required request content.
 <code><![CDATA[
@@ -413,7 +413,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch204Async(RequestContent,RequestContext)">
+    <member name="Patch204Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch204Async with required request content.
 <code><![CDATA[
@@ -427,7 +427,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch204(RequestContent,RequestContext)">
+    <member name="Patch204(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch204 with required request content.
 <code><![CDATA[
@@ -441,7 +441,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post204Async(RequestContent,RequestContext)">
+    <member name="Post204Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post204Async with required request content.
 <code><![CDATA[
@@ -455,7 +455,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post204(RequestContent,RequestContext)">
+    <member name="Post204(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post204 with required request content.
 <code><![CDATA[
@@ -469,7 +469,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete204Async(RequestContent,RequestContext)">
+    <member name="Delete204Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete204Async with required request content.
 <code><![CDATA[
@@ -483,7 +483,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete204(RequestContent,RequestContext)">
+    <member name="Delete204(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete204 with required request content.
 <code><![CDATA[
@@ -497,7 +497,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head404Async(RequestContext)">
+    <member name="Head404Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head404Async.
 <code><![CDATA[
@@ -509,7 +509,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head404(RequestContext)">
+    <member name="Head404(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head404.
 <code><![CDATA[

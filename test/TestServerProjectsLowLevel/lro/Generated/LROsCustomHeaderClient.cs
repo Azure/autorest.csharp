@@ -63,7 +63,7 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PutAsyncRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PutAsyncRetrySucceededAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> PutAsyncRetrySucceededAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
@@ -86,7 +86,7 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PutAsyncRetrySucceeded(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PutAsyncRetrySucceeded(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> PutAsyncRetrySucceeded(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
@@ -109,7 +109,7 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Put201CreatingSucceeded200Async(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Put201CreatingSucceeded200Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> Put201CreatingSucceeded200Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
@@ -132,7 +132,7 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Put201CreatingSucceeded200(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Put201CreatingSucceeded200(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> Put201CreatingSucceeded200(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
@@ -155,7 +155,7 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Post202Retry200Async(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Post202Retry200Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> Post202Retry200Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
@@ -178,7 +178,7 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Post202Retry200(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Post202Retry200(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation Post202Retry200(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
@@ -201,7 +201,7 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PostAsyncRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PostAsyncRetrySucceededAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> PostAsyncRetrySucceededAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
@@ -224,7 +224,7 @@ namespace lro_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PostAsyncRetrySucceeded(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PostAsyncRetrySucceeded(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation PostAsyncRetrySucceeded(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");

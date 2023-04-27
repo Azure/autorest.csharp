@@ -76,7 +76,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> JsonAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -100,7 +100,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Json(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Json(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Json(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -148,7 +148,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='ClientAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='ClientAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ClientAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -172,7 +172,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Client(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Client(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Client(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -220,7 +220,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='LanguageAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='LanguageAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> LanguageAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -244,7 +244,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Language(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='Language(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Language(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -292,7 +292,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClientAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClientAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> JsonAndClientAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -316,7 +316,7 @@ namespace Projection.ProjectedName
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClient(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/Property.xml" path="doc/members/member[@name='JsonAndClient(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response JsonAndClient(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

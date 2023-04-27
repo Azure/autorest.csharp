@@ -86,7 +86,7 @@ namespace LroBasicCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProjectAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProjectAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> CreateProjectAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -111,7 +111,7 @@ namespace LroBasicCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProject(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProject(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation CreateProject(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -170,7 +170,7 @@ namespace LroBasicCadl
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProjectAsync(WaitUntil,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProjectAsync(global::Azure.WaitUntil,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> UpdateProjectAsync(WaitUntil waitUntil, string id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -198,7 +198,7 @@ namespace LroBasicCadl
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProject(WaitUntil,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProject(global::Azure.WaitUntil,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> UpdateProject(WaitUntil waitUntil, string id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -253,7 +253,7 @@ namespace LroBasicCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateThingAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateThingAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> CreateThingAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -279,7 +279,7 @@ namespace LroBasicCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateThing(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateThing(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> CreateThing(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

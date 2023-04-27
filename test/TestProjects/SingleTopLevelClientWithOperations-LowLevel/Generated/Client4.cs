@@ -57,7 +57,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Client4.xml" path="doc/members/member[@name='PatchAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/Client4.xml" path="doc/members/member[@name='PatchAsync(string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PatchAsync(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));
@@ -82,7 +82,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Client4.xml" path="doc/members/member[@name='Patch(String,RequestContext)']/*" />
+        /// <include file="Docs/Client4.xml" path="doc/members/member[@name='Patch(string,global::Azure.RequestContext)']/*" />
         public virtual Response Patch(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));

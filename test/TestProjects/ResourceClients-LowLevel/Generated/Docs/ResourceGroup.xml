@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetGroupAsync(RequestContext)">
+    <member name="GetGroupAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetGroupAsync and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetGroup(RequestContext)">
+    <member name="GetGroup(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetGroup and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetItemsAsync(RequestContext)">
+    <member name="GetItemsAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetItemsAsync and parse the result.
 <code><![CDATA[
@@ -44,7 +44,7 @@ await foreach (var data in client.GetItemsAsync())
 ]]></code>
 </example>
     </member>
-    <member name="GetItems(RequestContext)">
+    <member name="GetItems(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetItems and parse the result.
 <code><![CDATA[

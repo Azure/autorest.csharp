@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetNullableFloatValueAsync(RequestContext)">
+    <member name="GetNullableFloatValueAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetNullableFloatValue(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetNullableFloatValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -14,7 +15,8 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetNullableFloatValue(RequestContext)">
+    <member name="GetNullableFloatValue(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="GetNullableFloatValue(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call GetNullableFloatValue with required parameters and parse the result.
 <code><![CDATA[
@@ -27,7 +29,8 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Put(object,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -42,7 +45,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="Put(object,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

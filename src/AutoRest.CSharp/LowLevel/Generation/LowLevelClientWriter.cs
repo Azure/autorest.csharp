@@ -529,6 +529,12 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
             using (_xmlDocWriter.CreateMember(docRef))
             {
+                if (clientMethod.ConvenienceMethod != null)
+                {
+                    var convenienceDocRef = GetMethodSignatureString(clientMethod.ConvenienceMethod.Signature);
+                    _xmlDocWriter.Write($"This is the advanced method. Use <see cref=\"{convenienceDocRef}\"/> for an overload that provides fully qualified model types.\n");
+                }
+
                 _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, async));
                 WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, methodSignature, remarks, hasRequestRemarks, hasResponseRemarks);
             }
@@ -538,7 +544,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var builder = new StringBuilder(signature.Name);
             builder.Append("(");
-            builder.Append(string.Join(",", signature.Parameters.Select(p => p.Type.Name)));
+            builder.Append(string.Join(",", signature.Parameters.Select(p => p.Type.ToString().Trim().Replace("<", "{").Replace(">", "}"))));
             builder.Append(")");
             return builder.ToString();
         }

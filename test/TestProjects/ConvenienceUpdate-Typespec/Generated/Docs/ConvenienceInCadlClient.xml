@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="UpdateConvenienceAsync(RequestContext)">
+    <member name="UpdateConvenienceAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="UpdateConvenience(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call UpdateConvenienceAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -26,7 +27,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="UpdateConvenience(RequestContext)">
+    <member name="UpdateConvenience(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="UpdateConvenience(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call UpdateConvenience with required parameters and parse the result.
 <code><![CDATA[
@@ -51,7 +53,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)">
+    <member name="ConvenienceOptionalBeforeRequiredAsync(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceOptionalBeforeRequired(global::ConvenienceInCadl.Models.Model,int?,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceOptionalBeforeRequiredAsync with required parameters and request content.
 <code><![CDATA[
@@ -89,7 +92,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalBeforeRequired(RequestContent,Int32,RequestContext)">
+    <member name="ConvenienceOptionalBeforeRequired(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceOptionalBeforeRequired(global::ConvenienceInCadl.Models.Model,int?,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceOptionalBeforeRequired with required parameters and request content.
 <code><![CDATA[
@@ -127,7 +131,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolAsync(RequestContext)">
+    <member name="ProtocolAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolValue(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ProtocolAsync and parse the result.
 <code><![CDATA[
@@ -152,7 +157,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="Protocol(RequestContext)">
+    <member name="Protocol(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolValue(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call Protocol and parse the result.
 <code><![CDATA[
@@ -177,7 +183,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceWithOptionalAsync(RequestContext)">
+    <member name="ConvenienceWithOptionalAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceWithOptionalValue(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceWithOptionalAsync and parse the result.
 <code><![CDATA[
@@ -202,7 +209,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceWithOptional(RequestContext)">
+    <member name="ConvenienceWithOptional(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceWithOptionalValue(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceWithOptional and parse the result.
 <code><![CDATA[
@@ -227,7 +235,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceWithRequiredAsync(RequestContext)">
+    <member name="ConvenienceWithRequiredAsync(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceWithRequired(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceWithRequiredAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -252,7 +261,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceWithRequired(RequestContext)">
+    <member name="ConvenienceWithRequired(global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceWithRequired(global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceWithRequired with required parameters and parse the result.
 <code><![CDATA[
@@ -277,7 +287,7 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceShouldNotGenerateAsync(RequestContext)">
+    <member name="ConvenienceShouldNotGenerateAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceShouldNotGenerateAsync.
 <code><![CDATA[
@@ -288,7 +298,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ConvenienceShouldNotGenerate(RequestContext)">
+    <member name="ConvenienceShouldNotGenerate(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ConvenienceShouldNotGenerate.
 <code><![CDATA[
@@ -299,7 +309,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ProtocolShouldNotGenerateConvenienceAsync(RequestContext)">
+    <member name="ProtocolShouldNotGenerateConvenienceAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolShouldNotGenerateConvenienceAsync.
 <code><![CDATA[
@@ -310,7 +320,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ProtocolShouldNotGenerateConvenience(RequestContext)">
+    <member name="ProtocolShouldNotGenerateConvenience(global::Azure.RequestContext)">
 <example>
 This sample shows how to call ProtocolShouldNotGenerateConvenience.
 <code><![CDATA[
@@ -321,7 +331,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ProtocolOptionalQueryAsync(Int32,RequestContext)">
+    <member name="ProtocolOptionalQueryAsync(int?,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolOptionalQueryValue(int?,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ProtocolOptionalQueryAsync and parse the result.
 <code><![CDATA[
@@ -355,7 +366,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalQuery(Int32,RequestContext)">
+    <member name="ProtocolOptionalQuery(int?,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolOptionalQueryValue(int?,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ProtocolOptionalQuery and parse the result.
 <code><![CDATA[
@@ -389,7 +401,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolRequiredQueryAsync(Int32,RequestContext)">
+    <member name="ProtocolRequiredQueryAsync(int,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolRequiredQueryValue(int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ProtocolRequiredQueryAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -414,7 +427,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolRequiredQuery(Int32,RequestContext)">
+    <member name="ProtocolRequiredQuery(int,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolRequiredQueryValue(int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ProtocolRequiredQuery with required parameters and parse the result.
 <code><![CDATA[
@@ -439,7 +453,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalModelAsync(RequestContent,RequestContext)">
+    <member name="ProtocolOptionalModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolOptionalModelValue(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ProtocolOptionalModelAsync with required request content.
 <code><![CDATA[
@@ -466,7 +481,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalModel(RequestContent,RequestContext)">
+    <member name="ProtocolOptionalModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolOptionalModelValue(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ProtocolOptionalModel with required request content.
 <code><![CDATA[
@@ -493,7 +509,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolRequiredModelAsync(RequestContent,RequestContext)">
+    <member name="ProtocolRequiredModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolRequiredModel(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ProtocolRequiredModelAsync with required request content.
 <code><![CDATA[
@@ -520,7 +537,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolRequiredModel(RequestContent,RequestContext)">
+    <member name="ProtocolRequiredModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolRequiredModel(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ProtocolRequiredModel with required request content.
 <code><![CDATA[
@@ -547,7 +565,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithOptionalAsync(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithOptionalAsync(int?,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceOptionalQueryWithOptionalValue(int?,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithOptionalAsync and parse the result.
 <code><![CDATA[
@@ -581,7 +600,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithOptional(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithOptional(int?,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceOptionalQueryWithOptionalValue(int?,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithOptional and parse the result.
 <code><![CDATA[
@@ -615,7 +635,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithOptionalAsync(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithOptionalAsync(int,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceRequiredQueryWithOptionalValue(int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithOptionalAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -640,7 +661,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithOptional(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithOptional(int,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceRequiredQueryWithOptionalValue(int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithOptional with required parameters and parse the result.
 <code><![CDATA[
@@ -665,7 +687,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithRequiredAsync(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithRequiredAsync(int?,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceOptionalQueryWithRequired(int?,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -690,7 +713,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalQueryWithRequired(Int32,RequestContext)">
+    <member name="ConvenienceOptionalQueryWithRequired(int?,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceOptionalQueryWithRequired(int?,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceOptionalQueryWithRequired with required parameters and parse the result.
 <code><![CDATA[
@@ -715,7 +739,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithRequiredAsync(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithRequiredAsync(int,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceRequiredQueryWithRequired(int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithRequiredAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -740,7 +765,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredQueryWithRequired(Int32,RequestContext)">
+    <member name="ConvenienceRequiredQueryWithRequired(int,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceRequiredQueryWithRequired(int,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceRequiredQueryWithRequired with required parameters and parse the result.
 <code><![CDATA[
@@ -765,7 +791,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalModelWithOptionalAsync(RequestContent,RequestContext)">
+    <member name="ConvenienceOptionalModelWithOptionalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceOptionalModelWithOptionalValue(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with required request content.
 <code><![CDATA[
@@ -792,7 +819,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalModelWithOptional(RequestContent,RequestContext)">
+    <member name="ConvenienceOptionalModelWithOptional(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceOptionalModelWithOptionalValue(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceOptionalModelWithOptional with required request content.
 <code><![CDATA[
@@ -819,7 +847,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredModelWithOptionalAsync(RequestContent,RequestContext)">
+    <member name="ConvenienceRequiredModelWithOptionalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceRequiredModelWithOptional(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceRequiredModelWithOptionalAsync with required request content.
 <code><![CDATA[
@@ -846,7 +875,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceRequiredModelWithOptional(RequestContent,RequestContext)">
+    <member name="ConvenienceRequiredModelWithOptional(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceRequiredModelWithOptional(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceRequiredModelWithOptional with required request content.
 <code><![CDATA[
@@ -873,7 +903,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalModelWithRequiredAsync(RequestContent,RequestContext)">
+    <member name="ConvenienceOptionalModelWithRequiredAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceOptionalModelWithRequired(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with required parameters and request content.
 <code><![CDATA[
@@ -900,7 +931,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ConvenienceOptionalModelWithRequired(RequestContent,RequestContext)">
+    <member name="ConvenienceOptionalModelWithRequired(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ConvenienceOptionalModelWithRequired(global::ConvenienceInCadl.Models.Model,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ConvenienceOptionalModelWithRequired with required parameters and request content.
 <code><![CDATA[
@@ -927,7 +959,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)">
+    <member name="ProtocolOptionalBeforeRequiredAsync(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolOptionalBeforeRequired(global::ConvenienceInCadl.Models.Model,int?,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ProtocolOptionalBeforeRequiredAsync with required parameters and request content.
 <code><![CDATA[
@@ -965,7 +998,8 @@ Schema for <c>Model</c>:
 
 </remarks>
     </member>
-    <member name="ProtocolOptionalBeforeRequired(RequestContent,Int32,RequestContext)">
+    <member name="ProtocolOptionalBeforeRequired(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="ProtocolOptionalBeforeRequired(global::ConvenienceInCadl.Models.Model,int?,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call ProtocolOptionalBeforeRequired with required parameters and request content.
 <code><![CDATA[

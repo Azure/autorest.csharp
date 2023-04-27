@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="HeadNoParamsAsync(RequestContext)">
+    <member name="HeadNoParamsAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call HeadNoParamsAsync and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="HeadNoParams(RequestContext)">
+    <member name="HeadNoParams(global::Azure.RequestContext)">
 <example>
 This sample shows how to call HeadNoParams and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetRequiredAsync(String,RequestContext)">
+    <member name="GetRequiredAsync(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetRequiredAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -43,7 +43,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetRequired(String,RequestContext)">
+    <member name="GetRequired(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetRequired with required parameters and parse the result.
 <code><![CDATA[
@@ -57,7 +57,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutRequiredOptionalAsync(String,String,RequestContext)">
+    <member name="PutRequiredOptionalAsync(string,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutRequiredOptionalAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -81,7 +81,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutRequiredOptional(String,String,RequestContext)">
+    <member name="PutRequiredOptional(string,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutRequiredOptional with required parameters and parse the result.
 <code><![CDATA[
@@ -105,7 +105,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PostParametersAsync(RequestContent,RequestContext)">
+    <member name="PostParametersAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PostParametersAsync with required request content and parse the result.
 <code><![CDATA[
@@ -135,7 +135,7 @@ Schema for <c>PostInput</c>:
 
 </remarks>
     </member>
-    <member name="PostParameters(RequestContent,RequestContext)">
+    <member name="PostParameters(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PostParameters with required request content and parse the result.
 <code><![CDATA[
@@ -165,7 +165,7 @@ Schema for <c>PostInput</c>:
 
 </remarks>
     </member>
-    <member name="GetOptionalAsync(String,RequestContext)">
+    <member name="GetOptionalAsync(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetOptionalAsync and parse the result.
 <code><![CDATA[
@@ -189,7 +189,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetOptional(String,RequestContext)">
+    <member name="GetOptional(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetOptional and parse the result.
 <code><![CDATA[

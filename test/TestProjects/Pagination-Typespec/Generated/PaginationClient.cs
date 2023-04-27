@@ -99,7 +99,7 @@ namespace Pagination
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntriesAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntriesAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPaginationLedgerEntriesAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -115,7 +115,7 @@ namespace Pagination
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntries(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetPaginationLedgerEntries(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPaginationLedgerEntries(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -149,7 +149,7 @@ namespace Pagination
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntriesAsync(RequestContext)']/*" />
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntriesAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetLedgerEntriesAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);
@@ -161,7 +161,7 @@ namespace Pagination
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntries(RequestContext)']/*" />
+        /// <include file="Docs/PaginationClient.xml" path="doc/members/member[@name='GetLedgerEntries(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetLedgerEntries(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetLedgerEntriesRequest(context);

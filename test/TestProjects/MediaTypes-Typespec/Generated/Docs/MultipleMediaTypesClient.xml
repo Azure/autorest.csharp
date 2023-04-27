@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="OneBinaryBodyTwoContentTypesAsync(RequestContent,ContentType,RequestContext)">
+    <member name="OneBinaryBodyTwoContentTypesAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="OneBinaryBodyTwoContentTypes(global::System.BinaryData,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call OneBinaryBodyTwoContentTypesAsync with required parameters and request content.
 <code><![CDATA[
@@ -15,7 +16,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OneBinaryBodyTwoContentTypes(RequestContent,ContentType,RequestContext)">
+    <member name="OneBinaryBodyTwoContentTypes(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="OneBinaryBodyTwoContentTypes(global::System.BinaryData,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call OneBinaryBodyTwoContentTypes with required parameters and request content.
 <code><![CDATA[
@@ -29,7 +31,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OneStringBodyThreeContentTypesAsync(RequestContent,ContentType,RequestContext)">
+    <member name="OneStringBodyThreeContentTypesAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="OneStringBodyThreeContentTypes(string,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call OneStringBodyThreeContentTypesAsync with required parameters and request content.
 <code><![CDATA[
@@ -43,7 +46,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OneStringBodyThreeContentTypes(RequestContent,ContentType,RequestContext)">
+    <member name="OneStringBodyThreeContentTypes(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="OneStringBodyThreeContentTypes(string,global::Azure.Core.ContentType,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call OneStringBodyThreeContentTypes with required parameters and request content.
 <code><![CDATA[
@@ -57,7 +61,8 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="OneModelBodyOneContentTypeAsync(RequestContent,RequestContext)">
+    <member name="OneModelBodyOneContentTypeAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="OneModelBodyOneContentType(global::MultipleMediaTypes.Models.Body,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call OneModelBodyOneContentTypeAsync with required request content.
 <code><![CDATA[
@@ -85,7 +90,8 @@ Schema for <c>Body</c>:
 
 </remarks>
     </member>
-    <member name="OneModelBodyOneContentType(RequestContent,RequestContext)">
+    <member name="OneModelBodyOneContentType(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+This is the advanced method. Use <see cref="OneModelBodyOneContentType(global::MultipleMediaTypes.Models.Body,global::System.Threading.CancellationToken)"/> for an overload that provides fully qualified model types.
 <example>
 This sample shows how to call OneModelBodyOneContentType with required request content.
 <code><![CDATA[
