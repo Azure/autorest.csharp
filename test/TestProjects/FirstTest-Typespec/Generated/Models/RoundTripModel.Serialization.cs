@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace CadlFirstTest.Models
+namespace TypeSpecFirstTest.Models
 {
     public partial class RoundTripModel : IUtf8JsonSerializable
     {
@@ -85,7 +85,7 @@ namespace CadlFirstTest.Models
                 if (FloatFixedEnum != null)
                 {
                     writer.WritePropertyName("floatFixedEnum"u8);
-                    writer.WriteNumberValue((int)FloatFixedEnum.Value);
+                    writer.WriteNumberValue(FloatFixedEnum.Value.ToSerialSingle());
                 }
                 else
                 {
@@ -98,7 +98,7 @@ namespace CadlFirstTest.Models
                 writer.WriteStartArray();
                 foreach (var item in FloatFixedEnumCollection)
                 {
-                    writer.WriteNumberValue((int)item);
+                    writer.WriteNumberValue(item.ToSerialSingle());
                 }
                 writer.WriteEndArray();
             }

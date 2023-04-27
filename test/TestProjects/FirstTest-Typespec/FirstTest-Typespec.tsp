@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 
@@ -8,18 +7,18 @@ import "@azure-tools/typespec-azure-core";
     title: "hello world",
     version: "0.1.0",
 })
-@doc("This is a sample cadl project.")
+@doc("This is a sample typespec project.")
 @server(
-    "{firstTestCadlUrl}",
+    "{firstTestTypeSpecUrl}",
     "Endpoint Service",
     {
-        firstTestCadlUrl: string,
+        firstTestTypeSpecUrl: string,
     }
 )
 @useAuth(
     OAuth2Auth<[AuthFlow]> | ApiKeyAuth<ApiKeyLocation.header, "x-ms-api-key">
 )
-namespace CadlFirstTest;
+namespace TypeSpecFirstTest;
 
 @doc("The auth flow model")
 model AuthFlow {
@@ -36,9 +35,9 @@ using Azure.Core;
 @doc("float fixed enum")
 @fixed
 enum FloatFixedEnum {
-    One: 1.0,
-    Two: 2.0,
-    Four: 4.0,
+    One: 1.1,
+    Two: 2.2,
+    Four: 4.4,
 }
 
 @doc("int fixed enum")

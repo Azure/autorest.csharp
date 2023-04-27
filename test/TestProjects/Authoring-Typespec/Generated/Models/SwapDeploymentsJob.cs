@@ -50,7 +50,7 @@ namespace Azure.Language.Authoring.Models
             LastUpdatedDateTime = lastUpdatedDateTime;
             ExpirationDateTime = expirationDateTime;
             Status = status;
-            Warnings = warnings.ToList();
+            Warnings = warnings;
             Errors = errors;
             Id = id;
         }

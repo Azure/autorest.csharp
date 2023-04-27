@@ -1,9 +1,10 @@
 {
   "OutputFolder": ".",
   "Namespace": "TypeSpec.visibility",
-  "LibraryName": null,
+  "LibraryName": "TypeSpec.visibility",
   "SharedSourceFolders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
-  ]
+  ],
+  "use-overloads-between-protocol-and-convenience": true
 }

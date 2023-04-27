@@ -20,6 +20,13 @@ namespace ModelsInCadl.Models
             writer.WriteNumberValue(RequiredInt);
             writer.WritePropertyName("discriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty);
+            if (Optional.IsDefined(OptionalPropertyOnBase))
+            {
+                writer.WritePropertyName("optionalPropertyOnBase"u8);
+                writer.WriteStringValue(OptionalPropertyOnBase);
+            }
+            writer.WritePropertyName("requiredPropertyOnBase"u8);
+            writer.WriteNumberValue(RequiredPropertyOnBase);
             writer.WriteEndObject();
         }
 
@@ -31,6 +38,8 @@ namespace ModelsInCadl.Models
             }
             int requiredInt = default;
             string discriminatorProperty = default;
+            Optional<string> optionalPropertyOnBase = default;
+            int requiredPropertyOnBase = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredInt"u8))
@@ -43,8 +52,18 @@ namespace ModelsInCadl.Models
                     discriminatorProperty = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("optionalPropertyOnBase"u8))
+                {
+                    optionalPropertyOnBase = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("requiredPropertyOnBase"u8))
+                {
+                    requiredPropertyOnBase = property.Value.GetInt32();
+                    continue;
+                }
             }
-            return new DerivedModelWithDiscriminatorB(requiredInt);
+            return new DerivedModelWithDiscriminatorB(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, requiredInt);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
