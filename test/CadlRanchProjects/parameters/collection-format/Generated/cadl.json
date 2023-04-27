@@ -165,7 +165,7 @@
     },
     {
      "$id": "21",
-     "Name": "ssv",
+     "Name": "csv",
      "ResourceName": "Query",
      "Parameters": [
       {
@@ -196,7 +196,7 @@
        "SkipUrlEncoding": false,
        "Explode": false,
        "Kind": "Method",
-       "ArraySerializationDelimiter": " "
+       "ArraySerializationDelimiter": ","
       },
       {
        "$id": "25",
@@ -243,261 +243,6 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/parameters/collection-format/query/ssv",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "29",
-     "Name": "tsv",
-     "ResourceName": "Query",
-     "Parameters": [
-      {
-       "$ref": "6"
-      },
-      {
-       "$id": "30",
-       "Name": "colors",
-       "NameInRequest": "colors",
-       "Description": "Possible values for colors are [blue,red,green]",
-       "Type": {
-        "$id": "31",
-        "Name": "Array",
-        "ElementType": {
-         "$id": "32",
-         "Name": "string",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method",
-       "ArraySerializationDelimiter": "\t"
-      },
-      {
-       "$id": "33",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "34",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "35",
-        "Type": {
-         "$ref": "34"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "16"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "36",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/parameters/collection-format/query/tsv",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "37",
-     "Name": "pipes",
-     "ResourceName": "Query",
-     "Parameters": [
-      {
-       "$ref": "6"
-      },
-      {
-       "$id": "38",
-       "Name": "colors",
-       "NameInRequest": "colors",
-       "Description": "Possible values for colors are [blue,red,green]",
-       "Type": {
-        "$id": "39",
-        "Name": "Array",
-        "ElementType": {
-         "$id": "40",
-         "Name": "string",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method",
-       "ArraySerializationDelimiter": "|"
-      },
-      {
-       "$id": "41",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "42",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "43",
-        "Type": {
-         "$ref": "42"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "16"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "44",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
-     "Path": "/parameters/collection-format/query/pipes",
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "45",
-     "Name": "csv",
-     "ResourceName": "Query",
-     "Parameters": [
-      {
-       "$ref": "6"
-      },
-      {
-       "$id": "46",
-       "Name": "colors",
-       "NameInRequest": "colors",
-       "Description": "Possible values for colors are [blue,red,green]",
-       "Type": {
-        "$id": "47",
-        "Name": "Array",
-        "ElementType": {
-         "$id": "48",
-         "Name": "string",
-         "Kind": "String",
-         "IsNullable": false
-        },
-        "IsNullable": false
-       },
-       "Location": "Query",
-       "IsRequired": true,
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Method",
-       "ArraySerializationDelimiter": ","
-      },
-      {
-       "$id": "49",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "50",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "51",
-        "Type": {
-         "$ref": "50"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "16"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "52",
-       "StatusCodes": [
-        204
-       ],
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "None",
-     "Uri": "{host}",
      "Path": "/parameters/collection-format/query/csv",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
@@ -505,18 +250,18 @@
     }
    ],
    "Protocol": {
-    "$id": "53"
+    "$id": "29"
    },
    "Creatable": false,
    "Parent": "CollectionFormatClient"
   },
   {
-   "$id": "54",
+   "$id": "30",
    "Name": "Header",
    "Description": "",
    "Operations": [
     {
-     "$id": "55",
+     "$id": "31",
      "Name": "csv",
      "ResourceName": "Header",
      "Parameters": [
@@ -524,15 +269,15 @@
        "$ref": "6"
       },
       {
-       "$id": "56",
+       "$id": "32",
        "Name": "colors",
        "NameInRequest": "colors",
        "Description": "Possible values for colors are [blue,red,green]",
        "Type": {
-        "$id": "57",
+        "$id": "33",
         "Name": "Array",
         "ElementType": {
-         "$id": "58",
+         "$id": "34",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -551,11 +296,11 @@
        "ArraySerializationDelimiter": ","
       },
       {
-       "$id": "59",
+       "$id": "35",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "60",
+        "$id": "36",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -570,9 +315,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "61",
+        "$id": "37",
         "Type": {
-         "$ref": "60"
+         "$ref": "36"
         },
         "Value": "application/json"
        }
@@ -583,7 +328,7 @@
      ],
      "Responses": [
       {
-       "$id": "62",
+       "$id": "38",
        "StatusCodes": [
         204
        ],
@@ -602,7 +347,7 @@
     }
    ],
    "Protocol": {
-    "$id": "63"
+    "$id": "39"
    },
    "Creatable": false,
    "Parent": "CollectionFormatClient"
