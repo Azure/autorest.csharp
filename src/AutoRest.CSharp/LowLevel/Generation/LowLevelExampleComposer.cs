@@ -77,6 +77,11 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 ComposeExampleWithoutParameter(convenienceMethod, methodSignature.Name, async, true, builder);
             }
+            else
+            {
+                // client.GetAllItems(int a, RequestContext context = null)
+                ComposeExampleWithRequiredParameters(convenienceMethod, methodSignature.Name, async, builder);
+            }
 
             return $"{builder.ToString()}";
         }
@@ -100,6 +105,12 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             builder.AppendLine($"This sample shows how to call {methodName} with required {GenerateParameterAndRequestContentDescription(clientMethod.ProtocolMethodSignature.Parameters)}{(clientMethod.ResponseBodyType != null ? " and parse the result" : "")}.");
             ComposeCodeSnippet(clientMethod, methodName, async, true, builder);
+        }
+
+        private void ComposeExampleWithRequiredParameters(ConvenienceMethod convenienceMethod, string methodName, bool async, StringBuilder builder)
+        {
+            builder.AppendLine($"This sample shows how to call {methodName} with required parameters.");
+            ComposeCodeSnippet(convenienceMethod, methodName, async, true, builder);
         }
 
         /// <summary>
@@ -249,7 +260,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                // handle normal
+                ComposeHandleNormalResponseCode(convenienceMethod, methodName, async, allParameters, builder);
             }
 
             builder.Append("]]></code>");
@@ -274,7 +285,7 @@ namespace AutoRest.CSharp.Generation.Writers
              *     ...
              * }
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), MockParameterValue, allParameters)});");
             builder.AppendLine();
             using (Scope($"{(async ? "await " : "")}foreach (var data in operation.Value)", 0, builder, true))
             {
@@ -294,7 +305,7 @@ namespace AutoRest.CSharp.Generation.Writers
              * Console.WriteLine(result[.GetProperty(...)...].ToString());
              * ...
              */
-            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            builder.AppendLine($"var operation = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), MockParameterValue, allParameters)});");
             builder.AppendLine();
 
             if (clientMethod.ResponseBodyType == null)
@@ -353,7 +364,7 @@ namespace AutoRest.CSharp.Generation.Writers
              *     ...
              * }
              */
-            using (Scope($"{(async ? "await " : "")}foreach (var data in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)}))", 0, builder, true))
+            using (Scope($"{(async ? "await " : "")}foreach (var data in client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), MockParameterValue, allParameters)}))", 0, builder, true))
             {
                 ComposeParsingPageableResponseCodes(modelType, clientMethod.PagingInfo!.ItemName, allParameters, builder);
             }
@@ -391,7 +402,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void ComposeHandleNormalResponseCode(LowLevelClientMethod clientMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
         {
-            builder.AppendLine($"Response response = {(async ? "await " : "")}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), allParameters)});");
+            builder.AppendLine($"Response response = {(async ? "await " : string.Empty)}client.{methodName}({MockParameterValues(clientMethod.ProtocolMethodSignature.Parameters.SkipLast(1).ToList(), MockParameterValue, allParameters)});");
             if (clientMethod.ResponseBodyType != null)
             {
                 ComposeParsingNormalResponseCodes(allParameters, clientMethod.ResponseBodyType, builder);
@@ -400,6 +411,13 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 builder.AppendLine("Console.WriteLine(response.Status);");
             }
+        }
+
+        private void ComposeHandleNormalResponseCode(ConvenienceMethod convenienceMethod, string methodName, bool async, bool allParameters, StringBuilder builder)
+        {
+            // TODO -- need refactor to use CodeWriter and then reduce with Roslyn maybe?
+            var methodSignature = convenienceMethod.Signature;
+            builder.AppendLine($"{methodSignature.ReturnType!.ToString().Trim()} result = {(async ? "await " : string.Empty)}client.{methodName}({MockParameterValues(methodSignature.Parameters.SkipLast(1).ToList(), MockConvenienceParameterValue, allParameters)})"); // TODO -- handle parameters
         }
 
         private void ComposeParsingNormalResponseCodes(bool allProperties, InputType responseBodyType, StringBuilder builder)
@@ -512,11 +530,11 @@ namespace AutoRest.CSharp.Generation.Writers
             apiInvocationChainList.Add(finalChain);
         }
 
-        private string MockParameterValues(IReadOnlyList<Parameter> parameters, bool allParameters)
+        private string MockParameterValues(IReadOnlyList<Parameter> parameters, Func<Parameter, string> parameterSelector, bool allParameters)
         {
             if (parameters.Count == 0)
             {
-                return "";
+                return string.Empty;
             }
 
             var parameterValues = new List<string>(parameters.Count);
@@ -524,10 +542,20 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 if (allParameters || parameters[i].DefaultValue == null)
                 {
-                    parameterValues.Add(MockParameterValue(parameters[i]));
+                    parameterValues.Add(parameterSelector(parameters[i]));
                 }
             }
             return string.Join(", ", parameterValues);
+        }
+
+        private string MockConvenienceParameterValue(Parameter parameter)
+        {
+            if (parameter.RequestLocation == RequestLocation.Body)
+            {
+                return $"{parameter.Name}";
+            }
+
+            return MockParameterValue(parameter);
         }
 
         private string MockParameterValue(Parameter parameter)
@@ -881,7 +909,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string GetFactoryMethodCode(MethodSignatureBase factoryMethod)
         {
-            return $".{factoryMethod.Name}({MockParameterValues(factoryMethod.Parameters, true)})";
+            return $".{factoryMethod.Name}({MockParameterValues(factoryMethod.Parameters, MockParameterValue, true)})";
         }
 
         private static string GetEndpoint()
