@@ -20,7 +20,8 @@ namespace MgmtPropertyBag.Models
         /// <summary> The filter to apply on the operation. </summary>
         public string Filter { get; set; }
         /// <summary> The Integer to use. </summary>
-        public int? Top { get; set; }
+        public int? Top { get; set; } = 10;
+
         /// <summary> The String to use. </summary>
         public string Orderby { get; set; }
         /// <summary> The entity state (Etag) version. A value of &quot;*&quot; can be used for If-Match to unconditionally apply the operation. </summary>

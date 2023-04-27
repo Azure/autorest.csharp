@@ -24,11 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                   getterModifiers: field.GetterModifiers,
                   setterModifiers: field.SetterModifiers)
         {
-            // if the property is a literal type, we need the initialization value for the property
-            if (inputModelProperty.Type is InputLiteralType)
-            {
-                InitializationValue = field.DefaultValue;
-            }
+            InitializationValue = field.DefaultValue;
         }
 
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false)
