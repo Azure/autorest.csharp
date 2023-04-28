@@ -98,7 +98,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 SerializeExpression(utf8JsonWriter, serialization.ValueSerialization, serialization.Value)
             };
 
-            if (!serialization.ValueType.IsNullable)
+            if (serialization.SerializedType is not { IsNullable: true })
             {
                 return InvokeOptional.WrapInIsDefined(serialization, writeProperty);
             }

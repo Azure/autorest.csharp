@@ -265,7 +265,7 @@ namespace AutoRest.CSharp.Output.Builders
                     property.SerializedName,
                     objectProperty.Declaration.Type,
                     objectProperty.ValueType,
-                    BuildSerialization(property.Schema, objectProperty.ValueType, false),
+                    BuildSerialization(property.Schema, objectProperty.Declaration.Type, false),
                     property.IsRequired,
                     property.IsReadOnly,
                     false);
