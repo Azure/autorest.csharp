@@ -294,9 +294,12 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/multi", false);
-            foreach (var param in colors)
+            if (colors != null && Optional.IsCollectionDefined(colors))
             {
-                uri.AppendQuery("colors", param, true);
+                foreach (var param in colors)
+                {
+                    uri.AppendQuery("colors", param, true);
+                }
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -312,7 +315,10 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/ssv", false);
-            uri.AppendQueryDelimited("colors", colors, " ", true);
+            if (colors != null && Optional.IsCollectionDefined(colors))
+            {
+                uri.AppendQueryDelimited("colors", colors, " ", true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -327,7 +333,10 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/tsv", false);
-            uri.AppendQueryDelimited("colors", colors, "\t", true);
+            if (colors != null && Optional.IsCollectionDefined(colors))
+            {
+                uri.AppendQueryDelimited("colors", colors, "\t", true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -342,7 +351,10 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/pipes", false);
-            uri.AppendQueryDelimited("colors", colors, "|", true);
+            if (colors != null && Optional.IsCollectionDefined(colors))
+            {
+                uri.AppendQueryDelimited("colors", colors, "|", true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -357,7 +369,10 @@ namespace Parameters.CollectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/parameters/collection-format/query/csv", false);
-            uri.AppendQueryDelimited("colors", colors, ",", true);
+            if (colors != null && Optional.IsCollectionDefined(colors))
+            {
+                uri.AppendQueryDelimited("colors", colors, ",", true);
+            }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
