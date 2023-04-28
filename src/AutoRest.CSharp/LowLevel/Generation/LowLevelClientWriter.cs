@@ -538,13 +538,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var builder = new StringBuilder(signature.Name);
             builder.Append("(");
-            var paramList = signature.Parameters.Select(p =>
-            {
-                var name = p.Type.IsFrameworkType ? CodeWriter.GetTypeNameMapping(p.Type.FrameworkType) ?? p.Type.Name : p.Type.Name;
-                if (p.Type.IsNullable && p.Type.IsValueType)
-                    name += "?";
-                return name.Replace("<", "{").Replace(">", "}");
-            });
+            var paramList = signature.Parameters.Select(p => p.Type.ConvertParamNameForDocs());
             builder.Append(string.Join(",", paramList));
             builder.Append(")");
             return builder.ToString();
