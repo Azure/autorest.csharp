@@ -395,7 +395,7 @@ namespace AutoRest.CSharp.Output.Models
 
             _createMessageParameters.Add(parameter);
             _protocolParameters.Add(parameter);
-            _createMessageParameters.Add(parameter);
+            _convenienceParameters.Add(parameter);
             AddReference(inputParameter.NameInRequest, inputParameter, parameter, SerializationFormat.Default);
         }
 

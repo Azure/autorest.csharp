@@ -4,10 +4,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Accessibility\\Generated"
     },
-    "Spread-Typespec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Spread-Typespec\\Generated"
-    },
     "Accessibility-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Accessibility-LowLevel\\Generated"
@@ -563,6 +559,10 @@
     "SingleTopLevelClientWithoutOperations-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\SingleTopLevelClientWithoutOperations-LowLevel\\Generated"
+    },
+    "Spread-Typespec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Spread-Typespec\\Generated"
     },
     "SubClients-LowLevel": {
       "commandName": "Project",
