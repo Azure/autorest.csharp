@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetParametersAsync(RequestContext)">
+    <member name="GetParametersAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetParametersAsync and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetParameters(RequestContext)">
+    <member name="GetParameters(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetParameters and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetGroupsAsync(RequestContext)">
+    <member name="GetGroupsAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetGroupsAsync and parse the result.
 <code><![CDATA[
@@ -44,7 +44,7 @@ await foreach (var data in client.GetGroupsAsync())
 ]]></code>
 </example>
     </member>
-    <member name="GetGroups(RequestContext)">
+    <member name="GetGroups(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetGroups and parse the result.
 <code><![CDATA[
@@ -59,7 +59,7 @@ foreach (var data in client.GetGroups())
 ]]></code>
 </example>
     </member>
-    <member name="GetAllItemsAsync(RequestContext)">
+    <member name="GetAllItemsAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetAllItemsAsync and parse the result.
 <code><![CDATA[
@@ -74,7 +74,7 @@ await foreach (var data in client.GetAllItemsAsync())
 ]]></code>
 </example>
     </member>
-    <member name="GetAllItems(RequestContext)">
+    <member name="GetAllItems(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetAllItems and parse the result.
 <code><![CDATA[

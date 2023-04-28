@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetAllAsync(RequestContext)">
+    <member name="GetAllAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetAllAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -30,7 +30,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetAll(RequestContext)">
+    <member name="GetAll(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetAll with required parameters and parse the result.
 <code><![CDATA[
@@ -59,7 +59,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetDefaultAsync(RequestContext)">
+    <member name="GetDefaultAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDefaultAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -88,7 +88,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetDefault(RequestContext)">
+    <member name="GetDefault(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDefault with required parameters and parse the result.
 <code><![CDATA[
@@ -117,7 +117,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAllAsync(RequestContent,RequestContext)">
+    <member name="PutAllAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAllAsync.
 <code><![CDATA[
@@ -161,7 +161,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAll(RequestContent,RequestContext)">
+    <member name="PutAll(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAll.
 <code><![CDATA[
@@ -205,7 +205,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutDefaultAsync(RequestContent,RequestContext)">
+    <member name="PutDefaultAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDefaultAsync.
 <code><![CDATA[
@@ -249,7 +249,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutDefault(RequestContent,RequestContext)">
+    <member name="PutDefault(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutDefault.
 <code><![CDATA[

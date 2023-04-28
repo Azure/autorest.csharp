@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetCollectionsModelAsync(RequestContext)">
+    <member name="GetCollectionsModelAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetCollectionsModelAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -30,7 +30,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetCollectionsModel(RequestContext)">
+    <member name="GetCollectionsModel(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetCollectionsModel with required parameters and parse the result.
 <code><![CDATA[
@@ -59,7 +59,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -94,7 +94,7 @@ Schema for <c>CollectionsModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

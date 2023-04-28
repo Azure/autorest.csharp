@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="SpreadAsRequestBodyAsync(RequestContent,RequestContext)">
+    <member name="SpreadAsRequestBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call SpreadAsRequestBodyAsync with required request content.
 <code><![CDATA[
@@ -28,7 +28,7 @@ Schema for <c>BodyParameter</c>:
 
 </remarks>
     </member>
-    <member name="SpreadAsRequestBody(RequestContent,RequestContext)">
+    <member name="SpreadAsRequestBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call SpreadAsRequestBody with required request content.
 <code><![CDATA[

@@ -59,11 +59,15 @@ namespace Authentication.ApiKey
             _apiVersion = options.Version;
         }
 
-        /// <summary> Check whether client is authenticated. </summary>
+        /// <summary>
+        /// [Protocol Method]Check whether client is authenticated
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='ValidAsync(RequestContext)']/*" />
+        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='ValidAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Valid");
@@ -80,11 +84,15 @@ namespace Authentication.ApiKey
             }
         }
 
-        /// <summary> Check whether client is authenticated. </summary>
+        /// <summary>
+        /// [Protocol Method]Check whether client is authenticated
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='Valid(RequestContext)']/*" />
+        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='Valid(global::Azure.RequestContext)']/*" />
         public virtual Response Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Valid");
@@ -101,11 +109,15 @@ namespace Authentication.ApiKey
             }
         }
 
-        /// <summary> Check whether client is authenticated. </summary>
+        /// <summary>
+        /// [Protocol Method]Check whether client is authenticated.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='InvalidAsync(RequestContext)']/*" />
+        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='InvalidAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> InvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Invalid");
@@ -122,11 +134,15 @@ namespace Authentication.ApiKey
             }
         }
 
-        /// <summary> Check whether client is authenticated. </summary>
+        /// <summary>
+        /// [Protocol Method]Check whether client is authenticated.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='Invalid(RequestContext)']/*" />
+        /// <include file="Docs/ApiKeyClient.xml" path="doc/members/member[@name='Invalid(global::Azure.RequestContext)']/*" />
         public virtual Response Invalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ApiKeyClient.Invalid");

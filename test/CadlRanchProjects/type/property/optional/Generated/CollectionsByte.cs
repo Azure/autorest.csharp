@@ -65,11 +65,20 @@ namespace _Type.Property.Optional
             return Response.FromValue(CollectionsByteProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get models that will return all properties in the model. </summary>
+        /// <summary>
+        /// [Protocol Method]Get models that will return all properties in the model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetAll(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
+        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetAllAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetAllAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("CollectionsByte.GetAll");
@@ -86,11 +95,20 @@ namespace _Type.Property.Optional
             }
         }
 
-        /// <summary> Get models that will return all properties in the model. </summary>
+        /// <summary>
+        /// [Protocol Method]Get models that will return all properties in the model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetAll(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
+        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetAll(global::Azure.RequestContext)']/*" />
         public virtual Response GetAll(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("CollectionsByte.GetAll");
@@ -125,11 +143,20 @@ namespace _Type.Property.Optional
             return Response.FromValue(CollectionsByteProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get models that will return the default object. </summary>
+        /// <summary>
+        /// [Protocol Method]Get models that will return the default object
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetDefault(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetDefaultAsync(RequestContext)']/*" />
+        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetDefaultAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("CollectionsByte.GetDefault");
@@ -146,11 +173,20 @@ namespace _Type.Property.Optional
             }
         }
 
-        /// <summary> Get models that will return the default object. </summary>
+        /// <summary>
+        /// [Protocol Method]Get models that will return the default object
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetDefault(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetDefault(RequestContext)']/*" />
+        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='GetDefault(global::Azure.RequestContext)']/*" />
         public virtual Response GetDefault(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("CollectionsByte.GetDefault");
@@ -193,13 +229,22 @@ namespace _Type.Property.Optional
             return response;
         }
 
-        /// <summary> Put a body with all properties present. </summary>
+        /// <summary>
+        /// [Protocol Method]Put a body with all properties present.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutAll(CollectionsByteProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutAllAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutAllAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -218,13 +263,22 @@ namespace _Type.Property.Optional
             }
         }
 
-        /// <summary> Put a body with all properties present. </summary>
+        /// <summary>
+        /// [Protocol Method]Put a body with all properties present.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutAll(CollectionsByteProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutAll(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutAll(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -269,13 +323,22 @@ namespace _Type.Property.Optional
             return response;
         }
 
-        /// <summary> Put a body with default properties. </summary>
+        /// <summary>
+        /// [Protocol Method]Put a body with default properties.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutDefault(CollectionsByteProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutDefaultAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutDefaultAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutDefaultAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -294,13 +357,22 @@ namespace _Type.Property.Optional
             }
         }
 
-        /// <summary> Put a body with default properties. </summary>
+        /// <summary>
+        /// [Protocol Method]Put a body with default properties.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutDefault(CollectionsByteProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutDefault(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/CollectionsByte.xml" path="doc/members/member[@name='PutDefault(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutDefault(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetDictionaryStringAsync(RequestContext)">
+    <member name="GetDictionaryStringAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryStringAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -26,7 +26,7 @@ Schema for <c>DictionaryStringProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetDictionaryString(RequestContext)">
+    <member name="GetDictionaryString(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDictionaryString with required parameters and parse the result.
 <code><![CDATA[
@@ -51,7 +51,7 @@ Schema for <c>DictionaryStringProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -80,7 +80,7 @@ Schema for <c>DictionaryStringProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

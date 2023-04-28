@@ -57,11 +57,15 @@ namespace httpInfrastructure_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 501 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Head501Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Head501Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Head501Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
@@ -78,11 +82,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 501 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Head501(RequestContext)']/*" />
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Head501(global::Azure.RequestContext)']/*" />
         public virtual Response Head501(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Head501");
@@ -99,11 +107,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 501 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Get501Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Get501Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Get501Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
@@ -120,11 +132,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 501 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 501 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Get501(RequestContext)']/*" />
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Get501(global::Azure.RequestContext)']/*" />
         public virtual Response Get501(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Get501");
@@ -141,12 +157,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 505 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Post505Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Post505Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Post505Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
@@ -163,12 +183,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 505 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Post505(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Post505(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Post505(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Post505");
@@ -185,12 +209,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 505 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Delete505Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Delete505Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Delete505Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");
@@ -207,12 +235,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 505 status code - should be represented in the client as an error. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 505 status code - should be represented in the client as an error
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Delete505(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpServerFailureClient.xml" path="doc/members/member[@name='Delete505(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Delete505(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpServerFailureClient.Delete505");

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="PostValidAsync(RequestContent,RequestContext)">
+    <member name="PostValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PostValidAsync with required request content.
 <code><![CDATA[
@@ -32,7 +32,7 @@ Schema for <c>Siamese</c>:
 
 </remarks>
     </member>
-    <member name="PostValid(RequestContent,RequestContext)">
+    <member name="PostValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PostValid with required request content.
 <code><![CDATA[
@@ -63,7 +63,7 @@ Schema for <c>Siamese</c>:
 
 </remarks>
     </member>
-    <member name="GetValidAsync(RequestContext)">
+    <member name="GetValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetValidAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -92,7 +92,7 @@ Schema for <c>Siamese</c>:
 
 </remarks>
     </member>
-    <member name="GetValid(RequestContext)">
+    <member name="GetValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetValid with required parameters and parse the result.
 <code><![CDATA[
@@ -121,7 +121,7 @@ Schema for <c>Siamese</c>:
 
 </remarks>
     </member>
-    <member name="PutValidAsync(RequestContent,RequestContext)">
+    <member name="PutValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutValidAsync with required request content and parse the result.
 <code><![CDATA[
@@ -166,7 +166,7 @@ Schema for <c>Siamese</c>:
 
 </remarks>
     </member>
-    <member name="PutValid(RequestContent,RequestContext)">
+    <member name="PutValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutValid with required request content and parse the result.
 <code><![CDATA[
@@ -211,7 +211,7 @@ Schema for <c>Siamese</c>:
 
 </remarks>
     </member>
-    <member name="GetModelAsync(RequestContext)">
+    <member name="GetModelAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetModelAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -236,7 +236,7 @@ Schema for <c>Fish</c>:
 
 </remarks>
     </member>
-    <member name="GetModel(RequestContext)">
+    <member name="GetModel(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetModel with required parameters and parse the result.
 <code><![CDATA[
@@ -261,7 +261,7 @@ Schema for <c>Fish</c>:
 
 </remarks>
     </member>
-    <member name="PutModelAsync(RequestContent,RequestContext)">
+    <member name="PutModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutModelAsync with required request content.
 <code><![CDATA[
@@ -288,7 +288,7 @@ Schema for <c>Fish</c>:
 
 </remarks>
     </member>
-    <member name="PutModel(RequestContent,RequestContext)">
+    <member name="PutModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutModel with required request content.
 <code><![CDATA[
@@ -315,7 +315,7 @@ Schema for <c>Fish</c>:
 
 </remarks>
     </member>
-    <member name="GetRecursiveModelAsync(RequestContext)">
+    <member name="GetRecursiveModelAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetRecursiveModelAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -340,7 +340,7 @@ Schema for <c>Fish</c>:
 
 </remarks>
     </member>
-    <member name="GetRecursiveModel(RequestContext)">
+    <member name="GetRecursiveModel(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetRecursiveModel with required parameters and parse the result.
 <code><![CDATA[
@@ -365,7 +365,7 @@ Schema for <c>Fish</c>:
 
 </remarks>
     </member>
-    <member name="PutRecursiveModelAsync(RequestContent,RequestContext)">
+    <member name="PutRecursiveModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutRecursiveModelAsync with required request content.
 <code><![CDATA[
@@ -392,7 +392,7 @@ Schema for <c>Fish</c>:
 
 </remarks>
     </member>
-    <member name="PutRecursiveModel(RequestContent,RequestContext)">
+    <member name="PutRecursiveModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutRecursiveModel with required request content.
 <code><![CDATA[
@@ -419,7 +419,7 @@ Schema for <c>Fish</c>:
 
 </remarks>
     </member>
-    <member name="GetMissingDiscriminatorAsync(RequestContext)">
+    <member name="GetMissingDiscriminatorAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetMissingDiscriminatorAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -444,7 +444,7 @@ Schema for <c>Fish</c>:
 
 </remarks>
     </member>
-    <member name="GetMissingDiscriminator(RequestContext)">
+    <member name="GetMissingDiscriminator(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetMissingDiscriminator with required parameters and parse the result.
 <code><![CDATA[
@@ -469,7 +469,7 @@ Schema for <c>Fish</c>:
 
 </remarks>
     </member>
-    <member name="GetWrongDiscriminatorAsync(RequestContext)">
+    <member name="GetWrongDiscriminatorAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetWrongDiscriminatorAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -494,7 +494,7 @@ Schema for <c>Fish</c>:
 
 </remarks>
     </member>
-    <member name="GetWrongDiscriminator(RequestContext)">
+    <member name="GetWrongDiscriminator(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetWrongDiscriminator with required parameters and parse the result.
 <code><![CDATA[

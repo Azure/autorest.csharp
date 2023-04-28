@@ -65,11 +65,20 @@ namespace _Type.Property.Optional
             return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get models that will return all properties in the model. </summary>
+        /// <summary>
+        /// [Protocol Method]Get models that will return all properties in the model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetAll(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetAllAsync(RequestContext)']/*" />
+        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetAllAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetAllAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetAll");
@@ -86,11 +95,20 @@ namespace _Type.Property.Optional
             }
         }
 
-        /// <summary> Get models that will return all properties in the model. </summary>
+        /// <summary>
+        /// [Protocol Method]Get models that will return all properties in the model
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetAll(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetAll(RequestContext)']/*" />
+        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetAll(global::Azure.RequestContext)']/*" />
         public virtual Response GetAll(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetAll");
@@ -125,11 +143,20 @@ namespace _Type.Property.Optional
             return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
         }
 
-        /// <summary> Get models that will return only the required properties. </summary>
+        /// <summary>
+        /// [Protocol Method]Get models that will return only the required properties
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetRequiredOnly(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetRequiredOnlyAsync(RequestContext)']/*" />
+        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetRequiredOnlyAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetRequiredOnlyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetRequiredOnly");
@@ -146,11 +173,20 @@ namespace _Type.Property.Optional
             }
         }
 
-        /// <summary> Get models that will return only the required properties. </summary>
+        /// <summary>
+        /// [Protocol Method]Get models that will return only the required properties
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetRequiredOnly(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetRequiredOnly(RequestContext)']/*" />
+        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='GetRequiredOnly(global::Azure.RequestContext)']/*" />
         public virtual Response GetRequiredOnly(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RequiredAndOptional.GetRequiredOnly");
@@ -193,13 +229,22 @@ namespace _Type.Property.Optional
             return response;
         }
 
-        /// <summary> Put a body with all properties present. </summary>
+        /// <summary>
+        /// [Protocol Method]Put a body with all properties present.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutAll(RequiredAndOptionalProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAllAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAllAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutAllAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -218,13 +263,22 @@ namespace _Type.Property.Optional
             }
         }
 
-        /// <summary> Put a body with all properties present. </summary>
+        /// <summary>
+        /// [Protocol Method]Put a body with all properties present.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutAll(RequiredAndOptionalProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAll(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutAll(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutAll(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -269,13 +323,22 @@ namespace _Type.Property.Optional
             return response;
         }
 
-        /// <summary> Put a body with only required properties. </summary>
+        /// <summary>
+        /// [Protocol Method]Put a body with only required properties.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutRequiredOnly(RequiredAndOptionalProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnlyAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnlyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutRequiredOnlyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -294,13 +357,22 @@ namespace _Type.Property.Optional
             }
         }
 
-        /// <summary> Put a body with only required properties. </summary>
+        /// <summary>
+        /// [Protocol Method]Put a body with only required properties.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="PutRequiredOnly(RequiredAndOptionalProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnly(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/RequiredAndOptional.xml" path="doc/members/member[@name='PutRequiredOnly(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutRequiredOnly(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

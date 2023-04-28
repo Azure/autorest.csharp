@@ -62,11 +62,20 @@ namespace ConvenienceInCadl
             return Response.FromValue(Model.FromResponse(response), response);
         }
 
-        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UpdateConvenience(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenienceAsync(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenienceAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> UpdateConvenienceAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.UpdateConvenience");
@@ -83,11 +92,20 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UpdateConvenience(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenience(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenience(global::Azure.RequestContext)']/*" />
         public virtual Response UpdateConvenience(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.UpdateConvenience");
@@ -132,14 +150,23 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceOptionalBeforeRequired(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequiredAsync(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalBeforeRequiredAsync(RequestContent content, int? optional = null, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -158,14 +185,23 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]No initial operation methods. In the updated version, we add the protocol method and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceOptionalBeforeRequired(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequired(RequestContent,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequired(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)']/*" />
         public virtual Response ConvenienceOptionalBeforeRequired(RequestContent content, int? optional = null, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -222,11 +258,20 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolValue(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolAsync(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ProtocolAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.Protocol");
@@ -243,11 +288,20 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolValue(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='Protocol(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='Protocol(global::Azure.RequestContext)']/*" />
         public virtual Response Protocol(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.Protocol");
@@ -302,11 +356,20 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with optional RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with optional RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceWithOptionalValue(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptionalAsync(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptionalAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceWithOptionalAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithOptional");
@@ -323,11 +386,20 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with optional RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with optional RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceWithOptionalValue(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptional(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptional(global::Azure.RequestContext)']/*" />
         public virtual Response ConvenienceWithOptional(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithOptional");
@@ -362,11 +434,20 @@ namespace ConvenienceInCadl
             return Response.FromValue(Model.FromResponse(response), response);
         }
 
-        /// <summary> Operation has protocol method with required RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with required RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceWithRequired(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequiredAsync(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequiredAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceWithRequiredAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithRequired");
@@ -383,11 +464,20 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with required RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with required RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceWithRequired(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequired(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequired(global::Azure.RequestContext)']/*" />
         public virtual Response ConvenienceWithRequired(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithRequired");
@@ -404,11 +494,15 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method marked with convenience method, but the convenience method should not be generated. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method marked with convenience method, but the convenience method should not be generated.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceShouldNotGenerateAsync(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceShouldNotGenerateAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceShouldNotGenerateAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceShouldNotGenerate");
@@ -425,11 +519,15 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method marked with convenience method, but the convenience method should not be generated. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method marked with convenience method, but the convenience method should not be generated.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceShouldNotGenerate(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceShouldNotGenerate(global::Azure.RequestContext)']/*" />
         public virtual Response ConvenienceShouldNotGenerate(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceShouldNotGenerate");
@@ -446,11 +544,15 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolShouldNotGenerateConvenienceAsync(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolShouldNotGenerateConvenienceAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ProtocolShouldNotGenerateConvenienceAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolShouldNotGenerateConvenience");
@@ -467,11 +569,15 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolShouldNotGenerateConvenience(RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolShouldNotGenerateConvenience(global::Azure.RequestContext)']/*" />
         public virtual Response ProtocolShouldNotGenerateConvenience(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolShouldNotGenerateConvenience");
@@ -528,12 +634,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolOptionalQueryValue(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQueryAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQueryAsync(int?,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ProtocolOptionalQueryAsync(int? optional = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalQuery");
@@ -550,12 +665,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method with optional query parameter. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolOptionalQueryValue(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQuery(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQuery(int?,global::Azure.RequestContext)']/*" />
         public virtual Response ProtocolOptionalQuery(int? optional = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalQuery");
@@ -612,12 +736,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolRequiredQueryValue(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="required"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQueryAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQueryAsync(int,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ProtocolRequiredQueryAsync(int required, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolRequiredQuery");
@@ -634,12 +767,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method with required query parameter. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolRequiredQueryValue(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="required"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQuery(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQuery(int,global::Azure.RequestContext)']/*" />
         public virtual Response ProtocolRequiredQuery(int required, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolRequiredQuery");
@@ -696,12 +838,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolOptionalModelValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ProtocolOptionalModelAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalModel");
@@ -718,12 +869,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolOptionalModelValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModel(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response ProtocolOptionalModel(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalModel");
@@ -766,13 +926,22 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolRequiredModel(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModelAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ProtocolRequiredModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -791,13 +960,22 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation only has protocol method with required model parameter. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolRequiredModel(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModel(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response ProtocolRequiredModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -856,12 +1034,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with optional query parameter and optional RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceOptionalQueryWithOptionalValue(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptionalAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptionalAsync(int?,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalQueryWithOptionalAsync(int? optional = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalQueryWithOptional");
@@ -878,12 +1065,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with optional query parameter and optional RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with optional query parameter and optional RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceOptionalQueryWithOptionalValue(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptional(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptional(int?,global::Azure.RequestContext)']/*" />
         public virtual Response ConvenienceOptionalQueryWithOptional(int? optional = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalQueryWithOptional");
@@ -940,12 +1136,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with required query parameter and optional RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with required query parameter and optional RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceRequiredQueryWithOptionalValue(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="required"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptionalAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptionalAsync(int,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceRequiredQueryWithOptionalAsync(int required, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredQueryWithOptional");
@@ -962,12 +1167,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with required query parameter and optional RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with required query parameter and optional RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceRequiredQueryWithOptionalValue(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="required"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptional(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptional(int,global::Azure.RequestContext)']/*" />
         public virtual Response ConvenienceRequiredQueryWithOptional(int required, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredQueryWithOptional");
@@ -1004,12 +1218,21 @@ namespace ConvenienceInCadl
             return Response.FromValue(Model.FromResponse(response), response);
         }
 
-        /// <summary> Operation has protocol method with optional query parameter and required RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with optional query parameter and required RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceOptionalQueryWithRequired(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequiredAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequiredAsync(int?,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalQueryWithRequiredAsync(int? optional, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalQueryWithRequired");
@@ -1026,12 +1249,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with optional query parameter and required RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with optional query parameter and required RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceOptionalQueryWithRequired(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequired(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequired(int?,global::Azure.RequestContext)']/*" />
         public virtual Response ConvenienceOptionalQueryWithRequired(int? optional, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalQueryWithRequired");
@@ -1068,12 +1300,21 @@ namespace ConvenienceInCadl
             return Response.FromValue(Model.FromResponse(response), response);
         }
 
-        /// <summary> Operation has protocol method with required query parameter and required RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with required query parameter and required RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceRequiredQueryWithRequired(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="required"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequiredAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequiredAsync(int,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceRequiredQueryWithRequiredAsync(int required, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredQueryWithRequired");
@@ -1090,12 +1331,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with required query parameter and required RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with required query parameter and required RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceRequiredQueryWithRequired(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="required"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequired(Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequired(int,global::Azure.RequestContext)']/*" />
         public virtual Response ConvenienceRequiredQueryWithRequired(int required, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredQueryWithRequired");
@@ -1152,12 +1402,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with optional body parameter and optional RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalModelWithOptionalAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithOptional");
@@ -1174,12 +1433,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with optional body parameter and optional RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with optional body parameter and optional RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptional(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptional(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response ConvenienceOptionalModelWithOptional(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithOptional");
@@ -1222,13 +1490,22 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> Operation has protocol method with required body parameter and optional RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with required body parameter and optional RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceRequiredModelWithOptional(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptionalAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptionalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceRequiredModelWithOptionalAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1247,13 +1524,22 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with required body parameter and optional RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with required body parameter and optional RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceRequiredModelWithOptional(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptional(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptional(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response ConvenienceRequiredModelWithOptional(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1292,12 +1578,21 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> Operation has protocol method with optional body parameter and required RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with optional body parameter and required RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceOptionalModelWithRequired(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequiredAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequiredAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalModelWithRequiredAsync(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithRequired");
@@ -1314,12 +1609,21 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Operation has protocol method with optional body parameter and required RequestContext and convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has protocol method with optional body parameter and required RequestContext and convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ConvenienceOptionalModelWithRequired(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequired(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequired(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response ConvenienceOptionalModelWithRequired(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithRequired");
@@ -1364,14 +1668,23 @@ namespace ConvenienceInCadl
             return response;
         }
 
-        /// <summary> Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolOptionalBeforeRequired(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequiredAsync(RequestContent,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequiredAsync(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ProtocolOptionalBeforeRequiredAsync(RequestContent content, int? optional = null, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1390,14 +1703,23 @@ namespace ConvenienceInCadl
             }
         }
 
-        /// <summary> Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method. </summary>
+        /// <summary>
+        /// [Protocol Method]Initial operation has protocol method with optioanl parameter before required parameter. In the updated version, we add the convenience method.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProtocolOptionalBeforeRequired(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="optional"> The Int32 to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequired(RequestContent,Int32,RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequired(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)']/*" />
         public virtual Response ProtocolOptionalBeforeRequired(RequestContent content, int? optional = null, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

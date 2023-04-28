@@ -57,11 +57,15 @@ namespace ResourceClients_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Method that belongs to the top level service. </summary>
+        /// <summary>
+        /// [Protocol Method]Method that belongs to the top level service
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetParametersAsync(RequestContext)']/*" />
+        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetParametersAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetParametersAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
@@ -78,11 +82,15 @@ namespace ResourceClients_LowLevel
             }
         }
 
-        /// <summary> Method that belongs to the top level service. </summary>
+        /// <summary>
+        /// [Protocol Method]Method that belongs to the top level service
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetParameters(RequestContext)']/*" />
+        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetParameters(global::Azure.RequestContext)']/*" />
         public virtual Response GetParameters(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceServiceClient.GetParameters");
@@ -99,11 +107,15 @@ namespace ResourceClients_LowLevel
             }
         }
 
-        /// <summary> Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client. </summary>
+        /// <summary>
+        /// [Protocol Method]Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetGroupsAsync(RequestContext)']/*" />
+        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetGroupsAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetGroupsAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetGroupsRequest(context);
@@ -111,11 +123,15 @@ namespace ResourceClients_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
         }
 
-        /// <summary> Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client. </summary>
+        /// <summary>
+        /// [Protocol Method]Get all groups. It is defined in `Group` subclient, but must be promoted to the `Service` client.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetGroups(RequestContext)']/*" />
+        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetGroups(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetGroups(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetGroupsRequest(context);
@@ -123,11 +139,15 @@ namespace ResourceClients_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetGroups", "value", "nextLink", context);
         }
 
-        /// <summary> Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
+        /// <summary>
+        /// [Protocol Method]Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetAllItemsAsync(RequestContext)']/*" />
+        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetAllItemsAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetAllItemsAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllItemsRequest(context);
@@ -135,11 +155,15 @@ namespace ResourceClients_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceServiceClient.GetAllItems", "value", "nextLink", context);
         }
 
-        /// <summary> Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters. </summary>
+        /// <summary>
+        /// [Protocol Method]Get all items. It is defined in `Item` subclient, but must be promoted to the `Service` client, because it has neither `groupId` nor `itemId` parameters.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetAllItems(RequestContext)']/*" />
+        /// <include file="Docs/ResourceServiceClient.xml" path="doc/members/member[@name='GetAllItems(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetAllItems(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetAllItemsRequest(context);

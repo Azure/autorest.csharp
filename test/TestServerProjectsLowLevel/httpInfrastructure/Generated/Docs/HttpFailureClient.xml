@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetEmptyErrorAsync(RequestContext)">
+    <member name="GetEmptyErrorAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetEmptyErrorAsync and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetEmptyError(RequestContext)">
+    <member name="GetEmptyError(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetEmptyError and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetNoModelErrorAsync(RequestContext)">
+    <member name="GetNoModelErrorAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetNoModelErrorAsync and parse the result.
 <code><![CDATA[
@@ -43,7 +43,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetNoModelError(RequestContext)">
+    <member name="GetNoModelError(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetNoModelError and parse the result.
 <code><![CDATA[
@@ -57,7 +57,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetNoModelEmptyAsync(RequestContext)">
+    <member name="GetNoModelEmptyAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetNoModelEmptyAsync and parse the result.
 <code><![CDATA[
@@ -71,7 +71,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetNoModelEmpty(RequestContext)">
+    <member name="GetNoModelEmpty(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetNoModelEmpty and parse the result.
 <code><![CDATA[

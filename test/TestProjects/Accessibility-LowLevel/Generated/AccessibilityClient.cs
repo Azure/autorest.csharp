@@ -57,11 +57,16 @@ namespace Accessibility_LowLevel
             _endpoint = endpoint;
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
@@ -78,11 +83,16 @@ namespace Accessibility_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='Operation(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='Operation(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Operation(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.Operation");
@@ -99,11 +109,16 @@ namespace Accessibility_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationInternalAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationInternalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         internal virtual async Task<Response> OperationInternalAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");
@@ -120,11 +135,16 @@ namespace Accessibility_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationInternal(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/AccessibilityClient.xml" path="doc/members/member[@name='OperationInternal(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         internal virtual Response OperationInternal(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("AccessibilityClient.OperationInternal");

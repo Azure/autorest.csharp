@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetDatetimeValueAsync(RequestContext)">
+    <member name="GetDatetimeValueAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDatetimeValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -14,7 +14,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetDatetimeValue(RequestContext)">
+    <member name="GetDatetimeValue(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetDatetimeValue with required parameters and parse the result.
 <code><![CDATA[
@@ -27,7 +27,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -42,7 +42,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

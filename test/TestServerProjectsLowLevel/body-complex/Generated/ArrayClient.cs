@@ -57,11 +57,15 @@ namespace body_complex_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Get complex types with array property. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types with array property
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetValidAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetValid");
@@ -78,11 +82,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex types with array property. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types with array property
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetValid(global::Azure.RequestContext)']/*" />
         public virtual Response GetValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetValid");
@@ -99,13 +107,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types with array property. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types with array property
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutValidAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -124,13 +136,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types with array property. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types with array property
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutValid(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -149,11 +165,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex types with array property which is empty. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types with array property which is empty
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmptyAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
@@ -170,11 +190,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex types with array property which is empty. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types with array property which is empty
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmpty(global::Azure.RequestContext)']/*" />
         public virtual Response GetEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
@@ -191,13 +215,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types with array property which is empty. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types with array property which is empty
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEmptyAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEmptyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -216,13 +244,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types with array property which is empty. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types with array property which is empty
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEmpty(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEmpty(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -241,11 +273,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types with array property while server doesn&apos;t provide a response payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNotProvidedAsync(RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNotProvidedAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNotProvided");
@@ -262,11 +298,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex types with array property while server doesn&apos;t provide a response payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types with array property while server doesn&apos;t provide a response payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNotProvided(RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNotProvided(global::Azure.RequestContext)']/*" />
         public virtual Response GetNotProvided(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNotProvided");

@@ -57,11 +57,15 @@ namespace body_complex_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Get complex types that are polymorphic. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types that are polymorphic
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetValidAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetValid");
@@ -78,11 +82,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex types that are polymorphic. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types that are polymorphic
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetValid(global::Azure.RequestContext)']/*" />
         public virtual Response GetValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetValid");
@@ -99,13 +107,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types that are polymorphic. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types that are polymorphic
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -124,13 +136,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types that are polymorphic. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types that are polymorphic
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValid(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -149,11 +165,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types that are polymorphic, JSON key contains a dot
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetDotSyntaxAsync(RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetDotSyntaxAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetDotSyntaxAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
@@ -170,11 +190,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex types that are polymorphic, JSON key contains a dot. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types that are polymorphic, JSON key contains a dot
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetDotSyntax(RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetDotSyntax(global::Azure.RequestContext)']/*" />
         public virtual Response GetDotSyntax(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetDotSyntax");
@@ -191,11 +215,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithDiscriminatorAsync(RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithDiscriminatorAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetComposedWithDiscriminatorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
@@ -212,11 +240,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithDiscriminator(RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithDiscriminator(global::Azure.RequestContext)']/*" />
         public virtual Response GetComposedWithDiscriminator(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithDiscriminator");
@@ -233,11 +265,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithoutDiscriminatorAsync(RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithoutDiscriminatorAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetComposedWithoutDiscriminatorAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
@@ -254,11 +290,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithoutDiscriminator(RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComposedWithoutDiscriminator(global::Azure.RequestContext)']/*" />
         public virtual Response GetComposedWithoutDiscriminator(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComposedWithoutDiscriminator");
@@ -275,11 +315,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComplicatedAsync(RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComplicatedAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetComplicatedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");
@@ -296,11 +340,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComplicated(RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='GetComplicated(global::Azure.RequestContext)']/*" />
         public virtual Response GetComplicated(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PolymorphismClient.GetComplicated");
@@ -317,13 +365,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutComplicatedAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutComplicatedAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutComplicatedAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -342,13 +394,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutComplicated(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutComplicated(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutComplicated(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -367,13 +423,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types that are polymorphic, omitting the discriminator
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutMissingDiscriminatorAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutMissingDiscriminatorAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutMissingDiscriminatorAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -392,13 +452,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types that are polymorphic, omitting the discriminator. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types that are polymorphic, omitting the discriminator
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutMissingDiscriminator(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutMissingDiscriminator(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutMissingDiscriminator(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -417,13 +481,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidMissingRequiredAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidMissingRequiredAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutValidMissingRequiredAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -442,13 +510,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client. </summary>
+        /// <summary>
+        /// [Protocol Method]Put complex types that are polymorphic, attempting to omit required &apos;birthday&apos; field - the request should not be allowed from the client
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidMissingRequired(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/PolymorphismClient.xml" path="doc/members/member[@name='PutValidMissingRequired(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutValidMissingRequired(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

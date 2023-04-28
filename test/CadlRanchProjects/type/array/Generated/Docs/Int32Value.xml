@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetInt32ValueAsync(RequestContext)">
+    <member name="GetInt32ValueAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetInt32ValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -14,7 +14,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetInt32Value(RequestContext)">
+    <member name="GetInt32Value(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetInt32Value with required parameters and parse the result.
 <code><![CDATA[
@@ -27,7 +27,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -42,7 +42,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

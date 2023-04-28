@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="CreateProjectAsync(WaitUntil,RequestContent,RequestContext)">
+    <member name="CreateProjectAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateProjectAsync with required parameters.
 <code><![CDATA[
@@ -44,7 +44,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="CreateProject(WaitUntil,RequestContent,RequestContext)">
+    <member name="CreateProject(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateProject with required parameters.
 <code><![CDATA[
@@ -87,7 +87,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="UpdateProjectAsync(WaitUntil,String,RequestContent,RequestContext)">
+    <member name="UpdateProjectAsync(global::Azure.WaitUntil,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call UpdateProjectAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -146,7 +146,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="UpdateProject(WaitUntil,String,RequestContent,RequestContext)">
+    <member name="UpdateProject(global::Azure.WaitUntil,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call UpdateProject with required parameters and parse the result.
 <code><![CDATA[
@@ -205,7 +205,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="CreateThingAsync(WaitUntil,RequestContent,RequestContext)">
+    <member name="CreateThingAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateThingAsync with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -244,7 +244,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="CreateThing(WaitUntil,RequestContent,RequestContext)">
+    <member name="CreateThing(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call CreateThing with required parameters and request content and parse the result.
 <code><![CDATA[

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="AnalyzeBodyAsync(RequestContent,ContentType,RequestContext)">
+    <member name="AnalyzeBodyAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
 <example>
 This sample shows how to call AnalyzeBodyAsync with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -17,7 +17,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="AnalyzeBody(RequestContent,ContentType,RequestContext)">
+    <member name="AnalyzeBody(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
 <example>
 This sample shows how to call AnalyzeBody with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -33,7 +33,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="AnalyzeBodyNoAcceptHeaderAsync(RequestContent,ContentType,RequestContext)">
+    <member name="AnalyzeBodyNoAcceptHeaderAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
 <example>
 This sample shows how to call AnalyzeBodyNoAcceptHeaderAsync with required parameters and request content.
 <code><![CDATA[
@@ -47,7 +47,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="AnalyzeBodyNoAcceptHeader(RequestContent,ContentType,RequestContext)">
+    <member name="AnalyzeBodyNoAcceptHeader(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
 <example>
 This sample shows how to call AnalyzeBodyNoAcceptHeader with required parameters and request content.
 <code><![CDATA[
@@ -61,7 +61,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ContentTypeWithEncodingAsync(RequestContent,RequestContext)">
+    <member name="ContentTypeWithEncodingAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ContentTypeWithEncodingAsync with required request content and parse the result.
 <code><![CDATA[
@@ -77,7 +77,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="ContentTypeWithEncoding(RequestContent,RequestContext)">
+    <member name="ContentTypeWithEncoding(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call ContentTypeWithEncoding with required request content and parse the result.
 <code><![CDATA[
@@ -93,7 +93,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="BinaryBodyWithTwoContentTypesAsync(RequestContent,ContentType,RequestContext)">
+    <member name="BinaryBodyWithTwoContentTypesAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
 <example>
 This sample shows how to call BinaryBodyWithTwoContentTypesAsync with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -109,7 +109,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="BinaryBodyWithTwoContentTypes(RequestContent,ContentType,RequestContext)">
+    <member name="BinaryBodyWithTwoContentTypes(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
 <example>
 This sample shows how to call BinaryBodyWithTwoContentTypes with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -125,7 +125,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="BinaryBodyWithThreeContentTypesAsync(RequestContent,ContentType,RequestContext)">
+    <member name="BinaryBodyWithThreeContentTypesAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
 <example>
 This sample shows how to call BinaryBodyWithThreeContentTypesAsync with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -141,7 +141,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="BinaryBodyWithThreeContentTypes(RequestContent,ContentType,RequestContext)">
+    <member name="BinaryBodyWithThreeContentTypes(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
 <example>
 This sample shows how to call BinaryBodyWithThreeContentTypes with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -157,7 +157,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutTextAndJsonBodyAsync(RequestContent,ContentType,RequestContext)">
+    <member name="PutTextAndJsonBodyAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutTextAndJsonBodyAsync with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -173,7 +173,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutTextAndJsonBody(RequestContent,ContentType,RequestContext)">
+    <member name="PutTextAndJsonBody(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutTextAndJsonBody with required parameters and request content and parse the result.
 <code><![CDATA[

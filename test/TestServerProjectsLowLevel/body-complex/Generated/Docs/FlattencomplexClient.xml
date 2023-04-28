@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetValidAsync(RequestContext)">
+    <member name="GetValidAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetValidAsync and parse the result.
 <code><![CDATA[
@@ -35,7 +35,7 @@ Response Body:
 
 </remarks>
     </member>
-    <member name="GetValid(RequestContext)">
+    <member name="GetValid(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetValid and parse the result.
 <code><![CDATA[

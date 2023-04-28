@@ -88,12 +88,17 @@ namespace SecurityDefinition_LowLevel
             _apiVersion = options.Version;
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='OperationAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='OperationAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -112,12 +117,17 @@ namespace SecurityDefinition_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='Operation(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='Operation(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Operation(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

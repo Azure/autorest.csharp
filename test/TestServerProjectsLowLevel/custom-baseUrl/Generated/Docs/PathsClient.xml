@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetEmptyAsync(String,RequestContext)">
+    <member name="GetEmptyAsync(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetEmptyAsync with required parameters.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetEmpty(String,RequestContext)">
+    <member name="GetEmpty(string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetEmpty with required parameters.
 <code><![CDATA[

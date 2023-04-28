@@ -54,14 +54,23 @@ namespace MixApiVersion
             _apiVersion = options.Version;
         }
 
-        /// <summary> delete. </summary>
+        /// <summary>
+        /// [Protocol Method]delete.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Delete a pet.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="name"> pet name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='DeleteAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='DeleteAsync(string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> DeleteAsync(string name, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -80,14 +89,23 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary> delete. </summary>
+        /// <summary>
+        /// [Protocol Method]delete.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Delete a pet.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="name"> pet name. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Delete(String,RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Delete(string,global::Azure.RequestContext)']/*" />
         public virtual Response Delete(string name, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -106,12 +124,16 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns a pet. Supports eTags.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='ReadAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='ReadAsync(int,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ReadAsync(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MixApiVersionClient.Read");
@@ -128,12 +150,16 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary> Returns a pet. Supports eTags. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns a pet. Supports eTags.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="petId"> The id of pet. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Read(Int32,RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Read(int,global::Azure.RequestContext)']/*" />
         public virtual Response Read(int petId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MixApiVersionClient.Read");
@@ -150,12 +176,17 @@ namespace MixApiVersion
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='CreateAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='CreateAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> CreateAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -174,12 +205,17 @@ namespace MixApiVersion
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Create(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Create(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Create(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -198,11 +234,20 @@ namespace MixApiVersion
             }
         }
 
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
+        /// <summary>
+        /// [Protocol Method]Gets ledger entries from a collection corresponding to a range.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='GetPetsAsync(RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='GetPetsAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPetsAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPetsRequest(context);
@@ -210,11 +255,20 @@ namespace MixApiVersion
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "MixApiVersionClient.GetPets", "value", "nextLink", context);
         }
 
-        /// <summary> Gets ledger entries from a collection corresponding to a range. </summary>
+        /// <summary>
+        /// [Protocol Method]Gets ledger entries from a collection corresponding to a range.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// A collection id may optionally be specified. Only entries in the specified (or default) collection will be returned.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='GetPets(RequestContext)']/*" />
+        /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='GetPets(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPets(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPetsRequest(context);

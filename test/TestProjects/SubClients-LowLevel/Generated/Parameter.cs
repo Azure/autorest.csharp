@@ -46,13 +46,18 @@ namespace SubClients_LowLevel
             _endpoint = endpoint;
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="subParameter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subParameter"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetSubParameterAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetSubParameterAsync(string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));
@@ -71,13 +76,18 @@ namespace SubClients_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="subParameter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subParameter"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subParameter"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetSubParameter(String,RequestContext)']/*" />
+        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetSubParameter(string,global::Azure.RequestContext)']/*" />
         public virtual Response GetSubParameter(string subParameter, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));

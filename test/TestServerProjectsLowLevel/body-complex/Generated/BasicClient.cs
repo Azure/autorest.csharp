@@ -59,11 +59,15 @@ namespace body_complex_LowLevel
             _apiVersion = options.Version;
         }
 
-        /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetValidAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetValid");
@@ -80,11 +84,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Get complex type {id: 2, name: &apos;abc&apos;, color: &apos;YELLOW&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetValid(global::Azure.RequestContext)']/*" />
         public virtual Response GetValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetValid");
@@ -101,13 +109,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='PutValidAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='PutValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -126,13 +138,17 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}. </summary>
+        /// <summary>
+        /// [Protocol Method]Please put {id: 2, name: &apos;abc&apos;, color: &apos;Magenta&apos;}
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='PutValid(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='PutValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -151,11 +167,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type that is invalid for the local strong type
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetInvalidAsync(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetInvalidAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetInvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetInvalid");
@@ -172,11 +192,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type that is invalid for the local strong type. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type that is invalid for the local strong type
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetInvalid(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetInvalid(global::Azure.RequestContext)']/*" />
         public virtual Response GetInvalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetInvalid");
@@ -193,11 +217,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type that is empty. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type that is empty
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetEmptyAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetEmpty");
@@ -214,11 +242,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type that is empty. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type that is empty
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetEmpty(global::Azure.RequestContext)']/*" />
         public virtual Response GetEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetEmpty");
@@ -235,11 +267,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type whose properties are null. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type whose properties are null
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNullAsync(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNullAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNull");
@@ -256,11 +292,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type whose properties are null. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type whose properties are null
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNull(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNull(global::Azure.RequestContext)']/*" />
         public virtual Response GetNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNull");
@@ -277,11 +317,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type while the server doesn&apos;t provide a response payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNotProvidedAsync(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNotProvidedAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNotProvided");
@@ -298,11 +342,15 @@ namespace body_complex_LowLevel
             }
         }
 
-        /// <summary> Get a basic complex type while the server doesn&apos;t provide a response payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a basic complex type while the server doesn&apos;t provide a response payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNotProvided(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetNotProvided(global::Azure.RequestContext)']/*" />
         public virtual Response GetNotProvided(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetNotProvided");

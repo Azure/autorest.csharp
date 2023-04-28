@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetItemAsync(RequestContext)">
+    <member name="GetItemAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetItemAsync and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetItem(RequestContext)">
+    <member name="GetItem(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetItem and parse the result.
 <code><![CDATA[

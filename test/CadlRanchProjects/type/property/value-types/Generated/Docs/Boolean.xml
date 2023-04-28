@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetBooleanAsync(RequestContext)">
+    <member name="GetBooleanAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBooleanAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -26,7 +26,7 @@ Schema for <c>BooleanProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetBoolean(RequestContext)">
+    <member name="GetBoolean(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetBoolean with required parameters and parse the result.
 <code><![CDATA[
@@ -51,7 +51,7 @@ Schema for <c>BooleanProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -78,7 +78,7 @@ Schema for <c>BooleanProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

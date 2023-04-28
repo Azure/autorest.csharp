@@ -51,11 +51,15 @@ namespace ResourceClients_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Get a group. Method should stay in `Group` subclient. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a group. Method should stay in `Group` subclient.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroupAsync(RequestContext)']/*" />
+        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroupAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetGroupAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
@@ -72,11 +76,15 @@ namespace ResourceClients_LowLevel
             }
         }
 
-        /// <summary> Get a group. Method should stay in `Group` subclient. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a group. Method should stay in `Group` subclient.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroup(RequestContext)']/*" />
+        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroup(global::Azure.RequestContext)']/*" />
         public virtual Response GetGroup(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
@@ -93,11 +101,15 @@ namespace ResourceClients_LowLevel
             }
         }
 
-        /// <summary> Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient. </summary>
+        /// <summary>
+        /// [Protocol Method]Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItemsAsync(RequestContext)']/*" />
+        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItemsAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetItemsAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);
@@ -105,11 +117,15 @@ namespace ResourceClients_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "ResourceGroup.GetItems", "value", "nextLink", context);
         }
 
-        /// <summary> Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient. </summary>
+        /// <summary>
+        /// [Protocol Method]Get items in group. It is defined in `Item` subclient, but must be promoted to the `Group` subclient.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItems(RequestContext)']/*" />
+        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItems(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetItems(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);

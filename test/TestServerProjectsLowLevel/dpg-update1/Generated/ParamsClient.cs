@@ -57,12 +57,16 @@ namespace dpg_update1_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added. </summary>
+        /// <summary>
+        /// [Protocol Method]Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParamsAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParamsAsync(string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> HeadNoParamsAsync(string newParameter = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
@@ -79,12 +83,16 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added. </summary>
+        /// <summary>
+        /// [Protocol Method]Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParams(String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParams(string,global::Azure.RequestContext)']/*" />
         public virtual Response HeadNoParams(string newParameter = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
@@ -102,8 +110,10 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method]Get true Boolean value on path.
         ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
@@ -111,7 +121,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequiredAsync(String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequiredAsync(string,string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetRequiredAsync(string parameter, string newParameter = null, RequestContext context = null)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
@@ -131,8 +141,10 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method]Get true Boolean value on path.
         ///  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
@@ -140,7 +152,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequired(String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequired(string,string,global::Azure.RequestContext)']/*" />
         public virtual Response GetRequired(string parameter, string newParameter = null, RequestContext context = null)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
@@ -159,7 +171,11 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
+        /// <summary>
+        /// [Protocol Method]Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
@@ -167,7 +183,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptionalAsync(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptionalAsync(string,string,string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam = null, string newParameter = null, RequestContext context = null)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
@@ -186,7 +202,11 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added. </summary>
+        /// <summary>
+        /// [Protocol Method]Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
@@ -194,7 +214,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptional(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptional(string,string,string,global::Azure.RequestContext)']/*" />
         public virtual Response PutRequiredOptional(string requiredParam, string optionalParam = null, string newParameter = null, RequestContext context = null)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
@@ -213,14 +233,18 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> POST a JSON or a JPEG. </summary>
+        /// <summary>
+        /// [Protocol Method]POST a JSON or a JPEG
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParametersAsync(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParametersAsync(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PostParametersAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -239,14 +263,18 @@ namespace dpg_update1_LowLevel
             }
         }
 
-        /// <summary> POST a JSON or a JPEG. </summary>
+        /// <summary>
+        /// [Protocol Method]POST a JSON or a JPEG
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParameters(RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParameters(global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual Response PostParameters(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -266,13 +294,15 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Delete something.
+        /// [Protocol Method]Delete something.
         ///  Initially the path exists but there is no delete method. After evolution this is a new method in a known path
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='DeleteParametersAsync(RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='DeleteParametersAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> DeleteParametersAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.DeleteParameters");
@@ -290,13 +320,15 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Delete something.
+        /// [Protocol Method]Delete something.
         ///  Initially the path exists but there is no delete method. After evolution this is a new method in a known path
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='DeleteParameters(RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='DeleteParameters(global::Azure.RequestContext)']/*" />
         public virtual Response DeleteParameters(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.DeleteParameters");
@@ -314,15 +346,17 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method]Get true Boolean value on path.
         ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptionalAsync(String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptionalAsync(string,string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetOptionalAsync(string optionalParam = null, string newParameter = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
@@ -340,15 +374,17 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// Get true Boolean value on path.
+        /// [Protocol Method]Get true Boolean value on path.
         ///  Initially has one optional query parameter. After evolution, a new optional query parameter is added
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
         /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptional(String,String,RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptional(string,string,global::Azure.RequestContext)']/*" />
         public virtual Response GetOptional(string optionalParam = null, string newParameter = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
@@ -366,13 +402,15 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// I&apos;m a new operation.
+        /// [Protocol Method]I&apos;m a new operation.
         ///  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetNewOperationAsync(RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetNewOperationAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetNewOperationAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetNewOperation");
@@ -390,13 +428,15 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// I&apos;m a new operation.
+        /// [Protocol Method]I&apos;m a new operation.
         ///  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
+        /// <list type="bullet">
+        /// </list>
         /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetNewOperation(RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetNewOperation(global::Azure.RequestContext)']/*" />
         public virtual Response GetNewOperation(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetNewOperation");

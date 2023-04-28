@@ -79,7 +79,16 @@ namespace _Specs_.Azure.Core.Traits
             return Response.FromValue(User.FromResponse(response), response);
         }
 
-        /// <summary> Get a resource, sending and receiving headers. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a resource, sending and receiving headers.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SmokeTest(int,string,RequestConditions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="foo"> header in request. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
@@ -87,7 +96,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTestAsync(Int32,String,RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTestAsync(int,string,global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> SmokeTestAsync(int id, string foo, RequestConditions requestConditions, RequestContext context)
         {
             Argument.AssertNotNull(foo, nameof(foo));
@@ -106,7 +115,16 @@ namespace _Specs_.Azure.Core.Traits
             }
         }
 
-        /// <summary> Get a resource, sending and receiving headers. </summary>
+        /// <summary>
+        /// [Protocol Method]Get a resource, sending and receiving headers.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SmokeTest(int,string,RequestConditions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="foo"> header in request. </param>
         /// <param name="requestConditions"> The content to send as the request conditions of the request. </param>
@@ -114,7 +132,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <exception cref="ArgumentNullException"> <paramref name="foo"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTest(Int32,String,RequestConditions,RequestContext)']/*" />
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='SmokeTest(int,string,global::Azure.RequestConditions,global::Azure.RequestContext)']/*" />
         public virtual Response SmokeTest(int id, string foo, RequestConditions requestConditions, RequestContext context)
         {
             Argument.AssertNotNull(foo, nameof(foo));

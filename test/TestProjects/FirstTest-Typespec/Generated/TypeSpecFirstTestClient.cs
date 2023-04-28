@@ -118,14 +118,23 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> top level method. </summary>
+        /// <summary>
+        /// [Protocol Method]top level method
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="TopAction(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> TopActionAsync(string action, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
@@ -144,14 +153,23 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> top level method. </summary>
+        /// <summary>
+        /// [Protocol Method]top level method
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="TopAction(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="action"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="action"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(String,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(string,global::Azure.RequestContext)']/*" />
         public virtual Response TopAction(string action, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
@@ -170,11 +188,15 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> top level method2. </summary>
+        /// <summary>
+        /// [Protocol Method]top level method2
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2Async(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> TopAction2Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction2");
@@ -191,11 +213,15 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> top level method2. </summary>
+        /// <summary>
+        /// [Protocol Method]top level method2
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2(global::Azure.RequestContext)']/*" />
         public virtual Response TopAction2(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction2");
@@ -212,13 +238,17 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> top level patch. </summary>
+        /// <summary>
+        /// [Protocol Method]top level patch
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchActionAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PatchActionAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -237,13 +267,17 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> top level patch. </summary>
+        /// <summary>
+        /// [Protocol Method]top level patch
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchAction(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response PatchAction(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -288,13 +322,22 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary>
+        /// [Protocol Method]body parameter without body decorator
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AnonymousBody(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> AnonymousBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -313,13 +356,22 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> body parameter without body decorator. </summary>
+        /// <summary>
+        /// [Protocol Method]body parameter without body decorator
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="AnonymousBody(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response AnonymousBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -364,13 +416,22 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Friend.FromResponse(response), response);
         }
 
-        /// <summary> Model can have its friendly name. </summary>
+        /// <summary>
+        /// [Protocol Method]Model can have its friendly name
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> FriendlyModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -389,13 +450,22 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Model can have its friendly name. </summary>
+        /// <summary>
+        /// [Protocol Method]Model can have its friendly name
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response FriendlyModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -414,11 +484,16 @@ namespace TypeSpecFirstTest
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(global::System.DateTimeOffset?,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> AddTimeHeaderAsync(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AddTimeHeader");
@@ -435,11 +510,16 @@ namespace TypeSpecFirstTest
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeader(DateTimeOffset,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeader(global::System.DateTimeOffset?,global::Azure.RequestContext)']/*" />
         public virtual Response AddTimeHeader(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AddTimeHeader");
@@ -456,7 +536,11 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi. </summary>
+        /// <summary>
+        /// [Protocol Method]Return hi
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="headParameter"> The String to use. </param>
         /// <param name="queryParameter"> The String to use. </param>
         /// <param name="optionalQuery"> The String to use. </param>
@@ -464,7 +548,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHiAsync(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
@@ -484,7 +568,11 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi. </summary>
+        /// <summary>
+        /// [Protocol Method]Return hi
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="headParameter"> The String to use. </param>
         /// <param name="queryParameter"> The String to use. </param>
         /// <param name="optionalQuery"> The String to use. </param>
@@ -492,7 +580,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHi(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHi(string,string,string,global::Azure.RequestContext)']/*" />
         public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
@@ -548,7 +636,16 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary>
+        /// [Protocol Method]Return hi again
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloAgain(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -557,7 +654,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgainAsync(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> HelloAgainAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -578,7 +675,16 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary>
+        /// [Protocol Method]Return hi again
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloAgain(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -587,7 +693,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgain(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgain(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response HelloAgain(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -608,7 +714,11 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary>
+        /// [Protocol Method]Return hi again
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -617,7 +727,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentTypeAsync(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> NoContentTypeAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -638,7 +748,11 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi again. </summary>
+        /// <summary>
+        /// [Protocol Method]Return hi again
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="p2"> The String to use. </param>
         /// <param name="p1"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -647,7 +761,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentType(String,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentType(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response NoContentType(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -686,11 +800,20 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Return hi in demo2. </summary>
+        /// <summary>
+        /// [Protocol Method]Return hi in demo2
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloDemo2(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> HelloDemo2Async(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloDemo2");
@@ -707,11 +830,20 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Return hi in demo2. </summary>
+        /// <summary>
+        /// [Protocol Method]Return hi in demo2
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloDemo2(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(global::Azure.RequestContext)']/*" />
         public virtual Response HelloDemo2(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloDemo2");
@@ -754,13 +886,22 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary>
+        /// [Protocol Method]Create with literal value
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateLiteral(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteralAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> CreateLiteralAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -779,13 +920,22 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Create with literal value. </summary>
+        /// <summary>
+        /// [Protocol Method]Create with literal value
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateLiteral(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteral(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response CreateLiteral(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -822,11 +972,20 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary>
+        /// [Protocol Method]Send literal parameters
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloLiteral(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> HelloLiteralAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloLiteral");
@@ -843,11 +1002,20 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> Send literal parameters. </summary>
+        /// <summary>
+        /// [Protocol Method]Send literal parameters
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="HelloLiteral(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(global::Azure.RequestContext)']/*" />
         public virtual Response HelloLiteral(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloLiteral");
@@ -864,11 +1032,15 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> get extensible enum. </summary>
+        /// <summary>
+        /// [Protocol Method]get extensible enum
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetUnknownValueAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.GetUnknownValue");
@@ -885,11 +1057,15 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> get extensible enum. </summary>
+        /// <summary>
+        /// [Protocol Method]get extensible enum
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValue(global::Azure.RequestContext)']/*" />
         public virtual Response GetUnknownValue(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.GetUnknownValue");
@@ -932,13 +1108,22 @@ namespace TypeSpecFirstTest
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
-        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
+        /// <summary>
+        /// [Protocol Method]When set protocol false and convenient true, then the protocol method should be internal
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InternalProtocol(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocolAsync(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocolAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         internal virtual async Task<Response> InternalProtocolAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -957,13 +1142,22 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> When set protocol false and convenient true, then the protocol method should be internal. </summary>
+        /// <summary>
+        /// [Protocol Method]When set protocol false and convenient true, then the protocol method should be internal
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="InternalProtocol(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocol(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocol(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         internal virtual Response InternalProtocol(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1000,11 +1194,20 @@ namespace TypeSpecFirstTest
             return response;
         }
 
-        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <summary>
+        /// [Protocol Method]When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="StillConvenient(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenientAsync(global::Azure.RequestContext)']/*" />
         internal virtual async Task<Response> StillConvenientAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StillConvenient");
@@ -1021,11 +1224,20 @@ namespace TypeSpecFirstTest
             }
         }
 
-        /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
+        /// <summary>
+        /// [Protocol Method]When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="StillConvenient(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenient(global::Azure.RequestContext)']/*" />
         internal virtual Response StillConvenient(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StillConvenient");

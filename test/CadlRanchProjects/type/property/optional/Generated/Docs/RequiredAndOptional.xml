@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetAllAsync(RequestContext)">
+    <member name="GetAllAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetAllAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -28,7 +28,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetAll(RequestContext)">
+    <member name="GetAll(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetAll with required parameters and parse the result.
 <code><![CDATA[
@@ -55,7 +55,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetRequiredOnlyAsync(RequestContext)">
+    <member name="GetRequiredOnlyAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetRequiredOnlyAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -82,7 +82,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetRequiredOnly(RequestContext)">
+    <member name="GetRequiredOnly(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetRequiredOnly with required parameters and parse the result.
 <code><![CDATA[
@@ -109,7 +109,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAllAsync(RequestContent,RequestContext)">
+    <member name="PutAllAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAllAsync with required request content.
 <code><![CDATA[
@@ -149,7 +149,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAll(RequestContent,RequestContext)">
+    <member name="PutAll(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAll with required request content.
 <code><![CDATA[
@@ -189,7 +189,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutRequiredOnlyAsync(RequestContent,RequestContext)">
+    <member name="PutRequiredOnlyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutRequiredOnlyAsync with required request content.
 <code><![CDATA[
@@ -229,7 +229,7 @@ Schema for <c>RequiredAndOptionalProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutRequiredOnly(RequestContent,RequestContext)">
+    <member name="PutRequiredOnly(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutRequiredOnly with required request content.
 <code><![CDATA[

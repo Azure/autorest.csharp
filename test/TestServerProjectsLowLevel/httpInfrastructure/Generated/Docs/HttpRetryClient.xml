@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="Head408Async(RequestContext)">
+    <member name="Head408Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head408Async.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head408(RequestContext)">
+    <member name="Head408(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Head408.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put500Async(RequestContent,RequestContext)">
+    <member name="Put500Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put500Async with required request content.
 <code><![CDATA[
@@ -39,7 +39,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put500(RequestContent,RequestContext)">
+    <member name="Put500(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put500 with required request content.
 <code><![CDATA[
@@ -53,7 +53,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch500Async(RequestContent,RequestContext)">
+    <member name="Patch500Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch500Async with required request content.
 <code><![CDATA[
@@ -67,7 +67,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch500(RequestContent,RequestContext)">
+    <member name="Patch500(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch500 with required request content.
 <code><![CDATA[
@@ -81,7 +81,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get502Async(RequestContext)">
+    <member name="Get502Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get502Async.
 <code><![CDATA[
@@ -93,7 +93,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get502(RequestContext)">
+    <member name="Get502(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Get502.
 <code><![CDATA[
@@ -105,7 +105,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Options502Async(RequestContext)">
+    <member name="Options502Async(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options502Async and parse the result.
 <code><![CDATA[
@@ -119,7 +119,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="Options502(RequestContext)">
+    <member name="Options502(global::Azure.RequestContext)">
 <example>
 This sample shows how to call Options502 and parse the result.
 <code><![CDATA[
@@ -133,7 +133,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="Post503Async(RequestContent,RequestContext)">
+    <member name="Post503Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post503Async with required request content.
 <code><![CDATA[
@@ -147,7 +147,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post503(RequestContent,RequestContext)">
+    <member name="Post503(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Post503 with required request content.
 <code><![CDATA[
@@ -161,7 +161,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete503Async(RequestContent,RequestContext)">
+    <member name="Delete503Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete503Async with required request content.
 <code><![CDATA[
@@ -175,7 +175,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete503(RequestContent,RequestContext)">
+    <member name="Delete503(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Delete503 with required request content.
 <code><![CDATA[
@@ -189,7 +189,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put504Async(RequestContent,RequestContext)">
+    <member name="Put504Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put504Async with required request content.
 <code><![CDATA[
@@ -203,7 +203,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put504(RequestContent,RequestContext)">
+    <member name="Put504(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put504 with required request content.
 <code><![CDATA[
@@ -217,7 +217,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch504Async(RequestContent,RequestContext)">
+    <member name="Patch504Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch504Async with required request content.
 <code><![CDATA[
@@ -231,7 +231,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Patch504(RequestContent,RequestContext)">
+    <member name="Patch504(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Patch504 with required request content.
 <code><![CDATA[

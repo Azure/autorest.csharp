@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetItemAsync(String,String,String,RequestContext)">
+    <member name="GetItemAsync(string,string,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetItemAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -28,7 +28,7 @@ Console.WriteLine(result.ToString());
 Get item.
 </remarks>
     </member>
-    <member name="GetItem(String,String,String,RequestContext)">
+    <member name="GetItem(string,string,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetItem with required parameters and parse the result.
 <code><![CDATA[
@@ -55,7 +55,7 @@ Console.WriteLine(result.ToString());
 Get item.
 </remarks>
     </member>
-    <member name="SelectItemAsync(String,String,String,RequestContext)">
+    <member name="SelectItemAsync(string,string,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call SelectItemAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -82,7 +82,7 @@ Console.WriteLine(result.ToString());
 Select item.
 </remarks>
     </member>
-    <member name="SelectItem(String,String,String,RequestContext)">
+    <member name="SelectItem(string,string,string,global::Azure.RequestContext)">
 <example>
 This sample shows how to call SelectItem with required parameters and parse the result.
 <code><![CDATA[

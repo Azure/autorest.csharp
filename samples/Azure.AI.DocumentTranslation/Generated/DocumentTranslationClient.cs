@@ -59,13 +59,22 @@ namespace Azure.AI.DocumentTranslation
             _endpoint = endpoint;
         }
 
-        /// <summary> Returns the status for a specific document. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns the status for a specific document
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Returns the translation status for a specific document based on the request Id and document Id.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentStatusAsync(Guid,Guid,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentStatusAsync(global::System.Guid,global::System.Guid,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetDocumentStatusAsync(Guid id, Guid documentId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
@@ -82,13 +91,22 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the status for a specific document. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns the status for a specific document
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Returns the translation status for a specific document based on the request Id and document Id.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> Format - uuid.  The batch id. </param>
         /// <param name="documentId"> Format - uuid.  The document id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentStatus(Guid,Guid,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentStatus(global::System.Guid,global::System.Guid,global::Azure.RequestContext)']/*" />
         public virtual Response GetDocumentStatus(Guid id, Guid documentId, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetDocumentStatus");
@@ -105,12 +123,22 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the status for a document translation request. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns the status for a document translation request
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Returns the status for a document translation request.
+        /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationStatusAsync(Guid,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationStatusAsync(global::System.Guid,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetTranslationStatusAsync(Guid id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
@@ -127,12 +155,22 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the status for a document translation request. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns the status for a document translation request
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Returns the status for a document translation request.
+        /// The status includes the overall request status, as well as the status for documents that are being translated as part of that request.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationStatus(Guid,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationStatus(global::System.Guid,global::Azure.RequestContext)']/*" />
         public virtual Response GetTranslationStatus(Guid id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetTranslationStatus");
@@ -149,12 +187,25 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Cancel a currently processing or queued translation. </summary>
+        /// <summary>
+        /// [Protocol Method]Cancel a currently processing or queued translation
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Cancel a currently processing or queued translation.
+        /// Cancel a currently processing or queued translation.
+        /// A translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
+        /// All documents that have completed translation will not be cancelled and will be charged.
+        /// All pending documents will be cancelled if possible.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='CancelTranslationAsync(Guid,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='CancelTranslationAsync(global::System.Guid,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> CancelTranslationAsync(Guid id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
@@ -171,12 +222,25 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Cancel a currently processing or queued translation. </summary>
+        /// <summary>
+        /// [Protocol Method]Cancel a currently processing or queued translation
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Cancel a currently processing or queued translation.
+        /// Cancel a currently processing or queued translation.
+        /// A translation will not be cancelled if it is already completed or failed or cancelling. A bad request will be returned.
+        /// All documents that have completed translation will not be cancelled and will be charged.
+        /// All pending documents will be cancelled if possible.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> Format - uuid.  The operation-id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='CancelTranslation(Guid,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='CancelTranslation(global::System.Guid,global::Azure.RequestContext)']/*" />
         public virtual Response CancelTranslation(Guid id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.CancelTranslation");
@@ -193,11 +257,21 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of supported document formats. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns a list of supported document formats
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// The list of supported document formats supported by the Document Translation service.
+        /// The list includes the common file extension, as well as the content-type if using the upload API.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedDocumentFormatsAsync(RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedDocumentFormatsAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetSupportedDocumentFormatsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
@@ -214,11 +288,21 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of supported document formats. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns a list of supported document formats
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// The list of supported document formats supported by the Document Translation service.
+        /// The list includes the common file extension, as well as the content-type if using the upload API.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedDocumentFormats(RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedDocumentFormats(global::Azure.RequestContext)']/*" />
         public virtual Response GetSupportedDocumentFormats(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedDocumentFormats");
@@ -235,11 +319,21 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the list of supported glossary formats. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns the list of supported glossary formats
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// The list of supported glossary formats supported by the Document Translation service.
+        /// The list includes the common file extension used.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedGlossaryFormatsAsync(RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedGlossaryFormatsAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetSupportedGlossaryFormatsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
@@ -256,11 +350,21 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns the list of supported glossary formats. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns the list of supported glossary formats
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// The list of supported glossary formats supported by the Document Translation service.
+        /// The list includes the common file extension used.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedGlossaryFormats(RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedGlossaryFormats(global::Azure.RequestContext)']/*" />
         public virtual Response GetSupportedGlossaryFormats(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedGlossaryFormats");
@@ -277,11 +381,20 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of supported storage sources. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns a list of supported storage sources
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Returns a list of storage sources/options supported by the Document Translation service.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedStorageSourcesAsync(RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedStorageSourcesAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetSupportedStorageSourcesAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
@@ -298,11 +411,20 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of supported storage sources. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns a list of supported storage sources
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Returns a list of storage sources/options supported by the Document Translation service.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedStorageSources(RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetSupportedStorageSources(global::Azure.RequestContext)']/*" />
         public virtual Response GetSupportedStorageSources(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("DocumentTranslationClient.GetSupportedStorageSources");
@@ -319,7 +441,38 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Returns a list of batch requests submitted and the status for each request. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns a list of batch requests submitted and the status for each request
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Returns a list of batch requests submitted and the status for each request.
+        /// This list only contains batch requests submitted by the user (based on the resource).
+        ///             
+        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
+        /// The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -349,7 +502,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatusAsync(Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatusAsync(int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetTranslationsStatusAsync(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -357,7 +510,38 @@ namespace Azure.AI.DocumentTranslation
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DocumentTranslationClient.GetTranslationsStatus", "value", "@nextLink", context);
         }
 
-        /// <summary> Returns a list of batch requests submitted and the status for each request. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns a list of batch requests submitted and the status for each request
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Returns a list of batch requests submitted and the status for each request.
+        /// This list only contains batch requests submitted by the user (based on the resource).
+        ///             
+        /// If the number of requests exceeds our paging limit, server-side paging is used. Paginated responses indicate a partial result and include a continuation token in the response.
+        /// The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of batches based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled operations.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// The server honors the values specified by the client. However, clients must be prepared to handle responses that contain a different page size or contain a continuation token.
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
         ///             
@@ -387,7 +571,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatus(Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetTranslationsStatus(int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetTranslationsStatus(int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTranslationsStatusRequest(top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -395,7 +579,35 @@ namespace Azure.AI.DocumentTranslation
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DocumentTranslationClient.GetTranslationsStatus", "value", "@nextLink", context);
         }
 
-        /// <summary> Returns the status for all documents in a batch document translation request. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns the status for all documents in a batch document translation request
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Returns the status for all documents in a batch document translation request.
+        ///             
+        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
+        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -426,7 +638,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatusAsync(Guid,Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatusAsync(global::System.Guid,int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetDocumentsStatusAsync(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -434,7 +646,35 @@ namespace Azure.AI.DocumentTranslation
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DocumentTranslationClient.GetDocumentsStatus", "value", "@nextLink", context);
         }
 
-        /// <summary> Returns the status for all documents in a batch document translation request. </summary>
+        /// <summary>
+        /// [Protocol Method]Returns the status for all documents in a batch document translation request
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Returns the status for all documents in a batch document translation request.
+        ///             
+        /// If the number of documents in the response exceeds our paging limit, server-side paging is used.
+        /// Paginated responses indicate a partial result and include a continuation token in the response. The absence of a continuation token means that no additional pages are available.
+        ///             
+        /// $top, $skip and $maxpagesize query parameters can be used to specify a number of results to return and an offset for the collection.
+        ///             
+        /// $top indicates the total number of records the user wants to be returned across all pages.
+        /// $skip indicates the number of records to skip from the list of document status held by the server based on the sorting method specified.  By default, we sort by descending start time.
+        /// $maxpagesize is the maximum items returned in a page.  If more items are requested via $top (or $top is not specified and there are more items to be returned), @nextLink will contain the link to the next page.
+        ///             
+        /// $orderBy query parameter can be used to sort the returned list (ex &quot;$orderBy=createdDateTimeUtc asc&quot; or &quot;$orderBy=createdDateTimeUtc desc&quot;).
+        /// The default sorting is descending by createdDateTimeUtc.
+        /// Some query parameters can be used to filter the returned list (ex: &quot;status=Succeeded,Cancelled&quot;) will only return succeeded and cancelled documents.
+        /// createdDateTimeUtcStart and createdDateTimeUtcEnd can be used combined or separately to specify a range of datetime to filter the returned list by.
+        /// The supported filtering query parameters are (status, ids, createdDateTimeUtcStart, createdDateTimeUtcEnd).
+        ///             
+        /// When both $top and $skip are included, the server should first apply $skip and then $top on the collection.
+        /// Note: If the server can&apos;t honor $top and/or $skip, the server must return an error to the client informing about it instead of just ignoring the query options.
+        /// This reduces the risk of the client making assumptions about the data returned.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> Format - uuid.  The operation id. </param>
         /// <param name="top">
         /// $top indicates the total number of records the user wants to be returned across all pages.
@@ -465,7 +705,7 @@ namespace Azure.AI.DocumentTranslation
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatus(Guid,Int32,Int32,Int32,IEnumerable,IEnumerable,DateTimeOffset,DateTimeOffset,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='GetDocumentsStatus(global::System.Guid,int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetDocumentsStatus(Guid id, int? top = null, int? skip = null, int? maxpagesize = null, IEnumerable<Guid> ids = null, IEnumerable<string> statuses = null, DateTimeOffset? createdDateTimeUtcStart = null, DateTimeOffset? createdDateTimeUtcEnd = null, IEnumerable<string> orderBy = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetDocumentsStatusRequest(id, top, skip, maxpagesize, ids, statuses, createdDateTimeUtcStart, createdDateTimeUtcEnd, orderBy, context);
@@ -473,7 +713,24 @@ namespace Azure.AI.DocumentTranslation
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "DocumentTranslationClient.GetDocumentsStatus", "value", "@nextLink", context);
         }
 
-        /// <summary> Submit a document translation request to the Document Translation service. </summary>
+        /// <summary>
+        /// [Protocol Method]Submit a document translation request to the Document Translation service
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Use this API to submit a bulk (batch) translation request to the Document Translation service.
+        /// Each request can contain multiple documents and must contain a source and destination container for each document.
+        ///             
+        /// The prefix and suffix filter (if supplied) are used to filter folders. The prefix is applied to the subpath after the container name.
+        ///             
+        /// Glossaries / Translation memory can be included in the request and are applied by the service when the document is translated.
+        ///             
+        /// If the glossary is invalid or unreachable during translation, an error is indicated in the document status.
+        /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
@@ -481,7 +738,7 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='StartTranslationAsync(WaitUntil,RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='StartTranslationAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> StartTranslationAsync(WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -500,7 +757,24 @@ namespace Azure.AI.DocumentTranslation
             }
         }
 
-        /// <summary> Submit a document translation request to the Document Translation service. </summary>
+        /// <summary>
+        /// [Protocol Method]Submit a document translation request to the Document Translation service
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Use this API to submit a bulk (batch) translation request to the Document Translation service.
+        /// Each request can contain multiple documents and must contain a source and destination container for each document.
+        ///             
+        /// The prefix and suffix filter (if supplied) are used to filter folders. The prefix is applied to the subpath after the container name.
+        ///             
+        /// Glossaries / Translation memory can be included in the request and are applied by the service when the document is translated.
+        ///             
+        /// If the glossary is invalid or unreachable during translation, an error is indicated in the document status.
+        /// If a file with the same name already exists at the destination, it will be overwritten. The targetUrl for each target language must be unique.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/*+json&quot; | &quot;application/json&quot; | &quot;text/json&quot;. </param>
@@ -508,7 +782,7 @@ namespace Azure.AI.DocumentTranslation
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='StartTranslation(WaitUntil,RequestContent,ContentType,RequestContext)']/*" />
+        /// <include file="Docs/DocumentTranslationClient.xml" path="doc/members/member[@name='StartTranslation(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)']/*" />
         public virtual Operation StartTranslation(WaitUntil waitUntil, RequestContent content, ContentType contentType, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

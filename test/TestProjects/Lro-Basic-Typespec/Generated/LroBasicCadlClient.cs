@@ -80,13 +80,23 @@ namespace LroBasicCadl
             return CreateProject(waitUntil, resource.ToRequestContent(), context);
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateProject(WaitUntil,Project,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProjectAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProjectAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> CreateProjectAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -105,13 +115,23 @@ namespace LroBasicCadl
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateProject(WaitUntil,Project,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProject(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateProject(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation CreateProject(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -162,6 +182,16 @@ namespace LroBasicCadl
             return ProtocolOperationHelpers.Convert(response, Project.FromResponse, ClientDiagnostics, "LroBasicCadlClient.UpdateProject");
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UpdateProject(WaitUntil,string,Project,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="id"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -170,7 +200,7 @@ namespace LroBasicCadl
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProjectAsync(WaitUntil,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProjectAsync(global::Azure.WaitUntil,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> UpdateProjectAsync(WaitUntil waitUntil, string id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -190,6 +220,16 @@ namespace LroBasicCadl
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="UpdateProject(WaitUntil,string,Project,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="id"> The String to use. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
@@ -198,7 +238,7 @@ namespace LroBasicCadl
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProject(WaitUntil,String,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='UpdateProject(global::Azure.WaitUntil,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> UpdateProject(WaitUntil waitUntil, string id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -246,14 +286,23 @@ namespace LroBasicCadl
             return ProtocolOperationHelpers.Convert(response, Thing.FromResponse, ClientDiagnostics, "LroBasicCadlClient.CreateThing");
         }
 
-        /// <summary> Long running RPC operation template. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running RPC operation template
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateThing(WaitUntil,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateThingAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateThingAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> CreateThingAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -272,14 +321,23 @@ namespace LroBasicCadl
             }
         }
 
-        /// <summary> Long running RPC operation template. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running RPC operation template
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateThing(WaitUntil,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateThing(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LroBasicCadlClient.xml" path="doc/members/member[@name='CreateThing(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> CreateThing(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

@@ -45,12 +45,17 @@ namespace SpecialWords
             _apiVersion = apiVersion;
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="if"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="if"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetWithIfAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetWithIfAsync(string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetWithIfAsync(string @if, RequestContext context = null)
         {
             Argument.AssertNotNull(@if, nameof(@if));
@@ -69,12 +74,17 @@ namespace SpecialWords
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="if"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="if"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetWithIf(String,RequestContext)']/*" />
+        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetWithIf(string,global::Azure.RequestContext)']/*" />
         public virtual Response GetWithIf(string @if, RequestContext context = null)
         {
             Argument.AssertNotNull(@if, nameof(@if));
@@ -93,12 +103,17 @@ namespace SpecialWords
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetWithFilterAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetWithFilterAsync(string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetWithFilterAsync(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));
@@ -117,12 +132,17 @@ namespace SpecialWords
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetWithFilter(String,RequestContext)']/*" />
+        /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetWithFilter(string,global::Azure.RequestContext)']/*" />
         public virtual Response GetWithFilter(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));

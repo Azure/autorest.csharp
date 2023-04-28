@@ -538,7 +538,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var builder = new StringBuilder(signature.Name);
             builder.Append("(");
-            builder.Append(string.Join(",", signature.Parameters.Select(p => p.Type.Name)));
+            builder.Append(string.Join(",", signature.Parameters.Select(p => p.Type.ToString().Trim().Replace("<", "{").Replace(">", "}"))));
             builder.Append(")");
             return builder.ToString();
         }
@@ -574,7 +574,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteConvenienceMethodDocumentation(CodeWriter writer, MethodSignature convenienceMethod)
         {
-            writer.WriteMethodDocumentation(convenienceMethod);
+            writer.WriteMethodDocumentation(convenienceMethod, $"{convenienceMethod.SummaryText}");
             writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
         }
 
@@ -596,9 +596,28 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line();
         }
 
+        private static FormattableString BuildProtocolMethodSummary(MethodSignature methodSignature, LowLevelClientMethod clientMethod)
+        {
+            var builder = new StringBuilder();
+            builder.AppendLine($"[Protocol Method]{methodSignature.SummaryText}");
+            builder.AppendLine($"<list type=\"bullet\">");
+            if (!methodSignature.DescriptionText.IsNullOrEmpty())
+            {
+                builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}{methodSignature.DescriptionText}{Environment.NewLine}</description>{Environment.NewLine}</item>");
+            }
+
+            if (clientMethod.ConvenienceMethod != null)
+            {
+                var convenienceDocRef = GetMethodSignatureString(clientMethod.ConvenienceMethod.Signature);
+                builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.{Environment.NewLine}</description>{Environment.NewLine}</item>");
+            }
+            builder.AppendLine($"</list>");
+            return $"{builder.ToString().Trim(Environment.NewLine.ToCharArray())}";
+        }
+
         private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature methodSignature, LowLevelClientMethod clientMethod, bool hasResponseRemarks)
         {
-            codeWriter.WriteMethodDocumentation(methodSignature);
+            codeWriter.WriteMethodDocumentation(methodSignature, BuildProtocolMethodSummary(methodSignature, clientMethod));
             codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
 
             if (methodSignature.ReturnType == null)

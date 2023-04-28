@@ -57,11 +57,15 @@ namespace paging_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that must return result of the default &apos;value&apos; node.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNoItemNamePagesAsync(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNoItemNamePagesAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetNoItemNamePagesAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNoItemNamePagesRequest(context);
@@ -69,11 +73,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNoItemNamePages", "value", "nextLink", context);
         }
 
-        /// <summary> A paging operation that must return result of the default &apos;value&apos; node. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that must return result of the default &apos;value&apos; node.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNoItemNamePages(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNoItemNamePages(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetNoItemNamePages(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNoItemNamePagesRequest(context);
@@ -81,33 +89,45 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNoItemNamePages", "value", "nextLink", context);
         }
 
-        /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that must ignore any kind of nextLink, and stop after page 1.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNullNextLinkNamePagesAsync(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNullNextLinkNamePagesAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetNullNextLinkNamePagesAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNullNextLinkNamePagesRequest(context);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNullNextLinkNamePages", "values", null, context);
         }
 
-        /// <summary> A paging operation that must ignore any kind of nextLink, and stop after page 1. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that must ignore any kind of nextLink, and stop after page 1.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNullNextLinkNamePages(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNullNextLinkNamePages(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetNullNextLinkNamePages(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNullNextLinkNamePagesRequest(context);
             return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNullNextLinkNamePages", "values", null, context);
         }
 
-        /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that finishes on the first call without a nextlink
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePagesAsync(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePagesAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetSinglePagesAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesRequest(context);
@@ -115,11 +135,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePages", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that finishes on the first call without a nextlink. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that finishes on the first call without a nextlink
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePages(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePages(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetSinglePages(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesRequest(context);
@@ -127,11 +151,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePages", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='FirstResponseEmptyAsync(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='FirstResponseEmptyAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> FirstResponseEmptyAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateFirstResponseEmptyRequest(context);
@@ -139,11 +167,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.FirstResponseEmpty", "value", "nextLink", context);
         }
 
-        /// <summary> A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='FirstResponseEmpty(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='FirstResponseEmpty(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> FirstResponseEmpty(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateFirstResponseEmptyRequest(context);
@@ -151,14 +183,18 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.FirstResponseEmpty", "value", "nextLink", context);
         }
 
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesAsync(String,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesAsync(string,int?,int?,global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
@@ -166,14 +202,18 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePages", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePages(String,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePages(string,int?,int?,global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
@@ -181,12 +221,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePages", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetWithQueryParamsAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetWithQueryParamsAsync(int,global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetWithQueryParamsAsync(int requiredQueryParameter, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithQueryParamsRequest(requiredQueryParameter, context);
@@ -194,12 +238,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetWithQueryParams", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetWithQueryParams(Int32,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetWithQueryParams(int,global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetWithQueryParams(int requiredQueryParameter, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithQueryParamsRequest(requiredQueryParameter, context);
@@ -207,12 +255,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetWithQueryParams", "values", "nextLink", context);
         }
 
-        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
+        /// <summary>
+        /// [Protocol Method]Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='DuplicateParamsAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='DuplicateParamsAsync(string,global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> DuplicateParamsAsync(string filter = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateDuplicateParamsRequest(filter, context);
@@ -220,12 +272,16 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.DuplicateParams", "values", "nextLink", context);
         }
 
-        /// <summary> Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent. </summary>
+        /// <summary>
+        /// [Protocol Method]Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='DuplicateParams(String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='DuplicateParams(string,global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> DuplicateParams(string filter = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateDuplicateParamsRequest(filter, context);
@@ -233,36 +289,48 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.DuplicateParams", "values", "nextLink", context);
         }
 
-        /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
+        /// <summary>
+        /// [Protocol Method]Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextOperationWithQueryParamsAsync(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextOperationWithQueryParamsAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> NextOperationWithQueryParamsAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextOperationWithQueryParamsRequest(context);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextOperationWithQueryParams", "values", null, context);
         }
 
-        /// <summary> Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult. </summary>
+        /// <summary>
+        /// [Protocol Method]Next operation for getWithQueryParams. Pass in next=True to pass test. Returns a ProductResult
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextOperationWithQueryParams(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextOperationWithQueryParams(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> NextOperationWithQueryParams(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextOperationWithQueryParamsRequest(context);
             return PageableHelpers.CreatePageable(FirstPageRequest, null, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextOperationWithQueryParams", "values", null, context);
         }
 
-        /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that includes a nextLink in odata format that has 10 pages
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetOdataMultiplePagesAsync(String,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetOdataMultiplePagesAsync(string,int?,int?,global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
@@ -270,14 +338,18 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetOdataMultiplePages", "values", "odata.nextLink", context);
         }
 
-        /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that includes a nextLink in odata format that has 10 pages
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetOdataMultiplePages(String,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetOdataMultiplePages(string,int?,int?,global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetOdataMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
@@ -285,7 +357,11 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetOdataMultiplePages", "values", "odata.nextLink", context);
         }
 
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -293,7 +369,7 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesWithOffsetAsync(Int32,String,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesWithOffsetAsync(int,string,int?,int?,global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout, context);
@@ -301,7 +377,11 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesWithOffset", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="offset"> Offset of return value. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -309,7 +389,7 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesWithOffset(Int32,String,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesWithOffset(int,string,int?,int?,global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout, context);
@@ -317,11 +397,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesWithOffset", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetryFirstAsync(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetryFirstAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMultiplePagesRetryFirstAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetryFirstRequest(context);
@@ -329,11 +413,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetryFirst", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetryFirst(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetryFirst(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMultiplePagesRetryFirst(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetryFirstRequest(context);
@@ -341,11 +429,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetryFirst", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetrySecondAsync(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetrySecondAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMultiplePagesRetrySecondAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetrySecondRequest(context);
@@ -353,11 +445,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetrySecond", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetrySecond(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetrySecond(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMultiplePagesRetrySecond(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetrySecondRequest(context);
@@ -365,11 +461,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesRetrySecond", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that receives a 400 on the first call. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that receives a 400 on the first call
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePagesFailureAsync(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePagesFailureAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetSinglePagesFailureAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesFailureRequest(context);
@@ -377,11 +477,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesFailure", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that receives a 400 on the first call. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that receives a 400 on the first call
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePagesFailure(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePagesFailure(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetSinglePagesFailure(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesFailureRequest(context);
@@ -389,11 +493,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesFailure", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that receives a 400 on the second call. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that receives a 400 on the second call
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailureAsync(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailureAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureRequest(context);
@@ -401,11 +509,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailure", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that receives a 400 on the second call. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that receives a 400 on the second call
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailure(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailure(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMultiplePagesFailure(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureRequest(context);
@@ -413,11 +525,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailure", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that receives an invalid nextLink. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that receives an invalid nextLink
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailureUriAsync(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailureUriAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureUriAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureUriRequest(context);
@@ -425,11 +541,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailureUri", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that receives an invalid nextLink. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that receives an invalid nextLink
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailureUri(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailureUri(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMultiplePagesFailureUri(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureUriRequest(context);
@@ -437,7 +557,11 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFailureUri", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -445,7 +569,7 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentNextLinkAsync(String,String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentNextLinkAsync(string,string,global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
@@ -456,7 +580,11 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentNextLink", "values", "odata.nextLink", context);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -464,7 +592,7 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentNextLink(String,String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentNextLink(string,string,global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string tenant, string apiVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
@@ -475,7 +603,11 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentNextLink", "values", "odata.nextLink", context);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -483,7 +615,7 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentWithGroupingNextLinkAsync(String,String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentWithGroupingNextLinkAsync(string,string,global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
@@ -494,7 +626,11 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", "values", "odata.nextLink", context);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
@@ -502,7 +638,7 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentWithGroupingNextLink(String,String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentWithGroupingNextLink(string,string,global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string tenant, string apiVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
@@ -513,7 +649,11 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesFragmentWithGroupingNextLink", "values", "odata.nextLink", context);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -522,7 +662,7 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentAsync(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentAsync(string,string,string,global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> NextFragmentAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
@@ -534,7 +674,11 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragment", "values", "odata.nextLink", context);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -543,7 +687,7 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragment(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragment(string,string,string,global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> NextFragment(string tenant, string nextLink, string apiVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
@@ -555,7 +699,11 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragment", "values", "odata.nextLink", context);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -564,7 +712,7 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentWithGroupingAsync(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentWithGroupingAsync(string,string,string,global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
@@ -576,7 +724,11 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragmentWithGrouping", "values", "odata.nextLink", context);
         }
 
-        /// <summary> A paging operation that doesn&apos;t return a full URL, just a fragment. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <param name="nextLink"> Next link for list operation. </param>
         /// <param name="apiVersion"> Sets the api version to use. </param>
@@ -585,7 +737,7 @@ namespace paging_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="tenant"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentWithGrouping(String,String,String,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentWithGrouping(string,string,string,global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> NextFragmentWithGrouping(string tenant, string nextLink, string apiVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
@@ -597,11 +749,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextFragmentWithGrouping", "values", "odata.nextLink", context);
         }
 
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagingModelWithItemNameWithXMSClientNameAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagingModelWithItemNameWithXMSClientNameRequest(context);
@@ -609,11 +765,15 @@ namespace paging_LowLevel
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagingModelWithItemNameWithXMSClientName", "values", "nextLink", context);
         }
 
-        /// <summary> A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;. </summary>
+        /// <summary>
+        /// [Protocol Method]A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagingModelWithItemNameWithXMSClientName(RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagingModelWithItemNameWithXMSClientName(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagingModelWithItemNameWithXMSClientNameRequest(context);
@@ -621,7 +781,11 @@ namespace paging_LowLevel
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetPagingModelWithItemNameWithXMSClientName", "values", "nextLink", context);
         }
 
-        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method]A long-running paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -629,7 +793,7 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="AsyncPageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesLROAsync(WaitUntil,String,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesLROAsync(global::Azure.WaitUntil,string,int?,int?,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(WaitUntil waitUntil, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
@@ -647,7 +811,11 @@ namespace paging_LowLevel
             }
         }
 
-        /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
+        /// <summary>
+        /// [Protocol Method]A long-running paging operation that includes a nextLink that has 10 pages
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
@@ -655,7 +823,7 @@ namespace paging_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="Pageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesLRO(WaitUntil,String,Int32,Int32,RequestContext)']/*" />
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesLRO(global::Azure.WaitUntil,string,int?,int?,global::Azure.RequestContext)']/*" />
         public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(WaitUntil waitUntil, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");

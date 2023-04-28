@@ -57,13 +57,17 @@ namespace lro_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 400 to the initial request
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry400Async(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry400Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> PutNonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
@@ -80,13 +84,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 400 to the initial request. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 400 to the initial request
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry400(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry400(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> PutNonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry400");
@@ -103,13 +111,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400Async(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
@@ -126,13 +138,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> PutNonRetry201Creating400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400");
@@ -149,13 +165,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400InvalidJsonAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400InvalidJsonAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> PutNonRetry201Creating400InvalidJsonAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
@@ -172,13 +192,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400InvalidJson(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutNonRetry201Creating400InvalidJson(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> PutNonRetry201Creating400InvalidJson(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutNonRetry201Creating400InvalidJson");
@@ -195,13 +219,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetry400Async(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetry400Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
@@ -218,13 +246,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetry400(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetry400(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> PutAsyncRelativeRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetry400");
@@ -241,12 +273,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 400 with an error body
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteNonRetry400Async(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteNonRetry400Async(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> DeleteNonRetry400Async(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
@@ -263,12 +299,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 400 with an error body. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 400 with an error body
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteNonRetry400(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteNonRetry400(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual Operation DeleteNonRetry400(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteNonRetry400");
@@ -285,12 +325,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 with a location header
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete202NonRetry400Async(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete202NonRetry400Async(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> Delete202NonRetry400Async(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
@@ -307,12 +351,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 with a location header. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 with a location header
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete202NonRetry400(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete202NonRetry400(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual Operation Delete202NonRetry400(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202NonRetry400");
@@ -329,12 +377,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetry400Async(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetry400Async(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> DeleteAsyncRelativeRetry400Async(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
@@ -351,12 +403,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetry400(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetry400(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual Operation DeleteAsyncRelativeRetry400(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetry400");
@@ -373,13 +429,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 400 with no error body. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 400 with no error body
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostNonRetry400Async(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostNonRetry400Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> PostNonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
@@ -396,13 +456,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 400 with no error body. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 400 with no error body
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostNonRetry400(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostNonRetry400(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation PostNonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostNonRetry400");
@@ -419,13 +483,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 with a location header. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 with a location header
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NonRetry400Async(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NonRetry400Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> Post202NonRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
@@ -442,13 +510,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 with a location header. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 with a location header
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NonRetry400(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NonRetry400(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation Post202NonRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NonRetry400");
@@ -465,13 +537,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetry400Async(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetry400Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> PostAsyncRelativeRetry400Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
@@ -488,13 +564,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetry400(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetry400(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation PostAsyncRelativeRetry400(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetry400");
@@ -511,13 +591,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 201 to the initial request with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutError201NoProvisioningStatePayloadAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutError201NoProvisioningStatePayloadAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> PutError201NoProvisioningStatePayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
@@ -534,13 +618,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 201 to the initial request with no payload. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 201 to the initial request with no payload
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutError201NoProvisioningStatePayload(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutError201NoProvisioningStatePayload(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> PutError201NoProvisioningStatePayload(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutError201NoProvisioningStatePayload");
@@ -557,13 +645,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatusAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatusAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
@@ -580,13 +672,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatus(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatus(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatus(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatus");
@@ -603,13 +699,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatusPayloadAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryNoStatusPayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
@@ -626,13 +726,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatusPayload(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryNoStatusPayload(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> PutAsyncRelativeRetryNoStatusPayload(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryNoStatusPayload");
@@ -649,12 +753,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 204 to the initial request, indicating success.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete204SucceededAsync(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete204SucceededAsync(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> Delete204SucceededAsync(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
@@ -671,12 +779,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 204 to the initial request, indicating success. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 204 to the initial request, indicating success.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete204Succeeded(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete204Succeeded(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual Operation Delete204Succeeded(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete204Succeeded");
@@ -693,12 +805,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryNoStatusAsync(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryNoStatusAsync(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> DeleteAsyncRelativeRetryNoStatusAsync(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
@@ -715,12 +831,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryNoStatus(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryNoStatus(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual Operation DeleteAsyncRelativeRetryNoStatus(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryNoStatus");
@@ -737,13 +857,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request, without a location header.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NoLocationAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NoLocationAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> Post202NoLocationAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
@@ -760,13 +884,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, without a location header. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request, without a location header.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NoLocation(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202NoLocation(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation Post202NoLocation(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202NoLocation");
@@ -783,13 +911,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryNoPayloadAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryNoPayloadAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> PostAsyncRelativeRetryNoPayloadAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
@@ -806,13 +938,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryNoPayload(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryNoPayload(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation PostAsyncRelativeRetryNoPayload(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryNoPayload");
@@ -829,13 +965,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Put200InvalidJsonAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Put200InvalidJsonAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> Put200InvalidJsonAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
@@ -852,13 +992,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Put200InvalidJson(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Put200InvalidJson(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> Put200InvalidJson(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Put200InvalidJson");
@@ -875,13 +1019,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidHeaderAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
@@ -898,13 +1046,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidHeader(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidHeader(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidHeader");
@@ -921,13 +1073,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidJsonPollingAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation<BinaryData>> PutAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
@@ -944,13 +1100,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="BinaryData"/> object once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PutAsyncRelativeRetryInvalidJsonPolling(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation<BinaryData> PutAsyncRelativeRetryInvalidJsonPolling(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PutAsyncRelativeRetryInvalidJsonPolling");
@@ -967,12 +1127,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete202RetryInvalidHeaderAsync(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete202RetryInvalidHeaderAsync(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> Delete202RetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
@@ -989,12 +1153,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete202RetryInvalidHeader(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Delete202RetryInvalidHeader(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual Operation Delete202RetryInvalidHeader(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Delete202RetryInvalidHeader");
@@ -1011,12 +1179,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryInvalidHeaderAsync(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryInvalidHeaderAsync(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> DeleteAsyncRelativeRetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
@@ -1033,12 +1205,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryInvalidHeader(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryInvalidHeader(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual Operation DeleteAsyncRelativeRetryInvalidHeader(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidHeader");
@@ -1055,12 +1231,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryInvalidJsonPollingAsync(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> DeleteAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
@@ -1077,12 +1257,16 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='DeleteAsyncRelativeRetryInvalidJsonPolling(global::Azure.WaitUntil,global::Azure.RequestContext)']/*" />
         public virtual Operation DeleteAsyncRelativeRetryInvalidJsonPolling(WaitUntil waitUntil, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.DeleteAsyncRelativeRetryInvalidJsonPolling");
@@ -1099,13 +1283,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202RetryInvalidHeaderAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202RetryInvalidHeaderAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> Post202RetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
@@ -1122,13 +1310,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202RetryInvalidHeader(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='Post202RetryInvalidHeader(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation Post202RetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.Post202RetryInvalidHeader");
@@ -1145,13 +1337,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidHeaderAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> PostAsyncRelativeRetryInvalidHeaderAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
@@ -1168,13 +1364,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidHeader(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidHeader(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation PostAsyncRelativeRetryInvalidHeader(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidHeader");
@@ -1191,13 +1391,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidJsonPollingAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Operation> PostAsyncRelativeRetryInvalidJsonPollingAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");
@@ -1214,13 +1418,17 @@ namespace lro_LowLevel
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status. </summary>
+        /// <summary>
+        /// [Protocol Method]Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
-        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/LrosaDsClient.xml" path="doc/members/member[@name='PostAsyncRelativeRetryInvalidJsonPolling(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Operation PostAsyncRelativeRetryInvalidJsonPolling(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("LrosaDsClient.PostAsyncRelativeRetryInvalidJsonPolling");

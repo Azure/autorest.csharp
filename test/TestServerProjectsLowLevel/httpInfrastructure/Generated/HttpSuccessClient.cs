@@ -57,11 +57,15 @@ namespace httpInfrastructure_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Return 200 status code if successful. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 200 status code if successful
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head200Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head200Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Head200Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -78,11 +82,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 200 status code if successful. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 200 status code if successful
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head200(RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head200(global::Azure.RequestContext)']/*" />
         public virtual Response Head200(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head200");
@@ -99,11 +107,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Get 200 success. </summary>
+        /// <summary>
+        /// [Protocol Method]Get 200 success
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Get200Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Get200Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Get200Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Get200");
@@ -120,11 +132,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Get 200 success. </summary>
+        /// <summary>
+        /// [Protocol Method]Get 200 success
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Get200(RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Get200(global::Azure.RequestContext)']/*" />
         public virtual Response Get200(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Get200");
@@ -141,11 +157,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Options 200 success. </summary>
+        /// <summary>
+        /// [Protocol Method]Options 200 success
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Options200Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Options200Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Options200Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Options200");
@@ -162,11 +182,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Options 200 success. </summary>
+        /// <summary>
+        /// [Protocol Method]Options 200 success
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Options200(RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Options200(global::Azure.RequestContext)']/*" />
         public virtual Response Options200(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Options200");
@@ -183,12 +207,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put boolean value true returning 200 success. </summary>
+        /// <summary>
+        /// [Protocol Method]Put boolean value true returning 200 success
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put200Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put200Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Put200Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put200");
@@ -205,12 +233,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put boolean value true returning 200 success. </summary>
+        /// <summary>
+        /// [Protocol Method]Put boolean value true returning 200 success
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put200(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put200(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Put200(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put200");
@@ -227,12 +259,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Patch true Boolean value in request returning 200. </summary>
+        /// <summary>
+        /// [Protocol Method]Patch true Boolean value in request returning 200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch200Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch200Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Patch200Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
@@ -249,12 +285,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Patch true Boolean value in request returning 200. </summary>
+        /// <summary>
+        /// [Protocol Method]Patch true Boolean value in request returning 200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch200(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch200(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Patch200(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch200");
@@ -271,12 +311,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post bollean value true in request that returns a 200. </summary>
+        /// <summary>
+        /// [Protocol Method]Post bollean value true in request that returns a 200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post200Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post200Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Post200Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post200");
@@ -293,12 +337,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post bollean value true in request that returns a 200. </summary>
+        /// <summary>
+        /// [Protocol Method]Post bollean value true in request that returns a 200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post200(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post200(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Post200(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post200");
@@ -315,12 +363,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Delete simple boolean value true returns 200. </summary>
+        /// <summary>
+        /// [Protocol Method]Delete simple boolean value true returns 200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete200Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete200Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Delete200Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
@@ -337,12 +389,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Delete simple boolean value true returns 200. </summary>
+        /// <summary>
+        /// [Protocol Method]Delete simple boolean value true returns 200
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete200(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete200(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Delete200(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete200");
@@ -359,12 +415,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put true Boolean value in request returns 201. </summary>
+        /// <summary>
+        /// [Protocol Method]Put true Boolean value in request returns 201
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put201Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put201Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Put201Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put201");
@@ -381,12 +441,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put true Boolean value in request returns 201. </summary>
+        /// <summary>
+        /// [Protocol Method]Put true Boolean value in request returns 201
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put201(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put201(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Put201(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put201");
@@ -403,12 +467,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
+        /// <summary>
+        /// [Protocol Method]Post true Boolean value in request returns 201 (Created)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post201Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post201Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Post201Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post201");
@@ -425,12 +493,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post true Boolean value in request returns 201 (Created). </summary>
+        /// <summary>
+        /// [Protocol Method]Post true Boolean value in request returns 201 (Created)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post201(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post201(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Post201(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post201");
@@ -447,12 +519,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
+        /// <summary>
+        /// [Protocol Method]Put true Boolean value in request returns 202 (Accepted)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put202Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put202Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Put202Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put202");
@@ -469,12 +545,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put true Boolean value in request returns 202 (Accepted). </summary>
+        /// <summary>
+        /// [Protocol Method]Put true Boolean value in request returns 202 (Accepted)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put202(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put202(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Put202(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put202");
@@ -491,12 +571,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Patch true Boolean value in request returns 202. </summary>
+        /// <summary>
+        /// [Protocol Method]Patch true Boolean value in request returns 202
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch202Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch202Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Patch202Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
@@ -513,12 +597,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Patch true Boolean value in request returns 202. </summary>
+        /// <summary>
+        /// [Protocol Method]Patch true Boolean value in request returns 202
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch202(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch202(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Patch202(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch202");
@@ -535,12 +623,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
+        /// <summary>
+        /// [Protocol Method]Post true Boolean value in request returns 202 (Accepted)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post202Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post202Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Post202Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post202");
@@ -557,12 +649,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post true Boolean value in request returns 202 (Accepted). </summary>
+        /// <summary>
+        /// [Protocol Method]Post true Boolean value in request returns 202 (Accepted)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post202(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post202(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Post202(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post202");
@@ -579,12 +675,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
+        /// <summary>
+        /// [Protocol Method]Delete true Boolean value in request returns 202 (accepted)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete202Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete202Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Delete202Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
@@ -601,12 +701,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Delete true Boolean value in request returns 202 (accepted). </summary>
+        /// <summary>
+        /// [Protocol Method]Delete true Boolean value in request returns 202 (accepted)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete202(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete202(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Delete202(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete202");
@@ -623,11 +727,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 204 status code if successful. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 204 status code if successful
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head204Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head204Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Head204Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -644,11 +752,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 204 status code if successful. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 204 status code if successful
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head204(RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head204(global::Azure.RequestContext)']/*" />
         public virtual Response Head204(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head204");
@@ -665,12 +777,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
+        /// <summary>
+        /// [Protocol Method]Put true Boolean value in request returns 204 (no content)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put204Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put204Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Put204Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put204");
@@ -687,12 +803,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Put true Boolean value in request returns 204 (no content). </summary>
+        /// <summary>
+        /// [Protocol Method]Put true Boolean value in request returns 204 (no content)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put204(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Put204(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Put204(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Put204");
@@ -709,12 +829,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
+        /// <summary>
+        /// [Protocol Method]Patch true Boolean value in request returns 204 (no content)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch204Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch204Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Patch204Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
@@ -731,12 +855,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Patch true Boolean value in request returns 204 (no content). </summary>
+        /// <summary>
+        /// [Protocol Method]Patch true Boolean value in request returns 204 (no content)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch204(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Patch204(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Patch204(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Patch204");
@@ -753,12 +881,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
+        /// <summary>
+        /// [Protocol Method]Post true Boolean value in request returns 204 (no content)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post204Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post204Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Post204Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post204");
@@ -775,12 +907,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Post true Boolean value in request returns 204 (no content). </summary>
+        /// <summary>
+        /// [Protocol Method]Post true Boolean value in request returns 204 (no content)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post204(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Post204(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Post204(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Post204");
@@ -797,12 +933,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
+        /// <summary>
+        /// [Protocol Method]Delete true Boolean value in request returns 204 (no content)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete204Async(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete204Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Delete204Async(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
@@ -819,12 +959,16 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Delete true Boolean value in request returns 204 (no content). </summary>
+        /// <summary>
+        /// [Protocol Method]Delete true Boolean value in request returns 204 (no content)
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete204(RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Delete204(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response Delete204(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Delete204");
@@ -841,11 +985,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 404 status code. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 404 status code
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head404Async(RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head404Async(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> Head404Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");
@@ -862,11 +1010,15 @@ namespace httpInfrastructure_LowLevel
             }
         }
 
-        /// <summary> Return 404 status code. </summary>
+        /// <summary>
+        /// [Protocol Method]Return 404 status code
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head404(RequestContext)']/*" />
+        /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Head404(global::Azure.RequestContext)']/*" />
         public virtual Response Head404(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Head404");

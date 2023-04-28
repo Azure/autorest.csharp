@@ -50,14 +50,23 @@ namespace _Specs_.Azure.Core.Basic
             _apiVersion = options.Version;
         }
 
-        /// <summary> Adds a user or updates a user&apos;s fields. </summary>
+        /// <summary>
+        /// [Protocol Method]Adds a user or updates a user&apos;s fields.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Creates or updates a User
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdateAsync(Int32,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdateAsync(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> CreateOrUpdateAsync(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -76,14 +85,23 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
-        /// <summary> Adds a user or updates a user&apos;s fields. </summary>
+        /// <summary>
+        /// [Protocol Method]Adds a user or updates a user&apos;s fields.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Creates or updates a User
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdate(Int32,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdate(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response CreateOrUpdate(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -132,14 +150,28 @@ namespace _Specs_.Azure.Core.Basic
             return Response.FromValue(User.FromResponse(response), response);
         }
 
-        /// <summary> Adds a user or replaces a user&apos;s fields. </summary>
+        /// <summary>
+        /// [Protocol Method]Adds a user or replaces a user&apos;s fields.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Creates or replaces a User
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateOrReplace(int,User,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(Int32,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> CreateOrReplaceAsync(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -158,14 +190,28 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
-        /// <summary> Adds a user or replaces a user&apos;s fields. </summary>
+        /// <summary>
+        /// [Protocol Method]Adds a user or replaces a user&apos;s fields.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Creates or replaces a User
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="CreateOrReplace(int,User,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="content"> The content to send as the body of the request. Details of the request body schema are in the Remarks section below. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(Int32,RequestContent,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
         public virtual Response CreateOrReplace(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -206,12 +252,26 @@ namespace _Specs_.Azure.Core.Basic
             return Response.FromValue(User.FromResponse(response), response);
         }
 
-        /// <summary> Gets a user. </summary>
+        /// <summary>
+        /// [Protocol Method]Gets a user.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Gets a User
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetUser(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUserAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUserAsync(int,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetUserAsync(int id, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetUser");
@@ -228,12 +288,26 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
-        /// <summary> Gets a user. </summary>
+        /// <summary>
+        /// [Protocol Method]Gets a user.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Gets a User
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetUser(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUser(Int32,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUser(int,global::Azure.RequestContext)']/*" />
         public virtual Response GetUser(int id, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetUser");
@@ -250,12 +324,21 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
-        /// <summary> Deletes a user. </summary>
+        /// <summary>
+        /// [Protocol Method]Deletes a user.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Deletes a User
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='DeleteAsync(Int32,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='DeleteAsync(int,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> DeleteAsync(int id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.Delete");
@@ -272,12 +355,21 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
-        /// <summary> Deletes a user. </summary>
+        /// <summary>
+        /// [Protocol Method]Deletes a user.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Deletes a User
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Delete(Int32,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Delete(int,global::Azure.RequestContext)']/*" />
         public virtual Response Delete(int id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.Delete");
@@ -324,14 +416,28 @@ namespace _Specs_.Azure.Core.Basic
             return Response.FromValue(User.FromResponse(response), response);
         }
 
-        /// <summary> Exports a user. </summary>
+        /// <summary>
+        /// [Protocol Method]Exports a user.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Exports a User
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Export(int,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(Int32,String,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(int,string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> ExportAsync(int id, string format, RequestContext context)
         {
             Argument.AssertNotNull(format, nameof(format));
@@ -350,14 +456,28 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
-        /// <summary> Exports a user. </summary>
+        /// <summary>
+        /// [Protocol Method]Exports a user.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Exports a User
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="Export(int,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="id"> The user&apos;s id. </param>
         /// <param name="format"> The format of the data. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(Int32,String,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(int,string,global::Azure.RequestContext)']/*" />
         public virtual Response Export(int id, string format, RequestContext context)
         {
             Argument.AssertNotNull(format, nameof(format));
@@ -412,7 +532,21 @@ namespace _Specs_.Azure.Core.Basic
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, User.DeserializeUser, ClientDiagnostics, _pipeline, "BasicClient.GetUsers", "value", "nextLink", context);
         }
 
-        /// <summary> Lists all users. </summary>
+        /// <summary>
+        /// [Protocol Method]Lists all users.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Lists all Users
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetUsers(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="maxCount"> The number of result items to return. </param>
         /// <param name="skip"> The number of result items to skip. </param>
         /// <param name="maxpagesize"> The maximum number of result items per page. </param>
@@ -423,7 +557,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsersAsync(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsersAsync(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetUsersAsync(int? maxCount, int? skip, int? maxpagesize, IEnumerable<string> orderby, string filter, IEnumerable<string> select, IEnumerable<string> expand, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
@@ -431,7 +565,21 @@ namespace _Specs_.Azure.Core.Basic
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetUsers", "value", "nextLink", context);
         }
 
-        /// <summary> Lists all users. </summary>
+        /// <summary>
+        /// [Protocol Method]Lists all users.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Lists all Users
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetUsers(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="maxCount"> The number of result items to return. </param>
         /// <param name="skip"> The number of result items to skip. </param>
         /// <param name="maxpagesize"> The maximum number of result items per page. </param>
@@ -442,7 +590,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsers(Int32,Int32,Int32,IEnumerable,String,IEnumerable,IEnumerable,RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsers(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetUsers(int? maxCount, int? skip, int? maxpagesize, IEnumerable<string> orderby, string filter, IEnumerable<string> select, IEnumerable<string> expand, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
@@ -470,11 +618,20 @@ namespace _Specs_.Azure.Core.Basic
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, User.DeserializeUser, ClientDiagnostics, _pipeline, "BasicClient.GetWithPage", "value", "nextLink", context);
         }
 
-        /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
+        /// <summary>
+        /// [Protocol Method]List with Azure.Core.Page&lt;&gt;.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWithPage(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPageAsync(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPageAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetWithPageAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
@@ -482,11 +639,20 @@ namespace _Specs_.Azure.Core.Basic
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithPage", "value", "nextLink", context);
         }
 
-        /// <summary> List with Azure.Core.Page&lt;&gt;. </summary>
+        /// <summary>
+        /// [Protocol Method]List with Azure.Core.Page&lt;&gt;.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWithPage(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPage(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPage(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetWithPage(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
@@ -514,11 +680,20 @@ namespace _Specs_.Azure.Core.Basic
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, User.DeserializeUser, ClientDiagnostics, _pipeline, "BasicClient.GetWithCustomPageModel", "items", "nextLink", context);
         }
 
-        /// <summary> List with custom page model. </summary>
+        /// <summary>
+        /// [Protocol Method]List with custom page model.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWithCustomPageModel(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModelAsync(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModelAsync(global::Azure.RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetWithCustomPageModelAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithCustomPageModelRequest(context);
@@ -526,11 +701,20 @@ namespace _Specs_.Azure.Core.Basic
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "BasicClient.GetWithCustomPageModel", "items", "nextLink", context);
         }
 
-        /// <summary> List with custom page model. </summary>
+        /// <summary>
+        /// [Protocol Method]List with custom page model.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetWithCustomPageModel(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModel(RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModel(global::Azure.RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetWithCustomPageModel(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithCustomPageModelRequest(context);

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="InputToRoundTripAsync(RequestContent,RequestContext)">
+    <member name="InputToRoundTripAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputToRoundTripAsync with required request content and parse the result.
 <code><![CDATA[
@@ -104,7 +104,7 @@ Schema for <c>RoundTripModel</c>:
 
 </remarks>
     </member>
-    <member name="InputToRoundTrip(RequestContent,RequestContext)">
+    <member name="InputToRoundTrip(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputToRoundTrip with required request content and parse the result.
 <code><![CDATA[
@@ -207,7 +207,7 @@ Schema for <c>RoundTripModel</c>:
 
 </remarks>
     </member>
-    <member name="InputToRoundTripPrimitiveAsync(RequestContent,RequestContext)">
+    <member name="InputToRoundTripPrimitiveAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputToRoundTripPrimitiveAsync with required request content and parse the result.
 <code><![CDATA[
@@ -304,7 +304,7 @@ Schema for <c>RoundTripPrimitiveModel</c>:
 
 </remarks>
     </member>
-    <member name="InputToRoundTripPrimitive(RequestContent,RequestContext)">
+    <member name="InputToRoundTripPrimitive(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputToRoundTripPrimitive with required request content and parse the result.
 <code><![CDATA[
@@ -401,7 +401,7 @@ Schema for <c>RoundTripPrimitiveModel</c>:
 
 </remarks>
     </member>
-    <member name="InputToRoundTripOptionalAsync(RequestContent,RequestContext)">
+    <member name="InputToRoundTripOptionalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputToRoundTripOptionalAsync and parse the result.
 <code><![CDATA[
@@ -561,7 +561,7 @@ Schema for <c>RoundTripOptionalModel</c>:
 
 </remarks>
     </member>
-    <member name="InputToRoundTripOptional(RequestContent,RequestContext)">
+    <member name="InputToRoundTripOptional(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputToRoundTripOptional and parse the result.
 <code><![CDATA[
@@ -721,7 +721,7 @@ Schema for <c>RoundTripOptionalModel</c>:
 
 </remarks>
     </member>
-    <member name="InputToRoundTripReadOnlyAsync(RequestContent,RequestContext)">
+    <member name="InputToRoundTripReadOnlyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputToRoundTripReadOnlyAsync with required request content and parse the result.
 <code><![CDATA[
@@ -842,7 +842,7 @@ Schema for <c>RoundTripReadOnlyModel</c>:
 
 </remarks>
     </member>
-    <member name="InputToRoundTripReadOnly(RequestContent,RequestContext)">
+    <member name="InputToRoundTripReadOnly(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputToRoundTripReadOnly with required request content and parse the result.
 <code><![CDATA[
@@ -963,7 +963,7 @@ Schema for <c>RoundTripReadOnlyModel</c>:
 
 </remarks>
     </member>
-    <member name="RoundTripToOutputAsync(RequestContent,RequestContext)">
+    <member name="RoundTripToOutputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RoundTripToOutputAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -1106,7 +1106,7 @@ Schema for <c>OutputModel</c>:
 
 </remarks>
     </member>
-    <member name="RoundTripToOutput(RequestContent,RequestContext)">
+    <member name="RoundTripToOutput(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RoundTripToOutput with required request content, and how to parse the result.
 <code><![CDATA[
@@ -1249,7 +1249,7 @@ Schema for <c>OutputModel</c>:
 
 </remarks>
     </member>
-    <member name="InputRecursiveAsync(RequestContent,RequestContext)">
+    <member name="InputRecursiveAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputRecursiveAsync with required request content.
 <code><![CDATA[
@@ -1290,7 +1290,7 @@ Schema for <c>InputRecursiveModel</c>:
 
 </remarks>
     </member>
-    <member name="InputRecursive(RequestContent,RequestContext)">
+    <member name="InputRecursive(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call InputRecursive with required request content.
 <code><![CDATA[
@@ -1331,7 +1331,7 @@ Schema for <c>InputRecursiveModel</c>:
 
 </remarks>
     </member>
-    <member name="RoundTripRecursiveAsync(RequestContent,RequestContext)">
+    <member name="RoundTripRecursiveAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RoundTripRecursiveAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -1386,7 +1386,7 @@ Schema for <c>RoundTripRecursiveModel</c>:
 
 </remarks>
     </member>
-    <member name="RoundTripRecursive(RequestContent,RequestContext)">
+    <member name="RoundTripRecursive(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RoundTripRecursive with required request content, and how to parse the result.
 <code><![CDATA[
@@ -1441,7 +1441,7 @@ Schema for <c>RoundTripRecursiveModel</c>:
 
 </remarks>
     </member>
-    <member name="SelfReferenceAsync(RequestContext)">
+    <member name="SelfReferenceAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call SelfReferenceAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -1469,7 +1469,7 @@ Schema for <c>ErrorModel</c>:
 
 </remarks>
     </member>
-    <member name="SelfReference(RequestContext)">
+    <member name="SelfReference(global::Azure.RequestContext)">
 <example>
 This sample shows how to call SelfReference with required parameters and parse the result.
 <code><![CDATA[
@@ -1497,7 +1497,7 @@ Schema for <c>ErrorModel</c>:
 
 </remarks>
     </member>
-    <member name="RoundTripToOutputWithNoUseBaseAsync(RequestContent,RequestContext)">
+    <member name="RoundTripToOutputWithNoUseBaseAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RoundTripToOutputWithNoUseBaseAsync with required request content and parse the result.
 <code><![CDATA[
@@ -1554,7 +1554,7 @@ Schema for <c>RoundTripOnNoUse</c>:
 
 </remarks>
     </member>
-    <member name="RoundTripToOutputWithNoUseBase(RequestContent,RequestContext)">
+    <member name="RoundTripToOutputWithNoUseBase(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call RoundTripToOutputWithNoUseBase with required request content and parse the result.
 <code><![CDATA[

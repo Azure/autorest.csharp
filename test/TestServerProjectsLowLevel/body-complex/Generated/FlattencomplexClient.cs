@@ -57,10 +57,15 @@ namespace body_complex_LowLevel
             _endpoint = endpoint;
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/FlattencomplexClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
+        /// <include file="Docs/FlattencomplexClient.xml" path="doc/members/member[@name='GetValidAsync(global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> GetValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FlattencomplexClient.GetValid");
@@ -77,10 +82,15 @@ namespace body_complex_LowLevel
             }
         }
 
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/FlattencomplexClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
+        /// <include file="Docs/FlattencomplexClient.xml" path="doc/members/member[@name='GetValid(global::Azure.RequestContext)']/*" />
         public virtual Response GetValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FlattencomplexClient.GetValid");

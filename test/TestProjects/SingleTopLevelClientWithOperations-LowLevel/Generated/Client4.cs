@@ -51,13 +51,17 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             _endpoint = endpoint;
         }
 
-        /// <summary> Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Client4.xml" path="doc/members/member[@name='PatchAsync(String,RequestContext)']/*" />
+        /// <include file="Docs/Client4.xml" path="doc/members/member[@name='PatchAsync(string,global::Azure.RequestContext)']/*" />
         public virtual async Task<Response> PatchAsync(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));
@@ -76,13 +80,17 @@ namespace SingleTopLevelClientWithOperations_LowLevel
             }
         }
 
-        /// <summary> Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client. </summary>
+        /// <summary>
+        /// [Protocol Method]Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="filter"> The String to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Client4.xml" path="doc/members/member[@name='Patch(String,RequestContext)']/*" />
+        /// <include file="Docs/Client4.xml" path="doc/members/member[@name='Patch(string,global::Azure.RequestContext)']/*" />
         public virtual Response Patch(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));

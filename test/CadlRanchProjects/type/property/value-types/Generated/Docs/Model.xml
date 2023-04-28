@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetModelAsync(RequestContext)">
+    <member name="GetModelAsync(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetModelAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -28,7 +28,7 @@ Schema for <c>ModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="GetModel(RequestContext)">
+    <member name="GetModel(global::Azure.RequestContext)">
 <example>
 This sample shows how to call GetModel with required parameters and parse the result.
 <code><![CDATA[
@@ -55,7 +55,7 @@ Schema for <c>ModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="PutAsync(RequestContent,RequestContext)">
+    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -86,7 +86,7 @@ Schema for <c>ModelProperty</c>:
 
 </remarks>
     </member>
-    <member name="Put(RequestContent,RequestContext)">
+    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

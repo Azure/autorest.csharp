@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="IfMatchPutAsync(RequestContent,ETag,RequestContext)">
+    <member name="IfMatchPutAsync(global::Azure.Core.RequestContent,global::Azure.ETag?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call IfMatchPutAsync with required parameters and request content.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="IfMatchPut(RequestContent,ETag,RequestContext)">
+    <member name="IfMatchPut(global::Azure.Core.RequestContent,global::Azure.ETag?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call IfMatchPut with required parameters and request content.
 <code><![CDATA[
@@ -49,7 +49,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="IfNoneMatchPutAsync(RequestContent,ETag,RequestContext)">
+    <member name="IfNoneMatchPutAsync(global::Azure.Core.RequestContent,global::Azure.ETag?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call IfNoneMatchPutAsync with required parameters and request content.
 <code><![CDATA[
@@ -73,7 +73,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="IfNoneMatchPut(RequestContent,ETag,RequestContext)">
+    <member name="IfNoneMatchPut(global::Azure.Core.RequestContent,global::Azure.ETag?,global::Azure.RequestContext)">
 <example>
 This sample shows how to call IfNoneMatchPut with required parameters and request content.
 <code><![CDATA[

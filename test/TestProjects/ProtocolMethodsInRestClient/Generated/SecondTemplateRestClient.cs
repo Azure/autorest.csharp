@@ -237,7 +237,11 @@ namespace ProtocolMethodsInRestClient
             return message;
         }
 
-        /// <summary> Retrieves information about the resource. </summary>
+        /// <summary>
+        /// [Protocol Method]Retrieves information about the resource.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
@@ -262,7 +266,11 @@ namespace ProtocolMethodsInRestClient
             }
         }
 
-        /// <summary> Retrieves information about the resource. </summary>
+        /// <summary>
+        /// [Protocol Method]Retrieves information about the resource.
+        /// <list type="bullet">
+        /// </list>
+        /// </summary>
         /// <param name="resourceId"> The id of the resource. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
