@@ -198,7 +198,7 @@ namespace url_multi_collectionFormat_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/null", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -218,7 +218,7 @@ namespace url_multi_collectionFormat_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/empty", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -238,7 +238,7 @@ namespace url_multi_collectionFormat_LowLevel
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/valid", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {

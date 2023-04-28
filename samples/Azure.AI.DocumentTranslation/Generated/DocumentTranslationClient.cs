@@ -564,11 +564,11 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("$maxpagesize", maxpagesize.Value, true);
             }
-            if (ids != null)
+            if (ids != null && Optional.IsCollectionDefined(ids))
             {
                 uri.AppendQueryDelimited("ids", ids, ",", true);
             }
-            if (statuses != null)
+            if (statuses != null && Optional.IsCollectionDefined(statuses))
             {
                 uri.AppendQueryDelimited("statuses", statuses, ",", true);
             }
@@ -580,7 +580,7 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("createdDateTimeUtcEnd", createdDateTimeUtcEnd.Value, "O", true);
             }
-            if (orderBy != null)
+            if (orderBy != null && Optional.IsCollectionDefined(orderBy))
             {
                 uri.AppendQueryDelimited("$orderBy", orderBy, ",", true);
             }
@@ -659,11 +659,11 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("$maxpagesize", maxpagesize.Value, true);
             }
-            if (ids != null)
+            if (ids != null && Optional.IsCollectionDefined(ids))
             {
                 uri.AppendQueryDelimited("ids", ids, ",", true);
             }
-            if (statuses != null)
+            if (statuses != null && Optional.IsCollectionDefined(statuses))
             {
                 uri.AppendQueryDelimited("statuses", statuses, ",", true);
             }
@@ -675,7 +675,7 @@ namespace Azure.AI.DocumentTranslation
             {
                 uri.AppendQuery("createdDateTimeUtcEnd", createdDateTimeUtcEnd.Value, "O", true);
             }
-            if (orderBy != null)
+            if (orderBy != null && Optional.IsCollectionDefined(orderBy))
             {
                 uri.AppendQueryDelimited("$orderBy", orderBy, ",", true);
             }

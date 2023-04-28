@@ -574,7 +574,7 @@ namespace MgmtPropertyBag
             {
                 uri.AppendQuery("$orderby", orderby, true);
             }
-            if (countryOrRegions != null)
+            if (countryOrRegions != null && Optional.IsCollectionDefined(countryOrRegions))
             {
                 foreach (var param in countryOrRegions)
                 {
