@@ -134,7 +134,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopActionAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> TopActionAsync(string action, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
@@ -169,7 +169,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="action"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction(string,RequestContext)']/*" />
         public virtual Response TopAction(string action, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(action, nameof(action));
@@ -196,7 +196,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2Async(RequestContext)']/*" />
         public virtual async Task<Response> TopAction2Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction2");
@@ -221,7 +221,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='TopAction2(RequestContext)']/*" />
         public virtual Response TopAction2(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.TopAction2");
@@ -248,7 +248,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchActionAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchActionAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PatchActionAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -277,7 +277,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchAction(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='PatchAction(RequestContent,RequestContext)']/*" />
         public virtual Response PatchAction(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -337,7 +337,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> AnonymousBodyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -371,7 +371,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AnonymousBody(RequestContent,RequestContext)']/*" />
         public virtual Response AnonymousBody(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -431,7 +431,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> FriendlyModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -465,7 +465,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='FriendlyModel(RequestContent,RequestContext)']/*" />
         public virtual Response FriendlyModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -493,7 +493,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(global::System.DateTimeOffset?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(DateTimeOffset?,RequestContext)']/*" />
         public virtual async Task<Response> AddTimeHeaderAsync(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AddTimeHeader");
@@ -519,7 +519,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeader(global::System.DateTimeOffset?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='AddTimeHeader(DateTimeOffset?,RequestContext)']/*" />
         public virtual Response AddTimeHeader(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.AddTimeHeader");
@@ -548,7 +548,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
@@ -580,7 +580,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHi(string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='SayHi(string,string,string,RequestContext)']/*" />
         public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
@@ -654,7 +654,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgainAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> HelloAgainAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -693,7 +693,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgain(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloAgain(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response HelloAgain(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -727,7 +727,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentTypeAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> NoContentTypeAsync(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -761,7 +761,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentException"> <paramref name="p2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentType(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='NoContentType(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response NoContentType(string p2, string p1, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(p2, nameof(p2));
@@ -813,7 +813,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2Async(RequestContext)']/*" />
         public virtual async Task<Response> HelloDemo2Async(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloDemo2");
@@ -843,7 +843,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloDemo2(RequestContext)']/*" />
         public virtual Response HelloDemo2(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloDemo2");
@@ -901,7 +901,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteralAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteralAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateLiteralAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -935,7 +935,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteral(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='CreateLiteral(RequestContent,RequestContext)']/*" />
         public virtual Response CreateLiteral(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -985,7 +985,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteralAsync(RequestContext)']/*" />
         public virtual async Task<Response> HelloLiteralAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloLiteral");
@@ -1015,7 +1015,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='HelloLiteral(RequestContext)']/*" />
         public virtual Response HelloLiteral(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.HelloLiteral");
@@ -1040,7 +1040,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetUnknownValueAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.GetUnknownValue");
@@ -1065,7 +1065,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValue(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
         public virtual Response GetUnknownValue(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.GetUnknownValue");
@@ -1123,7 +1123,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocolAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocolAsync(RequestContent,RequestContext)']/*" />
         internal virtual async Task<Response> InternalProtocolAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1157,7 +1157,7 @@ namespace TypeSpecFirstTest
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocol(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='InternalProtocol(RequestContent,RequestContext)']/*" />
         internal virtual Response InternalProtocol(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1207,7 +1207,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenientAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
         internal virtual async Task<Response> StillConvenientAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StillConvenient");
@@ -1237,7 +1237,7 @@ namespace TypeSpecFirstTest
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenient(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TypeSpecFirstTestClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
         internal virtual Response StillConvenient(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TypeSpecFirstTestClient.StillConvenient");

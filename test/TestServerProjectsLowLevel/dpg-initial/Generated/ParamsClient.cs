@@ -66,7 +66,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParamsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParamsAsync(RequestContext)']/*" />
         public virtual async Task<Response> HeadNoParamsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
@@ -92,7 +92,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParams(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParams(RequestContext)']/*" />
         public virtual Response HeadNoParams(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
@@ -120,7 +120,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequiredAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequiredAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetRequiredAsync(string parameter, RequestContext context = null)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
@@ -150,7 +150,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequired(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequired(string,RequestContext)']/*" />
         public virtual Response GetRequired(string parameter, RequestContext context = null)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
@@ -180,7 +180,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptionalAsync(string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptionalAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam = null, RequestContext context = null)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
@@ -210,7 +210,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptional(string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptional(string,string,RequestContext)']/*" />
         public virtual Response PutRequiredOptional(string requiredParam, string optionalParam = null, RequestContext context = null)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
@@ -239,7 +239,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParametersAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParametersAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PostParametersAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -268,7 +268,7 @@ namespace dpg_initial_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParameters(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PostParameters(RequestContent,RequestContext)']/*" />
         public virtual Response PostParameters(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -297,7 +297,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptionalAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptionalAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetOptionalAsync(string optionalParam = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
@@ -324,7 +324,7 @@ namespace dpg_initial_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptional(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptional(string,RequestContext)']/*" />
         public virtual Response GetOptional(string optionalParam = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");

@@ -93,7 +93,7 @@ namespace _Type._Array
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValueAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetStringValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringValue.GetStringValue");
@@ -123,7 +123,7 @@ namespace _Type._Array
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValue(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='GetStringValue(RequestContext)']/*" />
         public virtual Response GetStringValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringValue.GetStringValue");
@@ -179,7 +179,7 @@ namespace _Type._Array
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='PutAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -213,7 +213,7 @@ namespace _Type._Array
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/StringValue.xml" path="doc/members/member[@name='Put(RequestContent,RequestContext)']/*" />
         public virtual Response Put(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

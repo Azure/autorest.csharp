@@ -67,7 +67,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiNullAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiNullAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringMultiNullAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
@@ -93,7 +93,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiNull(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiNull(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringMultiNull(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiNull");
@@ -119,7 +119,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiEmptyAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiEmptyAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringMultiEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
@@ -145,7 +145,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiEmpty(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiEmpty(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringMultiEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiEmpty");
@@ -171,7 +171,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiValidAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiValidAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");
@@ -197,7 +197,7 @@ namespace url_multi_collectionFormat_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiValid(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringMultiValid(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringMultiValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringMultiValid");

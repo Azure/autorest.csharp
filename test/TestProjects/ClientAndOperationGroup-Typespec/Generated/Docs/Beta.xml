@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="TwoAsync(global::Azure.RequestContext)">
+    <member name="TwoAsync(RequestContext)">
 <example>
 This sample shows how to call TwoAsync and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="Two(global::Azure.RequestContext)">
+    <member name="Two(RequestContext)">
 <example>
 This sample shows how to call Two and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="ThreeAsync(global::Azure.RequestContext)">
+    <member name="ThreeAsync(RequestContext)">
 <example>
 This sample shows how to call ThreeAsync and parse the result.
 <code><![CDATA[
@@ -43,7 +43,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="Three(global::Azure.RequestContext)">
+    <member name="Three(RequestContext)">
 <example>
 This sample shows how to call Three and parse the result.
 <code><![CDATA[

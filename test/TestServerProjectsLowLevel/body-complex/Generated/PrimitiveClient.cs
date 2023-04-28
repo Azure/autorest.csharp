@@ -65,7 +65,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetIntAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetIntAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetIntAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetInt");
@@ -90,7 +90,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetInt(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetInt(RequestContext)']/*" />
         public virtual Response GetInt(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetInt");
@@ -117,7 +117,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutIntAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutIntAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutIntAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -146,7 +146,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutInt(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutInt(RequestContent,RequestContext)']/*" />
         public virtual Response PutInt(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -173,7 +173,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetLongAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetLongAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetLongAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetLong");
@@ -198,7 +198,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetLong(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetLong(RequestContext)']/*" />
         public virtual Response GetLong(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetLong");
@@ -225,7 +225,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutLongAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutLongAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutLongAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -254,7 +254,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutLong(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutLong(RequestContent,RequestContext)']/*" />
         public virtual Response PutLong(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -281,7 +281,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetFloatAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetFloatAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetFloatAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
@@ -306,7 +306,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetFloat(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetFloat(RequestContext)']/*" />
         public virtual Response GetFloat(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
@@ -333,7 +333,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutFloatAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutFloatAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutFloatAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -362,7 +362,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutFloat(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutFloat(RequestContent,RequestContext)']/*" />
         public virtual Response PutFloat(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -389,7 +389,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDoubleAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDoubleAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDoubleAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
@@ -414,7 +414,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDouble(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDouble(RequestContext)']/*" />
         public virtual Response GetDouble(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
@@ -441,7 +441,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDoubleAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDoubleAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDoubleAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -470,7 +470,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDouble(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDouble(RequestContent,RequestContext)']/*" />
         public virtual Response PutDouble(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -497,7 +497,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetBoolAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetBoolAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBoolAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetBool");
@@ -522,7 +522,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetBool(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetBool(RequestContext)']/*" />
         public virtual Response GetBool(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetBool");
@@ -549,7 +549,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutBoolAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutBoolAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutBoolAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -578,7 +578,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutBool(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutBool(RequestContent,RequestContext)']/*" />
         public virtual Response PutBool(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -605,7 +605,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetStringAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetStringAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetStringAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetString");
@@ -630,7 +630,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetString(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetString(RequestContext)']/*" />
         public virtual Response GetString(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetString");
@@ -657,7 +657,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutStringAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutStringAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutStringAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -686,7 +686,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutString(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutString(RequestContent,RequestContext)']/*" />
         public virtual Response PutString(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -713,7 +713,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDateAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDate");
@@ -738,7 +738,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDate(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDate(RequestContext)']/*" />
         public virtual Response GetDate(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDate");
@@ -765,7 +765,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -794,7 +794,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDate(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDate(RequestContent,RequestContext)']/*" />
         public virtual Response PutDate(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -821,7 +821,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTimeAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTimeAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDateTimeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
@@ -846,7 +846,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTime(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTime(RequestContext)']/*" />
         public virtual Response GetDateTime(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
@@ -873,7 +873,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTimeAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTimeAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateTimeAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -902,7 +902,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTime(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTime(RequestContent,RequestContext)']/*" />
         public virtual Response PutDateTime(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -929,7 +929,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123Async(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123Async(RequestContext)']/*" />
         public virtual async Task<Response> GetDateTimeRfc1123Async(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
@@ -954,7 +954,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123(RequestContext)']/*" />
         public virtual Response GetDateTimeRfc1123(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
@@ -981,7 +981,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123Async(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateTimeRfc1123Async(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1010,7 +1010,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123(RequestContent,RequestContext)']/*" />
         public virtual Response PutDateTimeRfc1123(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1037,7 +1037,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDurationAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDurationAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDurationAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
@@ -1062,7 +1062,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDuration(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDuration(RequestContext)']/*" />
         public virtual Response GetDuration(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
@@ -1089,7 +1089,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDurationAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDurationAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDurationAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1118,7 +1118,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDuration(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutDuration(RequestContent,RequestContext)']/*" />
         public virtual Response PutDuration(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1145,7 +1145,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetByteAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetByteAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetByteAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetByte");
@@ -1170,7 +1170,7 @@ namespace body_complex_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetByte(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetByte(RequestContext)']/*" />
         public virtual Response GetByte(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetByte");
@@ -1197,7 +1197,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutByteAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutByteAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutByteAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1226,7 +1226,7 @@ namespace body_complex_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutByte(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='PutByte(RequestContent,RequestContext)']/*" />
         public virtual Response PutByte(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

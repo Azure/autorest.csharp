@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetCollectionAsync(global::Azure.RequestContext)">
+    <member name="GetCollectionAsync(RequestContext)">
 <example>
 This sample shows how to call GetCollectionAsync and parse the result.
 <code><![CDATA[
@@ -54,7 +54,7 @@ Schema for <c>Collection</c>:
 
 </remarks>
     </member>
-    <member name="GetCollection(global::Azure.RequestContext)">
+    <member name="GetCollection(RequestContext)">
 <example>
 This sample shows how to call GetCollection and parse the result.
 <code><![CDATA[
@@ -107,7 +107,7 @@ Schema for <c>Collection</c>:
 
 </remarks>
     </member>
-    <member name="CreateOrUpdateCollectionAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="CreateOrUpdateCollectionAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call CreateOrUpdateCollectionAsync and parse the result.
 <code><![CDATA[
@@ -204,7 +204,7 @@ Schema for <c>Collection</c>:
 
 </remarks>
     </member>
-    <member name="CreateOrUpdateCollection(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="CreateOrUpdateCollection(RequestContent,RequestContext)">
 <example>
 This sample shows how to call CreateOrUpdateCollection and parse the result.
 <code><![CDATA[
@@ -301,7 +301,7 @@ Schema for <c>Collection</c>:
 
 </remarks>
     </member>
-    <member name="DeleteCollectionAsync(global::Azure.RequestContext)">
+    <member name="DeleteCollectionAsync(RequestContext)">
 <example>
 This sample shows how to call DeleteCollectionAsync.
 <code><![CDATA[
@@ -314,7 +314,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="DeleteCollection(global::Azure.RequestContext)">
+    <member name="DeleteCollection(RequestContext)">
 <example>
 This sample shows how to call DeleteCollection.
 <code><![CDATA[
@@ -327,7 +327,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetCollectionPathAsync(global::Azure.RequestContext)">
+    <member name="GetCollectionPathAsync(RequestContext)">
 <example>
 This sample shows how to call GetCollectionPathAsync and parse the result.
 <code><![CDATA[
@@ -356,7 +356,7 @@ Schema for <c>CollectionPathResponse</c>:
 
 </remarks>
     </member>
-    <member name="GetCollectionPath(global::Azure.RequestContext)">
+    <member name="GetCollectionPath(RequestContext)">
 <example>
 This sample shows how to call GetCollectionPath and parse the result.
 <code><![CDATA[
@@ -385,7 +385,7 @@ Schema for <c>CollectionPathResponse</c>:
 
 </remarks>
     </member>
-    <member name="GetChildCollectionNamesAsync(string,global::Azure.RequestContext)">
+    <member name="GetChildCollectionNamesAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetChildCollectionNamesAsync and parse the result.
 <code><![CDATA[
@@ -427,7 +427,7 @@ Schema for <c>CollectionNameResponseListValue</c>:
 
 </remarks>
     </member>
-    <member name="GetChildCollectionNames(string,global::Azure.RequestContext)">
+    <member name="GetChildCollectionNames(string,RequestContext)">
 <example>
 This sample shows how to call GetChildCollectionNames and parse the result.
 <code><![CDATA[

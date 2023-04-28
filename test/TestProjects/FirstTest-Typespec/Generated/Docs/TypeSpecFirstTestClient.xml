@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="TopActionAsync(string,global::Azure.RequestContext)">
+    <member name="TopActionAsync(string,RequestContext)">
 <example>
 This sample shows how to call TopActionAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -48,7 +48,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="TopAction(string,global::Azure.RequestContext)">
+    <member name="TopAction(string,RequestContext)">
 <example>
 This sample shows how to call TopAction with required parameters and parse the result.
 <code><![CDATA[
@@ -95,7 +95,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="TopAction2Async(global::Azure.RequestContext)">
+    <member name="TopAction2Async(RequestContext)">
 <example>
 This sample shows how to call TopAction2Async and parse the result.
 <code><![CDATA[
@@ -142,7 +142,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="TopAction2(global::Azure.RequestContext)">
+    <member name="TopAction2(RequestContext)">
 <example>
 This sample shows how to call TopAction2 and parse the result.
 <code><![CDATA[
@@ -189,7 +189,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="PatchActionAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PatchActionAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PatchActionAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -295,7 +295,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="PatchAction(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PatchAction(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PatchAction with required request content, and how to parse the result.
 <code><![CDATA[
@@ -401,7 +401,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="AnonymousBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call AnonymousBodyAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -507,7 +507,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="AnonymousBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="AnonymousBody(RequestContent,RequestContext)">
 <example>
 This sample shows how to call AnonymousBody with required request content, and how to parse the result.
 <code><![CDATA[
@@ -613,7 +613,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="FriendlyModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="FriendlyModelAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call FriendlyModelAsync with required request content and parse the result.
 <code><![CDATA[
@@ -652,7 +652,7 @@ Schema for <c>Friend</c>:
 
 </remarks>
     </member>
-    <member name="FriendlyModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="FriendlyModel(RequestContent,RequestContext)">
 <example>
 This sample shows how to call FriendlyModel with required request content and parse the result.
 <code><![CDATA[
@@ -691,7 +691,7 @@ Schema for <c>Friend</c>:
 
 </remarks>
     </member>
-    <member name="AddTimeHeaderAsync(global::System.DateTimeOffset?,global::Azure.RequestContext)">
+    <member name="AddTimeHeaderAsync(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
@@ -713,7 +713,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="AddTimeHeader(global::System.DateTimeOffset?,global::Azure.RequestContext)">
+    <member name="AddTimeHeader(DateTimeOffset?,RequestContext)">
 <example>
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
@@ -735,7 +735,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="SayHiAsync(string,string,string,global::Azure.RequestContext)">
+    <member name="SayHiAsync(string,string,string,RequestContext)">
 <example>
 This sample shows how to call SayHiAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -799,7 +799,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="SayHi(string,string,string,global::Azure.RequestContext)">
+    <member name="SayHi(string,string,string,RequestContext)">
 <example>
 This sample shows how to call SayHi with required parameters and parse the result.
 <code><![CDATA[
@@ -863,7 +863,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloAgainAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call HelloAgainAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1039,7 +1039,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloAgain(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="HelloAgain(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call HelloAgain with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1215,7 +1215,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="NoContentTypeAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="NoContentTypeAsync(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call NoContentTypeAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1391,7 +1391,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="NoContentType(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="NoContentType(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call NoContentType with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -1567,7 +1567,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloDemo2Async(global::Azure.RequestContext)">
+    <member name="HelloDemo2Async(RequestContext)">
 <example>
 This sample shows how to call HelloDemo2Async with required parameters and parse the result.
 <code><![CDATA[
@@ -1614,7 +1614,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloDemo2(global::Azure.RequestContext)">
+    <member name="HelloDemo2(RequestContext)">
 <example>
 This sample shows how to call HelloDemo2 with required parameters and parse the result.
 <code><![CDATA[
@@ -1661,7 +1661,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="CreateLiteralAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="CreateLiteralAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call CreateLiteralAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -1767,7 +1767,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="CreateLiteral(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="CreateLiteral(RequestContent,RequestContext)">
 <example>
 This sample shows how to call CreateLiteral with required request content, and how to parse the result.
 <code><![CDATA[
@@ -1873,7 +1873,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloLiteralAsync(global::Azure.RequestContext)">
+    <member name="HelloLiteralAsync(RequestContext)">
 <example>
 This sample shows how to call HelloLiteralAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -1920,7 +1920,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="HelloLiteral(global::Azure.RequestContext)">
+    <member name="HelloLiteral(RequestContext)">
 <example>
 This sample shows how to call HelloLiteral with required parameters and parse the result.
 <code><![CDATA[
@@ -1967,7 +1967,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="GetUnknownValueAsync(global::Azure.RequestContext)">
+    <member name="GetUnknownValueAsync(RequestContext)">
 <example>
 This sample shows how to call GetUnknownValueAsync and parse the result.
 <code><![CDATA[
@@ -1982,7 +1982,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetUnknownValue(global::Azure.RequestContext)">
+    <member name="GetUnknownValue(RequestContext)">
 <example>
 This sample shows how to call GetUnknownValue and parse the result.
 <code><![CDATA[
@@ -1997,7 +1997,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="InternalProtocolAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="InternalProtocolAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call InternalProtocolAsync with required request content, and how to parse the result.
 <code><![CDATA[
@@ -2103,7 +2103,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="InternalProtocol(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="InternalProtocol(RequestContent,RequestContext)">
 <example>
 This sample shows how to call InternalProtocol with required request content, and how to parse the result.
 <code><![CDATA[
@@ -2209,7 +2209,7 @@ Schema for <c>Thing</c>:
 
 </remarks>
     </member>
-    <member name="StillConvenientAsync(global::Azure.RequestContext)">
+    <member name="StillConvenientAsync(RequestContext)">
 <example>
 This sample shows how to call StillConvenientAsync with required parameters.
 <code><![CDATA[
@@ -2222,7 +2222,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="StillConvenient(global::Azure.RequestContext)">
+    <member name="StillConvenient(RequestContext)">
 <example>
 This sample shows how to call StillConvenient with required parameters.
 <code><![CDATA[

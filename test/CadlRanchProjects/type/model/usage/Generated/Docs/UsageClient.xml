@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="InputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="InputAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call InputAsync with required request content.
 <code><![CDATA[
@@ -28,7 +28,7 @@ Schema for <c>InputRecord</c>:
 
 </remarks>
     </member>
-    <member name="Input(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Input(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Input with required request content.
 <code><![CDATA[
@@ -55,7 +55,7 @@ Schema for <c>InputRecord</c>:
 
 </remarks>
     </member>
-    <member name="OutputAsync(global::Azure.RequestContext)">
+    <member name="OutputAsync(RequestContext)">
 <example>
 This sample shows how to call OutputAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -80,7 +80,7 @@ Schema for <c>OutputRecord</c>:
 
 </remarks>
     </member>
-    <member name="Output(global::Azure.RequestContext)">
+    <member name="Output(RequestContext)">
 <example>
 This sample shows how to call Output with required parameters and parse the result.
 <code><![CDATA[
@@ -105,7 +105,7 @@ Schema for <c>OutputRecord</c>:
 
 </remarks>
     </member>
-    <member name="InputAndOutputAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="InputAndOutputAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call InputAndOutputAsync with required request content and parse the result.
 <code><![CDATA[
@@ -142,7 +142,7 @@ Schema for <c>InputOutputRecord</c>:
 
 </remarks>
     </member>
-    <member name="InputAndOutput(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="InputAndOutput(RequestContent,RequestContext)">
 <example>
 This sample shows how to call InputAndOutput with required request content and parse the result.
 <code><![CDATA[

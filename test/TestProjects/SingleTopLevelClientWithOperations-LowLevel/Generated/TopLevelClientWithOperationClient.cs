@@ -66,7 +66,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='OperationAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='OperationAsync(RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TopLevelClientWithOperationClient.Operation");
@@ -91,7 +91,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='Operation(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='Operation(RequestContext)']/*" />
         public virtual Response Operation(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("TopLevelClientWithOperationClient.Operation");
@@ -118,7 +118,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='GetAllAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='GetAllAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetAllAsync(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));
@@ -138,7 +138,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='GetAll(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='GetAll(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetAll(string filter, RequestContext context = null)
         {
             Argument.AssertNotNull(filter, nameof(filter));

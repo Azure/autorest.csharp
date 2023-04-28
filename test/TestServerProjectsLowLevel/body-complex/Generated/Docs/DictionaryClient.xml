@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetValidAsync(global::Azure.RequestContext)">
+    <member name="GetValidAsync(RequestContext)">
 <example>
 This sample shows how to call GetValidAsync and parse the result.
 <code><![CDATA[
@@ -27,7 +27,7 @@ Schema for <c>DictionaryWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetValid(global::Azure.RequestContext)">
+    <member name="GetValid(RequestContext)">
 <example>
 This sample shows how to call GetValid and parse the result.
 <code><![CDATA[
@@ -53,7 +53,7 @@ Schema for <c>DictionaryWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutValidAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutValidAsync.
 <code><![CDATA[
@@ -93,7 +93,7 @@ Schema for <c>DictionaryWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutValid(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutValid.
 <code><![CDATA[
@@ -133,7 +133,7 @@ Schema for <c>DictionaryWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetEmptyAsync(global::Azure.RequestContext)">
+    <member name="GetEmptyAsync(RequestContext)">
 <example>
 This sample shows how to call GetEmptyAsync and parse the result.
 <code><![CDATA[
@@ -159,7 +159,7 @@ Schema for <c>DictionaryWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetEmpty(global::Azure.RequestContext)">
+    <member name="GetEmpty(RequestContext)">
 <example>
 This sample shows how to call GetEmpty and parse the result.
 <code><![CDATA[
@@ -185,7 +185,7 @@ Schema for <c>DictionaryWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutEmptyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutEmptyAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutEmptyAsync.
 <code><![CDATA[
@@ -225,7 +225,7 @@ Schema for <c>DictionaryWrapper</c>:
 
 </remarks>
     </member>
-    <member name="PutEmpty(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutEmpty(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutEmpty.
 <code><![CDATA[
@@ -265,7 +265,7 @@ Schema for <c>DictionaryWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetNullAsync(global::Azure.RequestContext)">
+    <member name="GetNullAsync(RequestContext)">
 <example>
 This sample shows how to call GetNullAsync and parse the result.
 <code><![CDATA[
@@ -291,7 +291,7 @@ Schema for <c>DictionaryWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetNull(global::Azure.RequestContext)">
+    <member name="GetNull(RequestContext)">
 <example>
 This sample shows how to call GetNull and parse the result.
 <code><![CDATA[
@@ -317,7 +317,7 @@ Schema for <c>DictionaryWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetNotProvidedAsync(global::Azure.RequestContext)">
+    <member name="GetNotProvidedAsync(RequestContext)">
 <example>
 This sample shows how to call GetNotProvidedAsync and parse the result.
 <code><![CDATA[
@@ -343,7 +343,7 @@ Schema for <c>DictionaryWrapper</c>:
 
 </remarks>
     </member>
-    <member name="GetNotProvided(global::Azure.RequestContext)">
+    <member name="GetNotProvided(RequestContext)">
 <example>
 This sample shows how to call GetNotProvided and parse the result.
 <code><![CDATA[

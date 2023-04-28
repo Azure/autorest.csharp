@@ -66,7 +66,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanTrueAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanTrueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBooleanTrueAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
@@ -91,7 +91,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanTrue(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanTrue(RequestContext)']/*" />
         public virtual Response GetBooleanTrue(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanTrue");
@@ -116,7 +116,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanFalseAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanFalseAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBooleanFalseAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
@@ -141,7 +141,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanFalse(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanFalse(RequestContext)']/*" />
         public virtual Response GetBooleanFalse(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanFalse");
@@ -167,7 +167,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanNullAsync(bool?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanNullAsync(bool?,RequestContext)']/*" />
         public virtual async Task<Response> GetBooleanNullAsync(bool? boolQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
@@ -193,7 +193,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanNull(bool?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetBooleanNull(bool?,RequestContext)']/*" />
         public virtual Response GetBooleanNull(bool? boolQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetBooleanNull");
@@ -218,7 +218,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntOneMillionAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntOneMillionAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetIntOneMillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
@@ -243,7 +243,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntOneMillion(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntOneMillion(RequestContext)']/*" />
         public virtual Response GetIntOneMillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntOneMillion");
@@ -268,7 +268,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntNegativeOneMillionAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntNegativeOneMillionAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
@@ -293,7 +293,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntNegativeOneMillion(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntNegativeOneMillion(RequestContext)']/*" />
         public virtual Response GetIntNegativeOneMillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNegativeOneMillion");
@@ -319,7 +319,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntNullAsync(int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntNullAsync(int?,RequestContext)']/*" />
         public virtual async Task<Response> GetIntNullAsync(int? intQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNull");
@@ -345,7 +345,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntNull(int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetIntNull(int?,RequestContext)']/*" />
         public virtual Response GetIntNull(int? intQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetIntNull");
@@ -370,7 +370,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetTenBillionAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetTenBillionAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetTenBillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
@@ -395,7 +395,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetTenBillion(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetTenBillion(RequestContext)']/*" />
         public virtual Response GetTenBillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetTenBillion");
@@ -420,7 +420,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetNegativeTenBillionAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetNegativeTenBillionAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
@@ -445,7 +445,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetNegativeTenBillion(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetNegativeTenBillion(RequestContext)']/*" />
         public virtual Response GetNegativeTenBillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetNegativeTenBillion");
@@ -471,7 +471,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetLongNullAsync(long?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetLongNullAsync(long?,RequestContext)']/*" />
         public virtual async Task<Response> GetLongNullAsync(long? longQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetLongNull");
@@ -497,7 +497,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetLongNull(long?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='GetLongNull(long?,RequestContext)']/*" />
         public virtual Response GetLongNull(long? longQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.GetLongNull");
@@ -522,7 +522,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatScientificPositiveAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatScientificPositiveAsync(RequestContext)']/*" />
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
@@ -547,7 +547,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatScientificPositive(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatScientificPositive(RequestContext)']/*" />
         public virtual Response FloatScientificPositive(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificPositive");
@@ -572,7 +572,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatScientificNegativeAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatScientificNegativeAsync(RequestContext)']/*" />
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
@@ -597,7 +597,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatScientificNegative(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatScientificNegative(RequestContext)']/*" />
         public virtual Response FloatScientificNegative(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatScientificNegative");
@@ -623,7 +623,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatNullAsync(float?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatNullAsync(float?,RequestContext)']/*" />
         public virtual async Task<Response> FloatNullAsync(float? floatQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatNull");
@@ -649,7 +649,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatNull(float?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='FloatNull(float?,RequestContext)']/*" />
         public virtual Response FloatNull(float? floatQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.FloatNull");
@@ -674,7 +674,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleDecimalPositiveAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleDecimalPositiveAsync(RequestContext)']/*" />
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
@@ -699,7 +699,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleDecimalPositive(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleDecimalPositive(RequestContext)']/*" />
         public virtual Response DoubleDecimalPositive(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalPositive");
@@ -724,7 +724,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleDecimalNegativeAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleDecimalNegativeAsync(RequestContext)']/*" />
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
@@ -749,7 +749,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleDecimalNegative(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleDecimalNegative(RequestContext)']/*" />
         public virtual Response DoubleDecimalNegative(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleDecimalNegative");
@@ -775,7 +775,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleNullAsync(double?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleNullAsync(double?,RequestContext)']/*" />
         public virtual async Task<Response> DoubleNullAsync(double? doubleQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleNull");
@@ -801,7 +801,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleNull(double?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DoubleNull(double?,RequestContext)']/*" />
         public virtual Response DoubleNull(double? doubleQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DoubleNull");
@@ -826,7 +826,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringUnicodeAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringUnicodeAsync(RequestContext)']/*" />
         public virtual async Task<Response> StringUnicodeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUnicode");
@@ -851,7 +851,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringUnicode(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringUnicode(RequestContext)']/*" />
         public virtual Response StringUnicode(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUnicode");
@@ -876,7 +876,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringUrlEncodedAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringUrlEncodedAsync(RequestContext)']/*" />
         public virtual async Task<Response> StringUrlEncodedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
@@ -901,7 +901,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringUrlEncoded(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringUrlEncoded(RequestContext)']/*" />
         public virtual Response StringUrlEncoded(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringUrlEncoded");
@@ -926,7 +926,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> StringEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringEmpty");
@@ -951,7 +951,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringEmpty(RequestContext)']/*" />
         public virtual Response StringEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringEmpty");
@@ -977,7 +977,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringNullAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringNullAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> StringNullAsync(string stringQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringNull");
@@ -1003,7 +1003,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringNull(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='StringNull(string,RequestContext)']/*" />
         public virtual Response StringNull(string stringQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.StringNull");
@@ -1029,7 +1029,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='EnumValidAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='EnumValidAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> EnumValidAsync(string enumQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumValid");
@@ -1055,7 +1055,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='EnumValid(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='EnumValid(string,RequestContext)']/*" />
         public virtual Response EnumValid(string enumQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumValid");
@@ -1081,7 +1081,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='EnumNullAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='EnumNullAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> EnumNullAsync(string enumQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumNull");
@@ -1107,7 +1107,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='EnumNull(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='EnumNull(string,RequestContext)']/*" />
         public virtual Response EnumNull(string enumQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.EnumNull");
@@ -1133,7 +1133,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteMultiByteAsync(global::System.Byte[],global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteMultiByteAsync(Byte[],RequestContext)']/*" />
         public virtual async Task<Response> ByteMultiByteAsync(byte[] byteQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
@@ -1159,7 +1159,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteMultiByte(global::System.Byte[],global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteMultiByte(Byte[],RequestContext)']/*" />
         public virtual Response ByteMultiByte(byte[] byteQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteMultiByte");
@@ -1184,7 +1184,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> ByteEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
@@ -1209,7 +1209,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteEmpty(RequestContext)']/*" />
         public virtual Response ByteEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteEmpty");
@@ -1235,7 +1235,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteNullAsync(global::System.Byte[],global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteNullAsync(Byte[],RequestContext)']/*" />
         public virtual async Task<Response> ByteNullAsync(byte[] byteQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteNull");
@@ -1261,7 +1261,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteNull(global::System.Byte[],global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ByteNull(Byte[],RequestContext)']/*" />
         public virtual Response ByteNull(byte[] byteQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ByteNull");
@@ -1286,7 +1286,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> DateValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateValid");
@@ -1311,7 +1311,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateValid(RequestContext)']/*" />
         public virtual Response DateValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateValid");
@@ -1337,7 +1337,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateNullAsync(global::System.DateTimeOffset?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateNullAsync(DateTimeOffset?,RequestContext)']/*" />
         public virtual async Task<Response> DateNullAsync(DateTimeOffset? dateQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateNull");
@@ -1363,7 +1363,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateNull(global::System.DateTimeOffset?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateNull(DateTimeOffset?,RequestContext)']/*" />
         public virtual Response DateNull(DateTimeOffset? dateQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateNull");
@@ -1388,7 +1388,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateTimeValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateTimeValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> DateTimeValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
@@ -1413,7 +1413,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateTimeValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateTimeValid(RequestContext)']/*" />
         public virtual Response DateTimeValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeValid");
@@ -1439,7 +1439,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateTimeNullAsync(global::System.DateTimeOffset?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateTimeNullAsync(DateTimeOffset?,RequestContext)']/*" />
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset? dateTimeQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
@@ -1465,7 +1465,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateTimeNull(global::System.DateTimeOffset?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='DateTimeNull(DateTimeOffset?,RequestContext)']/*" />
         public virtual Response DateTimeNull(DateTimeOffset? dateTimeQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.DateTimeNull");
@@ -1491,7 +1491,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvValidAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvValidAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringCsvValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
@@ -1517,7 +1517,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvValid(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvValid(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringCsvValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvValid");
@@ -1543,7 +1543,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvNullAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvNullAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringCsvNullAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
@@ -1569,7 +1569,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvNull(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvNull(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringCsvNull(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvNull");
@@ -1595,7 +1595,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvEmptyAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvEmptyAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringCsvEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
@@ -1621,7 +1621,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvEmpty(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringCsvEmpty(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringCsvEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringCsvEmpty");
@@ -1647,7 +1647,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringNoCollectionFormatEmptyAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringNoCollectionFormatEmptyAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringNoCollectionFormatEmptyAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
@@ -1673,7 +1673,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringNoCollectionFormatEmpty(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringNoCollectionFormatEmpty(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringNoCollectionFormatEmpty(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringNoCollectionFormatEmpty");
@@ -1699,7 +1699,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringSsvValidAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringSsvValidAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringSsvValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
@@ -1725,7 +1725,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringSsvValid(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringSsvValid(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringSsvValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringSsvValid");
@@ -1751,7 +1751,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringTsvValidAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringTsvValidAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringTsvValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
@@ -1777,7 +1777,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringTsvValid(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringTsvValid(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringTsvValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringTsvValid");
@@ -1803,7 +1803,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringPipesValidAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringPipesValidAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayStringPipesValidAsync(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");
@@ -1829,7 +1829,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringPipesValid(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/QueriesClient.xml" path="doc/members/member[@name='ArrayStringPipesValid(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayStringPipesValid(IEnumerable<string> arrayQuery = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("QueriesClient.ArrayStringPipesValid");

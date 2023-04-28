@@ -59,7 +59,7 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroupAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroupAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetGroupAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
@@ -84,7 +84,7 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroup(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroup(RequestContext)']/*" />
         public virtual Response GetGroup(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
@@ -109,7 +109,7 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItemsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItemsAsync(RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetItemsAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);
@@ -125,7 +125,7 @@ namespace ResourceClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItems(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItems(RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetItems(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);

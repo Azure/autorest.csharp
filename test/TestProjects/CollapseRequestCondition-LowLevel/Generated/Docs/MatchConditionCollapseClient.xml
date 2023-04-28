@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="CollapseGetWithHeadAsync(string,global::Azure.MatchConditions,global::Azure.RequestContext)">
+    <member name="CollapseGetWithHeadAsync(string,MatchConditions,RequestContext)">
 <example>
 This sample shows how to call CollapseGetWithHeadAsync.
 <code><![CDATA[
@@ -21,7 +21,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CollapseGetWithHead(string,global::Azure.MatchConditions,global::Azure.RequestContext)">
+    <member name="CollapseGetWithHead(string,MatchConditions,RequestContext)">
 <example>
 This sample shows how to call CollapseGetWithHead.
 <code><![CDATA[
@@ -41,7 +41,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CollapsePutAsync(global::Azure.Core.RequestContent,global::Azure.MatchConditions,global::Azure.RequestContext)">
+    <member name="CollapsePutAsync(RequestContent,MatchConditions,RequestContext)">
 <example>
 This sample shows how to call CollapsePutAsync with required parameters and request content.
 <code><![CDATA[
@@ -65,7 +65,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CollapsePut(global::Azure.Core.RequestContent,global::Azure.MatchConditions,global::Azure.RequestContext)">
+    <member name="CollapsePut(RequestContent,MatchConditions,RequestContext)">
 <example>
 This sample shows how to call CollapsePut with required parameters and request content.
 <code><![CDATA[
@@ -89,7 +89,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CollapseGetAsync(global::Azure.MatchConditions,global::Azure.RequestContext)">
+    <member name="CollapseGetAsync(MatchConditions,RequestContext)">
 <example>
 This sample shows how to call CollapseGetAsync.
 <code><![CDATA[
@@ -109,7 +109,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CollapseGet(global::Azure.MatchConditions,global::Azure.RequestContext)">
+    <member name="CollapseGet(MatchConditions,RequestContext)">
 <example>
 This sample shows how to call CollapseGet.
 <code><![CDATA[

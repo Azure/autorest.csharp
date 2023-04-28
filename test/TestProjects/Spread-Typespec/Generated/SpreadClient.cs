@@ -99,7 +99,7 @@ namespace Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -133,7 +133,7 @@ namespace Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadModel(RequestContent,RequestContext)']/*" />
         public virtual Response SpreadModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -197,7 +197,7 @@ namespace Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -231,7 +231,7 @@ namespace Spread
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAlias(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAlias(RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAlias(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -306,7 +306,7 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadMultiTargetAliasAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadMultiTargetAliasAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadMultiTargetAliasAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -344,7 +344,7 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadMultiTargetAlias(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadMultiTargetAlias(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadMultiTargetAlias(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -416,7 +416,7 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithModelAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasWithModelAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -454,7 +454,7 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithModel(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAliasWithModel(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -530,7 +530,7 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -568,7 +568,7 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAliasWithSpreadAlias(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -676,7 +676,7 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
@@ -714,7 +714,7 @@ namespace Spread
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SpreadClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,int,RequestContent,RequestContext)']/*" />
         public virtual Response SpreadAliasWithOptionalProps(string id, int top, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));

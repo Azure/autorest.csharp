@@ -66,7 +66,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdateAsync(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdateAsync(int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateOrUpdateAsync(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -101,7 +101,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdate(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrUpdate(int,RequestContent,RequestContext)']/*" />
         public virtual Response CreateOrUpdate(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -171,7 +171,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplaceAsync(int,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateOrReplaceAsync(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -211,7 +211,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(int,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='CreateOrReplace(int,RequestContent,RequestContext)']/*" />
         public virtual Response CreateOrReplace(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -271,7 +271,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUserAsync(int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUserAsync(int,RequestContext)']/*" />
         public virtual async Task<Response> GetUserAsync(int id, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetUser");
@@ -307,7 +307,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUser(int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUser(int,RequestContext)']/*" />
         public virtual Response GetUser(int id, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.GetUser");
@@ -338,7 +338,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='DeleteAsync(int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='DeleteAsync(int,RequestContext)']/*" />
         public virtual async Task<Response> DeleteAsync(int id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.Delete");
@@ -369,7 +369,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Delete(int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Delete(int,RequestContext)']/*" />
         public virtual Response Delete(int id, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BasicClient.Delete");
@@ -437,7 +437,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(int,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='ExportAsync(int,string,RequestContext)']/*" />
         public virtual async Task<Response> ExportAsync(int id, string format, RequestContext context)
         {
             Argument.AssertNotNull(format, nameof(format));
@@ -477,7 +477,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <exception cref="ArgumentNullException"> <paramref name="format"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(int,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='Export(int,string,RequestContext)']/*" />
         public virtual Response Export(int id, string format, RequestContext context)
         {
             Argument.AssertNotNull(format, nameof(format));
@@ -557,7 +557,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsersAsync(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetUsersAsync(int? maxCount, int? skip, int? maxpagesize, IEnumerable<string> orderby, string filter, IEnumerable<string> select, IEnumerable<string> expand, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
@@ -590,7 +590,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsers(int?,int?,int?,global::System.Collections.Generic.IEnumerable{string},string,global::System.Collections.Generic.IEnumerable{string},global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetUsers(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetUsers(int? maxCount, int? skip, int? maxpagesize, IEnumerable<string> orderby, string filter, IEnumerable<string> select, IEnumerable<string> expand, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetUsersRequest(maxCount, skip, maxpagesize, orderby, filter, select, expand, context);
@@ -631,7 +631,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPageAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPageAsync(RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetWithPageAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
@@ -652,7 +652,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPage(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithPage(RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetWithPage(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithPageRequest(context);
@@ -693,7 +693,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModelAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModelAsync(RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetWithCustomPageModelAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithCustomPageModelRequest(context);
@@ -714,7 +714,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModel(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BasicClient.xml" path="doc/members/member[@name='GetWithCustomPageModel(RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetWithCustomPageModel(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithCustomPageModelRequest(context);

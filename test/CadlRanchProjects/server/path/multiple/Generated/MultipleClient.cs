@@ -62,7 +62,7 @@ namespace Server.Path.Multiple
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='NoOperationParamsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='NoOperationParamsAsync(RequestContext)']/*" />
         public virtual async Task<Response> NoOperationParamsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleClient.NoOperationParams");
@@ -87,7 +87,7 @@ namespace Server.Path.Multiple
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='NoOperationParams(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='NoOperationParams(RequestContext)']/*" />
         public virtual Response NoOperationParams(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleClient.NoOperationParams");
@@ -115,7 +115,7 @@ namespace Server.Path.Multiple
         /// <exception cref="ArgumentException"> <paramref name="keyword"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParamAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParamAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> WithOperationPathParamAsync(string keyword, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(keyword, nameof(keyword));
@@ -145,7 +145,7 @@ namespace Server.Path.Multiple
         /// <exception cref="ArgumentException"> <paramref name="keyword"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParam(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleClient.xml" path="doc/members/member[@name='WithOperationPathParam(string,RequestContext)']/*" />
         public virtual Response WithOperationPathParam(string keyword, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(keyword, nameof(keyword));

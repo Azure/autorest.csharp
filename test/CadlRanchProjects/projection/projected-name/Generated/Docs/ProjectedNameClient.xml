@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="OperationAsync(global::Azure.RequestContext)">
+    <member name="OperationAsync(RequestContext)">
 <example>
 This sample shows how to call OperationAsync.
 <code><![CDATA[
@@ -12,7 +12,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Operation(global::Azure.RequestContext)">
+    <member name="Operation(RequestContext)">
 <example>
 This sample shows how to call Operation.
 <code><![CDATA[
@@ -23,7 +23,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ParameterAsync(string,global::Azure.RequestContext)">
+    <member name="ParameterAsync(string,RequestContext)">
 <example>
 This sample shows how to call ParameterAsync with required parameters.
 <code><![CDATA[
@@ -34,7 +34,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Parameter(string,global::Azure.RequestContext)">
+    <member name="Parameter(string,RequestContext)">
 <example>
 This sample shows how to call Parameter with required parameters.
 <code><![CDATA[

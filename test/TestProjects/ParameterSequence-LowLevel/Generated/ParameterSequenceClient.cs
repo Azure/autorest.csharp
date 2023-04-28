@@ -75,7 +75,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItemAsync(string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItemAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetItemAsync(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -113,7 +113,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItem(string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='GetItem(string,string,string,RequestContext)']/*" />
         public virtual Response GetItem(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -151,7 +151,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItemAsync(string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItemAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> SelectItemAsync(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -189,7 +189,7 @@ namespace ParameterSequence_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItem(string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParameterSequenceClient.xml" path="doc/members/member[@name='SelectItem(string,string,string,RequestContext)']/*" />
         public virtual Response SelectItem(string itemName, string origin, string version = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));

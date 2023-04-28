@@ -75,7 +75,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenienceAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenienceAsync(RequestContext)']/*" />
         public virtual async Task<Response> UpdateConvenienceAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.UpdateConvenience");
@@ -105,7 +105,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenience(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='UpdateConvenience(RequestContext)']/*" />
         public virtual Response UpdateConvenience(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.UpdateConvenience");
@@ -166,7 +166,7 @@ namespace ConvenienceInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequiredAsync(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalBeforeRequiredAsync(RequestContent content, int? optional = null, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -201,7 +201,7 @@ namespace ConvenienceInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequired(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalBeforeRequired(RequestContent,int?,RequestContext)']/*" />
         public virtual Response ConvenienceOptionalBeforeRequired(RequestContent content, int? optional = null, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -271,7 +271,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolAsync(RequestContext)']/*" />
         public virtual async Task<Response> ProtocolAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.Protocol");
@@ -301,7 +301,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='Protocol(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='Protocol(RequestContext)']/*" />
         public virtual Response Protocol(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.Protocol");
@@ -369,7 +369,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptionalAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptionalAsync(RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceWithOptionalAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithOptional");
@@ -399,7 +399,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptional(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithOptional(RequestContext)']/*" />
         public virtual Response ConvenienceWithOptional(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithOptional");
@@ -447,7 +447,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequiredAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequiredAsync(RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceWithRequiredAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithRequired");
@@ -477,7 +477,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequired(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceWithRequired(RequestContext)']/*" />
         public virtual Response ConvenienceWithRequired(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceWithRequired");
@@ -502,7 +502,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceShouldNotGenerateAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceShouldNotGenerateAsync(RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceShouldNotGenerateAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceShouldNotGenerate");
@@ -527,7 +527,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceShouldNotGenerate(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceShouldNotGenerate(RequestContext)']/*" />
         public virtual Response ConvenienceShouldNotGenerate(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceShouldNotGenerate");
@@ -552,7 +552,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolShouldNotGenerateConvenienceAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolShouldNotGenerateConvenienceAsync(RequestContext)']/*" />
         public virtual async Task<Response> ProtocolShouldNotGenerateConvenienceAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolShouldNotGenerateConvenience");
@@ -577,7 +577,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolShouldNotGenerateConvenience(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolShouldNotGenerateConvenience(RequestContext)']/*" />
         public virtual Response ProtocolShouldNotGenerateConvenience(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolShouldNotGenerateConvenience");
@@ -648,7 +648,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQueryAsync(int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQueryAsync(int?,RequestContext)']/*" />
         public virtual async Task<Response> ProtocolOptionalQueryAsync(int? optional = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalQuery");
@@ -679,7 +679,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQuery(int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalQuery(int?,RequestContext)']/*" />
         public virtual Response ProtocolOptionalQuery(int? optional = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalQuery");
@@ -750,7 +750,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQueryAsync(int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQueryAsync(int,RequestContext)']/*" />
         public virtual async Task<Response> ProtocolRequiredQueryAsync(int required, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolRequiredQuery");
@@ -781,7 +781,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQuery(int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredQuery(int,RequestContext)']/*" />
         public virtual Response ProtocolRequiredQuery(int required, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolRequiredQuery");
@@ -852,7 +852,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ProtocolOptionalModelAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalModel");
@@ -883,7 +883,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModel(RequestContent,RequestContext)']/*" />
         public virtual Response ProtocolOptionalModel(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalModel");
@@ -941,7 +941,7 @@ namespace ConvenienceInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ProtocolRequiredModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -975,7 +975,7 @@ namespace ConvenienceInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolRequiredModel(RequestContent,RequestContext)']/*" />
         public virtual Response ProtocolRequiredModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1048,7 +1048,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptionalAsync(int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptionalAsync(int?,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalQueryWithOptionalAsync(int? optional = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalQueryWithOptional");
@@ -1079,7 +1079,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptional(int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithOptional(int?,RequestContext)']/*" />
         public virtual Response ConvenienceOptionalQueryWithOptional(int? optional = null, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalQueryWithOptional");
@@ -1150,7 +1150,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptionalAsync(int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptionalAsync(int,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceRequiredQueryWithOptionalAsync(int required, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredQueryWithOptional");
@@ -1181,7 +1181,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptional(int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithOptional(int,RequestContext)']/*" />
         public virtual Response ConvenienceRequiredQueryWithOptional(int required, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredQueryWithOptional");
@@ -1232,7 +1232,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequiredAsync(int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequiredAsync(int?,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalQueryWithRequiredAsync(int? optional, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalQueryWithRequired");
@@ -1263,7 +1263,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequired(int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalQueryWithRequired(int?,RequestContext)']/*" />
         public virtual Response ConvenienceOptionalQueryWithRequired(int? optional, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalQueryWithRequired");
@@ -1314,7 +1314,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequiredAsync(int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequiredAsync(int,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceRequiredQueryWithRequiredAsync(int required, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredQueryWithRequired");
@@ -1345,7 +1345,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequired(int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredQueryWithRequired(int,RequestContext)']/*" />
         public virtual Response ConvenienceRequiredQueryWithRequired(int required, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceRequiredQueryWithRequired");
@@ -1416,7 +1416,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalModelWithOptionalAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithOptional");
@@ -1447,7 +1447,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptional(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptional(RequestContent,RequestContext)']/*" />
         public virtual Response ConvenienceOptionalModelWithOptional(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithOptional");
@@ -1505,7 +1505,7 @@ namespace ConvenienceInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptionalAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptionalAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceRequiredModelWithOptionalAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1539,7 +1539,7 @@ namespace ConvenienceInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptional(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceRequiredModelWithOptional(RequestContent,RequestContext)']/*" />
         public virtual Response ConvenienceRequiredModelWithOptional(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1592,7 +1592,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequiredAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequiredAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> ConvenienceOptionalModelWithRequiredAsync(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithRequired");
@@ -1623,7 +1623,7 @@ namespace ConvenienceInCadl
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequired(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequired(RequestContent,RequestContext)']/*" />
         public virtual Response ConvenienceOptionalModelWithRequired(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithRequired");
@@ -1684,7 +1684,7 @@ namespace ConvenienceInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequiredAsync(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequiredAsync(RequestContent,int?,RequestContext)']/*" />
         public virtual async Task<Response> ProtocolOptionalBeforeRequiredAsync(RequestContent content, int? optional = null, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1719,7 +1719,7 @@ namespace ConvenienceInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequired(global::Azure.Core.RequestContent,int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalBeforeRequired(RequestContent,int?,RequestContext)']/*" />
         public virtual Response ProtocolOptionalBeforeRequired(RequestContent content, int? optional = null, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="CollapsePutAsync(global::Azure.Core.RequestContent,global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="CollapsePutAsync(RequestContent,RequestConditions,RequestContext)">
 <example>
 This sample shows how to call CollapsePutAsync with required parameters and request content.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CollapsePut(global::Azure.Core.RequestContent,global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="CollapsePut(RequestContent,RequestConditions,RequestContext)">
 <example>
 This sample shows how to call CollapsePut with required parameters and request content.
 <code><![CDATA[
@@ -49,7 +49,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CollapseGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="CollapseGetAsync(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call CollapseGetAsync.
 <code><![CDATA[
@@ -69,7 +69,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CollapseGet(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="CollapseGet(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call CollapseGet.
 <code><![CDATA[
@@ -89,7 +89,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="MissIfNoneMatchGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="MissIfNoneMatchGetAsync(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call MissIfNoneMatchGetAsync.
 <code><![CDATA[
@@ -109,7 +109,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="MissIfNoneMatchGet(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="MissIfNoneMatchGet(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call MissIfNoneMatchGet.
 <code><![CDATA[
@@ -129,7 +129,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="MissIfMatchGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="MissIfMatchGetAsync(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call MissIfMatchGetAsync.
 <code><![CDATA[
@@ -149,7 +149,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="MissIfMatchGet(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="MissIfMatchGet(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call MissIfMatchGet.
 <code><![CDATA[
@@ -169,7 +169,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="MissIfModifiedSinceGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="MissIfModifiedSinceGetAsync(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call MissIfModifiedSinceGetAsync.
 <code><![CDATA[
@@ -189,7 +189,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="MissIfModifiedSinceGet(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="MissIfModifiedSinceGet(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call MissIfModifiedSinceGet.
 <code><![CDATA[
@@ -209,7 +209,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="MissIfUnmodifiedSinceGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="MissIfUnmodifiedSinceGetAsync(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call MissIfUnmodifiedSinceGetAsync.
 <code><![CDATA[
@@ -229,7 +229,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="MissIfUnmodifiedSinceGet(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="MissIfUnmodifiedSinceGet(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call MissIfUnmodifiedSinceGet.
 <code><![CDATA[
@@ -249,7 +249,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="MissIfMatchIfNoneMatchGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="MissIfMatchIfNoneMatchGetAsync(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call MissIfMatchIfNoneMatchGetAsync.
 <code><![CDATA[
@@ -269,7 +269,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="MissIfMatchIfNoneMatchGet(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="MissIfMatchIfNoneMatchGet(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call MissIfMatchIfNoneMatchGet.
 <code><![CDATA[
@@ -289,7 +289,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="IfModifiedSinceGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="IfModifiedSinceGetAsync(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call IfModifiedSinceGetAsync.
 <code><![CDATA[
@@ -309,7 +309,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="IfModifiedSinceGet(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="IfModifiedSinceGet(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call IfModifiedSinceGet.
 <code><![CDATA[
@@ -329,7 +329,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="IfUnmodifiedSinceGetAsync(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="IfUnmodifiedSinceGetAsync(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call IfUnmodifiedSinceGetAsync.
 <code><![CDATA[
@@ -349,7 +349,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="IfUnmodifiedSinceGet(global::Azure.RequestConditions,global::Azure.RequestContext)">
+    <member name="IfUnmodifiedSinceGet(RequestConditions,RequestContext)">
 <example>
 This sample shows how to call IfUnmodifiedSinceGet.
 <code><![CDATA[

@@ -69,7 +69,7 @@ namespace Parameters_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBodyAsync(int,int?,int,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBodyAsync(int,int?,int,string,RequestContext)']/*" />
         public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyResponseBody");
@@ -98,7 +98,7 @@ namespace Parameters_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBody(int,int?,int,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBody(int,int?,int,string,RequestContext)']/*" />
         public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyResponseBody");
@@ -124,7 +124,7 @@ namespace Parameters_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyResponseBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyResponseBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RequestBodyResponseBodyAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyResponseBody");
@@ -150,7 +150,7 @@ namespace Parameters_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyResponseBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyResponseBody(RequestContent,RequestContext)']/*" />
         public virtual Response RequestBodyResponseBody(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyResponseBody");
@@ -177,7 +177,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBodyAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBodyAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
@@ -206,7 +206,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="resourceName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBody(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBody(string,RequestContext)']/*" />
         public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
@@ -233,7 +233,7 @@ namespace Parameters_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyNoResponseBodyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyNoResponseBodyAsync(RequestContext)']/*" />
         public virtual async Task<Response> NoRequestBodyNoResponseBodyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyNoResponseBody");
@@ -258,7 +258,7 @@ namespace Parameters_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyNoResponseBody(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyNoResponseBody(RequestContext)']/*" />
         public virtual Response NoRequestBodyNoResponseBody(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyNoResponseBody");
@@ -284,7 +284,7 @@ namespace Parameters_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyNoResponseBodyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyNoResponseBodyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyNoResponseBody");
@@ -310,7 +310,7 @@ namespace Parameters_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyNoResponseBody(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyNoResponseBody(RequestContent,RequestContext)']/*" />
         public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyNoResponseBody");
@@ -340,7 +340,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersAsync(int,int,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersAsync(int,int,string,RequestContext)']/*" />
         public virtual async Task<Response> OptionalPathParametersAsync(int id, int skip, string name = "start", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -372,7 +372,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParameters(int,int,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParameters(int,int,string,RequestContext)']/*" />
         public virtual Response OptionalPathParameters(int id, int skip, string name = "start", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -404,7 +404,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequenceAsync(int,string,int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequenceAsync(int,string,int,RequestContext)']/*" />
         public virtual async Task<Response> OptionalPathParametersWithMixedSequenceAsync(int id, string name = "start", int skip = 12, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -436,7 +436,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequence(int,string,int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequence(int,string,int,RequestContext)']/*" />
         public virtual Response OptionalPathParametersWithMixedSequence(int id, string name = "start", int skip = 12, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -471,7 +471,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequenceAsync(string,int,global::Azure.Core.RequestContent,int,int?,int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequenceAsync(string,int,RequestContent,int,int?,int,RequestContext)']/*" />
         public virtual async Task<Response> OptionalPathBodyParametersWithMixedSequenceAsync(string name, int skip, RequestContent content, int id = 123, int? top = null, int max = 50, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
@@ -506,7 +506,7 @@ namespace Parameters_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequence(string,int,global::Azure.Core.RequestContent,int,int?,int,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequence(string,int,RequestContent,int,int?,int,RequestContext)']/*" />
         public virtual Response OptionalPathBodyParametersWithMixedSequence(string name, int skip, RequestContent content, int id = 123, int? top = null, int max = 50, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));

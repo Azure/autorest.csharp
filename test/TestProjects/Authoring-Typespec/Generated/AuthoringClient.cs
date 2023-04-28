@@ -68,7 +68,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='CreateOrUpdateAsync(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='CreateOrUpdateAsync(string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateOrUpdateAsync(string projectName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -100,7 +100,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='CreateOrUpdate(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='CreateOrUpdate(string,RequestContent,RequestContext)']/*" />
         public virtual Response CreateOrUpdate(string projectName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -131,7 +131,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjectAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjectAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetProjectAsync(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -161,7 +161,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProject(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProject(string,RequestContext)']/*" />
         public virtual Response GetProject(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -191,7 +191,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeleteAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeleteAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> DeleteAsync(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -221,7 +221,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='Delete(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='Delete(string,RequestContext)']/*" />
         public virtual Response Delete(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -252,7 +252,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='ExportAsync(string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='ExportAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> ExportAsync(string projectName, string projectFileVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -284,7 +284,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='Export(string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='Export(string,string,RequestContext)']/*" />
         public virtual Response Export(string projectName, string projectFileVersion, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -315,7 +315,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='ImportxAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='ImportxAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> ImportxAsync(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -345,7 +345,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='Importx(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='Importx(string,RequestContext)']/*" />
         public virtual Response Importx(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -376,7 +376,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='TrainAsync(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='TrainAsync(string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> TrainAsync(string projectName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -408,7 +408,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='Train(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='Train(string,RequestContent,RequestContext)']/*" />
         public virtual Response Train(string projectName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -440,7 +440,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeploymentAsync(string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeploymentAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetDeploymentAsync(string projectName, string deploymentName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -472,7 +472,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeployment(string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeployment(string,string,RequestContext)']/*" />
         public virtual Response GetDeployment(string projectName, string deploymentName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -505,7 +505,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeployProjectAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeployProjectAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> DeployProjectAsync(string projectName, string deploymentName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -539,7 +539,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeployProject(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeployProject(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response DeployProject(string projectName, string deploymentName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -572,7 +572,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeleteDeploymentAsync(string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeleteDeploymentAsync(string,string,RequestContext)']/*" />
         public virtual async Task<Response> DeleteDeploymentAsync(string projectName, string deploymentName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -604,7 +604,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeleteDeployment(string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='DeleteDeployment(string,string,RequestContext)']/*" />
         public virtual Response DeleteDeployment(string projectName, string deploymentName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -636,7 +636,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='SwapDeploymentsAsync(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='SwapDeploymentsAsync(string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> SwapDeploymentsAsync(string projectName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -668,7 +668,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='SwapDeployments(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='SwapDeployments(string,RequestContent,RequestContext)']/*" />
         public virtual Response SwapDeployments(string projectName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -742,7 +742,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeploymentStatusAsync(string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeploymentStatusAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetDeploymentStatusAsync(string projectName, string deploymentName, string jobId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -781,7 +781,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeploymentStatus(string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeploymentStatus(string,string,string,RequestContext)']/*" />
         public virtual Response GetDeploymentStatus(string projectName, string deploymentName, string jobId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -856,7 +856,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetSwapDeploymentsStatusAsync(string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetSwapDeploymentsStatusAsync(string,string,string,RequestContext)']/*" />
         public virtual async Task<Response> GetSwapDeploymentsStatusAsync(string projectName, string deploymentName, string jobId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -895,7 +895,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetSwapDeploymentsStatus(string,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetSwapDeploymentsStatus(string,string,string,RequestContext)']/*" />
         public virtual Response GetSwapDeploymentsStatus(string projectName, string deploymentName, string jobId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -924,7 +924,7 @@ namespace Azure.Language.Authoring
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjectsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjectsAsync(RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetProjectsAsync(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetProjectsRequest(context);
@@ -940,7 +940,7 @@ namespace Azure.Language.Authoring
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjects(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetProjects(RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetProjects(RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetProjectsRequest(context);
@@ -959,7 +959,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeploymentsAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeploymentsAsync(string,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetDeploymentsAsync(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -980,7 +980,7 @@ namespace Azure.Language.Authoring
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeployments(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetDeployments(string,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetDeployments(string projectName, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
@@ -1001,7 +1001,7 @@ namespace Azure.Language.Authoring
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetSupportedLanguagesAsync(int?,int?,int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetSupportedLanguagesAsync(int?,int?,int?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetSupportedLanguagesAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSupportedLanguagesRequest(maxCount, skip, maxpagesize, context);
@@ -1020,7 +1020,7 @@ namespace Azure.Language.Authoring
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetSupportedLanguages(int?,int?,int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetSupportedLanguages(int?,int?,int?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetSupportedLanguages(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSupportedLanguagesRequest(maxCount, skip, maxpagesize, context);
@@ -1039,7 +1039,7 @@ namespace Azure.Language.Authoring
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetTrainingConfigVersionsAsync(int?,int?,int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetTrainingConfigVersionsAsync(int?,int?,int?,RequestContext)']/*" />
         public virtual AsyncPageable<BinaryData> GetTrainingConfigVersionsAsync(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context);
@@ -1058,7 +1058,7 @@ namespace Azure.Language.Authoring
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetTrainingConfigVersions(int?,int?,int?,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/AuthoringClient.xml" path="doc/members/member[@name='GetTrainingConfigVersions(int?,int?,int?,RequestContext)']/*" />
         public virtual Pageable<BinaryData> GetTrainingConfigVersions(int? maxCount = null, int? skip = null, int? maxpagesize = null, RequestContext context = null)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetTrainingConfigVersionsRequest(maxCount, skip, maxpagesize, context);

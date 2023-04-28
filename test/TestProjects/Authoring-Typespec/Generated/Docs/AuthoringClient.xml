@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="CreateOrUpdateAsync(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="CreateOrUpdateAsync(string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call CreateOrUpdateAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -99,7 +99,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="CreateOrUpdate(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="CreateOrUpdate(string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call CreateOrUpdate with required parameters and request content, and how to parse the result.
 <code><![CDATA[
@@ -197,7 +197,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="GetProjectAsync(string,global::Azure.RequestContext)">
+    <member name="GetProjectAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetProjectAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -243,7 +243,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="GetProject(string,global::Azure.RequestContext)">
+    <member name="GetProject(string,RequestContext)">
 <example>
 This sample shows how to call GetProject with required parameters and parse the result.
 <code><![CDATA[
@@ -289,7 +289,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="DeleteAsync(string,global::Azure.RequestContext)">
+    <member name="DeleteAsync(string,RequestContext)">
 <example>
 This sample shows how to call DeleteAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -335,7 +335,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="Delete(string,global::Azure.RequestContext)">
+    <member name="Delete(string,RequestContext)">
 <example>
 This sample shows how to call Delete with required parameters and parse the result.
 <code><![CDATA[
@@ -381,7 +381,7 @@ Schema for <c>Project</c>:
 
 </remarks>
     </member>
-    <member name="ExportAsync(string,string,global::Azure.RequestContext)">
+    <member name="ExportAsync(string,string,RequestContext)">
 <example>
 This sample shows how to call ExportAsync with required parameters.
 <code><![CDATA[
@@ -393,7 +393,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Export(string,string,global::Azure.RequestContext)">
+    <member name="Export(string,string,RequestContext)">
 <example>
 This sample shows how to call Export with required parameters.
 <code><![CDATA[
@@ -405,7 +405,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ImportxAsync(string,global::Azure.RequestContext)">
+    <member name="ImportxAsync(string,RequestContext)">
 <example>
 This sample shows how to call ImportxAsync with required parameters.
 <code><![CDATA[
@@ -417,7 +417,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Importx(string,global::Azure.RequestContext)">
+    <member name="Importx(string,RequestContext)">
 <example>
 This sample shows how to call Importx with required parameters.
 <code><![CDATA[
@@ -429,7 +429,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="TrainAsync(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="TrainAsync(string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call TrainAsync with required parameters and request content.
 <code><![CDATA[
@@ -457,7 +457,7 @@ Schema for <c>TrainingJobOptions</c>:
 
 </remarks>
     </member>
-    <member name="Train(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Train(string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call Train with required parameters and request content.
 <code><![CDATA[
@@ -485,7 +485,7 @@ Schema for <c>TrainingJobOptions</c>:
 
 </remarks>
     </member>
-    <member name="GetDeploymentAsync(string,string,global::Azure.RequestContext)">
+    <member name="GetDeploymentAsync(string,string,RequestContext)">
 <example>
 This sample shows how to call GetDeploymentAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -511,7 +511,7 @@ Schema for <c>Deployment</c>:
 
 </remarks>
     </member>
-    <member name="GetDeployment(string,string,global::Azure.RequestContext)">
+    <member name="GetDeployment(string,string,RequestContext)">
 <example>
 This sample shows how to call GetDeployment with required parameters and parse the result.
 <code><![CDATA[
@@ -537,7 +537,7 @@ Schema for <c>Deployment</c>:
 
 </remarks>
     </member>
-    <member name="DeployProjectAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="DeployProjectAsync(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call DeployProjectAsync with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -573,7 +573,7 @@ Schema for <c>Deployment</c>:
 
 </remarks>
     </member>
-    <member name="DeployProject(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="DeployProject(string,string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call DeployProject with required parameters and request content and parse the result.
 <code><![CDATA[
@@ -609,7 +609,7 @@ Schema for <c>Deployment</c>:
 
 </remarks>
     </member>
-    <member name="DeleteDeploymentAsync(string,string,global::Azure.RequestContext)">
+    <member name="DeleteDeploymentAsync(string,string,RequestContext)">
 <example>
 This sample shows how to call DeleteDeploymentAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -635,7 +635,7 @@ Schema for <c>Deployment</c>:
 
 </remarks>
     </member>
-    <member name="DeleteDeployment(string,string,global::Azure.RequestContext)">
+    <member name="DeleteDeployment(string,string,RequestContext)">
 <example>
 This sample shows how to call DeleteDeployment with required parameters and parse the result.
 <code><![CDATA[
@@ -661,7 +661,7 @@ Schema for <c>Deployment</c>:
 
 </remarks>
     </member>
-    <member name="SwapDeploymentsAsync(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SwapDeploymentsAsync(string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SwapDeploymentsAsync with required parameters and request content.
 <code><![CDATA[
@@ -691,7 +691,7 @@ Schema for <c>SwapDeploymentsOptions</c>:
 
 </remarks>
     </member>
-    <member name="SwapDeployments(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="SwapDeployments(string,RequestContent,RequestContext)">
 <example>
 This sample shows how to call SwapDeployments with required parameters and request content.
 <code><![CDATA[
@@ -721,7 +721,7 @@ Schema for <c>SwapDeploymentsOptions</c>:
 
 </remarks>
     </member>
-    <member name="GetDeploymentStatusAsync(string,string,string,global::Azure.RequestContext)">
+    <member name="GetDeploymentStatusAsync(string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetDeploymentStatusAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -779,7 +779,7 @@ Schema for <c>DeploymentJob</c>:
 
 </remarks>
     </member>
-    <member name="GetDeploymentStatus(string,string,string,global::Azure.RequestContext)">
+    <member name="GetDeploymentStatus(string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetDeploymentStatus with required parameters and parse the result.
 <code><![CDATA[
@@ -837,7 +837,7 @@ Schema for <c>DeploymentJob</c>:
 
 </remarks>
     </member>
-    <member name="GetSwapDeploymentsStatusAsync(string,string,string,global::Azure.RequestContext)">
+    <member name="GetSwapDeploymentsStatusAsync(string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetSwapDeploymentsStatusAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -895,7 +895,7 @@ Schema for <c>SwapDeploymentsJob</c>:
 
 </remarks>
     </member>
-    <member name="GetSwapDeploymentsStatus(string,string,string,global::Azure.RequestContext)">
+    <member name="GetSwapDeploymentsStatus(string,string,string,RequestContext)">
 <example>
 This sample shows how to call GetSwapDeploymentsStatus with required parameters and parse the result.
 <code><![CDATA[
@@ -953,7 +953,7 @@ Schema for <c>SwapDeploymentsJob</c>:
 
 </remarks>
     </member>
-    <member name="GetProjectsAsync(global::Azure.RequestContext)">
+    <member name="GetProjectsAsync(RequestContext)">
 <example>
 This sample shows how to call GetProjectsAsync and parse the result.
 <code><![CDATA[
@@ -1000,7 +1000,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetProjects(global::Azure.RequestContext)">
+    <member name="GetProjects(RequestContext)">
 <example>
 This sample shows how to call GetProjects and parse the result.
 <code><![CDATA[
@@ -1047,7 +1047,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetDeploymentsAsync(string,global::Azure.RequestContext)">
+    <member name="GetDeploymentsAsync(string,RequestContext)">
 <example>
 This sample shows how to call GetDeploymentsAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -1094,7 +1094,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetDeployments(string,global::Azure.RequestContext)">
+    <member name="GetDeployments(string,RequestContext)">
 <example>
 This sample shows how to call GetDeployments with required parameters and parse the result.
 <code><![CDATA[
@@ -1141,7 +1141,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetSupportedLanguagesAsync(int?,int?,int?,global::Azure.RequestContext)">
+    <member name="GetSupportedLanguagesAsync(int?,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetSupportedLanguagesAsync and parse the result.
 <code><![CDATA[
@@ -1182,7 +1182,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetSupportedLanguages(int?,int?,int?,global::Azure.RequestContext)">
+    <member name="GetSupportedLanguages(int?,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetSupportedLanguages and parse the result.
 <code><![CDATA[
@@ -1223,7 +1223,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetTrainingConfigVersionsAsync(int?,int?,int?,global::Azure.RequestContext)">
+    <member name="GetTrainingConfigVersionsAsync(int?,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetTrainingConfigVersionsAsync and parse the result.
 <code><![CDATA[
@@ -1264,7 +1264,7 @@ Schema for <c>Array</c>:
 
 </remarks>
     </member>
-    <member name="GetTrainingConfigVersions(int?,int?,int?,global::Azure.RequestContext)">
+    <member name="GetTrainingConfigVersions(int?,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetTrainingConfigVersions and parse the result.
 <code><![CDATA[

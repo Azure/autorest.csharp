@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetDocumentStatusAsync(global::System.Guid,global::System.Guid,global::Azure.RequestContext)">
+    <member name="GetDocumentStatusAsync(Guid,Guid,RequestContext)">
 <example>
 This sample shows how to call GetDocumentStatusAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -66,7 +66,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="GetDocumentStatus(global::System.Guid,global::System.Guid,global::Azure.RequestContext)">
+    <member name="GetDocumentStatus(Guid,Guid,RequestContext)">
 <example>
 This sample shows how to call GetDocumentStatus with required parameters and parse the result.
 <code><![CDATA[
@@ -131,7 +131,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="GetTranslationStatusAsync(global::System.Guid,global::Azure.RequestContext)">
+    <member name="GetTranslationStatusAsync(Guid,RequestContext)">
 <example>
 This sample shows how to call GetTranslationStatusAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -203,7 +203,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="GetTranslationStatus(global::System.Guid,global::Azure.RequestContext)">
+    <member name="GetTranslationStatus(Guid,RequestContext)">
 <example>
 This sample shows how to call GetTranslationStatus with required parameters and parse the result.
 <code><![CDATA[
@@ -275,7 +275,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="CancelTranslationAsync(global::System.Guid,global::Azure.RequestContext)">
+    <member name="CancelTranslationAsync(Guid,RequestContext)">
 <example>
 This sample shows how to call CancelTranslationAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -350,7 +350,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="CancelTranslation(global::System.Guid,global::Azure.RequestContext)">
+    <member name="CancelTranslation(Guid,RequestContext)">
 <example>
 This sample shows how to call CancelTranslation with required parameters and parse the result.
 <code><![CDATA[
@@ -425,7 +425,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="GetSupportedDocumentFormatsAsync(global::Azure.RequestContext)">
+    <member name="GetSupportedDocumentFormatsAsync(RequestContext)">
 <example>
 This sample shows how to call GetSupportedDocumentFormatsAsync and parse the result.
 <code><![CDATA[
@@ -466,7 +466,7 @@ Schema for <c>SupportedFileFormats</c>:
 
 </remarks>
     </member>
-    <member name="GetSupportedDocumentFormats(global::Azure.RequestContext)">
+    <member name="GetSupportedDocumentFormats(RequestContext)">
 <example>
 This sample shows how to call GetSupportedDocumentFormats and parse the result.
 <code><![CDATA[
@@ -507,7 +507,7 @@ Schema for <c>SupportedFileFormats</c>:
 
 </remarks>
     </member>
-    <member name="GetSupportedGlossaryFormatsAsync(global::Azure.RequestContext)">
+    <member name="GetSupportedGlossaryFormatsAsync(RequestContext)">
 <example>
 This sample shows how to call GetSupportedGlossaryFormatsAsync and parse the result.
 <code><![CDATA[
@@ -548,7 +548,7 @@ Schema for <c>SupportedFileFormats</c>:
 
 </remarks>
     </member>
-    <member name="GetSupportedGlossaryFormats(global::Azure.RequestContext)">
+    <member name="GetSupportedGlossaryFormats(RequestContext)">
 <example>
 This sample shows how to call GetSupportedGlossaryFormats and parse the result.
 <code><![CDATA[
@@ -589,7 +589,7 @@ Schema for <c>SupportedFileFormats</c>:
 
 </remarks>
     </member>
-    <member name="GetSupportedStorageSourcesAsync(global::Azure.RequestContext)">
+    <member name="GetSupportedStorageSourcesAsync(RequestContext)">
 <example>
 This sample shows how to call GetSupportedStorageSourcesAsync and parse the result.
 <code><![CDATA[
@@ -617,7 +617,7 @@ Schema for <c>SupportedStorageSources</c>:
 
 </remarks>
     </member>
-    <member name="GetSupportedStorageSources(global::Azure.RequestContext)">
+    <member name="GetSupportedStorageSources(RequestContext)">
 <example>
 This sample shows how to call GetSupportedStorageSources and parse the result.
 <code><![CDATA[
@@ -645,7 +645,7 @@ Schema for <c>SupportedStorageSources</c>:
 
 </remarks>
     </member>
-    <member name="GetTranslationsStatusAsync(int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="GetTranslationsStatusAsync(int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call GetTranslationsStatusAsync and parse the result.
 <code><![CDATA[
@@ -760,7 +760,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="GetTranslationsStatus(int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="GetTranslationsStatus(int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call GetTranslationsStatus and parse the result.
 <code><![CDATA[
@@ -875,7 +875,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="GetDocumentsStatusAsync(global::System.Guid,int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="GetDocumentsStatusAsync(Guid,int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call GetDocumentsStatusAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -977,7 +977,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="GetDocumentsStatus(global::System.Guid,int?,int?,int?,global::System.Collections.Generic.IEnumerable{global::System.Guid},global::System.Collections.Generic.IEnumerable{string},global::System.DateTimeOffset?,global::System.DateTimeOffset?,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="GetDocumentsStatus(Guid,int?,int?,int?,IEnumerable{Guid},IEnumerable{string},DateTimeOffset?,DateTimeOffset?,IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call GetDocumentsStatus with required parameters and parse the result.
 <code><![CDATA[
@@ -1079,7 +1079,7 @@ This contains required properties ErrorCode, message and optional properties tar
 
 </remarks>
     </member>
-    <member name="StartTranslationAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
+    <member name="StartTranslationAsync(WaitUntil,RequestContent,ContentType,RequestContext)">
 <example>
 This sample shows how to call StartTranslationAsync with required parameters and request content.
 <code><![CDATA[
@@ -1182,7 +1182,7 @@ If the translation language pair is not present in the glossary, it will not be 
 
 </remarks>
     </member>
-    <member name="StartTranslation(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::Azure.RequestContext)">
+    <member name="StartTranslation(WaitUntil,RequestContent,ContentType,RequestContext)">
 <example>
 This sample shows how to call StartTranslation with required parameters and request content.
 <code><![CDATA[

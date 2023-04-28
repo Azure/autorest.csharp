@@ -65,7 +65,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNull");
@@ -90,7 +90,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNull(RequestContext)']/*" />
         public virtual Response GetNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNull");
@@ -115,7 +115,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetInvalidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetInvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetInvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetInvalid");
@@ -140,7 +140,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetInvalid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetInvalid(RequestContext)']/*" />
         public virtual Response GetInvalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetInvalid");
@@ -165,7 +165,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
@@ -190,7 +190,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
         public virtual Response GetEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
@@ -217,7 +217,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEmptyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEmptyAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutEmptyAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -246,7 +246,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEmpty(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEmpty(RequestContent,RequestContext)']/*" />
         public virtual Response PutEmpty(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -273,7 +273,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanTfftAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanTfftAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBooleanTfftAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
@@ -298,7 +298,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanTfft(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanTfft(RequestContext)']/*" />
         public virtual Response GetBooleanTfft(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
@@ -325,7 +325,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutBooleanTfftAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutBooleanTfftAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutBooleanTfftAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -354,7 +354,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutBooleanTfft(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutBooleanTfft(RequestContent,RequestContext)']/*" />
         public virtual Response PutBooleanTfft(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -381,7 +381,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBooleanInvalidNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
@@ -406,7 +406,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidNull(RequestContext)']/*" />
         public virtual Response GetBooleanInvalidNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
@@ -431,7 +431,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidStringAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidStringAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBooleanInvalidStringAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
@@ -456,7 +456,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidString(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidString(RequestContext)']/*" />
         public virtual Response GetBooleanInvalidString(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
@@ -481,7 +481,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntegerValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntegerValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetIntegerValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
@@ -506,7 +506,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntegerValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntegerValid(RequestContext)']/*" />
         public virtual Response GetIntegerValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
@@ -533,7 +533,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutIntegerValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutIntegerValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutIntegerValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -562,7 +562,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutIntegerValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutIntegerValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutIntegerValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -589,7 +589,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetIntInvalidNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
@@ -614,7 +614,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidNull(RequestContext)']/*" />
         public virtual Response GetIntInvalidNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
@@ -639,7 +639,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidStringAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidStringAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetIntInvalidStringAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
@@ -664,7 +664,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidString(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidString(RequestContext)']/*" />
         public virtual Response GetIntInvalidString(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
@@ -689,7 +689,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetLongValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongValid");
@@ -714,7 +714,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongValid(RequestContext)']/*" />
         public virtual Response GetLongValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongValid");
@@ -741,7 +741,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutLongValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutLongValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutLongValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -770,7 +770,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutLongValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutLongValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutLongValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -797,7 +797,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetLongInvalidNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
@@ -822,7 +822,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidNull(RequestContext)']/*" />
         public virtual Response GetLongInvalidNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
@@ -847,7 +847,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidStringAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidStringAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetLongInvalidStringAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
@@ -872,7 +872,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidString(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidString(RequestContext)']/*" />
         public virtual Response GetLongInvalidString(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
@@ -897,7 +897,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetFloatValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
@@ -922,7 +922,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatValid(RequestContext)']/*" />
         public virtual Response GetFloatValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
@@ -949,7 +949,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutFloatValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutFloatValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutFloatValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -978,7 +978,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutFloatValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutFloatValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutFloatValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1005,7 +1005,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetFloatInvalidNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
@@ -1030,7 +1030,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidNull(RequestContext)']/*" />
         public virtual Response GetFloatInvalidNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
@@ -1055,7 +1055,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidStringAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidStringAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetFloatInvalidStringAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
@@ -1080,7 +1080,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidString(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidString(RequestContext)']/*" />
         public virtual Response GetFloatInvalidString(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
@@ -1105,7 +1105,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDoubleValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
@@ -1130,7 +1130,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleValid(RequestContext)']/*" />
         public virtual Response GetDoubleValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
@@ -1157,7 +1157,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDoubleValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDoubleValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDoubleValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1186,7 +1186,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDoubleValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDoubleValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDoubleValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1213,7 +1213,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDoubleInvalidNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
@@ -1238,7 +1238,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidNull(RequestContext)']/*" />
         public virtual Response GetDoubleInvalidNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
@@ -1263,7 +1263,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidStringAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidStringAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDoubleInvalidStringAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
@@ -1288,7 +1288,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidString(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidString(RequestContext)']/*" />
         public virtual Response GetDoubleInvalidString(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
@@ -1313,7 +1313,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetStringValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringValid");
@@ -1338,7 +1338,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringValid(RequestContext)']/*" />
         public virtual Response GetStringValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringValid");
@@ -1365,7 +1365,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutStringValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1394,7 +1394,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutStringValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1421,7 +1421,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEnumValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEnumValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetEnumValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
@@ -1446,7 +1446,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEnumValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEnumValid(RequestContext)']/*" />
         public virtual Response GetEnumValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
@@ -1473,7 +1473,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEnumValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEnumValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutEnumValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1502,7 +1502,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEnumValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutEnumValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutEnumValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1529,7 +1529,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringEnumValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringEnumValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetStringEnumValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
@@ -1554,7 +1554,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringEnumValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringEnumValid(RequestContext)']/*" />
         public virtual Response GetStringEnumValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
@@ -1581,7 +1581,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringEnumValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringEnumValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutStringEnumValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1610,7 +1610,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringEnumValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutStringEnumValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutStringEnumValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1637,7 +1637,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetStringWithNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
@@ -1662,7 +1662,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithNull(RequestContext)']/*" />
         public virtual Response GetStringWithNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
@@ -1687,7 +1687,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithInvalidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithInvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetStringWithInvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
@@ -1712,7 +1712,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithInvalid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithInvalid(RequestContext)']/*" />
         public virtual Response GetStringWithInvalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
@@ -1737,7 +1737,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetUuidValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
@@ -1762,7 +1762,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidValid(RequestContext)']/*" />
         public virtual Response GetUuidValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
@@ -1789,7 +1789,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutUuidValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutUuidValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutUuidValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1818,7 +1818,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutUuidValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutUuidValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutUuidValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1845,7 +1845,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidInvalidCharsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidInvalidCharsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetUuidInvalidCharsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
@@ -1870,7 +1870,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidInvalidChars(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidInvalidChars(RequestContext)']/*" />
         public virtual Response GetUuidInvalidChars(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
@@ -1895,7 +1895,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDateValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateValid");
@@ -1920,7 +1920,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateValid(RequestContext)']/*" />
         public virtual Response GetDateValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateValid");
@@ -1947,7 +1947,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -1976,7 +1976,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDateValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -2003,7 +2003,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDateInvalidNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
@@ -2028,7 +2028,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidNull(RequestContext)']/*" />
         public virtual Response GetDateInvalidNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
@@ -2053,7 +2053,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidCharsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidCharsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDateInvalidCharsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
@@ -2078,7 +2078,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidChars(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidChars(RequestContext)']/*" />
         public virtual Response GetDateInvalidChars(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
@@ -2103,7 +2103,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDateTimeValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
@@ -2128,7 +2128,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeValid(RequestContext)']/*" />
         public virtual Response GetDateTimeValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
@@ -2155,7 +2155,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateTimeValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -2184,7 +2184,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDateTimeValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -2211,7 +2211,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDateTimeInvalidNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
@@ -2236,7 +2236,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidNull(RequestContext)']/*" />
         public virtual Response GetDateTimeInvalidNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
@@ -2261,7 +2261,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidCharsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidCharsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDateTimeInvalidCharsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
@@ -2286,7 +2286,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidChars(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidChars(RequestContext)']/*" />
         public virtual Response GetDateTimeInvalidChars(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
@@ -2311,7 +2311,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDateTimeRfc1123ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
@@ -2336,7 +2336,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123Valid(RequestContext)']/*" />
         public virtual Response GetDateTimeRfc1123Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
@@ -2363,7 +2363,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123ValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123ValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDateTimeRfc1123ValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -2392,7 +2392,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123Valid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDateTimeRfc1123Valid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDateTimeRfc1123Valid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -2419,7 +2419,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDurationValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDurationValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDurationValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
@@ -2444,7 +2444,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDurationValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDurationValid(RequestContext)']/*" />
         public virtual Response GetDurationValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
@@ -2471,7 +2471,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDurationValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDurationValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDurationValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -2500,7 +2500,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDurationValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDurationValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDurationValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -2527,7 +2527,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetByteValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteValid");
@@ -2552,7 +2552,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteValid(RequestContext)']/*" />
         public virtual Response GetByteValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteValid");
@@ -2579,7 +2579,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutByteValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutByteValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutByteValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -2608,7 +2608,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutByteValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutByteValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutByteValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -2635,7 +2635,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteInvalidNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteInvalidNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetByteInvalidNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
@@ -2660,7 +2660,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteInvalidNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteInvalidNull(RequestContext)']/*" />
         public virtual Response GetByteInvalidNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
@@ -2685,7 +2685,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBase64UrlAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBase64UrlAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBase64UrlAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
@@ -2710,7 +2710,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBase64Url(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBase64Url(RequestContext)']/*" />
         public virtual Response GetBase64Url(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
@@ -2735,7 +2735,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetComplexNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
@@ -2760,7 +2760,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexNull(RequestContext)']/*" />
         public virtual Response GetComplexNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
@@ -2785,7 +2785,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetComplexEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
@@ -2810,7 +2810,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexEmpty(RequestContext)']/*" />
         public virtual Response GetComplexEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
@@ -2835,7 +2835,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetComplexItemNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
@@ -2860,7 +2860,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemNull(RequestContext)']/*" />
         public virtual Response GetComplexItemNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
@@ -2885,7 +2885,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetComplexItemEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
@@ -2910,7 +2910,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemEmpty(RequestContext)']/*" />
         public virtual Response GetComplexItemEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
@@ -2935,7 +2935,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetComplexValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
@@ -2960,7 +2960,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexValid(RequestContext)']/*" />
         public virtual Response GetComplexValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
@@ -2987,7 +2987,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutComplexValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutComplexValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutComplexValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -3016,7 +3016,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutComplexValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutComplexValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutComplexValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -3043,7 +3043,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetArrayNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
@@ -3068,7 +3068,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayNull(RequestContext)']/*" />
         public virtual Response GetArrayNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
@@ -3093,7 +3093,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetArrayEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
@@ -3118,7 +3118,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayEmpty(RequestContext)']/*" />
         public virtual Response GetArrayEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
@@ -3143,7 +3143,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetArrayItemNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
@@ -3168,7 +3168,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemNull(RequestContext)']/*" />
         public virtual Response GetArrayItemNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
@@ -3193,7 +3193,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetArrayItemEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
@@ -3218,7 +3218,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemEmpty(RequestContext)']/*" />
         public virtual Response GetArrayItemEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
@@ -3243,7 +3243,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetArrayValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
@@ -3268,7 +3268,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayValid(RequestContext)']/*" />
         public virtual Response GetArrayValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
@@ -3295,7 +3295,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutArrayValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutArrayValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutArrayValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -3324,7 +3324,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutArrayValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutArrayValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutArrayValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -3351,7 +3351,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDictionaryNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
@@ -3376,7 +3376,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryNull(RequestContext)']/*" />
         public virtual Response GetDictionaryNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
@@ -3401,7 +3401,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDictionaryEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
@@ -3426,7 +3426,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryEmpty(RequestContext)']/*" />
         public virtual Response GetDictionaryEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
@@ -3451,7 +3451,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemNullAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemNullAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDictionaryItemNullAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
@@ -3476,7 +3476,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemNull(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemNull(RequestContext)']/*" />
         public virtual Response GetDictionaryItemNull(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
@@ -3501,7 +3501,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDictionaryItemEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
@@ -3526,7 +3526,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemEmpty(RequestContext)']/*" />
         public virtual Response GetDictionaryItemEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
@@ -3551,7 +3551,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDictionaryValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
@@ -3576,7 +3576,7 @@ namespace body_array_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryValid(RequestContext)']/*" />
         public virtual Response GetDictionaryValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
@@ -3603,7 +3603,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDictionaryValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDictionaryValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutDictionaryValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -3632,7 +3632,7 @@ namespace body_array_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDictionaryValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='PutDictionaryValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutDictionaryValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

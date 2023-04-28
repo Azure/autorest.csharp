@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetNullableFloatValueAsync(global::Azure.RequestContext)">
+    <member name="GetNullableFloatValueAsync(RequestContext)">
 <example>
 This sample shows how to call GetNullableFloatValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -14,7 +14,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetNullableFloatValue(global::Azure.RequestContext)">
+    <member name="GetNullableFloatValue(RequestContext)">
 <example>
 This sample shows how to call GetNullableFloatValue with required parameters and parse the result.
 <code><![CDATA[
@@ -27,7 +27,7 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
@@ -42,7 +42,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Put(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Put(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[

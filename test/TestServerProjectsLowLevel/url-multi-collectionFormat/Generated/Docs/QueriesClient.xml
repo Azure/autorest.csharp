@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="ArrayStringMultiNullAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringMultiNullAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringMultiNullAsync.
 <code><![CDATA[
@@ -21,7 +21,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringMultiNull(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringMultiNull(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringMultiNull.
 <code><![CDATA[
@@ -41,7 +41,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringMultiEmptyAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringMultiEmptyAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringMultiEmptyAsync.
 <code><![CDATA[
@@ -61,7 +61,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringMultiEmpty(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringMultiEmpty(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringMultiEmpty.
 <code><![CDATA[
@@ -81,7 +81,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringMultiValidAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringMultiValidAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringMultiValidAsync.
 <code><![CDATA[
@@ -101,7 +101,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="ArrayStringMultiValid(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="ArrayStringMultiValid(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call ArrayStringMultiValid.
 <code><![CDATA[

@@ -73,7 +73,7 @@ namespace SubClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RootClient.xml" path="doc/members/member[@name='GetCachedParameterAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/RootClient.xml" path="doc/members/member[@name='GetCachedParameterAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetCachedParameterAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RootClient.GetCachedParameter");
@@ -98,7 +98,7 @@ namespace SubClients_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/RootClient.xml" path="doc/members/member[@name='GetCachedParameter(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/RootClient.xml" path="doc/members/member[@name='GetCachedParameter(RequestContext)']/*" />
         public virtual Response GetCachedParameter(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("RootClient.GetCachedParameter");

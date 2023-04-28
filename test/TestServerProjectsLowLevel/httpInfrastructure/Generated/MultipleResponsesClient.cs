@@ -65,7 +65,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError200ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError200ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200Model204NoModelDefaultError200ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
@@ -90,7 +90,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError200Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError200Valid(RequestContext)']/*" />
         public virtual Response Get200Model204NoModelDefaultError200Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError200Valid");
@@ -115,7 +115,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError204ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError204ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200Model204NoModelDefaultError204ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
@@ -140,7 +140,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError204Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError204Valid(RequestContext)']/*" />
         public virtual Response Get200Model204NoModelDefaultError204Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError204Valid");
@@ -165,7 +165,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError201InvalidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError201InvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200Model204NoModelDefaultError201InvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
@@ -190,7 +190,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError201Invalid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError201Invalid(RequestContext)']/*" />
         public virtual Response Get200Model204NoModelDefaultError201Invalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError201Invalid");
@@ -215,7 +215,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError202NoneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError202NoneAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200Model204NoModelDefaultError202NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
@@ -240,7 +240,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError202None(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError202None(RequestContext)']/*" />
         public virtual Response Get200Model204NoModelDefaultError202None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError202None");
@@ -265,7 +265,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError400ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError400ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200Model204NoModelDefaultError400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
@@ -290,7 +290,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError400Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model204NoModelDefaultError400Valid(RequestContext)']/*" />
         public virtual Response Get200Model204NoModelDefaultError400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model204NoModelDefaultError400Valid");
@@ -315,7 +315,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError200ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError200ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200Model201ModelDefaultError200ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
@@ -340,7 +340,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError200Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError200Valid(RequestContext)']/*" />
         public virtual Response Get200Model201ModelDefaultError200Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError200Valid");
@@ -365,7 +365,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError201ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError201ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200Model201ModelDefaultError201ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
@@ -390,7 +390,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError201Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError201Valid(RequestContext)']/*" />
         public virtual Response Get200Model201ModelDefaultError201Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError201Valid");
@@ -415,7 +415,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError400ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError400ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200Model201ModelDefaultError400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
@@ -440,7 +440,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError400Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200Model201ModelDefaultError400Valid(RequestContext)']/*" />
         public virtual Response Get200Model201ModelDefaultError400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200Model201ModelDefaultError400Valid");
@@ -465,7 +465,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
@@ -490,7 +490,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError200Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext)']/*" />
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError200Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError200Valid");
@@ -515,7 +515,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
@@ -540,7 +540,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError201Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext)']/*" />
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError201Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError201Valid");
@@ -565,7 +565,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
@@ -590,7 +590,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError404Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext)']/*" />
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError404Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError404Valid");
@@ -615,7 +615,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
@@ -640,7 +640,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError400Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext)']/*" />
         public virtual Response Get200ModelA201ModelC404ModelDDefaultError400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA201ModelC404ModelDDefaultError400Valid");
@@ -665,7 +665,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError202NoneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError202NoneAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get202None204NoneDefaultError202NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
@@ -690,7 +690,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError202None(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError202None(RequestContext)']/*" />
         public virtual Response Get202None204NoneDefaultError202None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError202None");
@@ -715,7 +715,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError204NoneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError204NoneAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get202None204NoneDefaultError204NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
@@ -740,7 +740,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError204None(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError204None(RequestContext)']/*" />
         public virtual Response Get202None204NoneDefaultError204None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError204None");
@@ -765,7 +765,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError400ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError400ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get202None204NoneDefaultError400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
@@ -790,7 +790,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError400Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultError400Valid(RequestContext)']/*" />
         public virtual Response Get202None204NoneDefaultError400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultError400Valid");
@@ -815,7 +815,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone202InvalidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone202InvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get202None204NoneDefaultNone202InvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
@@ -840,7 +840,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone202Invalid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone202Invalid(RequestContext)']/*" />
         public virtual Response Get202None204NoneDefaultNone202Invalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone202Invalid");
@@ -865,7 +865,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone204NoneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone204NoneAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get202None204NoneDefaultNone204NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
@@ -890,7 +890,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone204None(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone204None(RequestContext)']/*" />
         public virtual Response Get202None204NoneDefaultNone204None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone204None");
@@ -915,7 +915,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone400NoneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone400NoneAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get202None204NoneDefaultNone400NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
@@ -940,7 +940,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone400None(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone400None(RequestContext)']/*" />
         public virtual Response Get202None204NoneDefaultNone400None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400None");
@@ -965,7 +965,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone400InvalidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone400InvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get202None204NoneDefaultNone400InvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
@@ -990,7 +990,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone400Invalid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get202None204NoneDefaultNone400Invalid(RequestContext)']/*" />
         public virtual Response Get202None204NoneDefaultNone400Invalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get202None204NoneDefaultNone400Invalid");
@@ -1015,7 +1015,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultModelA200ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
@@ -1040,7 +1040,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200Valid(RequestContext)']/*" />
         public virtual Response GetDefaultModelA200Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200Valid");
@@ -1065,7 +1065,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200NoneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200NoneAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultModelA200NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
@@ -1090,7 +1090,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200None(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA200None(RequestContext)']/*" />
         public virtual Response GetDefaultModelA200None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA200None");
@@ -1115,7 +1115,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA400ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA400ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultModelA400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
@@ -1140,7 +1140,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA400Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA400Valid(RequestContext)']/*" />
         public virtual Response GetDefaultModelA400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400Valid");
@@ -1165,7 +1165,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA400NoneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA400NoneAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultModelA400NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
@@ -1190,7 +1190,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA400None(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultModelA400None(RequestContext)']/*" />
         public virtual Response GetDefaultModelA400None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultModelA400None");
@@ -1215,7 +1215,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone200InvalidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone200InvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultNone200InvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
@@ -1240,7 +1240,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone200Invalid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone200Invalid(RequestContext)']/*" />
         public virtual Response GetDefaultNone200Invalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200Invalid");
@@ -1265,7 +1265,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone200NoneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone200NoneAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultNone200NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
@@ -1290,7 +1290,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone200None(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone200None(RequestContext)']/*" />
         public virtual Response GetDefaultNone200None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone200None");
@@ -1315,7 +1315,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone400InvalidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone400InvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultNone400InvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
@@ -1340,7 +1340,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone400Invalid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone400Invalid(RequestContext)']/*" />
         public virtual Response GetDefaultNone400Invalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400Invalid");
@@ -1365,7 +1365,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone400NoneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone400NoneAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetDefaultNone400NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
@@ -1390,7 +1390,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone400None(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='GetDefaultNone400None(RequestContext)']/*" />
         public virtual Response GetDefaultNone400None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.GetDefaultNone400None");
@@ -1415,7 +1415,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200NoneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200NoneAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200ModelA200NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
@@ -1440,7 +1440,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200None(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200None(RequestContext)']/*" />
         public virtual Response Get200ModelA200None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200None");
@@ -1465,7 +1465,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200ModelA200ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
@@ -1490,7 +1490,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200Valid(RequestContext)']/*" />
         public virtual Response Get200ModelA200Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Valid");
@@ -1515,7 +1515,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200InvalidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200InvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200ModelA200InvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
@@ -1540,7 +1540,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200Invalid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA200Invalid(RequestContext)']/*" />
         public virtual Response Get200ModelA200Invalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA200Invalid");
@@ -1565,7 +1565,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400NoneAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400NoneAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200ModelA400NoneAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
@@ -1590,7 +1590,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400None(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400None(RequestContext)']/*" />
         public virtual Response Get200ModelA400None(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400None");
@@ -1615,7 +1615,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200ModelA400ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
@@ -1640,7 +1640,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400Valid(RequestContext)']/*" />
         public virtual Response Get200ModelA400Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Valid");
@@ -1665,7 +1665,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400InvalidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400InvalidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200ModelA400InvalidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
@@ -1690,7 +1690,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400Invalid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA400Invalid(RequestContext)']/*" />
         public virtual Response Get200ModelA400Invalid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA400Invalid");
@@ -1715,7 +1715,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA202ValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA202ValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> Get200ModelA202ValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");
@@ -1740,7 +1740,7 @@ namespace httpInfrastructure_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA202Valid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/MultipleResponsesClient.xml" path="doc/members/member[@name='Get200ModelA202Valid(RequestContext)']/*" />
         public virtual Response Get200ModelA202Valid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MultipleResponsesClient.Get200ModelA202Valid");

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="MultiAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="MultiAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call MultiAsync with required parameters.
 <code><![CDATA[
@@ -12,7 +12,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Multi(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="Multi(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call Multi with required parameters.
 <code><![CDATA[
@@ -23,7 +23,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="SsvAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="SsvAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call SsvAsync with required parameters.
 <code><![CDATA[
@@ -34,7 +34,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Ssv(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="Ssv(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call Ssv with required parameters.
 <code><![CDATA[
@@ -45,7 +45,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="TsvAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="TsvAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call TsvAsync with required parameters.
 <code><![CDATA[
@@ -56,7 +56,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Tsv(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="Tsv(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call Tsv with required parameters.
 <code><![CDATA[
@@ -67,7 +67,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PipesAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="PipesAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call PipesAsync with required parameters.
 <code><![CDATA[
@@ -78,7 +78,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Pipes(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="Pipes(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call Pipes with required parameters.
 <code><![CDATA[
@@ -89,7 +89,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="CsvAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="CsvAsync(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call CsvAsync with required parameters.
 <code><![CDATA[
@@ -100,7 +100,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Csv(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)">
+    <member name="Csv(IEnumerable{string},RequestContext)">
 <example>
 This sample shows how to call Csv with required parameters.
 <code><![CDATA[

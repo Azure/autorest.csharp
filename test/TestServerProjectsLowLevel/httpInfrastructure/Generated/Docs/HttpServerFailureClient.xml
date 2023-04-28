@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="Head501Async(global::Azure.RequestContext)">
+    <member name="Head501Async(RequestContext)">
 <example>
 This sample shows how to call Head501Async.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Head501(global::Azure.RequestContext)">
+    <member name="Head501(RequestContext)">
 <example>
 This sample shows how to call Head501.
 <code><![CDATA[
@@ -25,7 +25,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get501Async(global::Azure.RequestContext)">
+    <member name="Get501Async(RequestContext)">
 <example>
 This sample shows how to call Get501Async.
 <code><![CDATA[
@@ -37,7 +37,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Get501(global::Azure.RequestContext)">
+    <member name="Get501(RequestContext)">
 <example>
 This sample shows how to call Get501.
 <code><![CDATA[
@@ -49,7 +49,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post505Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Post505Async(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Post505Async with required request content.
 <code><![CDATA[
@@ -63,7 +63,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Post505(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Post505(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Post505 with required request content.
 <code><![CDATA[
@@ -77,7 +77,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete505Async(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Delete505Async(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Delete505Async with required request content.
 <code><![CDATA[
@@ -91,7 +91,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="Delete505(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Delete505(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Delete505 with required request content.
 <code><![CDATA[

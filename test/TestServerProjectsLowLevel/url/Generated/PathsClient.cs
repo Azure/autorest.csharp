@@ -66,7 +66,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetBooleanTrueAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetBooleanTrueAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBooleanTrueAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
@@ -91,7 +91,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetBooleanTrue(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetBooleanTrue(RequestContext)']/*" />
         public virtual Response GetBooleanTrue(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanTrue");
@@ -116,7 +116,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetBooleanFalseAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetBooleanFalseAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBooleanFalseAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
@@ -141,7 +141,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetBooleanFalse(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetBooleanFalse(RequestContext)']/*" />
         public virtual Response GetBooleanFalse(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetBooleanFalse");
@@ -166,7 +166,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetIntOneMillionAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetIntOneMillionAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetIntOneMillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
@@ -191,7 +191,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetIntOneMillion(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetIntOneMillion(RequestContext)']/*" />
         public virtual Response GetIntOneMillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntOneMillion");
@@ -216,7 +216,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetIntNegativeOneMillionAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetIntNegativeOneMillionAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetIntNegativeOneMillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
@@ -241,7 +241,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetIntNegativeOneMillion(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetIntNegativeOneMillion(RequestContext)']/*" />
         public virtual Response GetIntNegativeOneMillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetIntNegativeOneMillion");
@@ -266,7 +266,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetTenBillionAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetTenBillionAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetTenBillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetTenBillion");
@@ -291,7 +291,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetTenBillion(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetTenBillion(RequestContext)']/*" />
         public virtual Response GetTenBillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetTenBillion");
@@ -316,7 +316,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetNegativeTenBillionAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetNegativeTenBillionAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetNegativeTenBillionAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
@@ -341,7 +341,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetNegativeTenBillion(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='GetNegativeTenBillion(RequestContext)']/*" />
         public virtual Response GetNegativeTenBillion(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.GetNegativeTenBillion");
@@ -366,7 +366,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='FloatScientificPositiveAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='FloatScientificPositiveAsync(RequestContext)']/*" />
         public virtual async Task<Response> FloatScientificPositiveAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
@@ -391,7 +391,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='FloatScientificPositive(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='FloatScientificPositive(RequestContext)']/*" />
         public virtual Response FloatScientificPositive(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificPositive");
@@ -416,7 +416,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='FloatScientificNegativeAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='FloatScientificNegativeAsync(RequestContext)']/*" />
         public virtual async Task<Response> FloatScientificNegativeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
@@ -441,7 +441,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='FloatScientificNegative(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='FloatScientificNegative(RequestContext)']/*" />
         public virtual Response FloatScientificNegative(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.FloatScientificNegative");
@@ -466,7 +466,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DoubleDecimalPositiveAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DoubleDecimalPositiveAsync(RequestContext)']/*" />
         public virtual async Task<Response> DoubleDecimalPositiveAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
@@ -491,7 +491,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DoubleDecimalPositive(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DoubleDecimalPositive(RequestContext)']/*" />
         public virtual Response DoubleDecimalPositive(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalPositive");
@@ -516,7 +516,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DoubleDecimalNegativeAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DoubleDecimalNegativeAsync(RequestContext)']/*" />
         public virtual async Task<Response> DoubleDecimalNegativeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
@@ -541,7 +541,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DoubleDecimalNegative(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DoubleDecimalNegative(RequestContext)']/*" />
         public virtual Response DoubleDecimalNegative(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DoubleDecimalNegative");
@@ -566,7 +566,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUnicodeAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUnicodeAsync(RequestContext)']/*" />
         public virtual async Task<Response> StringUnicodeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUnicode");
@@ -591,7 +591,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUnicode(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUnicode(RequestContext)']/*" />
         public virtual Response StringUnicode(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUnicode");
@@ -616,7 +616,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUrlEncodedAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUrlEncodedAsync(RequestContext)']/*" />
         public virtual async Task<Response> StringUrlEncodedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
@@ -641,7 +641,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUrlEncoded(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUrlEncoded(RequestContext)']/*" />
         public virtual Response StringUrlEncoded(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlEncoded");
@@ -671,7 +671,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUrlNonEncodedAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUrlNonEncodedAsync(RequestContext)']/*" />
         public virtual async Task<Response> StringUrlNonEncodedAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
@@ -701,7 +701,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUrlNonEncoded(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringUrlNonEncoded(RequestContext)']/*" />
         public virtual Response StringUrlNonEncoded(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringUrlNonEncoded");
@@ -726,7 +726,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> StringEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringEmpty");
@@ -751,7 +751,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringEmpty(RequestContext)']/*" />
         public virtual Response StringEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.StringEmpty");
@@ -779,7 +779,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="stringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringNullAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringNullAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> StringNullAsync(string stringPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
@@ -809,7 +809,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="stringPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringNull(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='StringNull(string,RequestContext)']/*" />
         public virtual Response StringNull(string stringPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(stringPath, nameof(stringPath));
@@ -839,7 +839,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumValidAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumValidAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> EnumValidAsync(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -869,7 +869,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumValid(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumValid(string,RequestContext)']/*" />
         public virtual Response EnumValid(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -899,7 +899,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumNullAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumNullAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> EnumNullAsync(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -929,7 +929,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="enumPath"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumNull(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='EnumNull(string,RequestContext)']/*" />
         public virtual Response EnumNull(string enumPath, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumPath, nameof(enumPath));
@@ -958,7 +958,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteMultiByteAsync(global::System.Byte[],global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteMultiByteAsync(Byte[],RequestContext)']/*" />
         public virtual async Task<Response> ByteMultiByteAsync(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -987,7 +987,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteMultiByte(global::System.Byte[],global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteMultiByte(Byte[],RequestContext)']/*" />
         public virtual Response ByteMultiByte(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -1014,7 +1014,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteEmptyAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteEmptyAsync(RequestContext)']/*" />
         public virtual async Task<Response> ByteEmptyAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteEmpty");
@@ -1039,7 +1039,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteEmpty(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteEmpty(RequestContext)']/*" />
         public virtual Response ByteEmpty(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.ByteEmpty");
@@ -1066,7 +1066,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteNullAsync(global::System.Byte[],global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteNullAsync(Byte[],RequestContext)']/*" />
         public virtual async Task<Response> ByteNullAsync(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -1095,7 +1095,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="bytePath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteNull(global::System.Byte[],global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ByteNull(Byte[],RequestContext)']/*" />
         public virtual Response ByteNull(byte[] bytePath, RequestContext context = null)
         {
             Argument.AssertNotNull(bytePath, nameof(bytePath));
@@ -1122,7 +1122,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> DateValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateValid");
@@ -1147,7 +1147,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateValid(RequestContext)']/*" />
         public virtual Response DateValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateValid");
@@ -1173,7 +1173,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateNullAsync(global::System.DateTimeOffset,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateNullAsync(DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> DateNullAsync(DateTimeOffset datePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateNull");
@@ -1199,7 +1199,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateNull(global::System.DateTimeOffset,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateNull(DateTimeOffset,RequestContext)']/*" />
         public virtual Response DateNull(DateTimeOffset datePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateNull");
@@ -1224,7 +1224,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateTimeValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateTimeValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> DateTimeValidAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeValid");
@@ -1249,7 +1249,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateTimeValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateTimeValid(RequestContext)']/*" />
         public virtual Response DateTimeValid(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeValid");
@@ -1275,7 +1275,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateTimeNullAsync(global::System.DateTimeOffset,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateTimeNullAsync(DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> DateTimeNullAsync(DateTimeOffset dateTimePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeNull");
@@ -1301,7 +1301,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateTimeNull(global::System.DateTimeOffset,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='DateTimeNull(DateTimeOffset,RequestContext)']/*" />
         public virtual Response DateTimeNull(DateTimeOffset dateTimePath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.DateTimeNull");
@@ -1328,7 +1328,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='Base64UrlAsync(global::System.Byte[],global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='Base64UrlAsync(Byte[],RequestContext)']/*" />
         public virtual async Task<Response> Base64UrlAsync(byte[] base64UrlPath, RequestContext context = null)
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
@@ -1357,7 +1357,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="base64UrlPath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='Base64Url(global::System.Byte[],global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='Base64Url(Byte[],RequestContext)']/*" />
         public virtual Response Base64Url(byte[] base64UrlPath, RequestContext context = null)
         {
             Argument.AssertNotNull(base64UrlPath, nameof(base64UrlPath));
@@ -1386,7 +1386,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ArrayCsvInPathAsync(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ArrayCsvInPathAsync(IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> ArrayCsvInPathAsync(IEnumerable<string> arrayPath, RequestContext context = null)
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
@@ -1415,7 +1415,7 @@ namespace url_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="arrayPath"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ArrayCsvInPath(global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='ArrayCsvInPath(IEnumerable{string},RequestContext)']/*" />
         public virtual Response ArrayCsvInPath(IEnumerable<string> arrayPath, RequestContext context = null)
         {
             Argument.AssertNotNull(arrayPath, nameof(arrayPath));
@@ -1443,7 +1443,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='UnixTimeUrlAsync(global::System.DateTimeOffset,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='UnixTimeUrlAsync(DateTimeOffset,RequestContext)']/*" />
         public virtual async Task<Response> UnixTimeUrlAsync(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");
@@ -1469,7 +1469,7 @@ namespace url_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='UnixTimeUrl(global::System.DateTimeOffset,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/PathsClient.xml" path="doc/members/member[@name='UnixTimeUrl(DateTimeOffset,RequestContext)']/*" />
         public virtual Response UnixTimeUrl(DateTimeOffset unixTimeUrlPath, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("PathsClient.UnixTimeUrl");

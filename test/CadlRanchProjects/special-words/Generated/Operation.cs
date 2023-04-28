@@ -53,7 +53,7 @@ namespace SpecialWords
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Operation.xml" path="doc/members/member[@name='ForAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Operation.xml" path="doc/members/member[@name='ForAsync(RequestContext)']/*" />
         public virtual async Task<Response> ForAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Operation.For");
@@ -78,7 +78,7 @@ namespace SpecialWords
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Operation.xml" path="doc/members/member[@name='For(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/Operation.xml" path="doc/members/member[@name='For(RequestContext)']/*" />
         public virtual Response For(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("Operation.For");

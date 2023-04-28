@@ -65,7 +65,7 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFileAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFileAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetFileAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
@@ -90,7 +90,7 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFile(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFile(RequestContext)']/*" />
         public virtual Response GetFile(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
@@ -115,7 +115,7 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFileLargeAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFileLargeAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetFileLargeAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
@@ -140,7 +140,7 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFileLarge(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFileLarge(RequestContext)']/*" />
         public virtual Response GetFileLarge(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
@@ -165,7 +165,7 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetEmptyFileAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetEmptyFileAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetEmptyFileAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
@@ -190,7 +190,7 @@ namespace body_file_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetEmptyFile(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetEmptyFile(RequestContext)']/*" />
         public virtual Response GetEmptyFile(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");

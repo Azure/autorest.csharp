@@ -75,7 +75,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateAsync(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateAsync(string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateAsync(string itemName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -112,7 +112,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Create(string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Create(string,RequestContent,RequestContext)']/*" />
         public virtual Response Create(string itemName, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemName, nameof(itemName));
@@ -151,7 +151,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStreamAsync(string,global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStreamAsync(string,RequestContent,ContentType,IEnumerable{string},RequestContext)']/*" />
         public virtual async Task<Response> CreateStreamAsync(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
@@ -190,7 +190,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="itemNameStream"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStream(string,global::Azure.Core.RequestContent,global::Azure.Core.ContentType,global::System.Collections.Generic.IEnumerable{string},global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateStream(string,RequestContent,ContentType,IEnumerable{string},RequestContext)']/*" />
         public virtual Response CreateStream(string itemNameStream, RequestContent content, ContentType contentType, IEnumerable<string> excluded = null, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(itemNameStream, nameof(itemNameStream));
@@ -228,7 +228,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnumAsync(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnumAsync(string,string,RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> CreateEnumAsync(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
@@ -267,7 +267,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="enumName1"/> or <paramref name="enumName2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnum(string,string,global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='CreateEnum(string,string,RequestContent,RequestContext)']/*" />
         public virtual Response CreateEnum(string enumName1, string enumName2, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(enumName1, nameof(enumName1));
@@ -301,7 +301,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPathsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPathsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetBodyAndPathsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
@@ -331,7 +331,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPaths(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetBodyAndPaths(RequestContext)']/*" />
         public virtual Response GetBodyAndPaths(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetBodyAndPaths");
@@ -361,7 +361,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItemsAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItemsAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetItemsAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
@@ -391,7 +391,7 @@ namespace BodyAndPath_LowLevel
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItems(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='GetItems(RequestContext)']/*" />
         public virtual Response GetItems(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("BodyAndPathClient.GetItems");
@@ -424,7 +424,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='UpdateAsync(string,string,string,global::Azure.Core.RequestContent,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='UpdateAsync(string,string,string,RequestContent,string,string,RequestContext)']/*" />
         public virtual async Task<Response> UpdateAsync(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));
@@ -462,7 +462,7 @@ namespace BodyAndPath_LowLevel
         /// <exception cref="ArgumentException"> <paramref name="item3"/> or <paramref name="item2"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Update(string,string,string,global::Azure.Core.RequestContent,string,string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/BodyAndPathClient.xml" path="doc/members/member[@name='Update(string,string,string,RequestContent,string,string,RequestContext)']/*" />
         public virtual Response Update(string item3, string item2, string item4, RequestContent content, string item5 = null, string item1 = "value", RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(item3, nameof(item3));

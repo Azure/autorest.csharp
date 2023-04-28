@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetKnownValueAsync(global::Azure.RequestContext)">
+    <member name="GetKnownValueAsync(RequestContext)">
 <example>
 This sample shows how to call GetKnownValueAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -14,7 +14,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetKnownValue(global::Azure.RequestContext)">
+    <member name="GetKnownValue(RequestContext)">
 <example>
 This sample shows how to call GetKnownValue with required parameters and parse the result.
 <code><![CDATA[
@@ -27,7 +27,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutKnownValueAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutKnownValueAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutKnownValueAsync with required request content.
 <code><![CDATA[
@@ -40,7 +40,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutKnownValue(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutKnownValue(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutKnownValue with required request content.
 <code><![CDATA[
@@ -53,7 +53,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutUnknownValueAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutUnknownValueAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutUnknownValueAsync with required request content.
 <code><![CDATA[
@@ -66,7 +66,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutUnknownValue(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutUnknownValue(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutUnknownValue with required request content.
 <code><![CDATA[

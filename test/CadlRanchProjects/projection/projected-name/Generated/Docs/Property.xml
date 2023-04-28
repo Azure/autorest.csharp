@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="JsonAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="JsonAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call JsonAsync with required request content.
 <code><![CDATA[
@@ -28,7 +28,7 @@ Schema for <c>JsonProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="Json(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Json(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Json with required request content.
 <code><![CDATA[
@@ -55,7 +55,7 @@ Schema for <c>JsonProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="ClientAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="ClientAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call ClientAsync with required request content.
 <code><![CDATA[
@@ -82,7 +82,7 @@ Schema for <c>ClientProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="Client(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Client(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Client with required request content.
 <code><![CDATA[
@@ -109,7 +109,7 @@ Schema for <c>ClientProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="LanguageAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="LanguageAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call LanguageAsync with required request content.
 <code><![CDATA[
@@ -136,7 +136,7 @@ Schema for <c>LanguageProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="Language(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Language(RequestContent,RequestContext)">
 <example>
 This sample shows how to call Language with required request content.
 <code><![CDATA[
@@ -163,7 +163,7 @@ Schema for <c>LanguageProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="JsonAndClientAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="JsonAndClientAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call JsonAndClientAsync with required request content.
 <code><![CDATA[
@@ -190,7 +190,7 @@ Schema for <c>JsonAndClientProjectedNameModel</c>:
 
 </remarks>
     </member>
-    <member name="JsonAndClient(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="JsonAndClient(RequestContent,RequestContext)">
 <example>
 This sample shows how to call JsonAndClient with required request content.
 <code><![CDATA[

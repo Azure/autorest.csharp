@@ -88,7 +88,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PostValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -122,7 +122,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PostValid(RequestContent,RequestContext)']/*" />
         public virtual Response PostValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -170,7 +170,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValidAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValidAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValid");
@@ -200,7 +200,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValid(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetValid(RequestContext)']/*" />
         public virtual Response GetValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetValid");
@@ -256,7 +256,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValidAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValidAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutValidAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -290,7 +290,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValid(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutValid(RequestContent,RequestContext)']/*" />
         public virtual Response PutValid(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -338,7 +338,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModelAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModelAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetModelAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModel");
@@ -368,7 +368,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModel(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModel(RequestContext)']/*" />
         public virtual Response GetModel(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetModel");
@@ -424,7 +424,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -458,7 +458,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutModel(RequestContent,RequestContext)']/*" />
         public virtual Response PutModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -506,7 +506,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModelAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModelAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetRecursiveModelAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModel");
@@ -536,7 +536,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModel(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetRecursiveModel(RequestContext)']/*" />
         public virtual Response GetRecursiveModel(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetRecursiveModel");
@@ -592,7 +592,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModelAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> PutRecursiveModelAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -626,7 +626,7 @@ namespace _Type.Model.Inheritance
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModel(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='PutRecursiveModel(RequestContent,RequestContext)']/*" />
         public virtual Response PutRecursiveModel(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -674,7 +674,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminatorAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminatorAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetMissingDiscriminatorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminator");
@@ -704,7 +704,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminator(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetMissingDiscriminator(RequestContext)']/*" />
         public virtual Response GetMissingDiscriminator(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetMissingDiscriminator");
@@ -750,7 +750,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminatorAsync(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminatorAsync(RequestContext)']/*" />
         public virtual async Task<Response> GetWrongDiscriminatorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminator");
@@ -780,7 +780,7 @@ namespace _Type.Model.Inheritance
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminator(global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetWrongDiscriminator(RequestContext)']/*" />
         public virtual Response GetWrongDiscriminator(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetWrongDiscriminator");

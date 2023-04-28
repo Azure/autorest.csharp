@@ -126,7 +126,7 @@ namespace ApiVersionInCadl
         /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResultAsync(string,RequestContext)']/*" />
         public virtual async Task<Response> GetBatchDetectionResultAsync(string resultId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));
@@ -167,7 +167,7 @@ namespace ApiVersionInCadl
         /// <exception cref="ArgumentException"> <paramref name="resultId"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(string,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/ApiVersionInCadlClient.xml" path="doc/members/member[@name='GetBatchDetectionResult(string,RequestContext)']/*" />
         public virtual Response GetBatchDetectionResult(string resultId, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(resultId, nameof(resultId));

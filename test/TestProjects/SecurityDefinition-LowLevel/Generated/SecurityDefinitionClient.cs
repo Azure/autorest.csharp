@@ -98,7 +98,7 @@ namespace SecurityDefinition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='OperationAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='OperationAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> OperationAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -127,7 +127,7 @@ namespace SecurityDefinition_LowLevel
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='Operation(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/SecurityDefinitionClient.xml" path="doc/members/member[@name='Operation(RequestContent,RequestContext)']/*" />
         public virtual Response Operation(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

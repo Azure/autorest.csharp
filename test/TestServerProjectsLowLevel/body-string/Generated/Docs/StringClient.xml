@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="GetNullAsync(global::Azure.RequestContext)">
+    <member name="GetNullAsync(RequestContext)">
 <example>
 This sample shows how to call GetNullAsync and parse the result.
 <code><![CDATA[
@@ -15,7 +15,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetNull(global::Azure.RequestContext)">
+    <member name="GetNull(RequestContext)">
 <example>
 This sample shows how to call GetNull and parse the result.
 <code><![CDATA[
@@ -29,7 +29,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutNullAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutNullAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutNullAsync with required request content.
 <code><![CDATA[
@@ -43,7 +43,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutNull(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutNull(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutNull with required request content.
 <code><![CDATA[
@@ -57,7 +57,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetEmptyAsync(global::Azure.RequestContext)">
+    <member name="GetEmptyAsync(RequestContext)">
 <example>
 This sample shows how to call GetEmptyAsync and parse the result.
 <code><![CDATA[
@@ -71,7 +71,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetEmpty(global::Azure.RequestContext)">
+    <member name="GetEmpty(RequestContext)">
 <example>
 This sample shows how to call GetEmpty and parse the result.
 <code><![CDATA[
@@ -85,7 +85,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutEmptyAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutEmptyAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutEmptyAsync with required request content.
 <code><![CDATA[
@@ -99,7 +99,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutEmpty(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutEmpty(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutEmpty with required request content.
 <code><![CDATA[
@@ -113,7 +113,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetMbcsAsync(global::Azure.RequestContext)">
+    <member name="GetMbcsAsync(RequestContext)">
 <example>
 This sample shows how to call GetMbcsAsync and parse the result.
 <code><![CDATA[
@@ -127,7 +127,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetMbcs(global::Azure.RequestContext)">
+    <member name="GetMbcs(RequestContext)">
 <example>
 This sample shows how to call GetMbcs and parse the result.
 <code><![CDATA[
@@ -141,7 +141,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutMbcsAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutMbcsAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutMbcsAsync with required request content.
 <code><![CDATA[
@@ -155,7 +155,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutMbcs(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutMbcs(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutMbcs with required request content.
 <code><![CDATA[
@@ -169,7 +169,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetWhitespaceAsync(global::Azure.RequestContext)">
+    <member name="GetWhitespaceAsync(RequestContext)">
 <example>
 This sample shows how to call GetWhitespaceAsync and parse the result.
 <code><![CDATA[
@@ -183,7 +183,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetWhitespace(global::Azure.RequestContext)">
+    <member name="GetWhitespace(RequestContext)">
 <example>
 This sample shows how to call GetWhitespace and parse the result.
 <code><![CDATA[
@@ -197,7 +197,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutWhitespaceAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutWhitespaceAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutWhitespaceAsync with required request content.
 <code><![CDATA[
@@ -211,7 +211,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutWhitespace(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutWhitespace(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutWhitespace with required request content.
 <code><![CDATA[
@@ -225,7 +225,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetNotProvidedAsync(global::Azure.RequestContext)">
+    <member name="GetNotProvidedAsync(RequestContext)">
 <example>
 This sample shows how to call GetNotProvidedAsync and parse the result.
 <code><![CDATA[
@@ -239,7 +239,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetNotProvided(global::Azure.RequestContext)">
+    <member name="GetNotProvided(RequestContext)">
 <example>
 This sample shows how to call GetNotProvided and parse the result.
 <code><![CDATA[
@@ -253,7 +253,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBase64EncodedAsync(global::Azure.RequestContext)">
+    <member name="GetBase64EncodedAsync(RequestContext)">
 <example>
 This sample shows how to call GetBase64EncodedAsync and parse the result.
 <code><![CDATA[
@@ -267,7 +267,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBase64Encoded(global::Azure.RequestContext)">
+    <member name="GetBase64Encoded(RequestContext)">
 <example>
 This sample shows how to call GetBase64Encoded and parse the result.
 <code><![CDATA[
@@ -281,7 +281,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBase64UrlEncodedAsync(global::Azure.RequestContext)">
+    <member name="GetBase64UrlEncodedAsync(RequestContext)">
 <example>
 This sample shows how to call GetBase64UrlEncodedAsync and parse the result.
 <code><![CDATA[
@@ -295,7 +295,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetBase64UrlEncoded(global::Azure.RequestContext)">
+    <member name="GetBase64UrlEncoded(RequestContext)">
 <example>
 This sample shows how to call GetBase64UrlEncoded and parse the result.
 <code><![CDATA[
@@ -309,7 +309,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutBase64UrlEncodedAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutBase64UrlEncodedAsync(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutBase64UrlEncodedAsync with required request content.
 <code><![CDATA[
@@ -323,7 +323,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="PutBase64UrlEncoded(global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutBase64UrlEncoded(RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutBase64UrlEncoded with required request content.
 <code><![CDATA[
@@ -337,7 +337,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="GetNullBase64UrlEncodedAsync(global::Azure.RequestContext)">
+    <member name="GetNullBase64UrlEncodedAsync(RequestContext)">
 <example>
 This sample shows how to call GetNullBase64UrlEncodedAsync and parse the result.
 <code><![CDATA[
@@ -351,7 +351,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
-    <member name="GetNullBase64UrlEncoded(global::Azure.RequestContext)">
+    <member name="GetNullBase64UrlEncoded(RequestContext)">
 <example>
 This sample shows how to call GetNullBase64UrlEncoded and parse the result.
 <code><![CDATA[

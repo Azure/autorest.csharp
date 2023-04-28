@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="Put201CreatingSucceeded200Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Put201CreatingSucceeded200Async(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put201CreatingSucceeded200Async with required parameters and parse the result.
 <code><![CDATA[
@@ -81,7 +81,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="Put201CreatingSucceeded200(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Put201CreatingSucceeded200(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call Put201CreatingSucceeded200 with required parameters and parse the result.
 <code><![CDATA[
@@ -161,7 +161,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="PutAsyncRelativeRetrySucceededAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAsyncRelativeRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsyncRelativeRetrySucceededAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -241,7 +241,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="PutAsyncRelativeRetrySucceeded(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PutAsyncRelativeRetrySucceeded(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call PutAsyncRelativeRetrySucceeded with required parameters and parse the result.
 <code><![CDATA[
@@ -321,7 +321,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="DeleteProvisioning202Accepted200SucceededAsync(global::Azure.WaitUntil,global::Azure.RequestContext)">
+    <member name="DeleteProvisioning202Accepted200SucceededAsync(WaitUntil,RequestContext)">
 <example>
 This sample shows how to call DeleteProvisioning202Accepted200SucceededAsync with required parameters and parse the result.
 <code><![CDATA[
@@ -362,7 +362,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="DeleteProvisioning202Accepted200Succeeded(global::Azure.WaitUntil,global::Azure.RequestContext)">
+    <member name="DeleteProvisioning202Accepted200Succeeded(WaitUntil,RequestContext)">
 <example>
 This sample shows how to call DeleteProvisioning202Accepted200Succeeded with required parameters and parse the result.
 <code><![CDATA[
@@ -403,7 +403,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="Delete202Retry200Async(global::Azure.WaitUntil,global::Azure.RequestContext)">
+    <member name="Delete202Retry200Async(WaitUntil,RequestContext)">
 <example>
 This sample shows how to call Delete202Retry200Async with required parameters.
 <code><![CDATA[
@@ -416,7 +416,7 @@ Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
-    <member name="Delete202Retry200(global::Azure.WaitUntil,global::Azure.RequestContext)">
+    <member name="Delete202Retry200(WaitUntil,RequestContext)">
 <example>
 This sample shows how to call Delete202Retry200 with required parameters.
 <code><![CDATA[
@@ -429,7 +429,7 @@ Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
-    <member name="DeleteAsyncRelativeRetrySucceededAsync(global::Azure.WaitUntil,global::Azure.RequestContext)">
+    <member name="DeleteAsyncRelativeRetrySucceededAsync(WaitUntil,RequestContext)">
 <example>
 This sample shows how to call DeleteAsyncRelativeRetrySucceededAsync with required parameters.
 <code><![CDATA[
@@ -442,7 +442,7 @@ Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
-    <member name="DeleteAsyncRelativeRetrySucceeded(global::Azure.WaitUntil,global::Azure.RequestContext)">
+    <member name="DeleteAsyncRelativeRetrySucceeded(WaitUntil,RequestContext)">
 <example>
 This sample shows how to call DeleteAsyncRelativeRetrySucceeded with required parameters.
 <code><![CDATA[
@@ -455,7 +455,7 @@ Console.WriteLine(operation.GetRawResponse().Status)
 ]]></code>
 </example>
     </member>
-    <member name="Post202Retry200Async(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Post202Retry200Async(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call Post202Retry200Async with required parameters.
 <code><![CDATA[
@@ -509,7 +509,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="Post202Retry200(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="Post202Retry200(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call Post202Retry200 with required parameters.
 <code><![CDATA[
@@ -563,7 +563,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="PostAsyncRelativeRetrySucceededAsync(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PostAsyncRelativeRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call PostAsyncRelativeRetrySucceededAsync with required parameters.
 <code><![CDATA[
@@ -617,7 +617,7 @@ Schema for <c>Product</c>:
 
 </remarks>
     </member>
-    <member name="PostAsyncRelativeRetrySucceeded(global::Azure.WaitUntil,global::Azure.Core.RequestContent,global::Azure.RequestContext)">
+    <member name="PostAsyncRelativeRetrySucceeded(WaitUntil,RequestContent,RequestContext)">
 <example>
 This sample shows how to call PostAsyncRelativeRetrySucceeded with required parameters.
 <code><![CDATA[

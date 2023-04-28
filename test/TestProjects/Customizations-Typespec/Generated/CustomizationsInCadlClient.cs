@@ -85,7 +85,7 @@ namespace CustomizationsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CustomizationsInCadlClient.xml" path="doc/members/member[@name='RoundTripAsync(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/CustomizationsInCadlClient.xml" path="doc/members/member[@name='RoundTripAsync(RequestContent,RequestContext)']/*" />
         public virtual async Task<Response> RoundTripAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
@@ -119,7 +119,7 @@ namespace CustomizationsInCadl
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. Details of the response body schema are in the Remarks section below. </returns>
-        /// <include file="Docs/CustomizationsInCadlClient.xml" path="doc/members/member[@name='RoundTrip(global::Azure.Core.RequestContent,global::Azure.RequestContext)']/*" />
+        /// <include file="Docs/CustomizationsInCadlClient.xml" path="doc/members/member[@name='RoundTrip(RequestContent,RequestContext)']/*" />
         public virtual Response RoundTrip(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="MyOpAsync(global::Azure.RequestContext)">
+    <member name="MyOpAsync(RequestContext)">
 <example>
 This sample shows how to call MyOpAsync.
 <code><![CDATA[
@@ -13,7 +13,7 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="MyOp(global::Azure.RequestContext)">
+    <member name="MyOp(RequestContext)">
 <example>
 This sample shows how to call MyOp.
 <code><![CDATA[
