@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
@@ -258,7 +259,7 @@ namespace AutoRest.CSharp.Output.Models
                 return;
             }
 
-            if (inputParameter is { Kind: InputOperationParameterKind.Spread })
+            if (inputParameter.Kind == InputOperationParameterKind.Spread)
             {
                 CreateSpreadParameters(inputParameter, protocolMethodParameter);
             }
@@ -272,7 +273,26 @@ namespace AutoRest.CSharp.Output.Models
                 _createMessageParameters.Add(protocolMethodParameter);
                 _protocolParameters.Add(protocolMethodParameter);
                 _convenienceParameters.Add(convenienceMethodParameter);
-                _arguments[protocolMethodParameter] = CreateConversion(convenienceMethodParameter, protocolMethodParameter);
+
+                if (protocolMethodParameter == convenienceMethodParameter)
+                {
+                    _arguments[protocolMethodParameter] = convenienceMethodParameter;
+                }
+                else
+                {
+                    var argumentConversion = CreateConversion(convenienceMethodParameter, protocolMethodParameter);
+                    if (_operation.Paging is not null)
+                    {
+                        // in paging methods, every request parameter is used twice, so even conversions that can be inlined must be cached
+                        var argument = new CodeWriterDeclaration(protocolMethodParameter.Name);
+                        _conversions[protocolMethodParameter] = new DeclareVariableStatement(protocolMethodParameter.Type, argument, argumentConversion);
+                        _arguments[protocolMethodParameter] = argument;
+                    }
+                    else
+                    {
+                        _arguments[protocolMethodParameter] = argumentConversion;
+                    }
+                }
             }
         }
 
@@ -417,11 +437,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private static ValueExpression CreateConversion(Parameter fromParameter, Parameter toParameter)
         {
-            if (fromParameter == toParameter)
-            {
-                return fromParameter;
-            }
-
             ValueExpression fromExpression = NullConditional(fromParameter);
             return fromParameter.Type.IsFrameworkType
                 ? CreateConversion(fromExpression, fromParameter.Type.FrameworkType, toParameter.Type)
