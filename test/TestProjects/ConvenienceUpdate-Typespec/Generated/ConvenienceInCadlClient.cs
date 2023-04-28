@@ -67,7 +67,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="UpdateConvenience(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="UpdateConvenienceAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -155,7 +155,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceOptionalBeforeRequired(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceOptionalBeforeRequiredAsync(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -263,7 +263,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProtocolValue(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProtocolValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -361,7 +361,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceWithOptionalValue(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceWithOptionalValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -439,7 +439,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceWithRequired(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceWithRequiredAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -639,7 +639,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProtocolOptionalQueryValue(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProtocolOptionalQueryValueAsync(int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -741,7 +741,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProtocolRequiredQueryValue(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProtocolRequiredQueryValueAsync(int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -843,7 +843,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProtocolOptionalModelValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProtocolOptionalModelValueAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -931,7 +931,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProtocolRequiredModel(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProtocolRequiredModelAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1039,7 +1039,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceOptionalQueryWithOptionalValue(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceOptionalQueryWithOptionalValueAsync(int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1141,7 +1141,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceRequiredQueryWithOptionalValue(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceRequiredQueryWithOptionalValueAsync(int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1223,7 +1223,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceOptionalQueryWithRequired(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceOptionalQueryWithRequiredAsync(int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1305,7 +1305,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceRequiredQueryWithRequired(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceRequiredQueryWithRequiredAsync(int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1407,7 +1407,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalValueAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1495,7 +1495,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceRequiredModelWithOptional(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceRequiredModelWithOptionalAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1583,7 +1583,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceOptionalModelWithRequired(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceOptionalModelWithRequiredAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1673,7 +1673,7 @@ namespace ConvenienceInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProtocolOptionalBeforeRequired(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProtocolOptionalBeforeRequiredAsync(Model,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

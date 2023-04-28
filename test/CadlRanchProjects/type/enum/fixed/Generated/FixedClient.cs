@@ -72,7 +72,7 @@ namespace _Type._Enum.Fixed
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetKnownValue(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetKnownValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -152,7 +152,7 @@ namespace _Type._Enum.Fixed
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutKnownValue(DaysOfWeekEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutKnownValueAsync(DaysOfWeekEnum,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -240,7 +240,7 @@ namespace _Type._Enum.Fixed
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutUnknownValue(DaysOfWeekEnum,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutUnknownValueAsync(DaysOfWeekEnum,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

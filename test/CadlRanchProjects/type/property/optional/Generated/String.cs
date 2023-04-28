@@ -70,7 +70,7 @@ namespace _Type.Property.Optional
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetAll(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetAllAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -148,7 +148,7 @@ namespace _Type.Property.Optional
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetDefault(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetDefaultAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -234,7 +234,7 @@ namespace _Type.Property.Optional
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAll(StringProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAllAsync(StringProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -328,7 +328,7 @@ namespace _Type.Property.Optional
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutDefault(StringProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutDefaultAsync(StringProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

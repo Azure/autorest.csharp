@@ -160,7 +160,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateOrReplace(int,User,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateOrReplaceAsync(int,User,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -262,7 +262,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetUser(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetUserAsync(int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -426,7 +426,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Export(int,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ExportAsync(int,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -542,7 +542,7 @@ namespace _Specs_.Azure.Core.Basic
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetUsers(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetUsersAsync(int?,int?,int?,IEnumerable{string},string,IEnumerable{string},IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -623,7 +623,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetWithPage(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetWithPageAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -685,7 +685,7 @@ namespace _Specs_.Azure.Core.Basic
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetWithCustomPageModel(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetWithCustomPageModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

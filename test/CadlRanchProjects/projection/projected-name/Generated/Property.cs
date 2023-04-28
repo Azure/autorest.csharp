@@ -76,7 +76,7 @@ namespace Projection.ProjectedName
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Json(JsonProjectedNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="JsonAsync(JsonProjectedNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -168,7 +168,7 @@ namespace Projection.ProjectedName
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Client(ClientProjectedNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ClientAsync(ClientProjectedNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -260,7 +260,7 @@ namespace Projection.ProjectedName
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Language(LanguageProjectedNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="LanguageAsync(LanguageProjectedNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -352,7 +352,7 @@ namespace Projection.ProjectedName
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="JsonAndClient(JsonAndClientProjectedNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="JsonAndClientAsync(JsonAndClientProjectedNameModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

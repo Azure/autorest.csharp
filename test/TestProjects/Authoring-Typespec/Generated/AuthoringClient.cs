@@ -729,7 +729,7 @@ namespace Azure.Language.Authoring
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetDeploymentStatus(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetDeploymentStatusAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -843,7 +843,7 @@ namespace Azure.Language.Authoring
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetSwapDeploymentsStatus(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetSwapDeploymentsStatusAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -70,7 +70,7 @@ namespace _Type.Property.ValueTypes
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetModel(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -156,7 +156,7 @@ namespace _Type.Property.ValueTypes
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Put(ModelProperty,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(ModelProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

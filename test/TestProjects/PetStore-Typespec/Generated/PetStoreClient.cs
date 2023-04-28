@@ -143,7 +143,7 @@ namespace PetStore
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Read(int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ReadAsync(int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -229,7 +229,7 @@ namespace PetStore
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Create(Pet,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateAsync(Pet,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -315,7 +315,7 @@ namespace PetStore
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetPetByKind(PetKind,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetPetByKindAsync(PetKind,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -403,7 +403,7 @@ namespace PetStore
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetFirstPet(int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetFirstPetAsync(int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -103,7 +103,7 @@ namespace Pagination
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetPaginationLedgerEntries(ListLedgerEntryInputBody,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetPaginationLedgerEntriesAsync(ListLedgerEntryInputBody,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -178,7 +178,7 @@ namespace Pagination
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetLedgerEntries(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetLedgerEntriesAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

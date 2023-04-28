@@ -84,7 +84,7 @@ namespace _Specs_.Azure.Core.Traits
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SmokeTest(int,string,RequestConditions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SmokeTestAsync(int,string,RequestConditions,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

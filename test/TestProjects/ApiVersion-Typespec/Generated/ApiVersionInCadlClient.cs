@@ -115,7 +115,7 @@ namespace ApiVersionInCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetBatchDetectionResult(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetBatchDetectionResultAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

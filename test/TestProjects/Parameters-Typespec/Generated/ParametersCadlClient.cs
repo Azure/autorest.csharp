@@ -69,7 +69,7 @@ namespace ParametersCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Operation(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="OperationAsync(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -153,7 +153,7 @@ namespace ParametersCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Operation2(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Operation2Async(int,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

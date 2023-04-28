@@ -78,7 +78,7 @@ namespace Parameters.Spread
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAsRequestBody(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsRequestBodyAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -182,7 +182,7 @@ namespace Parameters.Spread
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAsRequestParameter(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAsRequestParameterAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -316,7 +316,7 @@ namespace Parameters.Spread
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadWithMultipleParameters(string,string,string,string,string,string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadWithMultipleParametersAsync(string,string,string,string,string,string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

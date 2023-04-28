@@ -119,7 +119,7 @@ namespace AnomalyDetector
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DetectUnivariateEntireSeries(UnivariateDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DetectUnivariateEntireSeriesAsync(UnivariateDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -235,7 +235,7 @@ namespace AnomalyDetector
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DetectUnivariateLastPoint(UnivariateDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DetectUnivariateLastPointAsync(UnivariateDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -342,7 +342,7 @@ namespace AnomalyDetector
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DetectUnivariateChangePoint(UnivariateChangePointDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DetectUnivariateChangePointAsync(UnivariateChangePointDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -457,7 +457,7 @@ namespace AnomalyDetector
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetMultivariateBatchDetectionResult(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetMultivariateBatchDetectionResultAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -588,7 +588,7 @@ namespace AnomalyDetector
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="TrainMultivariateModel(ModelInfo,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="TrainMultivariateModelAsync(ModelInfo,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -779,7 +779,7 @@ namespace AnomalyDetector
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetMultivariateModel(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetMultivariateModelAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -913,7 +913,7 @@ namespace AnomalyDetector
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DetectMultivariateBatchAnomaly(string,MultivariateBatchDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DetectMultivariateBatchAnomalyAsync(string,MultivariateBatchDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1049,7 +1049,7 @@ namespace AnomalyDetector
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="DetectMultivariateLastAnomaly(string,MultivariateLastDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="DetectMultivariateLastAnomalyAsync(string,MultivariateLastDetectionOptions,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1162,7 +1162,7 @@ namespace AnomalyDetector
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetMultivariateModels(int?,int?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetMultivariateModelsAsync(int?,int?,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

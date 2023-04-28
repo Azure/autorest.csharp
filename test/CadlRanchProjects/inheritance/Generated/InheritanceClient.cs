@@ -78,7 +78,7 @@ namespace _Type.Model.Inheritance
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PostValid(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PostValidAsync(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -162,7 +162,7 @@ namespace _Type.Model.Inheritance
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetValid(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetValidAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -246,7 +246,7 @@ namespace _Type.Model.Inheritance
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutValid(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutValidAsync(Siamese,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -330,7 +330,7 @@ namespace _Type.Model.Inheritance
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetModel(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -414,7 +414,7 @@ namespace _Type.Model.Inheritance
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutModel(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutModelAsync(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -498,7 +498,7 @@ namespace _Type.Model.Inheritance
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetRecursiveModel(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetRecursiveModelAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -582,7 +582,7 @@ namespace _Type.Model.Inheritance
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutRecursiveModel(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutRecursiveModelAsync(Fish,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -666,7 +666,7 @@ namespace _Type.Model.Inheritance
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetMissingDiscriminator(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetMissingDiscriminatorAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -742,7 +742,7 @@ namespace _Type.Model.Inheritance
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetWrongDiscriminator(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetWrongDiscriminatorAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

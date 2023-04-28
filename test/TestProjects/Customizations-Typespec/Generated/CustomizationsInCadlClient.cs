@@ -75,7 +75,7 @@ namespace CustomizationsInCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RoundTrip(RootModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RoundTripAsync(RootModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -89,7 +89,7 @@ namespace Spread
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadModel(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadModelAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -187,7 +187,7 @@ namespace Spread
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAlias(string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAliasAsync(string,int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -293,7 +293,7 @@ namespace Spread
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadMultiTargetAlias(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadMultiTargetAliasAsync(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -403,7 +403,7 @@ namespace Spread
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithModel(string,int,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAliasWithModelAsync(string,int,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -517,7 +517,7 @@ namespace Spread
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -663,7 +663,7 @@ namespace Spread
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithOptionalProps(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAliasWithOptionalPropsAsync(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

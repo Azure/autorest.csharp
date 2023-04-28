@@ -87,7 +87,7 @@ namespace MultipleMediaTypes
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="OneBinaryBodyTwoContentTypes(BinaryData,ContentType,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="OneBinaryBodyTwoContentTypesAsync(BinaryData,ContentType,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -185,7 +185,7 @@ namespace MultipleMediaTypes
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="OneStringBodyThreeContentTypes(string,ContentType,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="OneStringBodyThreeContentTypesAsync(string,ContentType,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -279,7 +279,7 @@ namespace MultipleMediaTypes
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="OneModelBodyOneContentType(Body,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="OneModelBodyOneContentTypeAsync(Body,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

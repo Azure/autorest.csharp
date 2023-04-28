@@ -123,7 +123,7 @@ namespace TypeSpecFirstTest
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="TopAction(string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="TopActionAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -327,7 +327,7 @@ namespace TypeSpecFirstTest
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="AnonymousBody(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="AnonymousBodyAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -421,7 +421,7 @@ namespace TypeSpecFirstTest
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModelAsync(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -641,7 +641,7 @@ namespace TypeSpecFirstTest
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloAgain(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -805,7 +805,7 @@ namespace TypeSpecFirstTest
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloDemo2(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloDemo2Async(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -891,7 +891,7 @@ namespace TypeSpecFirstTest
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateLiteral(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateLiteralAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -977,7 +977,7 @@ namespace TypeSpecFirstTest
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="HelloLiteral(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="HelloLiteralAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1113,7 +1113,7 @@ namespace TypeSpecFirstTest
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="InternalProtocol(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="InternalProtocolAsync(Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1199,7 +1199,7 @@ namespace TypeSpecFirstTest
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="StillConvenient(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="StillConvenientAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -85,7 +85,7 @@ namespace LroBasicCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateProject(WaitUntil,Project,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateProjectAsync(WaitUntil,Project,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -187,7 +187,7 @@ namespace LroBasicCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="UpdateProject(WaitUntil,string,Project,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="UpdateProjectAsync(WaitUntil,string,Project,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -291,7 +291,7 @@ namespace LroBasicCadl
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="CreateThing(WaitUntil,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="CreateThingAsync(WaitUntil,Thing,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

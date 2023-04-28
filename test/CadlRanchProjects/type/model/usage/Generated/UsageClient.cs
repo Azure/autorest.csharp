@@ -78,7 +78,7 @@ namespace _Type.Model.Usage
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Input(InputRecord,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="InputAsync(InputRecord,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -162,7 +162,7 @@ namespace _Type.Model.Usage
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Output(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="OutputAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -246,7 +246,7 @@ namespace _Type.Model.Usage
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="InputAndOutput(InputOutputRecord,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="InputAndOutputAsync(InputOutputRecord,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

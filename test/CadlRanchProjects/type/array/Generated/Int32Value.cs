@@ -85,7 +85,7 @@ namespace _Type._Array
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetInt32Value(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetInt32ValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -169,7 +169,7 @@ namespace _Type._Array
         /// <list type="bullet">
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Put(object,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(object,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
